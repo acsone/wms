@@ -1,11 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import random
 import string
 
-from odoo.tools import mute_logger
+from fastapi import status
+from freezegun import freeze_time
+from requests import Response
+
+from odoo import Command, fields
 
 from odoo.addons.alc_b2c_connector.tests.common import CommonCase
 
@@ -14,21 +17,20 @@ ISO_DT_WITH_TZ = "2020-05-28T13:45:47+02:00"
 
 class TestSalesService(CommonCase):
     @classmethod
-    @mute_logger("odoo.addons.queue_job.models.base")
     def setUpClass(cls):
-        super(TestSalesService, cls).setUpClass()
+        super().setUpClass()
         # create a b2c_partner
         cls.discount_pricelist_id = cls.env.ref(
             "alc_b2c_connector.product_pricelist_b2c"
         )
         cls.discount_pricelist_id.currency_id = cls.currency_id
-        cls.b2c_backend.discount_pricelist_id = cls.discount_pricelist_id
+        cls.endpoint_setting.discount_pricelist_id = cls.discount_pricelist_id
         cls.b2c_partner = cls.env["res.partner"].create(
             {
                 "name": "EXISTING B2C PARTNER",
                 "is_b2c_customer": True,
                 "partner_type": "student_like",
-                "ref": "%s_ABC" % cls.b2c_backend.sale_channel,
+                "ref": f"{cls.endpoint_setting.sale_channel_id.name}_ABC",
                 "email": "b2c@b2c.be",
             }
         )
@@ -54,9 +56,7 @@ class TestSalesService(CommonCase):
                 "pricelist_id": cls.pricelist_id.id,
                 "discount_pricelist_ids": [(6, 0, cls.discount_pricelist_id.ids)],
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "b2c_ref": 1,
                             "product_id": cls.saleable_product.id,
@@ -73,10 +73,7 @@ class TestSalesService(CommonCase):
         cls.payment_term_test = cls.env.ref(
             "account.account_payment_term_advance"
         ).copy()
-        cls.b2c_backend.payment_term_id = cls.payment_term_test
-
-        with cls.work_on_services() as work:
-            cls.sales_service = work.component(usage="sales")
+        cls.endpoint_setting.payment_term_id = cls.payment_term_test
 
     @classmethod
     def _gen_string(cls, length=10):
@@ -102,9 +99,11 @@ class TestSalesService(CommonCase):
     def _get_so_from_name(self, name):
         return self.SaleOrder.search([("name", "=", name)])
 
+    @freeze_time("2020-05-28 11:45:47")
     def test_01(self):
         """
         Data:
+
             An existing veterinary
         Test case:
             Create a new SO for a new partner and the existing veterinary
@@ -133,25 +132,33 @@ class TestSalesService(CommonCase):
                 }
             ],
         }
-        res = self.sales_service.dispatch("create", params=params)
+        response: Response = self.client.post(
+            self._get_path("/sales/create"),
+            headers={"api-key": "1234"},
+            json=params,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
         self.assertTrue(new_so)
         self.assertEqual(
             new_so.partner_id.ref,
-            u"{}_{}".format(self.b2c_backend.sale_channel, recipient_info["id"]),
+            f"{self.endpoint_setting.sale_channel_id.name}_{recipient_info['id']}",
         )
         self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
         self.assertEqual(new_so.partner_shipping_id, self.vt_partner)
-        self.assertFalse(new_so.partner_id.is_sale_back_order_accepted)
-        self.assertEqual(new_so.date_order, "2020-05-28 11:45:47")
-        self.assertTrue(self.b2c_backend.pricelist_id)
-        self.assertEqual(new_so.pricelist_id, self.b2c_backend.pricelist_id)
-        self.assertTrue(self.b2c_backend.sale_team_id)
-        self.assertEqual(new_so.team_id, self.b2c_backend.sale_team_id)
-        self.assertTrue(self.b2c_backend.payment_mode_id)
-        self.assertEqual(new_so.payment_mode_id, self.b2c_backend.payment_mode_id)
-        self.assertEqual(self.b2c_backend.payment_term_id, self.payment_term_test)
+        self.assertEqual(new_so.partner_id.sale_reason_backorder_strategy, "cancel")
+        self.assertEqual(
+            new_so.date_order, fields.Datetime.to_datetime("2020-05-28 11:45:47")
+        )
+        self.assertTrue(self.endpoint_setting.pricelist_id)
+        self.assertEqual(new_so.pricelist_id, self.endpoint_setting.pricelist_id)
+        self.assertTrue(self.endpoint_setting.sale_team_id)
+        self.assertEqual(new_so.team_id, self.endpoint_setting.sale_team_id)
+        self.assertTrue(self.endpoint_setting.payment_mode_id)
+        self.assertEqual(new_so.payment_mode_id, self.endpoint_setting.payment_mode_id)
+        self.assertEqual(self.endpoint_setting.payment_term_id, self.payment_term_test)
         self.assertEqual(new_so.payment_term_id, self.payment_term_test)
         self.assertTrue(new_so.supplier_promotion_allowed)
         self.assertEqual(1, len(new_so.order_line))

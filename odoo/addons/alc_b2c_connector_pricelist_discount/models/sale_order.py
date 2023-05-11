@@ -1,16 +1,16 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
+from odoo import Command, api
+
+from odoo.addons.alc_b2c_connector.models.sale_order import SaleOrder as SaleOrderBase
 
 
-class SaleOrder(models.Model):
-
-    _inherit = "sale.order"
-
+class SaleOrder(SaleOrderBase):
     @api.model
-    def _parse_b2c_order(self, data, b2c_backend):
-        res = super(SaleOrder, self)._parse_b2c_order(data, b2c_backend)
-        res["discount_pricelist_ids"] = [(6, 0, b2c_backend.discount_pricelist_id.ids)]
+    def _parse_b2c_order(self, data, endpoint_setting):
+        res = super()._parse_b2c_order(data, endpoint_setting)
+        res["discount_pricelist_ids"] = [
+            Command.set(endpoint_setting.discount_pricelist_id.ids)
+        ]
         return res
