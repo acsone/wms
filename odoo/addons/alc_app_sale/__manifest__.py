@@ -112,5 +112,6 @@
         "alc_sale_order_line_lots",
         "alc_sale_auto_cancel_unavailable_qty",
         "alc_sale_mto_check_procurements",
+        "alc_sale_pricelist_2_menu",
     ],
 }
