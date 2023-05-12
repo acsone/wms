@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-12 19:12+0000\n"
+"PO-Revision-Date: 2023-05-12 19:12+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -41,13 +43,37 @@ msgid "Configuration"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
+#. odoo-python
+#: code:addons/alc_stock_release_channel_dashboard/models/stock_release_channel.py:0
+#, python-format
+msgid "Internal Pickings"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_form_view
+msgid "Internal pickings"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
 #: model:ir.model.fields,field_description:alc_stock_release_channel_dashboard.field_stock_release_channel__kanban_dashboard
 msgid "Kanban Dashboard"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
-msgid "Lock/Unlock destinations"
+msgid "Lock"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#. odoo-python
+#: code:addons/alc_stock_release_channel_dashboard/models/stock_release_channel.py:0
+#, python-format
+msgid "Outgoing Pickings"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_form_view
+msgid "Outgoing pickings"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
@@ -78,10 +104,25 @@ msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid "Sleep"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
 msgid "Start/Stop pickings"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
 #: model:ir.model,name:alc_stock_release_channel_dashboard.model_stock_release_channel
 msgid "Stock Release Channels"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid "Unlock"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid "Wake Up"
 msgstr ""
