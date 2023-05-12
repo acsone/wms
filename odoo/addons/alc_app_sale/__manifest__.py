@@ -116,5 +116,6 @@
         "alc_delivery_product_hide_hs_code",
         "alc_sale_order_report_customize",
         "alc_sale_order_ref_move",
+        "alc_sale_security",
     ],
 }
