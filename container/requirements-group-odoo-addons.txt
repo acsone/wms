@@ -71,7 +71,6 @@ odoo-addon-sale-triple-discount==16.0.1.0.1.1
 odoo-addon-server-environment==16.0.1.0.1.1
 odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
 odoo-addon-session-db==16.0.1.0.3
-odoo-addon-shipment-advice==16.0.1.0.1
 odoo-addon-uom-unece==16.0.1.1.0
 odoo-addon-web-chatter-position==16.0.1.0.0.6
 odoo-addon-web-domain-field==16.0.1.0.0.3
