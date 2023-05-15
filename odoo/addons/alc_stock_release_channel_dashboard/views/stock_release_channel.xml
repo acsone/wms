@@ -17,6 +17,10 @@
                 <field name="pick_allowed" />
                 <field name="state" />
                 <field name="is_auto_release_allowed" />
+                <field name="is_action_wake_up_allowed" />
+                <field name="is_action_sleep_allowed" />
+                <field name="is_action_unlock_allowed" />
+                <field name="is_action_lock_allowed" />
                 <field name="release_forbidden" />
                 <field name="active" />
                 <field name="kanban_dashboard" />
@@ -118,17 +122,33 @@
                     />
                                   </a>
                                 </div>
-                                <div class="col-2">
-                                    <t
-                    t-set="lock_class_name"
-                    t-value="{'open': 'fa fa-unlock', 'locked': 'fa fa-lock', 'asleep': 'fa fa-bed'}[record.state.raw_value] || ''"
-                  />
-                                  <a name="button_toggle_locked" type="object">
-                                    <i
-                      t-attf-class="{{ lock_class_name }}"
-                      title="Lock/Unlock destinations"
-                    />
-                                  </a>
+                                <div class="col-5">
+                                  <a
+                    t-if="record.is_action_lock_allowed.raw_value"
+                    name="action_lock"
+                    type="object"
+                    icon="fa-lock"
+                  >Lock</a>
+                                    <a
+                    t-if="record.is_action_unlock_allowed.raw_value"
+                    name="action_unlock"
+                    type="object"
+                    icon="fa-unlock"
+                  >Unlock</a>
+                                </div>
+                                <div class="col-5">
+                                    <a
+                    t-if="record.is_action_sleep_allowed.raw_value"
+                    name="action_sleep"
+                    type="object"
+                    icon="fa-bed"
+                  >Sleep</a>
+                                    <a
+                    t-if="record.is_action_wake_up_allowed.raw_value"
+                    name="action_wake_up"
+                    type="object"
+                    icon="fa-bolt"
+                  >Wake Up</a>
                                 </div>
                                 <div
                   class="col-2"
@@ -141,7 +161,8 @@
                     title="Automatic Release mode"
                   />
                                 </div>
-                                <div class="col-6">
+
+                                <div class="col-10">
                                     <field name="release_mode" />
                                 </div>
                             </div>
@@ -231,4 +252,34 @@
     />
 
   </record>
+    <!-- Inherit Form View to Modify it -->
+    <record id="stock_release_channel_form_view" model="ir.ui.view">
+        <field name="model">stock.release.channel</field>
+        <field
+      name="inherit_id"
+      ref="stock_release_channel.stock_release_channel_form_view"
+    />
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+          class="oe_stat_button"
+          type="object"
+          name="button_show_picking_int"
+          icon="fa-cubes"
+          string="Internal pickings"
+          context="{'default_release_channel_id':active_id}"
+        />
+                <button
+          class="oe_stat_button"
+          type="object"
+          name="button_show_picking_out"
+          icon="fa-truck"
+          string="Outgoing pickings"
+          context="{'default_release_channel_id':active_id}"
+        />
+            </xpath>
+
+        </field>
+    </record>
 </odoo>

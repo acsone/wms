@@ -22,6 +22,32 @@ class StockReleaseChannel(StockReleaseChannelBase):
         compute="_compute_kanban_dashboard", compute_sudo=True
     )
 
+    def button_show_picking_out(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Outgoing Pickings"),
+            "res_model": "stock.picking",
+            "view_mode": "tree,form",
+            "domain": [
+                ("release_channel_id", "=", self.id),
+                ("picking_type_code", "=", "outgoing"),
+            ],
+        }
+
+    def button_show_picking_int(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Internal Pickings"),
+            "res_model": "stock.picking",
+            "view_mode": "tree,form",
+            "domain": [
+                ("release_channel_id", "=", self.id),
+                ("picking_type_code", "=", "internal"),
+            ],
+        }
+
     @api.depends("pick_allowed", "pick_allowed_by_picking_type")
     def _compute_kanban_dashboard(self):
         for rec in self:
@@ -160,12 +186,6 @@ class StockReleaseChannel(StockReleaseChannelBase):
             "done": done,
             "progress": progress,
         }
-
-    def button_toggle_locked(self):
-        opened = self.filtered(lambda r: r.state == "open")
-        locked = self.filtered(lambda r: r.state == "locked")
-        opened.write({"state": "locked"})
-        locked.write({"state": "open"})
 
     def _kanban_dashboard_action_open_channel(self):
         return {
