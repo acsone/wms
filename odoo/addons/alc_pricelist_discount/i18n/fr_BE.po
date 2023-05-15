@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2023-01-18 09:58+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -80,14 +81,18 @@ msgstr "Ligne de bons de commande"
 #: code:addons/alc_pricelist_discount/models/res_partner.py:0
 #, python-format
 msgid "Some partners have a base pricelist set as discount pricelist."
-msgstr "Certains partenaires ont une liste de prix de base définie comme une liste de prix avec remise."
+msgstr ""
+"Certains partenaires ont une liste de prix de base définie comme une liste "
+"de prix avec remise."
 
 #. module: alc_pricelist_discount
 #. odoo-python
 #: code:addons/alc_pricelist_discount/models/res_partner.py:0
 #, python-format
 msgid "Some partners have a discount pricelist set as base pricelist."
-msgstr "Certains partenaires ont une liste de prix de remise définie comme liste de prix de base."
+msgstr ""
+"Certains partenaires ont une liste de prix de remise définie comme liste de "
+"prix de base."
 
 #. module: alc_pricelist_discount
 #: model:ir.model.fields,field_description:alc_pricelist_discount.field_sale_order__supplier_promotion_allowed

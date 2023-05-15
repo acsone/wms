@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_barcode_picking_type
-#: model:ir.model.fields,field_description:alc_stock_barcode_picking_type.field_stock_location_barcode_picking_type_id
+#: model:ir.model.fields,field_description:alc_stock_barcode_picking_type.field_stock_location__barcode_picking_type_id
 msgid "Barcode Picking Type"
 msgstr "Barcode Picking Type"
 
 #. module: alc_stock_barcode_picking_type
-#: model:ir.model.fields,help:alc_stock_barcode_picking_type.field_stock_location_barcode_picking_type_id
+#: model:ir.model.fields,help:alc_stock_barcode_picking_type.field_stock_location__barcode_picking_type_id
 msgid ""
 "Define the type of picking to create when this location (or any children) is "
 "scanned"

@@ -1,26 +1,16 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
+from odoo import api, fields
+
+from odoo.addons.alc_b2c_partner.models.res_partner import ResPartner as ResPartnerBase
 
 
-class ResPartner(models.Model):
+class ResPartner(ResPartnerBase):
+    in_geo_release_channel = fields.Boolean(
+        compute="_compute_in_geo_release_channel", store=True, readonly=False
+    )
 
-    _inherit = "res.partner"
-
-    def _inverse_is_b2c_customer(self):
-        res = super(ResPartner, self)._inverse_is_b2c_customer()
-        self.filtered("is_b2c_customer").write({"not_in_dynamic_delivery_round": True})
-        return res
-
-    @api.onchange("is_b2c_customer")
-    def _onchange_is_b2c_customer(self):
-        for record in self.filtered("is_b2c_customer"):
-            record.not_in_dynamic_delivery_round = True
-
-    @api.multi
-    def _write(self, vals):
-        if vals.get("is_b2c_customer"):
-            vals["not_in_dynamic_delivery_round"] = True
-        return super(ResPartner, self)._write(vals)
+    @api.depends("is_b2c_customer")
+    def _compute_in_geo_release_channel(self):
+        self.filtered("is_b2c_customer").update({"in_geo_release_channel": False})

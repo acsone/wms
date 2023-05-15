@@ -14,7 +14,6 @@ exclude: |
   ^odoo/addons/alc_automatic_account_move_line_reconcile/|
   ^odoo/addons/alc_b2c_connector/|
   ^odoo/addons/alc_b2c_connector_pricelist_discount/|
-  ^odoo/addons/alc_b2c_partner_no_geooptimize/|
   ^odoo/addons/alc_b2c_to_magento/|
   ^odoo/addons/alc_base_rest_api_doc/|
   ^odoo/addons/alc_cerberus_utils/|
@@ -127,7 +126,6 @@ exclude: |
   ^odoo/addons/alc_product_promotion_mailing/|
   ^odoo/addons/alc_product_promotion_subscription/|
   ^odoo/addons/alc_product_search_cnk/|
-  ^odoo/addons/alc_product_shop_category/|
   ^odoo/addons/alc_product_stock_state/|
   ^odoo/addons/alc_purchase_order_import_ubl/|
   ^odoo/addons/alc_purchase_order_ubl/|
@@ -228,7 +226,6 @@ exclude: |
   ^odoo/addons/partner_archive_new_partner/|
   ^odoo/addons/partner_schedule/|
   ^odoo/addons/price_compute/|
-  ^odoo/addons/pricelist_role_name/|
   ^odoo/addons/product_discount_specials/|
   ^odoo/addons/product_last_transaction/|
   ^odoo/addons/shopinvader_assortment_bind/|

@@ -10,15 +10,28 @@ msgstr ""
 "PO-Revision-Date: 2023-02-22 10:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: alc_supplier_purchase_manager
+#: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_purchase_order__user_id
+msgid "Buyer"
+msgstr ""
+
+#. module: alc_supplier_purchase_manager
 #: model:ir.model,name:alc_supplier_purchase_manager.model_res_partner
 msgid "Contact"
 msgstr ""
+
+#. module: alc_supplier_purchase_manager
+#: model:ir.model,name:alc_supplier_purchase_manager.model_purchase_order
+#, fuzzy
+#| msgid "Purchase manager"
+msgid "Purchase Order"
+msgstr "Responsable d'achat"
 
 #. module: alc_supplier_purchase_manager
 #: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_res_partner__purchase_manager_id
@@ -31,3 +44,8 @@ msgstr "Responsable d'achat"
 #: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_res_users__substitute_purchase_manager_id
 msgid "Substitute purchase manager"
 msgstr "Responsable d'achat remplaçant"
+
+#. module: alc_supplier_purchase_manager
+#: model_terms:ir.ui.view,arch_db:alc_supplier_purchase_manager.view_purchase_order_filter
+msgid "Without responsible"
+msgstr ""

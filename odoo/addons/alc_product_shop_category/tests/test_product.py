@@ -1,14 +1,13 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestProduct(SavepointCase):
+class TestProduct(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestProduct, cls).setUpClass()
+        super().setUpClass()
         cls.cat_web = cls.env.ref("alc_product_shop_category.master")
         cls.model_cat = cls.env["product.category"]
 

@@ -1,0 +1,177 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_stock_release_channel_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__active
+msgid "Active"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model,name:alc_stock_release_channel_import.model_alc_delivery_plan
+msgid "Alc Delivery Plan"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_form_view
+msgid "Alc Import Delivery Zone Wizard"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_import.alc_delivery_plan_form_view
+msgid "Archived"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__release_channel_ids
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_import.alc_delivery_plan_form_view
+msgid "Channels"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__create_uid
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__create_date
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__delivery_plan_id
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_stock_release_channel__delivery_plan_id
+msgid "Delivery Plan"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.actions.act_window,name:alc_stock_release_channel_import.alc_delivery_plan_act_window
+#: model:ir.ui.menu,name:alc_stock_release_channel_import.alc_delivery_plan_menu
+msgid "Delivery Plans"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__display_name
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#. odoo-python
+#: code:addons/alc_stock_release_channel_import/wizards/alc_import_delivery_zone_wizard.py:0
+#, python-format
+msgid "File is not a zip file!"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__filename
+msgid "Filename"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__id
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_form_view
+msgid "Import"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.actions.act_window,name:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_act_window
+#: model:ir.actions.server,name:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_action
+#: model:ir.ui.menu,name:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_menu
+msgid "Import Delivery Plans"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model,name:alc_stock_release_channel_import.model_alc_import_delivery_zone_wizard
+msgid "Import Delivery Zones Wizard"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__file
+msgid "Import shape file"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan____last_update
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__write_uid
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__write_date
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__name
+msgid "Name"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#. odoo-python
+#: code:addons/alc_stock_release_channel_import/models/alc_delivery_plan.py:0
+#: model:ir.model.constraint,message:alc_stock_release_channel_import.constraint_alc_delivery_plan_name_uniq
+#, python-format
+msgid "Name must be unique"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#. odoo-python
+#: code:addons/alc_stock_release_channel_import/wizards/alc_import_delivery_zone_wizard.py:0
+#, python-format
+msgid "No file sent."
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#. odoo-python
+#: code:addons/alc_stock_release_channel_import/models/alc_delivery_plan.py:0
+#, python-format
+msgid "Release Channels"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__stock_release_channel_tag_ids
+msgid "Release channel tags"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model,name:alc_stock_release_channel_import.model_stock_release_channel
+msgid "Stock Release Channels"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#. odoo-python
+#: code:addons/alc_stock_release_channel_import/wizards/alc_import_delivery_zone_wizard.py:0
+#, python-format
+msgid "Unable to import the shape file"
+msgstr ""

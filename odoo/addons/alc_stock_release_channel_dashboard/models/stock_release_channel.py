@@ -155,7 +155,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
         progress = _format_progress(todo, done)
         return {
             "model": "shipment.advice",
-            "name": "Shipment advices",
+            "name": _("Shipment advices"),
             "todo": todo,
             "done": done,
             "progress": progress,

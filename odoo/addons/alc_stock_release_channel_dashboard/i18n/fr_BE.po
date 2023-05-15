@@ -1,0 +1,92 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_stock_release_channel_dashboard
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-08 12:40+0000\n"
+"PO-Revision-Date: 2023-05-08 12:40+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid ""
+"<i class=\"fa fa-ellipsis-v\" aria-label=\"Selection\" role=\"img\" title="
+"\"Selection\"/>"
+msgstr ""
+"<i class=\"fa fa-ellipsis-v\" aria-label=\"Sélection\" role=\"img\" title="
+"\"Sélection\"/>"
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid "<span class=\"bg-danger\" title=\"\">Archived</span>"
+msgstr "<span class=\"bg-danger\" title=\"\">Archivé</span>"
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid "<span class=\"bg-danger\" title=\"\">Forbidden</span>"
+msgstr "<span class=\"bg-danger\" title=\"\">Interdite</span>"
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid "Automatic Release mode"
+msgstr "Mode de libération automatique"
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid "Configuration"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#: model:ir.model.fields,field_description:alc_stock_release_channel_dashboard.field_stock_release_channel__kanban_dashboard
+msgid "Kanban Dashboard"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid "Lock/Unlock destinations"
+msgstr "Verrouiller/Déverrouiller les destinations"
+
+#. module: alc_stock_release_channel_dashboard
+#. odoo-python
+#: code:addons/alc_stock_release_channel_dashboard/models/stock_release_channel.py:0
+#, python-format
+msgid "Pickings"
+msgstr "Transferts"
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid "Release mode auto"
+msgstr "Mode de libération automatique"
+
+#. module: alc_stock_release_channel_dashboard
+#. odoo-python
+#: code:addons/alc_stock_release_channel_dashboard/models/stock_release_channel.py:0
+#, python-format
+msgid "Shipment Advices"
+msgstr "Avis d'expédition"
+
+#. module: alc_stock_release_channel_dashboard
+#. odoo-python
+#: code:addons/alc_stock_release_channel_dashboard/models/stock_release_channel.py:0
+#, python-format
+msgid "Shipment advices"
+msgstr "Avis d'expédition"
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid "Start/Stop pickings"
+msgstr "Démarrer/Arrêter les transferts"
+
+#. module: alc_stock_release_channel_dashboard
+#: model:ir.model,name:alc_stock_release_channel_dashboard.model_stock_release_channel
+msgid "Stock Release Channels"
+msgstr "Canaux de libération des stocks"

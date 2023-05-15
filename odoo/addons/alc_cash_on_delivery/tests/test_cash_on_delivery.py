@@ -11,6 +11,10 @@ class TestCashOnDelivery(TestSaleCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        pricelist = cls.env["product.pricelist"].search(
+            [("name", "=", "default_pricelist")], limit=1
+        )
+        pricelist.name = f"default_pricelist {pricelist.id}"
         cls.uom_kg = cls.env.ref("uom.product_uom_kgm")
         cls.product = cls.env["product.product"].create(
             {

@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2023-01-29 14:59+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -25,6 +26,20 @@ msgstr "Produit Additionnel: %(ap_name)s (de %(m_p_name)s)"
 #. module: alc_additional_product_stock
 #: model:ir.model.fields,field_description:alc_additional_product_stock.field_stock_move__additional_move_ids
 msgid "Additional Product Moves"
+msgstr "Mouvement Produit Additionnel"
+
+#. module: alc_additional_product_stock
+#: model:ir.model.fields,field_description:alc_additional_product_stock.field_stock_move__additional_product_on_reserved_qty_allowed
+#, fuzzy
+#| msgid "Additional Product Moves"
+msgid "Additional Product On Reserved Qty Allowed"
+msgstr "Mouvement Produit Additionnel"
+
+#. module: alc_additional_product_stock
+#: model:ir.model.fields,field_description:alc_additional_product_stock.field_stock_picking_type__allow_additional_product_on_reserved_qty
+#, fuzzy
+#| msgid "Additional Product Moves"
+msgid "Allow Additional Product On Reserved Quantity"
 msgstr "Mouvement Produit Additionnel"
 
 #. module: alc_additional_product_stock
@@ -44,9 +59,19 @@ msgid "Main Product Move"
 msgstr "Mouvement Produit Principal"
 
 #. module: alc_additional_product_stock
+#: model:ir.model.fields,field_description:alc_additional_product_stock.field_stock_picking_type__no_backorder_for_additional_product
+msgid "No Backorders for additional products"
+msgstr ""
+
+#. module: alc_additional_product_stock
 #: model:ir.model.fields,help:alc_additional_product_stock.field_stock_move__additional_move_ids
 msgid ""
 "Optional: stock move for additional products linked to the current product"
+msgstr ""
+
+#. module: alc_additional_product_stock
+#: model:ir.model,name:alc_additional_product_stock.model_stock_picking_type
+msgid "Picking Type"
 msgstr ""
 
 #. module: alc_additional_product_stock
@@ -58,3 +83,8 @@ msgstr "Stock déplacer"
 #: model:ir.model,name:alc_additional_product_stock.model_stock_rule
 msgid "Stock Rule"
 msgstr "Règle de stock minimum"
+
+#. module: alc_additional_product_stock
+#: model:ir.model,name:alc_additional_product_stock.model_stock_picking
+msgid "Transfer"
+msgstr ""

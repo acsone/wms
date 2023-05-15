@@ -10,35 +10,34 @@ msgstr ""
 "PO-Revision-Date: 2023-01-18 08:42+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: alc_product_supplierinfo_check
-#: model:ir.model.fields,field_description:alc_product_supplierinfo_check.field_product_supplierinfo__discount_purchase
-msgid "Purchase discount (%)"
-msgstr "Remise d'achat (%)"
+#: model:ir.model.fields,help:alc_product_supplierinfo_check.field_res_config_settings__check_alcyon_constraints_on_supplierinfo
+msgid "Activate special check defined for alcyon on supplierinfo."
+msgstr ""
 
 #. module: alc_product_supplierinfo_check
-#: model:ir.model.fields,field_description:alc_product_supplierinfo_check.field_product_supplierinfo__min_qty
-msgid "Purchase minimum qty"
-msgstr "Quantité"
+#: model:ir.model.fields,field_description:alc_product_supplierinfo_check.field_res_config_settings__check_alcyon_constraints_on_supplierinfo
+msgid "Check Alcyon Constraints On Supplierinfo"
+msgstr ""
 
 #. module: alc_product_supplierinfo_check
-#: model_terms:ir.ui.view,arch_db:alc_product_supplierinfo_check.view_product_supplierinfo_specific_form
-msgid "Sale"
-msgstr "Vente"
+#: model:ir.model,name:alc_product_supplierinfo_check.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
 
 #. module: alc_product_supplierinfo_check
-#: model:ir.model.fields,field_description:alc_product_supplierinfo_check.field_product_supplierinfo__discount_sale
-msgid "Sale discount (%)"
-msgstr "Remise de vente (%)"
-
-#. module: alc_product_supplierinfo_check
-#: model:ir.model.fields,field_description:alc_product_supplierinfo_check.field_product_supplierinfo__min_qty_sale
-msgid "Sale minimum qty"
-msgstr "Qté minimum vente"
+#: model_terms:ir.ui.view,arch_db:alc_product_supplierinfo_check.res_config_settings_view_form
+msgid ""
+"For Alcyon, constrains have been defined on the supplier info to enforce one "
+"supplier by product, avoid overlapping dates in supplier promotions, ensure "
+"that the supplier promotion are correctly defined, etc."
+msgstr ""
 
 #. module: alc_product_supplierinfo_check
 #: model:ir.model,name:alc_product_supplierinfo_check.model_product_supplierinfo
@@ -46,9 +45,11 @@ msgid "Supplier Pricelist"
 msgstr "Liste de prix du fournisseur"
 
 #. module: alc_product_supplierinfo_check
-#: model:ir.model.fields,field_description:alc_product_supplierinfo_check.field_product_supplierinfo__is_null_date_start
-msgid "The date start is null"
-msgstr "La date de début est nul"
+#: model_terms:ir.ui.view,arch_db:alc_product_supplierinfo_check.res_config_settings_view_form
+#, fuzzy
+#| msgid "Supplier Pricelist"
+msgid "Supplier constraints"
+msgstr "Liste de prix du fournisseur"
 
 #. module: alc_product_supplierinfo_check
 #. odoo-python
@@ -56,17 +57,6 @@ msgstr "La date de début est nul"
 #, python-format
 msgid "The end date must be equal or greater than the start date"
 msgstr "La date de fin doit être égale ou supérieure à la date de début"
-
-#. module: alc_product_supplierinfo_check
-#: model:ir.model.fields,help:alc_product_supplierinfo_check.field_product_supplierinfo__min_qty
-msgid ""
-"The quantity to purchase from this vendor to benefit from the price, "
-"expressed in the vendor Product Unit of Measure if not any, in the default "
-"unit of measure of the product otherwise."
-msgstr ""
-"La quantité à acheter auprès de ce fournisseur pour bénéficier du prix, "
-"exprimée dans l'unité de mesure du produit du fournisseur, sinon aucune, "
-"dans l'unité de mesure par défaut du produit."
 
 #. module: alc_product_supplierinfo_check
 #. odoo-python
@@ -81,6 +71,13 @@ msgstr "Vous ne pouvez pas avoir une promotion sans date de fin"
 #, python-format
 msgid "You cannot have a promo without start date"
 msgstr "Vous ne pouvez pas avoir une promotion sans date de début"
+
+#. module: alc_product_supplierinfo_check
+#. odoo-python
+#: code:addons/alc_product_supplierinfo_check/models/product_supplierinfo.py:0
+#, python-format
+msgid "You cannot have two different supplier for a product"
+msgstr "Vous ne pouvez pas avoir plusieurs fournisseurs pour un même produit"
 
 #. module: alc_product_supplierinfo_check
 #. odoo-python
@@ -108,9 +105,29 @@ msgstr ""
 "Vous ne pouvez pas définir de mimimum (vente et achat) sur la promotion par "
 "défaut"
 
-#. module: alc_product_supplierinfo_check
-#. odoo-python
-#: code:addons/alc_product_supplierinfo_check/models/product_supplierinfo.py:0
-#, python-format
-msgid "You cannot have two different supplier for a product"
-msgstr "Vous ne pouvez pas avoir plusieurs fournisseurs pour un même produit"
+#~ msgid "Purchase discount (%)"
+#~ msgstr "Remise d'achat (%)"
+
+#~ msgid "Purchase minimum qty"
+#~ msgstr "Quantité"
+
+#~ msgid "Sale"
+#~ msgstr "Vente"
+
+#~ msgid "Sale discount (%)"
+#~ msgstr "Remise de vente (%)"
+
+#~ msgid "Sale minimum qty"
+#~ msgstr "Qté minimum vente"
+
+#~ msgid "The date start is null"
+#~ msgstr "La date de début est nul"
+
+#~ msgid ""
+#~ "The quantity to purchase from this vendor to benefit from the price, "
+#~ "expressed in the vendor Product Unit of Measure if not any, in the "
+#~ "default unit of measure of the product otherwise."
+#~ msgstr ""
+#~ "La quantité à acheter auprès de ce fournisseur pour bénéficier du prix, "
+#~ "exprimée dans l'unité de mesure du produit du fournisseur, sinon aucune, "
+#~ "dans l'unité de mesure par défaut du produit."
