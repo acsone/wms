@@ -15,3 +15,20 @@ class StockReleaseChannel(StockReleaseChannelBase):
     stock_release_channel_tag_ids = fields.Many2many[AlcStockReleaseChannelTag](
         string="Release channel tags"
     )
+
+    def name_get(self):
+        result = []
+        for rec in self:
+            name = rec.name
+            if not rec.stock_release_channel_tag_ids:
+                result.append((rec.id, name))
+                continue
+            tags = "/".join(
+                rec.stock_release_channel_tag_ids.with_context(
+                    short_tag_name=True
+                ).mapped("display_name")
+            )
+            name += f" ({tags})"
+            result.append((rec.id, name))
+
+        return result
