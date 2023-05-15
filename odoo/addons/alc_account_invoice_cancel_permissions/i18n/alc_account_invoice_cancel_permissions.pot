@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_account_invoice_cancel_permissions
+# 	* alc_account_invoice_cancel_permissions
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,8 +14,10 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_account_invoice_cancel_permissions
-#: model:ir.model.fields,field_description:alc_account_invoice_cancel_permissions.field_account_invoice_action_invoice_cancel_allowed
-msgid "Action invoice cancel allowed"
+#: model:ir.model.fields,field_description:alc_account_invoice_cancel_permissions.field_account_bank_statement_line__action_invoice_cancel_allowed
+#: model:ir.model.fields,field_description:alc_account_invoice_cancel_permissions.field_account_move__action_invoice_cancel_allowed
+#: model:ir.model.fields,field_description:alc_account_invoice_cancel_permissions.field_account_payment__action_invoice_cancel_allowed
+msgid "Action Invoice Cancel Allowed"
 msgstr ""
 
 #. module: alc_account_invoice_cancel_permissions
@@ -24,7 +26,15 @@ msgid "INVOICING - Can cancel invoices"
 msgstr ""
 
 #. module: alc_account_invoice_cancel_permissions
-#: model:ir.model,name:alc_account_invoice_cancel_permissions.model_account_invoice
-msgid "Invoice"
+#: model:ir.model,name:alc_account_invoice_cancel_permissions.model_account_move
+msgid "Journal Entry"
 msgstr ""
 
+#. module: alc_account_invoice_cancel_permissions
+#. odoo-python
+#: code:addons/alc_account_invoice_cancel_permissions/models/account_move.py:0
+#, python-format
+msgid ""
+"You are not allowed to cancel invoices. Check user permissions and the state"
+" of the invoice."
+msgstr ""
