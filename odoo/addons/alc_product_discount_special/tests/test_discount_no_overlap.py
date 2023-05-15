@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.exceptions import ValidationError
-from odoo.tests import SavepointCase
+from odoo.tests import TransactionCase
 
 
-class TestDiscountNoOverlap(SavepointCase):
+class TestDiscountNoOverlap(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestDiscountNoOverlap, cls).setUpClass()
+        super().setUpClass()
         cls.product = cls.env["product.template"].create({"name": "product test"})
 
         cls.discount1 = cls.env["product.discount.special"].create(
