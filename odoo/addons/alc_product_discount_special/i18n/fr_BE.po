@@ -10,10 +10,21 @@ msgstr ""
 "PO-Revision-Date: 2023-05-10 15:04+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: alc_product_discount_special
+#: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_product_discount_special
+#: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__create_date
+msgid "Created on"
+msgstr ""
 
 #. module: alc_product_discount_special
 #: model_terms:ir.ui.view,arch_db:alc_product_discount_special.product_discount_special_search_view
@@ -35,9 +46,26 @@ msgid "Discount Specials"
 msgstr "Discount Specials"
 
 #. module: alc_product_discount_special
+#. odoo-python
+#: code:addons/alc_product_discount_special/models/product_discount_special.py:0
+#, python-format
+msgid "Discount special: {product}. {start} - {end}"
+msgstr ""
+
+#. module: alc_product_discount_special
+#: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_product_discount_special
 #: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__date_end
 msgid "End Date"
 msgstr "Date de fin"
+
+#. module: alc_product_discount_special
+#: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__id
+msgid "ID"
+msgstr ""
 
 #. module: alc_product_discount_special
 #: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__is_future
@@ -48,6 +76,21 @@ msgstr "Est dans le futur?"
 #: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__is_past
 msgid "Is Past"
 msgstr "Est dans le passé?"
+
+#. module: alc_product_discount_special
+#: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_product_discount_special
+#: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_product_discount_special
+#: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__write_date
+msgid "Last Updated on"
+msgstr ""
 
 #. module: alc_product_discount_special
 #: model_terms:ir.ui.view,arch_db:alc_product_discount_special.product_discount_special_search_view
@@ -63,6 +106,13 @@ msgstr "Annonces échues au jour d'aujourd'hui"
 #: model:ir.model,name:alc_product_discount_special.model_product_template
 msgid "Product"
 msgstr "Produit"
+
+#. module: alc_product_discount_special
+#: model:ir.model,name:alc_product_discount_special.model_product_discount_special
+#, fuzzy
+#| msgid "Discount Specials"
+msgid "Product Discount Special"
+msgstr "Discount Specials"
 
 #. module: alc_product_discount_special
 #: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__product_template_id
@@ -97,14 +147,9 @@ msgid ""
 "date start {start}, date end {end} for product {product} overlaps already "
 "existing date start {others_date_start}, date end {others_date_end}"
 msgstr ""
-"la date de début {start}, ou la date de fin {end} pour le produit {product} recouvre une/"
-"des date(s) de début {others_date_start}, ou de fin {others_date_end} déjà existantes pour ce produit."
-
-
-#. module: alc_product_discount_special
-#: model:ir.model,name:alc_product_discount_special.model_product_discount_special
-msgid "product.discount.special"
-msgstr ""
+"la date de début {start}, ou la date de fin {end} pour le produit {product} "
+"recouvre une/des date(s) de début {others_date_start}, ou de fin "
+"{others_date_end} déjà existantes pour ce produit."
 
 #. module: alc_product_discount_special
 #. odoo-python
