@@ -25,7 +25,7 @@
         "report_intrastat",
         "specific_base",
         "specific_purchase",
-        "specific_shipping_costs",
+        #"specific_shipping_costs", TODO Replaced by alc_shipping_fee
         # OCA/web
         "web_readonly_bypass",
     ],

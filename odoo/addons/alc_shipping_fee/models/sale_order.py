@@ -1,11 +1,11 @@
-# *- coding: utf-8 -*-
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.sale.models import sale_order
 
 
-class SaleOrder(models.Model):
-    _inherit = "sale.order"
+class SaleOrder(sale_order.SaleOrder):
 
     used_for_delivery_fee = fields.Boolean(
         "Has been used for delivery fee calculation", copy=False
@@ -13,7 +13,6 @@ class SaleOrder(models.Model):
     used_for_fixed_fee = fields.Boolean(
         "Has been used for fixed delivery fee calculation", copy=False
     )
-
     fixed_extra_fee_for_delivery = fields.Float(
         string="Fixed extra fee", compute="_compute_fixed_extra_fee_for_delivery"
     )
@@ -21,8 +20,10 @@ class SaleOrder(models.Model):
     @api.depends("carrier_id")
     def _compute_fixed_extra_fee_for_delivery(self):
         for rec in self:
-            if rec.carrier_id:
-                rec.fixed_extra_fee_for_delivery = rec.carrier_id.fixed_fee_for_delivery
+            if not rec.carrier_id:
+                rec.fixed_extra_fee_for_delivery = 0.0
+                continue
+            rec.fixed_extra_fee_for_delivery = rec.carrier_id.fixed_fee_for_delivery
 
     @api.model
     def charge_shipping_costs_by_carrier(self, carrier, round_saleorders, customer):
@@ -72,7 +73,8 @@ class SaleOrder(models.Model):
             )
             query_select = """SELECT amount_untaxed FROM sale_order
             WHERE partner_id = %s AND state in ('sale', 'done')
-            AND used_for_delivery_fee = false AND carrier_id = %s;
+            AND (used_for_delivery_fee = false OR used_for_delivery_fee is NULL)
+            AND carrier_id = %s;
             """
             self.env.cr.execute(query_select, query_args)
             result = self.env.cr.fetchall()
@@ -82,7 +84,8 @@ class SaleOrder(models.Model):
             sum_ordered = sum(r[0] for r in result)
             query_update = """UPDATE sale_order SET used_for_delivery_fee = true
             WHERE partner_id = %s AND state in ('sale', 'done')
-            AND used_for_delivery_fee = false AND carrier_id = %s;
+            AND (used_for_delivery_fee = false OR used_for_delivery_fee is NULL)
+            AND carrier_id = %s;
             """
             self.env.cr.execute(query_update, query_args)
 
@@ -94,7 +97,8 @@ class SaleOrder(models.Model):
 
             query_select = """SELECT amount_untaxed FROM sale_order
             WHERE partner_id = %s AND state in ('sale', 'done')
-            AND used_for_fixed_fee = false AND carrier_id = %s;
+            AND (used_for_fixed_fee = false OR used_for_fixed_fee is NULL)
+            AND carrier_id = %s;
             """
             self.env.cr.execute(query_select, query_args)
             result = self.env.cr.fetchall()
@@ -104,7 +108,8 @@ class SaleOrder(models.Model):
             sum_ordered = sum(r[0] for r in result)
             query_update = """UPDATE sale_order SET used_for_fixed_fee = true
             WHERE partner_id = %s AND state in ('sale', 'done')
-            AND used_for_fixed_fee = false AND carrier_id = %s;
+            AND (used_for_fixed_fee = false OR used_for_fixed_fee is NULL)
+            AND carrier_id = %s;
             """
             self.env.cr.execute(query_update, query_args)
 

@@ -1,16 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import api, models
+from odoo.addons.stock.models.stock_picking import Picking
 
 
-class StockPicking(models.Model):
-    _inherit = "stock.picking"
-
-    @api.multi
+class StockPicking(Picking):
     def _add_delivery_cost_to_so(self):
-        """Fee line for specific shipping cost is added when round is done"""
+        """Fee line for specific shipping cost is added when round is done."""
         if (
             self.picking_type_id.avoid_shipping_cost
             and self.picking_type_code == "outgoing"
@@ -18,34 +14,44 @@ class StockPicking(models.Model):
             return None
         if self.carrier_id.use_specific_cost_calculation or not self.carrier_price:
             return None
-        return super(StockPicking, self)._add_delivery_cost_to_so()
+        res = super()._add_delivery_cost_to_so()
+        # check if a delivery line has been added by super and set the price if so
+        sale_order = self.sale_id
+        delivery_line = sale_order.order_line.filtered(
+            lambda l: l.is_delivery
+            and l.currency_id.is_zero(l.price_unit)
+            and l.product_id == self.carrier_id.product_id
+        )
+        if delivery_line:
+            delivery_line.price_unit = self.carrier_price
+            delivery_line.name = (
+                f"{sale_order.carrier_id.name}: "
+                f"{sale_order.carrier_id.product_id.description_sale}"
+                if sale_order.carrier_id.product_id.description_sale
+                else sale_order.carrier_id.name
+            )
+        return res
 
-    @api.multi
-    def do_transfer(self):
-        # TODO do_transfer MUST SUPPORT API MULTI WTF this check_shipping_cost
-        # method that doesn't support multi records!!!!!!
-        # Once again a bulk of shit
+    def button_validate(self):
         self.check_shipping_cost()
+        return super().button_validate()
 
-        return super(StockPicking, self).do_transfer()
-
-    @api.multi
     def check_shipping_cost(self):
-        """Compute shipping costs for the customers in the delivery round"""
+        """Compute shipping costs for the customers in the release channel."""
         self.ensure_one()
-        if self.picking_type_code != "outgoing":
-            return
-        if self.picking_type_id.avoid_shipping_cost:
-            return
-        if not self.carrier_id.use_specific_cost_calculation:
+        if (
+            self.picking_type_code != "outgoing"
+            or self.picking_type_id.avoid_shipping_cost
+            or not self.carrier_id.use_specific_cost_calculation
+        ):
             return
         moves = (
-            self.mapped("delivery_round_id.shipping_ids")
+            self.mapped("release_channel_id.picking_ids")
             .filtered(lambda ship: ship.partner_id == self.partner_id)
-            .mapped("move_lines")
+            .mapped("move_ids")
         )
         moves = moves.filtered(lambda m: m.state in ("assigned", "done"))
-        round_saleorders = moves.mapped("procurement_id.sale_line_id.order_id")
+        round_saleorders = moves.mapped("sale_line_id.order_id")
         round_carriers = round_saleorders.mapped("carrier_id").filtered(
             lambda r: r.use_specific_cost_calculation
         )

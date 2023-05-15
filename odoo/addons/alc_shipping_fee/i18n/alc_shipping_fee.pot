@@ -1,0 +1,99 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_shipping_fee
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-28 06:05+0000\n"
+"PO-Revision-Date: 2023-04-28 06:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_delivery_carrier__use_specific_cost_calculation
+msgid "Alcyon specific cost"
+msgstr ""
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_stock_picking_type__avoid_shipping_cost
+msgid "Avoid shipping cost"
+msgstr ""
+
+#. module: alc_shipping_fee
+#: model:ir.model,name:alc_shipping_fee.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_delivery_carrier__fixed_fee_for_delivery
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_sale_order__fixed_extra_fee_for_delivery
+msgid "Fixed extra fee"
+msgstr ""
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_res_partner__help_with_fixed_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_res_users__help_with_fixed_fee
+msgid "Fixed fee applied for deliveries"
+msgstr ""
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_sale_order__used_for_delivery_fee
+msgid "Has been used for delivery fee calculation"
+msgstr ""
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_sale_order__used_for_fixed_fee
+msgid "Has been used for fixed delivery fee calculation"
+msgstr ""
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_res_partner__help_with_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_res_users__help_with_fee
+msgid "Helps with fees"
+msgstr ""
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,help:alc_shipping_fee.field_res_partner__help_with_fixed_fee
+#: model:ir.model.fields,help:alc_shipping_fee.field_res_users__help_with_fixed_fee
+msgid ""
+"If checked, a fixed amount for delivery will be apply, no matter the amount "
+"of the delivery"
+msgstr ""
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,help:alc_shipping_fee.field_stock_picking_type__avoid_shipping_cost
+msgid "If selected, the shipping cost will not be added to the saleorder."
+msgstr ""
+
+#. module: alc_shipping_fee
+#: model:ir.model,name:alc_shipping_fee.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: alc_shipping_fee
+#: model:ir.model,name:alc_shipping_fee.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: alc_shipping_fee
+#: model:ir.model,name:alc_shipping_fee.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: alc_shipping_fee
+#: model:ir.model,name:alc_shipping_fee.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: alc_shipping_fee
+#. odoo-python
+#: code:addons/alc_shipping_fee/models/delivery_carrier.py:0
+#, python-format
+msgid "You cannot delete a record linked from a partner"
+msgstr ""

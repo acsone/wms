@@ -1,0 +1,102 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_shipping_fee
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-28 06:05+0000\n"
+"PO-Revision-Date: 2023-04-28 06:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_delivery_carrier__use_specific_cost_calculation
+msgid "Alcyon specific cost"
+msgstr "Frais de livraison spécifiques"
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_stock_picking_type__avoid_shipping_cost
+msgid "Avoid shipping cost"
+msgstr "Pas de frais de livraison"
+
+#. module: alc_shipping_fee
+#: model:ir.model,name:alc_shipping_fee.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_delivery_carrier__fixed_fee_for_delivery
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_sale_order__fixed_extra_fee_for_delivery
+msgid "Fixed extra fee"
+msgstr "Frais de livraison fixes supplémentaires"
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_res_partner__help_with_fixed_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_res_users__help_with_fixed_fee
+msgid "Fixed fee applied for deliveries"
+msgstr "Appliquer des rais de livraison fixes"
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_sale_order__used_for_delivery_fee
+msgid "Has been used for delivery fee calculation"
+msgstr "Utilisé pour le calcul des frais de livraison"
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_sale_order__used_for_fixed_fee
+msgid "Has been used for fixed delivery fee calculation"
+msgstr "Utilisé pour le calcul des frais de livraison fixes"
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_res_partner__help_with_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_res_users__help_with_fee
+msgid "Helps with fees"
+msgstr "Participe aux frais"
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,help:alc_shipping_fee.field_res_partner__help_with_fixed_fee
+#: model:ir.model.fields,help:alc_shipping_fee.field_res_users__help_with_fixed_fee
+msgid ""
+"If checked, a fixed amount for delivery will be apply, no matter the amount "
+"of the delivery"
+msgstr ""
+"Si coché, des frais fixes seront appliqués quel que soit le montant de la livraison."
+
+#. module: alc_shipping_fee
+#: model:ir.model.fields,help:alc_shipping_fee.field_stock_picking_type__avoid_shipping_cost
+msgid "If selected, the shipping cost will not be added to the saleorder."
+msgstr "Si coché, les frais de livraison ne seront pas ajoutés à la commande."
+
+#. module: alc_shipping_fee
+#: model:ir.model,name:alc_shipping_fee.model_stock_picking_type
+msgid "Picking Type"
+msgstr "Type d'opération"
+
+#. module: alc_shipping_fee
+#: model:ir.model,name:alc_shipping_fee.model_sale_order
+msgid "Sales Order"
+msgstr "Commande client"
+
+#. module: alc_shipping_fee
+#: model:ir.model,name:alc_shipping_fee.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Modes de livraison"
+
+#. module: alc_shipping_fee
+#: model:ir.model,name:alc_shipping_fee.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
+
+#. module: alc_shipping_fee
+#. odoo-python
+#: code:addons/alc_shipping_fee/models/delivery_carrier.py:0
+#, python-format
+msgid "You cannot delete a record linked from a partner"
+msgstr ""
+"Vous ne pouvez pas supprimer une méthode de livraison définie sur un "
+"partenaire"

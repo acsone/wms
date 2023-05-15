@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017-2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.fields import Command
+from odoo.tests.common import TransactionCase
 
 
-class TestShippingCosts(SavepointCase):
+class TestShippingFee(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestShippingCosts, cls).setUpClass()
-
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
         # Create the product used for "shipping alcyon fees" and is xmlid
@@ -18,41 +17,68 @@ class TestShippingCosts(SavepointCase):
         )
         # Create the delivery carrier for Alcyon
         cls.fee = 8.5
+        carrier_product = cls.env["product.product"].create(
+            {
+                "name": "Test carrier product",
+                "type": "service",
+            }
+        )
         cls.delivery_method = cls.env["delivery.carrier"].create(
             {
                 "delivery_type": "fixed",
                 "fixed_price": cls.fee,
-                "free_if_more_than": True,
+                "free_over": True,
                 "amount": 125,
                 "use_specific_cost_calculation": True,
                 "name": "Alcyon",
+                "product_id": carrier_product.id,
             }
         )
         cls.fee_2 = 20
+        carrier_product_2 = cls.env["product.product"].create(
+            {
+                "name": "Test carrier product 2",
+                "type": "service",
+            }
+        )
         cls.delivery_method_2 = cls.env["delivery.carrier"].create(
             {
                 "delivery_type": "fixed",
                 "fixed_price": cls.fee_2,
-                "free_if_more_than": True,
+                "free_over": True,
                 "amount": 200,
                 "use_specific_cost_calculation": True,
                 "name": "Alcyon 2",
+                "product_id": carrier_product_2.id,
             }
         )
 
         cls.fee_3 = 25
+        carrier_product_3 = cls.env["product.product"].create(
+            {
+                "name": "Test carrier product 3",
+                "type": "service",
+            }
+        )
         cls.delivery_method_3 = cls.env["delivery.carrier"].create(
             {
                 "delivery_type": "fixed",
                 "fixed_price": cls.fee_3,
-                "free_if_more_than": True,
+                "free_over": True,
                 "amount": 200,
                 "use_specific_cost_calculation": False,
                 "name": "Alcyon 3",
+                "product_id": carrier_product_3.id,
             }
         )
 
         cls.fixed_fee = 2
+        carrier_product_4 = cls.env["product.product"].create(
+            {
+                "name": "Test carrier product 4",
+                "type": "service",
+            }
+        )
         cls.delivery_method_4 = cls.env["delivery.carrier"].create(
             {
                 "delivery_type": "fixed",
@@ -60,6 +86,13 @@ class TestShippingCosts(SavepointCase):
                 "fixed_price": 0,
                 "fixed_fee_for_delivery": cls.fixed_fee,
                 "name": "Alcyon fixed fee",
+                "product_id": carrier_product_4.id,
+            }
+        )
+        carrier_product_5 = cls.env["product.product"].create(
+            {
+                "name": "Test carrier product 5",
+                "type": "service",
             }
         )
         cls.delivery_method_5 = cls.env["delivery.carrier"].create(
@@ -67,10 +100,11 @@ class TestShippingCosts(SavepointCase):
                 "delivery_type": "fixed",
                 "use_specific_cost_calculation": True,
                 "fixed_price": cls.fee,
-                "free_if_more_than": True,
+                "free_over": True,
                 "amount": 150,
                 "fixed_fee_for_delivery": cls.fixed_fee,
                 "name": "Alcyon fixed and extra fee",
+                "product_id": carrier_product_5.id,
             }
         )
 
@@ -93,22 +127,22 @@ class TestShippingCosts(SavepointCase):
         # Create a couple of products
         cls.p1 = cls.env["product.product"].create(
             {
-                "name": "Unittest P1",
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
-                "type": "consu",
+                "name": "Product 1",
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
+                "type": "product",
             }
         )
         cls.p2 = cls.env["product.product"].create(
             {
-                "name": "Unittest P2",
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "name": "Product 2",
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
             }
         )
         cls.p3 = cls.env["product.product"].create(
             {
-                "name": "Unittest P3",
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "name": "P3",
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
             }
         )
@@ -121,13 +155,11 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": cls.partner1.id,
                 "carrier_id": cls.delivery_method.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": cls.p1.name,
                             "product_id": cls.p1.id,
-                            "product_uom": cls.env.ref("product.product_uom_unit").id,
+                            "product_uom": cls.env.ref("uom.product_uom_unit").id,
                             "product_uom_qty": 1,
                             "price_unit": 50,
                         },
@@ -141,13 +173,11 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": cls.partner1.id,
                 "carrier_id": cls.delivery_method.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": cls.p1.name,
                             "product_id": cls.p1.id,
-                            "product_uom": cls.env.ref("product.product_uom_unit").id,
+                            "product_uom": cls.env.ref("uom.product_uom_unit").id,
                             "product_uom_qty": 1,
                             "price_unit": 10,
                         },
@@ -155,43 +185,22 @@ class TestShippingCosts(SavepointCase):
                 ],
             }
         )
-        # Finally create 2 delivery round
-        cls.delivery_template1 = cls.env["round.template"].create(
-            {"name": "Unittest delivery template"}
-        )
-        cls.dr1 = cls.env["round.instance"].create(
-            {"template_id": cls.delivery_template1.id}
-        )
-        cls.delivery_template2 = cls.env["round.template"].create(
-            {"name": "Unittest delivery template"}
-        )
-        cls.dr2 = cls.env["round.instance"].create(
-            {"template_id": cls.delivery_template2.id}
-        )
+        # Create a release_channel
+        cls.rc1 = cls.env["stock.release.channel"].create({"name": "release channel 1"})
 
     @classmethod
     def _create_inventory(cls, product, qty):
-        inventory = cls.env["stock.inventory"].create(
+        inventory_quant = cls.env["stock.quant"].create(
             {
-                "name": "Test",
                 "location_id": cls.env.ref("stock.stock_location_stock").id,
-                "filter": "partial",
-            }
-        )
-        inventory.prepare_inventory()
-        cls.env["stock.inventory.line"].create(
-            {
-                "inventory_id": inventory.id,
                 "product_id": product.id,
-                "product_uom_id": cls.env.ref("product.product_uom_unit").id,
-                "product_qty": qty,
-                "location_id": cls.env.ref("stock.stock_location_stock").id,
+                "inventory_quantity": qty,
             }
         )
-        inventory.action_done()
+        inventory_quant.action_apply_inventory()
 
     def get_shipping_cost(self, so):
-        """Returns the amount of shipping cost billed on a sale order"""
+        """Returns the amount of shipping cost billed on a sale order."""
         delivery_line = so.order_line.filtered("is_delivery")
         return sum(delivery_line.mapped("price_unit"))
 
@@ -204,21 +213,27 @@ class TestShippingCosts(SavepointCase):
         delivery_line = so.order_line.filtered("is_delivery")
         return not bool(len(delivery_line))
 
+    @staticmethod
+    def do_picking(picking):
+        picking.action_set_quantities_to_reservation()
+        picking.button_validate()
+
     def test_customer_never_pay_fees(self):
-        """Test a customer that should never pay shipping fees"""
+        """Test a customer that should never pay shipping fees."""
         self.partner1.help_with_fee = False
         self.so1.action_confirm()
-        self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1._deliver(background=False)
+        self.so1.picking_ids.assign_release_channel()
+        self.do_picking(self.so1.picking_ids)
         self.assertTrue(self.no_shipping_line_present(self.so1))
 
     def test_2_so_all_delivered_small_amount(self):
-        """2 sale order for a small amount all delivered add fee"""
+        """2 sale order for a small amount all delivered add fee."""
         self.so1.action_confirm()
         self.so2.action_confirm()
-        self.dr1._assign_pickings(self.so2.picking_ids)
-        self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1._deliver(background=False)
+        self.so2.picking_ids.assign_release_channel()
+        self.so1.picking_ids.assign_release_channel()
+        self.do_picking(self.so2.picking_ids)
+        self.do_picking(self.so1.picking_ids)
         self.assertTrue(self.no_shipping_line_present(self.so1))
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
         self.assertEqual(
@@ -226,37 +241,35 @@ class TestShippingCosts(SavepointCase):
         )
 
     def test_2_so_all_delivered_large_amount(self):
-        """2 sale order completely delivered large amount no fee"""
+        """2 sale order completely delivered large amount no fee."""
         self.so2.order_line[0].price_unit = 10
         self.so1.action_confirm()
         self.so2.action_confirm()
-        self.dr1._assign_pickings(self.so2.picking_ids)
-        self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1._deliver(background=False)
+        self.so2.picking_ids.assign_release_channel()
+        self.so1.picking_ids.assign_release_channel()
+        self.do_picking(self.so2.picking_ids)
+        self.do_picking(self.so1.picking_ids)
         self.assertTrue(self.no_shipping_line_present(self.so1))
 
     def test_3_so_in_2_delivery_fee_twice(self):
-        """Two deliveries both with fee
+        """Two deliveries both with fee.
 
         The customer makes so1 (50 EUR) and so2 (30 EUR)
         Delivery 1: so1 and 20% of so2 -> fees
         The customer makes so3 (70 EUR)
         Delivery 2: 80% so2 and so3 -> fees
-
         """
         self.so1.action_confirm()
-        self.dr1._assign_pickings(self.so1.picking_ids)
+        self.so1.picking_ids.assign_release_channel()
         self.so2.order_line[0].price_unit = 6
         self.so2.write(
             {
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p3.name,
                             "product_id": self.p3.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 24,
                         },
@@ -266,15 +279,13 @@ class TestShippingCosts(SavepointCase):
         )
         self.so2.action_confirm()
         # First delivery : 100 % sale order 1 + 20 % sale order 2
-        self.so1.action_confirm()
-        self.dr1._assign_pickings(self.so1.picking_ids)
         pick = self.so2.picking_ids
-        self.dr1._assign_pickings(pick)
-        op = pick.pack_operation_product_ids
+        pick.assign_release_channel()
+        op = pick.move_line_ids
         op = op.filtered(lambda r: r.product_id.id == self.p1.id)
         op.write({"qty_done": 1})
-        pick.with_context(test_mode=True).do_transfer()
-        self.dr1._deliver(background=False)
+        pick.button_validate()
+        self.do_picking(self.so1.picking_ids)
         self.assertTrue(self.no_shipping_line_present(self.so1))
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
         # Second delivery round
@@ -284,13 +295,11 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": self.partner1.id,
                 "carrier_id": self.delivery_method.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 70,
                         },
@@ -299,15 +308,15 @@ class TestShippingCosts(SavepointCase):
             }
         )
         so3.action_confirm()
-        self.dr2._assign_pickings(so3.picking_ids)
+        so3.picking_ids.assign_release_channel()
         pick = self.so2.picking_ids.filtered(lambda r: r.state != "done")
-        self.dr2._assign_pickings(pick)
-        pick.force_assign()
-        op = pick.pack_operation_product_ids
+        pick.assign_release_channel()
+        pick.action_assign()
+        op = pick.move_line_ids
         op.write({"qty_done": 1})
 
-        pick.with_context(test_mode=True).do_transfer()
-        self.dr2._deliver(background=False)
+        pick.button_validate()
+        self.do_picking(so3.picking_ids)
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
         self.assertEqual(
@@ -315,28 +324,25 @@ class TestShippingCosts(SavepointCase):
         )
 
     def test_3_so_in_2_delivery_fee_once(self):
-        """Two deliveries one without fees the other one with it
+        """Two deliveries one without fees the other one with it.
 
         The customer makes so1 (100 EUR) and so2 (30 EUR)
         Delivery 1: so1 and 20% of so2 -> no fees
         The customer makes so3 (70 EUR)
         Delivery 2: 80% so2 and so3 -> fees
-
         """
         self.so1.order_line[0].price_unit = 100
         self.so1.action_confirm()
-        self.dr1._assign_pickings(self.so1.picking_ids)
+        self.so1.picking_ids.assign_release_channel()
         self.so2.order_line[0].price_unit = 6
         self.so2.write(
             {
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p3.name,
                             "product_id": self.p3.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 24,
                         },
@@ -346,11 +352,9 @@ class TestShippingCosts(SavepointCase):
         )
         self.so2.action_confirm()
         # First delivery : 100 % sale order 1 + 20 % sale order 2
-        self.so1.action_confirm()
-        self.dr1._assign_pickings(self.so1.picking_ids)
         pick = self.so2.picking_ids
-        self.dr1._assign_pickings(pick)
-        op = pick.pack_operation_product_ids
+        pick.assign_release_channel()
+        op = pick.move_line_ids
         op = op.filtered(lambda r: r.product_id.id == self.p1.id)
         op.write({"qty_done": 1})
         # Create a 3rd sale order
@@ -360,13 +364,11 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": self.partner1.id,
                 "carrier_id": self.delivery_method.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 70,
                         },
@@ -374,29 +376,30 @@ class TestShippingCosts(SavepointCase):
                 ],
             }
         )
-        pick.with_context(test_mode=True).do_transfer()
-        self.dr1._deliver(background=False)
+        pick.button_validate()
+        self.do_picking(self.so1.picking_ids)
         self.assertTrue(self.no_shipping_line_present(self.so1))
         self.assertTrue(self.no_shipping_line_present(self.so2))
 
         # this is already covered by the fact that if it was true for so3,
         # then no fee would be added on it afterwards. Still, it's better to be
         # explicit, and refactor this test if implementation changes
+        (self.so1 | self.so2).invalidate_recordset()
         self.assertTrue(self.so1.used_for_delivery_fee)
         self.assertTrue(self.so2.used_for_delivery_fee)
         self.assertFalse(so3.used_for_delivery_fee)
 
         # Second delivery round
         so3.action_confirm()
-        self.dr2._assign_pickings(so3.picking_ids)
+        so3.picking_ids.assign_release_channel()
         pick = self.so2.picking_ids.filtered(lambda r: r.state != "done")
-        self.dr2._assign_pickings(pick)
-        pick.force_assign()
-        op = pick.pack_operation_product_ids
+        pick.assign_release_channel()
+        pick.action_assign()
+        op = pick.move_line_ids
         op.write({"qty_done": 1})
 
-        pick.with_context(test_mode=True).do_transfer()
-        self.dr2._deliver(background=False)
+        pick.button_validate()
+        self.do_picking(so3.picking_ids)
         self.assertTrue(self.no_shipping_line_present(self.so2))
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
 
@@ -407,15 +410,13 @@ class TestShippingCosts(SavepointCase):
         Delivery 1: so1 and 20% of so2 -> no fees
         The customer makes so3 (70 EUR)
         Delivery 2: 80% so2 and so3 -> fees
-
         """
         self.so1.action_confirm()
-        self.dr1._assign_pickings(self.so1.picking_ids)
+        self.so1.picking_ids.assign_release_channel()
         self.so2.order_line[0].price_unit = 30
         self.so2.action_confirm()
         # First delivery : 100 % sale order 1 + 0 % sale order 2
-        self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1._deliver(background=False)
+        self.do_picking(self.so1.picking_ids)
         self.assertEqual(self.get_shipping_cost(self.so1), self.fee)
         self.assertTrue(self.no_shipping_line_present(self.so2))
 
@@ -432,7 +433,7 @@ class TestShippingCosts(SavepointCase):
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 70,
                         },
@@ -441,28 +442,28 @@ class TestShippingCosts(SavepointCase):
             }
         )
         so3.action_confirm()
-        self.dr2._assign_pickings(so3.picking_ids)
-        self.dr2._assign_pickings(self.so2.picking_ids)
-        self.dr2._deliver(background=False)
+        so3.picking_ids.assign_release_channel()
+        self.so2.picking_ids.assign_release_channel()
+        self.do_picking(so3.picking_ids)
+        self.do_picking(self.so2.picking_ids)
         self.assertTrue(self.no_shipping_line_present(self.so2))
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
 
     def test_3_so_in_2_delivery_fee_once_2(self):
-        """Two deliveries one without fees the other one with it
+        """Two deliveries one without fees the other one with it.
 
         The customer makes so1 (100 EUR) and so2 (30 EUR)
         Delivery 1: so1 and 0% of so2 -> no fees
         The customer makes so3 (70 EUR)
         Delivery 2: so2 and so3 -> fees
-
         """
         self.so1.order_line[0].price_unit = 100
         self.so1.action_confirm()
+        self.so1.picking_ids.assign_release_channel()
         self.so2.order_line[0].price_unit = 30
         self.so2.action_confirm()
         # First delivery
-        self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1._deliver(background=False)
+        self.do_picking(self.so1.picking_ids)
         self.assertTrue(self.no_shipping_line_present(self.so1))
         self.assertTrue(self.no_shipping_line_present(self.so2))
         # Second delivery round
@@ -472,13 +473,11 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": self.partner1.id,
                 "carrier_id": self.delivery_method.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 70,
                         },
@@ -487,50 +486,26 @@ class TestShippingCosts(SavepointCase):
             }
         )
         so3.action_confirm()
-        self.dr2._assign_pickings(so3.picking_ids)
-        self.dr2._assign_pickings(self.so2.picking_ids)
-        self.dr2._deliver(background=False)
+        so3.picking_ids.assign_release_channel()
+        self.so2.picking_ids.assign_release_channel()
+        self.do_picking(so3.picking_ids)
+        self.do_picking(self.so2.picking_ids)
         self.assertTrue(self.no_shipping_line_present(self.so2))
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
 
-    def test_no_so_between_delivery_no_fee(self):
-        """Two deliveries one with fees the other one without
-
-        The customer makes so1 (50 EUR) and so2 (30 EUR)
-        Delivery 1: so1 and 0% of so2 -> fee
-        Delivery 2: so2 -> no fees
-
-        """
-        self.so1.action_confirm()
-        self.so2.order_line[0].price_unit = 30
-        self.so2.action_confirm()
-        # First delivery
-        self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1._deliver(background=False)
-        self.assertEqual(self.get_shipping_cost(self.so1), self.fee)
-        self.assertTrue(self.no_shipping_line_present(self.so2))
-
-        # Second delivery round
-        self.dr2._assign_pickings(self.so2.picking_ids)
-        self.dr2._deliver(background=False)
-        self.assertEqual(self.get_shipping_cost(self.so1), self.fee)
-        self.assertTrue(self.no_shipping_line_present(self.so2))
-
     def test_no_shipping_fees(self):
-        """Small order in round but second so with large amount"""
+        """Small order in round but second so with large amount."""
         # Create a second sale order for partner One
         self.so2 = self.env["sale.order"].create(
             {
                 "partner_id": self.partner1.id,
                 "carrier_id": self.delivery_method.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 3,
                             "price_unit": 200,
                         },
@@ -540,12 +515,12 @@ class TestShippingCosts(SavepointCase):
         )
         self.so2.action_confirm()
         self.so1.action_confirm()
-        self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1._deliver(background=False)
+        self.so1.picking_ids.assign_release_channel()
+        self.do_picking(self.so1.picking_ids)
         self.assertTrue(self.no_shipping_line_present(self.so1))
 
     def test_multiple_customer_in_round(self):
-        """2 customer in round, only partner 1 get charged """
+        """2 customer in round, only partner 1 get charged."""
         self.so1.action_confirm()
         self.so2.action_confirm()
         so21 = self.env["sale.order"].create(
@@ -553,13 +528,11 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": self.partner2.id,
                 "carrier_id": self.delivery_method.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 1000,
                         },
@@ -568,10 +541,12 @@ class TestShippingCosts(SavepointCase):
             }
         )
         so21.action_confirm()
-        self.dr1._assign_pickings(so21.picking_ids)
-        self.dr1._assign_pickings(self.so2.picking_ids)
-        self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1._deliver(background=False)
+        so21.picking_ids.assign_release_channel()
+        self.so2.picking_ids.assign_release_channel()
+        self.so1.picking_ids.assign_release_channel()
+        self.do_picking(so21.picking_ids)
+        self.do_picking(self.so2.picking_ids)
+        self.do_picking(self.so1.picking_ids)
         self.assertTrue(self.no_shipping_line_present(self.so1))
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee)
         self.assertTrue(self.no_shipping_line_present(so21))
@@ -585,14 +560,15 @@ class TestShippingCosts(SavepointCase):
         self.so2.carrier_id = self.delivery_method_2
         self.so2.order_line[0].price_unit = 170
         self.so2.action_confirm()
-        self.dr1._assign_pickings(self.so1.picking_ids)
-        self.dr1._assign_pickings(self.so2.picking_ids)
-        self.dr1._deliver(background=False)
+        self.so1.picking_ids.assign_release_channel()
+        self.so2.picking_ids.assign_release_channel()
+        self.do_picking(self.so1.picking_ids)
+        self.do_picking(self.so2.picking_ids)
         self.assertEqual(self.get_shipping_cost(self.so1), self.fee)
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee_2)
 
     def test_no_shipping_fees_no_specific_calc(self):
-        """Order shouldn't have a fee and return in _add_delivery_cost_to_so"""
+        """Order shouldn't have a fee and return in _add_delivery_cost_to_so."""
         # Create a second sale order for partner One
         self.so2 = self.env["sale.order"].create(
             {
@@ -605,7 +581,7 @@ class TestShippingCosts(SavepointCase):
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 5,
                             "price_unit": 200,
                         },
@@ -614,25 +590,24 @@ class TestShippingCosts(SavepointCase):
             }
         )
         self.so2.action_confirm()
-        self.dr1._assign_pickings(self.so2.picking_ids)
-        self.dr1._deliver(background=False)
+        self.so2.picking_ids.assign_release_channel()
+        self.do_picking(self.so2.picking_ids)
         self.assertTrue(self.no_shipping_line_present(self.so2))
 
     def test_shipping_fees_no_specific_calc(self):
-        """Order should have a fee and pass through _add_delivery_cost_to_so"""
+        """Order should have a fee and pass through _add_delivery_cost_to_so."""
+        self.delivery_method_3.invoice_policy = "real"
         # Create a second sale order for partner One
         self.so2 = self.env["sale.order"].create(
             {
                 "partner_id": self.partner1.id,
                 "carrier_id": self.delivery_method_3.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 10,
                         },
@@ -641,26 +616,26 @@ class TestShippingCosts(SavepointCase):
             }
         )
         self.so2.action_confirm()
-        self.dr1._assign_pickings(self.so2.picking_ids)
-        self.dr1._deliver(background=False)
+        self.so2.picking_ids.assign_release_channel()
+        self.do_picking(self.so2.picking_ids)
         self.assertEqual(self.get_shipping_cost(self.so2), self.fee_3)
 
     def test_avoid_shiping_cost(self):
-        """ If the outgoing picking type has avoid_shipping_cost at True
+        """If the outgoing picking type has avoid_shipping_cost at True.
+
         there should be no fee. Test with use_specific_cost_calculation
-        and without."""
+        and without.
+        """
         new_order = self.env["sale.order"].create(
             {
                 "partner_id": self.partner2.id,
                 "carrier_id": self.delivery_method.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 10,
                         },
@@ -669,8 +644,8 @@ class TestShippingCosts(SavepointCase):
             }
         )
         new_order.action_confirm()
-        self.dr1._assign_pickings(new_order.picking_ids)
-        self.dr1._deliver(background=False)
+        new_order.picking_ids.assign_release_channel()
+        self.do_picking(new_order.picking_ids)
         self.assertEqual(self.get_shipping_cost(new_order), self.fee)
         # Test with the same SO but we change the picking_type
         new_order = self.env["sale.order"].create(
@@ -684,7 +659,7 @@ class TestShippingCosts(SavepointCase):
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 10,
                         },
@@ -697,8 +672,8 @@ class TestShippingCosts(SavepointCase):
             lambda rec: rec.picking_type_code == "outgoing"
         ).mapped("picking_type_id")
         picking_type.avoid_shipping_cost = True
-        self.dr1._assign_pickings(new_order.picking_ids)
-        self.dr1._deliver(background=False)
+        new_order.picking_ids.assign_release_channel()
+        self.do_picking(new_order.picking_ids)
         self.assertTrue(self.no_shipping_line_present(new_order))
         # Test with the delivery method 3 (With
         # use_specific_cost_calculation set to False)
@@ -707,13 +682,11 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": self.partner2.id,
                 "carrier_id": self.delivery_method_3.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 10,
                         },
@@ -722,8 +695,8 @@ class TestShippingCosts(SavepointCase):
             }
         )
         new_order.action_confirm()
-        self.dr1._assign_pickings(new_order.picking_ids)
-        self.dr1._deliver(background=False)
+        new_order.picking_ids.assign_release_channel()
+        self.do_picking(new_order.picking_ids)
         self.assertTrue(self.no_shipping_line_present(new_order))
 
     def test_only_fixed_fee(self):
@@ -733,13 +706,11 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": self.partner3.id,
                 "carrier_id": self.delivery_method_4.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 70,
                         },
@@ -748,9 +719,8 @@ class TestShippingCosts(SavepointCase):
             }
         )
         so3.action_confirm()
-        self.dr2._assign_pickings(so3.picking_ids)
-        self.dr2._deliver(background=False)
-
+        so3.picking_ids.assign_release_channel()
+        self.do_picking(so3.picking_ids)
         self.assertEqual(self.get_shipping_cost(so3), self.fixed_fee)
 
     def test_only_fixed_fee_even_though_help_with_fees(self):
@@ -759,13 +729,11 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": self.partner3.id,
                 "carrier_id": self.delivery_method_4.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 70,
                         },
@@ -774,9 +742,8 @@ class TestShippingCosts(SavepointCase):
             }
         )
         so3.action_confirm()
-        self.dr2._assign_pickings(so3.picking_ids)
-        self.dr2._deliver(background=False)
-
+        so3.picking_ids.assign_release_channel()
+        self.do_picking(so3.picking_ids)
         self.assertEqual(self.get_shipping_cost(so3), self.fixed_fee)
 
     def test_fixed_and_extra_fees(self):
@@ -785,13 +752,11 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": self.partner3.id,
                 "carrier_id": self.delivery_method_5.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 70,
                         },
@@ -800,24 +765,21 @@ class TestShippingCosts(SavepointCase):
             }
         )
         so3.action_confirm()
-        self.dr2._assign_pickings(so3.picking_ids)
-        self.dr2._deliver(background=False)
-
+        so3.picking_ids.assign_release_channel()
+        self.do_picking(so3.picking_ids)
         self.assertEqual(self.get_shipping_cost(so3), self.fixed_fee + self.fee)
 
-    def test__extra_fee_only(self):
+    def test_extra_fee_only(self):
         so3 = self.env["sale.order"].create(
             {
                 "partner_id": self.partner3.id,
                 "carrier_id": self.delivery_method.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 70,
                         },
@@ -826,8 +788,8 @@ class TestShippingCosts(SavepointCase):
             }
         )
         so3.action_confirm()
-        self.dr2._assign_pickings(so3.picking_ids)
-        self.dr2._deliver(background=False)
+        so3.picking_ids.assign_release_channel()
+        self.do_picking(so3.picking_ids)
         self.assertEqual(self.get_shipping_cost(so3), self.fee)
 
     def test_shipping_costs_twice_at_bo(self):
@@ -835,8 +797,8 @@ class TestShippingCosts(SavepointCase):
         product = self.env["product.product"].create(
             {
                 "name": "Unittest product out of stock",
-                "uom_id": self.env.ref("product.product_uom_unit").id,
-                "type": "consu",
+                "uom_id": self.env.ref("uom.product_uom_unit").id,
+                "type": "product",
             }
         )
         so = self.env["sale.order"].create(
@@ -844,24 +806,20 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": self.partner3.id,
                 "carrier_id": self.delivery_method_5.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 5,
                             "price_unit": 5,
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": product.name,
                             "product_id": product.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 15,
                             "price_unit": 1,
                         },
@@ -872,18 +830,16 @@ class TestShippingCosts(SavepointCase):
 
         so.action_confirm()
         pick = so.picking_ids
-        self.dr1._assign_pickings(pick)
-        pick.with_context(test_mode=True).do_transfer()
-        self.dr1._deliver(background=False)
+        pick.assign_release_channel()
+        pick.picking_type_id.create_backorder = "always"
+        self.do_picking(pick)
         self.assertEqual(self.get_shipping_cost(so), self.fixed_fee + self.fee)
 
         bo = self.env["stock.picking"].search([("backorder_id", "=", pick[0].id)])
         self._create_inventory(product, 100)
-        self.dr2._assign_pickings(bo)
-        bo.force_assign()
-
-        bo.with_context(test_mode=True).do_transfer()
-        self.dr2._deliver(background=False)
+        bo.action_assign()
+        bo.assign_release_channel()
+        self.do_picking(bo)
         # Check shipping cost are not considered twice
         self.assertEqual(self.get_shipping_cost(so), self.fixed_fee + self.fee)
 
@@ -892,8 +848,8 @@ class TestShippingCosts(SavepointCase):
         product = self.env["product.product"].create(
             {
                 "name": "Unittest product out of stock",
-                "uom_id": self.env.ref("product.product_uom_unit").id,
-                "type": "consu",
+                "uom_id": self.env.ref("uom.product_uom_unit").id,
+                "type": "product",
             }
         )
         so = self.env["sale.order"].create(
@@ -901,24 +857,20 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": self.partner3.id,
                 "carrier_id": self.delivery_method_5.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 5,
                             "price_unit": 5,
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": product.name,
                             "product_id": product.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 15,
                             "price_unit": 1,
                         },
@@ -929,9 +881,9 @@ class TestShippingCosts(SavepointCase):
 
         so.action_confirm()
         pick = so.picking_ids
-        self.dr1._assign_pickings(pick)
-        pick.with_context(test_mode=True).do_transfer()
-        self.dr1._deliver(background=False)
+        pick.assign_release_channel()
+        pick.picking_type_id.create_backorder = "always"
+        self.do_picking(pick)
         self.assertEqual(self.get_shipping_cost(so), self.fixed_fee + self.fee)
 
         bo = self.env["stock.picking"].search([("backorder_id", "=", pick[0].id)])
@@ -942,13 +894,11 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": self.partner3.id,
                 "carrier_id": self.delivery_method_5.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 20,
                         },
@@ -957,9 +907,11 @@ class TestShippingCosts(SavepointCase):
             }
         )
         so1.action_confirm()
-        self.dr2._assign_pickings(so1.picking_ids)
-        self.dr2._assign_pickings(bo)
-        self.dr2._deliver(background=False)
+        so1.picking_ids.assign_release_channel()
+        bo.action_assign()
+        bo.assign_release_channel()
+        self.do_picking(so1.picking_ids)
+        self.do_picking(bo)
 
         self.assertEqual(self.get_shipping_cost(so1), self.fixed_fee + self.fee)
         # Check shipping cost are not considered twice
@@ -972,13 +924,11 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": self.partner1.id,
                 "carrier_id": self.delivery_method.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 1,
                             "price_unit": 20,
                         },
@@ -992,13 +942,11 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": self.partner1.id,
                 "carrier_id": self.delivery_method.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 12,
                             "price_unit": 20,
                         },
@@ -1011,13 +959,11 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": self.partner1.id,
                 "carrier_id": self.delivery_method.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.p1.name,
                             "product_id": self.p1.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 2,
                             "price_unit": 20,
                         },
@@ -1029,10 +975,12 @@ class TestShippingCosts(SavepointCase):
         so1.action_confirm()
         so2.action_confirm()
         so3.action_confirm()
-        self.dr1._assign_pickings(so1.picking_ids)
-        self.dr1._assign_pickings(so2.picking_ids)
-        self.dr1._assign_pickings(so3.picking_ids)
-        self.dr1._deliver(background=False)
+        so1.picking_ids.assign_release_channel()
+        so2.picking_ids.assign_release_channel()
+        so3.picking_ids.assign_release_channel()
+        self.do_picking(so1.picking_ids)
+        self.do_picking(so2.picking_ids)
+        self.do_picking(so3.picking_ids)
         self.assertTrue(self.no_shipping_line_present(so1))
         self.assertTrue(self.no_shipping_line_present(so2))
         self.assertTrue(self.no_shipping_line_present(so3))
@@ -1041,8 +989,8 @@ class TestShippingCosts(SavepointCase):
         product = self.env["product.product"].create(
             {
                 "name": "Unittest product delivery several times",
-                "uom_id": self.env.ref("product.product_uom_unit").id,
-                "type": "consu",
+                "uom_id": self.env.ref("uom.product_uom_unit").id,
+                "type": "product",
             }
         )
 
@@ -1052,13 +1000,11 @@ class TestShippingCosts(SavepointCase):
                 "partner_id": self.partner1.id,
                 "carrier_id": self.delivery_method.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": product.name,
                             "product_id": product.id,
-                            "product_uom": self.ref("product.product_uom_unit"),
+                            "product_uom": self.ref("uom.product_uom_unit"),
                             "product_uom_qty": 15,
                             "price_unit": 100,
                         },
@@ -1069,25 +1015,21 @@ class TestShippingCosts(SavepointCase):
 
         so.action_confirm()
         pick = so.picking_ids
-        self.dr1._assign_pickings(pick)
-        pick.with_context(test_mode=True).do_transfer()
-        self.dr1._deliver(background=False)
+        pick.picking_type_id.create_backorder = "always"
+        pick.assign_release_channel()
+        self.do_picking(pick)
         self.assertTrue(self.no_shipping_line_present(so))
 
         bo = self.env["stock.picking"].search([("backorder_id", "=", pick[0].id)])
         self._create_inventory(product, 5)
-        self.dr2._assign_pickings(bo)
-        bo.with_context(test_mode=True).do_transfer()
-        self.dr2._deliver(background=False)
+        bo.action_assign()
+        bo.assign_release_channel()
+        self.do_picking(bo)
         self.assertTrue(self.no_shipping_line_present(so))
 
         bo2 = self.env["stock.picking"].search([("backorder_id", "=", bo.id)])
         self._create_inventory(product, 5)
-        delivery_template3 = self.env["round.template"].create(
-            {"name": "Unittest delivery template"}
-        )
-        dr3 = self.env["round.instance"].create({"template_id": delivery_template3.id})
-        dr3._assign_pickings(bo2)
-        bo2.with_context(test_mode=True).do_transfer()
-        dr3._deliver(background=False)
+        bo2.action_assign()
+        bo2.assign_release_channel()
+        self.do_picking(bo2)
         self.assertTrue(self.no_shipping_line_present(so))

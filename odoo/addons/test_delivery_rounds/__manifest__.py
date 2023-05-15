@@ -16,7 +16,7 @@
         "stock_lot_loss",
         "stock_reassign_auto",
         "specific_sale",
-        "specific_shipping_costs",
+        # "specific_shipping_costs", TODO Replaced by alc_shipping_fee
         "specific_account",
     ],
     "data": [],
