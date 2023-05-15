@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2023-04-28 06:05+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -65,7 +66,8 @@ msgid ""
 "If checked, a fixed amount for delivery will be apply, no matter the amount "
 "of the delivery"
 msgstr ""
-"Si coché, des frais fixes seront appliqués quel que soit le montant de la livraison."
+"Si coché, des frais fixes seront appliqués quel que soit le montant de la "
+"livraison."
 
 #. module: alc_shipping_fee
 #: model:ir.model.fields,help:alc_shipping_fee.field_stock_picking_type__avoid_shipping_cost
