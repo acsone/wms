@@ -68,6 +68,7 @@
         "alc_product_is_new",
         "alc_stock_release_channel_tag",
         "alc_stock_release_channel_import",
+        "alc_stock_release_channel_propagate_channel_picking",
         "alc_stock_release_channel_user",
         "alc_restocking_exclude_not_salable",
         "alc_stock_receive_lot_expiry",
