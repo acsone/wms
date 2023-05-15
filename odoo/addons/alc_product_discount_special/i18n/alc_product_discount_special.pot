@@ -6,14 +6,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-10 15:03+0000\n"
-"PO-Revision-Date: 2023-05-10 15:03+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: alc_product_discount_special
+#: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_product_discount_special
+#: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__create_date
+msgid "Created on"
+msgstr ""
 
 #. module: alc_product_discount_special
 #: model_terms:ir.ui.view,arch_db:alc_product_discount_special.product_discount_special_search_view
@@ -35,8 +43,25 @@ msgid "Discount Specials"
 msgstr ""
 
 #. module: alc_product_discount_special
+#. odoo-python
+#: code:addons/alc_product_discount_special/models/product_discount_special.py:0
+#, python-format
+msgid "Discount special: {product}. {start} - {end}"
+msgstr ""
+
+#. module: alc_product_discount_special
+#: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_product_discount_special
 #: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__date_end
 msgid "End Date"
+msgstr ""
+
+#. module: alc_product_discount_special
+#: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__id
+msgid "ID"
 msgstr ""
 
 #. module: alc_product_discount_special
@@ -47,6 +72,21 @@ msgstr ""
 #. module: alc_product_discount_special
 #: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__is_past
 msgid "Is Past"
+msgstr ""
+
+#. module: alc_product_discount_special
+#: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_product_discount_special
+#: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_product_discount_special
+#: model:ir.model.fields,field_description:alc_product_discount_special.field_product_discount_special__write_date
+msgid "Last Updated on"
 msgstr ""
 
 #. module: alc_product_discount_special
@@ -62,6 +102,11 @@ msgstr ""
 #. module: alc_product_discount_special
 #: model:ir.model,name:alc_product_discount_special.model_product_template
 msgid "Product"
+msgstr ""
+
+#. module: alc_product_discount_special
+#: model:ir.model,name:alc_product_discount_special.model_product_discount_special
+msgid "Product Discount Special"
 msgstr ""
 
 #. module: alc_product_discount_special
@@ -96,11 +141,6 @@ msgstr ""
 msgid ""
 "date start {start}, date end {end} for product {product} overlaps already "
 "existing date start {others_date_start}, date end {others_date_end}"
-msgstr ""
-
-#. module: alc_product_discount_special
-#: model:ir.model,name:alc_product_discount_special.model_product_discount_special
-msgid "product.discount.special"
 msgstr ""
 
 #. module: alc_product_discount_special
