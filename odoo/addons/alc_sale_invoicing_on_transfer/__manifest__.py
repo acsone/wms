@@ -9,14 +9,11 @@
         Add a flag on picking type to set when we want the invoice to be
         generated at transfer.
         """,
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["account", "sale_stock", "queue_job"],
+    "depends": ["partner_invoicing_mode_at_shipping"],
     "data": ["views/stock_picking_type.xml"],
     "demo": [],
-    "external_dependencies": {"python": ["openupgradelib"]},
-    "pre_init_hook": "pre_init_hook",
-    "installable": False,
 }
