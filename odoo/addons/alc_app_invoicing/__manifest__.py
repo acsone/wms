@@ -30,5 +30,6 @@
         "base_business_document_import",
         # ALC
         "alc_cash_on_delivery",
+        "alc_account_invoice_cancel_permissions",
     ],
 }

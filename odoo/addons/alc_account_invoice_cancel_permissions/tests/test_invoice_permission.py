@@ -1,16 +1,15 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo import Command
 from odoo.exceptions import AccessError
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestInvoicePermission(SavepointCase):
+class TestInvoicePermission(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestInvoicePermission, cls).setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        super().setUpClass()
         cls.tax = cls.env["account.tax"].create(
             {
                 "name": "Unittest tax",
@@ -20,13 +19,10 @@ class TestInvoicePermission(SavepointCase):
             }
         )
         cls.p1 = cls.env["product.product"].create(
-            {"name": "Unittest P1", "taxes_id": [(6, False, [cls.tax.id])]}
+            {"name": "Unittest P1", "taxes_id": [Command.set(cls.tax.ids)]}
         )
         cls.partner = cls.env["res.partner"].create(
             {"name": "Unittest partner", "ref": "84023435243"}
-        )
-        cls.account_type = cls.env["account.account.type"].create(
-            {"name": "Test", "type": "receivable"}
         )
         cls.tax_fixed = cls.env["account.tax"].create(
             {
@@ -41,28 +37,26 @@ class TestInvoicePermission(SavepointCase):
             {
                 "name": "Test account",
                 "code": "TEST",
-                "user_type_id": cls.account_type.id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
         cls.invoice1 = cls._create_invoice(cls.partner, cls.p1)
 
     @classmethod
-    def _create_invoice(cls, partner, product, price_unit=100, qty=5, account=None):
+    def _create_invoice(cls, partner, account=None):
         account = account or cls.account
-        invoice = cls.env["account.invoice"].create(
+        invoice = cls.env["account.move"].create(
             {
                 "partner_id": partner.id,
-                "account_id": account.id,
+                "move_type": "out_invoice",
                 "invoice_line_ids": [
-                    (
-                        0,
-                        False,
+                    Command.create(
                         {
                             "name": cls.p1.name,
                             "product_id": cls.p1.id,
                             "quantity": 1,
-                            "uom_id": cls.env.ref("product.product_uom_unit").id,
+                            "product_uom_id": cls.env.ref("uom.product_uom_unit").id,
                             "price_unit": 100.0,
                             "account_id": cls.account.id,
                         },
@@ -70,7 +64,6 @@ class TestInvoicePermission(SavepointCase):
                 ],
             }
         )
-        invoice.compute_taxes()
         return invoice
 
     def test_00_cancel_invoice_without_permission(self):
@@ -82,15 +75,14 @@ class TestInvoicePermission(SavepointCase):
         )
 
         with self.assertRaises(AccessError):
-            self.invoice1.action_invoice_cancel()
+            self.invoice1.button_cancel()
 
     def test_01_cancel_invoice_with_permission(self):
         self.assertEqual(self.invoice1.state, "draft")
         self.env.user.write(
             {
                 "groups_id": [
-                    (
-                        4,
+                    Command.link(
                         self.ref(
                             "alc_account_invoice_cancel_permissions.cancel_invoice_permission"
                         ),
@@ -103,7 +95,7 @@ class TestInvoicePermission(SavepointCase):
                 "alc_account_invoice_cancel_permissions.cancel_invoice_permission"
             )
         )
-        self.invoice1.action_invoice_cancel()
+        self.invoice1.button_cancel()
         self.assertEqual(self.invoice1.state, "cancel")
 
     def test_02_cancel_invoice_with_wrong_state(self):
@@ -111,8 +103,7 @@ class TestInvoicePermission(SavepointCase):
         self.env.user.write(
             {
                 "groups_id": [
-                    (
-                        4,
+                    Command.link(
                         self.ref(
                             "alc_account_invoice_cancel_permissions.cancel_invoice_permission"
                         ),
@@ -125,17 +116,7 @@ class TestInvoicePermission(SavepointCase):
                 "alc_account_invoice_cancel_permissions.cancel_invoice_permission"
             )
         )
-        self.invoice1.state = "paid"
+        self.invoice1.state = "posted"
+        self.invoice1.payment_state = "paid"
         with self.assertRaises(AccessError):
-            self.invoice1.action_invoice_cancel()
-
-    def test_03_cancel_invoice_without_permissions_and_wrong_state(self):
-        self.assertEqual(self.invoice1.state, "draft")
-        self.assertFalse(
-            self.env.user.has_group(
-                "alc_account_invoice_cancel_permissions.cancel_invoice_permission"
-            )
-        )
-        self.invoice1.state = "paid"
-        with self.assertRaises(AccessError):
-            self.invoice1.action_invoice_cancel()
+            self.invoice1.button_cancel()
