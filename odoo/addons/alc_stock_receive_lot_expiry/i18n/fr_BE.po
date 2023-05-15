@@ -33,11 +33,9 @@ msgid "Add a wizard that facilitates purchases reception."
 msgstr "Ajoute un assistant pour faciliter la réception des achats."
 
 #. module: alc_stock_receive_lot_expiry
-#: model:ir.model,name:alc_stock_receive_lot_expiry.model_stock_pack_operation_lot
-msgid "Lot/Serial number for pack ops"
-msgstr "Lot/N°série d'opération"
-
-#. module: alc_stock_receive_lot_expiry
 #: model:ir.model.fields,field_description:alc_stock_receive_lot_expiry.field_stock_pack_operation_lot_add__is_removal_date_expired
 msgid "Removal Date Expired"
 msgstr "Date de retrait expirée"
+
+#~ msgid "Lot/Serial number for pack ops"
+#~ msgstr "Lot/N°série d'opération"
