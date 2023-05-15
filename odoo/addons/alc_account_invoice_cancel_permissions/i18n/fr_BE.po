@@ -17,8 +17,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_account_invoice_cancel_permissions
-#: model:ir.model.fields,field_description:alc_account_invoice_cancel_permissions.field_account_invoice_action_invoice_cancel_allowed
-msgid "Action invoice cancel allowed"
+#: model:ir.model.fields,field_description:alc_account_invoice_cancel_permissions.field_account_bank_statement_line__action_invoice_cancel_allowed
+#: model:ir.model.fields,field_description:alc_account_invoice_cancel_permissions.field_account_move__action_invoice_cancel_allowed
+#: model:ir.model.fields,field_description:alc_account_invoice_cancel_permissions.field_account_payment__action_invoice_cancel_allowed
+#, fuzzy
+#| msgid "Action invoice cancel allowed"
+msgid "Action Invoice Cancel Allowed"
 msgstr "Autorisation de l'annulation de factures"
 
 #. module: alc_account_invoice_cancel_permissions
@@ -27,6 +31,18 @@ msgid "INVOICING - Can cancel invoices"
 msgstr "FACTURATION - Annulation de factures"
 
 #. module: alc_account_invoice_cancel_permissions
-#: model:ir.model,name:alc_account_invoice_cancel_permissions.model_account_invoice
-msgid "Invoice"
-msgstr "Facture"
+#: model:ir.model,name:alc_account_invoice_cancel_permissions.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: alc_account_invoice_cancel_permissions
+#. odoo-python
+#: code:addons/alc_account_invoice_cancel_permissions/models/account_move.py:0
+#, python-format
+msgid ""
+"You are not allowed to cancel invoices. Check user permissions and the state "
+"of the invoice."
+msgstr ""
+
+#~ msgid "Invoice"
+#~ msgstr "Facture"
