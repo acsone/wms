@@ -5,10 +5,10 @@
 from fastapi import status
 from requests import Response
 
-from .common import CommonCase
+from .common import CommonB2CServiceCase
 
 
-class TestProductsService(CommonCase):
+class TestProductsService(CommonB2CServiceCase):
     def test_00(self):
         """
         Data:

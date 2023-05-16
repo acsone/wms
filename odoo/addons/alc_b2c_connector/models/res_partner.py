@@ -2,10 +2,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
+import logging
+
 from odoo import _, api
 from odoo.exceptions import ValidationError
 
 from odoo.addons.alc_partner_type.models.res_partner import ResPartner as ResPartnerBase
+
+_logger = logging.getLogger(__name__)
 
 TITLE_XML_ID_BY_B2C_KEY = {
     "mr": "base.res_partner_title_mister",
@@ -41,9 +45,10 @@ class ResPartner(ResPartnerBase):
                     msg = _(
                         "You cannot update this address since there are already"
                         " closed Sale Orders for this partner. "
-                        "Incoherent field: %(key)s, current value: %(value)s"
-                    )
-                    raise ValidationError(msg % dict(key=key, value=value))
+                        "Incoherent field: {key}, current value: {value}"
+                    ).format(key=key, value=value)
+                    _logger.error(msg)
+                    raise ValidationError(msg)
         return data
 
     @api.model
@@ -81,9 +86,9 @@ class ResPartner(ResPartnerBase):
             limit=1,
         )
         if not partner and raise_if_notfound:
-            raise ValidationError(
-                _("No match found for customer_id: {b2c_ref}").format(b2c_ref=b2c_ref)
-            )
+            msg = _("No match found for customer_id: {b2c_ref}").format(b2c_ref=b2c_ref)
+            _logger.error(msg)
+            raise ValidationError(msg)
         return partner
 
     @api.model

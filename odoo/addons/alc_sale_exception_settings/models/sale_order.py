@@ -6,8 +6,10 @@ from odoo.addons.sale_exception.models import sale_order
 
 class SaleOrder(sale_order.SaleOrder):
     def _is_sale_exception_check_enabled(self):
-        return self.env["ir.config_parameter"].get_param(
-            "alc_sale_exception_settings.sale_exception_check_enabled"
+        return (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("alc_sale_exception_settings.sale_exception_check_enabled")
         )
 
     def _check_sale_check_exception(self, vals):

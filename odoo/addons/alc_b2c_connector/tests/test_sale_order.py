@@ -1,15 +1,14 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 from psycopg2 import IntegrityError
 
 from odoo.exceptions import ValidationError
 from odoo.tools.misc import mute_logger
 
-from .common import CommonCase
+from .common import CommonB2CServiceCase
 
 
-class TestSaleOrder(CommonCase):
+class TestSaleOrder(CommonB2CServiceCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -61,6 +60,7 @@ class TestSaleOrder(CommonCase):
             )
         )
 
+    @mute_logger("odoo.addons.alc_b2c_connector.models.sale_order")
     def test_check_internal_sale_channel(self):
         """Regular users can't use external sale channels for not b2c orders."""
         self.sale_channel.is_internal = False

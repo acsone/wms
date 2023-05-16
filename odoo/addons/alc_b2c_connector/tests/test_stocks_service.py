@@ -5,10 +5,10 @@ from fastapi import status
 from freezegun import freeze_time
 from requests import Response
 
-from .common import CommonCase
+from .common import CommonB2CServiceCase
 
 
-class TestStocksService(CommonCase):
+class TestStocksService(CommonB2CServiceCase):
     @freeze_time("2020-05-28 11:45:47")
     def test_00(self):
         """

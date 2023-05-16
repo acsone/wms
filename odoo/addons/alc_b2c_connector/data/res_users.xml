@@ -11,7 +11,7 @@
     <field name="login">alc_b2c_rest_api_user</field>
     <field name="company_id" ref="base.main_company" />
     <field name="groups_id" eval="[(6,0,[])]" />
-    <field name="active" eval="0" />
+    <field name="active" eval="1" />
   </record>
   <function model="res.partner" name="write">
         <value

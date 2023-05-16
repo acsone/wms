@@ -6,13 +6,15 @@ import string
 from fastapi import status
 from requests import Response
 
+from odoo import Command
 from odoo.exceptions import ValidationError
+from odoo.tools.misc import mute_logger
 
 from ..services.models.country_code import CountryCode
-from .common import CommonCase
+from .common import CommonB2CServiceCase
 
 
-class TestRecipientsService(CommonCase):
+class TestRecipientsService(CommonB2CServiceCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -56,34 +58,9 @@ class TestRecipientsService(CommonCase):
                 "ref": "VTREF",
                 "email": "vt@vt.be",
                 "customer_payment_mode_id": cls.vt_payment_mode.id,
+                "is_b2c_customer": True,
             }
         )
-
-        # create a b2c sale_order
-        cls.b2c_order = cls.env["sale.order"].create(
-            {
-                "b2c_ref": 10,
-                "partner_id": cls.b2c_partner.id,
-                "partner_invoice_id": cls.vt_partner.id,
-                "partner_shipping_id": cls.vt_partner.id,
-                "pricelist_id": cls.pricelist_id.id,
-                "order_line": [
-                    (
-                        0,
-                        0,
-                        {
-                            "b2c_ref": 1,
-                            "product_id": cls.saleable_product.id,
-                            "name": cls.saleable_product.name,
-                            "product_uom": cls.saleable_product.uom_id.id,
-                            "product_uom_qty": 10,
-                        },
-                    )
-                ],
-                "sale_channel_id": cls.sale_channel.id,
-            }
-        )
-
         cls.SaleOrder = cls.env["sale.order"]
         cls.payment_term_test = cls.env.ref(
             "account.account_payment_term_advance"
@@ -110,6 +87,31 @@ class TestRecipientsService(CommonCase):
             "phone": cls._gen_string(),
             "mobile": cls._gen_string(),
         }
+
+    def setUp(self):
+        super().setUp()
+        # create a b2c sale_order
+        self.b2c_order = self.env["sale.order"].create(
+            {
+                "b2c_ref": 10,
+                "partner_id": self.b2c_partner.id,
+                "partner_invoice_id": self.vt_partner.id,
+                "partner_shipping_id": self.vt_partner.id,
+                "pricelist_id": self.pricelist_id.id,
+                "order_line": [
+                    Command.create(
+                        {
+                            "b2c_ref": 1,
+                            "product_id": self.saleable_product.id,
+                            "name": self.saleable_product.name,
+                            "product_uom": self.saleable_product.uom_id.id,
+                            "product_uom_qty": 10,
+                        },
+                    )
+                ],
+                "sale_channel_id": self.sale_channel.id,
+            }
+        )
 
     def test_get_b2c_recipient_info(self):
         """
@@ -212,6 +214,10 @@ class TestRecipientsService(CommonCase):
         self.assertEqual(self.b2c_order.partner_id.title.name, "Mister")
         self.assertEqual(self.b2c_order.partner_id.name, "EXISTING B2C PARTNER")
 
+    @mute_logger(
+        "odoo.addons.alc_b2c_connector.models.res_partner",
+        "odoo.addons.alc_b2c_connector.models.res_country",
+    )
     def test_update_street_for_partner_with_started_picking(self):
         """Once the partner has a started picking, it's not possible to update the address."""
 
@@ -284,6 +290,7 @@ class TestRecipientsService(CommonCase):
         self.assertFalse(self.b2c_partner.mobile)
         self.assertFalse(self.b2c_partner.comment)
 
+    @mute_logger("odoo.addons.alc_b2c_connector.models.res_partner")
     def test_name2(self):
         """Suite can be nulled, and is not updatable after a picking is started."""
         self.b2c_order.partner_id = self.b2c_partner

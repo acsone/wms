@@ -16,6 +16,8 @@
         # Odoo
         "sale_stock",
         "delivery",
+        "snailmail",  # necessary dependency due to auto-install. This module override
+        # partner write and perform search write on snailmail.letter
         # OCA
         "fastapi",
         "product_assortment",
@@ -26,6 +28,7 @@
         "account_payment_sale",
         "stock_picking_backorder_reason",
         "onchange_helper",
+        "sale_exception",
         # ALC
         "alc_product_pharmacy",
         "alc_partner_type",
@@ -45,6 +48,9 @@
         "data/product_pricelist.xml",
         "data/res_users.xml",
         "security/groups.xml",
+        "security/res_partner.xml",
+        "security/sale_order.xml",
+        "security/sale_order_line.xml",
         "security/auth_api_key.xml",
         "security/ir.model.access.csv",
         "security/fastapi_endpoint_settings.xml",

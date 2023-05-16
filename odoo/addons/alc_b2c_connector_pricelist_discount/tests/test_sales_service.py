@@ -1,21 +1,19 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import random
-import string
 
 from fastapi import status
 from freezegun import freeze_time
 from requests import Response
 
-from odoo import Command, fields
+from odoo import fields
 
-from odoo.addons.alc_b2c_connector.tests.common import CommonCase
+from odoo.addons.alc_b2c_connector.tests.common import CommonB2CSaleServiceCase
 
 ISO_DT_WITH_TZ = "2020-05-28T13:45:47+02:00"
 
 
-class TestSalesService(CommonCase):
+class TestSalesService(CommonB2CSaleServiceCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -25,79 +23,6 @@ class TestSalesService(CommonCase):
         )
         cls.discount_pricelist_id.currency_id = cls.currency_id
         cls.endpoint_setting.discount_pricelist_id = cls.discount_pricelist_id
-        cls.b2c_partner = cls.env["res.partner"].create(
-            {
-                "name": "EXISTING B2C PARTNER",
-                "is_b2c_customer": True,
-                "partner_type": "student_like",
-                "ref": f"{cls.endpoint_setting.sale_channel_id.name}_ABC",
-                "email": "b2c@b2c.be",
-            }
-        )
-
-        # create a vete
-        cls.vt_partner = cls.env["res.partner"].create(
-            {
-                "name": "VT",
-                "partner_type": "veterinary",
-                "ref": "VTREF",
-                "email": "vt@vt.be",
-                "supplier_promotion_sale_allowed": True,
-            }
-        )
-
-        # create a b2c sale_order
-        cls.b2c_order = cls.env["sale.order"].create(
-            {
-                "b2c_ref": 10,
-                "partner_id": cls.b2c_partner.id,
-                "partner_invoice_id": cls.vt_partner.id,
-                "partner_shipping_id": cls.vt_partner.id,
-                "pricelist_id": cls.pricelist_id.id,
-                "discount_pricelist_ids": [(6, 0, cls.discount_pricelist_id.ids)],
-                "order_line": [
-                    Command.create(
-                        {
-                            "b2c_ref": 1,
-                            "product_id": cls.saleable_product.id,
-                            "name": cls.saleable_product.name,
-                            "product_uom": cls.saleable_product.uom_id.id,
-                            "product_uom_qty": 10,
-                        },
-                    )
-                ],
-            }
-        )
-
-        cls.SaleOrder = cls.env["sale.order"]
-        cls.payment_term_test = cls.env.ref(
-            "account.account_payment_term_advance"
-        ).copy()
-        cls.endpoint_setting.payment_term_id = cls.payment_term_test
-
-    @classmethod
-    def _gen_string(cls, length=10):
-        return "".join(random.choice(string.ascii_letters) for _ in range(length))
-
-    @classmethod
-    def _gen_recipent(cls, _id=None, title="mr"):
-        _id = _id or cls._gen_string()
-        return {
-            "id": _id,
-            "title": title,
-            "last_name": cls._gen_string(),
-            "first_name": cls._gen_string(),
-            "street": cls._gen_string(),
-            "street2": cls._gen_string(),
-            "zip": cls._gen_string(),
-            "city": cls._gen_string(),
-            "email": cls._gen_string(),
-            "phone": cls._gen_string(),
-            "mobile": cls._gen_string(),
-        }
-
-    def _get_so_from_name(self, name):
-        return self.SaleOrder.search([("name", "=", name)])
 
     @freeze_time("2020-05-28 11:45:47")
     def test_01(self):

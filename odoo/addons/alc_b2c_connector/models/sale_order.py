@@ -2,6 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
+import logging
+
 import dateutil
 import pytz
 
@@ -12,7 +14,9 @@ from odoo.osv.expression import AND
 
 from odoo.addons.sale.models.sale_order import SaleOrder as SaleOrderBase
 
-from .res_partner import TITLE_XML_ID_BY_B2C_KEY
+from .res_partner import TITLE_XML_ID_BY_B2C_KEY, ResPartner
+
+_logger = logging.getLogger(__name__)
 
 
 class SaleOrder(SaleOrderBase):
@@ -28,7 +32,11 @@ class SaleOrder(SaleOrderBase):
         ],
         compute="_compute_b2c_state",
     )
-
+    message_partner_ids = fields.Many2many[ResPartner](
+        compute_sudo=True
+    )  # This field required
+    # base.group_user access, make it compute_sudo to avoid access right issue for b2c
+    # user
     _sql_constraints = [
         (
             "b2c_ref_unique",
@@ -62,7 +70,13 @@ class SaleOrder(SaleOrderBase):
         order_data = self._parse_b2c_order(data, endpoint_setting)
         order = (
             self.env["sale.order"]
-            .with_context(mail_auto_subscribe_no_notify=True)
+            .with_context(
+                mail_auto_subscribe_no_notify=True,
+                tracking_disable=True,
+                mail_create_nolog=True,
+                mail_create_nosubscribe=True,
+                mail_notrack=True,
+            )
             .create(order_data)
         )
         order.message_post(body=body)
@@ -92,11 +106,13 @@ class SaleOrder(SaleOrderBase):
         """
         self.ensure_one()
         if "done" in self.mapped("picking_ids.state"):
-            raise ValidationError(
-                _("You cannot update a sale order that is already ready for delivery")
-            )
+            msg = _("You cannot update a sale order that is already ready for delivery")
+            _logger.error(msg)
+            raise ValidationError(msg)
         if "lines" not in data and "recipient" not in data:
-            raise ValidationError(_("Missing update parameters, lines or recipient."))
+            msg = _("Missing update parameters, lines or recipient.")
+            _logger.error(msg)
+            raise ValidationError(msg)
         self.with_context(disable_cancel_warning=True).action_cancel()
         self.action_draft()
         if "lines" in data:
@@ -108,14 +124,21 @@ class SaleOrder(SaleOrderBase):
         return self
 
     def _update_lines_from_b2c(self, data, b2c_backend):
-        self.order_line.unlink()
+        order = self.with_context(
+            mail_auto_subscribe_no_notify=True,
+            tracking_disable=True,
+            mail_create_nolog=True,
+            mail_create_nosubscribe=True,
+            mail_notrack=True,
+        )
+        order.order_line.unlink()
         data_lines = self._parse_b2c_order_line(data, b2c_backend)
-        self.write({"order_line": [(0, 0, line) for line in data_lines]})
+        order.write({"order_line": [(0, 0, line) for line in data_lines]})
         body = _("Sale Order  {sale_order} updated from json: {json_file}.").format(
             sale_order=self.name,
             json_file=data,
         )
-        self.message_post(body=body)
+        order.message_post(body=body)
 
     def _update_recipient_from_b2c(self, partner):
         if self.partner_id != partner:
@@ -164,7 +187,9 @@ class SaleOrder(SaleOrderBase):
         product_by_sku = {p.default_code: p for p in products}
         unknown_skus = set(skus).difference(set(product_by_sku.keys()))
         if unknown_skus:
-            raise ValidationError(_("Unknowns SKU(s): %s " ", ".join(unknown_skus)))
+            msg = _("Unknowns SKU(s): %s " ", ".join(unknown_skus))
+            _logger.error(msg)
+            raise ValidationError(msg)
         result = []
         for line_data in lines_data:
             sol = {}
@@ -242,6 +267,7 @@ class SaleOrder(SaleOrderBase):
                 and not rec.b2c_ref
                 and not rec.sale_channel_id.is_internal
             ):
+                _logger.error(msg)
                 raise ValidationError(msg)
 
     @api.model
@@ -255,9 +281,9 @@ class SaleOrder(SaleOrderBase):
             domain = expression.AND([domain, extended_domain])
         res = self.search(domain)
         if not res:
-            raise MissingError(
-                _("Sale order not found for id {b2c_ref}").format(b2c_ref=b2c_ref)
-            )
+            msg = _("Sale order not found for id {b2c_ref}").format(b2c_ref=b2c_ref)
+            _logger.error(msg)
+            raise MissingError(msg)
         return res
 
     def _search_orders_from_b2c(

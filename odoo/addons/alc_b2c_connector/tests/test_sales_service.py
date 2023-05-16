@@ -1,139 +1,20 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import random
-import string
-
 from fastapi import status
 from freezegun import freeze_time
 from requests import Response
 
-from odoo import Command, fields
+from odoo import fields
 from odoo.exceptions import MissingError, ValidationError
+from odoo.tools.misc import mute_logger
 
-from .common import CommonCase
+from .common import CommonB2CSaleServiceCase
 
 ISO_DT_WITH_TZ = "2020-05-28T13:45:47+02:00"
 
 
-class TestSalesService(CommonCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.env.user.groups_id += cls.env.ref("product.group_discount_per_so_line")
-        # create a b2c_partner
-        cls.b2c_partner = cls.env["res.partner"].create(
-            {
-                "name": "EXISTING B2C PARTNER",
-                "is_b2c_customer": True,
-                "partner_type": "student_like",
-                "ref": f"{cls.sale_channel.name}_ABC",
-                "email": "b2c@b2c.be",
-            }
-        )
-
-        # create a specific payment mode for the VT
-        cls.vt_payment_mode = cls.env["account.payment.mode"].create(
-            {
-                "name": "Specific VT payment mode",
-                "company_id": cls.env.ref("base.main_company").id,
-                "bank_account_link": "variable",
-                "payment_method_id": cls.env.ref(
-                    "account.account_payment_method_manual_in"
-                ).id,
-                "payment_type": "inbound",
-            }
-        )
-
-        # create a vete
-        cls.vt_partner = cls.env["res.partner"].create(
-            {
-                "name": "VT",
-                "partner_type": "veterinary",
-                "ref": "VTREF",
-                "email": "vt@vt.be",
-                "supplier_promotion_sale_allowed": True,
-                "customer_payment_mode_id": cls.vt_payment_mode.id,
-            }
-        )
-
-        # create a b2c sale_order
-        cls.b2c_order = cls.env["sale.order"].create(
-            {
-                "b2c_ref": 10,
-                "partner_id": cls.b2c_partner.id,
-                "partner_invoice_id": cls.vt_partner.id,
-                "partner_shipping_id": cls.vt_partner.id,
-                "pricelist_id": cls.pricelist_id.id,
-                "order_line": [
-                    Command.create(
-                        {
-                            "b2c_ref": 1,
-                            "product_id": cls.saleable_product.id,
-                            "name": cls.saleable_product.name,
-                            "product_uom": cls.saleable_product.uom_id.id,
-                            "product_uom_qty": 10,
-                        },
-                    )
-                ],
-                "sale_channel_id": cls.sale_channel.id,
-            }
-        )
-
-        cls.SaleOrder = cls.env["sale.order"]
-        cls.payment_term_test = cls.env.ref(
-            "account.account_payment_term_advance"
-        ).copy()
-        cls.endpoint_setting.payment_term_id = cls.payment_term_test
-
-    @classmethod
-    def _gen_string(cls, length=10):
-        return "".join(random.choice(string.ascii_letters) for _ in range(length))
-
-    @classmethod
-    def _gen_recipent(cls, _id=None, title="mr"):
-        _id = _id or cls._gen_string()
-        return {
-            "id": _id,
-            "title": title,
-            "last_name": cls._gen_string(),
-            "first_name": cls._gen_string(),
-            "street": cls._gen_string(),
-            "street2": cls._gen_string(),
-            "zip": cls._gen_string(),
-            "city": cls._gen_string(),
-            "email": cls._gen_string(),
-            "phone": cls._gen_string(),
-            "mobile": cls._gen_string(),
-            "name2": cls._gen_string(),
-        }
-
-    def _get_so_from_name(self, name):
-        return self.SaleOrder.search([("name", "=", name)])
-
-    def _do_picking(self, picking):
-        for move in picking.move_ids:
-            move.quantity_done = move.product_qty
-        picking._action_done()
-
-    def _deliver_orders(self, orders):
-        for order in orders:
-            # validate SO
-            order.action_confirm()
-            # process deliveries
-            picking_internals = order.picking_ids.filtered(
-                lambda p: p.picking_type_code == "internal"
-            )
-            picking_outs = order.picking_ids.filtered(
-                lambda p: p.picking_type_code == "outgoing"
-            )
-            for picking in picking_internals:
-                self._do_picking(picking)
-                self.assertEqual(picking.state, "done")
-            for picking in picking_outs:
-                self._do_picking(picking)
-                self.assertEqual(picking.state, "done")
-
+class TestSalesService(CommonB2CSaleServiceCase):
     def test_00(self):
         """
         Data:
@@ -155,6 +36,7 @@ class TestSalesService(CommonCase):
         self.assertEqual(res["id"], 10)
         self.assertFalse(res["confirmation_date"])
 
+    @mute_logger("odoo.addons.alc_b2c_connector.models.sale_order")
     def test_01(self):
         """
         Test case:
@@ -193,22 +75,22 @@ class TestSalesService(CommonCase):
     @freeze_time("2020-05-28 11:45:47")
     def test_04(self):
         """
-        Data:
+        Access Denied by ACLs for operation     Data:
 
-            An existing veterinary
-        Test case:
-            Create a new SO for a new partner and the existing veterinary
-        Expected result:
-            A new partner is created
-            A new SO is created with:
-                partner -> new partner
-                shipping partner -> the veterinary
-                invoice partner -> the veterinary
-                priclist -> the one from the backend
-                payment_mode -> the one from the backend
-                payment_term_id -> the one from the backend
-                supplier_promotion_allowed -> the one from the veterinary
-                a new message with the json has been added into the chatter
+                 An existing veterinary
+             Test case:
+                 Create a new SO for a new partner and the existing veterinary
+             Expected result:
+                 A new partner is created
+                 A new SO is created with:
+                     partner -> new partner
+                     shipping partner -> the veterinary
+                     invoice partner -> the veterinary
+                     priclist -> the one from the backend
+                     payment_mode -> the one from the backend
+                     payment_term_id -> the one from the backend
+                     supplier_promotion_allowed -> the one from the veterinary
+                     a new message with the json has been added into the chatter
         """
         recipient_info = self._gen_recipent()
         params = {
@@ -343,6 +225,7 @@ class TestSalesService(CommonCase):
             self.assertTrue(new_so)
             self.assertEqual(new_so.picking_policy, policy)
 
+    @mute_logger("odoo.addons.alc_b2c_connector.models.res_partner")
     def test_05(self):
         """
         Test case:
@@ -411,6 +294,7 @@ class TestSalesService(CommonCase):
         self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
         self.assertEqual(new_so.partner_shipping_id, self.vt_partner)
 
+    @mute_logger("odoo.addons.alc_b2c_connector.models.sale_order")
     def test_07(self):
         """
         Test case:
@@ -430,6 +314,7 @@ class TestSalesService(CommonCase):
         with self.assertRaises(ValidationError):
             self.env["sale.order"]._create_from_b2c(params, self.endpoint_setting)
 
+    @mute_logger("odoo.addons.alc_b2c_connector.models.sale_order")
     def test_08(self):
         """
         Test case:
@@ -809,6 +694,7 @@ class TestSalesService(CommonCase):
         self.assertEqual(len(self.b2c_order.order_line), 2)
         self.assertEqual(self.b2c_order.state, "sale")
 
+    @mute_logger("odoo.addons.alc_b2c_connector.models.sale_order")
     def test_16(self):
         """
         Data:
@@ -914,6 +800,7 @@ class TestSalesService(CommonCase):
 
         self.assertFalse(self.b2c_order.partner_id.phone)
 
+    @mute_logger("odoo.addons.alc_b2c_connector.models.sale_order")
     def test_update_existing_missing_payload_raises(self):
         params = {"id": 10}
         with self.assertRaises(ValidationError):
