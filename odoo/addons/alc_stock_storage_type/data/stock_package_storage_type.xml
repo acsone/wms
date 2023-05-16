@@ -172,11 +172,12 @@
       eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Fixe_Mixed_Lots'),ref('alc_stock_storage_type.location_st_Etagere_Reserve_Fixe')])]"
     />
   </record>
-  <record id="package_st_M_M_Nouveaute" model="stock.package.storage.type">
-    <field name="name">M Nouveaute</field>
-    <field
-      name="location_storage_type_ids"
-      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_Etagere_Reserve_Fixe')])]"
-    />
-  </record>
+<!--  Moved to alc_product_new -->
+<!--  <record id="package_st_M_M_Nouveaute" model="stock.package.storage.type">-->
+<!--    <field name="name">M Nouveaute</field>-->
+<!--    <field-->
+<!--      name="location_storage_type_ids"-->
+<!--      eval="[(6, 0, [ref('alc_stock_storage_type.location_st_Etagere_Fixe'),ref('alc_stock_storage_type.location_st_Etagere_Reserve_Fixe')])]"-->
+<!--    />-->
+<!--  </record>-->
 </odoo>

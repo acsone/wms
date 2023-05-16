@@ -10,8 +10,10 @@
     "author": "ACSONE SA/NV",
     "depends": ["stock_storage_type"],
     "data": [
+        "data/stock_package_type.xml",
         "views/product_template_views.xml",
         "views/stock_package_type_views.xml",
     ],
     "installable": True,
+    "pre_init_hook": "pre_init_hook",
 }

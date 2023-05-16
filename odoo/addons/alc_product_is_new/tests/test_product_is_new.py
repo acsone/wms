@@ -11,9 +11,6 @@ class TestProductIsNew(TransactionCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
-        package_type_new = cls.env["stock.package.type"].create(
-            {"name": "any name", "is_new": True}
-        )
         cls.product2 = cls.env["product.product"].create(
             {
                 "name": "Product new",
@@ -24,7 +21,6 @@ class TestProductIsNew(TransactionCase):
             }
         )
         cls.product_template2 = cls.product2.product_tmpl_id
-        cls.product_template2.package_type_id = package_type_new.id
 
     def test_00(self):
         """Product is new."""
