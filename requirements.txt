@@ -50,7 +50,7 @@ odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-c
 odoo-addon-base-business-document-import @ git+https://github.com/acsone/edi.git@f15198354f32bf9b2c4107659883e6fecbf01e75#subdirectory=setup/base_business_document_import
 odoo-addon-base-delivery-carrier-label==16.0.1.0.0.3
 odoo-addon-base-exception==16.0.1.0.1.3
-odoo-addon-base-geoengine @ git+https://github.com/acsone/geospatial.git@738ed3504db75c7923b5c86687dd5d7ce3ea7137#subdirectory=setup/base_geoengine
+odoo-addon-base-geoengine @ git+https://github.com/acsone/geospatial.git@149bc0a2c89d8839ebf280719e3ebe5b73307165#subdirectory=setup/base_geoengine
 odoo-addon-base-partner-sequence==16.0.1.0.0.3
 odoo-addon-base-report-to-printer==16.0.1.1.0.1
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@f75469cfc3ead20b6224195b653ddba735a219b4#subdirectory=setup/base_sparse_field_list_support
@@ -123,14 +123,14 @@ odoo-addon-stock-dock==16.0.1.0.1
 odoo-addon-stock-dynamic-routing==16.0.1.0.1
 odoo-addon-stock-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@c96b8aa6b6df50c3c910742db419d15dd606ea39#subdirectory=setup/stock_grn
 odoo-addon-stock-helper==16.0.1.0.1
-odoo-addon-stock-location-position @ git+https://github.com/acsone/stock-logistics-warehouse.git@7e2528698e4f8b302175ba815f1e96f575355d0b#subdirectory=setup/stock_location_position
+odoo-addon-stock-location-position==16.0.1.0.0.2
 odoo-addon-stock-location-product-restriction==16.0.1.0.0.3
 odoo-addon-stock-location-zone==16.0.1.0.1
 odoo-addon-stock-lot-is-archived @ git+https://github.com/acsone/product-attribute.git@97187f0ca50387f0e1eb16ba34b5d9a4a14bd8d0#subdirectory=setup/stock_lot_is_archived
 odoo-addon-stock-move-auto-assign==16.0.1.1.0
 odoo-addon-stock-move-auto-assign-auto-release==16.0.1.1.0
 odoo-addon-stock-move-common-dest==16.0.1.0.1
-odoo-addon-stock-move-line-reserved-quant @ git+https://github.com/acsone/stock-logistics-workflow.git@488cbb4b78fc453732a430ce0d4a13a9c87d691b#subdirectory=setup/stock_move_line_reserved_quant
+odoo-addon-stock-move-line-reserved-quant==16.0.1.0.0.2
 odoo-addon-stock-move-location==16.0.1.1.0.2
 odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@c665cd29430f43b1d639001ca5c050adba1d9341#subdirectory=setup/stock_move_manage_priority
 odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@989dcfe2f6d4c56cfa96e98b1d5378f8fdc37e02#subdirectory=setup/stock_move_propagate_first_move
@@ -159,7 +159,7 @@ odoo-addon-stock-putaway-hook==16.0.1.0.0.4
 odoo-addon-stock-quant-package-dimension==16.0.1.0.0.2
 odoo-addon-stock-quant-package-product-packaging==16.0.1.0.1
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@9eb9df361d84ed3c5e29d38b417319a9ec1f6f55#subdirectory=setup/stock_release_channel
-odoo-addon-stock-release-channel-auto-release @ git+https://github.com/acsone/wms.git@56803f47c6d4d6d60d051e4e9e9d90a0645f9800#subdirectory=setup/stock_release_channel_auto_release
+odoo-addon-stock-release-channel-auto-release==16.0.1.0.1
 odoo-addon-stock-release-channel-geoengine @ git+https://github.com/acsone/wms.git@a9d8af8190810f0736d6ca9b1e66bf1de8678c9a#subdirectory=setup/stock_release_channel_geoengine
 odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@8f2038535412a6fc13f34c30793da926d9ee5a73#subdirectory=setup/stock_release_channel_process_end_time
 odoo-addon-stock-release-channel-shipment-advice @ git+https://github.com/acsone/wms.git@0d776d523ead4e35e218cbc461422c42992d174c#subdirectory=setup/stock_release_channel_shipment_advice

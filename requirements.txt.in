@@ -29,8 +29,6 @@ odoo-addon-stock-release-channel @ git+https://github.com/OCA/wms.git@refs/pull/
 odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@16.0-release_channel_date-dro#subdirectory=setup/stock_release_channel_process_end_time
 # https://github.com/OCA/wms/pull/470
 odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@16.0-mig-stock_storage_type-dro#subdirectory=setup/stock_storage_type
-# https://github.com/OCA/wms/pull/508
-odoo-addon-stock-release-channel-auto-release @ git+https://github.com/acsone/wms.git@16.0-add-stock_release_channel_auto_release#subdirectory=setup/stock_release_channel_auto_release
 # https://github.com/OCA/wms/pull/496 - [MIG][16.0] stock_storage_type_putaway_abc
 odoo-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@16.0-mig-stock_storage_type_abc-dro#subdirectory=setup/stock_storage_type_putaway_abc
 # https://github.com/OCA/wms/pull/497 - [ADD] stock_storage_type_putaway_abc_classification_sale_stock
@@ -82,15 +80,12 @@ odoo-addon-stock-average-daily-sale @ git+https://github.com/acsone/stock-logist
 
 # stock-logistics-warehouse
 
-# https://github.com/OCA/stock-logistics-warehouse/pull/1500
-odoo-addon-stock-location-position @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1500/head#subdirectory=setup/stock_location_position
+
 # https://github.com/OCA/stock-logistics-warehouse/pull/1646
 odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock-default-scrap-location-dro#subdirectory=setup/stock_scrap_location_default
 odoo-addon-stock-picking-volume @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1680/head#subdirectory=setup/stock_picking_volume
 
 # stock-logistics-workflow
-# https://github.com/OCA/stock-logistics-workflow/pull/1274
-odoo-addon-stock-move-line-reserved-quant @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1274/head#subdirectory=setup/stock_move_line_reserved_quant
 # https://github.com/OCA/stock-logistics-workflow/pull/1199
 odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-picking-backorder-reason-dro#subdirectory=setup/stock_picking_backorder_reason
 # https://github.com/OCA/stock-logistics-workflow/pull/1200
@@ -150,7 +145,7 @@ odoo-addon-attribute-set @ git+https://github.com/OCA/odoo-pim.git@refs/pull/141
 odoo-addon-product-attribute-set @ git+https://github.com/OCA/odoo-pim.git@refs/pull/142/head#subdirectory=setup/product_attribute_set
 
 # OCA/geospatial
-odoo-addon-base-geoengine @ git+https://github.com/OCA/geospatial.git@refs/pull/334/head#subdirectory=setup/base_geoengine
+odoo-addon-base-geoengine @ git+https://github.com/OCA/geospatial.git@refs/pull/338/head#subdirectory=setup/base_geoengine
 odoo-addon-geoengine-partner @ git+https://github.com/OCA/geospatial.git@refs/pull/331/head#subdirectory=setup/geoengine_partner
 odoo-addon-geoengine-base-geolocalize @ git+https://github.com/OCA/geospatial.git@refs/pull/332/head#subdirectory=setup/geoengine_base_geolocalize
 
