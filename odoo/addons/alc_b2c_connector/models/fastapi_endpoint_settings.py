@@ -89,13 +89,9 @@ def fastapi_endpoint_setting(
     endpoint: FastapiEndpoint = Depends(fastapi_endpoint),  # noqa: B008
 ) -> FastapiEndpointSettings:
     """Return the fastapi.endpoint record."""
-    return (
-        env["fastapi.endpoint.settings"]
-        .sudo()
-        .search(
-            [
-                ("fastapi_endpoint_id", "=", endpoint.id),
-                ("auth_api_key_id.key", "=", api_key),
-            ]
-        )
+    return env["fastapi.endpoint.settings"].search(
+        [
+            ("fastapi_endpoint_id", "=", endpoint.id),
+            ("auth_api_key_id.key", "=", api_key),
+        ]
     )

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-<odoo noupdate="1">
+<odoo>
   <record
     id="alc_b2c_rest_api_user"
     model="res.users"
@@ -10,10 +10,14 @@
     <field name="name">B2C REST API User</field>
     <field name="login">alc_b2c_rest_api_user</field>
     <field name="company_id" ref="base.main_company" />
-    <field
-      name="groups_id"
-      eval="[(6,0,[ref('product.group_discount_per_so_line')])]"
-    />
+    <field name="groups_id" eval="[(6,0,[])]" />
     <field name="active" eval="0" />
   </record>
+  <function model="res.partner" name="write">
+        <value
+      model="res.partner"
+      eval="obj().env.ref('alc_b2c_connector.alc_b2c_rest_api_user').partner_id.ids"
+    />
+        <value eval="{'user_id': ref('alc_b2c_connector.alc_b2c_rest_api_user')}" />
+    </function>
 </odoo>

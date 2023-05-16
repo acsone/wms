@@ -55,16 +55,12 @@ class FastapiEndpoint(FastapiEndpointBase):
             return record
         environ = request.httprequest.environ
         api_key = environ.get("HTTP_API_KEY")
-        setting = (
-            self.env["fastapi.endpoint.settings"]
-            .sudo()
-            .search(
-                [
-                    ("fastapi_endpoint_id", "=", record.id),
-                    ("auth_api_key_id.key", "=", api_key),
-                ],
-                limit=1,
-            )
+        setting = self.env["fastapi.endpoint.settings"].search(
+            [
+                ("fastapi_endpoint_id", "=", record.id),
+                ("auth_api_key_id.key", "=", api_key),
+            ],
+            limit=1,
         )
         if not setting:
             return None
@@ -80,16 +76,12 @@ def fastapi_endpoint_setting_based_authenticated_partner_impl(
 
     as the provided api key
     """
-    setting = (
-        env["fastapi.endpoint.settings"]
-        .sudo()
-        .search(
-            [
-                ("fastapi_endpoint_id", "=", endpoint.id),
-                ("auth_api_key_id.key", "=", api_key),
-            ],
-            limit=1,
-        )
+    setting = env["fastapi.endpoint.settings"].search(
+        [
+            ("fastapi_endpoint_id", "=", endpoint.id),
+            ("auth_api_key_id.key", "=", api_key),
+        ],
+        limit=1,
     )
     if not setting:
         raise HTTPException(

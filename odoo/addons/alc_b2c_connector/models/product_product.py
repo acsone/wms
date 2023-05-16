@@ -12,8 +12,8 @@ from odoo.addons.product.models.product_product import (
 class ProductProduct(ProductProductBase):
     @api.model
     def product_assortment_domain(self, endpoint_setting):
-        if endpoint_setting.sudo().product_assortment_id:
-            return endpoint_setting.sudo().product_assortment_id._get_eval_domain()
+        if endpoint_setting.product_assortment_id:
+            return endpoint_setting.product_assortment_id._get_eval_domain()
         return []
 
     def _search_products_from_b2c(
@@ -22,4 +22,6 @@ class ProductProduct(ProductProductBase):
         domain = self.product_assortment_domain(endpoint_setting)
         if skus:
             domain = expression.AND([domain, [("default_code", "in", skus)]])
+        products = self.search(domain, limit=limit, offset=offset)
+        products.check_access_rights("read")
         return self.search(domain, limit=limit, offset=offset)

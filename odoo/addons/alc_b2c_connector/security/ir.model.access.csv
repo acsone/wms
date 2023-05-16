@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+fastapi_endpoint_settings_access_b2c_group,fastapi.endpoint.settings access b2c_group,model_fastapi_endpoint_settings,alc_b2c_connector.b2c_group,1,0,0,0
+auth_api_key_b2c_group,auth_api_key b2c_group,auth_api_key.model_auth_api_key,alc_b2c_connector.b2c_group,1,0,0,0
+ir_filters_b2c_group,ir_filters b2c_group,base.model_ir_filters,alc_b2c_connector.b2c_group,1,0,0,0
+product_product_b2c_group,product_product b2c_group,product.model_product_product,alc_b2c_connector.b2c_group,1,0,0,0
+product_category_b2c_group,product_category b2c_group,product.model_product_category,alc_b2c_connector.b2c_group,1,0,0,0
+product_template_b2c_group,product_template b2c_group,product.model_product_template,alc_b2c_connector.b2c_group,1,0,0,0
+stock_warehouse_b2c_group,stock_warehouse b2c_group,stock.model_stock_warehouse,alc_b2c_connector.b2c_group,1,0,0,0
+stock_location_b2c_group,stock_location b2c_group,stock.model_stock_location,alc_b2c_connector.b2c_group,1,0,0,0
+stock_move_b2c_group,stock_move b2c_group,stock.model_stock_move,alc_b2c_connector.b2c_group,1,0,0,0
+stock_quant_b2c_group,stock_quant b2c_group,stock.model_stock_quant,alc_b2c_connector.b2c_group,1,0,0,0
+uom_uom_b2c_group,uom_uom b2c_group,uom.model_uom_uom,alc_b2c_connector.b2c_group,1,0,0,0

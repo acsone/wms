@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="auth_api_key_b2c_rule" model="ir.rule">
+        <field name="name">auth_api_key b2c rule</field>
+        <field ref="auth_api_key.model_auth_api_key" name="model_id" />
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="perm_write" eval="1" />
+        <field name="perm_create" eval="0" />
+        <field name="perm_read" eval="0" />
+        <field name="perm_unlink" eval="0" />
+        <field name="groups" eval="[(4, ref('alc_b2c_connector.b2c_group'))]" />
+    </record>
+</odoo>
