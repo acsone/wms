@@ -67,6 +67,7 @@ odoo-addon-sale-exception==16.0.1.2.0.1
 odoo-addon-sale-order-line-cancel @ git+https://github.com/acsone/sale-workflow.git@34bf9057b6de07e0d5a161688905da813387c399#subdirectory=setup/sale_order_line_cancel
 odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@ef0c216f30a0fd7fd1fb0d782f8b9aaac3f7d487#subdirectory=setup/sale_procurement_customer
 odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.git@f506b778476eacfc4a3f33d85c2f77f790a8ebc8#subdirectory=setup/sale_route_amendment
+odoo-addon-sale-shipping-info-helper @ git+https://github.com/OCA/sale-workflow.git@64185c13f8c69cc7faf87cb5b2bc0db444b4c93c#subdirectory=setup/sale_shipping_info_helper
 odoo-addon-sale-triple-discount==16.0.1.0.1.1
 odoo-addon-server-environment==16.0.1.0.1.1
 odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
