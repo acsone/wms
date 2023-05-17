@@ -24,6 +24,7 @@
         "sale_route_amendment",
         "sale_shipping_info_helper",
         "sale_discount_display_amount",
+        "sale_product_set",
         # OCA/sale-channel
         "sale_channel",
         # OCA/product-attribute

@@ -33,6 +33,7 @@ odoo-addon-delivery-procurement-group-carrier==16.0.1.0.0.2
 odoo-addon-geoengine-base-geolocalize @ git+https://github.com/acsone/geospatial.git@d977cbdc42825e5d241ebe91203e0d087d73b2e7#subdirectory=setup/geoengine_base_geolocalize
 odoo-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@ff4a76d86be5abd88dcb0f84c5def21a70e2262d#subdirectory=setup/geoengine_partner
 odoo-addon-hr-holidays-public==16.0.1.1.0
+odoo-addon-onchange-helper==16.0.1.0.0.3
 odoo-addon-partner-manual-rank==16.0.1.0.1
 odoo-addon-partner-tz==16.0.1.0.0.3
 odoo-addon-pdf-helper==16.0.1.0.0.2
@@ -67,6 +68,7 @@ odoo-addon-sale-discount-display-amount @ git+https://github.com/OCA/sale-workfl
 odoo-addon-sale-exception==16.0.1.2.0.1
 odoo-addon-sale-order-line-cancel @ git+https://github.com/acsone/sale-workflow.git@34bf9057b6de07e0d5a161688905da813387c399#subdirectory=setup/sale_order_line_cancel
 odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@ef0c216f30a0fd7fd1fb0d782f8b9aaac3f7d487#subdirectory=setup/sale_procurement_customer
+odoo-addon-sale-product-set @ git+https://github.com/OCA/sale-workflow.git@61b9f345092f828e1220cf0c1dc1964b0ccc9dc8#subdirectory=setup/sale_product_set
 odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.git@f506b778476eacfc4a3f33d85c2f77f790a8ebc8#subdirectory=setup/sale_route_amendment
 odoo-addon-sale-shipping-info-helper @ git+https://github.com/OCA/sale-workflow.git@64185c13f8c69cc7faf87cb5b2bc0db444b4c93c#subdirectory=setup/sale_shipping_info_helper
 odoo-addon-sale-triple-discount==16.0.1.0.1.1
