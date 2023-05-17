@@ -113,5 +113,3 @@ msgstr "Veuillez entrer les dimensions sur le produit à recevoir"
 msgid "stock.pack.operation.lot.add"
 msgstr "stock.pack.operation.lot.add"
 
-#~ msgid "Barcode not required"
-#~ msgstr "Barcode non requis"
