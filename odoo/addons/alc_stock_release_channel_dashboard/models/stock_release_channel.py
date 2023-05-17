@@ -98,7 +98,8 @@ class StockReleaseChannel(StockReleaseChannelBase):
     def _kanban_dashboard_todo_by_picking_type_domain(self):
         return [
             ("release_channel_id", "=", self.id),
-            ("scheduled_date", "=", self.process_end_date),
+            ("scheduled_date", "<=", self.process_end_date),
+            ("planned_shipment_advice_id", "=", False),
         ]
 
     def _kanban_dashboard_done_by_picking_type_domain(self):
