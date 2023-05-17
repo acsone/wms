@@ -2,10 +2,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from datetime import datetime
 from enum import Enum
-from typing import Any, List, Optional, Type
+from typing import List, Optional, Type
 
 from pydantic.utils import GetterDict
 
+from odoo.addons.alc_b2c_connector.models.sale_order import (  # pylint: disable=odoo-addons-relative-import
+    SaleOrder,
+)
 from odoo.addons.alc_b2c_connector.services.utils import (  # pylint: disable=odoo-addons-relative-import
     BaseModel,
 )
@@ -39,7 +42,9 @@ class SaleOrderResponse(SaleOrderCommon):
         orm_mode = True
 
     @classmethod
-    def _decompose_class(cls: Type["Model"], obj: Any) -> GetterDict:  # noqa: F821
+    def _decompose_class(
+        cls: Type["SaleOrderResponse"], obj: SaleOrder
+    ) -> GetterDict:  # noqa: F821
         state = obj.b2c_state
         res = {
             "id": obj.b2c_ref,
