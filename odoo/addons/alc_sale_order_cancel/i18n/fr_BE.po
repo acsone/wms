@@ -24,6 +24,7 @@ msgstr "Bon de commande"
 #. module: alc_sale_order_cancel
 #. odoo-python
 #: code:addons/alc_sale_order_cancel/models/sale_order.py:0
-#, python-format
-msgid "You cannot cancel sale order %s, it's already prepared"
+#, fuzzy, python-format
+#| msgid "You cannot cancel sale order %s, it's already prepared"
+msgid "You cannot cancel sale order {}, it's already prepared"
 msgstr "Vous ne pouvez pas annuler la commande %s, elle est déjà préparée"
