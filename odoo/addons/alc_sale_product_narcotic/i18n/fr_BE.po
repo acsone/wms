@@ -53,10 +53,6 @@ msgstr ""
 "message et bloquera le flux. Le message doit être encodé dans le champ "
 "suivant."
 
-#. module: alc_sale_product_narcotic
-#. odoo-python
-#: code:addons/alc_sale_product_narcotic/models/product.py:0
-#, python-format
-msgid "You cannot change the warning message on narcotics"
-msgstr ""
-"Vous ne pouvez pas changer l'avertissement sur les produits stupéfiants"
+#~ msgid "You cannot change the warning message on narcotics"
+#~ msgstr ""
+#~ "Vous ne pouvez pas changer l'avertissement sur les produits stupéfiants"
