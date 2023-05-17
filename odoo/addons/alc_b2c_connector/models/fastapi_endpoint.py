@@ -52,7 +52,7 @@ class FastapiEndpoint(FastapiEndpointBase):
         if not record:
             return None
         if record.app != "b2c":
-            return record
+            return super().get_uid()
         environ = request.httprequest.environ
         api_key = environ.get("HTTP_API_KEY")
         setting = self.env["fastapi.endpoint.settings"].search(
