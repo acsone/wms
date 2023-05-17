@@ -211,10 +211,30 @@ def _create_shipment_advice_from_round_instances(env):
             stock_move.picking_id = stock_picking.id
             AND stock_picking.delivery_round_id IS NOT NULL
             AND stock_move.state = 'done'
-            AND stock_picking_type.code = 'outgoing'
+            AND stock_picking_type.code IN ('outgoing', 'internal')
         """
     )
     _logger.info("Updated %s stock move with shipment advice", cr.rowcount)
+
+    # reference the shipment advice on the stock.picking
+    # As planned_shipment_advice_id is a related on first stock move
+    # shipment_advice_id field, we limit the select to 1
+    _logger.info("Linking stock picking to shipment advices")
+    cr.execute(
+        """
+        UPDATE stock_picking
+            SET planned_shipment_advice_id =
+                (SELECT shipment_advice_id
+                    FROM stock_move
+                        WHERE picking_id = stock_picking.id
+                        AND shipment_advice_id IS NOT NULL LIMIT 1)
+            WHERE EXISTS (
+                SELECT 1 FROM stock_move
+                WHERE picking_id = stock_picking.id
+                AND shipment_advice_id IS NOT NULL);
+        """
+    )
+    _logger.info("Updated %s stock picking with shipment advice", cr.rowcount)
 
     # set shipment advice on stock.move.line
     _logger.info("Linking stock move lines to shipment advices")
