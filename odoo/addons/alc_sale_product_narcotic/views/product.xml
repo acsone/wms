@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="product_template_form_view_sale_order_button" model="ir.ui.view">
+    <field
+      name="name"
+    >product.template.sale.order.button (in alc_sale_product_narcotic)</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="sale.product_template_form_view_sale_order_button" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='sale_line_warn']" position="before">
+        <field name="is_narcotic_reg" invsible="1" />
+        <field name="is_narcotic_vet" invsible="1" />
+      </xpath>
+      <xpath expr="//field[@name='sale_line_warn']" position="attributes">
+        <attribute
+          name="attrs"
+        >{'readonly':['|', ('is_narcotic_reg','=',True), ('is_narcotic_vet','=',True)]}</attribute>
+      </xpath>
+      <xpath expr="//field[@name='sale_line_warn_msg']" position="attributes">
+        <attribute name="attrs">
+          {
+            'required':[('sale_line_warn','!=','no-message')],
+            'readonly':['|', ('sale_line_warn','=','no-message'), '|', ('is_narcotic_reg','=',True), ('is_narcotic_vet','=',True)],
+            'invisible':[('sale_line_warn','=','no-message')]
+          }
+        </attribute>
+      </xpath>
+    </field>
+  </record>
+  <record id="product_form_view_sale_order_button" model="ir.ui.view">
+    <field name="name">product.sale.order.button (in alc_sale_product_narcotic)</field>
+    <field name="model">product.product</field>
+    <field name="inherit_id" ref="sale.product_form_view_sale_order_button" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='sale_line_warn']" position="before">
+        <field name="is_narcotic_reg" invsible="1" />
+        <field name="is_narcotic_vet" invsible="1" />
+      </xpath>
+      <xpath expr="//field[@name='sale_line_warn']" position="attributes">
+        <attribute
+          name="attrs"
+        >{'readonly':['|', ('is_narcotic_reg','=',True), ('is_narcotic_vet','=',True)]}</attribute>
+      </xpath>
+      <xpath expr="//field[@name='sale_line_warn_msg']" position="attributes">
+        <attribute name="attrs">
+          {
+            'required':[('sale_line_warn','!=','no-message')],
+            'readonly':['|', ('sale_line_warn','=','no-message'), '|', ('is_narcotic_reg','=',True), ('is_narcotic_vet','=',True)],
+          }
+        </attribute>
+      </xpath>
+    </field>
+  </record>
+</odoo>

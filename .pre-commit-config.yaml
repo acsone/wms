@@ -237,7 +237,6 @@ exclude: |
   ^odoo/addons/specific_cutoff/|
   ^odoo/addons/specific_print/|
   ^odoo/addons/specific_report/|
-  ^odoo/addons/specific_sale/|
   ^odoo/addons/specific_security/|
   ^odoo/addons/specific_stock/|
   ^odoo/addons/speedy_views/|

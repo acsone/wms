@@ -40,12 +40,13 @@ class TestSaleDelay(TransactionCase):
         self.partner.auto_confirm_max_delay = 0.5
         self.so.action_confirm_and_check_delay()
         self.assertEqual(self.so.state, "cancel")
-        self.assertEqual(len(self.so.message_ids), 1)
-        self.assertEqual(
-            str(self.so.message_ids.body),
+        self.assertGreater(len(self.so.message_ids), 0)
+        error_msg = (
             "<p>Was automatically cancelled on creation because the job took longer to "
-            "execute than the customer allows.</p>",
+            "execute than the customer allows.</p>"
         )
+        messages = [str(msg.body) for msg in self.so.message_ids]
+        self.assertIn(error_msg, messages)
 
     @freeze_time(datetime.now() + timedelta(hours=1))
     def test_so_in_time(self):

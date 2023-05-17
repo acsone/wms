@@ -1,0 +1,50 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_sale_order_line_unavailable
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-03 12:44+0000\n"
+"PO-Revision-Date: 2023-05-03 12:44+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_sale_order_line_unavailable
+#: model:ir.model.fields,field_description:alc_sale_order_line_unavailable.field_res_partner__auto_cancel_unavailable_qty_sold
+#: model:ir.model.fields,field_description:alc_sale_order_line_unavailable.field_res_users__auto_cancel_unavailable_qty_sold
+msgid "Auto-cancel Unavailable Quantity"
+msgstr ""
+
+#. module: alc_sale_order_line_unavailable
+#: model:ir.model.fields,help:alc_sale_order_line_unavailable.field_res_partner__auto_cancel_unavailable_qty_sold
+#: model:ir.model.fields,help:alc_sale_order_line_unavailable.field_res_users__auto_cancel_unavailable_qty_sold
+msgid ""
+"Automatically cancel unavailable ordered quantity to avoid the generation of backorders.\n"
+"In other words it will ship only immediately usable quantity."
+msgstr ""
+
+#. module: alc_sale_order_line_unavailable
+#: model:ir.model,name:alc_sale_order_line_unavailable.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_sale_order_line_unavailable
+#: model_terms:ir.ui.view,arch_db:alc_sale_order_line_unavailable.partner_form_view_sale_lines_unavailable_button
+msgid "Lines unavailable"
+msgstr "Lignes non disponibles"
+
+#. module: alc_sale_order_line_unavailable
+#: model:ir.model,name:alc_sale_order_line_unavailable.model_product_template
+msgid "Product"
+msgstr "Produit"
+
+#. module: alc_sale_order_line_unavailable
+#: model_terms:ir.ui.view,arch_db:alc_sale_order_line_unavailable.product_template_form_view_sale_order_button
+msgid "Sales"
+msgstr ""
