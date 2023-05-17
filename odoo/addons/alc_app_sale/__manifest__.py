@@ -22,6 +22,7 @@
         "sale_stock_picking_blocking",
         "sale_order_line_cancel",
         "sale_route_amendment",
+        "sale_discount_display_amount",
         # OCA/sale-channel
         "sale_channel",
         # OCA/product-attribute
