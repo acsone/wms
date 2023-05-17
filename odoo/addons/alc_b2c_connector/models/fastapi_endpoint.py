@@ -7,9 +7,8 @@ from odoo import api, fields
 from odoo.api import Environment
 from odoo.http import request
 
-from odoo.addons.base.models.res_partner import Partner
 from odoo.addons.fastapi.depends import (
-    authenticated_partner_impl,
+    authenticated_partner_impl as authenticated_partner_impl_base,
     fastapi_endpoint,
     odoo_env,
 )
@@ -17,6 +16,7 @@ from odoo.addons.fastapi.models.fastapi_endpoint import (
     FastapiEndpoint as FastapiEndpointBase,
 )
 
+from ..models.res_partner import ResPartner
 from ..services.utils import api_key_header
 from .fastapi_endpoint_settings import FastapiEndpointSettings
 
@@ -42,8 +42,8 @@ class FastapiEndpoint(FastapiEndpointBase):
         app = super()._get_app()
         if self.app == "b2c":
             app.dependency_overrides[
-                authenticated_partner_impl
-            ] = fastapi_endpoint_setting_based_authenticated_partner_impl
+                authenticated_partner_impl_base
+            ] = authenticated_partner_impl
         return app
 
     @api.model
@@ -67,29 +67,30 @@ class FastapiEndpoint(FastapiEndpointBase):
         return setting.auth_api_key_id.user_id.id
 
 
-def fastapi_endpoint_setting_based_authenticated_partner_impl(
+def __fastapi_endpoint_settings_base(
     api_key: str = Depends(api_key_header),  # noqa: B008
     env: Environment = Depends(odoo_env),  # noqa: B008
     endpoint: FastapiEndpoint = Depends(fastapi_endpoint),  # noqa: B008
-) -> Partner:
-    """A dummy implementation that look for a user with the same login.
-
-    as the provided api key
-    """
-    setting = env["fastapi.endpoint.settings"].search(
+) -> FastapiEndpointSettings:
+    """Return the fastapi.endpoint record."""
+    return env["fastapi.endpoint.settings"].search(
         [
             ("fastapi_endpoint_id", "=", endpoint.id),
             ("auth_api_key_id.key", "=", api_key),
-        ],
-        limit=1,
+        ]
     )
-    if not setting:
+
+
+def authenticated_partner_impl(
+    settings: FastapiEndpointSettings = Depends(  # noqa: B008
+        __fastapi_endpoint_settings_base
+    ),
+) -> ResPartner:
+    if not settings:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect API Key"
         )
-    return setting.auth_api_key_id.user_id.partner_id
+    return settings.auth_api_key_id.user_id.partner_id
 
 
-b2c_api_router = APIRouter(
-    dependencies=[Depends(fastapi_endpoint_setting_based_authenticated_partner_impl)]
-)
+b2c_api_router = APIRouter(dependencies=[Depends(authenticated_partner_impl)])

@@ -1,24 +1,19 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from fastapi import Depends
 
 from odoo import _, api, fields, models
-from odoo.api import Environment
 
 from odoo.addons.account.models.account_payment_term import AccountPaymentTerm
 from odoo.addons.account_payment_mode.models.account_payment_mode import (
     AccountPaymentMode,
 )
 from odoo.addons.auth_api_key.models.auth_api_key import AuthApiKey
-from odoo.addons.fastapi.depends import fastapi_endpoint, odoo_env
 from odoo.addons.fastapi.models.fastapi_endpoint import FastapiEndpoint
 from odoo.addons.product.models.product_pricelist import Pricelist
 from odoo.addons.product_assortment.models.ir_filters import IrFilters
 from odoo.addons.sale_channel.models.sale_channel import SaleChannel
 from odoo.addons.sales_team.models.crm_team import CrmTeam
-
-from ..services.utils import api_key_header
 
 
 class FastapiEndpointSettings(models.Model):
@@ -81,17 +76,3 @@ class FastapiEndpointSettings(models.Model):
     @api.model
     def _get_default_sale_reason_backorder_strategy(self):
         return self.env.company.partner_sale_backorder_default_strategy
-
-
-def fastapi_endpoint_setting(
-    api_key: str = Depends(api_key_header),  # noqa: B008
-    env: Environment = Depends(odoo_env),  # noqa: B008
-    endpoint: FastapiEndpoint = Depends(fastapi_endpoint),  # noqa: B008
-) -> FastapiEndpointSettings:
-    """Return the fastapi.endpoint record."""
-    return env["fastapi.endpoint.settings"].search(
-        [
-            ("fastapi_endpoint_id", "=", endpoint.id),
-            ("auth_api_key_id.key", "=", api_key),
-        ]
-    )

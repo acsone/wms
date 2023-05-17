@@ -8,10 +8,7 @@ from odoo.api import Environment
 from odoo.addons.fastapi.depends import authenticated_partner_env
 
 from ..models.fastapi_endpoint import b2c_api_router
-from ..models.fastapi_endpoint_settings import (
-    FastapiEndpointSettings,
-    fastapi_endpoint_setting,
-)
+from .depends import FastapiEndpointSettings, fastapi_endpoint_settings
 from .models.partner import PartnerRequest, PartnerResponse
 
 
@@ -23,7 +20,7 @@ def _get_partners(
     id: str,  # pylint: disable=redefined-builtin
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
     endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
-        fastapi_endpoint_setting
+        fastapi_endpoint_settings
     ),
 ) -> PartnerResponse:
     """Get partner by id."""
@@ -38,7 +35,7 @@ def _update_partner(
     body: PartnerRequest,
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
     endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
-        fastapi_endpoint_setting
+        fastapi_endpoint_settings
     ),
 ) -> PartnerResponse:
     """Update partner."""

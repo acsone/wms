@@ -11,10 +11,7 @@ from odoo.addons.fastapi.depends import authenticated_partner_env, paging
 from odoo.addons.fastapi.schemas import Paging
 
 from ..models.fastapi_endpoint import b2c_api_router
-from ..models.fastapi_endpoint_settings import (
-    FastapiEndpointSettings,
-    fastapi_endpoint_setting,
-)
+from .depends import FastapiEndpointSettings, fastapi_endpoint_settings
 from .models.sale_order import (
     SaleOrderCreateRequest,
     SaleOrderResponse,
@@ -28,7 +25,7 @@ def _create_sale_order(
     body: SaleOrderCreateRequest,
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
     endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
-        fastapi_endpoint_setting
+        fastapi_endpoint_settings
     ),
 ) -> SaleOrderResponse:
     """Create a sale order."""
@@ -52,7 +49,7 @@ def get_sale_orders(
     paging_: Paging = Depends(paging),  # noqa: B008
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
     endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
-        fastapi_endpoint_setting
+        fastapi_endpoint_settings
     ),
 ) -> PagedCollection[SaleOrderResponse]:
     """
@@ -80,7 +77,7 @@ def _get_sale_order(
     id: int,  # pylint: disable=redefined-builtin
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
     endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
-        fastapi_endpoint_setting
+        fastapi_endpoint_settings
     ),
 ) -> SaleOrderResponse:
     """
@@ -104,7 +101,7 @@ def _cancel_sale_order(
     id: int,  # pylint: disable=redefined-builtin
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
     endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
-        fastapi_endpoint_setting
+        fastapi_endpoint_settings
     ),
 ) -> SaleOrderResponse:
     """
@@ -126,7 +123,7 @@ def _update_sale_order(
     body: SaleOrderUpdateRequest,
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
     endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
-        fastapi_endpoint_setting
+        fastapi_endpoint_settings
     ),
 ) -> SaleOrderResponse:
     """Update sale order."""
