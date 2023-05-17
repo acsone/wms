@@ -1,0 +1,6 @@
+<odoo>
+  <record id="package_st_M_M_Nouveaute" model="stock.package.type">
+    <field name="is_new">True</field>
+    <field name="name">M Nouveaute</field>
+  </record>
+</odoo>

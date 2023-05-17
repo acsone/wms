@@ -58,16 +58,17 @@ class ProductTemplate(models.Model):
         index=True,
     )
 
-    has_no_dimensions = fields.Boolean(
-        default=False, compute="_compute_has_no_dimensions", store=True, index=True,
-    )
-
-    packaging_has_no_dimensions = fields.Boolean(
-        default=False,
-        compute="_compute_packaging_has_no_dimensions",
-        store=True,
-        index=True,
-    )
+    # Moved to alc_sale_dimensions_missing
+    # has_no_dimensions = fields.Boolean(
+    #     default=False, compute="_compute_has_no_dimensions", store=True, index=True,
+    # )
+    #
+    # packaging_has_no_dimensions = fields.Boolean(
+    #     default=False,
+    #     compute="_compute_packaging_has_no_dimensions",
+    #     store=True,
+    #     index=True,
+    # )
 
     mto_purchased_not_sold = fields.Boolean(
         default=False,
@@ -212,54 +213,55 @@ class ProductTemplate(models.Model):
             else:
                 product.mto_with_abnormal_route = False
 
-    @api.depends(
-        "product_variant_ids",
-        "product_variant_ids.height",
-        "product_variant_ids.length",
-        "product_variant_ids.width",
-    )
-    def _compute_has_no_dimensions(self):
-        unique_variants = self.filtered(
-            lambda template: len(template.product_variant_ids) == 1
-        )
-        for product in unique_variants:
-            if product.type == "service":
-                # No dimensions on services
-                continue
+    # Moved to alc_product_dimension_missing
+    # @api.depends(
+    #     "product_variant_ids",
+    #     "product_variant_ids.height",
+    #     "product_variant_ids.length",
+    #     "product_variant_ids.width",
+    # )
+    # def _compute_has_no_dimensions(self):
+    #     unique_variants = self.filtered(
+    #         lambda template: len(template.product_variant_ids) == 1
+    #     )
+    #     for product in unique_variants:
+    #         if product.type == "service":
+    #             # No dimensions on services
+    #             continue
+    #
+    #         if not (product.length or product.width or product.height):
+    #             product.has_no_dimensions = True
+    #         else:
+    #             product.has_no_dimensions = False
+    #     for product in self - unique_variants:
+    #         product.has_no_dimensions = False
 
-            if not (product.length or product.width or product.height):
-                product.has_no_dimensions = True
-            else:
-                product.has_no_dimensions = False
-        for product in self - unique_variants:
-            product.has_no_dimensions = False
-
-    @api.depends(
-        "packaging_ids",
-        "packaging_ids.height",
-        "packaging_ids.lngth",
-        "packaging_ids.width",
-    )
-    def _compute_packaging_has_no_dimensions(self):
-        for product in self:
-            if product.type == "service":
-                # No dimensions on services
-                continue
-
-            packagings = product.mapped("packaging_ids")
-            if packagings:
-                missing_dimensions = []
-                for pack in packagings:
-                    if not (pack.lngth or pack.width or pack.height):
-                        missing_dimensions.append(True)
-                    else:
-                        missing_dimensions.append(False)
-                if any(missing_dimensions):
-                    product.packaging_has_no_dimensions = True
-                else:
-                    product.packaging_has_no_dimensions = False
-            else:
-                product.packaging_has_no_dimensions = False
+    # @api.depends(
+    #     "packaging_ids",
+    #     "packaging_ids.height",
+    #     "packaging_ids.lngth",
+    #     "packaging_ids.width",
+    # )
+    # def _compute_packaging_has_no_dimensions(self):
+    #     for product in self:
+    #         if product.type == "service":
+    #             # No dimensions on services
+    #             continue
+    #
+    #         packagings = product.mapped("packaging_ids")
+    #         if packagings:
+    #             missing_dimensions = []
+    #             for pack in packagings:
+    #                 if not (pack.lngth or pack.width or pack.height):
+    #                     missing_dimensions.append(True)
+    #                 else:
+    #                     missing_dimensions.append(False)
+    #             if any(missing_dimensions):
+    #                 product.packaging_has_no_dimensions = True
+    #             else:
+    #                 product.packaging_has_no_dimensions = False
+    #         else:
+    #             product.packaging_has_no_dimensions = False
 
     def _get_current_ids(self):
         # copied as is into alc_product_is_new to avoid the whole dependency

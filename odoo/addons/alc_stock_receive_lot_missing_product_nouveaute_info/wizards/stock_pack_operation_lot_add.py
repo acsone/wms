@@ -1,15 +1,19 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.alc_stock_receive_lot.wizards.stock_pack_operation_lot_add import (
+    StockPackOperationLotAdd as StockPackOperationLotAddBase,
+)
+from odoo.addons.product.models.product_packaging import (
+    ProductPackaging as ProductPackagingBase,
+)
 
 from ..exceptions import MissingBarcodeError, MissingDimensionsError, MissingWeightError
 
 
-class StockPackOperationLotAdd(models.TransientModel):
-
-    _inherit = "stock.pack.operation.lot.add"
+class StockPackOperationLotAdd(StockPackOperationLotAddBase):
 
     product_weight = fields.Float(
         string="Product weight",
@@ -43,9 +47,8 @@ class StockPackOperationLotAdd(models.TransientModel):
     )
 
     product_is_new = fields.Boolean(related="product_id.is_new")
-    product_packaging_ids = fields.One2many(
-        comodel_name="product.packaging",
-        String="Logistical Units",
+    product_packaging_ids = fields.One2many[ProductPackagingBase](
+        string="Logistical Units",
         compute="_compute_product_packaging_ids",
         inverse="_inverse_product_packaging_ids",
     )
@@ -71,7 +74,7 @@ class StockPackOperationLotAdd(models.TransientModel):
                 or product.is_food
                 or product.is_meds
                 or product.is_equipment
-            ) and not product.is_mto_product
+            ) and not product.is_mto
 
     @api.depends("product_id", "edit_dimensions_barcode_fields", "product_id.weight")
     def _compute_product_weight(self):
@@ -86,44 +89,50 @@ class StockPackOperationLotAdd(models.TransientModel):
             if rec.edit_dimensions_barcode_fields:
                 product.sudo().write({"weight": rec.product_weight})
 
-    @api.depends("product_id", "edit_dimensions_barcode_fields", "product_id.length")
+    @api.depends(
+        "product_id", "edit_dimensions_barcode_fields", "product_id.product_length"
+    )
     def _compute_product_length(self):
         for rec in self:
             product = rec.product_id
             if rec.edit_dimensions_barcode_fields:
-                rec.product_length = product.length
+                rec.product_length = product.product_length
 
     def _inverse_product_length(self):
         for rec in self:
             product = rec.product_id
             if rec.edit_dimensions_barcode_fields:
-                product.sudo().write({"length": rec.product_length})
+                product.sudo().write({"product_length": rec.product_length})
 
-    @api.depends("product_id", "edit_dimensions_barcode_fields", "product_id.height")
+    @api.depends(
+        "product_id", "edit_dimensions_barcode_fields", "product_id.product_height"
+    )
     def _compute_product_height(self):
         for rec in self:
             product = rec.product_id
             if rec.edit_dimensions_barcode_fields:
-                rec.product_height = product.height
+                rec.product_height = product.product_height
 
     def _inverse_product_height(self):
         for rec in self:
             product = rec.product_id
             if rec.edit_dimensions_barcode_fields:
-                product.sudo().write({"height": rec.product_height})
+                product.sudo().write({"product_height": rec.product_height})
 
-    @api.depends("product_id", "edit_dimensions_barcode_fields", "product_id.width")
+    @api.depends(
+        "product_id", "edit_dimensions_barcode_fields", "product_id.product_width"
+    )
     def _compute_product_width(self):
         for rec in self:
             product = rec.product_id
             if rec.edit_dimensions_barcode_fields:
-                rec.product_width = product.width
+                rec.product_width = product.product_width
 
     def _inverse_product_width(self):
         for rec in self:
             product = rec.product_id
             if rec.edit_dimensions_barcode_fields:
-                product.sudo().write({"width": rec.product_width})
+                product.sudo().write({"product_width": rec.product_width})
 
     @api.depends("product_id", "edit_dimensions_barcode_fields", "product_id.barcode")
     def _compute_product_barcode(self):
@@ -178,19 +187,13 @@ class StockPackOperationLotAdd(models.TransientModel):
     def _check_packaging_creation(self, product, product_packagings):
         for product_packaging in product_packagings:
             if product_packaging not in product.packaging_ids:
-                vals = {
-                    "height_cm": product_packaging.height_cm,
-                    "barcode": product_packaging.barcode,
-                    "name": product_packaging.name,
-                    "length_cm": product_packaging.length_cm,
-                    "qty": product_packaging.qty,
-                    "packaging_type_id": product_packaging.packaging_type_id.id,
-                    "width_cm": product_packaging.width_cm,
-                    "product_tmpl_id": product.product_tmpl_id.id,
-                }
-                self.env["product.packaging"].create(vals)
+                product_packaging.product_id = product
 
     def _check_barcode_new_product(self):
+        if not self.env["ir.config_parameter"].get_param(
+            "reception_wizard_constraints"
+        ):
+            return
         for rec in self:
             if (
                 rec.edit_dimensions_barcode_fields
@@ -200,6 +203,10 @@ class StockPackOperationLotAdd(models.TransientModel):
                 raise MissingBarcodeError()
 
     def _check_dimensions_product(self):
+        if not self.env["ir.config_parameter"].get_param(
+            "reception_wizard_constraints"
+        ):
+            return
         for rec in self:
             if rec.edit_dimensions_barcode_fields and not (
                 rec.product_width or rec.product_length or rec.product_height
@@ -207,19 +214,23 @@ class StockPackOperationLotAdd(models.TransientModel):
                 raise MissingDimensionsError()
 
     def _check_weight_product(self):
+        if not self.env["ir.config_parameter"].get_param(
+            "reception_wizard_constraints"
+        ):
+            return
         for rec in self:
             if rec.edit_dimensions_barcode_fields and not rec.product_weight:
                 raise MissingWeightError()
 
     def _add(self):
-        result = super(StockPackOperationLotAdd, self)._add()
-
-        # Manually check constrains because they depends on product_id.is_new which is
-        # a computed field without an inverse. This raises a warning that triggers error.
-        # For this reason, we check the constrains exactly when we need it : when receiving
-        # the product.
-        self._check_barcode_new_product()
-        self._check_dimensions_product()
-        self._check_weight_product()
+        result = super()._add()
+        if self.env["ir.config_parameter"].get_param("reception_wizard_constraints"):
+            # Manually check constraints because they depend on product_id.is_new which
+            # is a computed field without an inverse. This raises a warning that
+            # triggers the errors. For this reason, we check the constraints exactly
+            # when we need to: when receiving the product.
+            self._check_barcode_new_product()
+            self._check_dimensions_product()
+            self._check_weight_product()
 
         return result

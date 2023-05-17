@@ -3,52 +3,52 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
 
-    <record model="ir.ui.view" id="stock_pack_operation_lot_add_form_view">
-        <field
+  <record model="ir.ui.view" id="stock_pack_operation_lot_add_form_view">
+    <field
       name="name"
-    >stock.pack.operation.lot.add.form (in alc_stock_receive_lot_missing_product_nouveaute_info)</field>
-        <field name="model">stock.pack.operation.lot.add</field>
-        <field
+    >stock.pack.operation.lot.add.form (in alc_stock_receive_lot_missing_product_nouveaute_info)
+    </field>
+    <field name="model">stock.pack.operation.lot.add</field>
+    <field
       name="inherit_id"
-      ref="stock_receive_lot.view_pack_operation_lot_add_form"
+      ref="alc_stock_receive_lot.view_pack_operation_lot_add_form"
     />
-        <field name="arch" type="xml">
-                <xpath expr="//group[@name='operation_details']" position="after">
-                    <field name="edit_dimensions_barcode_fields" invisible="1" />
-                    <group name="missing_infos">
-                        <field
+    <field name="arch" type="xml">
+      <xpath expr="//group[@name='operation_details']" position="after">
+        <field name="edit_dimensions_barcode_fields" invisible="1" />
+        <group name="missing_infos">
+          <field
             name="product_weight"
             attrs="{'invisible': [('edit_dimensions_barcode_fields', '=', False)], 'required': [('edit_dimensions_barcode_fields', '=', True)]}"
           />
-                        <field
+          <field
             name="product_length"
             attrs="{'invisible': [('edit_dimensions_barcode_fields', '=', False)], 'required': [('edit_dimensions_barcode_fields', '=', True)]}"
           />
-                        <field
+          <field
             name="product_height"
             attrs="{'invisible': [('edit_dimensions_barcode_fields', '=', False)], 'required': [('edit_dimensions_barcode_fields', '=', True)]}"
           />
-                        <field
+          <field
             name="product_width"
             attrs="{'invisible': [('edit_dimensions_barcode_fields', '=', False)], 'required': [('edit_dimensions_barcode_fields', '=', True)]}"
           />
-                        <field
+          <field
             name="product_barcode"
             attrs="{'invisible': [('edit_dimensions_barcode_fields', '=', False)], 'required': [('edit_dimensions_barcode_fields', '=', True), ('no_barcode_authorized', '=', False)]}"
           />
-                        <field
+          <field
             name="no_barcode_authorized"
             attrs="{'invisible': [('edit_dimensions_barcode_fields', '=', False)], 'required': [('edit_dimensions_barcode_fields', '=', True), ('product_barcode', '=', False)]}"
           />
-                        <field
+          <field
             name="product_packaging_ids"
             attrs="{'invisible': [('edit_dimensions_barcode_fields', '=', False)]}"
           />
-                    </group>
-                </xpath>
-        </field>
-    </record>
-
+        </group>
+      </xpath>
+    </field>
+  </record>
 
 
 </odoo>

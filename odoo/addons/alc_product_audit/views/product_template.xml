@@ -54,16 +54,17 @@
           name="filter_can_be_bought_without_buy_route"
           domain="[('can_be_bought_without_buy_route','=',True)]"
         />
-        <filter
-          string="Missing dimensions"
-          name="filter_has_no_dimensions"
-          domain="[('has_no_dimensions','=',True)]"
-        />
-        <filter
-          string="Missing packaging dimensions"
-          name="filter_packaging_has_no_dimensions"
-          domain="[('packaging_has_no_dimensions','=',True)]"
-        />
+<!--        Moved to alc_product_dimensions_missing-->
+<!--        <filter-->
+<!--          string="Missing dimensions"-->
+<!--          name="filter_has_no_dimensions"-->
+<!--          domain="[('has_no_dimensions','=',True)]"-->
+<!--        />-->
+<!--        <filter-->
+<!--          string="Missing packaging dimensions"-->
+<!--          name="filter_packaging_has_no_dimensions"-->
+<!--          domain="[('packaging_has_no_dimensions','=',True)]"-->
+<!--        />-->
         <filter
           name="filter_mto_purchased_not_sold"
           string="Mto product purchased and not sold"

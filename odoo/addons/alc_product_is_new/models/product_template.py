@@ -14,7 +14,6 @@ class ProductTemplate(product_template.ProductTemplate):
 
     is_new = fields.Boolean(
         related="package_type_id.is_new",
-        readonly=True,
     )
     new_product_with_old_date = fields.Boolean(
         default=False,
@@ -24,6 +23,9 @@ class ProductTemplate(product_template.ProductTemplate):
 
     package_type_id = fields.Many2one[StockPackageType](
         copy=False,
+        default=lambda self: self.env.ref(
+            "alc_product_is_new.package_st_M_M_Nouveaute"
+        ),
     )
 
     def _get_new_products_older_than_a_month(self):
