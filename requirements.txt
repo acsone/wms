@@ -86,6 +86,7 @@ odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/produc
 odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@bd03b6c5a098a1ce9dce4f594be675990049ff7d#subdirectory=setup/product_price_category
 odoo-addon-product-route-mto==16.0.1.0.0.4
 odoo-addon-product-state==16.0.1.0.0.2
+odoo-addon-product-stock-state @ git+https://github.com/acsone/product-attribute.git@155a28ad23e3d5547d79802e6335868e1ec5d4dc#subdirectory=setup/product_stock_state
 odoo-addon-product-template-has-one-variant==16.0.1.0.1
 odoo-addon-product-template-multi-link @ git+https://github.com/acsone/e-commerce.git@e0823c594edb7d3bddfbf687180df5aada132c2f#subdirectory=setup/product_template_multi_link
 odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@0ae6102ff01a7ea8622e20a5a47ecfbe68314a4d#subdirectory=setup/product_total_weight_from_packaging
@@ -101,13 +102,13 @@ odoo-addon-report-xlsx==16.0.1.0.1.1
 odoo-addon-report-xlsx-helper==16.0.1.0.0.3
 odoo-addon-report-xml==16.0.1.1.0.1
 odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@e3920cb6276556e98afed18a828d5a7c5103bf67#subdirectory=setup/sale_channel
-odoo-addon-sale-discount-display-amount @ git+https://github.com/OCA/sale-workflow.git@71ffa8bb41dc3ba46937f6065495fe1e68d7bb2c#subdirectory=setup/sale_discount_display_amount
+odoo-addon-sale-discount-display-amount @ git+https://github.com/acsone/sale-workflow.git@71ffa8bb41dc3ba46937f6065495fe1e68d7bb2c#subdirectory=setup/sale_discount_display_amount
 odoo-addon-sale-exception==16.0.1.2.0.1
 odoo-addon-sale-order-line-cancel @ git+https://github.com/acsone/sale-workflow.git@34bf9057b6de07e0d5a161688905da813387c399#subdirectory=setup/sale_order_line_cancel
 odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@ef0c216f30a0fd7fd1fb0d782f8b9aaac3f7d487#subdirectory=setup/sale_procurement_customer
-odoo-addon-sale-product-set @ git+https://github.com/OCA/sale-workflow.git@61b9f345092f828e1220cf0c1dc1964b0ccc9dc8#subdirectory=setup/sale_product_set
+odoo-addon-sale-product-set @ git+https://github.com/acsone/sale-workflow.git@61b9f345092f828e1220cf0c1dc1964b0ccc9dc8#subdirectory=setup/sale_product_set
 odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.git@f506b778476eacfc4a3f33d85c2f77f790a8ebc8#subdirectory=setup/sale_route_amendment
-odoo-addon-sale-shipping-info-helper @ git+https://github.com/OCA/sale-workflow.git@64185c13f8c69cc7faf87cb5b2bc0db444b4c93c#subdirectory=setup/sale_shipping_info_helper
+odoo-addon-sale-shipping-info-helper @ git+https://github.com/acsone/sale-workflow.git@64185c13f8c69cc7faf87cb5b2bc0db444b4c93c#subdirectory=setup/sale_shipping_info_helper
 odoo-addon-sale-stock-picking-blocking==16.0.1.0.0.4
 odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/stock-logistics-workflow.git@f2ceafadb0008ee27a6346a432ef9f58f1726784#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo-addon-sale-triple-discount==16.0.1.0.1.1
