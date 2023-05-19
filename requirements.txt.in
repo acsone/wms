@@ -162,3 +162,7 @@ odoo-addon-product-template-multi-link @ git+https://github.com/OCA/e-commerce.g
 # OCA/edi
 odoo-addon-base-ubl @ git+https://github.com/OCA/edi.git@refs/pull/725/head#subdirectory=setup/base_ubl
 odoo-addon-base-business-document-import @ git+https://github.com/OCA/edi.git@refs/pull/724/head#subdirectory=setup/base_business_document_import
+
+# OCA/l10n-belgium
+odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/OCA/l10n-belgium@refs/pull/186/head#subdirectory=setup/l10n_be_bpost_address_validation
+odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/OCA/l10n-belgium@refs/pull/188/head#subdirectory=setup/l10n_be_bpost_address_autocomplete

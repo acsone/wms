@@ -39,6 +39,9 @@
         "geoengine_base_geolocalize",
         # OCA/e-commerce
         "product_template_multi_link",
+        # OCA/l10n-belgium
+        "l10n_be_bpost_address_validation",
+        "l10n_be_bpost_address_autocomplete",
         # ALC
         "alc_partner_veterinary",
         "alc_product_category_data",
