@@ -65,7 +65,7 @@ class TestRecipientsService(CommonB2CServiceCase):
         cls.payment_term_test = cls.env.ref(
             "account.account_payment_term_advance"
         ).copy()
-        cls.endpoint_setting.payment_term_id = cls.payment_term_test
+        cls.b2c_client.payment_term_id = cls.payment_term_test
 
     @classmethod
     def _gen_string(cls, length=10):
@@ -238,7 +238,7 @@ class TestRecipientsService(CommonB2CServiceCase):
             ):
                 self.env["res.partner"]._update_b2c_recipient(
                     "ABC",
-                    self.endpoint_setting,
+                    self.b2c_client,
                     {
                         "id": "ABC",
                         field: CountryCode.BF if field == "country_code" else "X",
@@ -308,12 +308,12 @@ class TestRecipientsService(CommonB2CServiceCase):
         with self.assertRaises(ValidationError):
             self.env["res.partner"]._update_b2c_recipient(
                 "ABC",
-                self.endpoint_setting,
+                self.b2c_client,
                 {"id": "ABC", "name2": "S"},
             )
 
     def test_update_recipient_if_allowed_on_b2c_backend(self):
-        self.endpoint_setting.allow_customer_modifications = True
+        self.b2c_client.allow_customer_modifications = True
         self.b2c_order.action_confirm()
         ship = self.b2c_order.mapped("picking_ids").filtered(
             lambda p: p.picking_type_code == "outgoing"

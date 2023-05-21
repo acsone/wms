@@ -10,6 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": ["alc_b2c_connector", "alc_pricelist_discount"],
-    "data": ["views/fastapi_endpoint_settings.xml"],
+    "data": ["views/alc_b2c_client.xml"],
     "demo": [],
 }

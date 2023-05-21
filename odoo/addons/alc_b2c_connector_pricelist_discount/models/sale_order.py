@@ -8,9 +8,9 @@ from odoo.addons.alc_b2c_connector.models.sale_order import SaleOrder as SaleOrd
 
 class SaleOrder(SaleOrderBase):
     @api.model
-    def _parse_b2c_order(self, data, endpoint_setting):
-        res = super()._parse_b2c_order(data, endpoint_setting)
+    def _parse_b2c_order(self, data, b2c_client):
+        res = super()._parse_b2c_order(data, b2c_client)
         res["discount_pricelist_ids"] = [
-            Command.set(endpoint_setting.discount_pricelist_id.ids)
+            Command.set(b2c_client.discount_pricelist_id.ids)
         ]
         return res

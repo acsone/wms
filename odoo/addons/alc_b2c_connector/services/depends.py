@@ -8,14 +8,12 @@ from odoo.api import Environment
 
 from odoo.addons.fastapi.depends import authenticated_partner_env
 
-from ..models.fastapi_endpoint import __fastapi_endpoint_settings_base
-from ..models.fastapi_endpoint_settings import FastapiEndpointSettings
+from ..models.alc_b2c_client import AlcB2cClient
+from ..models.fastapi_endpoint import __alc_b2c_client_base
 
 
-def fastapi_endpoint_settings(
-    settings: FastapiEndpointSettings = Depends(
-        __fastapi_endpoint_settings_base
-    ),  # noqa: B008
+def alc_b2c_client(
+    client: AlcB2cClient = Depends(__alc_b2c_client_base),  # noqa: B008
     env: Environment = Depends(authenticated_partner_env),
-) -> FastapiEndpointSettings:
-    return env[settings._name].browse(settings.id)
+) -> AlcB2cClient:
+    return env[client._name].browse(client.id)

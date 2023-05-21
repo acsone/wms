@@ -64,10 +64,10 @@ class SaleOrder(SaleOrderBase):
             record.b2c_state = state
 
     @api.model
-    def _create_from_b2c(self, data, endpoint_setting):
+    def _create_from_b2c(self, data, b2c_client):
         """Create a sale order with data coming from b2c."""
         body = _("Order created from json: {data}.").format(data=data)
-        order_data = self._parse_b2c_order(data, endpoint_setting)
+        order_data = self._parse_b2c_order(data, b2c_client)
         order = (
             self.env["sale.order"]
             .with_context(
@@ -98,7 +98,7 @@ class SaleOrder(SaleOrderBase):
         self.message_post(body=body)
         return self
 
-    def _update_from_b2c(self, data, endpoint_setting):
+    def _update_from_b2c(self, data, b2c_client):
         """Update a sale order with data coming from b2c.
 
         This is possible as long as the order
@@ -116,9 +116,9 @@ class SaleOrder(SaleOrderBase):
         self.with_context(disable_cancel_warning=True).action_cancel()
         self.action_draft()
         if "lines" in data:
-            self._update_lines_from_b2c(data, endpoint_setting)
+            self._update_lines_from_b2c(data, b2c_client)
         if "recipient" in data:
-            partner = self._get_final_b2c_recipient(data, endpoint_setting)
+            partner = self._get_final_b2c_recipient(data, b2c_client)
             self._update_recipient_from_b2c(partner)
         self.action_confirm()
         return self
@@ -145,7 +145,7 @@ class SaleOrder(SaleOrderBase):
             self.partner_id = partner
 
     @api.model
-    def _parse_b2c_order(self, data, endpoint_setting):
+    def _parse_b2c_order(self, data, b2c_client):
         order_data = {}
         # we create all the orders with the VET as final customer
         # At the end of the process and after the onchange call, the partner_id
@@ -154,34 +154,32 @@ class SaleOrder(SaleOrderBase):
         # get the parther and play onchange to get shipping,
         order_data["partner_id"] = partner_vet.id
         order_data["b2c_ref"] = data["id"]
-        order_data["sale_channel_id"] = endpoint_setting.sale_channel_id.id
+        order_data["sale_channel_id"] = b2c_client.sale_channel_id.id
         order_data["date_order"] = self._convert_datetime_to_utc(data["date"])
-        order_data["team_id"] = endpoint_setting.sale_team_id.id
-        if endpoint_setting.payment_mode_id:
-            order_data["payment_mode_id"] = endpoint_setting.payment_mode_id.id
+        order_data["team_id"] = b2c_client.sale_team_id.id
+        if b2c_client.payment_mode_id:
+            order_data["payment_mode_id"] = b2c_client.payment_mode_id.id
         # invvoice, payment_term, pricelist, carrier_id, team
         updated_data = self.play_onchanges(order_data, order_data.keys())
         order_data.update(updated_data)
 
         # replace partner by the final customer
-        order_data["partner_id"] = self._get_final_b2c_recipient(
-            data, endpoint_setting
-        ).id
+        order_data["partner_id"] = self._get_final_b2c_recipient(data, b2c_client).id
         # ensure specific values from the backend are preserved
-        order_data["pricelist_id"] = endpoint_setting.pricelist_id.id
-        order_data["payment_term_id"] = endpoint_setting.payment_term_id.id
-        order_data["picking_policy"] = endpoint_setting.picking_policy
+        order_data["pricelist_id"] = b2c_client.pricelist_id.id
+        order_data["payment_term_id"] = b2c_client.payment_term_id.id
+        order_data["picking_policy"] = b2c_client.picking_policy
         order_data["order_line"] = [
             Command.create(line_info)
-            for line_info in self._parse_b2c_order_line(data, endpoint_setting)
+            for line_info in self._parse_b2c_order_line(data, b2c_client)
         ]
         return order_data
 
     @api.model
-    def _parse_b2c_order_line(self, data, endpoint_setting):
+    def _parse_b2c_order_line(self, data, b2c_client):
         lines_data = data["lines"]
         skus = [line["sku"] for line in lines_data]
-        domain = endpoint_setting.product_assortment_id._get_eval_domain()
+        domain = b2c_client.product_assortment_id._get_eval_domain()
         domain = AND([domain, [("default_code", "in", skus)]])
         products = self.env["product.product"].search(domain)
         product_by_sku = {p.default_code: p for p in products}
@@ -204,16 +202,16 @@ class SaleOrder(SaleOrderBase):
         return result
 
     @api.model
-    def _get_final_b2c_recipient(self, data, endpoint_setting):
+    def _get_final_b2c_recipient(self, data, b2c_client):
         customer_info = data["recipient"]
         b2c_ref = self.env["res.partner"]._b2c_id_to_b2c_ref(
-            customer_info["id"], endpoint_setting
+            customer_info["id"], b2c_client
         )
         partner = self.env["res.partner"]._get_partner_by_ref(
             b2c_ref, raise_if_notfound=False
         )
         if partner:
-            partner._update_b2c_data(customer_info, endpoint_setting)
+            partner._update_b2c_data(customer_info, b2c_client)
             return partner
         name = customer_info["first_name"]
         last_name = customer_info.get("last_name")
@@ -237,7 +235,7 @@ class SaleOrder(SaleOrderBase):
                 "city": customer_info.get("city"),
                 "phone": customer_info.get("phone"),
                 "mobile": customer_info.get("mobile"),
-                "sale_reason_backorder_strategy": endpoint_setting.sale_reason_backorder_strategy,
+                "sale_reason_backorder_strategy": b2c_client.sale_reason_backorder_strategy,
                 "is_b2c_customer": True,
                 "partner_type": "student_like",
                 "ref": b2c_ref,
@@ -271,11 +269,11 @@ class SaleOrder(SaleOrderBase):
                 raise ValidationError(msg)
 
     @api.model
-    def _get_base_search_domain(self, endpoint_setting):
-        return [("sale_channel_id", "=", endpoint_setting.sale_channel_id.id)]
+    def _get_base_search_domain(self, b2c_client):
+        return [("sale_channel_id", "=", b2c_client.sale_channel_id.id)]
 
-    def _get_order_from_b2c_ref(self, b2c_ref, endpoint_setting, extended_domain=None):
-        domain = self._get_base_search_domain(endpoint_setting)
+    def _get_order_from_b2c_ref(self, b2c_ref, b2c_client, extended_domain=None):
+        domain = self._get_base_search_domain(b2c_client)
         domain = expression.AND([domain, [("b2c_ref", "=", b2c_ref)]])
         if extended_domain:
             domain = expression.AND([domain, extended_domain])
@@ -287,9 +285,9 @@ class SaleOrder(SaleOrderBase):
         return res
 
     def _search_orders_from_b2c(
-        self, b2c_refs: list, limit: int, offset: int, endpoint_setting
+        self, b2c_refs: list, limit: int, offset: int, b2c_client
     ):
-        domain = self._get_base_search_domain(endpoint_setting)
+        domain = self._get_base_search_domain(b2c_client)
         if b2c_refs:
             domain = expression.AND([domain, [("b2c_ref", "in", b2c_refs)]])
         return self.search(domain, limit=limit, offset=offset)

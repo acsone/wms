@@ -8,7 +8,7 @@ from odoo.api import Environment
 from odoo.addons.fastapi.depends import authenticated_partner_env
 
 from ..models.fastapi_endpoint import b2c_api_router
-from .depends import FastapiEndpointSettings, fastapi_endpoint_settings
+from .depends import AlcB2cClient, alc_b2c_client
 from .models.partner import PartnerRequest, PartnerResponse
 
 
@@ -19,12 +19,10 @@ from .models.partner import PartnerRequest, PartnerResponse
 def _get_partners(
     id: str,  # pylint: disable=redefined-builtin
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
-    endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
-        fastapi_endpoint_settings
-    ),
+    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008
 ) -> PartnerResponse:
     """Get partner by id."""
-    b2c_ref = env["res.partner"]._b2c_id_to_b2c_ref(id, endpoint_setting)
+    b2c_ref = env["res.partner"]._b2c_id_to_b2c_ref(id, client)
     partner = env["res.partner"]._get_partner_by_ref(b2c_ref)
     return PartnerResponse.from_orm(partner)
 
@@ -34,12 +32,10 @@ def _update_partner(
     id: str,  # pylint: disable=redefined-builtin
     body: PartnerRequest,
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
-    endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
-        fastapi_endpoint_settings
-    ),
+    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
 ) -> PartnerResponse:
     """Update partner."""
     partner = env["res.partner"]._update_b2c_recipient(
-        id, endpoint_setting, body._convert_to_write()
+        id, client, body._convert_to_write()
     )
     return PartnerResponse.from_orm(partner)

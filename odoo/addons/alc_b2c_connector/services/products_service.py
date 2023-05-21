@@ -11,7 +11,7 @@ from odoo.addons.fastapi.depends import authenticated_partner_env, paging
 from odoo.addons.fastapi.schemas import Paging
 
 from ..models.fastapi_endpoint import b2c_api_router
-from .depends import FastapiEndpointSettings, fastapi_endpoint_settings
+from .depends import AlcB2cClient, alc_b2c_client
 from .models.product import Product
 from .utils import PagedCollection
 
@@ -30,9 +30,7 @@ def get_products(
     paging_: Paging = Depends(paging),  # noqa: B008
     skus: Optional[List[str]] = Query(None),
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
-    endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
-        fastapi_endpoint_settings
-    ),
+    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
 ) -> PagedCollection[Product]:
     """
     Return the list of available products.
@@ -44,7 +42,7 @@ def get_products(
         * division, Percentage of Price Tax Included
     """
     products = env["product.product"]._search_products_from_b2c(
-        skus, paging_.limit, paging_.offset, endpoint_setting
+        skus, paging_.limit, paging_.offset, client
     )
     return PagedCollection[Product](
         size=len(products),

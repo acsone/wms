@@ -3,8 +3,8 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
 
-    <record model="ir.ui.view" id="fastapi_endpoint_settings_form_view">
-        <field name="model">fastapi.endpoint.settings</field>
+    <record model="ir.ui.view" id="alc_b2c_client_form_view">
+        <field name="model">alc.b2c.client</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
@@ -28,9 +28,9 @@
                         <field name="payment_term_id" />
                         <field name="product_assortment_id" />
                         <field name="sale_reason_backorder_strategy" />
-                        <field name="auth_api_key_id" />
-
                         </group>
+                        <group><field name="partner_id" /></group>
+                        <group><field name="api_key" password="True" /></group>
                     </group>
                 </sheet>
             </form>
@@ -38,8 +38,8 @@
     </record>
 
 
-    <record model="ir.ui.view" id="fastapi_endpoint_settings_tree_view">
-        <field name="model">fastapi.endpoint.settings</field>
+    <record model="ir.ui.view" id="alc_b2c_client_tree_view">
+        <field name="model">alc.b2c.client</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
@@ -51,7 +51,7 @@
                 <field name="payment_term_id" />
                 <field name="sale_reason_backorder_strategy" />
                 <field name="picking_policy" />
-                <field name="auth_api_key_id" />
+                <field name="partner_id" />
                 <field name="allow_customer_modifications" />
             </tree>
         </field>

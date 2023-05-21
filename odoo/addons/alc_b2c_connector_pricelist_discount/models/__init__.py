@@ -1,2 +1,2 @@
 from . import sale_order
-from . import fastapi_endpoint_settings
+from . import alc_b2c_client

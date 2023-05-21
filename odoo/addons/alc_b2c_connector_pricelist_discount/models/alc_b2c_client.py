@@ -3,11 +3,11 @@
 
 from odoo import fields
 
-from odoo.addons.alc_b2c_connector.models.fastapi_endpoint_settings import (
-    FastapiEndpointSettings as FastapiEndpointSettingsBase,
+from odoo.addons.alc_b2c_connector.models.alc_b2c_client import (
+    AlcB2cClient as AlcB2cClientBase,
 )
 from odoo.addons.product.models.product_pricelist import Pricelist
 
 
-class FastapiEndpointSettings(FastapiEndpointSettingsBase):
+class AlcB2cClient(AlcB2cClientBase):
     discount_pricelist_id = fields.Many2one[Pricelist](string="Alcyon Discount")

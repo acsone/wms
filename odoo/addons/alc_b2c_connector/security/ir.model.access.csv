@@ -1,6 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-fastapi_endpoint_settings_access_b2c_group,fastapi.endpoint.settings access b2c_group,model_fastapi_endpoint_settings,alc_b2c_connector.b2c_group,1,0,0,0
-auth_api_key_b2c_group,auth_api_key b2c_group,auth_api_key.model_auth_api_key,alc_b2c_connector.b2c_group,1,0,0,0
+alc_b2c_client_access_b2c_group,alc.b2c.client access b2c_group,model_alc_b2c_client,alc_b2c_connector.b2c_group,1,0,0,0
 ir_filters_b2c_group,ir_filters b2c_group,base.model_ir_filters,alc_b2c_connector.b2c_group,1,0,0,0
 ir_sequence_b2c_group,ir_sequence b2c_group,base.model_ir_sequence,alc_b2c_connector.b2c_group,1,0,0,0
 product_product_b2c_group,product_product b2c_group,product.model_product_product,alc_b2c_connector.b2c_group,1,0,0,0

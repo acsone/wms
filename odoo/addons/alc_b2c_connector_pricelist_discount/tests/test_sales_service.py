@@ -22,7 +22,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
             "alc_b2c_connector.product_pricelist_b2c"
         )
         cls.discount_pricelist_id.currency_id = cls.currency_id
-        cls.endpoint_setting.discount_pricelist_id = cls.discount_pricelist_id
+        cls.b2c_client.discount_pricelist_id = cls.discount_pricelist_id
 
     @freeze_time("2020-05-28 11:45:47")
     def test_01(self):
@@ -69,7 +69,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
         self.assertTrue(new_so)
         self.assertEqual(
             new_so.partner_id.ref,
-            f"{self.endpoint_setting.sale_channel_id.name}_{recipient_info['id']}",
+            f"{self.b2c_client.sale_channel_id.name}_{recipient_info['id']}",
         )
         self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
         self.assertEqual(new_so.partner_shipping_id, self.vt_partner)
@@ -77,13 +77,13 @@ class TestSalesService(CommonB2CSaleServiceCase):
         self.assertEqual(
             new_so.date_order, fields.Datetime.to_datetime("2020-05-28 11:45:47")
         )
-        self.assertTrue(self.endpoint_setting.pricelist_id)
-        self.assertEqual(new_so.pricelist_id, self.endpoint_setting.pricelist_id)
-        self.assertTrue(self.endpoint_setting.sale_team_id)
-        self.assertEqual(new_so.team_id, self.endpoint_setting.sale_team_id)
-        self.assertTrue(self.endpoint_setting.payment_mode_id)
-        self.assertEqual(new_so.payment_mode_id, self.endpoint_setting.payment_mode_id)
-        self.assertEqual(self.endpoint_setting.payment_term_id, self.payment_term_test)
+        self.assertTrue(self.b2c_client.pricelist_id)
+        self.assertEqual(new_so.pricelist_id, self.b2c_client.pricelist_id)
+        self.assertTrue(self.b2c_client.sale_team_id)
+        self.assertEqual(new_so.team_id, self.b2c_client.sale_team_id)
+        self.assertTrue(self.b2c_client.payment_mode_id)
+        self.assertEqual(new_so.payment_mode_id, self.b2c_client.payment_mode_id)
+        self.assertEqual(self.b2c_client.payment_term_id, self.payment_term_test)
         self.assertEqual(new_so.payment_term_id, self.payment_term_test)
         self.assertTrue(new_so.supplier_promotion_allowed)
         self.assertEqual(1, len(new_so.order_line))

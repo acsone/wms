@@ -1,14 +1,13 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-
 from odoo import _, api, fields, models
 
 from odoo.addons.account.models.account_payment_term import AccountPaymentTerm
 from odoo.addons.account_payment_mode.models.account_payment_mode import (
     AccountPaymentMode,
 )
-from odoo.addons.auth_api_key.models.auth_api_key import AuthApiKey
+from odoo.addons.base.models.res_partner import Partner
 from odoo.addons.fastapi.models.fastapi_endpoint import FastapiEndpoint
 from odoo.addons.product.models.product_pricelist import Pricelist
 from odoo.addons.product_assortment.models.ir_filters import IrFilters
@@ -16,10 +15,10 @@ from odoo.addons.sale_channel.models.sale_channel import SaleChannel
 from odoo.addons.sales_team.models.crm_team import CrmTeam
 
 
-class FastapiEndpointSettings(models.Model):
+class AlcB2cClient(models.Model):
 
-    _name = "fastapi.endpoint.settings"
-    _description = "Fastapi Endpoint Settings"
+    _name = "alc.b2c.client"
+    _description = "Alc B2c Client"
 
     name = fields.Char(required=True)
     product_assortment_id = fields.Many2one[IrFilters](
@@ -49,7 +48,8 @@ class FastapiEndpointSettings(models.Model):
         default=lambda s: s._default_picking_policy(),
     )
 
-    auth_api_key_id = fields.Many2one[AuthApiKey](required=True)
+    api_key = fields.Char(required=True)
+    partner_id = fields.Many2one[Partner](required=True)
     allow_customer_modifications = fields.Boolean(
         default=False,
         help="If set to True, first name, last name and address can be modified for the customer without any check",
@@ -60,7 +60,7 @@ class FastapiEndpointSettings(models.Model):
         ("name_uniq", "UNIQUE(name)", _("Name must be unique")),
         (
             "auth_api_key_uniq",
-            "UNIQUE(auth_api_key_id)",
+            "UNIQUE(api_key)",
             _("Auth api key can only be used by 1 backend at same time"),
         ),
     ]

@@ -11,7 +11,7 @@ from odoo.addons.fastapi.depends import authenticated_partner_env, paging
 from odoo.addons.fastapi.schemas import Paging
 
 from ..models.fastapi_endpoint import b2c_api_router
-from .depends import FastapiEndpointSettings, fastapi_endpoint_settings
+from .depends import AlcB2cClient, alc_b2c_client
 from .models.sale_order import (
     SaleOrderCreateRequest,
     SaleOrderResponse,
@@ -24,13 +24,11 @@ from .utils import PagedCollection
 def _create_sale_order(
     body: SaleOrderCreateRequest,
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
-    endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
-        fastapi_endpoint_settings
-    ),
+    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
 ) -> SaleOrderResponse:
     """Create a sale order."""
     data = body._convert_to_write()
-    sale_order = env["sale.order"]._create_from_b2c(data, endpoint_setting)
+    sale_order = env["sale.order"]._create_from_b2c(data, client)
     return SaleOrderResponse.from_orm(sale_order)
 
 
@@ -48,9 +46,7 @@ def get_sale_orders(
     ids: Optional[List[int]] = Query(None),
     paging_: Paging = Depends(paging),  # noqa: B008
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
-    endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
-        fastapi_endpoint_settings
-    ),
+    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
 ) -> PagedCollection[SaleOrderResponse]:
     """
     Get orders info.
@@ -62,7 +58,7 @@ def get_sale_orders(
         b2c_refs=ids,
         limit=paging_.limit,
         offset=paging_.offset,
-        endpoint_setting=endpoint_setting,
+        b2c_client=client,
     )
     count = len(sale_orders)
     return PagedCollection[SaleOrderResponse](
@@ -76,9 +72,7 @@ def get_sale_orders(
 def _get_sale_order(
     id: int,  # pylint: disable=redefined-builtin
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
-    endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
-        fastapi_endpoint_settings
-    ),
+    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
 ) -> SaleOrderResponse:
     """
     Get order info:
@@ -92,7 +86,7 @@ def _get_sale_order(
     * When state is "delivery" delivery info are provided by the
     deliveries field
     """
-    sale_order = env["sale.order"]._get_order_from_b2c_ref(id, endpoint_setting)
+    sale_order = env["sale.order"]._get_order_from_b2c_ref(id, client)
     return SaleOrderResponse.from_orm(sale_order)
 
 
@@ -100,9 +94,7 @@ def _get_sale_order(
 def _cancel_sale_order(
     id: int,  # pylint: disable=redefined-builtin
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
-    endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
-        fastapi_endpoint_settings
-    ),
+    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
 ) -> SaleOrderResponse:
     """
     Cancel Sale Order.
@@ -110,7 +102,7 @@ def _cancel_sale_order(
     Cancelling a sale order is only possible until
     the preparation has started (i.e., the picking is printed)
     """
-    sale_order = env["sale.order"]._get_order_from_b2c_ref(id, endpoint_setting)
+    sale_order = env["sale.order"]._get_order_from_b2c_ref(id, client)
     sale_order._cancel_from_b2c()
     return SaleOrderResponse.from_orm(sale_order)
 
@@ -122,12 +114,10 @@ def _update_sale_order(
     id: int,  # pylint: disable=redefined-builtin
     body: SaleOrderUpdateRequest,
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
-    endpoint_setting: FastapiEndpointSettings = Depends(  # noqa: B008
-        fastapi_endpoint_settings
-    ),
+    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
 ) -> SaleOrderResponse:
     """Update sale order."""
-    sale_order = env["sale.order"]._get_order_from_b2c_ref(id, endpoint_setting)
+    sale_order = env["sale.order"]._get_order_from_b2c_ref(id, client)
     data = body._convert_to_write()
-    sale_order._update_from_b2c(data, endpoint_setting)
+    sale_order._update_from_b2c(data, client)
     return SaleOrderResponse.from_orm(sale_order)

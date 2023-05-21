@@ -46,7 +46,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
             Missing error is raised
         """
         with self.assertRaises(MissingError):
-            self.env["sale.order"]._get_order_from_b2c_ref(9999, self.endpoint_setting)
+            self.env["sale.order"]._get_order_from_b2c_ref(9999, self.b2c_client)
 
     def test_02(self):
         """
@@ -119,7 +119,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
         self.assertTrue(new_so)
         self.assertEqual(
             new_so.partner_id.ref,
-            f"{self.endpoint_setting.sale_channel_id.name}_{recipient_info['id']}".format(),
+            f"{self.b2c_client.sale_channel_id.name}_{recipient_info['id']}".format(),
         )
         self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
         self.assertEqual(new_so.partner_shipping_id, self.vt_partner)
@@ -127,13 +127,13 @@ class TestSalesService(CommonB2CSaleServiceCase):
         self.assertEqual(
             new_so.date_order, fields.Datetime.to_datetime("2020-05-28 11:45:47")
         )
-        self.assertTrue(self.endpoint_setting.pricelist_id)
-        self.assertEqual(new_so.pricelist_id, self.endpoint_setting.pricelist_id)
-        self.assertTrue(self.endpoint_setting.sale_team_id)
-        self.assertEqual(new_so.team_id, self.endpoint_setting.sale_team_id)
-        self.assertTrue(self.endpoint_setting.payment_mode_id)
-        self.assertEqual(new_so.payment_mode_id, self.endpoint_setting.payment_mode_id)
-        self.assertEqual(self.endpoint_setting.payment_term_id, self.payment_term_test)
+        self.assertTrue(self.b2c_client.pricelist_id)
+        self.assertEqual(new_so.pricelist_id, self.b2c_client.pricelist_id)
+        self.assertTrue(self.b2c_client.sale_team_id)
+        self.assertEqual(new_so.team_id, self.b2c_client.sale_team_id)
+        self.assertTrue(self.b2c_client.payment_mode_id)
+        self.assertEqual(new_so.payment_mode_id, self.b2c_client.payment_mode_id)
+        self.assertEqual(self.b2c_client.payment_term_id, self.payment_term_test)
         self.assertEqual(new_so.payment_term_id, self.payment_term_test)
         self.assertTrue(new_so.supplier_promotion_allowed)
         self.assertEqual(1, len(new_so.order_line))
@@ -155,7 +155,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
             A new SO is created with:
                 payment_mode -> the one from the veterinary
         """
-        self.endpoint_setting.payment_mode_id = False
+        self.b2c_client.payment_mode_id = False
         recipient_info = self._gen_recipent()
         params = {
             "id": 2,
@@ -198,7 +198,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 picking policy -> the one from the backend
         """
         for i, policy in enumerate(["one", "direct"]):
-            self.endpoint_setting.picking_policy = policy
+            self.b2c_client.picking_policy = policy
             recipient_info = self._gen_recipent()
             params = {
                 "id": i + 100,
@@ -249,7 +249,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
             ],
         }
         with self.assertRaises(ValidationError):
-            self.env["sale.order"]._create_from_b2c(params, self.endpoint_setting)
+            self.env["sale.order"]._create_from_b2c(params, self.b2c_client)
 
     def test_06(self):
         """
@@ -312,7 +312,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
             "lines": [{"line_id": 2, "sku": "????", "quantity": 10}],
         }
         with self.assertRaises(ValidationError):
-            self.env["sale.order"]._create_from_b2c(params, self.endpoint_setting)
+            self.env["sale.order"]._create_from_b2c(params, self.b2c_client)
 
     @mute_logger("odoo.addons.alc_b2c_connector.models.sale_order")
     def test_08(self):
@@ -338,7 +338,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
             ],
         }
         with self.assertRaises(ValidationError):
-            self.env["sale.order"]._create_from_b2c(params, self.endpoint_setting)
+            self.env["sale.order"]._create_from_b2c(params, self.b2c_client)
 
     @freeze_time("2020-05-28 11:45:47")
     def test_09(self):
@@ -556,7 +556,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
         new_so = self._get_so_from_name(res["ref"])
         self.assertEqual(
             new_so.partner_id.ref,
-            f"{self.endpoint_setting.sale_channel_id.name}_{recipient_info['id']}",
+            f"{self.b2c_client.sale_channel_id.name}_{recipient_info['id']}",
         )
         self.assertEqual("BE", new_so.partner_id.country_id.code)
 
@@ -734,7 +734,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
         res = response.json()
         self.assertEqual("delivery", res["state"])
         with self.assertRaises(ValidationError):
-            self.b2c_order._update_from_b2c(params, self.endpoint_setting)
+            self.b2c_order._update_from_b2c(params, self.b2c_client)
 
     def test_update_existing_recipient(self):
         recipient_info = {
@@ -804,7 +804,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
     def test_update_existing_missing_payload_raises(self):
         params = {"id": 10}
         with self.assertRaises(ValidationError):
-            self.b2c_order._update_from_b2c(params, self.endpoint_setting)
+            self.b2c_order._update_from_b2c(params, self.b2c_client)
 
     def test_create_two_so_for_same_partner(self):
         recipient_info = self._gen_recipent()

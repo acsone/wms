@@ -26,7 +26,7 @@ class ResPartner(ResPartnerBase):
             partner.is_student = False
         return res
 
-    def _update_b2c_recipient_validate_data(self, data, endpoint_setting):
+    def _update_b2c_recipient_validate_data(self, data, b2c_client):
         """If this partner has one started picking out, only update contact fields."""
         self.ensure_one()
         domain_pickings = [
@@ -37,7 +37,7 @@ class ResPartner(ResPartnerBase):
         keys = ["mobile", "phone", "email", "comment", "name2"]
         if (
             self.env["stock.picking"].search(domain_pickings, limit=1)
-            and not endpoint_setting.allow_customer_modifications
+            and not b2c_client.allow_customer_modifications
         ):
             for key in data:
                 value = self[key].id if key in {"title", "country_id"} else self[key]
@@ -52,14 +52,14 @@ class ResPartner(ResPartnerBase):
         return data
 
     @api.model
-    def _update_b2c_recipient(self, b2c_id, endpoint_setting, data):
+    def _update_b2c_recipient(self, b2c_id, b2c_client, data):
         """Update the final customer."""
-        b2c_ref = self._b2c_id_to_b2c_ref(b2c_id, endpoint_setting)
+        b2c_ref = self._b2c_id_to_b2c_ref(b2c_id, b2c_client)
         partner = self._get_partner_by_ref(b2c_ref)
-        partner._update_b2c_data(data, endpoint_setting)
+        partner._update_b2c_data(data, b2c_client)
         return partner
 
-    def _update_b2c_data(self, data, endpoint_setting):
+    def _update_b2c_data(self, data, b2c_client):
         self.ensure_one()
         if data.get("country_code"):
             country = self.env["res.country"]._get_by_code(data.pop("country_code"))
@@ -75,7 +75,7 @@ class ResPartner(ResPartnerBase):
             data["suite"] = data.pop("name2")
         if "note" in data:  # passing None is allowed, so no get here
             data["comment"] = data.pop("note")
-        self._update_b2c_recipient_validate_data(data, endpoint_setting)
+        self._update_b2c_recipient_validate_data(data, b2c_client)
         return self.write(data)
 
     @api.model
@@ -92,8 +92,8 @@ class ResPartner(ResPartnerBase):
         return partner
 
     @api.model
-    def _b2c_id_to_b2c_ref(self, b2c_id, endpoint_setting):
-        return f"{endpoint_setting.sale_channel_id.name}_{b2c_id}"
+    def _b2c_id_to_b2c_ref(self, b2c_id, b2c_client):
+        return f"{b2c_client.sale_channel_id.name}_{b2c_id}"
 
     @api.model
     def _b2c_ref_to_b2c_id(self, ref):

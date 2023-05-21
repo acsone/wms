@@ -99,13 +99,10 @@ class CommonB2CServiceCase(TransactionCase):
             }
         )
         cls.b2c_user = cls.env.ref("alc_b2c_connector.alc_b2c_rest_api_user")
-        cls.auth_api_key = cls.env["auth.api.key"].create(
-            {"name": "test api key", "key": "1234", "user_id": cls.b2c_user.id}
-        )
         cls.sale_channel = cls.env.ref("sale_channel.sale_channel_amazon")
         cls.sale_channel2 = cls.env.ref("sale_channel.sale_channel_ebay")
         cls.endpoint = cls.env.ref("alc_b2c_connector.fastapi_endpoint_b2c")
-        cls.endpoint_setting = cls.env["fastapi.endpoint.settings"].create(
+        cls.b2c_client = cls.env["alc.b2c.client"].create(
             {
                 "name": "B2c backend test",
                 "product_assortment_id": cls.env.ref(
@@ -116,7 +113,8 @@ class CommonB2CServiceCase(TransactionCase):
                 "payment_mode_id": cls.payment_mode.id,
                 "sale_channel_id": cls.sale_channel.id,
                 "sale_reason_backorder_strategy": "cancel",
-                "auth_api_key_id": cls.auth_api_key.id,
+                "api_key": "1234",
+                "partner_id": cls.b2c_user.partner_id.id,
                 "fastapi_endpoint_id": cls.endpoint.id,
             }
         )
@@ -197,7 +195,7 @@ class CommonB2CSaleServiceCase(CommonB2CServiceCase):
         cls.payment_term_test = cls.env.ref(
             "account.account_payment_term_advance"
         ).copy()
-        cls.endpoint_setting.payment_term_id = cls.payment_term_test
+        cls.b2c_client.payment_term_id = cls.payment_term_test
 
     @classmethod
     def _gen_string(cls, length=10):

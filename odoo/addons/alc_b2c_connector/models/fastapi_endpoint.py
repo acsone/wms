@@ -5,7 +5,6 @@ from fastapi import APIRouter, Depends, HTTPException, status
 
 from odoo import api, fields
 from odoo.api import Environment
-from odoo.http import request
 
 from odoo.addons.fastapi.depends import (
     authenticated_partner_impl as authenticated_partner_impl_base,
@@ -18,7 +17,7 @@ from odoo.addons.fastapi.models.fastapi_endpoint import (
 
 from ..models.res_partner import ResPartner
 from ..services.utils import api_key_header
-from .fastapi_endpoint_settings import FastapiEndpointSettings
+from .alc_b2c_client import AlcB2cClient
 
 
 class FastapiEndpoint(FastapiEndpointBase):
@@ -28,8 +27,8 @@ class FastapiEndpoint(FastapiEndpointBase):
     app: str = fields.Selection(
         selection_add=[("b2c", "B2C")], ondelete={"b2c": "cascade"}
     )
-    setting_ids = fields.One2many[FastapiEndpointSettings](
-        inverse_name="fastapi_endpoint_id", string="Settings"
+    client_ids = fields.One2many[AlcB2cClient](
+        inverse_name="fastapi_endpoint_id", string="Clients"
     )
 
     @api.model
@@ -46,51 +45,26 @@ class FastapiEndpoint(FastapiEndpointBase):
             ] = authenticated_partner_impl
         return app
 
-    @api.model
-    def get_uid(self, root_path):
-        record = self.search([("root_path", "=", root_path)])
-        if not record:
-            return None
-        if record.app != "b2c":
-            return super().get_uid()
-        environ = request.httprequest.environ
-        api_key = environ.get("HTTP_API_KEY")
-        setting = self.env["fastapi.endpoint.settings"].search(
-            [
-                ("fastapi_endpoint_id", "=", record.id),
-                ("auth_api_key_id.key", "=", api_key),
-            ],
-            limit=1,
-        )
-        if not setting:
-            return None
-        return setting.auth_api_key_id.user_id.id
 
-
-def __fastapi_endpoint_settings_base(
+def __alc_b2c_client_base(
     api_key: str = Depends(api_key_header),  # noqa: B008
     env: Environment = Depends(odoo_env),  # noqa: B008
     endpoint: FastapiEndpoint = Depends(fastapi_endpoint),  # noqa: B008
-) -> FastapiEndpointSettings:
+) -> AlcB2cClient:
     """Return the fastapi.endpoint record."""
-    return env["fastapi.endpoint.settings"].search(
-        [
-            ("fastapi_endpoint_id", "=", endpoint.id),
-            ("auth_api_key_id.key", "=", api_key),
-        ]
+    return env["alc.b2c.client"].search(
+        [("fastapi_endpoint_id", "=", endpoint.id), ("api_key", "=", api_key)]
     )
 
 
 def authenticated_partner_impl(
-    settings: FastapiEndpointSettings = Depends(  # noqa: B008
-        __fastapi_endpoint_settings_base
-    ),
+    client: AlcB2cClient = Depends(__alc_b2c_client_base),  # noqa: B008
 ) -> ResPartner:
-    if not settings:
+    if not client:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect API Key"
         )
-    return settings.auth_api_key_id.user_id.partner_id
+    return client.partner_id
 
 
 b2c_api_router = APIRouter(dependencies=[Depends(authenticated_partner_impl)])
