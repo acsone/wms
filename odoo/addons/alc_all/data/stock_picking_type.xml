@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <!-- set location reception on picking type in -->
+  <function model="stock.picking.type" name="write">
+    <value model="stock.picking.type" eval="[ref('stock.picking_type_in')]" />
+    <value eval="{'default_location_dest_id': ref('stock.stock_location_company')}" />
+  </function>
+</odoo>
