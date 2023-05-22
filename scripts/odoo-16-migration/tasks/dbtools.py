@@ -72,6 +72,12 @@ def recover_columns(db_10, db_16, table, columns_to_recover=None):
         cr.execute(query)
     # then we copy the data from the copy table to the target database using pg_dump
     # and psql
+    with cursor(db_16) as cr:
+        logger.info(f"Creating copy of table {table} in {db_16}.")
+        query = f"""
+            DROP TABLE IF EXISTS {table}_copy;
+        """
+        cr.execute(query)
     logger.info(f"Copying table {table}_copy from {db_10} to {db_16}.")
     check_call(
         [f"pg_dump -t {table}_copy -d {db_10} | psql -d{db_16}"],

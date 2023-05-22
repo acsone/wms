@@ -26,6 +26,7 @@
         "sale_discount_display_amount",
         "sale_product_set",
         "product_stock_state",
+        "sale_wishlist",
         # OCA/sale-channel
         "sale_channel",
         # OCA/product-attribute
@@ -40,6 +41,9 @@
         "geoengine_base_geolocalize",
         # OCA/e-commerce
         "product_template_multi_link",
+        # OCA/l10n-belgium
+        "l10n_be_bpost_address_validation",
+        "l10n_be_bpost_address_autocomplete",
         # ALC
         "alc_partner_veterinary",
         "alc_product_category_data",
