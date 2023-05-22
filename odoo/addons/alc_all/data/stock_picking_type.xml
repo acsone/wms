@@ -7,10 +7,21 @@
     <value model="stock.picking.type" eval="[ref('stock.picking_type_in')]" />
     <value eval="{'default_location_dest_id': ref('stock.stock_location_company')}" />
   </function>
+  <!-- Set group by customer on picking type out -->
+  <!-- Set show entire packs on picking type out -->
   <function model="stock.picking.type" name="write">
     <value model="stock.picking.type" eval="[ref('stock.picking_type_out')]" />
     <value
       eval="{'group_pickings': True, 'group_pickings_by_customer': True, 'show_entire_packs': True}"
     />
+  </function>
+
+  <!-- Set display put in pack wizard on old PICK picking type -->
+  <function model="stock.picking.type" name="write">
+    <value
+      model="stock.picking.type"
+      eval="(obj().env.cr.execute(&quot;select id from stock_picking_type where subcode=&apos;PICK&apos;&quot;) or True) and [i[0] for i in obj().env.cr.fetchall()]"
+    />
+    <value eval="{'set_delivery_package_type_on_put_in_pack': True}" />
   </function>
 </odoo>
