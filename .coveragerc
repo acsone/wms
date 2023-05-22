@@ -130,7 +130,6 @@ omit =
     odoo/addons/alc_product_abc_classification_picking_zone/*
     odoo/addons/alc_product_audit/*
     odoo/addons/alc_product_brand_image/*
-    odoo/addons/alc_product_category_sequence/*
     odoo/addons/alc_product_consolidated_price/*
     odoo/addons/alc_product_consolidated_price_newpharma/*
     odoo/addons/alc_product_consolidated_price_report/*
