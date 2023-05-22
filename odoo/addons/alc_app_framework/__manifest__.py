@@ -11,6 +11,9 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
+        # OCA
+        "report_csv",
+        # ALC
         "alc_base_auto_join",
     ],
 }
