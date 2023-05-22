@@ -18,8 +18,17 @@ msgstr ""
 
 #. module: alc_product_stock_state
 #: model:ir.model,name:alc_product_stock_state.model_product_product
-msgid "Product"
+#, fuzzy
+#| msgid "Product"
+msgid "Product Variant"
 msgstr "Article"
 
-#~ msgid "Supplier Out Of Stock"
-#~ msgstr "Rupture fournisseur"
+#. module: alc_product_stock_state
+#: model:ir.model.fields,field_description:alc_product_stock_state.field_product_product__stock_state
+msgid "Stock State"
+msgstr ""
+
+#. module: alc_product_stock_state
+#: model:ir.model.fields.selection,name:alc_product_stock_state.selection__product_product__stock_state__supplier_out_of_stock
+msgid "Supplier Out Of Stock"
+msgstr "Rupture fournisseur"
