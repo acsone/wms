@@ -1,14 +1,15 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import fields
+
+from odoo.addons.product.models.product_category import (
+    ProductCategory as ProductCategoryBase,
+)
 
 
-class ProductCategory(models.Model):
+class ProductCategory(ProductCategoryBase):
 
-    _inherit = "product.category"
-    _parent_order = "sequence, name"
-    _order = "sequence, parent_left"
+    _order = "sequence, name"
 
     sequence = fields.Integer(required=False)

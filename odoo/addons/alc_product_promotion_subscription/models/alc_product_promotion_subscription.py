@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -7,19 +6,19 @@ from psycopg2 import IntegrityError
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
+from odoo.addons.base.models.res_partner import Partner
+from odoo.addons.product.models.product_product import ProductProduct
+from odoo.addons.product.models.product_template import ProductTemplate
+
 
 class AlcProductPromotionSubscription(models.Model):
 
     _name = "alc.product.promotion.subscription"
+    _description = "Product Promotion Subscription"
 
-    partner_id = fields.Many2one(
-        comodel_name="res.partner", string="Partner", ondelete="cascade"
-    )
-    product_id = fields.Many2one(
-        comodel_name="product.product", string="Product", ondelete="cascade"
-    )
-    product_tmpl_id = fields.Many2one(
-        comodel_name="product.template",
+    partner_id = fields.Many2one[Partner](string="Partner", ondelete="cascade")
+    product_id = fields.Many2one[ProductProduct](string="Product", ondelete="cascade")
+    product_tmpl_id = fields.Many2one[ProductTemplate](
         related="product_id.product_tmpl_id",
         store=True,
         readonly=True,
@@ -46,11 +45,12 @@ class AlcProductPromotionSubscription(models.Model):
         product_name = product.name
         try:
             return self.create({"partner_id": partner.id, "product_id": product.id})
-        except IntegrityError:
+        except IntegrityError as error:
             raise UserError(
-                _("Partner %s already subscribed to promotion on product %s")
-                % (partner_name, product_name)
-            )
+                _(
+                    "Partner {partner_name} already subscribed to promotion on product {product_name}"
+                ).format(partner_name=partner_name, product_name=product_name)
+            ) from error
 
     @api.model
     def unsubscribe(self, partner, product):

@@ -4,22 +4,16 @@
 <odoo>
 
     <record model="ir.ui.view" id="product_category_form_view">
-        <field
-      name="name"
-    >product.category.form (in alc_product_category_sequence)</field>
         <field name="model">product.category</field>
         <field name="inherit_id" ref="product.product_category_form_view" />
         <field name="arch" type="xml">
-            <field name="type" position="before">
+            <field name="parent_id" position="after">
                 <field name="sequence" />
             </field>
         </field>
     </record>
 
     <record model="ir.ui.view" id="product_category_tree_view">
-        <field
-      name="name"
-    >product.category.tree (in alc_product_category_sequence)</field>
         <field name="model">product.category</field>
         <field name="inherit_id" ref="product.product_category_list_view" />
         <field name="arch" type="xml">

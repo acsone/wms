@@ -130,7 +130,6 @@ omit =
     odoo/addons/alc_product_abc_classification_picking_zone/*
     odoo/addons/alc_product_audit/*
     odoo/addons/alc_product_brand_image/*
-    odoo/addons/alc_product_category_sequence/*
     odoo/addons/alc_product_consolidated_price/*
     odoo/addons/alc_product_consolidated_price_newpharma/*
     odoo/addons/alc_product_consolidated_price_report/*
@@ -140,7 +139,6 @@ omit =
     odoo/addons/alc_product_mto/*
     odoo/addons/alc_product_packaging_stock_reserve/*
     odoo/addons/alc_product_promotion_mailing/*
-    odoo/addons/alc_product_promotion_subscription/*
     odoo/addons/alc_product_search_cnk/*
     odoo/addons/alc_product_stock_state/*
     odoo/addons/alc_purchase_order_import_ubl/*
