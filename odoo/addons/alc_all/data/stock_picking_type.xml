@@ -24,4 +24,15 @@
     />
     <value eval="{'set_delivery_package_type_on_put_in_pack': True}" />
   </function>
+  <!-- set sequence VLB/PICK on picking type Pick Aliments -->
+  <function model="stock.picking.type" name="write">
+    <value
+      model="stock.picking.type"
+      eval="[ref('alc_stock_picking_type_aliment.stock_picking_type_ali')]"
+    />
+    <value
+      model="ir.sequence"
+      eval="{'sequence_id': obj().search([('prefix', '=', 'VLB/PICK/')]) or ref('stock.seq_picking_internal')}"
+    />
+  </function>
 </odoo>
