@@ -125,6 +125,7 @@
         "alc_sale_order_report_customize",
         "alc_sale_order_ref_move",
         "alc_sale_security",
+        "alc_product_stock_state",
         "alc_product_promotion_subscription",
     ],
 }
