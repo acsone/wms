@@ -4,10 +4,12 @@
 
 import logging
 
-from odoo import _, api
+from odoo import _, api, fields
 from odoo.exceptions import ValidationError
 
 from odoo.addons.alc_partner_type.models.res_partner import ResPartner as ResPartnerBase
+
+from .alc_b2c_client import AlcB2cClient
 
 _logger = logging.getLogger(__name__)
 
@@ -18,6 +20,8 @@ TITLE_XML_ID_BY_B2C_KEY = {
 
 
 class ResPartner(ResPartnerBase):
+    alc_b2c_client_id = fields.Many2one[AlcB2cClient](readonly=True)
+
     @api.depends("partner_type", "is_b2c_customer")
     def _compute_is_student(self):
         """The student category is also used as a miscellaneous category."""
@@ -98,3 +102,41 @@ class ResPartner(ResPartnerBase):
     @api.model
     def _b2c_ref_to_b2c_id(self, ref):
         return ref.split("_")[1] if isinstance(ref, str) else None
+
+    @api.model
+    def _prepare_b2c_partner_values(self, data, b2c_client):
+        b2c_ref = self.env["res.partner"]._b2c_id_to_b2c_ref(data["id"], b2c_client)
+        name = data["first_name"]
+        last_name = data.get("last_name")
+        if last_name:
+            name = f"{name} {last_name}"
+        title = data.get("title")
+        if title:
+            title = self.env.ref(TITLE_XML_ID_BY_B2C_KEY[title]).id
+        country_id = None
+        country_code = data.get("country_code")
+        if country_code:
+            country_id = self.env["res.country"]._get_by_code(country_code).id
+        return {
+            "alc_b2c_client_id": b2c_client.id,
+            "name": name,
+            "title": title,
+            "email": data.get("email"),
+            "street": data.get("street"),
+            "street2": data.get("street2"),
+            "zip": data.get("zip"),
+            "city": data.get("city"),
+            "phone": data.get("phone"),
+            "mobile": data.get("mobile"),
+            "sale_reason_backorder_strategy": b2c_client.sale_reason_backorder_strategy,
+            "is_b2c_customer": True,
+            "partner_type": "student_like",
+            "ref": b2c_ref,
+            "country_id": country_id,
+            "suite": data.get("name2"),
+            "comment": data.get("note"),
+        }
+
+    @api.model
+    def _create_b2c_partner(self, data, b2c_client):
+        return self.create(self._prepare_b2c_partner_values(data, b2c_client))

@@ -6,3 +6,4 @@ from . import fastapi_endpoint
 from . import stock_picking
 from . import product_product
 from . import alc_b2c_client
+from . import ir_rule

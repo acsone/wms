@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import random
 import string
+from functools import partial
 
 from fastapi.testclient import TestClient
 
@@ -11,6 +12,7 @@ from odoo.tests.common import TransactionCase
 from odoo.addons.fastapi.context import odoo_env_ctx
 
 from ..hooks import _initialize_product_assortment_filter
+from ..models.fastapi_endpoint import authenticated_partner_impl
 
 
 class CommonB2CServiceCase(TransactionCase):
@@ -102,6 +104,7 @@ class CommonB2CServiceCase(TransactionCase):
         cls.sale_channel = cls.env.ref("sale_channel.sale_channel_amazon")
         cls.sale_channel2 = cls.env.ref("sale_channel.sale_channel_ebay")
         cls.endpoint = cls.env.ref("alc_b2c_connector.fastapi_endpoint_b2c")
+        cls.endpoint.user_id = cls.b2c_user
         cls.b2c_client = cls.env["alc.b2c.client"].create(
             {
                 "name": "B2c backend test",
@@ -122,19 +125,20 @@ class CommonB2CServiceCase(TransactionCase):
         cls.env["ir.config_parameter"].set_param(
             "alc_sale_exception_settings.sale_exception_check_enabled", False
         )
-
-    def setUp(self):
-        super().setUp()
-        self.endpoint._reset_app()
-        self.app = self.endpoint._get_app()
-        self.client = TestClient(self.app)
-        env = self.env(
-            user=self.b2c_user,
-            context=dict(
-                self.env.context, authenticated_partner_id=self.b2c_user.partner_id.id
-            ),
+        cls.app = cls.endpoint._get_app()
+        cls.app.dependency_overrides[authenticated_partner_impl] = partial(
+            lambda a: a, cls.b2c_user.partner_id
         )
-        self._ctx_token = odoo_env_ctx.set(env)
+        cls.client = TestClient(cls.app)
+        env = cls.env(user=cls.b2c_user, context=dict(cls.env.context))
+        cls._ctx_token = odoo_env_ctx.set(env)
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        odoo_env_ctx.reset(cls._ctx_token)
+        cls.endpoint._reset_app()
+
+        super().tearDownClass()
 
     @classmethod
     def change_product_qty(cls, product, qty):
@@ -163,6 +167,7 @@ class CommonB2CSaleServiceCase(CommonB2CServiceCase):
                 "partner_type": "student_like",
                 "ref": f"{cls.sale_channel.name}_ABC",
                 "email": "b2c@b2c.be",
+                "alc_b2c_client_id": cls.b2c_client.id,
             }
         )
 
@@ -184,11 +189,12 @@ class CommonB2CSaleServiceCase(CommonB2CServiceCase):
             {
                 "name": "VT",
                 "partner_type": "veterinary",
-                "ref": "VTREF",
+                "ref": f"{cls.sale_channel.name}_VTREF",
                 "email": "vt@vt.be",
                 "supplier_promotion_sale_allowed": True,
                 "customer_payment_mode_id": cls.vt_payment_mode.id,
                 "is_b2c_customer": True,
+                "alc_b2c_client_id": cls.b2c_client.id,
             }
         )
         cls.SaleOrder = cls.env["sale.order"]
@@ -224,6 +230,7 @@ class CommonB2CSaleServiceCase(CommonB2CServiceCase):
         # create a b2c sale_order
         self.b2c_order = self.env["sale.order"].create(
             {
+                "alc_b2c_client_id": self.b2c_client.id,
                 "b2c_ref": 10,
                 "partner_id": self.b2c_partner.id,
                 "partner_invoice_id": self.vt_partner.id,

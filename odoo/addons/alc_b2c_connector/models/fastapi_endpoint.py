@@ -64,7 +64,7 @@ def authenticated_partner_impl(
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect API Key"
         )
-    return client.partner_id
+    return client.partner_id.with_context(alc_b2c_client_id=client.id)
 
 
 b2c_api_router = APIRouter(dependencies=[Depends(authenticated_partner_impl)])

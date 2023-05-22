@@ -14,13 +14,14 @@ from odoo.osv.expression import AND
 
 from odoo.addons.sale.models.sale_order import SaleOrder as SaleOrderBase
 
-from .res_partner import TITLE_XML_ID_BY_B2C_KEY, ResPartner
+from .alc_b2c_client import AlcB2cClient
+from .res_partner import ResPartner
 
 _logger = logging.getLogger(__name__)
 
 
 class SaleOrder(SaleOrderBase):
-
+    alc_b2c_client_id = fields.Many2one[AlcB2cClient](readonly=True)
     b2c_ref = fields.Char(string="Reference B2C", copy=False, index=True)
     b2c_state = fields.Selection(
         string="B2C state",
@@ -173,6 +174,7 @@ class SaleOrder(SaleOrderBase):
             Command.create(line_info)
             for line_info in self._parse_b2c_order_line(data, b2c_client)
         ]
+        order_data["alc_b2c_client_id"] = b2c_client.id
         return order_data
 
     @api.model
@@ -213,37 +215,7 @@ class SaleOrder(SaleOrderBase):
         if partner:
             partner._update_b2c_data(customer_info, b2c_client)
             return partner
-        name = customer_info["first_name"]
-        last_name = customer_info.get("last_name")
-        if last_name:
-            name = f"{name} {last_name}"
-        title = customer_info.get("title")
-        if title:
-            title = self.env.ref(TITLE_XML_ID_BY_B2C_KEY[title]).id
-        country_id = None
-        country_code = customer_info.get("country_code")
-        if country_code:
-            country_id = self.env["res.country"]._get_by_code(country_code).id
-        return self.env["res.partner"].create(
-            {
-                "name": name,
-                "title": title,
-                "email": customer_info.get("email"),
-                "street": customer_info.get("street"),
-                "street2": customer_info.get("street2"),
-                "zip": customer_info.get("zip"),
-                "city": customer_info.get("city"),
-                "phone": customer_info.get("phone"),
-                "mobile": customer_info.get("mobile"),
-                "sale_reason_backorder_strategy": b2c_client.sale_reason_backorder_strategy,
-                "is_b2c_customer": True,
-                "partner_type": "student_like",
-                "ref": b2c_ref,
-                "country_id": country_id,
-                "suite": customer_info.get("name2"),
-                "comment": customer_info.get("note"),
-            }
-        )
+        return self.env["res.partner"]._create_b2c_partner(customer_info, b2c_client)
 
     @api.model
     def _convert_datetime_to_utc(self, dt):

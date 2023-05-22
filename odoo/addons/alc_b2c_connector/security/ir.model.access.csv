@@ -17,7 +17,7 @@ stock_picking_type_b2c_group,stock_picking_type b2c_group,stock.model_stock_pick
 stock_picking_b2c_group,stock_picking b2c_group,stock.model_stock_picking,alc_b2c_connector.b2c_group,1,0,0,0
 stock_warehouse_orderpoint_b2c_group,stock_warehouse_orderpoint b2c_group,stock.model_stock_warehouse_orderpoint,alc_b2c_connector.b2c_group,1,0,0,0
 stock_move_b2c_group,stock_move b2c_group,stock.model_stock_move,alc_b2c_connector.b2c_group,1,1,0,0
-stock_move_line_b2c_group,stock_move_line b2c_group,stock.model_stock_move_line,alc_b2c_connector.b2c_group,0,0,0,1
+stock_move_line_b2c_group,stock_move_line b2c_group,stock.model_stock_move_line,alc_b2c_connector.b2c_group,1,0,0,1
 stock_quant_b2c_group,stock_quant b2c_group,stock.model_stock_quant,alc_b2c_connector.b2c_group,1,0,0,0
 procurement_group_b2c_group,procurement_group b2c_group,stock.model_procurement_group,alc_b2c_connector.b2c_group,0,0,1,0
 sale_order_b2c_group,sale_order b2c_group,sale.model_sale_order,alc_b2c_connector.b2c_group,1,1,1,0

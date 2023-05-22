@@ -32,6 +32,7 @@ class TestRecipientsService(CommonB2CServiceCase):
                 "zip": "1234",
                 "partner_type": "student_like",
                 "ref": f"{cls.sale_channel.name}_ABC",
+                "alc_b2c_client_id": cls.b2c_client.id,
                 "email": "b2c@b2c.be",
                 "country_id": cls.belgium.id,
             }
@@ -55,9 +56,10 @@ class TestRecipientsService(CommonB2CServiceCase):
             {
                 "name": "VT",
                 "partner_type": "veterinary",
-                "ref": "VTREF",
+                "ref": "Amazon_",
                 "email": "vt@vt.be",
                 "customer_payment_mode_id": cls.vt_payment_mode.id,
+                "alc_b2c_client_id": cls.b2c_client.id,
                 "is_b2c_customer": True,
             }
         )

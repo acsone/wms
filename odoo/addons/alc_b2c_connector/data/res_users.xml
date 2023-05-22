@@ -13,11 +13,4 @@
     <field name="groups_id" eval="[(6,0,[])]" />
     <field name="active" eval="1" />
   </record>
-  <function model="res.partner" name="write">
-        <value
-      model="res.partner"
-      eval="obj().env.ref('alc_b2c_connector.alc_b2c_rest_api_user').partner_id.ids"
-    />
-        <value eval="{'user_id': ref('alc_b2c_connector.alc_b2c_rest_api_user')}" />
-    </function>
 </odoo>
