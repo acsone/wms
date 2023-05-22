@@ -30,6 +30,7 @@
         "alc_app_receipt",
         "alc_app_return",
         "alc_app_sale",
+        "alc_running_env",
         "stock_scrap_location_default",
         "alc_partner_message_subscribe",
         "alc_partner_name",
