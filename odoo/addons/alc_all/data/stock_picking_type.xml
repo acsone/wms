@@ -7,4 +7,8 @@
     <value model="stock.picking.type" eval="[ref('stock.picking_type_in')]" />
     <value eval="{'default_location_dest_id': ref('stock.stock_location_company')}" />
   </function>
+  <function model="stock.picking.type" name="write">
+    <value model="stock.picking.type" eval="[ref('stock.picking_type_out')]" />
+    <value eval="{'group_pickings': True, 'group_pickings_by_customer': True}" />
+  </function>
 </odoo>
