@@ -74,6 +74,7 @@ odoo-addon-sale-product-set @ git+https://github.com/acsone/sale-workflow.git@61
 odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.git@f506b778476eacfc4a3f33d85c2f77f790a8ebc8#subdirectory=setup/sale_route_amendment
 odoo-addon-sale-shipping-info-helper @ git+https://github.com/acsone/sale-workflow.git@64185c13f8c69cc7faf87cb5b2bc0db444b4c93c#subdirectory=setup/sale_shipping_info_helper
 odoo-addon-sale-triple-discount==16.0.1.0.1.1
+odoo-addon-sale-wishlist @ git+https://github.com/OCA/sale-workflow.git@3c6e8a832ffd09225a5fe7758b9598b2a13f2a56#subdirectory=setup/sale_wishlist
 odoo-addon-server-environment==16.0.1.0.1.1
 odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
 odoo-addon-session-db==16.0.1.0.3
