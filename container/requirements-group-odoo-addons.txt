@@ -16,7 +16,7 @@ odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-c
 odoo-addon-base-business-document-import @ git+https://github.com/acsone/edi.git@f15198354f32bf9b2c4107659883e6fecbf01e75#subdirectory=setup/base_business_document_import
 odoo-addon-base-delivery-carrier-label==16.0.1.0.0.3
 odoo-addon-base-exception==16.0.1.0.1.3
-odoo-addon-base-geoengine @ git+https://github.com/acsone/geospatial.git@149bc0a2c89d8839ebf280719e3ebe5b73307165#subdirectory=setup/base_geoengine
+odoo-addon-base-geoengine @ git+https://github.com/acsone/geospatial.git@fd0f0e4a52289067c56c95fcbf59979d94d758fc#subdirectory=setup/base_geoengine
 odoo-addon-base-partner-sequence==16.0.1.0.0.3
 odoo-addon-base-report-to-printer==16.0.1.1.0.1
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@f75469cfc3ead20b6224195b653ddba735a219b4#subdirectory=setup/base_sparse_field_list_support
@@ -33,6 +33,8 @@ odoo-addon-delivery-procurement-group-carrier==16.0.1.0.0.2
 odoo-addon-geoengine-base-geolocalize @ git+https://github.com/acsone/geospatial.git@d977cbdc42825e5d241ebe91203e0d087d73b2e7#subdirectory=setup/geoengine_base_geolocalize
 odoo-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@ff4a76d86be5abd88dcb0f84c5def21a70e2262d#subdirectory=setup/geoengine_partner
 odoo-addon-hr-holidays-public==16.0.1.1.0
+odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/acsone/l10n-belgium@63b4fce463858ea41cbf8417711f2850a915400d#subdirectory=setup/l10n_be_bpost_address_autocomplete
+odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/acsone/l10n-belgium@1add45854e6315c1bb00adb3c54a0fb396b61bad#subdirectory=setup/l10n_be_bpost_address_validation
 odoo-addon-onchange-helper==16.0.1.0.0.3
 odoo-addon-partner-manual-rank==16.0.1.0.1
 odoo-addon-partner-tz==16.0.1.0.0.3
@@ -72,6 +74,7 @@ odoo-addon-sale-product-set @ git+https://github.com/acsone/sale-workflow.git@61
 odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.git@f506b778476eacfc4a3f33d85c2f77f790a8ebc8#subdirectory=setup/sale_route_amendment
 odoo-addon-sale-shipping-info-helper @ git+https://github.com/acsone/sale-workflow.git@64185c13f8c69cc7faf87cb5b2bc0db444b4c93c#subdirectory=setup/sale_shipping_info_helper
 odoo-addon-sale-triple-discount==16.0.1.0.1.1
+odoo-addon-sale-wishlist @ git+https://github.com/OCA/sale-workflow.git@3c6e8a832ffd09225a5fe7758b9598b2a13f2a56#subdirectory=setup/sale_wishlist
 odoo-addon-server-environment==16.0.1.0.1.1
 odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
 odoo-addon-session-db==16.0.1.0.3

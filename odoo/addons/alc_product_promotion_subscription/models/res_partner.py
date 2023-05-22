@@ -1,19 +1,18 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import fields
+
+from odoo.addons.base.models.res_partner import Partner
+
+from .alc_product_promotion_subscription import AlcProductPromotionSubscription
 
 
-class ResPartner(models.Model):
+class ResPartner(Partner):
 
-    _inherit = "res.partner"
-
-    alc_product_promotion_subscription_ids = fields.One2many(
-        string="Product promotion subscriptions",
-        comodel_name="alc.product.promotion.subscription",
-        inverse_name="partner_id",
-    )
+    alc_product_promotion_subscription_ids = fields.One2many[
+        AlcProductPromotionSubscription
+    ](string="Product promotion subscriptions", inverse_name="partner_id")
 
     alc_product_promotion_subscription_count = fields.Integer(
         compute="_compute_alc_product_promotion_subscription_count",

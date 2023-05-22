@@ -8,15 +8,11 @@
   >
         <field name="name">Product Promotion Subscriptions</field>
         <field name="res_model">alc.product.promotion.subscription</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form,graph</field>
         <field name="context">{'search_default_partner_id': active_id}</field>
     </record>
 
     <record model="ir.ui.view" id="res_partner_form_view">
-        <field
-      name="name"
-    >res.partner.form (in alc_product_promotion_subscription)</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="priority" eval="90" />
@@ -26,7 +22,7 @@
           class="oe_stat_button"
           type="action"
           name="%(alc_product_promotion_subscription.act_res_partner_2_product_promotion_subscription)d"
-          attrs="{'invisible': [('customer', '=', False)]}"
+          attrs="{'invisible': [('is_customer', '=', False)]}"
           icon="fa-percent"
         >
                     <field
