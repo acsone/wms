@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <!-- set location reception on picking type in -->
+  <function model="stock.picking.type" name="write">
+    <value model="stock.picking.type" eval="[ref('stock.picking_type_in')]" />
+    <value eval="{'default_location_dest_id': ref('stock.stock_location_company')}" />
+  </function>
+  <!-- Set group by customer on picking type out -->
+  <!-- Set show entire packs on picking type out -->
+  <function model="stock.picking.type" name="write">
+    <value model="stock.picking.type" eval="[ref('stock.picking_type_out')]" />
+    <value
+      eval="{'group_pickings': True, 'group_pickings_by_customer': True, 'show_entire_packs': True}"
+    />
+  </function>
+
+  <!-- Set display put in pack wizard on old PICK picking type -->
+  <function model="stock.picking.type" name="write">
+    <value
+      model="stock.picking.type"
+      eval="(obj().env.cr.execute(&quot;select id from stock_picking_type where subcode=&apos;PICK&apos;&quot;) or True) and [i[0] for i in obj().env.cr.fetchall()]"
+    />
+    <value eval="{'set_delivery_package_type_on_put_in_pack': True}" />
+  </function>
+  <!-- set sequence VLB/PICK on picking type Pick Aliments -->
+  <function model="stock.picking.type" name="write">
+    <value
+      model="stock.picking.type"
+      eval="[ref('alc_stock_picking_type_aliment.stock_picking_type_ali')]"
+    />
+    <value
+      model="ir.sequence"
+      eval="{'sequence_id': obj().search([('prefix', '=', 'VLB/PICK/')]) or ref('stock.seq_picking_internal')}"
+    />
+  </function>
+</odoo>

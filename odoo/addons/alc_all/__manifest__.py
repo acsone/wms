@@ -47,6 +47,8 @@
         "views/res_partner.xml",
         "data/ir_config_parameter.xml",
         "data/res_company.xml",
+        "data/stock_picking_type.xml",
+        "data/stock_rule.xml",
     ],
     "demo": [],
 }
