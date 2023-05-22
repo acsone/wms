@@ -28,6 +28,7 @@
         "stock_picking_backorder_reason",
         "onchange_helper",
         "sale_exception",
+        "stock_procurement_customer",
         # ALC
         "alc_product_pharmacy",
         "alc_partner_type",

@@ -22,6 +22,4 @@ class ProductProduct(ProductProductBase):
         domain = self.product_assortment_domain(b2c_client)
         if skus:
             domain = expression.AND([domain, [("default_code", "in", skus)]])
-        products = self.search(domain, limit=limit, offset=offset)
-        products.check_access_rights("read")
         return self.search(domain, limit=limit, offset=offset)

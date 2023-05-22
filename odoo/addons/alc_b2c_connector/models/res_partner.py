@@ -34,7 +34,7 @@ class ResPartner(ResPartnerBase):
         """If this partner has one started picking out, only update contact fields."""
         self.ensure_one()
         domain_pickings = [
-            ("partner_id", "=", self.id),
+            ("customer_id", "=", self.id),
             ("picking_type_code", "=", "outgoing"),
             ("printed", "=", True),
         ]
