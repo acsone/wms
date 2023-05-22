@@ -4,9 +4,6 @@
 <odoo>
 
     <record model="ir.ui.view" id="alc_promotion_subscription_search_view">
-        <field name="name">alc.product.promotion.subscription.search (in
-            alc_product_promotion_subscription)
-        </field>
         <field name="model">alc.product.promotion.subscription</field>
         <field name="arch" type="xml">
             <search>
@@ -29,9 +26,6 @@
     </record>
 
     <record model="ir.ui.view" id="alc_promotion_subscription_tree_view">
-        <field name="name">alc.product.promotion.subscription.tree (in
-            alc_product_promotion_subscription)
-        </field>
         <field name="model">alc.product.promotion.subscription</field>
         <field name="arch" type="xml">
             <tree editable="top">
@@ -51,7 +45,7 @@
 
     <record model="ir.ui.menu" id="alc_promotion_subscription_menu">
         <field name="name">Product Promotion Subscriptions</field>
-        <field name="parent_id" ref="sales_team.menu_sales" />
+        <field name="parent_id" ref="sales_team.menu_sale_config" />
         <field name="action" ref="alc_promotion_subscription_act_window" />
         <field name="sequence" eval="66" />
     </record>
