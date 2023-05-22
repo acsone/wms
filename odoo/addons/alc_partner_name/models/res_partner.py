@@ -2,67 +2,27 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api
-from odoo.osv.expression import get_unaccent_wrapper
 
 from odoo.addons.base.models.res_partner import Partner as BasePartner
 
 
 class ResPartner(BasePartner):
     @api.model
-    def name_search(self, name="", args=None, operator="ilike", limit=100):
-        """Process ref as a code: do not apply ilike on ref.
-
-        Return matched ref first.
-        This is a copy/paste of the standard method where only 'ilike %ref%'
-        has been changed into '= ref' in the query below.
-        """
-        if args is None:
-            args = []
-        if name and operator in ("=", "ilike", "=ilike", "like", "=like"):
-            self.check_access_rights("read")
-            where_query = self._where_calc(args)
-            self._apply_ir_rules(where_query, "read")
-            _from_clause, where_clause, where_clause_params = where_query.get_sql()
-            where_str = f" WHERE {where_clause if where_clause else ' WHERE '} AND "
-
-            # search on the name of the contacts and of its company
-            search_name = name
-            if operator in ("ilike", "like"):
-                search_name = f"{name}"
-            if operator in ("=ilike", "=like"):
-                operator = operator[1:]
-
-            unaccent = get_unaccent_wrapper(self.env.cr)
-
-            query = """SELECT id
-                            FROM res_partner
-                         {where} ({email} {operator} {percent}
-                              OR {display_name} {operator} {percent}
-                              OR ref = {percent})
-                              -- don't panic, trust postgres bitmap
-                        ORDER BY ref = {percent} desc,
-                                 {display_name} {operator} {percent} desc,
-                                 {display_name}
-                       """.format(
-                where=where_str,
-                operator=operator,
-                email=unaccent("email"),
-                display_name=unaccent("display_name"),
-                percent=unaccent("%s"),
-            )
-
-            where_clause_params += [search_name] * 2 + [name] * 2 + [search_name]
-            if limit:
-                query += " limit %s"
-                where_clause_params.append(limit)
-            # pylint: disable=sql-injection
-            self.env.cr.execute(query, where_clause_params)
-            partner_ids = map(lambda x: x[0], self.env.cr.fetchall())
-
-            if partner_ids:
-                return self.browse(partner_ids).name_get()
-            return []
-        return super().name_search(name, args, operator=operator, limit=limit)
+    def _name_search(
+        self, name, args=None, operator="ilike", limit=100, name_get_uid=None
+    ):
+        """Process ref as a code: do not apply ilike on ref."""
+        return self._search(
+            [
+                "|",
+                "|",
+                ("display_name", operator, name),
+                ("email", operator, name),
+                ("ref", "=ilike", name),
+            ],
+            limit=limit,
+            access_rights_uid=name_get_uid,
+        )
 
     def name_get(self):
         if self.env.context.get("show_address_only"):
