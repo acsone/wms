@@ -84,17 +84,14 @@
                     <group name="operation_details">
                         <group>
                             <field name="lot_required" invisible="1" />
-                            <label
-                for="expiration_date_char"
-                string="Date d'expiration"
-              />
+                            <label for="expiration_date" string="Date d'expiration" />
                             <div>
                                 <field
-                  name="expiration_date_char"
+                  name="expiration_date"
                   placeholder="__/__/____"
                   attrs="{'required': [('lot_required', '=', True), ('picking_is_completed', '=', False)], 'readonly': ['|', ('move_line_id', '=', False), ('lot_required', '=', False)]}"
+                  widget="date"
                 />
-                                <field name="expiration_date" invisible="1" />
                             </div>
                             <field
                 name="lot_name"

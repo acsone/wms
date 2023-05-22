@@ -1,7 +1,6 @@
 # © 2017-2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from datetime import datetime
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
@@ -68,16 +67,8 @@ class StockPackOperationLotAdd(models.TransientModel):
     )
     is_qty_exceeded = fields.Boolean(compute="_compute_is_qty_exceeded")
     is_surplus_qty_confirmed = fields.Boolean("Confirm received more than expected")
-    expiration_date_char = fields.Char(
-        string="Expiration date (input)",
-        compute="_compute_expiration_date_char",
-        readonly=False,
-        store=True,
-    )
     expiration_date = fields.Datetime(
         string="Expiration date",
-        compute="_compute_expiration_date",
-        store=True,
     )
     lot_name = fields.Char(
         "Lot Name",
@@ -116,16 +107,6 @@ class StockPackOperationLotAdd(models.TransientModel):
                     ._calc_name_for_food(wiz.expiration_date)
                 )
             wiz.lot_name = lot_name
-
-    @api.depends("move_line_id")
-    def _compute_expiration_date_char(self) -> None:
-        for wizard in self:
-            wizard.update(
-                {
-                    "expiration_date": False,
-                    "expiration_date_char": False,
-                }
-            )
 
     def _is_parent_child(self, parent, child) -> bool:
         if child and parent:
@@ -168,17 +149,6 @@ class StockPackOperationLotAdd(models.TransientModel):
     def _compute_remaining_qty(self) -> None:
         for rec in self:
             rec.remaining_qty = rec.move_id.product_uom_qty - rec.move_id.quantity_done
-
-    @api.depends("expiration_date_char")
-    def _compute_expiration_date(self) -> None:
-        for wiz in self:
-            try:
-                expiration_date = fields.Datetime.to_string(
-                    datetime.strptime(wiz.expiration_date_char, "%d/%m/%Y")
-                )
-                wiz.expiration_date = expiration_date
-            except (TypeError, ValueError):
-                wiz.expiration_date = False
 
     def _split_move(self) -> StockMove:
         move = self.move_id
@@ -286,7 +256,6 @@ class StockPackOperationLotAdd(models.TransientModel):
                 "qty": False,
                 "lot_id": False,
                 "expiration_date": False,
-                "expiration_date_char": False,
                 "lot_name": False,
                 "is_surplus_qty_confirmed": False,
                 "is_transfer": False,

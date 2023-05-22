@@ -1,6 +1,7 @@
 # Copyright 2017 Jacques-Etienne Baudoux <je@bcim.be>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
+from odoo import fields
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 
@@ -29,7 +30,7 @@ class TestPackOperationLotAdd(PackOperationLotAddCommon, TransactionCase):
         # receive first lot
         self.assertEqual(1, wiz.lot_required)
         wiz.lot_name = "Unittest Reception L1"
-        wiz.expiration_date_char = "2030-01-01 10:00:00"
+        wiz.expiration_date = "2030-01-01 10:00:00"
         wiz.qty = 3
 
         # go to next lot
@@ -43,7 +44,7 @@ class TestPackOperationLotAdd(PackOperationLotAddCommon, TransactionCase):
         # receive second lot
         self.assertEqual(1, wiz.lot_required)
         wiz.lot_name = "Unittest Reception L2"
-        wiz.expiration_date_char = "2030-01-01 10:00:00"
+        wiz.expiration_date = "2030-01-01 10:00:00"
         wiz.qty = 1
 
         # go to next lot
@@ -56,7 +57,7 @@ class TestPackOperationLotAdd(PackOperationLotAddCommon, TransactionCase):
         # receive again first lot
         self.assertEqual(1, wiz.lot_required)
         wiz.lot_name = "Unittest Reception L1"
-        wiz.expiration_date_char = "2030-01-01 10:00:00"
+        wiz.expiration_date = "2030-01-01 10:00:00"
         wiz.qty = 1
 
         # go to next operation
@@ -76,7 +77,7 @@ class TestPackOperationLotAdd(PackOperationLotAddCommon, TransactionCase):
         # receive lot
         self.assertEqual(1, wiz.lot_required)
         wiz.lot_name = "Unittest Reception L3"
-        wiz.expiration_date_char = "2030-01-01 10:00:00"
+        wiz.expiration_date = "2030-01-01 10:00:00"
         wiz.qty = 5
         self.assertFalse(wiz.is_qty_exceeded)
 
