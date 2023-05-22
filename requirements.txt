@@ -114,7 +114,7 @@ odoo-addon-sale-shipping-info-helper @ git+https://github.com/acsone/sale-workfl
 odoo-addon-sale-stock-picking-blocking==16.0.1.0.0.4
 odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/stock-logistics-workflow.git@f2ceafadb0008ee27a6346a432ef9f58f1726784#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo-addon-sale-triple-discount==16.0.1.0.1.1
-odoo-addon-sale-wishlist @ git+https://github.com/OCA/sale-workflow.git@3c6e8a832ffd09225a5fe7758b9598b2a13f2a56#subdirectory=setup/sale_wishlist
+odoo-addon-sale-wishlist @ git+https://github.com/acsone/sale-workflow.git@3c6e8a832ffd09225a5fe7758b9598b2a13f2a56#subdirectory=setup/sale_wishlist
 odoo-addon-server-environment==16.0.1.0.1.1
 odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
 odoo-addon-session-db==16.0.1.0.3
