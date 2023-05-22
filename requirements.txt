@@ -34,7 +34,7 @@ manifestoo_core==0.10.4
 MarkupSafe==2.1.2
 num2words==0.5.12
 numpy==1.24.2
-odoo @ git+https://github.com/acsone/odoo.git@7305029ce57e240538339e66f6900809e25ff996
+odoo @ git+https://github.com/acsone/odoo.git@b364011c12d74f84d3fc55151e9d071f74b79329
 odoo-addon-account-invoice-tax-required==16.0.1.0.0.7
 odoo-addon-account-invoice-triple-discount==16.0.1.0.0.2
 odoo-addon-account-payment-mode==16.0.1.1.0.1
