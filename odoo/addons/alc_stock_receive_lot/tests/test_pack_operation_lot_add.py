@@ -1,7 +1,6 @@
 # Copyright 2017 Jacques-Etienne Baudoux <je@bcim.be>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import fields
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 

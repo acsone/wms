@@ -55,12 +55,10 @@ class StockPackOperationLotAdd(models.TransientModel):
     )
     remaining_qty = fields.Float(
         "Qty Remaining",
-        digits="Product Unit of Measure",
         compute="_compute_remaining_qty",
     )
     qty = fields.Float(
         "Qty Done",
-        digits="Product Unit of Measure",
         compute="_compute_qty",
         store=True,
         readonly=False,
@@ -179,9 +177,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         return self.env["stock.move.line"].create(self._prepare_move_line_values())
 
     def _add(self) -> None:
-        precision = self.env["decimal.precision"].precision_get(
-            "Product Unit of Measure"
-        )
+        precision = self.move_line_id.product_uom_id.rounding
         quantity_zero = bool(
             float_compare(self.qty, 0, precision_rounding=precision) <= 0
         )
