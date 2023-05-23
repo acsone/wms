@@ -69,11 +69,6 @@ msgid "Expiration date"
 msgstr ""
 
 #. module: alc_stock_receive_lot
-#: model:ir.model.fields,field_description:alc_stock_receive_lot.field_stock_pack_operation_lot_add__expiration_date_char
-msgid "Expiration date (input)"
-msgstr ""
-
-#. module: alc_stock_receive_lot
 #: model:ir.model.fields,field_description:alc_stock_receive_lot.field_stock_pack_operation_lot_add__id
 msgid "ID"
 msgstr ""
@@ -168,6 +163,11 @@ msgstr ""
 #. module: alc_stock_receive_lot
 #: model:ir.model.fields,field_description:alc_stock_receive_lot.field_stock_pack_operation_lot_add__product_id
 msgid "Product"
+msgstr ""
+
+#. module: alc_stock_receive_lot
+#: model:ir.model,name:alc_stock_receive_lot.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
 msgstr ""
 
 #. module: alc_stock_receive_lot
@@ -273,8 +273,8 @@ msgstr ""
 #| "ticking the 'Confirm received more than expected' checkbox."
 msgid ""
 "You received more than the expected remaining quantity.\n"
-"                    Please confirm by ticking the 'Confirm received more "
-"than expected' checkbox."
+"          Please confirm by ticking the 'Confirm received more than "
+"expected' checkbox."
 msgstr ""
 "Vous avez encodé une quantité suprérieure à la quantité commandée. Veuillez "
 "confirmer que l'encodage est correct via la case à cocher 'Confirmation "
