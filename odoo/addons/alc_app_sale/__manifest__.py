@@ -127,5 +127,6 @@
         "alc_sale_security",
         "alc_product_stock_state",
         "alc_product_promotion_subscription",
+        "alc_partner_category",
     ],
 }
