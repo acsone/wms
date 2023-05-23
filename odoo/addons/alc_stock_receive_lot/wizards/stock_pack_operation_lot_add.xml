@@ -59,11 +59,13 @@
           </group>
           <group name="operation_select">
             <field name="picking_id" invisible="1" />
+<!--            We replace the tree view on move lines because the default one would send us back to the picking instead of the wizard on selecting a line (see action_open_reference)-->
             <field
               name="move_line_id"
               domain="[('picking_id','=',picking_id)]"
               options="{'no_create':1}"
               attrs="{'required': [('picking_is_completed', '=', False)]}"
+              context="{'tree_view_ref':'stock.view_move_line_tree_detailed'}"
             />
             <label for="remaining_qty" />
             <span>
