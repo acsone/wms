@@ -218,6 +218,7 @@ class StockPackOperationLotAdd(models.TransientModel):
             ).exists()
             if move_line:
                 move_line.qty_done += self.qty
+                move_line.location_dest_id = self.location_dest_id
             else:
                 if not current_operation.lot_id and not current_operation.qty_done:
                     move_line = current_operation
@@ -230,6 +231,7 @@ class StockPackOperationLotAdd(models.TransientModel):
                         "lot_name": self.lot_name,
                         "qty_done": self.qty,
                         "expiration_date": self.expiration_date,
+                        "location_dest_id": self.location_dest_id,
                     }
                 )
         else:
