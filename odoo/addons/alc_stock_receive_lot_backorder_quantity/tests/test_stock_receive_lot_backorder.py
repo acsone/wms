@@ -56,7 +56,7 @@ class TestPackOperationLotAddBackorder(PackOperationLotAddCommon, TransactionCas
         wiz.location_dest_id = self.bin1.id
 
         wiz.lot_name = "Unittest Reception L1"
-        wiz.expiration_date_char = "2030-01-01 10:00:00"
+        wiz.expiration_date = "2030-01-01 10:00:00"
         wiz.qty = 3
 
         res = wiz.button_transfer()
