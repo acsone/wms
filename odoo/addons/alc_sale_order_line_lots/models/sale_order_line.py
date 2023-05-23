@@ -34,6 +34,6 @@ class SaleOrderLine(SaleOrderlineBase):
         for line in self:
             lot_ids = lot_ids_by_product_id.get(line.product_id.id)
             if lot_ids:
-                line.lot_ids = fields.Command.set(lot_ids)
+                line.lot_ids = [fields.Command.set(lot_ids)]
             else:
                 line.lot_ids = False
