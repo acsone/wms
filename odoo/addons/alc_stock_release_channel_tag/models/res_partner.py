@@ -13,5 +13,6 @@ from .alc_stock_release_channel_tag import AlcStockReleaseChannelTag
 class ResPartner(ResPartnerBase):
 
     stock_release_channel_tag_ids = fields.Many2many[AlcStockReleaseChannelTag](
-        string="Release channel tags"
+        string="Release channel tags",
+        relation="res_partner_stock_release_channel_tag_rel",
     )
