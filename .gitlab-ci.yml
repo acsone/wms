@@ -123,6 +123,16 @@ build-test-image:
   needs:
     - job: build-dependencies-image
 
+build-uat-image:
+  extends: .build-publish-image
+  variables:
+    ACIT_IMAGE_FLAVOR: /uat16
+  only:
+    - /^\d+\.\d+\.\d+$/
+  needs:
+    - job: build-dependencies-image
+  when: manual
+
 # deployments
 
 .deploy-trigger:
@@ -163,5 +173,17 @@ deploy-test-trigger:
     name: test16
   needs:
     - job: build-test-image
+  only:
+    - /^\d+\.\d+\.\d+$/
+
+deploy-uat-trigger:
+  extends: .deploy-trigger
+  variables:
+    DEPLOY_BRANCH: deploy-test
+    IMAGE_FLAVOR: /uat16
+  environment:
+    name: uat16
+  needs:
+    - job: build-uat-image
   only:
     - /^\d+\.\d+\.\d+$/
