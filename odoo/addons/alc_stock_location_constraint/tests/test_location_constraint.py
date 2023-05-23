@@ -1,7 +1,9 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo.exceptions import ValidationError
+from psycopg2.errors import UniqueViolation
+
 from odoo.tests.common import TransactionCase
+from odoo.tools import mute_logger
 
 
 class TestStockLocationConstraint(TransactionCase):
@@ -22,6 +24,7 @@ class TestStockLocationConstraint(TransactionCase):
             }
         )
 
+    @mute_logger("odoo.sql_db")
     def test_location_char_unique(self):
         # Activate the constraint
         # Try to add a duplicate and check constraint raises
@@ -31,8 +34,9 @@ class TestStockLocationConstraint(TransactionCase):
                 "alc_stock_location_constraint": True,
             }
         ).execute()
-        message = "The following locations have the same characteristics than this one (Test B): Test A"
-        with self.assertRaises(ValidationError, msg=message):
+        with self.assertRaisesRegex(
+            UniqueViolation, "Duplicate entry for location coordinates"
+        ), self.env.cr.savepoint():
             self.location_obj.create(
                 {
                     "name": "Test A",
