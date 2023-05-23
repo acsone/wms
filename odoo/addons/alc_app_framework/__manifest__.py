@@ -12,6 +12,7 @@
     "application": True,
     "depends": [
         # OCA
+        "queue_job_cron",
         "report_csv",
         # ALC
         "alc_base_auto_join",
