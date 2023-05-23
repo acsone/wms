@@ -22,6 +22,7 @@ class ResPartner(Partner):
 
     def _compute_alc_product_promotion_subscription_count(self):
         # retrieve all children partners and prefetch 'parent_id' on them
+        self.update({"alc_product_promotion_subscription_count": 0})
         all_partners = self.search([("id", "child_of", self.ids)])
         all_partners.read(["parent_id"])
 
