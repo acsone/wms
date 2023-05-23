@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api
+from odoo.osv.expression import get_unaccent_wrapper
 
 from odoo.addons.base.models.res_partner import Partner as BasePartner
 
@@ -11,8 +12,12 @@ class ResPartner(BasePartner):
     def _name_search(
         self, name, args=None, operator="ilike", limit=100, name_get_uid=None
     ):
-        """Process ref as a code: do not apply ilike on ref."""
-        return self._search(
+        """
+        Process ref as a code: do not apply ilike on ref.
+
+        Return matched ref first.
+        """
+        res = self._search(
             [
                 "|",
                 "|",
@@ -23,6 +28,23 @@ class ResPartner(BasePartner):
             limit=limit,
             access_rights_uid=name_get_uid,
         )
+        unaccent = get_unaccent_wrapper(self.env.cr)
+        order_name = name
+        if operator in ("ilike", "like"):
+            order_name = f"%{name}%"
+        order_operator = operator
+        if operator in ("=ilike", "=like"):
+            order_operator = operator[1:]
+        res.order = (
+            "ref ilike {percent} desc, {display_name} {operator} {percent} desc,"
+            " {display_name}".format(
+                operator=order_operator,
+                display_name=unaccent("display_name"),
+                percent=unaccent("%s"),
+            )
+        )
+        res._where_params = res._where_params + [name, order_name]
+        return res
 
     def name_get(self):
         if self.env.context.get("show_address_only"):
