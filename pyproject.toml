@@ -22,7 +22,8 @@ test = [
   "freezegun",
   "odoo-test-helper",
   "python-dateutil",
-  "manifestoo"
+  "manifestoo",
+  "vcrpy-unittest"
 ]
 dev = [
   "ipython",
@@ -193,7 +194,6 @@ exclude = [
   'odoo/addons/alc_product_consolidated_price_report/*',
   'odoo/addons/alc_product_flattened_data/*',
   'odoo/addons/alc_product_label_printer/*',
-  'odoo/addons/alc_product_link_notice/*',
   'odoo/addons/alc_product_mto/*',
   'odoo/addons/alc_product_packaging_stock_reserve/*',
   'odoo/addons/alc_product_promotion_mailing/*',
