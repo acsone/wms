@@ -51,5 +51,6 @@
         "alc_purchase_order_cancel_email_template",
         "alc_purchase_order_builder",
         "alc_stock_receive_lot_missing_product_nouveaute_info",
+        "alc_stock_move_line_show_quantity",
     ],
 }
