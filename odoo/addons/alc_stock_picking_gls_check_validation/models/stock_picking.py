@@ -56,12 +56,17 @@ class StockPicking(stock_picking.StockPicking):
         return self.with_context(bypass_check_validate_allowed=True).button_validate()
 
     def button_validate(self):
-        self.ensure_one()
-        if (
-            not self.env.context.get("bypass_check_validate_allowed")
-            and not self.validate_allowed
-        ):
-            raise UserError(
-                _("You cannot validate the picking before all the packs are done")
+        if not self.env.context.get("bypass_check_validate_allowed"):
+            validate_not_allowed_pickings = self.filtered(
+                lambda p: not p.validate_allowed
             )
+            if validate_not_allowed_pickings:
+                raise UserError(
+                    _(
+                        "You cannot validate the picking before all the packs are done (%(picking_names)s)",
+                        picking_names=", ".join(
+                            validate_not_allowed_pickings.mapped("name")
+                        ),
+                    )
+                )
         return super().button_validate()
