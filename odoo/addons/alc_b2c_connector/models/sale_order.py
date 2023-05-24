@@ -81,7 +81,9 @@ class SaleOrder(SaleOrderBase):
             .create(order_data)
         )
         order.message_post(body=body)
-        order.action_confirm()
+        # the vet is set to as the shipping_address, so the procurement group is created
+        # for him, as the b2c user don't have access to the vet, it needs sudo to perform
+        order.sudo().action_confirm()
         return order
 
     def _cancel_from_b2c(self):
@@ -114,14 +116,17 @@ class SaleOrder(SaleOrderBase):
             msg = _("Missing update parameters, lines or recipient.")
             _logger.error(msg)
             raise ValidationError(msg)
-        self.with_context(disable_cancel_warning=True).action_cancel()
+        self.sudo().with_context(disable_cancel_warning=True).action_cancel()
         self.action_draft()
         if "lines" in data:
             self._update_lines_from_b2c(data, b2c_client)
         if "recipient" in data:
             partner = self._get_final_b2c_recipient(data, b2c_client)
             self._update_recipient_from_b2c(partner)
-        self.action_confirm()
+        # the vet is set to as the shipping_address, so the procurement group is created
+        # for him, as the b2c user don't have access to the vet, it needs sudo to perform
+        # action_confirm
+        self.sudo().action_confirm()
         return self
 
     def _update_lines_from_b2c(self, data, b2c_backend):
@@ -151,7 +156,10 @@ class SaleOrder(SaleOrderBase):
         # we create all the orders with the VET as final customer
         # At the end of the process and after the onchange call, the partner_id
         # will be replaced by the final customer
-        partner_vet = self.env["res.partner"]._get_partner_by_ref(data["customer_ref"])
+        # b2c user don't have access to vet partners, we use sudo to get the partner id
+        partner_vet = (
+            self.env["res.partner"].sudo()._get_partner_by_ref(data["customer_ref"])
+        )
         # get the parther and play onchange to get shipping,
         order_data["partner_id"] = partner_vet.id
         order_data["b2c_ref"] = data["id"]
@@ -160,8 +168,8 @@ class SaleOrder(SaleOrderBase):
         order_data["team_id"] = b2c_client.sale_team_id.id
         if b2c_client.payment_mode_id:
             order_data["payment_mode_id"] = b2c_client.payment_mode_id.id
-        # invvoice, payment_term, pricelist, carrier_id, team
-        updated_data = self.play_onchanges(order_data, order_data.keys())
+        # play onchange with sudo as the b2c user don't have access to the vet partner
+        updated_data = self.sudo().play_onchanges(order_data, order_data.keys())
         order_data.update(updated_data)
 
         # replace partner by the final customer

@@ -3,9 +3,6 @@
 from fastapi import status
 from requests import Response
 
-from odoo.exceptions import ValidationError
-from odoo.tools.misc import mute_logger
-
 from .common import CommonB2CSaleServiceCase
 
 ISO_DT_WITH_TZ = "2020-05-28T13:45:47+02:00"
@@ -45,7 +42,15 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
                 "email": "vt@vt.be",
                 "supplier_promotion_sale_allowed": True,
                 "customer_payment_mode_id": cls.vt_payment_mode.id,
+            }
+        )
+        cls.b2c_partner_2 = cls.env["res.partner"].create(
+            {
+                "name": "EXISTING B2C PARTNER 2",
                 "is_b2c_customer": True,
+                "partner_type": "student_like",
+                "ref": f"{cls.sale_channel_2.name}_ABC",
+                "email": "b2c@b2c.be",
                 "alc_b2c_client_id": cls.b2c_client_2.id,
             }
         )
@@ -142,47 +147,19 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
         res = response.json()
         self.assertEqual(res["size"], 0)
 
-    @mute_logger("odoo.addons.alc_b2c_connector.models.res_partner")
     def test_02(self):
-        """
-        Test Case:
-
-            call sale order service create with a partner of another client
-        Expected Result:
-            Access error
-        """
-        recipient_info = self._gen_recipent(_id="XYZ")
-        params = {
-            "id": 2,
-            "customer_ref": self.vt_partner_2.ref,
-            "date": ISO_DT_WITH_TZ,
-            "recipient": recipient_info,
-            "lines": [
-                {
-                    "line_id": 2,
-                    "sku": self.saleable_product.default_code,
-                    "quantity": 10,
-                }
-            ],
-        }
-        with self.assertRaises(
-            ValidationError, msg="No match found for customer_id: Ebay_VTREF"
-        ):
-            self.sale_model._create_from_b2c(params, self.b2c_client)
-
-    def test_03(self):
         """Each client can access to his partners."""
         # first client
         response: Response = self.client.get(
-            self._get_path("/recipients/VTREF"), headers={"api-key": "1234"}
+            self._get_path("/recipients/ABC"), headers={"api-key": "1234"}
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
-        self.assertEqual(res["name"], "VT")
+        self.assertEqual(res["name"], "EXISTING B2C PARTNER")
         # second client
         response: Response = self.client.get(
-            self._get_path("/recipients/VTREF"), headers={"api-key": "5678"}
+            self._get_path("/recipients/ABC"), headers={"api-key": "5678"}
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
-        self.assertEqual(res["name"], "VT 2")
+        self.assertEqual(res["name"], "EXISTING B2C PARTNER 2")

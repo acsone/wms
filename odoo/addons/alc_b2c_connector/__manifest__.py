@@ -28,7 +28,7 @@
         "stock_picking_backorder_reason",
         "onchange_helper",
         "sale_exception",
-        "stock_procurement_customer",
+        "sale_procurement_customer",
         # ALC
         "alc_product_pharmacy",
         "alc_partner_type",
@@ -52,6 +52,7 @@
         "security/sale_order.xml",
         "security/sale_order_line.xml",
         "security/alc_b2c_client.xml",
+        "security/stock_picking.xml",
         "security/ir.model.access.csv",
         "views/fastapi_endpoint.xml",
         "views/alc_b2c_client.xml",

@@ -193,8 +193,6 @@ class CommonB2CSaleServiceCase(CommonB2CServiceCase):
                 "email": "vt@vt.be",
                 "supplier_promotion_sale_allowed": True,
                 "customer_payment_mode_id": cls.vt_payment_mode.id,
-                "is_b2c_customer": True,
-                "alc_b2c_client_id": cls.b2c_client.id,
             }
         )
         cls.SaleOrder = cls.env["sale.order"]
