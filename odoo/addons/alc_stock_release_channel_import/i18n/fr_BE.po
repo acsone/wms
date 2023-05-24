@@ -160,7 +160,7 @@ msgstr "Aucun fichier envoyé."
 #: code:addons/alc_stock_release_channel_import/models/alc_delivery_plan.py:0
 #, python-format
 msgid "Release Channels"
-msgstr "Canaux de libération"
+msgstr "Canaux de livraison"
 
 #. module: alc_stock_release_channel_import
 #: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__stock_release_channel_tag_ids
@@ -170,7 +170,7 @@ msgstr "Étiquettes"
 #. module: alc_stock_release_channel_import
 #: model:ir.model,name:alc_stock_release_channel_import.model_stock_release_channel
 msgid "Stock Release Channels"
-msgstr "Canaux de libération des stocks"
+msgstr "Canaux de livraison des stocks"
 
 #. module: alc_stock_release_channel_import
 #. odoo-python

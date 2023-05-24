@@ -84,7 +84,7 @@ msgstr ""
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model,name:alc_stock_release_channel_pick_allowed.model_stock_release_channel
 msgid "Stock Release Channels"
-msgstr "Canaux de libération des stocks"
+msgstr "Canaux de livraison des stocks"
 
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model,name:alc_stock_release_channel_pick_allowed.model_stock_picking

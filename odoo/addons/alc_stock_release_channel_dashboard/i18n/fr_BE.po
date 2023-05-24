@@ -118,7 +118,7 @@ msgstr "Démarrer/Arrêter les transferts"
 #. module: alc_stock_release_channel_dashboard
 #: model:ir.model,name:alc_stock_release_channel_dashboard.model_stock_release_channel
 msgid "Stock Release Channels"
-msgstr "Canaux de libération des stocks"
+msgstr "Canaux de livraison des stocks"
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view

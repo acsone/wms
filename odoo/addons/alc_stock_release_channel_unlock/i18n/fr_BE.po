@@ -75,4 +75,4 @@ msgstr "Déverrouiller"
 #: model:ir.actions.act_window,name:alc_stock_release_channel_unlock.alc_stock_release_channel_unlock_act_window
 #: model:ir.ui.menu,name:alc_stock_release_channel_unlock.alc_stock_release_channel_unlock_menu
 msgid "Unlock Release Channels"
-msgstr "Déverrouiller les canaux de libération"
+msgstr "Déverrouiller les canaux de livraison"
