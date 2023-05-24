@@ -16,6 +16,7 @@
         "account_payment_sale",
         "account_payment_partner",
         "account_banking_pain_base",
+        "account_banking_mandate",
         # OCA/account-invoicing
         "account_tax_one_vat",
         "account_tax_one_vat_purchase",
