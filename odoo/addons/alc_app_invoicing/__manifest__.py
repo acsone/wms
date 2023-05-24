@@ -17,6 +17,7 @@
         "account_payment_partner",
         "account_banking_pain_base",
         "account_banking_mandate",
+        "account_banking_sepa_direct_debit",
         # OCA/account-invoicing
         "account_tax_one_vat",
         "account_tax_one_vat_purchase",

@@ -36,7 +36,8 @@ num2words==0.5.12
 numpy==1.24.2
 odoo @ git+https://github.com/acsone/odoo.git@b364011c12d74f84d3fc55151e9d071f74b79329
 odoo-addon-account-banking-mandate==16.0.1.0.2.5
-odoo-addon-account-banking-pain-base @ git+https://github.com/OCA/bank-payment.git@29b53b2be9e0b7365f23acdc0e5086ffa3f5eb1c#subdirectory=setup/account_banking_pain_base
+odoo-addon-account-banking-pain-base @ git+https://github.com/acsone/bank-payment.git@29b53b2be9e0b7365f23acdc0e5086ffa3f5eb1c#subdirectory=setup/account_banking_pain_base
+odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/acsone/bank-payment.git@7392fb887f0a72e9d5a8b4e9a8b7588cf3747b25#subdirectory=setup/account_banking_sepa_direct_debit
 odoo-addon-account-invoice-tax-required==16.0.1.0.0.7
 odoo-addon-account-invoice-triple-discount==16.0.1.0.0.2
 odoo-addon-account-payment-mode==16.0.1.1.0.1
