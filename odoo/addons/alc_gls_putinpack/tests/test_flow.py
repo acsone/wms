@@ -43,9 +43,9 @@ class TestGlsFlow(TestGLSWizard):
         picking = self.sale_order.picking_ids
         picking.action_assign()
 
-        move_line_1 = picking.move_line_ids[0]
-        move_line_1.qty_done = move_line_1.reserved_uom_qty
-        package_id = picking._put_in_pack(move_line_1).id
+        for move_line in picking.move_line_ids:
+            move_line.qty_done = move_line.reserved_uom_qty
+        package_id = picking._put_in_pack(picking.move_line_ids).id
 
         # so now, when we validate the picking we get a wizard back:
         gls_wizard_transfer_action = picking.button_validate()

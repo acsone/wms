@@ -119,6 +119,7 @@ class DeliveryPackageGlsWizard(models.TransientModel):
         package.package_type_id = self.package_type_id
         package.shipping_weight = self.shipping_weight
         self.package_id = package.id
+        self.picking_id.is_put_in_pack_done = True
         return self._send(put_in_pack=True)
 
     def resend(self):

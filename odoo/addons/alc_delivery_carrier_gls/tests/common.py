@@ -1,7 +1,12 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.fields import Command
 from odoo.tests.common import TransactionCase
+
+from odoo.addons.delivery_carrier_label_gls.tests.common import mock_gls_client
+
+_mock_gls_client = mock_gls_client
 
 
 class GLSCommonFeatures(TransactionCase):
@@ -15,9 +20,6 @@ class GLSCommonFeatures(TransactionCase):
         cls.carrier = cls.env.ref(
             "alc_delivery_carrier_gls.delivery_carrier_gls_be", raise_if_not_found=False
         )
-        cls.delivery_template = cls.env["round.template"].create(
-            {"name": "Unittest delivery template"}
-        )
         if not cls.carrier:
 
             cls.carrier = cls.env["delivery.carrier"].create(
@@ -25,7 +27,6 @@ class GLSCommonFeatures(TransactionCase):
                     "name": "Unittest delivery GLS",
                     "delivery_type": "fixed",
                     "fixed_price": 10.0,
-                    "delivery_template_id": cls.delivery_template.id,
                 }
             )
             cls.env["ir.model.data"].create(
@@ -66,7 +67,7 @@ class GLSCommonFeatures(TransactionCase):
         cls.p1 = cls.env["product.product"].create(
             {
                 "name": "Unittest P1",
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
                 "weight": 10.0,
             }
@@ -74,7 +75,7 @@ class GLSCommonFeatures(TransactionCase):
         cls.p2 = cls.env["product.product"].create(
             {
                 "name": "Unittest P2",
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
                 "weight": 20.0,
             }
@@ -82,7 +83,7 @@ class GLSCommonFeatures(TransactionCase):
         cls.p3 = cls.env["product.product"].create(
             {
                 "name": "Unittest P3",
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
                 "weight": 30.0,
             }
@@ -91,7 +92,7 @@ class GLSCommonFeatures(TransactionCase):
         cls.p4 = cls.env["product.product"].create(
             {
                 "name": "Unittest P4",
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
                 "weight": 40.0,
             }
@@ -106,10 +107,7 @@ class GLSCommonFeatures(TransactionCase):
                 "code": "TST",
             }
         )
-        cls.warehouse_1.pick_type_id.subcode = "PICK"
-        cls.warehouse_1.pick_type_id.groupbypartner = True
-        cls.warehouse_1.out_type_id.groupbypartner = True
-        cls.warehouse_1.out_type_id.create_invoice_on_transfer = True
+        cls.warehouse_1.pick_type_id.code = "internal"
 
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
         cls.StockPicking = cls.env["stock.picking"]
@@ -120,8 +118,7 @@ class GLSCommonFeatures(TransactionCase):
         cls.location_ali = cls.env["stock.location"].create(
             {
                 "name": "Aliment",
-                "usage": "internal",
-                "act_as_view": True,
+                "usage": "view",
                 "location_id": cls.stock_location.id,
             }
         )
@@ -129,8 +126,7 @@ class GLSCommonFeatures(TransactionCase):
         cls.location_medoc = cls.env["stock.location"].create(
             {
                 "name": "Medicament",
-                "usage": "internal",
-                "act_as_view": True,
+                "usage": "view",
                 "location_id": cls.stock_location.id,
             }
         )
@@ -159,8 +155,7 @@ class GLSCommonFeatures(TransactionCase):
                 "sequence_id": picking_sequence.id,
                 "default_location_src_id": cls.stock_location.id,
                 "default_location_dest_id": location_out.id,
-                "subcode": "PICK",
-                "groupbypartner": True,
+                "sequence_code": "PICK",
                 "color": 7,
                 "sequence": 4,
             }
@@ -173,27 +168,24 @@ class GLSCommonFeatures(TransactionCase):
                 "sequence_id": picking_sequence.id,
                 "default_location_src_id": cls.stock_location.id,
                 "default_location_dest_id": location_out.id,
-                "subcode": "PICK",
-                "groupbypartner": True,
+                "sequence_code": "PICK",
                 "color": 7,
                 "sequence": 4,
             }
         )
 
-        cls.route_aliment = cls.env["stock.location.route"].create(
+        cls.route_aliment = cls.env["stock.route"].create(
             {
                 "name": "Aliments",
-                "pull_ids": [
-                    (
-                        0,
-                        0,
+                "rule_ids": [
+                    Command.create(
                         {
                             "name": "pull_ali",
-                            "location_id": location_out.id,
+                            "location_dest_id": location_out.id,
                             "picking_type_id": cls.picking_type_ali.id,
                             "location_src_id": cls.location_ali.id,
                             "procure_method": "make_to_stock",
-                            "action": "move",
+                            "action": "pull",
                         },
                     )
                 ],
@@ -208,20 +200,18 @@ class GLSCommonFeatures(TransactionCase):
         )
 
         if not cls.route_medoc:
-            cls.route_medoc = cls.env["stock.location.route"].create(
+            cls.route_medoc = cls.env["stock.route"].create(
                 {
                     "name": "Medicament",
-                    "pull_ids": [
-                        (
-                            0,
-                            0,
+                    "rule_ids": [
+                        Command.create(
                             {
                                 "name": "pull_medoc",
-                                "location_id": location_out.id,
+                                "location_dest_id": location_out.id,
                                 "picking_type_id": cls.picking_type_medoc.id,
                                 "location_src_id": cls.location_medoc.id,
                                 "procure_method": "make_to_stock",
-                                "action": "move",
+                                "action": "pull",
                             },
                         )
                     ],
@@ -258,28 +248,17 @@ class GLSCommonFeatures(TransactionCase):
         cls.p4.categ_id = cls.categ_ali
         cls.p4.route_ids = [(6, 0, cls.route_aliment.ids)]
 
-        parcel_xmlid = "delivery_carrier_label_gls.product_packaging_gls_parcel"
-        cls.packaging_parcel = cls.env.ref(parcel_xmlid)
-
     @classmethod
     def _set_qty_in_loc_only(cls, product, qty, location=None):
         location = location or cls.env.ref("stock.stock_location_stock")
-        inventory = cls.env["stock.inventory"].create(
-            {"name": "Test", "product_id": product.id, "filter": "product"}
-        )
-        inventory.prepare_inventory()
-        inventory.line_ids.write({"product_qty": 0})
-        cls.env["stock.inventory.line"].create(
+        inventory_quant = cls.env["stock.quant"].create(
             {
-                "inventory_id": inventory.id,
-                "product_id": product.id,
-                "product_uom_id": product.uom_id.id,
-                "product_qty": qty,
                 "location_id": location.id,
+                "product_id": product.id,
+                "inventory_quantity": qty,
             }
         )
-        inventory.action_done()
-        return inventory
+        inventory_quant.action_apply_inventory()
 
     @classmethod
     def _confirm_sale_order(
