@@ -38,8 +38,8 @@ odoo-addon-delivery-carrier-max-weight-constraint==16.0.1.0.1
 odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.com/acsone/delivery-carrier.git@628d15f465d02c468772d7f92fe7c3e3eebd3c18#subdirectory=setup/delivery_estimated_package_quantity_by_weight
 odoo-addon-delivery-package-type-number-parcels==16.0.1.0.1
 odoo-addon-delivery-procurement-group-carrier==16.0.1.0.0.2
-odoo-addon-endpoint-route-handler @ git+https://github.com/OCA/web-api.git@568d6cd6e69a88b466d81197674265933ebce557#subdirectory=setup/endpoint_route_handler
-odoo-addon-fastapi @ git+https://github.com/OCA/rest-framework.git@c1217416a4d95f14e6d39a7030367a24d9e13744#subdirectory=setup/fastapi
+odoo-addon-endpoint-route-handler @ git+https://github.com/acsone/web-api.git@568d6cd6e69a88b466d81197674265933ebce557#subdirectory=setup/endpoint_route_handler
+odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@c1217416a4d95f14e6d39a7030367a24d9e13744#subdirectory=setup/fastapi
 odoo-addon-geoengine-base-geolocalize @ git+https://github.com/acsone/geospatial.git@d977cbdc42825e5d241ebe91203e0d087d73b2e7#subdirectory=setup/geoengine_base_geolocalize
 odoo-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@ff4a76d86be5abd88dcb0f84c5def21a70e2262d#subdirectory=setup/geoengine_partner
 odoo-addon-hr-holidays-public==16.0.1.1.0
