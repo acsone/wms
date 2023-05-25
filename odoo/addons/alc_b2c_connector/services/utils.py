@@ -1,10 +1,10 @@
 from enum import Enum
 from typing import TypeVar
 
+from odoo.addons.fastapi.schemas import Generic, GenericModel
+
 from fastapi.security import APIKeyHeader
 from pydantic import BaseModel as PydanticBaseModel
-
-from odoo.addons.fastapi.schemas import Generic, GenericModel
 
 T = TypeVar("T")
 

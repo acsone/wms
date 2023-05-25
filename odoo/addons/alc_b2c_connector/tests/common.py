@@ -4,12 +4,12 @@ import random
 import string
 from functools import partial
 
-from fastapi.testclient import TestClient
-
 from odoo import Command
 from odoo.tests.common import TransactionCase
 
 from odoo.addons.fastapi.context import odoo_env_ctx
+
+from fastapi.testclient import TestClient
 
 from ..hooks import _initialize_product_assortment_filter
 from ..models.fastapi_endpoint import authenticated_partner_impl

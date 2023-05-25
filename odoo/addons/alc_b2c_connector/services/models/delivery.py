@@ -5,11 +5,11 @@ from datetime import date
 from enum import Enum
 from typing import Any
 
-from pydantic.utils import GetterDict
-
 from odoo.addons.alc_b2c_connector.services.utils import (  # pylint: disable=odoo-addons-relative-import
     BaseModel,
 )
+
+from pydantic.utils import GetterDict
 
 
 class Carrier(Enum):

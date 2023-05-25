@@ -3,14 +3,14 @@
 from datetime import datetime
 from enum import Enum
 
-from pydantic.utils import GetterDict
-
 from odoo.addons.alc_b2c_connector.models.sale_order import (  # pylint: disable=odoo-addons-relative-import
     SaleOrder,
 )
 from odoo.addons.alc_b2c_connector.services.utils import (  # pylint: disable=odoo-addons-relative-import
     BaseModel,
 )
+
+from pydantic.utils import GetterDict
 
 from . import delivery, partner, sale_line
 

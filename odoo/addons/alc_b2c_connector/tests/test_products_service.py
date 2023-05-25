@@ -2,8 +2,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from fastapi import status
 from requests import Response
+
+from fastapi import status
 
 from .common import CommonB2CServiceCase
 

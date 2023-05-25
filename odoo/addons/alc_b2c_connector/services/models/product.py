@@ -4,11 +4,11 @@
 from datetime import datetime
 from typing import Any
 
-from pydantic.utils import GetterDict
-
 from odoo.addons.alc_b2c_connector.services.utils import (  # pylint: disable=odoo-addons-relative-import
     BaseModel,
 )
+
+from pydantic.utils import GetterDict
 
 from . import tax
 
@@ -27,7 +27,7 @@ class Product(BaseModel):
         orm_mode = True
 
     @classmethod
-    def _decompose_class(cls: type["Model"], obj: Any) -> GetterDict:
+    def _decompose_class(cls: type["Product"], obj: Any) -> GetterDict:
         res = {
             "name": obj.name,
             "sku": obj.default_code or None,

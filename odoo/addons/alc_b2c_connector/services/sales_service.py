@@ -2,12 +2,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from fastapi import Depends, Query
-
 from odoo.api import Environment
 
 from odoo.addons.fastapi.depends import authenticated_partner_env, paging
 from odoo.addons.fastapi.schemas import Paging
+
+from fastapi import Depends, Query
 
 from ..models.fastapi_endpoint import b2c_api_router
 from .depends import AlcB2cClient, alc_b2c_client
@@ -42,7 +42,7 @@ def _create_sale_order(
     response_model_exclude_unset=True,
 )
 def get_sale_orders(
-    ids: list[int] | None = Query(None),
+    ids: list[int] | None = Query(None),  # noqa: B008
     paging_: Paging = Depends(paging),  # noqa: B008
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
     client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,

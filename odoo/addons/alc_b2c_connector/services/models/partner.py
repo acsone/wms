@@ -3,11 +3,11 @@
 
 from typing import Any
 
-from pydantic.utils import GetterDict
-
 from odoo.addons.alc_b2c_connector.services.utils import (  # pylint: disable=odoo-addons-relative-import
     BaseModel,
 )
+
+from pydantic.utils import GetterDict
 
 from . import country_code as country, partner_title
 
