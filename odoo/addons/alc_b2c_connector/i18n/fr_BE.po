@@ -308,10 +308,10 @@ msgstr "You cannot update a sale order that is already ready for delivery"
 #, python-format
 msgid ""
 "You cannot update this address since there are already closed Sale Orders "
-"for this partner. Incoherent field: %s, current value: %s"
+"for this partner. Incoherent field: {key}, current value: {value}"
 msgstr ""
 "You cannot update this address since there are already closed Sale Orders "
-"for this partner. Incoherent field: %s, current value: %s"
+"for this partner. Incoherent field: {key}, current value: {value}"
 
 #. module: alc_b2c_connector
 #: code:addons/alc_b2c_connector/models/sale_order.py:240

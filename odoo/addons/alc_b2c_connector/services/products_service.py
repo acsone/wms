@@ -1,153 +1,49 @@
-# -*- coding: utf-8 -*-
-# Copyright 2020 ACSONE SA/NV
+# Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.osv.expression import AND
 
-from odoo.addons.base_rest.components.service import to_int
-from odoo.addons.component.core import Component
+from fastapi import Depends, Query
+
+from odoo.api import Environment
+
+from odoo.addons.fastapi.depends import authenticated_partner_env, paging
+from odoo.addons.fastapi.schemas import Paging
+
+from ..models.fastapi_endpoint import b2c_api_router
+from .depends import AlcB2cClient, alc_b2c_client
+from .models.product import Product
+from .utils import PagedCollection
 
 
-class ProductsService(Component):
+@b2c_api_router.get(
+    "/products/search",
+    response_model=PagedCollection[Product],
+    response_model_exclude_unset=True,
+)
+@b2c_api_router.get(
+    "/stocks/search",
+    response_model=PagedCollection[Product],
+    response_model_exclude_unset=True,
+)
+def get_products(
+    paging_: Paging = Depends(paging),  # noqa: B008
+    skus: list[str] | None = Query(None),  # noqa: B008
+    env: Environment = Depends(authenticated_partner_env),  # noqa: B008
+    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
+) -> PagedCollection[Product]:
     """
-    Products services.
+    Return the list of available products.
 
-    Provides methods to get the products available for B2C
+    For each product, the taxes to applied are provided. The type of amount
+    to apply can be one of the following values:
+        * fixed: Fixed amount
+        * percent, Percentage of Price
+        * division, Percentage of Price Tax Included
     """
-
-    _inherit = "base.b2c.rest.service"
-    _name = "products.service"
-    _usage = "products"
-
-    # api methods
-    def search(self, **params):
-        """
-        Return the list of available products.
-
-        For each product, the taxes to applied are provided. The type of amount
-        to apply can be one of the following values:
-            * fixed: Fixed amount
-            * percent, Percentage of Price
-            * division, Percentage of Price Tax Included
-        """
-        domain = self.product_assortment_domain
-        skus = params.get("skus")
-        if skus:
-            domain = AND([domain, [("default_code", "in", skus)]])
-        limit = params.get("limit", None)
-        offset = params.get("offset", 0)
-        data = (
-            self.env["product.product"]
-            .suspend_security()
-            .search_read(
-                domain=domain,
-                fields=[
-                    "name",
-                    "default_code",
-                    "barcode",
-                    "create_date",
-                    "immediately_usable_qty",
-                    "list_price",
-                    "cnk_code",
-                    "taxes_id",
-                ],
-                limit=limit,
-                offset=offset,
-            )
-        )
-        return self._to_search_result(data)
-
-    def _validator_search(self):
-        return {
-            "skus": {
-                "type": "list",
-                "nullable": True,
-                "required": False,
-                "schema": {"type": "string"},
-            },
-            "limit": {"coerce": to_int, "nullable": True, "type": "integer"},
-            "offset": {"coerce": to_int, "nullable": True, "type": "integer"},
-        }
-
-    def _validator_return_search(self):
-        product_schema = {
-            "name": {"type": "string", "required": True, "nullable": False},
-            "sku": {"type": "string", "required": True, "nullable": False},
-            "eans": {
-                "type": "list",
-                "nullable": True,
-                "schema": {"type": "string"},
-                "required": False,
-            },
-            "cnk": {"type": "string", "required": True, "nullable": True},
-            "price": {"type": "float", "required": True, "nullable": False},
-            "create_date": {"type": "datetime", "required": True, "nullable": False},
-            "quantity": {"type": "float", "required": True, "nullable": False},
-            "taxes": {
-                "type": "list",
-                "nullable": True,
-                "schema": {
-                    "type": "dict",
-                    "schema": {
-                        "name": {"type": "string", "required": True, "nullable": False},
-                        "amount": {
-                            "type": "float",
-                            "required": True,
-                            "nullable": False,
-                        },
-                        "amount_type": {
-                            "type": "string",
-                            "nullable": False,
-                            "required": True,
-                            "allowed": ["fixed", "percent", "division"],
-                        },
-                    },
-                },
-                "required": False,
-            },
-        }
-        schema = {
-            "size": {"type": "integer"},
-            "data": {
-                "type": "list",
-                "schema": {"type": "dict", "schema": product_schema},
-            },
-        }
-        return schema
-
-    # private methods
-
-    def _to_search_result(self, read_result):
-        res = {
-            "size": len(read_result),
-            "data": [self._item_read_to_search_result(item) for item in read_result],
-        }
-        return res
-
-    def _item_read_to_search_result(self, read_item):
-        res = {
-            "name": read_item["name"],
-            "sku": read_item["default_code"],
-            "cnk": read_item["cnk_code"] or None,
-            "price": read_item["list_price"],
-            "create_date": self._to_dt_utc_with_tz(read_item["create_date"]),
-            "quantity": read_item["immediately_usable_qty"],
-            "eans": [],
-        }
-        ean = read_item["barcode"]
-        if ean:
-            res["eans"] = [ean]
-        taxes_id = read_item["taxes_id"]
-        if taxes_id:
-            taxes = []
-            for id_ in taxes_id:
-                tax = self.env["account.tax"].sudo().browse(id_)
-                taxes.append(
-                    {
-                        "name": tax.name,
-                        "amount": tax.amount,
-                        "amount_type": tax.amount_type,
-                    }
-                )
-            res["taxes"] = taxes
-        return res
+    products = env["product.product"]._search_products_from_b2c(
+        skus, paging_.limit, paging_.offset, client
+    )
+    return PagedCollection[Product](
+        size=len(products),
+        data=[Product.from_orm(product) for product in products],
+    )

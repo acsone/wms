@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import _, fields
+
+from odoo.addons.sale.models.sale_order_line import SaleOrderLine as SaleOrderLineBase
 
 
-class SaleOrderLine(models.Model):
-
-    _inherit = "sale.order.line"
+class SaleOrderLine(SaleOrderLineBase):
 
     b2c_ref = fields.Char(string="Reference B2C", copy=False)
 

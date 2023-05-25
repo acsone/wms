@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+
+    <record id="b2c_group" model="res.groups">
+    <field name="name">B2C Endpoint Group</field>
+    <field name="users" eval="[(4, ref('alc_b2c_connector.alc_b2c_rest_api_user'))]" />
+    <field
+      name="implied_ids"
+      eval="[(4, ref('fastapi.group_fastapi_endpoint_runner'))]"
+    />
+  </record>
+
+</odoo>

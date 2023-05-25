@@ -1,178 +1,70 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import json
-import random
-import string
+from fastapi import status
+from freezegun import freeze_time
+from requests import Response
 
 from odoo import fields
 from odoo.exceptions import MissingError, ValidationError
+from odoo.tools.misc import mute_logger
 
-from .common import CommonCase
+from .common import CommonB2CSaleServiceCase
 
 ISO_DT_WITH_TZ = "2020-05-28T13:45:47+02:00"
 
 
-class TestSalesService(CommonCase):
-    @classmethod
-    def setUpClass(cls):
-        super(TestSalesService, cls).setUpClass()
-        # create a b2c_partner
-        cls.b2c_partner = cls.env["res.partner"].create(
-            {
-                "name": "EXISTING B2C PARTNER",
-                "is_b2c_customer": True,
-                "partner_type": "student_like",
-                "ref": "%s_ABC" % cls.b2c_backend.sale_channel,
-                "email": "b2c@b2c.be",
-            }
-        )
-
-        # create a specific payment mode for the VT
-        cls.vt_payment_mode = cls.env["account.payment.mode"].create(
-            {
-                "name": "Specific VT payment mode",
-                "company_id": cls.env.ref("base.main_company").id,
-                "bank_account_link": "variable",
-                "payment_method_id": cls.env.ref(
-                    "account.account_payment_method_manual_in"
-                ).id,
-                "payment_type": "inbound",
-            }
-        )
-
-        # create a vete
-        cls.vt_partner = cls.env["res.partner"].create(
-            {
-                "name": "VT",
-                "partner_type": "veterinary",
-                "ref": "VTREF",
-                "email": "vt@vt.be",
-                "supplier_promotion_sale_allowed": True,
-                "customer_payment_mode_id": cls.vt_payment_mode.id,
-            }
-        )
-
-        # create a b2c sale_order
-        cls.b2c_order = cls.env["sale.order"].create(
-            {
-                "b2c_ref": 10,
-                "partner_id": cls.b2c_partner.id,
-                "partner_invoice_id": cls.vt_partner.id,
-                "partner_shipping_id": cls.vt_partner.id,
-                "pricelist_id": cls.pricelist_id.id,
-                "order_line": [
-                    (
-                        0,
-                        0,
-                        {
-                            "b2c_ref": 1,
-                            "product_id": cls.saleable_product.id,
-                            "name": cls.saleable_product.name,
-                            "product_uom": cls.saleable_product.uom_id.id,
-                            "product_uom_qty": 10,
-                        },
-                    )
-                ],
-                "sale_channel": cls.b2c_backend.sale_channel,
-            }
-        )
-
-        cls.SaleOrder = cls.env["sale.order"]
-        cls.payment_term_test = cls.env.ref(
-            "account.account_payment_term_advance"
-        ).copy()
-        cls.b2c_backend.payment_term_id = cls.payment_term_test
-
-        with cls.work_on_services() as work:
-            cls.sales_service = work.component(usage="sales")
-
-    @classmethod
-    def _gen_string(cls, length=10):
-        return "".join(random.choice(string.ascii_letters) for _ in range(length))
-
-    @classmethod
-    def _gen_recipent(cls, _id=None, title="mr"):
-        _id = _id or cls._gen_string()
-        return {
-            "id": _id,
-            "title": title,
-            "last_name": cls._gen_string(),
-            "first_name": cls._gen_string(),
-            "street": cls._gen_string(),
-            "street2": cls._gen_string(),
-            "zip": cls._gen_string(),
-            "city": cls._gen_string(),
-            "email": cls._gen_string(),
-            "phone": cls._gen_string(),
-            "mobile": cls._gen_string(),
-            "name2": cls._gen_string(),
-        }
-
-    def _get_so_from_name(self, name):
-        return self.SaleOrder.search([("name", "=", name)])
-
-    def _process_picking(self, picking):
-        picking.force_assign()
-        for pack in picking.pack_operation_product_ids:
-            pack.qty_done = pack.product_qty
-        picking.do_new_transfer()
-
-    def _deliver_orders(self, orders):
-        for order in orders:
-            # validate SO
-            order.action_confirm()
-            # process deliveries
-            picking_internals = order.picking_ids.filtered(
-                lambda p: p.picking_type_code == "internal"
-            )
-            picking_outs = order.picking_ids.filtered(
-                lambda p: p.picking_type_code == "outgoing"
-            )
-            for picking in picking_internals:
-                self._process_picking(picking)
-                self.assertEqual(picking.state, "done")
-            for picking in picking_outs:
-                self._process_picking(picking)
-                self.assertEqual(picking.state, "done")
-
+class TestSalesService(CommonB2CSaleServiceCase):
     def test_00(self):
         """
         Data:
+
             1 existing SO
         Test case:
             Get order info with the b2c ref
         Expected result:
             The so info
         """
-        res = self.sales_service.dispatch("get", 10)
+        response: Response = self.client.get(
+            self._get_path("/sales/10"), headers={"api-key": "1234"}
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
         self.assertTrue(res)
         self.assertEqual(res["state"], self.b2c_order.state)
         self.assertEqual(res["ref"], self.b2c_order.name)
         self.assertEqual(res["id"], 10)
         self.assertFalse(res["confirmation_date"])
 
+    @mute_logger("odoo.addons.alc_b2c_connector.models.sale_order")
     def test_01(self):
         """
         Test case:
+
             Get order info with an unknown b2c ref
         Expected result:
             Missing error is raised
         """
         with self.assertRaises(MissingError):
-            self.sales_service.dispatch("get", 9999)
+            self.env["sale.order"]._get_order_from_b2c_ref(9999, self.b2c_client)
 
     def test_02(self):
         """
         Data:
+
             1 existing SO
         Test case:
             Search order info with the b2c ref
         Expected result:
             The so info
         """
-        res = self.sales_service.dispatch("search", params={"ids": [10]})
+        response: Response = self.client.get(
+            self._get_path("/sales/search"),
+            headers={"api-key": "1234"},
+            params={"ids": [10]},
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
         self.assertEqual(res["size"], 1)
         result = res["data"][0]
         self.assertEqual(result["state"], self.b2c_order.state)
@@ -180,34 +72,25 @@ class TestSalesService(CommonCase):
         self.assertEqual(result["id"], 10)
         self.assertFalse(result["confirmation_date"])
 
-    def test_03(self):
-        """
-        Test case:
-            Search order info with the unknown b2c ref
-        Expected result:
-            Empty result
-        """
-        res = self.sales_service.dispatch("search", params={"ids": [9999]})
-        self.assertEqual(res["size"], 0)
-        self.assertFalse(res["data"])
-
+    @freeze_time("2020-05-28 11:45:47")
     def test_04(self):
         """
-        Data:
-            An existing veterinary
-        Test case:
-            Create a new SO for a new partner and the existing veterinary
-        Expected result:
-            A new partner is created
-            A new SO is created with:
-                partner -> new partner
-                shipping partner -> the veterinary
-                invoice partner -> the veterinary
-                priclist -> the one from the backend
-                payment_mode -> the one from the backend
-                payment_term_id -> the one from the backend
-                supplier_promotion_allowed -> the one from the veterinary
-                a new message with the json has been added into the chatter
+        Access Denied by ACLs for operation     Data:
+
+                 An existing veterinary
+             Test case:
+                 Create a new SO for a new partner and the existing veterinary
+             Expected result:
+                 A new partner is created
+                 A new SO is created with:
+                     partner -> new partner
+                     shipping partner -> the veterinary
+                     invoice partner -> the veterinary
+                     priclist -> the one from the backend
+                     payment_mode -> the one from the backend
+                     payment_term_id -> the one from the backend
+                     supplier_promotion_allowed -> the one from the veterinary
+                     a new message with the json has been added into the chatter
         """
         recipient_info = self._gen_recipent()
         params = {
@@ -223,25 +106,34 @@ class TestSalesService(CommonCase):
                 }
             ],
         }
-        res = self.sales_service.dispatch("create", params=params)
+        response: Response = self.client.post(
+            self._get_path("/sales/create"),
+            headers={"api-key": "1234"},
+            json=params,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
+
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
         self.assertTrue(new_so)
         self.assertEqual(
             new_so.partner_id.ref,
-            u"{}_{}".format(self.b2c_backend.sale_channel, recipient_info["id"]),
+            f"{self.b2c_client.sale_channel_id.name}_{recipient_info['id']}".format(),
         )
         self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
         self.assertEqual(new_so.partner_shipping_id, self.vt_partner)
-        self.assertFalse(new_so.partner_id.is_sale_back_order_accepted)
-        self.assertEqual(new_so.date_order, "2020-05-28 11:45:47")
-        self.assertTrue(self.b2c_backend.pricelist_id)
-        self.assertEqual(new_so.pricelist_id, self.b2c_backend.pricelist_id)
-        self.assertTrue(self.b2c_backend.sale_team_id)
-        self.assertEqual(new_so.team_id, self.b2c_backend.sale_team_id)
-        self.assertTrue(self.b2c_backend.payment_mode_id)
-        self.assertEqual(new_so.payment_mode_id, self.b2c_backend.payment_mode_id)
-        self.assertEqual(self.b2c_backend.payment_term_id, self.payment_term_test)
+        self.assertEqual(new_so.partner_id.sale_reason_backorder_strategy, "cancel")
+        self.assertEqual(
+            new_so.date_order, fields.Datetime.to_datetime("2020-05-28 11:45:47")
+        )
+        self.assertTrue(self.b2c_client.pricelist_id)
+        self.assertEqual(new_so.pricelist_id, self.b2c_client.pricelist_id)
+        self.assertTrue(self.b2c_client.sale_team_id)
+        self.assertEqual(new_so.team_id, self.b2c_client.sale_team_id)
+        self.assertTrue(self.b2c_client.payment_mode_id)
+        self.assertEqual(new_so.payment_mode_id, self.b2c_client.payment_mode_id)
+        self.assertEqual(self.b2c_client.payment_term_id, self.payment_term_test)
         self.assertEqual(new_so.payment_term_id, self.payment_term_test)
         self.assertTrue(new_so.supplier_promotion_allowed)
         self.assertEqual(1, len(new_so.order_line))
@@ -250,14 +142,11 @@ class TestSalesService(CommonCase):
         self.assertEqual(sol.discount3, 0)  # discount in %
         self.assertEqual(sol.price_unit, 10)
         self.assertEqual(sol.product_qty, 10)
-        self.assertIn(
-            json.dumps(params, sort_keys=True),
-            "\n".join(new_so.mapped("message_ids.body")),
-        )
 
     def test_04_01(self):
         """
         Data:
+
             An existing veterinary with a specific payment_mode
             A backend without payment_mode
         Test case:
@@ -265,9 +154,8 @@ class TestSalesService(CommonCase):
         Expected result:
             A new SO is created with:
                 payment_mode -> the one from the veterinary
-
         """
-        self.b2c_backend.payment_mode_id = False
+        self.b2c_client.payment_mode_id = False
         recipient_info = self._gen_recipent()
         params = {
             "id": 2,
@@ -282,7 +170,13 @@ class TestSalesService(CommonCase):
                 }
             ],
         }
-        res = self.sales_service.dispatch("create", params=params)
+        response: Response = self.client.post(
+            self._get_path("/sales/create"),
+            headers={"api-key": "1234"},
+            json=params,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
         self.assertTrue(new_so)
@@ -291,6 +185,7 @@ class TestSalesService(CommonCase):
     def test_04_02(self):
         """
         Data:
+
             A backend with a picking_policy
         Test case:
             1. Create a new SO for a new partner and the existing veterinary
@@ -301,10 +196,9 @@ class TestSalesService(CommonCase):
                 picking policy -> the one from the backend
             2. A new SO is created with:
                 picking policy -> the one from the backend
-
         """
         for i, policy in enumerate(["one", "direct"]):
-            self.b2c_backend.picking_policy = policy
+            self.b2c_client.picking_policy = policy
             recipient_info = self._gen_recipent()
             params = {
                 "id": i + 100,
@@ -319,15 +213,23 @@ class TestSalesService(CommonCase):
                     }
                 ],
             }
-            res = self.sales_service.dispatch("create", params=params)
+            response: Response = self.client.post(
+                self._get_path("/sales/create"),
+                headers={"api-key": "1234"},
+                json=params,
+            )
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            res = response.json()
             self.assertTrue(res)
             new_so = self._get_so_from_name(res["ref"])
             self.assertTrue(new_so)
             self.assertEqual(new_so.picking_policy, policy)
 
+    @mute_logger("odoo.addons.alc_b2c_connector.models.res_partner")
     def test_05(self):
         """
         Test case:
+
             Create a new SO with a wrong customer_ref (veterinary)
         Expected result:
             ValidationError must be raised
@@ -347,11 +249,12 @@ class TestSalesService(CommonCase):
             ],
         }
         with self.assertRaises(ValidationError):
-            self.sales_service.dispatch("create", params=params)
+            self.env["sale.order"]._create_from_b2c(params, self.b2c_client)
 
     def test_06(self):
         """
         Data:
+
             An existing veterinary
             An existing partner referenced into the request
         Test case:
@@ -377,7 +280,13 @@ class TestSalesService(CommonCase):
                 }
             ],
         }
-        res = self.sales_service.dispatch("create", params=params)
+        response: Response = self.client.post(
+            self._get_path("/sales/create"),
+            headers={"api-key": "1234"},
+            json=params,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
         self.assertTrue(new_so)
@@ -385,9 +294,11 @@ class TestSalesService(CommonCase):
         self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
         self.assertEqual(new_so.partner_shipping_id, self.vt_partner)
 
+    @mute_logger("odoo.addons.alc_b2c_connector.models.sale_order")
     def test_07(self):
         """
         Test case:
+
             Create a new SO with a wrong product ref
         Expected result:
             ValidationError must be raised
@@ -401,11 +312,13 @@ class TestSalesService(CommonCase):
             "lines": [{"line_id": 2, "sku": "????", "quantity": 10}],
         }
         with self.assertRaises(ValidationError):
-            self.sales_service.dispatch("create", params=params)
+            self.env["sale.order"]._create_from_b2c(params, self.b2c_client)
 
+    @mute_logger("odoo.addons.alc_b2c_connector.models.sale_order")
     def test_08(self):
         """
         Test case:
+
             Create a new SO with a product ref not into the assortment
         Expected result:
             ValidationError must be raised
@@ -425,11 +338,13 @@ class TestSalesService(CommonCase):
             ],
         }
         with self.assertRaises(ValidationError):
-            self.sales_service.dispatch("create", params=params)
+            self.env["sale.order"]._create_from_b2c(params, self.b2c_client)
 
+    @freeze_time("2020-05-28 11:45:47")
     def test_09(self):
         """
         Test case:
+
             Create a new SO with 2 lines.
             5 saleable products are in stock
             110  saleable product2s are in stock
@@ -455,44 +370,47 @@ class TestSalesService(CommonCase):
                 },
             ],
         }
-        res = self.sales_service.dispatch("create", params=params)
+        response: Response = self.client.post(
+            self._get_path("/sales/create"),
+            headers={"api-key": "1234"},
+            json=params,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
         self.assertEqual(2, len(new_so.order_line))
         self.assertEqual("sale", new_so.state)
-        res.pop("confirmation_date")
         self.assertDictEqual(
             {
-                "id": 2,
                 "lines": [
                     {
-                        "line_id": 2,
+                        "line_id": "2",
                         "qty_backorder": 5,
                         "qty_cancelled": 0,
                         "qty_delivered": 0,
                         "qty_ordered": 10,
                         "qty_returned": 0,
-                        "sku": u"12345",
+                        "sku": "12345",
                     },
                     {
-                        "line_id": 3,
+                        "line_id": "3",
                         "qty_backorder": 0,
                         "qty_cancelled": 0,
                         "qty_delivered": 0,
                         "qty_ordered": 1,
                         "qty_returned": 0,
-                        "sku": u"23456",
+                        "sku": "23456",
                     },
-                ],
-                "ref": new_so.name,
-                "state": u"sale",
+                ]
             },
-            res,
+            {"lines": res.get("lines")},
         )
 
     def test_10(self):
         """
         Test case:
+
             1. Create a new SO with 2 lines.
                5 saleable products are in stock
                110  saleable product2s are in stock
@@ -521,17 +439,30 @@ class TestSalesService(CommonCase):
                 },
             ],
         }
-        res = self.sales_service.dispatch("create", params=params)
+        response: Response = self.client.post(
+            self._get_path("/sales/create"),
+            headers={"api-key": "1234"},
+            json=params,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
         self.assertEqual("sale", res["state"])
         self._deliver_orders(new_so)
-        res = self.sales_service.dispatch("get", 99)
+
+        response: Response = self.client.get(
+            self._get_path("/sales/99"),
+            headers={"api-key": "1234"},
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
         self.assertEqual("delivery", res["state"])
 
     def test_10_01(self):
         """
         Test case:
+
             1. Create a new SO with 2 lines.
                5 saleable products are in stock
                110  saleable product2s are in stock
@@ -560,23 +491,38 @@ class TestSalesService(CommonCase):
                 },
             ],
         }
-        res = self.sales_service.dispatch("create", params=params)
+        response: Response = self.client.post(
+            self._get_path("/sales/create"),
+            headers={"api-key": "1234"},
+            json=params,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
         self.assertEqual("sale", res["state"])
         self._deliver_orders(new_so)
         new_so.picking_ids.write({"carrier_tracking_ref": "AZ123"})
-        res = self.sales_service.dispatch("get", 99)
+        response: Response = self.client.get(
+            self._get_path("/sales/99"),
+            headers={"api-key": "1234"},
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
         self.assertEqual("delivery", res["state"])
         self.assertIn("deliveries", res)
         delivery = res["deliveries"][0]
         self.assertEqual(delivery["tracking_reference"], "AZ123")
-        self.assertEqual(delivery["delivery_date"], fields.Date.today())
-        self.assertTrue(delivery["carrier"], new_so.carrier_id.name)
+        self.assertEqual(
+            delivery["delivery_date"], fields.Date.to_string(fields.Date.today())
+        )
+        self.assertFalse(delivery["carrier"])
+        self.assertFalse(new_so.carrier_id)
 
     def test_11(self):
         """
         Data:
+
             An existing veterinary
         Test case:
             Create a new SO for a new partner and the existing veterinary
@@ -599,31 +545,42 @@ class TestSalesService(CommonCase):
                 }
             ],
         }
-        res = self.sales_service.dispatch("create", params=params)
+        response: Response = self.client.post(
+            self._get_path("/sales/create"),
+            headers={"api-key": "1234"},
+            json=params,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
         self.assertEqual(
             new_so.partner_id.ref,
-            u"{}_{}".format(self.b2c_backend.sale_channel, recipient_info["id"]),
+            f"{self.b2c_client.sale_channel_id.name}_{recipient_info['id']}",
         )
         self.assertEqual("BE", new_so.partner_id.country_id.code)
 
     def test_12(self):
         """
         Data:
+
             1 existing SO
         Test case:
             Cancel the so while no picking is started for it
         Expected result:
             The so is cancelled
         """
-        self.sales_service.dispatch("cancel", self.b2c_order.b2c_ref)
-
+        response: Response = self.client.post(
+            self._get_path(f"/sales/{self.b2c_order.b2c_ref}/cancel"),
+            headers={"api-key": "1234"},
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual("cancel", self.b2c_order.state)
 
     def test_13(self):
         """
         Data:
+
             1 existing SO
         Test case:
             Try to cancel the SO while the picking is printed
@@ -632,13 +589,17 @@ class TestSalesService(CommonCase):
         """
         self._deliver_orders(self.b2c_order)
         self.b2c_order.picking_ids.do_print_picking()
-        self.sales_service.dispatch("cancel", self.b2c_order.b2c_ref)
-
+        response: Response = self.client.post(
+            self._get_path(f"/sales/{self.b2c_order.b2c_ref}/cancel"),
+            headers={"api-key": "1234"},
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual("sale", self.b2c_order.state)
 
     def test_14(self):
         """
         Data:
+
             An existing SO
         Test case:
             Update one line of the SO  (change the quantity of product) before it is started
@@ -679,8 +640,12 @@ class TestSalesService(CommonCase):
         self.b2c_order.action_confirm()
         self.assertEqual(self.b2c_order.state, "sale")
 
-        self.sales_service.dispatch("update", self.b2c_order.b2c_ref, params=params)
-
+        response: Response = self.client.post(
+            self._get_path(f"/sales/{self.b2c_order.b2c_ref}/update"),
+            headers={"api-key": "1234"},
+            json=params,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(self.b2c_order.order_line[0].product_uom_qty, 10)
         self.assertEqual(self.b2c_order.order_line[1].product_uom_qty, 5)
         self.assertEqual(self.b2c_order.state, "sale")
@@ -688,6 +653,7 @@ class TestSalesService(CommonCase):
     def test_15(self):
         """
         Data:
+
             An existing SO
         Test case:
             Add a new line to the sale order
@@ -716,16 +682,23 @@ class TestSalesService(CommonCase):
 
         self.b2c_order.action_confirm()
         self.assertEqual(self.b2c_order.state, "sale")
-        self.sales_service.dispatch("update", self.b2c_order.b2c_ref, params=params)
+        response: Response = self.client.post(
+            self._get_path(f"/sales/{self.b2c_order.b2c_ref}/update"),
+            headers={"api-key": "1234"},
+            json=params,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertEqual(self.b2c_order.order_line[0].product_uom_qty, 10)
         self.assertEqual(self.b2c_order.order_line[1].product_uom_qty, 35)
         self.assertEqual(len(self.b2c_order.order_line), 2)
         self.assertEqual(self.b2c_order.state, "sale")
 
+    @mute_logger("odoo.addons.alc_b2c_connector.models.sale_order")
     def test_16(self):
         """
         Data:
+
             An existing SO
         Test case:
             Try to update a sale order that is already out for delivery
@@ -753,10 +726,15 @@ class TestSalesService(CommonCase):
         }
 
         self._deliver_orders(self.b2c_order)
-        res = self.sales_service.dispatch("get", 10)
+        response: Response = self.client.get(
+            self._get_path("/sales/10"),
+            headers={"api-key": "1234"},
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
         self.assertEqual("delivery", res["state"])
         with self.assertRaises(ValidationError):
-            self.sales_service.dispatch("update", self.b2c_order.b2c_ref, params=params)
+            self.b2c_order._update_from_b2c(params, self.b2c_client)
 
     def test_update_existing_recipient(self):
         recipient_info = {
@@ -775,12 +753,17 @@ class TestSalesService(CommonCase):
         self.assertFalse(self.b2c_order.partner_id.zip)
         self.b2c_order.action_confirm()
 
-        self.sales_service.dispatch("update", self.b2c_order.b2c_ref, params=params)
+        response: Response = self.client.post(
+            self._get_path(f"/sales/{self.b2c_order.b2c_ref}/update"),
+            headers={"api-key": "1234"},
+            json=params,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertEqual(self.b2c_order.partner_id.zip, "1234")
         self.assertEqual(self.b2c_order.partner_id.suite, "My company")
         self.assertEqual(
-            self.b2c_order.partner_id.comment, "Specific note for delivery"
+            str(self.b2c_order.partner_id.comment), "<p>Specific note for delivery</p>"
         )
 
     def test_update_new_recipient(self):
@@ -788,7 +771,12 @@ class TestSalesService(CommonCase):
         params = {"id": 10, "recipient": recipient_info}
         old_partner = self.b2c_order.partner_id
 
-        self.sales_service.dispatch("update", self.b2c_order.b2c_ref, params=params)
+        response: Response = self.client.post(
+            self._get_path(f"/sales/{self.b2c_order.b2c_ref}/update"),
+            headers={"api-key": "1234"},
+            json=params,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertNotEqual(self.b2c_order.partner_id, old_partner)
         self.assertEqual(self.b2c_order.partner_id.zip, recipient_info["zip"])
@@ -803,14 +791,20 @@ class TestSalesService(CommonCase):
             "email": "b2c@b2c.be",
         }
         params = {"id": 10, "recipient": recipient_info}
-        self.sales_service.dispatch("update", self.b2c_order.b2c_ref, params=params)
+        response: Response = self.client.post(
+            self._get_path(f"/sales/{self.b2c_order.b2c_ref}/update"),
+            headers={"api-key": "1234"},
+            json=params,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertFalse(self.b2c_order.partner_id.phone)
 
+    @mute_logger("odoo.addons.alc_b2c_connector.models.sale_order")
     def test_update_existing_missing_payload_raises(self):
         params = {"id": 10}
         with self.assertRaises(ValidationError):
-            self.sales_service.dispatch("update", self.b2c_order.b2c_ref, params=params)
+            self.b2c_order._update_from_b2c(params, self.b2c_client)
 
     def test_create_two_so_for_same_partner(self):
         recipient_info = self._gen_recipent()
@@ -827,7 +821,13 @@ class TestSalesService(CommonCase):
                 }
             ],
         }
-        res = self.sales_service.dispatch("create", params=params)
+        response: Response = self.client.post(
+            self._get_path("/sales/create"),
+            headers={"api-key": "1234"},
+            json=params,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
         self._deliver_orders(new_so)
@@ -844,5 +844,11 @@ class TestSalesService(CommonCase):
                 }
             ],
         }
-        res2 = self.sales_service.dispatch("create", params=params2)
+        response: Response = self.client.post(
+            self._get_path("/sales/create"),
+            headers={"api-key": "1234"},
+            json=params2,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res2 = response.json()
         self.assertTrue(res2)

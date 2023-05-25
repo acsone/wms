@@ -1,383 +1,122 @@
-# -*- coding: utf-8 -*-
-# Copyright 2020 ACSONE SA/NV
+# Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields
-from odoo.exceptions import MissingError
-from odoo.osv import expression
 
-from odoo.addons.base_rest.components.service import to_int
-from odoo.addons.component.core import Component
+from fastapi import Depends, Query
+
+from odoo.api import Environment
+
+from odoo.addons.fastapi.depends import authenticated_partner_env, paging
+from odoo.addons.fastapi.schemas import Paging
+
+from ..models.fastapi_endpoint import b2c_api_router
+from .depends import AlcB2cClient, alc_b2c_client
+from .models.sale_order import (
+    SaleOrderCreateRequest,
+    SaleOrderResponse,
+    SaleOrderUpdateRequest,
+)
+from .utils import PagedCollection
 
 
-class SalesService(Component):
+@b2c_api_router.post("/sales/create", response_model=SaleOrderResponse)
+def _create_sale_order(
+    body: SaleOrderCreateRequest,
+    env: Environment = Depends(authenticated_partner_env),  # noqa: B008
+    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
+) -> SaleOrderResponse:
+    """Create a sale order."""
+    data = body._convert_to_write()
+    sale_order = env["sale.order"]._create_from_b2c(data, client)
+    return SaleOrderResponse.from_orm(sale_order)
+
+
+@b2c_api_router.get(
+    "/sales/search",
+    response_model=PagedCollection[SaleOrderResponse],
+    response_model_exclude_unset=True,
+)
+@b2c_api_router.get(
+    "/sales/",
+    response_model=PagedCollection[SaleOrderResponse],
+    response_model_exclude_unset=True,
+)
+def get_sale_orders(
+    ids: list[int] | None = Query(None),  # noqa: B008
+    paging_: Paging = Depends(paging),  # noqa: B008
+    env: Environment = Depends(authenticated_partner_env),  # noqa: B008
+    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
+) -> PagedCollection[SaleOrderResponse]:
     """
-    Stocks services.
+    Get orders info.
 
-    Provides methods to create and manage sale orders for B2C.
-
-    date and confirmation date info are datetime formatted into ISO-8601
-    with TZ info
+    More information on the response content is available
+    on the 'get' method
     """
+    sale_orders = env["sale.order"]._search_orders_from_b2c(
+        b2c_refs=ids,
+        limit=paging_.limit,
+        offset=paging_.offset,
+        b2c_client=client,
+    )
+    count = len(sale_orders)
+    return PagedCollection[SaleOrderResponse](
+        size=count,
+        data=[SaleOrderResponse.from_orm(sale_order) for sale_order in sale_orders],
+    )
 
-    _inherit = "base.b2c.rest.service"
-    _name = "sales.service"
-    _usage = "sales"
 
-    def _get_schema_recipient(self, create=True):
-        return {
-            "id": {"type": "string", "nullable": False, "required": True},
-            "title": {
-                "type": "string",
-                "nullable": False,
-                "required": False,
-                "allowed": ["mr", "mm"],
-            },
-            "first_name": {"type": "string", "nullable": False, "required": create},
-            "last_name": {"type": "string", "nullable": False, "required": create},
-            "street": {"type": "string", "nullable": True, "required": False},
-            "street2": {"type": "string", "nullable": True, "required": False},
-            "zip": {"type": "string", "nullable": True, "required": False},
-            "city": {"type": "string", "nullable": True, "required": False},
-            "email": {"type": "string", "nullable": False, "required": create},
-            "phone": {"type": "string", "nullable": True, "required": False},
-            "mobile": {"type": "string", "nullable": True, "required": False},
-            "country_code": {
-                "type": "string",
-                "nullable": False,  # None was not in allowed anyway
-                "required": False,
-                "allowed": self.env["res.country"]._get_codes(),
-            },
-            "name2": {"type": "string", "nullable": True, "required": False},
-            "note": {"type": "string", "nullable": True, "required": False},
-        }
+@b2c_api_router.get("/sales/{id}", response_model=SaleOrderResponse)
+@b2c_api_router.get("/sales/{id}/get", response_model=SaleOrderResponse)
+def _get_sale_order(
+    id: int,  # pylint: disable=redefined-builtin
+    env: Environment = Depends(authenticated_partner_env),  # noqa: B008
+    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
+) -> SaleOrderResponse:
+    """
+    Get order info:
 
-    def _get_schema_lines(self):
-        return {
-            "type": "dict",
-            "schema": {
-                "line_id": {"type": "integer", "nullable": False, "required": False},
-                "sku": {"type": "string", "required": True, "nullable": False},
-                "quantity": {
-                    "type": "integer",
-                    "required": True,
-                    "nullable": False,
-                    "coerce": to_int,
-                },
-            },
-        }
+    Into the response:
+     * the field state can have one of the following value:
+       * draft: Quote received and created into our system
+       * sale: Sale Order confirmed
+       * cancel: Sale Order cancelled
+       * delivery: Sale Order sent to the vet
+    * When state is "delivery" delivery info are provided by the
+    deliveries field
+    """
+    sale_order = env["sale.order"]._get_order_from_b2c_ref(id, client)
+    return SaleOrderResponse.from_orm(sale_order)
 
-    # api methods
-    # pylint: disable=method-required-super
-    def create(self, **params):
-        """
-        Create a sale order
-        """
-        so = (
-            self.env["sale.order"]
-            .suspend_security()
-            ._create_from_b2c(params, self.b2c_backend)
-        )
-        return self._sale_order_to_search_result(so)
 
-    def update(self, _id, **params):
-        so = self._get_order_from_b2c_ref(_id)
-        so._update_from_b2c(data=params, b2c_backend=self.b2c_backend)
+@b2c_api_router.post("/sales/{id}/cancel", response_model=SaleOrderResponse)
+def _cancel_sale_order(
+    id: int,  # pylint: disable=redefined-builtin
+    env: Environment = Depends(authenticated_partner_env),  # noqa: B008
+    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
+) -> SaleOrderResponse:
+    """
+    Cancel Sale Order.
 
-        return self._sale_order_to_search_result(so)
+    Cancelling a sale order is only possible until
+    the preparation has started (i.e., the picking is printed)
+    """
+    sale_order = env["sale.order"]._get_order_from_b2c_ref(id, client)
+    sale_order._cancel_from_b2c()
+    return SaleOrderResponse.from_orm(sale_order)
 
-    def get(self, _id):
-        """
-        Get order info:
 
-        Into the response:
-         * the field state can have one of the following value:
-           * draft: Quote received and created into our system
-           * sale: Sale Order confirmed
-           * cancel: Sale Order cancelled
-           * delivery: Sale Order sent to the vet
-        * When state is "delivery" delivery info are provided by the
-        deliveries field
-
-        """
-        res = self._get_order_from_b2c_ref(_id)
-        return self._sale_order_to_search_result(res[0])
-
-    def search(self, **params):
-        """
-        Get orders info. More information on the response content is available
-        on the 'get' method
-        """
-        domain = self._get_base_search_domain()
-        ids = params.get("ids")
-        if ids:
-            domain = expression.AND([domain, [("b2c_ref", "in", ids)]])
-        limit = params.get("limit", None)
-        offset = params.get("offset", 0)
-        data = (
-            self.env["sale.order"]
-            .suspend_security()
-            .search(domain, limit=limit, offset=offset)
-        )
-        return self._to_search_result(data)
-
-    def cancel(self, _id):
-        """
-        Cancel Sale Order.
-        Cancelling a sale order is only possible until
-        the preparation has started (i.e., the picking is printed)
-        """
-        so = self._get_order_from_b2c_ref(
-            _id, extended_domain=[("state", "!=", "cancel")]
-        )
-        so._cancel_from_b2c()
-        if so.state == "cancel":
-            return {
-                "status": "OK",
-                "message": "Order  %s cancelled from b2c api" % so.name,
-            }
-        return {
-            "status": "KO",
-            "message": "Cannot cancel so %s , being process already" % so.name,
-        }
-
-    def _validator_cancel(self):
-        return {}
-
-    def _validator_return_cancel(self):
-        return {
-            "status": {
-                "type": "string",
-                "nullable": False,
-                "required": True,
-                "allowed": ["OK", "KO"],
-            },
-            "message": {"type": "string", "nullable": True, "required": False},
-        }
-
-    def _validator_create(self):
-        return {
-            "id": {"type": "integer", "nullable": False, "required": True},
-            "customer_ref": {"type": "string", "nullable": False, "required": True},
-            "date": {"type": "string", "nullable": False, "required": True},
-            "recipient": {"type": "dict", "schema": self._get_schema_recipient()},
-            "lines": {
-                "type": "list",
-                "nullable": False,
-                "required": True,
-                "schema": self._get_schema_lines(),
-            },
-        }
-
-    def _validator_update(self):
-        return {
-            "lines": {
-                "type": "list",
-                "nullable": False,
-                "required": False,
-                "schema": self._get_schema_lines(),
-            },
-            "recipient": {
-                "type": "dict",
-                "nullable": False,
-                "required": False,
-                "schema": self._get_schema_recipient(create=False),
-            },
-        }
-
-    def _validator_return_create(self):
-        return self._sale_info_schema
-
-    def _validator_return_update(self):
-        return self._sale_info_schema
-
-    def _validator_return_get(self):
-        return self._sale_info_schema
-
-    def _validator_search(self):
-        return {
-            "ids": {
-                "type": "list",
-                "nullable": True,
-                "required": False,
-                "schema": {"type": "integer", "coerce": to_int},
-            },
-            "limit": {"coerce": to_int, "nullable": True, "type": "integer"},
-            "offset": {"coerce": to_int, "nullable": True, "type": "integer"},
-        }
-
-    def _validator_return_search(self):
-        schema = {
-            "size": {"type": "integer"},
-            "data": {
-                "type": "list",
-                "schema": {"type": "dict", "schema": self._sale_info_schema},
-            },
-        }
-        return schema
-
-    # private methods
-
-    def _get_base_search_domain(self):
-        return [("sale_channel", "=", self.b2c_backend.sale_channel)]
-
-    def _get_order_from_b2c_ref(self, _id, extended_domain=None):
-        domain = self._get_base_search_domain()
-        domain = expression.AND([domain, [("b2c_ref", "=", _id)]])
-        if extended_domain:
-            domain = expression.AND([domain, extended_domain])
-        res = self.env["sale.order"].suspend_security().search(domain)
-        if not res:
-            raise MissingError(_("Sale order not found for id %s") % _id)
-        return res
-
-    @property
-    def _sale_info_schema(self):
-        return {
-            "id": {"type": "integer", "required": True, "nullable": False},
-            "ref": {"type": "string", "required": True, "nullable": False},
-            "state": {"type": "string", "required": True, "nullable": False},
-            "confirmation_date": {
-                "type": "datetime",
-                "required": True,
-                "nullable": True,
-            },
-            "deliveries": {
-                "type": "list",
-                "nullable": False,
-                "required": False,
-                "schema": {
-                    "type": "dict",
-                    "schema": {
-                        "tracking_reference": {
-                            "type": "string",
-                            "nullable": True,
-                            "required": False,
-                        },
-                        "delivery_date": {
-                            "type": "string",
-                            "nullable": True,
-                            "required": False,
-                        },
-                        "carrier": {
-                            "type": "string",
-                            "nullable": True,
-                            "required": False,
-                        },
-                    },
-                },
-            },
-            "lines": {
-                "type": "list",
-                "nullable": False,
-                "required": True,
-                "schema": {
-                    "type": "dict",
-                    "schema": {
-                        "line_id": {
-                            "type": "integer",
-                            "nullable": False,
-                            "required": False,
-                        },
-                        "sku": {"type": "string", "required": True, "nullable": False},
-                        "qty_ordered": {
-                            "type": "integer",
-                            "required": True,
-                            "nullable": False,
-                            "coerce": to_int,
-                        },
-                        "qty_delivered": {
-                            "type": "integer",
-                            "required": True,
-                            "nullable": False,
-                            "coerce": to_int,
-                        },
-                        "qty_cancelled": {
-                            "type": "integer",
-                            "required": True,
-                            "nullable": False,
-                            "coerce": to_int,
-                        },
-                        "qty_returned": {
-                            "type": "integer",
-                            "required": True,
-                            "nullable": False,
-                            "coerce": to_int,
-                        },
-                        "qty_backorder": {
-                            "type": "integer",
-                            "required": True,
-                            "nullable": False,
-                            "coerce": to_int,
-                        },
-                    },
-                },
-            },
-        }
-
-    def _to_search_result(self, sale_orders):
-        res = {
-            "size": len(sale_orders),
-            "data": [self._sale_order_to_search_result(item) for item in sale_orders],
-        }
-        return res
-
-    def _sale_order_to_search_result(self, sale_order):
-        state = sale_order.b2c_state
-        res = {
-            "id": int(sale_order.b2c_ref),
-            "ref": sale_order.name,
-            "state": state,
-            "confirmation_date": self._to_dt_utc_with_tz(sale_order.confirmation_date),
-            "lines": [
-                self._line_to_search_result(line)
-                for line in sale_order.order_line.filtered("b2c_ref")
-            ],
-        }
-        if state == "delivery":
-            res["deliveries"] = self._deliveries_to_search_result(sale_order)
-        return res
-
-    def _line_to_search_result(self, order_line):
-        return {
-            "line_id": int(order_line.b2c_ref),
-            "sku": order_line.product_id.default_code,
-            "qty_ordered": int(order_line.product_uom_qty),
-            "qty_delivered": int(order_line.qty_delivered),
-            "qty_cancelled": int(order_line.product_qty_canceled),
-            "qty_returned": int(order_line.product_qty_returned),
-            "qty_backorder": int(order_line.product_qty_backorder),
-        }
-
-    def _deliveries_to_search_result(self, sale_order):
-        ships = sale_order.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_code == "outgoing"
-        )
-        res = []
-        for ship in ships:
-            res.append(
-                {
-                    "tracking_reference": ship.carrier_tracking_ref or "",
-                    "delivery_date": self._get_delivery_date(ship),
-                    "carrier": ship.carrier_id.name or "",
-                }
-            )
-        return res
-
-    def _get_delivery_date(self, picking):
-        """
-        Get the delivery date from given picking.
-        As the delivery date doesn't exist in Odoo, we use the date_done
-        when the state is 'done'.
-        :param picking: stock.picking
-        :return: str
-        """
-        delivery_date = ""
-        if picking.state == "done":
-            date_done = fields.Datetime.from_string(
-                picking.date_done or picking.write_date
-            )
-            delivery_date = fields.Date.to_string(
-                fields.Datetime.context_timestamp(picking, date_done)
-            )
-        return delivery_date
+@b2c_api_router.post("/sales/{id}", response_model=SaleOrderResponse)
+@b2c_api_router.post("/sales/{id}/update", response_model=SaleOrderResponse)
+@b2c_api_router.put("/sales/{id}", response_model=SaleOrderResponse)
+def _update_sale_order(
+    id: int,  # pylint: disable=redefined-builtin
+    body: SaleOrderUpdateRequest,
+    env: Environment = Depends(authenticated_partner_env),  # noqa: B008
+    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
+) -> SaleOrderResponse:
+    """Update sale order."""
+    sale_order = env["sale.order"]._get_order_from_b2c_ref(id, client)
+    data = body._convert_to_write()
+    sale_order._update_from_b2c(data, client)
+    return SaleOrderResponse.from_orm(sale_order)

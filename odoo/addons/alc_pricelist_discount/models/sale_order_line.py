@@ -33,7 +33,10 @@ class SaleOrderLine(SaleOrderLineBase):
     @api.depends("order_id.discount_pricelist_ids", "product_id", "product_uom_qty")
     def _compute_discount_item_id(self):
         for line in self:
+            pricelists = line.order_id.discount_pricelist_ids._origin
             # we don't use UOMs, if that changes then apply it here:
+            if not pricelists:
+                continue
             line.discount_item_id = line.product_id._get_best_applicable_pricelist_item(
                 line.order_id.date_order,
                 quantity=line.product_uom_qty or 1,

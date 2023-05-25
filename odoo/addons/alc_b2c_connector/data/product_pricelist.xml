@@ -19,10 +19,10 @@
         To be sure that only our new item is assigned to the price list
         we reassign the item_ids....
     -->
-  <record id="product_pricelist_b2c" model="product.pricelist">
-    <field
-      name="item_ids"
-      eval="[(6, 0, [ref('alc_b2c_connector.product_pricelist_b2c_item')])]"
+  <function model="product.pricelist" name="write">
+        <value eval="[ref('alc_b2c_connector.product_pricelist_b2c')]" />
+        <value
+      eval="{'item_ids': [(6, 0, [ref('alc_b2c_connector.product_pricelist_b2c_item')])]}"
     />
-  </record>
+    </function>
 </odoo>

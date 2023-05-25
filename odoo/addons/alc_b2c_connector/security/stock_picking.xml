@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="stock_picking_b2c_rule" model="ir.rule">
+        <field name="name">sale_order b2c rule</field>
+        <field ref="stock.model_stock_picking" name="model_id" />
+        <field
+      name="domain_force"
+    >['|', ('partner_id.alc_b2c_client_id', '=', alc_b2c_client_id), ('customer_id.alc_b2c_client_id', '=', alc_b2c_client_id)]</field>
+        <field name="perm_write" eval="1" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_unlink" eval="0" />
+        <field name="groups" eval="[(4, ref('alc_b2c_connector.b2c_group'))]" />
+    </record>
+</odoo>

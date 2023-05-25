@@ -297,7 +297,7 @@ msgstr ""
 #. module: alc_b2c_connector
 #: code:addons/alc_b2c_connector/models/res_partner.py:42
 #, python-format
-msgid "You cannot update this address since there are already closed Sale Orders for this partner. Incoherent field: %s, current value: %s"
+msgid "You cannot update this address since there are already closed Sale Orders for this partner. Incoherent field: {key}, current value: {value}"
 msgstr ""
 
 #. module: alc_b2c_connector

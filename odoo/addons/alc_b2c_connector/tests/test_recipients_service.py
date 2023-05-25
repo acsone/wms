@@ -1,18 +1,23 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import random
 import string
 
+from fastapi import status
+from requests import Response
+
+from odoo import Command
 from odoo.exceptions import ValidationError
+from odoo.tools.misc import mute_logger
 
-from .common import CommonCase
+from ..services.models.country_code import CountryCode
+from .common import CommonB2CServiceCase
 
 
-class TestRecipientsService(CommonCase):
+class TestRecipientsService(CommonB2CServiceCase):
     @classmethod
     def setUpClass(cls):
-        super(TestRecipientsService, cls).setUpClass()
+        super().setUpClass()
 
         title_id = cls.env.ref("base.res_partner_title_mister").id
         cls.belgium = cls.env.ref("base.be")
@@ -26,7 +31,8 @@ class TestRecipientsService(CommonCase):
                 "city": "my first city",
                 "zip": "1234",
                 "partner_type": "student_like",
-                "ref": "%s_ABC" % cls.b2c_backend.sale_channel,
+                "ref": f"{cls.sale_channel.name}_ABC",
+                "alc_b2c_client_id": cls.b2c_client.id,
                 "email": "b2c@b2c.be",
                 "country_id": cls.belgium.id,
             }
@@ -50,46 +56,16 @@ class TestRecipientsService(CommonCase):
             {
                 "name": "VT",
                 "partner_type": "veterinary",
-                "ref": "VTREF",
+                "ref": "Amazon_",
                 "email": "vt@vt.be",
-                "supplier_promotion_sale_allowed": True,
                 "customer_payment_mode_id": cls.vt_payment_mode.id,
             }
         )
-
-        # create a b2c sale_order
-        cls.b2c_order = cls.env["sale.order"].create(
-            {
-                "b2c_ref": 10,
-                "partner_id": cls.b2c_partner.id,
-                "partner_invoice_id": cls.vt_partner.id,
-                "partner_shipping_id": cls.vt_partner.id,
-                "pricelist_id": cls.pricelist_id.id,
-                "order_line": [
-                    (
-                        0,
-                        0,
-                        {
-                            "b2c_ref": 1,
-                            "product_id": cls.saleable_product.id,
-                            "name": cls.saleable_product.name,
-                            "product_uom": cls.saleable_product.uom_id.id,
-                            "product_uom_qty": 10,
-                        },
-                    )
-                ],
-                "sale_channel": cls.b2c_backend.sale_channel,
-            }
-        )
-
         cls.SaleOrder = cls.env["sale.order"]
         cls.payment_term_test = cls.env.ref(
             "account.account_payment_term_advance"
         ).copy()
-        cls.b2c_backend.payment_term_id = cls.payment_term_test
-
-        with cls.work_on_services() as work:
-            cls.recipient_service = work.component(usage="recipients")
+        cls.b2c_client.payment_term_id = cls.payment_term_test
 
     @classmethod
     def _gen_string(cls, length=10):
@@ -112,16 +88,46 @@ class TestRecipientsService(CommonCase):
             "mobile": cls._gen_string(),
         }
 
+    def setUp(self):
+        super().setUp()
+        # create a b2c sale_order
+        self.b2c_order = self.env["sale.order"].create(
+            {
+                "b2c_ref": 10,
+                "partner_id": self.b2c_partner.id,
+                "partner_invoice_id": self.vt_partner.id,
+                "partner_shipping_id": self.vt_partner.id,
+                "pricelist_id": self.pricelist_id.id,
+                "order_line": [
+                    Command.create(
+                        {
+                            "b2c_ref": 1,
+                            "product_id": self.saleable_product.id,
+                            "name": self.saleable_product.name,
+                            "product_uom": self.saleable_product.uom_id.id,
+                            "product_uom_qty": 10,
+                        },
+                    )
+                ],
+                "sale_channel_id": self.sale_channel.id,
+            }
+        )
+
     def test_get_b2c_recipient_info(self):
         """
         Data:
+
             1 existing b2c partner
         Test case:
             Get recipient info with the b2c ref
         Expected result:
             The recipient info
         """
-        res = self.recipient_service.dispatch("get", "ABC")
+        response: Response = self.client.get(
+            self._get_path("/recipients/ABC"), headers={"api-key": "1234"}
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        res = response.json()
         self.assertTrue(res)
         self.assertEqual(res["id"], "ABC")
         self.assertEqual(res["name"], "EXISTING B2C PARTNER")
@@ -132,6 +138,7 @@ class TestRecipientsService(CommonCase):
     def test_update_existing(self):
         """
         Data:
+
             An existing b2c customer
         Test case:
             Updating the address, name and title
@@ -149,10 +156,12 @@ class TestRecipientsService(CommonCase):
         recipient_info["country_code"] = "BE"
         recipient_info["name2"] = "My Partner Society"
         recipient_info["note"] = "Test note for delivery"
-
-        _ = self.recipient_service.dispatch(
-            "update", recipient_info["id"], params=recipient_info
+        response: Response = self.client.post(
+            self._get_path("/recipients/ABC/update"),
+            headers={"api-key": "1234"},
+            json=recipient_info,
         )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertEqual(self.b2c_partner.street, "new_street")
         self.assertEqual(self.b2c_partner.city, "new_city")
@@ -160,7 +169,7 @@ class TestRecipientsService(CommonCase):
         self.assertEqual(self.b2c_partner.title.name, "Madam")
         self.assertEqual(self.b2c_partner.name, "test b2cPartner")
         self.assertEqual(self.b2c_partner.suite, "My Partner Society")
-        self.assertEqual(self.b2c_partner.comment, "Test note for delivery")
+        self.assertEqual(str(self.b2c_partner.comment), "<p>Test note for delivery</p>")
 
         self.assertEqual(self.b2c_order.partner_id.street, "new_street")
         self.assertEqual(self.b2c_order.partner_id.city, "new_city")
@@ -168,11 +177,14 @@ class TestRecipientsService(CommonCase):
         self.assertEqual(self.b2c_order.partner_id.title.name, "Madam")
         self.assertEqual(self.b2c_order.partner_id.name, "test b2cPartner")
         self.assertEqual(self.b2c_order.partner_id.suite, "My Partner Society")
-        self.assertEqual(self.b2c_order.partner_id.comment, "Test note for delivery")
+        self.assertEqual(
+            str(self.b2c_order.partner_id.comment), "<p>Test note for delivery</p>"
+        )
 
     def test_update_existing_street_only(self):
         """
         Data:
+
             An existing b2c customer
         Test case:
             Updating the street only
@@ -183,9 +195,12 @@ class TestRecipientsService(CommonCase):
         recipient_info["id"] = "ABC"
         recipient_info["street"] = "new_street"
 
-        _ = self.recipient_service.dispatch(
-            "update", recipient_info["id"], params=recipient_info
+        response: Response = self.client.post(
+            self._get_path("/recipients/ABC/update"),
+            headers={"api-key": "1234"},
+            json=recipient_info,
         )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertEqual(self.b2c_partner.street, "new_street")
         self.assertEqual(self.b2c_partner.city, "my first city")
@@ -199,21 +214,39 @@ class TestRecipientsService(CommonCase):
         self.assertEqual(self.b2c_order.partner_id.title.name, "Mister")
         self.assertEqual(self.b2c_order.partner_id.name, "EXISTING B2C PARTNER")
 
+    @mute_logger(
+        "odoo.addons.alc_b2c_connector.models.res_partner",
+        "odoo.addons.alc_b2c_connector.models.res_country",
+    )
     def test_update_street_for_partner_with_started_picking(self):
         """Once the partner has a started picking, it's not possible to update the address."""
+
+        self.b2c_order.partner_id = self.b2c_partner
         self.b2c_order.action_confirm()
         ship = self.b2c_order.mapped("picking_ids").filtered(
             lambda p: p.picking_type_code == "outgoing"
         )
         ship.printed = True
         fields = {"city", "country_code", "street", "street2", "first_name", "zip"}
+
         for field in fields:
-            params = {"id": "ABC", field: "BF" if field == "country_code" else "X"}
-            with self.assertRaises(ValidationError):
-                self.recipient_service.dispatch("update", "ABC", params=params)
+
+            with self.assertRaises(
+                ValidationError,
+                msg="You cannot update this address since there are already closed "
+                "Sale Orders for this partner.",
+            ):
+                self.env["res.partner"]._update_b2c_recipient(
+                    "ABC",
+                    self.b2c_client,
+                    {
+                        "id": "ABC",
+                        field: CountryCode.BF if field == "country_code" else "X",
+                    },
+                )
 
     def test_update_contact_fields_for_partner_with_started_picking(self):
-        """We can always update the contact fields (phone, mobile, email)"""
+        """We can always update the contact fields (phone, mobile, email)."""
         self.b2c_order.action_confirm()
         ship = self.b2c_order.mapped("picking_ids").filtered(
             lambda p: p.picking_type_code == "outgoing"
@@ -231,45 +264,56 @@ class TestRecipientsService(CommonCase):
             "city": self.b2c_partner.city,
             "note": "new note",
         }
-        # when
-        self.recipient_service.dispatch(
-            "update", recipient_info["id"], params=recipient_info
+        response: Response = self.client.post(
+            self._get_path("/recipients/ABC/update"),
+            headers={"api-key": "1234"},
+            json=recipient_info,
         )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(self.b2c_partner.phone, "1")
         self.assertEqual(self.b2c_partner.mobile, "2")
         self.assertEqual(self.b2c_partner.email, "3")
-        self.assertEqual(self.b2c_partner.comment, "new note")
+        self.assertEqual(str(self.b2c_partner.comment), "<p>new note</p>")
         self.assertEqual(self.b2c_partner.street, "my first street")
 
     def test_update_nullable_fields(self):
         """Updatable fields can be erased by passing None."""
         self.b2c_partner.write({"phone": "0", "mobile": "1", "comment": "C"})
         recipient_info = {"id": "ABC", "phone": None, "mobile": None, "note": None}
-        # when
-        self.recipient_service.dispatch(
-            "update", recipient_info["id"], params=recipient_info
+        response: Response = self.client.post(
+            self._get_path("/recipients/ABC/update"),
+            headers={"api-key": "1234"},
+            json=recipient_info,
         )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertFalse(self.b2c_partner.phone)
         self.assertFalse(self.b2c_partner.mobile)
         self.assertFalse(self.b2c_partner.comment)
 
+    @mute_logger("odoo.addons.alc_b2c_connector.models.res_partner")
     def test_name2(self):
         """Suite can be nulled, and is not updatable after a picking is started."""
+        self.b2c_order.partner_id = self.b2c_partner
         self.b2c_partner.suite = "C"
-        self.recipient_service.dispatch(
-            "update", "ABC", params={"id": "ABC", "name2": None}
+        response: Response = self.client.post(
+            self._get_path("/recipients/ABC/update"),
+            headers={"api-key": "1234"},
+            json={"id": "ABC", "name2": None},
         )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertFalse(self.b2c_partner.suite)
 
         self.b2c_order.action_confirm()
         self.b2c_order.mapped("picking_ids").write({"printed": True})
         with self.assertRaises(ValidationError):
-            self.recipient_service.dispatch(
-                "update", "ABC", params={"id": "ABC", "name2": "S"}
+            self.env["res.partner"]._update_b2c_recipient(
+                "ABC",
+                self.b2c_client,
+                {"id": "ABC", "name2": "S"},
             )
 
     def test_update_recipient_if_allowed_on_b2c_backend(self):
-        self.b2c_backend.allow_customer_modifications = True
+        self.b2c_client.allow_customer_modifications = True
         self.b2c_order.action_confirm()
         ship = self.b2c_order.mapped("picking_ids").filtered(
             lambda p: p.picking_type_code == "outgoing"
@@ -283,9 +327,12 @@ class TestRecipientsService(CommonCase):
             "zip": "new zip info no check",
             "city": "new city info no check",
         }
-        self.recipient_service.dispatch(
-            "update", recipient_info["id"], params=recipient_info
+        response: Response = self.client.post(
+            self._get_path("/recipients/ABC/update"),
+            headers={"api-key": "1234"},
+            json=recipient_info,
         )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(self.b2c_partner.street, "new street info no check")
         self.assertEqual(self.b2c_partner.zip, "new zip info no check")
         self.assertEqual(self.b2c_partner.city, "new city info no check")

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="fastapi.res_partner_fastapi_running_user_rule" model="ir.rule">
+        <field
+      name="domain_force"
+    > [('alc_b2c_client_id', '=', alc_b2c_client_id), ('is_b2c_customer', '=', True)]</field>
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+    </record>
+    <record id="fastapi.res_partner_fastapi_running_user" model="ir.model.access">
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+    </record>
+</odoo>

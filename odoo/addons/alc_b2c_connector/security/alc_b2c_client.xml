@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.model.access" id="alc_b2c_client_access_all">
+        <field name="name">alc.b2c.client access all</field>
+        <field name="model_id" ref="model_alc_b2c_client" />
+        <field name="group_id" ref="fastapi.group_fastapi_user" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="0" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_unlink" eval="0" />
+    </record>
+    <record model="ir.model.access" id="alc_b2c_client_access_manager">
+        <field name="name">alc.b2c.client access manager</field>
+        <field name="model_id" ref="model_alc_b2c_client" />
+        <field name="group_id" ref="fastapi.group_fastapi_manager" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+    </record>
+
+</odoo>

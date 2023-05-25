@@ -1,33 +1,29 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import random
+import string
+from functools import partial
 
-import logging
-from contextlib import contextmanager
+from fastapi.testclient import TestClient
 
-from odoo.tools import mute_logger
+from odoo import Command
+from odoo.tests.common import TransactionCase
 
-from odoo.addons.base_rest.controllers.main import _PseudoCollection
-from odoo.addons.base_rest.tests.common import BaseRestCase
-from odoo.addons.component.core import WorkContext
+from odoo.addons.fastapi.context import odoo_env_ctx
 
 from ..hooks import _initialize_product_assortment_filter
-from ..services.base_b2c_service import B2C_COLLECTION
+from ..models.fastapi_endpoint import authenticated_partner_impl
 
 
-class CommonCase(BaseRestCase):
+class CommonB2CServiceCase(TransactionCase):
     @classmethod
-    @mute_logger("odoo.addons.queue_job.models.base")
     def setUpClass(cls):
-        super(CommonCase, cls).setUpClass()
-        cls.env = cls.env(
-            context=dict(
-                cls.env.context, tracking_disable=True, test_queue_job_no_delay=True
-            )
-        )
+        super().setUpClass()
         _initialize_product_assortment_filter(cls.env.cr)
         cls.currency_id = cls.env.user.company_id.currency_id
-        cls.pricelist_id = cls.env.ref("alc_product_pricelist_data.product_pricelist_pb1")
+        cls.pricelist_id = cls.env.ref(
+            "alc_product_pricelist_data.product_pricelist_pb1"
+        )
         # ensure same currency across products and pricelists
         cls.pricelist_id.currency_id = cls.currency_id
         cls.ProductProduct = cls.env["product.product"]
@@ -104,10 +100,12 @@ class CommonCase(BaseRestCase):
                 "payment_type": "inbound",
             }
         )
-        cls.auth_api_key = cls.env["auth.api.key"].create(
-            {"name": "test api key", "key": "1234", "user_id": cls.env.user.id}
-        )
-        cls.b2c_backend = cls.env["alc.b2c.backend"].create(
+        cls.b2c_user = cls.env.ref("alc_b2c_connector.alc_b2c_rest_api_user")
+        cls.sale_channel = cls.env.ref("sale_channel.sale_channel_amazon")
+        cls.sale_channel2 = cls.env.ref("sale_channel.sale_channel_ebay")
+        cls.endpoint = cls.env.ref("alc_b2c_connector.fastapi_endpoint_b2c")
+        cls.endpoint.user_id = cls.b2c_user
+        cls.b2c_client = cls.env["alc.b2c.client"].create(
             {
                 "name": "B2c backend test",
                 "product_assortment_id": cls.env.ref(
@@ -116,43 +114,163 @@ class CommonCase(BaseRestCase):
                 "pricelist_id": cls.pricelist_id.id,
                 "sale_team_id": cls.env.ref("sales_team.salesteam_website_sales").id,
                 "payment_mode_id": cls.payment_mode.id,
-                "sale_channel": "web",
-                "is_sale_back_order_accepted": False,
-                "auth_api_key_id": cls.auth_api_key.id,
+                "sale_channel_id": cls.sale_channel.id,
+                "sale_reason_backorder_strategy": "cancel",
+                "api_key": "1234",
+                "partner_id": cls.b2c_user.partner_id.id,
+                "fastapi_endpoint_id": cls.endpoint.id,
             }
         )
+        # disable sale exceptions
+        cls.env["ir.config_parameter"].set_param(
+            "alc_sale_exception_settings.sale_exception_check_enabled", False
+        )
+        cls.app = cls.endpoint._get_app()
+        cls.app.dependency_overrides[authenticated_partner_impl] = partial(
+            lambda a: a, cls.b2c_user.partner_id
+        )
+        cls.client = TestClient(cls.app)
+        env = cls.env(user=cls.b2c_user, context=dict(cls.env.context))
+        cls._ctx_token = odoo_env_ctx.set(env)
 
-    def setUp(self):
-        super(CommonCase, self).setUp()
-        loggers = ["odoo.addons.queue_job.models.base"]
-        for logger in loggers:
-            logging.getLogger(logger).addFilter(self)
+    @classmethod
+    def tearDownClass(cls) -> None:
+        odoo_env_ctx.reset(cls._ctx_token)
+        cls.endpoint._reset_app()
 
-        # pylint: disable=unused-variable
-        @self.addCleanup
-        def un_mute_logger():
-            for logger_ in loggers:
-                logging.getLogger(logger_).removeFilter(self)
-
-    def filter(self, record):
-        return 0
+        super().tearDownClass()
 
     @classmethod
     def change_product_qty(cls, product, qty):
         cls.env["stock.change.product.qty"].create(
-            {"product_id": product.id, "new_quantity": qty}
+            {
+                "product_id": product.id,
+                "product_tmpl_id": product.product_tmpl_id.id,
+                "new_quantity": qty,
+            }
         ).change_product_qty()
 
+    def _get_path(self, path) -> str:
+        return self.endpoint.root_path + path
+
+
+class CommonB2CSaleServiceCase(CommonB2CServiceCase):
     @classmethod
-    @contextmanager
-    def work_on_services(cls, **params):
-        params = params or {}
-        ctx = cls.env["res.users"].sudo(
-            cls.env.ref("alc_b2c_connector.alc_b2c_rest_api_user").id
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env.user.groups_id += cls.env.ref("product.group_discount_per_so_line")
+        # create a b2c_partner
+        cls.b2c_partner = cls.env["res.partner"].create(
+            {
+                "name": "EXISTING B2C PARTNER",
+                "is_b2c_customer": True,
+                "partner_type": "student_like",
+                "ref": f"{cls.sale_channel.name}_ABC",
+                "email": "b2c@b2c.be",
+                "alc_b2c_client_id": cls.b2c_client.id,
+            }
         )
-        if "b2c_backend" not in params:
-            params["b2c_backend"] = cls.b2c_backend
-        collection = _PseudoCollection(B2C_COLLECTION, ctx.env)
-        yield WorkContext(
-            model_name="rest.service.registration", collection=collection, **params
+
+        # create a specific payment mode for the VT
+        cls.vt_payment_mode = cls.env["account.payment.mode"].create(
+            {
+                "name": "Specific VT payment mode",
+                "company_id": cls.env.ref("base.main_company").id,
+                "bank_account_link": "variable",
+                "payment_method_id": cls.env.ref(
+                    "account.account_payment_method_manual_in"
+                ).id,
+                "payment_type": "inbound",
+            }
         )
+
+        # create a vete
+        cls.vt_partner = cls.env["res.partner"].create(
+            {
+                "name": "VT",
+                "partner_type": "veterinary",
+                "ref": f"{cls.sale_channel.name}_VTREF",
+                "email": "vt@vt.be",
+                "supplier_promotion_sale_allowed": True,
+                "customer_payment_mode_id": cls.vt_payment_mode.id,
+            }
+        )
+        cls.SaleOrder = cls.env["sale.order"]
+        cls.payment_term_test = cls.env.ref(
+            "account.account_payment_term_advance"
+        ).copy()
+        cls.b2c_client.payment_term_id = cls.payment_term_test
+
+    @classmethod
+    def _gen_string(cls, length=10):
+        return "".join(random.choice(string.ascii_letters) for _ in range(length))
+
+    @classmethod
+    def _gen_recipent(cls, _id=None, title="mr"):
+        _id = _id or cls._gen_string()
+        return {
+            "id": _id,
+            "title": title,
+            "last_name": cls._gen_string(),
+            "first_name": cls._gen_string(),
+            "street": cls._gen_string(),
+            "street2": cls._gen_string(),
+            "zip": cls._gen_string(),
+            "city": cls._gen_string(),
+            "email": cls._gen_string(),
+            "phone": cls._gen_string(),
+            "mobile": cls._gen_string(),
+            "name2": cls._gen_string(),
+        }
+
+    def setUp(self):
+        super().setUp()
+        # create a b2c sale_order
+        self.b2c_order = self.env["sale.order"].create(
+            {
+                "alc_b2c_client_id": self.b2c_client.id,
+                "b2c_ref": 10,
+                "partner_id": self.b2c_partner.id,
+                "partner_invoice_id": self.vt_partner.id,
+                "partner_shipping_id": self.vt_partner.id,
+                "pricelist_id": self.pricelist_id.id,
+                "order_line": [
+                    Command.create(
+                        {
+                            "b2c_ref": 1,
+                            "product_id": self.saleable_product.id,
+                            "name": self.saleable_product.name,
+                            "product_uom": self.saleable_product.uom_id.id,
+                            "product_uom_qty": 10,
+                        },
+                    )
+                ],
+                "sale_channel_id": self.sale_channel.id,
+            }
+        )
+
+    def _get_so_from_name(self, name):
+        return self.SaleOrder.search([("name", "=", name)])
+
+    def _do_picking(self, picking):
+        for move in picking.move_ids:
+            move.quantity_done = move.product_qty
+        picking._action_done()
+
+    def _deliver_orders(self, orders):
+        for order in orders:
+            # validate SO
+            order.action_confirm()
+            # process deliveries
+            picking_internals = order.picking_ids.filtered(
+                lambda p: p.picking_type_code == "internal"
+            )
+            picking_outs = order.picking_ids.filtered(
+                lambda p: p.picking_type_code == "outgoing"
+            )
+            for picking in picking_internals:
+                self._do_picking(picking)
+                self.assertEqual(picking.state, "done")
+            for picking in picking_outs:
+                self._do_picking(picking)
+                self.assertEqual(picking.state, "done")

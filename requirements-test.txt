@@ -2,6 +2,9 @@
 colorama==0.4.6
 coverage==6.4.4
 exceptiongroup==1.0.4
+h11==0.14.0
+httpcore==0.17.0
+httpx==0.24.0
 importlib-metadata==4.13.0
 iniconfig==1.1.1
 manifestoo==0.7
