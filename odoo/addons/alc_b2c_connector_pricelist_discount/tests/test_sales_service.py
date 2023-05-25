@@ -2,14 +2,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
+from fastapi import status
 from freezegun import freeze_time
 from requests import Response
 
 from odoo import fields
 
 from odoo.addons.alc_b2c_connector.tests.common import CommonB2CSaleServiceCase
-
-from fastapi import status
 
 ISO_DT_WITH_TZ = "2020-05-28T13:45:47+02:00"
 

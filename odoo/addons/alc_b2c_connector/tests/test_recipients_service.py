@@ -3,13 +3,12 @@
 import random
 import string
 
+from fastapi import status
 from requests import Response
 
 from odoo import Command
 from odoo.exceptions import ValidationError
 from odoo.tools.misc import mute_logger
-
-from fastapi import status
 
 from ..services.models.country_code import CountryCode
 from .common import CommonB2CServiceCase

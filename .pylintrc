@@ -91,3 +91,6 @@ manifest-deprecated-keys=
 
 # List of license allowed in manifest file, separated by a comma.
 license-allowed=AGPL-3,LGPL-3,Other proprietary
+
+# Force import order to recognize a module as part of a third party library.
+known-third-party=fastapi,pydantic,starlette

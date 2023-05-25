@@ -1,6 +1,8 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from fastapi import APIRouter, Depends, HTTPException, status
+
 from odoo import api, fields
 from odoo.api import Environment
 
@@ -12,8 +14,6 @@ from odoo.addons.fastapi.depends import (
 from odoo.addons.fastapi.models.fastapi_endpoint import (
     FastapiEndpoint as FastapiEndpointBase,
 )
-
-from fastapi import APIRouter, Depends, HTTPException, status
 
 from ..models.res_partner import ResPartner
 from ..services.utils import api_key_header

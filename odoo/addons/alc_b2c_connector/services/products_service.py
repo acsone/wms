@@ -2,12 +2,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
+from fastapi import Depends, Query
+
 from odoo.api import Environment
 
 from odoo.addons.fastapi.depends import authenticated_partner_env, paging
 from odoo.addons.fastapi.schemas import Paging
-
-from fastapi import Depends, Query
 
 from ..models.fastapi_endpoint import b2c_api_router
 from .depends import AlcB2cClient, alc_b2c_client
