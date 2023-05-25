@@ -11,6 +11,8 @@
     "website": "https://acsone.eu/",
     "depends": [
         # OCA
+        "attachment_unindex_content",
+        "base_technical_features",
         "server_environment",
         "server_environment_ir_config_parameter",
         "web_environment_ribbon",
