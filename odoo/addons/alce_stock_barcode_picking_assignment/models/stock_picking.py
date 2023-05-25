@@ -34,8 +34,8 @@ def decipher(salt):
         encoded = encoded.replace(" ", "")
         regex = r".{1,2}"
         vals = re.findall(regex, encoded)
-        vals = map(lambda s: int(s, 16), vals)
-        vals = map(lambda s: applySaltToChar(salt, s), vals)
+        vals = (int(s, 16) for s in vals)
+        vals = (applySaltToChar(salt, s) for s in vals)
         vals = map(chr, vals)
         return "".join(vals)
 

@@ -76,13 +76,13 @@ class ProductDiscountSpecial(Model):
                     """
             self.env.cr.execute(
                 sql_query,
-                dict(
-                    table=AsIs(self._table),
-                    start=record.date_start,
-                    end=record.date_end,
-                    discount_id=record.id,
-                    template_id=record.product_template_id.id,
-                ),
+                {
+                    "table": AsIs(self._table),
+                    "start": record.date_start,
+                    "end": record.date_end,
+                    "discount_id": record.id,
+                    "template_id": record.product_template_id.id,
+                },
             )
             res = self.env.cr.fetchall()
             if res:

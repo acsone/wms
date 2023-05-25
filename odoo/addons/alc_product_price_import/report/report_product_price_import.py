@@ -114,7 +114,7 @@ class ReportProductPriceImport(ReportXlsxAbstract):
             "ws_name": _("Product prices"),
             "generate_ws_method": "_product_prices_report",
             "title": _("Product prices"),
-            "wanted_list": [k for k in template],
+            "wanted_list": list(template),
             "col_specs": template,
         }
 
