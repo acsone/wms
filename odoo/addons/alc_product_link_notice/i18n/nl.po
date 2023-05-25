@@ -28,7 +28,7 @@ msgstr "Link aanvullende informatie"
 #. module: alc_product_link_notice
 #: code:addons/alc_product_link_notice/models/product_template.py:47
 #, python-format
-msgid "Check online links for product %s."
+msgid "Check online links for product {product_name}."
 msgstr ""
 
 #. module: alc_product_link_notice

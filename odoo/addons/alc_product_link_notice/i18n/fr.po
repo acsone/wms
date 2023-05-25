@@ -28,8 +28,8 @@ msgstr "Lien Informations complémentaires"
 #. module: alc_product_link_notice
 #: code:addons/alc_product_link_notice/models/product_template.py:47
 #, python-format
-msgid "Check online links for product %s."
-msgstr "Check online links for product %s."
+msgid "Check online links for product {product_name}."
+msgstr "Check online links for product {product_name}."
 
 #. module: alc_product_link_notice
 #: model:ir.model.fields,help:alc_product_link_notice.field_delivery_carrier_links_offline
