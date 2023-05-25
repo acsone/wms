@@ -175,7 +175,6 @@ exclude = [
   'odoo/addons/alc_package_label_printer/*',
   'odoo/addons/alc_partner_delivery_person/*',
   'odoo/addons/alc_partner_delivery_window_import/*',
-  'odoo/addons/alc_pg_trgm/*',
   'odoo/addons/alc_pim/*',
   'odoo/addons/alc_placedesvetos/*',
   'odoo/addons/alc_placedesvetos_payment_globalization/*',
