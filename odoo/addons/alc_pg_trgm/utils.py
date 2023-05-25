@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
@@ -37,7 +36,7 @@ def install_trgm_extension(env):
     extension = trgm_extension_exists(env)
     if extension == "missing":
         _logger.warning(
-            "To use pg_trgm you have to install the " "postgres-contrib module."
+            "To use pg_trgm you have to install the postgres-contrib module."
         )
     elif extension == "uninstalled":
         if is_postgres_superuser(env):
