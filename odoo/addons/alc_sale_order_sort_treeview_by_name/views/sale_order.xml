@@ -15,4 +15,16 @@
     </field>
   </record>
 
+  <record model="ir.ui.view" id="view_quotation_tree">
+    <field name="name">sale.quotation.tree (in alc_sale_order_sort_treeview_by_name)
+    </field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_quotation_tree" />
+    <field name="arch" type="xml">
+      <xpath expr="//tree" position="attributes">
+        <attribute name="default_order">name desc</attribute>
+      </xpath>
+    </field>
+  </record>
+
 </odoo>
