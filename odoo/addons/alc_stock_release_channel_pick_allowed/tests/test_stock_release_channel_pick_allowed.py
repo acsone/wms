@@ -82,8 +82,8 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
             self.channel.action_wake_up()
             trap.assert_enqueued_job(
                 self.env["stock.release.channel"]._set_pick_allowed,
-                kwargs=dict(pick_allowed=True, picking_type=None),
-                properties=dict(eta=datetime(2023, 4, 2, 6, 30)),
+                kwargs={"pick_allowed": True, "picking_type": None},
+                properties={"eta": datetime(2023, 4, 2, 6, 30)},
             )
             self.assertFalse(self.channel.pick_allowed)
             trap.perform_enqueued_jobs()
@@ -157,8 +157,8 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
             )
             trap.assert_enqueued_job(
                 self.env["stock.release.channel"]._set_pick_allowed,
-                kwargs=dict(pick_allowed=True, picking_type=None),
-                properties=dict(eta=datetime(2023, 4, 2, 5, 30)),
+                kwargs={"pick_allowed": True, "picking_type": None},
+                properties={"eta": datetime(2023, 4, 2, 5, 30)},
             )
             self.assertEqual(self.channel.auto_allow_pick_time_before_leave, 1.5)
 
@@ -189,8 +189,8 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
             )
             trap.assert_enqueued_job(
                 self.env["stock.release.channel"]._set_pick_allowed,
-                kwargs=dict(pick_allowed=True, picking_type=None),
-                properties=dict(eta=datetime(2023, 4, 2, 8, 30)),
+                kwargs={"pick_allowed": True, "picking_type": None},
+                properties={"eta": datetime(2023, 4, 2, 8, 30)},
             )
             self.assertEqual(self.channel.leave_planned_time, 14)
 

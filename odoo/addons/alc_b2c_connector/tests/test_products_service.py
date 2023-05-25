@@ -161,7 +161,7 @@ class TestProductsService(CommonB2CServiceCase):
         response: Response = self.client.get(
             self._get_path("/products/search"),
             headers={"api-key": "1234"},
-            params=dict(skus=[sku]),
+            params={"skus": [sku]},
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
@@ -169,7 +169,7 @@ class TestProductsService(CommonB2CServiceCase):
         response: Response = self.client.get(
             self._get_path("/products/search"),
             headers={"api-key": "1234"},
-            params=dict(skus=[sku + "false"]),
+            params={"skus": [sku + "false"]},
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()

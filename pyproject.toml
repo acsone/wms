@@ -339,6 +339,7 @@ select = [
   "W", # pycodestyle warnings
   "B", # flake8-bugbear
   "C90", # mccabe
+  "C",  # flake8-comprehensions
   "UP", # pyupgrade
 ]
 ignore = [
