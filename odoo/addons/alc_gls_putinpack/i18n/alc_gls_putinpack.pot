@@ -149,6 +149,11 @@ msgid "Put in Pack"
 msgstr ""
 
 #. module: alc_gls_putinpack
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_stock_picking__is_put_in_pack_done
+msgid "Put in Pack done"
+msgstr ""
+
+#. module: alc_gls_putinpack
 #: model:ir.model.fields,field_description:alc_gls_putinpack.field_stock_picking__quant_reserved_exist
 msgid "Quant Reserved Exist"
 msgstr ""
