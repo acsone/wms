@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from datetime import datetime
 from enum import Enum
-from typing import List, Optional, Type
 
 from pydantic.utils import GetterDict
 
@@ -24,18 +23,18 @@ class SaleOrderState(Enum):
 
 
 class SaleOrderCommon(BaseModel):
-    date: Optional[datetime]
-    carrier: Optional[delivery.Carrier] = None
+    date: datetime | None
+    carrier: delivery.Carrier | None = None
     id: int
 
 
 class SaleOrderResponse(SaleOrderCommon):
-    confirmation_date: Optional[datetime]
-    lines: List[sale_line.SaleLineResponse]
-    deliveries: Optional[List[delivery.Delivery]] = None
+    confirmation_date: datetime | None
+    lines: list[sale_line.SaleLineResponse]
+    deliveries: list[delivery.Delivery] | None = None
     state: SaleOrderState
     ref: str
-    recipient: Optional[partner.PartnerResponse] = None
+    recipient: partner.PartnerResponse | None = None
     customer_ref: str
 
     class Config:
@@ -43,7 +42,7 @@ class SaleOrderResponse(SaleOrderCommon):
 
     @classmethod
     def _decompose_class(
-        cls: Type["SaleOrderResponse"], obj: SaleOrder
+        cls: type["SaleOrderResponse"], obj: SaleOrder
     ) -> GetterDict:  # noqa: F821
         state = obj.b2c_state
         res = {
@@ -72,11 +71,11 @@ class SaleOrderResponse(SaleOrderCommon):
 
 
 class SaleOrderCreateRequest(SaleOrderCommon):
-    lines: List[sale_line.SaleLineRequest]
-    recipient: Optional[partner.PartnerSaleOrderRequest] = None
+    lines: list[sale_line.SaleLineRequest]
+    recipient: partner.PartnerSaleOrderRequest | None = None
     customer_ref: str
 
 
 class SaleOrderUpdateRequest(BaseModel):
-    recipient: Optional[partner.PartnerSaleOrderRequest] = None
-    lines: Optional[List[sale_line.SaleLineRequest]] = None
+    recipient: partner.PartnerSaleOrderRequest | None = None
+    lines: list[sale_line.SaleLineRequest] | None = None

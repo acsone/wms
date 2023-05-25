@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from datetime import datetime
-from typing import Any, List, Optional, Type
+from typing import Any
 
 from pydantic.utils import GetterDict
 
@@ -14,20 +14,20 @@ from . import tax
 
 
 class Product(BaseModel):
-    sku: Optional[str]
+    sku: str | None
     create_date: datetime
     name: str
     price: float
-    eans: Optional[List[str]]
-    cnk: Optional[str]
-    taxes: Optional[List[tax.Tax]]
+    eans: list[str] | None
+    cnk: str | None
+    taxes: list[tax.Tax] | None
     quantity: float
 
     class Config:
         orm_mode = True
 
     @classmethod
-    def _decompose_class(cls: Type["Model"], obj: Any) -> GetterDict:
+    def _decompose_class(cls: type["Model"], obj: Any) -> GetterDict:
         res = {
             "name": obj.name,
             "sku": obj.default_code or None,

@@ -1,7 +1,7 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from typing import Any, Optional, Type
+from typing import Any
 
 from pydantic.utils import GetterDict
 
@@ -12,7 +12,7 @@ from odoo.addons.alc_b2c_connector.services.utils import (  # pylint: disable=od
 
 class SaleLineCommon(BaseModel):
     sku: str
-    line_id: Optional[str] = None
+    line_id: str | None = None
 
 
 class SaleLineRequest(SaleLineCommon):
@@ -30,7 +30,7 @@ class SaleLineResponse(SaleLineCommon):
         orm_mode = True
 
     @classmethod
-    def _decompose_class(cls: Type["Model"], obj: Any) -> GetterDict:  # noqa: F821
+    def _decompose_class(cls: type["Model"], obj: Any) -> GetterDict:  # noqa: F821
         return {
             "line_id": obj.b2c_ref,
             "sku": obj.product_id.default_code,

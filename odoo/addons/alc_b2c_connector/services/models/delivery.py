@@ -3,7 +3,7 @@
 
 from datetime import date
 from enum import Enum
-from typing import Any, Optional, Type
+from typing import Any
 
 from pydantic.utils import GetterDict
 
@@ -18,15 +18,15 @@ class Carrier(Enum):
 
 
 class Delivery(BaseModel):
-    carrier: Optional[Carrier] = None
-    delivery_date: Optional[date] = None
-    tracking_reference: Optional[str] = None
+    carrier: Carrier | None = None
+    delivery_date: date | None = None
+    tracking_reference: str | None = None
 
     class Config:
         orm_mode = True
 
     @classmethod
-    def _decompose_class(cls: Type["Model"], obj: Any) -> GetterDict:  # noqa: F821
+    def _decompose_class(cls: type["Model"], obj: Any) -> GetterDict:  # noqa: F821
         return {
             "tracking_reference": obj.carrier_tracking_ref or None,
             "delivery_date": obj._get_delivery_date(),

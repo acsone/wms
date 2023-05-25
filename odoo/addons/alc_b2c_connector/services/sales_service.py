@@ -1,7 +1,6 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from typing import List, Optional
 
 from fastapi import Depends, Query
 
@@ -43,7 +42,7 @@ def _create_sale_order(
     response_model_exclude_unset=True,
 )
 def get_sale_orders(
-    ids: Optional[List[int]] = Query(None),
+    ids: list[int] | None = Query(None),
     paging_: Paging = Depends(paging),  # noqa: B008
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
     client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,

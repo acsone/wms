@@ -1,7 +1,6 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from typing import List, Optional
 
 from fastapi import Depends, Query
 
@@ -28,7 +27,7 @@ from .utils import PagedCollection
 )
 def get_products(
     paging_: Paging = Depends(paging),  # noqa: B008
-    skus: Optional[List[str]] = Query(None),
+    skus: list[str] | None = Query(None),
     env: Environment = Depends(authenticated_partner_env),  # noqa: B008
     client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
 ) -> PagedCollection[Product]:

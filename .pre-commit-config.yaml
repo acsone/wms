@@ -314,7 +314,6 @@ repos:
     rev: v0.0.249
     hooks:
       - id: ruff
-        exclude: \/alc_b2c_connector\/services\/.
   - repo: https://github.com/OCA/pylint-odoo
     rev: v8.0.19
     hooks:

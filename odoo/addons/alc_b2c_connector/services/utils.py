@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List, TypeVar
+from typing import TypeVar
 
 from fastapi.security import APIKeyHeader
 from pydantic import BaseModel as PydanticBaseModel
@@ -12,7 +12,7 @@ T = TypeVar("T")
 class PagedCollection(GenericModel, Generic[T]):
 
     size: int
-    data: List[T]
+    data: list[T]
 
 
 class BaseModel(PydanticBaseModel):
@@ -28,7 +28,7 @@ class BaseModel(PydanticBaseModel):
         res = {}
         for field in self.__fields_set__:
             value = values[field]
-            if isinstance(value, List):
+            if isinstance(value, list):
                 value = [self._convert_to_write_field(el) for el in value]
             else:
                 value = self._convert_to_write_field(value)

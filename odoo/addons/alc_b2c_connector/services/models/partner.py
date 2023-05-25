@@ -1,7 +1,7 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from typing import Any, Optional, Type
+from typing import Any
 
 from pydantic.utils import GetterDict
 
@@ -13,22 +13,22 @@ from . import country_code as country, partner_title
 
 
 class PartnerCommon(BaseModel):
-    street2: Optional[str]
-    phone: Optional[str]
-    street: Optional[str]
-    name2: Optional[str] = None
-    country_code: Optional[country.CountryCode]
-    city: Optional[str]
-    zip: Optional[str]
-    title: Optional[partner_title.Title]
-    mobile: Optional[str]
-    note: Optional[str]
-    email: Optional[str]
+    street2: str | None
+    phone: str | None
+    street: str | None
+    name2: str | None = None
+    country_code: country.CountryCode | None
+    city: str | None
+    zip: str | None
+    title: partner_title.Title | None
+    mobile: str | None
+    note: str | None
+    email: str | None
 
 
 class PartnerRequest(PartnerCommon):
-    first_name: Optional[str]
-    last_name: Optional[str]
+    first_name: str | None
+    last_name: str | None
 
 
 class PartnerResponse(PartnerCommon):
@@ -39,7 +39,7 @@ class PartnerResponse(PartnerCommon):
         orm_mode = True
 
     @classmethod
-    def _decompose_class(cls: Type["Model"], obj: Any) -> GetterDict:  # noqa: F821
+    def _decompose_class(cls: type["Model"], obj: Any) -> GetterDict:  # noqa: F821
         return {
             "id": obj._b2c_ref_to_b2c_id(obj.ref),
             "title": partner_title.Title.from_orm(obj.title),
