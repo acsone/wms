@@ -525,6 +525,7 @@ def click_odoo_uninstall():
         "alc_stock_picking_batch_delivery_rounds",  # replaced by alc_stock_release_channel_picking_batch_creation
         "specific_shipping_costs",  # replaced by alc_shipping_fee
         "alc_b2c_to_magento",
+        "base_suspend_security",
     ]
     modules = ",".join(modules_list)
     check_call(["click-odoo-uninstall", "-d", DB_16_POSTMIG, "-m", modules])
