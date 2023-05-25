@@ -87,12 +87,12 @@ msgstr "Étiquettes"
 #: model:ir.model.fields,field_description:alc_stock_release_channel_tag.field_res_users__stock_release_channel_tag_ids
 #: model:ir.model.fields,field_description:alc_stock_release_channel_tag.field_stock_release_channel__stock_release_channel_tag_ids
 msgid "Release channel tags"
-msgstr "Étiquettes de canaux de libération"
+msgstr "Étiquettes de canaux de livraison"
 
 #. module: alc_stock_release_channel_tag
 #: model:ir.model,name:alc_stock_release_channel_tag.model_stock_release_channel
 msgid "Stock Release Channels"
-msgstr "Canaux de libération des stocks"
+msgstr "Canaux de livraison des stocks"
 
 #. module: alc_stock_release_channel_tag
 #: model:ir.model,name:alc_stock_release_channel_tag.model_stock_picking

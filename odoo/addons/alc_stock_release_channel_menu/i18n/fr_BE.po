@@ -24,7 +24,7 @@ msgstr ""
 #. module: alc_stock_release_channel_menu
 #: model:ir.ui.menu,name:alc_stock_release_channel_menu.alc_stock_release_channel_root_menu
 msgid "Release Channels"
-msgstr "Canaux de libération"
+msgstr "Canaux de livraison"
 
 #. module: alc_stock_release_channel_menu
 #: model:ir.ui.menu,name:alc_stock_release_channel_menu.alc_stock_release_channel_setting_menu
