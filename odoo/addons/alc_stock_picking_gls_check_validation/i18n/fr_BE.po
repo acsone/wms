@@ -23,8 +23,6 @@ msgstr "Forcer validation"
 
 #. module: alc_stock_picking_gls_check_validation
 #: model:ir.model.fields,field_description:alc_stock_picking_gls_check_validation.field_stock_picking__gls_pack_in_picking
-#, fuzzy
-#| msgid "Gls Pack In Picking"
 msgid "Gls Pack In Picking"
 msgstr "Pack dans le picking"
 
@@ -42,8 +40,6 @@ msgstr "Transfert"
 
 #. module: alc_stock_picking_gls_check_validation
 #: model:ir.model.fields,field_description:alc_stock_picking_gls_check_validation.field_stock_picking__validate_allowed
-#, fuzzy
-#| msgid "Validate Allowed"
 msgid "Validate Allowed"
 msgstr "Validation autorisée"
 
@@ -57,10 +53,7 @@ msgstr "Vous ne disposez pas des droits pour forcer la validation"
 #. module: alc_stock_picking_gls_check_validation
 #. odoo-python
 #: code:addons/alc_stock_picking_gls_check_validation/models/stock_picking.py:0
-#, fuzzy, python-format
-#| msgid ""
-#| "You cannot validate the picking before all the packs are done "
-#| "(%(picking_names)s)"
+#, python-format
 msgid ""
 "You cannot validate the picking before all the packs are done "
 "(%(picking_names)s)"
