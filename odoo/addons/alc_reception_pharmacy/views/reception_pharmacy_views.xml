@@ -40,29 +40,10 @@
     </field>
   </record>
 
-    <record id="view_reception_pharmacy_line_tree" model="ir.ui.view">
-    <field name="name">reception.pharmacy.line.tree</field>
-    <field name="model">reception.pharmacy.line</field>
-    <field name="arch" type="xml">
-      <tree editable="bottom" create="0">
-          <field name="customer_id" options="{'no_open':True,'no_create':True}" />
-          <field
-          name="partner_shipping_id"
-          options="{'no_open':True,'no_create':True}"
-        />
-          <field name="bin_id" options="{'no_open':True,'no_create':True}" />
-          <field name="lot_id" options="{'no_open':True,'no_create':True}" />
-          <field name="product_qty" options="{'no_open':True,'no_create':True}" />
-          <field name="state" />
-          <button name="print_reception_pharmacy_label" type="object" string="Print" />
-        </tree>
-    </field>
-  </record>
   <record id="reception_pharmacy_action" model="ir.actions.act_window">
     <field name="name">Reception Pharmacy List</field>
     <field name="type">ir.actions.act_window</field>
     <field name="res_model">reception.pharmacy</field>
-    <field name="view_type">form</field>
     <field name="view_mode">tree,form</field>
   </record>
   <menuitem

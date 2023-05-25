@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Sylvain Van Hoof (Okia SPRL)
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # Copyright 2021 ACSONE SA/NV
@@ -7,16 +6,19 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
+from odoo.addons.product.models.product_product import ProductProduct
 from odoo.addons.queue_job.job import identity_exact
+
+from .reception_pharmacy_line import ReceptionPharmacyLine
 
 
 class ReceptionPharmacy(models.Model):
     _name = "reception.pharmacy"
     _rec_name = "date"
+    _description = "Reception pharmacy"
 
     date = fields.Datetime(default=lambda self: fields.Datetime.now(), copy=False)
-    product_id = fields.Many2one(
-        "product.product",
+    product_id = fields.Many2one[ProductProduct](
         string="Product",
         default=lambda self: self.env.ref(
             "alc_reception_pharmacy.product_colis_souverain"
@@ -24,9 +26,8 @@ class ReceptionPharmacy(models.Model):
         required=True,
         domain=lambda s: s._domain_product_id(),
     )
-    line_ids = fields.One2many(
-        "reception.pharmacy.line",
-        "wizard_id",
+    line_ids = fields.One2many[ReceptionPharmacyLine](
+        inverse_name="wizard_id",
         string="Lines",
         states={"done": [("readonly", True)]},
     )
@@ -40,7 +41,9 @@ class ReceptionPharmacy(models.Model):
             (
                 "categ_id",
                 "=",
-                self.env.ref("specific_data.product_categ_colis_souverain").id,
+                self.env.ref(
+                    "alc_product_category_data.product_categ_colis_souverain"
+                ).id,
             )
         ]
 
@@ -55,7 +58,7 @@ class ReceptionPharmacy(models.Model):
             # we delay the validation of the lines to minimize the risk of
             # deadlocks. The validation is done by partner to try to group
             # the lines that should go to the same picking.
-            job_description = _("Reception pharmacy for %s") % partner.name
+            job_description = _("Reception pharmacy for %(name)s", name=partner.name)
             lines.with_delay(
                 description=job_description, identity_key=identity_exact
             ).validate()

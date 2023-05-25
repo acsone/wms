@@ -1,17 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, models
+from odoo import _
+
+from odoo.addons.queue_job.models import queue_job
 
 
-class QueueJob(models.Model):
-    _inherit = "queue.job"
-
-    @api.multi
+class QueueJob(queue_job.QueueJob):
     def related_action_open_reception_pharmacy(self):
-        """Open a form view of the reception pharmacy linked to reception line of the job.
-        """
+        """Open a form view of the reception pharmacy linked to reception line of the job."""
         self.ensure_one()
         model_name = self.model_name
         records = self.env[model_name].browse(self.record_ids).exists()

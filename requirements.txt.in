@@ -23,6 +23,8 @@ odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.co
 odoo-addon-delivery_automatic_package @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/642/head#subdirectory=setup/delivery_automatic_package
 # https://github.com/OCA/delivery-carrier/pull/624 - [FIX] stock_picking_delivery_link: Add view for picking type option
 odoo-addon-stock-picking-delivery-link @ git+https://github.com/oca/delivery-carrier.git@refs/pull/624/head#subdirectory=setup/stock_picking_delivery_link
+# https://github.com/OCA/delivery-carrier/pull/640 - [16.0][MIG] delivery_carrier_partner
+odoo-addon-delivery-carrier-partner @ git+https://github.com/oca/delivery-carrier.git@refs/pull/640/head#subdirectory=setup/delivery_carrier_partner
 
 # wms
 # https://github.com/OCA/wms/pull/609
@@ -47,6 +49,7 @@ odoo-addon-stock-release-channel-propagate-channel-picking @ git+https://github.
 odoo-addon-stock-release-channel-shipment-advice-process-end-time @ git+https://github.com/acsone/wms.git@16.0-stock_release_channel_shipment_advice_process_end_time-sbj#subdirectory=setup/stock_release_channel_shipment_advice_process_end_time
 odoo-addon-stock-release-channel-shipment-advice-toursolver @ git+https://github.com/OCA/wms.git@refs/pull/577/head#subdirectory=setup/stock_release_channel_shipment_advice_toursolver
 odoo-addon-stock-release-channel-geoengine @ git+https://github.com/OCA/wms.git@refs/pull/599/head#subdirectory=setup/stock_release_channel_geoengine
+odoo-addon-stock-release-channel-delivery @ git+https://github.com/OCA/wms.git@refs/pull/636/head#subdirectory=setup/stock_release_channel_delivery
 
 # product-attribute
 # https://github.com/OCA/product-attribute/pull/1192
@@ -125,7 +128,7 @@ odoo-addon-stock-grn @ git+https://github.com/oca/stock-logistics-workflow.git@r
 # server-tools
 # https://github.com/OCA/server-tools/pull/2533 - [16.0][MIG] base_sparse_field_list_support
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@16.0-mig-base_sparse_field_list_support-hda#subdirectory=setup/base_sparse_field_list_support
-odoo-addon-base-partition @ git+https://github.com/OCA/server-tools.git@refs/pull/2615/head#subdirectory=setup/sbase_partition
+odoo-addon-base-partition @ git+https://github.com/OCA/server-tools.git@refs/pull/2615/head#subdirectory=setup/base_partition
 
 # OCA/web
 

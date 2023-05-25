@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="job_function_validate_pharmacy_line" model="queue.job.function">
+    <field name="model_id" ref="alc_reception_pharmacy.model_reception_pharmacy_line" />
+    <field name="method">validate</field>
+    <field
+      name="related_action"
+      eval='{"func_name": "related_action_open_reception_pharmacy"}'
+    />
+    <field
+      name="channel_id"
+      ref="alc_queue_job_background_channel.channel_root_background_process"
+    />
+  </record>
+</odoo>

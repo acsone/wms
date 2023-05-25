@@ -1,16 +1,16 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
 
-from odoo.tests.common import SavepointCase
+from odoo.fields import Command
+from odoo.tests.common import TransactionCase
 
 
-class CommonReceptionPharmacyCase(SavepointCase):
+class CommonReceptionPharmacyCase(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(CommonReceptionPharmacyCase, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(
             context=dict(
                 cls.env.context, tracking_disable=True, test_queue_job_no_delay=True
@@ -25,6 +25,7 @@ class CommonReceptionPharmacyCase(SavepointCase):
                 "zip": "5000",
                 "country_id": cls.env.ref("base.be").id,
                 "type": "delivery",
+                "is_delivered_by_alcyon": True,
             }
         )
 
@@ -48,27 +49,15 @@ class CommonReceptionPharmacyCase(SavepointCase):
                 "code": "TST",
             }
         )
-        cls.warehouse_1.pick_type_id.subcode = "PICK"
+        cls.warehouse_1.pick_type_id.code = "internal"
         cls.bin.location_id = cls.warehouse_1.lot_stock_id.id
         cls.env["stock.location"]._parent_store_compute()
 
-        cls.warehouse_1.pick_type_id.groupbypartner = True
-        cls.warehouse_1.out_type_id.groupbypartner = True
-        cls.delivery_template = cls.env["round.template"].create(
-            {"name": "Unittest delivery template"}
-        )
+        # cls.warehouse_1.pick_type_id.group_pickings = True
+        cls.warehouse_1.out_type_id.group_pickings = True
         cls.carrier = cls.env["delivery.carrier"].search(
-            [("free_if_more_than", "=", False)], limit=1
+            [("free_over", "=", False)], limit=1
         )
-
-        cls.delivery_round_1 = cls.env["round.instance"].create(
-            {
-                "template_id": cls.delivery_template.id,
-                "date": "2020-11-18",
-                "state": "draft",
-            }
-        )
-        cls.carrier.delivery_template_id = cls.delivery_template.id
 
         cls.env["ir.model.data"].create(
             {
@@ -84,32 +73,19 @@ class CommonReceptionPharmacyCase(SavepointCase):
                 "default_code": "987654312",
                 "tracking": "none",
                 "list_price": 20,
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
             }
         )
         cls._set_qty_in_loc_only(cls.product2, 100)
 
-        cls.itinerary = cls.env["round.itinerary"].create(
-            {
-                "name": "Itinerary test",
-                "code": "T17C",
-                "sequence": 22,
-                "partner_position_ids": [
-                    (0, 0, {"sequence": 10, "partner_id": cls.partner.id})
-                ],
-            }
-        )
-        cls.delivery_round_1.itinerary_ids = cls.itinerary
-
     def setUp(self):
-        super(CommonReceptionPharmacyCase, self).setUp()
+        super().setUp()
         # mute logger
         loggers = ["odoo.addons.queue_job.models.base"]
         for logger in loggers:
             logging.getLogger(logger).addFilter(self)
 
-        # pylint: disable=unused-variable
         @self.addCleanup
         def un_mute_logger():
             for logger_ in loggers:
@@ -129,22 +105,13 @@ class CommonReceptionPharmacyCase(SavepointCase):
     @classmethod
     def _set_qty_in_loc_only(cls, product, qty, location=None):
         location = location or cls.env.ref("stock.stock_location_stock")
-        inventory = cls.env["stock.inventory"].create(
-            {"name": "Test", "product_id": product.id, "filter": "product"}
-        )
-        inventory.prepare_inventory()
-        inventory.line_ids.write({"product_qty": 0})
-        cls.env["stock.inventory.line"].create(
+        cls.env["stock.quant"].with_context(inventory_mode=True).create(
             {
-                "inventory_id": inventory.id,
                 "product_id": product.id,
-                "product_uom_id": product.uom_id.id,
-                "product_qty": qty,
+                "inventory_quantity": qty,
                 "location_id": location.id,
             }
-        )
-        inventory.action_done()
-        return inventory
+        ).action_apply_inventory()
 
     @classmethod
     def _create_and_prepare_so(cls):
@@ -156,9 +123,7 @@ class CommonReceptionPharmacyCase(SavepointCase):
                 "partner_invoice_id": cls.partner.id,
                 "partner_shipping_id": cls.partner.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": cls.product2.name,
                             "product_id": cls.product2.id,
@@ -172,20 +137,19 @@ class CommonReceptionPharmacyCase(SavepointCase):
         cls.so1.action_confirm()
 
         cls.picking = cls.so1.mapped("picking_ids").filtered(
-            lambda p: p.picking_type_subcode == "PICK"
+            lambda p: p.picking_type_code == "internal"
         )
 
         cls.picking.action_confirm()
         cls.picking.action_assign()
-        for pack_op in cls.picking.pack_operation_ids:
-            pack_op.qty_done = pack_op.product_qty
-        cls.picking.action_done()
+        for pack_op in cls.picking.move_line_ids:
+            pack_op.qty_done = pack_op.reserved_uom_qty
+        cls.picking._action_done()
         cls.shipping = cls.so1.mapped("picking_ids").filtered(
             lambda p: p.picking_type_code == "outgoing"
         )
 
         cls.shipping.action_confirm()
         cls.shipping.action_assign()
-        for pack_op in cls.shipping.pack_operation_ids:
-            pack_op.qty_done = pack_op.product_qty
-        cls.shipping.delivery_round_id = cls.delivery_round_1.id
+        for pack_op in cls.shipping.move_line_ids:
+            pack_op.qty_done = pack_op.reserved_uom_qty
