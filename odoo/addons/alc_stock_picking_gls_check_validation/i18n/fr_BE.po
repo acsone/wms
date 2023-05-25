@@ -56,6 +56,7 @@ msgstr "Vous ne disposez pas des droits pour forcer la validation"
 msgid ""
 "You cannot validate the picking before all the packs are done "
 "(%(picking_names)s)"
+msgstr ""
 "Vous ne pouvez pas valider le picking avant d'avoir traité toutes les "
 "opérations (%(picking_names)s)"
 
