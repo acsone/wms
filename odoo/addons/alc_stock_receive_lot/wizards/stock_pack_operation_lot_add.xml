@@ -109,7 +109,7 @@
                 <field
                   name="location_dest_id"
                   domain="['|', '|', ('is_reception_wizard', '=', True), ('scrap_location', '=', True),
-                           '&amp;', '&amp;', ('usage', '=', 'internal'), ('id', 'child_of', location_op_dest_id), ('usage', '=', 'view')]"
+                           '&amp;', ('usage', '=', 'internal'), ('id', 'child_of', location_op_dest_id)]"
                   attrs="{'required': [('picking_is_completed', '=', False)]}"
                   options="{'no_create':1}"
                 />

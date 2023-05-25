@@ -3,9 +3,10 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <!-- Config Settings -->
-    <record id="base.main_company" model="res.company">
-        <field name="stock_picking_assign_operator_at_start" eval="1" />
-        <field name="account_tax_one_vat" eval="1" />
-        <field name="stock_move_manage_priority" eval="1" />
-    </record>
+    <function model="res.company" name="write">
+        <value model="res.company" eval="ref('base.main_company')" />
+        <value
+      eval="{'stock_picking_assign_operator_at_start': True, 'account_tax_one_vat': True, 'account_tax_one_vat': True, 'stock_move_manage_priority': True, 'toursolver_backend_id': ref('shipment_advice_planner_toursolver.toursolver_backend_default')}"
+    />
+    </function>
 </odoo>

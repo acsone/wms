@@ -76,6 +76,7 @@
         "alc_stock_release_channel_picking_batch_creation",
         "alc_stock_release_channel_dashboard",
         "alc_stock_release_channel_unlock",
+        "alc_reception_pharmacy",
     ],
     "data": [],
     "demo": [],

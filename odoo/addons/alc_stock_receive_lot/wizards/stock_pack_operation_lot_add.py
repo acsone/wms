@@ -102,7 +102,9 @@ class StockPackOperationLotAdd(models.TransientModel):
                 lot_name = (
                     self.env["stock.lot"]
                     .new({"product_id": wiz.product_id.id})
-                    ._calc_name_for_food(wiz.expiration_date)
+                    ._calc_name_for_food(
+                        wiz.expiration_date, use_default=True, default=lot_name
+                    )
                 )
             wiz.lot_name = lot_name
 

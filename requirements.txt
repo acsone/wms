@@ -38,9 +38,13 @@ MarkupSafe==2.1.2
 num2words==0.5.12
 numpy==1.24.2
 odoo @ git+https://github.com/acsone/odoo.git@b364011c12d74f84d3fc55151e9d071f74b79329
+odoo-addon-account-banking-mandate==16.0.1.0.2.5
+odoo-addon-account-banking-pain-base @ git+https://github.com/acsone/bank-payment.git@29b53b2be9e0b7365f23acdc0e5086ffa3f5eb1c#subdirectory=setup/account_banking_pain_base
+odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/acsone/bank-payment.git@7392fb887f0a72e9d5a8b4e9a8b7588cf3747b25#subdirectory=setup/account_banking_sepa_direct_debit
 odoo-addon-account-invoice-tax-required==16.0.1.0.0.7
 odoo-addon-account-invoice-triple-discount==16.0.1.0.0.2
 odoo-addon-account-payment-mode==16.0.1.1.0.1
+odoo-addon-account-payment-order==16.0.1.1.1.2
 odoo-addon-account-payment-partner==16.0.1.1.1
 odoo-addon-account-payment-sale==16.0.1.0.0.6
 odoo-addon-account-tax-one-vat @ git+https://github.com/acsone/account-invoicing.git@b3c9159ded3630381b4917e63d4c8a1b38ce3ee0#subdirectory=setup/account_tax_one_vat
@@ -51,15 +55,17 @@ odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@859
 odoo-addon-attribute-set @ git+https://github.com/acsone/odoo-pim.git@d8078f7e77f07390200bd321619ee6db5d36727f#subdirectory=setup/attribute_set
 odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@be594cd1855d41772f585e1ec87b14c5eab8cce7#subdirectory=setup/base_attachment_object_storage
 odoo-addon-base-business-document-import @ git+https://github.com/acsone/edi.git@f15198354f32bf9b2c4107659883e6fecbf01e75#subdirectory=setup/base_business_document_import
-odoo-addon-base-delivery-carrier-label==16.0.1.0.0.3
+odoo-addon-base-delivery-carrier-label @ git+https://github.com/acsone/delivery-carrier.git@2b12c8da82ec73a07057f1ccc9ce114afecd52b9#subdirectory=setup/base_delivery_carrier_label
 odoo-addon-base-exception==16.0.1.0.1.3
 odoo-addon-base-geoengine @ git+https://github.com/acsone/geospatial.git@fd0f0e4a52289067c56c95fcbf59979d94d758fc#subdirectory=setup/base_geoengine
+odoo-addon-base-partition @ git+https://github.com/acsone/server-tools.git@e07142b956a496f65fc43796ff2ad50c2fd06f49#subdirectory=setup/base_partition
 odoo-addon-base-partner-sequence==16.0.1.0.0.3
 odoo-addon-base-report-to-printer==16.0.1.1.0.1
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@f75469cfc3ead20b6224195b653ddba735a219b4#subdirectory=setup/base_sparse_field_list_support
 odoo-addon-base-time-window==16.0.1.0.0.3
 odoo-addon-base-ubl @ git+https://github.com/acsone/edi.git@daf8dc3c26f99e7688861f4b30550531660f9b63#subdirectory=setup/base_ubl
 odoo-addon-base-unece==16.0.1.0.0.6
+odoo-addon-delivery-automatic-package @ git+https://github.com/acsone/delivery-carrier.git@9c71352391a0ff36dfd5cda5b945c6ff3f911781#subdirectory=setup/delivery_automatic_package
 odoo-addon-delivery-carrier-account==16.0.1.0.0.4
 odoo-addon-delivery-carrier-info==16.0.1.0.0.2
 odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@db253a1b9dcb48a634cbbd2bc5f10be44a0ed48e#subdirectory=setup/delivery_carrier_label_gls

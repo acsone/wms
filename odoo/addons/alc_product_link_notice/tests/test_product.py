@@ -1,23 +1,23 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import unittest
+from vcr_unittest import VCRTestCase
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestProduct(SavepointCase):
+class TestProduct(VCRTestCase, TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestProduct, cls).setUpClass()
+        super().setUpClass()
+        cls.lang = (
+            cls.env["res.lang"]
+            .with_context(active_test=False)
+            .search([("code", "=", "fr_FR")])
+        )
+        cls.env["res.lang"]._activate_lang("fr_FR")
+        cls.env["ir.module.module"]._load_module_terms(["base"], ["fr_FR"])
 
-        Langs = cls.env["res.lang"].with_context(active_test=False)
-        cls.lang = Langs.search([("code", "=", "fr_FR")])
-        cls.lang.active = True
-        cls.env["ir.translation"].load_module_terms(["base"], [cls.lang.code])
-
-    @unittest.skip("Online check fails from CI")
     def test_flow(self):
         vals_product = {"name": "P", "link_info": "not_a_link", "type": "consu"}
         product = self.env["product.template"].create(vals_product)

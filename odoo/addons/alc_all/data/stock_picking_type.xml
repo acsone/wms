@@ -24,12 +24,20 @@
     />
     <value eval="{'set_delivery_package_type_on_put_in_pack': True}" />
   </function>
-  <!-- set sequence VLB/PICK on picking type Pick Aliments -->
+  <!-- set sequence VLB/PICK on picking type Pick Aliments / Pick M/ Pick frigo/ Pick M/ Pick G/ Pick matériel / Pick Zone inconnu -->
   <function model="stock.picking.type" name="write">
     <value
       model="stock.picking.type"
-      eval="[ref('alc_stock_picking_type_aliment.stock_picking_type_ali')]"
+      eval="[ref('alc_stock_picking_type_aliment.stock_picking_type_ali'), ref('__setup__.stock_picking_type_froid'), ref('alc_shopfloor.stock_picking_type_medoc'), ref('__setup__.stock_picking_type_materiel')]"
     />
+    <value
+      model="ir.sequence"
+      eval="{'sequence_id': obj().search([('prefix', '=', 'VLB/PICK/')]) or ref('stock.seq_picking_internal')}"
+    />
+  </function>
+
+  <function model="stock.picking.type" name="write">
+    <value model="stock.picking.type" eval="obj().browse([3, 24]).exists().ids" />
     <value
       model="ir.sequence"
       eval="{'sequence_id': obj().search([('prefix', '=', 'VLB/PICK/')]) or ref('stock.seq_picking_internal')}"

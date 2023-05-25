@@ -15,6 +15,7 @@ class StockPicking(PickingBase):
         compute="_compute_can_unreserve_moves", default=True
     )
     quant_reserved_exist = fields.Boolean(compute="_compute_quant_reserved_exist")
+    is_put_in_pack_done = fields.Boolean("Put in Pack done", default=False)
 
     @api.depends("gls_package_ref")
     def _compute_can_unreserve_moves(self):

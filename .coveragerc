@@ -132,14 +132,12 @@ omit =
     odoo/addons/alc_product_consolidated_price_report/*
     odoo/addons/alc_product_flattened_data/*
     odoo/addons/alc_product_label_printer/*
-    odoo/addons/alc_product_link_notice/*
     odoo/addons/alc_product_mto/*
     odoo/addons/alc_product_packaging_stock_reserve/*
     odoo/addons/alc_product_promotion_mailing/*
     odoo/addons/alc_product_search_cnk/*
     odoo/addons/alc_purchase_order_import_ubl/*
     odoo/addons/alc_purchase_order_ubl/*
-    odoo/addons/alc_reception_pharmacy/*
     odoo/addons/alc_reception_pharmacy_geo_delivery_rounds/*
     odoo/addons/alc_registration/*
     odoo/addons/alc_registration_eshop_service/*
@@ -193,7 +191,6 @@ omit =
     odoo/addons/alc_stock_location_barcode_search/*
     odoo/addons/alc_stock_move_direction/*
     odoo/addons/alc_stock_picking_assignable/*
-    odoo/addons/alc_stock_picking_gls_check_validation/*
     odoo/addons/alc_stock_picking_number_package/*
     odoo/addons/alc_stock_picking_wave_type/*
     odoo/addons/alc_stock_put_remaining_to_reserve/*
