@@ -1,8 +1,11 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
+from odoo import Command, api
+
+from odoo.addons.alc_pricelist_discount.models.product_pricelist import (
+    ProductPricelist as ProductPricelistBase,
+)
 
 
 def is_useless_item_vals(item_vals):
@@ -16,22 +19,21 @@ def is_useless_item_vals(item_vals):
     return useless
 
 
-class ProductPricelist(models.Model):
-    _inherit = "product.pricelist"
-
-    @api.model
-    def create(self, vals):
+class ProductPricelist(ProductPricelistBase):
+    @api.model_create_multi
+    def create(self, vals_list):
         # slight optimisation: prevent the addition of a useless global item
         # note that 'useless items' might be useful (by preventing discounts from
         # applying on a certain product) but if we are provided with only useless items
         # we assume it was given by the interface
-        if "item_ids" not in vals or not (
-            [
-                item
-                for item in vals["item_ids"]
-                if item[0] != 0  # in a create, one2many create command
-                or not is_useless_item_vals(item[2])
-            ]
-        ):
-            vals["item_ids"] = [(6, 0, [])]
-        return super(ProductPricelist, self).create(vals)
+        for vals in vals_list:
+            if "item_ids" not in vals or not (
+                [
+                    item
+                    for item in vals["item_ids"]
+                    if item[0] != 0  # in a create, one2many create command
+                    or not is_useless_item_vals(item[2])
+                ]
+            ):
+                vals["item_ids"] = [Command.set([])]
+        return super().create(vals_list)

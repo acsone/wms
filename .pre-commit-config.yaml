@@ -103,7 +103,6 @@ exclude: |
   ^odoo/addons/alc_price_cache_exclusive/|
   ^odoo/addons/alc_price_cache_import/|
   ^odoo/addons/alc_pricing/|
-  ^odoo/addons/alc_pricing_constraints/|
   ^odoo/addons/alc_print_all_deliveryslip/|
   ^odoo/addons/alc_product_abc_classification_picking_zone/|
   ^odoo/addons/alc_product_audit/|
