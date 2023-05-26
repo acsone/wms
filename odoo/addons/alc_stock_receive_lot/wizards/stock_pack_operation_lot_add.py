@@ -178,11 +178,18 @@ class StockPackOperationLotAdd(models.TransientModel):
     def _add_move_line(self) -> StockMoveLine:
         return self.env["stock.move.line"].create(self._prepare_move_line_values())
 
-    def _add(self) -> None:
+    def _is_quantity_zero(self) -> bool:
         precision = self.move_line_id.product_uom_id.rounding
-        quantity_zero = bool(
-            float_compare(self.qty, 0, precision_rounding=precision) <= 0
-        )
+        if precision:
+            quantity_zero = bool(
+                float_compare(self.qty, 0, precision_rounding=precision) <= 0
+            )
+        else:
+            quantity_zero = self.qty <= 0
+        return quantity_zero
+
+    def _add(self) -> None:
+        quantity_zero = self._is_quantity_zero()
         if quantity_zero and not self.is_transfer:
             raise UserError(_("Quantity must be greater than 0"))
         if quantity_zero and self.is_transfer:
