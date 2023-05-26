@@ -32,15 +32,6 @@ class ReceivePharmacyProducts(models.TransientModel):
     lot_name = fields.Char(string="Lot")
     state = fields.Selection(related="reception_pharmacy_id.state")
 
-    @api.model
-    def default_get(self, fields_list):
-        defaults = super().default_get(fields_list)
-        active_id = self.env.context.get("active_id")
-        if active_id is None:
-            return {}
-        defaults["reception_pharmacy_id"] = active_id
-        return defaults
-
     @api.onchange("customer_id")
     def _onchange_customer_id(self):
         self.bin_id = False
