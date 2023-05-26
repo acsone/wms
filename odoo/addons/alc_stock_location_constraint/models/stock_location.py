@@ -2,7 +2,6 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-
 from odoo.addons.stock.models.stock_location import Location
 
 
@@ -36,14 +35,15 @@ class StockLocation(Location):
                         FROM
                             stock_location
                         WHERE
-                            zone_location_id IS NOT DISTINCT FROM NEW.zone_location_id
-                            AND area_location_id IS NOT DISTINCT FROM NEW.area_location_id
-                            AND corridor IS NOT DISTINCT FROM NEW.corridor
-                            AND rack IS NOT DISTINCT FROM NEW.rack
-                            AND level IS NOT DISTINCT FROM NEW.level
-                            AND posx IS NOT DISTINCT FROM NEW.posx
-                            AND posy IS NOT DISTINCT FROM NEW.posy
-                            AND posz IS NOT DISTINCT FROM NEW.posz
+                            (zone_location_id IS NOT NULL
+                            AND zone_location_id IS NOT DISTINCT FROM NEW.zone_location_id)
+                            AND (area_location_id IS NOT NULL AND area_location_id IS NOT DISTINCT FROM NEW.area_location_id)
+                            AND (corridor IS NOT NULL AND corridor IS NOT DISTINCT FROM NEW.corridor)
+                            AND (rack IS NOT NULL AND rack IS NOT DISTINCT FROM NEW.rack)
+                            AND (level IS NOT NULL AND level IS NOT DISTINCT FROM NEW.level)
+                            AND ((posx IS NOT NULL OR posy <> 0) AND posx IS NOT DISTINCT FROM NEW.posx)
+                            AND ((posy IS NOT NULL OR posy <> 0) AND posy IS NOT DISTINCT FROM NEW.posy)
+                            AND ((posz IS NOT NULL OR posz <> 0) AND posz IS NOT DISTINCT FROM NEW.posz)
                             AND id IS DISTINCT FROM NEW.id
                         LIMIT 1
                     )
@@ -51,14 +51,15 @@ class StockLocation(Location):
                         SELECT name, id INTO duplicate_name, duplicate_id
                         FROM stock_location
                         WHERE
-                            zone_location_id IS NOT DISTINCT FROM NEW.zone_location_id
-                            AND area_location_id IS NOT DISTINCT FROM NEW.area_location_id
-                            AND corridor IS NOT DISTINCT FROM NEW.corridor
-                            AND rack IS NOT DISTINCT FROM NEW.rack
-                            AND level IS NOT DISTINCT FROM NEW.level
-                            AND posx IS NOT DISTINCT FROM NEW.posx
-                            AND posy IS NOT DISTINCT FROM NEW.posy
-                            AND posz IS NOT DISTINCT FROM NEW.posz
+                            (zone_location_id IS NOT NULL
+                            AND zone_location_id IS NOT DISTINCT FROM NEW.zone_location_id)
+                            AND (area_location_id IS NOT NULL AND area_location_id IS NOT DISTINCT FROM NEW.area_location_id)
+                            AND (corridor IS NOT NULL AND corridor IS NOT DISTINCT FROM NEW.corridor)
+                            AND (rack IS NOT NULL AND rack IS NOT DISTINCT FROM NEW.rack)
+                            AND (level IS NOT NULL AND level IS NOT DISTINCT FROM NEW.level)
+                            AND ((posx IS NOT NULL OR posy <> 0) AND posx IS NOT DISTINCT FROM NEW.posx)
+                            AND ((posy IS NOT NULL OR posy <> 0) AND posy IS NOT DISTINCT FROM NEW.posy)
+                            AND ((posz IS NOT NULL OR posz <> 0) AND posz IS NOT DISTINCT FROM NEW.posz)
                             AND id IS DISTINCT FROM NEW.id
                         LIMIT 1;
                         RAISE EXCEPTION USING ERRCODE = 'unique_violation',
