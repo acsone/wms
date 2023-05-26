@@ -18,7 +18,13 @@
       <form string="Pharmacy Reception">
         <header>
           <button name="validate" string="Transfer" type="object" states="draft" />
-          <button name="button_receive" string="Receive" type="object" states="draft" />
+          <button
+            name="%(receive_pharmacy_products_act_window)d"
+            string="Receive"
+            type="action"
+            states="draft"
+            context="{'default_reception_pharmacy_id': active_id}"
+          />
           <field name="state" widget="statusbar" statusbar_visible="draft,done" />
         </header>
         <sheet>

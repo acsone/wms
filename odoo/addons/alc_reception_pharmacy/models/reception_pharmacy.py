@@ -66,9 +66,3 @@ class ReceptionPharmacy(models.Model):
         self.env.user.notify_info(
             _("Reception pharmacy : lines are validated in background")
         )
-
-    def button_receive(self):
-        self.ensure_one()
-        return self.env.ref(
-            "alc_reception_pharmacy.receive_pharmacy_products_act_window"
-        ).read()[0]
