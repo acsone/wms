@@ -510,6 +510,7 @@ def click_odoo_uninstall():
         "stock_mts_mto_rule",
         "stock_disable_force_availability_button",
         "alc_sale_channel_stock_move",
+        "sale_order_price_recalculation",
         "alc_sale_order_price_recalculation",  # merged into alc_pricelist_discount
         "sale_delay",  # replaced by alc_sale_auto_confirm_max_delay
         "sale_internal_confirmation_mail",  # replaced by alc_sale_internal_confirmation_mail
