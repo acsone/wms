@@ -253,7 +253,7 @@ class TestPricelistItemFlow(TestPrices):
             "min_quantity": 2,
         }
         expected_price_cache = [expected_cache_element_1]
-        self.assertEqual(price_cache, expected_price_cache)
+        self.assertEqual(self._remove_extra_keys(price_cache), expected_price_cache)
 
         # given
         vals_item_no_min = self._get_item_vals(discount_pricelist, percent_price=5)
@@ -270,7 +270,9 @@ class TestPricelistItemFlow(TestPrices):
         expected_price_cache += [expected_cache_element_2]
         # we check set equivalence of dicts, but dicts are unhashable
         self.assertEqual(len(price_cache), len(expected_price_cache))
-        self.assertTrue(all(x in price_cache for x in expected_price_cache))
+        self.assertTrue(
+            all(x in self._remove_extra_keys(price_cache) for x in expected_price_cache)
+        )
 
         # given
         vals_item_min_qty_20 = self._get_item_vals(
@@ -294,7 +296,9 @@ class TestPricelistItemFlow(TestPrices):
         expected_price_cache += [expected_cache_element_3]
         # we check set equivalence of dicts, but dicts are unhashable
         self.assertEqual(len(price_cache), len(expected_price_cache))
-        self.assertTrue(all(x in price_cache for x in expected_price_cache))
+        self.assertTrue(
+            all(x in self._remove_extra_keys(price_cache) for x in expected_price_cache)
+        )
 
     @freeze_time("2022-01-01 12:00:00")
     @mute_logger("odoo.addons.queue_job.delay")
@@ -324,14 +328,16 @@ class TestPricelistItemFlow(TestPrices):
             "date_end": None,
             "min_quantity": 2,
         }
-        self.assertEqual(price_cache, [expected_cache_element])
+        self.assertEqual(self._remove_extra_keys(price_cache), [expected_cache_element])
 
         # when: we make it a normal element by removing the minimum quantity
         item_min_qty.write({"min_quantity": 1})
         # then
         price_cache_updated = self.product_1.price_cache[role]
         expected_cache_element.pop("min_quantity")
-        self.assertEqual(price_cache_updated, [expected_cache_element])
+        self.assertEqual(
+            self._remove_extra_keys(price_cache_updated), [expected_cache_element]
+        )
 
     @freeze_time("2022-01-01 12:00:00")
     @mute_logger("odoo.addons.queue_job.delay")
@@ -361,7 +367,7 @@ class TestPricelistItemFlow(TestPrices):
             "date_end": None,
         }
         expected_price_cache = [expected_cache_element]
-        self.assertEqual(price_cache, expected_price_cache)
+        self.assertEqual(self._remove_extra_keys(price_cache), expected_price_cache)
 
         vals = {
             "min_quantity": 5,
@@ -372,7 +378,9 @@ class TestPricelistItemFlow(TestPrices):
 
         price_cache_updated = self.product_1.price_cache[role]
         expected_cache_element["min_quantity"] = 5
-        self.assertEqual(price_cache_updated, [expected_cache_element])
+        self.assertEqual(
+            self._remove_extra_keys(price_cache_updated), [expected_cache_element]
+        )
 
     @freeze_time("2022-01-01 12:00:00")
     @mute_logger("odoo.addons.queue_job.delay")
@@ -425,4 +433,4 @@ class TestPricelistItemFlow(TestPrices):
             "min_quantity": 2,
         }
         expected_price_cache = [expected_cache_element_1, expected_cache_element_2]
-        self.assertEqual(price_cache, expected_price_cache)
+        self.assertEqual(self._remove_extra_keys(price_cache), expected_price_cache)

@@ -47,3 +47,16 @@ class TestPrices(TransactionCase, JobMixin):
             "item_ids": [(0, 0, item) for item in item_val_list],
         }
         return dict(vals, **kwargs)
+
+    @classmethod
+    def _remove_extra_keys(cls, price_caches):
+        """Remove extra keys that arn't in this module scope."""
+        expected_keys = ["discount", "date_start", "id", "date_end", "min_quantity"]
+        return [
+            {
+                key: price_cache[key]
+                for key in price_cache.keys()
+                if key in expected_keys
+            }
+            for price_cache in price_caches
+        ]

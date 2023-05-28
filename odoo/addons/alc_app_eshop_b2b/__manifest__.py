@@ -12,6 +12,7 @@
     "depends": [
         # ALC
         "alc_price_cache",
+        "alc_price_cache_exclusive",
     ],
     "data": [],
     "demo": [],
