@@ -1,15 +1,15 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 from odoo.addons.queue_job.tests.common import JobMixin
 
 
-class TestPrices(SavepointCase, JobMixin):
+class TestPrices(TransactionCase, JobMixin):
     @classmethod
     def setUpClass(cls):
-        super(TestPrices, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
         cls.cat_1 = cls.env["product.category"].create({"name": "C1"})

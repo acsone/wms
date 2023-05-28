@@ -19,7 +19,9 @@ class ProductProduct(ProductProductBase):
                 rules |= rule
         return rules
 
-    def _get_best_applicable_pricelist_item(self, date, quantity, pricelists, currency):
+    def _get_best_applicable_pricelist_item_id(
+        self, date, quantity, pricelists, currency
+    ):
         if not self:
             return False
         self.ensure_one()
@@ -32,6 +34,13 @@ class ProductProduct(ProductProductBase):
         if not price_by_rule:
             return False
         return min(price_by_rule.items(), key=lambda item: item[1])[0]
+
+    def _get_best_applicable_pricelist_item(self, date, quantity, pricelists, currency):
+        return self.env["product.pricelist.item"].browse(
+            self._get_best_applicable_pricelist_item_id(
+                date, quantity, pricelists, currency
+            )
+        )
 
     def _prepare_sellers(self, params=False):
         sellers = super()._prepare_sellers(params)

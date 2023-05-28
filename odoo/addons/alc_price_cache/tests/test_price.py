@@ -11,7 +11,7 @@ from .common import TestPrices
 
 
 class TestPricesFlow(TestPrices):
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_create_pricelist(self):
         vals_item_2b = {
             "applied_on": "2b_product_price_category",
@@ -48,9 +48,9 @@ class TestPricesFlow(TestPrices):
         self.assertFalse(price_key in self.product_1.price_cache)
         self.assertTrue(discount_key in self.product_1.price_cache)
         discount_pricelist.unlink()
-        self.assertFalse(discount_key in self.product_1.price_cache)
+        self.assertFalse(self.product_1.price_cache)
 
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_pricelist_update(self):
         vals_item_3_global = self._get_item_vals()  # global 10% discount
         vals = self._get_pricelist_vals("T", [vals_item_3_global])
@@ -71,21 +71,23 @@ class TestPricesFlow(TestPrices):
         self.assertTrue(self.product_1.price_cache[price_key][0]["id"], item.id)
 
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_pricelist_date_witnesses_none(self):
         """If there is no timed item, today is a good witness."""
         items = [self._get_item_vals()]
         vals = self._get_pricelist_vals("Date witness 1", items)
         pricelist = self.model_pl_nodelay.create(vals)
 
-        witnesses = pricelist.get_date_witnesses()
+        witnesses = pricelist._get_date_witnesses()
 
         self.assertEqual(witnesses, {Date.from_string("2022-01-01")})
 
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_create_limited_discount_pricelist(self):
         """When we create a discount pricelist, we only recompute necessary items.
-         No global item."""
+
+        No global item.
+        """
         vals_item_1 = {
             "applied_on": "0_product_variant",
             "product_id": self.product_1.id,
@@ -101,7 +103,7 @@ class TestPricesFlow(TestPrices):
 
         price_key = pricelist.discount_role_name
         self.assertTrue(price_key in self.product_1.price_cache)
-        self.assertFalse(price_key in self.product_2.price_cache)
+        self.assertFalse(self.product_2.price_cache)
 
         # now we add an item on product2; that should work as expected
         vals_item_2 = {
@@ -117,7 +119,7 @@ class TestPricesFlow(TestPrices):
         self.assertEqual(self.product_2.price_cache[price_key][0]["id"], item_2.id)
 
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_pricelist_date_witnesses(self):
         """Start should be here, as well as the date after each end."""
         items = [
@@ -127,7 +129,7 @@ class TestPricesFlow(TestPrices):
         vals = self._get_pricelist_vals("Date witness 1", items)
         pricelist = self.model_pl_nodelay.create(vals)
 
-        witnesses = pricelist.get_date_witnesses()
+        witnesses = pricelist._get_date_witnesses()
 
         expected = {"2022-01-01", "2022-02-03", "2022-02-16", "2022-02-28"}
-        self.assertEqual(witnesses, {Date.from_string(s) for s in expected})
+        self.assertSetEqual(witnesses, {Date.from_string(s) for s in expected})
