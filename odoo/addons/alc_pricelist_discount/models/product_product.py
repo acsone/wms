@@ -1,6 +1,8 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from collections import defaultdict
+
 from odoo.addons.product.models.product_product import (
     ProductProduct as ProductProductBase,
 )
@@ -25,11 +27,20 @@ class ProductProduct(ProductProductBase):
         if not self:
             return False
         self.ensure_one()
+        rules_applied_on = defaultdict(lambda: self.env["product.pricelist.item"])
+        # group candidate rule by applied on and evaluate the specific application
+        # if a discount applied on product is less than the global discount we want
+        # to get it any way.
+        for rule in self._get_applicable_pricelist_item(date, quantity, pricelists):
+            rules_applied_on[rule.applied_on] |= rule
+        if not rules_applied_on:
+            return False
+        specific_applied_on = sorted(rules_applied_on.keys())[0]
         price_by_rule = {
             rule.id: rule._compute_price(
                 self, quantity, self.uom_id, date, currency=currency
             )
-            for rule in self._get_applicable_pricelist_item(date, quantity, pricelists)
+            for rule in rules_applied_on[specific_applied_on]
         }
         if not price_by_rule:
             return False
