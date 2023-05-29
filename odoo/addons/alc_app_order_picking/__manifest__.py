@@ -78,6 +78,7 @@
         "alc_stock_release_channel_unlock",
         "alc_reception_pharmacy",
         "alc_reception_pharmacy_printing",
+        "alc_stock_security",
     ],
     "data": [],
     "demo": [],
