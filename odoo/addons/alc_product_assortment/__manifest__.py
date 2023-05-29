@@ -2,19 +2,17 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc App Eshop B2b",
+    "name": "Alc Product Assortment",
     "description": """
-        Gather all B2B related modules for Alcyon""",
+        Add a group to manage product assortment""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": [
-        # ALC
-        "alc_price_cache",
-        "alc_price_cache_exclusive",
-        "alc_product_assortment",
+    "depends": ["product_assortment"],
+    "data": [
+        "security/res_groups.xml",
+        "views/product_assortment.xml",
     ],
-    "data": [],
     "demo": [],
 }

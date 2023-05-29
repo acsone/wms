@@ -132,5 +132,6 @@
         "alc_b2c_connector",
         "alc_product_link_notice",
         "alc_pricing_constraints",
+        "alc_partner_security",
     ],
 }
