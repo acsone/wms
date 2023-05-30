@@ -288,7 +288,7 @@
                           </td>
                         </tr>
                         <tr t-if='current_product.packaging_ids'>
-                          <td>Unit</td>
+                          <td>Packaging</td>
                           <td>
                             <div
                               hidden="true"
@@ -314,7 +314,7 @@
                           </td>
                         </tr>
                         <tr t-if='current_product.packaging_ids'>
-                          <td>Ordered qty of unit</td>
+                          <td>Packaging Quantity</td>
                           <td>
                             <input
                               type="number"
