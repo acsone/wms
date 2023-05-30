@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_reception_pharmacy_line_tree" model="ir.ui.view">
+    <field
+      name="name"
+    >reception.pharmacy.line.tree (in alc_reception_pharmacy_print)</field>
+    <field name="model">reception.pharmacy.line</field>
+    <field
+      name="inherit_id"
+      ref="alc_reception_pharmacy.view_reception_pharmacy_line_tree"
+    />
+    <field name="arch" type="xml">
+        <field name="state" position="after">
+            <button
+          name="print_reception_pharmacy_label"
+          type="object"
+          string="Print"
+          icon="fa-print"
+        />
+        </field>
+    </field>
+  </record>
+</odoo>
