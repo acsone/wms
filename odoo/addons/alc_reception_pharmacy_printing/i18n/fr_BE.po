@@ -157,24 +157,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy_printing.pharmacy_lot_label
 msgid ""
 "^FS\\r\n"
-"^FO32,70^A0N,29,31^FDClient:^FS\\r\n"
-"^FO120,68^A0N,34,28^FD"
-msgstr ""
-
-#. module: alc_reception_pharmacy_printing
-#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy_printing.pharmacy_lot_label
-msgid ""
-"^FS\\r\n"
 "^FO420,150\\r\n"
 "^BQN,2,6\\r\n"
 "^FDQA,"
-msgstr ""
-
-#. module: alc_reception_pharmacy_printing
-#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy_printing.pharmacy_lot_label
-msgid ""
-"^FS\\r\n"
-"^FO420,33^A0N,29,31^FD"
 msgstr ""
 
 #. module: alc_reception_pharmacy_printing
@@ -190,5 +175,6 @@ msgid ""
 "^XA\n"
 "^PRC\n"
 "^LH0,0^FS\\r\n"
-"^FO32,33^A0N,29,31^FD"
+"^FO32,70^A0N,29,31^FDClient:^FS\\r\n"
+"^FO120,68^A0N,34,28^FD"
 msgstr ""
