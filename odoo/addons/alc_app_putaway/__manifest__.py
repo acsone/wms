@@ -42,5 +42,8 @@
         "alc_product_storage_temperature",
         "alc_product_dimensions_missing",
         "alc_product_barcode_required",
+        "alc_reception_pharmacy",
+        "alc_reception_pharmacy_printing",
+        "alc_reception_pharmacy_geo_release_channel",
     ],
 }

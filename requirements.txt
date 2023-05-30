@@ -72,6 +72,7 @@ odoo-addon-delivery-carrier-account==16.0.1.0.0.4
 odoo-addon-delivery-carrier-info==16.0.1.0.0.2
 odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@db253a1b9dcb48a634cbbd2bc5f10be44a0ed48e#subdirectory=setup/delivery_carrier_label_gls
 odoo-addon-delivery-carrier-max-weight-constraint==16.0.1.0.1
+odoo-addon-delivery-carrier-partner @ git+https://github.com/acsone/delivery-carrier.git@3979cb4a874034236ca189edbe213e293f2befa2#subdirectory=setup/delivery_carrier_partner
 odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.com/acsone/delivery-carrier.git@628d15f465d02c468772d7f92fe7c3e3eebd3c18#subdirectory=setup/delivery_estimated_package_quantity_by_weight
 odoo-addon-delivery-package-type-number-parcels==16.0.1.0.1
 odoo-addon-delivery-procurement-group-carrier==16.0.1.0.0.2
@@ -183,6 +184,7 @@ odoo-addon-stock-quant-package-dimension==16.0.1.0.0.2
 odoo-addon-stock-quant-package-product-packaging==16.0.1.0.1
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@0b095fe49e1cb0ed08c680d69e082fb001df9214#subdirectory=setup/stock_release_channel
 odoo-addon-stock-release-channel-auto-release==16.0.1.0.1
+odoo-addon-stock-release-channel-delivery @ git+https://github.com/acsone/wms.git@0dc95abcfa52445f88dd39c38c96b8f318e329e2#subdirectory=setup/stock_release_channel_delivery
 odoo-addon-stock-release-channel-geoengine @ git+https://github.com/acsone/wms.git@a9d8af8190810f0736d6ca9b1e66bf1de8678c9a#subdirectory=setup/stock_release_channel_geoengine
 odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@8f2038535412a6fc13f34c30793da926d9ee5a73#subdirectory=setup/stock_release_channel_process_end_time
 odoo-addon-stock-release-channel-propagate-channel-picking @ git+https://github.com/acsone/wms.git@3c19be271b7705388ed90354f693b32c7399a656#subdirectory=setup/stock_release_channel_propagate_channel_picking

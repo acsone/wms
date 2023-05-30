@@ -527,6 +527,7 @@ def click_odoo_uninstall():
         "specific_shipping_costs",  # replaced by alc_shipping_fee
         "alc_b2c_to_magento",
         "base_suspend_security",
+        "alc_reception_pharmacy_geo_delivery_rounds",  # replaced by alc_reception_pharmacy_geo_release_channel
     ]
     modules = ",".join(modules_list)
     check_call(["click-odoo-uninstall", "-d", DB_16_POSTMIG, "-m", modules])
