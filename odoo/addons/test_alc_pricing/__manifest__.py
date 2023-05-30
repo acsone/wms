@@ -3,8 +3,8 @@
 
 
 {
-    "name": "Alcyon Pricing",
-    "description": """Alcyon Pricing:
+    "name": "Test: Alcyon Pricing",
+    "description": """Test Alcyon Pricing:
     Module grouping price functionality.
     Since triple discounts, supplier discounts and other features cannot be fully tested
     without grouping all these dependencies.
