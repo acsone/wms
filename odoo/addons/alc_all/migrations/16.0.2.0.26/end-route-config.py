@@ -10,6 +10,9 @@ def _configure_route(env):
             "no_backorder_at_release": True,
         }
     )
+    route.rule_ids.filtered(
+        lambda rule: rule.location_dest_id.usage == "customer"
+    ).write({"propagate_carrier": True})
 
 
 @openupgrade.migrate()
