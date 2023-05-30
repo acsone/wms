@@ -1,6 +1,7 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo import Command
 from odoo.exceptions import ValidationError
 
 from .common import TestConstraints
@@ -50,3 +51,21 @@ class TestConstraintsFlow(TestConstraints):
         vals["product_id"] = self.product.id
         with self.assertRaises(ValidationError):
             self.env["product.pricelist.item"].create(vals)
+
+    def test_pricelist_creation(self):
+        pricelist = self.env["product.pricelist"].create(
+            {
+                "name": "pricelist",
+                "item_ids": [
+                    (0, 0, {"compute_price": "percentage", "percent_price": 0}),
+                    Command.create(
+                        {
+                            "compute_price": "formula",
+                            "price_surcharge": 0,
+                            "price_discount": 0,
+                        }
+                    ),
+                ],
+            }
+        )
+        self.assertFalse(pricelist.item_ids)

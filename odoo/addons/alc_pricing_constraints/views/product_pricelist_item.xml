@@ -3,7 +3,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
   <record model="ir.ui.view" id="view_product_pricelist_item_tree">
-    <field name="name">product.pricelist.item.tree.all</field>
     <field name="model">product.pricelist.item</field>
     <field name="priority" eval="116" />
     <field name="arch" type="xml">
@@ -19,7 +18,6 @@
       <field name="name">Pricelists Items</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">product.pricelist.item</field>
-      <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
       <field name="view_id" ref="view_product_pricelist_item_tree" />
   </record>
