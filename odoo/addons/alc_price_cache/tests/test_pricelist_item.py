@@ -11,9 +11,10 @@ from .common import TestPrices
 
 
 class TestPricelistItemFlow(TestPrices):
-    """Because of freeze_gun, all jobs have the same created_date; since _order
-       is on created_date DESC, that means recordsets are nondeterministic without
-       a call to sort by id.
+    """Because of freeze_gun, all jobs have the same created_date; since _order.
+
+    is on created_date DESC, that means recordsets are nondeterministic without
+    a call to sort by id.
     """
 
     @freeze_time("2022-01-01 12:00:00")
@@ -33,7 +34,7 @@ class TestPricelistItemFlow(TestPrices):
         self.assertTrue(item.is_past)
         queue_job = job_counter.search_created()
         self.assertEqual(len(queue_job), 2)
-        expected = {"price-date-witness-1": [Date.from_string("2022-1-1")]}
+        expected = {"price-date-witness-1": [Date.from_string("2022-01-01")]}
         last_job = max(queue_job, key=lambda x: x.id)
         self.assertEqual(last_job.kwargs["dates"], expected)
 
@@ -81,7 +82,7 @@ class TestPricelistItemFlow(TestPrices):
         # self.assertEqual(last_job.record_ids, self.product_1.ids)
 
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_no_delay(self):
         # given
         vals = self._get_pricelist_vals("nodelay", [])
@@ -90,10 +91,10 @@ class TestPricelistItemFlow(TestPrices):
         # then: no product specific item
         price_cache = self.product_1.price_cache[pricelist.role_name]
         expected_price_cache = {
-            u"price": 10,
-            u"date_start": None,
-            u"id": None,
-            u"date_end": None,
+            "price": 10,
+            "date_start": None,
+            "id": None,
+            "date_end": None,
         }
         self.assertEqual(price_cache, [expected_price_cache])
 
@@ -108,10 +109,10 @@ class TestPricelistItemFlow(TestPrices):
         # then
         price_cache = self.product_1.price_cache[pricelist.role_name]
         expected_price_cache = {
-            u"price": 9.0,
-            u"date_start": None,
-            u"id": item.id,
-            u"date_end": None,
+            "price": 9.0,
+            "date_start": None,
+            "id": item.id,
+            "date_end": None,
         }
         self.assertEqual(price_cache, [expected_price_cache])
 
@@ -126,17 +127,17 @@ class TestPricelistItemFlow(TestPrices):
         price_cache_sorted = sorted(price_cache, key=lambda x: x["price"])
         expected_price_cache = [
             {
-                u"price": 5.0,
-                u"date_start": u"2022-02-02",
-                u"id": item.id,
-                u"date_end": None,
+                "price": 5.0,
+                "date_start": "2022-02-02 00:00:00",
+                "id": item.id,
+                "date_end": None,
             },
-            {u"price": 10.0, u"date_start": None, u"id": None, u"date_end": None},
+            {"price": 10.0, "date_start": None, "id": None, "date_end": None},
         ]
         self.assertEqual(price_cache_sorted, expected_price_cache)
 
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_no_delay_price_category(self):
         # given
         vals = self._get_pricelist_vals("nodelay", [])
@@ -146,10 +147,10 @@ class TestPricelistItemFlow(TestPrices):
         # then: no product specific item
         price_cache = self.product_1.price_cache[pricelist.role_name]
         expected_price_cache = {
-            u"price": 10,
-            u"date_start": None,
-            u"id": None,
-            u"date_end": None,
+            "price": 10,
+            "date_start": None,
+            "id": None,
+            "date_end": None,
         }
         self.assertEqual(price_cache, [expected_price_cache])
 
@@ -166,34 +167,43 @@ class TestPricelistItemFlow(TestPrices):
         # then
         price_cache = self.product_1.price_cache[pricelist.role_name]
         expected_price_cache = {
-            u"price": 9.0,
-            u"date_start": None,
-            u"id": item.id,
-            u"date_end": None,
+            "price": 9.0,
+            "date_start": None,
+            "id": item.id,
+            "date_end": None,
         }
         self.assertEqual(price_cache, [expected_price_cache])
 
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_multiple_discount(self):
-        """Check that getting the best discount from the cache matches
-        what is done in the backend (so, in SQL)."""
+        """Check that getting the best discount from the cache matches.
+
+        what is done in the backend (so, in SQL).
+        """
         today = "2022-01-01"
         product = self.product_1
-        roles = lambda ps: ps.mapped("discount_role_name")
+
+        def roles(ps):
+            return ps.mapped("discount_role_name")
+
         vals = self._get_pricelist_vals("DPL1", [], is_discount=True)
         discount_pricelist_1 = self.model_pl_nodelay.create(vals)
         pricelists = discount_pricelist_1
-        item_id = pricelists._get_discount_item_id(product, today)
+        item_id = product._get_best_applicable_pricelist_item(
+            today, quantity=1, pricelists=pricelists, currency=pricelists.currency_id
+        )
         cache_item = product._discount_cache_get(roles(pricelists), today)
-        self.assertEqual(item_id, False)
+        self.assertFalse(item_id)
         self.assertEqual(cache_item, None)
 
         vals_item_global = self._get_item_vals(pricelist=discount_pricelist_1)
         item_global = self.model_pl_item_nodelay.create(vals_item_global)
-        item_id = pricelists._get_discount_item_id(product, today)
+        item_id = product._get_best_applicable_pricelist_item(
+            today, quantity=1, pricelists=pricelists, currency=pricelists.currency_id
+        )
         cache_item = product._discount_cache_get(roles(pricelists), today)
-        self.assertEqual(item_id, item_global.id)
+        self.assertEqual(item_id, item_global)
         self.assertEqual(cache_item["id"], item_global.id)
 
         vals = self._get_pricelist_vals("DPL2", [], is_discount=True)
@@ -205,14 +215,16 @@ class TestPricelistItemFlow(TestPrices):
             fixed_price=5,  # starting from a 10$ price, that makes a 50% discount
         )
         item_fixed = self.model_pl_item_nodelay.create(vals_item_fixed)
-        item_id = pricelists._get_discount_item_id(product, today)
+        item_id = product._get_best_applicable_pricelist_item(
+            today, quantity=1, pricelists=pricelists, currency=pricelists.currency_id
+        )
         cache_item = product._discount_cache_get(roles(pricelists), today)
-        self.assertEqual(item_id, item_fixed.id)
+        self.assertEqual(item_id, item_fixed)
         self.assertEqual(cache_item["id"], item_fixed.id)
         self.assertEqual(cache_item["discount"], 50)
 
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_no_delay_min_qty(self):
         # given
         tmpl = self.product_1.product_tmpl_id
@@ -220,7 +232,7 @@ class TestPricelistItemFlow(TestPrices):
         discount_pricelist = self.model_pl_nodelay.create(vals)
         role = discount_pricelist.discount_role_name
         # at this point, nothing!
-        self.assertEqual(self.product_1.price_cache, {})
+        self.assertFalse(self.product_1.price_cache)
 
         # given
         vals_item_min_qty_2 = self._get_item_vals(
@@ -285,14 +297,14 @@ class TestPricelistItemFlow(TestPrices):
         self.assertTrue(all(x in price_cache for x in expected_price_cache))
 
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_no_delay_write_min_qty_out(self):
         # given
         tmpl = self.product_1.product_tmpl_id
         vals = self._get_pricelist_vals("DPL", [], is_discount=True)
         discount_pricelist = self.model_pl_nodelay.create(vals)
         role = discount_pricelist.discount_role_name
-        self.assertEqual(self.product_1.price_cache, {})
+        self.assertFalse(self.product_1.price_cache)
 
         # given
         vals_item_min_qty = self._get_item_vals(
@@ -322,14 +334,14 @@ class TestPricelistItemFlow(TestPrices):
         self.assertEqual(price_cache_updated, [expected_cache_element])
 
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_no_delay_write_min_qty_in(self):
         # given
         tmpl = self.product_1.product_tmpl_id
         vals = self._get_pricelist_vals("DPL", [], is_discount=True)
         discount_pricelist = self.model_pl_nodelay.create(vals)
         role = discount_pricelist.discount_role_name
-        self.assertEqual(self.product_1.price_cache, {})
+        self.assertFalse(self.product_1.price_cache)
 
         # given
         vals_item_min_qty = self._get_item_vals(
@@ -363,14 +375,14 @@ class TestPricelistItemFlow(TestPrices):
         self.assertEqual(price_cache_updated, [expected_cache_element])
 
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_no_delay_write_min_qtys(self):
         # given
         tmpl = self.product_1.product_tmpl_id
         vals = self._get_pricelist_vals("DPL", [], is_discount=True)
         discount_pricelist = self.model_pl_nodelay.create(vals)
         role = discount_pricelist.discount_role_name
-        self.assertEqual(self.product_1.price_cache, {})
+        self.assertFalse(self.product_1.price_cache)
 
         # given
         vals_item_min_qty_0 = self._get_item_vals(

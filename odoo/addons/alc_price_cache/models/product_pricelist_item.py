@@ -1,14 +1,15 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
 from odoo.osv.expression import FALSE_LEAF, NEGATIVE_TERM_OPERATORS, OR, TRUE_LEAF
 
+from odoo.addons.mixin_past.models.mixin_past import MixinPast
+from odoo.addons.product.models.product_pricelist_item import PricelistItem
 
-class ProductPricelistItem(models.Model):
+
+class ProductPricelistItem(PricelistItem, MixinPast):
     _name = "product.pricelist.item"
-    _inherit = ["product.pricelist.item", "mixin.past"]
 
     has_min_quantity = fields.Boolean(
         compute="_compute_has_min_quantity",
@@ -21,6 +22,7 @@ class ProductPricelistItem(models.Model):
         for record in self:
             record.has_min_quantity = record.min_quantity and record.min_quantity > 1
 
+    @api.model
     def _search_has_min_quantity(self, operator, value):
         negative_op = operator in NEGATIVE_TERM_OPERATORS
         domain = []
@@ -56,32 +58,29 @@ class ProductPricelistItem(models.Model):
             result += item._get_product_domain()
         return result
 
-    def update_price_cache(self, domain_extend=None, dates=None, eids=None):
-        domain_extend = domain_extend or []
-        for items in self.partition("pricelist_id").values():
-            items._update_price_cache(domain_extend, dates, eids=eids)
-
     def _update_price_cache(self, domain_extend=None, dates=None, eids=None):
+        domain_extend = domain_extend or []
         eids = (eids or []) + [None]
-        pricelist = self.mapped("pricelist_id")
-        pricelist.ensure_one()
-        domain = self._get_domains_extend()
-        extended_domain = OR([domain, domain_extend or []])
-        dates = dates or {}
-        dates_pl = pricelist.get_date_witnesses(items=self)
-        dates[pricelist.role_name] = set(dates.get(pricelist, [])) | dates_pl
-        pricelist.delay_update_price_cache(
-            domain_extend=extended_domain, dates=dates, eids=eids
-        )
+        for items in self.partition("pricelist_id").values():
+            pricelist = items.mapped("pricelist_id")
+            pricelist.ensure_one()
+            domain = items._get_domains_extend()
+            extended_domain = OR([domain, domain_extend or []])
+            dates = dates or {}
+            dates_pl = pricelist._get_date_witnesses(items=items)
+            dates[pricelist.role_name] = set(dates.get(pricelist, [])) | dates_pl
+            pricelist._delay_update_price_cache(
+                domain_extend=extended_domain, dates=dates, eids=eids
+            )
 
-    @api.model
-    def create(self, vals):
-        res = super(ProductPricelistItem, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
         if not self._context.get("no_update_price_cache") and not self._context.get(
             "no_update_price_cache_items"
         ):
-            res.update_price_cache()
-        return res
+            records._update_price_cache()
+        return records
 
     def write(self, vals):
         # it is possible to change what the item is applied on; therefore it affects
@@ -94,16 +93,16 @@ class ProductPricelistItem(models.Model):
                 for pl, pl_items in items_by_pricelist.items()
             }
             dates_before = {
-                pl.role_name: pl.get_date_witnesses(pl_items)
+                pl.role_name: pl._get_date_witnesses(pl_items)
                 for pl, pl_items in items_by_pricelist.items()
             }
-        res = super(ProductPricelistItem, self).write(vals)
+        res = super().write(vals)
         if not update_price_cache:
             return res
         for pricelist, pl_items in items_by_pricelist.items():
-            dates_pl = pricelist.get_date_witnesses(pl_items)
+            dates_pl = pricelist._get_date_witnesses(pl_items)
             dates = {pricelist.role_name: dates_pl | dates_before[pricelist.role_name]}
-            pl_items.update_price_cache(
+            pl_items._update_price_cache(
                 domain_extend=extends_before[pricelist], dates=dates, eids=pl_items.ids
             )
         return res
@@ -113,16 +112,53 @@ class ProductPricelistItem(models.Model):
         # otherwise the id of the item will keep polluting the cache until a full reset.
         # pricelist unlink is the exception, since the parent key gets dropped.
         if not self.env.context.get("no_update_price_cache_items"):
-            self.update_price_cache(eids=self.ids)
-        return super(ProductPricelistItem, self).unlink()
+            self._update_price_cache(eids=self.ids)
+        return super().unlink()
+
+    def _get_price(self, product, date=None):
+        if not date:
+            date = fields.Date.context_today(self)
+        if self:
+            return self._compute_price(
+                product, 1, product.uom_id, date, self.currency_id
+            )
+        return self._compute_base_price(
+            product,
+            1,
+            product.uom_id,
+            date,
+            product.currency_id,
+        )
+
+    def _get_price_base(self, product):
+        self.ensure_one()
+        return self._compute_base_price(
+            product,
+            1,
+            product.uom_id,
+            fields.Date.context_today(self),
+            product.currency_id,
+        )
 
     def _cache_price(self, product):
         return {
             "id": self.id or None,  # typed json compatibility
-            "price": self._get_price(product),
+            "price": self._get_price(product, self.date_start),
             "date_start": self.date_start or None,
             "date_end": self.date_end or None,
         }
+
+    def _get_product_discount(self, product):
+        self.ensure_one()
+        if self.compute_price == "percentage":
+            alcyon_discount = self.percent_price
+        else:
+            alcyon_discount = 0
+            price = self._get_price_base(product)
+            if price:
+                discount_price = self._get_price(product)
+                alcyon_discount = (price - discount_price) / price * 100
+        return alcyon_discount
 
     def _cache_discount(self, product):
         self.ensure_one()

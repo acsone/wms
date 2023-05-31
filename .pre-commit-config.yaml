@@ -99,7 +99,6 @@ exclude: |
   ^odoo/addons/alc_pim/|
   ^odoo/addons/alc_placedesvetos/|
   ^odoo/addons/alc_placedesvetos_payment_globalization/|
-  ^odoo/addons/alc_price_cache/|
   ^odoo/addons/alc_price_cache_exclusive/|
   ^odoo/addons/alc_price_cache_import/|
   ^odoo/addons/alc_pricing/|
