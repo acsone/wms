@@ -61,7 +61,7 @@ odoo-addon-base-exception==16.0.1.0.1.3
 odoo-addon-base-geoengine @ git+https://github.com/acsone/geospatial.git@fd0f0e4a52289067c56c95fcbf59979d94d758fc#subdirectory=setup/base_geoengine
 odoo-addon-base-partition @ git+https://github.com/acsone/server-tools.git@e07142b956a496f65fc43796ff2ad50c2fd06f49#subdirectory=setup/base_partition
 odoo-addon-base-partner-sequence==16.0.1.0.0.3
-odoo-addon-base-report-to-printer==16.0.1.1.0.1
+odoo-addon-base-report-to-printer==16.0.1.1.2
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@f75469cfc3ead20b6224195b653ddba735a219b4#subdirectory=setup/base_sparse_field_list_support
 odoo-addon-base-technical-features==16.0.1.0.0.5
 odoo-addon-base-time-window==16.0.1.0.0.3
