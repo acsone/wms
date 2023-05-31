@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_price_cache
+# 	* alc_price_cache
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,15 +14,23 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_price_cache
-#: model:ir.model.fields,field_description:alc_price_cache.field_product_pricelist_item_has_min_quantity
-msgid "Has min quantity"
+#: model:ir.model.fields,field_description:alc_price_cache.field_product_pricelist_item__has_min_quantity
+msgid "Has Min Quantity"
 msgstr ""
 
 #. module: alc_price_cache
-#: model:ir.model.fields,field_description:alc_price_cache.field_delivery_carrier_price_cache
-#: model:ir.model.fields,field_description:alc_price_cache.field_product_product_price_cache
-#: model:ir.model.fields,field_description:alc_price_cache.field_shopinvader_variant_price_cache
-msgid "Price cache"
+#: model:ir.model.fields,field_description:alc_price_cache.field_product_pricelist_item__is_future
+msgid "Is Future"
+msgstr ""
+
+#. module: alc_price_cache
+#: model:ir.model.fields,field_description:alc_price_cache.field_product_pricelist_item__is_past
+msgid "Is Past"
+msgstr ""
+
+#. module: alc_price_cache
+#: model:ir.model.fields,field_description:alc_price_cache.field_product_product__price_cache
+msgid "Price Cache"
 msgstr ""
 
 #. module: alc_price_cache
@@ -32,35 +40,37 @@ msgstr ""
 
 #. module: alc_price_cache
 #: model:ir.model,name:alc_price_cache.model_product_pricelist_item
-msgid "Pricelist item"
-msgstr ""
-
-#. module: alc_price_cache
-#: model:ir.model,name:alc_price_cache.model_product_product
-msgid "Product"
+msgid "Pricelist Rule"
 msgstr ""
 
 #. module: alc_price_cache
 #: model:ir.model,name:alc_price_cache.model_product_template
-msgid "Product Template"
+msgid "Product"
 msgstr ""
 
 #. module: alc_price_cache
-#: code:addons/alc_price_cache/models/product_pricelist.py:39
-#: code:addons/alc_price_cache/models/product_product.py:117
+#: model:ir.model,name:alc_price_cache.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: alc_price_cache
+#. odoo-python
+#: code:addons/alc_price_cache/models/product_pricelist.py:0
+#: code:addons/alc_price_cache/models/product_product.py:0
 #, python-format
-msgid "Remove products prices for pricelist %s."
+msgid "Remove products prices for pricelist {names}."
 msgstr ""
 
 #. module: alc_price_cache
-#: code:addons/alc_price_cache/models/product_pricelist.py:24
+#. odoo-python
+#: code:addons/alc_price_cache/models/product_pricelist.py:0
 #, python-format
 msgid "Update products prices for pricelist {pricelist}."
 msgstr ""
 
 #. module: alc_price_cache
-#: code:addons/alc_price_cache/models/product_product.py:135
+#. odoo-python
+#: code:addons/alc_price_cache/models/product_product.py:0
 #, python-format
-msgid "Update products prices for product %s."
+msgid "Update products prices for product {names}"
 msgstr ""
-

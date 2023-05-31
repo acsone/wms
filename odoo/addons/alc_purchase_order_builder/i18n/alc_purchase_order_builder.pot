@@ -160,7 +160,12 @@ msgstr ""
 
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
-msgid "Ordered qty of unit"
+msgid "Packaging"
+msgstr ""
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Packaging Quantity"
 msgstr ""
 
 #. module: alc_purchase_order_builder
@@ -349,11 +354,6 @@ msgstr ""
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
 msgid "Total weight:"
-msgstr ""
-
-#. module: alc_purchase_order_builder
-#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
-msgid "Unit"
 msgstr ""
 
 #. module: alc_purchase_order_builder
