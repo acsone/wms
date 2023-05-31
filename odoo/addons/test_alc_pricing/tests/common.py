@@ -9,9 +9,9 @@ from odoo.addons.alc_supplier_promotion.tests.common import TestSupplierInfo
 
 class TestPricing(TestSupplierInfo, TestPrices):
     @classmethod
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def setUpClass(cls):
-        super(TestPricing, cls).setUpClass()
+        super().setUpClass()
         ctx = dict(cls.env.context, tracking_disable=True, test_queue_job_no_delay=True)
         cls.env = cls.env(context=ctx)
 
@@ -36,7 +36,8 @@ class TestPricing(TestSupplierInfo, TestPrices):
         # discount on product 1, exclusive discount on product 2, nothing on 3
         items_2 = [
             cls._get_item_vals(
-                applied_on="0_product_variant", product_id=cls.product_1.id,
+                applied_on="0_product_variant",
+                product_id=cls.product_1.id,
             ),
             cls._get_item_vals(
                 applied_on="0_product_variant",
@@ -122,5 +123,5 @@ class TestPricing(TestSupplierInfo, TestPrices):
     def _new_sale_line(cls, so, product, qty=1, **kwargs):
         base = {"product_id": product.id, "product_uom_qty": qty, "order_id": so.id}
         vals = dict(base, **kwargs)
-        vals_onchange = cls.model_line.play_onchanges(vals)
+        vals_onchange = cls.model_line.play_onchanges(vals, vals.keys())
         return cls.model_line.create(dict(vals, **vals_onchange))

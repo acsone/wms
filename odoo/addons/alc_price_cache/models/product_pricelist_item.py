@@ -174,3 +174,9 @@ class ProductPricelistItem(PricelistItem, MixinPast):
             if self.has_min_quantity:
                 cache["min_quantity"] = self.min_quantity
         return cache
+
+    def _compute_price(self, product, quantity, uom, date, currency=None):
+        currency = currency or self.currency_id
+        if not currency:
+            currency = self.env.ref("base.EUR")
+        return super()._compute_price(product, quantity, uom, date, currency=currency)

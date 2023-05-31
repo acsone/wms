@@ -11,7 +11,7 @@ from .common import TestPricing
 
 class TestPricingFlow(TestPricing):
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_so_1(self):
         # when
         line_1 = self._new_sale_line(self.so_1, self.product_1)
@@ -35,7 +35,7 @@ class TestPricingFlow(TestPricing):
         self.assertEqual(line_3.discount3, 0)
 
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_so_2(self):
         # when
         line_1 = self._new_sale_line(self.so_2, self.product_1)
@@ -64,7 +64,7 @@ class TestPricingFlow(TestPricing):
         self.assertEqual(line_3.discount3, 0)
 
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_multiple_discount_pricelists(self):
         vals = {"discount_pricelist_ids": [(4, self.dpl_1.id), (4, self.dpl_2.id)]}
         self.customer_1.write(vals)
@@ -87,7 +87,7 @@ class TestPricingFlow(TestPricing):
         self.assertEqual(line_2.discount_item_id, self.item_2_2)
 
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_discount_priority(self):
         self.customer_1.write({"discount_pricelist_ids": [(4, self.dpl_1.id)]})
         vals_item_global = self._get_item_vals(
@@ -115,7 +115,7 @@ class TestPricingFlow(TestPricing):
         self.assertEqual(line_product_3.discount_item_id, item_global)
 
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_discount_based_on_cost(self):
         """For a percentage discount item, basing on standard_price has no effect."""
         # given: percentage item based on standard_price (cost), differing from price
@@ -137,7 +137,7 @@ class TestPricingFlow(TestPricing):
         self.assertEqual(line_1.discount3, 50)
 
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.delay")
     def test_base_price_based_on_cost(self):
         self.product_3.standard_price = 5
         vals = self._get_item_vals(
