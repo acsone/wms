@@ -34,7 +34,7 @@ odoo-addon-delivery-carrier-partner @ git+https://github.com/oca/delivery-carrie
 # https://github.com/OCA/wms/pull/609
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/OCA/wms.git@refs/pull/609/head#subdirectory=setup/stock_available_to_promise_release
 # https://github.com/OCA/wms/pull/629
-odoo-addon-stock-release-channel @ git+https://github.com/OCA/wms.git@refs/pull/629/head#subdirectory=setup/stock_release_channel
+odoo-addon-stock-release-channel @ git+https://github.com/OCA/wms.git@refs/pull/644/head#subdirectory=setup/stock_release_channel
 # https://github.com/OCA/wms/pull/550
 odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@16.0-release_channel_date-dro#subdirectory=setup/stock_release_channel_process_end_time
 # https://github.com/OCA/wms/pull/470
