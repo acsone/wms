@@ -6,16 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-20 12:32+0000\n"
-"PO-Revision-Date: 2023-04-20 15:00+0200\n"
+"POT-Creation-Date: 2023-05-30 21:24+0000\n"
+"PO-Revision-Date: 2023-05-30 21:24+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: fr_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"X-Generator: Poedit 2.3\n"
 
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
@@ -166,9 +164,13 @@ msgstr "Qté commande"
 
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
-#, fuzzy
-msgid "Ordered qty of unit"
-msgstr "Qté commande"
+msgid "Packaging"
+msgstr "Conditionnement"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Packaging Quantity"
+msgstr "Quantité de conditionnement"
 
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
@@ -359,11 +361,6 @@ msgstr "Total des lignes faites"
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
 msgid "Total weight:"
 msgstr "Poids total:"
-
-#. module: alc_purchase_order_builder
-#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
-msgid "Unit"
-msgstr ""
 
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
