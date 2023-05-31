@@ -165,10 +165,13 @@ msgstr "Qté commande"
 
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
-#, fuzzy
-#| msgid "Ordered qty"
-msgid "Ordered qty of unit"
-msgstr "Qté commande"
+msgid "Packaging"
+msgstr "Conditionnement"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Packaging Quantity"
+msgstr "Quantité de conditionnement"
 
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
@@ -362,11 +365,6 @@ msgstr "Poids total:"
 
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
-msgid "Unit"
-msgstr ""
-
-#. module: alc_purchase_order_builder
-#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
 msgid "Unit in box"
 msgstr "Nbr unités par boite"
 
@@ -392,11 +390,10 @@ msgstr "Date d'écriture"
 msgid "You can only have one purchase order line by product"
 msgstr ""
 
-#~ msgid "Packaging"
-#~ msgstr "Conditionnement"
-
-#~ msgid "Packaging Quantity"
-#~ msgstr "Quantité de conditionnement"
+#, fuzzy
+#~| msgid "Ordered qty"
+#~ msgid "Ordered qty of unit"
+#~ msgstr "Qté commande"
 
 #~ msgid "Average annual consumption"
 #~ msgstr "Consommation annuelle moyenne"
