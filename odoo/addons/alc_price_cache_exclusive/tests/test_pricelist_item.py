@@ -32,11 +32,11 @@ class TestPricelistItemFlow(TestPrices):
         # then
         price_cache = self.product_1.price_cache[pricelist.discount_role_name]
         expected_price_item = {
-            u"discount": 10,
-            u"date_start": None,
-            u"id": item.id,
-            u"date_end": None,
-            u"exclusive": True,
+            "discount": 10,
+            "date_start": None,
+            "id": item.id,
+            "date_end": None,
+            "exclusive": True,
         }
         self.assertEqual(price_cache, [expected_price_item])
 
