@@ -6,6 +6,13 @@ Makes the field is_delivered_by_alcyon compute depending on
 stock_release_channel_geoengine which introduces geographic release channels
 on the partner.
 
+Config
+------
+
+Be sure the constraint "Delivered by Alcyon" on customer is enabled by going
+to *Inventory - Configuration - Settings - Operations* and check the box
+"Constrain customers for pharmacy receptions".
+
 Test
 ____
 

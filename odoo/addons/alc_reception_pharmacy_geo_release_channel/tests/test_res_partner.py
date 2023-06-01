@@ -13,6 +13,7 @@ class TestResPartner(TransactionCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
+        cls.env.user.company_id.delivered_by_alcyon_constraint = True
         cls.partner = cls.env["res.partner"].create(
             {"name": "Test partner", "geo_point": Point([4.602541, 50.435587])}
         )
