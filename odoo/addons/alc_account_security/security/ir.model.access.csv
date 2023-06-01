@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+account.access_product_product_account_manager,product.product.account.manager,product.model_product_product,account.group_account_manager,1,0,0,0
+account.access_product_template_account_manager,product.template.account.manager,product.model_product_template,account.group_account_manager,1,0,0,0
+access_res_partner_accounting,access_res_partner_accounting,base.model_res_partner,account.group_account_user,1,1,1,0
+access_account_cutoff_line_group_user,access_account_cutoff_line_group_user,account_cutoff_base.model_account_cutoff_line,base.group_user,1,0,0,0

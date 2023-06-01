@@ -8,7 +8,7 @@
     >[('categ_id', 'child_of' , [user.env.ref('alc_product_category_data.product_categ_materiel').id])]</field>
     <field
       name="groups"
-      eval="[(4, ref('specific_security.group_materials_manager'))]"
+      eval="[(4, ref('alc_stock_security.group_materials_manager'))]"
     />
     <field name="perm_read" eval="False" />
     <field name="perm_write" eval="True" />
@@ -23,7 +23,7 @@
     >[('categ_id', 'child_of' , [user.env.ref('alc_product_category_data.product_categ_materiel').id])]</field>
     <field
       name="groups"
-      eval="[(4, ref('specific_security.group_materials_manager'))]"
+      eval="[(4, ref('alc_stock_security.group_materials_manager'))]"
     />
     <field name="perm_read" eval="False" />
     <field name="perm_write" eval="True" />
