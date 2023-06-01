@@ -15,8 +15,8 @@ class MakePickingBatch(MakePickingBatchBase):
 
     release_channel_id = fields.Many2one[StockReleaseChannel](string="Release Channel")
 
-    def _get_picking_domain_common(self, user=None):
-        domain = super()._get_picking_domain_common(user=user)
+    def _get_picking_domain_common(self):
+        domain = super()._get_picking_domain_common()
         if not self.release_channel_id:
             domain.extend([("release_channel_id", "=", False)])
             return domain
@@ -30,14 +30,15 @@ class MakePickingBatch(MakePickingBatchBase):
                 ("picking_type_id", "in", picking_type_ids_pick_allowed),
             ]
         )
-        if user:
+        if self.user_id:
             domain.extend(
                 [
                     "|",
                     ("release_channel_id.user_ids", "=", False),
-                    ("release_channel_id.user_ids", "in", user.ids),
+                    ("release_channel_id.user_ids", "in", self.user_id.ids),
                 ]
             )
         else:
             domain.extend([("release_channel_id.user_ids", "=", False)])
+
         return domain
