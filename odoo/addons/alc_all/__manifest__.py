@@ -231,6 +231,13 @@
         "stock_putaway_route",
         "stock_valuation",
         "web_autorefresh",
+        # pepol
+        "account_invoice_ubl",
+        "account_invoice_export_ubl",
+        "account_invoice_sent",
+        "account_invoice_sent_peppol",
+        "base_ubl_payment_mode_required",
+        "l10n_be_invoice_bba_account_e-invoice_generate",
     ],
     "application": True,
     "data": [
