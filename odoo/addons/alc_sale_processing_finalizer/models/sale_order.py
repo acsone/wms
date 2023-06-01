@@ -56,7 +56,7 @@ class SaleOrder(sale_order.SaleOrder):
 
             if internal_moves and line.order_id.auto_finalize_processing:
                 canceled_orders |= line.order_id
-                wiz = wizard.with_context(active_id=line.id)
+                wiz = wizard.with_context(active_id=line.id, active_model=line._name)
                 wiz.cancel_remaining_qty()
 
         if config["test_enable"]:
