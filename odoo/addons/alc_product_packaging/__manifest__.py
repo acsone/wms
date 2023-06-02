@@ -17,6 +17,7 @@
     "data": [
         "data/product_packaging_type.xml",
         "views/product_template.xml",
+        "views/product_packaging_views.xml",
     ],
     "installable": True,
 }
