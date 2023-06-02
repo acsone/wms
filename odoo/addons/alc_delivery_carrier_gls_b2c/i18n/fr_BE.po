@@ -23,14 +23,14 @@ msgstr ""
 #. module: alc_delivery_carrier_gls_b2c
 #: model:ir.model.fields,field_description:alc_delivery_carrier_gls_b2c.field_stock_quant_package__sale_name
 msgid "Order Reference"
-msgstr ""
+msgstr "Référence de commande"
 
 #. module: alc_delivery_carrier_gls_b2c
 #: model:ir.model,name:alc_delivery_carrier_gls_b2c.model_stock_quant_package
 msgid "Packages"
-msgstr ""
+msgstr "Paquets"
 
 #. module: alc_delivery_carrier_gls_b2c
 #: model:ir.model.fields,field_description:alc_delivery_carrier_gls_b2c.field_stock_quant_package__b2c_ref
 msgid "Reference B2C"
-msgstr ""
+msgstr "Référence B2C"

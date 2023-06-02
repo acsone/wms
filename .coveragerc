@@ -38,7 +38,6 @@ omit =
     odoo/addons/alc_country/*
     odoo/addons/alc_customer_audit/*
     odoo/addons/alc_customer_invoices_by_fiscal_year/*
-    odoo/addons/alc_delivery_carrier_gls_b2c/*
     odoo/addons/alc_delivery_carrier_gls_report/*
     odoo/addons/alc_delivery_rounds_assign_blocking/*
     odoo/addons/alc_delivery_rounds_assign_blocking_unavailable_product/*
