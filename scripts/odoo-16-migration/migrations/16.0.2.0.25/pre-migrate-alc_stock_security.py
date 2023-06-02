@@ -1,0 +1,15 @@
+# Copyright 2023 ACSONE SA/NV
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+from openupgradelib import openupgrade
+
+
+@openupgrade.migrate()
+def migrate(env, version):
+    data = [
+        (
+            "specific_security.group_materials_manager",
+            "alc_stock_security.group_materials_manager",
+        )
+    ]
+    openupgrade.rename_xmlids(env.cr, data, allow_merge=True)

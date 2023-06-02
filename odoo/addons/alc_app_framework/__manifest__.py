@@ -16,5 +16,6 @@
         "report_csv",
         # ALC
         "alc_base_auto_join",
+        "alc_queue_job_security",
     ],
 }

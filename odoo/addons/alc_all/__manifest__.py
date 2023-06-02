@@ -33,6 +33,7 @@
         "alc_app_return",
         "alc_app_sale",
         "alc_app_eshop_b2b",
+        "alc_app_account",
         "alc_running_env",
         "stock_scrap_location_default",
         "alc_partner_message_subscribe",

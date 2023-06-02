@@ -2,19 +2,18 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc App Eshop B2b",
-    "description": """
-        Gather all B2B related modules for Alcyon""",
+    "name": "Alc Account Security",
+    "description": """Specific ACL for account models""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # ALC
-        "alc_price_cache",
-        "alc_price_cache_exclusive",
-        "alc_product_assortment",
+        # Odoo
+        "account",
+        # OCA
+        "account_cutoff_base",
     ],
-    "data": [],
+    "data": ["security/ir.model.access.csv"],
     "demo": [],
 }

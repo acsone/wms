@@ -17,6 +17,7 @@ dynamic = ["dependencies"]
 [project.optional-dependencies]
 test = [
   "coverage",
+  "pytest-cov",
   "pytest-odoo",
   "pygments",
   "freezegun",
@@ -28,8 +29,6 @@ test = [
 ]
 dev = [
   "ipython",
-  "pytest-cov",
-  "pytest-odoo",
 ]
 
 [project.scripts]
@@ -57,6 +56,8 @@ dependencies = [
   # xlrd >= 2 removes xlsx support for anything other than .xls files
   # https://xlrd.readthedocs.io/en/latest/changes.html#id1
   "xlrd<2",
+  #reportlab<4 to avoid dependency on pycairo which is not available as a wheel
+  "reportlab<4",
 ]
 addons_dirs = ["odoo/addons"]
 
@@ -301,7 +302,6 @@ exclude = [
   'odoo/addons/specific_cutoff/*',
   'odoo/addons/specific_print/*',
   'odoo/addons/specific_report/*',
-  'odoo/addons/specific_security/*',
   'odoo/addons/specific_stock/*',
   'odoo/addons/speedy_views/*',
   'odoo/addons/standard_service_mixin/*',

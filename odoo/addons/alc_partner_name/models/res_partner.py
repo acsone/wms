@@ -9,42 +9,44 @@ from odoo.addons.base.models.res_partner import Partner as BasePartner
 
 class ResPartner(BasePartner):
     @api.model
-    def _name_search(
-        self, name, args=None, operator="ilike", limit=100, name_get_uid=None
-    ):
+    def name_search(self, name, args=None, operator="ilike", limit=100):
         """
         Process ref as a code: do not apply ilike on ref.
 
         Return matched ref first.
         """
-        res = self._search(
-            [
-                "|",
-                "|",
-                ("display_name", operator, name),
-                ("email", operator, name),
-                ("ref", "=ilike", name),
-            ],
-            limit=limit,
-            access_rights_uid=name_get_uid,
-        )
-        unaccent = get_unaccent_wrapper(self.env.cr)
-        order_name = name
-        if operator in ("ilike", "like"):
-            order_name = f"%{name}%"
-        order_operator = operator
-        if operator in ("=ilike", "=like"):
-            order_operator = operator[1:]
-        res.order = (
-            "ref ilike {percent} desc, {display_name} {operator} {percent} desc,"
-            " {display_name}".format(
-                operator=order_operator,
-                display_name=unaccent("display_name"),
-                percent=unaccent("%s"),
+        if name and operator in ("=", "ilike", "=ilike", "like", "=like"):
+            res = self._search(
+                [
+                    "|",
+                    "|",
+                    ("display_name", operator, name),
+                    ("email", operator, name),
+                    ("ref", "=ilike", name),
+                ],
+                limit=limit,
             )
-        )
-        res._where_params = res._where_params + [name, order_name]
-        return res
+            unaccent = get_unaccent_wrapper(self.env.cr)
+            order_name = name
+            if operator in ("ilike", "like"):
+                order_name = f"%{name}%"
+            order_operator = operator
+            if operator in ("=ilike", "=like"):
+                order_operator = operator[1:]
+            res.order = (
+                "ref ilike {percent} desc, {display_name} {operator} {percent} desc,"
+                " {display_name}".format(
+                    operator=order_operator,
+                    display_name=unaccent("display_name"),
+                    percent=unaccent("%s"),
+                )
+            )
+            res._where_params = res._where_params + [name, order_name]
+            partner_ids = res._result
+            if partner_ids:
+                return self.browse(partner_ids).name_get()
+            return []
+        return super().name_search(name=name, args=args, operator=operator, limit=limit)
 
     def name_get(self):
         if self.env.context.get("show_address_only"):

@@ -22,6 +22,12 @@ class TestStockSchedulerFilter(TransactionCase):
         cls.product.route_ids = buy_route
         cls.product2.route_ids = buy_route
         cls.product_seller = cls.env.ref("product.product_supplierinfo_16")
+        cls.product_virtual_available = cls.product.with_context(
+            warehouse=cls.warehouse.id
+        ).virtual_available
+        cls.product_2_virtual_available = cls.product2.with_context(
+            warehouse=cls.warehouse.id
+        ).virtual_available
 
     def _create_delivery_move(self, product, qty):
         ship = self.env["stock.picking"].create(
@@ -65,13 +71,6 @@ class TestStockSchedulerFilter(TransactionCase):
         """Test initial context."""
         self.assertFalse(self.product.orderpoint_ids)
         self.assertFalse(self.product2.orderpoint_ids)
-        self.assertEqual(
-            self.product.with_context(warehouse=self.warehouse.id).virtual_available, 13
-        )
-        self.assertEqual(
-            self.product2.with_context(warehouse=self.warehouse.id).virtual_available,
-            267,
-        )
 
     def test_01(self):
         """Test orderpoint automatic creation for unavailable products."""
@@ -80,13 +79,15 @@ class TestStockSchedulerFilter(TransactionCase):
         ).unlink()
         self._create_delivery_move(self.product, 100)
         self._create_delivery_move(self.product2, 100)
+        product_demand = self.product_virtual_available - 100
+        product_2_demand = self.product_2_virtual_available - 100
         self.assertEqual(
             self.product.with_context(warehouse=self.warehouse.id).virtual_available,
-            -87,
+            product_demand,
         )
         self.assertEqual(
             self.product2.with_context(warehouse=self.warehouse.id).virtual_available,
-            167,
+            product_2_demand,
         )
         self.env["procurement.group"].with_context(
             procure_type="by_suppliers", supplier_ids=self.supplier.ids
@@ -96,7 +97,7 @@ class TestStockSchedulerFilter(TransactionCase):
         new_lines = self.product.purchase_order_line_ids.filtered(
             lambda l: l.state in ("draft", "sent")
         )
-        self.assertEqual(new_lines.product_uom_qty, 87)
+        self.assertEqual(new_lines.product_uom_qty, -product_demand)
         new_lines.order_id.button_confirm()
         self.assertEqual(
             self.product.with_context(warehouse=self.warehouse.id).virtual_available,

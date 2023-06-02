@@ -34,7 +34,7 @@ class TestGetDeviceToUse(TestGetDeviceToUseCommon):
                 ],
             }
         )
-        first_picking = make_picking_batch._get_first_picking(self.env.user)
+        first_picking = make_picking_batch._get_first_picking()
         self.assertEqual(first_picking, self.pick3)
         device = make_picking_batch._compute_device_to_use(first_picking)
         self.assertEqual(device, self.device3)
@@ -62,7 +62,7 @@ class TestGetDeviceToUse(TestGetDeviceToUseCommon):
                 ],
             }
         )
-        first_picking = make_picking_batch._get_first_picking(self.env.user)
+        first_picking = make_picking_batch._get_first_picking()
         self.assertEqual(first_picking, self.pick3)
         device = make_picking_batch._compute_device_to_use(first_picking)
         self.assertEqual(device, self.device3)
@@ -87,7 +87,7 @@ class TestGetDeviceToUse(TestGetDeviceToUseCommon):
                 ],
             }
         )
-        first_picking = make_picking_batch._get_first_picking(self.env.user)
+        first_picking = make_picking_batch._get_first_picking()
         self.assertEqual(first_picking, self.pick3)
         device = make_picking_batch._compute_device_to_use(first_picking)
         self.assertEqual(device, self.device3)
@@ -121,7 +121,7 @@ class TestGetDeviceToUse(TestGetDeviceToUseCommon):
                 ],
             }
         )
-        first_picking = make_picking_batch._get_first_picking(self.env.user)
+        first_picking = make_picking_batch._get_first_picking()
         self.assertEqual(first_picking, self.pick3)
         device = make_picking_batch._compute_device_to_use(first_picking)
         self.assertEqual(device, self.device3)
