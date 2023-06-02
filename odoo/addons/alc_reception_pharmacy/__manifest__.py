@@ -31,6 +31,7 @@
         "wizards/receive_pharmacy_products.xml",
         "views/reception_pharmacy_views.xml",
         "views/reception_pharmacy_line_views.xml",
+        "views/res_config_settings_views.xml",
     ],
     "demo": [],
     "installable": True,

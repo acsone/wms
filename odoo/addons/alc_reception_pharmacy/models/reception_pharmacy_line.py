@@ -55,14 +55,16 @@ class ReceptionPharmacyLine(models.Model):
 
     @api.constrains("customer_id")
     def _check_customer_id(self):
-        for rec in self:
-            if not rec.customer_id.is_delivered_by_alcyon:
-                raise ValidationError(
-                    _(
-                        "Partner %(partner)s does not belong to any release channel",
-                        partner=rec.partner_shipping_id.name,
+        if self.env.user.company_id.delivered_by_alcyon_constraint:
+            for rec in self:
+                if not rec.customer_id.is_delivered_by_alcyon:
+                    raise ValidationError(
+                        _(
+                            "Partner %(partner)s does not belong to any release "
+                            "channel",
+                            partner=rec.partner_shipping_id.name,
+                        )
                     )
-                )
 
     def validate(self):
         proc_group = self.env["procurement.group"]

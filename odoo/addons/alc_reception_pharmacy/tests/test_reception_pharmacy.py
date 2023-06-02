@@ -10,11 +10,8 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(
-            context=dict(
-                cls.env.context, test_queue_job_no_delay=True, mail_notrack=True
-            )
-        )
+
+        cls.env.user.company_id.delivered_by_alcyon_constraint = False
         cls.wizard = cls.env["receive.pharmacy.products"]
         cls.bin2 = cls.env["stock.location"].create({"name": "Test unit 2"})
 
