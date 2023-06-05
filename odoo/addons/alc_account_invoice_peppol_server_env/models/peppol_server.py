@@ -7,7 +7,7 @@ from odoo import models
 
 class PeppolServer(models.Model):
 
-    _inherit = "peppol.server"
+    _name = "peppol.server"
 
     _inherit = ["peppol.server", "server.env.mixin"]
 
