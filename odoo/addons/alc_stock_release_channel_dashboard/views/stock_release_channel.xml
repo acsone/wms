@@ -21,6 +21,7 @@
                 <field name="is_action_sleep_allowed" />
                 <field name="is_action_unlock_allowed" />
                 <field name="is_action_lock_allowed" />
+                <field name="is_action_delivering_allowed" />
                 <field name="release_forbidden" />
                 <field name="active" />
                 <field name="kanban_dashboard" />
@@ -46,9 +47,52 @@
                                     <a
                     type="object"
                     name="action_kanban_dashboard_open"
+                    style="margin-right: 10%;"
                   >
                                         <field name="name" />
                                     </a>
+                                    <span
+                    tabindex="-1"
+                    class="o_tag_color_0 badge rounded-pill o_tag d-inline-flex align-items-center"
+                    data-color="0"
+                    t-att-title="tag"
+                    style="box-shadow: inset 0 0 0 1px;background-color: red;color: white;"
+                    attrs="{'invisible': [('release_forbidden', '=', False)]}"
+                  >
+                                        <div class="o_tag_badge_text">Forbidden</div>
+                                    </span>
+                                    <span
+                    tabindex="-1"
+                    class="o_tag_color_0 badge rounded-pill o_tag d-inline-flex align-items-center"
+                    data-color="0"
+                    t-att-title="tag"
+                    style="box-shadow: inset 0 0 0 1px;background-color: orange;color: white;"
+                    attrs="{'invisible': [('state', '!=', 'delivering')]}"
+                  >
+                                        <div class="o_tag_badge_text">Delivering</div>
+                                    </span>
+                                    <span
+                    tabindex="-1"
+                    class="o_tag_color_0 badge rounded-pill o_tag d-inline-flex align-items-center"
+                    data-color="0"
+                    t-att-title="tag"
+                    style="box-shadow: inset 0 0 0 1px;background-color: red;color: white;"
+                    attrs="{'invisible': [('state', '!=', 'delivering_error')]}"
+                  >
+                                        <div
+                      class="o_tag_badge_text"
+                    >Delivering error</div>
+                                    </span>
+                                    <span
+                    tabindex="-1"
+                    class="o_tag_color_0 badge rounded-pill o_tag d-inline-flex align-items-center"
+                    data-color="0"
+                    t-att-title="tag"
+                    style="box-shadow: inset 0 0 0 1px;background-color: red;color: white;"
+                    attrs="{'invisible': [('active', '=', True)]}"
+                  >
+                                        <div class="o_tag_badge_text">Archived</div>
+                                    </span>
                                 </div>
                                 <t t-foreach="dashboard_tags" t-as="tag">
                                     <span
@@ -103,15 +147,8 @@
                         </div>
                     </t>
                     <t t-name="ChannelDashboard">
+
                         <div class="o_kanban_card_header_title">
-                        <div
-                class="ribbon ribbon-top-right"
-                attrs="{'invisible': ['|', ('release_forbidden', '=', False), ('active', '=', False)]}"
-              ><span class="bg-danger" title="">Forbidden</span></div>
-                        <div
-                class="ribbon ribbon-top-right"
-                attrs="{'invisible': [('active', '=', True)]}"
-              ><span class="bg-danger" title="">Archived</span></div>
                             <div class="row">
                                 <div class="col-2">
                                   <a name="button_toggle_pick_allowed" type="object">
@@ -134,7 +171,13 @@
                     name="action_unlock"
                     type="object"
                     icon="fa-unlock"
-                  >Unlock</a>
+                  >Unlock</a><br />
+                                    <a
+                    t-if="record.is_action_delivering_allowed.raw_value"
+                    name="action_delivering"
+                    type="object"
+                    icon="fa-truck"
+                  >Deliver</a>
                                 </div>
                                 <div class="col-5">
                                     <a

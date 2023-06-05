@@ -76,6 +76,8 @@
         "alc_stock_release_channel_picking_batch_creation",
         "alc_stock_release_channel_dashboard",
         "alc_stock_release_channel_unlock",
+        "alc_stock_release_channel_deliver",
+        "alc_stock_release_channel_deliver_toursolver",
         "alc_stock_security",
         "alc_label_printing_gls",
         "alc_delivery_carrier_gls_b2c",

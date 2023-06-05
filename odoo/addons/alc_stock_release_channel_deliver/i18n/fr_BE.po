@@ -1,0 +1,113 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_stock_release_channel_deliver
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-05 15:50+0000\n"
+"PO-Revision-Date: 2023-06-05 15:50+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_stock_release_channel_deliver
+#. odoo-python
+#: code:addons/alc_stock_release_channel_deliver/models/stock_release_channel.py:0
+#, python-format
+msgid "Action 'Delivering Error' is not allowed for channel %(name)s."
+msgstr "L'action "Erreur de livraison" n'est pas autorisée pour le canal %(name)s."
+
+#. module: alc_stock_release_channel_deliver
+#. odoo-python
+#: code:addons/alc_stock_release_channel_deliver/models/stock_release_channel.py:0
+#, python-format
+msgid "Action 'Delivering' is not allowed for channel %(name)s."
+msgstr "L'action "Livrer" n'est pas autorisée pour le canal %(name)s."
+
+#. module: alc_stock_release_channel_deliver
+#. odoo-python
+#: code:addons/alc_stock_release_channel_deliver/models/stock_release_channel.py:0
+#, python-format
+msgid ""
+"An error occurred while processing the delivery automatically:\n"
+"- %(related_object_name)s: %(error)s"
+msgstr ""
+"Une erreur s'est produite lors du traitement automatique de la livraison:\n"
+"- %(related_object_name)s: %(error)s"
+
+#. module: alc_stock_release_channel_deliver
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_deliver.stock_release_channel_form_view
+msgid "Deliver"
+msgstr "Livrer"
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields.selection,name:alc_stock_release_channel_deliver.selection__stock_release_channel__state__delivering
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_deliver.stock_release_channel_search_view
+msgid "Delivering"
+msgstr "Livraison"
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel__delivering_error
+#: model:ir.model.fields.selection,name:alc_stock_release_channel_deliver.selection__stock_release_channel__state__delivering_error
+msgid "Delivering Error"
+msgstr "Erreur de livraison"
+
+#. module: alc_stock_release_channel_deliver
+#. odoo-python
+#: code:addons/alc_stock_release_channel_deliver/models/stock_release_channel.py:0
+#, python-format
+msgid "Delivering release channel %(name)s."
+msgstr ""
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel__is_action_delivering_allowed
+msgid "Is Action Delivering Allowed"
+msgstr ""
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel__is_action_delivering_error_allowed
+msgid "Is Action Delivering Error Allowed"
+msgstr ""
+
+#. module: alc_stock_release_channel_deliver
+#. odoo-python
+#: code:addons/alc_stock_release_channel_deliver/models/stock_release_channel.py:0
+#, python-format
+msgid "No picking to deliver for channel %(name)s."
+msgstr "Aucun picking à livrer pour le canal %(name)s."
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model,name:alc_stock_release_channel_deliver.model_shipment_advice
+msgid "Shipment Advice"
+msgstr "Avis d'expédition"
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel__state
+msgid "State"
+msgstr "État"
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model,name:alc_stock_release_channel_deliver.model_stock_release_channel
+msgid "Stock Release Channels"
+msgstr "Canaux de livraison"
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,help:alc_stock_release_channel_deliver.field_stock_release_channel__state
+msgid ""
+"The state allows you to control the availability of the release channel.\n"
+"* Open: Manual and automatic picking assignment to the release is effective and release operations are allowed.\n"
+" * Locked: Release operations are forbidden. (Assignement processes are still working)\n"
+"* Delivering: A background task is running to automatically deliver ready shipments\n"
+"* Delivering Error: An error occurred in the delivery background task\n"
+"* Asleep: Assigned pickings not processed are unassigned from the release channel.\n"
+msgstr ""
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model,name:alc_stock_release_channel_deliver.model_toursolver_task
+msgid "Toursolver Task"
+msgstr ""

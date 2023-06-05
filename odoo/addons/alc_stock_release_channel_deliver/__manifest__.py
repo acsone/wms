@@ -1,0 +1,23 @@
+# Copyright 2023 ACSONE SA/NV
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+{
+    "name": "Alc Stock Release Channel Deliver",
+    "description": """This module adds an action to the release channel to
+    automate the delivery of its shippings.""",
+    "version": "16.0.1.0.0",
+    "license": "AGPL-3",
+    "author": "ACSONE SA/NV",
+    "website": "https://acsone.eu",
+    "depends": [
+        "stock_release_channel",
+        "queue_job",
+        "shipment_advice_planner_toursolver_queue_job",
+        "stock_release_channel_shipment_advice",
+    ],
+    "data": [
+        "data/queue_job_function.xml",
+        "views/stock_release_channel.xml",
+    ],
+    "demo": [],
+}
