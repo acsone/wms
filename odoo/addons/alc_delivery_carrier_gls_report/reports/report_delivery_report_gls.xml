@@ -33,13 +33,19 @@
         />
         </div>
     </xpath>
-    <xpath expr="//thead/tr/th" position="replace">
+    <xpath expr="//thead/tr/th" position="after">
         <th class="text-right"><strong>Reference</strong></th>
     </xpath>
-    <xpath expr="//tbody/t/tr/td" position="replace">
+    <xpath expr="//thead/tr/th" position="attributes">
+        <attribute name="invisible">1</attribute>
+    </xpath>
+    <xpath expr="//tbody/t/tr/td" position="after">
         <td>
             <span t-field="l.b2c_ref" />
         </td>
+    </xpath>
+    <xpath expr="//tbody/t/tr/td" position="attributes">
+        <attribute name="invisible">1</attribute>
     </xpath>
   </template>
 
