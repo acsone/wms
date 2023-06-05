@@ -241,7 +241,6 @@ omit =
     odoo/addons/specific_print/*
     odoo/addons/specific_report/*
     odoo/addons/specific_stock/*
-    odoo/addons/speedy_views/*
     odoo/addons/standard_service_mixin/*
     odoo/addons/stock_constraint/*
     odoo/addons/stock_inventory_constrains/*
