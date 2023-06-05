@@ -358,7 +358,7 @@ coverage-report-10.0:
 build-image:
   extends: .build-and-publish-image
   only:
-    - /^1\.100\.\d+$/
+    - /^1\.101\.\d+$/
 
 build-review-image:
   extends: .build-and-publish-image
@@ -396,7 +396,7 @@ deploy-test-trigger:
   needs:
     - job: build-image
   only:
-    - /^1\.100\.\d+$/
+    - /^1\.101\.\d+$/
 
 deploy-review-trigger:
   extends: .deploy-trigger
@@ -421,7 +421,7 @@ deploy-uat-trigger:
   needs:
     - job: build-image
   only:
-    - /^1\.100\.\d+$/
+    - /^1\.101\.\d+$/
 
 deploy-preprod-trigger:
   extends: .deploy-trigger
@@ -432,7 +432,7 @@ deploy-preprod-trigger:
   needs:
     - job: build-image
   only:
-    - /^1\.100\.\d+$/
+    - /^1\.101\.\d+$/
   when: manual
 
 # deployments to docker environments (prod)
@@ -442,7 +442,7 @@ deploy-preprod-trigger:
   needs:
     - job: build-image
   only:
-    - /^1\.100\.\d+$/
+    - /^1\.101\.\d+$/
   when: manual
 
 deploy-prod-trigger:
