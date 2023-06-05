@@ -79,6 +79,7 @@
         "alc_reception_pharmacy",
         "alc_reception_pharmacy_printing",
         "alc_stock_security",
+        "alc_label_printing_gls",
     ],
     "data": [],
     "demo": [],
