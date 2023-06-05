@@ -24,13 +24,6 @@ def _activate_constraint(env):
 
 
 def _change_columns(env):
-    openupgrade.update_module_moved_fields(
-        env.cr,
-        "stock.location",
-        ("corridor",),
-        "specific_stock",
-        "stock_location_position",
-    )
     if openupgrade.column_exists(env.cr, "stock_location", "shelf"):
         # Moving shelf data to rack one
         query = """
