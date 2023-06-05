@@ -52,12 +52,27 @@ class TestShapeFileImportWizard(TransactionCase):
     def test_create_channel(self):
         self._do_import("shape_test_1.zip")
         self.assertTrue(self.channel_model.search([("name", "=", "D1")]))
+        self.assertTrue(self.channel_model.search([("shape_name", "=", "D1")]))
 
     @mute_logger("shapefile")
     def test_update_channel(self):
         """Channel 2 already exist => do update."""
         channel = self.channel_model.create(
             {"name": "D2", "delivery_plan_id": self.delivery_plan.id}
+        )
+        self._do_import("shape_test_2.zip")
+        self.assertTrue(isinstance(channel.delivery_zone, MultiPolygon))
+        self.assertEqual(channel.name, "D2")
+
+    @mute_logger("shapefile")
+    def test_update_channel_2(self):
+        """Channel 2 already exist => do update."""
+        channel = self.channel_model.create(
+            {
+                "name": "xxxx",
+                "shape_name": "D2",
+                "delivery_plan_id": self.delivery_plan.id,
+            }
         )
         self._do_import("shape_test_2.zip")
         self.assertTrue(isinstance(channel.delivery_zone, MultiPolygon))

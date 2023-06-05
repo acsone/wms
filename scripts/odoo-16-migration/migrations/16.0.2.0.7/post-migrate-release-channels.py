@@ -32,6 +32,7 @@ def _create_release_channels_from_delivery_rounds(env):
         INSERT INTO stock_release_channel (
             name,
             round_template_code,
+            shape_name,
             release_mode,
             batch_mode,
             restrict_to_delivery_zone,
@@ -47,6 +48,7 @@ def _create_release_channels_from_delivery_rounds(env):
         SELECT
             name,
             code,
+            shape_name,
             'auto',
             'max',
             True,
@@ -73,7 +75,8 @@ def _create_release_channels_from_delivery_rounds(env):
         """
         INSERT INTO stock_release_channel (
             name,
-            code,
+            round_template_code,
+            shape_name,
             release_mode,
             batch_mode,
             shipment_planning_method,
@@ -87,6 +90,7 @@ def _create_release_channels_from_delivery_rounds(env):
         SELECT
             name,
             code,
+            shape_name,
             'auto',
             'max',
             'simple',
