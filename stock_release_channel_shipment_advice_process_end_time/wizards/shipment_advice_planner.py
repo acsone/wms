@@ -8,9 +8,9 @@ class ShipmentAdvicePlanner(models.TransientModel):
 
     _inherit = "shipment.advice.planner"
 
-    def _prepare_shipment_advice_common_vals(self, warehouse):
+    def _prepare_shipment_advice_common_vals(self, picking_type):
         self.ensure_one()
-        vals = super()._prepare_shipment_advice_common_vals(warehouse)
+        vals = super()._prepare_shipment_advice_common_vals(picking_type)
         if self.release_channel_id:
             vals[
                 "arrival_date"
