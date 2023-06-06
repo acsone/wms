@@ -50,7 +50,7 @@ odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logi
 odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@46f9749cf9e785a071baa8a0db6e95ab66ba9f77#subdirectory=setup/stock_picking_start
 odoo-addon-stock-picking-type-shipping-policy==16.0.1.0.0.3
 odoo-addon-stock-picking-volume @ git+https://github.com/acsone/stock-logistics-warehouse.git@75261dd8d3105a81011992a3e9f8cac34c9144a1#subdirectory=setup/stock_picking_volume
-odoo-addon-stock-procurement-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@c7ac26cbc2f8f9b812166b0ef73379fe1ebb8b59#subdirectory=setup/stock_procurement_customer
+odoo-addon-stock-procurement-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@03e6941e44aeaced231d586cd68d112c3ec7e451#subdirectory=setup/stock_procurement_customer
 odoo-addon-stock-production-lot-expired-date==16.0.1.0.1.2
 odoo-addon-stock-putaway-hook==16.0.1.0.0.4
 odoo-addon-stock-quant-package-dimension==16.0.1.0.0.2
