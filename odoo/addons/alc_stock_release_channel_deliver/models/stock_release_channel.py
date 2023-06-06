@@ -15,6 +15,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
         selection_add=[
             ("delivering", "Delivering"),
             ("delivering_error", "Delivering Error"),
+            ("delivered", "Delivered"),
         ],
         help="The state allows you to control the availability of the release channel.\n"
         "* Open: Manual and automatic picking assignment to the release is effective "
@@ -23,6 +24,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
         "still working)\n"
         "* Delivering: A background task is running to automatically deliver ready shipments\n"
         "* Delivering Error: An error occurred in the delivery background task\n"
+        "* Delivered: Ready transfers are delivered\n"
         "* Asleep: Assigned pickings not processed are unassigned from the release "
         "channel.\n",
     )
@@ -32,6 +34,9 @@ class StockReleaseChannel(StockReleaseChannelBase):
     )
     is_action_delivering_error_allowed = fields.Boolean(
         compute="_compute_is_action_delivering_error_allowed"
+    )
+    is_action_delivered_allowed = fields.Boolean(
+        compute="_compute_is_action_delivered_allowed"
     )
     delivering_error = fields.Text(readonly=True)
 
@@ -47,6 +52,11 @@ class StockReleaseChannel(StockReleaseChannelBase):
     def _compute_is_action_delivering_error_allowed(self):
         for rec in self:
             rec.is_action_delivering_error_allowed = rec.state == "delivering"
+
+    @api.depends("state")
+    def _compute_is_action_delivered_allowed(self):
+        for rec in self:
+            rec.is_action_delivered_allowed = rec.state == "delivering"
 
     def _check_is_action_delivering_allowed(self):
         for rec in self:
@@ -72,6 +82,16 @@ class StockReleaseChannel(StockReleaseChannelBase):
                     )
                 )
 
+    def _check_is_action_delivered_allowed(self):
+        for rec in self:
+            if not rec.is_action_delivered_allowed:
+                raise UserError(
+                    _(
+                        "Action 'Delivered' is not allowed for channel %(name)s.",
+                        name=rec.name,
+                    )
+                )
+
     def action_delivering(self):
         self._check_is_action_delivering_allowed()
         self.write({"state": "delivering"})
@@ -92,6 +112,18 @@ class StockReleaseChannel(StockReleaseChannelBase):
             sticky=True,
         )
 
+    def action_delivered(self):
+        self._check_is_action_delivered_allowed()
+        self.write({"state": "delivered"})
+        self.env.user.notify_success(
+            message=_(
+                "The delivery background task is done for channel %(name)s",
+                name=self.display_name,
+            ),
+            title="Delivering done",
+            sticky=True,
+        )
+
     def _action_deliver(self):
         self.ensure_one()
         self._plan_shipments()
@@ -102,22 +134,14 @@ class StockReleaseChannel(StockReleaseChannelBase):
         not_done_states = ["confirmed", "in_progress"]
         if any(not_done_state in shipment_states for not_done_state in not_done_states):
             return
-        self.action_lock()
-        self.env.user.notify_success(
-            message=_(
-                "The delivery background task is done for channel %(name)s",
-                name=self.display_name,
-            ),
-            title="Delivering done",
-            sticky=True,
-        )
+        self.action_delivered()
 
     @api.depends("state")
-    def _compute_is_action_lock_allowed(self):
+    def _compute_is_action_sleep_allowed(self):
         res = super()._compute_is_action_lock_allowed()
         for rec in self:
-            rec.is_action_lock_allowed = (
-                rec.is_action_lock_allowed or rec.state == "delivering"
+            rec.is_action_sleep_allowed = (
+                rec.is_action_sleep_allowed or rec.state == "delivering"
             )
         return res
 
