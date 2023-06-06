@@ -15,7 +15,7 @@ def _confirm_background_sales(env):
         SELECT id FROM sale_order
             WHERE state = 'confirm_background'
     """
-    env.cr.execute(env.cr, query)
+    env.cr.execute(query)
     ids = [i[0] for i in env.cr.fetchall()]
 
     query = """
@@ -23,7 +23,7 @@ def _confirm_background_sales(env):
             SET state = 'draft'
             WHERE state = 'confirm_background'
     """
-    env.cr.execute(env.cr, query)
+    env.cr.execute(query)
 
     env["sale.order"].browse(ids).action_confirm()
 
