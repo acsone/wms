@@ -12,7 +12,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "alc_package_label_printer",
+        "alc_package_label_printer",  # replaced by base_report_to_label_printer
         "alc_product_label_printer",
         "alc_shopfloor_packing",
         "specific_print",

@@ -1,0 +1,27 @@
+# Copyright 2023 ACSONE SA/NV
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+import logging
+
+from openupgradelib import openupgrade
+
+_logger = logging.getLogger(__name__)
+
+
+def _mig_res_users(env):
+    if not openupgrade.column_exists(
+        env.cr, "res_users", "printing_package_label_printer_id"
+    ):
+        return
+    env.cr.execute(
+        """
+        ALTER TABLE res_users
+        ADD COLUMN IF NOT EXISTS default_label_printer_id integer;
+        UPDATE res_users
+        SET default_label_printer_id=printing_package_label_printer_id;
+        """
+    )
+
+
+@openupgrade.migrate()
+def migrate(env, version):
+    _mig_res_users(env)
