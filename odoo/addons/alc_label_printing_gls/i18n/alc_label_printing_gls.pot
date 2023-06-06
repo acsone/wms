@@ -1,12 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_label_printing_gls
+# 	* alc_label_printing_gls
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2023-06-05 15:27+0000\n"
+"PO-Revision-Date: 2023-06-05 15:27+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,20 +16,22 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_label_printing_gls
-#: model:ir.model.fields,field_description:alc_label_printing_gls.field_res_users_printing_gls_printer_id
+#: model:ir.model.fields,field_description:alc_label_printing_gls.field_res_users__printing_gls_printer_id
 msgid "Gls Printer"
 msgstr ""
 
 #. module: alc_label_printing_gls
-#: code:addons/alc_label_printing_gls/models/shipping_label.py:31
+#. odoo-python
+#: code:addons/alc_label_printing_gls/models/shipping_label.py:0
 #, python-format
 msgid "No GLS printer assigned."
 msgstr ""
 
 #. module: alc_label_printing_gls
-#: code:addons/alc_label_printing_gls/models/shipping_label.py:21
+#. odoo-python
+#: code:addons/alc_label_printing_gls/models/shipping_label.py:0
 #, python-format
-msgid "Printing label {}"
+msgid "Printing label %(name)s"
 msgstr ""
 
 #. module: alc_label_printing_gls
@@ -37,6 +41,5 @@ msgstr ""
 
 #. module: alc_label_printing_gls
 #: model:ir.model,name:alc_label_printing_gls.model_res_users
-msgid "Users"
+msgid "User"
 msgstr ""
-
