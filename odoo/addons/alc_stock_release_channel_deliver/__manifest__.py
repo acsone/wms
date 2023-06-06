@@ -14,6 +14,7 @@
         "queue_job",
         "shipment_advice_planner_toursolver_queue_job",
         "stock_release_channel_shipment_advice",
+        "web_notify",
     ],
     "data": [
         "data/queue_job_function.xml",

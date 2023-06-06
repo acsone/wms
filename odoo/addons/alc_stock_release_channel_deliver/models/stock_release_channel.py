@@ -83,6 +83,14 @@ class StockReleaseChannel(StockReleaseChannelBase):
     def action_delivering_error(self):
         self._check_is_action_delivering_error_allowed()
         self.write({"state": "delivering_error"})
+        self.env.user.notify_danger(
+            message=_(
+                "An error occurred in the delivery background task for channel %(name)s",
+                name=self.display_name,
+            ),
+            title="Delivering Error",
+            sticky=True,
+        )
 
     def _action_deliver(self):
         self.ensure_one()
@@ -95,6 +103,14 @@ class StockReleaseChannel(StockReleaseChannelBase):
         if any(not_done_state in shipment_states for not_done_state in not_done_states):
             return
         self.action_lock()
+        self.env.user.notify_success(
+            message=_(
+                "The delivery background task is done for channel %(name)s",
+                name=self.display_name,
+            ),
+            title="Delivering done",
+            sticky=True,
+        )
 
     @api.depends("state")
     def _compute_is_action_lock_allowed(self):
