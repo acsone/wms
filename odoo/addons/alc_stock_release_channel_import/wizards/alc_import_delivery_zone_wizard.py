@@ -15,6 +15,7 @@ from shapely.wkb import loads as wkbloads
 
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.osv.expression import AND, OR
 
 from odoo.addons.alc_stock_release_channel_tag.models.alc_stock_release_channel_tag import (
     AlcStockReleaseChannelTag,
@@ -81,7 +82,18 @@ class AlcImportDeliveryZoneWizard(models.TransientModel):
     def _get_existing_channels(self, channel_name=None):
         domain = [("delivery_plan_id", "=", self.delivery_plan_id.id)]
         if channel_name:
-            domain.append(("name", "=", channel_name))
+            domain = AND(
+                [
+                    domain,
+                    OR(
+                        [
+                            [("name", "=", channel_name)],
+                            [("shape_name", "=", channel_name)],
+                        ]
+                    ),
+                ],
+            )
+
         return self.env["stock.release.channel"].search(domain)
 
     def _process_content(self, content):
@@ -130,6 +142,7 @@ class AlcImportDeliveryZoneWizard(models.TransientModel):
     def _get_channel_values(self, name, delivery_zone):
         return {
             "name": name,
+            "shape_name": name,
             "delivery_plan_id": self.delivery_plan_id.id,
             "restrict_to_delivery_zone": True,
             "delivery_zone": delivery_zone,
