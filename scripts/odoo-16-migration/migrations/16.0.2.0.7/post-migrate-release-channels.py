@@ -169,10 +169,16 @@ def _create_shipment_advice_from_round_instances(env):
     """Create shipment advices from round instances."""
     cr = env.cr
     # add column on shipment advice to keep reference of the corresponding delivery instance
+    # and its index
     cr.execute(
         """
         ALTER TABLE shipment_advice
         ADD COLUMN round_instance_id INTEGER
+        """
+    )
+    cr.execute(
+        """
+        CREATE INDEX ON shipment_advice (round_instance_id)
         """
     )
     # create one shipment advice per round instance
