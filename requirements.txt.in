@@ -56,7 +56,9 @@ odoo10-addon-purchase-order-import @  git+https://github.com/oca/edi.git@refs/pu
 odoo10-addon-despatch-advice-import @  git+https://github.com/oca/edi.git@refs/pull/280/head#subdirectory=setup/despatch_advice_import
 odoo10-addon-despatch-advice-import-ubl @  git+https://github.com/oca/edi.git@refs/pull/280/head#subdirectory=setup/despatch_advice_import_ubl
 odoo10-addon-base-ubl @ git+https://github.com/oca/edi.git@refs/pull/771/head#subdirectory=setup/base_ubl
+odoo10-addon-base-ubl-payment @ git+https://github.com/oca/edi.git@refs/pull/771/head#subdirectory=setup/base_ubl_payment
 odoo10-addon-account-invoice-ubl @ git+https://github.com/oca/edi.git@refs/pull/771/head#subdirectory=setup/account_invoice_ubl
+odoo10-addon-account-e-invoice-generate @ git+https://github.com/oca/edi.git@refs/pull/771/head#subdirectory=setup/account_e-invoice_generate
 
 # oca/stock-logistics-wokflow
 odoo10-addon-stock-quant-package-product-packaging @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/743/head#subdirectory=setup/stock_quant_package_product_packaging

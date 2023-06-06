@@ -61,7 +61,7 @@ odoo10-addon-account-cutoff-accrual-picking @ git+https://github.com/acsone/acco
 odoo10-addon-account-cutoff-accrual-picking-product-analytic @ git+https://github.com/acsone/account-closing@c2592d61473af7cc76be637088a2d146a607232e#subdirectory=setup/account_cutoff_accrual_picking_product_analytic
 odoo10-addon-account-cutoff-accrual-return @ git+https://github.com/acsone/account-closing@7a8ad29c39f58129b85cf975ea6ba2d946734ef7#subdirectory=setup/account_cutoff_accrual_return
 odoo10-addon-account-cutoff-base @ git+https://github.com/acsone/account-closing@b0d0b5e81000e47a89069491ec5ccc9e34299772#subdirectory=setup/account_cutoff_base
-odoo10-addon-account-e-invoice-generate==10.0.1.0.0
+odoo10-addon-account-e-invoice-generate @ git+https://github.com/jbaudoux/edi.git@45aef74af8ef51fb1bd68f2900996cb0f5534588#subdirectory=setup/account_e-invoice_generate
 odoo10-addon-account-financial-report-date-range @ git+https://github.com/acsone/account-financial-reporting.git@37e0dda2eea90b3efe046851d732443903ced004#subdirectory=setup/account_financial_report_date_range
 odoo10-addon-account-financial-report-qweb @ git+https://github.com/acsone/account-financial-reporting.git@37e0dda2eea90b3efe046851d732443903ced004#subdirectory=setup/account_financial_report_qweb
 odoo10-addon-account-group @ git+https://github.com/acsone/account-financial-tools.git@779a120dea41eca52bab98ff847b517ba58374ab#subdirectory=setup/account_group
@@ -129,8 +129,8 @@ odoo10-addon-base-sparse-field-list-support==10.0.1.0.0.99.dev7
 odoo10-addon-base-suspend-security @ git+https://github.com/acsone/server-tools.git@02988b423657d1e5950a39b76b84335c20a893a5#subdirectory=setup/base_suspend_security
 odoo10-addon-base-technical-features @ git+https://github.com/acsone/server-tools.git@dcefdba5bac014076f05229ba091acd8b739e164#subdirectory=setup/base_technical_features
 odoo10-addon-base-technical-user==10.0.1.1.0
-odoo10-addon-base-ubl==10.0.1.1.0
-odoo10-addon-base-ubl-payment==10.0.1.0.0
+odoo10-addon-base-ubl @ git+https://github.com/jbaudoux/edi.git@45aef74af8ef51fb1bd68f2900996cb0f5534588#subdirectory=setup/base_ubl
+odoo10-addon-base-ubl-payment @ git+https://github.com/jbaudoux/edi.git@45aef74af8ef51fb1bd68f2900996cb0f5534588#subdirectory=setup/base_ubl_payment
 odoo10-addon-base-ubl-payment-mode-required @ git+https://github.com/edido-eu/peppol@83f436b86f19b01159fead7cc318ec6c3e8bf219#subdirectory=setup/base_ubl_payment_mode_required
 odoo10-addon-base-unece==10.0.1.0.0.99.dev2
 odoo10-addon-base-url @ git+https://github.com/acsone/odoo-shopinvader.git@72e6e354127080c54f5e58b03d66252305c3f7e7#subdirectory=setup/base_url
