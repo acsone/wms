@@ -80,6 +80,7 @@
         "alc_reception_pharmacy_printing",
         "alc_stock_security",
         "alc_delivery_carrier_gls_b2c",
+        "alc_delivery_carrier_gls_report",
     ],
     "data": [],
     "demo": [],

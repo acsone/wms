@@ -33,14 +33,14 @@ msgstr ""
 #. module: alc_delivery_carrier_gls_report
 #: model_terms:ir.ui.view,arch_db:alc_delivery_carrier_gls_report.report_delivery_report_gls_document_b2c_ref
 msgid "<strong>Reference</strong>"
-msgstr ""
+msgstr "<strong>Référence</strong>"
 
 #. module: alc_delivery_carrier_gls_report
 #: model_terms:ir.ui.view,arch_db:alc_delivery_carrier_gls_report.report_delivery_report_gls_document_b2c_ref
 msgid "Collection point:"
-msgstr ""
+msgstr "Point d'enlèvement:"
 
 #. module: alc_delivery_carrier_gls_report
 #: model_terms:ir.ui.view,arch_db:alc_delivery_carrier_gls_report.report_delivery_report_gls_document_b2c_ref
 msgid "Sender:"
-msgstr ""
+msgstr "Expéditeur:"
