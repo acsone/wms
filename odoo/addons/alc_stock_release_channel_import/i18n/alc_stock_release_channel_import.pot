@@ -165,6 +165,16 @@ msgid "Release channel tags"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_stock_release_channel__shape_name
+msgid "Shape Name"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,help:alc_stock_release_channel_import.field_stock_release_channel__shape_name
+msgid "Shape resource name into the imported shape file"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
 #: model:ir.model,name:alc_stock_release_channel_import.model_stock_release_channel
 msgid "Stock Release Channels"
 msgstr ""
