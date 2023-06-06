@@ -168,6 +168,18 @@ msgid "Release channel tags"
 msgstr "Étiquettes"
 
 #. module: alc_stock_release_channel_import
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_stock_release_channel__shape_name
+msgid "Shape Name"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model.fields,help:alc_stock_release_channel_import.field_stock_release_channel__shape_name
+#, fuzzy
+#| msgid "Unable to import the shape file"
+msgid "Shape resource name into the imported shape file"
+msgstr "Impossible d'importer le fichier de formes"
+
+#. module: alc_stock_release_channel_import
 #: model:ir.model,name:alc_stock_release_channel_import.model_stock_release_channel
 msgid "Stock Release Channels"
 msgstr "Canaux de livraison des stocks"
