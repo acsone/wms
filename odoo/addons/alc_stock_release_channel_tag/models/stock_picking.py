@@ -21,14 +21,11 @@ class StockPicking(StockPickingBase):
         """
         self.ensure_one()
         partner_tags = self.partner_id.stock_release_channel_tag_ids
-        if partner_tags:
-            domain = [
-                "|",
-                ("stock_release_channel_tag_ids", "=", False),
-                ("stock_release_channel_tag_ids", "in", partner_tags.ids),
-            ]
-        else:
-            domain = [
-                ("stock_release_channel_tag_ids", "=", False),
-            ]
+        if not partner_tags:
+            return super()._get_release_channel_possible_candidate_domain()
+        domain = [
+            "|",
+            ("stock_release_channel_tag_ids", "=", False),
+            ("stock_release_channel_tag_ids", "in", partner_tags.ids),
+        ]
         return AND([super()._get_release_channel_possible_candidate_domain(), domain])

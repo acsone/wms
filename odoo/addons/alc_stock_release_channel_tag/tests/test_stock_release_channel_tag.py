@@ -16,8 +16,13 @@ class TestStockReleaseChannelTag(ChannelReleaseCase):
         cls.tag = cls.env.ref(
             "alc_stock_release_channel_tag.alc_stock_release_channel_tag_demo_1"
         )
+        cls.tag_2 = cls.env.ref(
+            "alc_stock_release_channel_tag.alc_stock_release_channel_tag_demo_2"
+        )
         cls.channel.stock_release_channel_tag_ids = cls.tag
         cls.delivery_address_1.stock_release_channel_tag_ids = cls.tag
+        cls.delivery_address_2.stock_release_channel_tag_ids = cls.tag_2
+        cls.other_partner.stock_release_channel_tag_ids = cls.tag_2
 
     @mute_logger("odoo.addons.stock_release_channel.models.stock_release_channel")
     def test_release_with_tag(self):
@@ -40,6 +45,6 @@ class TestStockReleaseChannelTag(ChannelReleaseCase):
         self.delivery_address_1.stock_release_channel_tag_ids = False
 
         self.pickings.assign_release_channel()
-        self.assertFalse(self.picking.release_channel_id)
+        self.assertEqual(self.picking.release_channel_id, self.channel)
         self.assertFalse(self.picking2.release_channel_id)
         self.assertFalse(self.picking3.release_channel_id)
