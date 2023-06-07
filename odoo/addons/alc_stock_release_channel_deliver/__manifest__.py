@@ -17,6 +17,7 @@
         "web_notify",
     ],
     "data": [
+        "data/queue_job_channel.xml",
         "data/queue_job_function.xml",
         "views/stock_release_channel.xml",
     ],

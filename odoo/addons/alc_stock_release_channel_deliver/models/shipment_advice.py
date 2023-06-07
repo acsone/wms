@@ -3,7 +3,7 @@
 
 import logging
 
-from odoo import api, fields
+from odoo import _, api, fields
 
 from odoo.addons.stock_release_channel_shipment_advice.models.shipment_advice import (
     ShipmentAdvice as ShipmentAdviceBase,
@@ -32,7 +32,12 @@ class ShipmentAdvice(ShipmentAdviceBase):
         records = super().create(vals_list)
         for rec in records:
             if rec._is_auto_process:
-                rec.with_delay()._auto_process()
+                rec.with_delay(
+                    description=_(
+                        "Automatically process the shipment advice %(name)s.",
+                        name=rec.name,
+                    )
+                )._auto_process()
         return records
 
     def _auto_process(self):

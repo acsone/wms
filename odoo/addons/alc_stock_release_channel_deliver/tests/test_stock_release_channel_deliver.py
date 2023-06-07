@@ -61,6 +61,8 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         self.assertEqual(shipment_advice.loaded_picking_ids, self.pickings)
         self.assertSetEqual(set(self.pickings.mapped("state")), {"done"})
         self.assertEqual(self.channel.state, "delivered")
+        self.channel.action_sleep()
+        self.assertEqual(self.channel.state, "asleep")
 
     @mute_logger("odoo.addons.alc_stock_release_channel_deliver.models.shipment_advice")
     def test_02(self):
