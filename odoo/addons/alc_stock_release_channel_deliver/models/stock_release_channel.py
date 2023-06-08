@@ -56,13 +56,18 @@ class StockReleaseChannel(StockReleaseChannelBase):
                 ]
             )
 
-    @api.depends("state")
+    @api.depends("state", "picking_to_plan_ids", "shipment_planning_method")
     def _compute_is_action_delivering_allowed(self):
         for rec in self:
-            rec.is_action_delivering_allowed = rec.state in (
-                "locked",
-                "delivering_error",
-            ) and bool(rec.picking_to_plan_ids)
+            rec.is_action_delivering_allowed = (
+                rec.state
+                in (
+                    "locked",
+                    "delivering_error",
+                )
+                and bool(rec.picking_to_plan_ids)
+                and rec.shipment_planning_method != "none"
+            )
 
     @api.depends("state")
     def _compute_is_action_delivering_error_allowed(self):

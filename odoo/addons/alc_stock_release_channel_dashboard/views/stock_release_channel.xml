@@ -22,6 +22,7 @@
                 <field name="is_action_unlock_allowed" />
                 <field name="is_action_lock_allowed" />
                 <field name="is_action_delivering_allowed" />
+                <field name="is_action_print_allowed" />
                 <field name="release_forbidden" />
                 <field name="active" />
                 <field name="kanban_dashboard" />
@@ -181,13 +182,18 @@
                     name="action_unlock"
                     type="object"
                     icon="fa-unlock"
-                  >Unlock</a><br />
-                                    <a
+                  >Unlock</a><br t-if="record.is_action_unlock_allowed.raw_value" /><a
                     t-if="record.is_action_delivering_allowed.raw_value"
                     name="action_delivering"
                     type="object"
                     icon="fa-truck"
                   >Deliver</a>
+                                    <a
+                    t-if="record.is_action_print_allowed.raw_value"
+                    name="action_print"
+                    type="object"
+                    icon="fa-print"
+                  >Print</a>
                                 </div>
                                 <div class="col-5">
                                     <a

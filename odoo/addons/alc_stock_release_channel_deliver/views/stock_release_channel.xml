@@ -43,7 +43,7 @@
                 <filter
           string="Delivering"
           name="filter_delivering"
-          domain="[('state','in', ('delivering', 'delivering_error'))]"
+          domain="[('state','in', ('delivering', 'delivering_error', 'delivered'))]"
         />
             </xpath>
        </field>

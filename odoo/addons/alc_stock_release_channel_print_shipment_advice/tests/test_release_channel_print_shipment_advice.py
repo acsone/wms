@@ -26,17 +26,7 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         cls.pickings = cls.channel.picking_to_plan_ids
 
     def test_00(self):
-        """Test action_delivering allowed."""
-        self.channel.action_unlock()
-        self.assertEqual(self.channel.state, "open")
-        with self.assertRaises(
-            UserError, msg="Action 'Delivering' is not allowed for channel Default."
-        ):
-            self.channel.action_delivering()
-
-    def test_01(self):
-        """Shipemnt advices are creared and automatically processed."""
-
+        """Shipment advices are created and automatically processed."""
         with trap_jobs() as trap_rc:
             self.channel.action_delivering()
             self.assertEqual(self.channel.state, "delivering")
@@ -62,12 +52,26 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         self.assertTrue(shipment_advice.in_release_channel_auto_process)
         self.assertSetEqual(set(self.pickings.mapped("state")), {"done"})
         self.assertEqual(self.channel.state, "delivered")
+        return shipment_advice
+
+    def test_01(self):
+        shipment_advice = self.test_00()
+        self.assertTrue(shipment_advice.in_release_channel_auto_process)
+        action = self.channel.with_context(discard_logo_check=True).action_print()
+        self.assertEqual(self.channel.state, "asleep")
+        self.assertFalse(shipment_advice.in_release_channel_auto_process)
+        self.assertEqual(action.get("type"), "ir.actions.report")
+        self.assertEqual(
+            action.get("report_name"), "shipment_advice.report_shipment_advice"
+        )
+        self.assertEqual(action.get("report_type"), "qweb-pdf")
+        self.assertEqual(action.get("context").get("active_ids"), shipment_advice.ids)
 
     @mute_logger("odoo.addons.alc_stock_release_channel_deliver.models.shipment_advice")
     def test_02(self):
-        """An error occurred while processing the shipment advices, the release channel.
+        """An error occurred while processing the shipment advices,.
 
-        is notified and the error is logged
+        the print is not allowed
         """
         self.channel.dock_id = False
         with trap_jobs() as trap_rc:
@@ -87,18 +91,38 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
             f"An error occurred while processing the delivery automatically:\n"
             f"- {shipment_advice.name}: Dock should be set on the shipment advice {shipment_advice.name}.",
         )
+        self.assertEqual(self.channel.state, "delivering_error")
+        with self.assertRaises(
+            UserError, msg="Action 'Print' is not allowed for channel Default."
+        ):
+            self.channel.action_print()
 
     def test_03(self):
-        """Re-deliver after fail."""
+        """Re-deliver after fail then print."""
         self.test_02()
         self.assertEqual(self.channel.state, "delivering_error")
         self.channel.dock_id = self.dock
-        self.test_01()
-
-    def test_04(self):
-        """No picking to deliver, an error should be raised."""
-        self.pickings.write({"release_channel_id": False})
-        with self.assertRaises(
-            UserError, msg="No picking to deliver for channel Default"
-        ):
-            self.channel.action_delivering()
+        self.test_00()
+        self.assertEqual(self.channel.state, "delivered")
+        # it should be two shipment_advices, one canceled and one done
+        shipment_advices = self.channel.in_process_shipment_advice_ids
+        self.assertEqual(len(shipment_advices), 2)
+        done_shipment_advice = shipment_advices.filtered(lambda s: s.state == "done")
+        cancel_shipment_advice = shipment_advices.filtered(
+            lambda s: s.state == "cancel"
+        )
+        self.assertTrue(done_shipment_advice.in_release_channel_auto_process)
+        self.assertTrue(cancel_shipment_advice.in_release_channel_auto_process)
+        action = self.channel.with_context(discard_logo_check=True).action_print()
+        self.assertEqual(self.channel.state, "asleep")
+        self.assertFalse(done_shipment_advice.in_release_channel_auto_process)
+        self.assertFalse(cancel_shipment_advice.in_release_channel_auto_process)
+        self.assertEqual(action.get("type"), "ir.actions.report")
+        self.assertEqual(
+            action.get("report_name"), "shipment_advice.report_shipment_advice"
+        )
+        self.assertEqual(action.get("report_type"), "qweb-pdf")
+        # only the done shipment is printed
+        self.assertEqual(
+            action.get("context").get("active_ids"), done_shipment_advice.ids
+        )
