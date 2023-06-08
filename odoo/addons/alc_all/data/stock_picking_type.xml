@@ -12,7 +12,7 @@
   <function model="stock.picking.type" name="write">
     <value model="stock.picking.type" eval="[ref('stock.picking_type_out')]" />
     <value
-      eval="{'group_pickings': True, 'group_pickings_by_customer': True, 'show_entire_packs': True}"
+      eval="{'group_pickings': True, 'group_pickings_by_customer': True, 'show_entire_packs': True, 'propagate_to_pickings_chain': True}"
     />
   </function>
 
