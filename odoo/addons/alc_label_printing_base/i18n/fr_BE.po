@@ -259,10 +259,10 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_label_printing_base.stock_pick_packs_label_zebra_v1
 msgid ""
 "^XA\n"
-"            ^FO30,30^GBpick.delivery_round_id.template_id.code and len(pick."
-"delivery_round_id.template_id.code) * 38\n"
+"            ^FO30,30^GBpick.release_channel_id.code and len(pick."
+"release_channel_id.code) * 38\n"
 "            ,75,3,2^FS\\r\n"
-"            ^FO40,47^A0N60,60^FDpick.delivery_round_id.template_id.code\n"
+"            ^FO40,47^A0N60,60^FDpick.release_channel_id.code\n"
 "            ^FS\\r"
 msgstr ""
 
