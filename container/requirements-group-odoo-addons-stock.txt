@@ -61,9 +61,9 @@ odoo-addon-stock-release-channel-delivery @ git+https://github.com/acsone/wms.gi
 odoo-addon-stock-release-channel-geoengine @ git+https://github.com/acsone/wms.git@a9d8af8190810f0736d6ca9b1e66bf1de8678c9a#subdirectory=setup/stock_release_channel_geoengine
 odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@8f2038535412a6fc13f34c30793da926d9ee5a73#subdirectory=setup/stock_release_channel_process_end_time
 odoo-addon-stock-release-channel-propagate-channel-picking @ git+https://github.com/acsone/wms.git@3c19be271b7705388ed90354f693b32c7399a656#subdirectory=setup/stock_release_channel_propagate_channel_picking
-odoo-addon-stock-release-channel-shipment-advice @ git+https://github.com/acsone/wms.git@4d466a3705b0dd6d54ff0380f6caba318dc39ffe#subdirectory=setup/stock_release_channel_shipment_advice
-odoo-addon-stock-release-channel-shipment-advice-process-end-time @ git+https://github.com/acsone/wms.git@49d513b2511e4248c2930d29612b03cd2294fc42#subdirectory=setup/stock_release_channel_shipment_advice_process_end_time
-odoo-addon-stock-release-channel-shipment-advice-toursolver @ git+https://github.com/acsone/wms.git@46cf39a54b0389062d13e5cdcb27b1788eb0c01e#subdirectory=setup/stock_release_channel_shipment_advice_toursolver
+odoo-addon-stock-release-channel-shipment-advice @ git+https://github.com/acsone/wms.git@24ad66249ccaa7ae6ed966c7ddce4da7d603ee3f#subdirectory=setup/stock_release_channel_shipment_advice
+odoo-addon-stock-release-channel-shipment-advice-process-end-time @ git+https://github.com/acsone/wms.git@d456d1c2e1af758c6ad5986e8555c8d8b7ed1bcf#subdirectory=setup/stock_release_channel_shipment_advice_process_end_time
+odoo-addon-stock-release-channel-shipment-advice-toursolver @ git+https://github.com/acsone/wms.git@2a14f82bdd97ec8329b436b4f7ae066d4fdb52c5#subdirectory=setup/stock_release_channel_shipment_advice_toursolver
 odoo-addon-stock-restrict-lot==16.0.1.1.0
 odoo-addon-stock-route-mto==16.0.1.0.0.2
 odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@0c90dfb1a4597a2da3beeb5de9fb2495c44d7520#subdirectory=setup/stock_scrap_location_default

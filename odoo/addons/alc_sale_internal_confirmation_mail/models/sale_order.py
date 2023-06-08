@@ -10,7 +10,7 @@ class SaleOrder(sale_order.SaleOrder):
         send_confirmation_email_internal = (
             self.env["ir.config_parameter"]
             .sudo()
-            .get_param("sale_mail_internal.send_email", "False")
+            .get_param("sale_mail_internal.send_email", False)
         )
         if send_confirmation_email_internal:
             for rec in self:
