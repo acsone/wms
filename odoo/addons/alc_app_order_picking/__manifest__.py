@@ -83,6 +83,7 @@
         "alc_delivery_carrier_gls_b2c",
         "alc_delivery_carrier_gls_report",
         "base_report_to_label_printer",
+        "alc_product_label_printer",
     ],
     "data": [],
     "demo": [],

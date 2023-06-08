@@ -35,9 +35,11 @@
     <field name="model">res.users</field>
     <field name="inherit_id" ref="base.view_users_simple_form" />
     <field name="arch" type="xml">
-      <field name="fax" position="after">
+      <group name="phone_numbers" position="after">
+          <group name="product_label_printer">
               <field name="printing_product_label_printer_id" />
-          </field>
+          </group>
+      </group>
     </field>
   </record>
 
