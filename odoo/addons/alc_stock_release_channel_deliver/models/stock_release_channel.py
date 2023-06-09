@@ -8,6 +8,8 @@ from odoo.addons.stock_release_channel_shipment_advice.models.stock_release_chan
     StockReleaseChannel as StockReleaseChannelBase,
 )
 
+from .shipment_advice import ShipmentAdvice
+
 
 class StockReleaseChannel(StockReleaseChannelBase):
 
@@ -39,14 +41,33 @@ class StockReleaseChannel(StockReleaseChannelBase):
         compute="_compute_is_action_delivered_allowed"
     )
     delivering_error = fields.Text(readonly=True)
+    in_process_shipment_advice_ids = fields.One2many[ShipmentAdvice](
+        compute="_compute_in_process_shipment_advice_ids"
+    )
 
-    @api.depends("state")
+    @api.depends("shipment_advice_ids", "process_end_date")
+    def _compute_in_process_shipment_advice_ids(self):
+        shipment_advice_model = self.env["shipment.advice"]
+        for rec in self:
+            rec.in_process_shipment_advice_ids = shipment_advice_model.search(
+                [
+                    ("in_release_channel_auto_process", "=", True),
+                    ("release_channel_id", "=", rec.id),
+                ]
+            )
+
+    @api.depends("state", "picking_to_plan_ids", "shipment_planning_method")
     def _compute_is_action_delivering_allowed(self):
         for rec in self:
-            rec.is_action_delivering_allowed = rec.state in (
-                "locked",
-                "delivering_error",
-            ) and bool(rec.picking_to_plan_ids)
+            rec.is_action_delivering_allowed = (
+                rec.state
+                in (
+                    "locked",
+                    "delivering_error",
+                )
+                and bool(rec.picking_to_plan_ids)
+                and rec.shipment_planning_method != "none"
+            )
 
     @api.depends("state")
     def _compute_is_action_delivering_error_allowed(self):
@@ -135,15 +156,6 @@ class StockReleaseChannel(StockReleaseChannelBase):
         if any(not_done_state in shipment_states for not_done_state in not_done_states):
             return
         self.action_delivered()
-
-    @api.depends("state")
-    def _compute_is_action_sleep_allowed(self):
-        res = super()._compute_is_action_sleep_allowed()
-        for rec in self:
-            rec.is_action_sleep_allowed = (
-                rec.is_action_sleep_allowed or rec.state == "delivered"
-            )
-        return res
 
     @api.model
     def _get_delivering_error_message(self, error, related_object):

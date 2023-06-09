@@ -13,6 +13,13 @@ _logger = logging.getLogger(__name__)
 
 
 class ShipmentAdvice(ShipmentAdviceBase):
+    in_release_channel_auto_process = fields.Boolean(
+        readonly=True,
+        help="Technical field to flag shipment advice that are in a release channel "
+        "auto-process",
+        index=True,
+    )
+
     @property
     def _is_auto_process(self) -> bool:
         """We consider that a shipment advice created for a release channel in 'delivering'.
@@ -45,6 +52,7 @@ class ShipmentAdvice(ShipmentAdviceBase):
         if not self._is_auto_process:
             return False
         self.arrival_date = fields.Date.context_today(self)
+        self.in_release_channel_auto_process = True
         try:
             self.planned_picking_ids._load_in_shipment(self)
             self.action_confirm()
