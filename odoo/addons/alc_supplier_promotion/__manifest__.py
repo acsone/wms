@@ -14,6 +14,7 @@
         "base_sparse_field_list_support",
         "product",
         "mixin_past",
+        "alc_product_supplier",
     ],
     "application": False,
     "data": ["views/product_supplierinfo.xml"],

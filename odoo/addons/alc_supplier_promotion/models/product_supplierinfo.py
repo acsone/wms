@@ -87,3 +87,11 @@ class ProductSupplierInfo(SupplierInfo, MixinPast):
             record.is_promotion = (
                 record.ratio_main_product and record.ratio_promotional_product
             )
+
+    def _onchange_product_tmpl_id(self):
+        res = super()._onchange_product_tmpl_id()
+        for rec in self:
+            if not rec.product_tmpl_id.supplier_id:
+                continue
+            rec.partner_id = rec.product_tmpl_id.supplier_id
+        return res
