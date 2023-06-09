@@ -525,6 +525,7 @@ def set_modules_to_remove():
             "alc_reception_pharmacy_geo_delivery_rounds",  # replaced by alc_reception_pharmacy_geo_release_channel
             "specific_security",
             "speedy_views",
+            "alc_stock_receive_frigo",
         ]
         query = """
             UPDATE ir_module_module
