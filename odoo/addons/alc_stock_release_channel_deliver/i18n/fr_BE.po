@@ -97,6 +97,20 @@ msgid "Delivering release channel %(name)s."
 msgstr ""
 
 #. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel__in_process_shipment_advice_ids
+#, fuzzy
+#| msgid "Shipment Advice"
+msgid "In Process Shipment Advice"
+msgstr "Avis d'expédition"
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_shipment_advice__in_release_channel_auto_process
+#, fuzzy
+#| msgid "Stock Release Channels"
+msgid "In Release Channel Auto Process"
+msgstr "Canaux de livraison"
+
+#. module: alc_stock_release_channel_deliver
 #: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel__is_action_delivered_allowed
 msgid "Is Action Delivered Allowed"
 msgstr ""
@@ -132,6 +146,13 @@ msgstr "État"
 #: model:ir.model,name:alc_stock_release_channel_deliver.model_stock_release_channel
 msgid "Stock Release Channels"
 msgstr "Canaux de livraison"
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,help:alc_stock_release_channel_deliver.field_shipment_advice__in_release_channel_auto_process
+msgid ""
+"Technical field to flag shipment advice that are in a release channel auto-"
+"process"
+msgstr ""
 
 #. module: alc_stock_release_channel_deliver
 #. odoo-python
