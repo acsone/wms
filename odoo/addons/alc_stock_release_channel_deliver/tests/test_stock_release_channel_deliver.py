@@ -44,9 +44,7 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         with trap_jobs() as trap_rc:
             self.channel.action_delivering()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(
-                self.env["stock.release.channel"]._action_deliver
-            )
+            trap_rc.assert_enqueued_job(self.channel._action_deliver)
             with trap_jobs() as trap_sa:
                 trap_rc.perform_enqueued_jobs()
                 shipment_advice = self.channel.shipment_advice_ids[-1]
@@ -74,9 +72,7 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         with trap_jobs() as trap_rc:
             self.channel.action_delivering()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(
-                self.env["stock.release.channel"]._action_deliver
-            )
+            trap_rc.assert_enqueued_job(self.channel._action_deliver)
             with trap_jobs() as trap_sa:
                 trap_rc.perform_enqueued_jobs()
                 shipment_advice = self.channel.shipment_advice_ids

@@ -81,7 +81,7 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         with trap_jobs() as trap:
             self.channel.action_wake_up()
             trap.assert_enqueued_job(
-                self.env["stock.release.channel"]._set_pick_allowed,
+                self.channel._set_pick_allowed,
                 kwargs={"pick_allowed": True, "picking_type": None},
                 properties={"eta": datetime(2023, 4, 2, 6, 30)},
             )
@@ -156,7 +156,7 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
                 "This job is set to done, a new one is created.",
             )
             trap.assert_enqueued_job(
-                self.env["stock.release.channel"]._set_pick_allowed,
+                self.channel._set_pick_allowed,
                 kwargs={"pick_allowed": True, "picking_type": None},
                 properties={"eta": datetime(2023, 4, 2, 5, 30)},
             )
@@ -188,7 +188,7 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
                 "This job is set to done, a new one is created.",
             )
             trap.assert_enqueued_job(
-                self.env["stock.release.channel"]._set_pick_allowed,
+                self.channel._set_pick_allowed,
                 kwargs={"pick_allowed": True, "picking_type": None},
                 properties={"eta": datetime(2023, 4, 2, 8, 30)},
             )
