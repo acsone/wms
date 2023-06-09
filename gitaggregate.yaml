@@ -20,8 +20,6 @@
     - origin 16.0-type-annotations
     - odoo refs/pull/106512/head # [IMP] Use importlib find_spec() instead of find_module()
     - odoo refs/pull/120538/head # [IMP] product_expiry: Don't trigger move lines expiration date recomputation
-    - odoo refs/pull/121240/head # [16.0][FIX] web: fix domain_selector widget
-    - odoo refs/pull/121839/head # [16.0][IMP] stock: Improves stock_quand_package.unpack performance
   shell_command_after:
     # pyproject.toml
     - curl -sSL https://github.com/odoo/odoo/pull/44001.patch | git am
