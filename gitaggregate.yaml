@@ -49,3 +49,12 @@
     - oca refs/pull/1262/head # [16.0][IMP] stock_move_propagate_first_move: Add init hook
     - oca refs/pull/1264/head # [ADD] - add stock_move_propagate_first_move_cancel
   target: origin 16.0-alc_stock_move_propagate_first_move
+
+./src/fastapi:
+  remotes:
+    origin: git@github.com:lmignon/fastapi.git
+    acsone: git@github.com:acsone/fastapi.git
+  merges:
+    - origin master-fix-openapi-with-overrides
+    - origin master-fix-classifier
+  target: acsone 16.0-alc
