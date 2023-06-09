@@ -30,18 +30,15 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         with trap_jobs() as trap_rc:
             self.channel.action_delivering()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(
-                self.env["stock.release.channel"]._action_deliver
-            )
+            trap_rc.assert_enqueued_job(self.channel._action_deliver)
             with trap_jobs() as trap_sa:
                 trap_rc.perform_enqueued_jobs()
-                trap_sa.assert_enqueued_job(
-                    self.channel.shipment_advice_ids._auto_process
+                advices = self.channel.shipment_advice_ids.filtered(
+                    lambda s: s.state not in ("cancel", "done")
                 )
+                trap_sa.assert_enqueued_job(advices._auto_process)
                 trap_sa.perform_enqueued_jobs()
-                shipment_advice = self.channel.shipment_advice_ids.filtered(
-                    lambda s: s.state == "done"
-                )
+                shipment_advice = advices.filtered(lambda s: s.state == "done")
         self.assertTrue(shipment_advice)
         self.assertEqual(shipment_advice.planned_pickings_count, 3)
         self.assertEqual(shipment_advice.shipment_type, "outgoing")
@@ -77,9 +74,7 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         with trap_jobs() as trap_rc:
             self.channel.action_delivering()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(
-                self.env["stock.release.channel"]._action_deliver
-            )
+            trap_rc.assert_enqueued_job(self.channel._action_deliver)
             with trap_jobs() as trap_sa:
                 trap_rc.perform_enqueued_jobs()
                 shipment_advice = self.channel.shipment_advice_ids
