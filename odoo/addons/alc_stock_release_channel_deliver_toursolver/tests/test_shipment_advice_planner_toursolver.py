@@ -55,24 +55,16 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         with trap_jobs() as trap_rc:
             self.channel.action_delivering()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(
-                self.env["stock.release.channel"]._action_deliver
-            )
+            trap_rc.assert_enqueued_job(self.channel._action_deliver)
             with trap_jobs() as trap_tt:
                 trap_rc.perform_enqueued_jobs()
                 self.assertFalse(self.channel.shipment_advice_ids)
                 task = pickings.toursolver_task_id
                 self.assertEqual(len(task), 1)
                 self.assertEqual(task.state, "draft")
-                trap_tt.assert_enqueued_job(
-                    self.env["toursolver.task"]._toursolver_send_request
-                )
-                trap_tt.assert_enqueued_job(
-                    self.env["toursolver.task"]._toursolver_check_status
-                )
-                trap_tt.assert_enqueued_job(
-                    self.env["toursolver.task"]._toursolver_get_result
-                )
+                trap_tt.assert_enqueued_job(task._toursolver_send_request)
+                trap_tt.assert_enqueued_job(task._toursolver_check_status)
+                trap_tt.assert_enqueued_job(task._toursolver_get_result)
                 with trap_jobs() as trap_sa:
                     trap_tt.perform_enqueued_jobs()
                     shipment_advice = self.channel.shipment_advice_ids[-1]
@@ -100,24 +92,16 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         with trap_jobs() as trap_rc:
             self.channel.action_delivering()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(
-                self.env["stock.release.channel"]._action_deliver
-            )
+            trap_rc.assert_enqueued_job(self.channel._action_deliver)
             with trap_jobs() as trap_tt:
                 trap_rc.perform_enqueued_jobs()
                 self.assertFalse(self.channel.shipment_advice_ids)
                 task = pickings.toursolver_task_id
                 self.assertEqual(len(task), 1)
                 self.assertEqual(task.state, "draft")
-                trap_tt.assert_enqueued_job(
-                    self.env["toursolver.task"]._toursolver_send_request
-                )
-                trap_tt.assert_enqueued_job(
-                    self.env["toursolver.task"]._toursolver_check_status
-                )
-                trap_tt.assert_enqueued_job(
-                    self.env["toursolver.task"]._toursolver_get_result
-                )
+                trap_tt.assert_enqueued_job(task._toursolver_send_request)
+                trap_tt.assert_enqueued_job(task._toursolver_check_status)
+                trap_tt.assert_enqueued_job(task._toursolver_get_result)
                 trap_tt.perform_enqueued_jobs()
         self.assertFalse(self.channel.shipment_advice_ids)
         self.assertEqual(task.state, "error")
@@ -144,24 +128,16 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         with trap_jobs() as trap_rc:
             self.channel.action_delivering()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(
-                self.env["stock.release.channel"]._action_deliver
-            )
+            trap_rc.assert_enqueued_job(self.channel._action_deliver)
             with trap_jobs() as trap_tt:
                 trap_rc.perform_enqueued_jobs()
                 self.assertFalse(self.channel.shipment_advice_ids)
                 task = pickings.toursolver_task_id
                 self.assertEqual(len(task), 1)
                 self.assertEqual(task.state, "draft")
-                trap_tt.assert_enqueued_job(
-                    self.env["toursolver.task"]._toursolver_send_request
-                )
-                trap_tt.assert_enqueued_job(
-                    self.env["toursolver.task"]._toursolver_check_status
-                )
-                trap_tt.assert_enqueued_job(
-                    self.env["toursolver.task"]._toursolver_get_result
-                )
+                trap_tt.assert_enqueued_job(task._toursolver_send_request)
+                trap_tt.assert_enqueued_job(task._toursolver_check_status)
+                trap_tt.assert_enqueued_job(task._toursolver_get_result)
                 trap_tt.perform_enqueued_jobs()
         self.assertEqual(task.state, "error")
         self.assertEqual(self.channel.state, "delivering_error")
