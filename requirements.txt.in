@@ -178,5 +178,5 @@ odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/OCA/l10n-
 # OCA/web-api
 
 #fastapi
-
-fastapi @ git+https://github.com/tiangolo/fastapi.git@refs/pull/5452/head
+# https://github.com/tiangolo/fastapi/pull/5452
+fastapi @ git+https://github.com/acsone/fastapi.git@16.0-alc

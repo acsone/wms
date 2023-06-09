@@ -22,7 +22,7 @@ docopt==0.6.2
 docutils==0.20.1
 ebaysdk==2.2.0
 exceptiongroup==1.1.1
-fastapi @ git+https://github.com/acsone/fastapi.git@3b7895b7506e1fa8f4bba19da23757100a39b893
+fastapi @ git+https://github.com/acsone/fastapi.git@6b547a9e172347de8caccaa0751f030ea6f96798
 freezegun==1.2.2
 geojson==3.0.1
 gevent==22.10.2
