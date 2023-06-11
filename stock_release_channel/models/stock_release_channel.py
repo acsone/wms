@@ -202,6 +202,7 @@ class StockReleaseChannel(models.Model):
         help="Technical field to check if the "
         "action 'Release Next Batch' is allowed.",
     )
+    partner_ids = fields.Many2many(comodel_name="res.partner", string="Partners")
 
     @api.depends("state")
     def _compute_is_action_lock_allowed(self):
