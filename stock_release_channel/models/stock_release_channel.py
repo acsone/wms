@@ -472,6 +472,10 @@ class StockReleaseChannel(models.Model):
         ):
             return
         message = ""
+        partner_release_channel = picking.partner_id._get_partner_release_channel()
+        if partner_release_channel:
+            picking.release_channel_id = partner_release_channel
+            return message
         for channel in picking._find_release_channel_possible_candidate():
             current = picking
             domain = channel._prepare_domain()
