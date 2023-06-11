@@ -26,3 +26,7 @@ A asleep channel can be waken up by using the "Wake up" button. When the "Wake u
 button is used, in addition to the state change, the system looks for pending
 transfers requiring a release and try to assign them to a channel in the
 "Open" or "Locked" state.
+
+You can choose a dedicated release channel for this partner. All of their
+transfers will be assigned to the selected channel, regardless of the automatic
+assigning process.
