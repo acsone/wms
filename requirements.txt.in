@@ -180,3 +180,6 @@ odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/OCA/l10n-
 #fastapi
 # https://github.com/tiangolo/fastapi/pull/5452
 fastapi @ git+https://github.com/acsone/fastapi.git@16.0-alc
+
+
+checklog-odoo @ git+https://github.com/acsone/checklog-odoo@master#subdirectory=checklog-odoo

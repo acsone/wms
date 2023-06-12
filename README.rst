@@ -40,7 +40,7 @@ environment variable before launching the pip-df command::
 
    export PIP_FIND_LINKS=https://wheelhouse.acsone.eu/manylinux1
 
-In an activated python 3.10 virtualenv, run::
+In an activated python 3.11 virtualenv, run::
 
    pip-df sync
 
