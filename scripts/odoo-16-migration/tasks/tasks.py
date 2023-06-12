@@ -175,6 +175,20 @@ def delete_uninstallable_xml_ids():
             print("deleted", cr.rowcount, "from ir_model_data")
 
 
+@task("16.0.2.1.3")
+def delete_custom_filters():
+    """Delete custom filters from the ir.filters table."""
+    with cursor(DB_16_POSTMIG) as cr:
+        query = """
+            delete from ir_filters
+            where id not in (
+                select res_id from ir_model_data where model='ir.filters'
+            )
+            """
+        cr.execute(query)
+        print("deleted", cr.rowcount, "from ir_filters")
+
+
 @task("16.0.1.0.0")
 def cleanup_assets():
     query = """
