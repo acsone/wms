@@ -26,6 +26,7 @@ test = [
   "manifestoo",
   "httpx",
   "vcrpy-unittest",
+  "checklog-odoo"
 ]
 dev = [
   "ipython",
