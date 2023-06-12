@@ -76,7 +76,7 @@ odoo10-addon-account-invoice-merge-attachment @ git+https://github.com/acsone/ac
 odoo10-addon-account-invoice-merge-purchase @ git+https://github.com/acsone/account-invoicing.git@d13cae1a77b1b49c11b16c56e0fd7ccfefa1a3a1#subdirectory=setup/account_invoice_merge_purchase
 odoo10-addon-account-invoice-payment-report @ git+https://github.com/acsone/account-invoicing.git@d13cae1a77b1b49c11b16c56e0fd7ccfefa1a3a1#subdirectory=setup/account_invoice_payment_report
 odoo10-addon-account-invoice-sent @ git+https://github.com/edido-eu/peppol@7dde23e82ea12e74e061a8a19ab62a9ed0398d5e#subdirectory=setup/account_invoice_sent
-odoo10-addon-account-invoice-sent-peppol @ git+https://github.com/edido-eu/peppol@7dde23e82ea12e74e061a8a19ab62a9ed0398d5e#subdirectory=setup/account_invoice_sent_peppol
+odoo10-addon-account-invoice-sent-peppol @ git+https://github.com/edido-eu/peppol@3137e9c9cef1a286fade3185c3d5c28862932bc3#subdirectory=setup/account_invoice_sent_peppol
 odoo10-addon-account-invoice-split-refund @ git+https://github.com/acsone/account-invoicing.git@d13cae1a77b1b49c11b16c56e0fd7ccfefa1a3a1#subdirectory=setup/account_invoice_split_refund
 odoo10-addon-account-invoice-tax-required @ git+https://github.com/acsone/account-financial-tools.git@779a120dea41eca52bab98ff847b517ba58374ab#subdirectory=setup/account_invoice_tax_required
 odoo10-addon-account-invoice-triple-discount @ git+https://github.com/acsone/account-invoicing.git@d13cae1a77b1b49c11b16c56e0fd7ccfefa1a3a1#subdirectory=setup/account_invoice_triple_discount
