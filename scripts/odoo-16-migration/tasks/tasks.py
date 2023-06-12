@@ -540,6 +540,7 @@ def set_modules_to_remove():
             "specific_security",
             "speedy_views",
             "alc_stock_receive_frigo",
+            "quality",
         ]
         query = """
             UPDATE ir_module_module
