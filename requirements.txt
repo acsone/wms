@@ -68,15 +68,15 @@ odoo10-addon-account-group @ git+https://github.com/acsone/account-financial-too
 odoo10-addon-account-invoice-accrual @ git+https://github.com/acsone/account-closing.git@4984aba9f3380e6690aec4aad87f58fc75898fed#subdirectory=setup/account_invoice_accrual
 odoo10-addon-account-invoice-accrual-merge @ git+https://github.com/acsone/account-closing.git@4984aba9f3380e6690aec4aad87f58fc75898fed#subdirectory=setup/account_invoice_accrual_merge
 odoo10-addon-account-invoice-check-total @ git+https://github.com/acsone/account-invoicing.git@d13cae1a77b1b49c11b16c56e0fd7ccfefa1a3a1#subdirectory=setup/account_invoice_check_total
-odoo10-addon-account-invoice-export-ubl @ git+https://github.com/edido-eu/peppol@83f436b86f19b01159fead7cc318ec6c3e8bf219#subdirectory=setup/account_invoice_export_ubl
+odoo10-addon-account-invoice-export-ubl @ git+https://github.com/edido-eu/peppol@7dde23e82ea12e74e061a8a19ab62a9ed0398d5e#subdirectory=setup/account_invoice_export_ubl
 odoo10-addon-account-invoice-force-number @ git+https://github.com/acsone/account-invoicing.git@d13cae1a77b1b49c11b16c56e0fd7ccfefa1a3a1#subdirectory=setup/account_invoice_force_number
 odoo10-addon-account-invoice-line-default-account @ git+https://github.com/acsone/account-invoicing.git@d13cae1a77b1b49c11b16c56e0fd7ccfefa1a3a1#subdirectory=setup/account_invoice_line_default_account
 odoo10-addon-account-invoice-merge @ git+https://github.com/acsone/account-invoicing.git@d13cae1a77b1b49c11b16c56e0fd7ccfefa1a3a1#subdirectory=setup/account_invoice_merge
 odoo10-addon-account-invoice-merge-attachment @ git+https://github.com/acsone/account-invoicing.git@d13cae1a77b1b49c11b16c56e0fd7ccfefa1a3a1#subdirectory=setup/account_invoice_merge_attachment
 odoo10-addon-account-invoice-merge-purchase @ git+https://github.com/acsone/account-invoicing.git@d13cae1a77b1b49c11b16c56e0fd7ccfefa1a3a1#subdirectory=setup/account_invoice_merge_purchase
 odoo10-addon-account-invoice-payment-report @ git+https://github.com/acsone/account-invoicing.git@d13cae1a77b1b49c11b16c56e0fd7ccfefa1a3a1#subdirectory=setup/account_invoice_payment_report
-odoo10-addon-account-invoice-sent @ git+https://github.com/edido-eu/peppol@83f436b86f19b01159fead7cc318ec6c3e8bf219#subdirectory=setup/account_invoice_sent
-odoo10-addon-account-invoice-sent-peppol @ git+https://github.com/edido-eu/peppol@83f436b86f19b01159fead7cc318ec6c3e8bf219#subdirectory=setup/account_invoice_sent_peppol
+odoo10-addon-account-invoice-sent @ git+https://github.com/edido-eu/peppol@7dde23e82ea12e74e061a8a19ab62a9ed0398d5e#subdirectory=setup/account_invoice_sent
+odoo10-addon-account-invoice-sent-peppol @ git+https://github.com/edido-eu/peppol@7dde23e82ea12e74e061a8a19ab62a9ed0398d5e#subdirectory=setup/account_invoice_sent_peppol
 odoo10-addon-account-invoice-split-refund @ git+https://github.com/acsone/account-invoicing.git@d13cae1a77b1b49c11b16c56e0fd7ccfefa1a3a1#subdirectory=setup/account_invoice_split_refund
 odoo10-addon-account-invoice-tax-required @ git+https://github.com/acsone/account-financial-tools.git@779a120dea41eca52bab98ff847b517ba58374ab#subdirectory=setup/account_invoice_tax_required
 odoo10-addon-account-invoice-triple-discount @ git+https://github.com/acsone/account-invoicing.git@d13cae1a77b1b49c11b16c56e0fd7ccfefa1a3a1#subdirectory=setup/account_invoice_triple_discount
@@ -131,7 +131,7 @@ odoo10-addon-base-technical-features @ git+https://github.com/acsone/server-tool
 odoo10-addon-base-technical-user==10.0.1.1.0
 odoo10-addon-base-ubl @ git+https://github.com/jbaudoux/edi.git@45aef74af8ef51fb1bd68f2900996cb0f5534588#subdirectory=setup/base_ubl
 odoo10-addon-base-ubl-payment @ git+https://github.com/jbaudoux/edi.git@45aef74af8ef51fb1bd68f2900996cb0f5534588#subdirectory=setup/base_ubl_payment
-odoo10-addon-base-ubl-payment-mode-required @ git+https://github.com/edido-eu/peppol@83f436b86f19b01159fead7cc318ec6c3e8bf219#subdirectory=setup/base_ubl_payment_mode_required
+odoo10-addon-base-ubl-payment-mode-required @ git+https://github.com/edido-eu/peppol@7dde23e82ea12e74e061a8a19ab62a9ed0398d5e#subdirectory=setup/base_ubl_payment_mode_required
 odoo10-addon-base-unece==10.0.1.0.0.99.dev2
 odoo10-addon-base-url @ git+https://github.com/acsone/odoo-shopinvader.git@72e6e354127080c54f5e58b03d66252305c3f7e7#subdirectory=setup/base_url
 odoo10-addon-base-vat-sanitized==10.0.1.0.0.99.dev9
@@ -151,7 +151,7 @@ odoo10-addon-geoengine-partner==10.0.1.0.1
 odoo10-addon-l10n-be-antibiotic-tax @ git+https://github.com/acsone/l10n-belgium.git@066bd9c086d087a2c1e11274e629f300f6e0eb27#subdirectory=setup/l10n_be_antibiotic_tax
 odoo10-addon-l10n-be-apb-tax @ git+https://github.com/acsone/l10n-belgium.git@066bd9c086d087a2c1e11274e629f300f6e0eb27#subdirectory=setup/l10n_be_apb_tax
 odoo10-addon-l10n-be-eco-tax @ git+https://github.com/acsone/l10n-belgium.git@066bd9c086d087a2c1e11274e629f300f6e0eb27#subdirectory=setup/l10n_be_eco_tax
-odoo10-addon-l10n-be-invoice-bba-account-e-invoice-generate @ git+https://github.com/edido-eu/peppol@83f436b86f19b01159fead7cc318ec6c3e8bf219#subdirectory=setup/l10n_be_invoice_bba_account_e-invoice_generate
+odoo10-addon-l10n-be-invoice-bba-account-e-invoice-generate @ git+https://github.com/edido-eu/peppol@7dde23e82ea12e74e061a8a19ab62a9ed0398d5e#subdirectory=setup/l10n_be_invoice_bba_account_e-invoice_generate
 odoo10-addon-l10n-be-iso20022-pain @ git+https://github.com/acsone/l10n-belgium.git@066bd9c086d087a2c1e11274e629f300f6e0eb27#subdirectory=setup/l10n_be_iso20022_pain
 odoo10-addon-l10n-be-mis-reports @ git+https://github.com/acsone/l10n-belgium.git@066bd9c086d087a2c1e11274e629f300f6e0eb27#subdirectory=setup/l10n_be_mis_reports
 odoo10-addon-logging-json @ git+https://github.com/acsone/odoo-cloud-platform.git@601842b9c0b4d45bd40c73ed3e0edf8def2f5787#subdirectory=setup/logging_json
