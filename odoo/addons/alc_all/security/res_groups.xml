@@ -12,6 +12,7 @@
                                      (4, ref('product.group_discount_per_so_line')),
                                      (4, ref('stock.group_stock_storage_categories')),
                                      (4, ref('stock.group_adv_location')),
+                                     (4, ref('group_auto_done_setting')),
                                      ]"
     />
   </record>
