@@ -86,6 +86,7 @@
         "base_report_to_label_printer",
         "alc_label_printing_base",
         "alc_product_label_printer",
+        "alc_product_label_printing",
     ],
     "data": [],
     "demo": [],

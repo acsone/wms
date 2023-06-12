@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+  <template id="stock_lot_nolot_label_zebra_v1">
+    <div class="raw">
+      <t t-foreach="docs" t-as="product_id">
+^XA
+^PRC
+^LH0,0^FS\r
+^FO25,40^A0N,40,30^CI13^FR^FD<t t-esc="product_id.name[:40]" />^FS\r
+^FO25,80^A0N,40,30^CI13^FR^FD<t t-esc="product_id.name[40:80]" />^FS\r
+^FO25,135^A0N,37,32^CI13^FR^FDArticle:^FS\r
+^FO140,135^A0N,37,40^CI13^FR^FD<t t-esc="product_id.default_code" />^FS\r
+^FO25,180^A0N,37,32^CI13^FR^FDBac:^FS\r
+^FO420,150\r
+^BQN,2,6\r
+^FDQA,<t t-esc="product_id.default_code" />^FS\r
+^XZ
+</t>
+    </div>
+  </template>
+  <record model="ir.actions.report" id="report_lot_nolot_label">
+    <field name="name">Alcyon Nolot Label</field>
+    <field name="model">product.product</field>
+    <field name="report_type">qweb-pdf</field>
+    <field
+      name="report_name"
+    >alc_product_label_printing.stock_lot_nolot_label_zebra_v1</field>
+    <field
+      name="report_file"
+    >alc_product_label_printing.stock_lot_nolot_label_zebra_v1</field>
+  </record>
+</odoo>
