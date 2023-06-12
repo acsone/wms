@@ -19,7 +19,7 @@ variables:
 pre-commit:
   extends: .pre-commit
   variables:
-    ACIT_PYTHON_IMAGE: "python:3.10"
+    ACIT_PYTHON_IMAGE: "python:3.11"
 
 .test_common:
   variables:

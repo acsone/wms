@@ -6,8 +6,8 @@ anyio==3.7.0
 attrs==23.1.0
 Babel==2.12.1
 beautifulsoup4==4.12.2
-boto3==1.26.149
-botocore==1.29.149
+boto3==1.26.151
+botocore==1.29.151
 cachetools==5.3.1
 certifi==2023.5.7
 cffi==1.15.1
@@ -23,7 +23,6 @@ decorator==5.1.1
 docopt==0.6.2
 docutils==0.20.1
 ebaysdk==2.2.0
-exceptiongroup==1.1.1
 fastapi @ git+https://github.com/acsone/fastapi.git@6b547a9e172347de8caccaa0751f030ea6f96798
 freezegun==1.2.2
 geojson==3.0.1
@@ -46,7 +45,7 @@ parse-accept-language==0.1.2
 passlib==1.7.4
 pdfminer==20191125
 Pillow==9.5.0
-platformdirs==3.5.1
+platformdirs==3.5.3
 polib==1.2.0
 psutil==5.9.5
 psycopg2==2.9.6
@@ -86,7 +85,7 @@ starlette==0.27.0
 text-unidecode==1.3
 typing_extensions==4.6.3
 typodoo==0.3
-ujson==5.7.0
+ujson==5.8.0
 unicodecsv==0.14.1
 Unidecode==1.3.6
 urllib3==1.26.16
@@ -116,14 +115,13 @@ odoo-test-helper==2.1.0
 packaging==23.1
 pluggy==1.0.0
 Pygments==2.15.1
-pytest==7.3.1
+pytest==7.3.2
 pytest-cov==4.1.0
 pytest-odoo==0.9.1
 PyYAML==6.0
 rich==13.4.1
 shellingham==1.5.0.post1
 textual==0.27.0
-tomli==2.0.1
 typer==0.9.0
 uc-micro-py==1.0.2
 vcrpy==4.3.1
