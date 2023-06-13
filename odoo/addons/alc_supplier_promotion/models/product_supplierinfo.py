@@ -88,10 +88,14 @@ class ProductSupplierInfo(SupplierInfo, MixinPast):
                 record.ratio_main_product and record.ratio_promotional_product
             )
 
-    def _onchange_product_tmpl_id(self):
-        res = super()._onchange_product_tmpl_id()
-        for rec in self:
-            if not rec.product_tmpl_id.supplier_id:
-                continue
-            rec.partner_id = rec.product_tmpl_id.supplier_id
-        return res
+    @api.model
+    def default_get(self, fields_list):
+        defaults = super().default_get(fields_list)
+        if "default_product_tmpl_id" in self._context and self._context.get(
+            "default_product_tmpl_id"
+        ):
+            product_template = self.env["product.template"].browse(
+                self._context.get("default_product_tmpl_id")
+            )
+            defaults["partner_id"] = product_template.supplier_id.id
+        return defaults
