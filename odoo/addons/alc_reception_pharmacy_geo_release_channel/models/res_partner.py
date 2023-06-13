@@ -21,7 +21,7 @@ class ResPartner(Partner):
     @api.depends(
         "child_ids",
         "partner_shipping_id",
-        "partner_shipping_id.stock_release_channel_ids",
+        "partner_shipping_id.located_in_stock_release_channel_ids",
     )
     def _compute_is_delivered_by_alcyon(self):
         partner_alcyon = self.env.user.company_id.partner_id
@@ -29,7 +29,7 @@ class ResPartner(Partner):
             rec.is_delivered_by_alcyon = (
                 rec.partner_shipping_id.in_geo_release_channel
                 and partner_alcyon
-                in rec.partner_shipping_id.stock_release_channel_ids.mapped(
+                in rec.partner_shipping_id.located_in_stock_release_channel_ids.mapped(
                     "carrier_id"
                 ).mapped("partner_id")
             )

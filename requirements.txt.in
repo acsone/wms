@@ -25,6 +25,7 @@ odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.co
 odoo-addon-delivery-carrier-partner @ git+https://github.com/oca/delivery-carrier.git@refs/pull/640/head#subdirectory=setup/delivery_carrier_partner
 
 # wms
+odoo-addon-stock-release-channel @ git+https://github.com/OCA/wms.git@refs/pull/651/head#subdirectory=setup/stock_release_channel
 # https://github.com/OCA/wms/pull/609
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/OCA/wms.git@refs/pull/609/head#subdirectory=setup/stock_available_to_promise_release
 # https://github.com/OCA/wms/pull/550
