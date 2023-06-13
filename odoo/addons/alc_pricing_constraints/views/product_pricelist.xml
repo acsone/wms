@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="view_product_pricelist_item_tree">
+    <field name="model">product.pricelist.item</field>
+    <field name="priority" eval="116" />
+    <field name="arch" type="xml">
+      <tree create="true">
+        <field name="pricelist_id" />
+        <field name="applied_on" />
+        <field name="compute_price" />
+        <field name="base" />
+      </tree>
+    </field>
+  </record>
+    <record id="product_pricelist_item_action" model="ir.actions.act_window">
+      <field name="name">Pricelists Items</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">product.pricelist.item</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="view_product_pricelist_item_tree" />
+  </record>
+  <menuitem
+    action="product_pricelist_item_action"
+    id="menu_product_pricelist_item"
+    parent="sale.menu_product_pricelist_main"
+    sequence="90"
+    groups="base.group_no_one"
+  />
+</odoo>

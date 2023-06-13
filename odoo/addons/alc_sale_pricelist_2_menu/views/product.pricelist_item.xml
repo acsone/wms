@@ -29,4 +29,12 @@
     parent="sale.menu_product_pricelist_main"
     sequence="100"
   />
+  <menuitem
+    id="menu_product_pricelist_pricelist"
+    parent="sale.menu_product_pricelist_main"
+    name="Pricelists"
+    action="product.product_pricelist_action2"
+    sequence="30"
+  />
+  />
 </odoo>

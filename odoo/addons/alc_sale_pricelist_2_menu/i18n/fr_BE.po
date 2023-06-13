@@ -21,3 +21,8 @@ msgstr ""
 #: model:ir.ui.menu,name:alc_sale_pricelist_2_menu.menu_product_pricelist_pv2
 msgid "Pricelist Sale Price 2"
 msgstr "Liste de prix PV 2"
+
+#. module: alc_sale_pricelist_2_menu
+#: model:ir.ui.menu,name:alc_sale_pricelist_2_menu.menu_product_pricelist_pricelist
+msgid "Pricelists"
+msgstr "Listes de prix"
