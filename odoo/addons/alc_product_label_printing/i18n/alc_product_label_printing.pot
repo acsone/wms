@@ -1,0 +1,468 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_product_label_printing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-12 13:45+0000\n"
+"PO-Revision-Date: 2023-06-12 13:45+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_label_toshiba_v1
+msgid ""
+",0002C3200|}\\r\n"
+"{U1;0120|}\\r"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid ""
+"-^FS\\r\n"
+"\n"
+"    ^FO50,60^A018,18^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.actions.report,name:alc_product_label_printing.report_lot_nolot_label
+msgid "Alcyon Nolot Label"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.actions.report,name:alc_product_label_printing.report_stock_product_food_label
+msgid "Alcyon Product Food Label"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.actions.report,name:alc_product_label_printing.report_stock_product_label
+msgid "Alcyon Product Label"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.actions.report,name:alc_product_label_printing.report_lot_label
+msgid "Alcyon lot Label"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model,name:alc_product_label_printing.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_product_label_printing
+#. odoo-python
+#: code:addons/alc_product_label_printing/models/stock_picking.py:0
+#: model:ir.model.fields,help:alc_product_label_printing.field_res_partner__no_labels_products
+#: model:ir.model.fields,help:alc_product_label_printing.field_res_users__no_labels_products
+#, python-format
+msgid "Customer does not need product labels"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model.fields,help:alc_product_label_printing.field_res_partner__no_labels_food_products
+#: model:ir.model.fields,help:alc_product_label_printing.field_res_users__no_labels_food_products
+msgid "Customer does not need product labels."
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.actions.act_window,name:alc_product_label_printing.stock_move_line_action
+msgid "Detailed operation"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model.fields,field_description:alc_product_label_printing.field_res_partner__no_labels_food_products
+#: model:ir.model.fields,field_description:alc_product_label_printing.field_res_users__no_labels_food_products
+msgid "Do not print food product labels"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model.fields,field_description:alc_product_label_printing.field_res_partner__no_labels_products
+#: model:ir.model.fields,field_description:alc_product_label_printing.field_res_users__no_labels_products
+msgid "Do not print product labels"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_label_toshiba_v1
+msgid "Doc.n : 1/"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid "EUR^FS\\r"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model.fields.selection,name:alc_product_label_printing.selection__print_label__label_type__food_product
+msgid "Food Product"
+msgstr ""
+
+#. module: alc_product_label_printing
+#. odoo-python
+#: code:addons/alc_product_label_printing/wizards/print_label.py:0
+#: code:addons/alc_product_label_printing/wizards/print_label.py:0
+#, python-format
+msgid "Invalid printer"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model.fields,field_description:alc_product_label_printing.field_print_label__label_type
+msgid "Label type"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model.fields.selection,name:alc_product_label_printing.selection__print_label__label_type__lot
+msgid "Lot"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model,name:alc_product_label_printing.model_stock_lot
+msgid "Lot/Serial"
+msgstr ""
+
+#. module: alc_product_label_printing
+#. odoo-python
+#: code:addons/alc_product_label_printing/models/stock_move_line.py:0
+#: code:addons/alc_product_label_printing/models/stock_picking.py:0
+#, python-format
+msgid "No destination partner defined"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model.fields,field_description:alc_product_label_printing.field_product_product__number_labels_to_print
+#: model:ir.model.fields,field_description:alc_product_label_printing.field_product_template__number_labels_to_print
+msgid "Number of Labels to Print."
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_stock_move_line_detailed_operation_tree
+msgid "Open to print"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_production_lot_form
+msgid "Print Lot"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model,name:alc_product_label_printing.model_print_label
+msgid "Print label wizard"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.actions.act_window,name:alc_product_label_printing.action_menu_print_lots
+msgid "Print lots"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model,name:alc_product_label_printing.model_product_template
+#: model:ir.model.fields.selection,name:alc_product_label_printing.selection__print_label__label_type__product
+msgid "Product"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model,name:alc_product_label_printing.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model,name:alc_product_label_printing.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model.fields,help:alc_product_label_printing.field_product_product__number_labels_to_print
+#: model:ir.model.fields,help:alc_product_label_printing.field_product_template__number_labels_to_print
+msgid ""
+"This field determines how many Product/Customer labels to print, and only "
+"these labels. Set to 0 to skip printing any."
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model,name:alc_product_label_printing.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid "^FO130,420^A025,25^FDPVI"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid ""
+"^FO295,200\n"
+"    ^BQ,2,4\n"
+"    ^FDQA,"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid "^FO310,480^A040,40^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid "^FO330,330^A030,30^FDB2C^FS\\r"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid ""
+"^FO80,60^BY2\n"
+"    ^BC,40,Y,Y,N,A^FDS-"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid "^FS\\r"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"\n"
+"    ^FO255,60^A025,25^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"    ^FO165,60^A025,25^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"    ^FO195,60^A030,25^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"    ^FO225,60^A025,25^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"    ^FO25,60^A018,18^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"    ^FO290,300^A020,20^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"^FO25,135^A0N,37,32^CI13^FR^FDArticle:^FS\\r\n"
+"^FO140,135^A0N,37,40^CI13^FR^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"^FO25,145^A0N,37,32^CI13^FR^FDBac:^FS\\r\n"
+"^FO25,190^A0N,37,32^CI13^FR^FDDate limite:^FS\\r\n"
+"^FO190,180^A0N,50,40^CI13^FR^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"^FO25,180^A0N,37,32^CI13^FR^FDBac:^FS\\r\n"
+"^FO420,150\\r\n"
+"^BQN,2,6\\r\n"
+"^FDQA,"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"^FO25,240^A0N,37,32^CI13^FR^FDArticle:^FS\\r\n"
+"^FO140,240^A0N,37,40^CI13^FR^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"^FO25,283^A0N,31,23^CI13^FR^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"^FO25,322^A0N,31,23^CI13^FR^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"^FO25,80^A0N,40,30^CI13^FR^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"^FO420,150\\r\n"
+"^BQN,2,6\\r\n"
+"^FDQA,#"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_label_zebra_v1
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"^XZ"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid ""
+"^FWN\n"
+"    ^XZ"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid ""
+"^XA\n"
+"    ^FWR\n"
+"\n"
+"    ^FO310,60^GB70,pick.release_channel_id.code and len(pick.release_channel_id.code) * 38\n"
+"          ,3,2^FS\\r\n"
+"    ^FO310,70^A060,60^FDpick.release_channel_id.code^FS\\r"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_label_zebra_v1
+msgid ""
+"^XA\n"
+"^PRC\n"
+"^LH0,0^FS\\r\n"
+"^FO25,105^A0N,37,32^CI13^FR^FDLot:^FS\\r\n"
+"^FO90,105^A0N,37,32^CI13^FR^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
+msgid ""
+"^XA\n"
+"^PRC\n"
+"^LH0,0^FS\\r\n"
+"^FO25,40^A0N,40,30^CI13^FR^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_label_toshiba_v1
+msgid "{PC007;0350,0070,05,05,J,00,B|}\\r{RC007;PVI :"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_label_toshiba_v1
+msgid ""
+"{U2;0120|}\\r\n"
+"{D0275,0560,0250|}\\r\n"
+"{C|}\\r\n"
+"{PC001;0400,0040,05,05,J,00,B|}\\r\n"
+"{RC001;ALCYON sa |}\\r\n"
+"{PC004;0010,0040,05,05,J,00,B|}\\r\n"
+"{RC004;"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_label_toshiba_v1
+msgid "{XB01;0030,0150,9,1,02,0,0080|}\\r{RB01;S"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_label_toshiba_v1
+msgid ""
+"|}\\r\n"
+"{PC002;0010,0130,05,05,J,00,B|}\\r\n"
+"{RC002;"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_label_toshiba_v1
+msgid ""
+"|}\\r\n"
+"{PC003;0030,0250,05,05,J,00,B|}\\r\n"
+"{RC003;S-"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_label_toshiba_v1
+msgid ""
+"|}\\r\n"
+"{PC005;0010,0100,05,05,J,00,B|}\\r\n"
+"{RC005;"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_label_toshiba_v1
+msgid ""
+"|}\\r\n"
+"{PC009;0010,0070,05,05,J,00,B|}\\r\n"
+"{RC009;"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_label_toshiba_v1
+msgid ""
+"|}\\r\n"
+"{XS;I,"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_move_line_form
+msgid "🖶Print Ali Product Label"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_picking_form
+msgid "🖶Print Food Products"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_move_line_form
+msgid "🖶Print Lot Label"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_move_line_form
+msgid "🖶Print Med Product Label"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_picking_form
+msgid "🖶Print Med Products"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_move_line_form
+msgid "🖶Print Product Label"
+msgstr ""

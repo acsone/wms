@@ -9,7 +9,11 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["alc_printing_base", "stock"],
+    "depends": [
+        "alc_printing_base",
+        "delivery_package_type_number_parcels",
+        "stock",
+    ],
     "data": [
         "security/ir.model.access.csv",
         "wizards/print_label.xml",

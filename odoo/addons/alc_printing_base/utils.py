@@ -14,7 +14,7 @@ def hw_print(model, report_xmlid, printer_id=False, qty=1, **extra):
         model._ids, report_xmlid, qty=qty, **extra
     )
     report = model.env.ref(report_xmlid)
-    behaviour = report.behaviour().get(report.id)
+    behaviour = report.behaviour()
     printer = False
     if printer_id:
         printer = model.env["printing.printer"].browse(printer_id)

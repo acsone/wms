@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="view_partner_form_inherit" model="ir.ui.view">
+    <field
+      name="name"
+    >view.partner.form.inherit (in alc_procduct_label_printing)</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="alc_label_printing_base.view_partner_form_inherit" />
+    <field name="arch" type="xml">
+      <field name="is_price_on_labels" position="before">
+        <field name="no_labels_products" />
+        <field name="no_labels_food_products" />
+      </field>
+    </field>
+  </record>
+</odoo>
