@@ -10,21 +10,16 @@ Compute the priority (rank) used to sort the incoming shipments.
 
 The rank is computed based on customer deliveries waiting for goods.
 
-Formula: Rank = qty_backorder * 1000 + qty_outofstock
+Formula: Rank = count_partners_waiting_for_reception * 1000 + count_products_waiting_for_reception
 
 Where:
-- qty_backorder = Quantity of deliveries part of a delivery round waiting for
+- count_partners_waiting_for_reception = Quantity of deliveries waiting for
   availability. For each product of the reception order, we count the customers
   (delivery address) waiting for the goods and we sum those quantities.
 
-  Note that a delivery is only part of a delivery round if it can be partially
-  (or entirely) delivered. If nothing is available, then the delivery is not
-  linked to a delivery round.
-  So we give here highest importance to deliveries partially available.
-
-- qty_outofstock = Quantity of products where the available stock is negative (< 0).
-  The available quantity is the quantity on hands minus the quantity to deliver.
-  So we give here second importance to deliveries not available.
+- count_products_waiting_for_reception = Count of products waiting for
+  availability. For each product of the reception order, we count the number
+  of products waiting for the goods.
 
 The rank is computed when the GRN is associated to the incoming shipment. A
 cron job recomputes the rank regularly.
