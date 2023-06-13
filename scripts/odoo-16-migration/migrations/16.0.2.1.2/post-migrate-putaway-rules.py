@@ -12,7 +12,7 @@ def _migrate_product_bin(env):
             FROM product_stock_bin psb
                 JOIN stock_location sl ON sl.id = psb.bin_location_id
             WHERE NOT EXISTS (
-                SELECT 1 FROM stock_putaway_rule WHERE product_id = variant_id)
+                SELECT 1 FROM stock_putaway_rule WHERE product_id = psb.variant_id AND location_out_id = psb.bin_location_id)
     """
 
     openupgrade.logged_query(env.cr, query)
