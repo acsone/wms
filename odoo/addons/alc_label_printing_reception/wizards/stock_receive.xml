@@ -3,16 +3,21 @@
   <record id="view_pack_operation_lot_add_form" model="ir.ui.view">
     <field name="name">stock.pack.operation.lot.add.form</field>
     <field name="model">stock.pack.operation.lot.add</field>
-    <field name="inherit_id" ref="stock_receive_lot.view_pack_operation_lot_add_form" />
+    <field
+      name="inherit_id"
+      ref="alc_stock_receive_lot.view_pack_operation_lot_add_form"
+    />
     <field name="arch" type="xml">
-      <footer position="inside">
+      <sheet position="after">
+        <div>
         <field
-          name="print_qty"
-          class="oe_inline"
-          style="width: 25px !important; text-align: center;"
-        />
+            name="print_qty"
+            no_label="1"
+            style="width: 25px !important; text-align: center;"
+          />
         <button name="print_label" string="Print" type="object" class="oe_highlight" />
-      </footer>
+        </div>
+      </sheet>
     </field>
   </record>
 </odoo>

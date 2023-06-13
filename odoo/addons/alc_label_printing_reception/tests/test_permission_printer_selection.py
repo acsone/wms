@@ -1,15 +1,15 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.exceptions import UserError
-from odoo.tests.common import SavepointCase
+from odoo.fields import Command
+from odoo.tests.common import TransactionCase
 
 
-class TestPermissionPrinterSelection(SavepointCase):
+class TestPermissionPrinterSelection(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestPermissionPrinterSelection, cls).setUpClass()
+        super().setUpClass()
         Printer = cls.env["printing.printer"].sudo()
         Printer.search([]).unlink()
         printer_server = (
@@ -40,8 +40,7 @@ class TestPermissionPrinterSelection(SavepointCase):
         self.env.user.write(
             {
                 "groups_id": [
-                    (
-                        4,
+                    Command.link(
                         self.ref(
                             "alc_label_printing_reception.reception_change_printer"
                         ),
@@ -73,5 +72,5 @@ class TestPermissionPrinterSelection(SavepointCase):
         self.assertFalse(self.env.user.printing_product_label_printer_id)
         wiz = self.ChangePrinterWizard.create({"printer_id": self.printer1.id})
 
-        with self.assertRaises(UserError), self.env.cr.savepoint():
+        with self.assertRaises(UserError):
             wiz.change_printer()

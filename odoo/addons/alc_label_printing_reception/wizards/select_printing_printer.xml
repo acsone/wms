@@ -4,9 +4,7 @@
 <odoo>
 
     <record model="ir.ui.view" id="select_printing_printer_form_view">
-        <field
-      name="name"
-    >select.printing.printer.form (in alc_label_printing_reception)</field>
+        <field name="name">select.printing.printer.form</field>
         <field name="model">select.printing.printer</field>
         <field name="arch" type="xml">
             <form string="Select Printing Printer">

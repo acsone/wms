@@ -166,7 +166,6 @@ exclude = [
   'odoo/addons/alc_internal_package_groupbypartner/*',
   'odoo/addons/alc_invoices_audit/*',
   'odoo/addons/alc_keycloak/*',
-  'odoo/addons/alc_label_printing_reception/*',
   'odoo/addons/alc_logiweb/*',
   'odoo/addons/alc_magento_api/*',
   'odoo/addons/alc_mrp_repair/*',
