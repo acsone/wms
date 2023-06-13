@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api
-from odoo.osv.expression import get_unaccent_wrapper
+from odoo.osv.expression import AND, get_unaccent_wrapper
 
 from odoo.addons.base.models.res_partner import Partner as BasePartner
 
@@ -16,16 +16,20 @@ class ResPartner(BasePartner):
         Return matched ref first.
         """
         if name and operator in ("=", "ilike", "=ilike", "like", "=like"):
-            res = self._search(
+            args = args or []
+            domain = AND(
                 [
-                    "|",
-                    "|",
-                    ("display_name", operator, name),
-                    ("email", operator, name),
-                    ("ref", "=ilike", name),
+                    args,
+                    [
+                        "|",
+                        "|",
+                        ("display_name", operator, name),
+                        ("email", operator, name),
+                        ("ref", "=ilike", name),
+                    ],
                 ],
-                limit=limit,
             )
+            res = self._search(domain, limit=limit)
             unaccent = get_unaccent_wrapper(self.env.cr)
             order_name = name
             if operator in ("ilike", "like"):
