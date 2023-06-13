@@ -541,6 +541,7 @@ def set_modules_to_remove():
             "speedy_views",
             "alc_stock_receive_frigo",
             "quality",
+            "alc_delivery_rounds_gls",  # replaced by alc_stock_release_channel_user_gls & alc_stock_release_channel_deliver_gls
         ]
         query = """
             UPDATE ir_module_module
