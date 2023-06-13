@@ -26,12 +26,11 @@ class StockPicking(StockPickingBase):
         "Nbr products Out of Stock", help="Count of products waiting for availability."
     )
 
-    @api.model
-    def create(self, vals):
-        record = super().create(vals)
-        if "grn_id" in vals:
-            record.button_priority_recompute()
-        return record
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        records.filtered("grn_id").button_rank_recompute()
+        return records
 
     def write(self, vals):
         result = super().write(vals)

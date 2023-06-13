@@ -13,6 +13,8 @@
     "depends": [
         "alc_stock_grn_partner_carrier",
         "alc_stock_grn_time_delay",
+        "alc_stock_reception_rank",
+        "alc_stock_reception_rank_release_channel",
         "stock_picking_grn_mandatory",
     ],
 }

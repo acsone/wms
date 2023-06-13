@@ -13,6 +13,7 @@ The rank is computed based on customer deliveries waiting for goods.
 Formula: Rank = count_partners_waiting_for_reception * 1000 + count_products_waiting_for_reception
 
 Where:
+
 - count_partners_waiting_for_reception = Quantity of deliveries waiting for
   availability. For each product of the reception order, we count the customers
   (delivery address) waiting for the goods and we sum those quantities.

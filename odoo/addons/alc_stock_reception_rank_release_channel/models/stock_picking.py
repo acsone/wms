@@ -11,6 +11,8 @@ class StockPicking(StockPickingBase):
         """Compute the rank of the given receptions."""
         res = super()._calc_reception_rank()
         receptions_with_rank = self.filtered(lambda r: r.rank > 0)
+        if not receptions_with_rank:
+            return res
         self.env.cr.execute(
             """
             -- Select the receptions picking_id where products are
