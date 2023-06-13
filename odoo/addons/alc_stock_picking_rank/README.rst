@@ -3,7 +3,7 @@
    :alt: License: AGPL-3
 
 ======================
-Stock Picking Sequence
+Stock Picking Ranking
 ======================
 
 Add a rank field on the picking to be able to (re)order them. The sort
