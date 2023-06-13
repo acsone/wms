@@ -221,9 +221,7 @@ exclude: |
   ^odoo/addons/stock_constraint/|
   ^odoo/addons/stock_inventory_constrains/|
   ^odoo/addons/stock_lot_loss/|
-  ^odoo/addons/stock_picking_sequence/|
   ^odoo/addons/stock_picking_zone/|
-  ^odoo/addons/stock_reception_priority/|
   ^odoo/addons/stock_refill/|
   ^odoo/addons/stock_valuation/|
   ^odoo/addons/storage_file_url_store/|

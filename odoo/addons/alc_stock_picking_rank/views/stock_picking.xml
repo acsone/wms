@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="view_vpicktree" model="ir.ui.view">
+    <field name="name">stock.picking.tree.rank</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.vpicktree" />
+    <field name="arch" type="xml">
+      <field name="name" position="before">
+        <field name="rank" />
+      </field>
+    </field>
+  </record>
+</odoo>
