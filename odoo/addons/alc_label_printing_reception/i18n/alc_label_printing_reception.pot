@@ -1,12 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_label_printing_reception
+# 	* alc_label_printing_reception
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2023-06-13 07:29+0000\n"
+"PO-Revision-Date: 2023-06-13 07:29+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,47 +16,53 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_label_printing_reception
+#: model:ir.model,name:alc_label_printing_reception.model_stock_pack_operation_lot_add
+msgid "Add a wizard that facilitates purchases reception."
+msgstr ""
+
+#. module: alc_label_printing_reception
 #: model_terms:ir.ui.view,arch_db:alc_label_printing_reception.select_printing_printer_form_view
 msgid "Cancel"
 msgstr ""
 
 #. module: alc_label_printing_reception
-#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer_create_uid
+#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: alc_label_printing_reception
-#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer_create_date
+#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: alc_label_printing_reception
-#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer_display_name
+#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: alc_label_printing_reception
-#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer_id
+#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer__id
 msgid "ID"
 msgstr ""
 
 #. module: alc_label_printing_reception
-#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer___last_update
+#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: alc_label_printing_reception
-#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer_write_uid
+#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: alc_label_printing_reception
-#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer_write_date
+#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: alc_label_printing_reception
-#: code:addons/alc_label_printing_reception/wizards/stock_receive.py:29
+#. odoo-python
+#: code:addons/alc_label_printing_reception/wizards/stock_receive.py:0
 #, python-format
 msgid "Lot is missing"
 msgstr ""
@@ -70,17 +78,17 @@ msgid "Print"
 msgstr ""
 
 #. module: alc_label_printing_reception
-#: model:ir.model.fields,field_description:alc_label_printing_reception.field_stock_pack_operation_lot_add_print_qty
+#: model:ir.model.fields,field_description:alc_label_printing_reception.field_stock_pack_operation_lot_add__print_qty
 msgid "Print Quantity"
 msgstr ""
 
 #. module: alc_label_printing_reception
-#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer_printer_id
+#: model:ir.model.fields,field_description:alc_label_printing_reception.field_select_printing_printer__printer_id
 msgid "Printer"
 msgstr ""
 
 #. module: alc_label_printing_reception
-#: model:ir.model.fields,help:alc_label_printing_reception.field_stock_pack_operation_lot_add_print_qty
+#: model:ir.model.fields,help:alc_label_printing_reception.field_stock_pack_operation_lot_add__print_qty
 msgid "Quantity to print"
 msgstr ""
 
@@ -97,18 +105,13 @@ msgid "Select Printing Printer"
 msgstr ""
 
 #. module: alc_label_printing_reception
-#: code:addons/alc_label_printing_reception/wizards/select_printing_printer.py:22
+#: model:ir.model,name:alc_label_printing_reception.model_select_printing_printer
+msgid "Select printing printer wizard"
+msgstr ""
+
+#. module: alc_label_printing_reception
+#. odoo-python
+#: code:addons/alc_label_printing_reception/wizards/select_printing_printer.py:0
 #, python-format
 msgid "You don't have the permission to change the printer on users."
 msgstr ""
-
-#. module: alc_label_printing_reception
-#: model:ir.model,name:alc_label_printing_reception.model_select_printing_printer
-msgid "select.printing.printer"
-msgstr ""
-
-#. module: alc_label_printing_reception
-#: model:ir.model,name:alc_label_printing_reception.model_stock_pack_operation_lot_add
-msgid "stock.pack.operation.lot.add"
-msgstr ""
-

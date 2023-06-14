@@ -1,16 +1,16 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-import mock
+from unittest import mock
 
-from odoo.tests.common import SavepointCase
+from odoo.fields import Command
+from odoo.tests.common import TransactionCase
 
 
-class TestPrintingReception(SavepointCase):
+class TestPrintingReception(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestPrintingReception, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, round_autoset=False))
         Printer = cls.env["printing.printer"].sudo()
         Printer.search([]).unlink()
@@ -33,26 +33,29 @@ class TestPrintingReception(SavepointCase):
                 "name": "reception",
                 "location_id": cls.env.ref("stock.stock_location_stock").id,
                 "usage": "internal",
-                "act_as_view": True,
             }
         )
 
         cls.product1 = cls.env["product.product"].create(
             {
                 "name": "Unittest Reception P1",
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "tracking": "lot",
                 "barcode": "1234567",
             }
         )
 
-        cls.lot = cls.env["stock.production.lot"].create(
-            {"product_id": cls.product1.id, "name": "Unittest Reception L1"}
+        cls.lot = cls.env["stock.lot"].create(
+            {
+                "product_id": cls.product1.id,
+                "name": "Unittest Reception L1",
+                "company_id": cls.env.user.company_id.id,
+            }
         )
         cls.product2 = cls.env["product.product"].create(
             {
                 "name": "Unittest Reception P2",
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "tracking": "none",
                 "barcode": "2345678",
             }
@@ -64,10 +67,8 @@ class TestPrintingReception(SavepointCase):
                 "picking_type_id": cls.env.ref("stock.picking_type_in").id,
                 "location_id": cls.env.ref("stock.stock_location_suppliers").id,
                 "location_dest_id": cls.reception_location.id,
-                "move_lines": [
-                    (
-                        0,
-                        0,
+                "move_ids": [
+                    Command.create(
                         {
                             "name": "move 1",
                             "product_id": product.id,
@@ -98,32 +99,28 @@ class TestPrintingReception(SavepointCase):
         cls.env.user.printing_product_label_printer_id = cls.printer1
 
     def test_call_printer_from_reception_wizard_lot(self):
-        op1 = self.picking.pack_operation_product_ids.search(
-            [("product_id", "=", self.product1.id)]
-        )
+        op1 = self.picking.move_line_ids.search([("product_id", "=", self.product1.id)])
         wiz = self.reception_wizard.create(
             {"picking_id": self.picking.id, "qty": 5, "location_dest_id": self.bin1.id}
         )
-        wiz.operation_id = op1.id
+        wiz.move_line_id = op1.id
         self.assertTrue(wiz.lot_required)
         wiz.lot_name = "Unittest Reception L1"
         wiz.print_qty = 5
         with mock.patch.object(
-            self.env["stock.production.lot"].__class__, "print_lot_label"
+            self.env["stock.lot"].__class__, "print_lot_label"
         ) as patched_print:
             wiz.print_label()
             self.assertEqual(patched_print.call_count, 1)
-            self.assertEqual(patched_print.call_args[0][0], wiz.print_qty)
+            self.assertEqual(patched_print.call_args[1]["quantity"], wiz.print_qty)
             self.assertEqual(patched_print.call_args[1]["printer_id"], self.printer1.id)
 
     def test_call_printer_from_reception_wizard_product(self):
-        op2 = self.picking.pack_operation_product_ids.search(
-            [("product_id", "=", self.product2.id)]
-        )
+        op2 = self.picking.move_line_ids.search([("product_id", "=", self.product2.id)])
         wiz = self.reception_wizard.create(
             {"picking_id": self.picking.id, "qty": 5, "location_dest_id": self.bin1.id}
         )
-        wiz.operation_id = op2.id
+        wiz.move_line_id = op2.id
         self.assertFalse(wiz.lot_required)
         wiz.print_qty = 5
         with mock.patch.object(
