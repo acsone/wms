@@ -24,6 +24,21 @@
                             Allows you to activate/deactivate sale exception checks
                         </div>
                     </div>
+                    <div
+            class="o_setting_left_pane"
+            attrs="{'invisible':[('alc_sale_exception_check_enabled', '=', False)]}"
+          >
+                        <field name="alc_sale_exception_skip_non_blocking" />
+                    </div>
+                    <div
+            class="o_setting_right_pane"
+            attrs="{'invisible':[('alc_sale_exception_check_enabled', '=', False)]}"
+          >
+                        <label for="alc_sale_exception_skip_non_blocking" />
+                        <div class="text-muted">
+                            Allows you to enable/disable the confirmation of a sale order having non blocking exception
+                        </div>
+                    </div>
                 </div>
             </div>
 
