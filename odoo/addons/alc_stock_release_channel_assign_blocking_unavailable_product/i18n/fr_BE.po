@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2023-06-14 14:01+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -26,8 +27,13 @@ msgid "Is Backorder"
 msgstr ""
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
-#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_picking__is_full_backorder
-msgid "Is Full Backorder"
+#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_picking__is_backorder_due_to_unavailability
+msgid "Is Backorder Due To Unavailability"
+msgstr ""
+
+#. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_move__product_qty_unavailable
+msgid "Product Qty Unavailable"
 msgstr ""
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
@@ -39,6 +45,13 @@ msgstr "Mouvement de stock"
 #: model:ir.model,name:alc_stock_release_channel_assign_blocking_unavailable_product.model_stock_release_channel
 msgid "Stock Release Channels"
 msgstr "Canaux de livraison"
+
+#. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#: model:ir.model,name:alc_stock_release_channel_assign_blocking_unavailable_product.model_stock_rule
+#, fuzzy
+#| msgid "Stock Move"
+msgid "Stock Rule"
+msgstr "Mouvement de stock"
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model:ir.model,name:alc_stock_release_channel_assign_blocking_unavailable_product.model_stock_picking
