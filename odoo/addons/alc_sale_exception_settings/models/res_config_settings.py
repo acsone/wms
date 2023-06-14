@@ -15,3 +15,10 @@ class ResConfigSettings(SaleSettings):
         help="Check this if you want to enable the sale exception checks",
         config_parameter="alc_sale_exception_settings.sale_exception_check_enabled",
     )
+    alc_sale_exception_skip_non_blocking = fields.Boolean(
+        string="Sale Exception Skip Non Blocking",
+        help="Check this if you want to be able to confirm a sale order having any "
+        "non blocking exception",
+        config_parameter="alc_sale_exception_settings.sale_exception_skip_non_blocking",
+        default=True,
+    )

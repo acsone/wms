@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-04 09:44+0000\n"
-"PO-Revision-Date: 2023-05-04 09:44+0000\n"
+"POT-Creation-Date: 2023-06-14 12:36+0000\n"
+"PO-Revision-Date: 2023-06-14 12:36+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: \n"
@@ -20,6 +20,24 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_sale_exception_settings.res_config_settings_form_view
 msgid "Allows you to activate/deactivate sale exception checks"
 msgstr "Permet d'activer/désactiver la vérification des restrictions de vente"
+
+#. module: alc_sale_exception_settings
+#: model_terms:ir.ui.view,arch_db:alc_sale_exception_settings.res_config_settings_form_view
+msgid ""
+"Allows you to enable/disable the confirmation of a sale order having non "
+"blocking exception"
+msgstr ""
+"Permet d'activer/désactiver la confirmation d'un bon de commande cotenant des exceptions de vente "
+"non bloquantes"
+
+#. module: alc_sale_exception_settings
+#: model:ir.model.fields,help:alc_sale_exception_settings.field_res_config_settings__alc_sale_exception_skip_non_blocking
+msgid ""
+"Check this if you want to be able to confirm a sale order having any non "
+"blocking exception"
+msgstr ""
+"Cocher pour pouvoir confirmer un bon de commande contenant une exception de "
+"vente non bloquante"
 
 #. module: alc_sale_exception_settings
 #: model:ir.model.fields,help:alc_sale_exception_settings.field_res_config_settings__alc_sale_exception_check_enabled
@@ -35,6 +53,11 @@ msgstr "Configuration"
 #: model:ir.model.fields,field_description:alc_sale_exception_settings.field_res_config_settings__alc_sale_exception_check_enabled
 msgid "Sale Exception Check Enabled"
 msgstr "Vérification des restrictions de vente activée"
+
+#. module: alc_sale_exception_settings
+#: model:ir.model.fields,field_description:alc_sale_exception_settings.field_res_config_settings__alc_sale_exception_skip_non_blocking
+msgid "Sale Exception Skip Non Blocking"
+msgstr "Éviter les exceptions de vente non bloquantes "
 
 #. module: alc_sale_exception_settings
 #: model:ir.model,name:alc_sale_exception_settings.model_sale_order

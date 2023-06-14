@@ -4,7 +4,8 @@
 {
     "name": "Alc Sale Exception Settings",
     "description": """
-        Alc Sale Exception: Add setting to activate exception checks (disable by default)""",
+        Alc Sale Exception: Add setting to activate exception checks (disable by default)
+        and """,
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
