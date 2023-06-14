@@ -20,8 +20,6 @@ exclude: |
   ^odoo/addons/alc_country/|
   ^odoo/addons/alc_customer_audit/|
   ^odoo/addons/alc_customer_invoices_by_fiscal_year/|
-  ^odoo/addons/alc_delivery_rounds_assign_blocking/|
-  ^odoo/addons/alc_delivery_rounds_assign_blocking_unavailable_product/|
   ^odoo/addons/alc_delivery_rounds_geooptimize/|
   ^odoo/addons/alc_documents/|
   ^odoo/addons/alc_documents_eshop_services/|

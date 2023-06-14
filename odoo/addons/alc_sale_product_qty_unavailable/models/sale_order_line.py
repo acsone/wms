@@ -144,6 +144,11 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
             record._init_product_qty_unavailable(vals)
         return res
 
+    def write(self, values):
+        result = super().write(values)
+        self._init_product_qty_unavailable(values)
+        return result
+
     def _compute_current_product_qty_unavailable(self):
         for line in self:
             if not line.product_qty_remains_to_deliver:
@@ -159,3 +164,8 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
                 ),
                 line.product_qty_remains_to_deliver,
             )
+
+    def _prepare_procurement_values(self, group_id=False):
+        values = super()._prepare_procurement_values(group_id=group_id)
+        values["product_qty_unavailable"] = self.product_qty_unavailable
+        return values
