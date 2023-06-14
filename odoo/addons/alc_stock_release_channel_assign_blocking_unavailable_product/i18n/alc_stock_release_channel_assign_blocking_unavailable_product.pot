@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-14 14:00+0000\n"
-"PO-Revision-Date: 2023-06-14 14:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,8 +24,13 @@ msgid "Is Backorder"
 msgstr ""
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
-#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_picking__is_full_backorder
-msgid "Is Full Backorder"
+#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_picking__is_backorder_due_to_unavailability
+msgid "Is Backorder Due To Unavailability"
+msgstr ""
+
+#. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_move__product_qty_unavailable
+msgid "Product Qty Unavailable"
 msgstr ""
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
@@ -38,6 +41,11 @@ msgstr ""
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model:ir.model,name:alc_stock_release_channel_assign_blocking_unavailable_product.model_stock_release_channel
 msgid "Stock Release Channels"
+msgstr ""
+
+#. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#: model:ir.model,name:alc_stock_release_channel_assign_blocking_unavailable_product.model_stock_rule
+msgid "Stock Rule"
 msgstr ""
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
