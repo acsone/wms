@@ -27,17 +27,8 @@ msgid ""
 "Allows you to enable/disable the confirmation of a sale order having non "
 "blocking exception"
 msgstr ""
-"Permet d'activer/désactiver la confirmation d'un bon de commande cotenant des exceptions de vente "
-"non bloquantes"
-
-#. module: alc_sale_exception_settings
-#: model:ir.model.fields,help:alc_sale_exception_settings.field_res_config_settings__alc_sale_exception_skip_non_blocking
-msgid ""
-"Check this if you want to be able to confirm a sale order having any non "
-"blocking exception"
-msgstr ""
-"Cocher pour pouvoir confirmer un bon de commande contenant une exception de "
-"vente non bloquante"
+"Permet d'activer/désactiver la confirmation d'un bon de commande cotenant "
+"des exceptions de vente non bloquantes"
 
 #. module: alc_sale_exception_settings
 #: model:ir.model.fields,help:alc_sale_exception_settings.field_res_config_settings__alc_sale_exception_non_blocking_as_exception
@@ -45,8 +36,9 @@ msgid ""
 "Check this if you want to block the confirmation of a sale order having any "
 "non blocking exception. You have to ignore exceptions to confirm."
 msgstr ""
-"Cocher pour bloquer la confirmation directe d'un bon de commande contenant une "
-"exception non bloquante. Il faudra alors ignorer les exceptions pour confirmer."
+"Cocher pour bloquer la confirmation directe d'un bon de commande contenant "
+"une exception non bloquante. Il faudra alors ignorer les exceptions pour "
+"confirmer."
 
 #. module: alc_sale_exception_settings
 #: model:ir.model.fields,help:alc_sale_exception_settings.field_res_config_settings__alc_sale_exception_check_enabled
@@ -72,3 +64,10 @@ msgstr "Exceptions non bloquantes prises en compte"
 #: model:ir.model,name:alc_sale_exception_settings.model_sale_order
 msgid "Sales Order"
 msgstr "Bons de commande"
+
+#~ msgid ""
+#~ "Check this if you want to be able to confirm a sale order having any non "
+#~ "blocking exception"
+#~ msgstr ""
+#~ "Cocher pour pouvoir confirmer un bon de commande contenant une exception "
+#~ "de vente non bloquante"
