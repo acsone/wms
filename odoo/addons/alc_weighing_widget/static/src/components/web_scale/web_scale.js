@@ -35,14 +35,19 @@ export class WebScale extends Component {
   }
 
   async getUserData() {
-    return await this.orm.call("res.users", "read", [session.user_id], {
+    return await this.orm.call("res.users", "read", [session.uid], {
       fields: ["pywebdriver_proxy_ip"],
     });
   }
 
   async setProxyUrl() {
     const userData = await this.getUserData();
-    this.proxyUrl = `${userData[0].pywebdriver_proxy_ip}/hw_proxy/weight`;
+    if (userData.length === 1) {
+      this.proxyUrl = `${userData[0].pywebdriver_proxy_ip}/hw_proxy/weight`;
+    } else {
+      this.proxyUrl = "";
+    }
+
     this.on_mode_change();
   }
 
