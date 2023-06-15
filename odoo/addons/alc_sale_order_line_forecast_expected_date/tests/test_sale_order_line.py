@@ -1,14 +1,13 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from datetime import datetime, timedelta
 
-from odoo import fields
-from odoo.tests.common import SavepointCase
+from odoo import Command, fields
+from odoo.tests.common import TransactionCase
 
 
-class TestSaleOrderLine(SavepointCase):
+class TestSaleOrderLine(TransactionCase):
 
     # to avoid trouble with pre installed db where specific_zeste is installed
     at_install = False
@@ -16,10 +15,9 @@ class TestSaleOrderLine(SavepointCase):
 
     @classmethod
     def setUpClass(cls):
-        super(TestSaleOrderLine, cls).setUpClass()
+        super().setUpClass()
         cls.partner = cls.env.ref("base.res_partner_1")
-        cls.partner.ref = "888534954"
-        cls.prod1 = cls.env.ref("product.product_product_1")
+        cls.prod1 = cls.env.ref("stock.product_cable_management_box")
         cls.prod2 = cls.prod1.copy()
         # Warehouses
         cls.warehouse_0 = cls.env["stock.warehouse"].create(
@@ -57,9 +55,7 @@ class TestSaleOrderLine(SavepointCase):
                 "client_order_ref": "whatever the client want",
                 "warehouse_id": cls.warehouse_0.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "sequence": 1,
                             "name": cls.prod1.name,
@@ -67,9 +63,7 @@ class TestSaleOrderLine(SavepointCase):
                             "product_uom_qty": 7,
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "sequence": 2,
                             "name": cls.prod2.name,
@@ -80,7 +74,6 @@ class TestSaleOrderLine(SavepointCase):
                 ],
             }
         )
-
         cls.sol_prod1 = cls.so.order_line.filtered(
             lambda a, p=cls.prod1: a.product_id == p
         )
@@ -112,9 +105,9 @@ class TestSaleOrderLine(SavepointCase):
         # Stock Moves
         cls.StockMove = cls.env["stock.move"]
         now = datetime.now()
-        cls.dp1 = fields.Date.to_string(now + timedelta(days=1))
-        cls.dp3 = fields.Date.to_string(now + timedelta(days=3))
-        cls.dm1 = fields.Date.to_string(now - timedelta(days=1))
+        cls.dp1 = fields.Datetime.to_datetime((now + timedelta(days=1)).date())
+        cls.dp3 = fields.Datetime.to_datetime((now + timedelta(days=3)).date())
+        cls.dm1 = fields.Datetime.to_datetime((now - timedelta(days=1)).date())
         # On WH0:
         # -> no stock move for prod1 and prod2
         # On WH1:
@@ -123,49 +116,53 @@ class TestSaleOrderLine(SavepointCase):
         cls.move_in_wh1_prod1_0 = cls.StockMove.create(
             {
                 "picking_id": cls.picking_in_wh1.id,
+                "warehouse_id": cls.warehouse_1.id,
                 "product_id": cls.prod1.id,
                 "product_uom_qty": 1,
                 "product_uom": cls.prod1.uom_id.id,
                 "location_id": cls.supplier_location.id,
                 "location_dest_id": cls.location_wh1_1.id,
                 "name": cls.prod1.name,
-                "date_expected": cls.dp1,
+                "date": cls.dp1,
             }
         )
         cls.move_in_wh1_prod1_1 = cls.StockMove.create(
             {
                 "picking_id": cls.picking_in_wh1.id,
+                "warehouse_id": cls.warehouse_1.id,
                 "product_id": cls.prod1.id,
                 "product_uom_qty": 2,
                 "product_uom": cls.prod1.uom_id.id,
                 "location_id": cls.supplier_location.id,
                 "location_dest_id": cls.location_wh1_1.id,
                 "name": cls.prod1.name,
-                "date_expected": cls.dp3,
+                "date": cls.dp3,
             }
         )
         cls.move_in_wh1_prod2_0 = cls.StockMove.create(
             {
                 "picking_id": cls.picking_in_wh1.id,
+                "warehouse_id": cls.warehouse_1.id,
                 "product_id": cls.prod2.id,
                 "product_uom_qty": 1,
                 "product_uom": cls.prod2.uom_id.id,
                 "location_id": cls.supplier_location.id,
                 "location_dest_id": cls.location_wh1_1.id,
                 "name": cls.prod2.name,
-                "date_expected": cls.dm1,
+                "date": cls.dm1,
             }
         )
         cls.move_in_wh1_prod2_1 = cls.StockMove.create(
             {
                 "picking_id": cls.picking_in_wh1.id,
+                "warehouse_id": cls.warehouse_1.id,
                 "product_id": cls.prod2.id,
                 "product_uom_qty": 2,
                 "product_uom": cls.prod2.uom_id.id,
                 "location_id": cls.supplier_location.id,
                 "location_dest_id": cls.location_wh1_1.id,
                 "name": cls.prod2.name,
-                "date_expected": cls.dp1,
+                "date": cls.dp1,
             }
         )
         # On WH2:
@@ -174,108 +171,115 @@ class TestSaleOrderLine(SavepointCase):
         cls.move_in_wh2_prod1_0 = cls.StockMove.create(
             {
                 "picking_id": cls.picking_in_wh2.id,
+                "warehouse_id": cls.warehouse_2.id,
                 "product_id": cls.prod1.id,
                 "product_uom_qty": 1,
                 "product_uom": cls.prod1.uom_id.id,
                 "location_id": cls.supplier_location.id,
                 "location_dest_id": cls.location_wh2_1.id,
                 "name": cls.prod1.name,
-                "date_expected": cls.dm1,
+                "date": cls.dm1,
             }
         )
         cls.move_in_wh2_prod1_1 = cls.StockMove.create(
             {
                 "picking_id": cls.picking_in_wh2.id,
+                "warehouse_id": cls.warehouse_2.id,
                 "product_id": cls.prod1.id,
                 "product_uom_qty": 2,
                 "product_uom": cls.prod1.uom_id.id,
                 "location_id": cls.supplier_location.id,
                 "location_dest_id": cls.location_wh2_1.id,
                 "name": cls.prod1.name,
-                "date_expected": cls.dp1,
+                "date": cls.dp1,
             }
         )
         cls.move_in_wh2_prod2_0 = cls.StockMove.create(
             {
                 "picking_id": cls.picking_in_wh2.id,
+                "warehouse_id": cls.warehouse_2.id,
                 "product_id": cls.prod2.id,
                 "product_uom_qty": 1,
                 "product_uom": cls.prod2.uom_id.id,
                 "location_id": cls.supplier_location.id,
                 "location_dest_id": cls.location_wh2_1.id,
                 "name": cls.prod2.name,
-                "date_expected": cls.dp1,
+                "date": cls.dp1,
             }
         )
         cls.move_in_wh2_prod2_1 = cls.StockMove.create(
             {
                 "picking_id": cls.picking_in_wh2.id,
+                "warehouse_id": cls.warehouse_2.id,
                 "product_id": cls.prod2.id,
                 "product_uom_qty": 2,
                 "product_uom": cls.prod2.uom_id.id,
                 "location_id": cls.supplier_location.id,
                 "location_dest_id": cls.location_wh2_1.id,
                 "name": cls.prod2.name,
-                "date_expected": cls.dp3,
+                "date": cls.dp3,
             }
         )
 
     def test_01(self):
         """
         Data:
+
             An order with 2 products without incoming qty (warehouse_0)
         Test Case:
-            Check next_expected_date_for_receipt
+            Check forecast_expected_date
         Expected result:
-            next_expected_date_for_receipt must be False
+            forecast_expected_date must be False
         """
-        self.assertFalse(self.sol_prod1.next_expected_date_for_receipt)
-        self.assertFalse(self.sol_prod2.next_expected_date_for_receipt)
+        self.assertFalse(self.sol_prod1.forecast_expected_date)
+        self.assertFalse(self.sol_prod2.forecast_expected_date)
 
     def test_02(self):
         """
         Data:
+
             An order with 2 products on warehouse_1
             A draft pricking in exists for the two products in warehouse_1
             and warehouse_2
         Test Case:
-            1. Check next_expected_date_for_receipt
+            1. Check forecast_expected_date
             2. Confirm the 2 pickings
         Expected result:
-            1. next_expected_date_for_receipt must be False for the 2 products
-            2. next_expected_date_for_receipt must be set for the 2 products
+            1. forecast_expected_date must be False for the 2 products
+            2. forecast_expected_date must be set for the 2 products
             at the min expected_date of the incoming stock move into wh1
         """
         self.so.warehouse_id = self.warehouse_1
-        self.assertFalse(self.sol_prod1.next_expected_date_for_receipt)
-        self.assertFalse(self.sol_prod2.next_expected_date_for_receipt)
+        self.assertFalse(self.sol_prod1.forecast_expected_date)
+        self.assertFalse(self.sol_prod2.forecast_expected_date)
         self.picking_in_wh1.action_confirm()
         self.picking_in_wh2.action_confirm()
-        self.assertEqual(self.sol_prod1.next_expected_date_for_receipt, self.dp1)
-        self.assertEqual(self.sol_prod2.next_expected_date_for_receipt, self.dm1)
+        self.assertEqual(self.sol_prod1.forecast_expected_date, self.dp1)
+        self.assertEqual(self.sol_prod2.forecast_expected_date, self.dm1)
 
     def test_03(self):
         """
         Data:
+
             An order with 2 products on warehouse_0
             A draft pricking in exists for the two products in warehouse_1
             and warehouse_2
         Test Case:
-            1. Check next_expected_date_for_receipt
+            1. Check forecast_expected_date
             2. Confirm the 2 pickings
             3. Assign warehouse_2 on the sale order
         Expected result:
-            1. next_expected_date_for_receipt must be False for the 2 products
-            2. next_expected_date_for_receipt must be False for the 2 products
-            3. next_expected_date_for_receipt must be set for the 2 products
+            1. forecast_expected_date must be False for the 2 products
+            2. forecast_expected_date must be False for the 2 products
+            3. forecast_expected_date must be set for the 2 products
             at the min expected_date of the incoming stock move into wh2
         """
-        self.assertFalse(self.sol_prod1.next_expected_date_for_receipt)
-        self.assertFalse(self.sol_prod2.next_expected_date_for_receipt)
+        self.assertFalse(self.sol_prod1.forecast_expected_date)
+        self.assertFalse(self.sol_prod2.forecast_expected_date)
         self.picking_in_wh1.action_confirm()
         self.picking_in_wh2.action_confirm()
-        self.assertFalse(self.sol_prod1.next_expected_date_for_receipt)
-        self.assertFalse(self.sol_prod2.next_expected_date_for_receipt)
+        self.assertFalse(self.sol_prod1.forecast_expected_date)
+        self.assertFalse(self.sol_prod2.forecast_expected_date)
         self.so.warehouse_id = self.warehouse_2
-        self.assertEqual(self.sol_prod1.next_expected_date_for_receipt, self.dm1)
-        self.assertEqual(self.sol_prod2.next_expected_date_for_receipt, self.dp1)
+        self.assertEqual(self.sol_prod1.forecast_expected_date, self.dm1)
+        self.assertEqual(self.sol_prod2.forecast_expected_date, self.dp1)

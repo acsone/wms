@@ -132,5 +132,6 @@
         "alc_product_link_notice",
         "alc_pricing_constraints",
         "alc_partner_security",
+        "alc_sale_order_line_forecast_expected_date",
     ],
 }
