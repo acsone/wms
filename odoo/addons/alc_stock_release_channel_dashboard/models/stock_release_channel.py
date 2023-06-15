@@ -33,6 +33,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
                 ("release_channel_id", "=", self.id),
                 ("picking_type_code", "=", "outgoing"),
             ],
+            "context": {"search_default_available": 1, **self.env.context},
         }
 
     def button_show_picking_int(self):
@@ -46,6 +47,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
                 ("release_channel_id", "=", self.id),
                 ("picking_type_code", "=", "internal"),
             ],
+            "context": {"search_default_available": 1, **self.env.context},
         }
 
     @api.depends("pick_allowed", "pick_allowed_by_picking_type")
