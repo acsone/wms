@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-15 08:15+0000\n"
+"PO-Revision-Date: 2023-06-15 08:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,10 +28,10 @@ msgid ""
 msgstr ""
 
 #. module: alc_sale_exception_settings
-#: model:ir.model.fields,help:alc_sale_exception_settings.field_res_config_settings__alc_sale_exception_skip_non_blocking
+#: model:ir.model.fields,help:alc_sale_exception_settings.field_res_config_settings__alc_sale_exception_non_blocking_as_exception
 msgid ""
-"Check this if you want to be able to confirm a sale order having any non "
-"blocking exception"
+"Check this if you want to block the confirmation of a sale order having any "
+"non blocking exception. You have to ignore exceptions to confirm."
 msgstr ""
 
 #. module: alc_sale_exception_settings
@@ -48,8 +50,8 @@ msgid "Sale Exception Check Enabled"
 msgstr ""
 
 #. module: alc_sale_exception_settings
-#: model:ir.model.fields,field_description:alc_sale_exception_settings.field_res_config_settings__alc_sale_exception_skip_non_blocking
-msgid "Sale Exception Skip Non Blocking"
+#: model:ir.model.fields,field_description:alc_sale_exception_settings.field_res_config_settings__alc_sale_exception_non_blocking_as_exception
+msgid "Sale Exception Non Blocking As Exception"
 msgstr ""
 
 #. module: alc_sale_exception_settings

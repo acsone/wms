@@ -69,3 +69,17 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         so1.action_confirm()
         self.assertEqual(so1.state, "draft")
         self.assertIn(exception, so1.exception_ids)
+
+    def test_skip_non_blocking(self):
+        exception = self.env.ref("alc_sale_exception.order_amount_minimum")
+        exception.is_blocking = False
+        exception.active = True
+        self.prod1.list_price = 1
+        so1 = self.env["sale.order"].create(self.so1_vals.copy())
+        so1.action_confirm()
+        self.assertEqual(so1.state, "draft")
+        self.env["res.config.settings"].sudo().create(
+            {"alc_sale_exception_non_blocking_as_exception": False}
+        ).execute()
+        so1.action_confirm()
+        self.assertEqual(so1.state, "sale")
