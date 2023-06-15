@@ -36,6 +36,7 @@ class TestSaleOrderExceptionCommon(TransactionCase):
         cls.env["res.config.settings"].create(
             {
                 "alc_sale_exception_check_enabled": True,
+                "alc_sale_exception_non_blocking_as_exception": True,
             }
         ).execute()
 

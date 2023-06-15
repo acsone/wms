@@ -12,6 +12,15 @@ class SaleOrder(sale_order.SaleOrder):
             .get_param("alc_sale_exception_settings.sale_exception_check_enabled")
         )
 
+    def _is_non_blocking_as_exception(self):
+        return (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param(
+                "alc_sale_exception_settings.sale_exception_non_blocking_as_exception"
+            )
+        )
+
     def _check_sale_check_exception(self, vals):
         if not self._is_sale_exception_check_enabled():
             return None

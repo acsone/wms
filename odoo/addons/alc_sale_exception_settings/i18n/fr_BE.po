@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-14 12:36+0000\n"
-"PO-Revision-Date: 2023-06-14 12:36+0000\n"
+"POT-Creation-Date: 2023-06-15 08:15+0000\n"
+"PO-Revision-Date: 2023-06-15 08:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: \n"
@@ -40,6 +40,15 @@ msgstr ""
 "vente non bloquante"
 
 #. module: alc_sale_exception_settings
+#: model:ir.model.fields,help:alc_sale_exception_settings.field_res_config_settings__alc_sale_exception_non_blocking_as_exception
+msgid ""
+"Check this if you want to block the confirmation of a sale order having any "
+"non blocking exception. You have to ignore exceptions to confirm."
+msgstr ""
+"Cocher pour bloquer la confirmation directe d'un bon de commande contenant une "
+"exception non bloquante. Il faudra alors ignorer les exceptions pour confirmer."
+
+#. module: alc_sale_exception_settings
 #: model:ir.model.fields,help:alc_sale_exception_settings.field_res_config_settings__alc_sale_exception_check_enabled
 msgid "Check this if you want to enable the sale exception checks"
 msgstr "Cocher pour activer la vérification des restrictions de vente"
@@ -55,9 +64,9 @@ msgid "Sale Exception Check Enabled"
 msgstr "Vérification des restrictions de vente activée"
 
 #. module: alc_sale_exception_settings
-#: model:ir.model.fields,field_description:alc_sale_exception_settings.field_res_config_settings__alc_sale_exception_skip_non_blocking
-msgid "Sale Exception Skip Non Blocking"
-msgstr "Éviter les exceptions de vente non bloquantes "
+#: model:ir.model.fields,field_description:alc_sale_exception_settings.field_res_config_settings__alc_sale_exception_non_blocking_as_exception
+msgid "Sale Exception Non Blocking As Exception"
+msgstr "Exceptions non bloquantes prises en compte"
 
 #. module: alc_sale_exception_settings
 #: model:ir.model,name:alc_sale_exception_settings.model_sale_order
