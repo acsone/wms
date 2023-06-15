@@ -1,7 +1,5 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
-import json
 import threading
 
 from odoo import _, api, fields, models, registry
@@ -30,10 +28,9 @@ class DeliveryPackageGlsWizard(models.TransientModel):
         help="The package to send to GLS.",
         # domain="[('id', 'in', allowed_package_ids)]",  # when migrating, use this
     )
-    package_id_domain = fields.Char(
+    package_id_domain = fields.Binary(
         compute="_compute_package_id_domain",
         readonly=True,
-        store=False,
     )
     is_sent = fields.Boolean(
         string="Is sent",
@@ -59,7 +56,7 @@ class DeliveryPackageGlsWizard(models.TransientModel):
     def _compute_package_id_domain(self):
         for record in self:
             ids = record.allowed_package_ids.ids
-            record.package_id_domain = json.dumps([("id", "in", ids)])
+            record.package_id_domain = [("id", "in", ids)]
 
     @api.depends("package_id")
     def _compute_is_sent(self):
@@ -68,19 +65,21 @@ class DeliveryPackageGlsWizard(models.TransientModel):
 
     @api.onchange("picking_id")
     def onchange_picking_id(self):
-        if self.picking_id and self.package_id not in self.allowed_package_ids:
-            sent = self.allowed_package_ids.filtered("parcel_tracking")
-            unsent = self.allowed_package_ids - sent
-            self.package_id = unsent[0] if unsent else sent[0] if sent else False
+        for rec in self:
+            if rec.picking_id and rec.package_id not in rec.allowed_package_ids:
+                sent = rec.allowed_package_ids.filtered("parcel_tracking")
+                unsent = rec.allowed_package_ids - sent
+                rec.package_id = unsent[0] if unsent else sent[0] if sent else False
 
     @api.onchange("package_id")
     def onchange_package_id(self):
-        packaging = self.package_id.package_type_id
-        if not packaging:
-            xml_id = "delivery_carrier_label_gls.packaging_gls_parcel"
-            packaging = self.env.ref(xml_id)
-        self._set_shipping_weight()
-        self.package_type_id = packaging
+        for rec in self:
+            packaging = rec.package_id.package_type_id
+            if not packaging:
+                xml_id = "delivery_carrier_label_gls.packaging_gls_parcel"
+                packaging = self.env.ref(xml_id)
+            rec._set_shipping_weight()
+            rec.package_type_id = packaging
 
     def _set_shipping_weight(self):
         for record in self:
