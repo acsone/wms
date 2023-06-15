@@ -4,10 +4,10 @@
 
 from odoo.exceptions import ValidationError
 
-from odoo.addons.sale_exception.models import sale_order
+from odoo.addons.sale_exception.models.sale_order import SaleOrder as Order
 
 
-class SaleOrder(sale_order.SaleOrder):
+class SaleOrder(Order):
     def sale_check_exception(self):
         # pylint: disable=except-pass
         try:
@@ -15,3 +15,13 @@ class SaleOrder(sale_order.SaleOrder):
         except ValidationError:
             # If a sale exception is found it will be displayed on the UI
             pass
+
+    def detect_exceptions(self):
+        non_blocking_as_exception = self._is_non_blocking_as_exception()
+        all_exceptions = super().detect_exceptions()
+        exceptions = self.env["exception.rule"].browse(all_exceptions)
+        is_blocking = any(exception.is_blocking for exception in exceptions)
+        if all_exceptions and not non_blocking_as_exception and not is_blocking:
+            self.exception_ids = False
+            return []
+        return all_exceptions
