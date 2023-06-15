@@ -9,20 +9,25 @@
   </function>
   <!-- Set group by customer on picking type out -->
   <!-- Set show entire packs on picking type out -->
+  <!-- Set propagate to picking chain on picking type out -->
+  <!-- Set no backorder for additional product on picking type out -->
   <function model="stock.picking.type" name="write">
     <value model="stock.picking.type" eval="[ref('stock.picking_type_out')]" />
     <value
-      eval="{'group_pickings': True, 'group_pickings_by_customer': True, 'show_entire_packs': True, 'propagate_to_pickings_chain': True}"
+      eval="{'group_pickings': True, 'group_pickings_by_customer': True, 'show_entire_packs': True, 'propagate_to_pickings_chain': True, 'no_backorder_for_additional_product': True}"
     />
   </function>
 
-  <!-- Set display put in pack wizard on old PICK picking type -->
+  <!-- Set display put in pack wizard on old PICK picking type-->
+  <!-- Set allow additional product on reserved qty on old PICK picking type-->
   <function model="stock.picking.type" name="write">
     <value
       model="stock.picking.type"
       eval="(obj().env.cr.execute(&quot;select id from stock_picking_type where subcode=&apos;PICK&apos;&quot;) or True) and [i[0] for i in obj().env.cr.fetchall()]"
     />
-    <value eval="{'set_delivery_package_type_on_put_in_pack': True}" />
+    <value
+      eval="{'set_delivery_package_type_on_put_in_pack': True, 'allow_additional_product_on_reserved_qty': True}"
+    />
   </function>
   <!-- set sequence VLB/PICK on picking type Pick Aliments / Pick M/ Pick frigo/ Pick M/ Pick G/ Pick matériel / Pick Zone inconnu -->
   <function model="stock.picking.type" name="write">

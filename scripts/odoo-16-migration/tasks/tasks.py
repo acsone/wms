@@ -75,8 +75,18 @@ def _register_migration_scripts_in_tasks(prefix):
                     "pyfile": callable_def.spec.name + ".py",
                 }
             )
-            with OdooEnvironment(DB_16_POSTMIG) as env:
-                callable_def.callable(env.cr, version=CURRENT_VERSION)
+            # disable all logging output
+            try:
+                logging_config = logging.getLogger().getEffectiveLevel()
+                logging.disable(logging.CRITICAL)
+                with OdooEnvironment(DB_16_POSTMIG) as env:
+                    logging.disable(logging.NOTSET)
+                    logging.getLogger().setLevel(logging_config)
+                    callable_def.callable(env.cr, version=CURRENT_VERSION)
+            finally:
+                # Restore the original logging configuration
+                logging.disable(logging.NOTSET)
+                logging.getLogger().setLevel(logging_config)
 
         tasks.append((name, functools.partial(wrapped, callable_def=callable_def)))
 
