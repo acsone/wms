@@ -19,6 +19,7 @@
     "data": [
         "security/res_groups.xml",
         "security/alc_new_product_reception.xml",
+        "views/res_config_settings_views.xml",
         "views/stock_picking.xml",
         "wizards/stock_pack_operation_lot_add.xml",
     ],

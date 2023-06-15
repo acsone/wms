@@ -1,10 +1,9 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.exceptions import ValidationError
 from odoo.fields import Command
 from odoo.tests.common import TransactionCase
-
-from ..exceptions import MissingBarcodeError, MissingDimensionsError, MissingWeightError
 
 
 class TestMissingInfoOnNewProduct(TransactionCase):
@@ -317,7 +316,8 @@ class TestMissingInfoOnNewProduct(TransactionCase):
         )
         self.assertTrue(self.operation_missing_dimensions.product_id.is_new)
         self.assertTrue(self.operation_missing_dimensions.product_id.has_no_dimensions)
-        with self.assertRaises(MissingDimensionsError), self.env.cr.savepoint():
+        error_msg = "You must enter dimensions for the product to receive"
+        with self.assertRaises(ValidationError, msg=error_msg):
             self.wiz._check_dimensions_product()
         self.env["res.config.settings"].create(
             {"reception_wizard_constraints": False}
@@ -345,7 +345,11 @@ class TestMissingInfoOnNewProduct(TransactionCase):
         self.assertEqual(
             self.operation_missing_barcode.product_id.name, "Unittest missing barcode"
         )
-        with self.assertRaises(MissingBarcodeError), self.env.cr.savepoint():
+        error_msg = (
+            "You must enter a barcode for the product to receive or allow "
+            "the reception without barcode"
+        )
+        with self.assertRaises(ValidationError, msg=error_msg):
             self.wiz._check_barcode_new_product()
 
     def test_01_1_complete_barcode(self):
@@ -366,7 +370,11 @@ class TestMissingInfoOnNewProduct(TransactionCase):
         self.assertEqual(
             self.operation_missing_barcode.product_id.name, "Unittest missing barcode"
         )
-        with self.assertRaises(MissingBarcodeError), self.env.cr.savepoint():
+        error_msg = (
+            "You must enter a barcode for the product to receive or allow "
+            "the reception without barcode"
+        )
+        with self.assertRaises(ValidationError, msg=error_msg):
             self.wiz._check_barcode_new_product()
 
     def test_02_1_complete_barcode_but_authorized(self):
@@ -385,7 +393,8 @@ class TestMissingInfoOnNewProduct(TransactionCase):
 
     def test_03_missing_weight(self):
         self.wiz.move_line_id = self.operation_missing_weight.id
-        with self.assertRaises(MissingWeightError), self.env.cr.savepoint():
+        error_msg = "You must enter a weight for the product to receive"
+        with self.assertRaises(ValidationError, msg=error_msg):
             self.wiz._check_weight_product()
 
     def test_03_1_complete_weight(self):
@@ -407,7 +416,8 @@ class TestMissingInfoOnNewProduct(TransactionCase):
             self.operation_missing_weight_dimensions.product_id.name,
             "Unittest missing dimensions and weight",
         )
-        with self.assertRaises(MissingWeightError), self.env.cr.savepoint():
+        error_msg = "You must enter a weight for the product to receive"
+        with self.assertRaises(ValidationError, msg=error_msg):
             self.wiz._check_weight_product()
 
     def test_04_1_missing_weight_and_dimensions(self):
@@ -421,7 +431,8 @@ class TestMissingInfoOnNewProduct(TransactionCase):
             self.operation_missing_weight_dimensions.product_id.name,
             "Unittest missing dimensions and weight",
         )
-        with self.assertRaises(MissingDimensionsError), self.env.cr.savepoint():
+        error_msg = "You must enter dimensions for the product to receive"
+        with self.assertRaises(ValidationError, msg=error_msg):
             self.wiz._check_dimensions_product()
 
     def test_04_2_complete_weight_and_dimensions(self):
@@ -482,7 +493,8 @@ class TestMissingInfoOnNewProduct(TransactionCase):
             "Unittest is med product",
         )
         self.assertTrue(self.operation_med_product.product_id.is_meds)
-        with self.assertRaises(MissingDimensionsError), self.env.cr.savepoint():
+        error_msg = "You must enter dimensions for the product to receive"
+        with self.assertRaises(ValidationError, msg=error_msg):
             self.wiz._check_dimensions_product()
 
     def test_08_product_is_meds_complete_dimensions(self):
@@ -503,7 +515,8 @@ class TestMissingInfoOnNewProduct(TransactionCase):
             "Unittest is food product",
         )
         self.assertTrue(self.operation_food_product.product_id.is_food)
-        with self.assertRaises(MissingDimensionsError), self.env.cr.savepoint():
+        error_msg = "You must enter dimensions for the product to receive"
+        with self.assertRaises(ValidationError, msg=error_msg):
             self.wiz._check_dimensions_product()
 
     def test_10_product_is_food_complete_dimensions(self):
@@ -524,7 +537,8 @@ class TestMissingInfoOnNewProduct(TransactionCase):
             "Unittest is human product",
         )
         self.assertTrue(self.operation_human_product.product_id.is_human)
-        with self.assertRaises(MissingDimensionsError), self.env.cr.savepoint():
+        error_msg = "You must enter dimensions for the product to receive"
+        with self.assertRaises(ValidationError, msg=error_msg):
             self.wiz._check_dimensions_product()
 
     def test_12_product_is_human_complete_dimensions(self):
@@ -603,7 +617,8 @@ class TestMissingInfoOnNewProduct(TransactionCase):
             "Unittest is mat product",
         )
         self.assertTrue(self.operation_mat_product.product_id.is_equipment)
-        with self.assertRaises(MissingDimensionsError), self.env.cr.savepoint():
+        error_msg = "You must enter dimensions for the product to receive"
+        with self.assertRaises(ValidationError, msg=error_msg):
             self.wiz._check_dimensions_product()
 
     def test_16_product_is_mat_complete_dimensions(self):

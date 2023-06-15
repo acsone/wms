@@ -9,7 +9,7 @@ class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
     reception_wizard_constraints = fields.Boolean(
-        "Check dimensions, weight and barcode on the purchase reception wizard.",
+        "Reception Wizard Constraints",
         default=False,
         config_parameter="reception_wizard_constraints",
     )
