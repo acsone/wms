@@ -23,9 +23,13 @@ msgstr "Permet d'activer/désactiver la vérification des restrictions de vente"
 
 #. module: alc_sale_exception_settings
 #: model_terms:ir.ui.view,arch_db:alc_sale_exception_settings.res_config_settings_form_view
+#, fuzzy
+#| msgid ""
+#| "Allows you to enable/disable the confirmation of a sale order having non "
+#| "blocking exception"
 msgid ""
-"Allows you to enable/disable the confirmation of a sale order having non "
-"blocking exception"
+"Allows you to enable/disable the straight confirmation of a sale order "
+"having non blocking exception"
 msgstr ""
 "Permet d'activer/désactiver la confirmation d'un bon de commande cotenant "
 "des exceptions de vente non bloquantes"
