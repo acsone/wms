@@ -95,7 +95,6 @@ odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
 odoo-addon-session-db==16.0.1.0.4
 odoo-addon-uom-unece==16.0.1.1.0.2
 odoo-addon-web-chatter-position==16.0.1.0.0.8
-odoo-addon-web-domain-field==16.0.1.0.1
 odoo-addon-web-environment-ribbon==16.0.1.0.0.3
 odoo-addon-web-notify==16.0.1.0.0.5
 odoo-addon-web-refresher==16.0.2.0.0.3
