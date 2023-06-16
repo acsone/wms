@@ -1,15 +1,13 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "Alcyon: Sale Product Expected Receipt Date",
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_base_auto_join", "sale", "sale_stock"],
+    "depends": ["sale_stock"],
     "data": ["views/sale_order.xml"],
     "demo": [],
-    'installable': False
 }
