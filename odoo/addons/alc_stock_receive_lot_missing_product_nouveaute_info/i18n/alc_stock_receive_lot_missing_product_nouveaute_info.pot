@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-15 16:27+0000\n"
+"PO-Revision-Date: 2023-06-15 16:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,11 +26,6 @@ msgid "Barcode"
 msgstr ""
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_res_config_settings__reception_wizard_constraints
-msgid "Check dimensions, weight and barcode on the purchase reception wizard."
-msgstr ""
-
-#. module: alc_stock_receive_lot_missing_product_nouveaute_info
 #: model:ir.model,name:alc_stock_receive_lot_missing_product_nouveaute_info.model_res_config_settings
 msgid "Config Settings"
 msgstr ""
@@ -36,6 +33,13 @@ msgstr ""
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
 #: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add__edit_dimensions_barcode_fields
 msgid "Edit Dimensions Barcode Fields"
+msgstr ""
+
+#. module: alc_stock_receive_lot_missing_product_nouveaute_info
+#: model_terms:ir.ui.view,arch_db:alc_stock_receive_lot_missing_product_nouveaute_info.res_config_settings_form_view
+msgid ""
+"Force the user to enter dimensions, weight and barcode of a new product "
+"received through the purchase reception wizard."
 msgstr ""
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
@@ -91,6 +95,11 @@ msgid "RECEPTION - Edit new products"
 msgstr ""
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_res_config_settings__reception_wizard_constraints
+msgid "Reception Wizard Constraints"
+msgstr ""
+
+#. module: alc_stock_receive_lot_missing_product_nouveaute_info
 #: model_terms:ir.ui.view,arch_db:alc_stock_receive_lot_missing_product_nouveaute_info.stock_picking_form_view
 msgid ""
 "Some information are missing on new products (dimensions, weight or "
@@ -109,7 +118,7 @@ msgstr ""
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
 #. odoo-python
-#: code:addons/alc_stock_receive_lot_missing_product_nouveaute_info/exceptions.py:0
+#: code:addons/alc_stock_receive_lot_missing_product_nouveaute_info/wizards/stock_pack_operation_lot_add.py:0
 #, python-format
 msgid ""
 "You must enter a barcode for the product to receive or allow the reception "
@@ -118,14 +127,14 @@ msgstr ""
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
 #. odoo-python
-#: code:addons/alc_stock_receive_lot_missing_product_nouveaute_info/exceptions.py:0
+#: code:addons/alc_stock_receive_lot_missing_product_nouveaute_info/wizards/stock_pack_operation_lot_add.py:0
 #, python-format
 msgid "You must enter a weight for the product to receive"
 msgstr ""
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
 #. odoo-python
-#: code:addons/alc_stock_receive_lot_missing_product_nouveaute_info/exceptions.py:0
+#: code:addons/alc_stock_receive_lot_missing_product_nouveaute_info/wizards/stock_pack_operation_lot_add.py:0
 #, python-format
 msgid "You must enter dimensions for the product to receive"
 msgstr ""

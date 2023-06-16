@@ -1,7 +1,8 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields
+from odoo import _, api, fields
+from odoo.exceptions import ValidationError
 
 from odoo.addons.alc_stock_receive_lot.wizards.stock_pack_operation_lot_add import (
     StockPackOperationLotAdd as StockPackOperationLotAddBase,
@@ -9,8 +10,6 @@ from odoo.addons.alc_stock_receive_lot.wizards.stock_pack_operation_lot_add impo
 from odoo.addons.product.models.product_packaging import (
     ProductPackaging as ProductPackagingBase,
 )
-
-from ..exceptions import MissingBarcodeError, MissingDimensionsError, MissingWeightError
 
 
 class StockPackOperationLotAdd(StockPackOperationLotAddBase):
@@ -200,7 +199,12 @@ class StockPackOperationLotAdd(StockPackOperationLotAddBase):
                 and not rec.product_barcode
                 and not rec.no_barcode_authorized
             ):
-                raise MissingBarcodeError()
+                raise ValidationError(
+                    _(
+                        "You must enter a barcode for the product to receive or allow "
+                        "the reception without barcode"
+                    )
+                )
 
     def _check_dimensions_product(self):
         if not self.env["ir.config_parameter"].get_param(
@@ -209,9 +213,13 @@ class StockPackOperationLotAdd(StockPackOperationLotAddBase):
             return
         for rec in self:
             if rec.edit_dimensions_barcode_fields and not (
-                rec.product_width or rec.product_length or rec.product_height
+                rec.product_width > 0
+                or rec.product_length > 0
+                or rec.product_height > 0
             ):
-                raise MissingDimensionsError()
+                raise ValidationError(
+                    _("You must enter dimensions for the product to receive")
+                )
 
     def _check_weight_product(self):
         if not self.env["ir.config_parameter"].get_param(
@@ -219,8 +227,10 @@ class StockPackOperationLotAdd(StockPackOperationLotAddBase):
         ):
             return
         for rec in self:
-            if rec.edit_dimensions_barcode_fields and not rec.product_weight:
-                raise MissingWeightError()
+            if rec.edit_dimensions_barcode_fields and not rec.product_weight > 0:
+                raise ValidationError(
+                    _("You must enter a weight for the product to receive")
+                )
 
     def _add(self):
         result = super()._add()
