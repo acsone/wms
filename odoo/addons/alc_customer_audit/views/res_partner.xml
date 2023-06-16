@@ -9,17 +9,18 @@
     <field name="arch" type="xml">
       <form position="inside">
         <field name="has_anomaly" invisible="1" />
-        <field name="no_delivery_round" invisible="1" />
+        <field name="no_release_channel" invisible="1" />
         <field name="no_pharmacist" invisible="1" />
       </form>
       <div name="button_box" position="before">
         <div
           class="alert alert-warning"
+          role="alert"
           attrs="{'invisible': [('has_anomaly', '=', False)]}"
         >
                     Following issue(s) is/are observed on the customer:
-                    <div attrs="{'invisible': [('no_delivery_round', '=', False)]}">
-            <p> - Customer is active but not in a delivery round </p>
+                    <div attrs="{'invisible': [('no_release_channel', '=', False)]}">
+            <p> - Customer is active without any release channel </p>
           </div>
                     <div attrs="{'invisible': [('no_pharmacist', '=', False)]}">
             <p
@@ -42,9 +43,9 @@
           domain="[('has_anomaly','=',True)]"
         />
         <filter
-          string="No delivery round"
-          name="filter_no_delivery_round"
-          domain="[('no_delivery_round','=',True)]"
+          string="No release channel"
+          name="filter_no_release_channel"
+          domain="[('no_release_channel','=',True)]"
         />
         <filter
           string="No pharmacist"
@@ -57,10 +58,12 @@
   <record model="ir.ui.view" id="res_partner_tree_view">
     <field name="name">res.partner.tree (in alc_customer_audit)</field>
     <field name="model">res.partner</field>
-<!--    in v16: Inherit this from alc_partner_manual_rank instead-->
-    <field name="inherit_id" ref="specific_partner.view_res_partner_specific_tree" />
+    <field
+      name="inherit_id"
+      ref="alc_partner_manual_rank.view_res_partner_specific_tree"
+    />
     <field name="arch" type="xml">
-      <field name="supplier" position="after">
+      <field name="is_supplier" position="after">
         <field name="has_anomaly" />
       </field>
     </field>
