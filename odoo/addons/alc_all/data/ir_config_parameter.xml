@@ -30,4 +30,10 @@
     <value model="stock.rule" eval="obj().search([('action', '=', 'buy')]).ids" />
     <value eval="{'location_dest_id': ref('stock.stock_location_company')}" />
   </function>
+  <!-- Send email for internal sale orders -->
+  <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('sale_mail_internal.send_email', True)"
+  />
 </odoo>
