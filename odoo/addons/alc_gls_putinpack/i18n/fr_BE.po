@@ -155,7 +155,6 @@ msgstr "Opération de manutention"
 
 #. module: alc_gls_putinpack
 #: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
-#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.view_picking_form
 #, fuzzy
 msgid "Put in Pack"
 msgstr "↳Ajouter au colis"
@@ -170,11 +169,6 @@ msgstr "↳Ajouter au colis"
 #: model:ir.model.fields,field_description:alc_gls_putinpack.field_stock_picking__quant_reserved_exist
 msgid "Quant Reserved Exist"
 msgstr ""
-
-#. module: alc_gls_putinpack
-#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
-msgid "Report"
-msgstr "Lettre"
 
 #. module: alc_gls_putinpack
 #: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__shipping_weight
@@ -200,6 +194,9 @@ msgstr "Transfert"
 #: model:ir.model,name:alc_gls_putinpack.model_delivery_package_gls_wizard
 msgid "Wizard to prepare the package and send it to GLS."
 msgstr "Wizard to prepare the package and send it to GLS."
+
+#~ msgid "Report"
+#~ msgstr "Lettre"
 
 #~ msgid "Packing Operation"
 #~ msgstr "Colisage"
