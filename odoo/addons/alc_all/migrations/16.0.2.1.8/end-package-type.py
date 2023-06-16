@@ -7,11 +7,12 @@ def _remove_pack_type(env):
     """Remove unused package types."""
 
     query = """
-         stock_package_type
+        DELETE FROM stock_package_type
             WHERE name NOT LIKE 'A%'
             AND name NOT LIKE 'E%'
             AND name NOT LIKE 'GLS%'
             AND name NOT LIKE 'I%'
+            AND name NOT LIKE 'M%'
             AND name NOT LIKE 'N%'
             AND name NOT LIKE 'Q%'
     """
