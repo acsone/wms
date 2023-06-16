@@ -6,34 +6,41 @@ from openupgradelib import openupgrade
 def _initialize_dates(env):
     query = """
         UPDATE product_template pt
-            SET pt.expiration_time = pc.expiration_time
+            SET expiration_time = pc.expiration_time
             FROM product_category pc
             WHERE pc.id = pt.categ_id
-            AND pt.expiration_time IS NOT NULL AND pt.expiration_time <> 0
+            AND (pt.expiration_time IS NULL OR pt.expiration_time = 0)
+            AND pc.expiration_time IS NOT NULL AND pc.expiration_time <> 0
     """
     openupgrade.logged_query(env.cr, query)
 
     query = """
         UPDATE product_template pt
-            SET pt.use_time = pc.use_time
+            SET use_time = pc.use_time
             FROM product_category pc
-            WHERE pc.id = pt.categ_id AND pt.use_time IS NOT NULL AND pt.use_time <> 0
+            WHERE pc.id = pt.categ_id
+            AND (pt.use_time IS NULL OR pt.use_time = 0)
+            AND pc.use_time IS NOT NULL AND pc.use_time <> 0
     """
     openupgrade.logged_query(env.cr, query)
 
     query = """
         UPDATE product_template pt
-            SET pt.removal_time = pc.removal_time
+            SET removal_time = pc.removal_time
             FROM product_category pc
-            WHERE pc.id = pt.categ_id AND pt.removal_time IS NOT NULL AND pt.removal_time <> 0
+            WHERE pc.id = pt.categ_id
+            AND (pt.removal_time IS NULL OR pt.removal_time = 0)
+            AND pc.removal_time IS NOT NULL AND pc.removal_time <> 0
     """
     openupgrade.logged_query(env.cr, query)
 
     query = """
         UPDATE product_template pt
-            SET pt.alert_time = pc.alert_time
+            SET alert_time = pc.alert_time
             FROM product_category pc
-            WHERE pc.id = pt.categ_id AND pt.alert_time IS NOT NULL AND pt.alert_time <> 0
+            WHERE pc.id = pt.categ_id
+            AND (pt.alert_time IS NULL OR pt.alert_time = 0)
+            AND pc.alert_time IS NOT NULL AND pc.alert_time <> 0
     """
     openupgrade.logged_query(env.cr, query)
 
