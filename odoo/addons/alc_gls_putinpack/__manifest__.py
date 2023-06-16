@@ -11,7 +11,6 @@
     "depends": [
         "alc_weighing_widget",
         "delivery_carrier_label_gls",
-        "web_domain_field",
     ],
     "data": [
         "security/delivery_package_gls_wizard.xml",

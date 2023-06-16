@@ -56,19 +56,20 @@ class StockPicking(PickingBase):
             raise ValidationError(_("More than one pack"))
         return package
 
-    def button_gls_put_in_pack(self):
-        """Dedicated put in pack button for GLS."""
-        self.ensure_one()
-        return self._get_gls_put_in_pack_wizard_action(False)
-
     def _get_gls_put_in_pack_wizard_action(self, package_id):
         xmlid = "alc_gls_putinpack.delivery_package_gls_wizard_act_window"
-        window_action = self.env.ref(xmlid).read()[0]
-        vals_wizard = {"picking_id": self.id, "package_id": package_id}
-        wizard = self.env["delivery.package.gls.wizard"].create(vals_wizard)
-        wizard.onchange_package_id()
-        window_action["res_id"] = wizard.id
+        window_action = self.env["ir.actions.act_window"]._for_xml_id(xmlid)
+        context = dict(
+            self.env.context, default_picking_id=self.id, default_package_id=package_id
+        )
+        window_action["context"] = context
         return window_action
+
+    def _pre_put_in_pack_hook(self, move_line_ids):
+        """Override the standard hook called at put in pack action."""
+        if self.delivery_type == "gls":
+            return self._get_gls_put_in_pack_wizard_action(False)
+        return super()._pre_put_in_pack_hook(move_line_ids)
 
     def button_validate(self):
         """If the packaging is missing on some package of a GLS picking, sending it.

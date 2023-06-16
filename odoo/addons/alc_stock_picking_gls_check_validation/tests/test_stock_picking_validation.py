@@ -88,7 +88,7 @@ class TestStockPickingValidation(GLSCommonFeatures):
         for ml in ship.move_line_ids:
             ml.qty_done = ml.reserved_uom_qty
         self.assertTrue(ship.gls_pack_in_picking)
-        ship.button_gls_put_in_pack()
+        ship.action_put_in_pack()
         self.assertFalse(ship.validate_allowed)
 
     def test_02(self):
