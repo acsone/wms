@@ -5,17 +5,21 @@
     <record model="sale.channel" id="sale_channel_phone">
         <field name="name">Phone</field>
         <field name="code">phone</field>
+        <field name="is_internal" eval="1" />
     </record>
     <record model="sale.channel" id="sale_channel_mail">
         <field name="name">Mail</field>
         <field name="code">mail</field>
+        <field name="is_internal" eval="1" />
     </record>
     <record model="sale.channel" id="sale_channel_fax">
         <field name="name">Fax</field>
         <field name="code">fax</field>
+        <field name="is_internal" eval="1" />
     </record>
     <record model="sale.channel" id="sale_channel_web">
         <field name="name">Web</field>
         <field name="code">web</field>
+        <field name="is_internal" eval="0" />
     </record>
 </odoo>
