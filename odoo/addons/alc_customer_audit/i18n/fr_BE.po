@@ -24,7 +24,9 @@ msgstr "- Vétérinaire actif, autorisé au dépôt et sans pharmacie associée"
 
 #. module: alc_customer_audit
 #: model_terms:ir.ui.view,arch_db:alc_customer_audit.res_partner_form_view
-msgid "- Customer is active but not in a delivery round"
+#, fuzzy
+#| msgid "- Customer is active but not in a delivery round"
+msgid "- Customer is active without any release channel"
 msgstr "- Actif et n'est pas affecté à une tournée"
 
 #. module: alc_customer_audit
