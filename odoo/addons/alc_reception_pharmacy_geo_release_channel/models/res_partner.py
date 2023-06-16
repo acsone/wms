@@ -13,7 +13,10 @@ from odoo.addons.stock_release_channel_geoengine.models.res_partner import (
 
 class ResPartner(Partner):
 
-    is_delivered_by_alcyon = fields.Boolean(compute="_compute_is_delivered_by_alcyon")
+    is_delivered_by_alcyon = fields.Boolean(
+        compute="_compute_is_delivered_by_alcyon",
+        store=False,
+    )
     partner_shipping_id = fields.Many2one[PartnerPharmacy](
         search="_search_partner_shipping_id",
     )
