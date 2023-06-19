@@ -175,13 +175,13 @@
                     t-if="record.is_action_lock_allowed.raw_value"
                     name="action_lock"
                     type="object"
-                    icon="fa-lock"
+                    icon="fa-unlock"
                   >Lock</a>
                                     <a
                     t-if="record.is_action_unlock_allowed.raw_value"
                     name="action_unlock"
                     type="object"
-                    icon="fa-unlock"
+                    icon="fa-lock"
                   >Unlock</a><br t-if="record.is_action_unlock_allowed.raw_value" /><a
                     t-if="record.is_action_delivering_allowed.raw_value"
                     name="action_delivering"
@@ -200,13 +200,13 @@
                     t-if="record.is_action_sleep_allowed.raw_value"
                     name="action_sleep"
                     type="object"
-                    icon="fa-bed"
+                    icon="fa-bolt"
                   >Sleep</a>
                                     <a
                     t-if="record.is_action_wake_up_allowed.raw_value"
                     name="action_wake_up"
                     type="object"
-                    icon="fa-bolt"
+                    icon="fa-bed"
                   >Wake Up</a>
                                 </div>
                                 <div
