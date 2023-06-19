@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -6,25 +5,22 @@
     "name": "Alc Product Audit",
     "description": """
         Custom filter for Alcyon products""",
-    "version": "10.0.1.0.2",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        "alc_product_dimensions",
-        "alc_product_packaging_dimension",
-        "alc_stock_storage_type",
-        "delivery_rounds_refill",
-        "product_dimension",
-        "purchase",
         "product",
-        "sale_order_line_cancel",
-        "specific_stock",
+        "purchase_stock",
         "stock",
-        "stock_orderpoint_product",
-        "stock_product_bin",
-        "alc_product_category_data",
+        "product_route_mto",
+        "sale_order_line_cancel",
+        "stock_location_zone",
+        "alc_stock_orderpoint_product",
+        "alc_product_web_publish",
+        "alc_product_dimensions_missing",
+        "alc_product_pharmacy",
     ],
     "data": ["views/product_template.xml"],
     "demo": [],
-    'installable': False
+    "installable": True,
 }
