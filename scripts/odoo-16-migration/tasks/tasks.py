@@ -558,7 +558,7 @@ def set_modules_to_remove():
             "alc_sale_product_qty_available_to_promise",  # useless
             "logging_json",
             "base_search_custom_field_filter",
-            "base_import_async",  
+            "base_import_async",
             "web_widget_color",
             "web_widget_inputmask",
         ]
