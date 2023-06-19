@@ -173,3 +173,12 @@ class StockReleaseChannel(StockReleaseChannelBase):
         self.delivering_error = self._get_delivering_error_message(
             error, related_object
         )
+
+    @api.depends("state")
+    def _compute_is_action_lock_allowed(self):
+        res = super()._compute_is_action_lock_allowed()
+        for rec in self:
+            rec.is_action_lock_allowed = (
+                rec.is_action_lock_allowed or rec.state == "delivering_error"
+            )
+        return res
