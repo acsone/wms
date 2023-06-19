@@ -5,10 +5,10 @@
     <field name="model">stock.warehouse.orderpoint</field>
     <field name="inherit_id" ref="stock.warehouse_orderpoint_search" />
     <field name="arch" type="xml">
-      <field name="name" position="after">
-        <filter name="active" string="Active" domain="[('active','=',True)]" />
-        <filter name="inactive" string="Inactive" domain="[('active','=',False)]" />
-      </field>
+        <!-- We add the active filter in order to be able to combine inactive or active -->
+        <filter name="inactive" domain="[('active', '=', False)]" position="after">
+            <filter name="active" string="Active" domain="[('active','=',True)]" />
+        </filter>
     </field>
   </record>
   <record id="view_stock_orderpoint_tree" model="ir.ui.view">
