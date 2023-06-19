@@ -305,8 +305,7 @@ exclude = [
   'odoo/addons/test_lot_life_date_mandatory_reception_pharmacy/*',
   'odoo/addons/test_product_additional_groupbypartner/*',
   'odoo/addons/test_product_mto/*',
-  'odoo/addons/test_stock_refill_storage_type/*',
-  'odoo/addons/web_widget_inputmask/*'
+  'odoo/addons/test_stock_refill_storage_type/*'
   # MYPY END NOT INSTALLABLE ADDONS
 ]
 [tool.ruff]
