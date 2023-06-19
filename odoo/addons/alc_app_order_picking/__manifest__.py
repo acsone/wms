@@ -91,6 +91,7 @@
         "alc_product_label_printer",
         "alc_product_label_printing",
         "alc_label_printing_reception",
+        "alc_stock_release_channel_code",
     ],
     "data": [],
     "demo": [],
