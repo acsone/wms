@@ -27,7 +27,7 @@
         "specific_purchase",
         #"specific_shipping_costs", TODO Replaced by alc_shipping_fee
         # OCA/web
-        "web_readonly_bypass",
+        # "web_readonly_bypass",  # has been removed
     ],
     "website": "http://www.camptocamp.com",
     "data": [

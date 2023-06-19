@@ -10,7 +10,11 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["product", "sales_team", "web_widget_color"],
+    "depends": [
+        "product",
+        "sales_team",
+        # "web_widget_color",  # has been removed
+    ],
     "data": [
         "security/veterinary_group.xml",
         "views/product_template.xml",
