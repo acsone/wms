@@ -556,7 +556,10 @@ def set_modules_to_remove():
             "alc_delivery_rounds_assign_blocking_unavailable_product",  # replaced by alc_stock_release_channel_assign_blocking_unavailable_product
             "alc_sale_product_expected_receipt_date",  # replaced by alc_sale_order_line_forecast_expected_date
             "alc_sale_product_qty_available_to_promise",  # useless
-            "base_search_custom_field_filter",  # release 2.2
+            "base_search_custom_field_filter",
+            "base_import_async",  
+            "web_widget_color",
+            "web_widget_inputmask",
         ]
         query = """
             UPDATE ir_module_module
