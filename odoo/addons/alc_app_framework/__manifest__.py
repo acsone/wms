@@ -18,5 +18,6 @@
         "alc_base_auto_join",
         "alc_queue_job_security",
         "base_optional_quick_create",
+        "mail_environment",
     ],
 }
