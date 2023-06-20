@@ -3,6 +3,9 @@
 
 from odoo import fields, models
 
+from odoo.addons.alc_stock_release_channel_preparation_plan.models.stock_release_channel_preparation_plan import (
+    StockReleaseChannelPreparationPlan,
+)
 from odoo.addons.alc_stock_release_channel_tag.models.alc_stock_release_channel_tag import (
     AlcStockReleaseChannelTag,
 )
@@ -14,24 +17,46 @@ class AlcStockReleaseChannelUnlock(models.TransientModel):
     _description = "Alc Stock Release Channel Unlock Wizard"
 
     stock_release_channel_tag_ids = fields.Many2many[AlcStockReleaseChannelTag](
-        string="Release channel tags",
-        relation="stock_release_channel_unlock_tag_rel",
-        required=True,
+        string="Release channel tags", relation="stock_release_channel_unlock_tag_rel"
     )
+    preparation_plan_id = fields.Many2one[StockReleaseChannelPreparationPlan](
+        string="Preparation Plan", required=True
+    )
+    process_end_date = fields.Datetime(required=True)
+
+    def _get_channels_to_unlock_domain(self):
+        self.ensure_one()
+        return [
+            ("state", "in", ("locked", "asleep")),
+            "|",
+            (
+                "stock_release_channel_tag_ids",
+                "in",
+                self.stock_release_channel_tag_ids.ids,
+            ),
+            ("stock_release_channel_tag_ids", "=", False),
+            "|",
+            (
+                "preparation_plan_ids",
+                "in",
+                self.preparation_plan_id.ids,
+            ),
+            ("preparation_plan_ids", "=", False),
+        ]
 
     def _get_channels_to_unlock(self):
-        all_channels = self.env["stock.release.channel"].search(
-            [("state", "in", ("locked", "asleep"))]
-        )
-        return all_channels.filtered(
-            lambda c: any(
-                tag in c.stock_release_channel_tag_ids
-                for tag in self.stock_release_channel_tag_ids
-            )
+        return self.env["stock.release.channel"].search(
+            self._get_channels_to_unlock_domain()
         )
 
+    def _get_channels_to_lock_domain(self):
+        self.ensure_one()
+        return [("state", "=", "open")]
+
     def _get_channels_to_lock(self):
-        return self.env["stock.release.channel"].search([("state", "=", "open")])
+        return self.env["stock.release.channel"].search(
+            self._get_channels_to_lock_domain()
+        )
 
     def action_unlock(self):
         self.ensure_one()
@@ -40,6 +65,7 @@ class AlcStockReleaseChannelUnlock(models.TransientModel):
         channels_to_unlock = self._get_channels_to_unlock()
         channels_to_unlock.filtered("is_action_unlock_allowed").action_unlock()
         channels_to_unlock.filtered("is_action_wake_up_allowed").action_wake_up()
+        channels_to_unlock.write({"process_end_date": self.process_end_date})
         action = self.env["ir.actions.actions"]._for_xml_id(
             "stock_release_channel.stock_release_channel_act_window"
         )

@@ -82,6 +82,7 @@
         "alc_stock_release_channel_deliver_toursolver",
         "alc_stock_release_channel_print_shipment_advice",
         "alc_stock_release_channel_assign_blocking_unavailable_product",
+        "alc_stock_release_channel_preparation_plan",
         "alc_stock_security",
         "alc_label_printing_gls",
         "alc_delivery_carrier_gls_b2c",

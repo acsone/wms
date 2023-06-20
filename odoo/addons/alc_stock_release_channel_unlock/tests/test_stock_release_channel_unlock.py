@@ -1,57 +1,102 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import Command
+from freezegun import freeze_time
 
-from odoo.addons.stock_release_channel.tests.common import ChannelReleaseCase
+from odoo import Command, fields
+from odoo.tests.common import TransactionCase
 
 
-class TestStockReleaseChannelUnlock(ChannelReleaseCase):
+class TestStockReleaseChannelUnlock(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.tag_locked = cls.env.ref(
+        cls.channel = cls.env.ref("stock_release_channel.stock_release_channel_default")
+        cls.tag_1 = cls.env.ref(
             "alc_stock_release_channel_tag.alc_stock_release_channel_tag_demo_1"
         )
-        cls.tag_asleep = cls.env.ref(
+        cls.tag_2 = cls.env.ref(
             "alc_stock_release_channel_tag.alc_stock_release_channel_tag_demo_2"
         )
-        cls.channel_open = cls.channel
-        cls.channel_locked = cls.channel.copy({"state": "locked"})
-        cls.channel_asleep = cls.channel.copy({"state": "asleep"})
-        cls.channel_locked.stock_release_channel_tag_ids = cls.tag_locked
-        cls.channel_asleep.stock_release_channel_tag_ids = cls.tag_asleep
+        cls.preparation_plan_1 = cls.env.ref(
+            "alc_stock_release_channel_preparation_plan."
+            "alc_stock_release_channel_preparation_plan_demo_1"
+        )
+        cls.preparation_plan_2 = cls.env.ref(
+            "alc_stock_release_channel_preparation_plan."
+            "alc_stock_release_channel_preparation_plan_demo_2"
+        )
+        cls.channel_open_no_tag = cls.channel
+        cls.channel_locked_tag_1 = cls.channel.copy()
+        cls.channel_locked_tag_1.write(
+            {
+                "state": "locked",
+                "stock_release_channel_tag_ids": [Command.set(cls.tag_1.ids)],
+            }
+        )
+        cls.channel_asleep_tag_2 = cls.channel.copy()
+        cls.channel_asleep_tag_2.write(
+            {
+                "state": "asleep",
+                "stock_release_channel_tag_ids": [Command.set(cls.tag_2.ids)],
+            }
+        )
+        cls.channel_asleep_plan_2_tag_2 = cls.channel.copy()
+        cls.channel_asleep_plan_2_tag_2.write(
+            {
+                "state": "asleep",
+                "stock_release_channel_tag_ids": [Command.set(cls.tag_2.ids)],
+                "preparation_plan_ids": [Command.set(cls.preparation_plan_2.ids)],
+            }
+        )
 
-    def _unlock_channel(self, tags):
+    @freeze_time("2023-06-15 14:00:00")
+    def _unlock_channel(self, tags, preparation_plan):
         self.env["alc.stock.release.channel.unlock"].create(
-            {"stock_release_channel_tag_ids": [Command.set(tags.ids)]}
+            {
+                "preparation_plan_id": preparation_plan.id,
+                "stock_release_channel_tag_ids": [Command.set(tags.ids)],
+                "process_end_date": fields.Datetime.now(),
+            }
         ).action_unlock()
 
     def test_00(self):
         """Test init context."""
-        self.assertEqual(self.channel_open.state, "open")
-        self.assertEqual(self.channel_locked.state, "locked")
-        self.assertEqual(self.channel_asleep.state, "asleep")
+        self.assertEqual(self.channel_open_no_tag.state, "open")
+        self.assertEqual(self.channel_locked_tag_1.state, "locked")
+        self.assertEqual(self.channel_asleep_tag_2.state, "asleep")
 
     def test_01(self):
-        self._unlock_channel(self.tag_locked)
-        self.assertEqual(self.channel_open.state, "locked")
-        self.assertEqual(self.channel_locked.state, "open")
-        self.assertEqual(self.channel_asleep.state, "asleep")
+        self._unlock_channel(self.tag_1, self.preparation_plan_1)
+        self.assertEqual(self.channel_open_no_tag.state, "open")
+        self.assertEqual(self.channel_locked_tag_1.state, "open")
+        self.assertEqual(self.channel_asleep_tag_2.state, "asleep")
         # nothing happens if we unlock the same tag
-        self._unlock_channel(self.tag_locked)
-        self.assertEqual(self.channel_open.state, "locked")
-        self.assertEqual(self.channel_locked.state, "open")
-        self.assertEqual(self.channel_asleep.state, "asleep")
+        self._unlock_channel(self.tag_1, self.preparation_plan_1)
+        self.assertEqual(self.channel_open_no_tag.state, "open")
+        self.assertEqual(self.channel_locked_tag_1.state, "open")
+        self.assertEqual(self.channel_asleep_tag_2.state, "asleep")
 
     def test_02(self):
-        self._unlock_channel(self.tag_asleep)
-        self.assertEqual(self.channel_open.state, "locked")
-        self.assertEqual(self.channel_locked.state, "locked")
-        self.assertEqual(self.channel_asleep.state, "open")
+        self.assertFalse(self.channel_asleep_tag_2.process_end_date)
+        self._unlock_channel(self.tag_2, self.preparation_plan_1)
+        self.assertEqual(self.channel_open_no_tag.state, "open")
+        self.assertEqual(self.channel_locked_tag_1.state, "locked")
+        self.assertEqual(self.channel_asleep_tag_2.state, "open")
+        self.assertEqual(
+            self.channel_asleep_tag_2.process_end_date,
+            fields.Datetime.to_datetime("2023-06-15 14:00:00"),
+        )
 
     def test_03(self):
-        self._unlock_channel(self.tag_locked | self.tag_asleep)
-        self.assertEqual(self.channel_open.state, "locked")
-        self.assertEqual(self.channel_locked.state, "open")
-        self.assertEqual(self.channel_asleep.state, "open")
+        self._unlock_channel(self.tag_1 | self.tag_2, self.preparation_plan_1)
+        self.assertEqual(self.channel_open_no_tag.state, "open")
+        self.assertEqual(self.channel_locked_tag_1.state, "open")
+        self.assertEqual(self.channel_asleep_tag_2.state, "open")
+
+    def test_04(self):
+        self._unlock_channel(self.tag_2, self.preparation_plan_2)
+        self.assertEqual(self.channel_open_no_tag.state, "locked")
+        self.assertEqual(self.channel_locked_tag_1.state, "locked")
+        self.assertEqual(self.channel_asleep_tag_2.state, "asleep")
+        self.assertEqual(self.channel_asleep_plan_2_tag_2.state, "open")

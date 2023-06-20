@@ -8,10 +8,12 @@
         <field name="arch" type="xml">
             <form>
                 <group>
+                    <field name="preparation_plan_id" />
                     <field
             name="stock_release_channel_tag_ids"
             widget="many2many_tags"
           />
+                    <field name="process_end_date" />
                 </group>
                 <footer>
                     <button
