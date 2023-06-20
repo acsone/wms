@@ -13,7 +13,7 @@
     "depends": [
         "alc_product_mto",
         "product_abc_classification_base",
-        "web_m2x_options",
+        # "web_m2x_options",  # has been removed
     ],
     "data": ["views/picking_zone.xml", "views/abc_classification_profile.xml"],
     "demo": [],

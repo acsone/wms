@@ -567,6 +567,7 @@ def set_modules_to_remove():
             "base_import_async",
             "web_widget_color",
             "web_widget_inputmask",
+            "web_m2x_options",
         ]
         query = """
             UPDATE ir_module_module
