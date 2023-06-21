@@ -67,6 +67,11 @@ msgid "Preparation Plan"
 msgstr "Plan de préparation"
 
 #. module: alc_stock_release_channel_unlock
+#: model:ir.model.fields,field_description:alc_stock_release_channel_unlock.field_alc_stock_release_channel_unlock__process_end_date
+msgid "Process End Date"
+msgstr ""
+
+#. module: alc_stock_release_channel_unlock
 #: model:ir.model.fields,field_description:alc_stock_release_channel_unlock.field_alc_stock_release_channel_unlock__stock_release_channel_tag_ids
 msgid "Release channel tags"
 msgstr "Étiquettes"
