@@ -16,13 +16,21 @@ class StockPicking(stock_picking.StockPicking):
     )
     validate_allowed = fields.Boolean(compute="_compute_is_validate_allowed")
 
-    @api.depends("picking_type_code", "delivery_type", "has_packages")
+    @api.depends(
+        "picking_type_code",
+        "delivery_type",
+        "has_packages",
+        "package_level_ids.is_done",
+    )
     def _compute_gls_pack_in_picking(self):
         for rec in self:
             rec.gls_pack_in_picking = (
                 rec.picking_type_code == "outgoing"
                 and rec.delivery_type == "gls"
-                and rec.has_packages
+                and (
+                    rec.has_packages
+                    and not all(package.is_done for package in rec.package_level_ids)
+                )
             )
 
     @api.depends(
