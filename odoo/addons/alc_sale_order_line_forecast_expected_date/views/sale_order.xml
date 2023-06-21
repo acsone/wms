@@ -12,6 +12,7 @@
       >
         <field
           name="forecast_expected_date"
+          string="Expected Receipt Date"
           attrs="{'column_invisible':[('parent.state', '!=', 'done')]}"
         />
       </xpath>
