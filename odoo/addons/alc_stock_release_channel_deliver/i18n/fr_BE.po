@@ -45,7 +45,7 @@ msgstr "L'action 'Livrer' n'est pas autorisée pour le canal %(name)s."
 #, fuzzy, python-format
 #| msgid "No picking to deliver for channel %(name)s."
 msgid "An error occurred in the delivery background task for channel %(name)s"
-msgstr "Aucun picking à livrer pour le canal %(name)s."
+msgstr "Une erreur s'est produite dans la tâche d'arrière-plan de livraison pour le canal %(name)s."
 
 #. module: alc_stock_release_channel_deliver
 #. odoo-python
@@ -63,7 +63,7 @@ msgstr ""
 #: code:addons/alc_stock_release_channel_deliver/models/shipment_advice.py:0
 #, python-format
 msgid "Automatically process the shipment advice %(name)s."
-msgstr ""
+msgstr "Traiter automatiquement l'avis d'expédition %(name)s."
 
 #. module: alc_stock_release_channel_deliver
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_deliver.stock_release_channel_form_view
@@ -75,7 +75,7 @@ msgstr "Livrer"
 #, fuzzy
 #| msgid "Deliver"
 msgid "Delivered"
-msgstr "Livrer"
+msgstr "Livré"
 
 #. module: alc_stock_release_channel_deliver
 #: model:ir.model.fields.selection,name:alc_stock_release_channel_deliver.selection__stock_release_channel__state__delivering
@@ -101,7 +101,7 @@ msgstr ""
 #, fuzzy
 #| msgid "Shipment Advice"
 msgid "In Process Shipment Advice"
-msgstr "Avis d'expédition"
+msgstr "Avis d'expédition En cours"
 
 #. module: alc_stock_release_channel_deliver
 #: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_shipment_advice__in_release_channel_auto_process
@@ -161,7 +161,7 @@ msgstr ""
 #| msgid "Action 'Delivering Error' is not allowed for channel %(name)s."
 msgid "The delivery background task is done for channel %(name)s"
 msgstr ""
-"L'action 'Erreur de livraison' n'est pas autorisée pour le canal %(name)s."
+"La tâche d'arrière-plan de livraison est effectuée pour le canal %(name)s."
 
 #. module: alc_stock_release_channel_deliver
 #: model:ir.model.fields,help:alc_stock_release_channel_deliver.field_stock_release_channel__state
