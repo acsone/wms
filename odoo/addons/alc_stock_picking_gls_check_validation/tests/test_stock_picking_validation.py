@@ -85,11 +85,20 @@ class TestStockPickingValidation(GLSCommonFeatures):
         """
 
         ship = self._create_pick_ship()[2]
-        for ml in ship.move_line_ids:
+        # Do all the operations but the package one
+        lines_without_package = ship.move_line_ids.filtered(
+            lambda line: not line.package_level_id
+        )
+        for ml in lines_without_package:
             ml.qty_done = ml.reserved_uom_qty
         self.assertTrue(ship.gls_pack_in_picking)
         ship.action_put_in_pack()
         self.assertFalse(ship.validate_allowed)
+
+        # Do the package operation
+        for ml in ship.move_line_ids - lines_without_package:
+            ml.qty_done = ml.reserved_uom_qty
+        self.assertFalse(ship.gls_pack_in_picking)
 
     def test_02(self):
         """
