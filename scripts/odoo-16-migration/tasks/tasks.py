@@ -572,7 +572,7 @@ def set_modules_to_remove():
         query = """
             UPDATE ir_module_module
                 SET state = 'to remove'
-                WHERE name IN (%s)
+                WHERE name IN %s
         """
         openupgrade.logged_query(
             cr,
