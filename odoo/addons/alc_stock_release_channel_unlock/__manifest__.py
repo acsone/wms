@@ -10,7 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        "stock_release_channel_process_end_time",
         "alc_stock_release_channel_pick_allowed",
+        "alc_stock_release_channel_preparation_plan",
         "alc_stock_release_channel_tag",
         "alc_stock_release_channel_menu",
     ],
