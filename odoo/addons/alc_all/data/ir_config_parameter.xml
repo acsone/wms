@@ -36,4 +36,16 @@
     name="set_param"
     eval="('sale_mail_internal.send_email', True)"
   />
+  <!-- Sale exceptions -->
+  <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('alc_sale_exception_settings.sale_exception_check_enabled', True)"
+  />
+  <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('alc_sale_exception_settings.sale_exception_non_blocking_as_exception', False)"
+  />
+
 </odoo>
