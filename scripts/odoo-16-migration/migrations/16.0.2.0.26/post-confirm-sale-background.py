@@ -25,7 +25,15 @@ def _confirm_background_sales(env):
     """
     env.cr.execute(query)
 
+    # Don't try to send mail
+    param = (
+        env["ir.config_parameter"]
+        .sudo()
+        .get_param("sale_mail_internal.send_email", False)
+    )
+    env["ir.config_parameter"].sudo().set_param("sale_mail_internal.send_email", False)
     env["sale.order"].browse(ids).action_confirm()
+    env["ir.config_parameter"].sudo().set_param("sale_mail_internal.send_email", param)
 
 
 @openupgrade.migrate()
