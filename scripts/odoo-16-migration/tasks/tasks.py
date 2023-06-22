@@ -568,6 +568,7 @@ def set_modules_to_remove():
             "web_widget_color",
             "web_widget_inputmask",
             "web_m2x_options",
+            "web_widget_many2many_tags_multi_selection",  # replaced by STD
         ]
         query = """
             UPDATE ir_module_module
