@@ -234,7 +234,7 @@
                             <tr
                     t-foreach="dashboard_data"
                     t-as="obj"
-                    style="border-bottom: 2px #f6f6fa solid;"
+                    t-att-style="'border-bottom: 2px #f6f6fa solid; background-color: ' + (record.state.raw_value=='open' and 'lightgreen' or record.state.raw_value=='asleep' and 'lightsalmon' or record.state.raw_value=='locked' and 'sandybrown' or record.state.raw_value=='delivering' and 'deepskyblue' or record.state.raw_value=='delivering_error' and 'red' or  record.state.raw_value=='delivered' and 'lightsteelblue' or 'lightgray')"
                   >
                                 <td width="40%">
                                     <a
@@ -255,7 +255,23 @@
                           t-att-aria-valuemax="obj['todo']"
                           t-att-style="'width: ' + obj['done'] / obj['todo'] * 100 + '%;'"
                         >
-                                           <span t-out="obj['progress']" />
+                                           <span
+                            t-out="obj['progress']"
+                            t-if="obj['done'] > 0"
+                          />
+                                       </div>
+                                      <div
+                          class="progress-bar progress-bar-striped bg-success"
+                          role="progressbar"
+                          t-att-aria-valuenow="obj['started']"
+                          aria-valuemin="0"
+                          t-att-aria-valuemax="obj['todo']"
+                          t-att-style="'width: ' + obj['started'] / obj['todo'] * 100 + '%;'"
+                        >
+                                           <span
+                            t-out="obj['started']"
+                            t-if="obj['started'] > 0"
+                          />
                                        </div>
                                     </div>
                                 </td>
