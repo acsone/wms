@@ -166,7 +166,6 @@ exclude: |
   ^odoo/addons/alc_turnover_reporting/|
   ^odoo/addons/alc_veterinary_group/|
   ^odoo/addons/alce_account_reports_followup_data/|
-  ^odoo/addons/alce_helpdesk/|
   ^odoo/addons/alce_l10n_be_reports/|
   ^odoo/addons/alce_purchase_report/|
   ^odoo/addons/alce_split_coda/|

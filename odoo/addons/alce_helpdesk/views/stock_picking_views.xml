@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
   <record id="view_picking_form" model="ir.ui.view">
-    <field name="name">stock.picking.form.inherit</field>
+    <field name="name">stock.picking.form.inherit (in alce_helpdesk)</field>
     <field name="model">stock.picking</field>
     <field name="inherit_id" ref="stock.view_picking_form" />
     <field name="arch" type="xml">
@@ -13,7 +13,7 @@
           name="action_view_helpdesk_tickets"
           type="object"
           icon="fa-life-ring"
-          context="{'default_ref': 'stock.picking,' + str(active_id), 'default_partner_id': partner_id, 'default_sale_order_id': sale_id, 'default_purchase_order_id': purchase_id}"
+          context="{'default_ref': 'stock.picking,' + active_id.toString(10), 'default_partner_id': partner_id, 'default_sale_order_id': sale_id, 'default_purchase_order_id': purchase_id}"
         >
           <field string="Tickets" name="helpdesk_tickets_count" widget="statinfo" />
         </button>
@@ -21,7 +21,7 @@
     </field>
   </record>
   <record id="view_picking_tree" model="ir.ui.view">
-    <field name="name">stock.picking.tree.inherit</field>
+    <field name="name">stock.picking.tree.inherit  (in alce_helpdesk)</field>
     <field name="model">stock.picking</field>
     <field name="inherit_id" ref="stock.vpicktree" />
     <field name="arch" type="xml">
@@ -30,8 +30,17 @@
         <button
           name="helpdesk_ticket_clicked"
           type="object"
-          fg_color="red:helpdesk_tickets_count>0;"
           icon="fa-life-ring"
+          string="Helpdesk"
+          attrs="{'invisible': [('helpdesk_tickets_count', '>', 0)]}"
+        />
+        <button
+          name="helpdesk_ticket_clicked"
+          type="object"
+          icon="fa-life-ring"
+          string="Helpdesk"
+          class="btn btn-danger"
+          attrs="{'invisible': [('helpdesk_tickets_count', '&lt;=', 0)]}"
         />
       </xpath>
     </field>

@@ -1,3 +1,3 @@
-id,name,sequence,fold,is_close
-stage_new,New,0,False,False
-stage_pending,Pending,3,False,False
+id,name,sequence,fold
+stage_new,New,0,False
+stage_pending,Pending,3,False

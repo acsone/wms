@@ -9,7 +9,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # "alce_helpdesk",
+        "alce_helpdesk",
         # "alce_purchase_report",
         # "alce_account_reports_followup_data",
         # "alce_l10n_be_reports",

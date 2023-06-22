@@ -1,12 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alce_helpdesk
+# 	* alce_helpdesk
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2023-06-22 17:28+0000\n"
+"PO-Revision-Date: 2023-06-22 17:28+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,8 +26,18 @@ msgid "${object.display_name}"
 msgstr ""
 
 #. module: alce_helpdesk
+#: model:mail.template,name:alce_helpdesk.email_template_helpdesk_msg_1
+msgid "01 - Article défectueux"
+msgstr ""
+
+#. module: alce_helpdesk
 #: model:helpdesk.ticket.reason,name:alce_helpdesk.product_defect
 msgid "01-Product defect"
+msgstr ""
+
+#. module: alce_helpdesk
+#: model:mail.template,name:alce_helpdesk.email_template_helpdesk_msg_2
+msgid "02 - Quantité manquante"
 msgstr ""
 
 #. module: alce_helpdesk
@@ -34,8 +46,18 @@ msgid "02-Missing quantity"
 msgstr ""
 
 #. module: alce_helpdesk
+#: model:mail.template,name:alce_helpdesk.email_template_helpdesk_msg_3
+msgid "03 - Chaîne du froids non respectée"
+msgstr ""
+
+#. module: alce_helpdesk
 #: model:helpdesk.ticket.reason,name:alce_helpdesk.cold_chain_broken
 msgid "03-Cold chain broken"
+msgstr ""
+
+#. module: alce_helpdesk
+#: model:mail.template,name:alce_helpdesk.email_template_helpdesk_msg_4
+msgid "04 - Date d'expiration proche"
 msgstr ""
 
 #. module: alce_helpdesk
@@ -44,8 +66,18 @@ msgid "04-Short lapsing"
 msgstr ""
 
 #. module: alce_helpdesk
+#: model:mail.template,name:alce_helpdesk.email_template_helpdesk_msg_5
+msgid "05 - Article périmé"
+msgstr ""
+
+#. module: alce_helpdesk
 #: model:helpdesk.ticket.reason,name:alce_helpdesk.expired_product
 msgid "05-Expired product"
+msgstr ""
+
+#. module: alce_helpdesk
+#: model:mail.template,name:alce_helpdesk.email_template_helpdesk_msg_6
+msgid "06 - Article non commandé"
 msgstr ""
 
 #. module: alce_helpdesk
@@ -80,7 +112,7 @@ msgstr ""
 
 #. module: alce_helpdesk
 #: model:mail.template,body_html:alce_helpdesk.email_template_helpdesk_msg_1
-msgid "<?xml version=\"1.0\"?>\n"
+msgid ""
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "        <div style=\"margin-left:30px;align=center;\">\n"
 "        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
@@ -88,7 +120,7 @@ msgid "<?xml version=\"1.0\"?>\n"
 "        <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
 "        MESSAGE_01\n"
 "    </div>\n"
-"        <br/>\n"
+"        <br>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
 "      </div>\n"
@@ -97,7 +129,7 @@ msgstr ""
 
 #. module: alce_helpdesk
 #: model:mail.template,body_html:alce_helpdesk.email_template_helpdesk_msg_2
-msgid "<?xml version=\"1.0\"?>\n"
+msgid ""
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "        <div style=\"margin-left:30px;align=center;\">\n"
 "        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
@@ -105,7 +137,7 @@ msgid "<?xml version=\"1.0\"?>\n"
 "        <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
 "        MESSAGE_02\n"
 "    </div>\n"
-"        <br/>\n"
+"        <br>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
 "      </div>\n"
@@ -114,7 +146,7 @@ msgstr ""
 
 #. module: alce_helpdesk
 #: model:mail.template,body_html:alce_helpdesk.email_template_helpdesk_msg_3
-msgid "<?xml version=\"1.0\"?>\n"
+msgid ""
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "        <div style=\"margin-left:30px;align=center;\">\n"
 "        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
@@ -122,7 +154,7 @@ msgid "<?xml version=\"1.0\"?>\n"
 "        <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
 "        MESSAGE_03\n"
 "    </div>\n"
-"        <br/>\n"
+"        <br>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
 "      </div>\n"
@@ -131,7 +163,7 @@ msgstr ""
 
 #. module: alce_helpdesk
 #: model:mail.template,body_html:alce_helpdesk.email_template_helpdesk_msg_4
-msgid "<?xml version=\"1.0\"?>\n"
+msgid ""
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "        <div style=\"margin-left:30px;align=center;\">\n"
 "        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
@@ -139,7 +171,7 @@ msgid "<?xml version=\"1.0\"?>\n"
 "        <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
 "        MESSAGE_04\n"
 "    </div>\n"
-"        <br/>\n"
+"        <br>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
 "      </div>\n"
@@ -148,7 +180,7 @@ msgstr ""
 
 #. module: alce_helpdesk
 #: model:mail.template,body_html:alce_helpdesk.email_template_helpdesk_msg_5
-msgid "<?xml version=\"1.0\"?>\n"
+msgid ""
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "        <div style=\"margin-left:30px;align=center;\">\n"
 "        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
@@ -156,7 +188,7 @@ msgid "<?xml version=\"1.0\"?>\n"
 "        <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
 "        MESSAGE_05\n"
 "    </div>\n"
-"        <br/>\n"
+"        <br>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
 "      </div>\n"
@@ -165,7 +197,7 @@ msgstr ""
 
 #. module: alce_helpdesk
 #: model:mail.template,body_html:alce_helpdesk.email_template_helpdesk_msg_6
-msgid "<?xml version=\"1.0\"?>\n"
+msgid ""
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "        <div style=\"margin-left:30px;align=center;\">\n"
 "        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
@@ -173,7 +205,7 @@ msgid "<?xml version=\"1.0\"?>\n"
 "        <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
 "        MESSAGE_06\n"
 "    </div>\n"
-"        <br/>\n"
+"        <br>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
 "      </div>\n"
@@ -186,8 +218,19 @@ msgid "Accounting"
 msgstr ""
 
 #. module: alce_helpdesk
+#: model:ir.model,name:alce_helpdesk.model_stock_pack_operation_lot_add
+msgid "Add a wizard that facilitates purchases reception."
+msgstr ""
+
+#. module: alce_helpdesk
 #: model:helpdesk.team,name:alce_helpdesk.aftersales_team
 msgid "After Sale Service"
+msgstr ""
+
+#. module: alce_helpdesk
+#: model:helpdesk.stage,legend_blocked:alce_helpdesk.stage_new
+#: model:helpdesk.stage,legend_blocked:alce_helpdesk.stage_pending
+msgid "Blocked"
 msgstr ""
 
 #. module: alce_helpdesk
@@ -196,8 +239,18 @@ msgid "Cancel"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.actions.act_window,help:alce_helpdesk.helpdesk_ticket_reason_action
+#: model_terms:ir.actions.act_window,help:alce_helpdesk.helpdesk_ticket_reason_action
 msgid "Click to create a new ticket reason."
+msgstr ""
+
+#. module: alce_helpdesk
+#: model:ir.model,name:alce_helpdesk.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alce_helpdesk
+#: model:ir.model,name:alce_helpdesk.model_create_helpdesk_ticket
+msgid "Create Helpdesk Ticket Wizard"
 msgstr ""
 
 #. module: alce_helpdesk
@@ -212,14 +265,14 @@ msgid "Create helpdesk ticket"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_create_uid
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_create_uid
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket__create_uid
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_create_date
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_create_date
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket__create_date
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason__create_date
 msgid "Created on"
 msgstr ""
 
@@ -229,87 +282,118 @@ msgid "Customer"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_description
-#: model:ir.model.fields,field_description:alce_helpdesk.field_stock_pack_operation_lot_add_helpdesk_ticket_description
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket__description
+#: model:ir.model.fields,field_description:alce_helpdesk.field_stock_pack_operation_lot_add__helpdesk_ticket_description
 msgid "Description"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_location_dest_id
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason__location_dest_id
 msgid "Destination Location"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_display_name
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_display_name
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket__display_name
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_account_invoice_helpdesk_tickets_count
-#: model:ir.model.fields,field_description:alce_helpdesk.field_purchase_order_helpdesk_tickets_count
-#: model:ir.model.fields,field_description:alce_helpdesk.field_res_partner_helpdesk_tickets_count
-#: model:ir.model.fields,field_description:alce_helpdesk.field_res_users_helpdesk_tickets_count
-#: model:ir.model.fields,field_description:alce_helpdesk.field_sale_order_helpdesk_tickets_count
-#: model:ir.model.fields,field_description:alce_helpdesk.field_shopinvader_partner_helpdesk_tickets_count
-#: model:ir.model.fields,field_description:alce_helpdesk.field_stock_move_helpdesk_tickets_count
-#: model:ir.model.fields,field_description:alce_helpdesk.field_stock_picking_helpdesk_tickets_count
-msgid "Helpdesk tickets count"
+#: model:ir.model,name:alce_helpdesk.model_helpdesk_ticket
+msgid "Helpdesk Ticket"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_id
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_id
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.view_picking_move_tree_helpdesk
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.view_picking_tree
+msgid "Helpdesk Tickets"
+msgstr ""
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_account_bank_statement_line__helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alce_helpdesk.field_account_move__helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alce_helpdesk.field_account_payment__helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alce_helpdesk.field_purchase_order__helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alce_helpdesk.field_res_partner__helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alce_helpdesk.field_res_users__helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alce_helpdesk.field_sale_order__helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alce_helpdesk.field_stock_move__helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alce_helpdesk.field_stock_picking__helpdesk_tickets_count
+msgid "Helpdesk Tickets Count"
+msgstr ""
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket__id
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason__id
 msgid "ID"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model,name:alce_helpdesk.model_account_invoice
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_account_invoice_id
+#: model:helpdesk.stage,legend_normal:alce_helpdesk.stage_new
+#: model:helpdesk.stage,legend_normal:alce_helpdesk.stage_pending
+msgid "In Progress"
+msgstr ""
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket__account_move_id
 msgid "Invoice"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket___last_update
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason___last_update
+#: model:ir.model,name:alce_helpdesk.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket____last_update
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_write_uid
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_write_uid
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket__write_uid
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_write_date
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_write_date
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket__write_date
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_lots
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket__lots
 msgid "Lot/Serial Number"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_name
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason__name
 msgid "Name"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_qty_ordered
+#: model:helpdesk.stage,name:alce_helpdesk.stage_new
+msgid "New"
+msgstr ""
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket__qty_ordered
 msgid "Ordered product quantitiy"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model,name:alce_helpdesk.model_res_partner
 #: model_terms:ir.ui.view,arch_db:alce_helpdesk.helpdesk_ticket_view_form
 msgid "Partner"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_product_id
+#: model:helpdesk.stage,name:alce_helpdesk.stage_pending
+msgid "Pending"
+msgstr ""
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket__product_id
 msgid "Product"
 msgstr ""
 
@@ -319,36 +403,45 @@ msgid "Purchase Order"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_purchase_order_id
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket__purchase_order_id
 msgid "Purchase order"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket_helpdesk_ticket_reason_id
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_helpdesk_ticket_reason_id
-#: model:ir.model.fields,field_description:alce_helpdesk.field_stock_pack_operation_lot_add_helpdesk_ticket_reason_id
+#: model:helpdesk.stage,legend_done:alce_helpdesk.stage_new
+#: model:helpdesk.stage,legend_done:alce_helpdesk.stage_pending
+msgid "Ready"
+msgstr ""
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_create_helpdesk_ticket__helpdesk_ticket_reason_id
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket__helpdesk_ticket_reason_id
+#: model:ir.model.fields,field_description:alce_helpdesk.field_stock_pack_operation_lot_add__helpdesk_ticket_reason_id
 #: model_terms:ir.ui.view,arch_db:alce_helpdesk.helpdesk_ticket_reason_view_form
 msgid "Reason"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.actions.act_window,help:alce_helpdesk.helpdesk_ticket_reason_action
+#: model_terms:ir.actions.act_window,help:alce_helpdesk.helpdesk_ticket_reason_action
 msgid "Reason allows to organize tickets."
 msgstr ""
 
 #. module: alce_helpdesk
-#: code:addons/alce_helpdesk/wizards/stock_pack_operation_lot_add.py:60
+#. odoo-python
+#: code:addons/alce_helpdesk/wizards/stock_pack_operation_lot_add.py:0
 #, python-format
-msgid "Received more than expected qties for product '%s'. (Expected: %d, Received %d)"
+msgid ""
+"Received more than expected qties for product '%(name)s'. (Expected: "
+"%(qty)d, Received %(qty_done)d)"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_qty_received
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket__qty_received
 msgid "Received product quantitiy"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_sale_order_id
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket__sale_order_id
 msgid "Sale order"
 msgstr ""
 
@@ -363,13 +456,18 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_stock_move_id
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket__stock_move_id
 msgid "Stock move"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_stock_picking_id
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket__stock_picking_id
 msgid "Stock picking"
+msgstr ""
+
+#. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket__name
+msgid "Subject"
 msgstr ""
 
 #. module: alce_helpdesk
@@ -378,14 +476,10 @@ msgid "Supplier"
 msgstr ""
 
 #. module: alce_helpdesk
-#: code:addons/alce_helpdesk/wizards/create_helpdesk_ticket.py:26
+#. odoo-python
+#: code:addons/alce_helpdesk/wizards/create_helpdesk_ticket.py:0
 #, python-format
 msgid "The record related to the new helpdeskticket was not found !"
-msgstr ""
-
-#. module: alce_helpdesk
-#: model:ir.model,name:alce_helpdesk.model_helpdesk_ticket
-msgid "Ticket"
 msgstr ""
 
 #. module: alce_helpdesk
@@ -396,7 +490,7 @@ msgid "Ticket Reason"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model_terms:ir.ui.view,arch_db:alce_helpdesk.account_invoice_alce_helpdesk
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.account_move_alce_helpdesk
 #: model_terms:ir.ui.view,arch_db:alce_helpdesk.account_supplier_invoice_alce_helpdesk
 #: model_terms:ir.ui.view,arch_db:alce_helpdesk.partner_form_view_helpdesk_tickets_button
 #: model_terms:ir.ui.view,arch_db:alce_helpdesk.purchase_order_specific_form
@@ -411,22 +505,16 @@ msgid "Transfer"
 msgstr ""
 
 #. module: alce_helpdesk
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket__ticket_type_id
+msgid "Type"
+msgstr ""
+
+#. module: alce_helpdesk
 #: model_terms:ir.ui.view,arch_db:alce_helpdesk.create_helpdesk_ticket_view_form
 msgid "Validate"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason_visible_reception_wizard
+#: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason__visible_reception_wizard
 msgid "Visible on Reception Wizard?"
 msgstr ""
-
-#. module: alce_helpdesk
-#: model:ir.model,name:alce_helpdesk.model_create_helpdesk_ticket
-msgid "create.helpdesk.ticket"
-msgstr ""
-
-#. module: alce_helpdesk
-#: model:ir.model,name:alce_helpdesk.model_stock_pack_operation_lot_add
-msgid "stock.pack.operation.lot.add"
-msgstr ""
-

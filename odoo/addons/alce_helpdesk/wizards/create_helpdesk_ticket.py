@@ -1,29 +1,27 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Camptocamp SA
+# Copyright 2023 ACSONE SA/NV
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
+
+from ..models.helpdesk_ticket import HelpdeskTicketReason
 
 
 class CreateHelpdeskTicket(models.TransientModel):
     _name = "create.helpdesk.ticket"
+    _description = "Create Helpdesk Ticket Wizard"
 
-    helpdesk_ticket_reason_id = fields.Many2one(
-        comodel_name="helpdesk.ticket.reason",
-        string="Reason",
-        # required=True,
-    )
+    helpdesk_ticket_reason_id = fields.Many2one[HelpdeskTicketReason](string="Reason")
     description = fields.Char(string="Description")
 
-    @api.multi
     def create_helpdesk_ticket(self):
         active_model = self._context.get("active_model")
         active_id = self._context.get("active_id")
 
         if not active_id:
             raise UserError(
-                _("The record related to the new helpdesk" "ticket was not found !")
+                _("The record related to the new helpdesk ticket was not found !")
             )
         record = self.env[active_model].browse(active_id)
         if active_model == "stock.picking":
