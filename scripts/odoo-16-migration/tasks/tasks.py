@@ -454,7 +454,18 @@ def drop_materialized_views():
             openupgrade.logged_query(cr, query)
 
 
-@task("16.0.1.0.0")
+_register_migration_scripts_in_tasks("pre-")
+
+
+@task()
+def click_odoo_update():
+    check_call(["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite"])
+
+
+_register_migration_scripts_in_tasks("post-")
+
+
+@task()
 def set_modules_to_remove():
     """
     Set modules to remove as using the action is not available.
@@ -581,12 +592,6 @@ def set_modules_to_remove():
         )
 
 
-_register_migration_scripts_in_tasks("pre-")
-
-
 @task()
-def click_odoo_update():
+def click_odoo_update_final():
     check_call(["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite"])
-
-
-_register_migration_scripts_in_tasks("post-")
