@@ -11,6 +11,7 @@
     "author": "ACSONE SA/NV",
     "depends": [
         "alc_printing_base",
+        "alc_stock_release_channel_code",
         "delivery_package_type_number_parcels",
         "stock",
     ],

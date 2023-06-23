@@ -17,21 +17,13 @@ def _create_release_channels_from_delivery_rounds(env):
         ADD COLUMN round_template_id INTEGER
         """
     )
-    # add column on release channel to keep code channel - release channel code
-    # is a python expression
-    cr.execute(
-        """
-        ALTER TABLE stock_release_channel
-        ADD COLUMN round_template_code character varying
-        """
-    )
 
     _logger.info("Creating release channels from delivery template for toursolver")
     cr.execute(
         """
         INSERT INTO stock_release_channel (
             name,
-            round_template_code,
+            channel_code,
             shape_name,
             release_mode,
             batch_mode,
@@ -75,7 +67,7 @@ def _create_release_channels_from_delivery_rounds(env):
         """
         INSERT INTO stock_release_channel (
             name,
-            round_template_code,
+            channel_code,
             shape_name,
             release_mode,
             batch_mode,

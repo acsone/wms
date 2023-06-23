@@ -1,6 +1,7 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import json
+from collections import defaultdict
 
 from odoo import _, api, fields
 
@@ -52,20 +53,27 @@ class StockReleaseChannel(StockReleaseChannelBase):
 
     @api.depends("pick_allowed", "pick_allowed_by_picking_type")
     def _compute_kanban_dashboard(self):
+        picking_types = self.env["stock.picking.type"]._get_visible_in_dashboard()
+        todo_by_rc_by_pt = self._count_picking_todo_by_type_id_by_release_id()
+        started_by_rc_by_pt = self._count_picking_started_by_type_id_by_release_id()
+        done_by_rc_by_pt = self._count_picking_done_by_type_id_by_release_id()
+        todo_shipment_advices_by_rc = self._count_shipment_advices_todo_by_release_id()
+        done_shipment_advices_by_rc = self._count_shipment_advices_done_by_release_id()
         for rec in self:
-            (
-                picking_types,
-                todo_by_pt,
-                done_by_pt_and_rc,
-                todo_shipment_advices,
-                done_shipment_advices,
-            ) = rec._kanban_dashboard_data()
             result = []
+            todo_by_pt = todo_by_rc_by_pt.get(rec.id, {})
+            started_by_pt = started_by_rc_by_pt.get(rec.id, {})
+            done_by_pt = done_by_rc_by_pt.get(rec.id, {})
+            todo_shipment_advices = todo_shipment_advices_by_rc.get(rec.id, 0)
+            done_shipment_advices = done_shipment_advices_by_rc.get(rec.id, 0)
             for picking_type in picking_types:
                 todo = todo_by_pt.get(picking_type.id, 0)
-                done = done_by_pt_and_rc.get((picking_type.id, rec.id), 0)
+                started = started_by_pt.get(picking_type.id, 0)
+                done = done_by_pt.get(picking_type.id, 0)
                 result.append(
-                    rec._kanban_dashboard_picking_type_data(picking_type, todo, done)
+                    rec._kanban_dashboard_picking_type_data(
+                        picking_type, todo, started, done
+                    )
                 )
             result.append(
                 rec._kanban_dashboard_shipment_advice_data(
@@ -83,12 +91,10 @@ class StockReleaseChannel(StockReleaseChannelBase):
         picking_types = self.env["stock.picking.type"].search(
             [("release_channel_can_allow_pick", "=", True)]
         )
-        todo_by_pt = self._kanban_dashboard_todo_by_picking_type()
-        done_by_pt_and_rc = (
-            self._kanban_dashboard_done_by_picking_type_and_release_channel()
-        )
-        todo_shipment_advices = self._kanban_dashboard_todo_shipment_advices()
-        done_shipment_advices = self._kanban_dashboard_done_shipment_advices()
+        todo_by_pt = self._count_picking_todo_by_type_id_by_release_id()
+        done_by_pt_and_rc = self._count_picking_done_by_type_id_by_release_id()
+        todo_shipment_advices = self._count_shipment_advices_todo_by_release_id()
+        done_shipment_advices = self._count_shipment_advices_done_by_release_id()
         return (
             picking_types,
             todo_by_pt,
@@ -97,71 +103,83 @@ class StockReleaseChannel(StockReleaseChannelBase):
             done_shipment_advices,
         )
 
-    def _kanban_dashboard_todo_by_picking_type_domain(self):
+    def _count_picking_todo_by_type_id_by_release_id_domain(self):
+        picking_type_ids = self.env[
+            "stock.picking.type"
+        ]._get_ids_visible_in_dashboard()
         return [
-            ("release_channel_id", "=", self.id),
-            ("scheduled_date", "<=", self.process_end_date),
+            ("release_channel_id", "in", self.ids),
             ("planned_shipment_advice_id", "=", False),
+            ("picking_type_id", "in", picking_type_ids),
+            ("state", "!=", "cancel"),
         ]
 
-    def _kanban_dashboard_done_by_picking_type_domain(self):
-        todo_domain = self._kanban_dashboard_todo_by_picking_type_domain()
+    def _count_picking_started_by_type_id_by_release_id_domain(self):
+        todo_domain = self._count_picking_todo_by_type_id_by_release_id_domain()
+        return todo_domain + [
+            ("started", "=", True),
+            ("state", "not in", DONE_PICKING_STATES),
+        ]
+
+    def _count_picking_done_by_type_id_by_release_id_domain(self):
+        todo_domain = self._count_picking_todo_by_type_id_by_release_id_domain()
         return todo_domain + [("state", "in", DONE_PICKING_STATES)]
 
-    def _kanban_dashboard_todo_by_picking_type(self):
-        result = {}
+    def _count_pickings_by_type_id_by_release_id(self, domain):
+        """Count pickings by picking type and release channel."""
+        result = defaultdict(dict)
         for group in self.env["stock.picking"].read_group(
-            self._kanban_dashboard_todo_by_picking_type_domain(),
-            ["picking_type_id"],
-            ["picking_type_id"],
-        ):
-            result[group.get("picking_type_id")[0]] = group.get("picking_type_id_count")
-        return result
-
-    def _kanban_dashboard_done_by_picking_type_and_release_channel(self):
-        result = {}
-        for group in self.env["stock.picking"].read_group(
-            self._kanban_dashboard_done_by_picking_type_domain(),
-            ["picking_type_id", "release_channel_id"],
-            ["picking_type_id", "release_channel_id"],
+            domain,
+            ["id:count", "picking_type_id", "release_channel_id"],
+            ["release_channel_id", "picking_type_id"],
             lazy=False,
         ):
-            result[
-                (group.get("picking_type_id")[0], group.get("release_channel_id")[0])
+            result[group.get("release_channel_id")[0]][
+                group.get("picking_type_id")[0]
             ] = group.get("__count")
         return result
 
-    def _kanban_dashboard_todo_shipment_advices(self):
+    def _count_picking_todo_by_type_id_by_release_id(self):
+        return self._count_pickings_by_type_id_by_release_id(
+            self._count_picking_todo_by_type_id_by_release_id_domain()
+        )
+
+    def _count_picking_started_by_type_id_by_release_id(self):
+        return self._count_pickings_by_type_id_by_release_id(
+            self._count_picking_started_by_type_id_by_release_id_domain()
+        )
+
+    def _count_picking_done_by_type_id_by_release_id(self):
+        return self._count_pickings_by_type_id_by_release_id(
+            self._count_picking_done_by_type_id_by_release_id_domain()
+        )
+
+    def _count_shipment_by_rc(self, domain):
+        """Count shipment advices by release channel."""
         result = {}
         for group in self.env["shipment.advice"].read_group(
-            [
-                ("state", "in", TODO_SHIPMENT_STATES),
-                ("release_channel_id", "in", self.ids),
-            ],
-            ["release_channel_id"],
+            domain,
+            ["id:count", "release_channel_id"],
             ["release_channel_id"],
         ):
-            result[group.get("release_channel_id")[0]] = group.get(
-                "release_channel_id_count"
-            )
+            result[group.get("release_channel_id")[0]] = group.get("__count")
         return result
 
-    def _kanban_dashboard_done_shipment_advices(self):
-        result = {}
-        for group in self.env["shipment.advice"].read_group(
-            [
-                ("state", "=", "in_progress"),
-                ("release_channel_id", "in", self.ids),
-            ],
-            ["release_channel_id"],
-            ["release_channel_id"],
-        ):
-            result[group.get("release_channel_id")[0]] = group.get(
-                "release_channel_id_count"
-            )
-        return result
+    def _count_shipment_advices_todo_by_release_id(self):
+        domain = [
+            ("state", "in", TODO_SHIPMENT_STATES),
+            ("release_channel_id", "in", self.ids),
+        ]
+        return self._count_shipment_by_rc(domain)
 
-    def _kanban_dashboard_picking_type_data(self, picking_type, todo, done):
+    def _count_shipment_advices_done_by_release_id(self):
+        domain = [
+            ("state", "=", "in_progress"),
+            ("release_channel_id", "in", self.ids),
+        ]
+        return self._count_shipment_by_rc(domain)
+
+    def _kanban_dashboard_picking_type_data(self, picking_type, todo, started, done):
         self.ensure_one()
         progress = _format_progress(todo, done)
         pick_allowed = self._get_picking_type_pick_allowed(picking_type.id)
@@ -170,17 +188,14 @@ class StockReleaseChannel(StockReleaseChannelBase):
             "model": picking_type._name,
             "name": picking_type.name,
             "todo": todo,
+            "started": started,
             "done": done,
             "progress": progress,
             "pick_allowed": pick_allowed,
         }
 
-    def _kanban_dashboard_shipment_advice_data(
-        self, todo_shipment_advices, done_shipment_advices
-    ):
+    def _kanban_dashboard_shipment_advice_data(self, todo, done):
         self.ensure_one()
-        todo = todo_shipment_advices.get(self.id, 0)
-        done = done_shipment_advices.get(self.id, 0)
         progress = _format_progress(todo, done)
         return {
             "model": "shipment.advice",
@@ -201,9 +216,9 @@ class StockReleaseChannel(StockReleaseChannelBase):
 
     def _kanban_dashboard_action_open_picking(self, picking_type_id, done=False):
         if done:
-            domain = self._kanban_dashboard_done_by_picking_type_domain()
+            domain = self._count_picking_done_by_type_id_by_release_id_domain()
         else:
-            domain = self._kanban_dashboard_todo_by_picking_type_domain()
+            domain = self._count_picking_todo_by_type_id_by_release_id_domain()
         domain += [("picking_type_id", "=", picking_type_id)]
         return {
             "type": "ir.actions.act_window",

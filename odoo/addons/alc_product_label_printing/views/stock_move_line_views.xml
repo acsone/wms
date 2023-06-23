@@ -52,9 +52,10 @@
     ^XA
     ^FWR
 
-    ^FO310,60^GB70,pick.release_channel_id.code and len(pick.release_channel_id.code) * 38
-          ,3,2^FS\r
-    ^FO310,70^A060,60^FDpick.release_channel_id.code^FS\r
+    ^FO310,60^GB70,<t
+            t-esc="pick.release_channel_id.channel_code and len(pick.release_channel_id.channel_code) * 38"
+          />,3,2^FS\r
+    ^FO310,70^A060,60^FD<t t-esc="pick.release_channel_id.channel_code" />^FS\r
 
     <t t-if="('customer_id' in pick) and pick.customer_id.is_b2c_customer">
     ^FO330,330^A030,30^FDB2C^FS\r

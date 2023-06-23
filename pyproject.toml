@@ -7,7 +7,7 @@ build-backend = "hatchling.build"
 # https://packaging.python.org/en/latest/specifications/declaring-project-metadata/
 [project]
 name = "odoo-addons-alcyon"
-version = "16.0.2.1.15"
+version = "16.0.2.2.0"
 readme = "README.rst"
 #license = "LicenseRef-Proprietary"  # waiting for hatchling>1.8.1
 requires-python = "==3.11.*"
@@ -173,7 +173,6 @@ exclude = [
   'odoo/addons/alc_price_cache_import/*',
   'odoo/addons/alc_print_all_deliveryslip/*',
   'odoo/addons/alc_product_abc_classification_picking_zone/*',
-  'odoo/addons/alc_product_audit/*',
   'odoo/addons/alc_product_brand_image/*',
   'odoo/addons/alc_product_consolidated_price/*',
   'odoo/addons/alc_product_consolidated_price_newpharma/*',

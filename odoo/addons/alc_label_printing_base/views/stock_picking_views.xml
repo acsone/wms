@@ -31,10 +31,10 @@
         <t t-foreach="packages" t-as="package">
           <t t-foreach="range(package.number_of_parcels)" t-as="index">
             ^XA
-            ^FO30,30^GBpick.release_channel_id.code and len(pick.release_channel_id.code) * 38
-            ,75,3,2^FS\r
-            ^FO40,47^A0N60,60^FDpick.release_channel_id.code
-            ^FS\r
+            ^FO30,30^GB<t
+              t-esc="pick.release_channel_id.channel_code and len(pick.release_channel_id.channel_code) * 38"
+            />,75,3,2^FS\r
+            ^FO40,47^A0N60,60^FD<t t-esc="pick.release_channel_id.channel_code" />^FS\r
 
             <t t-if="ship">
               ^FO200,20

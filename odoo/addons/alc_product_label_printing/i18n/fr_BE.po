@@ -26,6 +26,13 @@ msgstr ""
 #. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
 msgid ""
+",3,2^FS\\r\n"
+"    ^FO310,70^A060,60^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
+msgid ""
 "-^FS\\r\n"
 "\n"
 "    ^FO50,60^A018,18^FD"
@@ -354,10 +361,7 @@ msgid ""
 "^XA\n"
 "    ^FWR\n"
 "\n"
-"    ^FO310,60^GB70,pick.release_channel_id.code and len(pick."
-"release_channel_id.code) * 38\n"
-"          ,3,2^FS\\r\n"
-"    ^FO310,70^A060,60^FDpick.release_channel_id.code^FS\\r"
+"    ^FO310,60^GB70,"
 msgstr ""
 
 #. module: alc_product_label_printing

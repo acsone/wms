@@ -102,6 +102,13 @@ msgid "Outgoing pickings"
 msgstr "Livraisons"
 
 #. module: alc_stock_release_channel_dashboard
+#: model:ir.model,name:alc_stock_release_channel_dashboard.model_stock_picking_type
+#, fuzzy
+#| msgid "Pickings"
+msgid "Picking Type"
+msgstr "Transferts"
+
+#. module: alc_stock_release_channel_dashboard
 #. odoo-python
 #: code:addons/alc_stock_release_channel_dashboard/models/stock_release_channel.py:0
 #, python-format
