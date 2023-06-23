@@ -1,13 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from psycopg2.extensions import AsIs
 
-from odoo import api, fields, models
+from odoo import api, fields
 from odoo.osv.expression import OR
 
+from odoo.addons.product.models.product_template import ProductTemplate as Product
 
-class ProductTemplate(models.Model):
+
+class ProductTemplate(Product):
 
     _inherit = "product.template"
 
@@ -29,19 +30,9 @@ class ProductTemplate(models.Model):
         store=True,
         index=True,
     )
-    sale_not_ok_archived_bin_available = fields.Boolean(
-        default=False,
-        compute="_compute_sale_not_ok_archived_bin_available",
-        store=True,
-        index=True,
-    )
 
     mismatch_route_picking = fields.Boolean(
         default=False, compute="_compute_mismatch_route_picking", store=True, index=True
-    )
-
-    mismatch_picking_bin = fields.Boolean(
-        default=False, compute="_compute_mismatch_picking_bin", store=True, index=True
     )
 
     mto_with_abnormal_route = fields.Boolean(
@@ -57,18 +48,6 @@ class ProductTemplate(models.Model):
         store=True,
         index=True,
     )
-
-    # Moved to alc_sale_dimensions_missing
-    # has_no_dimensions = fields.Boolean(
-    #     default=False, compute="_compute_has_no_dimensions", store=True, index=True,
-    # )
-    #
-    # packaging_has_no_dimensions = fields.Boolean(
-    #     default=False,
-    #     compute="_compute_packaging_has_no_dimensions",
-    #     store=True,
-    #     index=True,
-    # )
 
     mto_purchased_not_sold = fields.Boolean(
         default=False,
@@ -95,7 +74,10 @@ class ProductTemplate(models.Model):
     )
 
     not_sold_on_website = fields.Boolean(
-        default=False, compute="_compute_not_sold_on_website", store=True, index=True,
+        default=False,
+        compute="_compute_not_sold_on_website",
+        store=True,
+        index=True,
     )
 
     no_dimensions_in_stock = fields.Boolean(
@@ -125,7 +107,7 @@ class ProductTemplate(models.Model):
             if (
                 not product.orderpoint_min
                 and not product.orderpoint_max
-                and not (on_command_reappro_route in product.route_ids)
+                and on_command_reappro_route not in product.route_ids
             ):
                 product.no_min_max_no_on_command_reappro = True
             else:
@@ -148,17 +130,9 @@ class ProductTemplate(models.Model):
             else:
                 product.sale_not_ok_not_archived = False
 
-    @api.depends("sale_ok", "active", "stock_bin_ids")
-    def _compute_sale_not_ok_archived_bin_available(self):
-        for product in self:
-            if product.stock_bin_ids and not (product.sale_ok and product.active):
-                product.sale_not_ok_archived_bin_available = True
-            else:
-                product.sale_not_ok_archived_bin_available = False
-
     @api.depends("purchase_ok", "route_ids")
     def _compute_can_be_bought_without_buy_route(self):
-        purchase_route = self.env.ref("purchase.route_warehouse0_buy")
+        purchase_route = self.env.ref("purchase_stock.route_warehouse0_buy")
         for product in self:
             product_routes = product.route_ids
             if product.purchase_ok and purchase_route not in product_routes:
@@ -168,7 +142,7 @@ class ProductTemplate(models.Model):
 
     @api.depends("route_ids")
     def _compute_mismatch_route_picking(self):
-        Rule = self.env["procurement.rule"]
+        Rule = self.env["stock.rule"]
         stock_location = self.env.ref("stock.stock_location_stock")
         picking_types = self.env["stock.picking.type"].search(
             [("default_location_src_id", "child_of", stock_location.id)]
@@ -188,19 +162,6 @@ class ProductTemplate(models.Model):
             else:
                 product.mismatch_route_picking = False
 
-    @api.depends("picking_zone_id", "stock_bin_ids")
-    def _compute_mismatch_picking_bin(self):
-        for product in self:
-            if product.stock_bin_ids:
-                for stock_bin in product.stock_bin_ids:
-                    if (
-                        stock_bin.bin_location_id.picking_zone_id
-                        != product.picking_zone_id
-                    ):
-                        product.mismatch_picking_bin = True
-                    else:
-                        product.mismatch_picking_bin = False
-
     @api.depends("route_ids")
     def _compute_mto_with_abnormal_route(self):
         new_route = self.env.ref(
@@ -208,67 +169,17 @@ class ProductTemplate(models.Model):
         )
         for product in self:
             product_routes = product.route_ids
-            if product.is_mto_product and new_route and new_route in product_routes:
+            if product.is_mto and new_route and new_route in product_routes:
                 product.mto_with_abnormal_route = True
             else:
                 product.mto_with_abnormal_route = False
 
-    # Moved to alc_product_dimension_missing
-    # @api.depends(
-    #     "product_variant_ids",
-    #     "product_variant_ids.height",
-    #     "product_variant_ids.length",
-    #     "product_variant_ids.width",
-    # )
-    # def _compute_has_no_dimensions(self):
-    #     unique_variants = self.filtered(
-    #         lambda template: len(template.product_variant_ids) == 1
-    #     )
-    #     for product in unique_variants:
-    #         if product.type == "service":
-    #             # No dimensions on services
-    #             continue
-    #
-    #         if not (product.length or product.width or product.height):
-    #             product.has_no_dimensions = True
-    #         else:
-    #             product.has_no_dimensions = False
-    #     for product in self - unique_variants:
-    #         product.has_no_dimensions = False
-
-    # @api.depends(
-    #     "packaging_ids",
-    #     "packaging_ids.height",
-    #     "packaging_ids.lngth",
-    #     "packaging_ids.width",
-    # )
-    # def _compute_packaging_has_no_dimensions(self):
-    #     for product in self:
-    #         if product.type == "service":
-    #             # No dimensions on services
-    #             continue
-    #
-    #         packagings = product.mapped("packaging_ids")
-    #         if packagings:
-    #             missing_dimensions = []
-    #             for pack in packagings:
-    #                 if not (pack.lngth or pack.width or pack.height):
-    #                     missing_dimensions.append(True)
-    #                 else:
-    #                     missing_dimensions.append(False)
-    #             if any(missing_dimensions):
-    #                 product.packaging_has_no_dimensions = True
-    #             else:
-    #                 product.packaging_has_no_dimensions = False
-    #         else:
-    #             product.packaging_has_no_dimensions = False
-
     def _get_current_ids(self):
         # copied as is into alc_product_is_new to avoid the whole dependency
         if self.ids and len(self.ids) > 1:
-            current_ids = AsIs("AND pt.id in {}".format(tuple(self.ids)))
+            current_ids = AsIs(f"AND pt.id in {tuple(self.ids)}")
         elif self.ids and len(self.ids) == 1:
-            current_ids = AsIs("AND pt.id = {}".format(self.ids[0]))
+            current_ids = AsIs(f"AND pt.id = {self.ids[0]}")
         else:
             current_ids = AsIs("")
         return current_ids
@@ -283,7 +194,7 @@ class ProductTemplate(models.Model):
                    JOIN
                         product_product pp ON pp.id = pol.product_id
                    JOIN
-                        product_template pt ON pt.id = pp.product_tmpl_id AND pt.is_mto_product = True
+                        product_template pt ON pt.id = pp.product_tmpl_id AND pt.is_mto = True
                    WHERE
                         pol.state NOT IN ('cancel', 'done') AND pol.product_qty - pol.qty_received > 0
                    AND NOT EXISTS
@@ -302,7 +213,7 @@ class ProductTemplate(models.Model):
         ids = [r[0] for r in result]
         return ids
 
-    @api.depends("is_mto_product", "route_ids")
+    @api.depends("is_mto", "route_ids")
     def _compute_mto_purchased_not_sold(self):
         ids_mto_purchased_not_sold = set(self._get_mto_product_without_sale_order())
         for product in self:
@@ -330,16 +241,15 @@ class ProductTemplate(models.Model):
                     JOIN
                             product_product pp ON pp.id = sq.product_id
                     JOIN
-                            product_template pt ON pt.id = pp.product_tmpl_id AND pt.is_mto_product = False
+                            product_template pt ON pt.id = pp.product_tmpl_id AND pt.is_mto = False
                     WHERE
-                            sl.parent_left >= %(stock_location_mto_parent_left)s AND sl.parent_right <= %(stock_location_mto_parent_right)s
-                    AND sq.location_kind = 'bin'
-                    AND sq.qty > 0
-                    %(ids)s
+                            sl.location_kind = 'bin'
+                            AND sl.parent_path LIKE %(stock_location_mto_parent)s || '%%'
+                            AND sq.quantity > 0
+                            %(ids)s
                 """,
                 {
-                    "stock_location_mto_parent_left": stock_location_mto.parent_left,
-                    "stock_location_mto_parent_right": stock_location_mto.parent_right,
+                    "stock_location_mto_parent": stock_location_mto.parent_path,
                     "ids": current_ids,
                 },
             )
@@ -348,7 +258,7 @@ class ProductTemplate(models.Model):
 
         return ids
 
-    @api.depends("is_mto_product", "route_ids")
+    @api.depends("is_mto", "route_ids")
     def _compute_mto_stock_no_mto_route(self):
         ids_mto_stock_no_mto_route = set(self._get_mto_stock_no_mto_route())
         for product in self:
@@ -382,15 +292,15 @@ class ProductTemplate(models.Model):
                     JOIN
                             stock_route_product srp ON pt.id = srp.product_id
                     WHERE
-                            sl.parent_left > %(stock_location_mto_parent_left)s AND sl.parent_right < %(stock_location_mto_parent_right)s
-                    AND location_kind = 'bin'
-                    AND qty > 0
+                            sl.location_kind = 'bin'
+                    AND sl.parent_path LIKE %(stock_location_mto_parent)s || '%%'
+                    AND sl.parent_path != %(stock_location_mto_parent)s
+                    AND sq.quantity > 0
                     AND srp.route_id = %(new_route_id)s
                     %(ids)s
                 """,
                 {
-                    "stock_location_mto_parent_left": stock_location_mto.parent_left,
-                    "stock_location_mto_parent_right": stock_location_mto.parent_right,
+                    "stock_location_mto_parent": stock_location_mto.parent_path,
                     "new_route_id": new_route.id,
                     "ids": current_ids,
                 },
@@ -400,7 +310,7 @@ class ProductTemplate(models.Model):
 
         return ids
 
-    @api.depends("is_mto_product", "route_ids")
+    @api.depends("is_mto", "route_ids")
     def _compute_mto_stock_new_route(self):
         ids_mto_stock_new_route = set(self._get_mto_stock_new_route())
         for product in self:
@@ -435,18 +345,16 @@ class ProductTemplate(models.Model):
                     JOIN
                             product_product pp ON pp.id = sq.product_id
                     JOIN
-                            product_template pt ON pt.id = pp.product_tmpl_id AND pt.is_mto_product = True
+                            product_template pt ON pt.id = pp.product_tmpl_id AND pt.is_mto = True
                     WHERE
-                            sl.parent_left >= %(stock_location_mto_parent_left)s
-                            AND sl.parent_right <= %(stock_location_mto_parent_right)s
-                            AND sq.location_kind = 'bin'
-                            AND sq.qty > 0
+                            sl.location_kind = 'bin'
+                            AND sl.parent_path LIKE %(stock_location_mto_parent)s || '%%'
+                            AND sq.quantity > 0
                             AND sq.write_date <  current_date - interval '5' day
                             %(ids)s
                 """,
                 {
-                    "stock_location_mto_parent_left": stock_location_mto.parent_left,
-                    "stock_location_mto_parent_right": stock_location_mto.parent_right,
+                    "stock_location_mto_parent": stock_location_mto.parent_path,
                     "ids": current_ids,
                 },
             )
@@ -455,7 +363,7 @@ class ProductTemplate(models.Model):
 
         return ids
 
-    @api.depends("is_mto_product", "route_ids")
+    @api.depends("is_mto", "route_ids")
     def _compute_mto_stock_5_days(self):
         ids_mto_stock_5_days = set(self._get_mto_stock_5_days())
         for product in self:
@@ -474,12 +382,14 @@ class ProductTemplate(models.Model):
                 FROM
                         product_template pt
                 JOIN
-                        product_product pp on pp.product_tmpl_id = pt.id AND pt.is_mto_product = False
+                        product_product pp on pp.product_tmpl_id = pt.id AND pt.is_mto = False
                 JOIN
                         stock_quant sq on sq.product_id = pp.id
+                JOIN
+                        stock_location sl ON sl.id = sq.location_id
                 WHERE
-                        sq.qty > 0
-                    AND sq.location_kind = 'bin'
+                        sq.quantity > 0
+                    AND sl.location_kind = 'bin'
                     %(no_product_dimensions)s
                     %(no_packaging_dimensions)s
                     AND pt.active = True
@@ -508,7 +418,7 @@ class ProductTemplate(models.Model):
     @api.depends(
         "sale_ok",
         "active",
-        "is_mto_product",
+        "is_mto",
         "has_no_dimensions",
         "packaging_has_no_dimensions",
         "route_ids",
@@ -527,7 +437,7 @@ class ProductTemplate(models.Model):
     @api.depends(
         "sale_ok",
         "active",
-        "is_mto_product",
+        "is_mto",
         "has_no_dimensions",
         "packaging_has_no_dimensions",
         "route_ids",
@@ -544,8 +454,6 @@ class ProductTemplate(models.Model):
     def _get_anomaly_fields(self):
         return [
             "mismatch_route_picking",
-            "mismatch_picking_bin",
-            "sale_not_ok_archived_bin_available",
             "sale_not_ok_not_archived",
             "min_max_on_command_reappro",
             "no_min_max_no_on_command_reappro",
@@ -565,9 +473,7 @@ class ProductTemplate(models.Model):
         "min_max_on_command_reappro",
         "no_min_max_no_on_command_reappro",
         "sale_not_ok_not_archived",
-        "sale_not_ok_archived_bin_available",
         "mismatch_route_picking",
-        "mismatch_picking_bin",
         "mto_with_abnormal_route",
         "can_be_bought_without_buy_route",
         "has_no_dimensions",

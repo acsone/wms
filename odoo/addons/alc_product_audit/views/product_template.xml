@@ -30,19 +30,9 @@
           domain="[('sale_not_ok_not_archived','=',True)]"
         />
         <filter
-          string="Not salable or archived but with a bin"
-          name="filter_sale_not_ok_archived_bin_available"
-          domain="[('sale_not_ok_archived_bin_available','=',True)]"
-        />
-        <filter
           string="Mismatch between route and picking zone"
           name="filter_mismatch_route_picking"
           domain="[('mismatch_route_picking','=',True)]"
-        />
-        <filter
-          string="Mismatch between picking zone and bin"
-          name="filter_mismatch_picking_bin"
-          domain="[('mismatch_picking_bin','=',True)]"
         />
         <filter
           string="MTO product has abnormal routes"
@@ -54,17 +44,6 @@
           name="filter_can_be_bought_without_buy_route"
           domain="[('can_be_bought_without_buy_route','=',True)]"
         />
-<!--        Moved to alc_product_dimensions_missing-->
-<!--        <filter-->
-<!--          string="Missing dimensions"-->
-<!--          name="filter_has_no_dimensions"-->
-<!--          domain="[('has_no_dimensions','=',True)]"-->
-<!--        />-->
-<!--        <filter-->
-<!--          string="Missing packaging dimensions"-->
-<!--          name="filter_packaging_has_no_dimensions"-->
-<!--          domain="[('packaging_has_no_dimensions','=',True)]"-->
-<!--        />-->
         <filter
           name="filter_mto_purchased_not_sold"
           string="Mto product purchased and not sold"
@@ -123,9 +102,7 @@
         <field name="no_min_max_no_on_command_reappro" invisible="1" />
         <field name="min_max_on_command_reappro" invisible="1" />
         <field name="sale_not_ok_not_archived" invisible="1" />
-        <field name="sale_not_ok_archived_bin_available" invisible="1" />
         <field name="mismatch_route_picking" invisible="1" />
-        <field name="mismatch_picking_bin" invisible="1" />
         <field name="mto_with_abnormal_route" invisible="1" />
         <field name="can_be_bought_without_buy_route" invisible="1" />
         <field name="has_no_dimensions" invisible="1" />
@@ -141,6 +118,7 @@
       <header position="after">
         <div
           class="alert alert-warning"
+          role="alert"
           attrs="{'invisible': [('has_anomaly', '=', False)]}"
         >
                 Following issue(s) is/are observed on the product:
@@ -160,18 +138,10 @@
             <p>- Product is not salable but not archived</p>
           </div>
                     <div
-            attrs="{'invisible': [('sale_not_ok_archived_bin_available', '=', False)]}"
-          >
-            <p>- Product is not salable and still has a bin</p>
-          </div>
-                    <div
             attrs="{'invisible': [('mismatch_route_picking', '=', False)]}"
           >
             <p
             >- More than one route is selected for the product, leading to a mismatch with the picking zone</p>
-          </div>
-                    <div attrs="{'invisible': [('mismatch_picking_bin', '=', False)]}">
-            <p>- The selected picking zone does not match the bin</p>
           </div>
                     <div
             attrs="{'invisible': [('mto_with_abnormal_route', '=', False)]}"
