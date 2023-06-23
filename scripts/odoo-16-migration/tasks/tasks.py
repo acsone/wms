@@ -583,6 +583,7 @@ def set_modules_to_remove():
         "web_widget_color",
         "web_widget_inputmask",
         "web_m2x_options",
+        "web_widget_many2many_tags_multi_selection",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     # with cursor(DB_16_POSTMIG) as cr:
