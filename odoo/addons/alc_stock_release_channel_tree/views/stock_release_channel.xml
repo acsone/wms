@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="stock_release_channel_tree_view" model="ir.ui.view">
+        <field name="model">stock.release.channel</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field
+          name="state"
+          widget="badge"
+          decoration-muted="state == 'asleep'"
+          decoration-info="state  == 'locked'"
+          decoration-success="state == 'open'"
+        />
+                <field name="name" />
+                <field name="release_mode" optional="hide" />
+                <field name="process_end_time" />
+                <field name="process_end_date" />
+                <field name="stock_release_channel_tag_ids" widget="many2many_tags" />
+          </tree>
+        </field>
+    </record>
+
+    <record
+    id="stock_release_channel_geoengine.action_stock_release_channel_tree"
+    model="ir.actions.act_window.view"
+  >
+    <field
+      name="view_id"
+      ref="alc_stock_release_channel_tree.stock_release_channel_tree_view"
+    />
+    </record>
+</odoo>
