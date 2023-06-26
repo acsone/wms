@@ -1,1 +1,0 @@
-from . import l10n_be_report_partner_vat_listing
