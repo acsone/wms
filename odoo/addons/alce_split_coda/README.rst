@@ -1,7 +1,7 @@
 Split CODA
 ==========
 
-This module will split CODA by statement and check if this statement' account number is in Odoo.
+This module will split CODA by statement and pass it to the normal coda process in Odoo.
 
 Installation
 ============
@@ -23,13 +23,4 @@ Contributors
 ------------
 
 * Sylvain Van Hoof <sylvain@okia.be>
-
-Maintainer
-----------
-
-.. image:: http://www.qansee.com/logo.png
-   :alt: QANSEE
-   :target: http://www.qansee.com
-
-This module is maintained by QANSEE
-www.qansee.com
+* Hughes Damry <hughes.damry@acsone.eu>
