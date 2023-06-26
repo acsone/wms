@@ -14,6 +14,7 @@
         # OCA
         "queue_job_cron",
         "report_csv",
+        "rest_log",
         # ALC
         "alc_base_auto_join",
         "alc_queue_job_security",
