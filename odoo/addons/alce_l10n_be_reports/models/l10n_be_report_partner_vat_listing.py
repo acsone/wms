@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 
 from odoo import api, models
