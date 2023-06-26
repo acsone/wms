@@ -69,6 +69,9 @@ odoo-addon-product-stock-state @ git+https://github.com/OCA/product-attribute.gi
 # purchase-workflow
 odoo-addon-purchase-cancel-reason @ git+https://github.com/OCA/purchase-workflow.git@refs/pull/1776/head#subdirectory=setup/purchase_cancel_reason
 
+# reporting-engine
+odoo-addon-report-csv @ git+https://github.com/OCA/reporting-engine.git@refs/pull/773/head#subdirectory=setup/report_csv
+
 # sale-workflow
 # https://github.com/OCA/sale-workflow/pull/2322
 odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@16.0-mig-product_price_category-sbj#subdirectory=setup/product_price_category
