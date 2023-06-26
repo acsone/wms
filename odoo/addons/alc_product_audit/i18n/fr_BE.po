@@ -219,7 +219,7 @@ msgstr "- Produit ne pouvant être vendu mais non archivé"
 msgid "Product"
 msgstr "Modèle de produit"
 
- module: alc_product_audit
+#.  module: alc_product_audit
 #: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product has an anomaly"
 msgstr "Produits avec anomalies"
