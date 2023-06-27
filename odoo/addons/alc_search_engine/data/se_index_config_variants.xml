@@ -175,7 +175,8 @@
           "start": {
             "type": "text",
             "analyzer": "analyzer_startswith",
-            "similarity": "boolean"
+            "similarity": "boolean",
+            "index_options": "offsets"
           }
         },
         "type": "keyword"
@@ -381,7 +382,7 @@
             "asciifolding",
             "lowercase"
           ],
-          "tokenizer": "keyword"
+          "tokenizer": "standard"
         },
         "default": {
           "filter": [
@@ -470,14 +471,9 @@
           }
         }
       },
-      "supplier_promotion_veterinary": {
-        "type": "nested",
-        "properties": {
-          "time_frame": {
-            "type": "date_range",
-            "format": "yyyy-MM-dd"
-          }
-        }
+      "cross": {
+        "type": "text",
+        "analyzer": "analyzer_lang"
       },
       "categories": {
         "type": "nested",
@@ -563,10 +559,6 @@
       "indicated_price": {
         "type": "double"
       },
-      "cross": {
-        "type": "text",
-        "analyzer": "analyzer_lang"
-      },
       "name": {
         "fields": {
           "raw": {
@@ -576,10 +568,20 @@
           "start": {
             "type": "text",
             "analyzer": "analyzer_startswith",
-            "similarity": "boolean"
+            "similarity": "boolean",
+            "index_options": "offsets"
           }
         },
         "type": "keyword"
+      },
+      "supplier_promotion_veterinary": {
+        "type": "nested",
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
       },
       "packaging_ids": {
         "type": "keyword"
@@ -772,7 +774,7 @@
             "asciifolding",
             "lowercase"
           ],
-          "tokenizer": "keyword"
+          "tokenizer": "standard"
         },
         "default": {
           "filter": [
@@ -861,14 +863,9 @@
           }
         }
       },
-      "supplier_promotion_veterinary": {
-        "type": "nested",
-        "properties": {
-          "time_frame": {
-            "type": "date_range",
-            "format": "yyyy-MM-dd"
-          }
-        }
+      "cross": {
+        "type": "text",
+        "analyzer": "analyzer_lang"
       },
       "categories": {
         "type": "nested",
@@ -954,10 +951,6 @@
       "indicated_price": {
         "type": "double"
       },
-      "cross": {
-        "type": "text",
-        "analyzer": "analyzer_lang"
-      },
       "name": {
         "fields": {
           "raw": {
@@ -967,10 +960,20 @@
           "start": {
             "type": "text",
             "analyzer": "analyzer_startswith",
-            "similarity": "boolean"
+            "similarity": "boolean",
+            "index_options": "offsets"
           }
         },
         "type": "keyword"
+      },
+      "supplier_promotion_veterinary": {
+        "type": "nested",
+        "properties": {
+          "time_frame": {
+            "type": "date_range",
+            "format": "yyyy-MM-dd"
+          }
+        }
       },
       "packaging_ids": {
         "type": "keyword"
@@ -1158,7 +1161,7 @@
             "asciifolding",
             "lowercase"
           ],
-          "tokenizer": "keyword"
+          "tokenizer": "standard"
         },
         "default": {
           "filter": [
