@@ -2,25 +2,25 @@
 <odoo noupdate="1">
   <record
     model="stock.backorder.reason"
-    id="stock_picking_backorder.stock_backorder_reason_1"
+    id="alc_stock_picking_backorder_reason.stock_backorder_reason_1"
   >
     <field name="is_helpdesk_ticket_to_create">True</field>
   </record>
   <record
     model="stock.backorder.reason"
-    id="stock_picking_backorder.stock_backorder_reason_2"
+    id="alc_stock_picking_backorder_reason.stock_backorder_reason_2"
   >
     <field name="is_helpdesk_ticket_to_create">False</field>
   </record>
   <record
     model="stock.backorder.reason"
-    id="stock_picking_backorder.stock_backorder_reason_3"
+    id="alc_stock_picking_backorder_reason.stock_backorder_reason_3"
   >
     <field name="is_helpdesk_ticket_to_create">False</field>
   </record>
   <record
     model="stock.backorder.reason"
-    id="stock_picking_backorder.stock_backorder_reason_4"
+    id="alc_stock_picking_backorder_reason.stock_backorder_reason_4"
   >
     <field name="is_helpdesk_ticket_to_create">False</field>
   </record>
