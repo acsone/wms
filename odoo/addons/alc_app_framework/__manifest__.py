@@ -14,6 +14,7 @@
         # OCA
         "queue_job_cron",
         "report_csv",
+        "base_import_security_group",
         "base_optional_quick_create",
         "mail_environment",
         "server_action_mass_edit",
