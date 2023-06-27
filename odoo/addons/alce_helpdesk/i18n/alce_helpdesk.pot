@@ -6,24 +6,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 17:28+0000\n"
-"PO-Revision-Date: 2023-06-22 17:28+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: alce_helpdesk
-#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_1
-#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_2
-#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_3
-#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_4
-#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_5
-#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_6
-msgid "${object.display_name}"
-msgstr ""
 
 #. module: alce_helpdesk
 #: model:mail.template,name:alce_helpdesk.email_template_helpdesk_msg_1
@@ -115,14 +103,14 @@ msgstr ""
 msgid ""
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "        <div style=\"margin-left:30px;align=center;\">\n"
-"        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
+"        Dear <t t-out=\"object.sudo().partner_id.name or 'Madam, Sir'\"></t>,\n"
 "    </div>\n"
 "        <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
 "        MESSAGE_01\n"
 "    </div>\n"
 "        <br>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
-"        <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"        <span style=\"margin-left:30px;font-weight:normal;\"><t t-out=\"object.team_id.name or 'Helpdesk'\"></t> Team.</span>\n"
 "      </div>\n"
 "    "
 msgstr ""
@@ -132,14 +120,14 @@ msgstr ""
 msgid ""
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "        <div style=\"margin-left:30px;align=center;\">\n"
-"        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
+"        Dear <t t-out=\"object.sudo().partner_id.name or 'Madam, Sir'\"></t>,\n"
 "    </div>\n"
 "        <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
 "        MESSAGE_02\n"
 "    </div>\n"
 "        <br>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
-"        <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"        <span style=\"margin-left:30px;font-weight:normal;\"><t t-out=\"object.team_id.name or 'Helpdesk'\"></t> Team.</span>\n"
 "      </div>\n"
 "    "
 msgstr ""
@@ -149,14 +137,14 @@ msgstr ""
 msgid ""
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "        <div style=\"margin-left:30px;align=center;\">\n"
-"        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
+"        Dear <t t-out=\"object.sudo().partner_id.name or 'Madam, Sir'\"></t>,\n"
 "    </div>\n"
 "        <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
 "        MESSAGE_03\n"
 "    </div>\n"
 "        <br>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
-"        <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"        <span style=\"margin-left:30px;font-weight:normal;\"><t t-out=\"object.team_id.name or 'Helpdesk'\"></t> Team.</span>\n"
 "      </div>\n"
 "    "
 msgstr ""
@@ -166,14 +154,14 @@ msgstr ""
 msgid ""
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "        <div style=\"margin-left:30px;align=center;\">\n"
-"        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
+"        Dear <t t-out=\"object.sudo().partner_id.name or 'Madam, Sir'\"></t>,\n"
 "    </div>\n"
 "        <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
 "        MESSAGE_04\n"
 "    </div>\n"
 "        <br>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
-"        <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"        <span style=\"margin-left:30px;font-weight:normal;\"><t t-out=\"object.team_id.name or 'Helpdesk'\"></t> Team.</span>\n"
 "      </div>\n"
 "    "
 msgstr ""
@@ -183,14 +171,14 @@ msgstr ""
 msgid ""
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "        <div style=\"margin-left:30px;align=center;\">\n"
-"        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
+"        Dear <t t-out=\"object.sudo().partner_id.name or 'Madam, Sir'\"></t>,\n"
 "    </div>\n"
 "        <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
 "        MESSAGE_05\n"
 "    </div>\n"
 "        <br>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
-"        <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"        <span style=\"margin-left:30px;font-weight:normal;\"><t t-out=\"object.team_id.name or 'Helpdesk'\"></t> Team.</span>\n"
 "      </div>\n"
 "    "
 msgstr ""
@@ -200,14 +188,14 @@ msgstr ""
 msgid ""
 "<div style=\"max-width:600px; height:auto; margin-left:30px;\">\n"
 "        <div style=\"margin-left:30px;align=center;\">\n"
-"        Dear ${object.sudo().partner_id.name or 'Madam, Sir'},\n"
+"        Dear <t t-out=\"object.sudo().partner_id.name or 'Madam, Sir'\"></t>,\n"
 "    </div>\n"
 "        <div style=\"margin-left:30px;align=center;\" width=\"60%\">\n"
 "        MESSAGE_06\n"
 "    </div>\n"
 "        <br>\n"
 "        <span style=\"margin-left:30px;font-weight:normal;\">Thank you </span>\n"
-"        <span style=\"margin-left:30px;font-weight:normal;\">${object.team_id.name or 'Helpdesk'} Team.</span>\n"
+"        <span style=\"margin-left:30px;font-weight:normal;\"><t t-out=\"object.team_id.name or 'Helpdesk'\"></t> Team.</span>\n"
 "      </div>\n"
 "    "
 msgstr ""
@@ -299,14 +287,14 @@ msgid "Display Name"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model:ir.model,name:alce_helpdesk.model_helpdesk_ticket
-msgid "Helpdesk Ticket"
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.view_picking_move_tree_helpdesk
+#: model_terms:ir.ui.view,arch_db:alce_helpdesk.view_picking_tree
+msgid "Helpdesk"
 msgstr ""
 
 #. module: alce_helpdesk
-#: model_terms:ir.ui.view,arch_db:alce_helpdesk.view_picking_move_tree_helpdesk
-#: model_terms:ir.ui.view,arch_db:alce_helpdesk.view_picking_tree
-msgid "Helpdesk Tickets"
+#: model:ir.model,name:alce_helpdesk.model_helpdesk_ticket
+msgid "Helpdesk Ticket"
 msgstr ""
 
 #. module: alce_helpdesk
@@ -479,7 +467,14 @@ msgstr ""
 #. odoo-python
 #: code:addons/alce_helpdesk/wizards/create_helpdesk_ticket.py:0
 #, python-format
-msgid "The record related to the new helpdeskticket was not found !"
+msgid "The record related to the new helpdesk ticket was not found !"
+msgstr ""
+
+#. module: alce_helpdesk
+#. odoo-python
+#: code:addons/alce_helpdesk/models/helpdesk_ticket.py:0
+#, python-format
+msgid "The ticket reason is mandatory."
 msgstr ""
 
 #. module: alce_helpdesk
@@ -517,4 +512,14 @@ msgstr ""
 #. module: alce_helpdesk
 #: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket_reason__visible_reception_wizard
 msgid "Visible on Reception Wizard?"
+msgstr ""
+
+#. module: alce_helpdesk
+#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_1
+#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_2
+#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_3
+#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_4
+#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_5
+#: model:mail.template,subject:alce_helpdesk.email_template_helpdesk_msg_6
+msgid "{{object.display_name}}"
 msgstr ""
