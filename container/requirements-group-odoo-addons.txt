@@ -29,11 +29,13 @@ odoo-addon-base-partition @ git+https://github.com/acsone/server-tools.git@e0714
 odoo-addon-base-partner-sequence==16.0.1.0.0.3
 odoo-addon-base-report-to-label-printer @ git+https://github.com/acsone/report-print-send.git@763b847a20a61448956df1e32231b56a7edd5189#subdirectory=setup/base_report_to_label_printer
 odoo-addon-base-report-to-printer==16.0.1.1.2
+odoo-addon-base-rest==16.0.1.0.1
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@f75469cfc3ead20b6224195b653ddba735a219b4#subdirectory=setup/base_sparse_field_list_support
 odoo-addon-base-technical-features==16.0.1.0.0.5
 odoo-addon-base-time-window==16.0.1.0.0.6
 odoo-addon-base-ubl==16.0.1.0.0.4
 odoo-addon-base-unece==16.0.1.0.0.8
+odoo-addon-component==16.0.1.1.0
 odoo-addon-delivery-automatic-package==16.0.1.0.0.2
 odoo-addon-delivery-carrier-account==16.0.1.0.0.4
 odoo-addon-delivery-carrier-info==16.0.1.0.0.2
@@ -83,6 +85,7 @@ odoo-addon-report-csv==16.0.1.0.0.2
 odoo-addon-report-xlsx==16.0.1.0.2
 odoo-addon-report-xlsx-helper==16.0.1.0.0.3
 odoo-addon-report-xml==16.0.1.1.0.1
+odoo-addon-rest-log @ git+https://github.com/acsone/rest-framework.git@0e2ba3edd1c9d5dda12e4bcf8422016e5469c9e6#subdirectory=setup/rest_log
 odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@e3920cb6276556e98afed18a828d5a7c5103bf67#subdirectory=setup/sale_channel
 odoo-addon-sale-discount-display-amount==16.0.1.0.0.3
 odoo-addon-sale-exception==16.0.1.2.0.2
