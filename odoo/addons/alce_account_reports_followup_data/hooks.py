@@ -1,16 +1,18 @@
-# -*- coding: utf-8 -*-
-# Copyright 2021 ACSONE SA/NV
-from openupgradelib import openupgrade
+# Copyright 2023 ACSONE SA/NV
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo import SUPERUSER_ID, api
+
+
+def _delete_demo_data(env):
+    """To avoid sql constraint conflicts."""
+    env["account_followup.followup.line"].search(
+        [
+            ("delay", "in", (15, 30, 40)),
+            ("company_id", "=", env.ref("base.main_company").id),
+        ]
+    ).unlink()
 
 
 def pre_init_hook(cr):
-    """Loaded before installing the module.
-    :param odoo.sql_db.Cursor cr:
-        Database cursor.
-
-    """
-    openupgrade.update_module_names(
-        cr,
-        [("specific_followup", "alce_account_reports_followup_data")],
-        merge_modules=True,
-    )
+    env = api.Environment(cr, SUPERUSER_ID, {})
+    _delete_demo_data(env)

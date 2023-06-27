@@ -1,99 +1,103 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
-  <!--By default Odoo create followup data. However all data have the no update flag-->
-  <!--It's why I want to delete existing followup data and create a specific data for Alcyon-->
-  <delete
-    model="account_followup.followup"
-    search="[('id', '=', ref('account_reports_followup.demo_followup1', False))]"
-  />
-  <record id="alcyon_followup" model="account_followup.followup">
-    <field name="company_id" ref="base.main_company" />
+  <record id="alcyon_email_template_followup_1" model="mail.template">
+      <field name="name">First reminder email</field>
+      <field name="model_id" ref="base.model_res_partner" />
+      <field
+      name="email_from"
+    >{{ object._get_followup_responsible().email_formatted }}</field>
+      <field name="partner_to">{{ object.id }}</field>
+      <field
+      name="subject"
+    >{{ (object.company_id or object._get_followup_responsible().company_id).name }} Payment Reminder - {{ object.commercial_company_name }}</field>
+      <field name="body_html" type="html">
+        <div style="margin: 0px; padding: 0px;">
+          Cher(e) Docteur,<br />
+          Madame, Monsieur,<br />
+          <br />
+          Nous vous prions de trouver ci-dessous un relevé de factures échues.<br />
+          <br />
+          Nous vous serions reconnaissants de vérifier que vous les avez bien reçues et de procéder au paiement dans les meilleurs délais, ou de nous contacter en cas de contestation.<br
+        />
+          <br />
+          Si vous venez d’effectuer votre paiement, veuillez nous excuser pour ce rappel.<br
+        />
+          <br />
+          Nous restons à votre disposition et vous prions d'agréer, Cher(e) Docteur, Madame, Monsieur, l'expression de nos sentiments dévoués.<br
+        />
+          <br />
+          <br />
+          Pour le service comptabilité<br />
+          <br />
+          JF MARECHAL<br />
+          Jf.marechal@alcyonbelux.be<br />
+          04/338 84 34<br />
+        </div>
+      </field>
   </record>
   <record id="alcyon_followup_line1" model="account_followup.followup.line">
-    <field name="name">First reminder email</field>
-    <field name="sequence">0</field>
-    <field name="delay">15</field>
-    <field name="followup_id" ref="alcyon_followup" />
-    <field name="send_email">True</field>
-    <field
-      name="description"
-    ><![CDATA[
-Cher(e) Docteur,
-Madame, Monsieur,
-
-Nous vous prions de trouver ci-dessous un relevé de factures échues.
-
-Nous vous serions reconnaissants de vérifier que vous les avez bien reçues et de procéder au paiement dans les meilleurs délais, ou de nous contacter en cas de contestation.
-
-Si vous venez d’effectuer votre paiement, veuillez nous excuser pour ce rappel.
-
-Nous restons à votre disposition et vous prions d'agréer, Cher(e) Docteur, Madame, Monsieur, l'expression de nos sentiments dévoués.
-
-
-Pour le service comptabilité
-
-JF MARECHAL
-Jf.marechal@alcyonbelux.be
-04/338 84 34
-  ]]></field>
+      <field name="name">First reminder email</field>
+      <field name="delay">15</field>
+      <field name="company_id" ref="base.main_company" />
+      <field name="send_email">True</field>
+      <field name="mail_template_id" ref="alcyon_email_template_followup_1" />
+  </record>
+  <record id="alcyon_email_template_followup_2" model="mail.template">
+      <field name="name">Second reminder followup</field>
+      <field name="model_id" ref="base.model_res_partner" />
+      <field
+      name="email_from"
+    >{{ object._get_followup_responsible().email_formatted }}</field>
+      <field name="partner_to">{{ object.id }}</field>
+      <field
+      name="subject"
+    >{{ (object.company_id or object._get_followup_responsible().company_id).name }} Payment Reminder - {{ object.commercial_company_name }}</field>
+      <field name="body_html" type="html">
+        <div style="margin: 0px; padding: 0px;">
+          Cher(e) Docteur,<br />
+          Madame, Monsieur,<br />
+          <br />
+          Sauf erreur ou omission de notre part, les factures reprises sur notre précédent rappel n’ont pas été réglées.<br
+        />
+          <br />
+          Nous vous prions de trouver ci-dessous le relevé des factures échues et vous invitons donc à procéder au règlement dans les dix jours sur notre compte bancaire BE33 3400 3074 9846 – BBRUBEBB.<br
+        />
+          <br />
+          Si entretemps vous avez effectué le paiement, veuillez nous excuser pour ce rappel.<br
+        />
+          <br />
+          Nous restons à votre disposition et vous prions d'agréer, Cher(e) Docteur, Madame, Monsieur, l'expression de nos sentiments dévoués.<br
+        />
+          <br />
+          <br />
+          Pour le service comptabilité<br />
+          <br />
+          JF MARECHAL<br />
+          Jf.marechal@alcyonbelux.be<br />
+          04/338 84 34<br />
+        </div>
+      </field>
   </record>
   <record id="alcyon_followup_line2" model="account_followup.followup.line">
-    <field name="name">Second reminder letter and email</field>
-    <field name="sequence">1</field>
-    <field name="delay">30</field>
-    <field name="followup_id" ref="alcyon_followup" />
-    <field name="send_email">True</field>
-    <field name="send_letter">True</field>
-    <field
-      name="description"
-    ><![CDATA[
-Cher(e) Docteur,
-Madame, Monsieur,
-
-Sauf erreur ou omission de notre part, les factures reprises sur notre précédent rappel n’ont pas été réglées.
-
-Nous vous prions de trouver ci-dessous le relevé des factures échues et vous invitons donc à procéder au règlement dans les dix jours sur notre compte bancaire BE33 3400 3074 9846 – BBRUBEBB.
-
-Si entretemps vous avez effectué le paiement, veuillez nous excuser pour ce rappel.
-
-Nous restons à votre disposition et vous prions d'agréer, Cher(e) Docteur, Madame, Monsieur, l'expression de nos sentiments dévoués.
-
-
-Pour le service comptabilité
-
-JF MARECHAL
-Jf.marechal@alcyonbelux.be
-04/338 84 34
-  ]]></field>
+      <field name="name">Second reminder letter and email</field>
+      <field name="delay">30</field>
+      <field name="company_id" ref="base.main_company" />
+      <field name="send_email">True</field>
+      <field name="send_letter">True</field>
+      <field name="mail_template_id" ref="alcyon_email_template_followup_2" />
   </record>
   <record id="alcyon_followup_line3" model="account_followup.followup.line">
-    <field name="name">Third reminder: phone the customer</field>
-    <field name="sequence">3</field>
-    <field name="delay">40</field>
-    <field name="followup_id" ref="alcyon_followup" />
-    <field eval="False" name="send_email" />
-    <field name="manual_action">True</field>
-    <field name="manual_action_note">Call the customer on the phone! </field>
-    <field
-      name="description"
-    ><![CDATA[
-Cher(e) Docteur,
-Madame, Monsieur,
+      <field name="name">Third reminder: phone the customer</field>
+      <field name="delay">40</field>
+      <field name="company_id" ref="base.main_company" />
+      <field name="send_email" eval="False" />
+      <field name="create_activity">True</field>
+      <field name="activity_type_id" ref="mail.mail_activity_data_call" />
+      <field name="activity_summary">Call the customer on the phone!</field>
+      <field name="activity_note">
+Urge the customer to pay overdue invoices, still not settled despite several reminders.
 
-Sauf erreur ou omission de notre part, les factures reprises sur notre précédent rappel n’ont pas été réglées.
-
-Nous vous prions de trouver ci-dessous le relevé des factures échues et vous invitons donc à procéder au règlement dans les dix jours sur notre compte bancaire BE33 3400 3074 9846 – BBRUBEBB.
-
-Si entretemps vous avez effectué le paiement, veuillez nous excuser pour ce rappel.
-
-Nous restons à votre disposition et vous prions d'agréer, Cher(e) Docteur, Madame, Monsieur, l'expression de nos sentiments dévoués.
-
-
-Pour le service comptabilité
-
-JF MARECHAL
-Jf.marechal@alcyonbelux.be
-04/338 84 34
-  ]]></field>
+Give 8 days for full payment, or legal action for the recovery of the debt will be taken without further notice.
+      </field>
   </record>
 </odoo>
