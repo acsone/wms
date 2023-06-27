@@ -5,13 +5,13 @@
     <field
       name="name"
     >stock.backorder.choice.form (in alce_stock_picking_backorder_helpdesk)</field>
-    <field name="model">stock.backorder.choice</field>
+    <field name="model">stock.backorder.reason.choice</field>
     <field
       name="inherit_id"
-      ref="stock_picking_backorder.stock_backorder_choice_view_form"
+      ref="stock_picking_backorder_reason.stock_backorder_choice_view_form"
     />
     <field name="arch" type="xml">
-      <field name="is_purchase_back_order_accepted" position="after">
+      <field name="backorder_action_to_do" position="after">
         <field name="is_helpdesk_ticket_to_create" />
       </field>
       <group name="main" position="after">

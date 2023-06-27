@@ -8,7 +8,7 @@
     <field name="model">stock.backorder.reason</field>
     <field
       name="inherit_id"
-      ref="stock_picking_backorder.stock_backorder_reason_form"
+      ref="stock_picking_backorder_reason.stock_backorder_reason_form_view"
     />
     <field name="arch" type="xml">
       <field name="keep_grn" position="after">
@@ -27,13 +27,13 @@
     <field name="model">stock.backorder.reason</field>
     <field
       name="inherit_id"
-      ref="stock_picking_backorder.stock_backorder_reason_tree_view"
+      ref="stock_picking_backorder_reason.stock_backorder_reason_tree_view"
     />
     <field name="arch" type="xml">
-      <field name="keep_grn" position="after">
+      <xpath expr="//tree" position="inside">
         <field name="is_helpdesk_ticket_to_create" />
         <field name="helpdesk_ticket_reason_id" />
-      </field>
+      </xpath>
     </field>
   </record>
 </odoo>

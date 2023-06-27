@@ -2,7 +2,8 @@
 Alc Stock Picking Backorder Reason
 ==================================
 
-Defines data for Alcyon when managing backorder reasons
+Allows to refine data for Alcyon when managing backorder reasons according to
+grn.
 
 Changelog
 =========

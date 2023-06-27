@@ -249,7 +249,6 @@ exclude = [
   'odoo/addons/alce_l10n_be_reports/*',
   'odoo/addons/alce_purchase_report/*',
   'odoo/addons/alce_split_coda/*',
-  'odoo/addons/alce_stock_picking_backorder_helpdesk/*',
   'odoo/addons/alcyon_credit_control/*',
   'odoo/addons/authenticated_partner_mixin/*',
   'odoo/addons/base_cached_xmlid/*',

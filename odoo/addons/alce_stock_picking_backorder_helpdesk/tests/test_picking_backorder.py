@@ -1,22 +1,23 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Camptocamp SA
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
+# Copyright 2023 ACSONE SA/NV
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo.tests.common import SavepointCase
+from odoo.fields import Command
+from odoo.tests.common import TransactionCase
 
 
-class TestPickingBackorder(SavepointCase):
+class TestPickingBackorder(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestPickingBackorder, cls).setUpClass()
+        super().setUpClass()
         cls.product_model = cls.env["product.product"]
         cls.partner_model = cls.env["res.partner"]
         cls.location_model = cls.env["stock.location"]
         cls.stock_picking_model = cls.env["stock.picking"]
         cls.stock_picking_type_model = cls.env["stock.picking.type"]
         cls.backorder_reason_model = cls.env["stock.backorder.reason"]
-        cls.backorder_choice_model = cls.env["stock.backorder.choice"]
+        cls.backorder_reason_choice_model = cls.env["stock.backorder.reason.choice"]
         cls.backorder_confirmation_model = cls.env["stock.backorder.confirmation"]
         cls.helpdesk_ticket_model = cls.env["helpdesk.ticket"]
         cls.helpdesk_ticket_reason_model = cls.env["helpdesk.ticket.reason"]
@@ -24,7 +25,7 @@ class TestPickingBackorder(SavepointCase):
         cls.product = cls.product_model.create(
             {
                 "name": "Unittest P1",
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
             }
         )
@@ -32,7 +33,7 @@ class TestPickingBackorder(SavepointCase):
         cls.partner = cls.partner_model.create(
             {
                 "name": "Unittest supplier",
-                "is_sale_back_order_accepted": False,
+                "sale_reason_backorder_strategy": "cancel",
                 "ref": "123321",
             }
         )
@@ -41,24 +42,21 @@ class TestPickingBackorder(SavepointCase):
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
         cls.output_location = cls.env.ref("stock.stock_location_output")
-        cls.grn = cls.env["stock.grn"].create(
-            {"carrier_id": cls.partner.id, "delivery_note_supplier_number": "12345678"}
-        )
 
-        picking_type_id = cls.env.ref("stock.picking_type_in").id
+        picking_type_in = cls.env.ref("stock.picking_type_in")
+        picking_type_in.backorder_reason_purchase = True
+        picking_type_in.backorder_reason = True
         location_id = cls.supplier_location.id
         location_dest_id = cls.stock_location.id
         # Create picking
         cls.picking = cls.stock_picking_model.create(
             {
-                "picking_type_id": picking_type_id,
+                "picking_type_id": picking_type_in.id,
                 "location_id": location_id,
                 "location_dest_id": location_dest_id,
                 "partner_id": cls.partner.id,
-                "move_lines": [
-                    (
-                        0,
-                        0,
+                "move_ids": [
+                    Command.create(
                         {
                             "name": "a move",
                             "product_id": cls.product.id,
@@ -69,39 +67,11 @@ class TestPickingBackorder(SavepointCase):
                         },
                     )
                 ],
-                "grn_id": cls.grn.id,
             }
         )
-        cls.picking_waiting_availability = cls.stock_picking_model.create(
-            {
-                "picking_type_id": cls.env.ref("stock.picking_type_out").id,
-                "location_id": cls.stock_location.id,
-                "location_dest_id": cls.output_location.id,
-                "partner_id": cls.partner.id,
-                "move_lines": [
-                    (
-                        0,
-                        0,
-                        {
-                            "name": "a move",
-                            "product_id": cls.product.id,
-                            "product_uom_qty": 10,
-                            "product_uom": cls.product.uom_id.id,
-                            "location_id": cls.stock_location.id,
-                            "location_dest_id": cls.output_location.id,
-                        },
-                    )
-                ],
-                "grn_id": cls.grn.id,
-            }
-        )
-        # Transfer picking partially
         cls.picking.action_confirm()
-        cls.picking.force_assign()
-        # Don't force assign to let the picking into waiting availability state
-        cls.picking_waiting_availability.action_confirm()
-        pack_operation = cls.picking.pack_operation_product_ids
-        pack_operation.write({"qty_done": 3})
+        cls.picking.action_assign()
+        cls.picking.move_line_ids.write({"qty_done": 3})
 
         # Define helpdesk ticket values
         cls.ticket_reason = cls.helpdesk_ticket_reason_model.create(
@@ -112,7 +82,9 @@ class TestPickingBackorder(SavepointCase):
         self, backorder_accepted, backorder_action, helpdesk_needed
     ):
         # Define the backorder behavior on partner
-        self.partner.is_purchase_back_order_accepted = backorder_accepted
+        self.partner.purchase_reason_backorder_strategy = (
+            "create" if backorder_accepted else "cancel"
+        )
 
         # Define backorder reason
         backorder_reason = self.backorder_reason_model.create(
@@ -123,14 +95,15 @@ class TestPickingBackorder(SavepointCase):
                 "helpdesk_ticket_reason_id": self.ticket_reason.id,
             }
         )
-
-        result = self.picking.do_new_transfer()
+        result = self.picking.with_context(skip_sms=True).button_validate()
 
         # Check that the transfer action return the good wizard
-        self.assertEqual(result["res_model"], "stock.backorder.choice")
+        self.assertEqual(result["res_model"], "stock.backorder.reason.choice")
 
         # Create backorder choice wizard and execute it
-        wizard = self.backorder_choice_model.with_context(result["context"]).create(
+        wizard = self.backorder_reason_choice_model.with_context(
+            **result["context"]
+        ).create(
             {"reason_id": backorder_reason.id, "helpdesk_ticket_description": "test"}
         )
         wizard.apply()
@@ -140,20 +113,26 @@ class TestPickingBackorder(SavepointCase):
             [("backorder_id", "=", self.picking.id)]
         )
 
+        moves_done = self.picking.move_ids.filtered(lambda m: m.state == "done")
+        moves_cancelled = self.picking.move_ids.filtered(lambda m: m.state == "cancel")
+        has_backorder = backorder_action == "create" or (
+            backorder_action == "use_partner_option" and backorder_accepted
+        )
+
         # Check picking values
-        self.assertEqual(len(self.picking.move_lines), 1)
-        self.assertEqual(self.picking.move_lines.product_id, self.product)
-        self.assertEqual(self.picking.move_lines.product_uom_qty, 3)
-        self.assertEqual(self.picking.move_lines.state, "done")
+        self.assertEqual(len(moves_done), 1)
+        self.assertEqual(moves_done.product_id, self.product)
+        self.assertEqual(moves_done.product_uom_qty, 3)
         self.assertEqual(self.picking.state, "done")
 
         # Check backorder values
-        self.assertEqual(len(backorder), 1)
-        self.assertEqual(backorder.move_lines.product_uom_qty, 7)
-        keep_backorder = backorder_action == "create" or (
-            backorder_action == "use_partner_option" and backorder_accepted
-        )
-        self.assertEqual(backorder.state, "assigned" if keep_backorder else "cancel")
+        if has_backorder:
+            self.assertEqual(len(backorder), 1)
+            self.assertEqual(backorder.move_ids.product_uom_qty, 7)
+            self.assertEqual(backorder.state, "assigned")
+        else:
+            self.assertEqual(len(moves_cancelled), 1)
+            self.assertEqual(moves_cancelled.product_uom_qty, 7)
 
         # Check helpdesk ticket creation
         ticket = self.helpdesk_ticket_model.search(
@@ -162,7 +141,7 @@ class TestPickingBackorder(SavepointCase):
         if helpdesk_needed:
             self.assertEqual(len(ticket), 1)
             self.assertEqual(ticket.partner_id, self.partner)
-            self.assertEqual(ticket.description, "test")
+            self.assertEqual(ticket.description, "<p>test</p>")
             # Check that the name has a reference and not the default value
             self.assertTrue(ticket.name)
             self.assertNotEqual(ticket.name, "/")

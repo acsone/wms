@@ -15,7 +15,7 @@
         # "alce_l10n_be_reports",
         # "alce_split_coda",
         "alce_stock_barcode",
-        # "alce_stock_picking_backorder_helpdesk",
+        "alce_stock_picking_backorder_helpdesk",
     ],
     "data": [],
     "demo": [],

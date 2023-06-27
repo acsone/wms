@@ -1,19 +1,18 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 {
     "name": "Alc Oeel Stock Picking Backorder Helpdesk",
     "description": """
         Alcyon: Add the ability to create a helpdesk ticket in case of backorder""",
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "Other proprietary",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alce_helpdesk", "stock_picking_backorder"],
+    "depends": ["alce_helpdesk", "alc_stock_picking_backorder_reason"],
     "data": [
         "wizards/stock_backorder_choice.xml",
-        "views/stock_backorder_reason.xml",
+        "views/stock_backorder_reason_views.xml",
         "data/stock_backorder_reason.xml",
     ],
     "demo": [],
-    'installable': False
+    "installable": True,
 }

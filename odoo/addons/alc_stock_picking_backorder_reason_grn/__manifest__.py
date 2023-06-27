@@ -4,12 +4,13 @@
 {
     "name": "Alc Stock Picking Backorder Reason",
     "description": """
-        Defines data for Alcyon when managing backorder reasons""",
+        Allows to refine data for Alcyon when managing backorder reasons
+        according to grn""",
     "version": "16.0.1.0.0",
-    "license": "LGPL-3",
+    "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["stock_picking_backorder_reason"],
+    "depends": ["stock_picking_backorder_reason", "stock_picking_backorder_reason_grn"],
     "data": [
         "data/stock_backorder_reason.xml",
     ],
