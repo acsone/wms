@@ -14,11 +14,12 @@
         # OCA
         "queue_job_cron",
         "report_csv",
+        "base_optional_quick_create",
+        "mail_environment",
+        "server_action_mass_edit",
         # ALC
         "alc_base_auto_join",
         "alc_queue_job_security",
         "alc_cerberus_utils",
-        "base_optional_quick_create",
-        "mail_environment",
     ],
 }
