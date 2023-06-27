@@ -1,14 +1,13 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Julien Coux (Camptocamp)
+# Copyright 2023 ACSONE SA/NV
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import api, fields, models
+from odoo import fields
+
+from odoo.addons.base.models.res_partner import Partner
 
 
-class ResPartner(models.Model):
-    _inherit = "res.partner"
-
-    @api.multi
+class ResPartner(Partner):
     def _compute_helpdesk_tickets_count(self):
         for partner in self:
             domain = [("partner_id", "=", partner.id)]
@@ -19,7 +18,6 @@ class ResPartner(models.Model):
 
     helpdesk_tickets_count = fields.Integer(compute="_compute_helpdesk_tickets_count")
 
-    @api.multi
     def action_view_helpdesk_tickets(self):
         self.ensure_one()
         action_data = self.env.ref("helpdesk.helpdesk_ticket_action_main_tree").read()[

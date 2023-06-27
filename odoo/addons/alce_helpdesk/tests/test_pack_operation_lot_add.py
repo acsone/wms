@@ -1,14 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.fields import Command
+from odoo.tests.common import TransactionCase
 
 
-class TestPackOperationLotAdd(SavepointCase):
+class TestPackOperationLotAdd(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestPackOperationLotAdd, cls).setUpClass()
+        super().setUpClass()
         cls.HelpdeskTicket = cls.env["helpdesk.ticket"]
         cls.ProductCategory = cls.env["product.category"]
         cls.ProductProduct = cls.env["product.product"]
@@ -26,12 +26,12 @@ class TestPackOperationLotAdd(SavepointCase):
             for d in [
                 {
                     "name": "Unittest Reception P1",
-                    "uom_id": cls.env.ref("product.product_uom_unit").id,
+                    "uom_id": cls.env.ref("uom.product_uom_unit").id,
                     "tracking": "lot",
                 },
                 {
                     "name": "Unittest Reception P2",
-                    "uom_id": cls.env.ref("product.product_uom_unit").id,
+                    "uom_id": cls.env.ref("uom.product_uom_unit").id,
                     "tracking": "lot",
                 },
             ]
@@ -48,7 +48,6 @@ class TestPackOperationLotAdd(SavepointCase):
                 "name": "reception",
                 "location_id": cls.stock_location.id,
                 "usage": "internal",
-                "act_as_view": True,
             }
         )
         cls.bin1 = cls.StockLocation.create(
@@ -70,10 +69,8 @@ class TestPackOperationLotAdd(SavepointCase):
                 "picking_type_id": cls.env.ref("stock.picking_type_in").id,
                 "location_id": cls.supplier_location.id,
                 "location_dest_id": cls.reception_location.id,
-                "move_lines": [
-                    (
-                        0,
-                        0,
+                "move_ids": [
+                    Command.create(
                         {
                             "name": "move 1",
                             "product_id": product.id,
@@ -100,15 +97,15 @@ class TestPackOperationLotAdd(SavepointCase):
             default_life_date_allowed=True
         ).create({"picking_id": picking.id})
 
-        op1 = picking.pack_operation_product_ids[0]
+        op1 = picking.move_line_ids[0]
 
         # Simulate putaway to bin1 and bin2
         op1.location_dest_id = self.bin1
 
         tickets = self.HelpdeskTicket.search([])
         # select operation
-        wiz.operation_id = op1
-        wiz._onchange_operation_id()
+        wiz.move_line_id = op1
+        wiz._compute_location_dest_id()
         wiz.qty = wiz.remaining_qty + 1
         wiz.is_surplus_qty_confirmed = True
         wiz.button_nextop()
@@ -128,15 +125,15 @@ class TestPackOperationLotAdd(SavepointCase):
             default_life_date_allowed=True
         ).create({"picking_id": picking.id})
 
-        op1 = picking.pack_operation_product_ids[0]
+        op1 = picking.move_line_ids[0]
 
         # Simulate putaway to bin1 and bin2
         op1.location_dest_id = self.bin1
 
         tickets = self.HelpdeskTicket.search([])
         # select operation
-        wiz.operation_id = op1
-        wiz._onchange_operation_id()
+        wiz.move_line_id = op1
+        wiz._compute_location_dest_id()
         wiz.qty = wiz.remaining_qty
         wiz.button_nextop()
         new_tickets = self.HelpdeskTicket.search([]) - tickets

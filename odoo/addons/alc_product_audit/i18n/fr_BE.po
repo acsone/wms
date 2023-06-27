@@ -63,12 +63,6 @@ msgstr "- Le produit n'a pas toutes les dimensions de conditionnement"
 
 #. module: alc_product_audit
 #: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-msgid "- Product is not salable and still has a bin"
-msgstr ""
-"- Le produit ne peut être vendu ou est archivé et est associé à un rangement"
-
-#. module: alc_product_audit
-#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product is not salable but not archived"
 msgstr "- Le produit ne peut être vendu et non archivé"
 
@@ -219,7 +213,7 @@ msgstr "- Produit ne pouvant être vendu mais non archivé"
 msgid "Product"
 msgstr "Modèle de produit"
 
- module: alc_product_audit
+#. module: alc_product_audit
 #: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product has an anomaly"
 msgstr "Produits avec anomalies"
@@ -267,3 +261,8 @@ msgstr "Ne peut être vendu et non archivé"
 #: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "can be bought without buy routes"
 msgstr "Peut être acheté sans route Acheter"
+
+#~ msgid "- Product is not salable and still has a bin"
+#~ msgstr ""
+#~ "- Le produit ne peut être vendu ou est archivé et est associé à un "
+#~ "rangement"
