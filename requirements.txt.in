@@ -130,6 +130,9 @@ odoo-addon-stock-grn @ git+https://github.com/oca/stock-logistics-workflow.git@r
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@16.0-mig-base_sparse_field_list_support-hda#subdirectory=setup/base_sparse_field_list_support
 odoo-addon-base-partition @ git+https://github.com/OCA/server-tools.git@refs/pull/2615/head#subdirectory=setup/base_partition
 
+# OCA/server-ux
+odoo-addon-base-import-security-group @ git+https://github.com/OCA/server-ux.git@refs/pull/677/head#subdirectory=setup/base_import_security_group
+
 # OCA/web
 
 # camptocamp/odoo-cloud-platform
