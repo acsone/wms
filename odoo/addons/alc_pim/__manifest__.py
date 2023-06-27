@@ -1,27 +1,24 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "Alc PIM",
-    "description": """Alcyon PIM""",
-    "version": "10.0.1.0.3",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
+    "description": """Data for product categories, attributes and brands""",
     "depends": [
+        # OCA
+        "product_brand",
+        # ALC
         "alc_pim_product",
         "alc_pim_attribute_group",
         "alc_product_shop_category",
         "alc_product_link_notice",
-        "alc_storage_media_product",
-        "product_animal_species",
-        # data dependencies
-        "product_dimension",
-        "specific_product",
-        "specific_purchase",  # depends on alc_product_pharmacy, product_manufacturer
+        "alc_product_animal_species",
         "alc_product_audit",
-        "product_brand",
+        "alc_pim_attribute_group",
     ],
     "application": False,
     "data": [
@@ -29,11 +26,8 @@
         "data/attribute_attribute.xml",
         "data/attribute_option.xml",
         "data/product_brand.xml",
-        "views/product_category_views.xml",
     ],
     "demo": [],
     "pre_init_hook": "pre_init_hook",
     "post_init_hook": "post_init_hook",
-    "external_dependencies": {"python": ["unicodecsv", "openupgradelib"]},
-    'installable': False
 }

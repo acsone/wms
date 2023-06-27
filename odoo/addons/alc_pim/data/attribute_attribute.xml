@@ -1,16 +1,15 @@
 <odoo noupdate="1">
   <record model="attribute.attribute" id="attribute_species_ids">
-    <field name="allow_mass_editing" eval="False" />
     <field
       ref="alc_pim_attribute_group.marketing_attribute_group"
       name="attribute_group_id"
     />
     <field
       name="attribute_set_ids"
-      eval="[(6,0,[ref('alc_pim_attribute_group.attribute_set_medicaments'), ref('alc_pim_attribute_group.attribute_set_aliments'), ref('alc_pim_attribute_group.attribute_set_materiel')])]"
+      eval="[Command.set([ref('alc_pim_attribute_group.attribute_set_medicaments'), ref('alc_pim_attribute_group.attribute_set_aliments'), ref('alc_pim_attribute_group.attribute_set_materiel')])]"
     />
     <field
-      ref="product_animal_species.field_product_template_species_ids"
+      ref="alc_product_animal_species.field_product_template__species_ids"
       name="field_id"
     />
     <field ref="product.model_product_template" name="model_id" />
