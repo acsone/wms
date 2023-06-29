@@ -16,6 +16,7 @@
         "sale_order_line_cancel",
         "stock_location_zone",
         "alc_stock_orderpoint_product",
+        "alc_product_supplier",
         "alc_product_web_publish",
         "alc_product_dimensions_missing",
         "alc_product_pharmacy",
