@@ -17,6 +17,7 @@ RUN set -e \
        postgresql-client \
        expect \
        gettext \
+       libcups2 \
   && apt -y clean \
   && rm -rf /var/lib/apt/lists/*
 
