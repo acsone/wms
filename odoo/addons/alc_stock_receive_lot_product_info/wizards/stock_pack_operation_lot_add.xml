@@ -13,15 +13,21 @@
     />
     <field name="arch" type="xml">
       <group name="operation_details" position="after">
-        <group name="lots">
-          <field name="tracking" invisible="1" />
-          <field name="lot_ids" attrs="{'invisible': [('tracking', '!=', 'lot')]}">
-            <tree limit='5' default_order="expiration_date DESC, qty_available DESC">
-              <field name="name" />
-              <field name="qty_available" widget="integer" />
-              <field name="expiration_date" />
-            </tree>
-          </field>
+        <group name="circum_lots">
+          <group name="lots" col="1">
+            <field name="tracking" invisible="1" />
+            <field
+              name="lot_ids"
+              attrs="{'invisible': [('tracking', '!=', 'lot')]}"
+              nolabel="1"
+            >
+              <tree limit='5' default_order="expiration_date DESC, qty_available DESC">
+                <field name="name" />
+                <field name="qty_available" widget="integer" />
+                <field name="expiration_date" />
+              </tree>
+            </field>
+          </group>
         </group>
       </group>
     </field>

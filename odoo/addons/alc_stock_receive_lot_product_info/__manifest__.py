@@ -17,6 +17,7 @@
         "alc_product_lot_info",  # AGPL
         "alc_stock_receive_lot_backorder_quantity",  # AGPL
         "alc_stock_receive_lot",  # LGPL
+        "stock_lot_is_archived",
     ],
     "data": ["wizards/stock_pack_operation_lot_add.xml"],
     "demo": [],
