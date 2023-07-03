@@ -18,7 +18,7 @@ def _fix_partners_in_geo_release_channels(env):
     SET
         in_geo_release_channel = False
     WHERE
-        not_in_dynamic_delivery_round is not True
+        not_in_dynamic_delivery_round = True
         """
     )
 
