@@ -105,6 +105,7 @@ class TestStockDeliveryNote(TransactionCase):
         cls.so_pdf_csv, cls.picking_pdf_csv = cls._create_and_transfer_picking(
             partner=cls.partner, customer=cls.customer_pdf_csv
         )
+        cls.picking_csv_number = cls.picking_csv.name.split("/")[-1]
 
     @classmethod
     def _create_and_transfer_picking(
@@ -219,7 +220,7 @@ class TestStockDeliveryNote(TransactionCase):
         self.partner.vet_depot_number = "778899"
         tax_amount = ",".join(str(self.tax.amount).split("."))
         expected = [
-            [self.picking_csv.id, "tester@pytest.com", ""],
+            [self.picking_csv_number, "tester@pytest.com", ""],
             [
                 "Prof. HOENS OLIVIER",
                 "Rue Polisart 2 A",
@@ -255,7 +256,7 @@ class TestStockDeliveryNote(TransactionCase):
         """Check the format of the csv document for a normal customer."""
         tax_amount = ",".join(str(self.tax.amount).split("."))
         expected = [
-            [self.picking_csv.id, "tester@pytest.com", ""],
+            [self.picking_csv_number, "tester@pytest.com", ""],
             [
                 "Prof. HOENS OLIVIER",
                 "Rue Polisart 2 A",
@@ -285,7 +286,7 @@ class TestStockDeliveryNote(TransactionCase):
         """Check with no vat so vat amount is zero."""
         self.tax.is_vat = False
         expected = [
-            [self.picking_csv.id, "tester@pytest.com", ""],
+            [self.picking_csv_number, "tester@pytest.com", ""],
             [
                 "Prof. HOENS OLIVIER",
                 "Rue Polisart 2 A",
