@@ -124,7 +124,7 @@ odoo-addon-purchase-order-approved==16.0.1.0.0.4
 odoo-addon-purchase-stock-packaging==16.0.1.0.0.4
 odoo-addon-queue-job==16.0.2.4.0
 odoo-addon-queue-job-cron==16.0.1.0.0.1
-odoo-addon-report-csv==16.0.1.0.0.2
+odoo-addon-report-csv @ git+https://github.com/acsone/reporting-engine.git@8a7b3274cdd06e156815ac363339af49c0d286f4#subdirectory=setup/report_csv
 odoo-addon-report-xlsx==16.0.1.0.2
 odoo-addon-report-xlsx-helper==16.0.1.0.0.3
 odoo-addon-report-xml==16.0.1.1.0.1
