@@ -64,6 +64,16 @@ msgid "Av. annual consumption"
 msgstr ""
 
 #. module: alc_purchase_order_builder
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_product_product__average_annual_consumption
+msgid "Average annual consumption"
+msgstr ""
+
+#. module: alc_purchase_order_builder
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_product_product__average_three_months_consumption
+msgid "Average three months consumption"
+msgstr ""
+
+#. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
 msgid "Class:"
 msgstr ""
@@ -166,6 +176,11 @@ msgstr ""
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
 msgid "Packaging Quantity"
+msgstr ""
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Picking Zones"
 msgstr ""
 
 #. module: alc_purchase_order_builder
@@ -300,7 +315,7 @@ msgstr ""
 
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
-msgid "Stock coverage (days)"
+msgid "Stock coverage (weeks)"
 msgstr ""
 
 #. module: alc_purchase_order_builder
