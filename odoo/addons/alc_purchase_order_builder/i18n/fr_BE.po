@@ -69,6 +69,16 @@ msgid "Av. annual consumption"
 msgstr "Conso. moyenne (1 an)"
 
 #. module: alc_purchase_order_builder
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_product_product__average_annual_consumption
+msgid "Average annual consumption"
+msgstr "Consommation annuelle moyenne"
+
+#. module: alc_purchase_order_builder
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_product_product__average_three_months_consumption
+msgid "Average three months consumption"
+msgstr "Consommation moyenne sur trois mois"
+
+#. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
 msgid "Class:"
 msgstr "Classe:"
@@ -172,6 +182,11 @@ msgstr "Conditionnement"
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
 msgid "Packaging Quantity"
 msgstr "Quantité de conditionnement"
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Picking Zones"
+msgstr ""
 
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
@@ -307,7 +322,9 @@ msgstr "Stock Disponible"
 
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
-msgid "Stock coverage (days)"
+#, fuzzy
+#| msgid "Stock coverage (days)"
+msgid "Stock coverage (weeks)"
 msgstr "Couverture du stock (jours)"
 
 #. module: alc_purchase_order_builder
@@ -394,12 +411,6 @@ msgstr ""
 #~| msgid "Ordered qty"
 #~ msgid "Ordered qty of unit"
 #~ msgstr "Qté commande"
-
-#~ msgid "Average annual consumption"
-#~ msgstr "Consommation annuelle moyenne"
-
-#~ msgid "Average three months consumption"
-#~ msgstr "Consommation moyenne sur trois mois"
 
 #~ msgid "Stock Move"
 #~ msgstr "Mouvement de stock"
