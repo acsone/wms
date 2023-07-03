@@ -32,7 +32,10 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
                     lambda s: s.state not in ("done", "cancel")
                 )
                 trap_sa.assert_enqueued_job(advices._auto_process)
-                trap_sa.perform_enqueued_jobs()
+                with trap_jobs() as trap_ba:
+                    # this job should create a job to assign backorders to a release channel
+                    trap_sa.perform_enqueued_jobs()
+                    trap_ba.perform_enqueued_jobs()
                 shipment_advice = advices.filtered(lambda s: s.state == "done")
         self.assertTrue(shipment_advice)
         self.assertEqual(shipment_advice.planned_pickings_count, 3)
@@ -82,3 +85,34 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
             UserError, msg="No picking to deliver for channel Default"
         ):
             self.channel.action_delivering()
+
+    def test_05(self):
+        """
+        Deliver with backorder, no other channel available:
+
+        - the backorder should not be assigned to the channel
+        - the backorder should not be assigned to the shipment advice
+        """
+        self._update_qty_in_location(self.output_loc, self.product2, 10)
+        self.pickings.do_unreserve()
+        self.pickings.action_assign()
+        self.test_01()
+        backorder = self.pickings.backorder_ids
+        self.assertFalse(backorder.release_channel_id)
+        self.assertFalse(backorder.planned_shipment_advice_id)
+
+    def test_06(self):
+        """
+        Deliver with backorder, another channel available:
+
+        - the backorder should be assigned to the available channel
+        - the backorder should not be assigned to the shipment advice
+        """
+        channel = self.channel.copy({"name": "channel 2"})
+        self._update_qty_in_location(self.output_loc, self.product2, 10)
+        self.pickings.do_unreserve()
+        self.pickings.action_assign()
+        self.test_01()
+        backorder = self.pickings.backorder_ids
+        self.assertEqual(backorder.release_channel_id, channel)
+        self.assertFalse(backorder.planned_shipment_advice_id)
