@@ -63,8 +63,8 @@ class ProductTemplate(Product):
 
     mto_stock_new_route = fields.Boolean(
         default=False,
-        compute="_compute_mto_stock_no_mto_route",
-        search="_search_mto_stock_no_mto_route",
+        compute="_compute_mto_stock_new_route",
+        search="_search_mto_stock_new_route",
     )
 
     mto_stock_5_days = fields.Boolean(
@@ -262,7 +262,9 @@ class ProductTemplate(Product):
     def _compute_mto_stock_no_mto_route(self):
         ids_mto_stock_no_mto_route = set(self._get_mto_stock_no_mto_route())
         for product in self:
-            product.mto_stock_no_mto_route = product.id in ids_mto_stock_no_mto_route
+            product.mto_stock_no_mto_route = bool(
+                product.id in ids_mto_stock_no_mto_route
+            )
 
     def _search_mto_stock_no_mto_route(self, operator, value):
         ids = self._get_mto_stock_no_mto_route()

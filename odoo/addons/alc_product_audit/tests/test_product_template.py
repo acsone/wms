@@ -13,7 +13,6 @@ class TestProductTemplate(ProductCharacteristicsCommonFeatures):
 
     def test_1(self):
         # no min/max, and no route for 'approvisionner a la commande'
-        self.product_template._compute_min_max_and_on_command_reappro()
         self.assertTrue(self.product_template.no_min_max_no_on_command_reappro)
         self.assertTrue(self.product_template.has_anomaly)
 
@@ -26,13 +25,11 @@ class TestProductTemplate(ProductCharacteristicsCommonFeatures):
                 "route_ids": [Command.link(self.route_mto.id)],
             }
         )
-        self.product_template._compute_min_max_and_on_command_reappro()
         self.assertTrue(self.product_template.min_max_on_command_reappro)
 
     def test_3(self):
         # not sale_ok but not archived
         self.product_template.sale_ok = False
-        self.product_template._compute_sale_not_ok_not_archived()
         self.assertTrue(self.product_template.sale_not_ok_not_archived)
 
     def test_5(self):
@@ -40,7 +37,6 @@ class TestProductTemplate(ProductCharacteristicsCommonFeatures):
         self.product_template.write(
             {"route_ids": [Command.set([self.route_aliment.id, self.route_medoc.id])]}
         )
-        self.product_template._compute_mismatch_route_picking()
         self.assertTrue(self.product_template.mismatch_route_picking)
 
     def test_7(self):
@@ -49,7 +45,6 @@ class TestProductTemplate(ProductCharacteristicsCommonFeatures):
             {"route_ids": [Command.unlink(self.route_buy.id)], "purchase_ok": True}
         )
 
-        self.product_template._compute_can_be_bought_without_buy_route()
         self.assertTrue(self.product_template.can_be_bought_without_buy_route)
 
     def test_8(self):
@@ -58,13 +53,10 @@ class TestProductTemplate(ProductCharacteristicsCommonFeatures):
             Command.set([self.route_mto.id, self.route_new.id])
         ]
 
-        self.product_template._compute_mto_with_abnormal_route()
         self.assertTrue(self.product_template.mto_with_abnormal_route)
 
     def test_9(self):
         # product without dimensions
-
-        self.product_template._compute_has_no_dimensions()
         self.assertTrue(self.product_template.has_no_dimensions)
 
         self.product_template.write(
@@ -75,8 +67,6 @@ class TestProductTemplate(ProductCharacteristicsCommonFeatures):
 
     def test_10(self):
         # product without packaging dimensions
-
-        self.product_template._compute_packaging_has_no_dimensions()
         self.assertTrue(self.product_template.packaging_has_no_dimensions)
 
         self.product_palette.write(
@@ -91,15 +81,12 @@ class TestProductTemplate(ProductCharacteristicsCommonFeatures):
 
     def test_11(self):
         # product without packaging at all
-
-        self.product_template1._compute_packaging_has_no_dimensions()
         self.assertFalse(self.product_template1.packaging_has_no_dimensions)
 
     def test_12(self):
         # product not sale_ok but on website
 
         self.product_template1.write({"sale_ok": False, "web_published": True})
-        self.product_template1._compute_not_sold_on_website()
         self.assertTrue(self.product_template1.not_sold_on_website)
 
     def test_13(self):
@@ -107,18 +94,15 @@ class TestProductTemplate(ProductCharacteristicsCommonFeatures):
 
         self.product_template1.is_mto = True
         self.product_template1.invalidate_recordset()
-        self.product_template1._compute_mto_purchased_not_sold()
         self.assertTrue(self.product_template1.mto_purchased_not_sold)
 
     def test_14(self):
         # product in a mto bin but without mto route
         self.product_template1.write({"location_id": self.location_bin_mto.id})
-        self.product_template1._compute_mto_stock_no_mto_route()
         self.assertTrue(self.product_template1.mto_stock_no_mto_route)
 
         self.product_template1.write({"route_ids": [Command.set([self.route_mto.id])]})
         self.product_template1.invalidate_recordset()
-        self.product_template1._compute_mto_stock_no_mto_route()
         self.assertFalse(self.product_template1.mto_stock_no_mto_route)
 
     def test_15(self):
@@ -130,6 +114,4 @@ class TestProductTemplate(ProductCharacteristicsCommonFeatures):
                 "location_id": self.location_bin_mto.id,
             }
         )
-
-        self.product_template1._compute_mto_stock_new_route()
         self.assertTrue(self.product_template1.mto_stock_new_route)
