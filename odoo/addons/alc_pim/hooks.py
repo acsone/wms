@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import csv
 import logging
 import os
 from collections import defaultdict
-
-import unicodecsv as csv
 
 import odoo
 
@@ -22,7 +20,7 @@ def pre_init_hook(cr):
         lang = Langs.search([("code", "=", code)])
         if not lang.active:
             lang.active = True
-            env["ir.translation"].load_module_terms(["base"], [lang.code])
+            env["ir.module.module"]._load_module_terms(["base"], [lang.code])
 
 
 def post_init_hook(cr, registry=None):
@@ -34,7 +32,7 @@ def _load_attribute_options_translations(cr):
     _logger.info("Load translations for attributes options")
     env = odoo.api.Environment(cr, odoo.SUPERUSER_ID, {})
     path = os.path.join(os.path.dirname(__file__), "static", "alc_options.csv")
-    with open(path) as csv_file:
+    with open(path, encoding="utf-8") as csv_file:
         csv_reader = csv.DictReader(csv_file, delimiter=",")
         all_options_records = env["attribute.option"].search([])
         option_ids_by_en_name = defaultdict(list)
@@ -53,7 +51,7 @@ def _load_categories_translations(cr):
     _logger.info("Load translations for categories")
     env = odoo.api.Environment(cr, odoo.SUPERUSER_ID, {})
     path = os.path.join(os.path.dirname(__file__), "static", "categories.csv")
-    with open(path) as csv_file:
+    with open(path, encoding="utf-8") as csv_file:
         csv_reader = csv.DictReader(csv_file, delimiter=";")
         all_categories_records = env["product.category"].search([("is_web", "=", True)])
         categorie_ids_by_en_name = defaultdict(list)
