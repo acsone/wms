@@ -45,5 +45,6 @@
         "alc_reception_pharmacy",
         "alc_reception_pharmacy_printing",
         "alc_reception_pharmacy_geo_release_channel",
+        "alc_stock_storage_type_sequence_condition",
     ],
 }
