@@ -447,7 +447,7 @@ msgstr ""
 #. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_move_line_form
 msgid "🖶Print Ali Product Label"
-msgstr "🖶Imprimer produit aliment"
+msgstr "🖶Imprimer étiquette produit aliment"
 
 #. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_picking_form
@@ -457,16 +457,14 @@ msgstr "🖶Imprimer produits aliments"
 #. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_move_line_form
 #, fuzzy
-#| msgid "🖶Print Product Label"
 msgid "🖶Print Lot Label"
-msgstr "🖶Imprimer l'étiquette réception produit"
+msgstr "🖶Imprimer étiquette réception colis"
 
 #. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_move_line_form
 #, fuzzy
-#| msgid "🖶Print Product Label"
 msgid "🖶Print Med Product Label"
-msgstr "🖶Imprimer l'étiquette réception produit"
+msgstr "🖶Imprimer étiquette produit médicament"
 
 #. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_picking_form
@@ -476,4 +474,4 @@ msgstr "🖶Imprimer produits médicaments"
 #. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_move_line_form
 msgid "🖶Print Product Label"
-msgstr "🖶Imprimer l'étiquette réception produit"
+msgstr "🖶Imprimer étiquette réception produit"
