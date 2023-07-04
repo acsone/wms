@@ -84,8 +84,7 @@
             "raw" : {
               "type" : "text",
               "analyzer" : "analyzer_lang",
-              "similarity": "boolean",
-              "index_options": "offsets"
+              "similarity": "boolean"
             }
           }
       },
@@ -182,8 +181,7 @@
           "start": {
             "type": "text",
             "analyzer": "analyzer_startswith",
-            "similarity": "boolean",
-            "index_options": "offsets"
+            "similarity": "boolean"
           }
         },
         "type": "keyword"
@@ -484,8 +482,7 @@
             "raw" : {
               "type" : "text",
               "analyzer" : "analyzer_lang",
-              "similarity": "boolean",
-              "index_options": "offsets"
+              "similarity": "boolean"
             }
           }
       },
@@ -582,8 +579,7 @@
           "start": {
             "type": "text",
             "analyzer": "analyzer_startswith",
-            "similarity": "boolean",
-            "index_options": "offsets"
+            "similarity": "boolean"
           }
         },
         "type": "keyword"
@@ -883,8 +879,7 @@
             "raw" : {
               "type" : "text",
               "analyzer" : "analyzer_lang",
-              "similarity": "boolean",
-              "index_options": "offsets"
+              "similarity": "boolean"
             }
           }
       },
@@ -981,8 +976,7 @@
           "start": {
             "type": "text",
             "analyzer": "analyzer_startswith",
-            "similarity": "boolean",
-            "index_options": "offsets"
+            "similarity": "boolean"
           }
         },
         "type": "keyword"
