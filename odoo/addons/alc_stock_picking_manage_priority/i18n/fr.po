@@ -25,3 +25,10 @@ msgstr "Priorité éditable?"
 #: model:ir.model,name:alc_stock_picking_manage_priority.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
+
+#. module: alc_stock_picking_manage_priority
+#. odoo-python
+#: code:addons/alc_stock_picking_manage_priority/models/stock_picking.py:0
+#, python-format
+msgid "You don't have the right to change the priority."
+msgstr ""
