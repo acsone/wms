@@ -37,7 +37,7 @@ class PrintLabel(models.TransientModel):
             result["picking_ids"] = [fields.Command.set(active_ids)]
         elif active_model == "stock.production.lot":
             result["lot_ids"] = [fields.Command.set(active_ids)]
-        elif active_model == "stock.move.operation":
+        elif active_model == "stock.move.line":
             result["pack_operation_ids"] = [fields.Command.set(active_ids)]
         else:
             raise UserError(_("Invalid model"))
@@ -49,7 +49,7 @@ class PrintLabel(models.TransientModel):
 
         if self.label_type == "package":
             if self.printer_id.type != "zebra":
-                raise UserError(_("Invalid printer"))
+                raise UserError(_("Invalid printer (-> zebra)"))
             for picking in self.picking_ids:
                 picking.print_packages_label(
                     printer_id=self.printer_id.id, quantity=self.qty

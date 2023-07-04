@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-04 14:31+0000\n"
+"PO-Revision-Date: 2023-07-04 14:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -110,9 +112,15 @@ msgstr ""
 #. module: alc_product_label_printing
 #. odoo-python
 #: code:addons/alc_product_label_printing/wizards/print_label.py:0
+#, python-format
+msgid "Invalid printer (-> toshiba)"
+msgstr ""
+
+#. module: alc_product_label_printing
+#. odoo-python
 #: code:addons/alc_product_label_printing/wizards/print_label.py:0
 #, python-format
-msgid "Invalid printer"
+msgid "Invalid printer (-> zebra)"
 msgstr ""
 
 #. module: alc_product_label_printing

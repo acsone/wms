@@ -19,7 +19,7 @@ msgstr ""
 #. module: alc_product_label_printer
 #: model:ir.model.fields,field_description:alc_product_label_printer.field_res_users__printing_product_label_printer_id
 msgid "Product Label Printer"
-msgstr "Imprimante Etiquette Produit"
+msgstr "Imprimante étiquette produit"
 
 #. module: alc_product_label_printer
 #: model:ir.model,name:alc_product_label_printer.model_res_users

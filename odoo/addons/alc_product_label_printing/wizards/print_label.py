@@ -22,7 +22,7 @@ class PrintLabel(Label):
 
         if self.label_type == "product":
             if self.printer_id.type != "toshiba":
-                raise UserError(_("Invalid printer"))
+                raise UserError(_("Invalid printer (-> toshiba)"))
 
             for picking in self.picking_ids:
                 picking.print_products_label(
@@ -31,7 +31,7 @@ class PrintLabel(Label):
             return True
         if self.label_type == "food_product":
             if self.printer_id.type != "zebra":
-                raise UserError(_("Invalid printer"))
+                raise UserError(_("Invalid printer (-> zebra)"))
             if self.picking_ids:
                 self.print_food_from_picking()
 
