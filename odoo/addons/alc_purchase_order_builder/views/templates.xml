@@ -245,7 +245,7 @@
                           <td>Class: </td>
                           <td>
                             <strong>
-                              <span t-esc="current_product.abc_storage" />
+                              <span t-field="current_product.abc_storage" />
                             </strong>
                           </td>
                         </tr>
@@ -260,13 +260,14 @@
                           </td>
                         </tr>
                         <tr>
-                          <td>Stock coverage (days)</td>
+                          <td>Stock coverage (weeks)</td>
                           <td>
                             <strong>
                               <t t-if="current_product.average_three_months_sale">
                               <span
-                                  t-esc="round(int(current_product.advised_qty + product_qty + current_product.virtual_available) /
-                                  (current_product.average_three_months_sale / 90.0), 2)"
+                                  id="stock_coverage"
+                                  t-esc="round(float(product_qty + current_product.virtual_available) /
+                                  float(current_product.average_three_months_consumption / 4.333), 2)"
                                 />
                               </t>
                               <t t-else="">
@@ -433,7 +434,10 @@
                   <tr>
                     <td>Av. 3 months consumption</td>
                     <td>
-                      <span t-field="current_product.average_three_months_sale" />
+                      <span
+                        id="average_three_months_consumption"
+                        t-field="current_product.average_three_months_consumption"
+                      />
                     </td>
                   </tr>
                   <tr>
@@ -445,7 +449,10 @@
                   <tr>
                     <td>Stock available</td>
                     <td>
-                      <span t-field="current_product.virtual_available" />
+                      <span
+                        id="virtual_available"
+                        t-field="current_product.virtual_available"
+                      />
                     </td>
                   </tr>
                   <tr>
@@ -660,7 +667,7 @@
       </div>
       <div class="col-md-3 h-100 d-inline-block" style="height: 100%; min-height: 100%">
         <div class="border" style="height: 100%; min-height: 100%; ">
-          <div style="height: 120px;">
+          <div>
             <div class="row">
               <div class="col-md-8">
                 <div id="products_list_header">
@@ -676,6 +683,13 @@
                     type="checkbox"
                     id="products_with_promo"
                   /> Products with promotions<br />
+                  <strong t-if="picking_zones">Picking Zones</strong><br />
+                  <t t-foreach="picking_zones" t-as="picking_zone">
+                      <input
+                      type="checkbox"
+                      t-att-id="'picking_zone_%s' % picking_zone.id"
+                    /> <t t-esc="picking_zone.display_name" /><br />
+                  </t>
                                     <input
                     type="text"
                     id="product_name"

@@ -7,9 +7,9 @@ odoo-addon-product-stock-state @ git+https://github.com/acsone/product-attribute
 odoo-addon-purchase-stock-packaging==16.0.1.0.0.4
 odoo-addon-sale-stock-picking-blocking==16.0.1.0.0.7
 odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/stock-logistics-workflow.git@f2ceafadb0008ee27a6346a432ef9f58f1726784#subdirectory=setup/sale_stock_restocking_fee_invoicing
-odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-transport.git@1b2c04230e2956bdacaff046f3f905dfd858b292#subdirectory=setup/shipment_advice
+odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-transport.git@d13ae58487e737a4cb4cbd063fcae626cb594c3f#subdirectory=setup/shipment_advice
 odoo-addon-shipment-advice-planner @ git+https://github.com/acsone/stock-logistics-transport.git@02392647556d5b7bb61a250d5e170ffa5ad09b57#subdirectory=setup/shipment_advice_planner
-odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/acsone/stock-logistics-transport.git@bd27da489a51d65e0998fdc0e6189af875407faa#subdirectory=setup/shipment_advice_planner_toursolver
+odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/acsone/stock-logistics-transport.git@105c2be432e9c7c0be0eebdff512eb2b7e7718c0#subdirectory=setup/shipment_advice_planner_toursolver
 odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com/acsone/stock-logistics-transport.git@f520def3eec887e7c4b36225cfd65b684d2b596e#subdirectory=setup/shipment_advice_planner_toursolver_queue_job
 odoo-addon-stock-available==16.0.1.0.1.3
 odoo-addon-stock-available-immediately==16.0.1.0.0.5
@@ -35,9 +35,9 @@ odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock
 odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/acsone/stock-logistics-workflow.git@471f86453e056e980c907479c5ba5693c3cb3140#subdirectory=setup/stock_move_propagate_first_move_cancel
 odoo-addon-stock-override-procurement @ git+https://github.com/acsone/stock-logistics-workflow.git@ac0568b760314fa721e8f167b8ffd61c16a14b36#subdirectory=setup/stock_override_procurement
 odoo-addon-stock-packaging-calculator==16.0.1.0.1
-odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@74479d7aabf266a4202daaaf0edb5cc0c4ba0ca6#subdirectory=setup/stock_picking_backorder_reason
+odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@f29361401b7b47b65abd054bda4f0c28946aa8b8#subdirectory=setup/stock_picking_backorder_reason
 odoo-addon-stock-picking-backorder-reason-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@385cf7dc6eb9ce7c43ca7e0f697d513c4cd6891b#subdirectory=setup/stock_picking_backorder_reason_grn
-odoo-addon-stock-picking-batch-creation @ git+https://github.com/acsone/wms.git@4e0650b58e9bf8387fbb9410601a15f726c6b936#subdirectory=setup/stock_picking_batch_creation
+odoo-addon-stock-picking-batch-creation @ git+https://github.com/acsone/wms.git@9538f65c4520a06ee0ddd01c511651330eb590db#subdirectory=setup/stock_picking_batch_creation
 odoo-addon-stock-picking-completion-info==16.0.1.0.1.2
 odoo-addon-stock-picking-delivery-link @ git+https://github.com/acsone/delivery-carrier.git@76bb9868926ed4178aba6dbaa324f144b71c8d4c#subdirectory=setup/stock_picking_delivery_link
 odoo-addon-stock-picking-grn-mandatory @ git+https://github.com/acsone/stock-logistics-workflow.git@08d5e13c91adc264555c3323cf3eb61ae2f78626#subdirectory=setup/stock_picking_grn_mandatory
@@ -62,7 +62,7 @@ odoo-addon-stock-release-channel-delivery @ git+https://github.com/acsone/wms.gi
 odoo-addon-stock-release-channel-geoengine @ git+https://github.com/acsone/wms.git@5bf244f63bf8a4076407604ba7e0534a6b4a050b#subdirectory=setup/stock_release_channel_geoengine
 odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@8f2038535412a6fc13f34c30793da926d9ee5a73#subdirectory=setup/stock_release_channel_process_end_time
 odoo-addon-stock-release-channel-propagate-channel-picking @ git+https://github.com/acsone/wms.git@f3225ade9ab74eca9a23e5220f342b68945061e8#subdirectory=setup/stock_release_channel_propagate_channel_picking
-odoo-addon-stock-release-channel-shipment-advice @ git+https://github.com/acsone/wms.git@83c33c815c15aa14093934f582291ef3fdc06865#subdirectory=setup/stock_release_channel_shipment_advice
+odoo-addon-stock-release-channel-shipment-advice @ git+https://github.com/acsone/wms.git@ad7b59eb24f65842716cee0ee270750319f93bee#subdirectory=setup/stock_release_channel_shipment_advice
 odoo-addon-stock-release-channel-shipment-advice-process-end-time @ git+https://github.com/acsone/wms.git@d456d1c2e1af758c6ad5986e8555c8d8b7ed1bcf#subdirectory=setup/stock_release_channel_shipment_advice_process_end_time
 odoo-addon-stock-release-channel-shipment-advice-toursolver @ git+https://github.com/acsone/wms.git@2a14f82bdd97ec8329b436b4f7ae066d4fdb52c5#subdirectory=setup/stock_release_channel_shipment_advice_toursolver
 odoo-addon-stock-restrict-lot==16.0.1.1.0

@@ -4,7 +4,7 @@
     "name": "Alc All Enterprise",
     "description": """
         Alcyon addons under Odoo Enterprise licence""",
-    "version": "16.0.2.2.1",
+    "version": "16.0.2.2.2",
     "license": "Other proprietary",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -13,7 +13,7 @@
         # "alce_purchase_report",
         # "alce_account_reports_followup_data",
         # "alce_l10n_be_reports",
-        # "alce_split_coda",
+        "alce_split_coda",
         "alce_stock_barcode",
         "alce_stock_picking_backorder_helpdesk",
     ],

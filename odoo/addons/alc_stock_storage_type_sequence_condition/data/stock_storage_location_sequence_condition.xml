@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Don't put noupdate=1 to enforce those rules-->
+
+    <record id="condition_besoin_reassort" model="stock.storage.location.sequence.cond">
+        <field name="name">Besoin réassort</field>
+        <field name="condition_type">code</field>
+        <!-- TODO: Change this to True after having migrated module -->
+        <field name="active" eval="False" />
+        <field name="code_snippet">
+result = True
+
+# If there is already stock and no need to refill
+if env["stock.quant"].search([
+    ("product_id", "=", product.id),
+    ("location_id", "child_of", storage_location_sequence.location_id.id),
+    ("qty", ">", 0),
+], limit=1) and not env["report.stock.refill.reassort"].search([
+    ("product_id", "=", product.id),
+    ("refill_priority_reassort", ">", 0)]):
+        result = False
+
+        </field>
+    </record>
+
+    <record id="condition_lot_en_stock" model="stock.storage.location.sequence.cond">
+        <field name="name">Lot déjà en stock</field>
+        <field name="condition_type">code</field>
+        <field name="code_snippet">
+if quant.lot_id and env["stock.quant"].search([
+    ("lot_id", "=", quant.lot_id.id),
+    ("location_id", "child_of", storage_location_sequence.location_id.id),
+    ("quantity", ">", 0),
+], limit=1):
+    result = True
+else:
+    result = False
+
+        </field>
+    </record>
+
+    <record id="condition_ancien_lot" model="stock.storage.location.sequence.cond">
+        <field name="name">Pas de lot plus ancien en réserve</field>
+        <field name="condition_type">code</field>
+        <field name="code_snippet">
+            <![CDATA[
+result = True
+
+if quant.lot_id:
+    # older lot in reserve?
+    orderpoint_locations = env["stock.location.orderpoint"].search([]).location_src_id
+    for reserve_quant in env["stock.quant"].search([
+            ("product_id", "=", quant.product_id.id),
+            ("quantity", ">", 0),
+            ("location_id", "in", orderpoint_locations.ids),
+            ("location_id", "!=", quant.location_id.id),
+    ]):
+        if reserve_quant.lot_id.removal_date > datetime.datetime.now() and reserve_quant.lot_id.removal_date < quant.lot_id.removal_date:
+            result = False
+            break
+            ]]>
+        </field>
+    </record>
+
+    <record id="condition_deja_stock" model="stock.storage.location.sequence.cond">
+        <field name="name">Article déjà en stock</field>
+        <field name="condition_type">code</field>
+        <field name="code_snippet">
+if quant.product_id and env["stock.quant"].search([
+    ("product_id", "=", quant.product_id.id),
+    ("location_id", "child_of", storage_location_sequence.location_id.id),
+    ("quantity", ">", 0),
+], limit=1):
+    result = True
+else:
+    result = False
+
+        </field>
+    </record>
+</odoo>

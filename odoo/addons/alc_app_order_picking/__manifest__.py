@@ -95,6 +95,7 @@
         "alc_label_printing_reception",
         "alc_stock_release_channel_code",
         "alc_stock_picking_manage_priority",
+        "alc_stock_move_direction",
     ],
     "data": [],
     "demo": [],
