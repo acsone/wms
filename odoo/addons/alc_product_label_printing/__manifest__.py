@@ -4,7 +4,7 @@
 {
     "name": "Alc Product label printing",
     "summary": """
-        Add code needed to print products labels without lot""",
+        Add code needed to print products labels""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
