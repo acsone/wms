@@ -20,7 +20,7 @@ odoo-addon-stock-dock==16.0.1.0.1
 odoo-addon-stock-dynamic-routing==16.0.1.0.1
 odoo-addon-stock-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@c96b8aa6b6df50c3c910742db419d15dd606ea39#subdirectory=setup/stock_grn
 odoo-addon-stock-helper==16.0.1.1.0
-odoo-addon-stock-location-orderpoint @ git+https://github.com/acsone/stock-logistics-orderpoint.git@16a266cf0fbafa5cb092d3210e0e6b93c75d15a9#subdirectory=setup/stock_location_orderpoint
+odoo-addon-stock-location-orderpoint @ git+https://github.com/acsone/stock-logistics-orderpoint.git@d73bae156182f1a853e9da19f79bd54b9cb98fa9#subdirectory=setup/stock_location_orderpoint
 odoo-addon-stock-location-position==16.0.1.0.0.2
 odoo-addon-stock-location-product-restriction==16.0.1.0.0.5
 odoo-addon-stock-location-zone==16.0.1.0.1

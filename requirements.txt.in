@@ -87,8 +87,8 @@ odoo-addon-sale-wishlist @ git+https://github.com/OCA/sale-workflow.git@refs/pul
 odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@16.0-sale_channel-sbj#subdirectory=setup/sale_channel
 
 # stock-logistics-orderpoint
-# https://github.com/OCA/stock-logistics-orderpoint/pull/3
-odoo-addon-stock-location-orderpoint @ git+https://github.com/OCA/stock-logistics-orderpoint.git@refs/pull/3/head#subdirectory=setup/stock_location_orderpoint
+# See gitaggregate
+odoo-addon-stock-location-orderpoint @ git+https://github.com/acsone/stock-logistics-orderpoint.git@16.0-alc_stock_location_orderpoint#subdirectory=setup/stock_location_orderpoint
 
 # stock-logistics-reporting
 # https://github.com/OCA/stock-logistics-reporting/pull/257
