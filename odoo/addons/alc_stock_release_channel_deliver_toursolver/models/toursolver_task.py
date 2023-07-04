@@ -3,6 +3,8 @@
 
 import logging
 
+from requests.exceptions import RequestException
+
 from odoo.exceptions import UserError
 
 from odoo.addons.stock_release_channel_shipment_advice_toursolver.models.toursolver_task import (
@@ -26,7 +28,7 @@ class ToursolverTask(ToursolverTaskBase):
             return super()._toursolver_send_request()
         try:
             return super()._toursolver_send_request()
-        except UserError as error:
+        except (UserError, RequestException) as error:
             _logger.error(error)
             return self.release_channel_id._toursolver_task_auto_process_notify_error(
                 error, self
@@ -40,7 +42,7 @@ class ToursolverTask(ToursolverTaskBase):
             res = super()._toursolver_check_status()
             self._release_channel_notify_error(self.toursolver_error_message)
             return res
-        except UserError as error:
+        except (UserError, RequestException) as error:
             _logger.error(error)
             return self.release_channel_id._toursolver_task_auto_process_notify_error(
                 error, self
@@ -54,7 +56,7 @@ class ToursolverTask(ToursolverTaskBase):
             res = super()._toursolver_get_result()
             self._release_channel_notify_error(self.toursolver_error_message)
             return res
-        except UserError as error:
+        except (UserError, RequestException) as error:
             _logger.error(error)
             return self.release_channel_id._toursolver_task_auto_process_notify_error(
                 error, self
