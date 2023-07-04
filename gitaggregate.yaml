@@ -38,6 +38,8 @@
     - oca 16.0
     - oca refs/pull/98/head # [IMP] shipment_advice: Use correct field for package type in report
     - oca refs/pull/101/head # [FIX] shipment_advice: Use correct filters
+    - oca refs/pull/102/head # [FIX] - don't copy shipment advice when duplicating a stock move
+    - oca refs/pull/103/head # [FIX] - shipment_advice: plan only ready moves
   target: origin 16.0-alc_shipment_advice
 
 ./src/stock_available_to_promise_release:

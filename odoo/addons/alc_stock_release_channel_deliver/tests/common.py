@@ -9,9 +9,9 @@ class TestStockReleaseChannelDeliverCommon(ChannelReleaseCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        output_loc = cls.channel.picking_ids.move_ids.location_id
-        cls._update_qty_in_location(output_loc, cls.product1, 100)
-        cls._update_qty_in_location(output_loc, cls.product2, 100)
+        cls.output_loc = cls.channel.picking_ids.move_ids.location_id
+        cls._update_qty_in_location(cls.output_loc, cls.product1, 100)
+        cls._update_qty_in_location(cls.output_loc, cls.product2, 100)
         cls.channel.picking_ids.move_ids.write({"procure_method": "make_to_stock"})
         cls.channel.picking_ids.action_assign()
         cls.dock = cls.env.ref("shipment_advice.stock_dock_demo")
