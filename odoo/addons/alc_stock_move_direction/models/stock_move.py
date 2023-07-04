@@ -1,14 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo.addons.stock.models.stock_move import StockMove as StockMoveBase
 
 
-class StockMove(models.Model):
-
-    _inherit = "stock.move"
-
+class StockMove(StockMoveBase):
     def _get_dest_locations(self):
         """Get the destination locations.
 
@@ -18,10 +14,8 @@ class StockMove(models.Model):
         """
         self.ensure_one()
         destinations = self.location_dest_id
-        if self.state in ("assigned", "done") or self.partially_available:
-            destinations = self.mapped(
-                "linked_move_operation_ids.operation_id.location_dest_id"
-            )
+        if self.state in ("partially_available", "assigned", "done"):
+            destinations = self.mapped("move_line_ids.location_dest_id")
         return destinations or self.location_dest_id
 
     def _is_outgoing(self):
