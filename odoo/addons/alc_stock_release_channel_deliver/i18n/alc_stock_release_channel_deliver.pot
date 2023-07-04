@@ -158,3 +158,8 @@ msgid ""
 "* Delivered: Ready transfers are delivered\n"
 "* Asleep: Assigned pickings not processed are unassigned from the release channel.\n"
 msgstr ""
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model,name:alc_stock_release_channel_deliver.model_stock_picking
+msgid "Transfer"
+msgstr ""
