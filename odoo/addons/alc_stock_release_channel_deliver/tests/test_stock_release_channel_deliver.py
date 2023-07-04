@@ -116,3 +116,12 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
         backorder = self.pickings.backorder_ids
         self.assertEqual(backorder.release_channel_id, channel)
         self.assertFalse(backorder.planned_shipment_advice_id)
+
+    def test_07(self):
+        """Deliver is not allowed if one of the pickings is started."""
+        self.picking.action_start()
+        with self.assertRaises(
+            UserError,
+            msg="One of the pickings to deliver for channel Default is started.",
+        ):
+            self.channel.action_delivering()
