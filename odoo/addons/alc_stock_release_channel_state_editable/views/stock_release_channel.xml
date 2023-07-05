@@ -18,7 +18,7 @@
           name="state"
           widget="statusbar"
           statusbar_visible="open,locked,asleep"
-          readonly="True"
+          readonly="False"
           groups="stock.group_stock_manager"
           options="{'clickable': '1'}"
         />
