@@ -1,83 +1,82 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* alc_veterinary_group
+#	* alc_veterinary_group
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-20 09:36+0000\n"
-"PO-Revision-Date: 2022-07-20 09:36+0000\n"
+"POT-Creation-Date: 2023-07-06 08:40+0000\n"
+"PO-Revision-Date: 2023-07-06 08:40+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: alc_veterinary_group
+#: model:ir.ui.view,arch_db:alc_veterinary_group.view_partner_form
+msgid "Alcyonnaire Contract Validity"
+msgstr "Validité du contrat Alcyonnaire"
+
+#. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group_display_color
 msgid "Color"
-msgstr ""
+msgstr "Couleur"
 
 #. module: alc_veterinary_group
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group_create_uid
-msgid "Created by"
-msgstr ""
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner_date_end_contract_alcyonnaire
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users_date_end_contract_alcyonnaire
+msgid "Date end contract"
+msgstr "Date de fin du contrat"
 
 #. module: alc_veterinary_group
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group_create_date
-msgid "Created on"
-msgstr ""
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner_date_start_contract_alcyonnaire
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users_date_start_contract_alcyonnaire
+msgid "Date start contract"
+msgstr "Date de début du contrat"
 
 #. module: alc_veterinary_group
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group_display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: alc_veterinary_group
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group_id
-msgid "ID"
-msgstr ""
+#: model:ir.model.fields,help:alc_veterinary_group.field_res_partner_date_end_contract_alcyonnaire
+#: model:ir.model.fields,help:alc_veterinary_group.field_res_users_date_end_contract_alcyonnaire
+msgid "If the date end contract is not set, the contract is considered as indefinite. If the date end contract is set, the contract is considered as closed the day before the date end contract. IOW if the date end is set at the same day as the date start, the contract is considered as without duration."
+msgstr "Si la date de fin du contrat n'est pas spécifiée, le contrat est considéré comme à durée indéterminée. Si la date de fin du contrat est spécifiée, le contrat est considéré comme terminé la veille de la date de fin du contrat. Autrement dit, si la date de fin est la même que la date de début, le contrat est considéré comme sans durée."
 
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner_is_alcyonnaire
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users_is_alcyonnaire
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_shopinvader_partner_is_alcyonnaire
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group_is_alcyonnaire
 msgid "Is alcyonnaire"
-msgstr ""
+msgstr "Est Alcyonnaire"
 
 #. module: alc_veterinary_group
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group___last_update
-msgid "Last Modified on"
-msgstr ""
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner_is_alcyonnaire_under_contract
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users_is_alcyonnaire_under_contract
+msgid "Is alcyonnaire under contract"
+msgstr "Est Alcyonnaire sous contrat"
 
 #. module: alc_veterinary_group
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group_write_uid
-msgid "Last Updated by"
-msgstr ""
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner_is_date_end_contract_editable
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users_is_date_end_contract_editable
+msgid "Is date end contract editable"
+msgstr "La date de fin du contrat est-elle modifiable"
 
 #. module: alc_veterinary_group
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group_write_date
-msgid "Last Updated on"
-msgstr ""
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner_is_date_start_contract_editable
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users_is_date_start_contract_editable
+msgid "Is date start contract editable"
+msgstr "La date de début du contrat est-elle modifiable"
 
 #. module: alc_veterinary_group
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group_name
-msgid "Name"
-msgstr ""
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner_is_dates_contract_visible
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users_is_dates_contract_visible
+msgid "Is dates contract visible"
+msgstr "Les dates du contrat sont-elles visibles"
 
 #. module: alc_veterinary_group
 #: model:ir.model,name:alc_veterinary_group.model_res_partner
 msgid "Partner"
-msgstr "Partenaire"
-
-#. module: alc_veterinary_group
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group_partner_ids
-#, fuzzy
-msgid "Partners"
 msgstr "Partenaire"
 
 #. module: alc_veterinary_group
@@ -86,14 +85,50 @@ msgid "Product Template"
 msgstr "Modèle de produit"
 
 #. module: alc_veterinary_group
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group_product_template_ids
-msgid "Products"
-msgstr ""
-
-#. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group_sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Séquence"
+
+#. module: alc_veterinary_group
+#: code:addons/alc_veterinary_group/models/res_partner.py:71
+#, python-format
+msgid "The end date must be anterior at today."
+msgstr "La date de fin doit être antérieure à aujourd'hui."
+
+#. module: alc_veterinary_group
+#: code:addons/alc_veterinary_group/models/res_partner.py:134
+#, python-format
+msgid "The end date of the contract must be set before leaving the group of alcyonnaire.\n"
+"Please set the end date of the contract in the partner form for partners: \n"
+" %s."
+msgstr "La date de fin du contrat doit être fixée avant de quitter le groupe d'Alcyonnaire.\n"
+"Veuillez fixer la date de fin du contrat dans le formulaire du contact pour les contacts: \n"
+" %s."
+
+#. module: alc_veterinary_group
+#: code:addons/alc_veterinary_group/models/res_partner.py:162
+#: code:addons/alc_veterinary_group/models/res_partner.py:166
+#, python-format
+msgid "The partner must be Alcyonnaire to have a contract."
+msgstr "Le contact doit être Alcyonnaire pour avoir un contrat."
+
+#. module: alc_veterinary_group
+#: code:addons/alc_veterinary_group/models/res_partner.py:174
+#, python-format
+msgid "The partner must have a start date to end a contract."
+msgstr "Le contact doit avoir une date de début pour mettre fin à un contrat."
+
+#. module: alc_veterinary_group
+#: code:addons/alc_veterinary_group/models/res_partner.py:65
+#, python-format
+msgid "The start date must be anterior or equal to today."
+msgstr "La date de début doit être antérieure ou égale à aujourd'hui.
+
+#. module: alc_veterinary_group
+#: code:addons/alc_veterinary_group/models/res_partner.py:58
+#, python-format
+msgid "The start date must be anterior to the end date."
+msgstr "La date de début doit être antérieure à la date de fin."
 
 #. module: alc_veterinary_group
 #: model:ir.model,name:alc_veterinary_group.model_veterinary_group
@@ -105,12 +140,17 @@ msgstr "Groupement vétérinaire"
 
 #. module: alc_veterinary_group
 #: model:ir.actions.act_window,name:alc_veterinary_group.veterinary_group_act_window
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_delivery_carrier_veterinary_group_ids
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_product_product_veterinary_group_ids
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_product_template_veterinary_group_ids
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_shopinvader_product_veterinary_group_ids
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_shopinvader_variant_veterinary_group_ids
 #: model:ir.ui.menu,name:alc_veterinary_group.veterinary_group_menu
 #: model:ir.ui.view,arch_db:alc_veterinary_group.product_template_form_view_discount_specials
 msgid "Veterinary Groups"
 msgstr "Groupements vétérinaires"
+
+#. module: alc_veterinary_group
+#: model:ir.ui.view,arch_db:alc_veterinary_group.view_partner_form
+msgid "from"
+msgstr "du"
+
+#. module: alc_veterinary_group
+#: model:ir.ui.view,arch_db:alc_veterinary_group.view_partner_form
+msgid "to"
+msgstr "au"

@@ -14,6 +14,28 @@
           widget="many2many_tags"
           options="{'no_create': True}"
         />
+        <field name="is_dates_contract_visible" invisible="1" />
+        <field name="is_date_start_contract_editable" invisible="1" />
+        <field name="is_date_end_contract_editable" invisible="1" />
+            <label
+          for="date_start_contract_alcyonnaire"
+          string="Alcyonnaire Contract Validity"
+          attrs="{'invisible': [('is_dates_contract_visible', '=', False)]}"
+        />
+            <div
+          class="o_row"
+          attrs="{'invisible': [('is_dates_contract_visible', '=', False)]}"
+        >
+                from <field
+            name="date_start_contract_alcyonnaire"
+            attrs="{'readonly': [('is_date_start_contract_editable', '=', False)]}"
+          />
+                to <field
+            name="date_end_contract_alcyonnaire"
+            attrs="{'readonly': [('is_date_end_contract_editable', '=', False)], 'invisible': [('date_start_contract_alcyonnaire', '=', False)]}"
+          />
+
+            </div>
       </xpath>
     </field>
   </record>
