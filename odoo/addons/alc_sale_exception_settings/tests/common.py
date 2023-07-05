@@ -26,7 +26,6 @@ class TestSaleOrderExceptionCommon(TransactionCase):
                 Command.create(
                     {
                         "sequence": 1,
-                        "name": cls.prod1.name,
                         "product_id": cls.prod1.id,
                         "product_uom_qty": 20,
                     },

@@ -38,4 +38,4 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         exception.active = True
         so1 = self.env["sale.order"].create(self.so1_vals)
         sol = so1.order_line[0]
-        self.assertEqual(exception.description, sol.exception)
+        self.assertEqual(exception, sol.main_exception_id)
