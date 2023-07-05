@@ -12,7 +12,8 @@
     "website": "https://acsone.eu/",
     "depends": [
         "authenticated_partner_mixin",
-        "base_jsonify",
+        # "base_jsonify", renamed to jsonifier
+        "jsonifier",
         "base_rest",
         "sales_team",
         "mixin_file_id",

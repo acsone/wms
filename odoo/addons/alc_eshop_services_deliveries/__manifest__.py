@@ -11,7 +11,8 @@
     "website": "https://acsone.eu/",
     "depends": [
         "authenticated_partner_mixin",
-        "base_jsonify",
+        # "base_jsonify", renamed to jsonifier
+        "jsonifier",
         "stock_delivery_note",
         "specific_report",
         "account_tax_one_vat",
