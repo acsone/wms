@@ -61,7 +61,6 @@ msgstr ""
 "          04/338 84 26<br>\n"
 "        </div>\n"
 "      "
-msgstr ""
 
 #. module: alce_account_reports_followup_data
 #: model:mail.template,body_html:alce_account_reports_followup_data.alcyon_email_template_followup_2
