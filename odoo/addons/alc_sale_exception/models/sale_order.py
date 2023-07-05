@@ -2,6 +2,7 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo import api
 from odoo.exceptions import ValidationError
 
 from odoo.addons.sale_exception.models.sale_order import SaleOrder as Order
@@ -25,3 +26,11 @@ class SaleOrder(Order):
             self.exception_ids = False
             return []
         return all_exceptions
+
+    @api.depends("order_line")
+    def _compute_main_error(self):
+        return super()._compute_main_error()
+
+    @api.depends("order_line")
+    def _compute_exceptions_summary(self):
+        return super()._compute_exceptions_summary()

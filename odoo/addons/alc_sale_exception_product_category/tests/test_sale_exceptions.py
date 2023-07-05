@@ -143,23 +143,23 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         self.partner.partner_type = "misc"
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_matos
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         # Medoc are not allowed
         line.product_id = self.prod_medoc_pharma
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         line.product_id = self.prod_medoc_human
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         line.product_id = self.prod_medoc_vet_belge
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         line.product_id = self.prod_medoc_belge_only
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         line.product_id = self.prod_vet_only
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         # No stup
         line.product_id = self.prod_stup
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
 
     def test_customer_partner_type_shareholder(self):
         warns = self.env["exception.rule"].search(
@@ -173,22 +173,22 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         # Everything is allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_matos
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_medoc_pharma
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_medoc_human
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_medoc_vet_belge
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_medoc_belge_only
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_vet_only
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         # But not stup
         line.product_id = self.prod_stup
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         warns.write({"active": 1})
 
     def test_customer_partner_type_veterinary(self):
@@ -203,22 +203,22 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         # Everything is allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_matos
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_medoc_pharma
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_medoc_human
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_medoc_vet_belge
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_medoc_belge_only
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_vet_only
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         # But no stup
         line.product_id = self.prod_stup
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         warns.write({"active": 1})
 
     def test_customer_partner_type_student_like(self):
@@ -233,20 +233,20 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         # Food and gear and medoc pharmacy are allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_matos
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_medoc_pharma
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_stup
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         line.product_id = self.prod_medoc_human
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         line.product_id = self.prod_stup
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         # And vet only product as well, I guess
         line.product_id = self.prod_vet_only
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         warns.write({"active": 0})
 
     def test_customer_partner_type_wholesaler_pharmacy(self):
@@ -262,17 +262,17 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         # Food and gear and medoc are allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_matos
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_medoc_pharma
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         # But not human medoc
         line.product_id = self.prod_medoc_human
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         # And no product for vet only either
         line.product_id = self.prod_vet_only
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         warns.write({"active": 1})
 
     def test_customer_partner_type_wholesaler_veterinary(self):
@@ -287,17 +287,17 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         # Food and gear and medoc are allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_matos
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_medoc_pharma
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         # And vet only product as well, for sure
         line.product_id = self.prod_vet_only
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         # But not human medoc
         line.product_id = self.prod_medoc_human
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         warns.write({"active": 1})
 
     def test_customer_partner_type_export_customer(self):
@@ -305,23 +305,23 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         # Food and gear is allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_matos
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         # Medoc for parapharmacy are ok as well
         line.product_id = self.prod_medoc_pharma
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         # But not other medoc
         line.product_id = self.prod_stup
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         line.product_id = self.prod_medoc_vet_belge
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         # And not the one for belgium only
         line.product_id = self.prod_medoc_belge_only
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         # And no product for vet only either
         line.product_id = self.prod_vet_only
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
 
     def test_customer_partner_type_export_meds(self):
         """Test client medicament export sale order limitations."""
@@ -329,58 +329,58 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         # Food and gear is allowed
         line = self.so1.order_line[0]
         line.product_id = self.prod_food
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_matos
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         # Medoc veterinary belge ok
         line.product_id = self.prod_medoc_vet_belge
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         # Medoc for parapharmacy are ok as well
         line.product_id = self.prod_medoc_pharma
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         # No Psychotropes Annexe III
         line.product_id = self.prod_psycho_III
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         # But not other medoc
         line.product_id = self.prod_stup
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         # And not the one for belgium only
         line.product_id = self.prod_medoc_belge_only
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         # And no stup
         line.product_id = self.prod_stup
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
 
     def test_customer_partner_type_equipment_only(self):
         self.partner.partner_type = "equipment_only"
         line = self.so1.order_line[0]
         # Gear is allowed
         line.product_id = self.prod_matos
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         # Food is not allowed
         line.product_id = self.prod_food
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         # No medicine allowed
         line.product_id = self.prod_medoc
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         # Medoc veterinary belge ok
         line.product_id = self.prod_medoc_vet_belge
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         # Medoc for parapharmacy are ok as well
         line.product_id = self.prod_medoc_pharma
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         # No Psychotropes Annexe III
         line.product_id = self.prod_psycho_III
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         # But not other medoc
         line.product_id = self.prod_stup
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         # And not the one for belgium only
         line.product_id = self.prod_medoc_belge_only
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
         # And no stup
         line.product_id = self.prod_stup
-        self.assertTrue(line.exception)
+        self.assertTrue(line.main_exception_id)
 
     def test_exception_warning_psychotropic_product(self):
         """Check sale order line message for psychotropic products."""
@@ -416,17 +416,17 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         line.order_id.sale_channel_id = self.sale_channel_fax
         line.product_id = self.prod_psycho_III
         # Sale order by fax the line should only have the warning displayed
-        self.assertEqual(line.exception, warning.description)
+        self.assertEqual(line.main_exception_id, warning)
         # Sale order by phone should have the exception
         line.order_id.sale_channel_id = self.sale_channel_phone
         # Switch product to trigger exception checking
-        line.product_id = self.prod_food
         line.product_id = self.prod_psycho_III
-        self.assertEqual(line.exception, psycotropic.description)
+        # the main exception is the warning
+        self.assertEqual(line.main_exception_id, psycotropic)
         line.product_id = self.prod_food
-        self.assertFalse(line.exception)
+        self.assertFalse(line.main_exception_id)
         line.product_id = self.prod_stupefiant_vet
-        self.assertEqual(line.exception, vet.description)
+        self.assertEqual(line.main_exception_id, vet)
 
     def test_exception_warning_cascade_importation(self):
         """Check sale order line message for cascade importation products."""

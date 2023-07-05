@@ -9,11 +9,11 @@
         expr="//field[@name='order_line']/tree//field[@name='price_subtotal']"
         position="after"
       >
-        <field name="exception" />
+        <field name="main_exception_id" />
       </xpath>
       <xpath expr="//field[@name='order_line']/tree" position="attributes">
         <attribute name="decoration-danger">False</attribute>
-        <attribute name="decoration-warning">exception</attribute>
+        <attribute name="decoration-warning">main_exception_id</attribute>
       </xpath>
     </field>
   </record>

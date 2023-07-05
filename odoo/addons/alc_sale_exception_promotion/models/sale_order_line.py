@@ -9,6 +9,8 @@ from odoo.addons.alc_sale_exception.models import sale_order_line
 class SaleOrderLine(sale_order_line.SaleOrderLine):
     def warning_free_product(self):
         """Raise a warning if order give rights to promotional product."""
+        if not self.product_id:
+            return False
         return self.product_id.product_tmpl_id.get_promotional_product(
             self.product_uom_qty, self.product_id.uom_id, self.order_partner_id
         )

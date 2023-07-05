@@ -59,17 +59,17 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         self.partner.sale_reason_backorder_strategy = "cancel"
         line = self.so1.order_line[0]
         line.product_uom_qty = 234
-        self.assertEqual(no_backorder_rule.description, line.exception)
+        self.assertEqual(no_backorder_rule, line.main_exception_id)
         # If quantity ordered is zero exception should not be raised (not active)
         line.product_uom_qty = 0
-        self.assertEqual("", line.exception)
+        self.assertFalse(line.main_exception_id)
         # And if it is set to a positive number raised again
         line.product_uom_qty = 234
-        self.assertEqual(no_backorder_rule.description, line.exception)
+        self.assertEqual(no_backorder_rule, line.main_exception_id)
         # Check customer accept back order
         self.partner.sale_reason_backorder_strategy = "create"
         line.product_uom_qty = 534
-        self.assertEqual("", line.exception)
+        self.assertFalse(line.main_exception_id)
 
     def test_exception_out_of_stock_at_supplier(self):
         """Check warning for out of stock at supplier level."""
@@ -83,7 +83,7 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         self.prod1.product_state_id = self.env.ref("alc_product_state.product_state_h")
         line.product_id = self.prod2
         line.product_id = self.prod1
-        self.assertIn(exception.description, line.warning_text)
+        self.assertEqual(exception, line.main_exception_id)
         # With some inventory there should be no warning
         stock_location = self.env.ref("stock.stock_location_stock")
         quant = self.env["stock.quant"].create(
@@ -95,7 +95,6 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         )
         quant.action_apply_inventory()
         # Cache refreshing needed for the back order calculation to work ?
-        self.prod1.invalidate_recordset()
         line.product_id = self.prod2
         line.product_id = self.prod1
-        self.assertNotIn(exception.description, str(line.warning_text))
+        self.assertFalse(line.main_exception_id)
