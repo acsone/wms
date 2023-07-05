@@ -85,6 +85,17 @@ class StockReleaseChannel(StockReleaseChannelBase):
                 raise UserError(
                     _("No picking to deliver for channel %(name)s.", name=rec.name)
                 )
+            if any(rec.picking_to_plan_ids.mapped("started")):
+                started_pickings = rec.picking_to_plan_ids.filtered("started")
+                raise UserError(
+                    _(
+                        "One of the pickings to deliver for channel %(name)s is started."
+                        "\nPlease finish it manually or cancel its start to be able to deliver.\n"
+                        "%(pickings)s",
+                        name=rec.name,
+                        pickings=", ".join(started_pickings.mapped("name")),
+                    )
+                )
             if not rec.is_action_delivering_allowed:
                 raise UserError(
                     _(

@@ -16,6 +16,7 @@
         "stock_release_channel_shipment_advice",
         "web_notify",
         "stock_release_channel_process_end_time",
+        "stock_picking_start",
     ],
     "data": [
         "data/queue_job_channel.xml",

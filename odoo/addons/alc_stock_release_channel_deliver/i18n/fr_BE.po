@@ -6,11 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 15:50+0000\n"
-"PO-Revision-Date: 2023-06-05 15:50+0000\n"
+"POT-Creation-Date: 2023-07-04 13:01+0000\n"
+"PO-Revision-Date: 2023-07-04 13:01+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,8 +18,7 @@ msgstr ""
 #. module: alc_stock_release_channel_deliver
 #. odoo-python
 #: code:addons/alc_stock_release_channel_deliver/models/stock_release_channel.py:0
-#, fuzzy, python-format
-#| msgid "Action 'Delivering' is not allowed for channel %(name)s."
+#, python-format
 msgid "Action 'Delivered' is not allowed for channel %(name)s."
 msgstr "L'action 'Livrer' n'est pas autorisée pour le canal %(name)s."
 
@@ -42,8 +40,7 @@ msgstr "L'action 'Livrer' n'est pas autorisée pour le canal %(name)s."
 #. module: alc_stock_release_channel_deliver
 #. odoo-python
 #: code:addons/alc_stock_release_channel_deliver/models/stock_release_channel.py:0
-#, fuzzy, python-format
-#| msgid "No picking to deliver for channel %(name)s."
+#, python-format
 msgid "An error occurred in the delivery background task for channel %(name)s"
 msgstr ""
 "Une erreur s'est produite dans la tâche d'arrière-plan de livraison pour le "
@@ -74,8 +71,6 @@ msgstr "Livrer"
 
 #. module: alc_stock_release_channel_deliver
 #: model:ir.model.fields.selection,name:alc_stock_release_channel_deliver.selection__stock_release_channel__state__delivered
-#, fuzzy
-#| msgid "Deliver"
 msgid "Delivered"
 msgstr "Livré"
 
@@ -96,19 +91,15 @@ msgstr "Erreur de livraison"
 #: code:addons/alc_stock_release_channel_deliver/models/stock_release_channel.py:0
 #, python-format
 msgid "Delivering release channel %(name)s."
-msgstr ""
+msgstr "Livraison du canal de livraison %(name)s"
 
 #. module: alc_stock_release_channel_deliver
 #: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel__in_process_shipment_advice_ids
-#, fuzzy
-#| msgid "Shipment Advice"
 msgid "In Process Shipment Advice"
 msgstr "Avis d'expédition En cours"
 
 #. module: alc_stock_release_channel_deliver
 #: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_shipment_advice__in_release_channel_auto_process
-#, fuzzy
-#| msgid "Stock Release Channels"
 msgid "In Release Channel Auto Process"
 msgstr "Canaux de livraison"
 
@@ -135,9 +126,22 @@ msgid "No picking to deliver for channel %(name)s."
 msgstr "Aucun picking à livrer pour le canal %(name)s."
 
 #. module: alc_stock_release_channel_deliver
+#. odoo-python
+#: code:addons/alc_stock_release_channel_deliver/models/stock_release_channel.py:0
+#, python-format
+msgid ""
+"One of the pickings to deliver for channel %(name)s is started.\n"
+"Please finish it manually or cancel its start to be able to deliver.\n"
+"%(pickings)s"
+msgstr ""
+"Un des pickings à livrer est démarré pour le canal de livraison %(name)s\n"
+"Veuillez le terminer manuellement ou annuler son démarrage pour pouvoir livrer.\n"
+"%(pickings)s"
+
+#. module: alc_stock_release_channel_deliver
 #: model:ir.model,name:alc_stock_release_channel_deliver.model_shipment_advice
 msgid "Shipment Advice"
-msgstr "Avis d'expédition"
+msgstr "Conseil d'expédition"
 
 #. module: alc_stock_release_channel_deliver
 #: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel__state
@@ -159,8 +163,7 @@ msgstr ""
 #. module: alc_stock_release_channel_deliver
 #. odoo-python
 #: code:addons/alc_stock_release_channel_deliver/models/stock_release_channel.py:0
-#, fuzzy, python-format
-#| msgid "Action 'Delivering Error' is not allowed for channel %(name)s."
+#, python-format
 msgid "The delivery background task is done for channel %(name)s"
 msgstr ""
 "La tâche d'arrière-plan de livraison est effectuée pour le canal %(name)s."
@@ -169,17 +172,20 @@ msgstr ""
 #: model:ir.model.fields,help:alc_stock_release_channel_deliver.field_stock_release_channel__state
 msgid ""
 "The state allows you to control the availability of the release channel.\n"
-"* Open: Manual and automatic picking assignment to the release is effective "
-"and release operations are allowed.\n"
-" * Locked: Release operations are forbidden. (Assignement processes are "
-"still working)\n"
-"* Delivering: A background task is running to automatically deliver ready "
-"shipments\n"
+"* Open: Manual and automatic picking assignment to the release is effective and release operations are allowed.\n"
+" * Locked: Release operations are forbidden. (Assignement processes are still working)\n"
+"* Delivering: A background task is running to automatically deliver ready shipments\n"
 "* Delivering Error: An error occurred in the delivery background task\n"
 "* Delivered: Ready transfers are delivered\n"
-"* Asleep: Assigned pickings not processed are unassigned from the release "
-"channel.\n"
+"* Asleep: Assigned pickings not processed are unassigned from the release channel.\n"
 msgstr ""
+"L'état vous permet de contrôler la disponibilité du canal de livraison.\n"
+"* Ouvert: l'affectation manuelle et automatique des transferts au canal de livraison est effective et les opérations de préparation sont autorisées.\n"
+"* Verrouillé: les opérations de préparation sont interdites. (Les processus d'affectation fonctionnent toujours)\n"
+"* Livraison : une tâche en arrière-plan est en cours d'exécution pour livrer automatiquement les transferts\n"
+"* Erreur de livraison: une erreur s'est produite dans la tâche d'arrière-plan de livraison\n"
+"* Livré: les transferts prêts sont livrés\n"
+"* Endormi: les transferts affectés non traités sont désaffectés du canal de livraison.\n"
 
 #. module: alc_stock_release_channel_deliver
 #: model:ir.model,name:alc_stock_release_channel_deliver.model_stock_picking
