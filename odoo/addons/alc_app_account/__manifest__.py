@@ -12,6 +12,7 @@
         # Odoo
         "account",
         # OCA
+        "account_invoice_merge",
         # ALC
         "alc_account_security",
     ],
