@@ -44,6 +44,7 @@ odoo-addon-account-banking-mandate==16.0.1.0.2.6
 odoo-addon-account-banking-pain-base==16.0.1.0.0.5
 odoo-addon-account-banking-sepa-direct-debit==16.0.1.0.0.3
 odoo-addon-account-cutoff-base==16.0.1.0.0.19
+odoo-addon-account-invoice-merge==16.0.1.0.1.1
 odoo-addon-account-invoice-tax-required==16.0.1.0.0.8
 odoo-addon-account-invoice-triple-discount==16.0.1.0.1.2
 odoo-addon-account-payment-mode==16.0.1.1.0.4
