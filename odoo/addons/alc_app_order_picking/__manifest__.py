@@ -30,6 +30,7 @@
         "product_expiry_configurable",
         "product_total_weight_from_packaging",
         "shipment_advice",
+        "stock_available_location_orderpoint",
         "stock_dynamic_routing",
         "stock_location_orderpoint",
         "stock_move_common_dest",
