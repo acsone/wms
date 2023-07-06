@@ -80,8 +80,8 @@ msgstr "Objet non valide"
 #. odoo-python
 #: code:addons/alc_label_printing_base/wizards/print_label.py:0
 #, python-format
-msgid "Invalid printer"
-msgstr "Imprimante non valide"
+msgid "Invalid printer (-> zebra)"
+msgstr "Imprimante non valide (-> zebra)"
 
 #. module: alc_label_printing_base
 #: model:ir.model.fields,field_description:alc_label_printing_base.field_print_label__label_type

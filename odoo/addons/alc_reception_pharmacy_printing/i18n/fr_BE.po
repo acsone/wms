@@ -107,7 +107,7 @@ msgstr "Sélectionnez une imprimante de réception"
 #. module: alc_reception_pharmacy_printing
 #: model:ir.ui.menu,name:alc_reception_pharmacy_printing.select_pharmacy_printing_printer_menu
 msgid "Select Pharmacy Printing Printer"
-msgstr "Sélectionnez une imprimante de réception"
+msgstr "Sélectionner une imprimante réception pharmacie"
 
 #. module: alc_reception_pharmacy_printing
 #: model:ir.model,name:alc_reception_pharmacy_printing.model_res_users
