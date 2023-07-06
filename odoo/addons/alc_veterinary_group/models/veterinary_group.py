@@ -31,3 +31,16 @@ class VeterinaryGroup(models.Model):
         "product_template_id",
         string="Products",
     )
+
+    def write(self, vals):
+        if "partner_ids" in vals:
+            partners_alcyonnaire = self.mapped("partner_ids").filtered(
+                lambda p: p.is_alcyonnaire
+            )
+        res = super(VeterinaryGroup, self).write(vals)
+        if "partner_ids" in vals:
+            partners_no_more_alcyonnaire = partners_alcyonnaire - self.mapped(
+                "partner_ids"
+            ).filtered(lambda p: p.is_alcyonnaire)
+            partners_no_more_alcyonnaire._check_date_end_contract_alcyonnaire()
+        return res

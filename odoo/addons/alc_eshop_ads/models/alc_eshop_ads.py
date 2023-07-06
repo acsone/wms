@@ -20,6 +20,7 @@ class AlcEshopAds(models.Model):
             ("everyone", "Everyone"),
             ("shareholder", "Shareholder"),
             ("non-shareholder", "Non Shareholder"),
+            ("shareholder-under-contract", "Shareholder under contract"),
         ],
         default="everyone",
     )

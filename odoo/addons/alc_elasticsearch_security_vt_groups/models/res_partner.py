@@ -15,6 +15,8 @@ class ResPartner(models.Model):
         "property_product_pricelist",
         "discount_pricelist_ids",
         "veterinary_group_ids",
+        "date_start_contract_alcyonnaire",
+        "date_end_contract_alcyonnaire",
     )
     def _compute_elasticsearch_role(self):
         partner_vt_roles = {
@@ -27,7 +29,11 @@ class ResPartner(models.Model):
             vt_roles = partner_vt_roles[partner]
             if vt_roles:
                 roles = ",".join((partner.elasticsearch_role, vt_roles))
-            role_a = "is_alcyonnaire" if partner.is_alcyonnaire else "non_alcyonnaire"
+            role_a = "non_alcyonnaire"
+            if partner.is_alcyonnaire:
+                role_a = "is_alcyonnaire"
+            if partner.is_alcyonnaire_under_contract:
+                role_a = "is_alcyonnaire_under_contract"
             roles = ",".join((roles, role_a))
             partner.elasticsearch_role = roles
         return res
