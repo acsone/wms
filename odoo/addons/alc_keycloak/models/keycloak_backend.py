@@ -16,6 +16,8 @@ class KeycloakBackend(models.Model):
             "property_product_pricelist": "shopinvader-vt-roles",
             "discount_pricelist_ids": "shopinvader-vt-roles",
             "supplier_promotion_sale_allowed": "shopinvader-vt-roles",
+            "date_start_contract_alcyonnaire": "shopinvader-vt-roles",
+            "date_end_contract_alcyonnaire": "shopinvader-vt-roles",
             "lang": "locale",
             "ref": "ref",
             "eshop_ordering_allowed": "can_order",

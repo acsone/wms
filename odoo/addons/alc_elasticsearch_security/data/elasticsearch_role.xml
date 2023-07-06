@@ -226,6 +226,23 @@
 }
     </field>
   </record>
+  <record id="role_is_alcyonnaire_under_contract" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="name">is_alcyonnaire_under_contract</field>
+    <field name="body">{
+  "cluster_permissions": ["read"],
+  "tenant_permissions": [],
+  "index_permissions": [
+    {
+      "index_patterns":["alc_eshop_ads_*"],
+      "allowed_actions": ["read"],
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_roles\": \"is_alcyonnaire_under_contract\"}}}}",
+      "masked_fields": []
+    }
+  ]
+}
+    </field>
+  </record>
   <record id="role_non_alcyonnaire" model="elasticsearch.role">
     <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
     <field name="name">non_alcyonnaire</field>
