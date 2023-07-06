@@ -13,6 +13,7 @@
         "account",
         # OCA
         "account_invoice_merge",
+        "account_invoice_check_total",
         # ALC
         "alc_account_security",
     ],
