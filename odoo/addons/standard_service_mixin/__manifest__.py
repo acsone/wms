@@ -9,7 +9,11 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["base_rest", "base_jsonify"],
+    "depends": [
+        "base_rest",
+        # "base_jsonify" renamed to jsonifier
+        "jsonifier",
+    ],
     "data": [],
     "demo": [],
     'installable': False

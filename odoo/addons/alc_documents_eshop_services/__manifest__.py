@@ -12,7 +12,8 @@
     "depends": [
         "alc_cerberus_utils",
         "alc_documents",
-        "base_jsonify",
+        # "base_jsonify", renamed to jsonifier
+        "jsonifier",
         "authenticated_partner_mixin",
     ],
     "demo": [],

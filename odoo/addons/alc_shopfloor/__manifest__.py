@@ -20,7 +20,8 @@
         "shopfloor_base",
         "stock",
         "stock_storage_type",
-        "base_jsonify",
+        # "base_jsonify", renamed to jsonifier
+        "jsonifier",
         "base_rest",
         "stock_picking_completion_info",
         "stock_quant_package_dimension",

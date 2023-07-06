@@ -13,7 +13,8 @@
         "alc_eshop_classifieds",
         "alc_cerberus_utils",
         "authenticated_partner_mixin",
-        "base_jsonify",
+        # "base_jsonify", renamed to jsonifier
+        "jsonifier",
     ],
     "data": [],
     "demo": [],
