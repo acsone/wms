@@ -57,6 +57,46 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         roles = set(payload["attributes"]["shopinvader-vt-roles"].split(","))
         self.assertEqual(roles, expected_roles)
 
+    def test_update_partner_is_alcyonnaire_under_contract(self):
+        keycloak_user = self.env["keycloak.user"].create(self.vals_user)
+        alcyonnaire_group = self.env["veterinary.group"].create(
+            {"name": "Alcyonnaire", "is_alcyonnaire": True}
+        )
+        job_counter = self.job_counter()
+        self.partner.write({"veterinary_group_ids": [(6, 0, alcyonnaire_group.ids)]})
+
+        jobs = job_counter.search_created()
+        job = jobs.filtered(lambda j: j.model_name == "keycloak.backend")
+        self.assertEqual(job.args, [keycloak_user, ["veterinary_group_ids"]])
+        payload = keycloak_user.keycloak_backend_id._get_user_payload(*job.args)
+        roles = set(payload["attributes"]["shopinvader-vt-roles"].split(","))
+        self.assertNotIn("is_alcyonnaire_under_contract", roles)
+        self.assertIn("is_alcyonnaire", roles)
+
+        job_counter = self.job_counter()
+        # when a partner becomes an alcyonnaire under contract
+        self.partner.date_start_contract_alcyonnaire = "2019-01-01"
+        # then
+        jobs = job_counter.search_created()
+        job = jobs.filtered(lambda j: j.model_name == "keycloak.backend")
+        self.assertEqual(job.args, [keycloak_user, ["date_start_contract_alcyonnaire"]])
+        payload = keycloak_user.keycloak_backend_id._get_user_payload(*job.args)
+        roles = set(payload["attributes"]["shopinvader-vt-roles"].split(","))
+        self.assertIn("is_alcyonnaire_under_contract", roles)
+        self.assertNotIn("is_alcyonnaire", roles)
+
+        job_counter = self.job_counter()
+        # when a partner is no more an alcyonnaire under contract
+        self.partner.date_end_contract_alcyonnaire = "2020-01-01"
+        # then
+        jobs = job_counter.search_created()
+        job = jobs.filtered(lambda j: j.model_name == "keycloak.backend")
+        self.assertEqual(job.args, [keycloak_user, ["date_end_contract_alcyonnaire"]])
+        payload = keycloak_user.keycloak_backend_id._get_user_payload(*job.args)
+        roles = set(payload["attributes"]["shopinvader-vt-roles"].split(","))
+        self.assertNotIn("is_alcyonnaire_under_contract", roles)
+        self.assertIn("is_alcyonnaire", roles)
+
     def test_update_veterinary_groups(self):
         veterinary_group = self.env["veterinary.group"].create({"name": "VTG"})
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)

@@ -70,11 +70,13 @@ class AlcEshopAds(models.Model):
 
     def _compute_security(self):
         self.ensure_one()
-        rights = ["is_alcyonnaire", "non_alcyonnaire"]
+        rights = ["is_alcyonnaire", "is_alcyonnaire_under_contract", "non_alcyonnaire"]
         if self.visibility == "non-shareholder":
             rights = ["non_alcyonnaire"]
         elif self.visibility == "shareholder":
             rights = ["is_alcyonnaire"]
+        elif self.visibility == "shareholder-under-contract":
+            rights = ["is_alcyonnaire_under_contract"]
         return rights
 
     def _compute_json_doc(self):
