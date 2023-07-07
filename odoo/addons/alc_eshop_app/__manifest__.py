@@ -11,6 +11,7 @@
     "depends": [
         "alc_price_cache_exclusive",
         "alc_elasticsearch_price_sorting",
+        "alc_elasticsearch_score_script",
         "alc_eshop",
         "alc_eshop_api_v2",
         "alc_eshop_ads",

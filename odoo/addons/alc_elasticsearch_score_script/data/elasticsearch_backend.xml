@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="alc_search_engine.elasticsearch_backend" model="se.backend.elasticsearch">
+    <field
+      name="score_on_position_script"
+    ><![CDATA[
+{
+  "script": {
+    "lang": "painless",
+    "source": """
+      if (doc[params.docFieldname].size() == 0) {
+        return 0
+      }
+      def field = doc[params.docFieldname].value.toLowerCase();
+      def boost = 1.0;
+      def terms = params.terms;
+      def finalFactor = 100;
+      if (terms.size() == 1) {
+        def currentTerm = terms[0].toLowerCase();
+        def currentTermIndex = field.indexOf(currentTerm);
+        boost = (1.0 / currentTermIndex )
+      }
+      for (int i = 0; i < terms.size() - 1; i++) {
+        def currentTerm = terms[i].toLowerCase();
+        def nextTerm = terms[i + 1].toLowerCase();
+        def currentTermIndex = field.indexOf(currentTerm);
+        def nextTermIndex = field.indexOf(nextTerm);
+        if (currentTermIndex >= 0 && nextTermIndex >= 0) {
+          boost *= (1.0 / (currentTermIndex + Math.abs(currentTermIndex - nextTermIndex)));
+          if (currentTermIndex > nextTermIndex) {
+            // not the right order
+            finalFactor = 20;
+          }
+        }
+      }
+      return finalFactor * boost;
+    """
+  }
+}
+]]></field>
+   </record>
+</odoo>
