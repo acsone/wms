@@ -133,13 +133,3 @@ msgid ""
 "{{ (object.company_id or object._get_followup_responsible().company_id).name"
 " }} Payment Reminder - {{ object.commercial_company_name }}"
 msgstr ""
-
-#. module: alce_account_reports_followup_data
-#: model:account_followup.followup.line,name:alce_account_reports_followup_data.alcyon_followup_line2
-msgid "Second reminder letter and email"
-msgstr "Deuxième lettre de relance et courriel"
-
-#. module: alce_account_reports_followup_data
-#: model:account_followup.followup.line,name:alce_account_reports_followup_data.alcyon_followup_line3
-msgid "Third reminder: phone the customer"
-msgstr "Troisième relance: appel du client"
