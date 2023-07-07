@@ -7,8 +7,6 @@
     - OCA b258ca4311bf93456c9d201b4d86837a1f9cc8c3
     # [MIG][10.0] account_cutoff_accrual_picking
     - OCA refs/pull/73/head
-    # [10.0] account_cutoff_accrual_return
-    - OCA refs/pull/70/head
     # Fix comparaison of Date and Datetime
     - jbaudoux refs/pull/1/head
   shell_command_after:
