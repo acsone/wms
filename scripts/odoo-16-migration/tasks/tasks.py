@@ -587,6 +587,8 @@ def set_modules_to_remove():
         "mass_editing",  # replaced by server_action_mass_edit
         "alce_l10n_be_reports",
         "account_invoice_merge_purchase",  # done by account_invoice_merge
+        "account_mass_reconcile_partner",
+        "account_mass_reconcile",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     # with cursor(DB_16_POSTMIG) as cr:
