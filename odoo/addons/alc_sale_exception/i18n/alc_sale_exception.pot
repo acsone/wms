@@ -14,13 +14,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_sale_exception
-#: model:ir.model.fields,field_description:alc_sale_exception.field_sale_order_line__exception
-msgid "Exception"
+#: model:ir.model.fields,field_description:alc_sale_exception.field_sale_order_line__exception_ids
+msgid "Exceptions"
 msgstr ""
 
 #. module: alc_sale_exception
 #: model:exception.rule,description:alc_sale_exception.order_amount_minimum
 msgid "Le montant total de la commande ne peut pas être inférieur à 100 euros"
+msgstr ""
+
+#. module: alc_sale_exception
+#: model:ir.model.fields,field_description:alc_sale_exception.field_sale_order_line__main_exception_id
+msgid "Main Exception"
 msgstr ""
 
 #. module: alc_sale_exception
