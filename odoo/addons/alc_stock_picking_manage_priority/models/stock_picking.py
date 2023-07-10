@@ -31,7 +31,7 @@ class StockPicking(Picking):
         if (
             "priority" in vals
             and not no_check_priority
-            and not self.is_priority_editable
+            and any(not picking.is_priority_editable for picking in self)
         ):
             raise ValidationError(_("You don't have the right to change the priority."))
         return super(StockPicking, self.with_context(no_check_priority=False)).write(
