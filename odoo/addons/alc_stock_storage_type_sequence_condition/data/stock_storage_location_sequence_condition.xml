@@ -29,7 +29,7 @@ if env["stock.quant"].search([
         <field name="condition_type">code</field>
         <field name="code_snippet">
 if quant.lot_id and env["stock.quant"].search([
-    ("lot_id", "=", quant.lot_id.id),
+    ("lot_id", "in", quant.lot_id.ids),
     ("location_id", "child_of", storage_location_sequence.location_id.id),
     ("quantity", ">", 0),
 ], limit=1):
@@ -51,12 +51,12 @@ if quant.lot_id:
     # older lot in reserve?
     orderpoint_locations = env["stock.location.orderpoint"].search([]).location_src_id
     for reserve_quant in env["stock.quant"].search([
-            ("product_id", "=", quant.product_id.id),
+            ("product_id", "in", quant.product_id.ids),
             ("quantity", ">", 0),
             ("location_id", "in", orderpoint_locations.ids),
-            ("location_id", "!=", quant.location_id.id),
+            ("location_id", "!=", quant.location_id.ids),
     ]):
-        if reserve_quant.lot_id.removal_date > datetime.datetime.now() and reserve_quant.lot_id.removal_date < quant.lot_id.removal_date:
+        if reserve_quant.lot_id.removal_date > datetime.datetime.now() and any((reserve_quant.lot_id.removal_date < lot.removal_date) for lot in quant.lot_id):
             result = False
             break
             ]]>
@@ -68,7 +68,7 @@ if quant.lot_id:
         <field name="condition_type">code</field>
         <field name="code_snippet">
 if quant.product_id and env["stock.quant"].search([
-    ("product_id", "=", quant.product_id.id),
+    ("product_id", "in", quant.product_id.ids),
     ("location_id", "child_of", storage_location_sequence.location_id.id),
     ("quantity", ">", 0),
 ], limit=1):
