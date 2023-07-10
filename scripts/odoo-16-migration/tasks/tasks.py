@@ -587,6 +587,7 @@ def set_modules_to_remove():
         "mass_editing",  # replaced by server_action_mass_edit
         "alce_l10n_be_reports",
         "account_invoice_merge_purchase",  # done by account_invoice_merge
+        "account_invoice_merge_attachment",
         "account_cutoff_accrual_base",
         "account_cutoff_accrual_return",
         "account_type_menu",
