@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+<odoo>
+  <record id="fs_storage_prod" model="fs.storage">
+    <!-- This storage is used in the production environment as default storage
+      for the attachments. Configuration is provided by server environment files.
+    -->
+    <field name="name">FileSystem Production</field>
+    <field name="code">fsprod</field>
+  </record>
+  <record id="fs_storage_tst" model="fs.storage">
+    <!-- This storage is used in non-production environments as default storage
+      for the attachments. Configuration is provided by server environment files
+    -->
+    <field name="name">FileSystem Test</field>
+    <field name="code">fstst</field>
+  </record>
+</odoo>
