@@ -52,13 +52,14 @@ dependencies = [
   "num2words",
   "pdfminer",
   # addons we want in the package but not installed
-  "odoo-addon-attachment-s3",
   "odoo-addon-session_db",
   # xlrd >= 2 removes xlsx support for anything other than .xls files
   # https://xlrd.readthedocs.io/en/latest/changes.html#id1
   "xlrd<2",
   #reportlab<4 to avoid dependency on pycairo which is not available as a wheel
   "reportlab<4",
+  # fs_storage with s3
+  "s3fs"
 ]
 addons_dirs = ["odoo/addons"]
 
