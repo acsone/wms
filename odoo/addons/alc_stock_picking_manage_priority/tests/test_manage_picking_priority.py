@@ -71,10 +71,19 @@ class TestManageMovePriority(TransactionCase):
         )
         self.assertEqual(pick.priority, "0")
         self.assertFalse(pick.is_priority_editable)  # priority not editable
+        picks = (
+            self.create_picking(
+                self.picking_type_out,
+                self.product,
+                self.stock_location,
+                self.customer_location,
+            )
+            | pick
+        )
         # try to change the priority and get a validation error
         msg = "You don't have the right to change the priority."
         with self.assertRaises(ValidationError, msg=msg):
-            pick.priority = "1"
+            picks.write({"priority": "1"})
         # but it didn't work
         self.assertNotEqual(pick.priority, "1")
         # enable move priority management

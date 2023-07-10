@@ -589,6 +589,11 @@ def set_modules_to_remove():
         "account_invoice_merge_purchase",  # done by account_invoice_merge
         "account_cutoff_accrual_base",
         "account_cutoff_accrual_return",
+        "account_type_menu",
+        "account_financial_report_date_range",
+        "account_move_line_report_xls",
+        "account_mass_reconcile_partner",
+        "account_mass_reconcile",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     # with cursor(DB_16_POSTMIG) as cr:
