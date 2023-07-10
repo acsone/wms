@@ -7,8 +7,6 @@
     <record id="condition_besoin_reassort" model="stock.storage.location.sequence.cond">
         <field name="name">Besoin réassort</field>
         <field name="condition_type">code</field>
-        <!-- TODO: Change this to True after having migrated module -->
-        <field name="active" eval="False" />
         <field name="code_snippet">
 result = True
 
@@ -16,10 +14,11 @@ result = True
 if env["stock.quant"].search([
     ("product_id", "=", product.id),
     ("location_id", "child_of", storage_location_sequence.location_id.id),
-    ("qty", ">", 0),
-], limit=1) and not env["report.stock.refill.reassort"].search([
-    ("product_id", "=", product.id),
-    ("refill_priority_reassort", ">", 0)]):
+    ("quantity", ">", 0),
+], limit=1):
+    # We have some quantities that will be taken
+    product_location = product.with_context(location=storage_location_sequence.location_id.id)
+    if (product_location.quantity_in_replenishments == 0 and product_location.quantity_to_replenish == 0):
         result = False
 
         </field>

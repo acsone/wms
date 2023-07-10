@@ -27,6 +27,9 @@ class TestAlcStorageTypeCondition(TestStorageTypeCommon):
         cls.cond_reserve_lot = cls.env.ref(
             "alc_stock_storage_type_sequence_condition.condition_ancien_lot"
         )
+        cls.cond_need_replenish = cls.env.ref(
+            "alc_stock_storage_type_sequence_condition.condition_besoin_reassort"
+        )
 
         # configure a new sequence with none in the stock location (default destination)
         cls.cardboxes_package_storage_type.storage_location_sequence_ids.unlink()
@@ -142,6 +145,43 @@ class TestAlcStorageTypeCondition(TestStorageTypeCommon):
                 "sequence": 2,
             }
         )
+
+    @classmethod
+    def _create_need_replenish_cond(cls):
+        """Create Sequences for older lot in reserve."""
+        cls.env["stock.storage.location.sequence"].create(
+            {
+                "package_type_id": cls.cardboxes_package_storage_type.id,
+                "location_id": cls.cardboxes_bin_4_location.id,
+                "sequence": 1,
+                "location_sequence_cond_ids": [
+                    Command.set(cls.cond_need_replenish.ids)
+                ],
+            }
+        )
+
+        cls.env["stock.storage.location.sequence"].create(
+            {
+                "package_type_id": cls.cardboxes_package_storage_type.id,
+                "location_id": cls.cardboxes_bin_1_location.id,
+                "sequence": 2,
+            }
+        )
+
+    @classmethod
+    def _create_move_out(cls):
+        # Create a move to trigger a replenishment
+        cls.move_out = cls.env["stock.move"].create(
+            {
+                "name": "Move OUT",
+                "product_id": cls.product.id,
+                "product_uom": cls.product.uom_id.id,
+                "location_id": cls.cardboxes_location.id,
+                "location_dest_id": cls.env.ref("stock.stock_location_customers").id,
+                "product_uom_qty": 10.0,
+            }
+        )
+        cls.move_out._action_confirm()
 
     def test_location_no_stock(self):
         """There is no stock in cardbox 2, so move will point out cardbox 4."""
@@ -367,6 +407,112 @@ class TestAlcStorageTypeCondition(TestStorageTypeCommon):
                 "location_id": self.alc_reserve_location.id,
             }
         )._apply_inventory()
+
+        move.lot_ids |= self.alc_lot
+        move._action_assign()
+        move_line = move.move_line_ids
+        package_level = move_line.package_level_id
+
+        self.assertEqual(
+            package_level.location_dest_id,
+            self.cardboxes_bin_1_location,
+            "the move line's destination must stay in Stock as we have"
+            " a 'none' strategy on it and it is in the sequence",
+        )
+
+    def test_location_need_replenish(self):
+        """
+        Create two location sequences for the cardbox package type.
+
+            - The first one with a condition that need replenishment
+            - A second one without condition
+
+        Move destination should be in the second location
+        """
+        self._create_need_replenish_cond()
+
+        move = self._create_single_move(self.product)
+
+        self._create_move_out()
+
+        move._assign_picking()
+        package = self.env["stock.quant.package"].create(
+            {"product_packaging_id": self.product_lot_cardbox_product_packaging.id}
+        )
+        self._update_qty_in_location(
+            move.location_id,
+            move.product_id,
+            move.product_qty,
+            package=package,
+            lot=self.alc_lot,
+        )
+
+        # Set product quantity in destination as this is the first condition requirement
+        self.env["stock.quant"].with_context(inventory_mode=True).create(
+            {
+                "product_id": self.product.id,
+                "inventory_quantity": 1.0,
+                "lot_id": self.alc_lot_old.id,
+                "location_id": self.cardboxes_bin_4_location.id,
+            }
+        )._apply_inventory()
+
+        # Set product with lot in reserve with lot == '2023-05-01'
+        self.env["stock.quant"].with_context(inventory_mode=True).create(
+            {
+                "product_id": self.product.id,
+                "inventory_quantity": 5.0,
+                "lot_id": self.alc_lot_old.id,
+                "location_id": self.alc_reserve_location.id,
+            }
+        )._apply_inventory()
+
+        move.lot_ids |= self.alc_lot
+        move._action_assign()
+        move_line = move.move_line_ids
+        package_level = move_line.package_level_id
+
+        self.assertEqual(
+            package_level.location_dest_id,
+            self.cardboxes_bin_4_location,
+            "the move line's destination must stay in Stock as we have"
+            " a 'none' strategy on it and it is in the sequence",
+        )
+
+    def test_location_no_replenish(self):
+        """
+        Create two location sequences for the cardbox package type.
+
+            - The first one with a condition taht need replenishment
+            - A second one without condition
+
+        Move destination should be in the second location
+        """
+        self._create_need_replenish_cond()
+
+        move = self._create_single_move(self.product)
+
+        # Set product quantity in destination as this is the first condition requirement
+        self.env["stock.quant"].with_context(inventory_mode=True).create(
+            {
+                "product_id": self.product.id,
+                "inventory_quantity": 1.0,
+                "lot_id": self.alc_lot_old.id,
+                "location_id": self.cardboxes_bin_4_location.id,
+            }
+        )._apply_inventory()
+
+        move._assign_picking()
+        package = self.env["stock.quant.package"].create(
+            {"product_packaging_id": self.product_lot_cardbox_product_packaging.id}
+        )
+        self._update_qty_in_location(
+            move.location_id,
+            move.product_id,
+            move.product_qty,
+            package=package,
+            lot=self.alc_lot,
+        )
 
         move.lot_ids |= self.alc_lot
         move._action_assign()
