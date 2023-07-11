@@ -47,3 +47,9 @@ class StockPicking(Picking):
         return super(
             StockPicking, self.with_context(no_check_priority=True)
         )._action_done()
+
+    def auto_release_available_to_promise(self):
+        """After picking release, the priority is recomputed."""
+        return super(
+            StockPicking, self.with_context(no_check_priority=True)
+        ).auto_release_available_to_promise()
