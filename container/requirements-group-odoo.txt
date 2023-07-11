@@ -2,4 +2,4 @@
 # from requirements.txt, requirements-test.txt.
 # Do not edit.
 odoo @ git+https://github.com/acsone/odoo.git@ae4d5aeb4af3c60a4ce893eab38e87328a3aa814
-odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@9507276fc8c95965f6d6353a737c974d7fcc7739
+odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@504297edcd0f157375b3d797c047086b250ff3ca

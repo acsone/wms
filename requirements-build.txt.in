@@ -3,3 +3,6 @@
 hatchling
 hatch-odoo
 setuptools-odoo>=3.1.4
+# xmlsec
+pkgconfig>=1.5.1
+lxml>=3.8, !=4.7.0
