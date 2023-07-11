@@ -29,5 +29,5 @@ class SeBackendElasticsearch(models.Model):
     def create_or_update_score_on_position_script(self):
         client = self._get_es_client()
         client.put_script(
-            "sort-net-price", self._scrip_field_json(self.score_on_position_script)
+            "score_on_position", self._scrip_field_json(self.score_on_position_script)
         )
