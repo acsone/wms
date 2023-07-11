@@ -6,11 +6,11 @@ from fastapi import Depends, Query
 
 from odoo.api import Environment
 
-from odoo.addons.fastapi.depends import authenticated_partner_env, paging
+from odoo.addons.fastapi.dependencies import authenticated_partner_env, paging
 from odoo.addons.fastapi.schemas import Paging
 
 from ..models.fastapi_endpoint import b2c_api_router
-from .depends import AlcB2cClient, alc_b2c_client
+from .dependencies import AlcB2cClient, alc_b2c_client
 from .models.product import Product
 from .utils import PagedCollection
 

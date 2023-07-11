@@ -6,7 +6,7 @@ from fastapi import Depends
 
 from odoo.api import Environment
 
-from odoo.addons.fastapi.depends import authenticated_partner_env
+from odoo.addons.fastapi.dependencies import authenticated_partner_env
 
 from ..models.alc_b2c_client import AlcB2cClient
 from ..models.fastapi_endpoint import __alc_b2c_client_base

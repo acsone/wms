@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from odoo import api, fields
 from odoo.api import Environment
 
-from odoo.addons.fastapi.depends import (
+from odoo.addons.fastapi.dependencies import (
     authenticated_partner_impl as authenticated_partner_impl_base,
     fastapi_endpoint,
     odoo_env,
