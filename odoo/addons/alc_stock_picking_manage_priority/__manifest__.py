@@ -6,7 +6,7 @@
     "version": "16.0.1.0.0",
     "author": "ACSONE SA/NV, Odoo Community Association (OCA)",
     "category": "stock",
-    "depends": ["stock_move_manage_priority", "stock_release_channel_auto_release"],
+    "depends": ["stock_move_manage_priority", "stock_available_to_promise_release"],
     "website": "https://github.com/OCA/stock-logistics-workflow",
     "data": [
         "views/stock_picking_views.xml",
