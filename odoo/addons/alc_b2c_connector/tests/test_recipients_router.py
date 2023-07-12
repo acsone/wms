@@ -10,7 +10,8 @@ from odoo import Command
 from odoo.exceptions import ValidationError
 from odoo.tools.misc import mute_logger
 
-from ..services.models.country_code import CountryCode
+from ..routers.recipients import router as recipients_router
+from ..schemas.country_code import CountryCode
 from .common import CommonB2CServiceCase
 
 
@@ -18,6 +19,7 @@ class TestRecipientsService(CommonB2CServiceCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.default_fastapi_router = recipients_router
 
         title_id = cls.env.ref("base.res_partner_title_mister").id
         cls.belgium = cls.env.ref("base.be")
@@ -123,9 +125,10 @@ class TestRecipientsService(CommonB2CServiceCase):
         Expected result:
             The recipient info
         """
-        response: Response = self.client.get(
-            self._get_path("/recipients/ABC"), headers={"api-key": "1234"}
-        )
+        with self._create_test_client() as client:
+            response: Response = client.get(
+                "/recipients/ABC", headers={"api-key": "1234"}
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertTrue(res)
@@ -156,11 +159,12 @@ class TestRecipientsService(CommonB2CServiceCase):
         recipient_info["country_code"] = "BE"
         recipient_info["name2"] = "My Partner Society"
         recipient_info["note"] = "Test note for delivery"
-        response: Response = self.client.post(
-            self._get_path("/recipients/ABC/update"),
-            headers={"api-key": "1234"},
-            json=recipient_info,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/recipients/ABC/update",
+                headers={"api-key": "1234"},
+                json=recipient_info,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertEqual(self.b2c_partner.street, "new_street")
@@ -194,12 +198,12 @@ class TestRecipientsService(CommonB2CServiceCase):
         recipient_info = {}
         recipient_info["id"] = "ABC"
         recipient_info["street"] = "new_street"
-
-        response: Response = self.client.post(
-            self._get_path("/recipients/ABC/update"),
-            headers={"api-key": "1234"},
-            json=recipient_info,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/recipients/ABC/update",
+                headers={"api-key": "1234"},
+                json=recipient_info,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertEqual(self.b2c_partner.street, "new_street")
@@ -264,11 +268,12 @@ class TestRecipientsService(CommonB2CServiceCase):
             "city": self.b2c_partner.city,
             "note": "new note",
         }
-        response: Response = self.client.post(
-            self._get_path("/recipients/ABC/update"),
-            headers={"api-key": "1234"},
-            json=recipient_info,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/recipients/ABC/update",
+                headers={"api-key": "1234"},
+                json=recipient_info,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(self.b2c_partner.phone, "1")
         self.assertEqual(self.b2c_partner.mobile, "2")
@@ -280,11 +285,12 @@ class TestRecipientsService(CommonB2CServiceCase):
         """Updatable fields can be erased by passing None."""
         self.b2c_partner.write({"phone": "0", "mobile": "1", "comment": "C"})
         recipient_info = {"id": "ABC", "phone": None, "mobile": None, "note": None}
-        response: Response = self.client.post(
-            self._get_path("/recipients/ABC/update"),
-            headers={"api-key": "1234"},
-            json=recipient_info,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/recipients/ABC/update",
+                headers={"api-key": "1234"},
+                json=recipient_info,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertFalse(self.b2c_partner.phone)
         self.assertFalse(self.b2c_partner.mobile)
@@ -295,11 +301,12 @@ class TestRecipientsService(CommonB2CServiceCase):
         """Suite can be nulled, and is not updatable after a picking is started."""
         self.b2c_order.partner_id = self.b2c_partner
         self.b2c_partner.suite = "C"
-        response: Response = self.client.post(
-            self._get_path("/recipients/ABC/update"),
-            headers={"api-key": "1234"},
-            json={"id": "ABC", "name2": None},
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/recipients/ABC/update",
+                headers={"api-key": "1234"},
+                json={"id": "ABC", "name2": None},
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertFalse(self.b2c_partner.suite)
 
@@ -327,11 +334,12 @@ class TestRecipientsService(CommonB2CServiceCase):
             "zip": "new zip info no check",
             "city": "new city info no check",
         }
-        response: Response = self.client.post(
-            self._get_path("/recipients/ABC/update"),
-            headers={"api-key": "1234"},
-            json=recipient_info,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/recipients/ABC/update",
+                headers={"api-key": "1234"},
+                json=recipient_info,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(self.b2c_partner.street, "new street info no check")
         self.assertEqual(self.b2c_partner.zip, "new zip info no check")

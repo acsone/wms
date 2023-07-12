@@ -1,6 +1,5 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 from fastapi import status
 from freezegun import freeze_time
 from requests import Response
@@ -9,12 +8,18 @@ from odoo import fields
 from odoo.exceptions import MissingError, ValidationError
 from odoo.tools.misc import mute_logger
 
+from ..routers.sales import router as sales_router
 from .common import CommonB2CSaleServiceCase
 
 ISO_DT_WITH_TZ = "2020-05-28T13:45:47+02:00"
 
 
 class TestSalesService(CommonB2CSaleServiceCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.default_fastapi_router = sales_router
+
     def test_00(self):
         """
         Data:
@@ -25,9 +30,8 @@ class TestSalesService(CommonB2CSaleServiceCase):
         Expected result:
             The so info
         """
-        response: Response = self.client.get(
-            self._get_path("/sales/10"), headers={"api-key": "1234"}
-        )
+        with self._create_test_client() as client:
+            response: Response = client.get("/sales/10", headers={"api-key": "1234"})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertTrue(res)
@@ -58,11 +62,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
         Expected result:
             The so info
         """
-        response: Response = self.client.get(
-            self._get_path("/sales/search"),
-            headers={"api-key": "1234"},
-            params={"ids": [10]},
-        )
+        with self._create_test_client() as client:
+            response: Response = client.get(
+                "/sales/search",
+                headers={"api-key": "1234"},
+                params={"ids": [10]},
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual(res["size"], 1)
@@ -106,11 +111,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 }
             ],
         }
-        response: Response = self.client.post(
-            self._get_path("/sales/create"),
-            headers={"api-key": "1234"},
-            json=params,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/sales/create",
+                headers={"api-key": "1234"},
+                json=params,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
 
@@ -170,11 +176,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 }
             ],
         }
-        response: Response = self.client.post(
-            self._get_path("/sales/create"),
-            headers={"api-key": "1234"},
-            json=params,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/sales/create",
+                headers={"api-key": "1234"},
+                json=params,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertTrue(res)
@@ -213,11 +220,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
                     }
                 ],
             }
-            response: Response = self.client.post(
-                self._get_path("/sales/create"),
-                headers={"api-key": "1234"},
-                json=params,
-            )
+            with self._create_test_client() as client:
+                response: Response = client.post(
+                    "/sales/create",
+                    headers={"api-key": "1234"},
+                    json=params,
+                )
             self.assertEqual(response.status_code, status.HTTP_200_OK)
             res = response.json()
             self.assertTrue(res)
@@ -280,11 +288,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 }
             ],
         }
-        response: Response = self.client.post(
-            self._get_path("/sales/create"),
-            headers={"api-key": "1234"},
-            json=params,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/sales/create",
+                headers={"api-key": "1234"},
+                json=params,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertTrue(res)
@@ -370,11 +379,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 },
             ],
         }
-        response: Response = self.client.post(
-            self._get_path("/sales/create"),
-            headers={"api-key": "1234"},
-            json=params,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/sales/create",
+                headers={"api-key": "1234"},
+                json=params,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertTrue(res)
@@ -439,22 +449,23 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 },
             ],
         }
-        response: Response = self.client.post(
-            self._get_path("/sales/create"),
-            headers={"api-key": "1234"},
-            json=params,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/sales/create",
+                headers={"api-key": "1234"},
+                json=params,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
         self.assertEqual("sale", res["state"])
         self._deliver_orders(new_so)
-
-        response: Response = self.client.get(
-            self._get_path("/sales/99"),
-            headers={"api-key": "1234"},
-        )
+        with self._create_test_client() as client:
+            response: Response = client.get(
+                "/sales/99",
+                headers={"api-key": "1234"},
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual("delivery", res["state"])
@@ -491,11 +502,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 },
             ],
         }
-        response: Response = self.client.post(
-            self._get_path("/sales/create"),
-            headers={"api-key": "1234"},
-            json=params,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/sales/create",
+                headers={"api-key": "1234"},
+                json=params,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertTrue(res)
@@ -503,10 +515,11 @@ class TestSalesService(CommonB2CSaleServiceCase):
         self.assertEqual("sale", res["state"])
         self._deliver_orders(new_so)
         new_so.picking_ids.write({"carrier_tracking_ref": "AZ123"})
-        response: Response = self.client.get(
-            self._get_path("/sales/99"),
-            headers={"api-key": "1234"},
-        )
+        with self._create_test_client() as client:
+            response: Response = client.get(
+                "/sales/99",
+                headers={"api-key": "1234"},
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual("delivery", res["state"])
@@ -545,11 +558,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 }
             ],
         }
-        response: Response = self.client.post(
-            self._get_path("/sales/create"),
-            headers={"api-key": "1234"},
-            json=params,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/sales/create",
+                headers={"api-key": "1234"},
+                json=params,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertTrue(res)
@@ -570,10 +584,11 @@ class TestSalesService(CommonB2CSaleServiceCase):
         Expected result:
             The so is cancelled
         """
-        response: Response = self.client.post(
-            self._get_path(f"/sales/{self.b2c_order.b2c_ref}/cancel"),
-            headers={"api-key": "1234"},
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                f"/sales/{self.b2c_order.b2c_ref}/cancel",
+                headers={"api-key": "1234"},
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual("cancel", self.b2c_order.state)
 
@@ -589,10 +604,11 @@ class TestSalesService(CommonB2CSaleServiceCase):
         """
         self._deliver_orders(self.b2c_order)
         self.b2c_order.picking_ids.do_print_picking()
-        response: Response = self.client.post(
-            self._get_path(f"/sales/{self.b2c_order.b2c_ref}/cancel"),
-            headers={"api-key": "1234"},
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                f"/sales/{self.b2c_order.b2c_ref}/cancel",
+                headers={"api-key": "1234"},
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual("sale", self.b2c_order.state)
 
@@ -640,11 +656,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
         self.b2c_order.action_confirm()
         self.assertEqual(self.b2c_order.state, "sale")
 
-        response: Response = self.client.post(
-            self._get_path(f"/sales/{self.b2c_order.b2c_ref}/update"),
-            headers={"api-key": "1234"},
-            json=params,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                f"/sales/{self.b2c_order.b2c_ref}/update",
+                headers={"api-key": "1234"},
+                json=params,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(self.b2c_order.order_line[0].product_uom_qty, 10)
         self.assertEqual(self.b2c_order.order_line[1].product_uom_qty, 5)
@@ -682,11 +699,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
 
         self.b2c_order.action_confirm()
         self.assertEqual(self.b2c_order.state, "sale")
-        response: Response = self.client.post(
-            self._get_path(f"/sales/{self.b2c_order.b2c_ref}/update"),
-            headers={"api-key": "1234"},
-            json=params,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                f"/sales/{self.b2c_order.b2c_ref}/update",
+                headers={"api-key": "1234"},
+                json=params,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertEqual(self.b2c_order.order_line[0].product_uom_qty, 10)
@@ -726,10 +744,11 @@ class TestSalesService(CommonB2CSaleServiceCase):
         }
 
         self._deliver_orders(self.b2c_order)
-        response: Response = self.client.get(
-            self._get_path("/sales/10"),
-            headers={"api-key": "1234"},
-        )
+        with self._create_test_client() as client:
+            response: Response = client.get(
+                "/sales/10",
+                headers={"api-key": "1234"},
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual("delivery", res["state"])
@@ -753,11 +772,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
         self.assertFalse(self.b2c_order.partner_id.zip)
         self.b2c_order.action_confirm()
 
-        response: Response = self.client.post(
-            self._get_path(f"/sales/{self.b2c_order.b2c_ref}/update"),
-            headers={"api-key": "1234"},
-            json=params,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                f"/sales/{self.b2c_order.b2c_ref}/update",
+                headers={"api-key": "1234"},
+                json=params,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertEqual(self.b2c_order.partner_id.zip, "1234")
@@ -771,11 +791,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
         params = {"id": 10, "recipient": recipient_info}
         old_partner = self.b2c_order.partner_id
 
-        response: Response = self.client.post(
-            self._get_path(f"/sales/{self.b2c_order.b2c_ref}/update"),
-            headers={"api-key": "1234"},
-            json=params,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                f"/sales/{self.b2c_order.b2c_ref}/update",
+                headers={"api-key": "1234"},
+                json=params,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertNotEqual(self.b2c_order.partner_id, old_partner)
@@ -791,11 +812,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
             "email": "b2c@b2c.be",
         }
         params = {"id": 10, "recipient": recipient_info}
-        response: Response = self.client.post(
-            self._get_path(f"/sales/{self.b2c_order.b2c_ref}/update"),
-            headers={"api-key": "1234"},
-            json=params,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                f"/sales/{self.b2c_order.b2c_ref}/update",
+                headers={"api-key": "1234"},
+                json=params,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertFalse(self.b2c_order.partner_id.phone)
@@ -821,11 +843,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 }
             ],
         }
-        response: Response = self.client.post(
-            self._get_path("/sales/create"),
-            headers={"api-key": "1234"},
-            json=params,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/sales/create",
+                headers={"api-key": "1234"},
+                json=params,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertTrue(res)
@@ -844,11 +867,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 }
             ],
         }
-        response: Response = self.client.post(
-            self._get_path("/sales/create"),
-            headers={"api-key": "1234"},
-            json=params2,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/sales/create",
+                headers={"api-key": "1234"},
+                json=params2,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res2 = response.json()
         self.assertTrue(res2)

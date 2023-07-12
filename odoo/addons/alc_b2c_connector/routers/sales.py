@@ -1,29 +1,30 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from typing import Annotated
 
-
-from fastapi import Depends, Query
+from fastapi import APIRouter, Depends, Query
 
 from odoo.api import Environment
 
-from odoo.addons.fastapi.depends import authenticated_partner_env, paging
+from odoo.addons.fastapi.dependencies import authenticated_partner_env, paging
 from odoo.addons.fastapi.schemas import Paging
 
-from ..models.fastapi_endpoint import b2c_api_router
-from .depends import AlcB2cClient, alc_b2c_client
-from .models.sale_order import (
+from ..dependencies import AlcB2cClient, alc_b2c_client
+from ..schemas.paged_collection import PagedCollection
+from ..schemas.sale_order import (
     SaleOrderCreateRequest,
     SaleOrderResponse,
     SaleOrderUpdateRequest,
 )
-from .utils import PagedCollection
+
+router = APIRouter(tags=["sales"])
 
 
-@b2c_api_router.post("/sales/create", response_model=SaleOrderResponse)
+@router.post("/sales/create")
 def _create_sale_order(
     body: SaleOrderCreateRequest,
-    env: Environment = Depends(authenticated_partner_env),  # noqa: B008
-    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
+    env: Annotated[Environment, Depends(authenticated_partner_env)],
+    client: Annotated[AlcB2cClient, Depends(alc_b2c_client)],
 ) -> SaleOrderResponse:
     """Create a sale order."""
     data = body._convert_to_write()
@@ -31,21 +32,19 @@ def _create_sale_order(
     return SaleOrderResponse.from_orm(sale_order)
 
 
-@b2c_api_router.get(
+@router.get(
     "/sales/search",
-    response_model=PagedCollection[SaleOrderResponse],
     response_model_exclude_unset=True,
 )
-@b2c_api_router.get(
+@router.get(
     "/sales/",
-    response_model=PagedCollection[SaleOrderResponse],
     response_model_exclude_unset=True,
 )
 def get_sale_orders(
-    ids: list[int] | None = Query(None),  # noqa: B008
-    paging_: Paging = Depends(paging),  # noqa: B008
-    env: Environment = Depends(authenticated_partner_env),  # noqa: B008
-    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
+    paging_: Annotated[Paging, Depends(paging)],
+    env: Annotated[Environment, Depends(authenticated_partner_env)],
+    client: Annotated[AlcB2cClient, Depends(alc_b2c_client)],
+    ids: Annotated[list[int] | None, Query()] = None,
 ) -> PagedCollection[SaleOrderResponse]:
     """
     Get orders info.
@@ -66,12 +65,12 @@ def get_sale_orders(
     )
 
 
-@b2c_api_router.get("/sales/{id}", response_model=SaleOrderResponse)
-@b2c_api_router.get("/sales/{id}/get", response_model=SaleOrderResponse)
+@router.get("/sales/{id}")
+@router.get("/sales/{id}/get")
 def _get_sale_order(
     id: int,  # pylint: disable=redefined-builtin
-    env: Environment = Depends(authenticated_partner_env),  # noqa: B008
-    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
+    env: Annotated[Environment, Depends(authenticated_partner_env)],
+    client: Annotated[AlcB2cClient, Depends(alc_b2c_client)],
 ) -> SaleOrderResponse:
     """
     Get order info:
@@ -89,11 +88,11 @@ def _get_sale_order(
     return SaleOrderResponse.from_orm(sale_order)
 
 
-@b2c_api_router.post("/sales/{id}/cancel", response_model=SaleOrderResponse)
+@router.post("/sales/{id}/cancel")
 def _cancel_sale_order(
     id: int,  # pylint: disable=redefined-builtin
-    env: Environment = Depends(authenticated_partner_env),  # noqa: B008
-    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
+    env: Annotated[Environment, Depends(authenticated_partner_env)],
+    client: Annotated[AlcB2cClient, Depends(alc_b2c_client)],
 ) -> SaleOrderResponse:
     """
     Cancel Sale Order.
@@ -106,14 +105,14 @@ def _cancel_sale_order(
     return SaleOrderResponse.from_orm(sale_order)
 
 
-@b2c_api_router.post("/sales/{id}", response_model=SaleOrderResponse)
-@b2c_api_router.post("/sales/{id}/update", response_model=SaleOrderResponse)
-@b2c_api_router.put("/sales/{id}", response_model=SaleOrderResponse)
+@router.post("/sales/{id}")
+@router.post("/sales/{id}/update")
+@router.put("/sales/{id}")
 def _update_sale_order(
     id: int,  # pylint: disable=redefined-builtin
     body: SaleOrderUpdateRequest,
-    env: Environment = Depends(authenticated_partner_env),  # noqa: B008
-    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
+    env: Annotated[Environment, Depends(authenticated_partner_env)],
+    client: Annotated[AlcB2cClient, Depends(alc_b2c_client)],
 ) -> SaleOrderResponse:
     """Update sale order."""
     sale_order = env["sale.order"]._get_order_from_b2c_ref(id, client)

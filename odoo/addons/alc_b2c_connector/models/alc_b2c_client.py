@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
+from odoo.tools import ormcache
 
 from odoo.addons.account.models.account_payment_term import AccountPaymentTerm
 from odoo.addons.account_payment_mode.models.account_payment_mode import (
@@ -76,3 +77,24 @@ class AlcB2cClient(models.Model):
     @api.model
     def _get_default_sale_reason_backorder_strategy(self):
         return self.env.company.partner_sale_backorder_default_strategy
+
+    @api.model
+    @ormcache("endpoint_id", "api_key")
+    def _get_id_by_endpoint_id_and_api_key(self, endpoint_id, api_key):
+        return self.search(
+            [
+                ("fastapi_endpoint_id", "=", endpoint_id),
+                ("api_key", "=", api_key),
+            ],
+            limit=1,
+        ).id
+
+    def write(self, vals):
+        res = super().write(vals)
+        self._get_id_by_endpoint_id_and_api_key.clear_cache(self)
+        return res
+
+    def unlink(self):
+        res = super().unlink()
+        self._get_id_by_endpoint_id_and_api_key.clear_cache(self)
+        return res

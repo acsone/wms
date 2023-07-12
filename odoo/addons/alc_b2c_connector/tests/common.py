@@ -4,18 +4,19 @@ import random
 import string
 from functools import partial
 
-from fastapi.testclient import TestClient
-
 from odoo import Command
-from odoo.tests.common import TransactionCase
 
-from odoo.addons.fastapi.context import odoo_env_ctx
+from odoo.addons.fastapi.dependencies import (
+    authenticated_partner_impl as base_authenticated_partner_impl,
+    fastapi_endpoint_id,
+)
+from odoo.addons.fastapi.tests.common import FastAPITransactionCase
 
 from ..hooks import _initialize_product_assortment_filter
 from ..models.fastapi_endpoint import authenticated_partner_impl
 
 
-class CommonB2CServiceCase(TransactionCase):
+class CommonB2CServiceCase(FastAPITransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -125,20 +126,14 @@ class CommonB2CServiceCase(TransactionCase):
         cls.env["ir.config_parameter"].set_param(
             "alc_sale_exception_settings.sale_exception_check_enabled", False
         )
-        cls.app = cls.endpoint._get_app()
-        cls.app.dependency_overrides[authenticated_partner_impl] = partial(
-            lambda a: a, cls.b2c_user.partner_id
+        # cls.default_fastapi_authenticated_partner = cls.b2c_user.partner_id
+        cls.default_fastapi_odoo_env = cls.env(
+            user=cls.b2c_user, context=dict(cls.env.context)
         )
-        cls.client = TestClient(cls.app)
-        env = cls.env(user=cls.b2c_user, context=dict(cls.env.context))
-        cls._ctx_token = odoo_env_ctx.set(env)
-
-    @classmethod
-    def tearDownClass(cls) -> None:
-        odoo_env_ctx.reset(cls._ctx_token)
-        cls.endpoint._reset_app()
-
-        super().tearDownClass()
+        cls.default_fastapi_dependency_overrides = {
+            base_authenticated_partner_impl: authenticated_partner_impl,
+            fastapi_endpoint_id: partial(lambda a: a, cls.endpoint.id),
+        }
 
     @classmethod
     def change_product_qty(cls, product, qty):
@@ -149,9 +144,6 @@ class CommonB2CServiceCase(TransactionCase):
                 "new_quantity": qty,
             }
         ).change_product_qty()
-
-    def _get_path(self, path) -> str:
-        return self.endpoint.root_path + path
 
 
 class CommonB2CSaleServiceCase(CommonB2CServiceCase):

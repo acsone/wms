@@ -3,6 +3,8 @@
 from fastapi import status
 from requests import Response
 
+from ..routers.recipients import router as recipients_router
+from ..routers.sales import router as sales_router
 from .common import CommonB2CSaleServiceCase
 
 ISO_DT_WITH_TZ = "2020-05-28T13:45:47+02:00"
@@ -70,11 +72,12 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
                 }
             ],
         }
-        self.client.post(
-            self._get_path("/sales/create"),
-            headers={"api-key": b2c_client.api_key},
-            json=params,
-        )
+        with self._create_test_client(router=sales_router) as client:
+            client.post(
+                "/sales/create",
+                headers={"api-key": b2c_client.api_key},
+                json=params,
+            )
 
     def test_00(self):
         """
@@ -98,22 +101,24 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
         self.assertEqual(order.alc_b2c_client_id, self.b2c_client_2)
         self.assertEqual(len(self.env["sale.order"].search([("b2c_ref", "=", "2")])), 2)
         # first client
-        response: Response = self.client.get(
-            self._get_path("/sales/search"),
-            headers={"api-key": "1234"},
-            params={"ids": [2]},
-        )
+        with self._create_test_client(router=sales_router) as client:
+            response: Response = client.get(
+                "/sales/search",
+                headers={"api-key": "1234"},
+                params={"ids": [2]},
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual(res["size"], 1)
         result = res["data"][0]
         self.assertEqual(result["customer_ref"], "Amazon_XYZ")
         # second client
-        response: Response = self.client.get(
-            self._get_path("/sales/search"),
-            headers={"api-key": "5678"},
-            params={"ids": [2]},
-        )
+        with self._create_test_client(router=sales_router) as client:
+            response: Response = client.get(
+                "/sales/search",
+                headers={"api-key": "5678"},
+                params={"ids": [2]},
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual(res["size"], 1)
@@ -129,20 +134,22 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
             Each client can access only to his sale order
         """
         # first client
-        response: Response = self.client.get(
-            self._get_path("/sales/search"),
-            headers={"api-key": "1234"},
-            params={"ids": [10]},
-        )
+        with self._create_test_client(router=sales_router) as client:
+            response: Response = client.get(
+                "/sales/search",
+                headers={"api-key": "1234"},
+                params={"ids": [10]},
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual(res["size"], 1)
         # second client
-        response: Response = self.client.get(
-            self._get_path("/sales/search"),
-            headers={"api-key": "5678"},
-            params={"ids": [10]},
-        )
+        with self._create_test_client(router=sales_router) as client:
+            response: Response = client.get(
+                "/sales/search",
+                headers={"api-key": "5678"},
+                params={"ids": [10]},
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual(res["size"], 0)
@@ -150,16 +157,18 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
     def test_02(self):
         """Each client can access to his partners."""
         # first client
-        response: Response = self.client.get(
-            self._get_path("/recipients/ABC"), headers={"api-key": "1234"}
-        )
+        with self._create_test_client(router=recipients_router) as client:
+            response: Response = client.get(
+                "/recipients/ABC", headers={"api-key": "1234"}
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual(res["name"], "EXISTING B2C PARTNER")
         # second client
-        response: Response = self.client.get(
-            self._get_path("/recipients/ABC"), headers={"api-key": "5678"}
-        )
+        with self._create_test_client(router=recipients_router) as client:
+            response: Response = client.get(
+                "/recipients/ABC", headers={"api-key": "5678"}
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual(res["name"], "EXISTING B2C PARTNER 2")

@@ -1,35 +1,31 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from typing import Annotated
 
-from fastapi import Depends, Query
+from fastapi import APIRouter, Depends, Query
 
 from odoo.api import Environment
 
-from odoo.addons.fastapi.depends import authenticated_partner_env, paging
+from odoo.addons.fastapi.dependencies import authenticated_partner_env, paging
 from odoo.addons.fastapi.schemas import Paging
 
-from ..models.fastapi_endpoint import b2c_api_router
-from .depends import AlcB2cClient, alc_b2c_client
-from .models.product import Product
-from .utils import PagedCollection
+from ..dependencies import AlcB2cClient, alc_b2c_client
+from ..schemas.paged_collection import PagedCollection
+from ..schemas.product import Product
+
+router = APIRouter(tags=["products"])
 
 
-@b2c_api_router.get(
+@router.get(
     "/products/search",
-    response_model=PagedCollection[Product],
-    response_model_exclude_unset=True,
-)
-@b2c_api_router.get(
-    "/stocks/search",
-    response_model=PagedCollection[Product],
     response_model_exclude_unset=True,
 )
 def get_products(
-    paging_: Paging = Depends(paging),  # noqa: B008
-    skus: list[str] | None = Query(None),  # noqa: B008
-    env: Environment = Depends(authenticated_partner_env),  # noqa: B008
-    client: AlcB2cClient = Depends(alc_b2c_client),  # noqa: B008,
+    paging_: Annotated[Paging, Depends(paging)],
+    env: Annotated[Environment, Depends(authenticated_partner_env)],
+    client: Annotated[AlcB2cClient, Depends(alc_b2c_client)],
+    skus: Annotated[list[str] | None, Query()] = None,
 ) -> PagedCollection[Product]:
     """
     Return the list of available products.

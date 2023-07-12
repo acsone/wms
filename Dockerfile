@@ -18,6 +18,7 @@ RUN set -e \
        expect \
        gettext \
        libcups2 \
+       xmlsec1 \
   && apt -y clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -37,6 +38,8 @@ RUN set -e \
        build-essential \
        libpq-dev \
        libcups2-dev \
+       libxmlsec1-dev \
+       pkg-config \
   && apt -y clean \
   && rm -rf /var/lib/apt/lists/*
 
