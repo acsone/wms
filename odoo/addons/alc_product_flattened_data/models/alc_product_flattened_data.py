@@ -1,26 +1,28 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import ujson
 from psycopg2.extensions import AsIs
 
-from odoo import api, fields, models
+from odoo import api, fields
+from odoo.models import Model
 from odoo.osv import expression
-from odoo.osv.query import Query
+from odoo.tools import Query
 
-import odoo.addons.decimal_precision as dp
 from odoo.addons.alc_pg_trgm.utils import install_trgm_extension
+from odoo.addons.base_sparse_field.models.fields import Serialized
+from odoo.addons.product.models.product_product import ProductProduct
+from odoo.addons.product.models.product_template import ProductTemplate
 
 
-class AlcProductFlattenedData(models.Model):
+class AlcProductFlattenedData(Model):
 
     _name = "alc.product.flattened.data"
     _inherit = "materialized.view.mixin"
     _description = "Product informations for document prices"
     _auto = False
 
-    product_id = fields.Many2one(comodel_name="product.product", readonly=True)
-    product_tmpl_id = fields.Many2one(comodel_name="product.template", readonly=True)
+    product_id = fields.Many2one[ProductProduct](readonly=True)
+    product_tmpl_id = fields.Many2one[ProductTemplate](readonly=True)
     default_code = fields.Char(readonly=True)
     name_en = fields.Char(readonly=True)
     name_fr = fields.Char(readonly=True)
@@ -31,21 +33,16 @@ class AlcProductFlattenedData(models.Model):
     code_amm = fields.Char(readonly=True)
     code_cti = fields.Char(readonly=True)
     indicated_price = fields.Float(
-        string="Indicated price",
-        digits=dp.get_precision("Product Price"),
-        readonly=True,
+        string="Indicated price", digits="Product Price", readonly=True
     )
     barcode = fields.Char(readonly=True)
     categ_en = fields.Char(readonly=True)
     categ_fr = fields.Char(readonly=True)
     categ_nl = fields.Char(readonly=True)
     allowed_partner_types = fields.Char(readonly=True)
-    price_cache = fields.Serialized(readonly=True, prefetch=True)
+    price_cache = Serialized(readonly=True, prefetch=True)
     supplier_discount_discount_sale = fields.Float(
-        "Sale discount (%)",
-        digits=dp.get_precision("Discount"),
-        default=0.0,
-        readonly=True,
+        "Sale discount (%)", digits="Discount", default=0.0, readonly=True
     )
     supplier_discount_date_end = fields.Date(readonly=True)
     has_supplier_promotion = fields.Boolean(readonly=True)
@@ -56,9 +53,9 @@ class AlcProductFlattenedData(models.Model):
     web_published = fields.Boolean(readonly=True)
     supplier_name = fields.Char(readonly=True)
     tax_amount = fields.Float(readonly=True, digits=(16, 4))
-    url_key_fr = fields.Char(readonly=True)
-    url_key_en = fields.Char(readonly=True)
-    url_key_nl = fields.Char(readonly=True)
+    # url_key_fr = fields.Char(readonly=True) # FIXME: do after shopinvider migration
+    # url_key_en = fields.Char(readonly=True)
+    # url_key_nl = fields.Char(readonly=True)
 
     @api.model
     def get_init_query(self):
@@ -69,43 +66,24 @@ WITH RECURSIVE categ_info AS (
         product_category.id,
         parent_id,
         product_category.name,
-        product_category.name as fullname_en,
-        coalesce(categ_fr.value, product_category.name) as fullname_fr,
-        coalesce(categ_nl.value, product_category.name) as fullname_nl
+        product_category.name->>'en_US' as fullname_en,
+        product_category.name->>'fr_BE' as fullname_fr,
+        product_category.name->>'nl_BE' as fullname_nl
     FROM product_category
-        LEFT join ir_translation as categ_fr
-            ON categ_fr.res_id = product_category.id
-            AND categ_fr.type = 'model'
-            AND categ_fr.name = 'product.category,name'
-            AND categ_fr.lang = 'fr_BE'
-        LEFT join ir_translation as categ_nl
-            ON categ_nl.res_id = product_category.id
-            AND categ_nl.type = 'model'
-            AND categ_nl.name = 'product.category,name'
-            AND categ_nl.lang = 'nl_BE'
     WHERE product_category.parent_id = %(main_web_category_id)s
     UNION
         SELECT
             product_category.id,
             product_category.parent_id,
             product_category.name,
-            cs.fullname_en || ' / ' || product_category.name as fullname_en,
-            cs.fullname_fr || ' / ' || coalesce(categ_fr.value, product_category.name) as fullname_fr,
-            cs.fullname_nl || ' / ' || coalesce(categ_nl.value, product_category.name) as fullname_nl
+            concat(cs.fullname_en, ' / ', product_category.name->>'en_US') as fullname_en,
+            concat(cs.fullname_fr, ' / ', product_category.name->>'fr_BE') as fullname_fr,
+            concat(cs.fullname_nl, ' / ', product_category.name->>'nl_BE') as fullname_nl
         FROM
             categ_info cs
         JOIN
             product_category on cs.id = product_category.parent_id
-            LEFT join ir_translation as categ_fr
-                ON categ_fr.res_id = product_category.id
-                AND categ_fr.type = 'model'
-                AND categ_fr.name = 'product.category,name'
-                AND categ_fr.lang = 'fr_BE'
-            LEFT join ir_translation as categ_nl
-                ON categ_nl.res_id = product_category.id
-                AND categ_nl.type = 'model'
-                AND categ_nl.name = 'product.category,name'
-                AND categ_nl.lang = 'nl_BE'
+
 ),
 web_categories AS (
     SELECT
@@ -121,17 +99,17 @@ single_tax AS (
         product_taxes_rel trel
         JOIN account_tax tax
             ON trel.tax_id = tax.id
-            AND tax.tax_group_id = %(tax_group_one_tax_id)s
+            AND tax.is_vat
 )
 SELECT
     pp.id,
     pt.id as product_tmpl_id,
     pp.id as product_id,
     pt.default_code,
-    pt.name as name_en,
-    coalesce(name_fr.value, pt.name) as name_fr,
-    coalesce(name_nl.value, pt.name) as name_nl,
-    coalesce(name_de.value, pt.name) as name_de,
+    pt.name->>'en_US' as name_en,
+    pt.name->>'fr_BE' as name_fr,
+    pt.name->>'nl_BE' as name_nl,
+    pt.name->>'de_DE' as name_de,
     manufacturer.name as manufacturer,
     cnk_code,
     code_amm,
@@ -152,30 +130,12 @@ SELECT
     discount_special.date_end as discount_special_date_end,
     tax.amount as tax_amount,
     supplier.name as supplier_name,
-    web_published,
-    url_key_fr.url_key as url_key_fr,
-    url_key_nl.url_key as url_key_nl,
-    url_key_en.url_key as url_key_en
+    web_published
 FROM
     product_template pt
     join product_product pp on pp.product_tmpl_id = pt.id
-    LEFT join ir_translation as name_fr
-        ON name_fr.res_id = pt.id
-        AND name_fr.type = 'model'
-        AND name_fr.name = 'product.template,name'
-        AND name_fr.lang = 'fr_BE'
-    LEFT join ir_translation as name_nl
-        ON name_nl.res_id = pt.id
-        AND name_nl.type = 'model'
-        AND name_nl.name = 'product.template,name'
-        AND name_nl.lang = 'nl_BE'
-    LEFT join ir_translation as name_de
-        ON name_de.res_id = pt.id
-        AND name_de.type = 'model'
-        AND name_de.name = 'product.template,name'
-        AND name_de.lang = 'de_DE'
     LEFT join res_partner as manufacturer
-        on pt.manufacturer = manufacturer.id
+        on pt.manufacturer_id = manufacturer.id
     LEFT join web_categories web_categs
         on web_categs.product_id = pt.id
         AND web_categs.idx = 1
@@ -197,39 +157,6 @@ FROM
         ON tax.prod_id = pt.id
     LEFT join res_partner as supplier
         ON supplier.id = pt.supplier_id
-    LEFT JOIN LATERAL (
-        SELECT
-            url_key
-        FROM shopinvader_product sp
-        JOIN res_lang
-            ON res_lang.id = sp.lang_id
-        WHERE
-            record_id = pt.id
-            AND res_lang.code = 'fr_BE'
-        limit 1
-    ) as url_key_fr ON TRUE
-    LEFT JOIN LATERAL (
-        SELECT
-            url_key
-        FROM shopinvader_product sp
-        JOIN res_lang
-            ON res_lang.id = sp.lang_id
-        WHERE
-            record_id = pt.id
-            AND res_lang.code = 'nl_BE'
-        limit 1
-    ) as url_key_nl ON TRUE
-    LEFT JOIN LATERAL (
-        SELECT
-            url_key
-        FROM shopinvader_product sp
-        JOIN res_lang
-            ON res_lang.id = sp.lang_id
-        WHERE
-            record_id = pt.id
-            AND res_lang.code = 'en_US'
-        limit 1
-    ) as url_key_en ON TRUE
 
 WHERE pp.active and web_published
 
@@ -241,18 +168,14 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
 
     @api.model
     def get_init_query_args(self):
-        args = super(AlcProductFlattenedData, self).get_init_query_args()
-        args["tax_group_one_tax_id"] = self.env.ref(
-            "account_tax_one_vat.vat_tax_group"
-        ).id
+        args = super().get_init_query_args()
         args["main_web_category_id"] = self.env.ref(
             "alc_product_shop_category.master"
         ).id
         return args
 
-    @api.model_cr
     def init(self):
-        res = super(AlcProductFlattenedData, self).init()
+        res = super().init()
         trgm_installed = install_trgm_extension(self.env)
         if trgm_installed:
             index_name = "alc_product_flatted_data_partner_types_index"
@@ -268,17 +191,17 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
 
     @api.model
     def _get_iterator(self, domain, partner=None, limit=None, offset=None):
-        """Generator method to get one by one line as a simple object where
-        each column is accessed with a doc notation"""
+        """Generator method to get one by one line as a simple object where.
+
+        each column is accessed with a doc notation
+        """
         e = expression.expression(domain, self)
         tables = e.get_tables()
         where_clause, where_params = e.to_sql()
         where_clause = [where_clause] if where_clause else []
         query = Query(tables, where_clause, where_params)
         query_from, query_where, query_params = query.get_sql()
-        sql_query = "SELECT * from {query_from} WHERE {query_where}".format(
-            query_from=query_from, query_where=query_where
-        )
+        sql_query = f"SELECT * from {query_from} WHERE {query_where}"
         if limit:
             query_params.append(limit)
             sql_query += " limit %s"
@@ -287,7 +210,7 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
             sql_query += " offset %s"
         # avoid name conflict; note that the problem might still occur if we try
         # to get two iterators in the same transaction...
-        name = "iterator %s" % self.env.cr
+        name = f"iterator {self.env.cr}"
         named_cursor = self.env.cr._obj.connection.cursor(name)
         named_cursor.execute(sql_query, query_params)
         try:
@@ -295,7 +218,7 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
                 container = _ProductDataContainer(
                     self.env,
                     partner,
-                    **{d.name: row[i] for i, d in enumerate(named_cursor.description)}
+                    **{d.name: row[i] for i, d in enumerate(named_cursor.description)},
                 )
                 yield container
         finally:
@@ -324,7 +247,7 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
             if prefix in lang:
                 suffix = prefix
         for elem in domain:
-            if isinstance(elem, (unicode, str)):
+            if isinstance(elem, str):
                 new_domain.append(elem)
             else:  # we have a triple
                 x, y, z = elem
@@ -334,14 +257,15 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
         return new_domain
 
 
-class _Container(object):
+class _Container:
     """
-        A generic container for when you want to access to value into a dict
-        with a dot notation
-        ex:
-        >>> c = _Container(**{"a": "b"})
-        >>> c.a
-        "b"
+    A generic container for when you want to access to value into a dict.
+
+    with a dot notation
+    ex:
+    >>> c = _Container(**{"a": "b"})
+    >>> c.a
+    "b"
     """
 
     def __init__(self, **kwargs):
@@ -352,7 +276,7 @@ class _ProductDataContainer(_Container):
     def __init__(self, env, partner, **kwargs):
         self._env = env
         self._partner = partner
-        super(_ProductDataContainer, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         # here we use ujson to improve to increase perf X 5
         self.price_cache = ujson.loads(self.price_cache) if self.price_cache else {}
         # init and compute prices
