@@ -1,14 +1,19 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 from fastapi import status
 from freezegun import freeze_time
 from requests import Response
 
+from ..routers.stocks import router as stocks_router
 from .common import CommonB2CServiceCase
 
 
 class TestStocksService(CommonB2CServiceCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.default_fastapi_router = stocks_router
+
     @freeze_time("2020-05-28 11:45:47")
     def test_00(self):
         """
@@ -20,9 +25,10 @@ class TestStocksService(CommonB2CServiceCase):
         Expected result:
             The product is into the list with the expected info
         """
-        response: Response = self.client.get(
-            self._get_path("/stocks/search"), headers={"api-key": "1234"}
-        )
+        with self._create_test_client() as client:
+            response: Response = client.get(
+                "/stocks/search", headers={"api-key": "1234"}
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual(res["size"], 2)
@@ -68,11 +74,12 @@ class TestStocksService(CommonB2CServiceCase):
             The product is into the list with the expected info
         """
         sku = self.saleable_product.default_code
-        response: Response = self.client.get(
-            self._get_path("/stocks/search"),
-            headers={"api-key": "1234"},
-            params={"skus": [sku]},
-        )
+        with self._create_test_client() as client:
+            response: Response = client.get(
+                "/stocks/search",
+                headers={"api-key": "1234"},
+                params={"skus": [sku]},
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual(res["size"], 1)
@@ -90,11 +97,12 @@ class TestStocksService(CommonB2CServiceCase):
                 "taxes": [{"amount": 6.0, "amount_type": "percent", "name": "Tax 6%"}],
             },
         )
-        response: Response = self.client.get(
-            self._get_path("/stocks/search"),
-            headers={"api-key": "1234"},
-            params={"skus": [sku + "old"]},
-        )
+        with self._create_test_client() as client:
+            response: Response = client.get(
+                "/stocks/search",
+                headers={"api-key": "1234"},
+                params={"skus": [sku + "old"]},
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual(res["size"], 0)

@@ -1,18 +1,8 @@
+# Copyright 2023 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from enum import Enum
-from typing import TypeVar
 
-from fastapi.security import APIKeyHeader
 from pydantic import BaseModel as PydanticBaseModel
-
-from odoo.addons.fastapi.schemas import Generic, GenericModel
-
-T = TypeVar("T")
-
-
-class PagedCollection(GenericModel, Generic[T]):
-
-    size: int
-    data: list[T]
 
 
 class BaseModel(PydanticBaseModel):
@@ -34,9 +24,3 @@ class BaseModel(PydanticBaseModel):
                 value = self._convert_to_write_field(value)
             res[field] = value
         return res
-
-
-api_key_header = APIKeyHeader(
-    name="api-key",
-    description="In this demo, you can use a user's login as api key.",
-)

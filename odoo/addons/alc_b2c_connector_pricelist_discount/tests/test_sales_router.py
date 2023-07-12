@@ -1,13 +1,12 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
-
 from fastapi import status
 from freezegun import freeze_time
 from requests import Response
 
 from odoo import fields
 
+from odoo.addons.alc_b2c_connector.routers.sales import router as sales_router
 from odoo.addons.alc_b2c_connector.tests.common import CommonB2CSaleServiceCase
 
 ISO_DT_WITH_TZ = "2020-05-28T13:45:47+02:00"
@@ -17,6 +16,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.default_fastapi_router = sales_router
         # create a b2c_partner
         cls.discount_pricelist_id = cls.env.ref(
             "alc_b2c_connector.product_pricelist_b2c"
@@ -57,11 +57,12 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 }
             ],
         }
-        response: Response = self.client.post(
-            self._get_path("/sales/create"),
-            headers={"api-key": "1234"},
-            json=params,
-        )
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/sales/create",
+                headers={"api-key": "1234"},
+                json=params,
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertTrue(res)

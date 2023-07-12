@@ -1,14 +1,18 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
-
 from fastapi import status
 from requests import Response
 
+from ..routers.products import router as products_router
 from .common import CommonB2CServiceCase
 
 
 class TestProductsService(CommonB2CServiceCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.default_fastapi_router = products_router
+
     def test_00(self):
         """
         Data:
@@ -19,10 +23,10 @@ class TestProductsService(CommonB2CServiceCase):
         Expected result:
             The product is into the list with the expected info
         """
-
-        response: Response = self.client.get(
-            self._get_path("/products/search"), headers={"api-key": "1234"}
-        )
+        with self._create_test_client() as client:
+            response: Response = client.get(
+                "/products/search", headers={"api-key": "1234"}
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual(res["size"], 2)
@@ -72,9 +76,10 @@ class TestProductsService(CommonB2CServiceCase):
             The product is into the list with the expected info
         """
         self.saleable_product.write({"barcode": False, "cnk_code": False})
-        response: Response = self.client.get(
-            self._get_path("/products/search"), headers={"api-key": "1234"}
-        )
+        with self._create_test_client() as client:
+            response: Response = client.get(
+                "/products/search", headers={"api-key": "1234"}
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual(res["size"], 2)
@@ -124,28 +129,29 @@ class TestProductsService(CommonB2CServiceCase):
             This product is no more into the list with the expected info
         """
         default_categ = self.saleable_product.categ_id
-        for categ_xml_id in (
-            "alc_product_category_data.product_categ_humain",
-            "alc_product_category_data.product_categ_vet_belges",
-            "alc_product_category_data.product_categ_importation",
-        ):
-            self.saleable_product.categ_id = self.env.ref(categ_xml_id)
-            response: Response = self.client.get(
-                self._get_path("/products/search"), headers={"api-key": "1234"}
+        with self._create_test_client() as client:
+            for categ_xml_id in (
+                "alc_product_category_data.product_categ_humain",
+                "alc_product_category_data.product_categ_vet_belges",
+                "alc_product_category_data.product_categ_importation",
+            ):
+                self.saleable_product.categ_id = self.env.ref(categ_xml_id)
+                response: Response = client.get(
+                    "/products/search", headers={"api-key": "1234"}
+                )
+                self.assertEqual(response.status_code, status.HTTP_200_OK)
+                res = response.json()
+                self.assertEqual(res["size"], 1)
+                self.assertEqual(
+                    res["data"][0]["sku"], self.saleable_product_2.default_code
+                )
+            self.saleable_product.categ_id = default_categ
+            response: Response = client.get(
+                "/products/search", headers={"api-key": "1234"}
             )
             self.assertEqual(response.status_code, status.HTTP_200_OK)
             res = response.json()
-            self.assertEqual(res["size"], 1)
-            self.assertEqual(
-                res["data"][0]["sku"], self.saleable_product_2.default_code
-            )
-        self.saleable_product.categ_id = default_categ
-        response: Response = self.client.get(
-            self._get_path("/products/search"), headers={"api-key": "1234"}
-        )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        res = response.json()
-        self.assertEqual(res["size"], 2)
+            self.assertEqual(res["size"], 2)
 
     def test_03(self):
         """
@@ -158,19 +164,21 @@ class TestProductsService(CommonB2CServiceCase):
             Product is returned if the sku match
         """
         sku = self.saleable_product.default_code
-        response: Response = self.client.get(
-            self._get_path("/products/search"),
-            headers={"api-key": "1234"},
-            params={"skus": [sku]},
-        )
+        with self._create_test_client() as client:
+            response: Response = client.get(
+                "/products/search",
+                headers={"api-key": "1234"},
+                params={"skus": [sku]},
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual(res["size"], 1)
-        response: Response = self.client.get(
-            self._get_path("/products/search"),
-            headers={"api-key": "1234"},
-            params={"skus": [sku + "false"]},
-        )
+        with self._create_test_client() as client:
+            response: Response = client.get(
+                "/products/search",
+                headers={"api-key": "1234"},
+                params={"skus": [sku + "false"]},
+            )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         self.assertEqual(res["size"], 0)
