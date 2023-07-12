@@ -19,8 +19,8 @@ msgid "Is Priority Editable"
 msgstr ""
 
 #. module: alc_stock_picking_manage_priority
-#: model:ir.model,name:alc_stock_picking_manage_priority.model_stock_rule
-msgid "Stock Rule"
+#: model:ir.model,name:alc_stock_picking_manage_priority.model_stock_move
+msgid "Stock Move"
 msgstr ""
 
 #. module: alc_stock_picking_manage_priority
