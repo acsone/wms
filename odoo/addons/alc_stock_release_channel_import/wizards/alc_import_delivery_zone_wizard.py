@@ -132,17 +132,27 @@ class AlcImportDeliveryZoneWizard(models.TransientModel):
     def _create_or_update_release_channel(self, shape_record):
         channel_model = self.env["stock.release.channel"]
         delivery_zone = self._get_delivery_zone(shape_record)
-        name = self._get_delivery_zone_name(shape_record)
-        existing_channel = self._get_existing_channels(channel_name=name)
+        shape_name = self._get_delivery_zone_name(shape_record)
+        existing_channel = self._get_existing_channels(channel_name=shape_name)
         if existing_channel:
-            existing_channel.write(self._get_channel_values(name, delivery_zone))
+            existing_channel.write(
+                self._get_channel_values(
+                    name=existing_channel.name,
+                    shape_name=shape_name,
+                    delivery_zone=delivery_zone,
+                )
+            )
             return existing_channel
-        return channel_model.create(self._get_channel_values(name, delivery_zone))
+        return channel_model.create(
+            self._get_channel_values(
+                name=shape_name, shape_name=shape_name, delivery_zone=delivery_zone
+            )
+        )
 
-    def _get_channel_values(self, name, delivery_zone):
+    def _get_channel_values(self, name, shape_name, delivery_zone):
         return {
             "name": name,
-            "shape_name": name,
+            "shape_name": shape_name,
             "delivery_plan_id": self.delivery_plan_id.id,
             "restrict_to_delivery_zone": True,
             "delivery_zone": delivery_zone,

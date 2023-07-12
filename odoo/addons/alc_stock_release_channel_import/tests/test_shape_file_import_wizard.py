@@ -76,7 +76,8 @@ class TestShapeFileImportWizard(TransactionCase):
         )
         self._do_import("shape_test_2.zip")
         self.assertTrue(isinstance(channel.delivery_zone, MultiPolygon))
-        self.assertEqual(channel.name, "D2")
+        self.assertEqual(channel.name, "xxxx")
+        self.assertEqual(channel.shape_name, "D2")
 
     @mute_logger("shapefile")
     def test_archive_channel(self):
