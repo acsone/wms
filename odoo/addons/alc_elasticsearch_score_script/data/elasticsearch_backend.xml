@@ -19,14 +19,14 @@
       def finalFactor = 100;
       if (terms.size() == 1) {
         def currentTerm = terms[0].toLowerCase();
-        def currentTermIndex = field.indexOf(currentTerm);
-        boost = (1.0 / currentTermIndex )
+        def currentTermIndex = field.indexOf(currentTerm) + 1;
+        boost = 1.0 / currentTermIndex
       }
       for (int i = 0; i < terms.size() - 1; i++) {
         def currentTerm = terms[i].toLowerCase();
         def nextTerm = terms[i + 1].toLowerCase();
-        def currentTermIndex = field.indexOf(currentTerm);
-        def nextTermIndex = field.indexOf(nextTerm);
+        def currentTermIndex = field.indexOf(currentTerm) + 1;
+        def nextTermIndex = field.indexOf(nextTerm) + 1;
         if (currentTermIndex >= 0 && nextTermIndex >= 0) {
           boost *= (1.0 / (currentTermIndex + Math.abs(currentTermIndex - nextTermIndex)));
           if (currentTermIndex > nextTermIndex) {
