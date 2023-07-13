@@ -52,6 +52,7 @@ odoo-addon-fs-storage @ git+https://github.com/acsone/storage.git@935a9f0d978034
 odoo-addon-geoengine-base-geolocalize @ git+https://github.com/acsone/geospatial.git@d977cbdc42825e5d241ebe91203e0d087d73b2e7#subdirectory=setup/geoengine_base_geolocalize
 odoo-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@ff4a76d86be5abd88dcb0f84c5def21a70e2262d#subdirectory=setup/geoengine_partner
 odoo-addon-hr-holidays-public==16.0.1.1.0
+odoo-addon-jsonifier @ git+https://github.com/acsone/server-tools.git@d0f16e3186ca85bd2a93899af1a642db6d662356#subdirectory=setup/jsonifier
 odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/acsone/l10n-belgium.git@63b4fce463858ea41cbf8417711f2850a915400d#subdirectory=setup/l10n_be_bpost_address_autocomplete
 odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/acsone/l10n-belgium.git@3d1359a7e58a4ee9c53c5f16178a1428feadd368#subdirectory=setup/l10n_be_bpost_address_validation
 odoo-addon-mail-environment==16.0.1.0.1.1
@@ -103,6 +104,7 @@ odoo-addon-server-action-mass-edit==16.0.2.0.1.5
 odoo-addon-server-environment==16.0.1.0.2.2
 odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
 odoo-addon-session-db==16.0.1.0.4
+odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@22e70153a9845d9c9316170728ed0a435b39ffee#subdirectory=setup/shopfloor_base
 odoo-addon-uom-unece==16.0.1.1.0.2
 odoo-addon-web-chatter-position==16.0.1.0.0.8
 odoo-addon-web-environment-ribbon==16.0.1.0.0.3
