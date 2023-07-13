@@ -10,7 +10,7 @@
             ref="stock_release_channel_shipment_advice.stock_release_channel_form_view"
         />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='shipment_planning_method']" position="after">
+            <xpath expr="//field[@name='process_end_date']" position="after">
                 <label
                     for="shipment_advice_arrival_delay"
                     attrs="{'invisible': [('shipment_planning_method', '=', 'none')]}"
