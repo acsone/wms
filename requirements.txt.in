@@ -54,8 +54,8 @@ odoo-addon-stock-release-channel-delivery @ git+https://github.com/OCA/wms.git@r
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_abc_classification-dro#subdirectory=setup/product_abc_classification
 # https://github.com/OCA/product-attribute/pull/1196
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-abc-sale-dro#subdirectory=setup/product_abc_classification_sale_stock
-# https://github.com/OCA/product-attribute/pull/1220 - [IMP] product_packaging_dimension: Improve view in order to easy inheritance
-odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@16.0-imp-product-packaging-dimension-dro#subdirectory=setup/product_packaging_dimension
+# https://github.com/OCA/product-attribute/pull/1386 - [IMP] product_packaging_dimension: Don't use max_weight anymore
+odoo-addon-product-packaging-dimension @ git+https://github.com/OCA/product-attribute.git@refs/pull/1386/head#subdirectory=setup/product_packaging_dimension
 # https://github.com/OCA/product-attribute/pull/1215 - MIG][16.0] product_packaging_type + renaming to product_packaging_level
 odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-packaging-level-dro#subdirectory=setup/product_packaging_level
 # https://github.com/OCA/product-attribute/pull/1216 - [MIG][16.0] product_packaging_type_pallet => product_packaging_level_pallet
