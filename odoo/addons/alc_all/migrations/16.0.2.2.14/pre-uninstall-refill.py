@@ -14,3 +14,12 @@ def migrate(cr, version):
       WHERE name = 'stock_refill'
       """
     )
+
+    _logger.info("Uninstall delivery_rounds_refill ")
+    cr.execute(
+        """
+      UPDATE ir_module_module
+      SET state='to remove'
+      WHERE name = 'delivery_rounds_refill'
+      """
+    )
