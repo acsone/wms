@@ -46,7 +46,7 @@ MarkupSafe==2.1.3
 multidict==6.0.4
 num2words==0.5.12
 numpy==1.25.1
-odoo @ git+https://github.com/acsone/odoo.git@ae4d5aeb4af3c60a4ce893eab38e87328a3aa814
+odoo @ git+https://github.com/acsone/odoo.git@e487b580cb20df76946408d14b4538324920f93d
 odoo-addon-account-banking-mandate==16.0.1.0.2.8
 odoo-addon-account-banking-pain-base==16.0.1.0.0.7
 odoo-addon-account-banking-sepa-direct-debit==16.0.1.0.0.4
