@@ -1,1 +1,13 @@
 odoo_test_helper
+mock
+
+# OCA/wms
+odoo-addon-shopfloor-base @ git+https://github.com/OCA/wms.git@refs/pull/642/head#subdirectory=setup/shopfloor_base
+
+# OCA/stock-logistics-workflow
+odoo-addon-stock-picking-progress @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1330/head#subdirectory=setup/stock_picking_progress
+
+# OCA/product-attribute
+odoo-addon-product-packaging-level @ git+https://github.com/OCA/product-attribute.git@refs/pull/1215/head#subdirectory=setup/product_packaging_level
+
+openupgradelib @ git+https://github.com/OCA/openupgradelib.git@master
