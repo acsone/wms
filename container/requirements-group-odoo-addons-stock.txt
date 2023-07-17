@@ -57,7 +57,7 @@ odoo-addon-stock-picking-volume @ git+https://github.com/acsone/stock-logistics-
 odoo-addon-stock-procurement-customer==16.0.1.0.1
 odoo-addon-stock-production-lot-expired-date==16.0.1.0.1.2
 odoo-addon-stock-putaway-hook==16.0.1.0.0.4
-odoo-addon-stock-quant-package-dimension==16.0.1.0.0.2
+odoo-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow@5416b8b84c37b8b5ebeb08d65ac38cdbcb9b837d#subdirectory=setup/stock_quant_package_dimension
 odoo-addon-stock-quant-package-product-packaging==16.0.1.0.1.2
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@398888b99e252ac0b4be0cc214331329662af988#subdirectory=setup/stock_release_channel
 odoo-addon-stock-release-channel-auto-release==16.0.1.0.1
@@ -73,6 +73,6 @@ odoo-addon-stock-restrict-lot==16.0.1.1.0.2
 odoo-addon-stock-route-mto==16.0.1.0.0.2
 odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@0c90dfb1a4597a2da3beeb5de9fb2495c44d7520#subdirectory=setup/stock_scrap_location_default
 odoo-addon-stock-storage-category-capacity-name==16.0.1.0.0.2
-odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@594b342e86aeb21c83071dfad3d3478591d0fed6#subdirectory=setup/stock_storage_type
+odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@a5c682259da2989c1578312a48ae61a54d641db3#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@7cbc029691a77db339325af3179e081ea65c3a65#subdirectory=setup/stock_storage_type_putaway_abc
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
