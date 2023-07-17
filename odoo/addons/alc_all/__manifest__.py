@@ -32,6 +32,7 @@
         "alc_app_sale",
         "alc_app_eshop_b2b",
         "alc_app_account",
+        "alc_app_shopfloor",
         "alc_fs_attachment",
         "alc_running_env",
         "stock_scrap_location_default",
