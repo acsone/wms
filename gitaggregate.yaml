@@ -31,16 +31,6 @@
     - git commit -m "Remove unused auto install addon test_mail_sms"
   target: origin 16.0-alc_master
 
-./src/shipment_advice:
-  remotes:
-    origin: git@github.com:acsone/stock-logistics-transport.git
-    oca: git@github.com:oca/stock-logistics-transport.git
-  merges:
-    - oca 16.0
-    - oca refs/pull/103/head # [FIX] - shipment_advice: plan only ready moves
-    - oca refs/pull/104/head # [FIX] - don't overwrite arrival and departure dates if they have already been set by the user
-  target: origin 16.0-alc_shipment_advice
-
 ./src/stock_available_to_promise_release:
   remotes:
     origin: git@github.com:acsone/wms.git
