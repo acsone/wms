@@ -7,8 +7,6 @@
     <record id="condition_besoin_reassort" model="stock.storage.location.sequence.cond">
         <field name="name">Besoin réassort</field>
         <field name="condition_type">code</field>
-        <!-- TODO: Change this to True after having migrated module -->
-        <field name="active" eval="False" />
         <field name="code_snippet">
 result = True
 
@@ -16,10 +14,11 @@ result = True
 if env["stock.quant"].search([
     ("product_id", "=", product.id),
     ("location_id", "child_of", storage_location_sequence.location_id.id),
-    ("qty", ">", 0),
-], limit=1) and not env["report.stock.refill.reassort"].search([
-    ("product_id", "=", product.id),
-    ("refill_priority_reassort", ">", 0)]):
+    ("quantity", ">", 0),
+], limit=1):
+    # We have some quantities that will be taken
+    product_location = product.with_context(location=storage_location_sequence.location_id.id)
+    if (product_location.quantity_in_replenishments == 0 and product_location.quantity_to_replenish == 0):
         result = False
 
         </field>
@@ -30,7 +29,7 @@ if env["stock.quant"].search([
         <field name="condition_type">code</field>
         <field name="code_snippet">
 if quant.lot_id and env["stock.quant"].search([
-    ("lot_id", "=", quant.lot_id.id),
+    ("lot_id", "in", quant.lot_id.ids),
     ("location_id", "child_of", storage_location_sequence.location_id.id),
     ("quantity", ">", 0),
 ], limit=1):
@@ -52,12 +51,12 @@ if quant.lot_id:
     # older lot in reserve?
     orderpoint_locations = env["stock.location.orderpoint"].search([]).location_src_id
     for reserve_quant in env["stock.quant"].search([
-            ("product_id", "=", quant.product_id.id),
+            ("product_id", "in", quant.product_id.ids),
             ("quantity", ">", 0),
             ("location_id", "in", orderpoint_locations.ids),
-            ("location_id", "!=", quant.location_id.id),
+            ("location_id", "!=", quant.location_id.ids),
     ]):
-        if reserve_quant.lot_id.removal_date > datetime.datetime.now() and reserve_quant.lot_id.removal_date < quant.lot_id.removal_date:
+        if reserve_quant.lot_id.removal_date > datetime.datetime.now() and any((reserve_quant.lot_id.removal_date < lot.removal_date) for lot in quant.lot_id):
             result = False
             break
             ]]>
@@ -69,7 +68,7 @@ if quant.lot_id:
         <field name="condition_type">code</field>
         <field name="code_snippet">
 if quant.product_id and env["stock.quant"].search([
-    ("product_id", "=", quant.product_id.id),
+    ("product_id", "in", quant.product_id.ids),
     ("location_id", "child_of", storage_location_sequence.location_id.id),
     ("quantity", ">", 0),
 ], limit=1):

@@ -11,6 +11,7 @@
     "website": "https://acsone.eu",
     "depends": [
         "product_expiry",
+        "stock_available_location_orderpoint",
         "stock_storage_type",
         "stock_location_orderpoint",
     ],

@@ -189,7 +189,6 @@ omit =
     odoo/addons/connector_esb/*
     odoo/addons/delivery_rounds/*
     odoo/addons/delivery_rounds_alcyon/*
-    odoo/addons/delivery_rounds_refill/*
     odoo/addons/document_unindex_content/*
     odoo/addons/elasticsearch_product_cache/*
     odoo/addons/elasticsearch_search/*
@@ -227,7 +226,6 @@ omit =
     odoo/addons/stock_inventory_constrains/*
     odoo/addons/stock_lot_loss/*
     odoo/addons/stock_picking_zone/*
-    odoo/addons/stock_refill/*
     odoo/addons/stock_valuation/*
     odoo/addons/storage_file_url_store/*
     odoo/addons/test_alc_shopfloor_stock_issue_product_additional/*
