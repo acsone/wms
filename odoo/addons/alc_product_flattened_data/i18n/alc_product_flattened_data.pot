@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_product_flattened_data
+# 	* alc_product_flattened_data
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,118 +14,123 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_allowed_partner_types
-msgid "Allowed partner types"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__allowed_partner_types
+msgid "Allowed Partner Types"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_barcode
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__barcode
 msgid "Barcode"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_categ_en
-msgid "Categ en"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__categ_en
+msgid "Categ En"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_categ_fr
-msgid "Categ fr"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__categ_fr
+msgid "Categ Fr"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_categ_nl
-msgid "Categ nl"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__categ_nl
+msgid "Categ Nl"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_cnk_code
-msgid "Cnk code"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__cnk_code
+msgid "Cnk Code"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_code_amm
-msgid "Code amm"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__code_amm
+msgid "Code Amm"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_code_cti
-msgid "Code cti"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__code_cti
+msgid "Code Cti"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_default_code
-msgid "Default code"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__default_code
+msgid "Default Code"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_discount_special_date_end
-msgid "Discount special date end"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__discount_special_date_end
+msgid "Discount Special Date End"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_display_name
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_has_discount_special
-msgid "Has discount special"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__has_discount_special
+msgid "Has Discount Special"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_has_supplier_promotion
-msgid "Has supplier promotion"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__has_supplier_promotion
+msgid "Has Supplier Promotion"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_id
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__id
 msgid "ID"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_indicated_price
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__indicated_price
 msgid "Indicated price"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data___last_update
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_manufacturer
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__manufacturer
 msgid "Manufacturer"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_name_de
-msgid "Name de"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__name_de
+msgid "Name De"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_name_en
-msgid "Name en"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__name_en
+msgid "Name En"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_name_fr
-msgid "Name fr"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__name_fr
+msgid "Name Fr"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_name_nl
-msgid "Name nl"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__name_nl
+msgid "Name Nl"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_price_cache
-msgid "Price cache"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__price_cache
+msgid "Price Cache"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_product_id
-msgid "Product id"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__product_id
+msgid "Product"
+msgstr ""
+
+#. module: alc_product_flattened_data
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__product_tmpl_id
+msgid "Product Tmpl"
 msgstr ""
 
 #. module: alc_product_flattened_data
@@ -134,57 +139,42 @@ msgid "Product informations for document prices"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_product_tmpl_id
-msgid "Product tmpl id"
+#: model:ir.actions.server,name:alc_product_flattened_data.alc_product_flattened_datas_refresh_materialized_view_ir_actions_server
+#: model:ir.cron,cron_name:alc_product_flattened_data.alc_product_flattened_datas_refresh_materialized_view
+msgid "Refresh Flattened Product Data materialized view"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_supplier_discount_discount_sale
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__supplier_discount_discount_sale
 msgid "Sale discount (%)"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_supplier_discount_date_end
-msgid "Supplier discount date end"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__supplier_discount_date_end
+msgid "Supplier Discount Date End"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_supplier_name
-msgid "Supplier name"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__supplier_name
+msgid "Supplier Name"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_supplier_promotion_date_end
-msgid "Supplier promotion date end"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__supplier_promotion_date_end
+msgid "Supplier Promotion Date End"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_supplier_promotion_only_for_veterinaries
-msgid "Supplier promotion only for veterinaries"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__supplier_promotion_only_for_veterinaries
+msgid "Supplier Promotion Only For Veterinaries"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_tax_amount
-msgid "Tax amount"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__tax_amount
+msgid "Tax Amount"
 msgstr ""
 
 #. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_url_key_en
-msgid "Url key en"
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__web_published
+msgid "Web Published"
 msgstr ""
-
-#. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_url_key_fr
-msgid "Url key fr"
-msgstr ""
-
-#. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_url_key_nl
-msgid "Url key nl"
-msgstr ""
-
-#. module: alc_product_flattened_data
-#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data_web_published
-msgid "Web published"
-msgstr ""
-
