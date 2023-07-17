@@ -51,7 +51,8 @@ class ShipmentAdvice(ShipmentAdviceBase):
         self.ensure_one()
         if not self._is_auto_process:
             return False
-        self.arrival_date = fields.Date.context_today(self)
+        if not self.arrival_date:
+            self.arrival_date = fields.Date.context_today(self)
         self.in_release_channel_auto_process = True
         try:
             self.planned_picking_ids._load_in_shipment(self)
