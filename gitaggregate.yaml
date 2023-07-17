@@ -79,3 +79,11 @@
     - origin master-fix-openapi-with-overrides
     - origin master-fix-classifier
   target: acsone 16.0-alc
+
+./src/openupgradelib:
+  remotes:
+    origin: git@github.com:OCA/openupgradelib.git
+    acsone: git@github.com:acsone/openupgradelib.git
+  merges:
+    - origin master
+  target: acsone 16.0-alc_master
