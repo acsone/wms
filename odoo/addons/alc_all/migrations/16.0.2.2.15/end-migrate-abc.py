@@ -14,7 +14,7 @@ def migrate(env, version):
     cron = env.ref("product_abc_classification.ir_cron_product_abc_classification")
     cron.write(
         {
-            "interval_type": "week",
+            "interval_type": "weeks",
             "interval_number": 1,
             "run_as_queue_job": True,
         }
