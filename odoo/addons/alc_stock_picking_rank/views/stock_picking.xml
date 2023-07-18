@@ -7,6 +7,11 @@
     <field name="model">stock.picking</field>
     <field name="inherit_id" ref="stock.vpicktree" />
     <field name="arch" type="xml">
+      <tree position="attributes">
+        <attribute
+          name="default_order"
+        >priority desc, rank desc, date asc, id desc</attribute>
+      </tree>
       <field name="name" position="before">
         <field name="rank" />
       </field>
