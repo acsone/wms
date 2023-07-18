@@ -41,16 +41,6 @@
     - oca refs/pull/673/head # [IMP] - Improve unrelease check message
   target: origin 16.0-alc_stock_available_to_promise_release
 
-./src/stock_location_orderpoint:
-  remotes:
-    origin: git@github.com:acsone/stock-logistics-orderpoint.git
-    oca: git@github.com:oca/stock-logistics-orderpoint.git
-  merges:
-    - oca 16.0
-    - oca refs/pull/3/head # [16.0][MIG]stock_location_orderpoint : Migration to 16.0
-    - origin 16.0-fix-location-orderpoint-dro # [FIX] stock_location_orderpoint: Set demo data as ... demo data
-  target: origin 16.0-alc_stock_location_orderpoint
-
 ./src/stock_move_propagate_first_move:
   remotes:
     origin: git@github.com:acsone/stock-logistics-workflow.git
