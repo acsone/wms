@@ -17,6 +17,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_shop_category
+#: model:product.category,name:alc_product_shop_category.master
+#, fuzzy
+#| msgid "Alcyon category"
+msgid "Alcyon Catalog"
+msgstr "Catégorie Alcyon"
+
+#. module: alc_product_shop_category
 #: model_terms:ir.ui.view,arch_db:alc_product_shop_category.product_category_search_view
 msgid "Alcyon category"
 msgstr "Catégorie Alcyon"
