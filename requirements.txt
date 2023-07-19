@@ -109,6 +109,7 @@ odoo-addon-partner-tz==16.0.1.0.0.3
 odoo-addon-pdf-helper==16.0.1.0.0.4
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@6403c0518b44a1e3b741f94b550120879ae7c3f8#subdirectory=setup/product_abc_classification
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@b8e3913186e7c02b7846e64dceb611f51e00f163#subdirectory=setup/product_abc_classification_sale_stock
+odoo-addon-product-analytic @ git+https://github.com/acsone/account-analytic@f253f9b2d317d6bb0a2967412ce897a92fba321e#subdirectory=setup/product_analytic
 odoo-addon-product-assortment==16.0.1.0.2.6
 odoo-addon-product-attribute-set @ git+https://github.com/acsone/odoo-pim.git@ec398626b73661f320974cc6ba6210de8ea9c188#subdirectory=setup/product_attribute_set
 odoo-addon-product-brand==16.0.1.0.1.5
