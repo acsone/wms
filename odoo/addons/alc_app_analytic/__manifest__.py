@@ -10,6 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        "account_analytic_required",
         "analytic",
         "product_analytic",
         "product_analytic_purchase",
