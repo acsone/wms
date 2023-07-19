@@ -15,13 +15,23 @@ _logger = logging.getLogger(__name__)
 
 class StockPicking(StockPickingBase):
 
-    count_partners_waiting_for_reception = fields.Integer(
-        "Nbr partner waiting for this reception",
+    count_planned_partners_waiting_for_reception = fields.Integer(
+        "Nbr partner waiting for this reception in a planned preparation",
         help="Count of deliveries waiting for availability of one the incoming "
         "products. For each product of the reception order, we "
         "count the customers (delivery address) waiting for the goods "
         "and we sum those quantities",
     )
+    count_planned_products_waiting_for_reception = fields.Integer(
+        "Nbr products Out of Stock in a planned preparation",
+        help="Count of products waiting for availability.",
+    )
+
+    count_partners_waiting_for_reception = fields.Integer(
+        "Nbr partner waiting for this reception",
+        help="Nbr of partners impacted by out of stock for this reception",
+    )
+
     count_products_waiting_for_reception = fields.Integer(
         "Nbr products Out of Stock", help="Count of products waiting for availability."
     )
@@ -43,17 +53,35 @@ class StockPicking(StockPickingBase):
         # The computation is performed with 1 query per warehouse
         self.flush_recordset()
         receptions = {}  # receptions grouped by warehouse stock location
+        records = self.filtered(lambda r: r.state not in ("done", "cancel"))
+        mising_product_ids = {
+            p.id
+            for p in records.mapped("move_ids.product_id")
+            if p.immediately_usable_qty < 0
+        }
+        if not mising_product_ids:
+            self.update(
+                {
+                    "count_planned_partners_waiting_for_reception": 0,
+                    "count_planned_products_waiting_for_reception": 0,
+                    "count_partners_waiting_for_reception": 0,
+                    "count_products_waiting_for_reception": 0,
+                }
+            )
+            return
         for record in self:
             if record.location_id.usage == "supplier":
-                stock_loc = record.picking_type_id.warehouse_id.lot_stock_id
+                stock_loc = record.picking_type_id.warehouse_id.view_location_id
                 receptions.setdefault(stock_loc.id, self.browse())
                 receptions[stock_loc.id] += record
         # Now compute the qty
         for stock_id, pickings in receptions.items():
             # We count the number of moves from stock in
-            # state == confirmed("Waiting Availability")
+            # state == waiting
             # for each product
-            # part of a delivery round
+            # part of a release_channel not having a PICK move associated
+            # With stock_available_to_promise_release, if a pick move
+            # exists, it means that the product is available
             # Each delivery address count for 1
             _logger.debug("Computing qty_backorder")
             self.env.cr.execute(
@@ -78,45 +106,35 @@ class StockPicking(StockPickingBase):
                         ON incoming_move.picking_id in %(picking_ids)s
                         AND incoming_move.product_id = outgoing_move.product_id
                     WHERE
-                        outgoing_move.state in ('confirmed', 'partially_available')
+                        outgoing_move.state not in ('cancel', 'done')
+                        AND picking.release_channel_id IS NOT NULL
+                        AND NOT EXISTS(select 1 from stock_move smp where smp.first_move_id=outgoing_move.id and smp.picking_id <> outgoing_move.picking_id)
                 );
-                -- reset the stock_move_line count_partners_waiting_for_reception
+                -- reset the stock_move_line count_planned_partners_waiting_for_reception
                 UPDATE
-                    stock_move_line
+                    stock_move
                 SET
-                    count_partners_waiting_for_reception = 0
+                    count_partners_for_reception = 0
                 WHERE picking_id in %(picking_ids)s;
 
-                -- set the stock_move_line count_partners_waiting_for_reception for
-                -- each product found in the outgoing_moves table
-                UPDATE
-                    stock_move_line
-                SET
-                    count_partners_waiting_for_reception = line_waiting.count
-                FROM
-                    (
-                        SELECT count(partner_id) as count, product_id FROM outgoing_moves
-                        GROUP BY product_id
-                    ) as line_waiting
-                WHERE picking_id in %(picking_ids)s and stock_move_line.product_id = line_waiting.product_id;
-
-                -- reset the stock_picking count_partners_waiting_for_reception and
-                -- count_products_waiting_for_reception
+                -- reset the stock_picking count_planned_partners_waiting_for_reception and
+                -- count_planned_products_waiting_for_reception
                 UPDATE
                     stock_picking
                 SET
-                    count_products_waiting_for_reception = 0,
+                    count_planned_products_waiting_for_reception = 0,
+                    count_planned_partners_waiting_for_reception = 0,
                     count_partners_waiting_for_reception = 0
                 WHERE id in %(picking_ids)s;
 
-                -- set the stock_picking count_partners_waiting_for_reception and
-                -- count_products_waiting_for_reception for each picking found in the
+                -- set the stock_picking count_planned_partners_waiting_for_reception and
+                -- count_planned_products_waiting_for_reception for each picking found in the
                 -- outgoing_moves table
                 UPDATE
                     stock_picking
                 SET
-                    count_products_waiting_for_reception = line_waiting.products_count,
-                    count_partners_waiting_for_reception = line_waiting.partners_count
+                    count_planned_products_waiting_for_reception = line_waiting.products_count,
+                    count_planned_partners_waiting_for_reception = line_waiting.partners_count
                 FROM
                     (
                         SELECT
@@ -128,28 +146,122 @@ class StockPicking(StockPickingBase):
                     ) as line_waiting
                 WHERE id = line_waiting.picking_id;
 
+
+                DROP TABLE outgoing_moves;
+
+                -- update stock_move to compute count_partners_for_reception
+                -- This sum the number of partners in an outgoing move
+                -- for an incoming move
+                CREATE TEMPORARY TABLE outgoing_moves AS (
+                    SELECT
+                        distinct outgoing_move.partner_id AS partner_id,
+                        outgoing_move.product_id AS product_id
+                    FROM stock_move AS outgoing_move
+                    JOIN stock_location AS loc
+                        ON outgoing_move.location_id = loc.id
+                    JOIN stock_location dest_loc
+                        ON outgoing_move.location_dest_id = dest_loc.id
+                        AND dest_loc.usage = 'customer'
+                    JOIN stock_location p ON
+                        p.id = %(stock_id)s
+                        AND loc.parent_path like p.parent_path || '%%'
+                    JOIN stock_picking AS picking
+                        ON picking.id = outgoing_move.picking_id
+                    JOIN stock_move AS incoming_move
+                        ON incoming_move.picking_id in %(picking_ids)s
+                        AND incoming_move.product_id = outgoing_move.product_id
+                    WHERE
+                        outgoing_move.state not in ('cancel', 'done')
+                );
+
+                UPDATE
+                    stock_move
+                SET
+                    count_partners_for_reception = t.partners_count
+                FROM (
+                    SELECT
+                        product_id,
+                        count(distinct partner_id) as partners_count
+                    FROM
+                        outgoing_moves
+                    WHERE
+                        product_id in %(missing_product_ids)s
+                    GROUP BY product_id
+                ) as t
+                WHERE
+                    stock_move.product_id = t.product_id AND
+                    stock_move.picking_id in %(picking_ids)s;
+
+                -- update stock_picking to compute count_partners_waiting_for_reception
+                -- This sum the number of partners in an outgoing move
+                -- for an incoming move if the product is missing
+
+                UPDATE
+                    stock_picking
+                SET
+                    count_partners_waiting_for_reception = t.partner_count
+                FROM (
+                    SELECT
+                        count(distinct outgoing_moves.partner_id) AS partner_count,
+                        stock_move.picking_id AS picking_id
+                    FROM
+                        outgoing_moves
+                        join stock_move on stock_move.product_id = outgoing_moves.product_id
+                    WHERE
+                        stock_move.picking_id in %(picking_ids)s AND
+                        stock_move.product_id in %(missing_product_ids)s
+                    GROUP BY stock_move.picking_id
+                ) as t
+                WHERE
+                    id = t.picking_id;
+
                 DROP TABLE outgoing_moves;
                 """,
-                {"stock_id": stock_id, "picking_ids": tuple(pickings.ids)},
+                {
+                    "stock_id": stock_id,
+                    "picking_ids": tuple(pickings.ids),
+                    "missing_product_ids": tuple(mising_product_ids),
+                },
             )
 
             pickings.invalidate_recordset(
                 [
-                    "count_products_waiting_for_reception",
+                    "count_planned_products_waiting_for_reception",
+                    "count_planned_partners_waiting_for_reception",
                     "count_partners_waiting_for_reception",
                 ]
             )
-            pickings.move_line_ids.invalidate_recordset(
-                ["count_partners_waiting_for_reception"]
-            )
+            pickings.move_ids.invalidate_recordset(["count_partners_for_reception"])
 
+        # get the number of partners in outgoing moves for missing products
+        for record in records:
+            product_ids = set(record.mapped("move_ids.product_id").ids)
+            record.count_products_waiting_for_reception = len(
+                product_ids.intersection(mising_product_ids)
+            )
         _logger.debug("Computing qty_backorder - done")
+
+    @api.depends("move_ids")
+    def _compute_count_products_waiting_for_reception(self):
+        records = self.filtered(lambda r: r.state not in ("done", "cancel"))
+        mising_product_ids = {
+            p.id
+            for p in records.mapped("move_ids.product_id")
+            if p.immediately_usable_qty <= 0
+        }
+        for record in records:
+            product_ids = set(record.mapped("move_ids.product_id").ids)
+            record.count_products_waiting_for_reception = len(
+                product_ids.intersection(mising_product_ids)
+            )
 
     def _calc_reception_rank(self):
         """Compute the rank of the given receptions."""
         for record in self:
             rank = (
-                record.count_partners_waiting_for_reception * 1000
+                record.count_planned_partners_waiting_for_reception * 1000000000
+                + record.count_planned_products_waiting_for_reception * 1000000
+                + record.count_partners_waiting_for_reception * 1000
                 + record.count_products_waiting_for_reception
             )
             if record.rank != rank:

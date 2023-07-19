@@ -22,6 +22,12 @@ class TestStockReceptionRank(CommonTestStockReceptionRankCase):
         self.incoming_picking.button_rank_recompute()
         self.assertEqual(self.incoming_picking.count_partners_waiting_for_reception, 1)
         self.assertEqual(self.incoming_picking.count_products_waiting_for_reception, 1)
+        self.assertEqual(
+            self.incoming_picking.count_planned_partners_waiting_for_reception, 0
+        )
+        self.assertEqual(
+            self.incoming_picking.count_planned_products_waiting_for_reception, 0
+        )
 
     def test_03_stock_reception_rank(self):
         """Test the stock reception rank when there are several delivery orders."""
@@ -31,6 +37,12 @@ class TestStockReceptionRank(CommonTestStockReceptionRankCase):
         self.incoming_picking.button_rank_recompute()
         self.assertEqual(self.incoming_picking.count_partners_waiting_for_reception, 2)
         self.assertEqual(self.incoming_picking.count_products_waiting_for_reception, 1)
+        self.assertEqual(
+            self.incoming_picking.count_planned_partners_waiting_for_reception, 0
+        )
+        self.assertEqual(
+            self.incoming_picking.count_planned_products_waiting_for_reception, 0
+        )
 
     def test_04_stock_reception_rank(self):
         """
@@ -57,8 +69,23 @@ class TestStockReceptionRank(CommonTestStockReceptionRankCase):
             self.incoming_picking_2_products.count_products_waiting_for_reception,
             2,
         )
+
+        self.assertEqual(
+            self.incoming_picking_2_products.count_planned_partners_waiting_for_reception,
+            0,
+        )
+        self.assertEqual(
+            self.incoming_picking_2_products.count_planned_products_waiting_for_reception,
+            0,
+        )
         self.assertEqual(self.incoming_picking.count_partners_waiting_for_reception, 1)
         self.assertEqual(self.incoming_picking.count_products_waiting_for_reception, 1)
+        self.assertEqual(
+            self.incoming_picking.count_planned_partners_waiting_for_reception, 0
+        )
+        self.assertEqual(
+            self.incoming_picking.count_planned_products_waiting_for_reception, 0
+        )
 
     def test_05_stock_reception_rank(self):
         """
@@ -76,6 +103,14 @@ class TestStockReceptionRank(CommonTestStockReceptionRankCase):
         self.assertEqual(
             self.incoming_picking_2_products.count_products_waiting_for_reception,
             2,
+        )
+        self.assertEqual(
+            self.incoming_picking_2_products.count_planned_partners_waiting_for_reception,
+            0,
+        )
+        self.assertEqual(
+            self.incoming_picking_2_products.count_planned_products_waiting_for_reception,
+            0,
         )
 
     def test_06_stock_reception_rank(self):
@@ -99,6 +134,12 @@ class TestStockReceptionRank(CommonTestStockReceptionRankCase):
         )
         self.assertEqual(self.incoming_picking.count_partners_waiting_for_reception, 1)
         self.assertEqual(self.incoming_picking.count_products_waiting_for_reception, 1)
+        self.assertEqual(
+            self.incoming_picking.count_planned_partners_waiting_for_reception, 0
+        )
+        self.assertEqual(
+            self.incoming_picking.count_planned_products_waiting_for_reception, 0
+        )
 
     def test_07_stock_reception_rank(self):
         """Test the stock reception rank is computed when cron run."""
@@ -118,6 +159,12 @@ class TestStockReceptionRank(CommonTestStockReceptionRankCase):
         self.assertEqual(self.incoming_picking.count_partners_waiting_for_reception, 1)
         self.env["stock.picking"]._cron_reception_rank_recompute()
         self.assertEqual(self.incoming_picking.count_partners_waiting_for_reception, 2)
+        self.assertEqual(
+            self.incoming_picking.count_planned_partners_waiting_for_reception, 0
+        )
+        self.assertEqual(
+            self.incoming_picking.count_planned_products_waiting_for_reception, 0
+        )
 
     def test_08_stock_reception_rank(self):
         """Test the stock reception rank value."""
@@ -130,3 +177,55 @@ class TestStockReceptionRank(CommonTestStockReceptionRankCase):
         self._create_outgoing_picking(self.customer2, qty=1, product=self.product2)
         self.incoming_picking_2_products.button_rank_recompute()
         self.assertEqual(self.incoming_picking_2_products.rank, 2 * 1000 + 2 * 1)
+
+    def test_09_stock_reception_rank(self):
+        """Check release_channel impact on rank."""
+        outgoing_picking_1 = self._create_outgoing_picking(
+            self.customer1, qty=3, product=self.product
+        )
+        outgoing_picking_2 = self._create_outgoing_picking(
+            self.customer1, qty=1, product=self.product2
+        )
+        self.incoming_picking_2_products.button_rank_recompute()
+        self.assertEqual(self.incoming_picking_2_products.rank, 1 * 1000 + 2 * 1)
+        self.assertEqual(
+            self.incoming_picking_2_products.count_planned_partners_waiting_for_reception,
+            0,
+        )
+        self.assertEqual(
+            self.incoming_picking_2_products.count_planned_products_waiting_for_reception,
+            0,
+        )
+        # add the outgoing picking to a release channel
+        outgoing_picking_1.release_channel_id = self.release_channel
+        self.incoming_picking_2_products.button_rank_recompute()
+        self.assertEqual(
+            self.incoming_picking_2_products.count_planned_partners_waiting_for_reception,
+            1,
+        )
+        self.assertEqual(
+            self.incoming_picking_2_products.count_planned_products_waiting_for_reception,
+            1,
+        )
+        # only one outgoing picking is in the release channel
+        # -> only one product in planned for delivery
+        self.assertEqual(
+            self.incoming_picking_2_products.rank,
+            1 * 1000000000 + 1 * 1000000 + 1 * 1000 + 2 * 1,
+        )
+        outgoing_picking_2.release_channel_id = self.release_channel
+        self.incoming_picking_2_products.button_rank_recompute()
+        # the two outgoing pickings are in the release channel
+        # -> the 2 products are planned for delivery
+        self.assertEqual(
+            self.incoming_picking_2_products.count_planned_partners_waiting_for_reception,
+            1,
+        )
+        self.assertEqual(
+            self.incoming_picking_2_products.count_planned_products_waiting_for_reception,
+            2,
+        )
+        self.assertEqual(
+            self.incoming_picking_2_products.rank,
+            1 * 1000000000 + 2 * 1000000 + 1 * 1000 + 2 * 1,
+        )
