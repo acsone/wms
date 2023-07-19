@@ -100,6 +100,13 @@ class CommonTestStockReceptionRankCase(TransactionCase):
             }
         )
         cls.incoming_picking_2_products.action_confirm()
+        cls.env["stock.release.channel"].search([]).write({"active": False})
+        # we create a release_channel
+        cls.release_channel = cls.env["stock.release.channel"].create(
+            {
+                "name": "Test",
+            }
+        )
 
         cls.env.flush_all()
 

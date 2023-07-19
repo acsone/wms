@@ -12,9 +12,12 @@
         "stock",
         "stock_grn",
         "alc_stock_picking_rank",
+        "stock_available_immediately",
+        "stock_release_channel",
+        "stock_move_propagate_first_move",
+        "stock_available_to_promise_release",
     ],
     "data": [
-        "views/stock_move_line.xml",
         "views/stock_picking.xml",
         "data/ir_cron.xml",
     ],
