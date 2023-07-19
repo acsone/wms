@@ -12,12 +12,25 @@ from odoo.addons.stock.models.stock_picking import Picking
 class StockPicking(Picking):
     _order = "priority desc, rank desc, date asc, id desc"
 
-    rank = fields.Integer(
+    rank = fields.Float(
         "Rank",
+        digits=(12, 0),
         states={"done": [("readonly", True)], "cancel": [("readonly", True)]},
     )
 
     def init(self):
+        # if column rank already exists and is not a numeric column, convert it to numeric
+        self.env.cr.execute(
+            "SELECT column_name, data_type "
+            "FROM information_schema.columns "
+            "WHERE table_name = %s AND column_name = %s",
+            (self._table, "rank"),
+        )
+        res = self.env.cr.fetchone()
+        if res and res[1] != "numeric":
+            self.env.cr.execute(
+                "ALTER TABLE %s ALTER COLUMN rank TYPE numeric", (AsIs(self._table),)
+            )
 
         index_name = "stock_picking_order_list_sort_desc_index"
         sql.create_index(
