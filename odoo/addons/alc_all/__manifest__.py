@@ -22,6 +22,7 @@
         "web_sheet_full_width",
         "web_tree_many2one_clickable",
         # ALC
+        "alc_app_analytic",
         "alc_app_framework",
         "alc_app_invoicing",
         "alc_app_order_picking",

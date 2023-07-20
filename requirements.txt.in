@@ -4,7 +4,11 @@ odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@16.0-alc
 werkzeug<2.1
 pypdf2<2
 
-# bank-payment
+# account-analytic
+# https://github.com/elego/account-analytic/pull/1
+odoo-addon-product-analytic @ git+https://github.com/elego/account-analytic@refs/pull/1/head#subdirectory=setup/product_analytic
+# https://github.com/OCA/account-analytic/pull/576
+odoo-addon-product-analytic-purchase @ git+https://github.com/OCA/account-analytic@refs/pull/576/head#subdirectory=setup/product_analytic_purchase
 
 # account-invoicing
 # https://github.com/OCA/account-invoicing/pull/1364 - [16.0][ADD] account_tax_one_vat

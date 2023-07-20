@@ -47,6 +47,7 @@ multidict==6.0.4
 num2words==0.5.12
 numpy==1.25.1
 odoo @ git+https://github.com/acsone/odoo.git@e487b580cb20df76946408d14b4538324920f93d
+odoo-addon-account-analytic-required==16.0.1.0.0.8
 odoo-addon-account-banking-mandate==16.0.1.0.2.8
 odoo-addon-account-banking-pain-base==16.0.1.0.0.7
 odoo-addon-account-banking-sepa-direct-debit==16.0.1.0.0.4
@@ -63,6 +64,7 @@ odoo-addon-account-tax-one-vat @ git+https://github.com/acsone/account-invoicing
 odoo-addon-account-tax-one-vat-purchase @ git+https://github.com/acsone/account-invoicing.git@d0ac2a45355ae505cdb257e98acea7d914c532be#subdirectory=setup/account_tax_one_vat_purchase
 odoo-addon-account-tax-one-vat-sale @ git+https://github.com/acsone/account-invoicing.git@fb8c32abf76462d6f085bbd7c4f32305901d3f29#subdirectory=setup/account_tax_one_vat_sale
 odoo-addon-account-tax-unece==16.0.1.2.0.1
+odoo-addon-account-usability==16.0.1.0.3.7
 odoo-addon-attachment-unindex-content==16.0.1.0.0.3
 odoo-addon-attribute-set @ git+https://github.com/acsone/odoo-pim.git@d8078f7e77f07390200bd321619ee6db5d36727f#subdirectory=setup/attribute_set
 odoo-addon-base-business-document-import @ git+https://github.com/acsone/edi.git@218282f08996953e22c161849fded00a39c2ceee#subdirectory=setup/base_business_document_import
@@ -109,6 +111,8 @@ odoo-addon-partner-tz==16.0.1.0.0.3
 odoo-addon-pdf-helper==16.0.1.0.0.4
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@6403c0518b44a1e3b741f94b550120879ae7c3f8#subdirectory=setup/product_abc_classification
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@b8e3913186e7c02b7846e64dceb611f51e00f163#subdirectory=setup/product_abc_classification_sale_stock
+odoo-addon-product-analytic @ git+https://github.com/acsone/account-analytic@f253f9b2d317d6bb0a2967412ce897a92fba321e#subdirectory=setup/product_analytic
+odoo-addon-product-analytic-purchase @ git+https://github.com/acsone/account-analytic@a207d473a01b56e9212ef9915bed62a403ba8aca#subdirectory=setup/product_analytic_purchase
 odoo-addon-product-assortment==16.0.1.0.2.6
 odoo-addon-product-attribute-set @ git+https://github.com/acsone/odoo-pim.git@ec398626b73661f320974cc6ba6210de8ea9c188#subdirectory=setup/product_attribute_set
 odoo-addon-product-brand==16.0.1.0.1.5
