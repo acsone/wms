@@ -1,5 +1,5 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: v1.14.1
+_commit: v1.14.2
 _src_path: gh:oca/oca-addons-repo-template
 ci: GitHub
 dependency_installation_mode: PIP
@@ -14,7 +14,8 @@ include_wkhtmltopdf: false
 odoo_version: 16.0
 org_name: Odoo Community Association (OCA)
 org_slug: OCA
-rebel_module_groups: []
+rebel_module_groups:
+- stock_picking_batch_creation
 repo_description: WMS modules for Odoo
 repo_name: wms
 repo_slug: wms
