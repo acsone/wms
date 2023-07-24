@@ -30,7 +30,7 @@ class PurchaseOrderLine(purchase.PurchaseOrderLine):
                 qty = line.product_qty - line.qty_invoiced
                 if (
                     float_compare(
-                        qty, 0.0, precision_rounding=self.product_uom.rounding
+                        qty, 0.0, precision_rounding=line.product_uom.rounding
                     )
                     <= 0
                 ):
