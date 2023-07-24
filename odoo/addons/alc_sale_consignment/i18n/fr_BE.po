@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_sale_consignment
+# 	* alc_sale_consignment
 #
 msgid ""
 msgstr ""
@@ -8,34 +8,38 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: alc_sale_consignment
-#: model:ir.model.fields,field_description:alc_sale_consignment.field_res_partner_property_stock_consignment_customer
-#: model:ir.model.fields,field_description:alc_sale_consignment.field_res_users_property_stock_consignment_customer
-#: model:ir.model.fields,field_description:alc_sale_consignment.field_shopinvader_partner_property_stock_consignment_customer
+#: model:ir.model,name:alc_sale_consignment.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_sale_consignment
+#: model:ir.model.fields,field_description:alc_sale_consignment.field_res_partner__property_stock_consignment_customer
+#: model:ir.model.fields,field_description:alc_sale_consignment.field_res_users__property_stock_consignment_customer
 msgid "Customer Consignment Location"
 msgstr "Emplacement de consignation client"
 
 #. module: alc_sale_consignment
-#: model:ir.model.fields,field_description:alc_sale_consignment.field_sale_order_is_consignment
-#: model:ir.model.fields,field_description:alc_sale_consignment.field_sale_order_line_is_consignment
+#: model:ir.model.fields,field_description:alc_sale_consignment.field_sale_order__is_consignment
+#: model:ir.model.fields,field_description:alc_sale_consignment.field_sale_order_line__is_consignment
 msgid "For Consignment"
 msgstr "Pour consignation"
 
 #. module: alc_sale_consignment
-#: model:ir.model,name:alc_sale_consignment.model_res_partner
-msgid "Partner"
-msgstr "Partenaire"
-
-#. module: alc_sale_consignment
-#: model:ir.model.fields,help:alc_sale_consignment.field_sale_order_is_consignment
-#: model:ir.model.fields,help:alc_sale_consignment.field_sale_order_line_is_consignment
-msgid "Procurement will be generated for the consignment location of the selected customer"
-msgstr "L'approvisionnement sera généré pour l'emplacement de consignation du client sélectionné"
+#: model:ir.model.fields,help:alc_sale_consignment.field_sale_order__is_consignment
+#: model:ir.model.fields,help:alc_sale_consignment.field_sale_order_line__is_consignment
+msgid ""
+"Procurement will be generated for the consignment location of the selected "
+"customer"
+msgstr ""
+"L'approvisionnement sera généré pour l'emplacement de consignation du client "
+"sélectionné"
 
 #. module: alc_sale_consignment
 #: model:ir.model,name:alc_sale_consignment.model_sale_order
@@ -48,9 +52,14 @@ msgid "Sales Order Line"
 msgstr "Ligne de commande client"
 
 #. module: alc_sale_consignment
-#: model:ir.model.fields,help:alc_sale_consignment.field_res_partner_property_stock_consignment_customer
-#: model:ir.model.fields,help:alc_sale_consignment.field_res_users_property_stock_consignment_customer
-#: model:ir.model.fields,help:alc_sale_consignment.field_shopinvader_partner_property_stock_consignment_customer
-msgid "This stock location will be used for consignment orders as the destination location for goods you send to this partner"
-msgstr "Cet emplacement de stock sera utilisé comme emplacement de destination pour la commande en consignation des biens envoyés à ce partenaire"
+#: model:ir.model.fields,help:alc_sale_consignment.field_res_partner__property_stock_consignment_customer
+#: model:ir.model.fields,help:alc_sale_consignment.field_res_users__property_stock_consignment_customer
+msgid ""
+"This stock location will be used for consignment orders as the destination "
+"location for goods you send to this partner"
+msgstr ""
+"Cet emplacement de stock sera utilisé comme emplacement de destination pour "
+"la commande en consignation des biens envoyés à ce partenaire"
 
+#~ msgid "Partner"
+#~ msgstr "Partenaire"
