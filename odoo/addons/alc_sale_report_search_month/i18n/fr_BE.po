@@ -16,73 +16,72 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: alc_sale_report_show_month
-#: model:ir.model.fields.selection,name:alc_sale_report_show_month.selection__sale_report__month__04
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__04
 msgid "April"
 msgstr "Avril"
 
-#. module: alc_sale_report_show_month
-#: model:ir.model.fields.selection,name:alc_sale_report_show_month.selection__sale_report__month__08
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__08
 msgid "August"
 msgstr "Aout"
 
-#. module: alc_sale_report_show_month
-#: model:ir.model.fields.selection,name:alc_sale_report_show_month.selection__sale_report__month__12
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__12
 msgid "December"
 msgstr "Décembre"
 
-#. module: alc_sale_report_show_month
-#: model:ir.model.fields.selection,name:alc_sale_report_show_month.selection__sale_report__month__02
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__02
 msgid "February"
 msgstr "Février"
 
-#. module: alc_sale_report_show_month
-#: model:ir.model.fields.selection,name:alc_sale_report_show_month.selection__sale_report__month__01
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__01
 msgid "January"
 msgstr "Janvier"
 
-#. module: alc_sale_report_show_month
-#: model:ir.model.fields.selection,name:alc_sale_report_show_month.selection__sale_report__month__07
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__07
 msgid "July"
 msgstr "Juillet"
 
-#. module: alc_sale_report_show_month
-#: model:ir.model.fields.selection,name:alc_sale_report_show_month.selection__sale_report__month__06
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__06
 msgid "June"
 msgstr "Juin"
 
-#. module: alc_sale_report_show_month
-#: model:ir.model.fields.selection,name:alc_sale_report_show_month.selection__sale_report__month__03
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__03
 msgid "March"
 msgstr "Mars"
 
-#. module: alc_sale_report_show_month
-#: model:ir.model.fields.selection,name:alc_sale_report_show_month.selection__sale_report__month__05
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__05
 msgid "May"
 msgstr "Mai"
 
-#. module: alc_sale_report_show_month
-#: model:ir.model.fields,field_description:alc_sale_report_show_month.field_sale_report__month
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields,field_description:alc_sale_report_search_month.field_sale_report__month
 msgid "Month"
 msgstr "Mois"
 
-#. module: alc_sale_report_show_month
-#: model:ir.model.fields.selection,name:alc_sale_report_show_month.selection__sale_report__month__11
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__11
 msgid "November"
 msgstr "Novembre"
 
-#. module: alc_sale_report_show_month
-#: model:ir.model.fields.selection,name:alc_sale_report_show_month.selection__sale_report__month__10
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__10
 msgid "October"
 msgstr "Octobre"
 
-#. module: alc_sale_report_show_month
-#: model:ir.model,name:alc_sale_report_show_month.model_sale_report
+#. module: alc_sale_report_search_month
+#: model:ir.model,name:alc_sale_report_search_month.model_sale_report
 msgid "Sales Analysis Report"
 msgstr "Rapport d'analyse des ventes"
 
-#. module: alc_sale_report_show_month
-#: model:ir.model.fields.selection,name:alc_sale_report_show_month.selection__sale_report__month__09
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__09
 msgid "September"
 msgstr "Septembre"
-
