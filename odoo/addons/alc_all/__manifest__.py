@@ -21,6 +21,7 @@
         "web_search_with_and",
         "web_sheet_full_width",
         "web_tree_many2one_clickable",
+        "web_remember_tree_column_width",
         # ALC
         "alc_app_analytic",
         "alc_app_framework",
