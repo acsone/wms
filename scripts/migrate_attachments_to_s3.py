@@ -70,7 +70,6 @@ def _migrate_batch(attachment_ids):
 
 
 def _migrate():
-    pool = multiprocessing.Pool(5)
 
     from click_odoo import OdooEnvironment
 
@@ -89,9 +88,11 @@ def _migrate():
             ("res_field", "!=", False),
         ]
         attachment_ids = env["ir.attachment"].search(domain, order="create_date").ids
-        pool.map(_migrate_batch, chunks(attachment_ids, 100))
-        pool.close()
-        pool.join()
+
+    pool = multiprocessing.Pool(5)
+    pool.map(_migrate_batch, chunks(attachment_ids, 100))
+    pool.close()
+    pool.join()
 
 
 if __name__ == "__main__":
