@@ -68,7 +68,9 @@ msgstr ""
 msgid ""
 "You must enter a barcode or specify product without barcode. Affected "
 "products ids: %s"
-msgstr "Entrez un code barre ou spécifiez 'code barre non requis'."
+msgstr ""
+"Entrez un code barre ou spécifiez 'code barre non requis'. Produits "
+"concernés: %s"
 
 #, fuzzy
 #~ msgid "You must enter a weight for the product to receive"
