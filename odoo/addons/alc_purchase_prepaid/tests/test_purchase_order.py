@@ -93,3 +93,34 @@ class TestPurchaseOrder(TransactionCase):
         self.assertEqual(bill_action["res_model"], "account.move")
         invoice_line = self.po.order_line.invoice_lines
         self.assertEqual(invoice_line.quantity, 365)
+
+    def test_po_with_2_lines(self):
+        """
+        This test was created after a reported bug because self was used instead of.
+
+        line in purchase_order_line._compute_qty_invoiced when getting product_uom
+        Data:
+            A prepaid PO with 2 lines having different uom
+        Test case:
+            Confirm PO
+        Expected result:
+            The PO is confirmed
+        """
+        product_2 = self.env["product.product"].create(
+            {"name": "Product 2", "purchase_method": "receive"}
+        )
+        self.po.order_line = [
+            Command.create(
+                {
+                    "name": product_2.name,
+                    "product_id": product_2.id,
+                    "product_uom": self.env.ref("uom.product_uom_dozen").id,
+                    "product_qty": 100,
+                    "price_unit": 75,
+                },
+            ),
+        ]
+        self.po.prepayment = True
+        self.po.button_confirm()
+        self.assertEqual(self.po.state, "purchase")
+        self.po.order_line._compute_qty_invoiced()
