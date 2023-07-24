@@ -1,0 +1,25 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_stock_scrap_responsible
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_stock_scrap_responsible
+#: model:ir.model.fields,field_description:alc_stock_scrap_responsible.field_stock_scrap__user_id
+#: model_terms:ir.ui.view,arch_db:alc_stock_scrap_responsible.stock_scrap_search_view
+msgid "Responsible"
+msgstr ""
+
+#. module: alc_stock_scrap_responsible
+#: model:ir.model,name:alc_stock_scrap_responsible.model_stock_scrap
+msgid "Scrap"
+msgstr ""

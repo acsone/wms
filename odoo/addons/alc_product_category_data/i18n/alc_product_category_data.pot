@@ -1,0 +1,305 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_product_category_data
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_ali_comp
+msgid "Aliments complémentaires"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_cardio
+msgid "Anesth-Rea-Cardio-Resp"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_antimicrobiens
+msgid "Antimicrobiens"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_antiparasite
+msgid "Antiparasitaire"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_ali_divers
+msgid "Articles divers"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_finance_bonus_actionnaires
+msgid "Bonus actionnaire"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_importation
+msgid "Cascade importation"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_chimiques
+msgid "Chimiques (pas d'APB)"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_finance_cheques_clients
+msgid "Chèques clients"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_colis_souverain
+msgid "Colis"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_conso
+msgid "Consommables"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_finance_coope
+msgid "Coope"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_dentisterie
+msgid "Dentisterie"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_finance_divers
+#: model:product.category,name:alc_product_category_data.product_categ_finance_divers_divers
+msgid "Divers"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_divers_para
+msgid "Divers parapharmacie"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_ali_dietetique
+msgid "Diététique"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_equipement
+msgid "Equipement"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_finance
+msgid "Finance"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_finance_frais
+msgid "Frais accessoires s/achats"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_homeo
+msgid "Homéopathie, Phytotérapie"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_hormones
+msgid "Hormones"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_img_endo
+msgid "Imagerie Médicale - endoscopie"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_img_radio
+msgid "Imagerie Médicale - radiologie"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_img_echo
+msgid "Imagerie Médicale - échographie"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_instrumentation
+msgid "Instrumentation"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_sav
+msgid "Main d'œuvre - Service - SAV"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_marge
+msgid "Marge s/vtes Alcyon"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_equins
+msgid "Mat, pour Equins"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_materiel
+msgid "Matériel"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_rurale
+msgid "Matériel de Médecine Rurale"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_medoc
+msgid "Médicaments"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_divers_veto
+msgid "Médicaments Vétérinaire Divers"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_oeil_oreille
+msgid "Médicaments de l'oeil - oreille"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_sys_nerveux
+msgid "Médicaments du système nerveux"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_vasculo
+msgid "Médicaments du système vasculo-circ"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_humain
+msgid "Médicaments humains"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_vet_belges
+msgid "Médicaments vétérinaires belges"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_occasion
+msgid "Occasion"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_finance_opcli
+msgid "Opcli"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_ortho
+msgid "Orthopedie"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_parapharmacie
+msgid "Parapharmacie"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_petshop
+msgid "Petshop"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_ali_physio
+msgid "Physiologique"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_phytosanitaires
+msgid "Phytosanitaires"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_psychotropes_25
+msgid "Psychotropes Annexe III"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_finance_remises_geste_commercial
+msgid "Remises Geste commerciale"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_finance_remises_fournisseurs
+msgid "Remises fournisseurs"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_finance_remises_partenariat
+msgid "Remises partenariat"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_finance_divers_service
+msgid "Service"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_stupefiant_vet
+msgid "Stupéfiant VET"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_stupefiant
+msgid "Stupéfiants"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_sut_bobine
+msgid "Sutures en bobine"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_mat_sutures
+msgid "Sutures en pochette"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_topiques
+msgid "Topiques"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_undefined
+msgid "Undefined"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_vaccins
+msgid "Vaccins, sérums"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_vitamines
+msgid "Vitamines"
+msgstr ""
+
+#. module: alc_product_category_data
+#: model:product.category,name:alc_product_category_data.product_categ_pis
+msgid "medicaments du pis"
+msgstr ""

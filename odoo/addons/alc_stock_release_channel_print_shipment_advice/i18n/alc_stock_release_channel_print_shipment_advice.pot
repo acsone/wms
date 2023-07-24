@@ -1,0 +1,36 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_stock_release_channel_print_shipment_advice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_stock_release_channel_print_shipment_advice
+#. odoo-python
+#: code:addons/alc_stock_release_channel_print_shipment_advice/models/stock_release_channel.py:0
+#, python-format
+msgid "Action 'Print' is not allowed for channel %(name)s."
+msgstr ""
+
+#. module: alc_stock_release_channel_print_shipment_advice
+#: model:ir.model.fields,field_description:alc_stock_release_channel_print_shipment_advice.field_stock_release_channel__is_action_print_allowed
+msgid "Is Action Print Allowed"
+msgstr ""
+
+#. module: alc_stock_release_channel_print_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_print_shipment_advice.stock_release_channel_form_view
+msgid "Print"
+msgstr ""
+
+#. module: alc_stock_release_channel_print_shipment_advice
+#: model:ir.model,name:alc_stock_release_channel_print_shipment_advice.model_stock_release_channel
+msgid "Stock Release Channels"
+msgstr ""

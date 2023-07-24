@@ -1,0 +1,84 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_sale_report_search_month
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__04
+msgid "April"
+msgstr ""
+
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__08
+msgid "August"
+msgstr ""
+
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__12
+msgid "December"
+msgstr ""
+
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__02
+msgid "February"
+msgstr ""
+
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__01
+msgid "January"
+msgstr ""
+
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__07
+msgid "July"
+msgstr ""
+
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__06
+msgid "June"
+msgstr ""
+
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__03
+msgid "March"
+msgstr ""
+
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__05
+msgid "May"
+msgstr ""
+
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields,field_description:alc_sale_report_search_month.field_sale_report__month
+msgid "Month"
+msgstr ""
+
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__11
+msgid "November"
+msgstr ""
+
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__10
+msgid "October"
+msgstr ""
+
+#. module: alc_sale_report_search_month
+#: model:ir.model,name:alc_sale_report_search_month.model_sale_report
+msgid "Sales Analysis Report"
+msgstr ""
+
+#. module: alc_sale_report_search_month
+#: model:ir.model.fields.selection,name:alc_sale_report_search_month.selection__sale_report__month__09
+msgid "September"
+msgstr ""

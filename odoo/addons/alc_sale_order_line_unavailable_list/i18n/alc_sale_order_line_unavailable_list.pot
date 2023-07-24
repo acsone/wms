@@ -1,0 +1,25 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_sale_order_line_unavailable_list
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_sale_order_line_unavailable_list
+#: model_terms:ir.ui.view,arch_db:alc_sale_order_line_unavailable_list.sale_order_line_search_view
+msgid "Remains to deliver"
+msgstr ""
+
+#. module: alc_sale_order_line_unavailable_list
+#: model:ir.actions.act_window,name:alc_sale_order_line_unavailable_list.action_sale_order_line_unavailable_list
+#: model:ir.ui.menu,name:alc_sale_order_line_unavailable_list.menu_sale_lines_unavailable_list
+msgid "Sale Order Lines"
+msgstr ""

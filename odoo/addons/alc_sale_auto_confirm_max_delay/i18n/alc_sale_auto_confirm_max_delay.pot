@@ -1,0 +1,52 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_sale_auto_confirm_max_delay
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_sale_auto_confirm_max_delay
+#: model_terms:ir.ui.view,arch_db:alc_sale_auto_confirm_max_delay.view_partner_product_group
+msgid "<span>hours</span>"
+msgstr ""
+
+#. module: alc_sale_auto_confirm_max_delay
+#: model:ir.model,name:alc_sale_auto_confirm_max_delay.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_sale_auto_confirm_max_delay
+#: model:ir.model.fields,help:alc_sale_auto_confirm_max_delay.field_res_partner__auto_confirm_max_delay
+#: model:ir.model.fields,help:alc_sale_auto_confirm_max_delay.field_res_users__auto_confirm_max_delay
+msgid ""
+"Max delay between the order creation and the auto confirmation by the "
+"system. This value applies to orders created by the api."
+msgstr ""
+
+#. module: alc_sale_auto_confirm_max_delay
+#: model:ir.model.fields,field_description:alc_sale_auto_confirm_max_delay.field_res_partner__auto_confirm_max_delay
+#: model:ir.model.fields,field_description:alc_sale_auto_confirm_max_delay.field_res_users__auto_confirm_max_delay
+msgid "Max delay on sale order operation"
+msgstr ""
+
+#. module: alc_sale_auto_confirm_max_delay
+#: model:ir.model,name:alc_sale_auto_confirm_max_delay.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: alc_sale_auto_confirm_max_delay
+#. odoo-python
+#: code:addons/alc_sale_auto_confirm_max_delay/models/sale_order.py:0
+#, python-format
+msgid ""
+"Was automatically cancelled on creation because the job took longer to "
+"execute than the customer allows."
+msgstr ""
