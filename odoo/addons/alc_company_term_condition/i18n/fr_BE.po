@@ -21,26 +21,27 @@ msgstr ""
 msgid "Companies"
 msgstr "Sociétés"
 
-
 #. module: alc_company_term_condition
-#: model:ir.model.fields,field_description:alc_company_term_condition.field_res_company_delivery_terms_conditions
+#: model:ir.model.fields,field_description:alc_company_term_condition.field_res_company__delivery_terms_conditions
 msgid "Delivery Terms and Conditions"
 msgstr "Conditions générales pour livraison"
 
-
 #. module: alc_company_term_condition
-#: model:ir.model.fields,field_description:alc_company_term_condition.field_res_company_invoice_terms_conditions
+#: model:ir.model.fields,field_description:alc_company_term_condition.field_res_company__invoice_terms_conditions
 msgid "Invoice Terms and Conditions"
 msgstr "Conditions générales pour facture"
 
 #. module: alc_company_term_condition
-#: model:ir.model.fields,field_description:alc_company_term_condition.field_res_company_order_fax
+#: model:ir.model.fields,field_description:alc_company_term_condition.field_res_company__order_fax
 msgid "Order fax"
 msgstr "Fax pour commande"
 
 #. module: alc_company_term_condition
-#: model:ir.model.fields,field_description:alc_company_term_condition.field_res_company_order_phone
+#: model:ir.model.fields,field_description:alc_company_term_condition.field_res_company__order_phone
 msgid "Order phone"
 msgstr "Téléphone pour commande"
 
-
+#. module: alc_company_term_condition
+#: model_terms:ir.ui.view,arch_db:alc_company_term_condition.view_company_form
+msgid "Report configuration"
+msgstr ""
