@@ -10,37 +10,54 @@ msgstr ""
 "PO-Revision-Date: 2023-06-13 14:47+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: alc_stock_reception_rank
-#: model_terms:ir.ui.view,arch_db:alc_stock_reception_rank.view_stock_move_line_detailed_operation_tree
-msgid "BO"
-msgstr ""
-
-#. module: alc_stock_reception_rank
-#: model:ir.model.fields,help:alc_stock_reception_rank.field_stock_picking__count_partners_waiting_for_reception
+#: model:ir.model.fields,help:alc_stock_reception_rank.field_stock_picking__count_planned_partners_waiting_for_reception
 msgid ""
 "Count of deliveries waiting for availability of one the incoming products. "
 "For each product of the reception order, we count the customers (delivery "
 "address) waiting for the goods and we sum those quantities"
-msgstr "Nombre de livraisons en attente de disponibilité d'un des produits entrants. Pour chaque produit de la commande de réception, nous comptons les clients (adresse de livraison) en attente des marchandises et nous additionnons ces quantités"
+msgstr ""
+"Nombre de livraisons en attente de disponibilité d'un des produits entrants. "
+"Pour chaque produit de la commande de réception, nous comptons les clients "
+"(adresse de livraison) en attente des marchandises et nous additionnons ces "
+"quantités"
 
 #. module: alc_stock_reception_rank
+#: model:ir.model.fields,help:alc_stock_reception_rank.field_stock_picking__count_planned_products_waiting_for_reception
 #: model:ir.model.fields,help:alc_stock_reception_rank.field_stock_picking__count_products_waiting_for_reception
 msgid "Count of products waiting for availability."
 msgstr "Nombre de produits en attente de disponibilité."
 
 #. module: alc_stock_reception_rank
-#: model:ir.model.fields,field_description:alc_stock_reception_rank.field_stock_move_line__count_partners_waiting_for_reception
-msgid "Nbr partner waiting for this product"
-msgstr "Nbr client en BO"
+#: model:ir.model.fields,help:alc_stock_reception_rank.field_stock_picking__count_partners_waiting_for_reception
+#, fuzzy
+#| msgid "Nbr partner waiting for this reception"
+msgid "Nbr of partners impacted by out of stock for this reception"
+msgstr "Nbr clients en BO"
+
+#. module: alc_stock_reception_rank
+#: model:ir.model.fields,field_description:alc_stock_reception_rank.field_stock_move__count_partners_for_reception
+#, fuzzy
+#| msgid "Nbr partner waiting for this reception"
+msgid "Nbr partner linked to this product in reception"
+msgstr "Nbr clients en BO"
 
 #. module: alc_stock_reception_rank
 #: model:ir.model.fields,field_description:alc_stock_reception_rank.field_stock_picking__count_partners_waiting_for_reception
 msgid "Nbr partner waiting for this reception"
+msgstr "Nbr clients en BO"
+
+#. module: alc_stock_reception_rank
+#: model:ir.model.fields,field_description:alc_stock_reception_rank.field_stock_picking__count_planned_partners_waiting_for_reception
+#, fuzzy
+#| msgid "Nbr partner waiting for this reception"
+msgid "Nbr partner waiting for this reception in a planned preparation"
 msgstr "Nbr clients en BO"
 
 #. module: alc_stock_reception_rank
@@ -49,22 +66,22 @@ msgid "Nbr products Out of Stock"
 msgstr "Nbr produits en rupture"
 
 #. module: alc_stock_reception_rank
-#: model:ir.model,name:alc_stock_reception_rank.model_stock_move_line
-msgid "Product Moves (Stock Move Line)"
-msgstr "Mouvements de produit (Ligne de mouvement de stock)"
-
-#. module: alc_stock_reception_rank
-#: model:ir.model.fields,help:alc_stock_reception_rank.field_stock_move_line__count_partners_waiting_for_reception
-msgid ""
-"Quantity of deliveries part of a release_channel waiting for availability of"
-" this product. This field is only filled for receptions."
-msgstr "Quantité de livraisons faisant partie d'un canal de sortie en attente de disponibilité de ce produit. Ce champ n'est rempli que pour les réceptions."
+#: model:ir.model.fields,field_description:alc_stock_reception_rank.field_stock_picking__count_planned_products_waiting_for_reception
+#, fuzzy
+#| msgid "Nbr products Out of Stock"
+msgid "Nbr products Out of Stock in a planned preparation"
+msgstr "Nbr produits en rupture"
 
 #. module: alc_stock_reception_rank
 #: model:ir.actions.server,name:alc_stock_reception_rank.cron_picking_rank_scheduler_ir_actions_server
 #: model:ir.cron,cron_name:alc_stock_reception_rank.cron_picking_rank_scheduler
 msgid "Reception Rank Scheduler"
 msgstr "Planificateur de classement des réceptions"
+
+#. module: alc_stock_reception_rank
+#: model:ir.model,name:alc_stock_reception_rank.model_stock_move
+msgid "Stock Move"
+msgstr ""
 
 #. module: alc_stock_reception_rank
 #: model:ir.model,name:alc_stock_reception_rank.model_stock_picking
@@ -75,3 +92,17 @@ msgstr "Transfert"
 #: model_terms:ir.ui.view,arch_db:alc_stock_reception_rank.view_picking_form
 msgid "recompute"
 msgstr "Re-calculer"
+
+#~ msgid "Nbr partner waiting for this product"
+#~ msgstr "Nbr client en BO"
+
+#~ msgid "Product Moves (Stock Move Line)"
+#~ msgstr "Mouvements de produit (Ligne de mouvement de stock)"
+
+#~ msgid ""
+#~ "Quantity of deliveries part of a release_channel waiting for availability "
+#~ "of this product. This field is only filled for receptions."
+#~ msgstr ""
+#~ "Quantité de livraisons faisant partie d'un canal de sortie en attente de "
+#~ "disponibilité de ce produit. Ce champ n'est rempli que pour les "
+#~ "réceptions."
