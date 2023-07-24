@@ -22,16 +22,8 @@ msgid "Active"
 msgstr "Actif"
 
 #. module: alc_stock_orderpoint_product
-#: model_terms:ir.ui.view,arch_db:alc_stock_orderpoint_product.view_stock_orderpoint_search
-msgid "Inactive"
-msgstr "Inactif"
-
-#. module: alc_stock_orderpoint_product
-#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_delivery_carrier_orderpoint_max
-#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_product_product_orderpoint_max
-#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_product_template_orderpoint_max
-#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_shopinvader_product_orderpoint_max
-#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_shopinvader_variant_orderpoint_max
+#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_product_product__orderpoint_max
+#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_product_template__orderpoint_max
 msgid "Maximum Quantity"
 msgstr "Quantité maximale"
 
@@ -41,37 +33,34 @@ msgid "Minimum Inventory Rule"
 msgstr ""
 
 #. module: alc_stock_orderpoint_product
-#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_delivery_carrier_orderpoint_min
-#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_product_product_orderpoint_min
-#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_product_template_orderpoint_min
-#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_shopinvader_product_orderpoint_min
-#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_shopinvader_variant_orderpoint_min
+#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_product_product__orderpoint_min
+#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_product_template__orderpoint_min
 msgid "Minimum Quantity"
 msgstr "Quantité minimum"
 
 #. module: alc_stock_orderpoint_product
-#: code:addons/alc_stock_orderpoint_product/models/stock_warehouse_orderpoint.py:16
-#: sql_constraint:stock.warehouse.orderpoint:0
+#. odoo-python
+#: code:addons/alc_stock_orderpoint_product/models/stock_warehouse_orderpoint.py:0
+#: model:ir.model.constraint,message:alc_stock_orderpoint_product.constraint_stock_warehouse_orderpoint_orderpoint_product_id_unique
 #, python-format
 msgid "More than one active orderpoint for this product. Please archive one."
 msgstr ""
 
 #. module: alc_stock_orderpoint_product
-#: model:ir.model,name:alc_stock_orderpoint_product.model_product_product
+#: model:ir.model,name:alc_stock_orderpoint_product.model_product_template
 msgid "Product"
 msgstr "Produit"
 
 #. module: alc_stock_orderpoint_product
-#: model:ir.model,name:alc_stock_orderpoint_product.model_product_template
-msgid "Product Template"
+#: model:ir.model,name:alc_stock_orderpoint_product.model_product_product
+#, fuzzy
+#| msgid "Product Template"
+msgid "Product Variant"
 msgstr "Modèle d'article"
 
 #. module: alc_stock_orderpoint_product
-#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_delivery_carrier_orderpoint_qty_multiple
-#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_product_product_orderpoint_qty_multiple
-#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_product_template_orderpoint_qty_multiple
-#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_shopinvader_product_orderpoint_qty_multiple
-#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_shopinvader_variant_orderpoint_qty_multiple
+#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_product_product__orderpoint_qty_multiple
+#: model:ir.model.fields,field_description:alc_stock_orderpoint_product.field_product_template__orderpoint_qty_multiple
 msgid "Qty Multiple"
 msgstr "Multiple Qté"
 
@@ -79,6 +68,9 @@ msgstr "Multiple Qté"
 #: model_terms:ir.ui.view,arch_db:alc_stock_orderpoint_product.view_template_property_form
 msgid "Reordering Rules"
 msgstr "Règles de réapprovisionnement"
+
+#~ msgid "Inactive"
+#~ msgstr "Inactif"
 
 #~ msgid "Orderpoint"
 #~ msgstr "Orderpoint"
