@@ -17,6 +17,7 @@
         "partner_invoicing_mode",
         "partner_invoicing_mode_at_shipping",
         "partner_invoicing_mode_monthly",
+        "partner_invoicing_mode_weekly",
         # ALC
         "alc_account_security",
     ],
