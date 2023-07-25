@@ -2,13 +2,12 @@ import functools
 import logging
 
 from click_odoo.env import OdooEnvironment
+from openupgradelib import openupgrade
 from setuptools_odoo import base_addons
 
 from odoo.tools import parse_version
 
 from odoo.addons.base_geoengine.geo_db import init_postgis
-
-from openupgradelib import openupgrade
 
 from . import VERSION
 from .call import check_call
