@@ -14,9 +14,10 @@
         # OCA
         "account_invoice_merge",
         "account_invoice_check_total",
+        "partner_invoicing_mode",
+        "partner_invoicing_mode_at_shipping",
+        "partner_invoicing_mode_monthly",
         # ALC
         "alc_account_security",
     ],
-    "data": [],
-    "demo": [],
 }
