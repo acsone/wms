@@ -17,7 +17,10 @@
         "queue_job_cron",
         # ALC
         "alc_price_cache",
+        "alc_product_additional_price",
+        "alc_product_category_translatable",
         "alc_product_shop_category",
+        "alc_product_web_publish",
         "alc_supplier_promotion",
         "alc_materialized_view_mixin",
         "alc_product_discount_special",
