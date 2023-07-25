@@ -38,23 +38,18 @@
   </record>
   <template id="stock_product_food_label_zebra_v1">
     <div class="raw">
-    <t t-foreach="docs" t-as="line">
-    <t t-set="pick" t-value="line.picking_id" />
-    <t
+<t t-foreach="docs" t-as="line">
+<t t-set="pick" t-value="line.picking_id" />
+<t
           t-set="ships"
           t-value="pick._get_all_dest_pickings().filtered(lambda r: r.picking_type_code == 'outgoing' and r.state not in ('cancel', 'done'))"
         />
-    <t t-set="ship" t-value="ships and ships[0]" />
-
-    <t t-foreach="range(1, int(qty_done) + 1)" t-as="index">
-
-
+<t t-set="ship" t-value="ships and ships[0]" />
+<t t-foreach="range(1, int(qty_done) + 1)" t-as="index">
     ^XA
     ^FWR
 
-    ^FO310,60^GB70,<t
-            t-esc="pick.release_channel_id.channel_code and len(pick.release_channel_id.channel_code) * 38"
-          />,3,2^FS\r
+    ^FO310,60^GB70,<t t-esc="len(pick.release_channel_id.channel_code) * 38" />,3,2^FS\r
     ^FO310,70^A060,60^FD<t t-esc="pick.release_channel_id.channel_code" />^FS\r
 
     <t t-if="('customer_id' in pick) and pick.customer_id.is_b2c_customer">
@@ -64,13 +59,13 @@
     ^FO310,480^A040,40^FD<t t-esc="index" /> / <t t-esc="int(qty_done)" />^FS\r
 
     ^FO255,60^A025,25^FD<t
-            t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[:38] or u'')"
+            t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[:38] or '')"
           />^FS\r
     ^FO225,60^A025,25^FD<t
-            t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[38:60] or u'')"
+            t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[38:60] or '')"
           />^FS\r
     ^FO195,60^A030,25^FD<t t-esc="pick.partner_id.zip" /> <t
-            t-esc="pick.partner_id.city and res_company.convert_to_ascii(pick.partner_id.city)"
+            t-esc="res_company.convert_to_ascii(pick.partner_id.city)"
           />^FS\r
     ^FO165,60^A025,25^FD<t
             t-esc="('customer_id' in pick) and (pick.partner_id != pick.customer_id) and res_company.convert_to_ascii(pick.customer_id.name and pick.customer_id.name[:29] or '') or ''"
@@ -98,10 +93,9 @@
 
     ^FWN
     ^XZ
-
-    </t>
-    </t>
-    </div>
+</t>
+</t>
+</div>
   </template>
   <record model="ir.actions.report" id="report_stock_product_food_label">
     <field name="name">Alcyon Product Food Label</field>
@@ -116,12 +110,11 @@
   </record>
   <template id="stock_product_label_toshiba_v1">
     <div class="raw">
-      <t t-foreach="docs" t-as="move_line">
-        <t t-foreach="move_line.get_qty_by_lot()" t-as="line">
-          <t t-set="qty" t-value="line[0]" />
-          <t t-set="lot" t-value="line[1]" />
-          <t t-set="customer" t-value="move_line.get_so_partner()" />
-          <t t-if="qty">{U2;0120|}\r
+<t t-foreach="docs" t-as="move_line">
+<t t-foreach="move_line.get_qty_by_lot()" t-as="line">
+<t t-set="qty" t-value="line[0]" />
+<t t-set="lot" t-value="line[1]" />
+<t t-set="customer" t-value="move_line.get_so_partner()" /><t t-if="qty">{U2;0120|}\r
 {D0275,0560,0250|}\r
 {C|}\r
 {PC001;0400,0040,05,05,J,00,B|}\r
@@ -131,35 +124,33 @@
               t-esc="res_company.convert_to_ascii(move_line.picking_id.partner_id.display_name)[:30]"
             />|}\r
 {PC009;0010,0070,05,05,J,00,B|}\r
-{RC009;<t t-esc="res_company.convert_to_ascii(customer.vet_depot_number or u'')" />|}\r
+{RC009;<t t-esc="res_company.convert_to_ascii(customer.vet_depot_number or '')" />|}\r
 {PC005;0010,0100,05,05,J,00,B|}\r
 {RC005;<t t-if="customer.vet_subscription_number">Doc.n : 1/<t
-                t-esc="res_company.convert_to_ascii(customer.vet_subscription_number or u'')"
+                t-esc="res_company.convert_to_ascii(customer.vet_subscription_number or '')"
               />/</t>|}\r
 {PC002;0010,0130,05,05,J,00,B|}\r
-{RC002;<t
-              t-esc="res_company.convert_to_ascii(move_line.product_id.name or u'')"
-            />|}\r<t
+{RC002;<t t-esc="res_company.convert_to_ascii(move_line.product_id.name or '')" />|}\r<t
               t-if="move_line.picking_id.partner_id.is_price_on_labels"
             >{PC007;0350,0070,05,05,J,00,B|}\r{RC007;PVI : <t
                 t-esc="move_line.product_id.indicated_price"
               />|}\r</t>{XB01;0030,0150,9,1,02,0,0080|}\r{RB01;S<t
               t-esc="move_line.product_id and move_line.product_id.default_code[:8].ljust(8) or ''"
-            /><t t-esc="lot and lot.name[:13].ljust(13) or ''" /><t
-              t-esc="lot and lot.expiration_date and lot.expiration_date.strftime('%d%m%y') or ''"
+            /><t t-esc="lot and lot.name[:12].ljust(12) or ''" /><t
+              t-esc="lot and lot.life_date and lot.expiration_date.strftime('%d%m%y') or ''"
             />|}\r
 {PC003;0030,0250,05,05,J,00,B|}\r
 {RC003;S-<t t-esc="move_line.product_id.default_code[:8].ljust(8)" />-<t
-              t-esc="lot and lot.name[:13].ljust(13) or ''"
+              t-esc="lot and lot.name[:12].ljust(12) or ''"
             />-<t
-              t-esc="lot and lot.expiration_date and lot.expiration_date.strftime('%d/%m/%y') or ''"
+              t-esc="lot and lot.life_date and lot.life_date.strftime('%d/%m/%y') or ''"
             />|}\r
 {XS;I,<t t-esc="'%04d'%qty" />,0002C3200|}\r
 {U1;0120|}\r
 </t>
-        </t>
-      </t>
-    </div>
+</t>
+</t>
+</div>
   </template>
   <record model="ir.actions.report" id="report_stock_product_label">
     <field name="name">Alcyon Product Label</field>
