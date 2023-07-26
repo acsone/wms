@@ -17,9 +17,8 @@ class ResCompany(Company):
         This method will replace each special character and convert
         to ascii (requested by printers).
         :param str_to_convert:
-        :return:
+        :return: bytes
         """
         if not isinstance(str_to_convert, str):
-            str.decode("uft-8")
-
+            str_to_convert = ""
         return unicodedata.normalize("NFKD", str_to_convert).encode("ascii", "ignore")

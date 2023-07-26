@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-25 09:12+0000\n"
+"PO-Revision-Date: 2023-07-25 09:12+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,7 +19,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_label_printing_base.stock_pick_packs_label_zebra_v1
 msgid ""
 ",75,3,2^FS\\r\n"
-"            ^FO40,47^A0N60,60^FD"
+"^FO40,47^A0N60,60^FD"
 msgstr ""
 
 #. module: alc_label_printing_base
@@ -174,8 +176,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_label_printing_base.stock_pick_packs_label_zebra_v1
 msgid ""
 "^FO200,20\n"
-"              ^BQN,2,4\n"
-"              ^FDQA,"
+"^BQN,2,4\n"
+"^FDQA,"
 msgstr ""
 
 #. module: alc_label_printing_base
@@ -199,7 +201,7 @@ msgid ""
 "^FS\\r\n"
 "\n"
 "\n"
-"            ^FO30,310^A0N20,25^FD"
+"^FO30,310^A0N20,25^FD"
 msgstr ""
 
 #. module: alc_label_printing_base
@@ -207,7 +209,7 @@ msgstr ""
 msgid ""
 "^FS\\r\n"
 "\n"
-"            ^FO30,140^A0N30,30^FD"
+"^FO30,140^A0N30,30^FD"
 msgstr ""
 
 #. module: alc_label_printing_base
@@ -215,9 +217,9 @@ msgstr ""
 msgid ""
 "^FS\\r\n"
 "\n"
-"            ^FO570,310,1\n"
-"            ^BXN,5,200\n"
-"            ^FD"
+"^FO570,310,1\n"
+"^BXN,5,200\n"
+"^FD"
 msgstr ""
 
 #. module: alc_label_printing_base
@@ -225,42 +227,43 @@ msgstr ""
 msgid ""
 "^FS\\r\n"
 "\n"
-"            ^XZ"
+"^XZ"
 msgstr ""
 
 #. module: alc_label_printing_base
 #: model_terms:ir.ui.view,arch_db:alc_label_printing_base.stock_pick_packs_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"            ^FO30,170^A0N30,30^FD"
+"^FO30,170^A0N30,30^FD"
 msgstr ""
 
 #. module: alc_label_printing_base
 #: model_terms:ir.ui.view,arch_db:alc_label_printing_base.stock_pick_packs_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"            ^FO30,205^A0N35,30^FD"
+"^FO30,205^A0N35,30^FD"
 msgstr ""
 
 #. module: alc_label_printing_base
 #: model_terms:ir.ui.view,arch_db:alc_label_printing_base.stock_pick_packs_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"            ^FO30,250^A0N30,30^FD"
+"^FO30,250^A0N30,30^FD"
 msgstr ""
 
 #. module: alc_label_printing_base
 #: model_terms:ir.ui.view,arch_db:alc_label_printing_base.stock_pick_packs_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"            ^FO30,350^A0N45,45^FD"
+"^FO30,350^A0N45,45^FD"
 msgstr ""
 
 #. module: alc_label_printing_base
 #: model_terms:ir.ui.view,arch_db:alc_label_printing_base.stock_pick_packs_label_zebra_v1
 msgid ""
 "^XA\n"
-"            ^FO30,30^GB"
+"\n"
+"^FO30,30^GB"
 msgstr ""
 
 #. module: alc_label_printing_base
