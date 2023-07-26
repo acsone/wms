@@ -2954,11 +2954,6 @@ msgid "Nafcilline"
 msgstr ""
 
 #. module: alc_pim
-#: model:ir.model.fields,field_description:alc_pim.field_product_category__name
-msgid "Name"
-msgstr ""
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_nandrolon
 msgid "Nandrolon"
 msgstr ""
@@ -3574,11 +3569,6 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_procaine
 msgid "Procaine"
-msgstr ""
-
-#. module: alc_pim
-#: model:ir.model,name:alc_pim.model_product_category
-msgid "Product Category"
 msgstr ""
 
 #. module: alc_pim
