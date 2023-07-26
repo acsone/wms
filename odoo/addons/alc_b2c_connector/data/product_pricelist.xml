@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- pylint:disable=duplicate-xml-record-id -->
+<!-- pylint:oca-disable=duplicate-xml-record-id -->
 <odoo noupdate="1">
   <record id="product_pricelist_b2c" model="product.pricelist">
     <field name="name">List de prix B2C</field>
