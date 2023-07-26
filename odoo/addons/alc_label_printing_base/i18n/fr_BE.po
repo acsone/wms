@@ -20,7 +20,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_label_printing_base.stock_pick_packs_label_zebra_v1
 msgid ""
 ",75,3,2^FS\\r\n"
-"            ^FO40,47^A0N60,60^FD"
+"^FO40,47^A0N60,60^FD"
 msgstr ""
 
 #. module: alc_label_printing_base
