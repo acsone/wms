@@ -25,7 +25,7 @@ odoo-addon-stock-helper==16.0.1.1.0
 odoo-addon-stock-location-orderpoint @ git+https://github.com/acsone/stock-logistics-orderpoint.git@959a2b179c8c30d7111d56546f08e2024f7b938f#subdirectory=setup/stock_location_orderpoint
 odoo-addon-stock-location-orderpoint-average-daily-sale @ git+https://github.com/acsone/stock-logistics-orderpoint.git@f9d2bcbcaee753a9c33b738ea41a6229dcbaba3c#subdirectory=setup/stock_location_orderpoint_average_daily_sale
 odoo-addon-stock-location-position==16.0.1.0.0.2
-odoo-addon-stock-location-product-restriction==16.0.1.0.0.5
+odoo-addon-stock-location-product-restriction @ git+https://github.com/acsone/stock-logistics-warehouse.git@ae96436a067247ee934991e2620b3cb176f2ce74#subdirectory=setup/stock_location_product_restriction
 odoo-addon-stock-location-zone==16.0.1.0.1
 odoo-addon-stock-lot-is-archived @ git+https://github.com/acsone/product-attribute.git@c35f37cf50f3a1f1291a6bfc38657a3bab041bfc#subdirectory=setup/stock_lot_is_archived
 odoo-addon-stock-move-auto-assign==16.0.1.1.0
