@@ -51,6 +51,16 @@
     - oca refs/pull/1264/head # [ADD] - add stock_move_propagate_first_move_cancel
   target: origin 16.0-alc_stock_move_propagate_first_move
 
+./src/stock_release_channel:
+  remotes:
+    origin: git@github.com:acsone/wms.git
+    oca: git@github.com:oca/wms.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/667/head # [FIX] - don't copy release channel when duplicating a picking
+    - oca refs/pull/689/head # [IMP] stock_release_channel: Move release channel data to demo
+  target: origin 16.0-alc_stock_release_channel
+
 ./src/fastapi:
   remotes:
     origin: git@github.com:lmignon/fastapi.git
