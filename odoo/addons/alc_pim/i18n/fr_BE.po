@@ -3098,11 +3098,6 @@ msgid "Nafcilline"
 msgstr "Pénicillines"
 
 #. module: alc_pim
-#: model:ir.model.fields,field_description:alc_pim.field_product_category__name
-msgid "Name"
-msgstr ""
-
-#. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_nandrolon
 msgid "Nandrolon"
 msgstr ""
@@ -3746,13 +3741,6 @@ msgstr ""
 #: model:attribute.option,name:alc_pim.attribute_option_procaine
 msgid "Procaine"
 msgstr ""
-
-#. module: alc_pim
-#: model:ir.model,name:alc_pim.model_product_category
-#, fuzzy
-#| msgid "Products Categories"
-msgid "Product Category"
-msgstr "Catégories d'articles non web"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_produkt_om_te_verstuiven_voor_omgeving_en_oppervlaktes
@@ -5223,6 +5211,11 @@ msgstr "à usage transdermique contre les endoparasites"
 #, fuzzy
 msgid "transdermic use against endoparasites"
 msgstr "à us. transderm. contre endoparasites"
+
+#, fuzzy
+#~| msgid "Products Categories"
+#~ msgid "Product Category"
+#~ msgstr "Catégories d'articles non web"
 
 #~ msgid "Product Categories Web"
 #~ msgstr "Catégories d'articles web"
