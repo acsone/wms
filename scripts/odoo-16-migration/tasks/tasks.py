@@ -294,8 +294,6 @@ def migrate_account_payment_partner():
             WHERE bank_account_link = 'fixed'
         """
         openupgrade.logged_query(cr, query)
-        query = "ALTER TABLE account_move ADD payment_mode_id int4"
-        openupgrade.logged_query(cr, query)
         query = """
             UPDATE account_move am
             SET payment_mode_id = ai.payment_mode_id

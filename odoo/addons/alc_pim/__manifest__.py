@@ -14,6 +14,7 @@
         # ALC
         "alc_pim_product",
         "alc_pim_attribute_group",
+        "alc_product_category_translatable",
         "alc_product_shop_category",
         "alc_product_link_notice",
         "alc_product_animal_species",

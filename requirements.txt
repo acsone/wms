@@ -121,7 +121,7 @@ odoo-addon-product-expiry-configurable==16.0.1.0.0.6
 odoo-addon-product-logistics-uom==16.0.3.0.0.3
 odoo-addon-product-manufacturer==16.0.1.0.0.7
 odoo-addon-product-multi-category==16.0.1.0.0.3
-odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@3e5467b2af51dd5cceba4d916df02f3afd8fde76#subdirectory=setup/product_packaging_dimension
+odoo-addon-product-packaging-dimension @ git+https://github.com/acsone/product-attribute.git@3b66da6f0c7531ebce8d897dedbcf7dec369b669#subdirectory=setup/product_packaging_dimension
 odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attribute.git@86dea0c2af466a4414fef833d74d5c835cf78575#subdirectory=setup/product_packaging_level
 odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@14fada9a163b6ab385d4f65b9915c4e6a0b0211e#subdirectory=setup/product_packaging_level_pallet
 odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@bd03b6c5a098a1ce9dce4f594be675990049ff7d#subdirectory=setup/product_price_category
@@ -179,7 +179,7 @@ odoo-addon-stock-helper==16.0.1.1.0
 odoo-addon-stock-location-orderpoint @ git+https://github.com/acsone/stock-logistics-orderpoint.git@959a2b179c8c30d7111d56546f08e2024f7b938f#subdirectory=setup/stock_location_orderpoint
 odoo-addon-stock-location-orderpoint-average-daily-sale @ git+https://github.com/acsone/stock-logistics-orderpoint.git@f9d2bcbcaee753a9c33b738ea41a6229dcbaba3c#subdirectory=setup/stock_location_orderpoint_average_daily_sale
 odoo-addon-stock-location-position==16.0.1.0.0.2
-odoo-addon-stock-location-product-restriction==16.0.1.0.0.5
+odoo-addon-stock-location-product-restriction @ git+https://github.com/acsone/stock-logistics-warehouse.git@ae96436a067247ee934991e2620b3cb176f2ce74#subdirectory=setup/stock_location_product_restriction
 odoo-addon-stock-location-zone==16.0.1.0.1
 odoo-addon-stock-lot-is-archived @ git+https://github.com/acsone/product-attribute.git@c35f37cf50f3a1f1291a6bfc38657a3bab041bfc#subdirectory=setup/stock_lot_is_archived
 odoo-addon-stock-move-auto-assign==16.0.1.1.0

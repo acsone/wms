@@ -57,7 +57,7 @@ class StockPicking(stock_picking.StockPicking):
                     self.action_start()
                     self.user_id = user
                     return None
-            except Exception:  # pylint: disable=W0703(broad-except)
+            except Exception:  # pylint: disable=broad-except'
                 _logger.exception(
                     "Unable to decode user barcode or wrong user barcode %s", barcode
                 )
