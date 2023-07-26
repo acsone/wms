@@ -16,12 +16,9 @@ class MakePickingBatch(make_picking_batch.MakePickingBatch):
         partner_devices = partner._get_specific_stock_devices()
         if partner_devices:
             menu_devices = self.stock_device_type_ids
-            device_to_keep = self.env["stock.device.type"]
             for device in partner_devices:
                 if device in menu_devices:
-                    device_to_keep |= device
-
-            if device_to_keep:
-                # Only one device should be put by zone on the partner
-                return device_to_keep[0]
+                    # Only one device should be put by zone on the partner so creating
+                    # a list is useless
+                    return device
         return super()._compute_device_to_use(first_picking_to_cluster)
