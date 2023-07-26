@@ -59,7 +59,7 @@ class ShipmentAdvice(ShipmentAdviceBase):
             self.action_confirm()
             self.action_in_progress()
             self.action_done()
-        except Exception as error:  # pylint: disable=W0703(broad-except)
+        except Exception as error:  # pylint: disable=broad-except
             _logger.error(error)
             self.action_cancel()
             self.planned_picking_ids.move_ids.write({"shipment_advice_id": False})

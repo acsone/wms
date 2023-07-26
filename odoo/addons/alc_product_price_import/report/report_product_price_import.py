@@ -109,7 +109,6 @@ class ReportProductPriceImport(ReportXlsxAbstract):
             },
             "width": 7,
         }
-        # pylint: disable=unnecessary-comprehension)
         ws_params = {
             "ws_name": _("Product prices"),
             "generate_ws_method": "_product_prices_report",
