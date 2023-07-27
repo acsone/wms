@@ -67,19 +67,6 @@ class StockReleaseChannel(models.Model):
                 channel.warehouse_id.partner_id.tz or company_tz or False
             )
 
-    @api.model
-    def assign_release_channel(self, picking):
-        res = super().assign_release_channel(picking)
-        # Check if a channel has been assigned to the picking and write scheduled_date
-        # if different to avoid unnecessary write
-        if (
-            picking.release_channel_id
-            and picking.release_channel_id.process_end_date
-            and picking.scheduled_date != picking.release_channel_id.process_end_date
-        ):
-            picking.scheduled_date = picking.release_channel_id.process_end_date
-        return res
-
     def _field_picking_domains(self):
         res = super()._field_picking_domains()
         release_ready_domain = res["count_picking_release_ready"]
