@@ -5,8 +5,6 @@ from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 from odoo.addons.alc_printing_base.models.printing_printer import PrintingPrinter
-from odoo.addons.stock.models.stock_lot import StockLot
-from odoo.addons.stock.models.stock_move_line import StockMoveLine
 from odoo.addons.stock.models.stock_picking import Picking
 
 
@@ -21,27 +19,16 @@ class PrintLabel(models.TransientModel):
     )
     printer_id = fields.Many2one[PrintingPrinter](string="Printer", required=True)
     picking_ids = fields.Many2many[Picking](string="Pickings")
-    lot_ids = fields.Many2many[StockLot](string="Lots")
-    pack_operation_ids = fields.Many2many[StockMoveLine](string="Pack operations")
     qty = fields.Integer("Quantity", default=1)
 
     def default_get(self, fields_list=None):
         if not fields_list:
             fields_list = {}
-
         result = super().default_get(fields_list)
-
         active_model = self._context.get("active_model")
         active_ids = self._context.get("active_ids", [])
         if active_model == "stock.picking":
             result["picking_ids"] = [fields.Command.set(active_ids)]
-        elif active_model == "stock.production.lot":
-            result["lot_ids"] = [fields.Command.set(active_ids)]
-        elif active_model == "stock.move.line":
-            result["pack_operation_ids"] = [fields.Command.set(active_ids)]
-        else:
-            raise UserError(_("Invalid model"))
-
         return result
 
     def print_label(self):

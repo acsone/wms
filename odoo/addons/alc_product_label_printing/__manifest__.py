@@ -5,7 +5,7 @@
     "name": "Alc Product label printing",
     "summary": """
         Add code needed to print products labels""",
-    "version": "16.0.1.0.1",
+    "version": "16.0.1.0.2",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
@@ -13,6 +13,7 @@
         "alc_label_printing_base",
         "alc_partner_veterinary",
         "stock_procurement_customer",
+        "product_expiry",
     ],
     "data": [
         "views/res_partner_views.xml",
@@ -22,6 +23,7 @@
         "views/stock_lot_views.xml",
         "views/stock_move_line_views.xml",
         "views/stock_move_views.xml",
+        "wizards/print_label.xml",
     ],
     "demo": [],
     "installable": True,

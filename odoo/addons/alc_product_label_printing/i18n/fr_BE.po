@@ -41,22 +41,22 @@ msgstr ""
 #. module: alc_product_label_printing
 #: model:ir.actions.report,name:alc_product_label_printing.report_lot_nolot_label
 msgid "Alcyon Nolot Label"
-msgstr ""
+msgstr "Etiquette de produit Alcyon"
 
 #. module: alc_product_label_printing
 #: model:ir.actions.report,name:alc_product_label_printing.report_stock_product_food_label
 msgid "Alcyon Product Food Label"
-msgstr ""
+msgstr "Etiquette aliment Alcyon"
 
 #. module: alc_product_label_printing
 #: model:ir.actions.report,name:alc_product_label_printing.report_stock_product_label
 msgid "Alcyon Product Label"
-msgstr ""
+msgstr "Etiquette de produit Alcyon"
 
 #. module: alc_product_label_printing
 #: model:ir.actions.report,name:alc_product_label_printing.report_lot_label
 msgid "Alcyon lot Label"
-msgstr ""
+msgstr "Etiquette de lot Alcyon"
 
 #. module: alc_product_label_printing
 #: model:ir.model,name:alc_product_label_printing.model_res_partner

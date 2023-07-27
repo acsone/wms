@@ -31,12 +31,21 @@ def migrate(env, version):
             "label_type",
             "printer_id",
             "picking_ids",
-            "lot_ids",
-            "pack_operation_ids",
             "qty",
         ],
         "specific_print",
         "alc_label_printing_base",
+    )
+
+    openupgrade.update_module_moved_fields(
+        env.cr,
+        "print.label",
+        [
+            "lot_ids",
+            "move_line_ids",
+        ],
+        "specific_print",
+        "alc_product_label_printing",
     )
 
     openupgrade.update_module_moved_fields(
