@@ -53,6 +53,7 @@ class TestReleaseChannelProcurement(ReleaseChannelCase):
         )
 
         self.assertEqual(pickings_internal.release_channel_id, self.default_channel)
+        return pickings_internal
 
     def test_channel_internal_no_propagation(self):
         """
