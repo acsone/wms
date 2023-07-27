@@ -129,10 +129,10 @@ class ProductProduct(ProductBase):
               sum(sol.product_uom_qty)
             FROM sale_order_line AS sol
               INNER JOIN sale_order so ON sol.order_id = so.id
-            WHERE so.confirmation_date IS NOT NULL
+            WHERE so.date_order IS NOT NULL
               AND sol.product_id IN %s
-              AND so.confirmation_date >= %s
-              AND so.confirmation_date < %s
+              AND so.date_order >= %s
+              AND so.date_order < %s
               AND so.state <> 'cancel'
             GROUP BY sol.product_id
             """
@@ -152,10 +152,10 @@ class ProductProduct(ProductBase):
               sum(sol.product_uom_qty)
             FROM sale_order_line AS sol
               INNER JOIN sale_order so ON sol.order_id = so.id
-            WHERE so.confirmation_date IS NOT NULL
+            WHERE so.date_order IS NOT NULL
               AND sol.product_id IN %s
-              AND so.confirmation_date >= %s
-              AND so.confirmation_date < %s
+              AND so.date_order >= %s
+              AND so.date_order < %s
               AND so.state <> 'cancel'
             GROUP BY sol.product_id
             """
