@@ -32,10 +32,10 @@ class StockPicking(Picking):
             )
         return res
 
-    def button_validate(self):
+    def _action_done(self):
         for rec in self:
             rec._check_shipping_cost()
-        return super().button_validate()
+        return super()._action_done()
 
     def _check_shipping_cost(self):
         """Compute shipping costs for the customers in the release channel."""
