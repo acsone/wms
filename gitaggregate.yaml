@@ -31,6 +31,16 @@
     - git commit -m "Remove unused auto install addon test_mail_sms"
   target: origin 16.0-alc_master
 
+./src/partner_invoicing_mode:
+  remotes:
+    origin: git@github.com:acsone/account-invoicing.git
+    oca: git@github.com:oca/account-invoicing.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/1514/head # [MIG][16.0] partner_invoicing_mode_weekly (rename account_invoice_mode_weekly)
+    - oca refs/pull/1515/head # [16.0][IMP] partner_invoicing_mode: Allow better inheritance + use correctly grouping option
+  target: origin 16.0-alc_partner_invoicing_mode
+
 ./src/stock_available_to_promise_release:
   remotes:
     origin: git@github.com:acsone/wms.git
