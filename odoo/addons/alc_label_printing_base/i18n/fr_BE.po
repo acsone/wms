@@ -73,13 +73,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/alc_label_printing_base/wizards/print_label.py:0
 #, python-format
-msgid "Invalid model"
-msgstr "Objet non valide"
-
-#. module: alc_label_printing_base
-#. odoo-python
-#: code:addons/alc_label_printing_base/wizards/print_label.py:0
-#, python-format
 msgid "Invalid printer (-> zebra)"
 msgstr "Imprimante non valide (-> zebra)"
 
@@ -104,21 +97,11 @@ msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: alc_label_printing_base
-#: model:ir.model.fields,field_description:alc_label_printing_base.field_print_label__lot_ids
-msgid "Lots"
-msgstr ""
-
-#. module: alc_label_printing_base
 #. odoo-python
 #: code:addons/alc_label_printing_base/models/stock_picking.py:0
 #, python-format
 msgid "No destination partner defined"
 msgstr "Aucun partneaire de destination défini"
-
-#. module: alc_label_printing_base
-#: model:ir.model.fields,field_description:alc_label_printing_base.field_print_label__pack_operation_ids
-msgid "Pack operations"
-msgstr "Opération d'emballage"
 
 #. module: alc_label_printing_base
 #: model:ir.model.fields.selection,name:alc_label_printing_base.selection__print_label__label_type__package
@@ -274,3 +257,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_label_printing_base.view_picking_form
 msgid "🖶Print Packs"
 msgstr "🖶Imprimer colis médicaments"
+
+#~ msgid "Invalid model"
+#~ msgstr "Objet non valide"
+
+#~ msgid "Pack operations"
+#~ msgstr "Opération d'emballage"
