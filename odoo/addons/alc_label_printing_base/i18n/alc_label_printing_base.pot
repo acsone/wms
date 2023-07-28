@@ -70,13 +70,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/alc_label_printing_base/wizards/print_label.py:0
 #, python-format
-msgid "Invalid model"
-msgstr ""
-
-#. module: alc_label_printing_base
-#. odoo-python
-#: code:addons/alc_label_printing_base/wizards/print_label.py:0
-#, python-format
 msgid "Invalid printer (-> zebra)"
 msgstr ""
 
@@ -101,20 +94,10 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: alc_label_printing_base
-#: model:ir.model.fields,field_description:alc_label_printing_base.field_print_label__lot_ids
-msgid "Lots"
-msgstr ""
-
-#. module: alc_label_printing_base
 #. odoo-python
 #: code:addons/alc_label_printing_base/models/stock_picking.py:0
 #, python-format
 msgid "No destination partner defined"
-msgstr ""
-
-#. module: alc_label_printing_base
-#: model:ir.model.fields,field_description:alc_label_printing_base.field_print_label__pack_operation_ids
-msgid "Pack operations"
 msgstr ""
 
 #. module: alc_label_printing_base

@@ -111,6 +111,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/alc_product_label_printing/wizards/print_label.py:0
 #, python-format
+msgid "Invalid printer"
+msgstr ""
+
+#. module: alc_product_label_printing
+#. odoo-python
+#: code:addons/alc_product_label_printing/wizards/print_label.py:0
+#, python-format
 msgid "Invalid printer (-> toshiba)"
 msgstr ""
 
@@ -137,6 +144,11 @@ msgid "Lot/Serial"
 msgstr ""
 
 #. module: alc_product_label_printing
+#: model:ir.model.fields,field_description:alc_product_label_printing.field_print_label__lot_ids
+msgid "Lots"
+msgstr ""
+
+#. module: alc_product_label_printing
 #. odoo-python
 #: code:addons/alc_product_label_printing/models/stock_move_line.py:0
 #: code:addons/alc_product_label_printing/models/stock_picking.py:0
@@ -153,6 +165,11 @@ msgstr ""
 #. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_stock_move_line_detailed_operation_tree
 msgid "Open to print"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model:ir.model.fields,field_description:alc_product_label_printing.field_print_label__move_line_ids
+msgid "Pack operations"
 msgstr ""
 
 #. module: alc_product_label_printing
