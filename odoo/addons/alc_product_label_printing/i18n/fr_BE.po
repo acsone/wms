@@ -113,6 +113,14 @@ msgstr "Articles alimentaires"
 #. module: alc_product_label_printing
 #. odoo-python
 #: code:addons/alc_product_label_printing/wizards/print_label.py:0
+#, fuzzy, python-format
+#| msgid "Invalid printer (-> zebra)"
+msgid "Invalid printer"
+msgstr "Imprimante non valide (-> zebra)"
+
+#. module: alc_product_label_printing
+#. odoo-python
+#: code:addons/alc_product_label_printing/wizards/print_label.py:0
 #, python-format
 msgid "Invalid printer (-> toshiba)"
 msgstr "Imprimante non valide (-> toshiba)"
@@ -140,6 +148,11 @@ msgid "Lot/Serial"
 msgstr "Lot/N° série"
 
 #. module: alc_product_label_printing
+#: model:ir.model.fields,field_description:alc_product_label_printing.field_print_label__lot_ids
+msgid "Lots"
+msgstr ""
+
+#. module: alc_product_label_printing
 #. odoo-python
 #: code:addons/alc_product_label_printing/models/stock_move_line.py:0
 #: code:addons/alc_product_label_printing/models/stock_picking.py:0
@@ -157,6 +170,13 @@ msgstr "Nombre d'étiquettes à imprimer."
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_stock_move_line_detailed_operation_tree
 msgid "Open to print"
 msgstr "Ouvrir pour imprimer"
+
+#. module: alc_product_label_printing
+#: model:ir.model.fields,field_description:alc_product_label_printing.field_print_label__move_line_ids
+#, fuzzy
+#| msgid "Detailed operation"
+msgid "Pack operations"
+msgstr "Opération détaillée"
 
 #. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_production_lot_form
