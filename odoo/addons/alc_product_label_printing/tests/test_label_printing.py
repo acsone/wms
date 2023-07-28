@@ -19,7 +19,7 @@ class TestLabelPrinting(TransactionCase):
             .create({"name": "Localhost", "address": "no_printing", "port": "1234"})
         )
 
-        cls.product_label_printer = Printer.create(
+        cls.toshiba_printer = Printer.create(
             {
                 "name": "Toshiba printer",
                 "system_name": "toshiba_printer",
@@ -29,7 +29,7 @@ class TestLabelPrinting(TransactionCase):
             }
         )
 
-        cls.package_label_printer = Printer.create(
+        cls.zebra_printer = Printer.create(
             {
                 "name": "Zebra printer",
                 "system_name": "zebra_printer",
@@ -85,6 +85,7 @@ class TestLabelPrinting(TransactionCase):
             }
         )
         cls.move._action_confirm()
+        cls.lot = cls.env["stock.lot"].create({"product_id": cls.product.id})
 
         # add some stock
         inventory_quant = cls.env["stock.quant"].create(
@@ -92,6 +93,7 @@ class TestLabelPrinting(TransactionCase):
                 "location_id": cls.location.id,
                 "product_id": cls.product.id,
                 "inventory_quantity": 100,
+                "lot_id": cls.lot.id,
             }
         )
         inventory_quant.action_apply_inventory()
@@ -157,7 +159,7 @@ class TestLabelPrinting(TransactionCase):
             PrintingPrinter, "print_document"
         ) as patched_print_document:
             self.picking.print_products_label(
-                printer_id=self.product_label_printer, packages=package
+                printer_id=self.toshiba_printer, packages=package
             )
             patched_print_document.assert_called_once()
 
@@ -165,7 +167,7 @@ class TestLabelPrinting(TransactionCase):
             PrintingPrinter, "print_document"
         ) as patched_print_document:
             self.picking.print_packages_label(
-                printer_id=self.product_label_printer, packages=package
+                printer_id=self.toshiba_printer, packages=package
             )
             patched_print_document.assert_called_once()
 
@@ -186,3 +188,50 @@ class TestLabelPrinting(TransactionCase):
         ) as patched_print:
             self.picking.print_food_products_label()
             self.assertEqual(patched_print.call_count, 1)
+
+    def test_wizard_print(self):
+        # We do not wants labels but we call it from a picking :
+        # specific call ==> we force print
+        wizard = self.env["print.label"].create(
+            {"label_type": "food_product", "printer_id": self.zebra_printer.id}
+        )
+        PrintingPrinter = self.env["printing.printer"].__class__
+        # food product label
+        with mock.patch.object(
+            PrintingPrinter, "print_document"
+        ) as patched_print_document:
+            wizard.printer_id = self.zebra_printer
+            wizard.move_line_ids = self.picking.move_line_ids
+            wizard.label_type = "food_product"
+            wizard.print_label()
+            patched_print_document.assert_called_once()
+
+        with mock.patch.object(
+            PrintingPrinter, "print_document"
+        ) as patched_print_document:
+            wizard.printer_id = self.zebra_printer
+            wizard.move_line_ids = False
+            wizard.picking_ids = self.picking
+            wizard.label_type = "food_product"
+            wizard.print_label()
+            patched_print_document.assert_called_once()
+        # product label
+        with mock.patch.object(
+            PrintingPrinter, "print_document"
+        ) as patched_print_document:
+            wizard.printer_id = self.toshiba_printer
+            wizard.move_line_ids = False
+            wizard.picking_ids = self.picking
+            wizard.label_type = "product"
+            wizard.print_label()
+            patched_print_document.assert_called_once()
+
+        # lot label
+        with mock.patch.object(
+            PrintingPrinter, "print_document"
+        ) as patched_print_document:
+            wizard.printer_id = self.zebra_printer
+            wizard.lot_ids = self.lot
+            wizard.label_type = "lot"
+            wizard.print_label()
+            patched_print_document.assert_called_once()

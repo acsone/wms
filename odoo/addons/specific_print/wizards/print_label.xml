@@ -11,7 +11,6 @@
             <field name="qty" />
             <field name="label_type" invisible="1" />
             <field name="picking_ids" invisible="1" />
-            <field name="lot_ids" invisible="1" />
           </group>
         </sheet>
         <footer>

@@ -73,7 +73,7 @@ class StockMoveLine(MoveLine):
         self.ensure_one()
         if not self.lot_id:
             return [(int(self.qty_done), None)]
-        return [(int(self.lot_id.qty), self.lot_id)]
+        return [(int(self.lot_id.product_qty), self.lot_id)]
 
     def print_food_product_label(
         self,

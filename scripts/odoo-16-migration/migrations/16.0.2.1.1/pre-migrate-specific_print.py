@@ -31,12 +31,21 @@ def migrate(env, version):
             "label_type",
             "printer_id",
             "picking_ids",
-            "lot_ids",
-            "pack_operation_ids",
             "qty",
         ],
         "specific_print",
         "alc_label_printing_base",
+    )
+
+    openupgrade.update_module_moved_fields(
+        env.cr,
+        "print.label",
+        [
+            "lot_ids",
+            "move_line_ids",
+        ],
+        "specific_print",
+        "alc_product_label_printing",
     )
 
     openupgrade.update_module_moved_fields(
@@ -48,4 +57,30 @@ def migrate(env, version):
         ],
         "specific_print",
         "alc_label_printing_base",
+    )
+
+    openupgrade.rename_xmlids(
+        env.cr,
+        [
+            (
+                "specific_print.report_stock_pick_packs_label",
+                "alc_label_printing_base.report_stock_pick_packs_label",
+            ),
+            (
+                "specific_print.report_stock_product_label",
+                "alc_product_label_printing.report_stock_product_label",
+            ),
+            (
+                "specific_print.report_lot_label",
+                "alc_product_label_printing.report_lot_label",
+            ),
+            (
+                "specific_print.report_lot_nolot_label",
+                "alc_product_label_printing.report_lot_nolot_label",
+            ),
+            (
+                "specific_print.report_stock_product_food_label",
+                "alc_product_label_printing.report_stock_product_food_label",
+            ),
+        ],
     )

@@ -37,7 +37,7 @@
     </field>
   </record>
   <template id="stock_product_food_label_zebra_v1">
-    <div class="raw">
+<div class="raw">
 <t t-foreach="docs" t-as="line">
 <t t-set="pick" t-value="line.picking_id" />
 <t
@@ -45,11 +45,22 @@
           t-value="pick._get_all_dest_pickings().filtered(lambda r: r.picking_type_code == 'outgoing' and r.state not in ('cancel', 'done'))"
         />
 <t t-set="ship" t-value="ships and ships[0]" />
-<t t-foreach="range(1, int(qty_done) + 1)" t-as="index">
+
+<!--
+Migration note:
+The lot_id is given in arg in v10 as it is not part of the pack operation
+In next versions, we can extract it from the move line
+
+t t-set="lot_id" t-value="line.lot_id"
+-->
+
+<t t-foreach="xrange(1, int(qty_done) + 1)" t-as="index">
     ^XA
     ^FWR
 
-    ^FO310,60^GB70,<t t-esc="len(pick.release_channel_id.channel_code) * 38" />,3,2^FS\r
+    ^FO310,60^GB70,<t
+            t-esc="len(pick.release_channel_id.channel_code or '') * 38"
+          />,3,2^FS\r
     ^FO310,70^A060,60^FD<t t-esc="pick.release_channel_id.channel_code" />^FS\r
 
     <t t-if="('customer_id' in pick) and pick.customer_id.is_b2c_customer">
@@ -78,7 +89,7 @@
 
     ^FO80,60^BY2
     ^BC,40,Y,Y,N,A^FDS-<t t-esc="line.product_id.default_code" />-<t
-            t-esc="line.lot_id and line.lot_id.name or ''"
+            t-esc="lot_id and lot_id.name or ''"
           />-^FS\r
 
     ^FO50,60^A018,18^FD<t t-esc="line.product_id.name[:60]" />^FS\r
@@ -109,19 +120,19 @@
     >alc_product_label_printing.stock_product_food_label_zebra_v1</field>
   </record>
   <template id="stock_product_label_toshiba_v1">
-    <div class="raw">
-<t t-foreach="docs" t-as="move_line">
-<t t-foreach="move_line.get_qty_by_lot()" t-as="line">
+<div class="raw">
+<t t-foreach="docs" t-as="pack">
+<t t-foreach="pack.get_qty_by_lot()" t-as="line">
 <t t-set="qty" t-value="line[0]" />
 <t t-set="lot" t-value="line[1]" />
-<t t-set="customer" t-value="move_line.get_so_partner()" /><t t-if="qty">{U2;0120|}\r
+<t t-set="customer" t-value="pack.get_so_partner()" /><t t-if="qty">{U2;0120|}\r
 {D0275,0560,0250|}\r
 {C|}\r
 {PC001;0400,0040,05,05,J,00,B|}\r
 {RC001;ALCYON sa |}\r
 {PC004;0010,0040,05,05,J,00,B|}\r
 {RC004;<t
-              t-esc="res_company.convert_to_ascii(move_line.picking_id.partner_id.display_name)[:30]"
+              t-esc="res_company.convert_to_ascii(pack.picking_id.partner_id.display_name)[:30]"
             />|}\r
 {PC009;0010,0070,05,05,J,00,B|}\r
 {RC009;<t t-esc="res_company.convert_to_ascii(customer.vet_depot_number or '')" />|}\r
@@ -130,20 +141,20 @@
                 t-esc="res_company.convert_to_ascii(customer.vet_subscription_number or '')"
               />/</t>|}\r
 {PC002;0010,0130,05,05,J,00,B|}\r
-{RC002;<t t-esc="res_company.convert_to_ascii(move_line.product_id.name or '')" />|}\r<t
-              t-if="move_line.picking_id.partner_id.is_price_on_labels"
+{RC002;<t t-esc="res_company.convert_to_ascii(pack.product_id.name or '')" />|}\r<t
+              t-if="pack.picking_id.partner_id.is_price_on_labels"
             >{PC007;0350,0070,05,05,J,00,B|}\r{RC007;PVI : <t
-                t-esc="move_line.product_id.indicated_price"
+                t-esc="pack.product_id.indicated_price"
               />|}\r</t>{XB01;0030,0150,9,1,02,0,0080|}\r{RB01;S<t
-              t-esc="move_line.product_id and move_line.product_id.default_code[:8].ljust(8) or ''"
+              t-esc="pack.product_id and pack.product_id.default_code[:8].ljust(8) or ''"
             /><t t-esc="lot and lot.name[:12].ljust(12) or ''" /><t
-              t-esc="lot and lot.life_date and lot.expiration_date.strftime('%d%m%y') or ''"
+              t-esc="lot and lot.expiration_date and time.strftime('%d%m%y', time.strptime(lot.expiration_date,'%Y-%m-%d %H:%M:%S')) or ''"
             />|}\r
 {PC003;0030,0250,05,05,J,00,B|}\r
-{RC003;S-<t t-esc="move_line.product_id.default_code[:8].ljust(8)" />-<t
+{RC003;S-<t t-esc="pack.product_id.default_code[:8].ljust(8)" />-<t
               t-esc="lot and lot.name[:12].ljust(12) or ''"
             />-<t
-              t-esc="lot and lot.life_date and lot.life_date.strftime('%d/%m/%y') or ''"
+              t-esc="lot and lot.expiration_date and time.strftime('%d/%m/%y', time.strptime(lot.expiration_date,'%Y-%m-%d %H:%M:%S')) or ''"
             />|}\r
 {XS;I,<t t-esc="'%04d'%qty" />,0002C3200|}\r
 {U1;0120|}\r
