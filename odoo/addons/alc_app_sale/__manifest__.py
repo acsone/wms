@@ -136,5 +136,6 @@
         "alc_customer_audit",
         "alc_product_audit",
         "alc_pim",
+        "test_alc_shipping_fee_auto_process",
     ],
 }
