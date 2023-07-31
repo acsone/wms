@@ -50,7 +50,7 @@ odoo @ git+https://github.com/acsone/odoo.git@e487b580cb20df76946408d14b45383249
 odoo-addon-account-analytic-required==16.0.1.0.0.8
 odoo-addon-account-banking-mandate==16.0.1.0.2.8
 odoo-addon-account-banking-pain-base==16.0.1.0.0.7
-odoo-addon-account-banking-sepa-direct-debit==16.0.1.0.0.4
+odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/acsone/bank-payment.git@bf2a4e166e9d2f6b45cc4818f8499b683dfe9abf#subdirectory=setup/account_banking_sepa_direct_debit
 odoo-addon-account-cutoff-base==16.0.1.2.0.2
 odoo-addon-account-invoice-check-total==16.0.1.0.0.6
 odoo-addon-account-invoice-merge==16.0.1.0.1.1
@@ -168,6 +168,10 @@ odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/acsone/st
 odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com/acsone/stock-logistics-transport.git@b4f080b42a32026d7b28d255434584cc30c285db#subdirectory=setup/shipment_advice_planner_toursolver_queue_job
 odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@a9d4c4e4917e4caae3c85f96b9813d4fdc6f6806#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@22e70153a9845d9c9316170728ed0a435b39ffee#subdirectory=setup/shopfloor_base
+odoo-addon-shopfloor-workstation @ git+https://github.com/acsone/wms.git@758b160304e097300932c358c7dd8bc915db0c45#subdirectory=setup/shopfloor_workstation
+odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@e93ba1225c3e6724b417857b96343d7ed48a2e99#subdirectory=setup/shopfloor_mobile_base
+odoo-addon-shopfloor-workstation @ git+https://github.com/acsone/wms.git@758b160304e097300932c358c7dd8bc915db0c45#subdirectory=setup/shopfloor_workstation
+odoo-addon-shopfloor-workstation-mobile @ git+https://github.com/acsone/wms.git@ebe2544d4bd88b0b1d5d7c43f782902873d6fa2c#subdirectory=setup/shopfloor_workstation_mobile
 odoo-addon-stock-available==16.0.1.0.1.3
 odoo-addon-stock-available-immediately==16.0.1.0.0.5
 odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com/acsone/stock-logistics-availability.git@7f105272b0941fd74ba05d7a98765d8ed3765e1e#subdirectory=setup/stock_available_immediately_exclude_location

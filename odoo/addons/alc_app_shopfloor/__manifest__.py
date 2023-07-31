@@ -10,9 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        "shopfloor_base",
-        "shopfloor",
         "alc_shopfloor_user",
+        "shopfloor",
+        "shopfloor_workstation",
+        "shopfloor_workstation_mobile",
     ],
     "data": [],
     "demo": [],
