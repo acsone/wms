@@ -57,6 +57,7 @@ odoo-addon-shopfloor-base @ git+https://github.com/OCA/wms.git@refs/pull/642/hea
 odoo-addon-shopfloor @ git+https://github.com/OCA/wms.git@refs/pull/679/head#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-workstation @ git+https://github.com/OCA/wms.git@refs/pull/693/head#subdirectory=setup/shopfloor_workstation
 odoo-addon-shopfloor-mobile-base @ git+https://github.com/OCA/wms.git@refs/pull/694/head#subdirectory=setup/shopfloor_mobile_base
+odoo-addon-shopfloor-workstation-mobile @ git+https://github.com/OCA/wms.git@refs/pull/697/head#subdirectory=setup/shopfloor_workstation_mobile
 
 # product-attribute
 # https://github.com/OCA/product-attribute/pull/1192
