@@ -11,6 +11,7 @@
     "website": "https://acsone.eu",
     "depends": [
         "shopfloor_base",
+        "shopfloor",
     ],
     "data": [],
     "demo": [],
