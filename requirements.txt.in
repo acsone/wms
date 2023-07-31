@@ -54,6 +54,7 @@ odoo-addon-stock-release-channel-shipment-advice-toursolver @ git+https://github
 odoo-addon-stock-release-channel-geoengine @ git+https://github.com/OCA/wms.git@refs/pull/599/head#subdirectory=setup/stock_release_channel_geoengine
 odoo-addon-stock-release-channel-delivery @ git+https://github.com/OCA/wms.git@refs/pull/636/head#subdirectory=setup/stock_release_channel_delivery
 odoo-addon-shopfloor-base @ git+https://github.com/OCA/wms.git@refs/pull/642/head#subdirectory=setup/shopfloor_base
+odoo-addon-shopfloor-mobile-base @ git+https://github.com/OCA/wms.git@refs/pull/694/head#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor @ git+https://github.com/OCA/wms.git@refs/pull/679/head#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-workstation @ git+https://github.com/OCA/wms.git@refs/pull/693/head#subdirectory=setup/shopfloor_workstation
 
@@ -218,3 +219,6 @@ odoo-addon-fs-attachment @ git+https://github.com/OCA/storage.git@refs/pull/260/
 checklog-odoo @ git+https://github.com/acsone/checklog-odoo@master#subdirectory=checklog-odoo
 
 openupgradelib @ git+https://github.com/acsone/openupgradelib.git@16.0-alc_master
+
+# OCA/payment
+odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/OCA/bank-payment.git@refs/pull/1126/head#subdirectory=setup/account_banking_sepa_direct_debit
