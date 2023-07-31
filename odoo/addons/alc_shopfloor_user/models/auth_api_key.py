@@ -1,16 +1,15 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import fields
+
+from odoo.addons.auth_api_key.models.auth_api_key import AuthApiKey as AuthApiKeyBase
+from odoo.addons.base.models.res_users import Users
 
 
-class AuthApiKey(models.Model):
+class AuthApiKey(AuthApiKeyBase):
 
-    _inherit = "auth.api.key"
-
-    shopfloor_user_id = fields.Many2one(
-        comodel_name="res.users",
+    shopfloor_user_id = fields.Many2one[Users](
         string="Shopfloor User",
         required=False,
         help="""The user operating the shopfloor app. All the operations are done

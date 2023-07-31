@@ -3,7 +3,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
   <record model="ir.ui.view" id="auth_api_key_form_view">
-    <field name="name">auth.api.key.form (in alc_shopfloor_user)</field>
     <field name="model">auth.api.key</field>
     <field name="inherit_id" ref="auth_api_key.auth_api_key_form_view" />
     <field name="arch" type="xml">
@@ -13,7 +12,6 @@
     </field>
   </record>
   <record model="ir.ui.view" id="auth_api_key_tree_view">
-    <field name="name">auth.api.key.tree (in alc_shopfloor_user)</field>
     <field name="model">auth.api.key</field>
     <field name="inherit_id" ref="auth_api_key.auth_api_key_tree_view" />
     <field name="arch" type="xml">
