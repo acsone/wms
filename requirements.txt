@@ -167,6 +167,7 @@ odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/acsone/st
 odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com/acsone/stock-logistics-transport.git@b4f080b42a32026d7b28d255434584cc30c285db#subdirectory=setup/shipment_advice_planner_toursolver_queue_job
 odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@a9d4c4e4917e4caae3c85f96b9813d4fdc6f6806#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@22e70153a9845d9c9316170728ed0a435b39ffee#subdirectory=setup/shopfloor_base
+odoo-addon-shopfloor-workstation @ git+https://github.com/acsone/wms.git@758b160304e097300932c358c7dd8bc915db0c45#subdirectory=setup/shopfloor_workstation
 odoo-addon-stock-available==16.0.1.0.1.3
 odoo-addon-stock-available-immediately==16.0.1.0.0.5
 odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com/acsone/stock-logistics-availability.git@7f105272b0941fd74ba05d7a98765d8ed3765e1e#subdirectory=setup/stock_available_immediately_exclude_location
