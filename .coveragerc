@@ -128,7 +128,6 @@ omit =
     odoo/addons/alc_sale_invoicing_on_transfer/*
     odoo/addons/alc_sale_invoicing_policy/*
     odoo/addons/alc_search_engine/*
-    odoo/addons/alc_shopfloor/*
     odoo/addons/alc_shopfloor_app/*
     odoo/addons/alc_shopfloor_assignation_issue_message/*
     odoo/addons/alc_shopfloor_cluster_picking/*
