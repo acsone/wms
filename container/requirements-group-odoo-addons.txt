@@ -113,6 +113,8 @@ odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@a9d4c4e4917e4caae3c
 odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@22e70153a9845d9c9316170728ed0a435b39ffee#subdirectory=setup/shopfloor_base
 odoo-addon-shopfloor-workstation @ git+https://github.com/acsone/wms.git@758b160304e097300932c358c7dd8bc915db0c45#subdirectory=setup/shopfloor_workstation
 odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@e93ba1225c3e6724b417857b96343d7ed48a2e99#subdirectory=setup/shopfloor_mobile_base
+odoo-addon-shopfloor-workstation @ git+https://github.com/acsone/wms.git@758b160304e097300932c358c7dd8bc915db0c45#subdirectory=setup/shopfloor_workstation
+odoo-addon-shopfloor-workstation-mobile @ git+https://github.com/acsone/wms.git@ebe2544d4bd88b0b1d5d7c43f782902873d6fa2c#subdirectory=setup/shopfloor_workstation_mobile
 odoo-addon-uom-unece==16.0.1.1.0.2
 odoo-addon-web-chatter-position==16.0.1.0.0.8
 odoo-addon-web-environment-ribbon==16.0.1.0.0.3
