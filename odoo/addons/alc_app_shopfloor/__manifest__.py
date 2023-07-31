@@ -12,6 +12,7 @@
     "depends": [
         "shopfloor_base",
         "shopfloor",
+        "shopfloor_workstation",
         "shopfloor_mobile_base",
     ],
     "data": [],
