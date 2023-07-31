@@ -597,6 +597,7 @@ def set_modules_to_remove():
         "account_mass_reconcile_partner",
         "account_mass_reconcile",
         "alc_shopfloor",  # replaced by OCA module shopfloor
+        "alc_shopfloor_mobile",  # replaced by shopfloor_mobile
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     # with cursor(DB_16_POSTMIG) as cr:
