@@ -1,7 +1,8 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo_test_helper import FakeModelLoader
+
 from odoo.tests.common import TransactionCase
 
 
@@ -24,23 +25,20 @@ class TestAlcReportBase(TransactionCase):
         cls.company.vat = "BE 0835.207.216"
         cls.company.logo = "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAALklEQVR42u3OMQEAAAgDoNk/jgE1xh5IwNzmUjQCAgICAgICAgICAgICAgLtwAONFFZBP1VacgAAAABJRU5ErkJggg=="
 
+        cls.loader = FakeModelLoader(cls.env, cls.__module__)
+        cls.loader.backup_registry()
+
+        # pylint: disable=import-outside-toplevel
+        from .models import TestModel
+
+        cls.loader.update_registry([TestModel])
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.loader.restore_registry()
+        super().tearDownClass()
+
     def test_basic(self):
-        class TestModel(models.Model):
-            _name = "test.model"
-            _inherit = ["report.async"]
-
-            def get_report_name(self):
-                return "Test report"
-
-        model_name = TestModel._name
-        self.registry.models[model_name] = TestModel._build_model(
-            self.registry, self.cr
-        )
-        self.registry.setup_models(self.cr)
-        self.registry.init_models(
-            self.cr, [model_name], {"module": "test"}, install=True
-        )
-
         # Create report action
         vals = {
             "name": "test_report",
