@@ -36,7 +36,6 @@ gevent==22.10.2
 google-auth==2.21.0
 greenlet==2.0.2
 idna==3.4
-importlib-metadata==6.8.0
 isodate==0.6.1
 Jinja2==3.1.2
 jmespath==1.0.1
@@ -167,6 +166,7 @@ odoo-addon-shipment-advice-planner @ git+https://github.com/acsone/stock-logisti
 odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/acsone/stock-logistics-transport.git@b4f080b42a32026d7b28d255434584cc30c285db#subdirectory=setup/shipment_advice_planner_toursolver
 odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com/acsone/stock-logistics-transport.git@b4f080b42a32026d7b28d255434584cc30c285db#subdirectory=setup/shipment_advice_planner_toursolver_queue_job
 odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@22e70153a9845d9c9316170728ed0a435b39ffee#subdirectory=setup/shopfloor_base
+odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@e93ba1225c3e6724b417857b96343d7ed48a2e99#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-stock-available==16.0.1.0.1.3
 odoo-addon-stock-available-immediately==16.0.1.0.0.5
 odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com/acsone/stock-logistics-availability.git@7f105272b0941fd74ba05d7a98765d8ed3765e1e#subdirectory=setup/stock_available_immediately_exclude_location
@@ -304,6 +304,5 @@ xlwt==1.3.0
 xmlsec==1.3.13
 yarl==1.9.2
 zeep==4.2.1
-zipp==3.16.0
 zope.event==5.0
 zope.interface==6.0
