@@ -12,6 +12,7 @@
     "depends": [
         "shopfloor_base",
         "shopfloor",
+        "alc_shopfloor_user",
     ],
     "data": [],
     "demo": [],

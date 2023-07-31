@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV (https://www.acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.http import request
 
-from odoo.addons.component.core import AbstractComponent
+from odoo.addons.shopfloor_base.services.service import BaseShopfloorService
 
 
-class BaseShopfloorService(AbstractComponent):
-    """Base class for REST services"""
-
-    _inherit = "base.shopfloor.service"
+class ShopfloorService(BaseShopfloorService):
+    """Base class for REST services."""
 
     @property
     def shopfloor_user(self):
