@@ -58,6 +58,8 @@ odoo-addon-shopfloor @ git+https://github.com/OCA/wms.git@refs/pull/679/head#sub
 odoo-addon-shopfloor-workstation @ git+https://github.com/OCA/wms.git@refs/pull/693/head#subdirectory=setup/shopfloor_workstation
 odoo-addon-shopfloor-mobile-base @ git+https://github.com/OCA/wms.git@refs/pull/694/head#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-workstation-mobile @ git+https://github.com/OCA/wms.git@refs/pull/697/head#subdirectory=setup/shopfloor_workstation_mobile
+odoo-addon-shopfloor @ git+https://github.com/OCA/wms.git@refs/pull/679/head#subdirectory=setup/shopfloor
+odoo-addon-shopfloor-workstation @ git+https://github.com/OCA/wms.git@refs/pull/693/head#subdirectory=setup/shopfloor_workstation
 
 # product-attribute
 # https://github.com/OCA/product-attribute/pull/1192
@@ -220,3 +222,6 @@ odoo-addon-fs-attachment @ git+https://github.com/OCA/storage.git@refs/pull/260/
 checklog-odoo @ git+https://github.com/acsone/checklog-odoo@master#subdirectory=checklog-odoo
 
 openupgradelib @ git+https://github.com/acsone/openupgradelib.git@16.0-alc_master
+
+# OCA/payment
+odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/OCA/bank-payment.git@refs/pull/1126/head#subdirectory=setup/account_banking_sepa_direct_debit

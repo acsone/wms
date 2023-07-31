@@ -46,7 +46,7 @@ msgstr ""
 #, fuzzy, python-format
 #| msgid "Sending fax for %{obj}s with id %{objid}s"
 msgid "Sending fax for %(obj)s with id %(objid)s"
-msgstr "Envoi de fax pour %{obj}s avec id %{objid}s"
+msgstr "Envoi de fax pour %(obj)s avec id %(objid)s"
 
 #. module: alc_report_base
 #: model:ir.model,name:alc_report_base.model_report_async
