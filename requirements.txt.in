@@ -61,6 +61,7 @@ odoo-addon-shopfloor-mobile @ git+https://github.com/OCA/wms.git@refs/pull/698/h
 odoo-addon-shopfloor-workstation-mobile @ git+https://github.com/OCA/wms.git@refs/pull/697/head#subdirectory=setup/shopfloor_workstation_mobile
 odoo-addon-shopfloor @ git+https://github.com/OCA/wms.git@refs/pull/679/head#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-workstation @ git+https://github.com/OCA/wms.git@refs/pull/693/head#subdirectory=setup/shopfloor_workstation
+odoo-addon-shopfloor-mobile-base-auth-api-key @ git+https://github.com/OCA/wms.git@refs/pull/701/head#subdirectory=setup/shopfloor_mobile_base_auth_api_key
 
 # product-attribute
 # https://github.com/OCA/product-attribute/pull/1192
@@ -152,6 +153,9 @@ odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server
 odoo-addon-base-partition @ git+https://github.com/OCA/server-tools.git@refs/pull/2615/head#subdirectory=setup/base_partition
 odoo-addon-base-exception @ git+https://github.com/OCA/server-tools.git@refs/pull/2670/head#subdirectory=setup/base_exception
 odoo-addon-jsonifier @ git+https://github.com/OCA/server-tools.git@refs/pull/2671/head#subdirectory=setup/jsonifier
+
+# OCA/server-auth
+odoo-addon-auth-api-key-group @ git+https://github.com/OCA/server-auth.git@refs/pull/544/head#subdirectory=setup/auth_api_key_group
 
 # OCA/server-ux
 odoo-addon-base-import-security-group @ git+https://github.com/OCA/server-ux.git@refs/pull/677/head#subdirectory=setup/base_import_security_group

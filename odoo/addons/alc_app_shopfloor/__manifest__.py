@@ -10,11 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        "alc_shopfloor_user",
         "shopfloor",
         "shopfloor_workstation",
         "shopfloor_workstation_mobile",
         "shopfloor_mobile",
+        "shopfloor_mobile_base_auth_api_key",
     ],
     "data": [],
     "demo": [],
