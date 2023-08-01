@@ -14,6 +14,7 @@
         "shopfloor",
         "shopfloor_workstation",
         "shopfloor_workstation_mobile",
+        "shopfloor_mobile",
     ],
     "data": [],
     "demo": [],

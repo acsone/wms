@@ -206,7 +206,6 @@ exclude = [
   'odoo/addons/alc_shopfloor_image_product/*',
   'odoo/addons/alc_shopfloor_location_content_relocation/*',
   'odoo/addons/alc_shopfloor_location_info/*',
-  'odoo/addons/alc_shopfloor_mobile/*',
   'odoo/addons/alc_shopfloor_mobile_change_pack_lot_back_button/*',
   'odoo/addons/alc_shopfloor_mobile_cluster_picking/*',
   'odoo/addons/alc_shopfloor_mobile_cluster_picking_informations/*',
