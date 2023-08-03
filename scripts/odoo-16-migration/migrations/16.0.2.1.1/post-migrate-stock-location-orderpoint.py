@@ -13,9 +13,9 @@ def _migrate_reserves(env):
     orderpoint_obj = env["stock.location.orderpoint"]
     location_obj = env["stock.location"]
     query = """
-        SELECT id, reserve_location_id
+        SELECT id, x_reserve_location_id
             FROM stock_location
-                WHERE reserve_location_id IS NOT NULL
+                WHERE x_reserve_location_id IS NOT NULL
                 AND NOT EXISTS (SELECT 1 FROM stock_location_orderpoint WHERE location_id = stock_location.id)
     """
 

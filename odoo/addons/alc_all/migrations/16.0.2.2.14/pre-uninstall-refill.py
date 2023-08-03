@@ -15,6 +15,13 @@ def migrate(cr, version):
       """
     )
 
+    # rename column reserve_location_id to x_reserve_location_id on stock_location required for migration script
+    cr.execute(
+        """
+        ALTER TABLE stock_location RENAME COLUMN reserve_location_id TO x_reserve_location_id
+    """
+    )
+
     _logger.info("Uninstall delivery_rounds_refill ")
     cr.execute(
         """
