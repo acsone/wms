@@ -15,6 +15,7 @@
         "shopfloor_workstation_mobile",
         "shopfloor_mobile",
         "shopfloor_mobile_base_auth_api_key",
+        "shopfloor_batch_automatic_creation",
     ],
     "data": [],
     "demo": [],

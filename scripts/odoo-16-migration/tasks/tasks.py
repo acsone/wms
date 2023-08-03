@@ -599,6 +599,7 @@ def set_modules_to_remove():
         "alc_shopfloor",  # replaced by OCA module shopfloor
         "alc_shopfloor_mobile",  # replaced by shopfloor_mobile
         "alc_shopfloor_user",  # replaced by shopfloor_mobile_base_auth_api_key
+        "alc_shopfloor_cluster_picking",  # replaced by shopfloor_batch_automatic_creation
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     # with cursor(DB_16_POSTMIG) as cr:
