@@ -16,12 +16,15 @@
                     name="loading"
                     attrs="{'invisible': [('shipment_planning_method', '=', 'none')]}"
                 >
-                    <group name="group_loading">
-                        <group name="group_loading_left">
+                    <group name="shipment_advice_arrival">
+                        <p
+                            colspan="2"
+                            style="color: grey; font-style: italic;"
+                        >The delay between the process end time and the arrival of shipments to the dock.</p>
+                        <group>
+
                             <label for="shipment_advice_arrival_delay" />
-                            <div
-                                attrs="{'invisible': [('shipment_planning_method', '=', 'none')]}"
-                            >
+                            <div>
                                 <field
                                     name="shipment_advice_arrival_delay"
                                     class="oe_inline"
@@ -29,11 +32,22 @@
                                 <span>minutes</span>
                             </div>
                         </group>
-                        <group name="group_loading_right">
+                        <group>
+                            <field
+                                name="shipment_advice_arrival_time"
+                                widget="float_time"
+                            />
+                        </group>
+                    </group>
+                    <group name="shipment_advice_departure">
+                        <p
+                            colspan="2"
+                            style="color: grey; font-style: italic;"
+                        >The delay between the process end time and the departure of shipments to the dock.</p>
+                        <group>
+
                             <label for="shipment_advice_departure_delay" />
-                            <div
-                                attrs="{'invisible': [('shipment_planning_method', '=', 'none')]}"
-                            >
+                            <div>
                                 <field
                                     name="shipment_advice_departure_delay"
                                     class="oe_inline"
@@ -41,6 +55,16 @@
                                 <span>minutes</span>
                             </div>
                         </group>
+                        <group>
+                            <field
+                                name="shipment_advice_departure_time"
+                                widget="float_time"
+                            />
+                        </group>
+                    </group>
+                    <group name="group_loading">
+                        <group name="group_loading_left" />
+                        <group name="group_loading_right" />
                     </group>
                 </page>
             </xpath>
