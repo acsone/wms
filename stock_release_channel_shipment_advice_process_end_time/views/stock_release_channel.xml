@@ -10,16 +10,33 @@
             ref="stock_release_channel_shipment_advice.stock_release_channel_form_view"
         />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='process_end_date']" position="after">
-                <label
-                    for="shipment_advice_arrival_delay"
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="Shipment loading and departure Settings"
+                    name="loading"
                     attrs="{'invisible': [('shipment_planning_method', '=', 'none')]}"
-                />
-                <div attrs="{'invisible': [('shipment_planning_method', '=', 'none')]}">
-                    <field name="shipment_advice_arrival_delay" class="oe_inline" />
-                    <span>minutes</span>
-                </div>
+                >
+                    <group name="group_loading">
+                        <group name="group_loading_left">
+                            <label for="shipment_advice_arrival_delay" />
+                            <div
+                                attrs="{'invisible': [('shipment_planning_method', '=', 'none')]}"
+                            >
+                                <field
+                                    name="shipment_advice_arrival_delay"
+                                    class="oe_inline"
+                                />
+                                <span>minutes</span>
+                            </div>
+                        </group>
+                        <group name="group_loading_right">
+                            <field name="planned_arrival_datetime" />
+                            <field name="planned_departure_datetime" />
+                        </group>
+                    </group>
+                </page>
             </xpath>
+
         </field>
     </record>
 
