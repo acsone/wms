@@ -16,6 +16,13 @@ class StockReleaseChannel(models.Model):
         help="The delay between the release channel process end time and the arrival "
         "of shipments to the dock.",
     )
+    shipment_advice_departure_delay = fields.Integer(
+        compute="_compute_shipment_advice_departure_delay",
+        store=True,
+        readonly=False,
+        help="The delay between the release channel process end time and the departure "
+        "of shipments to the dock.",
+    )
 
     @api.depends("warehouse_id")
     def _compute_shipment_advice_arrival_delay(self):
@@ -25,8 +32,22 @@ class StockReleaseChannel(models.Model):
                     rec.warehouse_id.release_channel_shipment_advice_arrival_delay
                 )
 
+    @api.depends("warehouse_id")
+    def _compute_shipment_advice_departure_delay(self):
+        for rec in self:
+            if not rec.shipment_advice_departure_delay:
+                rec.shipment_advice_departure_delay = (
+                    rec.warehouse_id.release_channel_shipment_advice_departure_delay
+                )
+
     def _get_shipment_advice_arrival_date(self):
         self.ensure_one()
         return self.process_end_date + timedelta(
             minutes=self.shipment_advice_arrival_delay
+        )
+
+    def _get_shipment_advice_departure_date(self):
+        self.ensure_one()
+        return self.process_end_date + timedelta(
+            minutes=self.shipment_advice_departure_delay
         )

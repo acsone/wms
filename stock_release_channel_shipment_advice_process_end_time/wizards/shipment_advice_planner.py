@@ -15,4 +15,7 @@ class ShipmentAdvicePlanner(models.TransientModel):
             vals[
                 "arrival_date"
             ] = self.release_channel_id._get_shipment_advice_arrival_date()
+            vals[
+                "departure_date"
+            ] = self.release_channel_id._get_shipment_advice_departure_date()
         return vals

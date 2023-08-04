@@ -16,6 +16,14 @@
                     />
                     <span>minutes</span>
                 </div>
+                <label for="release_channel_shipment_advice_departure_delay" />
+                <div class="o_row">
+                    <field
+                        name="release_channel_shipment_advice_departure_delay"
+                        class="oe_inline"
+                    />
+                    <span>minutes</span>
+                </div>
             </xpath>
         </field>
     </record>
