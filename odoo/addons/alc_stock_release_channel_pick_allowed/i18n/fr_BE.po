@@ -6,11 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-07 01:20+0000\n"
-"PO-Revision-Date: 2023-04-07 01:20+0000\n"
+"POT-Creation-Date: 2023-08-04 15:58+0000\n"
+"PO-Revision-Date: 2023-08-04 15:58+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -22,16 +21,14 @@ msgid "Allow picking automatically"
 msgstr "Autoriser automatiquement la préparation"
 
 #. module: alc_stock_release_channel_pick_allowed
-#: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick
-msgid "Allow picking automatically after all ongoing transfers are done"
-msgstr ""
-"Autoriser automatiquement la préparation une fois tous les transferts en "
-"cours effectués"
-
-#. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick_datetime
 msgid "Allow picking automatically at"
 msgstr "Autoriser automatiquement la préparation à"
+
+#. module: alc_stock_release_channel_pick_allowed
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_form_view
+msgid "Automatic picking settings"
+msgstr "Paramètres de préparation automatique"
 
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_disallow_pick
@@ -39,18 +36,19 @@ msgid "Disallow picking automatically"
 msgstr "Interdire automatiquement la préparation"
 
 #. module: alc_stock_release_channel_pick_allowed
-#: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_disallow_pick
-msgid "Disallow picking automatically after ongoing transfers are started"
-msgstr ""
-"Interdire automatiquement la préparation après le début des transferts en "
-"cours"
-
-#. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick_time_before_leave
-msgid "Duration before shipment leave to allow picking automatically"
+msgid "Duration before shipment load to allow picking automatically"
 msgstr ""
 "Durée avant le départ de l'expédition pour autoriser automatiquement le "
 "picking"
+
+#. module: alc_stock_release_channel_pick_allowed
+#: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_form_view
+msgid "Enable automatic picking once the shipment has been completed."
+msgstr ""
+"Autoriser automatiquement la préparation une fois tous les transferts en "
+"cours effectués"
 
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_picking_type__release_channel_can_allow_pick
@@ -77,14 +75,17 @@ msgid "Picking Type"
 msgstr "Type de picking"
 
 #. module: alc_stock_release_channel_pick_allowed
-#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__leave_planned_time
-msgid "Planned shipment leave time"
+#: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_disallow_pick
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_form_view
+msgid "Prevent automatic picking once the shipment has been started."
 msgstr ""
+"Interdire automatiquement la préparation après le début des transferts en "
+"cours"
 
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model,name:alc_stock_release_channel_pick_allowed.model_stock_release_channel
 msgid "Stock Release Channels"
-msgstr "Canaux de livraison des stocks"
+msgstr "Canaux de livraison"
 
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model,name:alc_stock_release_channel_pick_allowed.model_stock_picking

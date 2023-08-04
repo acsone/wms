@@ -10,14 +10,21 @@
       ref="stock_release_channel.stock_release_channel_form_view"
     />
         <field name="arch" type="xml">
-            <xpath expr="//notebook" position="inside">
-                <page string="Shipment loading Settings" name="loading">
-                    <group>
-                        <field name="leave_planned_time" widget="float_time" />
-                        <field name="leave_planned_datetime" />
-                        <field name="planned_start_loading_time" widget="float_time" />
-                    </group>
-                </page>
+            <xpath expr="//group[@name='group_loading']" position="before">
+                <p
+          colspan="2"
+          style="color: grey; font-style: italic;"
+        >Loading start = departure from the dock - loading time</p>
+            </xpath>
+            <xpath expr="//group[@name='group_loading_right']" position="inside">
+                <field name="planned_start_loading_time" widget="float_time" />
+            </xpath>
+            <xpath expr="//group[@name='group_loading_left']" position="inside">
+                <label for="loading_duration" />
+                <div>
+                    <field name="loading_duration" class="oe_inline" />
+                    <span>minutes</span>
+                </div>
             </xpath>
         </field>
     </record>

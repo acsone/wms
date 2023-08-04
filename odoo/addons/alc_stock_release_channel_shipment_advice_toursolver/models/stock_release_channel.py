@@ -2,9 +2,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import math
-from datetime import date, datetime, time, timedelta
-
-import pytz
 
 from odoo import api, fields
 
@@ -23,45 +20,37 @@ def float_to_time(hours_minutes: float) -> (int, int):
 
 
 class StockReleaseChannel(StockReleaseChannelBase):
-
-    leave_planned_time = fields.Float("Planned shipment leave time")
+    loading_duration = fields.Integer(
+        string="Loading time",
+        help="Loading time in minutes",
+        compute="_compute_loading_duration",
+        inverse="_inverse_loading_duration",
+    )
     planned_start_loading_time = fields.Float(
-        "Planned Start Loading Time", compute="_compute_planned_start_loading_time"
+        "Start loading at", compute="_compute_planned_start_loading_time"
     )
     leave_planned_datetime = fields.Datetime(
         string="Planned shipment leave date time",
         compute="_compute_leave_planned_datetime",
     )
 
-    @api.depends("leave_planned_time")
-    def _compute_leave_planned_datetime(self):
-        datetime_now = datetime.now()
-        user_tz = pytz.timezone(self.env.user.tz)
-        utc_tz = pytz.timezone("UTC")
-
-        for rec in self:
-            hours, minutes = float_to_time(rec.leave_planned_time)
-            leave_planned_time = time(hours, minutes)
-            leave_planned_datetime = datetime.combine(date.today(), leave_planned_time)
-            leave_planned_datetime = (
-                user_tz.localize(leave_planned_datetime)
-                .astimezone(utc_tz)
-                .replace(tzinfo=None)
-            )
-            if leave_planned_datetime <= datetime_now:
-                leave_planned_datetime += timedelta(days=1)
-            rec.leave_planned_datetime = leave_planned_datetime
-
-    @api.depends("leave_planned_time")
+    @api.depends("shipment_advice_departure_time", "loading_duration")
     def _compute_planned_start_loading_time(self):
-        task_model = self.env["toursolver.task"]
-        backend = task_model._get_default_toursolver_backend()
-        duration = backend.loading_duration
-        for record in self:
-            leave_planned_in_minutes = record.leave_planned_time * 60
-            if leave_planned_in_minutes and duration:
-                record.planned_start_loading_time = (
-                    leave_planned_in_minutes - float(duration)
+        for rec in self:
+            leave_planned_in_minutes = rec.shipment_advice_departure_time * 60
+            if leave_planned_in_minutes and rec.loading_duration:
+                rec.planned_start_loading_time = (
+                    leave_planned_in_minutes - float(rec.loading_duration)
                 ) / 60
             else:
-                record.planned_start_loading_time = record.leave_planned_time
+                rec.planned_start_loading_time = rec.shipment_advice_departure_time
+
+    def _compute_loading_duration(self):
+        task_model = self.env["toursolver.task"]
+        backend = task_model._get_default_toursolver_backend()
+        self.update({"loading_duration": backend.loading_duration})
+
+    def _inverse_loading_duration(self):
+        task_model = self.env["toursolver.task"]
+        backend = task_model._get_default_toursolver_backend()
+        backend.loading_duration = self.loading_duration

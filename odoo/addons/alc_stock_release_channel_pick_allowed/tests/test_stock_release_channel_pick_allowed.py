@@ -29,13 +29,15 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         cls.channel.pick_allowed = True
         cls.channel.auto_disallow_pick = True
         cls.channel.auto_allow_pick = True
-        cls.channel.leave_planned_time = 12
+        cls.channel.process_end_time = 14
+        cls.channel.shipment_advice_departure_time = 12
         cls.channel.auto_allow_pick_time_before_leave = 0.5
         cls.channel.state = "asleep"
+        cls.channel.process_end_time = 14
         cls.backend = cls.env.ref(
             "shipment_advice_planner_toursolver.toursolver_backend_default"
         )
-        cls.backend.loading_duration = 180
+        cls.channel.loading_duration = 180
 
     def test_00(self):
         """
@@ -114,18 +116,18 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         self.assertEqual(
             self.channel.auto_allow_pick_datetime, datetime(2023, 4, 2, 5, 30)
         )
-        self.channel.leave_planned_time = 14
+        self.channel.shipment_advice_departure_time = 14
         self.channel.auto_allow_pick_time_before_leave = 0
         self.assertEqual(
             self.channel.auto_allow_pick_datetime, datetime(2023, 4, 2, 9, 0)
         )
-        self.backend.loading_duration = 120
-        self.channel.leave_planned_time = 16
+        self.channel.loading_duration = 120
+        self.channel.shipment_advice_departure_time = 16
         self.assertEqual(
             self.channel.auto_allow_pick_datetime, datetime(2023, 4, 2, 12, 0)
         )
         self.env.user.tz = "UTC"
-        self.channel.leave_planned_time = 18
+        self.channel.shipment_advice_departure_time = 18
         self.assertEqual(
             self.channel.auto_allow_pick_datetime, datetime(2023, 4, 1, 16, 0)
         )
@@ -180,7 +182,7 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         )
         self.assertEqual(job.eta, datetime(2023, 4, 2, 6, 30))
         with trap_jobs() as trap:
-            self.channel.leave_planned_time = 14
+            self.channel.shipment_advice_departure_time = 14
             self.assertEqual(job.state, "done")
             self.assertEqual(
                 job.result,
@@ -192,7 +194,7 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
                 kwargs={"pick_allowed": True, "picking_type": None},
                 properties={"eta": datetime(2023, 4, 2, 8, 30)},
             )
-            self.assertEqual(self.channel.leave_planned_time, 14)
+            self.assertEqual(self.channel.shipment_advice_departure_time, 14)
 
     def test_08(self):
         """Action_sleep disallow pick automatically."""
