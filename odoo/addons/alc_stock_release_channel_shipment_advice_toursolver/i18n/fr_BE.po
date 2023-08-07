@@ -6,20 +6,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-07 01:13+0000\n"
-"PO-Revision-Date: 2023-04-07 01:13+0000\n"
+"POT-Creation-Date: 2023-08-04 15:52+0000\n"
+"PO-Revision-Date: 2023-08-04 15:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: alc_stock_release_channel_shipment_advice_toursolver
-#: model:ir.model.fields,field_description:alc_stock_release_channel_shipment_advice_toursolver.field_stock_release_channel__planned_start_loading_time
-msgid "Planned Start Loading Time"
-msgstr "Heure de début de chargement prévue"
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_shipment_advice_toursolver.stock_release_channel_form_view
+msgid "<span>minutes</span>"
+msgstr ""
+
+#. module: alc_stock_release_channel_shipment_advice_toursolver
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_shipment_advice_toursolver.stock_release_channel_form_view
+msgid "Loading start = departure from the dock - loading time"
+msgstr "Début du chargement = départ du quai - temps de chargement"
+
+#. module: alc_stock_release_channel_shipment_advice_toursolver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_shipment_advice_toursolver.field_stock_release_channel__loading_duration
+msgid "Loading time"
+msgstr "Temps de chargement"
+
+#. module: alc_stock_release_channel_shipment_advice_toursolver
+#: model:ir.model.fields,help:alc_stock_release_channel_shipment_advice_toursolver.field_stock_release_channel__loading_duration
+msgid "Loading time in minutes"
+msgstr "Temps de chargement en minutes"
 
 #. module: alc_stock_release_channel_shipment_advice_toursolver
 #: model:ir.model.fields,field_description:alc_stock_release_channel_shipment_advice_toursolver.field_stock_release_channel__leave_planned_datetime
@@ -27,16 +41,11 @@ msgid "Planned shipment leave date time"
 msgstr "Date prévue de départ de l'expédition"
 
 #. module: alc_stock_release_channel_shipment_advice_toursolver
-#: model:ir.model.fields,field_description:alc_stock_release_channel_shipment_advice_toursolver.field_stock_release_channel__leave_planned_time
-msgid "Planned shipment leave time"
-msgstr "Date prévue de départ de l'expédition"
-
-#. module: alc_stock_release_channel_shipment_advice_toursolver
-#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_shipment_advice_toursolver.stock_release_channel_form_view
-msgid "Shipment loading Settings"
-msgstr "Paramètres de chargement de l'expédition"
+#: model:ir.model.fields,field_description:alc_stock_release_channel_shipment_advice_toursolver.field_stock_release_channel__planned_start_loading_time
+msgid "Start loading at"
+msgstr "Heure de début de chargement prévue"
 
 #. module: alc_stock_release_channel_shipment_advice_toursolver
 #: model:ir.model,name:alc_stock_release_channel_shipment_advice_toursolver.model_stock_release_channel
 msgid "Stock Release Channels"
-msgstr "Canaux de livraison des stocks"
+msgstr "Canaux de livraison"

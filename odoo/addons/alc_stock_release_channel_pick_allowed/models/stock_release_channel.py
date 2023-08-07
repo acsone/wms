@@ -24,25 +24,23 @@ class StockReleaseChannel(StockReleaseChannelBase):
     pick_allowed_by_picking_type = fields.Json()
     auto_disallow_pick = fields.Boolean(
         string="Disallow picking automatically",
-        help="Disallow picking automatically after ongoing transfers are started",
+        help="Prevent automatic picking once the shipment has been started.",
     )
     auto_allow_pick = fields.Boolean(
         string="Allow picking automatically",
-        help="Allow picking automatically after all ongoing transfers are done",
+        help="Enable automatic picking once the shipment has been completed.",
     )
     auto_allow_pick_time_before_leave = fields.Float(
-        "Duration before shipment leave to allow picking automatically",
+        "Duration before shipment load to allow picking automatically",
         default=0.5,
-        inverse="_inverse_auto_allow_pick_datetime",
+        inverse="_inverse_auto_allow_pick_time_before_leave",
     )
-    leave_planned_time = fields.Float(inverse="_inverse_auto_allow_pick_datetime")
     auto_allow_pick_datetime = fields.Datetime(
         "Allow picking automatically at", compute="_compute_auto_allow_pick_datetime"
     )
 
     @api.depends(
         "planned_start_loading_time",
-        "leave_planned_datetime",
         "auto_allow_pick_time_before_leave",
     )
     def _compute_auto_allow_pick_datetime(self):
@@ -148,7 +146,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
             pick_allowed=pick_allowed, picking_type=picking_type
         )
 
-    def _inverse_auto_allow_pick_datetime(self):
+    def _inverse_auto_allow_pick_time_before_leave(self):
         """
         Auto_allow_pick_datetime changed, we look if there is planned jobs to set.
 
@@ -156,6 +154,12 @@ class StockReleaseChannel(StockReleaseChannelBase):
         """
         for rec in self:
             rec._requeue_set_pick_allowed_true_job()
+
+    def _inverse_shipment_advice_departure_time(self):
+        res = super()._inverse_shipment_advice_departure_time()
+        for rec in self:
+            rec._requeue_set_pick_allowed_true_job()
+        return res
 
     def _get_set_pick_allowed_true_pending_jobs(self):
         self.ensure_one()
