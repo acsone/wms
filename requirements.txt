@@ -36,7 +36,6 @@ gevent==22.10.2
 google-auth==2.21.0
 greenlet==2.0.2
 idna==3.4
-importlib-metadata==6.8.0
 isodate==0.6.1
 Jinja2==3.1.2
 jmespath==1.0.1
@@ -147,7 +146,7 @@ odoo-addon-report-csv @ git+https://github.com/acsone/reporting-engine.git@e1430
 odoo-addon-report-xlsx==16.0.1.0.2
 odoo-addon-report-xlsx-helper==16.0.1.0.0.3
 odoo-addon-report-xml==16.0.1.1.0.1
-odoo-addon-rest-log @ git+https://github.com/acsone/rest-framework.git@0e2ba3edd1c9d5dda12e4bcf8422016e5469c9e6#subdirectory=setup/rest_log
+odoo-addon-rest-log @ git+https://github.com/acsone/rest-framework.git@d7998a4d0c7330430ace9ae748fa42bc60346aa2#subdirectory=setup/rest_log
 odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@e3920cb6276556e98afed18a828d5a7c5103bf67#subdirectory=setup/sale_channel
 odoo-addon-sale-discount-display-amount==16.0.1.0.0.3
 odoo-addon-sale-exception==16.0.1.2.0.2
@@ -174,6 +173,7 @@ odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wm
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@88d0d2c8b7521374b458d211125f3258a1a8f83d#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@e93ba1225c3e6724b417857b96343d7ed48a2e99#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-mobile-base-auth-api-key @ git+https://github.com/acsone/wms.git@1de9f61eb2ad8757577b38bcf30c006fc0453ffc#subdirectory=setup/shopfloor_mobile_base_auth_api_key
+odoo-addon-shopfloor-rest-log @ git+https://github.com/acsone/wms.git@dbe32e3decb51672ed0a5656ba4fed037bca7f4f#subdirectory=setup/shopfloor_rest_log
 odoo-addon-shopfloor-workstation @ git+https://github.com/acsone/wms.git@758b160304e097300932c358c7dd8bc915db0c45#subdirectory=setup/shopfloor_workstation
 odoo-addon-shopfloor-workstation-mobile @ git+https://github.com/acsone/wms.git@ebe2544d4bd88b0b1d5d7c43f782902873d6fa2c#subdirectory=setup/shopfloor_workstation_mobile
 odoo-addon-stock-available==16.0.1.0.1.3
@@ -313,6 +313,5 @@ xlwt==1.3.0
 xmlsec==1.3.13
 yarl==1.9.2
 zeep==4.2.1
-zipp==3.16.0
 zope.event==5.0
 zope.interface==6.0

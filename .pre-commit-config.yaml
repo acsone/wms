@@ -136,7 +136,6 @@ exclude: |
   ^odoo/addons/alc_shopfloor_packing/|
   ^odoo/addons/alc_shopfloor_product_info/|
   ^odoo/addons/alc_shopfloor_product_print_label/|
-  ^odoo/addons/alc_shopfloor_rest_log/|
   ^odoo/addons/alc_shopfloor_stock_refill/|
   ^odoo/addons/alc_shopfloor_stock_reserve/|
   ^odoo/addons/alc_shopfloor_unassign_wave/|
