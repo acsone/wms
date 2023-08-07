@@ -14,8 +14,23 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_release_channel_shipment_advice_toursolver
-#: model:ir.model.fields,field_description:alc_stock_release_channel_shipment_advice_toursolver.field_stock_release_channel__planned_start_loading_time
-msgid "Planned Start Loading Time"
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_shipment_advice_toursolver.stock_release_channel_form_view
+msgid "<span>minutes</span>"
+msgstr ""
+
+#. module: alc_stock_release_channel_shipment_advice_toursolver
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_shipment_advice_toursolver.stock_release_channel_form_view
+msgid "Loading start = departure from the dock - loading time"
+msgstr ""
+
+#. module: alc_stock_release_channel_shipment_advice_toursolver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_shipment_advice_toursolver.field_stock_release_channel__loading_duration
+msgid "Loading time"
+msgstr ""
+
+#. module: alc_stock_release_channel_shipment_advice_toursolver
+#: model:ir.model.fields,help:alc_stock_release_channel_shipment_advice_toursolver.field_stock_release_channel__loading_duration
+msgid "Loading time in minutes"
 msgstr ""
 
 #. module: alc_stock_release_channel_shipment_advice_toursolver
@@ -24,13 +39,8 @@ msgid "Planned shipment leave date time"
 msgstr ""
 
 #. module: alc_stock_release_channel_shipment_advice_toursolver
-#: model:ir.model.fields,field_description:alc_stock_release_channel_shipment_advice_toursolver.field_stock_release_channel__leave_planned_time
-msgid "Planned shipment leave time"
-msgstr ""
-
-#. module: alc_stock_release_channel_shipment_advice_toursolver
-#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_shipment_advice_toursolver.stock_release_channel_form_view
-msgid "Shipment loading Settings"
+#: model:ir.model.fields,field_description:alc_stock_release_channel_shipment_advice_toursolver.field_stock_release_channel__planned_start_loading_time
+msgid "Start loading at"
 msgstr ""
 
 #. module: alc_stock_release_channel_shipment_advice_toursolver

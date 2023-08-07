@@ -19,13 +19,13 @@ msgid "Allow picking automatically"
 msgstr ""
 
 #. module: alc_stock_release_channel_pick_allowed
-#: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick
-msgid "Allow picking automatically after all ongoing transfers are done"
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick_datetime
+msgid "Allow picking automatically at"
 msgstr ""
 
 #. module: alc_stock_release_channel_pick_allowed
-#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick_datetime
-msgid "Allow picking automatically at"
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_form_view
+msgid "Automatic picking settings"
 msgstr ""
 
 #. module: alc_stock_release_channel_pick_allowed
@@ -34,13 +34,14 @@ msgid "Disallow picking automatically"
 msgstr ""
 
 #. module: alc_stock_release_channel_pick_allowed
-#: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_disallow_pick
-msgid "Disallow picking automatically after ongoing transfers are started"
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick_time_before_leave
+msgid "Duration before shipment load to allow picking automatically"
 msgstr ""
 
 #. module: alc_stock_release_channel_pick_allowed
-#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick_time_before_leave
-msgid "Duration before shipment leave to allow picking automatically"
+#: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_form_view
+msgid "Enable automatic picking once the shipment has been completed."
 msgstr ""
 
 #. module: alc_stock_release_channel_pick_allowed
@@ -66,8 +67,9 @@ msgid "Picking Type"
 msgstr ""
 
 #. module: alc_stock_release_channel_pick_allowed
-#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__leave_planned_time
-msgid "Planned shipment leave time"
+#: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_disallow_pick
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_form_view
+msgid "Prevent automatic picking once the shipment has been started."
 msgstr ""
 
 #. module: alc_stock_release_channel_pick_allowed
