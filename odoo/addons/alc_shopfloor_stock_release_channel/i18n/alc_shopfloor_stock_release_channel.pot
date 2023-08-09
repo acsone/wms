@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_shopfloor_stock_release_channel
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_shopfloor_stock_release_channel
+#: model:ir.model,name:alc_shopfloor_stock_release_channel.model_make_picking_batch
+msgid "Make a batch picking wizard"
+msgstr ""
+
+#. module: alc_shopfloor_stock_release_channel
+#: model:ir.model,name:alc_shopfloor_stock_release_channel.model_shopfloor_menu
+msgid "Menu displayed in the scanner application"
+msgstr ""
+
+#. module: alc_shopfloor_stock_release_channel
+#: model:ir.model.fields,help:alc_shopfloor_stock_release_channel.field_make_picking_batch__restrict_to_same_release_channel
+#: model:ir.model.fields,help:alc_shopfloor_stock_release_channel.field_shopfloor_menu__restrict_to_same_release_channel
+msgid ""
+"Only the pickings with the same release channel will be selected for this "
+"batch."
+msgstr ""
+
+#. module: alc_shopfloor_stock_release_channel
+#: model:ir.model.fields,field_description:alc_shopfloor_stock_release_channel.field_make_picking_batch__restrict_to_same_release_channel
+#: model:ir.model.fields,field_description:alc_shopfloor_stock_release_channel.field_shopfloor_menu__restrict_to_same_release_channel
+msgid "Restrict to the same release channel"
+msgstr ""
