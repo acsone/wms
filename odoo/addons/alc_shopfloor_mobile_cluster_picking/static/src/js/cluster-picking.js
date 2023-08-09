@@ -11,13 +11,12 @@ const ClusterPickingBase = process_registry.get(registry_key);
 // Keep the pointer to the orginal method
 let screen_title_method = ClusterPickingBase.component.methods.screen_title;
 
-ClusterPickingBase.component.methods.screen_title = function() {
+ClusterPickingBase.component.methods.screen_title = function () {
   let title = screen_title_method.bind(this)();
   if (_.isEmpty(this.current_batch()) || this.state_is("confirm_start")) return title;
-
-  const delivery_round_code = this?.current_picking()?.delivery_round?.code;
-  if (delivery_round_code) {
-    title = delivery_round_code + " > " + title;
+  const release_channel_code = this?.current_picking()?.release_channel?.code;
+  if (release_channel_code) {
+    title = release_channel_code + " > " + title;
   }
   return title;
 };

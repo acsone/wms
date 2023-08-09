@@ -1,4 +1,4 @@
 {
   "alc_shopfloor_mobile_cluster_picking.batch_picking_detail.device": "Device",
-  "alc_shopfloor_mobile_cluster_picking.batch_picking_detail.delivery_round": "Delivery Round(s)"
+  "alc_shopfloor_mobile_cluster_picking.batch_picking_detail.release_channels": "Release channel(s)"
 }

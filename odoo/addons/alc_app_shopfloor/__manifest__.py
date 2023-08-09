@@ -10,6 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        # OCA
         "shopfloor",
         "shopfloor_workstation",
         "shopfloor_workstation_mobile",
@@ -17,7 +18,10 @@
         "shopfloor_mobile_base_auth_api_key",
         "shopfloor_batch_automatic_creation",
         "shopfloor_rest_log",
+        # ALC
         "alc_shopfloor_stock_release_channel",
+        "alc_shopfloor_mobile_cluster_picking",
+        "alc_shopfloor_mobile_cluster_picking",
     ],
     "data": [],
     "demo": [],

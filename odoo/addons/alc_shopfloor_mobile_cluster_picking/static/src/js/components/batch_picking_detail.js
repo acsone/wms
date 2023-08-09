@@ -3,23 +3,21 @@
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
  */
 
-/* eslint-disable strict */
 // Extend batch-picking-detail
 const batch_picking_detail_component = Vue.component("batch-picking-detail");
 const methods = batch_picking_detail_component.extendOptions.methods;
 const detail_fields_method = methods.detail_fields;
-const screen_title_method = methods.screen_title;
-methods.detail_fields = function() {
+methods.detail_fields = function () {
   const result = detail_fields_method.bind(this)();
   const new_result = [
     ...result,
     {
-      path: "delivery_rounds",
+      path: "release_channels",
       label: this.$t(
-        "alc_shopfloor_mobile_cluster_picking.batch_picking_detail.delivery_rounds"
+        "alc_shopfloor_mobile_cluster_picking.batch_picking_detail.release_channels"
       ),
-      renderer: function(rec, field) {
-        return rec.delivery_rounds.map(d => d.name).join(" | ");
+      renderer: function (rec, field) {
+        return rec.release_channels.map((d) => d.name).join(" | ");
       },
     },
     {
