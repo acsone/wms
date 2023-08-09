@@ -11,9 +11,9 @@ Vue.component("picking-detail", {
     },
     render_infos(record, field) {
       return [
-        record["name"] + " -",
-        " Op: " + record["operation_count"] + ", ",
-        "Weight: " + Math.round(record["weight"] * 100) / 100 + " kg",
+        record.name + " -",
+        " Op: " + record.move_line_count + ", ",
+        "Weight: " + Math.round(record.weight * 100) / 100 + " kg",
       ].join(" ");
     },
   },
