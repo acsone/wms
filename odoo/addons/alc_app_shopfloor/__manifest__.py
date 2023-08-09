@@ -17,6 +17,7 @@
         "shopfloor_mobile_base_auth_api_key",
         "shopfloor_batch_automatic_creation",
         "shopfloor_rest_log",
+        "alc_shopfloor_stock_release_channel",
     ],
     "data": [],
     "demo": [],
