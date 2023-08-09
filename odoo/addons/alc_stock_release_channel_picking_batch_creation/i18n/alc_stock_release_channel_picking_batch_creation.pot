@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_release_channel_picking_batch_creation
+#: model:ir.model,name:alc_stock_release_channel_picking_batch_creation.model_stock_picking_batch
+msgid "Batch Transfer"
+msgstr ""
+
+#. module: alc_stock_release_channel_picking_batch_creation
 #: model:ir.model,name:alc_stock_release_channel_picking_batch_creation.model_make_picking_batch
 msgid "Make a batch picking wizard"
 msgstr ""
@@ -21,4 +26,9 @@ msgstr ""
 #. module: alc_stock_release_channel_picking_batch_creation
 #: model:ir.model.fields,field_description:alc_stock_release_channel_picking_batch_creation.field_make_picking_batch__release_channel_id
 msgid "Release Channel"
+msgstr ""
+
+#. module: alc_stock_release_channel_picking_batch_creation
+#: model:ir.model.fields,field_description:alc_stock_release_channel_picking_batch_creation.field_stock_picking_batch__release_channel_ids
+msgid "Release Channel(s)"
 msgstr ""
