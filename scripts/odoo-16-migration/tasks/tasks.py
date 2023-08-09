@@ -602,6 +602,7 @@ def set_modules_to_remove():
         "alc_shopfloor_cluster_picking",  # replaced by shopfloor_batch_automatic_creation
         "alc_shopfloor_rest_log",  # replaced by shopfloor_rest_log
         "alc_shopfloor_delivery_rounds",  # replaced by alc_shopfloor_stock_release_channel
+        "alc_shopfloor_packing",  # replaced by shopfloor_packing
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     # with cursor(DB_16_POSTMIG) as cr:
