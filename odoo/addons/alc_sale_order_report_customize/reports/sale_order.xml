@@ -2,7 +2,7 @@
 <odoo>
   <template
     id="report_saleorder_specific_document"
-    inherit_id="alc_pricelist_discount.report_saleorder_specific_document"
+    inherit_id="sale.report_saleorder_document"
   >
     <!--
             Change title
