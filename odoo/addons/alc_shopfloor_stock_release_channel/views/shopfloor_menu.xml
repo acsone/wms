@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="shopfloor_menu_form_view">
+        <field name="model">shopfloor.menu</field>
+        <field
+      name="inherit_id"
+      ref="shopfloor_batch_automatic_creation.shopfloor_menu_form_view"
+    />
+        <field name="arch" type="xml">
+            <field name="batch_create" position="after">
+                  <field
+          name="restrict_to_same_release_channel"
+          attrs="{'invisible': [('batch_create', '=', False)]}"
+        />
+             </field>
+        </field>
+    </record>
+
+</odoo>

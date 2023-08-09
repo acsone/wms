@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -10,10 +9,12 @@ class DataAction(Component):
 
     @property
     def _picking_parser(self):
-        parser = super(DataAction, self)._picking_parser
-        parser.append(("delivery_round_id:delivery_round", self.delivery_round_parser))
+        parser = super()._picking_parser
+        parser.append(
+            ("release_channel_id:release_channel", self.release_channel_parser)
+        )
         return parser
 
     @property
-    def delivery_round_parser(self):
-        return ["template_code:code", "display_name:name"]
+    def release_channel_parser(self):
+        return ["channel_code:code", "display_name:name"]

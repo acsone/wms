@@ -18,7 +18,6 @@ class MakePickingBatch(MakePickingBatchBase):
     def _get_picking_domain_common(self):
         domain = super()._get_picking_domain_common()
         if not self.release_channel_id:
-            domain.extend([("release_channel_id", "=", False)])
             return domain
         picking_type_ids_pick_allowed = (
             self.release_channel_id._get_all_picking_type_ids_pick_allowed()
