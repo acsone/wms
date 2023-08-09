@@ -1,4 +1,4 @@
 {
   "alc_shopfloor_mobile_cluster_picking.batch_picking_detail.device": "Matériel à utiliser",
-  "alc_shopfloor_mobile_cluster_picking.batch_picking_detail.delivery_rounds": "Tournée(s)"
+  "alc_shopfloor_mobile_cluster_picking.batch_picking_detail.release_channels": "Canaux de livraison"
 }

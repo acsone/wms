@@ -14,5 +14,5 @@
         "alc_stock_release_channel_user",
         "alc_stock_release_channel_pick_allowed",
     ],
-    "data": ["wizards/make_picking_batch.xml"],
+    "data": ["views/stock_picking_batch.xml", "wizards/make_picking_batch.xml"],
 }
