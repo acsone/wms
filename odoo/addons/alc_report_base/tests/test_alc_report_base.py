@@ -12,7 +12,9 @@ class TestAlcReportBase(TransactionCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
+        external_layout = cls.env.ref("alc_report_base.external_layout_alcyon")
         cls.company = cls.env.user.company_id
+        cls.company.external_report_layout_id = external_layout
         cls.company.street = "My street"
         cls.company.zip = "123456789"
         cls.company.city = "My city"
