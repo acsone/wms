@@ -14,26 +14,26 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_report_base
-#: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+#: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
 msgid ""
 "-\n"
 "                    <span>Fax:</span>"
 msgstr ""
 
 #. module: alc_report_base
-#: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+#: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
 msgid ""
 "<br/>\n"
 "                    <span>Email:</span>"
 msgstr ""
 
 #. module: alc_report_base
-#: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+#: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
 msgid "<span>RPM Liège division Huy - TVA</span>"
 msgstr ""
 
 #. module: alc_report_base
-#: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+#: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
 msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
 msgstr ""
 
@@ -50,14 +50,14 @@ msgid "job queued report"
 msgstr ""
 
 #. module: alc_report_base
-#: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+#: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
 msgid ""
 "|\n"
 "                    <span>Fax:</span>"
 msgstr ""
 
 #. module: alc_report_base
-#: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+#: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
 msgid ""
 "|\n"
 "                    <span>For commands;</span>\n"
@@ -65,7 +65,7 @@ msgid ""
 msgstr ""
 
 #. module: alc_report_base
-#: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+#: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
 msgid ""
 "|\n"
 "                    <span>Phone:</span>"
