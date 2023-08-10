@@ -22,6 +22,7 @@
         "alc_shopfloor_stock_release_channel",
         "alc_shopfloor_mobile_cluster_picking",
         "alc_shopfloor_mobile_cluster_picking",
+        "alc_shopfloor_mobile_cluster_picking_informations",
     ],
     "data": [],
     "demo": [],

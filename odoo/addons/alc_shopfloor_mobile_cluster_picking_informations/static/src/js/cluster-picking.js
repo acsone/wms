@@ -8,12 +8,12 @@ import {process_registry} from "/shopfloor_mobile_base/static/wms/src/services/p
 const registry_key = "cluster_picking";
 const ClusterPickingBase = process_registry.get(registry_key);
 
-let template = ClusterPickingBase.component.template;
+const template = ClusterPickingBase.component.template;
 ClusterPickingBase.component.template = template.replace(
   '<Screen :screen_info="screen_info">',
   `<Screen :screen_info="screen_info">
    <picking-detail
-   v-show="state_in(['start_operation', 'scan_destination', 'change_pack_lot', 'stock_issue'])"
+   v-show="state_in(['start_line', 'scan_destination', 'change_pack_lot', 'stock_issue'])"
    :record="state.data.picking"
    />
 `
