@@ -6,12 +6,8 @@ from openupgradelib import openupgrade
 def _migrate_data(env):
     data = [
         (
-            "specific_print.alcyon_header",
-            "alc_report_base.alcyon_header",
-        ),
-        (
-            "specific_print.page_number_footer",
-            "alc_report_base.page_number_footer",
+            "specific_account.tax_group_apb",  # used in reports only
+            "alc_accounting_data.tax_group_apb",
         ),
     ]
     openupgrade.rename_xmlids(env.cr, data, allow_merge=True)

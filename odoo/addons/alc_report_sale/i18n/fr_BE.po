@@ -1,0 +1,183 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_report_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-09 12:08+0000\n"
+"PO-Revision-Date: 2023-08-09 12:08+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
+msgid "<span> n° </span>"
+msgstr "<span> n° </span>"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
+msgid "<span>Consignment # </span>"
+msgstr "<span>Consignation n° </span>"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
+msgid "<span>No associated pharmacist</span>"
+msgstr "<span>Aucun pharmacien associé</span>"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
+msgid "<span>Order # </span>"
+msgstr "<span>Commande n° </span>"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
+msgid "<strong>Customer:</strong>"
+msgstr "<strong>Client:</strong>"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
+msgid "<strong>Date Ordered:</strong>"
+msgstr "<strong>Date de commande:</strong>"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
+msgid "<strong>Discount subtotal</strong>"
+msgstr "<strong>Montant de la remise</strong>"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
+msgid "<strong>Shipping address:</strong>"
+msgstr "<strong>Adresse d'envoi:</strong>"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
+msgid "<strong>Subtotal without discount</strong>"
+msgstr "<strong>Sous-total sans la remise</strong>"
+
+#. module: alc_report_sale
+#: model:ir.model.fields,field_description:alc_report_sale.field_sale_order_line__amount_contribution
+msgid "Amount Contribution"
+msgstr "Montant des contributions"
+
+#. module: alc_report_sale
+#: model:ir.model.fields,field_description:alc_report_sale.field_sale_order_line__apb_ids
+msgid "Apb"
+msgstr "Apb"
+
+#. module: alc_report_sale
+#. odoo-python
+#: code:addons/alc_report_sale/models/sale_order.py:0
+#, python-format
+msgid ""
+"Cannot send pharmacist email\n"
+"%(pharmacist)s partner must have an email address."
+msgstr ""
+"Imposible d'envoyer l'email au pharmacien\n"
+"le partenaire %(pharmacist)s doit avoir une adresse email."
+
+#. module: alc_report_sale
+#. odoo-python
+#: code:addons/alc_report_sale/models/sale_order.py:0
+#, python-format
+msgid ""
+"Cannot send pharmacist email\n"
+"No pharmacist affiliated to the client."
+msgstr ""
+"Imposible d'envoyer l'email au pharmacien\n"
+"Aucun pharmacien associé au client."
+
+
+#. module: alc_report_sale
+#: model:ir.model.fields,field_description:alc_report_sale.field_sale_order_line__contribution_ids
+msgid "Contribution"
+msgstr "Contribution"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
+msgid "DON'T FORGET TO BRING BACK COOLPACK IF ANY"
+msgstr ""
+"Merci de SYSTÉMATIQUEMENT LAISSER LES BLOCS RÉFRIGÉRANTS ALCYON DANS LA "
+"GLACIÈRE afin que le chauffeur fasse l'échange!"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
+msgid "Depot number:"
+msgstr "Numéro de dépot:"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
+msgid "Description"
+msgstr "Description"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
+msgid "Invoicing address:"
+msgstr "Adresse d'envoi:"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
+msgid "Invoicing and shipping address:"
+msgstr "Adresse de facturation et d'envoi:"
+
+#. module: alc_report_sale
+#: model:ir.model.fields,field_description:alc_report_sale.field_sale_order_line__only_tax_ids
+msgid "Only Tax"
+msgstr ""
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
+msgid "Order #"
+msgstr "Commande n°"
+
+#. module: alc_report_sale
+#: model:ir.actions.report,name:alc_report_sale.report_sale_order_pharmacist_supplier
+msgid "Pharmacist fax content"
+msgstr "Contenu du fax pharmacien"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
+msgid "Quotation #"
+msgstr "Devis n°"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
+msgid "Ref"
+msgstr ""
+
+#. module: alc_report_sale
+#: model:ir.model,name:alc_report_sale.model_sale_order
+msgid "Sales Order"
+msgstr "Commande client"
+
+#. module: alc_report_sale
+#: model:ir.model,name:alc_report_sale.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de bons de commande"
+
+#. module: alc_report_sale
+#. odoo-python
+#: code:addons/alc_report_sale/models/sale_order.py:0
+#, python-format
+msgid ""
+"The Quotation can not be printed the client %(partner_name)s "
+"(%(partner_id)s) has no reference assigned."
+msgstr ""
+"Le devis ne peut pas être imprimé car le client %(partner_name)s "
+"(%(partner_id)s) n'a pas de référence."
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
+msgid "VAT:"
+msgstr "TVA:"

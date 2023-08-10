@@ -24,8 +24,6 @@
     ],
     "website": "http://www.camptocamp.com",
     "data": [
-        # Report
-        "report/sale_order.xml",
         # Views
         "views/account_move.xml",
         "views/sale_order.xml",

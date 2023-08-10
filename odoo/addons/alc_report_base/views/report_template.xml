@@ -1,19 +1,17 @@
 <odoo>
-  <template id="alc_report_base.alcyon_header">
+  <template id="external_layout_alcyon">
     <div class="header">
-      <div style="position: fixed; left: 0; top: 420px;">_</div>
-      <div style="position: fixed; right: 0; top: 420px;">_</div>
       <div class="logo">
         <img
           t-if="company.logo"
-          t-att-src="'data:image/png;base64,%s' % company.logo"
+          t-att-src="image_data_uri(company.logo)"
           style="max-height: 70px;"
         />
       </div>
     </div>
-  </template>
-  <!-- footer with only page numbering -->
-  <template id="alc_report_base.page_number_footer">
+    <div class="article">
+        <t t-out="0" />
+    </div>
     <div class="footer">
       <div style="padding-top: 5mm;">
         <div style="border-top: 1px solid black;">
@@ -50,27 +48,5 @@
       </div>
     </div>
   </template>
-  <template id="web.external_layout">
-    <!-- Multicompany -->
-    <t t-if="not o and doc">
-      <t t-set="o" t-value="doc" />
-    </t>
-    <t t-if="o and 'company_id' in o">
-      <t t-set="company" t-value="o.company_id" />
-    </t>
-    <t t-if="not o or not 'company_id' in o">
-      <t t-set="company" t-value="res_company" />
-    </t>
-    <!--Avoid problem with xpath in other module
-            We want to get rid of them. Given that we already did it (and) the
-            xmlid of this template, we need to put them back as 'invisible'
-        -->
-    <!--Tag invisible will call the original header. It's why I prefer to use a t-if tag-->
-    <t t-call="web.external_layout_header" t-if="1 == 0" />
-    <t t-call="alc_report_base.alcyon_header" />
-    <t t-raw="0" />
-    <t t-call="alc_report_base.page_number_footer" />
-    <!--Avoid problem with xpath in other module-->
-    <t t-call="web.external_layout_footer" t-if="1 == 0" />
-  </template>
+
 </odoo>
