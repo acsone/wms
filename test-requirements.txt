@@ -1,2 +1,14 @@
 vcrpy-unittest
 odoo_test_helper
+
+# OCA/wms
+odoo-addon-shopfloor-mobile @ git+https://github.com/OCA/wms.git@refs/pull/698/head#subdirectory=setup/shopfloor_mobile
+
+
+# OCA/product-attribute
+odoo-addon-product-packaging-level @ git+https://github.com/OCA/product-attribute.git@refs/pull/1215/head#subdirectory=setup/product_packaging_level
+
+
+# stock-logistics-tracking
+odoo-addon-internal-stock-quant-package @ git+https://github.com/OCA/stock-logistics-tracking.git@refs/pull/34/head#subdirectory=setup/internal_stock_quant_package
+
