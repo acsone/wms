@@ -127,53 +127,24 @@ class SaleOrder(Order, ReportAsync):
                 )
         return pharmacist
 
-    def action_send_pharmacist_email(self, pharmacist=None):
-        """This action is not available on front.
-
-        Based on `action_quotation_send`
-        """
+    def force_pharmacist_email_send(self, pharmacist):
         template_xid = "alc_report_sale.email_template_pharmacist_supplier_order"
         mail_template = self.env.ref(template_xid)
         if not pharmacist:
             pharmacist = self._get_pharmacist()
-        ctx = {
-            "default_email_to": pharmacist and pharmacist.email,
-            "default_partner_ids": [],
-            "default_model": "sale.order",
-            "default_res_id": self.ids[0],
-            "default_use_template": bool(mail_template),
-            "default_template_id": mail_template.id,
-            "default_composition_mode": "comment",
-            "mark_so_as_sent": False,
-            "custom_layout": ("alc_report_sale.mail_template_pharamcist_notification"),
-        }
-        try:
-            wiz_xid = "mail.email_compose_message_wizard_form"
-            compose_form_id = self.env.ref(wiz_xid)
-        except ValueError:
-            compose_form_id = False
-        return {
-            "type": "ir.actions.act_window",
-            "view_type": "form",
-            "view_mode": "form",
-            "res_model": "mail.compose.message",
-            "views": [(compose_form_id, "form")],
-            "view_id": compose_form_id,
-            "target": "new",
-            "context": ctx,
-        }
-
-    def force_pharmacist_email_send(self, pharmacist):
         for order in self:
-            email_act = order.action_send_pharmacist_email(pharmacist)
-            if email_act and email_act.get("context"):
-                email_ctx = email_act["context"]
-                email_ctx.update(default_email_from=order.company_id.email)
-
-                # FIXME separate chatter and email sending
-                order.with_context(**email_ctx).message_post_with_template(
-                    email_ctx.get("default_template_id")
-                )
+            mail_template.lang = pharmacist.lang
+            mail_template.send_mail(
+                res_id=order.id,
+                force_send=True,
+                email_layout_xmlid="mail.mail_notification_layout",
+                email_values={"email_to": pharmacist.email},
+            )
+            mail_template.lang = order.partner_id.lang
+            order.with_context(mark_so_as_sent=False).message_post_with_template(
+                template_id=mail_template.id,
+                composition_mode="comment",
+            )
         return True
 
     def create_pharmacist_reports(self):
