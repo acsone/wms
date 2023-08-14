@@ -127,5 +127,5 @@ msgstr "Fichier au format xlsx"
 
 #. module: alc_product_price_import
 #: model:ir.actions.report,name:alc_product_price_import.report_product_price_import_xlsx
-msgid "product_price_import_xlsx"
-msgstr ""
+msgid "Product prices export/import XLSX"
+msgstr "Prix des articles export/import XLSX"
