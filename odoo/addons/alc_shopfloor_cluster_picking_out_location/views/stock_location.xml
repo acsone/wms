@@ -4,17 +4,14 @@
 <odoo>
 
     <record model="ir.ui.view" id="stock_location_form_view">
-        <field
-      name="name"
-    >stock.location.form (in alc_shopfloor_cluster_picking_out_location)</field>
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_form" />
         <field name="arch" type="xml">
             <field name="usage" position="after">
-                <field name="keep_track_of_delivery_round" />
+                <field name="keep_track_of_release_channel" />
                 <field
-          name="delivery_round_id"
-          attrs="{'invisible': [('keep_track_of_delivery_round', '=', False)]}"
+          name="release_channel_id"
+          attrs="{'invisible': [('keep_track_of_release_channel', '=', False)]}"
         />
             </field>
         </field>
