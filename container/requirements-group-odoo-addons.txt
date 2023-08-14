@@ -111,7 +111,7 @@ odoo-addon-server-action-mass-edit==16.0.2.0.1.5
 odoo-addon-server-environment==16.0.1.0.2.2
 odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
 odoo-addon-session-db==16.0.1.0.4
-odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@a9d4c4e4917e4caae3c85f96b9813d4fdc6f6806#subdirectory=setup/shopfloor
+odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@56e9ad5b804e0a1fdb02fae348b6ee1fd298aa5b#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@22e70153a9845d9c9316170728ed0a435b39ffee#subdirectory=setup/shopfloor_base
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wms.git@e16369900d9be166e308267e3cbfeddd78b13663#subdirectory=setup/shopfloor_batch_automatic_creation
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@88d0d2c8b7521374b458d211125f3258a1a8f83d#subdirectory=setup/shopfloor_mobile
