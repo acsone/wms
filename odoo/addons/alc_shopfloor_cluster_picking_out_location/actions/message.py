@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 Camptocamp SA (http://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import _
@@ -13,7 +12,7 @@ class MessageAction(Component):
         return {
             "message_type": "error",
             "body": _(
-                "This trolley is already blocked by another delivery round, select a new one."
+                "This trolley is already blocked by another release channel, select a new one."
             ),
         }
 
@@ -27,7 +26,7 @@ class MessageAction(Component):
         return {
             "message_type": "error",
             "body": _(
-                "Package not in the picking wave. Please scan a correct package."
+                "Package not in the picking batch. Please scan a correct package."
             ),
         }
 

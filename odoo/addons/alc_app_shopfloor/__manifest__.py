@@ -25,6 +25,7 @@
         "alc_shopfloor_mobile_cluster_picking",
         "alc_shopfloor_mobile_cluster_picking",
         "alc_shopfloor_mobile_cluster_picking_informations",
+        "alc_shopfloor_cluster_picking_out_location",
     ],
     "data": [],
     "demo": [],

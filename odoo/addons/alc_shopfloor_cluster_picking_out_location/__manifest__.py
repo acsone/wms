@@ -5,11 +5,10 @@
     "name": "Alc Shopfloor Cluster Picking Out Location",
     "description": """
         backoffice for unloading cluster picking med location by location in the out""",
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["alc_shopfloor", "delivery_rounds", "stock"],
+    "depends": ["shopfloor", "alc_stock_release_channel_deliver"],
     "data": ["views/stock_location.xml", "views/shopfloor_menu.xml"],
     "demo": [],
-    "installable": False,
 }

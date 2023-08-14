@@ -1,11 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import fields
+
+from odoo.addons.shopfloor.models.shopfloor_menu import (
+    ShopfloorMenu as ShopfloorMenuBase,
+)
 
 
-class ShopfloorMenu(models.Model):
+class ShopfloorMenu(ShopfloorMenuBase):
 
     _inherit = "shopfloor.menu"
     unload_on_specific_location = fields.Boolean(

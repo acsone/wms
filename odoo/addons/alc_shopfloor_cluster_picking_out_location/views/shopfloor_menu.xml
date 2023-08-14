@@ -3,14 +3,15 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record model="ir.ui.view" id="shopfloor_menu_form_view">
-        <field
-      name="name"
-    >shopfloor.menu.form (in alc_shopfloor_cluster_picking_out_location)</field>
         <field name="model">shopfloor.menu</field>
-        <field name="inherit_id" ref="alc_shopfloor.shopfloor_menu_form_view" />
+        <field name="inherit_id" ref="shopfloor.shopfloor_menu_form_view" />
         <field name="arch" type="xml">
-            <group name="keep_existing_reservations" position="after">
-                <group name="unload_on_specific_location">
+            <group name="options" position="after">
+                <group
+          name="unload_on_specific_location"
+          string="Unload"
+          attrs="{'invisible': [('scenario', '!=', 'cluster_picking')]}"
+        >
                     <field name="unload_on_specific_location" />
                 </group>
             </group>
