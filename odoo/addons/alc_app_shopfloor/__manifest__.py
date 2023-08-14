@@ -18,6 +18,8 @@
         "shopfloor_mobile_base_auth_api_key",
         "shopfloor_batch_automatic_creation",
         "shopfloor_rest_log",
+        "shopfloor_packing",
+        "shopfloor_mobile_packing",
         # ALC
         "alc_shopfloor_stock_release_channel",
         "alc_shopfloor_mobile_cluster_picking",

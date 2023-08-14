@@ -64,6 +64,8 @@ odoo-addon-shopfloor-workstation @ git+https://github.com/OCA/wms.git@refs/pull/
 odoo-addon-shopfloor-mobile-base-auth-api-key @ git+https://github.com/OCA/wms.git@refs/pull/701/head#subdirectory=setup/shopfloor_mobile_base_auth_api_key
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/OCA/wms.git@refs/pull/703/head#subdirectory=setup/shopfloor_batch_automatic_creation
 odoo-addon-shopfloor-rest-log @ git+https://github.com/OCA/wms.git@refs/pull/713/head#subdirectory=setup/shopfloor_rest_log
+odoo-addon-shopfloor-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/head#subdirectory=setup/shopfloor_packing
+odoo-addon-shopfloor-mobile-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/head#subdirectory=setup/shopfloor_mobile_packing
 
 # product-attribute
 # https://github.com/OCA/product-attribute/pull/1192
