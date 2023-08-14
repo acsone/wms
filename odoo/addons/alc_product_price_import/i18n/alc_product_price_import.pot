@@ -79,6 +79,11 @@ msgid "Product prices"
 msgstr ""
 
 #. module: alc_product_price_import
+#: model:ir.actions.report,name:alc_product_price_import.report_product_price_import_xlsx
+msgid "Product prices export/import XLSX"
+msgstr ""
+
+#. module: alc_product_price_import
 #: model:ir.model,name:alc_product_price_import.model_alc_product_price_importer
 msgid "Product prices mass import wizard"
 msgstr ""
@@ -121,9 +126,4 @@ msgstr ""
 #. module: alc_product_price_import
 #: model:ir.model.fields,field_description:alc_product_price_import.field_alc_product_price_importer__document
 msgid "XLSX file"
-msgstr ""
-
-#. module: alc_product_price_import
-#: model:ir.actions.report,name:alc_product_price_import.report_product_price_import_xlsx
-msgid "product_price_import_xlsx"
 msgstr ""
