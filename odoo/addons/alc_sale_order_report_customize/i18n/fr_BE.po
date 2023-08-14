@@ -18,8 +18,8 @@ msgstr ""
 
 #. module: alc_sale_order_report_customize
 #: model_terms:ir.ui.view,arch_db:alc_sale_order_report_customize.report_saleorder_specific_document
-msgid "Confirmed order #"
-msgstr "Commande confirmée #"
+msgid "BO"
+msgstr ""
 
 #. module: alc_sale_order_report_customize
 #: model_terms:ir.ui.view,arch_db:alc_sale_order_report_customize.report_saleorder_specific_document
@@ -36,10 +36,11 @@ msgstr "Réference d'article"
 msgid "Promotion"
 msgstr ""
 
-#. module: alc_sale_order_report_customize
-#: model_terms:ir.ui.view,arch_db:alc_sale_order_report_customize.report_saleorder_specific_document
-msgid "Quantity unavailable"
-msgstr "Quantité indisponible"
+#~ msgid "Confirmed order #"
+#~ msgstr "Commande confirmée #"
+
+#~ msgid "Quantity unavailable"
+#~ msgstr "Quantité indisponible"
 
 #~ msgid "Disc.(%)"
 #~ msgstr "Rem.(%)"
