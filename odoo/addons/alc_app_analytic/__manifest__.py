@@ -14,5 +14,6 @@
         "analytic",
         "product_analytic",
         "product_analytic_purchase",
+        "account_analytic_tag",
     ],
 }
