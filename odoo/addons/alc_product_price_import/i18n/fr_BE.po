@@ -81,6 +81,11 @@ msgid "Product prices"
 msgstr "Prix des articles"
 
 #. module: alc_product_price_import
+#: model:ir.actions.report,name:alc_product_price_import.report_product_price_import_xlsx
+msgid "Product prices export/import XLSX"
+msgstr "Prix des articles export/import XLSX"
+
+#. module: alc_product_price_import
 #: model:ir.model,name:alc_product_price_import.model_alc_product_price_importer
 msgid "Product prices mass import wizard"
 msgstr "Import en masse des prix des articles"
@@ -125,12 +130,7 @@ msgstr "Articles mis à jour"
 msgid "XLSX file"
 msgstr "Fichier au format xlsx"
 
-#. module: alc_product_price_import
-#: model:ir.actions.report,name:alc_product_price_import.report_product_price_import_xlsx
 #, fuzzy
-#| msgid "Product Price Importer"
-msgid "product_price_import_xlsx"
-msgstr "Import des prix des articles"
-
-#~ msgid "Product prices export/import XLSX"
-#~ msgstr "Prix des articles export/import XLSX"
+#~| msgid "Product Price Importer"
+#~ msgid "product_price_import_xlsx"
+#~ msgstr "Import des prix des articles"
