@@ -151,7 +151,6 @@ omit =
     odoo/addons/alc_shopfloor_product_print_label/*
     odoo/addons/alc_shopfloor_stock_refill/*
     odoo/addons/alc_shopfloor_stock_reserve/*
-    odoo/addons/alc_shopfloor_unassign_wave/*
     odoo/addons/alc_shopfloor_version/*
     odoo/addons/alc_shopfloor_workstation/*
     odoo/addons/alc_shopinvader_category/*
