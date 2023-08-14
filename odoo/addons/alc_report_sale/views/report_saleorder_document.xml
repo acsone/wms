@@ -3,7 +3,7 @@
   <template
     id="report_saleorder_document_inherit"
     priority="100"
-    inherit_id="sale.report_saleorder_document"
+    inherit_id="sale_triple_discount.report_saleorder_document_triple_discount"
   >
     <xpath expr="//h2" position="before">
             <div class="row">
@@ -105,6 +105,11 @@
           </div>
         </div>
     </xpath>
+
+    <xpath expr="//th[@t-if='display_discount2']" position="replace" />
+    <xpath expr="//th[@t-if='display_discount3']" position="replace" />
+    <xpath expr="//td[@t-if='display_discount2']" position="replace" />
+    <xpath expr="//td[@t-if='display_discount3']" position="replace" />
   </template>
   <template id="report_saleorder_document_pharmacist_supplier">
     <t t-call="web.external_layout">
