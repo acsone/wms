@@ -108,21 +108,6 @@ msgid "Finance"
 msgstr ""
 
 #. module: alc_product_category_data
-#: model:product.category,warning_info:alc_product_category_data.product_categ_humain
-msgid ""
-"Following human medicines ordered under your responsibility.This command is "
-"transferred on your behalf to the pharmacy which will ensure the delivery of "
-"medicines. The medicines will be delivered to you by your care upon receipt "
-"of these from the pharmacy. For any problems related to this command please "
-"contact the pharmacist."
-msgstr ""
-"Humane geneesmiddel cascade ii onder uw verantwoordelijkheid. Deze "
-"bestelling wordt doorgestuurd in Uw naam naar de Apotheek, die de levering "
-"van de geneesmiddelen zal afhandelen. Zodra we de producten ontvangen, "
-"zullen ze door Alcyon geleverd worden. In het geval dat er probleem is met "
-"uw bestelling Gelieve rechtstreeks de Apotheek te contacteren : 02/672 82 49"
-
-#. module: alc_product_category_data
 #: model:product.category,name:alc_product_category_data.product_categ_finance_frais
 msgid "Frais accessoires s/achats"
 msgstr ""
@@ -151,13 +136,6 @@ msgstr ""
 #: model:product.category,name:alc_product_category_data.product_categ_mat_img_echo
 msgid "Imagerie Médicale - échographie"
 msgstr ""
-
-#. module: alc_product_category_data
-#: model:product.category,warning_info:alc_product_category_data.product_categ_importation
-msgid "Imported medicines under your entire responsibility"
-msgstr ""
-"Geneesmiddelen geïmporteerd in cascade ii onder uw volledige "
-"verantwoordelijkheid."
 
 #. module: alc_product_category_data
 #: model:product.category,name:alc_product_category_data.product_categ_mat_instrumentation
@@ -328,3 +306,22 @@ msgstr ""
 #: model:product.category,name:alc_product_category_data.product_categ_pis
 msgid "medicaments du pis"
 msgstr ""
+
+#~ msgid ""
+#~ "Following human medicines ordered under your responsibility.This command "
+#~ "is transferred on your behalf to the pharmacy which will ensure the "
+#~ "delivery of medicines. The medicines will be delivered to you by your "
+#~ "care upon receipt of these from the pharmacy. For any problems related to "
+#~ "this command please contact the pharmacist."
+#~ msgstr ""
+#~ "Humane geneesmiddel cascade ii onder uw verantwoordelijkheid. Deze "
+#~ "bestelling wordt doorgestuurd in Uw naam naar de Apotheek, die de "
+#~ "levering van de geneesmiddelen zal afhandelen. Zodra we de producten "
+#~ "ontvangen, zullen ze door Alcyon geleverd worden. In het geval dat er "
+#~ "probleem is met uw bestelling Gelieve rechtstreeks de Apotheek te "
+#~ "contacteren : 02/672 82 49"
+
+#~ msgid "Imported medicines under your entire responsibility"
+#~ msgstr ""
+#~ "Geneesmiddelen geïmporteerd in cascade ii onder uw volledige "
+#~ "verantwoordelijkheid."
