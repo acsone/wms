@@ -1,0 +1,67 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_shopfloor_cluster_picking_workstation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_shopfloor_cluster_picking_workstation
+#: model:ir.model,name:alc_shopfloor_cluster_picking_workstation.model_stock_picking_batch
+msgid "Batch Transfer"
+msgstr ""
+
+#. module: alc_shopfloor_cluster_picking_workstation
+#: model:ir.model.fields,help:alc_shopfloor_cluster_picking_workstation.field_shopfloor_menu__scan_workstation
+msgid ""
+"If you tick this box, you will have to scan the workstation before starting "
+"the put in pack."
+msgstr ""
+
+#. module: alc_shopfloor_cluster_picking_workstation
+#: model:ir.model,name:alc_shopfloor_cluster_picking_workstation.model_shopfloor_menu
+msgid "Menu displayed in the scanner application"
+msgstr ""
+
+#. module: alc_shopfloor_cluster_picking_workstation
+#: model:ir.model.fields,field_description:alc_shopfloor_cluster_picking_workstation.field_shopfloor_menu__scan_workstation
+msgid "Scan workstation during scenario"
+msgstr ""
+
+#. module: alc_shopfloor_cluster_picking_workstation
+#: model:ir.model.fields,help:alc_shopfloor_cluster_picking_workstation.field_stock_picking_batch__workstation_selected
+msgid ""
+"Technical field set to True if the workstation has already been selected"
+msgstr ""
+
+#. module: alc_shopfloor_cluster_picking_workstation
+#: model:ir.model.fields,field_description:alc_shopfloor_cluster_picking_workstation.field_stock_picking_batch__workstation_id
+#: model_terms:ir.ui.view,arch_db:alc_shopfloor_cluster_picking_workstation.shopfloor_menu_form_view
+msgid "Workstation"
+msgstr ""
+
+#. module: alc_shopfloor_cluster_picking_workstation
+#: model:ir.model.fields,field_description:alc_shopfloor_cluster_picking_workstation.field_stock_picking_batch__workstation_selected
+msgid "Workstation Selected"
+msgstr ""
+
+#. module: alc_shopfloor_cluster_picking_workstation
+#. odoo-python
+#: code:addons/alc_shopfloor_cluster_picking_workstation/actions/message.py:0
+#, python-format
+msgid "Workstation not found"
+msgstr ""
+
+#. module: alc_shopfloor_cluster_picking_workstation
+#. odoo-python
+#: code:addons/alc_shopfloor_cluster_picking_workstation/actions/message.py:0
+#, python-format
+msgid "Workstation set to {}"
+msgstr ""
