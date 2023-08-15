@@ -122,7 +122,6 @@ exclude: |
   ^odoo/addons/alc_shopfloor_mobile_cluster_picking_workstation/|
   ^odoo/addons/alc_shopfloor_mobile_image_product/|
   ^odoo/addons/alc_shopfloor_mobile_product_print_label/|
-  ^odoo/addons/alc_shopfloor_mobile_qty_picker_font_style/|
   ^odoo/addons/alc_shopfloor_mobile_stock_refill/|
   ^odoo/addons/alc_shopfloor_mobile_stock_reserve/|
   ^odoo/addons/alc_shopfloor_mobile_workstation/|
