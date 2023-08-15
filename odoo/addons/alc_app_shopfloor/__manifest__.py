@@ -29,6 +29,7 @@
         "alc_shopfloor_mobile_stock_issue_button",
         "alc_shopfloor_mobile_qty_picker_font_style",
         "alc_shopfloor_cluster_picking_workstation",
+        "alc_shopfloor_mobile_cluster_picking_workstation",
     ],
     "data": [],
     "demo": [],
