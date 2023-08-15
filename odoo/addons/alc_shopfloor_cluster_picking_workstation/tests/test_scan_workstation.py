@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo.addons.alc_shopfloor.tests.test_cluster_picking_unload import (
+from odoo.addons.shopfloor.tests.test_cluster_picking_unload import (
     ClusterPickingUnloadingCommonCase,
 )
 
@@ -9,7 +8,7 @@ from odoo.addons.alc_shopfloor.tests.test_cluster_picking_unload import (
 class TestScanWorkstation(ClusterPickingUnloadingCommonCase):
     @classmethod
     def setUpClass(cls):
-        super(TestScanWorkstation, cls).setUpClass()
+        super().setUpClass()
 
         cls.workstation = (
             cls.env["shopfloor.workstation"]
@@ -19,9 +18,9 @@ class TestScanWorkstation(ClusterPickingUnloadingCommonCase):
 
         cls.bin1.write({"name": "bin1", "is_internal": True})
         cls.bin2.write({"name": "bin2", "is_internal": True})
-        cls._set_dest_package_and_done(cls.pack_operation_ids[:1], cls.bin2)
-        cls._set_dest_package_and_done(cls.pack_operation_ids[1:], cls.bin1)
-        cls.pack_operation_ids.write({"location_dest_id": cls.packing_location.id})
+        cls._set_dest_package_and_done(cls.move_lines[:1], cls.bin2)
+        cls._set_dest_package_and_done(cls.move_lines[1:], cls.bin1)
+        cls.move_lines.write({"location_dest_id": cls.packing_location.id})
         cls.menu.sudo().scan_workstation = True
 
     def test_scan_workstation_ok(self):
@@ -37,7 +36,7 @@ class TestScanWorkstation(ClusterPickingUnloadingCommonCase):
                 "picking_batch_id": self.batch.id,
             },
         )
-        operations = self.pack_operation_ids
+        operations = self.move_lines
         picking = operations[-1].picking_id
         data = self.data_detail.pack_picking_detail(picking)
         self.assert_response(

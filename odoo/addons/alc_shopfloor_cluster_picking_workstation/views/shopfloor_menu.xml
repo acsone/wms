@@ -4,18 +4,15 @@
 <odoo>
 
     <record model="ir.ui.view" id="shopfloor_menu_form_view">
-        <field
-      name="name"
-    >shopfloor.menu.form (in alc_shopfloor_cluster_picking_workstation)</field>
         <field name="model">shopfloor.menu</field>
-        <field name="inherit_id" ref="alc_shopfloor.shopfloor_menu_form_view" />
+        <field name="inherit_id" ref="shopfloor.shopfloor_menu_form_view" />
         <field name="arch" type="xml">
-           <group name="keep_existing_reservations" position="after">
+           <group name="options" position="after">
                 <group
+          attrs="{'invisible': [('scenario', '!=', 'cluster_picking')]}"
           name="scan_workstation"
-          attrs="{'invisible': [('scan_workstation_is_possible', '=', False)]}"
+          string="Workstation"
         >
-                    <field name="scan_workstation_is_possible" invisible="1" />
                     <field name="scan_workstation" />
                 </group>
             </group>

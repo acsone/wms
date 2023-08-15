@@ -199,7 +199,6 @@ exclude = [
   'odoo/addons/alc_shopfloor_cluster_picking_printing/*',
   'odoo/addons/alc_shopfloor_cluster_picking_stock_issue_all_products/*',
   'odoo/addons/alc_shopfloor_cluster_picking_transfer_async/*',
-  'odoo/addons/alc_shopfloor_cluster_picking_workstation/*',
   'odoo/addons/alc_shopfloor_image_product/*',
   'odoo/addons/alc_shopfloor_location_info/*',
   'odoo/addons/alc_shopfloor_mobile_change_pack_lot_back_button/*',
