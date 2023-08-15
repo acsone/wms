@@ -7,6 +7,11 @@
     inherit_id="shopfloor_mobile.shopfloor_app_assets"
   >
     <script id="script_scenario_cluster_picking" position="after">
+      <script
+        id="script_translations"
+        t-attf-src="/alc_shopfloor_mobile_stock_issue_button/static/src/js/translation_registry.js?v=#{mod_version}"
+        type="module"
+      />
         <script
         id="script_component_cluster_picking_stock_issue_button"
         t-attf-src="/alc_shopfloor_mobile_stock_issue_button/static/src/js/cluster-picking.js?v=#{mod_version}"
