@@ -132,7 +132,6 @@ omit =
     odoo/addons/alc_shopfloor_assignation_issue_message/*
     odoo/addons/alc_shopfloor_cluster_picking_by_partners/*
     odoo/addons/alc_shopfloor_cluster_picking_printing/*
-    odoo/addons/alc_shopfloor_cluster_picking_stock_issue_all_products/*
     odoo/addons/alc_shopfloor_cluster_picking_transfer_async/*
     odoo/addons/alc_shopfloor_image_product/*
     odoo/addons/alc_shopfloor_location_info/*

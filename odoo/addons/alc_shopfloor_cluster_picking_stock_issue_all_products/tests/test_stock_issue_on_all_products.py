@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.addons.alc_shopfloor.tests.test_cluster_picking_base import (
+from odoo.addons.shopfloor.tests.test_cluster_picking_base import (
     ClusterPickingCommonCase,
 )
 
@@ -10,7 +9,7 @@ from odoo.addons.alc_shopfloor.tests.test_cluster_picking_base import (
 class TestStockIssueOnAllProducts(ClusterPickingCommonCase):
     @classmethod
     def setUpClass(cls):
-        super(TestStockIssueOnAllProducts, cls).setUpClass()
+        super().setUpClass()
         cls.product_a = (
             cls.env["product.product"]
             .sudo()
@@ -22,10 +21,11 @@ class TestStockIssueOnAllProducts(ClusterPickingCommonCase):
 
     def test_all_products_are_out_of_stock_with_scan_workstation(self):
         self.menu.sudo().scan_workstation = True
-        self._update_qty_in_location(self.shelf1, self.product_a, 100)
+        initial_lot = self._create_lot(self.product_a)
+        self._update_qty_in_location(self.shelf1, self.product_a, 100, lot=initial_lot)
         self._simulate_batch_selected(self.batch, fill_stock=False)
-        operation = self.batch.mapped("picking_ids.move_lines")[0].pack_operation_ids
-        params = {"picking_batch_id": self.batch.id, "operation_id": operation.id}
+        move_line = self.batch.picking_ids.move_line_ids[0]
+        params = {"picking_batch_id": self.batch.id, "move_line_id": move_line.id}
 
         response = self.service.dispatch("stock_issue", params=params)
         self.assert_response(
@@ -38,8 +38,8 @@ class TestStockIssueOnAllProducts(ClusterPickingCommonCase):
         self.menu.sudo().scan_workstation = False
         self._update_qty_in_location(self.shelf1, self.product_a, 100)
         self._simulate_batch_selected(self.batch, fill_stock=False)
-        operation = self.batch.mapped("picking_ids.move_lines")[0].pack_operation_ids
-        params = {"picking_batch_id": self.batch.id, "operation_id": operation.id}
+        move_line = self.batch.picking_ids.move_line_ids[0]
+        params = {"picking_batch_id": self.batch.id, "move_line_id": move_line.id}
 
         response = self.service.dispatch("stock_issue", params=params)
         self.assert_response(
