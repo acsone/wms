@@ -4,7 +4,7 @@
 <odoo>
   <template
     id="shopfloor_app_assets"
-    inherit_id="alc_shopfloor_mobile.shopfloor_app_assets"
+    inherit_id="shopfloor_mobile.shopfloor_app_assets"
   >
     <script id="script_scenario_cluster_picking" position="after">
         <script

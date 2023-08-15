@@ -8,14 +8,14 @@ import {process_registry} from "/shopfloor_mobile_base/static/wms/src/services/p
 const registry_key = "cluster_picking";
 const ClusterPickingBase = process_registry.get(registry_key);
 
-let data_result_method = ClusterPickingBase.component.data;
-let data = function() {
-  // we must bin the original method to this to put it into
+const data_result_method = ClusterPickingBase.component.data;
+const data = function () {
+  // We must bin the original method to this to put it into
   // the object context
-  let result = data_result_method.bind(this)();
-  let scan_dest_fct = result.states.scan_destination;
-  let self = this;
-  scan_dest_fct.on_action_stock_out = function() {
+  const result = data_result_method.bind(this)();
+  const scan_dest_fct = result.states.scan_destination;
+  const self = this;
+  scan_dest_fct.on_action_stock_out = function () {
     self.state_set_data(self.state.data, "stock_issue");
     self.state_to("stock_issue");
   };
@@ -23,7 +23,7 @@ let data = function() {
   return result;
 };
 
-let template = ClusterPickingBase.component.template;
+const template = ClusterPickingBase.component.template;
 ClusterPickingBase.component.template = template.replace(
   "</Screen>",
   `
