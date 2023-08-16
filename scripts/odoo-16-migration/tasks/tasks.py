@@ -607,6 +607,7 @@ def set_modules_to_remove():
         "alc_shopfloor_unassign_wave",  # replaced by shopfloor
         "alc_shopfloor_location_content_relocation",  # included in base module
         "alc_shopfloor_mobile_change_pack_lot_back_button",  # included in base module
+        "alc_shopfloor_assignation_issue_message",  # included in base module
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     # with cursor(DB_16_POSTMIG) as cr:
