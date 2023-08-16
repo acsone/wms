@@ -9,16 +9,16 @@ const registry_key = "location_content_transfer";
 const LocationContentTransferBase = process_registry.get(registry_key);
 
 // Keep the pointer to the orginal method
-let actions_method = LocationContentTransferBase.component.methods.line_actions;
+const actions_method = LocationContentTransferBase.component.methods.line_actions;
 
-LocationContentTransferBase.component.methods.line_actions = function() {
-  let line_actions = actions_method.bind(this)();
+LocationContentTransferBase.component.methods.line_actions = function () {
+  const line_actions = actions_method.bind(this)();
   line_actions.push({name: "Print label", event_name: "action_print_label"});
   return line_actions;
 };
 
-LocationContentTransferBase.component.methods.on_action_print_label = function() {
-  let endpoint, endpoint_data;
+LocationContentTransferBase.component.methods.on_action_print_label = function () {
+  var endpoint, endpoint_data;
   const data = this.state.data;
   endpoint = "print_label";
   endpoint_data = {
