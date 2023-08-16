@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="shopfloor_menu_form_view">
+        <field name="model">shopfloor.menu</field>
+        <field name="inherit_id" ref="shopfloor.shopfloor_menu_form_view" />
+        <field name="arch" type="xml">
+            <group name="options" position="after">
+                <group
+          name="print"
+          string="Print"
+          attrs="{'invisible': [('scenario', '!=', 'cluster_picking')]}"
+        >
+                    <group><field name="food_label" /></group>
+                    <group><field name="med_label" /></group>
+
+                </group>
+            </group>
+        </field>
+    </record>
+
+
+
+</odoo>
