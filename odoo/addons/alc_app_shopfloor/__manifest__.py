@@ -31,6 +31,7 @@
         "alc_shopfloor_cluster_picking_workstation",
         "alc_shopfloor_mobile_cluster_picking_workstation",
         "alc_shopfloor_cluster_picking_stock_issue_all_products",
+        "alc_shopfloor_version",
     ],
     "data": [],
     "demo": [],
