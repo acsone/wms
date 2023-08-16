@@ -3,13 +3,11 @@
 
 {
     "name": "Alc Shopfloor Version",
-    "description": """
-        Alcyon: Shopfloor Version""",
-    "version": "10.0.1.0.0",
+    "description": """Alcyon: Shopfloor Version""",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["web_environment_ribbon", "alc_shopfloor"],  # get the right version
+    "depends": ["shopfloor_base"],
     "data": [],
     "demo": [],
-    "installable": False,
 }
