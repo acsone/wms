@@ -19,7 +19,7 @@
     <xpath expr="//tbody[hasclass('sale_tbody')]" position="inside">
       <t t-set="warnings" t-value="lines_separated_by_warnings['lines_with_warning']" />
       <t t-foreach="warnings" t-as="warning">
-        <tr class="bg-200 fw-bold o_line_section">
+        <tr class="bg-200 fw-bold o_line_section text-small">
           <td colspan="9" t-esc="warning['warning']" />
         </tr>
         <t t-foreach="warning['lines']" t-as="line">
