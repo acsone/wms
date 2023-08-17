@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="view_account_move_line_filter">
+      <field
+      name="name"
+    >account.move.line.search (in account_move_line_single_analytic_account)</field>
+      <field name="model">account.move.line</field>
+      <field name="inherit_id" ref="account.view_account_move_line_filter" />
+      <field name="arch" type="xml">
+          <filter name="date_before" position="after">
+              <separator />
+                <field name="analytic_account_id" />
+          </filter>
+      </field>
+    </record>
+</odoo>
