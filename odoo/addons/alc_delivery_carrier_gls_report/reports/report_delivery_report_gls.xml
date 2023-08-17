@@ -6,32 +6,34 @@
     inherit_id="delivery_carrier_label_gls.report_delivery_report_gls_document"
   >
       <xpath expr="//div[@id='packages_info']" position="before">
-      <div name="sender_address" class="col-xs-6">
-          <h4>Sender:</h4>
-          <div>
-                <span itemprop="name">LOGIWEB S.A.</span>
-            </div>
-    <div
-          itemprop="address"
-          itemscope="itemscope"
-          itemtype="http://schema.org/PostalAddress"
-        >
-            <div>
-                 <span itemprop="streetAddress">
-                     2 rue de l’eau<br />
-                     L-4920 Bascharage<br />
-                     Luxembourg
-                 </span>
-            </div>
-        </div>
-      </div>
-        <div name="collection_point" class="col-xs-5 col-xs-offset-1">
-            <h4>Collection point:</h4>
-                <span
-          t-field="o.carrier_id.company_id.partner_id"
-          t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
-        />
-        </div>
+          <div class="row">
+              <div name="sender_address" class="col-6">
+                  <h4>Sender:</h4>
+                  <div>
+                      <span itemprop="name">LOGIWEB S.A.</span>
+                  </div>
+                  <div
+            itemprop="address"
+            itemscope="itemscope"
+            itemtype="http://schema.org/PostalAddress"
+          >
+                      <div>
+                         <span itemprop="streetAddress">
+                             2 rue de l’eau<br />
+                             L-4920 Bascharage<br />
+                             Luxembourg
+                         </span>
+                      </div>
+                  </div>
+              </div>
+              <div name="collection_point" class="col-5 col-offset-1">
+                  <h4>Collection point:</h4>
+                  <span
+            t-field="o.carrier_id.company_id.partner_id"
+            t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+          />
+              </div>
+          </div>
     </xpath>
     <xpath expr="//thead/tr/th" position="after">
         <th class="text-right"><strong>Reference</strong></th>

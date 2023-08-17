@@ -91,7 +91,7 @@ odoo-addon-component==16.0.1.1.0
 odoo-addon-delivery-automatic-package==16.0.1.0.0.2
 odoo-addon-delivery-carrier-account==16.0.1.0.0.4
 odoo-addon-delivery-carrier-info==16.0.1.0.0.2
-odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@6e89657049a2ba209e5103d4b846f0b4d775fd2f#subdirectory=setup/delivery_carrier_label_gls
+odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@f1d9724c9c7afbec5203a99ed8347448fdfd9676#subdirectory=setup/delivery_carrier_label_gls
 odoo-addon-delivery-carrier-max-weight-constraint==16.0.1.0.1
 odoo-addon-delivery-carrier-partner @ git+https://github.com/acsone/delivery-carrier.git@3979cb4a874034236ca189edbe213e293f2befa2#subdirectory=setup/delivery_carrier_partner
 odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.com/acsone/delivery-carrier.git@628d15f465d02c468772d7f92fe7c3e3eebd3c18#subdirectory=setup/delivery_estimated_package_quantity_by_weight
