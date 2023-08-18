@@ -11,6 +11,8 @@ odoo-addon-product-analytic @ git+https://github.com/elego/account-analytic@refs
 odoo-addon-product-analytic-purchase @ git+https://github.com/OCA/account-analytic@refs/pull/576/head#subdirectory=setup/product_analytic_purchase
 # https://github.com/OCA/account-analytic/pull/572
 odoo-addon-account-analytic-tag @ git+https://github.com/OCA/account-analytic@refs/pull/572/head#subdirectory=setup/account_analytic_tag
+# https://github.com/OCA/account-analytic/pull/585
+odoo-addon-account-analytic-account-tag @ git+https://github.com/OCA/account-analytic@refs/pull/585/head#subdirectory=setup/account_analytic_account_tag
 
 # account-invoicing
 # https://github.com/OCA/account-invoicing/pull/1364 - [16.0][ADD] account_tax_one_vat
