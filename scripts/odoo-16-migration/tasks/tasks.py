@@ -609,6 +609,9 @@ def set_modules_to_remove():
         "alc_shopfloor_mobile_change_pack_lot_back_button",  # included in base module
         "alc_shopfloor_app",  # replaced by alc_app_shopfloor
         "alc_shopfloor_assignation_issue_message",  # included in base module
+        "analytic_tag_dimension",
+        "analytic_tag_dimension_purchase_warning",
+        "analytic_tag_dimension_sale_warning",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     # with cursor(DB_16_POSTMIG) as cr:
