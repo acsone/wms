@@ -25,10 +25,10 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_delivery_carrier_gls_report.report_delivery_report_gls_document_b2c_ref
 msgid ""
 "<span itemprop=\"streetAddress\">\n"
-"                     2 rue de l’eau<br/>\n"
-"                     L-4920 Bascharage<br/>\n"
-"                     Luxembourg\n"
-"                 </span>"
+"                             2 rue de l’eau<br/>\n"
+"                             L-4920 Bascharage<br/>\n"
+"                             Luxembourg\n"
+"                         </span>"
 msgstr ""
 
 #. module: alc_delivery_carrier_gls_report
