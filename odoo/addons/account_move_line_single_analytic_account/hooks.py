@@ -24,11 +24,9 @@ def pre_init_hook(cr):
 
         cr.execute(
             """
-            UPDATE account_move_line
-            SET analytic_account_id = map.account_analytic_id
-            FROM (SELECT ivl.account_analytic_id, iam.aml_id
-              FROM account_invoice_line ivl JOIN invl_aml_mapping iam
-              ON ivl.id = iam.invl_id) as map
-            WHERE id = map.aml_id
+            UPDATE account_move_line aml
+            SET analytic_account_id = ivl.account_analytic_id
+            FROM invl_aml_mapping iam, account_invoice_line ivl
+            WHERE aml.id=iam.aml_id and ivl.id = iam.invl_id;
             """
         )
