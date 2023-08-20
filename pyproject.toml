@@ -201,7 +201,6 @@ exclude = [
   'odoo/addons/alc_shopfloor_mobile_stock_refill/*',
   'odoo/addons/alc_shopfloor_mobile_stock_reserve/*',
   'odoo/addons/alc_shopfloor_mobile_workstation/*',
-  'odoo/addons/alc_shopfloor_product_info/*',
   'odoo/addons/alc_shopfloor_stock_refill/*',
   'odoo/addons/alc_shopfloor_stock_reserve/*',
   'odoo/addons/alc_shopfloor_workstation/*',
