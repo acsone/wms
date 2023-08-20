@@ -4,14 +4,13 @@
 <odoo>
 
     <record model="ir.ui.view" id="shopfloor_menu_form_view">
-        <field
-      name="name"
-    >shopfloor.menu.form (in alc_shopfloor_cluster_picking_printing)
-        </field>
         <field name="model">shopfloor.menu</field>
-        <field name="inherit_id" ref="alc_shopfloor_packing.shopfloor_menu_form_view" />
+        <field
+      name="inherit_id"
+      ref="alc_shopfloor_product_print_label.shopfloor_menu_form_view"
+    />
         <field name="arch" type="xml">
-            <field name="pack_pickings" position="after">
+            <field name="food_label" position="after">
                 <field
           name="print_on_pack_pickings"
           attrs="{'invisible': [('pack_pickings', '=', False)]}"

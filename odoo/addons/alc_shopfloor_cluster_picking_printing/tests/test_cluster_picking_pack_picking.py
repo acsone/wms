@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import mock
+from unittest import mock
 
-from odoo.addons.alc_shopfloor.tests.test_cluster_picking_unload import (
+from odoo.addons.shopfloor.tests.test_cluster_picking_unload import (
     ClusterPickingUnloadingCommonCase,
 )
 
@@ -12,10 +11,10 @@ from odoo.addons.alc_shopfloor.tests.test_cluster_picking_unload import (
 class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
     @classmethod
     def setUpClassBaseData(cls, *args, **kwargs):
-        super(ClusterPickingPutInPackPrintCase, cls).setUpClassBaseData(*args, **kwargs)
+        super().setUpClassBaseData(*args, **kwargs)
         cls.bin1.write({"name": "bin1", "is_internal": True})
         cls.bin2.write({"name": "bin2", "is_internal": True})
-        cls.menu.sudo().write(dict(pack_pickings=True, print_on_pack_pickings=True))
+        cls.menu.sudo().write({"pack_pickings": True, "print_on_pack_pickings": True})
 
         Printer = cls.env["printing.printer"].sudo()
         Printer.search([]).unlink()
@@ -46,19 +45,21 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
         )
 
     def test_print_after_put_in_pack(self):
-        operations = self.pack_operation_ids
-        self._set_dest_package_and_done(operations[:1], self.bin2)
-        self._set_dest_package_and_done(operations[1:], self.bin1)
-        operations.write({"location_dest_id": self.packing_location.id})
+        move_lines = self.move_lines
+        self._set_dest_package_and_done(move_lines[:1], self.bin2)
+        self._set_dest_package_and_done(move_lines[1:], self.bin1)
+        move_lines.write({"location_dest_id": self.packing_location.id})
         response = self.service.dispatch(
             "prepare_unload", params={"picking_batch_id": self.batch.id}
         )
 
         # The first bin to process is bin1 scan the pack and try to put in pack
-        picking = operations[-1].picking_id
+        picking = move_lines[-1].picking_id
         data = self.data_detail.pack_picking_detail(picking)
         self.assert_response(
-            response, next_state="pack_picking_scan_pack", data=data,
+            response,
+            next_state="pack_picking_scan_pack",
+            data=data,
         )
         # we scan the pack
         response = self.service.dispatch(
@@ -71,7 +72,9 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
         )
         data = self.data_detail.pack_picking_detail(picking)
         self.assert_response(
-            response, next_state="pack_picking_put_in_pack", data=data,
+            response,
+            next_state="pack_picking_put_in_pack",
+            data=data,
         )
         response = self.service.dispatch(
             "put_in_pack",
@@ -89,7 +92,7 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             data=data,
             message=self.service.msg_store.no_product_label_printer_found(),
         )
-        self.shopfloor_user.sudo().printing_product_label_printer_id = (
+        self.env.user.sudo().printing_product_label_printer_id = (
             self.product_label_printer
         )
         response = self.service.dispatch(
@@ -108,9 +111,7 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             data=data,
             message=self.service.msg_store.no_package_label_printer_found(),
         )
-        self.shopfloor_user.sudo().printing_package_label_printer_id = (
-            self.package_label_printer
-        )
+        self.env.user.sudo().default_label_printer_id = self.package_label_printer
 
         # we process to the put in pack
         with mock.patch.object(
@@ -131,17 +132,19 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
 
     def test_print_after_scan_destination_food(self):
         self.bin1.is_internal = True
-        self.menu.sudo().write(dict(pack_pickings=False, print_on_pack_pickings=False))
-        operation = self.batch.pack_operation_ids[0]
-        qty_done = operation.product_qty
+        self.menu.sudo().write(
+            {"pack_pickings": False, "print_on_pack_pickings": False}
+        )
+        move_line = self.batch.move_line_ids[0]
+        qty_done = move_line.reserved_qty
         with mock.patch.object(
-            operation.__class__, "print_food_product_label"
+            move_line.__class__, "print_food_product_label"
         ) as mocked_print_food_product_label:
             self.service.dispatch(
                 "scan_destination_pack",
                 params={
                     "picking_batch_id": self.batch.id,
-                    "operation_id": operation.id,
+                    "move_line_id": move_line.id,
                     "barcode": self.bin1.name,
                     "quantity": qty_done,
                 },
@@ -152,24 +155,22 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
         self.product_a.tracking = "lot"
         initial_lot = self._create_lot(self.product_a)
         self.bin1.is_internal = True
-        self.menu.sudo().write(dict(pack_pickings=False, print_on_pack_pickings=False))
-        operation = self.batch.pack_operation_ids[0]
-        # we need to put the lot on the operation for this to work
-        vals = {
-            "operation_id": operation.id,
-            "lot_id": initial_lot.id,
-            "qty_todo": operation.product_qty,
-        }
-        self.env["stock.pack.operation.lot"].create(vals)
-        qty_done = operation.product_qty
+        self.menu.sudo().write(
+            {"pack_pickings": False, "print_on_pack_pickings": False}
+        )
+        move_line = self.batch.move_line_ids[0]
+        # we need to put the lot on the move_line for this to work
+        move_line.lot_id = initial_lot
+        # self.env["stock.move.line"].create(vals)
+        qty_done = move_line.reserved_qty
         with mock.patch.object(
-            operation.__class__, "print_food_product_label"
+            move_line.__class__, "print_food_product_label"
         ) as mocked_print_food_product_label:
             self.service.dispatch(
                 "scan_destination_pack",
                 params={
                     "picking_batch_id": self.batch.id,
-                    "operation_id": operation.id,
+                    "move_line_id": move_line.id,
                     "barcode": self.bin1.name,
                     "quantity": qty_done,
                     "lot_id": initial_lot.id,
@@ -179,41 +180,41 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
 
     def test_print_after_scan_destination_food_one_and_only_once(self):
         self.bin1.is_internal = True
-        self.menu.sudo().write(dict(pack_pickings=False, print_on_pack_pickings=False))
-        pick1 = self.batch.picking_ids.filtered(
-            lambda p: len(p.pack_operation_ids) == 2
+        self.menu.sudo().write(
+            {"pack_pickings": False, "print_on_pack_pickings": False}
         )
-        operations1 = pick1.mapped("pack_operation_ids")
-        self.assertEqual(len(operations1), 2)
-        operation = operations1[0]
-        operation.picking_id.partner_id.sudo().no_labels_food_products = True
-        qty_done = operation.product_qty
-        self.assertFalse(operation.picking_id.printed_once)
+        pick1 = self.batch.picking_ids.filtered(lambda p: len(p.move_line_ids) == 2)
+        move_lines1 = pick1.mapped("move_line_ids")
+        self.assertEqual(len(move_lines1), 2)
+        move_line = move_lines1[0]
+        move_line.picking_id.partner_id.sudo().no_labels_food_products = True
+        qty_done = move_line.reserved_qty
+        self.assertFalse(move_line.picking_id.printed_once)
         with mock.patch.object(
-            operation.__class__, "print_food_product_label"
+            move_line.__class__, "print_food_product_label"
         ) as mocked_print_food_product_label:
             self.service.dispatch(
                 "scan_destination_pack",
                 params={
                     "picking_batch_id": self.batch.id,
-                    "operation_id": operation.id,
+                    "move_line_id": move_line.id,
                     "barcode": self.bin1.name,
                     "quantity": qty_done,
                 },
             )
             mocked_print_food_product_label.assert_called_once()
 
-        operation2 = operations1[1]
-        qty_done = operation2.product_qty
-        self.assertTrue(operation2.picking_id.printed_once)
+        move_line2 = move_lines1[1]
+        qty_done = move_line2.reserved_qty
+        self.assertTrue(move_line2.picking_id.printed_once)
         with mock.patch.object(
-            operation2.__class__, "print_food_product_label"
+            move_line2.__class__, "print_food_product_label"
         ) as mocked_print_food_product_label:
             self.service.dispatch(
                 "scan_destination_pack",
                 params={
                     "picking_batch_id": self.batch.id,
-                    "operation_id": operation2.id,
+                    "move_line_id": move_line2.id,
                     "barcode": self.bin1.name,
                     "quantity": qty_done,
                 },
@@ -224,59 +225,59 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             {"name": "bin3", "is_internal": True}
         )
 
-        pick2 = self.batch.picking_ids.filtered(
-            lambda p: len(p.pack_operation_ids) == 1
-        )
-        operations2 = pick2.mapped("pack_operation_ids")
-        operation3 = operations2[0]
-        qty_done = operation3.product_qty
+        pick2 = self.batch.picking_ids.filtered(lambda p: len(p.move_line_ids) == 1)
+        move_lines2 = pick2.mapped("move_line_ids")
+        move_line3 = move_lines2[0]
+        qty_done = move_line3.reserved_qty
         # Third op is on another picking : print again
-        self.assertFalse(operation3.picking_id.printed_once)
+        self.assertFalse(move_line3.picking_id.printed_once)
         with mock.patch.object(
-            operation3.__class__, "print_food_product_label"
+            move_line3.__class__, "print_food_product_label"
         ) as mocked_print_food_product_label:
             self.service.dispatch(
                 "scan_destination_pack",
                 params={
                     "picking_batch_id": self.batch.id,
-                    "operation_id": operation3.id,
+                    "move_line_id": move_line3.id,
                     "barcode": bin3.name,
                     "quantity": qty_done,
                 },
             )
             mocked_print_food_product_label.assert_called_once()
-        self.assertTrue(operation3.picking_id.printed_once)
+        self.assertTrue(move_line3.picking_id.printed_once)
 
     def test_print_after_scan_destination_food_for_all_products(self):
         self.bin1.is_internal = True
         self.bin2.is_internal = True
-        self.menu.sudo().write(dict(pack_pickings=False, print_on_pack_pickings=False))
-        operation = self.batch.pack_operation_ids[0]
-        qty_done = operation.product_qty
+        self.menu.sudo().write(
+            {"pack_pickings": False, "print_on_pack_pickings": False}
+        )
+        move_line = self.batch.move_line_ids[0]
+        qty_done = move_line.reserved_qty
         with mock.patch.object(
-            operation.__class__, "print_food_product_label"
+            move_line.__class__, "print_food_product_label"
         ) as mocked_print_food_product_label:
             self.service.dispatch(
                 "scan_destination_pack",
                 params={
                     "picking_batch_id": self.batch.id,
-                    "operation_id": operation.id,
+                    "move_line_id": move_line.id,
                     "barcode": self.bin1.name,
                     "quantity": qty_done,
                 },
             )
             mocked_print_food_product_label.assert_called_once()
 
-        operation2 = self.batch.pack_operation_ids[1]
-        qty_done = operation2.product_qty
+        move_line2 = self.batch.move_line_ids[1]
+        qty_done = move_line2.reserved_qty
         with mock.patch.object(
-            operation2.__class__, "print_food_product_label"
+            move_line2.__class__, "print_food_product_label"
         ) as mocked_print_food_product_label:
             self.service.dispatch(
                 "scan_destination_pack",
                 params={
                     "picking_batch_id": self.batch.id,
-                    "operation_id": operation2.id,
+                    "move_line_id": move_line2.id,
                     "barcode": self.bin2.name,
                     "quantity": qty_done,
                 },
@@ -284,28 +285,31 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             mocked_print_food_product_label.assert_called_once()
 
     def test_errors_are_not_overwritten(self):
-        """Here we give a lot that is not on the operation; this initial error should
-           bubble up, and not something else, like 'cannot print document'"""
+        """Here we give a package that is not on the move_line; this initial error should.
+
+        bubble up, and not something else, like 'cannot print document'
+        """
         self.product_a.tracking = "lot"
-        initial_lot = self._create_lot(self.product_a)
+        self._create_lot(self.product_a)
         self.bin1.is_internal = True
-        self.menu.sudo().write(dict(pack_pickings=False, print_on_pack_pickings=False))
-        operation = self.batch.pack_operation_ids[0]
-        qty_done = operation.product_qty
+        self.menu.sudo().write(
+            {"pack_pickings": False, "print_on_pack_pickings": False}
+        )
+        move_line = self.batch.move_line_ids[0]
+        qty_done = move_line.reserved_qty
         with mock.patch.object(
-            operation.__class__, "print_food_product_label"
+            move_line.__class__, "print_food_product_label"
         ) as mocked_print_food_product_label:
             result = self.service.dispatch(
                 "scan_destination_pack",
                 params={
                     "picking_batch_id": self.batch.id,
-                    "operation_id": operation.id,
-                    "barcode": self.bin1.name,
+                    "move_line_id": move_line.id,
+                    "barcode": self.bin1.name + "??",
                     "quantity": qty_done,
-                    "lot_id": initial_lot.id,
                 },
             )
             message = result["message"]
             self.assertEqual(message["message_type"], "error")
-            self.assertTrue("not found on packing operation" in message["body"])
+            self.assertEqual("Bin bin1?? doesn't exist", message["body"])
             mocked_print_food_product_label.assert_not_called()
