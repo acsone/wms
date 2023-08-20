@@ -98,6 +98,7 @@ class ShopfloorSchemaDetailAction(Component):
                 "image": {"type": "string", "nullable": True, "required": False},
                 "manufacturer": self._schema_dict_of(self._simple_record()),
                 "suppliers": self._schema_list_of(self.product_supplierinfo()),
+                "locations": self._schema_list_of(self.location_detail()),
             }
         )
         return schema

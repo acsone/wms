@@ -175,7 +175,25 @@ class DataDetailAction(Component):
                     rec.product_tmpl_id.manufacturer_id, ["id", "name"]
                 ),
             ),
+            (
+                "quant_ids:locations",
+                lambda record, fname: self._locations_for_product(record),
+            ),
         ]
+
+    def _locations_for_product(self, record):
+        res = []
+        # Retrieve all products -- maybe more than one location
+        product_template = record.product_tmpl_id
+        products = product_template.product_variant_ids
+
+        quants = self.env["stock.quant"].search(
+            [("product_id", "in", products.ids), ("location_id.usage", "=", "internal")]
+        )
+        for location in quants.locattion_id:
+            loc = self.location_detail(location)
+            res.append(loc)
+        return res
 
     def _product_image_url(self, record, field_name):
         if not record[field_name]:
