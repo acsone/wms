@@ -163,7 +163,7 @@ class ClusterPicking(Component):
         )
 
     def _put_in_pack(self, picking, number_of_parcels):
-        pack = picking.action_put_in_pack()
+        pack = picking._put_in_pack(picking.move_line_ids)
         if (
             isinstance(pack, dict)
             and pack.get("res_model") == "stock.quant.package"
