@@ -612,6 +612,7 @@ def set_modules_to_remove():
         "analytic_tag_dimension",
         "analytic_tag_dimension_purchase_warning",
         "analytic_tag_dimension_sale_warning",
+        "alc_shopfloor_location_info",  # included in base module
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     # with cursor(DB_16_POSTMIG) as cr:
