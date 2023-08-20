@@ -19,7 +19,12 @@ class MakePickingBatch(MakePickingBatchBase):
     def _get_picking_domain_common(self):
         domain = super()._get_picking_domain_common()
         if self.restrict_to_same_release_channel:
-            domain = AND([domain, [("release_channel_id", "!=", False)]])
+            channels = self.env["stock.release.channel"]._get_channels_pick_allowed(
+                self.picking_type_ids
+            )
+            if not channels:
+                return domain
+            domain = AND([domain, [("release_channel_id", "in", channels.ids)]])
         return domain
 
     def _get_picking_domain_for_additional(self):

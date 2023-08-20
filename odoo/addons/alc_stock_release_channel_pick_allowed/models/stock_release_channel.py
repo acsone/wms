@@ -203,3 +203,15 @@ class StockReleaseChannel(StockReleaseChannelBase):
                 continue
             rec._set_pick_allowed(pick_allowed=False, picking_type=None)
         return super().action_sleep()
+
+    @api.model
+    def _get_channels_pick_allowed(self, picking_types):
+        """Return all channels that allows picking for a given picking types."""
+        res = self.browse()
+        for rec in self.search([("state", "in", ("open", "locked"))]):
+            if any(
+                rec._get_picking_type_pick_allowed(picking_type.id)
+                for picking_type in picking_types
+            ):
+                res += rec
+        return res
