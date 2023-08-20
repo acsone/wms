@@ -8,6 +8,10 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["shopfloor_batch_automatic_creation", "stock_release_channel"],
+    "depends": [
+        "shopfloor_batch_automatic_creation",
+        "stock_release_channel",
+        "alc_stock_release_channel_pick_allowed",
+    ],
     "data": ["views/shopfloor_menu.xml"],
 }
