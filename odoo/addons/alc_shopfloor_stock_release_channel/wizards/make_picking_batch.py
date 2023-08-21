@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import fields
-from odoo.osv.expression import AND
+from odoo.osv.expression import AND, FALSE_DOMAIN
 
 from odoo.addons.stock_picking_batch_creation.wizards.make_picking_batch import (
     MakePickingBatch as MakePickingBatchBase,
@@ -23,8 +23,9 @@ class MakePickingBatch(MakePickingBatchBase):
                 self.picking_type_ids
             )
             if not channels:
-                return domain
-            domain = AND([domain, [("release_channel_id", "in", channels.ids)]])
+                domain = AND([domain, FALSE_DOMAIN])
+            else:
+                domain = AND([domain, [("release_channel_id", "in", channels.ids)]])
         return domain
 
     def _get_picking_domain_for_additional(self):
