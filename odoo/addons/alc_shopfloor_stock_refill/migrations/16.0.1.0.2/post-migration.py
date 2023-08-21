@@ -1,8 +1,8 @@
-from odoo import api, SUPERUSER_ID
+from openupgradelib import openupgrade
 
 
-def post_init_hook(cr, registry):
-    env = api.Environment(cr, SUPERUSER_ID, {})
+@openupgrade.migrate()
+def migrate(env, version):
     scenario = env.ref("shopfloor.scenario_location_content_transfer")
     menus = env["shopfloor.menu"].search([("scenario_id", "=", scenario.id)])
     menus.write({"allow_get_work": True, "allow_move_create": False})

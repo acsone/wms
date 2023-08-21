@@ -25,7 +25,8 @@ class TestCustomErrorMessage(LocationContentTransferCommonCase):
         response = self.service.dispatch(
             "scan_location", params={"barcode": self.content_loc.barcode}
         )
-        self.assert_response_start(
+        self.assert_response(
             response,
             message=self.msg_store.location_empty(self.content_loc),
+            next_state="get_work",
         )
