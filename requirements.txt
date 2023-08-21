@@ -173,10 +173,10 @@ odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-trans
 odoo-addon-shipment-advice-planner @ git+https://github.com/acsone/stock-logistics-transport.git@02392647556d5b7bb61a250d5e170ffa5ad09b57#subdirectory=setup/shipment_advice_planner
 odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/acsone/stock-logistics-transport.git@b4f080b42a32026d7b28d255434584cc30c285db#subdirectory=setup/shipment_advice_planner_toursolver
 odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com/acsone/stock-logistics-transport.git@b4f080b42a32026d7b28d255434584cc30c285db#subdirectory=setup/shipment_advice_planner_toursolver_queue_job
-odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@eb936377428589e37811b07beb60ca940cf51fbe#subdirectory=setup/shopfloor
+odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@6c74ad3f3c619daded311e6ff7bc17ca951f44aa#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@22e70153a9845d9c9316170728ed0a435b39ffee#subdirectory=setup/shopfloor_base
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wms.git@e16369900d9be166e308267e3cbfeddd78b13663#subdirectory=setup/shopfloor_batch_automatic_creation
-odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@30d1b0b0f493a3049a326eb0943465437374b5b4#subdirectory=setup/shopfloor_mobile
+odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@24f62ed034e25f83be5329bc36ddf84be2b973b8#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@e93ba1225c3e6724b417857b96343d7ed48a2e99#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-mobile-base-auth-api-key @ git+https://github.com/acsone/wms.git@1de9f61eb2ad8757577b38bcf30c006fc0453ffc#subdirectory=setup/shopfloor_mobile_base_auth_api_key
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@57d45d512344ad839b83cae4cb7f82f52f37cde1#subdirectory=setup/shopfloor_mobile_packing
