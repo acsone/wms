@@ -25,7 +25,17 @@ class MakePickingBatch(MakePickingBatchBase):
             if not channels:
                 domain = AND([domain, FALSE_DOMAIN])
             else:
-                domain = AND([domain, [("release_channel_id", "in", channels.ids)]])
+                domain = AND(
+                    [
+                        domain,
+                        [
+                            ("release_channel_id", "in", channels.ids),
+                            "|",
+                            ("release_channel_id.user_ids", "=", False),
+                            ("release_channel_id.user_ids", "in", self.user_id.ids),
+                        ],
+                    ]
+                )
         return domain
 
     def _get_picking_domain_for_additional(self):
@@ -40,7 +50,10 @@ class MakePickingBatch(MakePickingBatchBase):
                             "release_channel_id",
                             "=",
                             previous_picking.release_channel_id.id,
-                        )
+                        ),
+                        "|",
+                        ("release_channel_id.user_ids", "=", False),
+                        ("release_channel_id.user_ids", "in", self.user_id.ids),
                     ],
                 ]
             )
