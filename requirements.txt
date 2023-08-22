@@ -47,7 +47,7 @@ multidict==6.0.4
 num2words==0.5.12
 numpy==1.25.1
 odoo @ git+https://github.com/acsone/odoo.git@e487b580cb20df76946408d14b4538324920f93d
-odoo-addon-account-analytic-account-tag @ git+https://github.com/acsone/account-analytic@390b4a9b3effef6f9e322f43d652b14f1e705ad2#subdirectory=setup/account_analytic_account_tag
+odoo-addon-account-analytic-account-tag @ git+https://github.com/acsone/account-analytic@0df0b863f1efc304e4a91c0d5045d31e20c19068#subdirectory=setup/account_analytic_account_tag
 odoo-addon-account-analytic-required==16.0.1.0.0.8
 odoo-addon-account-analytic-tag @ git+https://github.com/acsone/account-analytic@d36983ee62074252d0b01d9035fca564fe7cd5fa#subdirectory=setup/account_analytic_tag
 odoo-addon-account-banking-mandate==16.0.1.0.2.8
