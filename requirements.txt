@@ -88,6 +88,7 @@ odoo-addon-base-time-window==16.0.1.0.0.6
 odoo-addon-base-ubl==16.0.1.0.0.4
 odoo-addon-base-unece==16.0.1.0.0.8
 odoo-addon-component==16.0.1.1.0
+odoo-addon-date-range==16.0.1.0.2
 odoo-addon-delivery-automatic-package==16.0.1.0.0.2
 odoo-addon-delivery-carrier-account==16.0.1.0.0.4
 odoo-addon-delivery-carrier-info==16.0.1.0.0.2
@@ -109,6 +110,8 @@ odoo-addon-jsonifier @ git+https://github.com/acsone/server-tools.git@d0f16e3186
 odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/acsone/l10n-belgium.git@63b4fce463858ea41cbf8417711f2850a915400d#subdirectory=setup/l10n_be_bpost_address_autocomplete
 odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/acsone/l10n-belgium.git@3d1359a7e58a4ee9c53c5f16178a1428feadd368#subdirectory=setup/l10n_be_bpost_address_validation
 odoo-addon-mail-environment==16.0.1.0.1.1
+odoo-addon-mis-builder==16.0.5.1.3
+odoo-addon-mis-builder-budget==16.0.5.0.1.5
 odoo-addon-onchange-helper==16.0.1.0.0.3
 odoo-addon-partner-fax==16.0.1.0.0.3
 odoo-addon-partner-invoicing-mode @ git+https://github.com/acsone/account-invoicing.git@e2b68daacbe1b68c7c939c3938a4931f5b47bc92#subdirectory=setup/partner_invoicing_mode
