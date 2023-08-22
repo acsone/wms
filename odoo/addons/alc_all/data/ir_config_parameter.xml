@@ -47,5 +47,9 @@
     name="set_param"
     eval="('alc_sale_exception_settings.sale_exception_non_blocking_as_exception', False)"
   />
-
+  <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('stock_move_free_reservation_reassign.reassign_stock_move_after_free_reservation', True)"
+  />
 </odoo>
