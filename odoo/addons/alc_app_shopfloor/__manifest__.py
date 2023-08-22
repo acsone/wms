@@ -35,6 +35,7 @@
         "alc_shopfloor_product_print_label",
         "alc_shopfloor_cluster_picking_printing",
         "alc_shopfloor_mobile_product_print_label",
+        "alc_shopfloor_product_info",
     ],
     "data": [],
     "demo": [],

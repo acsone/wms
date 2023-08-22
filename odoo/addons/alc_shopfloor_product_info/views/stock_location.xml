@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_location_form_view">
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="shopfloor.view_location_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='shopfloor_picking_sequence']" position="after">
+                <field
+          name="display_in_shopfloor_product_info"
+          attrs="{'invisible': [('usage', '!=', 'internal')]}"
+        />
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>
