@@ -24,7 +24,7 @@ Vue.component("pack-picking-detail", {
             return {
                 card_klass: "loud-labels",
                 key_title: "",
-                showCounters: true,
+                showCounters: false,
                 list_item_options: {
                     fields: this.line_list_fields(),
                     list_item_klass_maker: this.move_lines_color_klass,
@@ -32,6 +32,7 @@ Vue.component("pack-picking-detail", {
             };
         },
         line_list_fields() {
+            self = this;
             return [
                 {
                     path: "product.display_name",
@@ -48,13 +49,10 @@ Vue.component("pack-picking-detail", {
                     path: "qty_done",
                     label: "Qty",
                     render_component: "packaging-qty-picker-display",
-                    render_options: function (record) {
-                        const opts = {
-                            init_value: record.qty_done,
-                            available_packaging: record.product.packaging,
-                            uom: record.product.uom,
-                        };
-                        return opts;
+                    render_props: function (record) {
+                        return self.utils.wms.move_line_qty_picker_props(record, {
+                            qtyInit: record.qty_done,
+                        });
                     },
                 },
             ];
