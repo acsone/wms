@@ -132,10 +132,8 @@ omit =
     odoo/addons/alc_shopfloor_cluster_picking_transfer_async/*
     odoo/addons/alc_shopfloor_image_product/*
     odoo/addons/alc_shopfloor_mobile_image_product/*
-    odoo/addons/alc_shopfloor_mobile_stock_refill/*
     odoo/addons/alc_shopfloor_mobile_stock_reserve/*
     odoo/addons/alc_shopfloor_mobile_workstation/*
-    odoo/addons/alc_shopfloor_stock_refill/*
     odoo/addons/alc_shopfloor_stock_reserve/*
     odoo/addons/alc_shopfloor_workstation/*
     odoo/addons/alc_shopinvader_category/*
