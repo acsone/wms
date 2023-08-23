@@ -38,6 +38,7 @@
         "alc_shopfloor_product_info",
         "alc_shopfloor_stock_refill",
         "alc_shopfloor_stock_reserve",
+        "alc_shopfloor_mobile_stock_reserve",
     ],
     "data": [],
     "demo": [],
