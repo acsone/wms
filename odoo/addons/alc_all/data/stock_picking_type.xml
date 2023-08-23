@@ -48,4 +48,19 @@
       eval="{'sequence_id': obj().search([('prefix', '=', 'VLB/PICK/')]) or ref('stock.seq_picking_internal')}"
     />
   </function>
+  <data noupdate="1">
+    <record id="stock_picking_type_reassort" model="stock.picking.type">
+      <field name="name">Réassort</field>
+      <field name="code">internal</field>
+      <field name="sequence_code">REASS</field>
+      <field name="default_location_src_id" ref="stock_location_reserve" />
+      <field name="default_location_dest_id" ref="stock.stock_location_stock" />
+      <field name="sequence_id" ref="sequence_reassort" />
+      <field name="show_operations" eval="True" />
+      <field name="empty_internal_package_on_transfer" eval="True" />
+      <field name="reservation_method">at_confirm</field>
+      <field name="use_create_lots">True</field>
+      <field name="use_existing_lots">True</field>
+    </record>
+  </data>
 </odoo>

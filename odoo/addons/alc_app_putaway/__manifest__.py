@@ -47,5 +47,6 @@
         "alc_reception_pharmacy_geo_release_channel",
         "alc_stock_storage_type_sequence_condition",
         "stock_move_free_reservation_reassign",
+        "procurement_auto_create_group",
     ],
 }
