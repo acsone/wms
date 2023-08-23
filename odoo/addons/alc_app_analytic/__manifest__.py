@@ -17,5 +17,6 @@
         "account_analytic_tag",
         "account_move_line_single_analytic_account",
         "account_analytic_account_tag",
+        "alc_analytic_category_report",
     ],
 }

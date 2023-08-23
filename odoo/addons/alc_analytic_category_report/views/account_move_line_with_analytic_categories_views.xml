@@ -12,7 +12,7 @@
         <field name="company_id" groups="base.group_multi_company" />
         <field name="date" />
         <field name="account_id" />
-        <field name="user_type_id" />
+        <field name="account_type" />
         <field name="analytic_account_id" />
         <field name="tag_1_id" />
         <field name="tag_2_id" />
@@ -82,7 +82,7 @@
   </record>
   <menuitem
     id="analytic_analysis_view_menu"
-    parent="account.account_reports_business_intelligence_menu"
+    parent="account.account_reports_management_menu"
     name="Analytic Analysis"
     action="analytic_analysis_act_window"
     sequence="23"

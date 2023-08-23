@@ -9,7 +9,6 @@ exclude: |
   ^odoo/addons/alc_account_invoice_peppol_server_env/|
   ^odoo/addons/alc_account_payment_globalization/|
   ^odoo/addons/alc_address_data/|
-  ^odoo/addons/alc_analytic_category_report/|
   ^odoo/addons/alc_automatic_account_move_line_reconcile/|
   ^odoo/addons/alc_base_rest_api_doc/|
   ^odoo/addons/alc_chronovet/|
