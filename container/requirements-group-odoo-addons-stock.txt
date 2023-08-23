@@ -2,6 +2,7 @@
 # from requirements.txt, requirements-test.txt.
 # Do not edit.
 odoo-addon-internal-stock-quant-package @ git+https://github.com/acsone/stock-logistics-tracking.git@46777fba77919e3998bebc17ec3a60b35f11de62#subdirectory=setup/internal_stock_quant_package
+odoo-addon-procurement-auto-create-group @ git+https://github.com/acsone/stock-logistics-warehouse.git@6e15826cd0bdf71cd6c9f55d17b106b207d10fb3#subdirectory=setup/procurement_auto_create_group
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@b8e3913186e7c02b7846e64dceb611f51e00f163#subdirectory=setup/product_abc_classification_sale_stock
 odoo-addon-product-stock-state @ git+https://github.com/acsone/product-attribute.git@155a28ad23e3d5547d79802e6335868e1ec5d4dc#subdirectory=setup/product_stock_state
 odoo-addon-purchase-stock-packaging==16.0.1.0.0.4
