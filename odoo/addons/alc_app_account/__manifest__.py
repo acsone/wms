@@ -23,5 +23,6 @@
         "partner_invoicing_mode_ten_days",
         # ALC
         "alc_account_security",
+        "alc_partner_invoicing_mode_default",
     ],
 }
