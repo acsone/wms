@@ -38,6 +38,11 @@ msgstr ""
 "boekjaar en het openen van de balans."
 
 #. module: alc_analytic_category_report
+#: model:ir.model,name:alc_analytic_category_report.model_account_move_line_with_analytic_category
+msgid "Account move line for analytic analysis"
+msgstr ""
+
+#. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category__amount
 msgid "Amount"
 msgstr ""
@@ -163,8 +168,3 @@ msgstr "Tag 2"
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category__tag_3_id
 msgid "Tag 3"
 msgstr "Tag 3"
-
-#. module: alc_analytic_category_report
-#: model:ir.model,name:alc_analytic_category_report.model_account_move_line_with_analytic_category
-msgid "account.move.line.with.analytic.category"
-msgstr ""

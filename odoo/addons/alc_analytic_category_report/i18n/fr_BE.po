@@ -39,6 +39,13 @@ msgstr ""
 "correspondantes)"
 
 #. module: alc_analytic_category_report
+#: model:ir.model,name:alc_analytic_category_report.model_account_move_line_with_analytic_category
+#, fuzzy
+#| msgid "account.move.line.with.analytic.category"
+msgid "Account move line for analytic analysis"
+msgstr "account.move.line.with.analytic.category"
+
+#. module: alc_analytic_category_report
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category__amount
 msgid "Amount"
 msgstr "Montant"
@@ -164,8 +171,3 @@ msgstr "Etiquette 2"
 #: model:ir.model.fields,field_description:alc_analytic_category_report.field_account_move_line_with_analytic_category__tag_3_id
 msgid "Tag 3"
 msgstr "Etiquette 3"
-
-#. module: alc_analytic_category_report
-#: model:ir.model,name:alc_analytic_category_report.model_account_move_line_with_analytic_category
-msgid "account.move.line.with.analytic.category"
-msgstr "account.move.line.with.analytic.category"
