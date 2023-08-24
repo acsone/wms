@@ -195,7 +195,6 @@ exclude = [
   'odoo/addons/alc_shopfloor_image_product/*',
   'odoo/addons/alc_shopfloor_mobile_image_product/*',
   'odoo/addons/alc_shopfloor_mobile_workstation/*',
-  'odoo/addons/alc_shopfloor_workstation/*',
   'odoo/addons/alc_shopinvader_category/*',
   'odoo/addons/alc_shopinvader_fixes/*',
   'odoo/addons/alc_standby_delivery/*',
