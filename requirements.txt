@@ -47,7 +47,7 @@ multidict==6.0.4
 num2words==0.5.12
 numpy==1.25.1
 odoo @ git+https://github.com/acsone/odoo.git@e487b580cb20df76946408d14b4538324920f93d
-odoo-addon-account-analytic-account-tag @ git+https://github.com/acsone/account-analytic@390b4a9b3effef6f9e322f43d652b14f1e705ad2#subdirectory=setup/account_analytic_account_tag
+odoo-addon-account-analytic-account-tag @ git+https://github.com/acsone/account-analytic@0df0b863f1efc304e4a91c0d5045d31e20c19068#subdirectory=setup/account_analytic_account_tag
 odoo-addon-account-analytic-required==16.0.1.0.0.8
 odoo-addon-account-analytic-tag @ git+https://github.com/acsone/account-analytic@35dcc7dc41e468b60f6291d9d3f08df90f29d672#subdirectory=setup/account_analytic_tag
 odoo-addon-account-banking-mandate==16.0.1.0.2.8
@@ -122,6 +122,7 @@ odoo-addon-partner-invoicing-mode-ten-days @ git+https://github.com/acsone/accou
 odoo-addon-partner-manual-rank==16.0.1.0.1.3
 odoo-addon-partner-tz==16.0.1.0.0.3
 odoo-addon-pdf-helper==16.0.1.0.0.4
+odoo-addon-procurement-auto-create-group @ git+https://github.com/acsone/stock-logistics-warehouse.git@6e15826cd0bdf71cd6c9f55d17b106b207d10fb3#subdirectory=setup/procurement_auto_create_group
 odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@6403c0518b44a1e3b741f94b550120879ae7c3f8#subdirectory=setup/product_abc_classification
 odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@b8e3913186e7c02b7846e64dceb611f51e00f163#subdirectory=setup/product_abc_classification_sale_stock
 odoo-addon-product-analytic @ git+https://github.com/acsone/account-analytic@f253f9b2d317d6bb0a2967412ce897a92fba321e#subdirectory=setup/product_analytic
@@ -183,8 +184,8 @@ odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wm
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@24f62ed034e25f83be5329bc36ddf84be2b973b8#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@e93ba1225c3e6724b417857b96343d7ed48a2e99#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-mobile-base-auth-api-key @ git+https://github.com/acsone/wms.git@1de9f61eb2ad8757577b38bcf30c006fc0453ffc#subdirectory=setup/shopfloor_mobile_base_auth_api_key
-odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@57d45d512344ad839b83cae4cb7f82f52f37cde1#subdirectory=setup/shopfloor_mobile_packing
-odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@d084aa718c5b067fd99bc7137fcefb78b863ab97#subdirectory=setup/shopfloor_packing
+odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@c25f22ec6adb871aee6d3cae9ffbf4424cd10915#subdirectory=setup/shopfloor_mobile_packing
+odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@c25f22ec6adb871aee6d3cae9ffbf4424cd10915#subdirectory=setup/shopfloor_packing
 odoo-addon-shopfloor-rest-log @ git+https://github.com/acsone/wms.git@dbe32e3decb51672ed0a5656ba4fed037bca7f4f#subdirectory=setup/shopfloor_rest_log
 odoo-addon-shopfloor-workstation @ git+https://github.com/acsone/wms.git@758b160304e097300932c358c7dd8bc915db0c45#subdirectory=setup/shopfloor_workstation
 odoo-addon-shopfloor-workstation-mobile @ git+https://github.com/acsone/wms.git@ebe2544d4bd88b0b1d5d7c43f782902873d6fa2c#subdirectory=setup/shopfloor_workstation_mobile
@@ -252,7 +253,7 @@ odoo-addon-stock-restrict-lot==16.0.1.1.0.2
 odoo-addon-stock-route-mto==16.0.1.0.0.2
 odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@0c90dfb1a4597a2da3beeb5de9fb2495c44d7520#subdirectory=setup/stock_scrap_location_default
 odoo-addon-stock-storage-category-capacity-name==16.0.1.0.0.2
-odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@a5c682259da2989c1578312a48ae61a54d641db3#subdirectory=setup/stock_storage_type
+odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@e6a33796e1a0a5d2bb55f543a02a7005559cce0e#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc @ git+https://github.com/acsone/wms.git@7cbc029691a77db339325af3179e081ea65c3a65#subdirectory=setup/stock_storage_type_putaway_abc
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-uom-unece==16.0.1.1.0.2

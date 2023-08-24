@@ -11,7 +11,7 @@ from odoo.addons.base_geoengine.geo_db import init_postgis
 
 from . import VERSION
 from .call import check_call
-from .dbtools import copydb, cursor, psql_file, recover_columns, ref_id
+from .dbtools import copydb, copytable, cursor, psql_file, recover_columns, ref_id
 from .migration import MigrationScriptsManager
 from .pseudo_env import pseudo_env
 
@@ -454,7 +454,7 @@ def drop_materialized_views():
             openupgrade.logged_query(cr, query)
 
 
-@task("16.0.1.0.0")
+@task("16.0.2.3.12")
 def restore_account_analytic_tag_xmlids():
     """The account_analytic_tag xmlids are dropped during the migration process so.
 
@@ -476,6 +476,13 @@ def restore_account_analytic_tag_xmlids():
                 """
         for ana_tag in ana_tags:
             openupgrade.logged_query(cr, query, ana_tag)
+
+
+@task("16.0.2.3.12")
+def recover_account_analytyc_tag_ids():
+    # copy table account_analytic_account_tag_rel from db10 to db16
+    table = "account_analytic_account_tag_rel"
+    copytable(DB_10_SRC_NOT_CLEANED, DB_16_POSTMIG, table)
 
 
 _register_migration_scripts_in_tasks("pre-")

@@ -8,4 +8,17 @@
     <value model="stock.rule" eval="obj().search([('action', '=', 'buy')]).ids" />
     <value eval="{'location_dest_id': ref('stock.stock_location_company')}" />
   </function>
+
+  <data noupdate="1">
+    <record id="stock_rule_reserve_to_stock" model="stock.rule">
+      <field name="name">Reserve to stock</field>
+      <field name="action">pull</field>
+      <field name="picking_type_id" ref="stock_picking_type_reassort" />
+      <field name="location_src_id" ref="stock_location_reserve" />
+      <field name="location_dest_id" ref="stock.stock_location_stock" />
+      <field name="procure_method">make_to_stock</field>
+      <field name="route_id" ref="stock_route_reassort" />
+      <field name="auto_create_group" eval="True" />
+    </record>
+  </data>
 </odoo>
