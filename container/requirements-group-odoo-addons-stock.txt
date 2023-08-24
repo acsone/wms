@@ -10,7 +10,7 @@ odoo-addon-sale-stock-picking-blocking==16.0.1.0.0.7
 odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/stock-logistics-workflow.git@1fba8cf43ce18100099b7b3d1bd6f31a8ab1aa6d#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-transport.git@be9e4ffe220e4a69da78bf1e1b3bf29e7e30bf73#subdirectory=setup/shipment_advice
 odoo-addon-shipment-advice-planner @ git+https://github.com/acsone/stock-logistics-transport.git@02392647556d5b7bb61a250d5e170ffa5ad09b57#subdirectory=setup/shipment_advice_planner
-odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/acsone/stock-logistics-transport.git@b4f080b42a32026d7b28d255434584cc30c285db#subdirectory=setup/shipment_advice_planner_toursolver
+odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/acsone/stock-logistics-transport.git@56fc7545b0f1e80baa4e059855f2cac346cbdadb#subdirectory=setup/shipment_advice_planner_toursolver
 odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com/acsone/stock-logistics-transport.git@b4f080b42a32026d7b28d255434584cc30c285db#subdirectory=setup/shipment_advice_planner_toursolver_queue_job
 odoo-addon-stock-available==16.0.1.0.1.3
 odoo-addon-stock-available-immediately==16.0.1.0.0.5
