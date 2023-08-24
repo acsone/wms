@@ -142,3 +142,12 @@ def recover_columns(db_10, db_16, table, columns_to_recover=None):
             DROP TABLE {table}_copy
             """
         cr.execute(query)
+
+
+def copytable(db_10, db_16, table):
+    """Copy table from db_10 to db_16."""
+    logger.info(f"Copying table {table} from {db_10} to {db_16}.")
+    check_call(
+        [f"pg_dump -t {table} -d {db_10} | psql -d{db_16}"],
+        shell=True,
+    )
