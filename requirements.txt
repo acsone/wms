@@ -176,7 +176,7 @@ odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
 odoo-addon-session-db==16.0.1.0.4
 odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-transport.git@be9e4ffe220e4a69da78bf1e1b3bf29e7e30bf73#subdirectory=setup/shipment_advice
 odoo-addon-shipment-advice-planner @ git+https://github.com/acsone/stock-logistics-transport.git@02392647556d5b7bb61a250d5e170ffa5ad09b57#subdirectory=setup/shipment_advice_planner
-odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/acsone/stock-logistics-transport.git@b4f080b42a32026d7b28d255434584cc30c285db#subdirectory=setup/shipment_advice_planner_toursolver
+odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/acsone/stock-logistics-transport.git@56fc7545b0f1e80baa4e059855f2cac346cbdadb#subdirectory=setup/shipment_advice_planner_toursolver
 odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com/acsone/stock-logistics-transport.git@b4f080b42a32026d7b28d255434584cc30c285db#subdirectory=setup/shipment_advice_planner_toursolver_queue_job
 odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@0d339e8dc034a7da2d554f46ff6b6224859f6438#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@22e70153a9845d9c9316170728ed0a435b39ffee#subdirectory=setup/shopfloor_base
