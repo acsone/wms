@@ -454,6 +454,30 @@ def drop_materialized_views():
             openupgrade.logged_query(cr, query)
 
 
+@task("16.0.1.0.0")
+def restore_account_analytic_tag_xmlids():
+    """The account_analytic_tag xmlids are dropped during the migration process so.
+
+    we need to recover them as they are heavily used in mis_builder reports
+    """
+
+    with cursor(DB_10_SRC_NOT_CLEANED) as cr:
+        query = """
+                SELECT noupdate, name, module, model, res_id
+                FROM ir_model_data
+                WHERE model like 'account.analytic.tag'
+                """
+        openupgrade.logged_query(cr, query)
+        ana_tags = cr.fetchall()
+    with cursor(DB_16_POSTMIG) as cr:
+        query = """
+                INSERT INTO ir_model_data(noupdate, name, module, model, res_id)
+                VALUES (%s, %s, %s, %s, %s)
+                """
+        for ana_tag in ana_tags:
+            openupgrade.logged_query(cr, query, ana_tag)
+
+
 _register_migration_scripts_in_tasks("pre-")
 
 
