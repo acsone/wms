@@ -69,6 +69,7 @@
         "alc_stock_location_data",
         "alc_mail_thread_no_auto_subscribe_notify",
         "alc_stock_picking_batch_creation",
+        "alc_stock_picking_batch_cancel",
         "alc_product_incoming_stock_move_action",
         "alc_product_is_new",
         "alc_stock_release_channel_tag",
