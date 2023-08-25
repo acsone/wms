@@ -614,6 +614,7 @@ def set_modules_to_remove():
         "analytic_tag_dimension_sale_warning",
         "alc_shopfloor_location_info",  # included in base module
         "alc_shopfloor_mobile_stock_refill",  # included in base module
+        "document_unindex_content",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     # with cursor(DB_16_POSTMIG) as cr:

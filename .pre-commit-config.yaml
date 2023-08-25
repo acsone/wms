@@ -135,7 +135,6 @@ exclude: |
   ^odoo/addons/connector_esb/|
   ^odoo/addons/delivery_rounds/|
   ^odoo/addons/delivery_rounds_alcyon/|
-  ^odoo/addons/document_unindex_content/|
   ^odoo/addons/elasticsearch_product_cache/|
   ^odoo/addons/elasticsearch_search/|
   ^odoo/addons/elasticsearch_security/|
