@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-05 13:21+0000\n"
-"PO-Revision-Date: 2022-12-05 13:21+0000\n"
+"POT-Creation-Date: 2023-08-28 09:04+0000\n"
+"PO-Revision-Date: 2023-08-28 09:04+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: \n"
@@ -17,24 +17,45 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_packaging
+#: model:ir.model.fields,help:alc_product_packaging.field_product_product__product_package_type_id
+msgid ""
+"Defines a 'default' package type for this product to be applied on packages "
+"without product packagings and on put-away computation based on package type"
+" for product not in a package"
+msgstr ""
+"Définit un type de stockage de colis par défaut pour cet article, à appliquer "
+"sur les colis de cet article ou les articles sans colis pour les calculs de "
+"rangement."
+
+#. module: alc_product_packaging
 #: model:product.packaging.level,name:alc_product_packaging.product_packaging_type_box
 msgid "Boîte"
-msgstr ""
+msgstr "Boîte"
 
 #. module: alc_product_packaging
 #: model:product.packaging.level,name:alc_product_packaging.product_packaging_type_shrink_wrap
 msgid "Fardelage"
-msgstr ""
+msgstr "Fardelage"
+
+#. module: alc_product_packaging
+#: model:ir.model.fields,field_description:alc_product_packaging.field_product_product__product_package_type_id
+msgid "Package type"
+msgstr "Type de stockage"
 
 #. module: alc_product_packaging
 #: model:product.packaging.level,name:alc_product_packaging.product_packaging_type_palette
 msgid "Palette"
-msgstr ""
+msgstr "Palette"
 
 #. module: alc_product_packaging
 #: model:ir.model,name:alc_product_packaging.model_product_template
 msgid "Product"
 msgstr "Article"
+
+#. module: alc_product_packaging
+#: model:ir.model,name:alc_product_packaging.model_product_product
+msgid "Product Variant"
+msgstr "Modèle d'article"
 
 #. module: alc_product_packaging
 #: model:ir.model.fields,field_description:alc_product_packaging.field_product_product__unit_in_box
