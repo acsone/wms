@@ -14,6 +14,7 @@
         # OCA
         "account_invoice_merge",
         "account_invoice_check_total",
+        "account_move_sent_usability",
         "mis_builder",
         "mis_builder_budget",
         "partner_invoicing_mode",
