@@ -17,17 +17,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_packaging
-#: model:ir.model.fields,help:alc_product_packaging.field_product_product__product_package_type_id
-msgid ""
-"Defines a 'default' package type for this product to be applied on packages "
-"without product packagings and on put-away computation based on package type"
-" for product not in a package"
-msgstr ""
-"Définit un type de stockage de colis par défaut pour cet article, à appliquer "
-"sur les colis de cet article ou les articles sans colis pour les calculs de "
-"rangement."
-
-#. module: alc_product_packaging
 #: model:product.packaging.level,name:alc_product_packaging.product_packaging_type_box
 msgid "Boîte"
 msgstr "Boîte"
@@ -38,11 +27,6 @@ msgid "Fardelage"
 msgstr "Fardelage"
 
 #. module: alc_product_packaging
-#: model:ir.model.fields,field_description:alc_product_packaging.field_product_product__product_package_type_id
-msgid "Package type"
-msgstr "Type de stockage"
-
-#. module: alc_product_packaging
 #: model:product.packaging.level,name:alc_product_packaging.product_packaging_type_palette
 msgid "Palette"
 msgstr "Palette"
@@ -51,11 +35,6 @@ msgstr "Palette"
 #: model:ir.model,name:alc_product_packaging.model_product_template
 msgid "Product"
 msgstr "Article"
-
-#. module: alc_product_packaging
-#: model:ir.model,name:alc_product_packaging.model_product_product
-msgid "Product Variant"
-msgstr "Modèle d'article"
 
 #. module: alc_product_packaging
 #: model:ir.model.fields,field_description:alc_product_packaging.field_product_product__unit_in_box
@@ -79,3 +58,18 @@ msgstr "Unités en Fardelage"
 #: model_terms:ir.ui.view,arch_db:alc_product_packaging.product_template_form_view_procurement_button
 msgid "Units"
 msgstr "Unités"
+
+#~ msgid ""
+#~ "Defines a 'default' package type for this product to be applied on "
+#~ "packages without product packagings and on put-away computation based on "
+#~ "package type for product not in a package"
+#~ msgstr ""
+#~ "Définit un type de stockage de colis par défaut pour cet article, à "
+#~ "appliquer sur les colis de cet article ou les articles sans colis pour "
+#~ "les calculs de rangement."
+
+#~ msgid "Package type"
+#~ msgstr "Type de stockage"
+
+#~ msgid "Product Variant"
+#~ msgstr "Modèle d'article"
