@@ -62,10 +62,12 @@ class SaleOrder(sale_order.SaleOrder):
         if config["test_enable"]:
             # Do not send mails during tests
             return
+        mail_template.model = self._name
         for canceled_order in canceled_orders:
-            mail_template.send_mail(canceled_order.id)
+            mail_template.send_mail(canceled_order.id, force_send=True)
 
     def _filter_sale_order_lines_to_cancel(self, lines):
         return lines.filtered(
             lambda line: not line.order_id.carrier_id.is_long_term_delivery
+            and line.state not in ("draft", "sent")
         )

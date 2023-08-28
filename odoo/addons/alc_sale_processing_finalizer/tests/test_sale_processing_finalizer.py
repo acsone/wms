@@ -34,6 +34,9 @@ class TestCron(TransactionCase):
             cls.p2 = cls.env["product.product"].create(
                 {"name": "Unittest P2", "type": "product"}
             )
+            cls.p3 = cls.env["product.product"].create(
+                {"name": "P3", "type": "product"}
+            )
             cls.so_after_3months_to_purge = cls.SaleOrder.create(
                 {
                     "partner_id": cls.partner.id,
@@ -45,6 +48,23 @@ class TestCron(TransactionCase):
                                 "product_id": cls.p1.id,
                                 "product_uom_qty": 2,
                                 "product_uom": cls.p1.uom_id.id,
+                                "price_unit": 1,
+                            },
+                        )
+                    ],
+                }
+            )
+            cls.so_draft_auto_finalize = cls.SaleOrder.create(
+                {
+                    "partner_id": cls.partner.id,
+                    "warehouse_id": cls.warehouse_1.id,
+                    "order_line": [
+                        Command.create(
+                            {
+                                "name": cls.p3.name,
+                                "product_id": cls.p3.id,
+                                "product_uom_qty": 1,
+                                "product_uom": cls.p3.uom_id.id,
                                 "price_unit": 1,
                             },
                         )
@@ -101,6 +121,12 @@ class TestCron(TransactionCase):
         )
         self.assertEqual(
             self.so_after_3months_to_keep.order_line.product_qty_remains_to_deliver, 6
+        )
+
+        # Check that quantities for SO draft auto finalize are still there
+        self.assertEqual(self.so_draft_auto_finalize.order_line.product_qty_canceled, 0)
+        self.assertEqual(
+            self.so_draft_auto_finalize.order_line.product_qty_remains_to_deliver, 1
         )
 
     def test_long_term_carrier(self):
