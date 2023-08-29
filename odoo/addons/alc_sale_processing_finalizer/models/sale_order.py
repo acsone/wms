@@ -8,10 +8,10 @@ from dateutil.relativedelta import relativedelta
 from odoo import api, fields
 from odoo.tools import config
 
-from odoo.addons.alc_sale_consignment.models import sale_order
+from odoo.addons.alc_sale_consignment.models.sale_order import SaleOrder as Order
 
 
-class SaleOrder(sale_order.SaleOrder):
+class SaleOrder(Order):
 
     auto_finalize_processing = fields.Boolean(
         default=True, help="Set to true to automatically purge SO after 3 months"

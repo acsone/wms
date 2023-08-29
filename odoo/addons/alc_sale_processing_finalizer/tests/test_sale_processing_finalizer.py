@@ -37,6 +37,9 @@ class TestCron(TransactionCase):
             cls.p3 = cls.env["product.product"].create(
                 {"name": "P3", "type": "product"}
             )
+            cls.p4 = cls.env["product.product"].create(
+                {"name": "P4", "type": "product"}
+            )
             cls.so_after_3months_to_purge = cls.SaleOrder.create(
                 {
                     "partner_id": cls.partner.id,
@@ -93,17 +96,38 @@ class TestCron(TransactionCase):
             cls.so_after_3months_to_purge.action_done()  # lock the so
             cls.so_after_3months_to_keep.action_confirm()
             cls.so_after_3months_to_keep.action_done()  # lock the so
+        cls.so_auto_finalize = cls.SaleOrder.create(
+            {
+                "partner_id": cls.partner.id,
+                "warehouse_id": cls.warehouse_1.id,
+                "order_line": [
+                    Command.create(
+                        {
+                            "name": cls.p4.name,
+                            "product_id": cls.p4.id,
+                            "product_uom_qty": 7,
+                            "product_uom": cls.p4.uom_id.id,
+                            "price_unit": 1,
+                        },
+                    )
+                ],
+            }
+        )
+        cls.so_auto_finalize.action_confirm()
+        cls.so_auto_finalize.action_done()
 
     def test_cron_method(self):
         """
-        Data: 1 so (to_purge) with auto_finalize_processing set and 1 so (to_keep).
+        Data: 1 so (old to_purge) with auto_finalize_processing set and confirmed.
 
-              without. Both so's are confirmed and done.
+              1 so (old to_keep) with auto_finalize_processing not set and confirmed..
+              1 so (olf draft to keep) with auto_finalize_processing set.
+              1 so (young to keep) with auto_finalize_processing set and confirmed.
         case: trigger the cron method: cancel_sales_bo_gt_3months
         result: product_qty_canceled is > 0 and product_qty_remains_to_deliver = 0 for
                 the so to_purge
                 product_qty_canceled is = 0 and product_qty_remains_to_deliver > 0 for
-                the so to_keep
+                the so's to_keep
         """
         self.env["sale.order"].cancel_sales_bo_gt_3months()
 
@@ -113,6 +137,11 @@ class TestCron(TransactionCase):
         )
         self.assertEqual(
             self.so_after_3months_to_purge.order_line.product_qty_remains_to_deliver, 0
+        )
+        # check that SO to purge pickings are cancelled
+        self.assertEqual(
+            self.so_after_3months_to_purge.picking_ids.mapped("state"),
+            ["cancel", "cancel"],
         )
 
         # Check that quantities for SO to keep are still there
@@ -127,6 +156,12 @@ class TestCron(TransactionCase):
         self.assertEqual(self.so_draft_auto_finalize.order_line.product_qty_canceled, 0)
         self.assertEqual(
             self.so_draft_auto_finalize.order_line.product_qty_remains_to_deliver, 1
+        )
+
+        # Check that quantities for SO 1 month auto finalize are still there
+        self.assertEqual(self.so_auto_finalize.order_line.product_qty_canceled, 0)
+        self.assertEqual(
+            self.so_auto_finalize.order_line.product_qty_remains_to_deliver, 7
         )
 
     def test_long_term_carrier(self):
