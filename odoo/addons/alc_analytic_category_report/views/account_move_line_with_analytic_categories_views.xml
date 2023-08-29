@@ -74,12 +74,6 @@
     <field name="domain">[]</field>
     <field name="context">{}</field>
   </record>
-  <record model="ir.ui.menu" id="analytic_analysis_menu">
-    <field name="name">Analytic Analysis</field>
-    <field name="parent_id" ref="account.menu_finance_reports" />
-    <field name="action" ref="analytic_analysis_act_window" />
-    <field name="sequence" eval="202" />
-  </record>
   <menuitem
     id="analytic_analysis_view_menu"
     parent="account.account_reports_management_menu"
