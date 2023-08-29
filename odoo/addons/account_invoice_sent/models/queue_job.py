@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, models
+from odoo import _
+
+from odoo.addons.queue_job.models.queue_job import QueueJob as QueueJobBase
 
 
-class QueueJob(models.Model):
-    _inherit = "queue.job"
-
-    @api.multi
+class QueueJob(QueueJobBase):
     def related_action_open_invoice(self):
         """Open a form view with the invoices of the job.
 
@@ -30,13 +28,12 @@ class QueueJob(models.Model):
 
         if all(
             invoice_type in ("out_invoice", "out_refund")
-            for invoice_type in records.mapped("type")
+            for invoice_type in records.mapped("move_type")
         ):
-            form_xmlid = "account.invoice_form"
-            tree_xmlid = "account.invoice_tree"
+            tree_xmlid = "account.view_invoice_tree"
         else:
-            form_xmlid = "account.invoice_supplier_form"
-            tree_xmlid = "account.invoice_supplier_tree"
+            tree_xmlid = "account.view_in_invoice_tree"
+        form_xmlid = "account.view_move_form"
         form_view_id = self.env.ref(form_xmlid).id
         tree_view_id = self.env.ref(tree_xmlid).id
 

@@ -33,3 +33,10 @@ Contributors
 ------------
 
 * Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
+
+
+Roadmap
+=======
+
+- This has to be refactored in order to be sent to OCA. This could be merged with
+  https://github.com/OCA/account-invoicing/tree/16.0/account_invoice_mass_sending

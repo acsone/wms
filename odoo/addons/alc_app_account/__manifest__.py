@@ -23,6 +23,7 @@
         "partner_invoicing_mode_monthly",
         "partner_invoicing_mode_ten_days",
         # ALC
+        "account_invoice_sent",
         "alc_account_security",
         "alc_partner_invoicing_mode_default",
     ],

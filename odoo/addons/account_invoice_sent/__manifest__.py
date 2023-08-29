@@ -1,20 +1,25 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016-2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "Account Invoice Sent",
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "author": "BCIM, ACSONE SA/NV",
     "license": "AGPL-3",
     "category": "Accounting & Finance",
-    "depends": ["account", "web_notify", "queue_job"],
+    "depends": [
+        "account_move_sent_usability",
+        "account_invoice_transmit_method",
+        "web_notify",
+        "queue_job",
+    ],
     "data": [
-        "views/account_invoice.xml",
+        "security/security.xml",
         "views/account_invoice_print_views.xml",
         "views/res_partner.xml",
-        "security/ir.model.access.csv",
-        "wizards/account_invoice_state_view.xml",
+        "wizards/account_invoice_sent_view.xml",
+        "data/queue_job_channel.xml",
+        "data/queue_job_functions.xml",
     ],
     "installable": True,
 }
