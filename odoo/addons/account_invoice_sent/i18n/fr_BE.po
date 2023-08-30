@@ -34,8 +34,9 @@ msgstr "Un rapport de factures est disponible."
 
 #. module: account_invoice_sent
 #: code:addons/account_invoice_sent/wizards/account_invoice_state.py:56
-#, python-format
-msgid "A report will be generated in the background."
+#, fuzzy, python-format
+#| msgid "A report will be generated in the background."
+msgid "A report will be generated in background."
 msgstr "Un rapport va être généré en tâche de fond."
 
 #. module: account_invoice_sent
@@ -173,8 +174,9 @@ msgstr "Envoi en masse de factures"
 
 #. module: account_invoice_sent
 #: code:addons/account_invoice_sent/wizards/account_invoice_state.py:70
-#, python-format
-msgid "Invoices will be sent by email in the background."
+#, fuzzy, python-format
+#| msgid "Invoices will be sent by email in the background."
+msgid "Invoices will be send by email in background."
 msgstr "Des factures vont être envoyer par courriel en tâche de fond."
 
 #. module: account_invoice_sent
