@@ -14,6 +14,7 @@
         # OCA
         "account_invoice_merge",
         "account_invoice_check_total",
+        "account_move_sent_usability",
         "mis_builder",
         "mis_builder_budget",
         "partner_invoicing_mode",
@@ -22,6 +23,7 @@
         "partner_invoicing_mode_monthly",
         "partner_invoicing_mode_ten_days",
         # ALC
+        "account_invoice_sent",
         "alc_account_security",
         "alc_partner_invoicing_mode_default",
     ],
