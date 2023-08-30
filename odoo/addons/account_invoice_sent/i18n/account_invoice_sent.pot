@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_invoice_sent
+# 	* account_invoice_sent
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,121 +14,122 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_form
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_form
 msgid "<span>Invoices</span>"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "<strong>Please select operation...</strong>"
 msgstr ""
 
 #. module: account_invoice_sent
-#: code:addons/account_invoice_sent/models/account_invoice_print.py:110
+#. odoo-python
+#: code:addons/account_invoice_sent/models/account_invoice_print.py:0
 #, python-format
 msgid "A report for invoices is available."
 msgstr ""
 
 #. module: account_invoice_sent
-#: code:addons/account_invoice_sent/wizards/account_invoice_state.py:56
+#. odoo-python
+#: code:addons/account_invoice_sent/wizards/account_invoice_sent.py:0
 #, python-format
-msgid "A report will be generated in background."
+msgid "A report will be generated in the background."
 msgstr ""
 
 #. module: account_invoice_sent
 #: model:ir.actions.act_window,name:account_invoice_sent.action_account_invoice_print_form
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_form
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_form
 msgid "Account Invoice Print"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_res_partner_invoice_amount_copy
-#: model:ir.model.fields,field_description:account_invoice_sent.field_res_users_invoice_amount_copy
-#: model:ir.model.fields,field_description:account_invoice_sent.field_shopinvader_partner_invoice_amount_copy
+#: model:ir.model.fields,field_description:account_invoice_sent.field_res_partner__invoice_amount_copy
+#: model:ir.model.fields,field_description:account_invoice_sent.field_res_users__invoice_amount_copy
 msgid "Amount of invoice copies to generate"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_count_email
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent__count_email
 msgid "By email"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "Cancel"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print_create_uid
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_create_uid
+#: model:ir.model,name:account_invoice_sent.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print__create_uid
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print_create_date
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_create_date
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print__create_date
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print_display_name
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_display_name
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print__display_name
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print_document
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print__document
 msgid "Document"
 msgstr ""
 
 #. module: account_invoice_sent
-#: selection:account.invoice.print,state:0
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
+#: model:ir.model.fields.selection,name:account_invoice_sent.selection__account_invoice_print__state__done
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
 msgid "Done"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
-#: selection:res.partner,invoice_sending_method:0
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "Email"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_count_email_missing
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent__count_email_missing
 msgid "Email address missing"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print_fname
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print__fname
 msgid "Fname"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,help:account_invoice_sent.field_account_invoice_sent_email_copy
-msgid "For printed documents"
-msgstr ""
-
-#. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print_id
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_id
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print__id
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent__id
 msgid "ID"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,help:account_invoice_sent.field_res_partner_invoice_amount_copy
-#: model:ir.model.fields,help:account_invoice_sent.field_res_users_invoice_amount_copy
-#: model:ir.model.fields,help:account_invoice_sent.field_shopinvader_partner_invoice_amount_copy
-msgid "If amount = 1, then 2 invoices will be generated in the pdf (original + copy)"
+#: model:ir.model.fields,help:account_invoice_sent.field_res_partner__invoice_amount_copy
+#: model:ir.model.fields,help:account_invoice_sent.field_res_users__invoice_amount_copy
+msgid ""
+"If amount = 1, then 2 invoices will be generated in the pdf (original + "
+"copy)"
 msgstr ""
 
 #. module: account_invoice_sent
-#: selection:account.invoice.print,state:0
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
+#: model:ir.model.fields.selection,name:account_invoice_sent.selection__account_invoice_print__state__progress
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
 msgid "In Progress"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model,name:account_invoice_sent.model_account_invoice
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print__invoice_ids
 msgid "Invoice"
 msgstr ""
 
@@ -138,66 +139,68 @@ msgid "Invoice Prints"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print_invoice_ids
-msgid "Invoice ids"
+#. odoo-python
+#: code:addons/account_invoice_sent/models/account_invoice_print.py:0
+#, python-format
+msgid "Invoice generation has suceeded"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_res_partner_invoice_sending_method
-#: model:ir.model.fields,field_description:account_invoice_sent.field_res_users_invoice_sending_method
-#: model:ir.model.fields,field_description:account_invoice_sent.field_shopinvader_partner_invoice_sending_method
-msgid "Invoice sending method"
-msgstr ""
-
-#. module: account_invoice_sent
-#: code:addons/account_invoice_sent/models/account_invoice.py:63
-#: code:addons/account_invoice_sent/models/account_invoice_print.py:128
-#: code:addons/account_invoice_sent/wizards/account_invoice_state.py:83
+#. odoo-python
+#: code:addons/account_invoice_sent/models/account_invoice_print.py:0
+#: code:addons/account_invoice_sent/models/account_move.py:0
+#: code:addons/account_invoice_sent/wizards/account_invoice_sent.py:0
 #, python-format
 msgid "Invoice sent"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
 msgid "Invoices"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "Invoices Mass Sending"
 msgstr ""
 
 #. module: account_invoice_sent
-#: code:addons/account_invoice_sent/wizards/account_invoice_state.py:70
-#, python-format
-msgid "Invoices will be send by email in background."
+#: model:ir.model,name:account_invoice_sent.model_account_invoice_print
+msgid "Invoices sending report"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print___last_update
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent___last_update
+#. odoo-python
+#: code:addons/account_invoice_sent/wizards/account_invoice_sent.py:0
+#, python-format
+msgid "Invoices will be sent by email in the background."
+msgstr ""
+
+#. module: account_invoice_sent
+#: model:ir.model,name:account_invoice_sent.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_invoice_sent
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print____last_update
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print_write_uid
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_write_uid
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print__write_uid
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print_write_date
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_write_date
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print__write_date
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: account_invoice_sent
-#: selection:res.partner,invoice_sending_method:0
-msgid "Letter"
-msgstr ""
-
-#. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "Mark as sent"
 msgstr ""
 
@@ -207,28 +210,25 @@ msgid "Mass Sending"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
 msgid "My reports"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "Only mark as sent without sending anything"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model,name:account_invoice_sent.model_res_partner
-msgid "Partner"
-msgstr ""
-
-#. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
 msgid "Print"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
-msgid "Print invoices for partners having an invoice sending method 'letter'. Also mark as sent"
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+msgid ""
+"Print invoices for partners having an invoice sending method 'letter'. Also "
+"mark as sent"
 msgstr ""
 
 #. module: account_invoice_sent
@@ -237,69 +237,42 @@ msgid "Queue Job"
 msgstr ""
 
 #. module: account_invoice_sent
-#: code:addons/account_invoice_sent/models/queue_job.py:24
+#. odoo-python
+#: code:addons/account_invoice_sent/models/queue_job.py:0
 #, python-format
 msgid "Related Record"
 msgstr ""
 
 #. module: account_invoice_sent
-#: code:addons/account_invoice_sent/models/queue_job.py:49
+#. odoo-python
+#: code:addons/account_invoice_sent/models/queue_job.py:0
 #, python-format
 msgid "Related Records"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_print_view
 msgid "Search Account Invoice Print"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
-msgid "Send by email invoices for partners having an invoice sending method 'email'. Also mark as sent"
+#: model_terms:ir.ui.view,arch_db:account_invoice_sent.account_invoice_sent_view
+msgid ""
+"Send by email invoices for partners having an invoice sending method "
+"'email'. Also mark as sent"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_email_copy
-msgid "Send copy by email"
-msgstr ""
-
-#. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print_send_email_copy
-msgid "Send email copy"
-msgstr ""
-
-#. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sending_method
-msgid "Sending Method"
-msgstr ""
-
-#. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print_state
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_print__state
 msgid "State"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent_count_print
+#: model:ir.model.fields,field_description:account_invoice_sent.field_account_invoice_sent__count_print
 msgid "To print"
 msgstr ""
 
 #. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_filter
-msgid "Unsent"
-msgstr ""
-
-#. module: account_invoice_sent
-#: model:ir.ui.view,arch_db:account_invoice_sent.view_account_invoice_filter
-msgid "Unsent Proforma/Open/Paid Invoices"
-msgstr ""
-
-#. module: account_invoice_sent
-#: model:ir.model,name:account_invoice_sent.model_account_invoice_print
-msgid "account.invoice.print"
-msgstr ""
-
-#. module: account_invoice_sent
 #: model:ir.model,name:account_invoice_sent.model_account_invoice_sent
-msgid "account.invoice.sent"
+msgid "Wizard to send invoices"
 msgstr ""
-
