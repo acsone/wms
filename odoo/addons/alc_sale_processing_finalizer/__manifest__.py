@@ -21,6 +21,7 @@
         "views/sale_order_views.xml",
         "views/delivery_carrier_views.xml",
         "data/ir_cron.xml",
+        "data/queue_job_function.xml",
         "data/mail_template_30.xml",
     ],
     "installable": True,

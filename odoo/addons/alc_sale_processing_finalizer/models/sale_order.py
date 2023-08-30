@@ -8,10 +8,10 @@ from dateutil.relativedelta import relativedelta
 from odoo import api, fields
 from odoo.tools import config
 
-from odoo.addons.alc_sale_consignment.models import sale_order
+from odoo.addons.alc_sale_consignment.models.sale_order import SaleOrder as Order
 
 
-class SaleOrder(sale_order.SaleOrder):
+class SaleOrder(Order):
 
     auto_finalize_processing = fields.Boolean(
         default=True, help="Set to true to automatically purge SO after 3 months"
@@ -62,10 +62,12 @@ class SaleOrder(sale_order.SaleOrder):
         if config["test_enable"]:
             # Do not send mails during tests
             return
+        mail_template.model = self._name
         for canceled_order in canceled_orders:
-            mail_template.send_mail(canceled_order.id)
+            mail_template.send_mail(canceled_order.id, force_send=True)
 
     def _filter_sale_order_lines_to_cancel(self, lines):
         return lines.filtered(
             lambda line: not line.order_id.carrier_id.is_long_term_delivery
+            and line.state not in ("draft", "sent")
         )
