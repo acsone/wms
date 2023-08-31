@@ -33,10 +33,9 @@ class AccountMoveLine(MoveLine):
                         distrib=rec.analytic_distribution,
                     )
                 )
-            rec.analytic_account_id = (
-                self.env["account.analytic.account"].browse(
-                    int(next(iter(rec.analytic_distribution.keys())))
-                )
-                if rec.analytic_distribution
-                else False
-            )
+            account_id = False
+            if rec.analytic_distribution:
+                key = next(iter(rec.analytic_distribution.keys()))
+                if isinstance(key, str) and key.isnumeric():
+                    account_id = int(key)
+            rec.analytic_account_id = account_id
