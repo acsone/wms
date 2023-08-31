@@ -83,3 +83,34 @@ class TestAccountAnalyticAccount(AccountTestInvoicingCommon):
         self.assertEqual(
             move_line.analytic_distribution, {f"{self.analytic_account_a.id}": 100}
         )  # no change
+
+    def test_single_analytic_account_false(self):
+        """
+        When set a valid analytic_distribution is 1 analytic account at 100%.
+
+        If we try to set 2 accounts or 1 account not at 100% we get a ValidationError
+        """
+        out_invoice = self.env["account.move"].create(
+            [
+                {
+                    "move_type": "out_invoice",
+                    "partner_id": self.partner_a.id,
+                    "date": "2017-01-01",
+                    "invoice_date": "2017-01-01",
+                    "invoice_line_ids": [
+                        Command.create(
+                            {
+                                "product_id": self.product_a.id,
+                                "price_unit": 200.0,
+                            }
+                        )
+                    ],
+                }
+            ]
+        )
+        move_line = out_invoice.invoice_line_ids[0]
+        self.assertFalse(move_line.analytic_distribution)
+        # set a valid distribution: 1 analytic account at 100%
+        move_line.analytic_distribution = {False: 100}
+        move_line.invalidate_recordset()
+        self.assertFalse(move_line.analytic_account_id)
