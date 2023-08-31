@@ -16,6 +16,7 @@ class AccountMoveLine(MoveLine):
         string="Analytic Account",
         compute="_compute_analytic_account_id",
         store=True,
+        index=True,
     )
 
     @api.depends("analytic_distribution")
