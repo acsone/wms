@@ -56,7 +56,6 @@ class ShipmentAdvice(ShipmentAdviceBase):
         self.in_release_channel_auto_process = True
         try:
             self.planned_picking_ids._load_in_shipment(self)
-            self.action_confirm()
             self.action_in_progress()
             self.action_done()
         except Exception as error:  # pylint: disable=broad-except
