@@ -22,6 +22,13 @@ msgid "Ignore Release Channel Block"
 msgstr "Ignorer le blocage de la livraison"
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_assign_blocking_unavailable_product.stock_picking_form_view
+#, fuzzy
+#| msgid "Ignore Release Channel Block"
+msgid "Ignore release channel block"
+msgstr "Ignorer le blocage de la livraison"
+
+#. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_move__is_backorder
 msgid "Is Backorder"
 msgstr ""
