@@ -228,6 +228,7 @@ odoo-addon-base-business-document-import @ git+https://github.com/OCA/edi.git@re
 # OCA/l10n-belgium
 odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/186/head#subdirectory=setup/l10n_be_bpost_address_validation
 odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/188/head#subdirectory=setup/l10n_be_bpost_address_autocomplete
+odoo-addon-l10n-be-eco-tax @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/199/head#subdirectory=setup/l10n_be_eco_tax
 
 # OCA/rest-framework
 odoo-addon-base-rest @ git+https://github.com/OCA/rest-framework.git@refs/pull/368/head#subdirectory=setup/base_rest
