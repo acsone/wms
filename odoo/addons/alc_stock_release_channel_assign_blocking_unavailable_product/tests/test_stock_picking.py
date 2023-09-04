@@ -85,8 +85,7 @@ class TestStockPicking(TransactionCase):
         force it
         """
         self.test_00()
-        self.backorder.ignore_release_channel_block = True
-        self.backorder.assign_release_channel()
+        self.backorder.button_ignore_release_channel_block()
         self.assertTrue(self.backorder.release_channel_id)
 
     def test_05(self):
