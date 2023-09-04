@@ -15,6 +15,7 @@
         "account_invoice_merge",
         "account_invoice_check_total",
         "account_move_sent_usability",
+        "account_payment_mode_auto_reconcile",
         "mis_builder",
         "mis_builder_budget",
         "partner_invoicing_mode",
