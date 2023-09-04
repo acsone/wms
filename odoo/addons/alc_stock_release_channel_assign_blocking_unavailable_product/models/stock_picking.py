@@ -3,10 +3,12 @@
 
 from odoo import api, fields
 
-from odoo.addons.stock.models.stock_picking import Picking
+from odoo.addons.stock_release_channel.models.stock_picking import (
+    StockPicking as StockPickingBase,
+)
 
 
-class StockPicking(Picking):
+class StockPicking(StockPickingBase):
 
     is_backorder_due_to_unavailability = fields.Boolean(
         compute="_compute_is_backorder_due_to_unavailability"
@@ -24,3 +26,8 @@ class StockPicking(Picking):
         backorders = super()._create_backorder()
         backorders.move_ids.write({"is_backorder": True})
         return backorders
+
+    def button_ignore_release_channel_block(self):
+        self.write({"ignore_release_channel_block": True})
+        self.assign_release_channel()
+        return True
