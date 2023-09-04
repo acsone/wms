@@ -81,7 +81,7 @@ class StockPicking(models.Model):
 
     def _get_release_channel_possible_candidate_domain(self):
         self.ensure_one()
-        return [
+        domain = [
             ("state", "!=", "asleep"),
             "|",
             ("picking_type_ids", "=", False),
@@ -89,7 +89,13 @@ class StockPicking(models.Model):
             "|",
             ("warehouse_id", "=", False),
             ("warehouse_id", "=", self.picking_type_id.warehouse_id.id),
-            "|",
-            ("partner_ids", "=", False),
-            ("partner_ids", "in", self.partner_id.ids),
         ]
+        if self.partner_id.stock_release_channel_ids:
+            domain.append(
+                [
+                    "|",
+                    ("partner_ids", "=", False),
+                    ("id", "in", self.partner_id.stock_release_channel_ids.ids),
+                ]
+            )
+        return domain
