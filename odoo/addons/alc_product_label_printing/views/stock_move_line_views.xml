@@ -148,13 +148,13 @@ t t-set="lot_id" t-value="line.lot_id"
               />|}\r</t>{XB01;0030,0150,9,1,02,0,0080|}\r{RB01;S<t
               t-esc="pack.product_id and pack.product_id.default_code[:8].ljust(8) or ''"
             /><t t-esc="lot and lot.name[:12].ljust(12) or ''" /><t
-              t-esc="lot and lot.expiration_date and time.strftime('%d%m%y', time.strptime(lot.expiration_date,'%Y-%m-%d %H:%M:%S')) or ''"
+              t-esc="lot and lot.expiration_date and lot.expiration_date.strftime('%d%m%y') or ''"
             />|}\r
 {PC003;0030,0250,05,05,J,00,B|}\r
 {RC003;S-<t t-esc="pack.product_id.default_code[:8].ljust(8)" />-<t
               t-esc="lot and lot.name[:12].ljust(12) or ''"
             />-<t
-              t-esc="lot and lot.expiration_date and time.strftime('%d/%m/%y', time.strptime(lot.expiration_date,'%Y-%m-%d %H:%M:%S')) or ''"
+              t-esc="lot and lot.expiration_date and lot.expiration_date.strftime('%d/%m/%y') or ''"
             />|}\r
 {XS;I,<t t-esc="'%04d'%qty" />,0002C3200|}\r
 {U1;0120|}\r
