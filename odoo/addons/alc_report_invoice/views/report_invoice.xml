@@ -1,0 +1,476 @@
+<odoo>
+  <template id="report_invoice_document_alcyon">
+    <div class="page">
+      <div id="left_header">
+        <table id="document_reference" class="border_table round_table">
+          <tr>
+            <td>
+              <span>Customer</span>
+            </td>
+            <td>
+              <span>N° Document</span>
+            </td>
+            <td>
+              <span>Date</span>
+            </td>
+            <td>
+              <span>Due date</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span t-field="partner.ref" />
+            </td>
+            <td>
+              <span t-field="o.name" />
+            </td>
+            <td>
+              <span t-field="o.invoice_date" />
+            </td>
+            <td>
+              <span t-field="o.invoice_date_due" />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4">
+              <span>Your VAT number:</span>
+              <span t-field="partner.vat" />
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="partner_header">
+        <div
+          t-field="o.partner_id"
+          t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'
+        />
+      </div>
+      <table id="products_table" class="round_table">
+        <thead>
+          <tr>
+            <th>Product<br />reference</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Unit<br />price</th>
+            <th>%<br />Supplier<br />discount</th>
+            <th>%<br />Alcyon<br />discount</th>
+            <th>Subtotal<br />price</th>
+            <th>Taxes</th>
+          </tr>
+        </thead>
+        <tbody class="invoice_tbody">
+          <t t-foreach="o.get_lines_by_sale()" t-as="grouped_lines">
+            <t t-set="sale" t-value="grouped_lines[0]" />
+            <t t-set="invoice_lines" t-value="grouped_lines[1]" />
+            <t t-if="sale">
+              <tr>
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+              </tr>
+              <tr>
+                <td colspan="8" class="sale_separator">
+                  <div>
+                    <span>Sales Order</span>
+                    <span t-field="sale.name" />
+                    <t t-if="sale.suite_name">(<t t-esc="sale.suite_name" />)</t>
+                    <span>du</span>
+                    <span t-esc="sale.date_order.date()" />
+                    <t t-if="sale.client_order_ref">(V Ref:<t
+                        t-esc="sale.client_order_ref"
+                      />)</t>
+                    <t t-if="sale.partner_id != o.partner_id">
+                      <br />
+                      <br />
+                      <span>Customer</span>
+                      <span
+                        t-esc="sale.partner_id.with_context(show_address=1).name_get()[0][1].replace('\n',' ; ')"
+                      />
+                    </t>
+                    <t
+                      t-set="pickings"
+                      t-value="sale.picking_ids.filtered(lambda p: p.picking_type_code in ('incoming', 'outgoing') and p.state == 'done').sorted(lambda p: p.name, reverse=True)"
+                    />
+                    <t t-if="pickings">
+                      <span> - Delivery slip:</span>
+                      <t t-foreach="pickings" t-as="picking">
+                        <span t-field="picking.name" />
+                      </t>
+                    </t>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+                <td />
+              </tr>
+            </t>
+            <t t-foreach="invoice_lines" t-as="line">
+              <tr>
+                <td>
+                  <span t-field="line.product_id.default_code" />
+                </td>
+                <td class="text-left">
+                  <span t-field="line.name" />
+                </td>
+                <td>
+                  <span t-esc="int(line.quantity)" />
+                </td>
+                <td>
+                  <span t-field="line.price_unit" />
+                </td>
+                <td>
+                  <span t-field="line.discount2" />
+                </td>
+                <td>
+                  <span t-field="line.discount3" />
+                </td>
+                <td>
+                  <span t-field="line.price_subtotal" />
+                </td>
+                <td>
+                  <span
+                    t-esc="', '.join(x.name or x.description for x in line.only_tax_ids)"
+                  />
+                </td>
+              </tr>
+              <tr t-foreach="line.contribution_ids" t-as="contribution">
+                <td />
+                <td>
+                  <t t-if="contribution.amount">
+                    <span t-esc="contribution.description or contribution.name" />
+                  </t>
+                </td>
+                <td>
+                  <span t-esc="int(line.quantity)" />
+                </td>
+                <td>
+                  <span t-field="contribution.amount" />
+                </td>
+                <td />
+                <td />
+                <td>
+                  <span t-field="line.amount_contribution" />
+                </td>
+                <td>
+                  <span
+                    t-esc="', '.join(map(lambda x: (x.description or x.name), line.only_tax_ids))"
+                  />
+                </td>
+              </tr>
+            </t>
+          </t>
+          <tr>
+            <td />
+            <td />
+            <td />
+            <td />
+            <td />
+            <td />
+            <td />
+            <td />
+          </tr>
+          <tr
+            t-if="o.partner_id.country_id and o.partner_id.country_id.is_intrastat and o.partner_id.country_id != o.env.ref('base.be')"
+          >
+            <td colspan="8" class="border_top">
+              <table class="round_table intrastat_table">
+                <tbody>
+                  <tr>
+                    <th class="text-right">Intrastat code</th>
+                    <th class="text-right">Total weight</th>
+                    <th class="text-right">Total net value</th>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr t-foreach="o.get_instrastat_values()" t-as="line">
+                    <td class="text-right">
+                      <span t-esc="line[0]" />
+                    </td>
+                    <td class="text-right"><span t-esc="line[1]" /> Kg</td>
+                    <td class="text-right">
+                      <span t-esc="line[2]" />
+                      <span t-esc="o.currency_id.symbol" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="m-5px">
+                <strong>
+                  <span t-field="o.fiscal_position_id.note" />
+                </strong>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="avoid_break">
+        <p
+          id="sale_condition"
+          t-field="company.invoice_terms_conditions"
+          class="small"
+        />
+        <t t-set="tax_summary" t-value="o._get_taxes_summary()" />
+        <table id="total_table" class="border_table round_table">
+          <tr>
+            <td>Totals</td>
+            <td>
+              <span>Gross<br />amount</span>
+              <span t-esc="tax_summary['amount_without_discount']" />
+            </td>
+            <td>
+              <span>Base<br />discount</span>
+              <span t-field="o.amount_supplier_discount" />
+            </td>
+            <td>
+              <span>Alcyon<br />discount</span>
+              <span t-field="o.amount_alcyon_discount" />
+            </td>
+            <td>
+              <span>Untaxed<br />amount</span>
+              <span t-esc="tax_summary['amount_untaxed_with_contribution']" />
+            </td>
+            <td>
+              <span>Total<br />APB</span>
+              <span t-esc="tax_summary['apb_total_tax_amount']" />
+            </td>
+            <td>
+              <span>Total<br />Antibiotics</span>
+              <span t-esc="tax_summary['antibiotics_total_tax_amount']" />
+            </td>
+            <td>
+              <span>Total<br />tax</span>
+              <span t-esc="tax_summary['invoice_total_tax_amount']" />
+            </td>
+            <td t-if="o.move_type != 'out_refund'">
+              <span>Total<br />amount</span>
+              <strong t-field="o.amount_total" />
+            </td>
+            <td t-if="o.move_type == 'out_refund'">
+              <span>Total<br />refund</span>
+              <strong t-field="o.amount_total" />
+            </td>
+          </tr>
+        </table>
+        <table id="summary_table" class="round_table">
+          <tr>
+            <td colspan="4" class="pl-5px">
+              <span>SUMMARY</span>
+              <br />
+              <span>Total discount:</span>
+              <span t-field="o.amount_discount_total" />
+              <br />
+              <span class="font-xxs" t-field="o.fiscal_position_id.note" />
+            </td>
+          </tr>
+          <tr>
+            <td>Base taxable</td>
+            <td>Rate</td>
+            <td>VAT Amount</td>
+          </tr>
+          <t t-if="len(o.invoice_only_tax_ids) &lt; 4">
+            <t t-foreach="range(3 - len(o.invoice_only_tax_ids))" t-as="idx">
+              <tr>
+                <td />
+                <td />
+                <td />
+              </tr>
+            </t>
+          </t>
+          <t t-foreach="tax_summary['invoice']" t-as="tax_line">
+            <tr>
+              <td>
+                <span t-esc="tax_line['base_amount']" />
+              </td>
+              <td>
+                <span t-esc="tax_line['rate']" />
+              </td>
+              <td>
+                <span t-esc="tax_line['tax_amount']" />
+              </td>
+            </tr>
+          </t>
+        </table>
+        <table id="bank_table" class="round_table">
+          <t
+            t-set="bank_cbc"
+            t-value="o.env['account.journal'].search([('code', '=', 'BNK1')])"
+          />
+          <t
+            t-set="bank_ing"
+            t-value="o.env['account.journal'].search([('code', '=', 'BNK2')])"
+          />
+          <t
+            t-set="bank_dexia"
+            t-value="o.env['account.journal'].search([('code', '=', 'BNK3')])"
+          />
+          <t
+            t-set="bank_bnp"
+            t-value="o.env['account.journal'].search([('code', '=', 'BNK4')])"
+          />
+          <t t-if="o.payment_mode_description">
+            <tr>
+              <td colspan="2">
+                <span t-esc="o.payment_mode_description" />
+              </td>
+            </tr>
+          </t>
+          <t t-else="">
+            <tr>
+              <td colspan="2" t-if="o.move_type == 'out_invoice'">
+                <t>Reference for your payment</t>
+                <br />
+                <strong t-field="o.payment_reference" />
+              </td>
+            </tr>
+            <tr>
+             <td><small>
+                              CBC:
+                              <span t-esc="bank_cbc.bank_acc_number" />
+                              <br />
+                              BIC:
+                              <span t-esc="bank_cbc.bank_id.bic" />
+             </small></td>
+             <td><small>
+                              ING:
+                              <span t-esc="bank_ing.bank_acc_number" />
+                              <br />
+                              BIC:
+                              <span t-esc="bank_ing.bank_id.bic" />
+             </small></td>
+             </tr>
+             <tr>
+             <td><small>
+                              BELFIUS:
+                              <span t-esc="bank_dexia.bank_acc_number" />
+                              <br />
+                              BIC:
+                              <span t-esc="bank_dexia.bank_id.bic" />
+             </small></td>
+             <td><small>
+                              BNP PARIBAS FORTIS :
+                              <span t-esc="bank_bnp.bank_acc_number" />
+                              <br />
+                              BIC:
+                              <span t-esc="bank_bnp.bank_id.bic" />
+             </small></td>
+            </tr>
+            <tr>
+              <td colspan="2" t-if="o.move_type == 'out_invoice'">
+                <span
+                  t-if="o.payment_mode_id and o.payment_mode_id.payment_method_id.code == 'sepa_direct_debit'"
+                  t-field="o.payment_mode_id.name"
+                />
+                <span>Due date</span>
+                <strong t-field="o.invoice_date_due" />
+              </td>
+            </tr>
+          </t>
+        </table>
+      </div>
+    </div>
+  </template>
+  <template id="report_invoice_alcyon">
+      <t t-set="company" t-value="o.company_id.with_context(lang=lang)" />
+      <t t-set="invoice" t-value="o.with_context(lang=lang)" />
+      <t t-set="partner" t-value="o.partner_id" />
+      <t t-foreach="range(partner.invoice_amount_copy+1)" t-as="duplicata">
+        <div class="header">
+          <div class="indicator_left">_</div>
+          <div class="indicator_right">_</div>
+          <div>
+            <div class="logo">
+              <img
+              t-if="company.logo"
+              t-att-src="'data:image/png;base64,%s' % company.logo"
+            />
+            </div>
+            <div class="main_title">
+              <div t-if="o.move_type == 'out_invoice'">
+                <span
+                t-if="o.state == 'posted' and o.payment_state in ('in_payment', 'paid', 'partial')"
+              >Invoice</span>
+                <span t-if="o.state == 'draft'">Draft Invoice</span>
+                <span t-if="o.state == 'cancel'">Canceled Invoice</span>
+              </div>
+              <div t-if="o.move_type == 'out_refund'">
+                <span
+                t-if="o.state == 'posted' and o.payment_state in ('in_payment', 'paid', 'partial')"
+              >Refund</span>
+                <span t-if="o.state == 'draft'">Draft Credit Note</span>
+                <span t-if="o.state == 'cancel'">Canceled Refund</span>
+              </div>
+              <span t-if="duplicata">DUPLICATA</span>
+              <span t-if="o.move_type == 'in_refund'">Vendor Refund</span>
+              <span t-if="o.move_type == 'in_invoice'">Vendor Bill</span>
+            </div>
+          </div>
+        </div>
+        <t
+        t-call="alc_report_invoice.report_invoice_document_alcyon"
+        t-lang="partner.lang"
+      />
+        <div class="footer">
+          <div style="padding-top: 3mm;">
+            <div style="border-top: 1px solid black;">
+                    <span t-field="company.street" />,
+                    <span t-field="company.zip" />
+                    <span t-field="company.city" />
+                    -
+                    <span t-field="company.country_id" />
+                    |
+                    <span>Phone:</span>
+                    <span t-field="company.phone" />
+                    |
+                    <span>Fax:</span>
+                    <span t-field="company.partner_id.fax" />
+                    <br />
+                    <span>Email:</span>
+                    <span t-field="company.email" />
+                    |
+                    <span>For commands;</span>
+                    <span>Phone:</span>
+                    <span t-field="company.order_phone" />
+                    -
+                    <span>Fax:</span>
+                    <span t-field="company.order_fax" />
+                    <br />
+                    <div style="width: 50%; float: left">
+                <span>RPM Liège division Huy - TVA</span>
+                <span t-field="company.vat" />
+              </div>
+                    <span t-field="o.name" />
+                    -
+                    <span t-field="o.invoice_date" />
+                    <div style="width: 50%; float: right; text-align: right">
+                        Page: <span class="page" /> / <span class="topage" />
+                    </div>
+                </div>
+          </div>
+        </div>
+      </t>
+  </template>
+  <template id="report_invoice" inherit_id="account.report_invoice" priority="100">
+    <xpath expr="//t[@t-call='account.report_invoice_document']" position="replace">
+      <div
+        class="article"
+        t-att-data-oe-model="o and o._name"
+        t-att-data-oe-id="o and o.id"
+        t-att-data-oe-lang="o and o.env.context.get('lang')"
+      >
+        <t t-call="alc_report_invoice.report_invoice_alcyon" t-lang="lang" />
+      </div>
+    </xpath>
+  </template>
+</odoo>

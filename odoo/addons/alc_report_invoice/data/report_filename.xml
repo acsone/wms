@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="account_invoices_without_payment" model="ir.actions.report">
+    <field name="attachment">object.get_report_name()</field>
+    <field name="paperformat_id" ref="alc_report_base.paperformat_alcyon_report" />
+  </record>
+</odoo>
