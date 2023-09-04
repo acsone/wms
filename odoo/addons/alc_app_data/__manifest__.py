@@ -13,5 +13,6 @@
     "depends": [
         "alc_report_base",
         "alc_report_sale",
+        "alc_report_purchase",
     ],
 }
