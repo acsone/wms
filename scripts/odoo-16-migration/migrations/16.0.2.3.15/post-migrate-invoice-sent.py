@@ -4,82 +4,39 @@
 from openupgradelib import openupgrade
 
 
-def _migrate_fields(env):
-    if not openupgrade.column_exists(env.cr, "account_move", "sent"):
-        return
-    query = """
-        UPDATE account_move
-            SET is_move_sent = True
-            WHERE sent = True
-            AND is_move_sent <> True
-    """
-    openupgrade.logged_query(env.cr, query)
-
-
 def _migrate_method(env):
-    if not openupgrade.column_exists(env.cr, "account_move", "invoice_sending_method"):
+    if not openupgrade.column_exists(
+        env.cr, "res_partner", "invoice_sending_method_old"
+    ):
         return
-    fields_spec = [
-        (
-            "customer_invoice_transmit_method_id",
-            "res.partner",
-            "res_partner",
-            "many2one",
-            False,
-            "account_invoice_transmit_method",
-        ),
-        (
-            "transmit_method_id",
-            "res.partner",
-            "res_partner",
-            "many2one",
-            False,
-            "account_invoice_transmit_method",
-        ),
-    ]
-    openupgrade.add_fields(env, fields_spec)
+
     query = """
-        UPDATE res_partner
-            SET invoice_sending_method =
-                CASE
-                    WHEN invoice_sending_method = 'letter' THEN 'post'
-                    WHEN invoice_sending_method = 'email' THEN 'mail'
-        WHERE invoice_sending_method IS NOT NULL
-
-    """
-    openupgrade.logged_query(env.cr, query)
-    query = """
-        UPDATE res_partner
-            SET customer_invoice_transmit_method_id = method_id
-                FROM (SELECT id AS method_id, code FROM transmit_method) methods
-            WHERE res_partner.invoice_sending_method = methods.code
-
-    """
-    openupgrade.logged_query(env.cr, query)
-
-    # Update the transmit method on invoices
-    query = """
-        UPDATE account_move
-            SET sending_method =
-                CASE
-                    WHEN sending_method = 'letter' THEN 'post'
-                    WHEN sending_method = 'email' THEN 'mail'
-        WHERE sending_method IS NOT NULL AND move_type IN ('out_invoice', 'out_refund')
-
+        INSERT INTO ir_property (name, type, res_id, value_reference, fields_id, create_date, create_uid)
+        SELECT 'customer_invoice_transmit_method_id', 'many2one', 'res.partner' || ',' || rp.id, 'transmit.method' || ',' || tm.id, imf.id, NOW(), 1
+            FROM res_partner rp
+                INNER JOIN transmit_method tm ON rp.invoice_sending_method_old = tm.code,
+            ir_model_fields imf
+        WHERE NOT EXISTS (SELECT 1 FROM ir_property WHERE res_id = 'res.partner' || ',' || rp.id and value_reference = 'transmit.method' || ',' || tm.id)
+        AND imf.model = 'res.partner' AND imf.name = 'customer_invoice_transmit_method_id'
     """
     openupgrade.logged_query(env.cr, query)
 
     query = """
         UPDATE account_move
-            SET transmit_method_id = method_id
-                FROM (SELECT id AS method_id, code FROM transmit_method) methods
-            WHERE account_move.sending_method = methods.code
+            SET transmit_method_id =
+                (SELECT split_part(value_reference, ',', 2)::integer FROM ir_property, ir_model_fields imf WHERE split_part(res_id, ',', 1) = 'res.partner' AND split_part(res_id, ',', 2)::integer = account_move.partner_id
+                    AND imf.model = 'res.partner' AND imf.name = 'customer_invoice_transmit_method_id' AND fields_id = imf.id
+                )
 
+    """
+    openupgrade.logged_query(env.cr, query)
+
+    query = """
+        ALTER TABLE res_partner DROP COLUMN invoice_sending_method_old
     """
     openupgrade.logged_query(env.cr, query)
 
 
 @openupgrade.migrate()
 def migrate(env, version):
-    _migrate_fields(env)
     _migrate_method(env)
