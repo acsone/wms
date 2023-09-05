@@ -15,6 +15,7 @@
         "account_invoice_merge",
         "account_invoice_check_total",
         "account_move_sent_usability",
+        "l10n_be_antibiotic_tax",
         "l10n_be_apb_tax",
         "l10n_be_eco_tax",
         "mis_builder",

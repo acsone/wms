@@ -111,6 +111,7 @@ odoo-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@ff4a
 odoo-addon-hr-holidays-public==16.0.1.1.0
 odoo-addon-internal-stock-quant-package @ git+https://github.com/acsone/stock-logistics-tracking.git@46777fba77919e3998bebc17ec3a60b35f11de62#subdirectory=setup/internal_stock_quant_package
 odoo-addon-jsonifier @ git+https://github.com/acsone/server-tools.git@d0f16e3186ca85bd2a93899af1a642db6d662356#subdirectory=setup/jsonifier
+odoo-addon-l10n-be-antibiotic-tax @ git+https://github.com/acsone/l10n-belgium.git@e51d1f2dfe6cedbda81afcaeb56c3b0ff09def9d#subdirectory=setup/l10n_be_antibiotic_tax
 odoo-addon-l10n-be-apb-tax @ git+https://github.com/acsone/l10n-belgium.git@293ec328826ba333833802b581d8725269a346a9#subdirectory=setup/l10n_be_apb_tax
 odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/acsone/l10n-belgium.git@63b4fce463858ea41cbf8417711f2850a915400d#subdirectory=setup/l10n_be_bpost_address_autocomplete
 odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/acsone/l10n-belgium.git@3d1359a7e58a4ee9c53c5f16178a1428feadd368#subdirectory=setup/l10n_be_bpost_address_validation
