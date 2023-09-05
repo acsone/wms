@@ -63,6 +63,7 @@ odoo-addon-geoengine-base-geolocalize @ git+https://github.com/acsone/geospatial
 odoo-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@ff4a76d86be5abd88dcb0f84c5def21a70e2262d#subdirectory=setup/geoengine_partner
 odoo-addon-hr-holidays-public==16.0.1.1.0
 odoo-addon-jsonifier @ git+https://github.com/acsone/server-tools.git@d0f16e3186ca85bd2a93899af1a642db6d662356#subdirectory=setup/jsonifier
+odoo-addon-l10n-be-apb-tax @ git+https://github.com/acsone/l10n-belgium.git@293ec328826ba333833802b581d8725269a346a9#subdirectory=setup/l10n_be_apb_tax
 odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/acsone/l10n-belgium.git@63b4fce463858ea41cbf8417711f2850a915400d#subdirectory=setup/l10n_be_bpost_address_autocomplete
 odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/acsone/l10n-belgium.git@3d1359a7e58a4ee9c53c5f16178a1428feadd368#subdirectory=setup/l10n_be_bpost_address_validation
 odoo-addon-l10n-be-eco-tax @ git+https://github.com/acsone/l10n-belgium.git@09e400df7b86b0cbbfeda8ba5ee64a64f651304d#subdirectory=setup/l10n_be_eco_tax
