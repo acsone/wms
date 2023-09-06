@@ -53,6 +53,7 @@ odoo-addon-account-analytic-required==16.0.1.0.0.8
 odoo-addon-account-analytic-tag @ git+https://github.com/acsone/account-analytic@35dcc7dc41e468b60f6291d9d3f08df90f29d672#subdirectory=setup/account_analytic_tag
 odoo-addon-account-banking-mandate==16.0.1.0.2.8
 odoo-addon-account-banking-pain-base==16.0.1.0.0.7
+odoo-addon-account-banking-sepa-credit-transfer==16.0.1.0.0.6
 odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/acsone/bank-payment.git@bf2a4e166e9d2f6b45cc4818f8499b683dfe9abf#subdirectory=setup/account_banking_sepa_direct_debit
 odoo-addon-account-cutoff-base==16.0.1.2.0.2
 odoo-addon-account-cutoff-picking @ git+https://github.com/acsone/account-closing.git@b580c26a76b9eeb968c0ae9f2838e05bdef2f401#subdirectory=setup/account_cutoff_picking
