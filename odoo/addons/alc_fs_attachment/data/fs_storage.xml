@@ -16,4 +16,31 @@
     <field name="name">FileSystem Test</field>
     <field name="code">fstst</field>
   </record>
+  <record id="fs_storage_eshop_prd" model="fs.storage">
+    <!-- This storage is used in production environments as storage
+      for images and media files used in the e-shop.
+      Configuration is provided by server environment files
+    -->
+    <field name="name">FileSystem EShop Prod</field>
+    <field name="code">fsprd_eshop</field>
+    <field name="autovacuum_gc" eval="False" />
+    <field
+      name="options"
+    >{"key": "odoo", "anon": true, "client_kwargs":{"endpoint_url": "https://media.alcyonbelux.be"}}</field>
+    <field name="is_directory_path_in_url" eval="True" />
+    <field name="use_filename_obfuscation" eval="False" />
+    <field name="optimizes_directory_path" eval="False" />
+ </record>
+  <record id="fs_storage_eshop_tst" model="fs.storage">
+    <!-- This storage is used in non-production environments as storage
+      for images and media files used in the e-shop.
+      Configuration is provided by server environment files
+    -->
+    <field name="name">FileSystem EShop Test</field>
+    <field name="code">fstst_eshop</field>
+    <field name="autovacuum_gc" eval="False" />
+    <field name="is_directory_path_in_url" eval="True" />
+    <field name="use_filename_obfuscation" eval="False" />
+    <field name="optimizes_directory_path" eval="False" />
+  </record>
 </odoo>
