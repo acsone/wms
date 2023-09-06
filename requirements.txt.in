@@ -27,6 +27,9 @@ odoo-addon-partner-invoicing-mode-fourteen-days @ git+https://github.com/OCA/acc
 odoo-addon-partner-invoicing-mode-monthly @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1515/head#subdirectory=setup/partner_invoicing_mode_monthly
 odoo-addon-partner-invoicing-mode-ten-days @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1532/head#subdirectory=setup/partner_invoicing_mode_ten_days
 
+# account-reconcile
+odoo-addon-account-payment-mode-auto-reconcile @ git+https://github.com/OCA/account-reconcile.git@refs/pull/537/head#subdirectory=setup/account_payment_mode_auto_reconcile
+
 # delivery-carrier
 # https://github.com/OCA/delivery-carrier/pull/643 - [IMP] base_delivery_carrier_label: Externalize automatic package creation
 odoo-addon-base-delivery-carrier-label @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/643/head#subdirectory=setup/base_delivery_carrier_label
@@ -251,3 +254,6 @@ openupgradelib @ git+https://github.com/acsone/openupgradelib.git@16.0-alc_maste
 
 # OCA/payment
 odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/OCA/bank-payment.git@refs/pull/1126/head#subdirectory=setup/account_banking_sepa_direct_debit
+
+# OCA/account-closing
+odoo-addon-account-cutoff-picking @ git+https://github.com/acsone/account-closing.git@16.0-account_cutoff_picking-sbj#subdirectory=setup/account_cutoff_picking

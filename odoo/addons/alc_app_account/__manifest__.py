@@ -18,6 +18,7 @@
         "l10n_be_antibiotic_tax",
         "l10n_be_apb_tax",
         "l10n_be_eco_tax",
+        "account_payment_mode_auto_reconcile",
         "mis_builder",
         "mis_builder_budget",
         "partner_invoicing_mode",
@@ -25,6 +26,7 @@
         "partner_invoicing_mode_fourteen_days",
         "partner_invoicing_mode_monthly",
         "partner_invoicing_mode_ten_days",
+        "account_cutoff_picking",
         # ALC
         "account_invoice_sent",
         "alc_account_security",
