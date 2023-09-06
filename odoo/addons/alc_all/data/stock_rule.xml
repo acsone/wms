@@ -5,7 +5,10 @@
 
   <!-- Set location reception on 'buy' rules -->
   <function model="stock.rule" name="write">
-    <value model="stock.rule" eval="obj().search([('action', '=', 'buy')]).ids" />
+    <value
+      model="stock.rule"
+      eval="obj().search([('action', '=', 'buy'), ('company_id', '=', ref('base.main_company'))]).ids"
+    />
     <value eval="{'location_dest_id': ref('stock.stock_location_company')}" />
   </function>
 

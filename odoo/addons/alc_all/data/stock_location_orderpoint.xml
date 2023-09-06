@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <record id="stock_location_orderpoint_fillup" model="stock.location.orderpoint">
+        <field name="name">FillUp</field>
+        <field name="trigger">auto</field>
+        <field name="replenish_method">fill_up</field>
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="route_id" ref="stock_route_reassort" />
+        <field name="sequence">1</field>
+        <field name="priority">1</field>
+    </record>
+    <record id="stock_location_orderpoint_average" model="stock.location.orderpoint">
+        <field name="name">Average Daily Sale</field>
+        <field name="trigger">cron</field>
+        <field name="replenish_method">average_daily_sale</field>
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="route_id" ref="stock_route_reassort" />
+        <field name="sequence">2</field>
+        <field name="priority">0</field>
+    </record>
+
+</odoo>

@@ -23,7 +23,7 @@
   <function model="stock.picking.type" name="write">
     <value
       model="stock.picking.type"
-      eval="(obj().env.cr.execute(&quot;select id from stock_picking_type where subcode=&apos;PICK&apos;&quot;) or True) and [i[0] for i in obj().env.cr.fetchall()]"
+      eval="(obj().env.cr.execute(&quot;select id from stock_picking_type where sequence_code=&apos;PICK&apos;&quot;) or True) and [i[0] for i in obj().env.cr.fetchall()]"
     />
     <value
       eval="{'set_delivery_package_type_on_put_in_pack': True, 'allow_additional_product_on_reserved_qty': True}"
@@ -33,7 +33,7 @@
   <function model="stock.picking.type" name="write">
     <value
       model="stock.picking.type"
-      eval="[ref('alc_stock_picking_type_aliment.stock_picking_type_ali'), ref('__setup__.stock_picking_type_froid'), ref('alc_shopfloor.stock_picking_type_medoc'), ref('__setup__.stock_picking_type_materiel')]"
+      eval="obj().browse([ref('alc_stock_picking_type_aliment.stock_picking_type_ali'), ref('__setup__.stock_picking_type_froid', raise_if_not_found=False) or False, ref('alc_shopfloor.stock_picking_type_medoc', raise_if_not_found=False) or False, ref('__setup__.stock_picking_type_materiel', raise_if_not_found=False) or False]).ids"
     />
     <value
       model="ir.sequence"
