@@ -648,6 +648,7 @@ def set_modules_to_remove():
         "document_unindex_content",
         "alc_stock_put_remaining_to_reserve",
         "account_invoice_payment_report",  # replaced by STD
+        "account_payment_order_background",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     # with cursor(DB_16_POSTMIG) as cr:

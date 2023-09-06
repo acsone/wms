@@ -63,7 +63,6 @@
     - oca refs/pull/689/head # [IMP] stock_release_channel: Move release channel data to demo
     - oca refs/pull/736/head # [FIX] stock_release_channel: rule domain can be empty #736
     - oca refs/pull/634/head # [16.0][ADD] stock_release_channel_propagate_channel_picking
-    - oca refs/pull/738/head # [FIX] restriction to partner is applied only if partner is assigned to a release channel
   target: origin 16.0-alc_stock_release_channel
 
 ./src/stock_storage_type:

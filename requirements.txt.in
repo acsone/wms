@@ -27,6 +27,9 @@ odoo-addon-partner-invoicing-mode-fourteen-days @ git+https://github.com/OCA/acc
 odoo-addon-partner-invoicing-mode-monthly @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1515/head#subdirectory=setup/partner_invoicing_mode_monthly
 odoo-addon-partner-invoicing-mode-ten-days @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1532/head#subdirectory=setup/partner_invoicing_mode_ten_days
 
+# account-reconcile
+odoo-addon-account-payment-mode-auto-reconcile @ git+https://github.com/OCA/account-reconcile.git@refs/pull/537/head#subdirectory=setup/account_payment_mode_auto_reconcile
+
 # delivery-carrier
 # https://github.com/OCA/delivery-carrier/pull/643 - [IMP] base_delivery_carrier_label: Externalize automatic package creation
 odoo-addon-base-delivery-carrier-label @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/643/head#subdirectory=setup/base_delivery_carrier_label
@@ -228,6 +231,9 @@ odoo-addon-base-business-document-import @ git+https://github.com/OCA/edi.git@re
 # OCA/l10n-belgium
 odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/186/head#subdirectory=setup/l10n_be_bpost_address_validation
 odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/188/head#subdirectory=setup/l10n_be_bpost_address_autocomplete
+odoo-addon-l10n-be-eco-tax @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/199/head#subdirectory=setup/l10n_be_eco_tax
+odoo-addon-l10n-be-antibiotic-tax @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/202/head#subdirectory=setup/l10n_be_antibiotic_tax
+odoo-addon-l10n-be-apb-tax @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/201/head#subdirectory=setup/l10n_be_apb_tax
 
 # OCA/rest-framework
 odoo-addon-base-rest @ git+https://github.com/OCA/rest-framework.git@refs/pull/368/head#subdirectory=setup/base_rest
@@ -248,3 +254,6 @@ openupgradelib @ git+https://github.com/acsone/openupgradelib.git@16.0-alc_maste
 
 # OCA/payment
 odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/OCA/bank-payment.git@refs/pull/1126/head#subdirectory=setup/account_banking_sepa_direct_debit
+
+# OCA/account-closing
+odoo-addon-account-cutoff-picking @ git+https://github.com/acsone/account-closing.git@16.0-account_cutoff_picking-sbj#subdirectory=setup/account_cutoff_picking
