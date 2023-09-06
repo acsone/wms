@@ -59,6 +59,7 @@
         "data/stock_picking_type.xml",
         "data/stock_route.xml",
         "data/stock_rule.xml",
+        "data/stock_location_orderpoint.xml",
     ],
     "demo": [],
 }
