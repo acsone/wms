@@ -649,6 +649,14 @@ def set_modules_to_remove():
         "alc_stock_put_remaining_to_reserve",
         "account_invoice_payment_report",  # replaced by STD
         "account_payment_order_background",
+        "storage_backend",
+        "storage_backend_s3",
+        "storage_thumbnail",
+        "storage_media",
+        "storage_media_product",
+        "storage_image",
+        "storage_image_product",
+        "storage_file",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     # with cursor(DB_16_POSTMIG) as cr:

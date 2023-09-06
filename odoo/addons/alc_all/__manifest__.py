@@ -62,4 +62,5 @@
         "data/stock_rule.xml",
     ],
     "demo": [],
+    "development_status": "Alpha",
 }

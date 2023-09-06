@@ -61,10 +61,18 @@ odoo-addon-delivery-procurement-group-carrier==16.0.1.0.0.2
 odoo-addon-endpoint-route-handler==16.0.1.0.0.3
 odoo-addon-fastapi==16.0.0.0.4.2
 odoo-addon-fs-attachment==16.0.1.0.1
+odoo-addon-fs-base-multi-image @ git+https://github.com/acsone/storage.git@20ab1a45ba3e210e975b15672cdbf503c94ca3d8#subdirectory=setup/fs_base_multi_image
+odoo-addon-fs-base-multi-media @ git+https://github.com/acsone/storage.git@a6413e7c56b08f3aa2c2cce2134d41394c2089f4#subdirectory=setup/fs_base_multi_media
+odoo-addon-fs-file @ git+https://github.com/acsone/storage.git@32d4699a18387b993ed0d167418de0f119c24241#subdirectory=setup/fs_file
+odoo-addon-fs-image @ git+https://github.com/acsone/storage.git@32d4699a18387b993ed0d167418de0f119c24241#subdirectory=setup/fs_image
+odoo-addon-fs-product-brand-multi-image @ git+https://github.com/acsone/storage.git@e30bc60a7b7a3c2f9172a5dabd708500f566817f#subdirectory=setup/fs_product_brand_multi_image
+odoo-addon-fs-product-multi-image @ git+https://github.com/acsone/storage.git@20ab1a45ba3e210e975b15672cdbf503c94ca3d8#subdirectory=setup/fs_product_multi_image
+odoo-addon-fs-product-multi-media @ git+https://github.com/acsone/storage.git@a6413e7c56b08f3aa2c2cce2134d41394c2089f4#subdirectory=setup/fs_product_multi_media
 odoo-addon-fs-storage==16.0.1.0.1.2
 odoo-addon-geoengine-base-geolocalize @ git+https://github.com/acsone/geospatial.git@d977cbdc42825e5d241ebe91203e0d087d73b2e7#subdirectory=setup/geoengine_base_geolocalize
 odoo-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@ff4a76d86be5abd88dcb0f84c5def21a70e2262d#subdirectory=setup/geoengine_partner
 odoo-addon-hr-holidays-public==16.0.1.1.0
+odoo-addon-image-tag @ git+https://github.com/acsone/storage.git@20ab1a45ba3e210e975b15672cdbf503c94ca3d8#subdirectory=setup/image_tag
 odoo-addon-jsonifier @ git+https://github.com/acsone/server-tools.git@d0f16e3186ca85bd2a93899af1a642db6d662356#subdirectory=setup/jsonifier
 odoo-addon-l10n-be-antibiotic-tax @ git+https://github.com/acsone/l10n-belgium.git@e51d1f2dfe6cedbda81afcaeb56c3b0ff09def9d#subdirectory=setup/l10n_be_antibiotic_tax
 odoo-addon-l10n-be-apb-tax @ git+https://github.com/acsone/l10n-belgium.git@293ec328826ba333833802b581d8725269a346a9#subdirectory=setup/l10n_be_apb_tax

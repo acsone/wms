@@ -10,6 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        # OCA/storage
+        "fs_product_brand_multi_image",
+        "fs_product_multi_image",
+        "fs_product_multi_media",
         # ALC
         "alc_price_cache",
         "alc_price_cache_exclusive",
@@ -17,4 +21,5 @@
     ],
     "data": [],
     "demo": [],
+    "development_status": "Alpha",
 }
