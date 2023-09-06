@@ -647,6 +647,7 @@ def set_modules_to_remove():
         "alc_shopfloor_mobile_stock_refill",  # included in base module
         "document_unindex_content",
         "alc_stock_put_remaining_to_reserve",
+        "account_invoice_payment_report",  # replaced by STD
         "account_payment_order_background",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
