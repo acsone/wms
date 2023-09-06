@@ -248,3 +248,6 @@ openupgradelib @ git+https://github.com/acsone/openupgradelib.git@16.0-alc_maste
 
 # OCA/payment
 odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/OCA/bank-payment.git@refs/pull/1126/head#subdirectory=setup/account_banking_sepa_direct_debit
+
+# OCA/account-closing
+odoo-addon-account-cutoff-picking @ git+https://github.com/acsone/account-closing.git@16.0-account_cutoff_picking-sbj#subdirectory=setup/account_cutoff_picking
