@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="fs_media_form_view">
+        <field name="name">fs.media.form</field>
+        <field name="model">fs.media</field>
+        <field name="inherit_id" ref="fs_base_multi_media.fs_media_form_view" />
+        <field name="arch" type="xml">
+            <field name="file" position="after">
+                <field name="lang" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="fs_media_search_view">
+        <field name="name">fs.media.search</field>
+        <field name="model">fs.media</field>
+        <field name="inherit_id" ref="fs_base_multi_media.fs_media_search_view" />
+        <field name="arch" type="xml">
+            <filter name="media_type" position="after">
+                <filter
+          name="groupby_lang"
+          string="Lang"
+          context="{'group_by':'lang'}"
+        />
+            </filter>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="fs_media_tree_view">
+        <field name="name">fs.media.tree</field>
+        <field name="model">fs.media</field>
+        <field name="inherit_id" ref="fs_base_multi_media.fs_media_tree_view" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="lang" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

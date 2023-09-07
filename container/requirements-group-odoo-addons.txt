@@ -61,7 +61,7 @@ odoo-addon-delivery-package-type-number-parcels==16.0.1.0.1
 odoo-addon-delivery-procurement-group-carrier==16.0.1.0.0.2
 odoo-addon-endpoint-route-handler==16.0.1.0.0.3
 odoo-addon-fastapi==16.0.0.0.4.2
-odoo-addon-fs-attachment==16.0.1.0.1
+odoo-addon-fs-attachment @ git+https://github.com/acsone/storage.git@7d0cf1c2d23c40d8a9b8354e2c719a63a006c821#subdirectory=setup/fs_attachment
 odoo-addon-fs-base-multi-image @ git+https://github.com/acsone/storage.git@20ab1a45ba3e210e975b15672cdbf503c94ca3d8#subdirectory=setup/fs_base_multi_image
 odoo-addon-fs-base-multi-media @ git+https://github.com/acsone/storage.git@a6413e7c56b08f3aa2c2cce2134d41394c2089f4#subdirectory=setup/fs_base_multi_media
 odoo-addon-fs-file @ git+https://github.com/acsone/storage.git@32d4699a18387b993ed0d167418de0f119c24241#subdirectory=setup/fs_file

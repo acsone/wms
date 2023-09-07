@@ -657,6 +657,9 @@ def set_modules_to_remove():
         "storage_image",
         "storage_image_product",
         "storage_file",
+        "alc_storage_file_lang",
+        "alc_storage_media_lang",
+        "alc_storage_media_product",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     # with cursor(DB_16_POSTMIG) as cr:
