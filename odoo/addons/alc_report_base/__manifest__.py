@@ -23,6 +23,7 @@
     "data": [
         "data/queue_job_channel.xml",
         "data/queue_job_function.xml",
+        "data/paperformat.xml",
         "views/report_template.xml",
     ],
     "demo": [],

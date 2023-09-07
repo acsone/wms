@@ -16,6 +16,7 @@
         "alce_split_coda",
         "alce_stock_barcode",
         "alce_stock_picking_backorder_helpdesk",
+        "alce_report_intrastat_infos",
     ],
     "data": [],
     "demo": [],

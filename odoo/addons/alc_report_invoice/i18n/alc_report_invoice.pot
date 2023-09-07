@@ -1,0 +1,474 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_report_invoice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-01 11:37+0000\n"
+"PO-Revision-Date: 2023-09-01 11:37+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "%<br/>Alcyon<br/>discount"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "%<br/>Supplier<br/>discount"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "(V Ref:"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid ""
+"-\n"
+"                    <span>Fax:</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid ""
+"<br/>\n"
+"                                BIC:"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid ""
+"<br/>\n"
+"                      <br/>\n"
+"                      <span>Customer</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid ""
+"<br/>\n"
+"                    <span>Email:</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span> - Delivery slip:</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>Alcyon<br/>discount</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>Base<br/>discount</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>Customer</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>Date</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>Due date</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>Gross<br/>amount</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>N° Document</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid "<span>RPM Liège division Huy - TVA</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid ""
+"<span>SUMMARY</span>\n"
+"                <br/>\n"
+"                <span>Total discount:</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>Sales Order</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>Total<br/>APB</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>Total<br/>Antibiotics</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>Total<br/>amount</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>Total<br/>refund</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>Total<br/>tax</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>Untaxed<br/>amount</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>Your VAT number:</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "<span>du</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_alcyon_discount
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_alcyon_discount
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_alcyon_discount
+msgid "Amount Alcyon Discount"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_antibiotics
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_antibiotics
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_antibiotics
+msgid "Amount Antibiotics"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_apb
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_apb
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_apb
+msgid "Amount Apb"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_contribution
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_contribution
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__amount_contribution
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_contribution
+msgid "Amount Contribution"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_discount_total
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_discount_total
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_discount_total
+msgid "Amount Discount Total"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__amount_discount2
+msgid "Amount Discount2"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__amount_discount3
+msgid "Amount Discount3"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_only_tax
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_only_tax
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_only_tax
+msgid "Amount Only Tax"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_supplier_discount
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_supplier_discount
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_supplier_discount
+msgid "Amount Supplier Discount"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_untaxed_with_contribution
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_untaxed_with_contribution
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_untaxed_with_contribution
+msgid "Amount Untaxed With Contribution"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_without_discount
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_without_discount
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_without_discount
+msgid "Amount Without Discount"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__apb_ids
+msgid "Apb"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "BELFIUS:"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "BNP PARIBAS FORTIS :"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "Base taxable"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "CBC:"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid "Canceled Invoice"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid "Canceled Refund"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__contribution_ids
+msgid "Contribution"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid "DUPLICATA"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid "Draft Credit Note"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid "Draft Invoice"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "ING:"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "Intrastat code"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid "Invoice"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__invoice_antibiotics_ids
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__invoice_antibiotics_ids
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__invoice_antibiotics_ids
+msgid "Invoice Antibiotics"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__invoice_apb_ids
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__invoice_apb_ids
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__invoice_apb_ids
+msgid "Invoice Apb"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__invoice_contribution_ids
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__invoice_contribution_ids
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__invoice_contribution_ids
+msgid "Invoice Contribution"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment_mode__invoice_description
+msgid "Invoice Description"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__invoice_only_tax_ids
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__invoice_only_tax_ids
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__invoice_only_tax_ids
+msgid "Invoice Only Tax"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,help:alc_report_invoice.field_account_payment_mode__invoice_description
+msgid "Invoicing method description"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model,name:alc_report_invoice.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model,name:alc_report_invoice.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "Kg"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "Name"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__only_tax_ids
+msgid "Only Tax"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__payment_mode_description
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__payment_mode_description
+#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__payment_mode_description
+msgid "Payment Mode Description"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model,name:alc_report_invoice.model_account_payment_mode
+msgid "Payment Modes"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "Product<br/>reference"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "Quantity"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "Rate"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "Reference for your payment"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid "Refund"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "Subtotal<br/>price"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "Taxes"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "Total net value"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "Total weight"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "Totals"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "Unit<br/>price"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
+msgid "VAT Amount"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid "Vendor Bill"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid "Vendor Refund"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid ""
+"|\n"
+"                    <span>Fax:</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid ""
+"|\n"
+"                    <span>For commands;</span>\n"
+"                    <span>Phone:</span>"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
+msgid ""
+"|\n"
+"                    <span>Phone:</span>"
+msgstr ""
