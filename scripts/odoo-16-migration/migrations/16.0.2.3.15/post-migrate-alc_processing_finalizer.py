@@ -1,16 +1,16 @@
 # Copyright 2023 ACSONE SA/NV
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from openupgradelib import openupgrade
 
 
 def _migrate_data(env):
-    data = [
-        (
-            "__export__.mail_template_30",
-            "alc_sale_processing_finalizer.mail_template_30",
-        ),
-    ]
-    openupgrade.rename_xmlids(env.cr, data, allow_merge=True)
+    # Remove this duplicate that point to the same record
+    query = """
+        DELETE FROM ir_model_data
+            WHERE name = 'mail_template_30'
+            AND module = '__export__';
+    """
+    openupgrade.logged_query(env.cr, query)
 
 
 @openupgrade.migrate()
