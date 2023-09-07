@@ -158,7 +158,6 @@ omit =
     odoo/addons/elasticsearch_security_mixin/*
     odoo/addons/ir_sequence_period/*
     odoo/addons/keycloak/*
-    odoo/addons/l10n_be_bba_fix/*
     odoo/addons/l10n_be_vat/*
     odoo/addons/mixin_file_id/*
     odoo/addons/mixin_image_id/*
