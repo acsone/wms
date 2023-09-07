@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="shipment_advice_form_view">
+        <field name="model">shipment.advice</field>
+        <field name="inherit_id" ref="shipment_advice.shipment_advice_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="before">
+                    <button
+          name="print_all_deliveryslip"
+          type="object"
+          string="Print all deliveryslip"
+          class="btn-primary"
+          states="done"
+        />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
