@@ -35,6 +35,14 @@ def migrate(env, version):
         """
         openupgrade.logged_query(env.cr, query)
 
+    query = """
+        UPDATE sale_order
+            SET invoicing_mode = rp.invoicing_mode
+            FROM res_partner rp WHERE rp.id = sale_order.partner_invoice_id
+            AND sale_order.invoicing_mode IS NULL
+    """
+    openupgrade.logged_query(env.cr, query)
+
     # Uninstall alc modules
     query = """
       UPDATE ir_module_module
