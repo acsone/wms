@@ -11,5 +11,6 @@
     "depends": [
         # OCA
         "account_banking_sepa_credit_transfer",
+        "account_payment_order",
     ],
 }
