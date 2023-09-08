@@ -1,0 +1,51 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_report_stock_picking_operations
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-07 16:17+0000\n"
+"PO-Revision-Date: 2023-09-07 16:17+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_report_stock_picking_operations
+#: model_terms:ir.ui.view,arch_db:alc_report_stock_picking_operations.report_picking_body
+msgid "-&gt;"
+msgstr ""
+
+#. module: alc_report_stock_picking_operations
+#: model_terms:ir.ui.view,arch_db:alc_report_stock_picking_operations.report_picking_body
+msgid "<span>Customer</span>"
+msgstr "<span>Klant</span>"
+
+#. module: alc_report_stock_picking_operations
+#: model_terms:ir.ui.view,arch_db:alc_report_stock_picking_operations.report_picking_body
+msgid "<span>Date</span>"
+msgstr "<span>Datum</span>"
+
+#. module: alc_report_stock_picking_operations
+#: model_terms:ir.ui.view,arch_db:alc_report_stock_picking_operations.report_picking_body
+msgid "<span>N° Document</span>"
+msgstr "<span>Document nr</span>"
+
+#. module: alc_report_stock_picking_operations
+#: model_terms:ir.ui.view,arch_db:alc_report_stock_picking_operations.report_picking_body
+msgid "Location:"
+msgstr "Location:"
+
+#. module: alc_report_stock_picking_operations
+#: model_terms:ir.ui.view,arch_db:alc_report_stock_picking_operations.report_picking_body
+msgid "Package:"
+msgstr "Package:"
+
+#. module: alc_report_stock_picking_operations
+#: model_terms:ir.ui.view,arch_db:alc_report_stock_picking_operations.report_picking_body
+msgid "Resulting Package:"
+msgstr "Resulting Package:"
