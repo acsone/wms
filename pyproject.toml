@@ -225,7 +225,6 @@ exclude = [
   'odoo/addons/partner_archive_new_partner/*',
   'odoo/addons/partner_schedule/*',
   'odoo/addons/price_compute/*',
-  'odoo/addons/product_last_transaction/*',
   'odoo/addons/shopinvader_assortment_bind/*',
   'odoo/addons/shopinvader_search_engine_export/*',
   'odoo/addons/shopinvader_search_engine_update/*',

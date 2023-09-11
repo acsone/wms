@@ -53,5 +53,6 @@
         "alc_stock_receive_lot_missing_product_nouveaute_info",
         "alc_stock_move_line_show_quantity",
         "alc_b2c_connector",
+        "alc_product_last_transaction",
     ],
 }
