@@ -9,6 +9,7 @@ from odoo.addons.alc_stock_release_channel_pick_allowed.models.stock_release_cha
     StockReleaseChannel as StockReleaseChannelBase,
 )
 
+WAITING_PICKING_STATES = ("confirmed", "waiting")
 DONE_PICKING_STATES = ("done", "cancel")
 TODO_SHIPMENT_STATES = ("draft", "confirmed", "in_progress")
 
@@ -22,6 +23,36 @@ class StockReleaseChannel(StockReleaseChannelBase):
     kanban_dashboard = fields.Json(
         compute="_compute_kanban_dashboard", compute_sudo=True
     )
+    count_picking_release_ready = fields.Integer(compute="_compute_count_release_ready")
+    count_move_release_ready = fields.Integer(compute="_compute_count_release_ready")
+
+    def _get_picking_ids_per_channel(self, field):
+        domains = self._field_picking_domains()
+        domain = domains.get(field)
+        data = self.env["stock.picking"].read_group(
+            domain + [("release_channel_id", "in", self.ids)],
+            ["release_channel_id", "picking_ids:array_agg(id)"],
+            ["release_channel_id"],
+        )
+        return {
+            row["release_channel_id"][0]: row["picking_ids"]
+            for row in data
+            if row["release_channel_id"]
+        }
+
+    def _compute_count_field(self, field):
+        move_field = field.replace("picking", "move")
+        picking_ids_per_channel = self._get_picking_ids_per_channel(field)
+        stock_move_model = self.env["stock.move"]
+        for channel in self:
+            picking_ids = picking_ids_per_channel.get(channel.id, [])
+            channel[field] = len(picking_ids)
+            channel[move_field] = stock_move_model.search_count(
+                [("picking_id", "in", picking_ids), ("state", "!=", "cancel")]
+            )
+
+    def _compute_count_release_ready(self):
+        self._compute_count_field("count_picking_release_ready")
 
     def button_show_picking_out(self):
         self.ensure_one()
@@ -57,6 +88,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
         todo_by_rc_by_pt = self._count_picking_todo_by_type_id_by_release_id()
         started_by_rc_by_pt = self._count_picking_started_by_type_id_by_release_id()
         done_by_rc_by_pt = self._count_picking_done_by_type_id_by_release_id()
+        waiting_by_rc_by_pt = self._count_picking_waiting_by_type_id_by_release_id()
         todo_shipment_advices_by_rc = self._count_shipment_advices_todo_by_release_id()
         done_shipment_advices_by_rc = self._count_shipment_advices_done_by_release_id()
         for rec in self:
@@ -64,15 +96,17 @@ class StockReleaseChannel(StockReleaseChannelBase):
             todo_by_pt = todo_by_rc_by_pt.get(rec.id, {})
             started_by_pt = started_by_rc_by_pt.get(rec.id, {})
             done_by_pt = done_by_rc_by_pt.get(rec.id, {})
+            waiting_by_pt = waiting_by_rc_by_pt.get(rec.id, {})
             todo_shipment_advices = todo_shipment_advices_by_rc.get(rec.id, 0)
             done_shipment_advices = done_shipment_advices_by_rc.get(rec.id, 0)
             for picking_type in picking_types:
                 todo = todo_by_pt.get(picking_type.id, 0)
                 started = started_by_pt.get(picking_type.id, 0)
                 done = done_by_pt.get(picking_type.id, 0)
+                waiting = waiting_by_pt.get(picking_type.id, 0)
                 result.append(
                     rec._kanban_dashboard_picking_type_data(
-                        picking_type, todo, started, done
+                        picking_type, todo, started, done, waiting
                     )
                 )
             result.append(
@@ -125,6 +159,10 @@ class StockReleaseChannel(StockReleaseChannelBase):
         todo_domain = self._count_picking_todo_by_type_id_by_release_id_domain()
         return todo_domain + [("state", "in", DONE_PICKING_STATES)]
 
+    def _count_picking_waiting_by_type_id_by_release_id_domain(self):
+        todo_domain = self._count_picking_todo_by_type_id_by_release_id_domain()
+        return todo_domain + [("state", "in", WAITING_PICKING_STATES)]
+
     def _count_pickings_by_type_id_by_release_id(self, domain):
         """Count pickings by picking type and release channel."""
         result = defaultdict(dict)
@@ -154,6 +192,11 @@ class StockReleaseChannel(StockReleaseChannelBase):
             self._count_picking_done_by_type_id_by_release_id_domain()
         )
 
+    def _count_picking_waiting_by_type_id_by_release_id(self):
+        return self._count_pickings_by_type_id_by_release_id(
+            self._count_picking_waiting_by_type_id_by_release_id_domain()
+        )
+
     def _count_shipment_by_rc(self, domain):
         """Count shipment advices by release channel."""
         result = {}
@@ -179,9 +222,12 @@ class StockReleaseChannel(StockReleaseChannelBase):
         ]
         return self._count_shipment_by_rc(domain)
 
-    def _kanban_dashboard_picking_type_data(self, picking_type, todo, started, done):
+    def _kanban_dashboard_picking_type_data(
+        self, picking_type, todo, started, done, waiting
+    ):
         self.ensure_one()
         progress = _format_progress(todo, done)
+        waiting_progress = _format_progress(todo, waiting)
         pick_allowed = self._get_picking_type_pick_allowed(picking_type.id)
         return {
             "id": picking_type.id,
@@ -190,7 +236,9 @@ class StockReleaseChannel(StockReleaseChannelBase):
             "todo": todo,
             "started": started,
             "done": done,
+            "waiting": waiting,
             "progress": progress,
+            "waiting_progress": waiting_progress,
             "pick_allowed": pick_allowed,
         }
 

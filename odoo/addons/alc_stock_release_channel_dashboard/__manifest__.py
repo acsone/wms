@@ -19,7 +19,7 @@
         "alc_stock_release_channel_deliver",
         "alc_stock_release_channel_print_shipment_advice",
     ],
-    "data": ["views/stock_release_channel.xml"],
+    "data": ["views/stock_picking.xml", "views/stock_release_channel.xml"],
     "assets": {
         "web.assets_backend": [
             "alc_stock_release_channel_dashboard/static/src/scss/channel_dashboard.scss",
