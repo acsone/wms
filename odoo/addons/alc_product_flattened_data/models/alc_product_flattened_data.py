@@ -1,17 +1,19 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import ujson
+import logging
+
 from psycopg2.extensions import AsIs
 
 from odoo import api, fields
 from odoo.models import Model
 from odoo.osv import expression
-from odoo.tools import Query
 
 from odoo.addons.alc_pg_trgm.utils import install_trgm_extension
 from odoo.addons.base_sparse_field.models.fields import Serialized
 from odoo.addons.product.models.product_product import ProductProduct
 from odoo.addons.product.models.product_template import ProductTemplate
+
+_logger = logging.getLogger(__name__)
 
 
 class AlcProductFlattenedData(Model):
@@ -196,10 +198,7 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
         each column is accessed with a doc notation
         """
         e = expression.expression(domain, self)
-        tables = e.get_tables()
-        where_clause, where_params = e.to_sql()
-        where_clause = [where_clause] if where_clause else []
-        query = Query(tables, where_clause, where_params)
+        query = e.query
         query_from, query_where, query_params = query.get_sql()
         sql_query = f"SELECT * from {query_from} WHERE {query_where}"
         if limit:
@@ -213,16 +212,14 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
         name = f"iterator {self.env.cr}"
         named_cursor = self.env.cr._obj.connection.cursor(name)
         named_cursor.execute(sql_query, query_params)
-        try:
-            for row in named_cursor:
-                container = _ProductDataContainer(
-                    self.env,
-                    partner,
-                    **{d.name: row[i] for i, d in enumerate(named_cursor.description)},
-                )
-                yield container
-        finally:
-            named_cursor.close()
+        for row in named_cursor:
+            container = _ProductDataContainer(
+                self.env,
+                partner,
+                **{d.name: row[i] for i, d in enumerate(named_cursor.description)},
+            )
+            yield container
+        named_cursor.close()
 
     @api.model
     def _get_partner_products_iterator(
@@ -277,8 +274,6 @@ class _ProductDataContainer(_Container):
         self._env = env
         self._partner = partner
         super().__init__(**kwargs)
-        # here we use ujson to improve to increase perf X 5
-        self.price_cache = ujson.loads(self.price_cache) if self.price_cache else {}
         # init and compute prices
         self.gross_price = 0
         self.gross_price_with_vat = 0

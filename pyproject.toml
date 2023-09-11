@@ -173,7 +173,6 @@ exclude = [
   'odoo/addons/alc_print_all_deliveryslip/*',
   'odoo/addons/alc_product_abc_classification_picking_zone/*',
   'odoo/addons/alc_product_consolidated_price_newpharma/*',
-  'odoo/addons/alc_product_consolidated_price_report/*',
   'odoo/addons/alc_product_mto/*',
   'odoo/addons/alc_product_packaging_stock_reserve/*',
   'odoo/addons/alc_product_promotion_mailing/*',

@@ -18,9 +18,9 @@ msgstr ""
 #. module: alc_product_consolidated_price_report
 #: model:ir.actions.report,name:alc_product_consolidated_price_report.alc_product_consolidated_price_csv_report
 msgid "consolidated price"
-msgstr ""
+msgstr "Prix consolidé"
 
 #. module: alc_product_consolidated_price_report
 #: model:ir.model,name:alc_product_consolidated_price_report.model_report_alc_product_consolidated_price_csv_report
 msgid "report.alc_product_consolidated_price_csv_report"
-msgstr ""
+msgstr "report.alc_product_consolidated_price_csv_report"
