@@ -42,6 +42,7 @@
         "alc_shopfloor_workstation",
         "alc_shopfloor_image_product",
         "alc_shopfloor_mobile_image_product",
+        "alc_shopfloor_stock_picking_batch_assignment",
     ],
     "data": [],
     "demo": [],
