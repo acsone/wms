@@ -5,12 +5,11 @@
     "name": "Alc Shopfloor Mobile Image Product",
     "description": """
         Front part of image product inclusion on the gun""",
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["alc_shopfloor_mobile", "alc_shopfloor_image_product"],
+    "depends": ["shopfloor_mobile", "alc_shopfloor_image_product"],
     "data": ["templates/assets.xml"],
     "demo": [],
-    "installable": False,
-    "auto_install": True,
+    "development_status": "Alpha",
 }
