@@ -146,9 +146,13 @@ class SaleOrder(SaleOrderBase):
         )
         order.message_post(body=body)
 
+    def _prepare_update_recipient_from_b2c_vals(self, partner):
+        return {"partner_id": partner.id}
+
     def _update_recipient_from_b2c(self, partner):
         if self.partner_id != partner:
-            self.partner_id = partner
+            vals = self._prepare_update_recipient_from_b2c_vals(partner)
+            self.sudo().write(vals)
 
     @api.model
     def _parse_b2c_order(self, data, b2c_client):
