@@ -83,7 +83,6 @@ exclude: |
   ^odoo/addons/alc_mrp_repair/|
   ^odoo/addons/alc_partner_delivery_person/|
   ^odoo/addons/alc_partner_delivery_window_import/|
-  ^odoo/addons/alc_placedesvetos/|
   ^odoo/addons/alc_placedesvetos_payment_globalization/|
   ^odoo/addons/alc_price_cache_import/|
   ^odoo/addons/alc_print_all_deliveryslip/|

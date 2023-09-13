@@ -5,6 +5,6 @@
   <record id="res_partner_placedesvetos" model="res.partner">
     <field name="name">placedesvetos</field>
     <field name="is_company" eval="1" />
-    <field name="customer" eval="1" />
+    <field name="customer_rank" eval="1" />
   </record>
 </odoo>
