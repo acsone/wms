@@ -13,7 +13,6 @@
         "account",
         # OCA
         "account_invoice_line_default_account",
-        "account_invoice_merge",
         "account_invoice_check_total",
         "account_move_sent_usability",
         "l10n_be_antibiotic_tax",
