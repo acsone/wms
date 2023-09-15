@@ -14,12 +14,12 @@
         "shipment_advice_planner_toursolver",
         "alc_report_base",
         "shopfloor",
+        "stock_move_zone_location_source",
+        "alc_stock_picking_parcels_and_items_per_source",
     ],
     "data": [
+        "security/security.xml",
         "data/paperformat.xml",
         "views/report_shipment_advice.xml",
-        # "views/stock_release_channel_views.xml",
     ],
-    "demo": [],
-    "installable": True,
 }

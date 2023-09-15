@@ -1,394 +1,207 @@
 <odoo>
-  <template
+    <template
     id="report_shipment_advice_document"
     inherit_id="shipment_advice.report_shipment_advice_document"
   >
-    <xpath expr="//div[@class='page']" position="before">
-      <t t-set="index" t-value="1" />
-      <t t-set="total_medoc_box" t-value="0" />
-      <t t-set="total_medoc_unit" t-value="0" />
-      <t t-set="total_cold_box" t-value="0" />
-      <t t-set="total_cold_unit" t-value="0" />
-      <t t-set="total_food_box" t-value="0" />
-      <t t-set="total_food_unit" t-value="0" />
-      <t t-set="total_mat_box" t-value="0" />
-      <t t-set="total_mat_unit" t-value="0" />
-      <t t-set="total_total_box" t-value="0" />
-      <t t-set="total_total_unit" t-value="0" />
-      <t t-set="lines" t-value="o.get_merged_shippings()" />
-    </xpath>
-    <xpath expr="//table[@name='header']" position="replace">
-        <h2>
-          <t t-if="o.toursolver_resource_id">
-            <span t-field="o.display_name" /> -
-            <span t-field="o.toursolver_resource_id.display_name" />
-          </t>
-          <t t-else="">
-            <span t-field="o.display_name" />
-          </t>
-        </h2>
-        <div class="row">
-          <div class="col-5">
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td>
-                    Exp: <span
-                    t-field="o.loaded_picking_ids.mapped('carrier_id.company_id').name"
+
+        <xpath expr="//div[hasclass('page')]" position="before">
+            <t t-set="index" t-value="1" />
+            <t t-set="report" t-value="o.get_alc_report_shipment_advice()" />
+            <t t-set="lines" t-value="report.line_ids" />
+            <t t-set="company" t-value="o.company_id" />
+        </xpath>
+        <xpath expr="//table[@name='header']" position="attributes">
+            <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//table[@name='header']" position="after">
+            <h2>
+                <t t-if="o.toursolver_resource_id">
+                    <span t-field="o.display_name" /> -
+                    <span t-field="o.toursolver_resource_id.display_name" />
+                </t>
+                <t t-else="">
+                    <span t-field="o.display_name" />
+                </t>
+            </h2>
+            <div class="row">
+                <div class="col-5">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Exp: <span t-field="company.name" />
+                                    <br />
+                                    <span t-field="company.street" />
+                                    <br />
+                                    <span t-field="company.zip" />,
+                                    <span t-field="company.city" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Start mileage</td>
+                                <td />
+                            </tr>
+                            <tr>
+                                <td>End mileage</td>
+                                <td />
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-5 offset-2">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td class="col-4">Stops</td>
+                                <td class="col-8">
+                                    <span t-esc="len(lines)" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Departure time</td>
+                                <td>
+                                    <t t-if="o.departure_date">
+                                        <span
+                      t-esc="o.departure_date.strftime('%H:%M')"
+                    />
+                                    </t>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Arriving time</td>
+                                    <t t-if="o.arrival_date">
+                                        <span
+                    t-esc="o.arrival_date.strftime('%H:%M')"
                   />
-                    <br />
-                    <span
-                    t-field="o.loaded_picking_ids.mapped('carrier_id.company_id').street"
-                  />
-                    <br />
-                    <span
-                    t-field="o.loaded_picking_ids.mapped('carrier_id.company_id').zip"
-                  />,
-                    <span
-                    t-field="o.loaded_picking_ids.mapped('carrier_id.company_id').city"
-                  />
-                    </td>
-                </tr>
-                <tr>
-                  <td>Start mileage</td>
-                  <td />
-                </tr>
-                <tr>
-                  <td>End mileage</td>
-                  <td />
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-5 offset-2">
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td class="col-4">Stops</td>
-                  <td class="col-8">
-                    <span t-esc="len(lines)" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Departure time</td>
-                  <td>
-                    <span t-esc="o.departure_date.strftime('%H:%M')" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Arriving time</td>
-                  <td />
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-    </xpath>
-    <xpath expr="//table[@name='package_content']" position="replace">
-    </xpath>
-    <xpath expr="//table[@name='bulk_content']" position="replace">
-        <div class="row">
-          <table
+                                    </t>
+                                <td />
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//table[@name='package_content']" position="attributes">
+            <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//table[@name='bulk_content']" position="attributes">
+            <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//table[@name='bulk_content']" position="after">
+            <div class="row">
+                <table
           class="table table-bordered table-condensed"
           name="bulk_content"
           t-if="lines"
         >
-            <thead>
-              <tr class="active">
-                <th>Seq.</th>
-                <th>Customer</th>
-                <th>Notes</th>
-                <th>Phone</th>
-                <th># Drug</th>
-                <th># Cold</th>
-                <th># Food</th>
-                <th># Mat.</th>
-                <th># Tot.</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr t-foreach="lines" t-as="line">
-                <t t-set="partner" t-value="line[0]" />
-                <t t-set="shipping" t-value="line[1]" />
-                <t t-set="shipping_value" t-value="line[2]" />
-                <t
-                t-set="specific_locations"
-                t-value="shipping_value.get('specific_out_locations', {})"
-              />
-                <tr>
-                  <td>
-                    <span t-esc="index" />
-                  </td>
-                  <td>
-                    <div
-                    t-field="shipping.partner_id"
+                    <thead>
+                        <tr class="active">
+                            <th>Seq.</th>
+                            <th>Customer</th>
+                            <th>Notes</th>
+                            <th>Phone</th>
+                            <t t-foreach="report.location_ids" t-as="zone_location">
+                                <th>
+                                    <t t-esc="zone_location.name" />
+                                </th>
+                            </t>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="lines" t-as="line">
+                            <t t-set="partner" t-value="line['partner_id']" />
+                            <tr>
+                                <td>
+                                    <span t-esc="index" />
+                                </td>
+                                <td>
+                                    <div
+                    t-esc="partner"
                     t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'
                   />
-                    <span t-field="partner.ref" />
-                  </td>
-                  <td style="width: 40%;">
-                    <strong>
-                      <span t-esc="shipping_value.get('note', '')" />
-                    </strong>
-                  </td>
-                  <td>
-                    <span t-field="partner.mobile" />
-                    <br />
-                    <span t-field="partner.phone" />
-                  </td>
-                  <td style="width: 7%;">
-                    <t
-                    t-set="total_medoc_box"
-                    t-value="shipping_value.get('number_of_drug', 0) + total_medoc_box"
-                  />
-                    <t
-                    t-set="total_medoc_unit"
-                    t-value="int(shipping_value.get('item_number_of_drug', 0)) + total_medoc_unit"
-                  />
-                    <t
-                    t-set="specific_med_locations"
-                    t-value="specific_locations.get('med_out_locations', [])"
-                  />
-                    <t t-if="shipping_value.get('number_of_drug', 0)">
-                      <span
-                      t-esc="int(shipping_value.get('number_of_drug', 0))"
-                    /> box(es)
-                    </t>
-                    <br
-                    t-if="shipping_value.get('number_of_drug', 0)
-                              and shipping_value.get('item_number_of_drug', 0)"
-                  />
-                    <t t-if="shipping_value.get('item_number_of_drug', 0)">
-                        <span
-                      t-esc="int(shipping_value.get('item_number_of_drug', 0))"
-                    /> unit(s)
-                    </t>
-                    <br t-if="specific_locations.get('med_out_locations', [])" />
-                    <t t-foreach="specific_med_locations" t-as="med_location">
-                      <span t-esc="med_location" style="font-size:10px;" />
-                      <br />
-                    </t>
-                  </td>
-                  <td style="width: 7%;">
-                    <t
-                    t-set="total_cold_box"
-                    t-value="shipping_value.get('number_of_cold', 0) + total_cold_box"
-                  />
-                    <t
-                    t-set="total_cold_unit"
-                    t-value="int(shipping_value.get('item_number_of_cold', 0)) + total_cold_unit"
-                  />
-                    <t
-                    t-set="specific_cold_locations"
-                    t-value="specific_locations.get('cold_out_locations', [])"
-                  />
-                    <t t-if="shipping_value.get('number_of_cold', 0)">
-                        <span
-                      t-esc="int(shipping_value.get('number_of_cold', 0))"
-                    /> box(es)
-                    </t>
-                    <br
-                    t-if="shipping_value.get('number_of_cold', 0)
-                              and shipping_value.get('item_number_of_cold', 0)"
-                  />
-                    <t t-if="shipping_value.get('item_number_of_cold', 0)">
-                        <span
-                      t-esc="int(shipping_value.get('item_number_of_cold', 0))"
-                    /> unit(s)
-                    </t>
-                    <br t-if="specific_locations.get('cold_out_locations', [])" />
-                    <t t-foreach="specific_cold_locations" t-as="cold_location">
-                      <span t-esc="cold_location" style="font-size:10px;" />
-                      <br />
-                    </t>
-                  </td>
-                  <td style="width: 7%;">
-                    <t
-                    t-set="total_food_box"
-                    t-value="shipping_value.get('number_of_food', 0) + total_food_box"
-                  />
-                    <t
-                    t-set="total_food_unit"
-                    t-value="int(shipping_value.get('item_number_of_food', 0)) + total_food_unit"
-                  />
-                    <t
-                    t-set="specific_food_locations"
-                    t-value="specific_locations.get('food_out_locations', [])"
-                  />
-                    <t t-if="shipping_value.get('number_of_food', 0)">
-                        <span
-                      t-esc="int(shipping_value.get('number_of_food', 0))"
-                    /> box(es)
-                    </t>
-                    <br
-                    t-if="shipping_value.get('number_of_food', 0)
-                              and shipping_value.get('item_number_of_food', 0)"
-                  />
-                    <t t-if="shipping_value.get('item_number_of_food', 0)">
-                        <span
-                      t-esc="int(shipping_value.get('item_number_of_food', 0))"
-                    /> unit(s)
-                    </t>
-                    <br t-if="specific_locations.get('food_out_locations', [])" />
-                    <t t-foreach="specific_food_locations" t-as="food_location">
-                      <span t-esc="food_location" style="font-size:10px;" />
-                      <br />
-                    </t>
-                  </td>
-                  <td style="width: 7%;">
-                    <t
-                    t-set="total_mat_box"
-                    t-value="shipping_value.get('number_of_equipment', 0) + total_mat_box"
-                  />
-                    <t
-                    t-set="total_mat_unit"
-                    t-value="int(shipping_value.get('item_number_of_equipment', 0)) + total_mat_unit"
-                  />
-                    <t
-                    t-set="specific_equipment_locations"
-                    t-value="specific_locations.get('equipment_out_locations', [])"
-                  />
-                    <t t-if="shipping_value.get('number_of_equipment', 0)">
-                        <span
-                      t-esc="int(shipping_value.get('number_of_equipment', 0))"
-                    /> box(es)
-                    </t>
-                    <br
-                    t-if="shipping_value.get('number_of_equipment', 0)
-                              and shipping_value.get('item_number_of_equipment', 0)"
-                  />
-                    <t t-if="shipping_value.get('item_number_of_equipment', 0)">
-                        <span
-                      t-esc="int(shipping_value.get('item_number_of_equipment', 0))"
-                    /> unit(s)
-                    </t>
-                    <br t-if="specific_locations.get('equipment_out_locations', [])" />
-                    <t
-                    t-foreach="specific_equipment_locations"
-                    t-as="equipment_location"
-                  >
-                      <span t-esc="equipment_location" style="font-size:10px;" />
-                      <br />
-                    </t>
-                  </td>
-                  <td>
-                    <t
-                    t-set="total_total_box"
-                    t-value="shipping_value.get('number_total', 0) + total_total_box"
-                  />
-                    <t
-                    t-set="total_total_unit"
-                    t-value="int(shipping_value.get('item_number_total', 0)) + total_total_unit"
-                  />
-                    <t t-if="shipping_value.get('number_total', 0)">
-                        <span
-                      t-esc="int(shipping_value.get('number_total', 0))"
-                    /> box(es)
-                    </t>
-                    <br
-                    t-if="shipping_value.get('number_total', 0) and shipping_value.get('item_number_total', 0)"
-                  />
-                    <t t-if="shipping_value.get('item_number_total', 0)">
-                        <span
-                      t-esc="int(shipping_value.get('item_number_total', 0))"
-                    /> unit(s)
-                    </t>
-                  </td>
-                </tr>
-                <t t-set="index" t-value="index + 1" />
-              </tr>
-              <tr>
-                <td colspan="4" class="active">Total number of box(es)</td>
-                <td>
-                  <span t-esc="int(total_medoc_box)" class="pull-right" />
-                </td>
-                <td>
-                  <span t-esc="int(total_cold_box)" class="pull-right" />
-                </td>
-                <td>
-                  <span t-esc="int(total_food_box)" class="pull-right" />
-                </td>
-                <td>
-                  <span t-esc="int(total_mat_box)" class="pull-right" />
-                </td>
-                <td>
-                  <span t-esc="int(total_total_box)" class="pull-right" />
-                </td>
-              </tr>
-              <tr>
-                <td colspan="4" class="active">Total number of unit(s)</td>
-                <td>
-                  <span t-esc="int(total_medoc_unit)" class="pull-right" />
-                </td>
-                <td>
-                  <span t-esc="int(total_cold_unit)" class="pull-right" />
-                </td>
-                <td>
-                  <span t-esc="int(total_food_unit)" class="pull-right" />
-                </td>
-                <td>
-                  <span t-esc="int(total_mat_unit)" class="pull-right" />
-                </td>
-                <td>
-                  <span t-esc="int(total_total_unit)" class="pull-right" />
-                </td>
-              </tr>
-              <tr>
-                <td colspan="4" class="active">Total number of parcel(s)</td>
-                <td>
-                  <span
-                  t-esc="int(total_medoc_unit + total_medoc_box)"
-                  class="pull-right"
+                                    <span t-field="partner.ref" />
+                                </td>
+                                <td style="width: 40%;">
+                                    <strong>
+                                        <span t-esc="line['note']" />
+                                    </strong>
+                                </td>
+                                <td>
+                                    <span t-field="partner.mobile" />
+                                    <br />
+                                    <span t-field="partner.phone" />
+                                </td>
+                                <t
+                  t-foreach="line.parcels_and_items_per_source['locations']"
+                  t-as="location_key"
+                >
+                                    <td>
+                                        <t
+                      t-if="line.parcels_and_items_per_source['parcels'].get(str(location_key))"
+                    >
+                                            <t
+                        t-esc="line.parcels_and_items_per_source['parcels'][str(location_key)]"
+                      />
+                                            box(es)
+                                            <br />
+                                        </t>
+                                        <t
+                      t-if="line.parcels_and_items_per_source['items'].get(str(location_key))"
+                    >
+                                            <t
+                        t-esc="line.parcels_and_items_per_source['items'][str(location_key)]"
+                      />
+                                            unit(s)
+                                        </t>
+
+                                    </td>
+
+                                </t>
+                            </tr>
+                        <t t-set="index" t-value="index + 1" />
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="active">Total number of box(es)</td>
+                            <td>
+                                <t
+                  t-esc="o.parcels_and_items_per_source['total_parcels']"
                 />
-                </td>
-                <td>
-                  <span
-                  t-esc="int(total_cold_unit + total_cold_box)"
-                  class="pull-right"
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="active">Total number of unit(s)</td>
+                            <td>
+                                <t
+                  t-esc="o.parcels_and_items_per_source['total_items']"
                 />
-                </td>
-                <td>
-                  <span
-                  t-esc="int(total_food_unit + total_food_box)"
-                  class="pull-right"
-                />
-                </td>
-                <td>
-                  <span
-                  t-esc="int(total_mat_unit + total_mat_box)"
-                  class="pull-right"
-                />
-                </td>
-                <td>
-                  <span
-                  t-esc="int(total_total_unit + total_total_box)"
-                  class="pull-right"
-                />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-    </xpath>
-  </template>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="active">Total of parcel(s)</td>
+                            <td>
+                                <t t-esc="o.parcels_and_items_per_source['total']" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </xpath>
+    </template>
 
     <template id="report_shipment_advice">
         <t t-foreach="docs" t-as="o">
-            <t t-set="lines" t-value="o.get_merged_shippings()" />
             <t t-call="alc_report_shipment_advice.report_shipment_advice_document" />
         </t>
     </template>
 
-  <record id="shipment_advice.action_report_shipment_advice" model="ir.actions.report">
-      <field
+    <record
+    id="shipment_advice.action_report_shipment_advice"
+    model="ir.actions.report"
+  >
+        <field
       name="paperformat_id"
       ref="alc_report_shipment_advice.paperformat_shipment_advice"
     />
-        <field
-      name="report_name"
-    >alc_report_shipment_advice.report_shipment_advice</field>
-        <field
-      name="report_file"
-    >alc_report_shipment_advice.report_shipment_advice</field>
-  </record>
+    </record>
 </odoo>

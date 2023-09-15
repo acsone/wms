@@ -16,5 +16,6 @@
         "alc_report_purchase",
         "alc_report_invoice",
         "alc_report_stock_picking_operations",
+        "alc_report_shipment_advice",
     ],
 }
