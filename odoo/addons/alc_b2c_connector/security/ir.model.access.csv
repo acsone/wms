@@ -22,3 +22,4 @@ sale_channel_b2c_group,sale_channel b2c_group,sale_channel.model_sale_channel,al
 mail_message_b2c_group,mail_message b2c_group,mail.model_mail_message,alc_b2c_connector.b2c_group,0,0,1,0
 snailmail_letter_b2c_group,snailmail_letter b2c_group,snailmail.model_snailmail_letter,alc_b2c_connector.b2c_group,1,1,1,0
 account_tax_b2c_group,account_tax b2c_group,account.model_account_tax,alc_b2c_connector.b2c_group,1,1,1,0
+mrp_bom_b2c_group,mrp_bom b2c_group,mrp.model_mrp_bom,alc_b2c_connector.b2c_group,1,0,0,0

@@ -16,6 +16,7 @@
         # Odoo
         "sale_stock",
         "delivery",
+        "mrp",
         "snailmail",  # necessary dependency due to auto-install. This module override
         # partner write and perform search write on snailmail.letter
         # OCA
@@ -60,6 +61,5 @@
         "views/sale_order.xml",
     ],
     "demo": [],
-    "post_init_hook": "post_init_hook",
     "application": True,
 }
