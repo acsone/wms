@@ -12,6 +12,8 @@
         create="0"
       >
                 <field name="id" />
+                <field name="count_picking_release_ready" />
+                <field name="count_move_release_ready" />
                 <field name="name" />
                 <field name="color" />
                 <field name="pick_allowed" />
@@ -51,6 +53,12 @@
                     style="margin-right: 10%;"
                   >
                                         <field name="name" />
+                                        <field
+                      name="process_end_date"
+                      title="End Date"
+                      attrs="{'invisible': [('process_end_date', '=', False)]}"
+                      class="badge rounded-pill bg-o-color-1 ml4"
+                    />
                                     </a>
                                     <span
                     tabindex="-1"
@@ -170,7 +178,7 @@
                     />
                                   </a>
                                 </div>
-                                <div class="col-5">
+                                <div class="col-4">
                                   <a
                     t-if="record.is_action_lock_allowed.raw_value"
                     name="action_lock"
@@ -195,19 +203,29 @@
                     icon="fa-print"
                   >Print</a>
                                 </div>
-                                <div class="col-5">
-                                    <a
-                    t-if="record.is_action_sleep_allowed.raw_value"
-                    name="action_sleep"
-                    type="object"
-                    icon="fa-bolt"
-                  >Sleep</a>
-                                    <a
-                    t-if="record.is_action_wake_up_allowed.raw_value"
-                    name="action_wake_up"
-                    type="object"
-                    icon="fa-bed"
-                  >Wake Up</a>
+                                <div class="col-6">
+                                <!-- stats-->
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <a
+                        name="action_picking_release_ready"
+                        type="object"
+                      >
+                                                To Release
+                                            </a>
+                                        </div>
+                                        <div class="col-5" style="padding-left: 0;">
+                                            <field name="count_picking_release_ready" />
+                                            <a
+                        name="action_move_release_ready"
+                        type="object"
+                      >
+                                                [~<field
+                          name="count_move_release_ready"
+                        />]
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div
                   class="col-2"
@@ -260,6 +278,20 @@
                             t-if="obj['done'] > 0"
                           />
                                        </div>
+                                        <div
+                          class="progress-bar progress-bar-striped bg-danger"
+                          role="progressbar"
+                          t-att-aria-valuenow="obj['waiting']"
+                          aria-valuemin="0"
+                          t-att-aria-valuemax="obj['todo']"
+                          t-att-style="'width: ' + obj['waiting'] / obj['todo'] * 100 + '%;'"
+                        >
+                                           <span
+                            t-out="obj['waiting_progress']"
+                            t-if="obj['waiting'] > 0"
+                          />
+                                       </div>
+
                                       <div
                           class="progress-bar progress-bar-striped bg-success"
                           role="progressbar"
