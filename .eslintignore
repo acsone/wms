@@ -4,3 +4,4 @@ odoo/addons/alc_shopfloor_mobile_cluster_picking_informations/static/src/js/comp
 odoo/addons/alc_shopfloor_mobile_cluster_picking_workstation/static/src/js/cluster-picking.js
 odoo/addons/alc_shopfloor_mobile_product_print_label/static/src/js/location-content-transfer.js
 odoo/addons/alc_shopfloor_mobile_stock_reserve/static/src/js/location-content-transfer.js
+odoo/addons/alc_shopfloor_mobile_image_product/static/wms/src/components/batch_picking_line_detail.js

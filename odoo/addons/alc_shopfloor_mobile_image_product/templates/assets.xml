@@ -7,7 +7,7 @@
 <odoo>
   <template
     id="shopfloor_app_assets"
-    inherit_id="alc_shopfloor_mobile.shopfloor_app_assets"
+    inherit_id="shopfloor_mobile.shopfloor_app_assets"
   >
     <script id="script_component_batch_picking_line_detail" position="after">
       <script

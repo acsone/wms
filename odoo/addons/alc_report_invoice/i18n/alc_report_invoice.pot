@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-01 11:37+0000\n"
-"PO-Revision-Date: 2023-09-01 11:37+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -41,7 +39,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid ""
 "<br/>\n"
-"                                BIC:"
+"                              BIC:"
 msgstr ""
 
 #. module: alc_report_invoice
@@ -108,8 +106,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid ""
 "<span>SUMMARY</span>\n"
-"                <br/>\n"
-"                <span>Total discount:</span>"
+"              <br/>\n"
+"              <span>Total discount:</span>"
 msgstr ""
 
 #. module: alc_report_invoice
@@ -165,24 +163,7 @@ msgid "Amount Alcyon Discount"
 msgstr ""
 
 #. module: alc_report_invoice
-#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_antibiotics
-#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_antibiotics
-#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_antibiotics
-msgid "Amount Antibiotics"
-msgstr ""
-
-#. module: alc_report_invoice
-#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_apb
-#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_apb
-#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_apb
-msgid "Amount Apb"
-msgstr ""
-
-#. module: alc_report_invoice
-#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_contribution
-#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_contribution
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__amount_contribution
-#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_contribution
 msgid "Amount Contribution"
 msgstr ""
 
@@ -204,13 +185,6 @@ msgid "Amount Discount3"
 msgstr ""
 
 #. module: alc_report_invoice
-#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_only_tax
-#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_only_tax
-#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_only_tax
-msgid "Amount Only Tax"
-msgstr ""
-
-#. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_supplier_discount
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_supplier_discount
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_supplier_discount
@@ -222,13 +196,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_untaxed_with_contribution
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_untaxed_with_contribution
 msgid "Amount Untaxed With Contribution"
-msgstr ""
-
-#. module: alc_report_invoice
-#: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_without_discount
-#: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_without_discount
-#: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_without_discount
-msgid "Amount Without Discount"
 msgstr ""
 
 #. module: alc_report_invoice

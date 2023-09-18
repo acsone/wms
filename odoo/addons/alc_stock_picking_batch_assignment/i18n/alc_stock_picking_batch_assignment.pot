@@ -50,5 +50,5 @@ msgstr ""
 #: code:addons/alc_stock_picking_batch_assignment/models/stock_picking_batch.py:0
 #: model:ir.model.constraint,message:alc_stock_picking_batch_assignment.constraint_stock_picking_batch_user_id_unique
 #, python-format
-msgid "This operator is already assigned to a wave"
+msgid "This operator is already assigned to a batch"
 msgstr ""

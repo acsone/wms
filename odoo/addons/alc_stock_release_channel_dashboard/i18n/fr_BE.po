@@ -64,6 +64,11 @@ msgstr "Erreur de livraison"
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid "End Date"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
 msgid "Forbidden"
 msgstr "Interdite"
 
@@ -121,6 +126,16 @@ msgid "Print"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
+#: model:ir.model.fields,field_description:alc_stock_release_channel_dashboard.field_stock_release_channel__count_move_release_ready
+msgid "Release Ready Moves (Estimate)"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#: model:ir.model.fields,field_description:alc_stock_release_channel_dashboard.field_stock_release_channel__count_picking_release_ready
+msgid "Release Ready Transfers"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
 msgid "Release mode auto"
 msgstr "Mode de libération automatique"
@@ -141,11 +156,6 @@ msgstr "Avis d'expédition"
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
-msgid "Sleep"
-msgstr "Endormir"
-
-#. module: alc_stock_release_channel_dashboard
-#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
 msgid "Start/Stop pickings"
 msgstr "Démarrer/Arrêter les transferts"
 
@@ -156,10 +166,16 @@ msgstr "Canaux de livraison des stocks"
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
-msgid "Unlock"
-msgstr "Ouvrir"
+msgid "To Release"
+msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
-msgid "Wake Up"
-msgstr "Réveiller"
+msgid "Unlock"
+msgstr "Ouvrir"
+
+#~ msgid "Sleep"
+#~ msgstr "Endormir"
+
+#~ msgid "Wake Up"
+#~ msgstr "Réveiller"

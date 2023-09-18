@@ -615,11 +615,12 @@ def set_modules_to_remove():
         "web_widget_many2many_tags_multi_selection",
         "mass_editing",  # replaced by server_action_mass_edit
         "alce_l10n_be_reports",
-        "account_invoice_merge_purchase",  # done by account_invoice_merge
+        "account_invoice_merge_purchase",
         "account_invoice_force_number",
         "account_group",
         "account_chart_update",
         "account_invoice_merge_attachment",
+        "account_invoice_merge",
         "account_cutoff_accrual_base",
         "account_cutoff_accrual_return",
         "account_type_menu",
@@ -660,6 +661,8 @@ def set_modules_to_remove():
         "alc_storage_file_lang",
         "alc_storage_media_lang",
         "alc_storage_media_product",
+        "alc_product_brand_image",
+        "alc_product_consolidated_price",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     # with cursor(DB_16_POSTMIG) as cr:

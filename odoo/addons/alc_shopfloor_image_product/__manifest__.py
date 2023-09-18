@@ -5,10 +5,10 @@
     "name": "Alc Shopfloor Image Product",
     "description": """
         Include images on products""",
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["alc_shopfloor", "storage_image_product"],
+    "depends": ["shopfloor", "fs_product_multi_image"],
     "data": [],
-    "installable": False,
+    "development_status": "Alpha",
 }

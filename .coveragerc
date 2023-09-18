@@ -110,8 +110,6 @@ omit =
     odoo/addons/alc_price_cache_import/*
     odoo/addons/alc_print_all_deliveryslip/*
     odoo/addons/alc_product_abc_classification_picking_zone/*
-    odoo/addons/alc_product_brand_image/*
-    odoo/addons/alc_product_consolidated_price/*
     odoo/addons/alc_product_consolidated_price_newpharma/*
     odoo/addons/alc_product_consolidated_price_report/*
     odoo/addons/alc_product_mto/*
@@ -127,8 +125,6 @@ omit =
     odoo/addons/alc_search_engine/*
     odoo/addons/alc_shopfloor_cluster_picking_by_partners/*
     odoo/addons/alc_shopfloor_cluster_picking_transfer_async/*
-    odoo/addons/alc_shopfloor_image_product/*
-    odoo/addons/alc_shopfloor_mobile_image_product/*
     odoo/addons/alc_shopfloor_mobile_workstation/*
     odoo/addons/alc_shopinvader_category/*
     odoo/addons/alc_shopinvader_fixes/*

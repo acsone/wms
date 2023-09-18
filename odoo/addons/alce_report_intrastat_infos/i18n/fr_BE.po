@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2023-09-07 06:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -21,21 +22,30 @@ msgid "Country"
 msgstr "Pays"
 
 #. module: alce_report_intrastat_infos
+#: model:ir.model.fields,field_description:alce_report_intrastat_infos.field_product_product__intrastat_code_name
+#, fuzzy
+#| msgid "Intrastat member"
+msgid "Intrastat Code"
+msgstr "Membre Intrastat"
+
+#. module: alce_report_intrastat_infos
 #: model:ir.model.fields,field_description:alce_report_intrastat_infos.field_product_product__has_intrastat
-msgid "Has Intrastat"
+#, fuzzy
+#| msgid "Has Intrastat"
+msgid "Intrastat ok"
 msgstr "Intrastat ?"
 
 #. module: alce_report_intrastat_infos
 #: model:ir.model.fields,field_description:alce_report_intrastat_infos.field_res_country__is_intrastat
-msgid "Intrastat member"
+#, fuzzy
+#| msgid "Intrastat member"
+msgid "Intrastat ready"
 msgstr "Membre Intrastat"
-
-#. module: alce_report_intrastat_infos
-#: model:ir.model.fields,field_description:alce_report_intrastat_infos.field_product_product__intrastat_code_name
-msgid "Name"
-msgstr "Nom"
 
 #. module: alce_report_intrastat_infos
 #: model:ir.model,name:alce_report_intrastat_infos.model_product_product
 msgid "Product Variant"
 msgstr "Modèle d'article"
+
+#~ msgid "Name"
+#~ msgstr "Nom"

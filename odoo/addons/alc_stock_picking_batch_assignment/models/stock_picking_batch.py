@@ -21,7 +21,7 @@ class StockPickingBatch(StockPickingBatchBase):
             "user_id_unique",
             "EXCLUDE (user_id WITH =) WHERE ( user_id is not null and state not in "
             "('done', 'cancel', 'draft'))",
-            _("This operator is already assigned to a wave"),
+            _("This operator is already assigned to a batch"),
         )
     ]
 
