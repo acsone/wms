@@ -152,8 +152,8 @@ odoo-addon-partner-manual-rank==16.0.1.0.1.3
 odoo-addon-partner-tz==16.0.1.0.0.3
 odoo-addon-pdf-helper==16.0.1.0.0.4
 odoo-addon-procurement-auto-create-group @ git+https://github.com/acsone/stock-logistics-warehouse.git@6e15826cd0bdf71cd6c9f55d17b106b207d10fb3#subdirectory=setup/procurement_auto_create_group
-odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@6403c0518b44a1e3b741f94b550120879ae7c3f8#subdirectory=setup/product_abc_classification
-odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@b8e3913186e7c02b7846e64dceb611f51e00f163#subdirectory=setup/product_abc_classification_sale_stock
+odoo-addon-product-abc-classification==16.0.1.0.0.9
+odoo-addon-product-abc-classification-sale-stock==16.0.1.0.0.4
 odoo-addon-product-analytic @ git+https://github.com/acsone/account-analytic@f253f9b2d317d6bb0a2967412ce897a92fba321e#subdirectory=setup/product_analytic
 odoo-addon-product-analytic-purchase @ git+https://github.com/acsone/account-analytic@a207d473a01b56e9212ef9915bed62a403ba8aca#subdirectory=setup/product_analytic_purchase
 odoo-addon-product-assortment==16.0.1.0.2.6
