@@ -23,6 +23,8 @@
     -->
     <field name="name">FileSystem EShop Prod</field>
     <field name="code">fsprd_eshop</field>
+    <field name="protocol">s3</field>
+    <field name="directory_path">media</field>
     <field name="autovacuum_gc" eval="False" />
     <field
       name="options"
