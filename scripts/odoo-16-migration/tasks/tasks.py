@@ -99,6 +99,18 @@ def copydb_16_postmig():
 
 
 @task("16.0.1.0.0")
+def uninstallable_uninstalled():
+    check_call(
+        [
+            "click-odoo",
+            "-d",
+            DB_16_POSTMIG,
+            "click-odoo/unavailable-uninstallable.py",
+        ]
+    )
+
+
+@task("16.0.1.0.0")
 def ensure_postgis():
     with cursor(DB_16_POSTMIG) as cr:
         init_postgis(cr)
@@ -595,6 +607,17 @@ def set_modules_to_remove():
         "speedy_views",
         "alc_stock_receive_frigo",
         "quality",
+        "quality_mrp",
+        "quality_mrp_workorder",
+        "mrp_product_expiry",
+        "mrp_repair",
+        "stock_barcode_mrp",
+        "mrp_workorder_hr_account",
+        "spreadsheet_dashboard_mrp_account",
+        "mrp_account_enterprise",
+        "mrp_workorder_hr",
+        "mrp_workorder_expiry",
+        "purchase_mrp_workorder_quality",
         "alc_delivery_rounds_gls",  # replaced by alc_stock_release_channel_user_gls & alc_stock_release_channel_deliver_gls
         "alc_delivery_rounds_assign_blocking",  # replaced by alc_stock_release_channel_assign_blocking_unavailable_product
         "alc_delivery_rounds_assign_blocking_unavailable_product",  # replaced by alc_stock_release_channel_assign_blocking_unavailable_product
@@ -665,21 +688,19 @@ def set_modules_to_remove():
         "alc_product_consolidated_price",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
-    # with cursor(DB_16_POSTMIG) as cr:
-    #     query = """
-    #         UPDATE ir_module_module
-    #             SET state = 'to remove'
-    #             WHERE name IN %s
-    #     """
-    #     openupgrade.logged_query(
-    #         cr,
-    #         query,
-    #         (tuple(modules_list),),
-    #     )
+    with cursor(DB_16_POSTMIG) as cr:
+        query = """
+            UPDATE ir_module_module
+                SET state = 'to remove'
+                WHERE name IN %s AND state <> 'uninstallable'
+        """
+        openupgrade.logged_query(
+            cr,
+            query,
+            (tuple(modules_list),),
+        )
 
 
-# TODO: Activate this when remove module script is activated
-
-# @task()
-# def click_odoo_update_final():
-#     check_call(["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite"])
+@task()
+def click_odoo_update_final():
+    check_call(["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite"])
