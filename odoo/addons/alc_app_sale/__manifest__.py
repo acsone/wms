@@ -138,5 +138,6 @@
         "alc_pim",
         "test_alc_shipping_fee_auto_process",
         "alc_chronovet",
+        "alc_clubvetshop",
     ],
 }
