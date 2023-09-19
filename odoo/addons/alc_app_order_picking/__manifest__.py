@@ -102,6 +102,7 @@
         "alc_stock_picking_manage_priority",
         "alc_stock_move_direction",
         "alc_stock_release_channel_state_editable",
+        "alc_stock_available",
     ],
     "data": [],
     "demo": [],
