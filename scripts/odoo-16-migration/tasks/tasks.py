@@ -99,6 +99,18 @@ def copydb_16_postmig():
 
 
 @task("16.0.1.0.0")
+def uninstallable_uninstalled():
+    check_call(
+        [
+            "click-odoo",
+            "-d",
+            DB_16_POSTMIG,
+            "click-odoo/unavailable-uninstallable.py",
+        ]
+    )
+
+
+@task("16.0.1.0.0")
 def ensure_postgis():
     with cursor(DB_16_POSTMIG) as cr:
         init_postgis(cr)
@@ -665,21 +677,19 @@ def set_modules_to_remove():
         "alc_product_consolidated_price",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
-    # with cursor(DB_16_POSTMIG) as cr:
-    #     query = """
-    #         UPDATE ir_module_module
-    #             SET state = 'to remove'
-    #             WHERE name IN %s
-    #     """
-    #     openupgrade.logged_query(
-    #         cr,
-    #         query,
-    #         (tuple(modules_list),),
-    #     )
+    with cursor(DB_16_POSTMIG) as cr:
+        query = """
+            UPDATE ir_module_module
+                SET state = 'to remove'
+                WHERE name IN %s AND state <> 'uninstallable'
+        """
+        openupgrade.logged_query(
+            cr,
+            query,
+            (tuple(modules_list),),
+        )
 
 
-# TODO: Activate this when remove module script is activated
-
-# @task()
-# def click_odoo_update_final():
-#     check_call(["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite"])
+@task()
+def click_odoo_update_final():
+    check_call(["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite"])
