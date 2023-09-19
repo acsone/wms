@@ -15,6 +15,7 @@
         "account_invoice_line_default_account",
         "account_invoice_check_total",
         "account_move_sent_usability",
+        "account_reversal",
         "l10n_be_antibiotic_tax",
         "l10n_be_apb_tax",
         "l10n_be_eco_tax",

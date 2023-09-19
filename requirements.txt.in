@@ -14,6 +14,10 @@ odoo-addon-account-analytic-tag @ git+https://github.com/OCA/account-analytic@re
 # https://github.com/OCA/account-analytic/pull/585
 odoo-addon-account-analytic-account-tag @ git+https://github.com/OCA/account-analytic@refs/pull/585/head#subdirectory=setup/account_analytic_account_tag
 
+# account-financial-tools
+# https://github.com/OCA/account-financial-tools/pull/1725
+odoo-addon-account-reversal @ git+https://github.com/OCA/account-financial-tools@refs/pull/1725/head#subdirectory=setup/account_reversal
+
 # account-invoicing
 odoo-addon-account-invoice-line-default-account @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1545/head#subdirectory=setup/account_invoice_line_default_account
 odoo-addon-account-move-sent-usability @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1538/head#subdirectory=setup/account_move_sent_usability
