@@ -607,6 +607,17 @@ def set_modules_to_remove():
         "speedy_views",
         "alc_stock_receive_frigo",
         "quality",
+        "quality_mrp",
+        "quality_mrp_workorder",
+        "mrp_product_expiry",
+        "mrp_repair",
+        "stock_barcode_mrp",
+        "mrp_workorder_hr_account",
+        "spreadsheet_dashboard_mrp_account",
+        "mrp_account_enterprise",
+        "mrp_workorder_hr",
+        "mrp_workorder_expiry",
+        "purchase_mrp_workorder_quality",
         "alc_delivery_rounds_gls",  # replaced by alc_stock_release_channel_user_gls & alc_stock_release_channel_deliver_gls
         "alc_delivery_rounds_assign_blocking",  # replaced by alc_stock_release_channel_assign_blocking_unavailable_product
         "alc_delivery_rounds_assign_blocking_unavailable_product",  # replaced by alc_stock_release_channel_assign_blocking_unavailable_product
