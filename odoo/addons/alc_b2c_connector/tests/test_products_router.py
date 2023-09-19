@@ -27,7 +27,7 @@ class TestProductsService(CommonB2CServiceCase):
             response: Response = client.get(
                 "/products/search", headers={"api-key": "1234"}
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertEqual(res["size"], 2)
         result = res["data"][0]
@@ -80,7 +80,7 @@ class TestProductsService(CommonB2CServiceCase):
             response: Response = client.get(
                 "/products/search", headers={"api-key": "1234"}
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertEqual(res["size"], 2)
         result = res["data"][0]
@@ -139,7 +139,9 @@ class TestProductsService(CommonB2CServiceCase):
                 response: Response = client.get(
                     "/products/search", headers={"api-key": "1234"}
                 )
-                self.assertEqual(response.status_code, status.HTTP_200_OK)
+                self.assertEqual(
+                    response.status_code, status.HTTP_200_OK, response.json()
+                )
                 res = response.json()
                 self.assertEqual(res["size"], 1)
                 self.assertEqual(
@@ -149,7 +151,7 @@ class TestProductsService(CommonB2CServiceCase):
             response: Response = client.get(
                 "/products/search", headers={"api-key": "1234"}
             )
-            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
             res = response.json()
             self.assertEqual(res["size"], 2)
 
@@ -170,7 +172,7 @@ class TestProductsService(CommonB2CServiceCase):
                 headers={"api-key": "1234"},
                 params={"skus": [sku]},
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertEqual(res["size"], 1)
         with self._create_test_client() as client:
@@ -179,6 +181,6 @@ class TestProductsService(CommonB2CServiceCase):
                 headers={"api-key": "1234"},
                 params={"skus": [sku + "false"]},
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertEqual(res["size"], 0)

@@ -6,11 +6,11 @@ from functools import partial
 
 from odoo import Command
 
+from odoo.addons.extendable_fastapi.tests.common import FastAPITransactionCase
 from odoo.addons.fastapi.dependencies import (
     authenticated_partner_impl as base_authenticated_partner_impl,
     fastapi_endpoint_id,
 )
-from odoo.addons.fastapi.tests.common import FastAPITransactionCase
 
 from ..hooks import _initialize_product_assortment_filter
 from ..models.fastapi_endpoint import authenticated_partner_impl

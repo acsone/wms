@@ -1,11 +1,13 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-
 from enum import Enum
+from typing import Optional
+
+from odoo.addons.base.models.res_country import Country
 
 
-class CountryCode(Enum):
+class CountryCode(str, Enum):
     AD = "AD"
     AE = "AE"
     AF = "AF"
@@ -262,3 +264,9 @@ class CountryCode(Enum):
     ZM = "ZM"
     ZR = "ZR"
     ZW = "ZW"
+
+    @classmethod
+    def from_res_country(cls, country: Country | None) -> Optional["CountryCode"]:
+        if not country:
+            return None
+        return cls(country.code)

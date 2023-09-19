@@ -2,9 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from datetime import datetime
-from typing import Any
 
-from pydantic.utils import GetterDict
+from odoo.addons.product.models.product_product import ProductProduct
 
 from . import tax
 from .base_model import BaseModel
@@ -20,31 +19,15 @@ class Product(BaseModel):
     taxes: list[tax.Tax] | None
     quantity: float
 
-    class Config:
-        orm_mode = True
-
     @classmethod
-    def _decompose_class(cls: type["Product"], obj: Any) -> GetterDict:
-        res = {
-            "name": obj.name,
-            "sku": obj.default_code or None,
-            "cnk": obj.cnk_code or None,
-            "price": obj.list_price,
-            "create_date": obj.create_date,
-            "quantity": obj.immediately_usable_qty,
-            "eans": [],
-        }
-        ean = obj.barcode
-        if ean:
-            res["eans"] = [ean]
-        taxes = []
-        for tax_ in obj.taxes_id:
-            taxes.append(
-                {
-                    "name": tax_.name,
-                    "amount": tax_.amount,
-                    "amount_type": tax_.amount_type,
-                }
-            )
-        res["taxes"] = taxes
-        return res
+    def from_product_product(cls, product: ProductProduct) -> "Product":
+        return cls.model_construct(
+            sku=product.default_code or None,
+            create_date=product.create_date,
+            name=product.name,
+            price=product.list_price,
+            eans=[product.barcode] if product.barcode else [],
+            cnk=product.cnk_code or None,
+            taxes=[tax.Tax.from_account_tax(tax_) for tax_ in product.taxes_id],
+            quantity=product.immediately_usable_qty,
+        )

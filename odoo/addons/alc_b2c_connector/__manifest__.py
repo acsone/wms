@@ -20,6 +20,7 @@
         # partner write and perform search write on snailmail.letter
         # OCA
         "fastapi",
+        "extendable_fastapi",
         "product_assortment",
         "sale_channel",
         "account_payment_mode",

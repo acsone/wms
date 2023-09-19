@@ -29,7 +29,7 @@ def _create_sale_order(
     """Create a sale order."""
     data = body._convert_to_write()
     sale_order = env["sale.order"]._create_from_b2c(data, client)
-    return SaleOrderResponse.from_orm(sale_order)
+    return SaleOrderResponse.from_sale_order(sale_order)
 
 
 @router.get(
@@ -61,7 +61,9 @@ def get_sale_orders(
     count = len(sale_orders)
     return PagedCollection[SaleOrderResponse](
         size=count,
-        data=[SaleOrderResponse.from_orm(sale_order) for sale_order in sale_orders],
+        data=[
+            SaleOrderResponse.from_sale_order(sale_order) for sale_order in sale_orders
+        ],
     )
 
 
@@ -85,7 +87,7 @@ def _get_sale_order(
     deliveries field
     """
     sale_order = env["sale.order"]._get_order_from_b2c_ref(id, client)
-    return SaleOrderResponse.from_orm(sale_order)
+    return SaleOrderResponse.from_sale_order(sale_order)
 
 
 @router.post("/sales/{id}/cancel")
@@ -102,7 +104,7 @@ def _cancel_sale_order(
     """
     sale_order = env["sale.order"]._get_order_from_b2c_ref(id, client)
     sale_order._cancel_from_b2c()
-    return SaleOrderResponse.from_orm(sale_order)
+    return SaleOrderResponse.from_sale_order(sale_order)
 
 
 @router.post("/sales/{id}")
@@ -118,4 +120,4 @@ def _update_sale_order(
     sale_order = env["sale.order"]._get_order_from_b2c_ref(id, client)
     data = body._convert_to_write()
     sale_order._update_from_b2c(data, client)
-    return SaleOrderResponse.from_orm(sale_order)
+    return SaleOrderResponse.from_sale_order(sale_order)

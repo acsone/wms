@@ -129,7 +129,7 @@ class TestRecipientsService(CommonB2CServiceCase):
             response: Response = client.get(
                 "/recipients/ABC", headers={"api-key": "1234"}
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertTrue(res)
         self.assertEqual(res["id"], "ABC")
@@ -156,7 +156,7 @@ class TestRecipientsService(CommonB2CServiceCase):
         recipient_info["last_name"] = "b2cPartner"
         recipient_info["zip"] = "4567"
         recipient_info["city"] = "new_city"
-        recipient_info["country_code"] = "BE"
+        recipient_info["country_code"] = CountryCode.BE
         recipient_info["name2"] = "My Partner Society"
         recipient_info["note"] = "Test note for delivery"
         with self._create_test_client() as client:
@@ -165,7 +165,7 @@ class TestRecipientsService(CommonB2CServiceCase):
                 headers={"api-key": "1234"},
                 json=recipient_info,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
 
         self.assertEqual(self.b2c_partner.street, "new_street")
         self.assertEqual(self.b2c_partner.city, "new_city")
@@ -204,7 +204,7 @@ class TestRecipientsService(CommonB2CServiceCase):
                 headers={"api-key": "1234"},
                 json=recipient_info,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
 
         self.assertEqual(self.b2c_partner.street, "new_street")
         self.assertEqual(self.b2c_partner.city, "my first city")
@@ -274,7 +274,8 @@ class TestRecipientsService(CommonB2CServiceCase):
                 headers={"api-key": "1234"},
                 json=recipient_info,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         self.assertEqual(self.b2c_partner.phone, "1")
         self.assertEqual(self.b2c_partner.mobile, "2")
         self.assertEqual(self.b2c_partner.email, "3")
@@ -291,7 +292,7 @@ class TestRecipientsService(CommonB2CServiceCase):
                 headers={"api-key": "1234"},
                 json=recipient_info,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         self.assertFalse(self.b2c_partner.phone)
         self.assertFalse(self.b2c_partner.mobile)
         self.assertFalse(self.b2c_partner.comment)
@@ -307,7 +308,7 @@ class TestRecipientsService(CommonB2CServiceCase):
                 headers={"api-key": "1234"},
                 json={"id": "ABC", "name2": None},
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         self.assertFalse(self.b2c_partner.suite)
 
         self.b2c_order.action_confirm()
@@ -340,7 +341,7 @@ class TestRecipientsService(CommonB2CServiceCase):
                 headers={"api-key": "1234"},
                 json=recipient_info,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         self.assertEqual(self.b2c_partner.street, "new street info no check")
         self.assertEqual(self.b2c_partner.zip, "new zip info no check")
         self.assertEqual(self.b2c_partner.city, "new city info no check")

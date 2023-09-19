@@ -107,7 +107,7 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 params={"ids": [2]},
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertEqual(res["size"], 1)
         result = res["data"][0]
@@ -119,7 +119,7 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
                 headers={"api-key": "5678"},
                 params={"ids": [2]},
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertEqual(res["size"], 1)
         result = res["data"][0]
@@ -140,7 +140,7 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 params={"ids": [10]},
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertEqual(res["size"], 1)
         # second client
@@ -150,7 +150,7 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
                 headers={"api-key": "5678"},
                 params={"ids": [10]},
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertEqual(res["size"], 0)
 
@@ -161,7 +161,7 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
             response: Response = client.get(
                 "/recipients/ABC", headers={"api-key": "1234"}
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertEqual(res["name"], "EXISTING B2C PARTNER")
         # second client
@@ -169,6 +169,6 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
             response: Response = client.get(
                 "/recipients/ABC", headers={"api-key": "5678"}
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertEqual(res["name"], "EXISTING B2C PARTNER 2")

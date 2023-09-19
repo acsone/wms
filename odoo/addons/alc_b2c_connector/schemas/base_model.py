@@ -2,10 +2,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from enum import Enum
 
-from pydantic import BaseModel as PydanticBaseModel
+from odoo.addons.extendable_fastapi import StrictExtendableBaseModel
 
 
-class BaseModel(PydanticBaseModel):
+class BaseModel(StrictExtendableBaseModel, extra="ignore"):
     def _convert_to_write_field(self, field):
         if isinstance(field, BaseModel):
             return field._convert_to_write()
@@ -16,7 +16,7 @@ class BaseModel(PydanticBaseModel):
     def _convert_to_write(self):
         values = dict(self)
         res = {}
-        for field in self.__fields_set__:
+        for field in self.model_fields_set:
             value = values[field]
             if isinstance(value, list):
                 value = [self._convert_to_write_field(el) for el in value]

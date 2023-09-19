@@ -3,12 +3,12 @@
 
 from typing import Generic, TypeVar
 
-from pydantic.generics import GenericModel
+from extendable_pydantic.models import ExtendableBaseModel
 
 T = TypeVar("T")
 
 
-class PagedCollection(GenericModel, Generic[T]):
+class PagedCollection(ExtendableBaseModel, Generic[T]):
 
     size: int
     data: list[T]
