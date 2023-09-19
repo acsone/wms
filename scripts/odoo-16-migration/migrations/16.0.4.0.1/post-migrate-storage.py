@@ -528,9 +528,8 @@ def migrate_product_image(cr):
           AND st.res_model = 'storage.image'
           AND si.id = st.res_id
           AND st.size_x = 128;
-        """(
-            fs_storage_id,
-        )
+        """,
+        (fs_storage_id,),
     )
 
     _logger.info("%s ir_attachment records created", cr.rowcount)
