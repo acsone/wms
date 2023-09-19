@@ -32,7 +32,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
         """
         with self._create_test_client() as client:
             response: Response = client.get("/sales/10", headers={"api-key": "1234"})
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertTrue(res)
         self.assertEqual(res["state"], self.b2c_order.state)
@@ -68,7 +68,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 params={"ids": [10]},
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertEqual(res["size"], 1)
         result = res["data"][0]
@@ -117,7 +117,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 json=params,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
 
         self.assertTrue(res)
@@ -182,7 +182,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 json=params,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
@@ -226,7 +226,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                     headers={"api-key": "1234"},
                     json=params,
                 )
-            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
             res = response.json()
             self.assertTrue(res)
             new_so = self._get_so_from_name(res["ref"])
@@ -294,7 +294,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 json=params,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
@@ -385,7 +385,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 json=params,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
@@ -395,22 +395,22 @@ class TestSalesService(CommonB2CSaleServiceCase):
             {
                 "lines": [
                     {
-                        "line_id": "2",
-                        "qty_backorder": 5,
-                        "qty_cancelled": 0,
-                        "qty_delivered": 0,
+                        "sku": "12345",
+                        "line_id": 2,
                         "qty_ordered": 10,
                         "qty_returned": 0,
-                        "sku": "12345",
+                        "qty_delivered": 0,
+                        "qty_cancelled": 0,
+                        "qty_backorder": 5,
                     },
                     {
-                        "line_id": "3",
-                        "qty_backorder": 0,
-                        "qty_cancelled": 0,
-                        "qty_delivered": 0,
+                        "sku": "23456",
+                        "line_id": 3,
                         "qty_ordered": 1,
                         "qty_returned": 0,
-                        "sku": "23456",
+                        "qty_delivered": 0,
+                        "qty_cancelled": 0,
+                        "qty_backorder": 0,
                     },
                 ]
             },
@@ -455,7 +455,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 json=params,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
@@ -466,7 +466,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 "/sales/99",
                 headers={"api-key": "1234"},
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertEqual("delivery", res["state"])
 
@@ -508,7 +508,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 json=params,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
@@ -520,7 +520,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 "/sales/99",
                 headers={"api-key": "1234"},
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertEqual("delivery", res["state"])
         self.assertIn("deliveries", res)
@@ -564,7 +564,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 json=params,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
@@ -589,7 +589,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 f"/sales/{self.b2c_order.b2c_ref}/cancel",
                 headers={"api-key": "1234"},
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         self.assertEqual("cancel", self.b2c_order.state)
 
     def test_13(self):
@@ -609,7 +609,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 f"/sales/{self.b2c_order.b2c_ref}/cancel",
                 headers={"api-key": "1234"},
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         self.assertEqual("sale", self.b2c_order.state)
 
     def test_14(self):
@@ -662,7 +662,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 json=params,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         self.assertEqual(self.b2c_order.order_line[0].product_uom_qty, 10)
         self.assertEqual(self.b2c_order.order_line[1].product_uom_qty, 5)
         self.assertEqual(self.b2c_order.state, "sale")
@@ -705,7 +705,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 json=params,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
 
         self.assertEqual(self.b2c_order.order_line[0].product_uom_qty, 10)
         self.assertEqual(self.b2c_order.order_line[1].product_uom_qty, 35)
@@ -749,7 +749,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 "/sales/10",
                 headers={"api-key": "1234"},
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertEqual("delivery", res["state"])
         with self.assertRaises(ValidationError):
@@ -778,7 +778,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 json=params,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
 
         self.assertEqual(self.b2c_order.partner_id.zip, "1234")
         self.assertEqual(self.b2c_order.partner_id.suite, "My company")
@@ -797,7 +797,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 json=params,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
 
         self.assertNotEqual(self.b2c_order.partner_id, old_partner)
         self.assertEqual(self.b2c_order.partner_id.zip, recipient_info["zip"])
@@ -818,7 +818,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 json=params,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
 
         self.assertFalse(self.b2c_order.partner_id.phone)
 
@@ -849,7 +849,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 json=params,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
         self.assertTrue(res)
         new_so = self._get_so_from_name(res["ref"])
@@ -873,6 +873,6 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
                 json=params2,
             )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res2 = response.json()
         self.assertTrue(res2)

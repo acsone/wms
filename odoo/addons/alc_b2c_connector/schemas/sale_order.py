@@ -3,8 +3,6 @@
 from datetime import datetime
 from enum import Enum
 
-from pydantic.utils import GetterDict
-
 from ..models.sale_order import SaleOrder
 from . import delivery, partner, sale_line
 from .base_model import BaseModel
@@ -19,8 +17,16 @@ class SaleOrderState(Enum):
 
 class SaleOrderCommon(BaseModel):
     date: datetime | None
-    carrier: delivery.Carrier | None = None
+    carrier: delivery.Carrier | None = None  # WHY HERE?
     id: int
+
+    @classmethod
+    def from_sale_order(cls, sale_order: SaleOrder) -> "SaleOrderCommon":
+        return cls.model_construct(
+            id=int(sale_order.b2c_ref),
+            date=sale_order.date_order,
+            carrier=delivery.Carrier.from_delivery_carrier(sale_order.carrier_id),
+        )
 
 
 class SaleOrderResponse(SaleOrderCommon):
@@ -32,37 +38,29 @@ class SaleOrderResponse(SaleOrderCommon):
     recipient: partner.PartnerResponse | None = None
     customer_ref: str
 
-    class Config:
-        orm_mode = True
-
     @classmethod
-    def _decompose_class(
-        cls: type["SaleOrderResponse"], obj: SaleOrder
-    ) -> GetterDict:  # noqa: F821
-        state = obj.b2c_state
-        res = {
-            "id": obj.b2c_ref,
-            "customer_ref": obj.partner_id.ref,
-            "date": obj.date_order,
-            "recipient": partner.PartnerResponse.from_orm(obj.partner_id),
-            "ref": obj.name,
-            "state": state,
-            "confirmation_date": obj.date_order
-            if obj.state in ("sale", "done")
-            else None,
-            "lines": [
-                sale_line.SaleLineResponse.from_orm(line)
-                for line in obj.order_line.filtered("b2c_ref")
-            ],
-        }
-        if state == "delivery":
-            res["deliveries"] = [
-                delivery.Delivery.from_orm(ship)
-                for ship in obj.mapped("picking_ids").filtered(
+    def from_sale_order(cls, sale_order: SaleOrder) -> "SaleOrderResponse":
+        obj = super().from_sale_order(sale_order)
+        obj.confirmation_date = (
+            sale_order.date_order if sale_order.state in ("sale", "done") else None
+        )
+        obj.lines = [
+            sale_line.SaleLineResponse.from_sale_order_line(line)
+            for line in sale_order.order_line.filtered("b2c_ref")
+        ]
+        obj.deliveries = []
+        if sale_order.b2c_state == "delivery":
+            obj.deliveries = [
+                delivery.Delivery.from_stock_picking(ship)
+                for ship in sale_order.mapped("picking_ids").filtered(
                     lambda p: p.picking_type_code == "outgoing"
                 )
             ]
-        return res
+        obj.state = SaleOrderState(sale_order.b2c_state)
+        obj.ref = sale_order.name
+        obj.recipient = partner.PartnerResponse.from_res_partner(sale_order.partner_id)
+        obj.customer_ref = sale_order.partner_id.ref
+        return obj
 
 
 class SaleOrderCreateRequest(SaleOrderCommon):

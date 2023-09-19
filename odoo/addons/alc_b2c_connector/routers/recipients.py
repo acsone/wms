@@ -26,7 +26,7 @@ def _get_partners(
     """Get partner by id."""
     b2c_ref = env["res.partner"]._b2c_id_to_b2c_ref(id, client)
     partner = env["res.partner"]._get_partner_by_ref(b2c_ref)
-    return PartnerResponse.from_orm(partner)
+    return PartnerResponse.from_res_partner(partner)
 
 
 @router.post("/recipients/{id}/update")
@@ -40,4 +40,4 @@ def _update_partner(
     partner = env["res.partner"]._update_b2c_recipient(
         id, client, body._convert_to_write()
     )
-    return PartnerResponse.from_orm(partner)
+    return PartnerResponse.from_res_partner(partner)

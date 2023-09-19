@@ -249,7 +249,7 @@ odoo-addon-rest-log @ git+https://github.com/OCA/rest-framework.git@refs/pull/35
 
 #fastapi
 # https://github.com/tiangolo/fastapi/pull/5452
-fastapi @ git+https://github.com/acsone/fastapi.git@16.0-alc
+# fastapi @ git+https://github.com/acsone/fastapi.git@16.0-alc
 
 # OCA/storage
 odoo-addon-fs-attachment @ git+https://github.com/oca/storage.git@refs/pull/274/head#subdirectory=setup/fs_attachment

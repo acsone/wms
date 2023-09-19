@@ -14,6 +14,9 @@ class StockPicking(Picking):
         :param picking: stock.picking
         :return: str
         """
+        delivery_date = None
         if self.state == "done":
-            return self.date_done or self.write_date
-        return None
+            delivery_date = self.date_done or self.write_date
+        if delivery_date:
+            delivery_date = delivery_date.date()
+        return delivery_date

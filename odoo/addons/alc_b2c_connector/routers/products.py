@@ -41,5 +41,5 @@ def get_products(
     )
     return PagedCollection[Product](
         size=len(products),
-        data=[Product.from_orm(product) for product in products],
+        data=[Product.from_product_product(product) for product in products],
     )

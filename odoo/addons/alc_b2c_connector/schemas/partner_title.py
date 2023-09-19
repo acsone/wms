@@ -3,7 +3,9 @@
 
 
 from enum import Enum
-from typing import Any
+from typing import Optional
+
+from odoo.addons.base.models.res_partner import PartnerTitle
 
 
 class Title(Enum):
@@ -11,9 +13,9 @@ class Title(Enum):
     mm = "mm"
 
     @classmethod
-    def from_orm(cls: Enum, obj: Any) -> str:
+    def from_partner_title(cls, obj: PartnerTitle | None) -> Optional["Title"]:
         if not obj:
             return None
         if obj.name == "Madam":
-            return "mm"
-        return "mr"
+            return cls.mm
+        return cls.mr
