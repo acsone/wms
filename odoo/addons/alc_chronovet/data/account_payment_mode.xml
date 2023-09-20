@@ -10,13 +10,13 @@
       name="payment_method_id"
       ref="account_banking_sepa_direct_debit.sepa_direct_debit"
     />
-    <field name="payment_order_ok" eval="1" />
+    <field name="payment_order_ok">True</field>
     <field name="bank_account_link">variable</field>
     <field
       name="variable_journal_ids"
       search="[('name', 'in', ['CBC Banque - CC', 'BELFIUS - CC', 'BNP Paribas - CC', 'ING Belgium - CC'])]"
     />
-    <field name="group_lines" eval="1" />
+    <field name="group_lines">True</field>
     <field
       name="default_journal_ids"
       search="[('type', 'in', ('sale', 'sale_refund'))]"
@@ -24,11 +24,6 @@
     <field name="default_payment_mode">same</field>
     <field name="default_target_move">posted</field>
     <field name="default_date_type">due</field>
-    <!-- field name="generate_move" eval="1"/>
-        <field name="offsetting_account">transfer_account</field>
-        <field name="transfer_account_id" search="[('code', '=', '401500')]"/>
-        <field name="transfer_journal_id" search="[('name', '=', 'Domiciliations clients')]"/ -->
-    <field name="move_option">date</field>
     <field name="show_bank_account">full</field>
   </record>
 </odoo>
