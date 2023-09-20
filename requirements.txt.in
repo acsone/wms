@@ -15,6 +15,8 @@ odoo-addon-account-analytic-tag @ git+https://github.com/OCA/account-analytic@re
 odoo-addon-account-analytic-account-tag @ git+https://github.com/OCA/account-analytic@refs/pull/585/head#subdirectory=setup/account_analytic_account_tag
 
 # account-financial-tools
+# https://github.com/OCA/account-financial-tools/pull/1726
+odoo-addon-move-line-product-category @ git+https://github.com/OCA/account-financial-tools@refs/pull/1726/head#subdirectory=setup/account_move_line_product_category
 # https://github.com/OCA/account-financial-tools/pull/1725
 odoo-addon-account-reversal @ git+https://github.com/OCA/account-financial-tools@refs/pull/1725/head#subdirectory=setup/account_reversal
 

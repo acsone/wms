@@ -15,6 +15,7 @@
         "account_invoice_line_default_account",
         "account_invoice_check_total",
         "account_invoice_supplier_ref_unique",
+        "account_move_line_product_category",
         "account_move_sent_usability",
         "account_reversal",
         "l10n_be_antibiotic_tax",
