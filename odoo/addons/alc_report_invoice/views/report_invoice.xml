@@ -359,7 +359,7 @@
                               <span t-esc="bank_dexia.bank_id.bic" />
              </small></td>
              <td><small>
-                              BNP PARIBAS FORTIS :
+                              BNP PARIBAS FORTIS:
                               <span t-esc="bank_bnp.bank_acc_number" />
                               <br />
                               BIC:
@@ -393,21 +393,18 @@
             <div class="logo">
               <img
               t-if="company.logo"
-              t-att-src="'data:image/png;base64,%s' % company.logo"
+              t-att-src="image_data_uri(company.logo)"
+              style="max-height: 70px;"
             />
             </div>
             <div class="main_title">
               <div t-if="o.move_type == 'out_invoice'">
-                <span
-                t-if="o.state == 'posted' and o.payment_state in ('in_payment', 'paid', 'partial')"
-              >Invoice</span>
+                <span t-if="o.state == 'posted'">Invoice</span>
                 <span t-if="o.state == 'draft'">Draft Invoice</span>
                 <span t-if="o.state == 'cancel'">Canceled Invoice</span>
               </div>
               <div t-if="o.move_type == 'out_refund'">
-                <span
-                t-if="o.state == 'posted' and o.payment_state in ('in_payment', 'paid', 'partial')"
-              >Refund</span>
+                <span t-if="o.state == 'posted'">Refund</span>
                 <span t-if="o.state == 'draft'">Draft Credit Note</span>
                 <span t-if="o.state == 'cancel'">Canceled Refund</span>
               </div>
@@ -424,39 +421,41 @@
         <div class="footer">
           <div style="padding-top: 3mm;">
             <div style="border-top: 1px solid black;">
-                    <span t-field="company.street" />,
-                    <span t-field="company.zip" />
-                    <span t-field="company.city" />
-                    -
-                    <span t-field="company.country_id" />
-                    |
-                    <span>Phone:</span>
-                    <span t-field="company.phone" />
-                    |
-                    <span>Fax:</span>
-                    <span t-field="company.partner_id.fax" />
-                    <br />
-                    <span>Email:</span>
-                    <span t-field="company.email" />
-                    |
-                    <span>For commands;</span>
-                    <span>Phone:</span>
-                    <span t-field="company.order_phone" />
-                    -
-                    <span>Fax:</span>
-                    <span t-field="company.order_fax" />
-                    <br />
-                    <div style="width: 50%; float: left">
-                <span>RPM Liège division Huy - TVA</span>
-                <span t-field="company.vat" />
-              </div>
-                    <span t-field="o.name" />
-                    -
-                    <span t-field="o.invoice_date" />
-                    <div style="width: 50%; float: right; text-align: right">
-                        Page: <span class="page" /> / <span class="topage" />
-                    </div>
+              <small>
+                <span t-field="company.street" />,
+                <span t-field="company.zip" />
+                <span t-field="company.city" />
+                -
+                <span t-field="company.country_id" />
+                |
+                <span>Phone:</span>
+                <span t-field="company.phone" />
+                |
+                <span>Fax:</span>
+                <span t-field="company.partner_id.fax" />
+                <br />
+                <span>Email:</span>
+                <span t-field="company.email" />
+                |
+                <span>For commands;</span>
+                <span>Phone:</span>
+                <span t-field="company.order_phone" />
+                -
+                <span>Fax:</span>
+                <span t-field="company.order_fax" />
+                <br />
+                <div style="width: 50%; float: left">
+                  <span>RPM Liège division Huy - TVA</span>
+                  <span t-field="company.vat" />
                 </div>
+                <span t-field="o.name" />
+                  -
+                <span t-field="o.invoice_date" />
+                <div style="width: 50%; float: right; text-align: right">
+                  Page: <span class="page" /> / <span class="topage" />
+                </div>
+              </small>
+            </div>
           </div>
         </div>
       </t>

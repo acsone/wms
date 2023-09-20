@@ -6,11 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-01 11:37+0000\n"
-"PO-Revision-Date: 2023-09-01 11:37+0000\n"
+"POT-Creation-Date: 2023-09-20 12:20+0000\n"
+"PO-Revision-Date: 2023-09-20 12:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -35,23 +34,17 @@ msgstr "(V Réf:"
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid ""
 "-\n"
-"                    <span>Fax:</span>"
+"                <span>Fax:</span>"
 msgstr ""
 "-\n"
-"                    <span>Fax:</span>"
+"                <span>Fax:</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
-#, fuzzy
-#| msgid ""
-#| "<br/>\n"
-#| "                                BIC:"
 msgid ""
 "<br/>\n"
 "                              BIC:"
-msgstr ""
-"<br/>\n"
-"                                BIC:"
+msgstr "<br/> BIC:"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
@@ -60,18 +53,17 @@ msgid ""
 "                      <br/>\n"
 "                      <span>Customer</span>"
 msgstr ""
-"<br/>\n"
-"                      <br/>\n"
-"                      <span>Client</span>"
+"<br/> <br/>\n"
+"<span>Client</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid ""
 "<br/>\n"
-"                    <span>Email:</span>"
+"                <span>Email:</span>"
 msgstr ""
 "<br/>\n"
-"                    <span>Email:</span>"
+"                <span>Email:</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
@@ -86,12 +78,12 @@ msgstr "<span>Remise<br/>Alcyon</span>"
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Base<br/>discount</span>"
-msgstr ""
+msgstr "<span>Remise<br/>Fournisseur</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Customer</span>"
-msgstr "<span>Remise<br/>Fournisseur</span>"
+msgstr "<span>Client</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
@@ -111,7 +103,7 @@ msgstr "<span>Montant<br/>brut</span>"
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>N° Document</span>"
-msgstr "<span>N° Document</span>"
+msgstr "<span>N° Document</span"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
@@ -120,11 +112,6 @@ msgstr "<span>RPM Liège division Huy - TVA</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
-#, fuzzy
-#| msgid ""
-#| "<span>SUMMARY</span>\n"
-#| "                <br/>\n"
-#| "                <span>Total discount:</span>"
 msgid ""
 "<span>SUMMARY</span>\n"
 "              <br/>\n"
@@ -167,7 +154,7 @@ msgstr "<span>Total<br/>TVA</span>"
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Untaxed<br/>amount</span>"
-msgstr "<span>Base<br/>imposable</span>"
+msgstr "<span>Montant<br/>hors taxes</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
@@ -201,19 +188,19 @@ msgstr "Montant total des remises"
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__amount_discount2
 msgid "Amount Discount2"
-msgstr "Amount Discount2"
+msgstr "Montant remise2"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__amount_discount3
 msgid "Amount Discount3"
-msgstr "Amount Discount3"
+msgstr "Montant remise3"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_supplier_discount
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_supplier_discount
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_supplier_discount
 msgid "Amount Supplier Discount"
-msgstr "Montant des remises fournisseurs "
+msgstr "Montant des remises fournisseurs"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_untaxed_with_contribution
@@ -234,8 +221,8 @@ msgstr "BELFIUS:"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
-msgid "BNP PARIBAS FORTIS :"
-msgstr "BNP PARIBAS FORTIS :"
+msgid "BNP PARIBAS FORTIS:"
+msgstr "BNP PARIBAS FORTIS:"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
@@ -446,17 +433,17 @@ msgstr "Note de crédit fournisseur"
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid ""
 "|\n"
-"                    <span>Fax:</span>"
+"                <span>Fax:</span>"
 msgstr ""
 "|\n"
-"                    <span>Fax:</span>"
+"                <span>Fax:</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid ""
 "|\n"
-"                    <span>For commands;</span>\n"
-"                    <span>Phone:</span>"
+"                <span>For commands;</span>\n"
+"                <span>Phone:</span>"
 msgstr ""
 "|\n"
 "                <span>Pour les commandes;</span>\n"
@@ -466,19 +453,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid ""
 "|\n"
-"                    <span>Phone:</span>"
+"                <span>Phone:</span>"
 msgstr ""
 "|\n"
 "                <span>Téléphone:</span>"
-
-#~ msgid "Amount Antibiotics"
-#~ msgstr "Amount antibiotics"
-
-#~ msgid "Amount Apb"
-#~ msgstr "Montant APB"
-
-#~ msgid "Amount Only Tax"
-#~ msgstr "Montant des taxes"
-
-#~ msgid "Amount Without Discount"
-#~ msgstr "Montant sans remise"

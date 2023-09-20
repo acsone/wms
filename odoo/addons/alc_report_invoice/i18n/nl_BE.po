@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-20 12:21+0000\n"
-"PO-Revision-Date: 2023-09-20 12:21+0000\n"
+"POT-Creation-Date: 2023-09-20 12:20+0000\n"
+"PO-Revision-Date: 2023-09-20 12:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,17 +18,17 @@ msgstr ""
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "%<br/>Alcyon<br/>discount"
-msgstr ""
+msgstr "%<br/>Alcyon<br/>korting"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "%<br/>Supplier<br/>discount"
-msgstr ""
+msgstr "%<br/>Leverancier<br/>korting"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "(V Ref:"
-msgstr ""
+msgstr "(V Ref:"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
@@ -36,13 +36,15 @@ msgid ""
 "-\n"
 "                <span>Fax:</span>"
 msgstr ""
+"-\n"
+"                <span>Fax:</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid ""
 "<br/>\n"
 "                              BIC:"
-msgstr ""
+msgstr "<br/> BIC:"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
@@ -51,6 +53,8 @@ msgid ""
 "                      <br/>\n"
 "                      <span>Customer</span>"
 msgstr ""
+"<br/> <br/>\n"
+"<span>Klant</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
@@ -58,51 +62,53 @@ msgid ""
 "<br/>\n"
 "                <span>Email:</span>"
 msgstr ""
+"<br/>\n"
+"                <span>Email:</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span> - Delivery slip:</span>"
-msgstr ""
+msgstr "<span> - Afleverbon:</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Alcyon<br/>discount</span>"
-msgstr ""
+msgstr "<span>Alcyon<br/>Korting</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Base<br/>discount</span>"
-msgstr ""
+msgstr "<span>Leverencier<br/>Korting</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Customer</span>"
-msgstr ""
+msgstr "<span>Klant</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Date</span>"
-msgstr ""
+msgstr "<span>Datum</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Due date</span>"
-msgstr ""
+msgstr "<span>Vervaldatum</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Gross<br/>amount</span>"
-msgstr ""
+msgstr "<span>Bruto<br/>Totaal</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>N° Document</span>"
-msgstr ""
+msgstr "<span>Document nr</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid "<span>RPM Liège division Huy - TVA</span>"
-msgstr ""
+msgstr "<span>RPM Liège division Huy - BTW</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
@@ -111,190 +117,193 @@ msgid ""
 "              <br/>\n"
 "              <span>Total discount:</span>"
 msgstr ""
+"<span>Résumé</span>\n"
+"                            <br/>\n"
+"                            <span>Totale korting:</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Sales Order</span>"
-msgstr ""
+msgstr "<span>Verkooporder</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Total<br/>APB</span>"
-msgstr ""
+msgstr "<span>APB<br/>Totaal</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Total<br/>Antibiotics</span>"
-msgstr ""
+msgstr "<span>Antibiotica<br/>Totaal</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Total<br/>amount</span>"
-msgstr ""
+msgstr "<span>Te betalen</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Total<br/>refund</span>"
-msgstr ""
+msgstr "<span>Af te<br/>trekken</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Total<br/>tax</span>"
-msgstr ""
+msgstr "<span>BTW<br/>Totaal</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Untaxed<br/>amount</span>"
-msgstr ""
+msgstr "<span>Netto<br/>Totaal</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Your VAT number:</span>"
-msgstr ""
+msgstr "<span>Uw BTW nr:</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>du</span>"
-msgstr ""
+msgstr "<span>van</span>"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_alcyon_discount
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_alcyon_discount
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_alcyon_discount
 msgid "Amount Alcyon Discount"
-msgstr ""
+msgstr "Amount Alcyon Discount"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__amount_contribution
 msgid "Amount Contribution"
-msgstr ""
+msgstr "Amount Contribution"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_discount_total
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_discount_total
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_discount_total
 msgid "Amount Discount Total"
-msgstr ""
+msgstr "Amount Discount Total"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__amount_discount2
 msgid "Amount Discount2"
-msgstr ""
+msgstr "Amount Discount2"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__amount_discount3
 msgid "Amount Discount3"
-msgstr ""
+msgstr "Amount Discount3"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_supplier_discount
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_supplier_discount
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_supplier_discount
 msgid "Amount Supplier Discount"
-msgstr ""
+msgstr "Amount supplier discount"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__amount_untaxed_with_contribution
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__amount_untaxed_with_contribution
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__amount_untaxed_with_contribution
 msgid "Amount Untaxed With Contribution"
-msgstr ""
+msgstr "Amount untaxed with contribution"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__apb_ids
 msgid "Apb"
-msgstr ""
+msgstr "APB"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "BELFIUS:"
-msgstr ""
+msgstr "BELFIUS:"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "BNP PARIBAS FORTIS:"
-msgstr ""
+msgstr "BNP PARIBAS FORTIS:"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "Base taxable"
-msgstr ""
+msgstr "Belastbare basis"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "CBC:"
-msgstr ""
+msgstr "CBC:"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid "Canceled Invoice"
-msgstr ""
+msgstr "Geannuleerde factuur"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid "Canceled Refund"
-msgstr ""
+msgstr "Geannuleerde terugbetaling"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__contribution_ids
 msgid "Contribution"
-msgstr ""
+msgstr "Contribution"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid "DUPLICATA"
-msgstr ""
+msgstr "DUPLICAAT"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid "Draft Credit Note"
-msgstr ""
+msgstr "Concept creditnota"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid "Draft Invoice"
-msgstr ""
+msgstr "Concept factuur"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "ING:"
-msgstr ""
+msgstr "ING:"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "Intrastat code"
-msgstr ""
+msgstr "Intrastat-code"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid "Invoice"
-msgstr ""
+msgstr "Factuur"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__invoice_antibiotics_ids
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__invoice_antibiotics_ids
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__invoice_antibiotics_ids
 msgid "Invoice Antibiotics"
-msgstr ""
+msgstr "Antibiotica factuur"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__invoice_apb_ids
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__invoice_apb_ids
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__invoice_apb_ids
 msgid "Invoice Apb"
-msgstr ""
+msgstr "APB factuur"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__invoice_contribution_ids
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move__invoice_contribution_ids
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment__invoice_contribution_ids
 msgid "Invoice Contribution"
-msgstr ""
+msgstr "Contribution factuur"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_payment_mode__invoice_description
 msgid "Invoice Description"
-msgstr ""
+msgstr "Factuur beschrijving"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__invoice_only_tax_ids
@@ -321,12 +330,12 @@ msgstr ""
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "Kg"
-msgstr ""
+msgstr "Kg"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__only_tax_ids
@@ -336,7 +345,7 @@ msgstr ""
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
-msgstr ""
+msgstr "Pagina: <span class=\"page\"/> / <span class=\"topage\"/>"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_bank_statement_line__payment_mode_description
@@ -353,72 +362,72 @@ msgstr ""
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "Product<br/>reference"
-msgstr ""
+msgstr "Artikel<br/>nummer"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "Quantity"
-msgstr ""
+msgstr "Hoeveelheid"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "Rate"
-msgstr ""
+msgstr "Tarief"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "Reference for your payment"
-msgstr ""
+msgstr "Referentie te vermelden bij betaling"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid "Refund"
-msgstr ""
+msgstr "Terugbetaling"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "Subtotal<br/>price"
-msgstr ""
+msgstr "Sub<br/>totaal"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "Taxes"
-msgstr ""
+msgstr "BTW"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "Total net value"
-msgstr ""
+msgstr "Netto bedrag"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "Total weight"
-msgstr ""
+msgstr "Totaal gewicht"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "Totals"
-msgstr ""
+msgstr "Totalen"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "Unit<br/>price"
-msgstr ""
+msgstr "stuk<br/>prijs"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "VAT Amount"
-msgstr ""
+msgstr "BTW bedrag"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid "Vendor Bill"
-msgstr ""
+msgstr "Leveranciersfactuur"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid "Vendor Refund"
-msgstr ""
+msgstr "Credietnota leverancier"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
@@ -426,6 +435,8 @@ msgid ""
 "|\n"
 "                <span>Fax:</span>"
 msgstr ""
+"|\n"
+"                <span>Fax:</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
@@ -434,6 +445,9 @@ msgid ""
 "                <span>For commands;</span>\n"
 "                <span>Phone:</span>"
 msgstr ""
+"|\n"
+"                <span>Om te bestellen;</span>\n"
+"                <span>Telefoon:</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
@@ -441,3 +455,5 @@ msgid ""
 "|\n"
 "                <span>Phone:</span>"
 msgstr ""
+"|\n"
+"                <span>Telefoon:</span>"
