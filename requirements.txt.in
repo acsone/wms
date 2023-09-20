@@ -279,3 +279,5 @@ odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/OCA/bank-p
 # OCA/account-closing
 odoo-addon-account-cutoff-picking @ git+https://github.com/OCA/account-closing.git@refs/pull/261/head#subdirectory=setup/account_cutoff_picking
 odoo-addon-account-invoice-accrual @ git+https://github.com/OCA/account-closing.git@refs/pull/264/head#subdirectory=setup/account_invoice_accrual
+odoo-addon-account-cutoff-picking-product-category @ git+https://github.com/OCA/account-closing.git@refs/pull/265/head#subdirectory=setup/account_cutoff_picking_product_category
+

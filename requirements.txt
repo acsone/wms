@@ -61,6 +61,7 @@ odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/acsone/ban
 odoo-addon-account-cutoff-base==16.0.1.2.0.2
 odoo-addon-account-cutoff-picking @ git+https://github.com/acsone/account-closing.git@ab4cd346084704fe86b411ce61fef175b92f19fd#subdirectory=setup/account_cutoff_picking
 odoo-addon-account-invoice-accrual @ git+https://github.com/acsone/account-closing.git@42710267a8ed7351ba1f70a58491ce04beac04a2#subdirectory=setup/account_invoice_accrual
+odoo-addon-account-cutoff-picking-product-category @ git+https://github.com/acsone/account-closing.git@a76c24db1282e160cb0c313fca8dd40c1892aa8f#subdirectory=setup/account_cutoff_picking_product_category
 odoo-addon-account-invoice-check-total==16.0.1.0.0.6
 odoo-addon-account-invoice-line-default-account @ git+https://github.com/acsone/account-invoicing.git@dc5ed651481440a2195344e8137e247cdcfdafd6#subdirectory=setup/account_invoice_line_default_account
 odoo-addon-account-invoice-purchase-quantity @ git+https://github.com/acsone/account-invoicing.git@2bda70318412c722657ec8850eaefd237f350bcc#subdirectory=setup/account_invoice_purchase_quantity
