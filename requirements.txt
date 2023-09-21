@@ -196,7 +196,7 @@ odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/s
 odoo-addon-sale-triple-discount==16.0.1.0.1.4
 odoo-addon-sale-wishlist @ git+https://github.com/acsone/sale-workflow.git@4a626895cfa9c88e1df15fbf9a184959e83c1198#subdirectory=setup/sale_wishlist
 odoo-addon-server-action-mass-edit==16.0.2.0.1.5
-odoo-addon-server-environment==16.0.1.0.2.2
+odoo-addon-server-environment==16.0.1.0.3.1
 odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
 odoo-addon-session-db==16.0.1.0.4
 odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-transport.git@be9e4ffe220e4a69da78bf1e1b3bf29e7e30bf73#subdirectory=setup/shipment_advice

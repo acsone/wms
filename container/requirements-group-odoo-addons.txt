@@ -138,7 +138,7 @@ odoo-addon-sale-shipping-info-helper @ git+https://github.com/acsone/sale-workfl
 odoo-addon-sale-triple-discount==16.0.1.0.1.4
 odoo-addon-sale-wishlist @ git+https://github.com/acsone/sale-workflow.git@4a626895cfa9c88e1df15fbf9a184959e83c1198#subdirectory=setup/sale_wishlist
 odoo-addon-server-action-mass-edit==16.0.2.0.1.5
-odoo-addon-server-environment==16.0.1.0.2.2
+odoo-addon-server-environment==16.0.1.0.3.1
 odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
 odoo-addon-session-db==16.0.1.0.4
 odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@0d339e8dc034a7da2d554f46ff6b6224859f6438#subdirectory=setup/shopfloor
