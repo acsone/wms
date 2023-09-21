@@ -8,7 +8,6 @@ FROM ghcr.io/acsone/odoo-bedrock:16.0-py311-latest as base
 
 # Install apt runtime dependencies.
 # - postgresql-client for comfort in the shell container and for db dump to work
-# - ghostscript for pdf-a conversion
 # - expect to have unbuffer in CI
 # - gettext for click-odoo-makepot in CI
 RUN set -e \
@@ -23,7 +22,8 @@ RUN set -e \
   && rm -rf /var/lib/apt/lists/*
 
 #######################################################################################
-# build dependencies stage, where we download and install requirements-build.txt
+# builds-deps stage, where we download requirements-build.txt,
+# and install tools necessary to build source distributions.
 #
 
 FROM base as build-deps
@@ -49,43 +49,55 @@ RUN mkdir $HOME/.ssh \
   && echo "PubkeyAcceptedKeyTypes=+ssh-rsa" >> $HOME/.ssh/config
 
 # Configure pip:
-# - no cache, to keep layers light
 # - use pep517 builds always (no setup.py bdist_wheel)
-ENV PIP_NO_CACHE_DIR=1 PIP_USE_PEP517=1
+# - constraint build depdendencies for better reproducibility
+ENV PIP_USE_PEP517=1 PIP_CONSTRAINTS=/build-deps/requirements-build.txt
 
 # Download build dependencies to /build-deps.
 # --only-binary=:all: is to avoid trying building build dependencies from source
 # --no-deps is to make sure we have pinned them all
 COPY requirements-build.txt /build-deps/
 RUN pip wheel --only-binary=:all: --no-deps --wheel-dir=/build-deps -r /build-deps/requirements-build.txt
-# pre-install build dependencies, so we can build without downloading them again
-RUN pip install --no-index --no-deps /build-deps/*.whl
 
 #######################################################################################
-# build stages, can run in parallel and be cached as independent layers.
-# --no-build-isolation is to use the build dependencies we have pre-installed above
+# build-* stages, can run in parallel and be cached as independent layers.
 # --no-deps is to make sure we have pinned them all
 #
 
-FROM build-deps as build-odoo
-COPY container/requirements-group-odoo.txt /build/reqs.txt
-RUN --mount=type=ssh \
-    pip wheel --no-build-isolation --no-deps --wheel-dir=/build -r /build/reqs.txt
+FROM python:3.11-slim as split-requirements
+RUN pip install "pip-split-requirements>=0.7"
+WORKDIR /reqs/
+COPY requirements*.txt /reqs/
+RUN pip-split-requirements \
+    --group-spec="odoo:^(odoo|odoo-addons-enterprise)\s*@" \
+    --group-spec="odoo-addons-stock:odoo-addon-.*stock" \
+    --group-spec="odoo-addons:odoo-addon" \
+    --prefix="requirements-group" \
+    requirements.txt requirements-test.txt
 
-FROM build-deps as build-odoo-addons-stock
-COPY container/requirements-group-odoo-addons-stock.txt /build/reqs.txt
+FROM build-deps as build-odoo
+COPY --from=split-requirements /reqs/requirements-group-odoo.txt /build/reqs.txt
 RUN --mount=type=ssh \
-    pip wheel --no-build-isolation --no-deps --wheel-dir=/build -r /build/reqs.txt
+    --mount=type=cache,target=/root/.cache/pip \
+    pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
 
 FROM build-deps as build-odoo-addons
-COPY container/requirements-group-odoo-addons.txt /build/reqs.txt
+COPY --from=split-requirements /reqs/requirements-group-odoo-addons.txt /build/reqs.txt
 RUN --mount=type=ssh \
-    pip wheel --no-build-isolation --no-deps --wheel-dir=/build -r /build/reqs.txt
+    --mount=type=cache,target=/root/.cache/pip \
+    pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
+
+FROM build-deps as build-odoo-addons-stock
+COPY --from=split-requirements /reqs/requirements-group-odoo-addons-stock.txt /build/reqs.txt
+RUN --mount=type=ssh \
+    --mount=type=cache,target=/root/.cache/pip \
+    pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
 
 FROM build-deps as build-other
-COPY container/requirements-group-other.txt /build/reqs.txt
+COPY --from=split-requirements /reqs/requirements-group-other.txt /build/reqs.txt
 RUN --mount=type=ssh \
-    pip wheel --no-build-isolation --no-deps --wheel-dir=/build -r /build/reqs.txt
+    --mount=type=cache,target=/root/.cache/pip \
+    pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
 
 #######################################################################################
 # dependencies stage, installs wheels from build stages on top of other runtime deps.
@@ -123,4 +135,5 @@ FROM dependencies as runtime
 # have been installed before (i.e. they have been pinned in requirements.txt).
 COPY . /app
 RUN --mount=type=bind,target=/build-deps,source=/build-deps,from=build-deps \
+  --mount=type=cache,target=/root/.cache/pip \
   pip install --no-index --find-links /build-deps --editable /app
