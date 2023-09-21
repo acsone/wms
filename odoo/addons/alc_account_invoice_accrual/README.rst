@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-================
-Specific Accrual
-================
+============================
+alc account invoice accrual
+============================
 
 Add cron job to generate cut-off for draft credit notes at end of month
 
