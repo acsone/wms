@@ -61,6 +61,7 @@
         "alc_sale_suite_name",
         "alc_supplier_promotion",
         "alc_supplier_promotion_sale",
+        "alc_sale_order_date_order_short",
         "alc_sale_order_line_cancel_check",
         "alc_sale_order_line_unavailable_list",
         "alc_sale_order_sort_treeview_by_name",
