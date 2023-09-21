@@ -33,6 +33,7 @@
         # ALC
         "account_invoice_sent",
         "alc_account_security",
+        "alc_account_tax_precision",
         "alc_partner_invoicing_mode_default",
         "alc_account_invoice_accrual",
         "alc_account_cutoff_picking",
