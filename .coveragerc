@@ -122,6 +122,7 @@ omit =
     odoo/addons/alc_registration_eshop_service/*
     odoo/addons/alc_registration_responsible/*
     odoo/addons/alc_sale_cart_price_recalculation/*
+    odoo/addons/alc_sale_invoicing_on_transfer/*
     odoo/addons/alc_search_engine/*
     odoo/addons/alc_shopfloor_cluster_picking_by_partners/*
     odoo/addons/alc_shopfloor_cluster_picking_transfer_async/*
