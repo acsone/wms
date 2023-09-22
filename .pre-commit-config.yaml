@@ -272,10 +272,6 @@ repos:
   #      args: ["--namespace-packages", "--explicit-package-bases", "--ignore-missing-imports", "--follow-imports=skip"]
   #      exclude : ^odoo/addons/.*/migrations/.*$
   #      additional_dependencies: [types-python-dateutil]
-  - repo: https://github.com/sbidoul/pip-split-requirements
-    rev: v0.7.0
-    hooks:
-      - id: pip-split-requirements
 
   - repo: https://github.com/returntocorp/semgrep
     rev: "v1.31.0"
