@@ -35,6 +35,12 @@
 ^FO25,105^A0N,37,32^CI13^FR^FDLot:^FS\r
 ^FO90,105^A0N,37,32^CI13^FR^FD<t t-esc="lot.name" />^FS\r
 ^FO25,145^A0N,37,32^CI13^FR^FDBac:^FS\r
+      <t t-if="lot.product_id.putaway_rule_ids">
+          <t t-set="rule" t-value="lot.product_id.putaway_rule_ids[0]" />
+^FO90,145^A0N,37,32^CI13^FR^FD<t
+            t-esc="rule.location_in_id.name + '/' + rule.location_out_id.name"
+          />^FS\r
+      </t>
 ^FO25,190^A0N,37,32^CI13^FR^FDDate limite:^FS\r
 ^FO190,180^A0N,50,40^CI13^FR^FD<t
           t-esc="lot.expiration_date and lot.expiration_date.strftime('%d/%m/%Y') or ''"
