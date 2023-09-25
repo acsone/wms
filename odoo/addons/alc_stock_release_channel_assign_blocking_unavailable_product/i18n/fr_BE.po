@@ -6,15 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-14 14:01+0000\n"
-"PO-Revision-Date: 2023-06-14 14:01+0000\n"
+"POT-Creation-Date: 2023-09-25 14:42+0000\n"
+"PO-Revision-Date: 2023-09-25 14:42+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_move__delivery_requires_other_lines
+#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_picking__delivery_requires_other_lines
+msgid "Delivery Requires Other Lines"
+msgstr "La livraison nécessite d'autres produits"
+
+#. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_sale_order__do_not_deliver_if_alone
+msgid "Do Not Deliver If Alone"
+msgstr "Ne pas livrer si seul"
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_picking__ignore_release_channel_block
@@ -23,25 +33,23 @@ msgstr "Ignorer le blocage de la livraison"
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_assign_blocking_unavailable_product.stock_picking_form_view
-#, fuzzy
-#| msgid "Ignore Release Channel Block"
 msgid "Ignore release channel block"
 msgstr "Ignorer le blocage de la livraison"
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
-#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_move__is_backorder
-msgid "Is Backorder"
-msgstr ""
-
-#. module: alc_stock_release_channel_assign_blocking_unavailable_product
-#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_picking__is_backorder_due_to_unavailability
-msgid "Is Backorder Due To Unavailability"
-msgstr ""
-
-#. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_move__product_qty_unavailable
 msgid "Product Qty Unavailable"
-msgstr ""
+msgstr "Quantité indisponible"
+
+#. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#: model:ir.model,name:alc_stock_release_channel_assign_blocking_unavailable_product.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#: model:ir.model,name:alc_stock_release_channel_assign_blocking_unavailable_product.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de commande"
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model:ir.model,name:alc_stock_release_channel_assign_blocking_unavailable_product.model_stock_move
@@ -55,10 +63,8 @@ msgstr "Canaux de livraison"
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model:ir.model,name:alc_stock_release_channel_assign_blocking_unavailable_product.model_stock_rule
-#, fuzzy
-#| msgid "Stock Move"
 msgid "Stock Rule"
-msgstr "Mouvement de stock"
+msgstr "Règle de stock minimum"
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model:ir.model,name:alc_stock_release_channel_assign_blocking_unavailable_product.model_stock_picking
