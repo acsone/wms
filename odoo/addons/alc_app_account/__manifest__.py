@@ -28,6 +28,7 @@
         "partner_invoicing_mode_monthly",
         "partner_invoicing_mode_ten_days",
         "account_cutoff_picking",
+        "l10n_be_iso20022_pain",
         # ALC
         "account_invoice_sent",
         "alc_account_security",
