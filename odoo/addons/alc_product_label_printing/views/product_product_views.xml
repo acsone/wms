@@ -11,6 +11,8 @@
 ^FO25,135^A0N,37,32^CI13^FR^FDArticle:^FS\r
 ^FO140,135^A0N,37,40^CI13^FR^FD<t t-esc="product_id.default_code" />^FS\r
 ^FO25,180^A0N,37,32^CI13^FR^FDBac:^FS\r
+^FO90,180^A0N,37,32^CI13^FR^FD<t t-if="product_id.putaway_rules_id">
+        <t t-esc="product_id.putaway_rules_id[0].location_id.display_name" /></t>^FS\r
 ^FO420,150\r
 ^BQN,2,6\r
 ^FDQA,<t t-esc="product_id.default_code" />^FS\r
