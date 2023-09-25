@@ -14,8 +14,6 @@
           attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"
         />
         <field name="purchase_id" />
-        <field name="purchase_line_qty_received" />
-        <field name="purchase_line_product_qty" />
         <field
           name="product_id"
           attrs="{'readonly': [('invoice_state', '!=', 'draft')]}"
