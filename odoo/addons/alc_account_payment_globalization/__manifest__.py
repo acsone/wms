@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -14,17 +13,19 @@ This addon provides a wizard that will allow you to transfer the debits from mov
 
 
 Translated with www.DeepL.com/Translator (free version)""",
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
         "account",
         "account_payment_mode",
-        "account_payment_partner",  # payment_mode_id on account.invoice
+        "account_payment_partner",  # payment_mode_id on account.move
         "account_banking_mandate",  # mandate_id
     ],
-    "data": ["wizards/alc_account_payment_globalization.xml"],
+    "data": [
+        "security/alc_account_payment_globalization.xml",
+        "wizards/alc_account_payment_globalization.xml",
+    ],
     "demo": [],
-    'installable': False
 }
