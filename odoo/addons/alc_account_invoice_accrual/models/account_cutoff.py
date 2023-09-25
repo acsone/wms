@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -6,18 +5,20 @@ from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, models
+from odoo import api
+
+from odoo.addons.account_cutoff_base.models.account_cutoff import (
+    AccountCutoff as AccountCutoffBase,
+)
 
 
-class AccountCutoff(models.Model):
-    _inherit = "account.cutoff"
-
+class AccountCutoff(AccountCutoffBase):
     @api.model
-    def _cron_cutoff_refund(self, type_):
-        invoices = self.env["account.invoice"].search(
+    def _cron_cutoff_refund(self, move_type):
+        invoices = self.env["account.move"].search(
             [
-                ("state", "in", ("draft", "proforma2")),
-                ("type", "=", type_),
+                ("state", "=", "draft"),
+                ("move_type", "=", move_type),
                 ("accrual_move_id", "=", False),
             ]
         )
@@ -33,7 +34,7 @@ class AccountCutoff(models.Model):
         last_day -= relativedelta(days=1)
         wizard = (
             self.env["account.move.accrue"]
-            .with_context(active_model=invoices[0]._name, active_ids=invoices.ids)
+            .with_context(active_model="account.move", active_ids=invoices.ids)
             .create({"date": last_day})
         )
         wizard.action_accrue()
@@ -47,16 +48,16 @@ class AccountCutoff(models.Model):
         self._cron_cutoff_refund("out_refund")
 
     def _get_sale_lines(self):
-        SaleOrderLine = self.env["sale.order.line"]
-        with SaleOrderLine._auto_join(["order_id"]):
+        sale_order_line_model = self.env["sale.order.line"]
+        with sale_order_line_model._auto_join(["order_id"]):
             lines = self.env["sale.order.line"].search(
                 [("qty_to_invoice", "!=", 0), ("order_id.state", "!=", "done")]
             )
         return lines
 
     def _get_purchase_lines(self):
-        PurchaseOrderLine = self.env["purchase.order.line"]
-        with PurchaseOrderLine._auto_join(["order_id"]):
+        purchase_order_line_model = self.env["purchase.order.line"]
+        with purchase_order_line_model._auto_join(["order_id"]):
             lines = self.env["purchase.order.line"].search(
                 [("qty_to_invoice", "!=", 0), ("order_id.state", "!=", "done")]
             )
