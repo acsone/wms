@@ -8,7 +8,7 @@
 
         A set of FastAPI services used by B2C market places to makes SO.
         """,
-    "version": "16.0.2.0.0",
+    "version": "16.0.2.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -44,10 +44,10 @@
         "alc_sale_channel",
     ],
     "data": [
+        "data/res_users.xml",
         "data/fastapi_endpoint.xml",
         "data/ir_filters.xml",
         "data/product_pricelist.xml",
-        "data/res_users.xml",
         "security/groups.xml",
         "security/res_partner.xml",
         "security/sale_order.xml",

@@ -7,6 +7,7 @@
       <field name="name">B2C</field>
       <field name="app">b2c</field>
         <field name="root_path">b2c_api</field>
+      <field name="user_id" ref="alc_b2c_rest_api_user" />
     </record>
 
 
