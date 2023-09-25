@@ -181,7 +181,7 @@ odoo-addon-report-csv @ git+https://github.com/acsone/reporting-engine.git@e1430
 odoo-addon-report-xlsx==16.0.1.0.2
 odoo-addon-report-xlsx-helper==16.0.1.0.0.3
 odoo-addon-report-xml==16.0.1.1.0.1
-odoo-addon-rest-log @ git+https://github.com/acsone/rest-framework.git@d7998a4d0c7330430ace9ae748fa42bc60346aa2#subdirectory=setup/rest_log
+odoo-addon-rest-log @ git+https://github.com/acsone/rest-framework.git@36ee037eb05642682d238b7a2a9814d4cc0f83da#subdirectory=setup/rest_log
 odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@e3920cb6276556e98afed18a828d5a7c5103bf67#subdirectory=setup/sale_channel
 odoo-addon-sale-discount-display-amount==16.0.1.0.0.3
 odoo-addon-sale-exception==16.0.1.2.0.2
