@@ -4,14 +4,14 @@
 from contextlib import contextmanager
 from unittest import mock
 
-from odoo.tests import SavepointCase
+from odoo.tests import TransactionCase
 
 from odoo.addons.alc_product_flattened_data.models.alc_product_flattened_data import (
     _ProductDataContainer,
 )
 
 
-class TestProductFlattenedData(SavepointCase):
+class TestProductFlattenedData(TransactionCase):
     @classmethod
     @contextmanager
     def mock_product_data(cls, return_value=None):

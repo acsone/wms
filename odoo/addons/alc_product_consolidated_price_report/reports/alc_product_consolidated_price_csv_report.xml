@@ -2,7 +2,7 @@
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-  <record id="alc_product_consolidated_price_csv_report" model="ir.actions.report.xml">
+  <record id="alc_product_consolidated_price_csv_report" model="ir.actions.report">
     <field name="name">consolidated price</field>
     <field name="model">res.partner</field>
     <field name="report_type">csv</field>

@@ -206,6 +206,8 @@ class ProductProduct(ProductProductBase):
 
     @api.model
     def _resolve_price_cache_get(self, price_cache, key, date_ref=None):
+        if not price_cache:
+            return {}
         items = price_cache.get(key, [])  # TODO: we should not be in that case
         # however, in tests, the matter is different...
         mixin = self.env["mixin.past"]

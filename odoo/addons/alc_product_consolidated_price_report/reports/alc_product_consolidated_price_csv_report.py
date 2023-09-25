@@ -1,44 +1,44 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import csv
 
-from odoo import models
+from odoo.addons.report_csv.report.report_csv import ReportCSVAbstract
 
 
-class AlcProductConsolidatedPriceCsvReport(models.AbstractModel):
+class AlcProductConsolidatedPriceCsvReport(ReportCSVAbstract):
     _name = "report.alc_product_consolidated_price_csv_report"
-    _inherit = "report.report_csv.abstract"
+    _description = "Product consolidated price report"
 
     def generate_csv_report(self, file, data, partner):
         # Write header first
         file.writeheader()
-        consolidated_prices = self._consolidated_prices(partner)
-        for cons_price in consolidated_prices:
-            product = cons_price.product_id
+        flattened_data = self._flattened_data(partner)
+        for fdata in flattened_data:
+            final_discount = self._get_final_discount(
+                fdata.supplier_discount_discount_sale,
+            )
+            product = self.env["product.product"].browse(fdata.product_id)
             file.writerow(
                 {
-                    "REF": product.default_code,
-                    "NAME": product.name,
-                    "CNK": product.cnk_code or "",
-                    "INDICATED_PRICE": product.indicated_price,
+                    "REF": fdata.default_code,
+                    "NAME": fdata.name,
+                    "CNK": fdata.cnk_code or "",
+                    "INDICATED_PRICE": fdata.indicated_price,
                     "TAXES": ", ".join(
                         product.taxes_id.filtered(
                             lambda t: t.amount_type == "percent"
                         ).mapped("description")
                     ),
-                    "LIST_PRICE": cons_price.unit_price,
-                    "DISCOUNT": cons_price.supplier_discount,
-                    "NET_PRICE": cons_price.net_price,
-                    "SUPPLIER": product.seller_ids[0].name.name
-                    if product.seller_ids
-                    else "",
-                    "CATEGORY": product.categ_id.parent_id.display_name,
+                    "LIST_PRICE": fdata.gross_price,
+                    "DISCOUNT": fdata.supplier_discount_discount_sale,
+                    "NET_PRICE": fdata.gross_price * (1.0 - final_discount / 100.0),
+                    "SUPPLIER": fdata.supplier_name,
+                    "CATEGORY": fdata.categ,
                 }
             )
 
     def csv_report_options(self):
-        res = super(AlcProductConsolidatedPriceCsvReport, self).csv_report_options()
+        res = super().csv_report_options()
         res["fieldnames"].extend(
             [
                 "REF",
@@ -57,7 +57,15 @@ class AlcProductConsolidatedPriceCsvReport(models.AbstractModel):
         res["quoting"] = csv.QUOTE_ALL
         return res
 
-    def _consolidated_prices(self, partner):
-        return self.env["alc.product.partner.price"].search(
-            [("partner_id", "=", partner.id)]
+    def _flattened_data(self, partner):
+        return self.env["alc.product.flattened.data"]._get_partner_products_iterator(
+            partner
         )
+
+    @staticmethod
+    def _get_final_discount(*discounts):
+        discounts = [1 - (discount or 0.0) / 100 for discount in discounts]
+        final_discount = 1
+        for discount in discounts:
+            final_discount *= discount
+        return 100 - final_discount * 100
