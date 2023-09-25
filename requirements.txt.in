@@ -117,6 +117,7 @@ odoo-addon-sale-route-amendment @ git+https://github.com/OCA/sale-workflow.git@r
 odoo-addon-sale-shipping-info-helper @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2456/head#subdirectory=setup/sale_shipping_info_helper
 odoo-addon-sale-product-set @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2582/head#subdirectory=setup/sale_product_set
 odoo-addon-sale-wishlist @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2517/head#subdirectory=setup/sale_wishlist
+odoo-addon-sale-stock-picking-blocking @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2693/head#subdirectory=setup/sale_stock_picking_blocking
 
 # sale-channel
 odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@16.0-sale_channel-sbj#subdirectory=setup/sale_channel
@@ -240,6 +241,7 @@ odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/OCA/l10n-
 odoo-addon-l10n-be-eco-tax @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/199/head#subdirectory=setup/l10n_be_eco_tax
 odoo-addon-l10n-be-antibiotic-tax @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/202/head#subdirectory=setup/l10n_be_antibiotic_tax
 odoo-addon-l10n-be-apb-tax @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/201/head#subdirectory=setup/l10n_be_apb_tax
+odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/204/head#subdirectory=setup/l10n_be_iso20022_pain
 
 # OCA/rest-framework
 odoo-addon-base-rest @ git+https://github.com/OCA/rest-framework.git@refs/pull/368/head#subdirectory=setup/base_rest

@@ -1,17 +1,16 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields
+from odoo import Command, fields
 from odoo.tests import common
 
 
-class TestAlcAccountPaymentGlobalization(common.SavepointCase):
+class TestAlcAccountPaymentGlobalization(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestAlcAccountPaymentGlobalization, cls).setUpClass()
+        super().setUpClass()
         cls.partner_1 = cls.env["res.partner"].create({"name": "partner1"})
-        cls.partner_2 = cls.env["res.partner"].create({"name": "partner1"})
+        cls.partner_2 = cls.env["res.partner"].create({"name": "partner2"})
         cls.partner_3 = cls.env["res.partner"].create({"name": "partner3"})
 
         cls.payment_mode = cls.env["account.payment.mode"].create(
@@ -39,26 +38,21 @@ class TestAlcAccountPaymentGlobalization(common.SavepointCase):
             mandate.validate()
             cls.mandate = cls.partner_3.valid_mandate_id
         cls.partner_3.customer_payment_mode_id = cls.payment_mode
-
-        cls.account_type_receivable = cls.env.ref(
-            "account.data_account_type_receivable"
-        )
-        cls.account_type_revenue = cls.env.ref("account.data_account_type_revenue")
         cls.payment_term = cls.env.ref("account.account_payment_term_advance")
         cls.AccountAccount = cls.env["account.account"]
         cls.account_receivable_1 = cls.AccountAccount.create(
             {
                 "name": "Receive account",
-                "code": "440000_demo_1",
-                "user_type_id": cls.account_type_receivable.id,
+                "code": "440000demo1",
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
         cls.account_receivable_2 = cls.AccountAccount.create(
             {
                 "name": "Receive account",
-                "code": "440000_demo_2",
-                "user_type_id": cls.account_type_receivable.id,
+                "code": "440000demo2",
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
@@ -66,7 +60,7 @@ class TestAlcAccountPaymentGlobalization(common.SavepointCase):
             {
                 "name": "Revenue account",
                 "code": "702",
-                "user_type_id": cls.account_type_revenue.id,
+                "account_type": "income",
             }
         )
         cls.journal = cls.env["account.journal"].create(
@@ -84,7 +78,9 @@ class TestAlcAccountPaymentGlobalization(common.SavepointCase):
         cls.partner_3.property_account_receivable_id = cls.account_receivable_1
         cls.partner_3.property_account_payable_id = cls.account_revenue
 
-        cls.AccountInvoice = cls.env["account.invoice"]
+        cls.invoice_model = cls.env["account.move"].with_context(
+            default_move_type="out_invoice"
+        )
         cls.product = cls.env.ref("product.product_product_4")
         cls.tax_fixed = cls.env["account.tax"].create(
             {
@@ -114,28 +110,25 @@ class TestAlcAccountPaymentGlobalization(common.SavepointCase):
     @classmethod
     def _create_invoice(cls, partner, product, price_unit=100, qty=5, account=None):
         account = account or cls.account_receivable_1
-        invoice = cls.AccountInvoice.create(
+        partner.property_account_receivable_id = account
+        invoice = cls.invoice_model.create(
             {
                 "partner_id": partner.id,
-                "account_id": account.id,
-                "type": "out_invoice",
                 "payment_mode_id": cls.payment_mode.id,
+                "invoice_line_ids": [
+                    Command.create(
+                        {
+                            "product_id": product.id,
+                            "quantity": qty,
+                            "price_unit": price_unit,
+                            "account_id": cls.account_revenue.id,
+                            "name": "product that cost 100",
+                            "tax_ids": [Command.set(cls.tax_fixed.ids)],
+                        }
+                    )
+                ],
             }
         )
-
-        cls.env["account.invoice.line"].create(
-            {
-                "product_id": product.id,
-                "quantity": qty,
-                "price_unit": price_unit,
-                "invoice_id": invoice.id,
-                "account_id": cls.account_revenue.id,
-                "name": "product that cost 100",
-                "invoice_line_tax_ids": [(6, 0, [cls.tax_fixed.id])],
-            }
-        )
-        invoice.compute_taxes()
-
         return invoice
 
     def _do_globalization(self, partner, account, date=None):
@@ -155,6 +148,7 @@ class TestAlcAccountPaymentGlobalization(common.SavepointCase):
     def test_00(self):
         """
         Data:
+
             2 open invoices for partner 1 and receivable_1 account
             1 open invoice for partner 2 and receivable_1 account
             1 draft invoice for partner 2 and receivable_1 account
@@ -168,14 +162,14 @@ class TestAlcAccountPaymentGlobalization(common.SavepointCase):
             * 1 line for partner 3  (debit)
             Open invoices are now paid
         """
-        self.invoice_partner_1_1_receivable_1.action_invoice_open()
-        self.invoice_partner_1_2_receivable_1.action_invoice_open()
-        self.invoice_partner_2_1_receivable_1.action_invoice_open()
-        self.invoice_partner_2_1_receivable_2.action_invoice_open()
-        self.assertEqual(self.invoice_partner_1_1_receivable_1.state, "open")
-        self.assertEqual(self.invoice_partner_1_2_receivable_1.state, "open")
-        self.assertEqual(self.invoice_partner_2_1_receivable_1.state, "open")
-        self.assertEqual(self.invoice_partner_2_1_receivable_2.state, "open")
+        self.invoice_partner_1_1_receivable_1.action_post()
+        self.invoice_partner_1_2_receivable_1.action_post()
+        self.invoice_partner_2_1_receivable_1.action_post()
+        self.invoice_partner_2_1_receivable_2.action_post()
+        self.assertEqual(self.invoice_partner_1_1_receivable_1.state, "posted")
+        self.assertEqual(self.invoice_partner_1_2_receivable_1.state, "posted")
+        self.assertEqual(self.invoice_partner_2_1_receivable_1.state, "posted")
+        self.assertEqual(self.invoice_partner_2_1_receivable_2.state, "posted")
         account_globalization = self._do_globalization(
             self.partner_3, self.account_receivable_1
         )
@@ -185,19 +179,11 @@ class TestAlcAccountPaymentGlobalization(common.SavepointCase):
             lambda l: l.partner_id == self.partner_1
         )
         self.assertEqual(len(partner_1_lines), 2)
-        self.assertEqual(
-            partner_1_lines.mapped("invoice_id"),
-            self.invoice_partner_1_1_receivable_1
-            + self.invoice_partner_1_2_receivable_1,
-        )
         self.assertEqual(partner_1_lines.mapped("reconciled"), [True, True])
         partner_2_line = account_globalization.line_ids.filtered(
             lambda l: l.partner_id == self.partner_2
         )
         self.assertEqual(len(partner_2_line), 1)
-        self.assertEqual(
-            partner_2_line.invoice_id, self.invoice_partner_2_1_receivable_1
-        )
         self.assertEqual(partner_2_line.reconciled, True)
         partner_3_line = account_globalization.line_ids.filtered(
             lambda l: l.partner_id == self.partner_3
@@ -207,9 +193,11 @@ class TestAlcAccountPaymentGlobalization(common.SavepointCase):
         # partner_3_line is the globalization line
         # we must have the mandate and the payment mode on globalization line
         self.assertEqual(partner_3_line.payment_mode_id, self.payment_mode)
-        self.assertEqual(partner_3_line.mandate_id, self.mandate)
+        self.assertEqual(partner_3_line.move_id.mandate_id, self.mandate)
 
-        self.assertEqual(self.invoice_partner_1_1_receivable_1.state, "paid")
-        self.assertEqual(self.invoice_partner_1_2_receivable_1.state, "paid")
-        self.assertEqual(self.invoice_partner_2_1_receivable_1.state, "paid")
-        self.assertEqual(self.invoice_partner_2_1_receivable_2.state, "open")
+        self.assertEqual(self.invoice_partner_1_1_receivable_1.payment_state, "paid")
+        self.assertEqual(self.invoice_partner_1_2_receivable_1.payment_state, "paid")
+        self.assertEqual(self.invoice_partner_2_1_receivable_1.payment_state, "paid")
+        self.assertEqual(
+            self.invoice_partner_2_1_receivable_2.payment_state, "not_paid"
+        )

@@ -42,6 +42,7 @@
         "alc_partner_message_subscribe",
         "alc_partner_name",
         "alc_app_data",
+        "alc_app_b2c",
         # TO BE REMOVED
         "base_report_to_printer",
     ],
