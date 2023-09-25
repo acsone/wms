@@ -21,16 +21,12 @@ msgstr ""
 msgid "Domiciliation Chronovet"
 msgstr "Domiciliation Chronovet"
 
-#. module: alc_chronovet
-#: model:ir.model,name:alc_chronovet.model_sale_order
-msgid "Sales Order"
-msgstr "Bon de commande"
+#~ msgid "Sales Order"
+#~ msgstr "Bon de commande"
 
-#. module: alc_chronovet
-#: model:account.payment.mode,invoice_description:alc_chronovet.account_payment_mode_chronovet
-msgid ""
-"VETODISTRIBUTION BENELUX mandaté pour régler la facture pour le compte de la "
-"clinique"
-msgstr ""
-"VETODISTRIBUTION BENELUX mandaté pour régler la facture pour le compte de la "
-"clinique"
+#~ msgid ""
+#~ "VETODISTRIBUTION BENELUX mandaté pour régler la facture pour le compte de "
+#~ "la clinique"
+#~ msgstr ""
+#~ "VETODISTRIBUTION BENELUX mandaté pour régler la facture pour le compte de "
+#~ "la clinique"
