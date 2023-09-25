@@ -17,11 +17,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_consolidated_price_report
+#: model:ir.model,name:alc_product_consolidated_price_report.model_report_alc_product_consolidated_price_csv_report
+#, fuzzy
+#| msgid "report.alc_product_consolidated_price_csv_report"
+msgid "Product consolidated price report"
+msgstr "report.alc_product_consolidated_price_csv_report"
+
+#. module: alc_product_consolidated_price_report
 #: model:ir.actions.report,name:alc_product_consolidated_price_report.alc_product_consolidated_price_csv_report
 msgid "consolidated price"
 msgstr "Prix consolidé"
-
-#. module: alc_product_consolidated_price_report
-#: model:ir.model,name:alc_product_consolidated_price_report.model_report_alc_product_consolidated_price_csv_report
-msgid "report.alc_product_consolidated_price_csv_report"
-msgstr "report.alc_product_consolidated_price_csv_report"
