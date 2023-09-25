@@ -3,9 +3,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
   <record model="ir.ui.view" id="alc_account_payment_globalization_form_view">
-    <field
-      name="name"
-    >alc.account.payment.globalization.form (in alc_account_payment_globalization)</field>
     <field name="model">alc.account.payment.globalization</field>
     <field name="arch" type="xml">
       <form string="Account Payment Globalization">
@@ -33,14 +30,9 @@
     <field name="context">{}</field>
     <field name="target">new</field>
   </record>
-  <record model="ir.ui.menu" id="alc_account_actions_menu">
-    <field name="name">Actions</field>
-    <field name="parent_id" ref="account.menu_finance_entries" />
-    <field name="sequence" eval="99" />
-  </record>
   <record model="ir.ui.menu" id="alc_account_payment_globalization_menu">
     <field name="name">Account Payment Globalization</field>
-    <field name="parent_id" ref="alc_account_actions_menu" />
+    <field name="parent_id" ref="account.menu_finance_entries_actions" />
     <field name="action" ref="alc_account_payment_globalization_act_window" />
     <field name="sequence" eval="10" />
   </record>

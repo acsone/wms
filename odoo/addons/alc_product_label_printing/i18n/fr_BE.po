@@ -324,9 +324,7 @@ msgstr ""
 msgid ""
 "^FS\\r\n"
 "^FO25,180^A0N,37,32^CI13^FR^FDBac:^FS\\r\n"
-"^FO420,150\\r\n"
-"^BQN,2,6\\r\n"
-"^FDQA,"
+"^FO90,180^A0N,37,32^CI13^FR^FD"
 msgstr ""
 
 #. module: alc_product_label_printing
@@ -356,6 +354,15 @@ msgstr ""
 msgid ""
 "^FS\\r\n"
 "^FO25,80^A0N,40,30^CI13^FR^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
+msgid ""
+"^FS\\r\n"
+"^FO420,150\\r\n"
+"^BQN,2,6\\r\n"
+"^FDQA,"
 msgstr ""
 
 #. module: alc_product_label_printing
