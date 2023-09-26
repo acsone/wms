@@ -230,6 +230,13 @@ msgid "^FO130,420^A025,25^FDPVI"
 msgstr ""
 
 #. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_label_zebra_v1
+msgid ""
+"^FO25,190^A0N,37,32^CI13^FR^FDDate limite:^FS\\r\n"
+"^FO190,180^A0N,50,40^CI13^FR^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
 msgid ""
 "^FO295,200\n"
@@ -248,6 +255,14 @@ msgid "^FO330,330^A030,30^FDB2C^FS\\r"
 msgstr ""
 
 #. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
+msgid ""
+"^FO420,150\\r\n"
+"^BQN,2,6\\r\n"
+"^FDQA,"
+msgstr ""
+
+#. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
 msgid ""
 "^FO80,60^BY2\n"
@@ -255,6 +270,18 @@ msgid ""
 msgstr ""
 
 #. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_label_zebra_v1
+msgid "^FO90,145^A0N,37,32^CI13^FR^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
+msgid "^FO90,180^A0N,37,32^CI13^FR^FD"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_label_zebra_v1
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
 msgid "^FS\\r"
 msgstr ""
@@ -314,17 +341,14 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"^FO25,145^A0N,37,32^CI13^FR^FDBac:^FS\\r\n"
-"^FO25,190^A0N,37,32^CI13^FR^FDDate limite:^FS\\r\n"
-"^FO190,180^A0N,50,40^CI13^FR^FD"
+"^FO25,145^A0N,37,32^CI13^FR^FDBac:^FS\\r"
 msgstr ""
 
 #. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"^FO25,180^A0N,37,32^CI13^FR^FDBac:^FS\\r\n"
-"^FO90,180^A0N,37,32^CI13^FR^FD"
+"^FO25,180^A0N,37,32^CI13^FR^FDBac:^FS\\r"
 msgstr ""
 
 #. module: alc_product_label_printing
@@ -354,15 +378,6 @@ msgstr ""
 msgid ""
 "^FS\\r\n"
 "^FO25,80^A0N,40,30^CI13^FR^FD"
-msgstr ""
-
-#. module: alc_product_label_printing
-#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
-msgid ""
-"^FS\\r\n"
-"^FO420,150\\r\n"
-"^BQN,2,6\\r\n"
-"^FDQA,"
 msgstr ""
 
 #. module: alc_product_label_printing
@@ -491,12 +506,6 @@ msgstr "🖶Imprimer produits aliments"
 #. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_move_line_form
 #, fuzzy
-msgid "🖶Print Lot Label"
-msgstr "🖶Étiquette réception lot"
-
-#. module: alc_product_label_printing
-#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_move_line_form
-#, fuzzy
 msgid "🖶Print Med Product Label"
 msgstr "🖶Étiquette produit médicament"
 
@@ -509,3 +518,7 @@ msgstr "🖶Imprimer produits médicaments"
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.view_move_line_form
 msgid "🖶Print Product Label"
 msgstr "🖶Étiquette réception produit"
+
+#, fuzzy
+#~ msgid "🖶Print Lot Label"
+#~ msgstr "🖶Étiquette réception lot"
