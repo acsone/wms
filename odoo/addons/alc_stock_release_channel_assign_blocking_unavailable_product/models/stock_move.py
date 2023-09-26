@@ -8,5 +8,5 @@ from odoo.addons.stock.models.stock_move import StockMove as StockMoveBase
 
 class StockMove(StockMoveBase):
 
-    is_backorder = fields.Boolean(readonly=True)
+    delivery_requires_other_lines = fields.Boolean(readonly=True)
     product_qty_unavailable = fields.Float()

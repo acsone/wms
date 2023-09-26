@@ -14,6 +14,7 @@
         # OCA
         "account_invoice_line_default_account",
         "account_invoice_check_total",
+        "account_invoice_supplier_ref_unique",
         "account_move_sent_usability",
         "account_reversal",
         "l10n_be_antibiotic_tax",
@@ -33,6 +34,7 @@
         # ALC
         "account_invoice_sent",
         "alc_account_security",
+        "alc_account_tax_precision",
         "alc_partner_invoicing_mode_default",
         "alc_account_invoice_accrual",
         "alc_account_cutoff_picking",

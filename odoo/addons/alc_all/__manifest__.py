@@ -54,6 +54,7 @@
         "views/product_packaging.xml",
         "views/product_template.xml",
         "views/res_partner.xml",
+        "data/decimal_precision.xml",
         "data/ir_config_parameter.xml",
         "data/ir_sequence.xml",
         "data/res_company.xml",

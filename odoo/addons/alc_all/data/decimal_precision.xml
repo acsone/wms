@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Rise decimal precision from (16, 4) to (16, 5) the APB taxe needs a precision of 5 decimals -->
+    <record id="alc_account_tax_precision.decimal_tax" model="decimal.precision">
+        <field name="digits">5</field>
+    </record>
+</odoo>

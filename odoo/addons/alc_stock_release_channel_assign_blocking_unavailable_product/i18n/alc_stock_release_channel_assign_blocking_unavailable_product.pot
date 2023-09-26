@@ -14,6 +14,17 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_move__delivery_requires_other_lines
+#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_picking__delivery_requires_other_lines
+msgid "Delivery Requires Other Lines"
+msgstr ""
+
+#. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_sale_order__do_not_deliver_if_alone
+msgid "Do Not Deliver If Alone"
+msgstr ""
+
+#. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_picking__ignore_release_channel_block
 msgid "Ignore Release Channel Block"
 msgstr ""
@@ -24,18 +35,18 @@ msgid "Ignore release channel block"
 msgstr ""
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
-#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_move__is_backorder
-msgid "Is Backorder"
-msgstr ""
-
-#. module: alc_stock_release_channel_assign_blocking_unavailable_product
-#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_picking__is_backorder_due_to_unavailability
-msgid "Is Backorder Due To Unavailability"
-msgstr ""
-
-#. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_move__product_qty_unavailable
 msgid "Product Qty Unavailable"
+msgstr ""
+
+#. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#: model:ir.model,name:alc_stock_release_channel_assign_blocking_unavailable_product.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#: model:ir.model,name:alc_stock_release_channel_assign_blocking_unavailable_product.model_sale_order_line
+msgid "Sales Order Line"
 msgstr ""
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product

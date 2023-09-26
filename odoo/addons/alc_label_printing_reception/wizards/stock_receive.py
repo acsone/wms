@@ -29,7 +29,16 @@ class StockPackOperationLotAdd(PackOperationLotAdd):
         if self.lot_required:
             if not self.lot_name:  # check name because lot is not yet created
                 raise UserError(_("Lot is missing"))
-            self.move_line_id.print_lot_label(self.print_qty, printer_id=printer_id)
+            # create a memory record before printing lot label
+            lot = self.env["stock.lot"].new(
+                {
+                    "name": self.lot_name,
+                    "product_id": self.product_id.id,
+                    "product_qty": self.product_qty,
+                    "company_id": self.move_line_id.company_id.id,
+                }
+            )
+            lot.print_lot_label(self.print_qty, printer_id=printer_id)
         else:
             self.move_line_id.product_id.print_product_label(
                 self.print_qty, printer_id=printer_id

@@ -1,0 +1,24 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_sale_order_date_order_short
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_sale_order_date_order_short
+#: model:ir.model.fields,field_description:alc_sale_order_date_order_short.field_sale_order__date_order_short
+msgid "Date Order Short"
+msgstr ""
+
+#. module: alc_sale_order_date_order_short
+#: model:ir.model,name:alc_sale_order_date_order_short.model_sale_order
+msgid "Sales Order"
+msgstr ""

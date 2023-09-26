@@ -99,18 +99,6 @@ def copydb_16_postmig():
 
 
 @task("16.0.1.0.0")
-def uninstallable_uninstalled():
-    check_call(
-        [
-            "click-odoo",
-            "-d",
-            DB_16_POSTMIG,
-            "click-odoo/unavailable-uninstallable.py",
-        ]
-    )
-
-
-@task("16.0.1.0.0")
 def ensure_postgis():
     with cursor(DB_16_POSTMIG) as cr:
         init_postgis(cr)
@@ -500,12 +488,35 @@ def recover_account_analytyc_tag_ids():
 _register_migration_scripts_in_tasks("pre-")
 
 
+@task("16.0.1.0.0")
+def uninstallable_uninstalled():
+    check_call(
+        [
+            "click-odoo",
+            "-d",
+            DB_16_POSTMIG,
+            "click-odoo/unavailable-uninstallable.py",
+        ]
+    )
+
+
 @task()
 def click_odoo_update():
     check_call(["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite"])
 
 
 _register_migration_scripts_in_tasks("post-")
+
+
+@task("16.0.1.0.0")
+def uninstall_unused():
+    unused_modules = [
+        "mrp",
+        "quality_control",
+    ]
+    check_call(
+        ["click-odoo-uninstall", "-d", DB_16_POSTMIG, "-m", ",".join(unused_modules)]
+    )
 
 
 @task()
@@ -541,9 +552,6 @@ def set_modules_to_remove():
         "base_vat_sanitized",  # Replaced by STD
         "delivery_carrier_label_gls_server_env",
         "grid",
-        "mrp",
-        "mrp_account",
-        "mrp_workorder",
         "partner_delivery",
         "partner_helper",
         "portal",
@@ -552,11 +560,9 @@ def set_modules_to_remove():
         "procurement_sale",
         "product_packaging_barcode",
         "product_price_import",
-        "purchase_mrp",
         "purchase_prepaid",
         "purchase_unlink_cancelop",
         "purchase_update_procurement_qty",
-        "sale_mrp",
         "specific_zetes",
         "stock_delivery_note",
         "stock_expired",
@@ -606,18 +612,6 @@ def set_modules_to_remove():
         "specific_security",
         "speedy_views",
         "alc_stock_receive_frigo",
-        "quality",
-        "quality_mrp",
-        "quality_mrp_workorder",
-        "mrp_product_expiry",
-        "mrp_repair",
-        "stock_barcode_mrp",
-        "mrp_workorder_hr_account",
-        "spreadsheet_dashboard_mrp_account",
-        "mrp_account_enterprise",
-        "mrp_workorder_hr",
-        "mrp_workorder_expiry",
-        "purchase_mrp_workorder_quality",
         "alc_delivery_rounds_gls",  # replaced by alc_stock_release_channel_user_gls & alc_stock_release_channel_deliver_gls
         "alc_delivery_rounds_assign_blocking",  # replaced by alc_stock_release_channel_assign_blocking_unavailable_product
         "alc_delivery_rounds_assign_blocking_unavailable_product",  # replaced by alc_stock_release_channel_assign_blocking_unavailable_product
@@ -704,4 +698,6 @@ def set_modules_to_remove():
 
 @task()
 def click_odoo_update_final():
-    check_call(["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite"])
+    check_call(
+        ["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite", "--update-all"]
+    )

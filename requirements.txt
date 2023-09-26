@@ -63,7 +63,9 @@ odoo-addon-account-cutoff-picking @ git+https://github.com/acsone/account-closin
 odoo-addon-account-invoice-accrual @ git+https://github.com/acsone/account-closing.git@42710267a8ed7351ba1f70a58491ce04beac04a2#subdirectory=setup/account_invoice_accrual
 odoo-addon-account-invoice-check-total==16.0.1.0.0.6
 odoo-addon-account-invoice-line-default-account @ git+https://github.com/acsone/account-invoicing.git@dc5ed651481440a2195344e8137e247cdcfdafd6#subdirectory=setup/account_invoice_line_default_account
+odoo-addon-account-invoice-purchase-quantity @ git+https://github.com/acsone/account-invoicing.git@2bda70318412c722657ec8850eaefd237f350bcc#subdirectory=setup/account_invoice_purchase_quantity
 odoo-addon-account-invoice-split-refund @ git+https://github.com/acsone/account-invoicing.git@f244165f0b6e69eae5f47483a6ef1b334cae3b2b#subdirectory=setup/account_invoice_split_refund
+odoo-addon-account-invoice-supplier-ref-unique @ git+https://github.com/acsone/account-invoicing.git@2e8876cfb3305c6bebbbb187c1c96bef7ee1a645#subdirectory=setup/account_invoice_supplier_ref_unique
 odoo-addon-account-invoice-tax-required==16.0.1.0.0.9
 odoo-addon-account-invoice-transmit-method==16.0.1.0.1.8
 odoo-addon-account-invoice-triple-discount==16.0.1.0.1.3
@@ -131,7 +133,7 @@ odoo-addon-image-tag @ git+https://github.com/acsone/storage.git@20ab1a45ba3e210
 odoo-addon-internal-stock-quant-package @ git+https://github.com/acsone/stock-logistics-tracking.git@46777fba77919e3998bebc17ec3a60b35f11de62#subdirectory=setup/internal_stock_quant_package
 odoo-addon-jsonifier @ git+https://github.com/acsone/server-tools.git@d0f16e3186ca85bd2a93899af1a642db6d662356#subdirectory=setup/jsonifier
 odoo-addon-l10n-be-antibiotic-tax @ git+https://github.com/acsone/l10n-belgium.git@e51d1f2dfe6cedbda81afcaeb56c3b0ff09def9d#subdirectory=setup/l10n_be_antibiotic_tax
-odoo-addon-l10n-be-apb-tax @ git+https://github.com/acsone/l10n-belgium.git@293ec328826ba333833802b581d8725269a346a9#subdirectory=setup/l10n_be_apb_tax
+odoo-addon-l10n-be-apb-tax @ git+https://github.com/acsone/l10n-belgium.git@2435082a72b574c3e421872dca18710fcc04c4a5#subdirectory=setup/l10n_be_apb_tax
 odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/acsone/l10n-belgium.git@63b4fce463858ea41cbf8417711f2850a915400d#subdirectory=setup/l10n_be_bpost_address_autocomplete
 odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/acsone/l10n-belgium.git@3d1359a7e58a4ee9c53c5f16178a1428feadd368#subdirectory=setup/l10n_be_bpost_address_validation
 odoo-addon-l10n-be-eco-tax @ git+https://github.com/acsone/l10n-belgium.git@09e400df7b86b0cbbfeda8ba5ee64a64f651304d#subdirectory=setup/l10n_be_eco_tax

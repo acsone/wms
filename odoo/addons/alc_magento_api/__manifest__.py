@@ -16,6 +16,7 @@
         "alc_eshop_services_orders",
         "alc_eshop_sale_cart_info",
         "alc_product_flattened_data",
+        "alc_sale_order_date_order_short",
     ],
     "demo": [],
     "external_dependencies": {"python": ["xmltodict", "dicttoxml"]},
