@@ -14,7 +14,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
         picking.ensure_one()
         if (
             not picking.ignore_release_channel_block
-            and picking.is_backorder_due_to_unavailability
+            and picking.delivery_requires_other_lines
         ):
             return None
         return super().assign_release_channel(picking)

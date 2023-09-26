@@ -46,9 +46,9 @@ class TestStockPicking(TransactionCase):
         self._do_picking(self.picking, 100)
         self.assertEqual(self.picking.state, "done")
         self.backorder = self.picking.backorder_ids
-        self.assertTrue(self.backorder.move_ids.is_backorder)
+        self.assertTrue(self.backorder.move_ids.delivery_requires_other_lines)
         self.assertEqual(self.backorder.move_ids.product_qty_unavailable, 20)
-        self.assertTrue(self.backorder.is_backorder_due_to_unavailability)
+        self.assertTrue(self.backorder.delivery_requires_other_lines)
 
     def test_01(self):
         """Check that a full backorder became a regular picking if new move is added."""
@@ -65,7 +65,7 @@ class TestStockPicking(TransactionCase):
                 "picking_type_id": self.env.ref("stock.picking_type_out").id,
             }
         )
-        self.assertFalse(self.backorder.is_backorder_due_to_unavailability)
+        self.assertFalse(self.backorder.delivery_requires_other_lines)
 
     def test_02(self):
         """Check that a full back order can't be assigned to a release channel."""
@@ -101,8 +101,20 @@ class TestStockPicking(TransactionCase):
         self._do_picking(self.picking, 80)
         self.assertEqual(self.picking.state, "done")
         self.backorder = self.picking.backorder_ids
-        self.assertTrue(self.backorder.move_ids.is_backorder)
+        self.assertFalse(self.backorder.move_ids.delivery_requires_other_lines)
         self.assertEqual(self.backorder.move_ids.product_qty_unavailable, 0)
-        self.assertFalse(self.backorder.is_backorder_due_to_unavailability)
+        self.assertFalse(self.backorder.delivery_requires_other_lines)
         self.backorder.assign_release_channel()
         self.assertTrue(self.backorder.release_channel_id)
+
+    def test_06(self):
+        """Users can prevent a sale order from being delivered individually."""
+        self.sale.order_line.product_uom_qty = 20
+        self.assertEqual(self.sale.order_line.product_qty_unavailable, 0)
+        self.sale.do_not_deliver_if_alone = True
+        self.sale.action_confirm()
+        self.picking = self.sale.picking_ids
+        self.assertTrue(self.picking.move_ids.delivery_requires_other_lines)
+        self.assertTrue(self.picking.delivery_requires_other_lines)
+        self.picking.assign_release_channel()
+        self.assertFalse(self.picking.release_channel_id)

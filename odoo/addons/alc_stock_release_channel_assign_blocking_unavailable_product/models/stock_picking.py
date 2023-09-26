@@ -10,21 +10,22 @@ from odoo.addons.stock_release_channel.models.stock_picking import (
 
 class StockPicking(StockPickingBase):
 
-    is_backorder_due_to_unavailability = fields.Boolean(
-        compute="_compute_is_backorder_due_to_unavailability"
+    delivery_requires_other_lines = fields.Boolean(
+        compute="_compute_delivery_requires_other_lines"
     )
     ignore_release_channel_block = fields.Boolean(default=False)
 
-    @api.depends("move_ids", "move_ids.is_backorder")
-    def _compute_is_backorder_due_to_unavailability(self):
+    @api.depends("move_ids", "move_ids.delivery_requires_other_lines")
+    def _compute_delivery_requires_other_lines(self):
         for rec in self:
-            rec.is_backorder_due_to_unavailability = bool(rec.move_ids) and all(
-                m.is_backorder and m.product_qty_unavailable > 0 for m in rec.move_ids
+            rec.delivery_requires_other_lines = bool(rec.move_ids) and all(
+                m.delivery_requires_other_lines for m in rec.move_ids
             )
 
     def _create_backorder(self):
         backorders = super()._create_backorder()
-        backorders.move_ids.write({"is_backorder": True})
+        for move in backorders.move_ids:
+            move.delivery_requires_other_lines = move.product_qty_unavailable > 0
         return backorders
 
     def button_ignore_release_channel_block(self):
