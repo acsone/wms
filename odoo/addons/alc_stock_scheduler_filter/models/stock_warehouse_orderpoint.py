@@ -28,13 +28,17 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpointBase):
         warehouses = self.env["stock.warehouse"].search(
             [("company_id", "=", company_id.id)]
         )
-        missing_orderpoints = self.browse()
+        missing_orderpoint_ids = set()
         for warehouse in warehouses:
-            missing_orderpoints |= self._create_missing_orderpoint(warehouse)
-        to_process = missing_orderpoints | self._filter_orderpoint_to_process()
+            missing_orderpoint_ids.update(
+                self._create_missing_orderpoint(warehouse).ids
+            )
+        to_process = self.env["stock.warehouse.orderpoint"].browse(
+            missing_orderpoint_ids.update(self._filter_orderpoint_to_process().ids)
+        )
         _logger.info("Run the procurement")
         result = super(
-            StockWarehouseOrderpoint, to_process | missing_orderpoints
+            StockWarehouseOrderpoint, to_process
         )._procure_orderpoint_confirm(
             use_new_cursor=use_new_cursor,
             company_id=company_id,
