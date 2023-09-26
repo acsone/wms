@@ -13,6 +13,7 @@
         # Odoo
         "purchase",
         # OCA
+        "account_invoice_purchase_quantity",
         "purchase_delivery_split_date",
         "purchase_stock_packaging",
         "purchase_cancel_reason",

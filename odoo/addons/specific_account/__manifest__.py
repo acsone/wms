@@ -31,8 +31,6 @@
     ],
     "website": "http://www.camptocamp.com",
     "data": [
-        # Data
-        "data/account_tax_group.xml",
         # Views
         "views/assets.xml",
         "views/account_analytic_tag.xml",
@@ -40,7 +38,6 @@
         "views/account_invoice_report.xml",
         "views/account_invoice_view.xml",
         "views/account_move_line.xml",
-        "views/menu.xml",
         "views/res_config.xml",
         "security/ir.model.access.csv",
     ],

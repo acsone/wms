@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- This is the default taxes precision in Odoo core. We need to update it later in alc_all for instance -->
+    <record forcecreate="True" id="decimal_tax" model="decimal.precision">
+        <field name="name">Taxes</field>
+        <field name="digits">4</field>
+    </record>
+</odoo>
