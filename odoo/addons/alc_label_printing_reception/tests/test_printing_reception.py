@@ -112,8 +112,10 @@ class TestPrintingReception(TransactionCase):
         ) as patched_print:
             wiz.print_label()
             self.assertEqual(patched_print.call_count, 1)
-            self.assertEqual(patched_print.call_args[1]["quantity"], wiz.print_qty)
-            self.assertEqual(patched_print.call_args[1]["printer_id"], self.printer1.id)
+            self.assertEqual(patched_print.call_args.args[0], wiz.print_qty)
+            self.assertEqual(
+                patched_print.call_args.kwargs["printer_id"], self.printer1.id
+            )
 
     def test_call_printer_from_reception_wizard_product(self):
         op2 = self.picking.move_line_ids.search([("product_id", "=", self.product2.id)])

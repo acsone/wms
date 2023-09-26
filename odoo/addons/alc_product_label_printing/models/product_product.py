@@ -9,7 +9,7 @@ from odoo.addons.product.models.product_product import ProductProduct as Product
 class ProductProduct(Product):
     def print_product_label(self, quantity=1, printer_id=False):
         self.ensure_one()
-        qty = quantity  # not affected by number_labels_to_print
+        qty = quantity
         if qty:
             hw_print(
                 self,

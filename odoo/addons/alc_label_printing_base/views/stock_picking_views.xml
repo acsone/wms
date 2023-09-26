@@ -53,16 +53,16 @@
             />^FS\r
 
 ^FO30,140^A0N30,30^FD<t
-              t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[:29] or '')"
+              t-esc="pick.partner_id.display_name and pick.partner_id.display_name[:29] or ''"
             />^FS\r
 ^FO30,170^A0N30,30^FD<t
-              t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[29:50] or '')"
+              t-esc="pick.partner_id.display_name and pick.partner_id.display_name[29:50] or ''"
             />^FS\r
 ^FO30,205^A0N35,30^FD<t t-esc="pick.partner_id.zip" /> <t
-              t-esc="res_company.convert_to_ascii(pick.partner_id.city)"
+              t-esc="pick.partner_id.city"
             />^FS\r
 ^FO30,250^A0N30,30^FD<t
-              t-esc="('customer_id' in pick) and (pick.partner_id != pick.customer_id) and res_company.convert_to_ascii(pick.customer_id.name and pick.customer_id.name[:29] or '') or ''"
+              t-esc="('customer_id' in pick) and (pick.partner_id != pick.customer_id) and pick.customer_id.name and pick.customer_id.name[:29] or ''"
             />^FS\r
 
 
@@ -73,7 +73,7 @@
 
 ^FO570,310,1
 ^BXN,5,200
-^FD<t t-esc="res_company.convert_to_ascii(package.name)" />^FS\r
+^FD<t t-esc="package.name" />^FS\r
 
 ^XZ
 </t>

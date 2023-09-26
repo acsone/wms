@@ -25,14 +25,6 @@
           string="&#128438;Print Product Label"
           class="oe-link"
         />
-          <button
-          name="print_lot_label"
-          type="object"
-          class="oe-link"
-          string="&#128438;Print Lot Label"
-          attrs="{'invisible': [('lot_id', '=', False)]}"
-          groups="stock.group_production_lot"
-        />
       </xpath>
     </field>
   </record>
@@ -70,16 +62,16 @@ t t-set="lot_id" t-value="line.lot_id"
     ^FO310,480^A040,40^FD<t t-esc="index" /> / <t t-esc="int(qty_done)" />^FS\r
 
     ^FO255,60^A025,25^FD<t
-            t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[:38] or '')"
+            t-esc="pick.partner_id.display_name and pick.partner_id.display_name[:38] or ''"
           />^FS\r
     ^FO225,60^A025,25^FD<t
-            t-esc="res_company.convert_to_ascii(pick.partner_id.display_name and pick.partner_id.display_name[38:60] or '')"
+            t-esc="pick.partner_id.display_name and pick.partner_id.display_name[38:60] or ''"
           />^FS\r
     ^FO195,60^A030,25^FD<t t-esc="pick.partner_id.zip" /> <t
-            t-esc="res_company.convert_to_ascii(pick.partner_id.city)"
+            t-esc="pick.partner_id.city"
           />^FS\r
     ^FO165,60^A025,25^FD<t
-            t-esc="('customer_id' in pick) and (pick.partner_id != pick.customer_id) and res_company.convert_to_ascii(pick.customer_id.name and pick.customer_id.name[:29] or '') or ''"
+            t-esc="('customer_id' in pick) and (pick.partner_id != pick.customer_id) and pick.customer_id.name and pick.customer_id.name[:29] or ''"
           />^FS\r
 
 
@@ -131,17 +123,15 @@ t t-set="lot_id" t-value="line.lot_id"
 {PC001;0400,0040,05,05,J,00,B|}\r
 {RC001;ALCYON sa |}\r
 {PC004;0010,0040,05,05,J,00,B|}\r
-{RC004;<t
-              t-esc="res_company.convert_to_ascii(pack.picking_id.partner_id.display_name)[:30]"
-            />|}\r
+{RC004;<t t-esc="pack.picking_id.partner_id.display_name[:30]" />|}\r
 {PC009;0010,0070,05,05,J,00,B|}\r
-{RC009;<t t-esc="res_company.convert_to_ascii(customer.vet_depot_number or '')" />|}\r
+{RC009;<t t-esc="customer.vet_depot_number or ''" />|}\r
 {PC005;0010,0100,05,05,J,00,B|}\r
 {RC005;<t t-if="customer.vet_subscription_number">Doc.n : 1/<t
-                t-esc="res_company.convert_to_ascii(customer.vet_subscription_number or '')"
+                t-esc="customer.vet_subscription_number or ''"
               />/</t>|}\r
 {PC002;0010,0130,05,05,J,00,B|}\r
-{RC002;<t t-esc="res_company.convert_to_ascii(pack.product_id.name or '')" />|}\r<t
+{RC002;<t t-esc="pack.product_id.name or ''" />|}\r<t
               t-if="pack.picking_id.partner_id.is_price_on_labels"
             >{PC007;0350,0070,05,05,J,00,B|}\r{RC007;PVI : <t
                 t-esc="pack.product_id.indicated_price"
