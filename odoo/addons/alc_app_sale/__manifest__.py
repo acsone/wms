@@ -138,5 +138,6 @@
         "alc_pim",
         "test_alc_shipping_fee_auto_process",
         "alc_product_consolidated_price_report",
+        "alc_product_consolidated_price_newpharma",
     ],
 }
