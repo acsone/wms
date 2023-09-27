@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright 2020 ACSONE SA/NV
+<!-- Copyright 2023 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-  <record id="alc_b2c_placedesvetos_backend" model="alc.b2c.backend">
+  <record id="alc_b2c_client_placedesvetos" model="alc.b2c.client" forcecreate="True">
     <field name="name">Place Des Vetos</field>
     <field
       name="product_assortment_id"
       ref="alc_b2c_connector.b2c_product_assortment_filter"
     />
+    <field name="sale_channel_id" ref="sale_channel_placedesvetos" />
     <field name="pricelist_id" ref="alc_product_pricelist_data.product_pricelist_pb1" />
     <field name="discount_pricelist_id" ref="alc_b2c_connector.product_pricelist_b2c" />
     <field name="sale_team_id" ref="sales_team.salesteam_website_sales" />
-    <field
-      name="payment_mode_id"
-      ref="alc_placedesvetos.account_payment_mode_placedesvetos"
-    />
-    <field name="sale_channel">placedesvetos</field>
-    <field name="auth_api_key_id" ref="api_key_place_des_vetos_rest_api" />
+    <field name="payment_mode_id" ref="account_payment_mode_placedesvetos" />
+    <field name="partner_id" ref="res_partner_placedesvetos" />
+    <field name="api_key">api_key_place_des_vetos_rest_api</field>
+    <field name="fastapi_endpoint_id" ref="alc_b2c_connector.fastapi_endpoint_b2c" />
   </record>
 </odoo>
