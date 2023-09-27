@@ -32,7 +32,6 @@
     "website": "http://www.camptocamp.com",
     "data": [
         # Views
-        "views/assets.xml",
         "views/account_analytic_tag.xml",
         "views/account_cutoff.xml",
         "views/account_invoice_view.xml",
