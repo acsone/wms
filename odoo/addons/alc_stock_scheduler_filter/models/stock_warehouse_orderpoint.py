@@ -28,13 +28,18 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpointBase):
         warehouses = self.env["stock.warehouse"].search(
             [("company_id", "=", company_id.id)]
         )
-        missing_orderpoints = self.browse()
+        missing_orderpoint_ids = set()
         for warehouse in warehouses:
-            missing_orderpoints |= self._create_missing_orderpoint(warehouse)
-        to_process = missing_orderpoints | self._filter_orderpoint_to_process()
+            missing_orderpoint_ids.update(
+                self._create_missing_orderpoint(warehouse).ids
+            )
+        missing_orderpoint_ids.update(self._filter_orderpoint_to_process().ids)
+        to_process = self.env["stock.warehouse.orderpoint"].browse(
+            missing_orderpoint_ids
+        )
         _logger.info("Run the procurement")
         result = super(
-            StockWarehouseOrderpoint, to_process | missing_orderpoints
+            StockWarehouseOrderpoint, to_process
         )._procure_orderpoint_confirm(
             use_new_cursor=use_new_cursor,
             company_id=company_id,
@@ -58,7 +63,11 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpointBase):
 
     @api.model
     def _get_missing_orderpoint_domain(self, products=None):
-        domain = [("orderpoint_ids", "=", False), ("type", "=", "product")]
+        domain = [
+            ("orderpoint_ids", "=", False),
+            ("type", "=", "product"),
+            ("virtual_available", "<", 0),
+        ]
         if products:
             domain.append(("id", "in", products.ids))
         return domain
@@ -67,10 +76,7 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpointBase):
     def _prepare_missing_orderpoint_list_vals(self, warehouse, products):
         list_vals = []
         for product in products:
-            if product.virtual_available < 0:
-                list_vals.append(
-                    self._prepare_missing_orderpoint_vals(warehouse, product)
-                )
+            list_vals.append(self._prepare_missing_orderpoint_vals(warehouse, product))
         return list_vals
 
     @api.model
