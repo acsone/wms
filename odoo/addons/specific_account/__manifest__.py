@@ -38,7 +38,6 @@
         "views/account_invoice_report.xml",
         "views/account_invoice_view.xml",
         "views/account_move_line.xml",
-        "views/res_config.xml",
         "security/ir.model.access.csv",
     ],
     "installable": False,
