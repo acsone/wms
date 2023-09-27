@@ -37,6 +37,7 @@
         "alc_account_tax_precision",
         "alc_partner_invoicing_mode_default",
         "alc_account_invoice_accrual",
+        "alc_account_invoice_product_no_reference",
         "alc_account_cutoff_picking",
         "alc_account_payment_globalization",
     ],
