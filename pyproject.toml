@@ -96,7 +96,6 @@ exclude = [
   'odoo/addons/alc_base_rest_api_doc/*',
   'odoo/addons/alc_chronovet_payment_globalization/*',
   'odoo/addons/alc_country/*',
-  'odoo/addons/alc_customer_invoices_by_fiscal_year/*',
   'odoo/addons/alc_db_cleaner/*',
   'odoo/addons/alc_delivery_rounds_geooptimize/*',
   'odoo/addons/alc_documents/*',
