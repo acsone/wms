@@ -5,6 +5,7 @@ import logging
 from datetime import datetime
 
 from odoo import api
+from odoo.tools import float_compare
 
 from odoo.addons.stock.models.stock_orderpoint import (
     StockWarehouseOrderpoint as StockWarehouseOrderpointBase,
@@ -33,8 +34,9 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpointBase):
             missing_orderpoint_ids.update(
                 self._create_missing_orderpoint(warehouse).ids
             )
+        missing_orderpoint_ids.update(self._filter_orderpoint_to_process().ids)
         to_process = self.env["stock.warehouse.orderpoint"].browse(
-            missing_orderpoint_ids.update(self._filter_orderpoint_to_process().ids)
+            missing_orderpoint_ids
         )
         _logger.info("Run the procurement")
         result = super(
@@ -70,8 +72,21 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpointBase):
     @api.model
     def _prepare_missing_orderpoint_list_vals(self, warehouse, products):
         list_vals = []
+        precision_name = (
+            self.env["product.product"]._fields["virtual_available"]._digits
+        )
+        decimal_precision = self.env["decimal.precision"].search(
+            [("name", "=", precision_name)], limit=1
+        )
         for product in products:
-            if product.virtual_available < 0:
+            if (
+                float_compare(
+                    product.virtual_available,
+                    0,
+                    precision_digits=decimal_precision.digits,
+                )
+                < 0
+            ):
                 list_vals.append(
                     self._prepare_missing_orderpoint_vals(warehouse, product)
                 )
