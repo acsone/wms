@@ -33,7 +33,6 @@
     "data": [
         # Views
         "views/account_analytic_tag.xml",
-        "views/account_cutoff.xml",
         "views/account_invoice_view.xml",
         "views/account_move_line.xml",
         "security/ir.model.access.csv",
