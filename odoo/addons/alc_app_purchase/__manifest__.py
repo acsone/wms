@@ -19,6 +19,7 @@
         "purchase_cancel_reason",
         "purchase_discount",
         "purchase_order_approved",
+        "stock_orderpoint_default_location",
         # ALC
         "alc_additional_product_purchase",
         "alc_incoming_product_supplier_filter",

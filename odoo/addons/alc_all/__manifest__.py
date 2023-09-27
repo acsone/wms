@@ -63,6 +63,7 @@
         "data/stock_route.xml",
         "data/stock_rule.xml",
         "data/stock_location_orderpoint.xml",
+        "data/stock_warehouse.xml",
     ],
     "demo": [],
     "development_status": "Alpha",
