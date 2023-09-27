@@ -20,10 +20,6 @@ class AccountInvoice(models.Model):
             self.journal_id = journal
         return res
 
-    @api.onchange("partner_id")
-    def _onchange_intrastat_country(self):
-        self.intrastat_country_id = self.partner_id.country_id
-
 
 class AccountInvoiceLine(models.Model):
     _inherit = "account.invoice.line"
