@@ -1,4 +1,56 @@
 <odoo>
+  <template id="alc_report_base.alcyon_header">
+    <div class="header">
+      <div style="position: fixed; left: 0; top: 420px;">_</div>
+      <div style="position: fixed; right: 0; top: 420px;">_</div>
+      <div class="logo">
+        <img
+          t-if="company.logo"
+          t-att-src="image_data_uri(company.logo)"
+          style="max-height: 70px;"
+          alt="Logo"
+        />
+      </div>
+    </div>
+  </template>
+  <!-- footer with only page numbering -->
+  <template id="alc_report_base.page_number_footer">
+    <div class="footer">
+      <div style="padding-top: 5mm;">
+        <div style="border-top: 1px solid black;">
+                    <span t-field="company.street" />,
+                    <span t-field="company.zip" />
+                    <span t-field="company.city" />
+                    -
+                    <span t-field="company.country_id" />
+                    |
+                    <span>Phone:</span>
+                    <span t-field="company.phone" />
+                    |
+                    <span>Fax:</span>
+                    <span t-field="company.partner_id.fax" />
+                    <br />
+                    <span>Email:</span>
+                    <span t-field="company.email" />
+                    |
+                    <span>For commands;</span>
+                    <span>Phone:</span>
+                    <span t-field="company.order_phone" />
+                    -
+                    <span>Fax:</span>
+                    <span t-field="company.order_fax" />
+                    <br />
+                    <div style="width: 50%; float: left">
+            <span>RPM Liège division Huy - TVA</span>
+            <span t-field="company.vat" />
+          </div>
+                    <div style="width: 50%; float: right; text-align: right">
+                        Page: <span class="page" /> / <span class="topage" />
+                    </div>
+                </div>
+      </div>
+    </div>
+  </template>
   <template id="external_layout_alcyon">
     <div class="header">
       <div class="logo">
@@ -6,6 +58,7 @@
           t-if="company.logo"
           t-att-src="image_data_uri(company.logo)"
           style="max-height: 70px;"
+          alt="Logo"
         />
       </div>
     </div>

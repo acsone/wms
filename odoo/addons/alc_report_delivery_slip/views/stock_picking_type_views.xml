@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_type_tree" model="ir.ui.view">
+        <field name="name">Operation types (in alc_report_delivery_slip)</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_tree" />
+        <field name="arch" type="xml">
+            <field name="warehouse_id" position="before">
+                <field name="is_cold" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_picking_type_form" model="ir.ui.view">
+        <field name="name">Operation Types (in alc_report_delivery_slip)</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form" />
+        <field name="arch" type="xml">
+            <group name="locations" position="inside">
+                <field name="is_cold" />
+            </group>
+        </field>
+    </record>
+</odoo>
