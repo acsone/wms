@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Set VLB as the default location for new orderpoints -->
+
+    <function model="stock.warehouse" name="write">
+        <value model="stock.warehouse" eval="[ref('stock.warehouse0')]" />
+        <value
+      eval="{'default_orderpoint_location_id': ref('alc_stock_location_data.stock_location_vlb')}"
+    />
+    </function>
+</odoo>

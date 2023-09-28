@@ -31,7 +31,6 @@ omit =
     odoo/addons/alc_base_rest_api_doc/*
     odoo/addons/alc_chronovet_payment_globalization/*
     odoo/addons/alc_country/*
-    odoo/addons/alc_customer_invoices_by_fiscal_year/*
     odoo/addons/alc_db_cleaner/*
     odoo/addons/alc_delivery_rounds_geooptimize/*
     odoo/addons/alc_documents/*
@@ -102,8 +101,6 @@ omit =
     odoo/addons/alc_mrp_repair/*
     odoo/addons/alc_partner_delivery_person/*
     odoo/addons/alc_partner_delivery_window_import/*
-    odoo/addons/alc_placedesvetos/*
-    odoo/addons/alc_placedesvetos_payment_globalization/*
     odoo/addons/alc_price_cache_import/*
     odoo/addons/alc_print_all_deliveryslip/*
     odoo/addons/alc_product_abc_classification_picking_zone/*

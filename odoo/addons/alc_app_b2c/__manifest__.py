@@ -15,5 +15,6 @@
         "alc_b2c_connector",
         "alc_chronovet",
         "alc_clubvetshop",
+        "alc_placedesvetos",
     ],
 }

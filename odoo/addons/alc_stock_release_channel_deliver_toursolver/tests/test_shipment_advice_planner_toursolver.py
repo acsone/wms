@@ -1,6 +1,5 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-
 from vcr_unittest import VCRTestCase
 
 from odoo.tools import mute_logger
@@ -19,19 +18,18 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         cls.resource_2 = cls.env.ref(
             "shipment_advice_planner_toursolver.toursolver_resource_r2_demo"
         )
-
-        (cls.picking + cls.picking2 + cls.picking3).unlink()
-        cls.pickings = (
-            cls.env["stock.picking"]
-            .search(
-                [
-                    ("picking_type_code", "=", "outgoing"),
-                    ("partner_id", "!=", False),
-                    ("state", "in", ("confirmed", "assigned")),
-                ]
-            )
-            .filtered(lambda p: p.products_availability_state == "available")
-        )
+        cls.partner1 = cls.env.ref("base.res_partner_1")
+        cls.partner2 = cls.env.ref("base.res_partner_2")
+        cls.partner3 = cls.env.ref("base.res_partner_3")
+        cls.picking.partner_id = cls.partner1
+        cls.picking2.partner_id = cls.partner2
+        cls.picking3.partner_id = cls.partner3
+        cls.pickings = cls.picking + cls.picking2 + cls.picking3
+        output_loc = cls.pickings.move_ids.location_id
+        cls._update_qty_in_location(output_loc, cls.product1, 100)
+        cls._update_qty_in_location(output_loc, cls.product2, 100)
+        cls.pickings.move_ids.write({"procure_method": "make_to_stock"})
+        cls.pickings.action_assign()
         cls.channel.picking_ids = cls.pickings
         cls.pickings.move_ids.write({"procure_method": "make_to_stock"})
         cls.pickings.action_assign()
@@ -144,6 +142,6 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         self.assertEqual(
             self.channel.delivering_error,
             "An error occurred while processing the delivery automatically:\n"
-            f"- {task.display_name}: The following partner ids are not expected into the "
-            "optimization result: 31",
+            f"- {task.display_name}: The following partners are not found into the "
+            f"optimization result: Wood Corner",
         )

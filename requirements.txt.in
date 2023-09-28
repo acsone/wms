@@ -89,10 +89,6 @@ odoo-addon-shopfloor-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/head#subdirectory=setup/shopfloor_mobile_packing
 
 # product-attribute
-# https://github.com/OCA/product-attribute/pull/1192
-odoo-addon-product-abc-classification @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_abc_classification-dro#subdirectory=setup/product_abc_classification
-# https://github.com/OCA/product-attribute/pull/1196
-odoo-addon-product-abc-classification-sale-stock @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-abc-sale-dro#subdirectory=setup/product_abc_classification_sale_stock
 # https://github.com/OCA/product-attribute/pull/1386 - [IMP] product_packaging_dimension: Don't use max_weight anymore
 odoo-addon-product-packaging-dimension @ git+https://github.com/OCA/product-attribute.git@refs/pull/1386/head#subdirectory=setup/product_packaging_dimension
 # https://github.com/OCA/product-attribute/pull/1215 - MIG][16.0] product_packaging_type + renaming to product_packaging_level
@@ -109,7 +105,7 @@ odoo-addon-product-stock-state @ git+https://github.com/OCA/product-attribute.gi
 odoo-addon-purchase-cancel-reason @ git+https://github.com/OCA/purchase-workflow.git@refs/pull/1776/head#subdirectory=setup/purchase_cancel_reason
 
 # reporting-engine
-odoo-addon-report-csv @ git+https://github.com/OCA/reporting-engine.git@refs/pull/773/head#subdirectory=setup/report_csv
+odoo-addon-report-csv @ git+https://github.com/OCA/reporting-engine.git@refs/pull/793/head#subdirectory=setup/report_csv
 
 # sale-workflow
 # https://github.com/OCA/sale-workflow/pull/2322
@@ -131,6 +127,7 @@ odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@16.0-sa
 # https://github.com/mt-software-de/stock-logistics-orderpoint/pull/3
 odoo-addon-stock-location-orderpoint @ git+https://github.com/acsone/stock-logistics-orderpoint.git@16.0-mig-stock_location_orderpoint-lmi#subdirectory=setup/stock_location_orderpoint
 odoo-addon-stock-location-orderpoint-average-daily-sale @ git+https://github.com/OCA/stock-logistics-orderpoint.git@refs/pull/4/head#subdirectory=setup/stock_location_orderpoint_average_daily_sale
+odoo-addon-stock-orderpoint-default-location @ git+https://github.com/OCA/stock-logistics-orderpoint.git@refs/pull/5/head#subdirectory=setup/stock_orderpoint_default_location
 
 # stock-logistics-reporting
 # https://github.com/OCA/stock-logistics-reporting/pull/257
