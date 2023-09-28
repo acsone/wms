@@ -28,5 +28,6 @@ class BaseShopfloorService(AbstractComponent):
         if self.shopfloor_user and self.shopfloor_user != self.env.user:
             # If shopfloor user is set we call the method in his name with sudo mode
             self.env.uid = self.shopfloor_user.id
+            self.env.user = self.shopfloor_user
             self.env.su = True
         return super().dispatch(method_name, *args, params=params)
