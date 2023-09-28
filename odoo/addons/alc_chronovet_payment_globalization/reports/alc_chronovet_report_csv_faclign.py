@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import csv
@@ -8,49 +7,34 @@ from odoo import models
 
 class AlcChronovetReportCsvFaclign(models.AbstractModel):
     _name = "report.alc_chronovet_report_csv_faclign"
+    _description = "alc chronovet report csv faclign"
     _inherit = "report.report_csv.abstract"
 
     def _get_common_data(self, invoice, invoice_line):
+        amount_tax = abs(invoice_line.price_total - invoice_line.price_subtotal)
+        sign = -1 if invoice.move_type == "out_refund" else 1
         return {
-            "CFACT": invoice.partner_id.ref,
-            "CLIVR": invoice.partner_id.ref,
+            "CFACT": invoice.partner_id.ref or "",
+            "CLIVR": invoice.partner_id.ref or "",
             "NOM": invoice.partner_id.name,
-            "TYPE": invoice.type,
-            "NFACT": invoice.number,
-            "DATFAC": invoice.date_invoice,
-            "CDART": invoice_line.product_id.default_code,
+            "TYPE": invoice.move_type,
+            "NFACT": invoice.name,
+            "DATFAC": invoice.invoice_date,
+            "CDART": invoice_line.product_id.default_code or "",
             "DESART": invoice_line.product_id.name,
-            "PRIXUN": -invoice_line.price_unit
-            if invoice.type == "out_refund"
-            else invoice_line.price_unit,
-            "PRIXREM": -invoice_line.price_subtotal / invoice_line.quantity
-            if invoice.type == "out_refund"
-            else invoice_line.price_subtotal / invoice_line.quantity,
+            "PRIXUN": sign * invoice_line.price_unit,
+            "PRIXREM": sign * invoice_line.price_subtotal / invoice_line.quantity,
             "QTFACT": invoice_line.quantity,
-            "MONTHT": -invoice_line.price_subtotal
-            if invoice.type == "out_refund"
-            else invoice_line.price_subtotal,
+            "MONTHT": sign * invoice_line.price_subtotal,
             "GTIN14": invoice_line.product_id.barcode,
             "LABORATOIRE": invoice_line.product_id.supplier_id.name,
-            "TVA": invoice_line.invoice_line_tax_ids[0].amount,
+            "TVA": amount_tax,
             "CATEG": invoice_line.product_id.categ_id.parent_id.name
             if invoice_line.product_id.categ_id.parent_id
             else invoice_line.product_id.categ_id.name,
-            "TOTALHT": -invoice_line.price_subtotal
-            if invoice.type == "out_refund"
-            else invoice_line.price_subtotal,
-            "MONTTVA": -invoice_line.price_subtotal
-            * invoice_line.invoice_line_tax_ids[0].amount
-            / 100.0
-            if invoice.type == "out_refund"
-            else invoice_line.price_subtotal
-            * invoice_line.invoice_line_tax_ids[0].amount
-            / 100.0,
-            "TOTALTTC": -invoice_line.price_subtotal
-            * (1 + invoice_line.invoice_line_tax_ids[0].amount / 100.0)
-            if invoice.type == "out_refund"
-            else invoice_line.price_subtotal
-            * (1 + invoice_line.invoice_line_tax_ids[0].amount / 100.0),
+            "TOTALHT": sign * invoice_line.price_subtotal,
+            "MONTTVA": sign * amount_tax,
+            "TOTALTTC": sign * invoice_line.price_total,
         }
 
     def _add_sale_order_data(self, sale_order, common_data):
@@ -93,7 +77,7 @@ class AlcChronovetReportCsvFaclign(models.AbstractModel):
                     file.writerow(vals)
 
     def csv_report_options(self):
-        res = super(AlcChronovetReportCsvFaclign, self).csv_report_options()
+        res = super().csv_report_options()
         res["fieldnames"].extend(
             [
                 "CFACT",
@@ -129,4 +113,4 @@ class AlcChronovetReportCsvFaclign(models.AbstractModel):
         return res
 
     def _get_all_invoices(self, account_move):
-        return [line.invoice_id for line in account_move.line_ids if line.invoice_id]
+        return account_move._get_reconciled_amls().move_id

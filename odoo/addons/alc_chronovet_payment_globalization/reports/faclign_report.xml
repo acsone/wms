@@ -2,7 +2,7 @@
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-  <record id="alc_chronovet_report_csv_faclign" model="ir.actions.report.xml">
+  <record id="alc_chronovet_report_csv_faclign" model="ir.actions.report">
     <field name="name">faclign</field>
     <field name="model">account.move</field>
     <field name="report_type">csv</field>
