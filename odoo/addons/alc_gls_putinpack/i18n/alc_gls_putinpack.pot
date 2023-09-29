@@ -50,6 +50,11 @@ msgid "Display Name"
 msgstr ""
 
 #. module: alc_gls_putinpack
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.package_level_tree_view_picking
+msgid "Display package content"
+msgstr ""
+
+#. module: alc_gls_putinpack
 #: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "GLS: Cancel"
 msgstr ""
@@ -160,6 +165,11 @@ msgstr ""
 #. module: alc_gls_putinpack
 #: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__shipping_weight
 msgid "Shipping Weight"
+msgstr ""
+
+#. module: alc_gls_putinpack
+#: model:ir.model,name:alc_gls_putinpack.model_stock_package_level
+msgid "Stock Package Level"
 msgstr ""
 
 #. module: alc_gls_putinpack
