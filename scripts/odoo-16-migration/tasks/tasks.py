@@ -681,6 +681,7 @@ def set_modules_to_remove():
         "alc_product_brand_image",
         "alc_product_consolidated_price",
         "specific_cutoff",  # replaced by alc_account_invoice_accrual & alc_account_cutoff_picking
+        "stock_valuation",  # replaced by STD
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
