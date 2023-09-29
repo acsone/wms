@@ -31,6 +31,7 @@
         "account_cutoff_picking",
         "account_invoice_accrual",
         "l10n_be_iso20022_pain",
+        "account_reconcile_restrict_partner_mismatch",
         # ALC
         "account_invoice_sent",
         "alc_account_security",
