@@ -40,5 +40,7 @@
         "alc_account_invoice_product_no_reference",
         "alc_account_cutoff_picking",
         "alc_account_payment_globalization",
+        "alc_placedesvetos_payment_globalization",
+        "alc_chronovet_payment_globalization",
     ],
 }
