@@ -14,7 +14,7 @@
 ^FO90,145^A0N,34,28^FD<t t-esc="line.bin_id.name" />^FS\r
 ^FO32,190^A0N,34,28^FDDate limite:^FS\r
 ^FO175,186^A0N,40,30^FD<t
-          t-esc="line.lot_id.expiration_date and time.strftime('%d/%m/%Y', time.strptime(line.lot_id.expiration_date,'%Y-%m-%d %H:%M:%S')) or ''"
+          t-esc="line.lot_id.expiration_date and line.lot_id.expiration_date.strftime('%d/%m/%Y') or ''"
         />^FS\r
 ^FO32,240^A0N,34,28^FDArticle:^FS\r
 ^FO120,240^A0N,34,36^FD<t t-esc="line.lot_id.product_id.default_code" />^FS\r
