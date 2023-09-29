@@ -46,6 +46,11 @@ msgid "Display Name"
 msgstr ""
 
 #. module: alc_account_payment_globalization
+#: model:ir.model.fields,field_description:alc_account_payment_globalization.field_account_move_line__globalization_move_id
+msgid "Globalization Move"
+msgstr ""
+
+#. module: alc_account_payment_globalization
 #: model:ir.model.fields,field_description:alc_account_payment_globalization.field_alc_account_payment_globalization__partner_id
 msgid "Globalization counter party"
 msgstr ""
@@ -58,6 +63,11 @@ msgstr ""
 #. module: alc_account_payment_globalization
 #: model:ir.model.fields,field_description:alc_account_payment_globalization.field_alc_account_payment_globalization__journal_id
 msgid "Journal"
+msgstr ""
+
+#. module: alc_account_payment_globalization
+#: model:ir.model,name:alc_account_payment_globalization.model_account_move_line
+msgid "Journal Item"
 msgstr ""
 
 #. module: alc_account_payment_globalization
@@ -95,6 +105,11 @@ msgstr ""
 #. module: alc_account_payment_globalization
 #: model:ir.model.fields,field_description:alc_account_payment_globalization.field_alc_account_payment_globalization__date
 msgid "Posting date"
+msgstr ""
+
+#. module: alc_account_payment_globalization
+#: model:ir.model.fields,help:alc_account_payment_globalization.field_account_move_line__globalization_move_id
+msgid "Technical field used for payment globalization reconciliation"
 msgstr ""
 
 #. module: alc_account_payment_globalization
