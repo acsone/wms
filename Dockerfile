@@ -46,7 +46,8 @@ RUN set -e \
 # Configure ssh.
 RUN mkdir $HOME/.ssh \
   && echo "Host github.com\n  StrictHostKeyChecking no" >> $HOME/.ssh/config \
-  && echo "PubkeyAcceptedKeyTypes=+ssh-rsa" >> $HOME/.ssh/config
+  && echo "PubkeyAcceptedKeyTypes=+ssh-rsa" >> $HOME/.ssh/config \
+  && echo "Host upgrade.odoo.com\n  StrictHostKeyChecking no" >> $HOME/.ssh/config
 
 # Configure pip:
 # - use pep517 builds always (no setup.py bdist_wheel)
