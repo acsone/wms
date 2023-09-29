@@ -29,7 +29,6 @@ omit =
     odoo/addons/alc_address_data/*
     odoo/addons/alc_automatic_account_move_line_reconcile/*
     odoo/addons/alc_base_rest_api_doc/*
-    odoo/addons/alc_chronovet_payment_globalization/*
     odoo/addons/alc_country/*
     odoo/addons/alc_db_cleaner/*
     odoo/addons/alc_delivery_rounds_geooptimize/*

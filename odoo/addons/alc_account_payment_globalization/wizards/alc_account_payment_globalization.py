@@ -64,6 +64,7 @@ class AlcAccountPaymentGlobalization(models.TransientModel):
         self.ensure_one()
         amount_residual = move_line.amount_residual
         vals = {
+            "globalization_move_id": move_line.move_id.id,
             "name": f"{move_line.move_id.name} {self.partner_id.name}",
             "account_id": self.account_id.id,
             "partner_id": move_line.partner_id.id,
@@ -107,14 +108,14 @@ class AlcAccountPaymentGlobalization(models.TransientModel):
 
     def _reconcile(self, move_lines, new_move_lines):
         move_line_model = self.env["account.move.line"]
-        move_line_id_by_partner = defaultdict(list)
-        new_move_line_id_by_partner = defaultdict(list)
+        move_line_id_by_invoice = defaultdict(list)
+        new_move_line_id_by_invoice = defaultdict(list)
         for line in move_lines:
-            move_line_id_by_partner[line.partner_id].append(line.id)
+            move_line_id_by_invoice[line.move_id].append(line.id)
         for line in new_move_lines:
-            new_move_line_id_by_partner[line.partner_id].append(line.id)
-        for partner, line_ids in move_line_id_by_partner.items():
-            line_ids.extend(new_move_line_id_by_partner[partner])
+            new_move_line_id_by_invoice[line.globalization_move_id].append(line.id)
+        for invoice, line_ids in move_line_id_by_invoice.items():
+            line_ids.extend(new_move_line_id_by_invoice[invoice])
             move_line_model.browse(line_ids).reconcile()
 
     def _after_globalization(self, account_move):

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import csv
@@ -8,6 +7,7 @@ from odoo import models
 
 class AlcChronovetReportCsvFacpied(models.AbstractModel):
     _name = "report.alc_chronovet_report_csv_facpied"
+    _description = "alc chronovet report csv facpied"
     _inherit = "report.report_csv.abstract"
 
     def generate_csv_report(self, file, data, account_move):
@@ -17,30 +17,22 @@ class AlcChronovetReportCsvFacpied(models.AbstractModel):
         for invoice in invoices:
             file.writerow(
                 {
-                    "CFACT": invoice.partner_id.ref,
+                    "CFACT": invoice.partner_id.ref or "",
                     "NOM": invoice.partner_id.name,
-                    "TYPE": invoice.type,
-                    "NFACT": invoice.number,
-                    "DATFAC": invoice.date_invoice,
-                    "TVA": invoice.tax_line_ids[0].tax_id.amount,
-                    "MONTHT": -invoice.amount_untaxed
-                    if invoice.type == "out_refund"
-                    else invoice.amount_untaxed,
+                    "TYPE": invoice.move_type,
+                    "NFACT": invoice.name,
+                    "DATFAC": invoice.invoice_date,
+                    "TVA": invoice.amount_tax,
+                    "MONTHT": invoice.amount_untaxed_signed,
                     "ESCOMPTE": 0,
-                    "TOTALHT": -invoice.amount_untaxed
-                    if invoice.type == "out_refund"
-                    else invoice.amount_untaxed,
-                    "MONTTVA": -invoice.amount_tax
-                    if invoice.type == "out_refund"
-                    else invoice.amount_tax,
-                    "TOTALTTC": -invoice.amount_total
-                    if invoice.type == "out_refund"
-                    else invoice.amount_total,
+                    "TOTALHT": invoice.amount_untaxed_signed,
+                    "MONTTVA": invoice.amount_tax_signed,
+                    "TOTALTTC": invoice.amount_total_signed,
                 }
             )
 
     def csv_report_options(self):
-        res = super(AlcChronovetReportCsvFacpied, self).csv_report_options()
+        res = super().csv_report_options()
         res["fieldnames"].extend(
             [
                 "CFACT",
@@ -61,4 +53,4 @@ class AlcChronovetReportCsvFacpied(models.AbstractModel):
         return res
 
     def _get_all_invoices(self, account_move):
-        return [line.invoice_id for line in account_move.line_ids if line.invoice_id]
+        return account_move._get_reconciled_amls().move_id
