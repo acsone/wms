@@ -59,11 +59,6 @@ class ShipmentAdvice(Advice):
 
     def _get_alc_report_line_values(self, pickings):
         self.ensure_one()
-        if self.toursolver_resource_id:
-            pickings = pickings.filtered(
-                lambda p, resource=self.toursolver_resource_id: p.toursolver_resource_id
-                == resource
-            )
         # We want to group shippings for a same partner
         self.env["alc.report.shipment.advice.line"].browse()
         line_values = []
