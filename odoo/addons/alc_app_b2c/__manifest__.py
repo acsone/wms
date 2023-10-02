@@ -16,5 +16,6 @@
         "alc_chronovet",
         "alc_clubvetshop",
         "alc_placedesvetos",
+        "alc_logiweb",
     ],
 }

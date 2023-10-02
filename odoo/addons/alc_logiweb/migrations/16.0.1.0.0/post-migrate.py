@@ -1,4 +1,4 @@
-# Copyright 2021 ACSONE SA/NV
+# Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
@@ -76,5 +76,5 @@ def _initialize_product_assortment_filter(cr):
     assortment_filter.domain = str(domain)
 
 
-def post_init_hook(cr, registry):
+def migrate(cr, version):
     _initialize_product_assortment_filter(cr)

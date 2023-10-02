@@ -21,9 +21,9 @@ class Carrier(Enum):
     ) -> Optional["Carrier"]:
         if not carrier:
             return None
-        if carrier.name == "ALCYON":
+        if carrier.name == "Alcyon Shipping":
             return cls.ALCYON
-        if carrier.name == "GLS_BE":
+        if carrier.name == "GLS Belgique":
             return cls.GLS_BE
         return None
 
