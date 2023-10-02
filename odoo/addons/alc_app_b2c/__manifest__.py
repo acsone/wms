@@ -17,5 +17,6 @@
         "alc_clubvetshop",
         "alc_placedesvetos",
         "alc_address_data",
+        "alc_logiweb",
     ],
 }

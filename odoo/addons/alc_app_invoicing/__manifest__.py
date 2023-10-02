@@ -36,5 +36,6 @@
         "alc_cash_on_delivery",
         "alc_account_invoice_cancel_permissions",
         "alc_sale_invoicing_on_transfer",
+        "alc_invoices_audit",
     ],
 }
