@@ -16,7 +16,7 @@ odoo-addon-account-analytic-account-tag @ git+https://github.com/OCA/account-ana
 
 # account-financial-tools
 # https://github.com/OCA/account-financial-tools/pull/1726
-odoo-addon-move-line-product-category @ git+https://github.com/OCA/account-financial-tools@refs/pull/1726/head#subdirectory=setup/account_move_line_product_category
+odoo-addon-account-move-line-product-category @ git+https://github.com/OCA/account-financial-tools@refs/pull/1726/head#subdirectory=setup/account_move_line_product_category
 # https://github.com/OCA/account-financial-tools/pull/1725
 odoo-addon-account-reversal @ git+https://github.com/OCA/account-financial-tools@refs/pull/1725/head#subdirectory=setup/account_reversal
 
@@ -280,4 +280,3 @@ odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/OCA/bank-p
 odoo-addon-account-cutoff-picking @ git+https://github.com/OCA/account-closing.git@refs/pull/261/head#subdirectory=setup/account_cutoff_picking
 odoo-addon-account-invoice-accrual @ git+https://github.com/OCA/account-closing.git@refs/pull/264/head#subdirectory=setup/account_invoice_accrual
 odoo-addon-account-cutoff-picking-product-category @ git+https://github.com/OCA/account-closing.git@refs/pull/265/head#subdirectory=setup/account_cutoff_picking_product_category
-
