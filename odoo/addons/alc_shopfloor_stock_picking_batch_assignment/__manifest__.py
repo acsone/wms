@@ -9,7 +9,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        "shopfloor",
         "shopfloor_batch_automatic_creation",
+        "stock_picking_batch_start",
         "alc_stock_picking_batch_assignment",
     ],
     "data": [],
