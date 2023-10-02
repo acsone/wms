@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<odoo noupdate="1">
+<odoo>
   <template id="pharmacy_lot_label">
     <div class="raw">
       <t t-foreach="docs" t-as="line">
@@ -18,7 +18,9 @@
         />^FS\r
 ^FO32,240^A0N,34,28^FDArticle:^FS\r
 ^FO120,240^A0N,34,36^FD<t t-esc="line.lot_id.product_id.default_code" />^FS\r
-^FO32,283^A0N,31,23^FD<t t-esc="line.lot_id.product_id.name[:45]" />^FS\r
+^FO32,283^A0N,31,23^FD<t
+          t-esc="line.lot_id.product_id.name and line.lot_id.product_id.name[:45]"
+        />^FS\r
 ^FO420,150\r
 ^BQN,2,6\r
 ^FDQA,<t t-esc="line.lot_id.name" />^FS\r
