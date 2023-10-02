@@ -6,7 +6,7 @@
 
     <record model="ir.ui.view" id="account_invoice_search_view">
         <field name="name">account.invoice.search (in alc_invoices_audit)</field>
-        <field name="model">account.invoice</field>
+        <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_account_invoice_filter" />
         <field name="arch" type="xml">
             <xpath expr="//search//field[@name='date']" position="after">
@@ -15,17 +15,17 @@
                 <filter
           name="invoice_frequency_10"
           string="Invoice frequency 10 days"
-          domain="[('invoice_frequency', '=', '10_days'), ('type','in', ('out_invoice','out_refund'))]"
+          domain="[('customer_invoicing_mode', '=', 'ten_days'), ('move_type','in', ('out_invoice','out_refund'))]"
         />
                 <filter
           name="invoice_frequency_14"
           string="Invoice frequency 14 days"
-          domain="[('invoice_frequency', '=', '14_days'), ('type','in', ('out_invoice','out_refund'))]"
+          domain="[('customer_invoicing_mode', '=', 'fourteen_days'), ('move_type','in', ('out_invoice','out_refund'))]"
         />
                 <filter
           name="invoice_frequency_month"
           string="Invoice frequency one month"
-          domain="[('invoice_frequency', '=', '1_month'), ('type','in', ('out_invoice','out_refund'))]"
+          domain="[('customer_invoicing_mode', '=', 'monthly'), ('move_type','in', ('out_invoice','out_refund'))]"
         />
             </xpath>
         </field>
