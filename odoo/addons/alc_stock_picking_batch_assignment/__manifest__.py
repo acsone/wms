@@ -5,7 +5,7 @@
     "name": "Alc Stock Picking Batch Assignement",
     "description": """
         Alcyon: a user can be assigned to just one batch that is currently in progress""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.2.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
