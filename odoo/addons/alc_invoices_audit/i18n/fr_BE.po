@@ -22,16 +22,6 @@ msgid "Call name"
 msgstr "Call name"
 
 #. module: alc_invoices_audit
-#: model:ir.model,name:alc_invoices_audit.model_account_invoice
-msgid "Invoice"
-msgstr "Facture"
-
-#. module: alc_invoices_audit
-#: model:ir.model.fields,field_description:alc_invoices_audit.field_account_invoice_invoice_frequency
-msgid "Invoice frequency"
-msgstr "Fréquence de facturation"
-
-#. module: alc_invoices_audit
 #: model_terms:ir.ui.view,arch_db:alc_invoices_audit.account_invoice_search_view
 msgid "Invoice frequency 10 days"
 msgstr "Fréquence de facturation: 10 jours"
@@ -47,6 +37,25 @@ msgid "Invoice frequency one month"
 msgstr "Fréquence de facturation: 1 mois"
 
 #. module: alc_invoices_audit
-#: model:ir.model.fields,field_description:alc_invoices_audit.field_account_invoice_customer_call_name
+#: model:ir.model.fields,field_description:alc_invoices_audit.field_account_bank_statement_line__customer_invoicing_mode
+#: model:ir.model.fields,field_description:alc_invoices_audit.field_account_move__customer_invoicing_mode
+#: model:ir.model.fields,field_description:alc_invoices_audit.field_account_payment__customer_invoicing_mode
+#, fuzzy
+#| msgid "Invoice"
+msgid "Invoicing Mode"
+msgstr "Facture"
+
+#. module: alc_invoices_audit
+#: model:ir.model,name:alc_invoices_audit.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: alc_invoices_audit
+#: model:ir.model.fields,field_description:alc_invoices_audit.field_account_bank_statement_line__customer_call_name
+#: model:ir.model.fields,field_description:alc_invoices_audit.field_account_move__customer_call_name
+#: model:ir.model.fields,field_description:alc_invoices_audit.field_account_payment__customer_call_name
 msgid "Nickname"
 msgstr "Nom d'appel"
+
+#~ msgid "Invoice frequency"
+#~ msgstr "Fréquence de facturation"
