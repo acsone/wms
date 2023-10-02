@@ -38,6 +38,7 @@ odoo-addon-account-invoice-split-refund @ git+https://github.com/OCA/account-inv
 
 # account-reconcile
 odoo-addon-account-payment-mode-auto-reconcile @ git+https://github.com/OCA/account-reconcile.git@refs/pull/537/head#subdirectory=setup/account_payment_mode_auto_reconcile
+odoo-addon-account-reconcile-restrict-partner-mismatch @ git+https://github.com/OCA/account-reconcile.git@refs/pull/596/head#subdirectory=setup/account_reconcile_restrict_partner_mismatch
 
 # delivery-carrier
 # https://github.com/OCA/delivery-carrier/pull/643 - [IMP] base_delivery_carrier_label: Externalize automatic package creation
