@@ -16,57 +16,35 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: alc_address_data
-#: model:res.country.state,name:alc_address_data.province_van
-msgid "Antwerp"
-msgstr "Antwerpen"
+#~ msgid "Antwerp"
+#~ msgstr "Antwerpen"
 
-#. module: alc_address_data
-#: model:res.country.state,name:alc_address_data.province_bbr
-msgid "Brussels Capital Region"
-msgstr "Brussels Hoofdstedelijk Gewest"
+#~ msgid "Brussels Capital Region"
+#~ msgstr "Brussels Hoofdstedelijk Gewest"
 
-#. module: alc_address_data
-#: model:res.country.state,name:alc_address_data.province_vov
-msgid "East Flanders"
-msgstr "Oost-Vlaanderen"
+#~ msgid "East Flanders"
+#~ msgstr "Oost-Vlaanderen"
 
-#. module: alc_address_data
-#: model:res.country.state,name:alc_address_data.province_vbr
-msgid "Flemish Brabant"
-msgstr "Vlaams-Brabant"
+#~ msgid "Flemish Brabant"
+#~ msgstr "Vlaams-Brabant"
 
-#. module: alc_address_data
-#: model:res.country.state,name:alc_address_data.province_wht
-msgid "Hainaut"
-msgstr "Henegouwen"
+#~ msgid "Hainaut"
+#~ msgstr "Henegouwen"
 
-#. module: alc_address_data
-#: model:res.country.state,name:alc_address_data.province_vli
-msgid "Limburg"
-msgstr "Limburg"
+#~ msgid "Limburg"
+#~ msgstr "Limburg"
 
-#. module: alc_address_data
-#: model:res.country.state,name:alc_address_data.province_wlg
-msgid "Liège"
-msgstr "Luik"
+#~ msgid "Liège"
+#~ msgstr "Luik"
 
-#. module: alc_address_data
-#: model:res.country.state,name:alc_address_data.province_wlx
-msgid "Luxembourg"
-msgstr "Luxemburg"
+#~ msgid "Luxembourg"
+#~ msgstr "Luxemburg"
 
-#. module: alc_address_data
-#: model:res.country.state,name:alc_address_data.province_wna
-msgid "Namur"
-msgstr "Namen"
+#~ msgid "Namur"
+#~ msgstr "Namen"
 
-#. module: alc_address_data
-#: model:res.country.state,name:alc_address_data.province_wbr
-msgid "Walloon Brabant"
-msgstr "Waals-Brabant"
+#~ msgid "Walloon Brabant"
+#~ msgstr "Waals-Brabant"
 
-#. module: alc_address_data
-#: model:res.country.state,name:alc_address_data.province_vwv
-msgid "West Flanders"
-msgstr "West-Vlaanderen"
+#~ msgid "West Flanders"
+#~ msgstr "West-Vlaanderen"
