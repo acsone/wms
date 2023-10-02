@@ -40,15 +40,17 @@ class AlcReportShipmentAdviceLine(models.TransientModel):
                 for location, value in picking.parcels_and_items_per_source[
                     "parcels"
                 ].items():
-                    total_location_parcels[int(location)] += value
+                    location_id = int(location) if location.isnumeric() else False
+                    total_location_parcels[location_id] += value
                     total_parcels += value
-                    locations.update([int(location)])
+                    locations.update([location_id])
                 for location, value in picking.parcels_and_items_per_source[
                     "items"
                 ].items():
-                    total_quantities[int(location)] += value
+                    location_id = int(location) if location.isnumeric() else False
+                    total_quantities[location_id] += value
                     total_quantity += value
-                    locations.update([int(location)])
+                    locations.update([location_id])
 
             line.parcels_and_items_per_source = {
                 "parcels": total_location_parcels,
