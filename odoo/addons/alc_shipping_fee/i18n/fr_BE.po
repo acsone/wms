@@ -35,7 +35,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_shipping_fee.field_delivery_carrier__fixed_fee_for_delivery
 #: model:ir.model.fields,field_description:alc_shipping_fee.field_sale_order__fixed_extra_fee_for_delivery
 msgid "Fixed extra fee"
-msgstr "Frais de livraison fixes supplémentaires"
+msgstr "Frais de livraison fixes"
 
 #. module: alc_shipping_fee
 #: model:ir.model.fields,field_description:alc_shipping_fee.field_res_partner__help_with_fixed_fee
