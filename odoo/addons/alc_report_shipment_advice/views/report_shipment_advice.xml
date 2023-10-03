@@ -101,9 +101,20 @@
                             <th>Customer</th>
                             <th>Notes</th>
                             <th>Phone</th>
-                            <t t-foreach="report.location_ids" t-as="zone_location">
+                            <t
+                t-foreach="report.location_ids._ids"
+                t-as="zone_location_id"
+              >
                                 <th>
-                                    <t t-esc="zone_location.name" />
+                                    <t t-if="zone_location_id">
+                                        <t
+                      t-esc="o.env['stock.location'].browse(zone_location_id).name"
+                    />
+                                    </t>
+                                    <t t-else="">
+                                        <span>Unknown Zone</span>
+                                    </t>
+
                                 </th>
                             </t>
                         </tr>
@@ -138,19 +149,19 @@
                 >
                                     <td>
                                         <t
-                      t-if="line.parcels_and_items_per_source['parcels'].get(str(location_key))"
+                      t-if="line.parcels_and_items_per_source['parcels'].get(str(location_key) if location_key else 'false')"
                     >
                                             <t
-                        t-esc="line.parcels_and_items_per_source['parcels'][str(location_key)]"
+                        t-esc="line.parcels_and_items_per_source['parcels'][str(location_key) if location_key else 'false']"
                       />
                                             box(es)
                                             <br />
                                         </t>
                                         <t
-                      t-if="line.parcels_and_items_per_source['items'].get(str(location_key))"
+                      t-if="line.parcels_and_items_per_source['items'].get(str(location_key) if location_key else 'false')"
                     >
                                             <t
-                        t-esc="line.parcels_and_items_per_source['items'][str(location_key)]"
+                        t-esc="line.parcels_and_items_per_source['items'][str(location_key) if location_key else 'false']"
                       />
                                             unit(s)
                                         </t>
