@@ -258,15 +258,7 @@ odoo-addon-rest-log @ git+https://github.com/OCA/rest-framework.git@refs/pull/35
 # fastapi @ git+https://github.com/acsone/fastapi.git@16.0-alc
 
 # OCA/storage
-odoo-addon-fs-attachment @ git+https://github.com/oca/storage.git@refs/pull/274/head#subdirectory=setup/fs_attachment
-odoo-addon-fs-file @ git+https://github.com/oca/storage.git@refs/pull/274/head#subdirectory=setup/fs_file
-odoo-addon-fs-image @ git+https://github.com/oca/storage.git@refs/pull/274/head#subdirectory=setup/fs_image
-odoo-addon-fs-base-multi-media @ git+https://github.com/oca/storage.git@refs/pull/278/head#subdirectory=setup/fs_base_multi_media
-odoo-addon-fs-product-multi-media @ git+https://github.com/oca/storage.git@refs/pull/278/head#subdirectory=setup/fs_product_multi_media
-odoo-addon-image-tag @ git+https://github.com/oca/storage.git@refs/pull/276/head#subdirectory=setup/image_tag
-odoo-addon-fs-base-multi-image @ git+https://github.com/oca/storage.git@refs/pull/276/head#subdirectory=setup/fs_base_multi_image
-odoo-addon-fs-product-multi-image @ git+https://github.com/oca/storage.git@refs/pull/276/head#subdirectory=setup/fs_product_multi_image
-odoo-addon-fs-product-brand-multi-image @ git+https://github.com/oca/storage.git@refs/pull/277/head#subdirectory=setup/fs_product_brand_multi_image
+
 
 
 checklog-odoo @ git+https://github.com/acsone/checklog-odoo@master#subdirectory=checklog-odoo
