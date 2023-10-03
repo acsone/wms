@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -6,13 +5,13 @@ import base64
 import datetime
 import os
 
-from odoo.addons.component.tests.common import SavepointComponentCase
+from odoo.tests.common import TransactionCase
 
 
-class TestEShopAdsCommon(SavepointComponentCase):
+class TestEShopAdsCommon(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestEShopAdsCommon, cls).setUpClass()
+        super().setUpClass()
         cls.EShopAds = cls.env["alc.eshop.ads"]
         cls.image = cls._get_image("black-image.jpg")
 
@@ -23,5 +22,5 @@ class TestEShopAdsCommon(SavepointComponentCase):
     @classmethod
     def _get_image(cls, name):
         path = os.path.dirname(os.path.abspath(__file__))
-        f = open(os.path.join(path, "static", name))
-        return base64.b64encode(f.read())
+        with open(os.path.join(path, "static", name), "rb") as f:
+            return base64.b64encode(f.read())
