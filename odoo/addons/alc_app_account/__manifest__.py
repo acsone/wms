@@ -45,5 +45,6 @@
         "alc_account_payment_globalization",
         "alc_placedesvetos_payment_globalization",
         "alc_chronovet_payment_globalization",
+        "alc_automatic_account_move_line_reconcile",
     ],
 }
