@@ -49,6 +49,7 @@
         "stock_picking_group_by_max_weight",
         "stock_picking_low_priority",
         "stock_picking_start",
+        "stock_picking_batch_start",
         "stock_picking_progress",
         "stock_picking_type_shipping_policy",
         "stock_production_lot_expired_date",
