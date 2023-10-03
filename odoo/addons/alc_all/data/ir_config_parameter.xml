@@ -55,4 +55,9 @@
     name="set_param"
     eval="('stock_move_free_reservation_reassign.reassign_stock_move_after_free_reservation', True)"
   />
+  <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('alc_sale_processing_finalizer.send_email', True)"
+  />
 </odoo>

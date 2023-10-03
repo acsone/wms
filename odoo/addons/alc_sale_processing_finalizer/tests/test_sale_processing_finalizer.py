@@ -16,6 +16,11 @@ class TestCron(TransactionCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
+        cls.env["res.config.settings"].create(
+            {
+                "send_processing_finalizer_email": False,
+            }
+        ).execute()
         today = datetime.date.today()
         with freeze_time(today - datetime.timedelta(days=100)):
             cls.warehouse_1 = cls.env.ref("stock.warehouse0")
