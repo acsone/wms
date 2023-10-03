@@ -15,6 +15,11 @@ msgstr ""
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+msgid "<span>Unknown Zone</span>"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
 msgid "Arriving time"
 msgstr ""
 
