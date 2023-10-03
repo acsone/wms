@@ -85,7 +85,7 @@ odoo-addon-account-tax-one-vat-sale @ git+https://github.com/acsone/account-invo
 odoo-addon-account-tax-unece==16.0.1.2.0.1
 odoo-addon-account-usability==16.0.1.0.3.7
 odoo-addon-attachment-unindex-content==16.0.1.0.0.3
-odoo-addon-attribute-set @ git+https://github.com/acsone/odoo-pim.git@d8078f7e77f07390200bd321619ee6db5d36727f#subdirectory=setup/attribute_set
+odoo-addon-attribute-set @ git+https://github.com/acsone/odoo-pim.git@067aabd8aa96e6c5eb13bf1c68383fc7ed43550a#subdirectory=setup/attribute_set
 odoo-addon-auth-api-key==16.0.1.0.0.4
 odoo-addon-auth-api-key-group @ git+https://github.com/acsone/server-auth.git@68309b60b530d23e6aee4ac40a1013e50d62fb86#subdirectory=setup/auth_api_key_group
 odoo-addon-base-business-document-import @ git+https://github.com/acsone/edi.git@218282f08996953e22c161849fded00a39c2ceee#subdirectory=setup/base_business_document_import
