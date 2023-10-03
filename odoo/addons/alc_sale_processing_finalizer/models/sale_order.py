@@ -69,5 +69,5 @@ class SaleOrder(Order):
     def _filter_sale_order_lines_to_cancel(self, lines):
         return lines.filtered(
             lambda line: not line.order_id.carrier_id.is_long_term_delivery
-            and line.state not in ("draft", "sent")
+            and line.state not in ("draft", "sent")  # filter quotations
         )

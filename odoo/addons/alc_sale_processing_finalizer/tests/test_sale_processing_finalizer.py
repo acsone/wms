@@ -1,8 +1,9 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from datetime import date, timedelta
+import datetime
 
+from dateutil.relativedelta import relativedelta
 from freezegun import freeze_time
 
 from odoo.fields import Command
@@ -15,8 +16,8 @@ class TestCron(TransactionCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
-        today = date.today()
-        with freeze_time(today - timedelta(days=100)):
+        today = datetime.date.today()
+        with freeze_time(today - datetime.timedelta(days=100)):
             cls.warehouse_1 = cls.env.ref("stock.warehouse0")
             cls.warehouse_1.write(
                 {
@@ -163,6 +164,22 @@ class TestCron(TransactionCase):
         self.assertEqual(
             self.so_auto_finalize.order_line.product_qty_remains_to_deliver, 7
         )
+
+        # Check that that already canceled BOs don't rise again
+        lines = self.env["sale.order.line"].search(
+            [
+                ("product_qty_remains_to_deliver", ">", 0),
+                ("product_type", "in", ["consu", "product"]),
+                ("is_consignment", "=", False),
+                (
+                    "date_order",
+                    "<",
+                    (datetime.datetime.today() - relativedelta(months=3)).date(),
+                ),
+            ]
+        )
+        lines = self.env["sale.order"]._filter_sale_order_lines_to_cancel(lines)
+        self.assertNotIn(lines, self.so_after_3months_to_purge.order_line)
 
     def test_long_term_carrier(self):
         """
