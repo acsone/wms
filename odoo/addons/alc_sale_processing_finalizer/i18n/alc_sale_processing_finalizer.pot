@@ -19,6 +19,11 @@ msgid "Auto Finalize Processing"
 msgstr ""
 
 #. module: alc_sale_processing_finalizer
+#: model:ir.model,name:alc_sale_processing_finalizer.model_sale_order_line_cancel
+msgid "Cancel Remaining Wizard"
+msgstr ""
+
+#. module: alc_sale_processing_finalizer
 #: model:ir.actions.server,name:alc_sale_processing_finalizer.ir_cron_cancel_sales_bo_gt_3months_ir_actions_server
 #: model:ir.cron,cron_name:alc_sale_processing_finalizer.ir_cron_cancel_sales_bo_gt_3months
 msgid "Cancel Sales BO > 3months"
