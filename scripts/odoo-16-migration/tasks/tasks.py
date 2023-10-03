@@ -684,6 +684,7 @@ def set_modules_to_remove():
         "stock_valuation",  # replaced by STD
         "alc_product_packaging_stock_reserve",
         "alcyon_credit_control",
+        "mixin_image_id",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:

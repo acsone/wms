@@ -10,7 +10,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["mixin_file_id", "mixin_image_id", "mixin_past", "sales_team"],
+    "depends": [
+        "mixin_file_id",
+# removed        "mixin_image_id",
+        "mixin_past",
+        "sales_team"
+    ],
     "data": [
         "security/res_groups.xml",
         "security/storage_backend.xml",
