@@ -201,6 +201,7 @@ msgstr ""
 
 #. module: alc_report_delivery_slip
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.shipment_advice_form_view
+#: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.stock_release_channel_form_view
 msgid "Print all deliveryslip"
 msgstr ""
 
@@ -241,6 +242,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_report_delivery_slip.field_res_partner__show_deliveryslip_cnk
 #: model:ir.model.fields,field_description:alc_report_delivery_slip.field_res_users__show_deliveryslip_cnk
 msgid "Show CNK on delivery slip"
+msgstr ""
+
+#. module: alc_report_delivery_slip
+#: model:ir.model,name:alc_report_delivery_slip.model_stock_release_channel
+msgid "Stock Release Channels"
 msgstr ""
 
 #. module: alc_report_delivery_slip
