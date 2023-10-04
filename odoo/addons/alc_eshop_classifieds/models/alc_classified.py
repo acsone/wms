@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -7,19 +6,25 @@ from slugify import slugify
 
 from odoo import api, fields, models
 
+from odoo.addons.base.models.res_country import CountryState
+from odoo.addons.base.models.res_partner import Partner
+from odoo.addons.fs_file.fields import FSFile
+
 
 class AlcClassified(models.Model):
-    """Model for classified advertisement. The partner is the classified owner.
-       He can create new classifieds, and submit them for publication.
-       An Odoo user can then approve or reject them(with motivation).
-       At any moment a user can unpublish his own classified, either by deletion
-       or by resetting the state to draft, or to pending so that the new version
-       can be approved.
+    """Model for classified advertisement.
+
+    The partner is the classified owner.
+    He can create new classifieds, and submit them for publication.
+    An Odoo user can then approve or reject them(with motivation).
+    At any moment a user can unpublish his own classified, either by deletion
+    or by resetting the state to draft, or to pending so that the new version
+    can be approved.
     """
 
     _name = "alc.classified"
     _description = "Classified Advertising"
-    _inherit = ["mixin.past", "mixin.file.id", "mail.thread"]
+    _inherit = ["mixin.past", "mail.thread"]  # nosemgrep: is-old-style-inheritance
     _order = "date_start desc, sequence, id desc"
 
     sequence = fields.Integer("Sequence")
@@ -27,20 +32,23 @@ class AlcClassified(models.Model):
         "Start Date",
         required=True,
         default=lambda a: a.default_today(),
-        track_visibility="onchange",
+        tracking=True,
     )
     date_end = fields.Date(
         "End Date",
         required=True,
         default=lambda a: a.default_in_one_week(),
-        track_visibility="onchange",
+        tracking=True,
     )
-    name = fields.Char(string="Title", required=True, track_visibility="onchange")
-    body = fields.Text(string="Content", required=True, track_visibility="onchange")
-    partner_id = fields.Many2one(
-        "res.partner", string="Partner", required=True, index=True, ondelete="cascade",
+    name = fields.Char(string="Title", required=True, tracking=True)
+    body = fields.Text(string="Content", required=True, tracking=True)
+    partner_id = fields.Many2one[Partner](
+        string="Partner",
+        required=True,
+        index=True,
+        ondelete="cascade",
     )
-    rejection_reason = fields.Char(string="Rejection", track_visibility="onchange")
+    rejection_reason = fields.Char(string="Rejection", tracking=True)
     state = fields.Selection(
         [
             ("draft", "Draft"),
@@ -49,7 +57,7 @@ class AlcClassified(models.Model):
             ("pending", "Approval Pending"),
         ],
         string="Status",
-        track_visibility="onchange",
+        tracking=True,
         copy=False,
         default="draft",
         index=True,
@@ -65,20 +73,20 @@ class AlcClassified(models.Model):
             ("misc", "Miscellaneous"),
         ],
         string="Category",
-        track_visibility="onchange",
+        tracking=True,
         index=True,
         required=True,
     )
-    state_id = fields.Many2one(
-        "res.country.state",
+    state_id = fields.Many2one[CountryState](
         string="State",
         required=True,
-        track_visibility="onchange",
+        tracking=True,
         domain=lambda self: [("country_id", "=", self.env.ref("base.be").id)],
     )
-    email = fields.Char("Email", required=True, track_visibility="onchange")
-    phone = fields.Char("Phone", required=True, track_visibility="onchange")
-    contact = fields.Char("Contact", required=True, track_visibility="onchange")
+    email = fields.Char("Email", required=True, tracking=True)
+    phone = fields.Char("Phone", required=True, tracking=True)
+    contact = fields.Char("Contact", required=True, tracking=True)
+    file_id = FSFile()
 
     @api.model
     def default_today(self):

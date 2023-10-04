@@ -1,20 +1,22 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, api, fields
+
+from odoo.addons.base.models.res_partner import Partner
+
+from .alc_classified import AlcClassified
 
 
-class ResPartner(models.Model):
+class ResPartner(Partner):
 
-    _inherit = "res.partner"
-
-    alc_classified_ids = fields.One2many(
-        "alc.classified", "partner_id", string="Classifieds"
+    alc_classified_ids = fields.One2many[AlcClassified](
+        inverse_name="partner_id", string="Classifieds"
     )
 
     alc_classified_count = fields.Integer(
-        compute="_compute_alc_classified_count", string="# of classifieds",
+        compute="_compute_alc_classified_count",
+        string="# of classifieds",
     )
 
     @api.depends("alc_classified_ids")

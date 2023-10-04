@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestClassifiedCase(SavepointCase):
+class TestClassifiedCase(TransactionCase):
     @classmethod
     def create_classified(cls, partner=False, state=False, **params):
         vals = {
@@ -23,7 +22,7 @@ class TestClassifiedCase(SavepointCase):
 
     @classmethod
     def setUpClass(cls):
-        super(TestClassifiedCase, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner_0 = cls.env["res.partner"].create({"name": "P0"})
         cls.partner_1 = cls.env["res.partner"].create({"name": "P1"})
