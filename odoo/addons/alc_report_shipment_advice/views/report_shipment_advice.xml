@@ -83,10 +83,10 @@
             </div>
         </xpath>
         <xpath expr="//table[@name='package_content']" position="attributes">
-            <attribute name="invisible">1</attribute>
+            <attribute name="t-if">1 == 0</attribute>
         </xpath>
         <xpath expr="//table[@name='bulk_content']" position="attributes">
-            <attribute name="invisible">1</attribute>
+            <attribute name="t-if">1 == 0</attribute>
         </xpath>
         <xpath expr="//table[@name='bulk_content']" position="after">
             <div class="row">

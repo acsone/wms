@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<odoo>
+  <record id="view_picking_form_reopen" model="ir.ui.view">
+    <field
+      name="name"
+    >view_picking_form_reopen (in alc_stock_picking_cancel_permission)</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock_picking_back2draft.view_picking_form_reopen" />
+    <field name="arch" type="xml">
+        <button name="action_back_to_draft" position="attributes">
+          <attribute
+          name="groups"
+        >alc_stock_picking_cancel_permission.group_picking_cancel</attribute>
+      </button>
+    </field>
+  </record>
+</odoo>
