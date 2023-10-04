@@ -20,8 +20,10 @@
         "alc_stock_delivery_slip",
         "alc_stock_picking_parcels_and_items_per_source",
         "alc_stock_move_serial_number",
+        "alc_stock_release_channel_print_shipment_advice",
     ],
     "data": [
+        "views/stock_release_channel.xml",
         "views/base_contact_views.xml",
         "views/res_partner_views.xml",
         "views/report_deliveryslip.xml",
