@@ -104,6 +104,7 @@
         "alc_stock_move_direction",
         "alc_stock_release_channel_state_editable",
         "alc_stock_available",
+        "alc_stock_picking_cancel_permission",
     ],
     "data": [],
     "demo": [],
