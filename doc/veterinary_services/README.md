@@ -18,15 +18,21 @@ There is a sandbox available at TODO: UAT needs to open endpoints, PP, K8s? Data
 regularly synchronized with production, however there might be a delay of at most a
 month.
 
-## Authentication: TODO
+## Authentication:
 
-Authentication is through JWT tokens managed by `Keycloak` using OIDC (Open ID Connect).
+Authentication is through 
+
+### JWT tokens managed by `Keycloak` using OIDC (Open ID Connect).
 The entrypoint is at:
 [TODO](https://account.alcyonbelux.be/auth/realms/alcyon/protocol/openid-connect/auth?protocol=oauth2&response_type=code&access_type&client_id=shopinvader)
 
 TODO: correct link, audience name?
 
 [Basics of OIDC](https://connect2id.com/learn/openid-connect)
+
+### API key
+Use of an API key supplied by Alcyon.
+This connection mode is immediately available and operational, but will become obsolete in a few months.
 
 ## Navigating the main endpoints and their documentation
 
@@ -38,7 +44,8 @@ The main page for documentation is at:
 
 ### Catalog
 
-[Documentation](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader_jwt%3A%20catalog)
+[Documentation if authentication mode uses JWT tokens](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader_jwt%3A%20catalog)
+[Documentation if authentication mode uses API keys](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader%3A%20catalog)
 
 This service offers a `/` endpoint that returns the paginated catalog, and can be
 filtered by AMM code, name or reference. By passing any of these fields with `__ilike`
@@ -46,7 +53,8 @@ it is possible to search on a substring.
 
 ### Discounts
 
-[Documentation](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader_jwt%3A%20discounts)
+[Documentation if authentication mode uses JWT tokens](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader_jwt%3A%20discounts)
+[Documentation if authentication mode uses API keys](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader%3A%20discounts)
 
 This service offers a `/` endpoint that returns all the current and planned discounts.
 It is possible to look up discounts for a given product by passing the product
@@ -56,7 +64,8 @@ buying a certain number (e.g. buy 2 get 1 free).
 
 ### Cart
 
-[Documentation](https://erp.alcyonbelux.be/api-docs?debug=1&urls.primaryName=shopinvader_jwt%2Fv2%3A%20cart)
+[Documentation if authentication mode uses JWT tokens](https://erp.alcyonbelux.be/api-docs?debug=1&urls.primaryName=shopinvader_jwt%2Fv2%3A%20cart)
+[Documentation if authentication mode uses API keys](https://erp.alcyonbelux.be/api-docs?debug=1&urls.primaryName=shopinvader%2Fv2%3A%20cart)
 
 This service offers different endpoints to interact with the current cart. There can be
 only one cart at a given time. The `/` endpoint returns the current cart, or nothing is
@@ -71,14 +80,16 @@ case there is no uuid for safe retries, and it is not possible to remove quantit
 
 ### Orders
 
-[Documentation](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader_jwt%3A%20orders)
+[Documentation if authentication mode uses JWT tokens](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader_jwt%3A%20orders)
+[Documentation if authentication mode uses API keys](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader%3A%20orders)
 
 This service offers a `/` endpoint that returns the orders. It is possible to filter
 them by date, channel (phone, mail, fax, web).
 
 ### Deliveries
 
-[Documentation](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader_jwt%3A%20pickings)
+[Documentation if authentication mode uses JWT tokens](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader_jwt%3A%20pickings)
+[Documentation if authentication mode uses API keys](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader%3A%20pickings)
 
 This service offers two endpoints of interest:
 
@@ -87,7 +98,8 @@ This service offers two endpoints of interest:
 
 ### Sale Statistics
 
-[Documentation](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader_jwt%3A%20sale_statistics)
+[Documentation if authentication mode uses JWT tokens](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader_jwt%3A%20sale_statistics)
+[Documentation if authentication mode uses API keys](https://erp.alcyonbelux.be/api-docs?urls.primaryName=shopinvader%3A%20sale_statistics)
 
 This service offers one main endpoint of interest, `/top_ordered`, which returns the
 most ordered product along the last 12 months.
