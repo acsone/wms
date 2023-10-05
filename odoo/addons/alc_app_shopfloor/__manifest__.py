@@ -44,6 +44,7 @@
         "alc_shopfloor_mobile_image_product",
         "alc_shopfloor_stock_picking_batch_assignment",
         "alc_shopfloor_user",
+        "alc_shopfloor_lot_scan",
     ],
     "data": [],
     "demo": [],
