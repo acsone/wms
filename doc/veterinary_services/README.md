@@ -20,9 +20,10 @@ month.
 
 ## Authentication:
 
-Authentication is through 
+Authentication is through
 
 ### JWT tokens managed by `Keycloak` using OIDC (Open ID Connect).
+
 The entrypoint is at:
 [TODO](https://account.alcyonbelux.be/auth/realms/alcyon/protocol/openid-connect/auth?protocol=oauth2&response_type=code&access_type&client_id=shopinvader)
 
@@ -31,8 +32,9 @@ TODO: correct link, audience name?
 [Basics of OIDC](https://connect2id.com/learn/openid-connect)
 
 ### API key
-Use of an API key supplied by Alcyon.
-This connection mode is immediately available and operational, but will become obsolete in a few months.
+
+Use of an API key supplied by Alcyon. This connection mode is immediately available and
+operational, but will become obsolete in a few months.
 
 ## Navigating the main endpoints and their documentation
 
