@@ -6,8 +6,8 @@ from odoo.addons.stock.models.stock_location import Location
 
 
 class StockLocation(Location):
-    def _register_hook(self):
-        super()._register_hook()
+    def init(self):
+        res = super().init()
         cr = self.env.cr
         cr.execute(
             """
@@ -89,3 +89,4 @@ class StockLocation(Location):
             EXECUTE FUNCTION alc_unique_location_coordinates_check();
             """
         )
+        return res
