@@ -26,15 +26,12 @@ ClusterPickingBase.component.template = template.replace(
 
 // Keep the pointer to the orginal method
 let data_result_method = ClusterPickingBase.component.data;
-let searchbar_input_type_computed =
-    ClusterPickingBase.component.computed.searchbar_input_type;
 
 ClusterPickingBase.component.computed.searchbar_input_type = function () {
-    let searchbar_input_type = searchbar_input_type_computed.bind(this)();
     if (this.state_is("pack_picking_put_in_pack")) {
-        searchbar_input_type = "number";
+        return "number";
     }
-    return searchbar_input_type;
+    return "text";
 };
 
 // Replace the data method with our new method to add
