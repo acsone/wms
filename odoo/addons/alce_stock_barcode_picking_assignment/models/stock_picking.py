@@ -4,11 +4,12 @@ import logging
 import re
 from functools import reduce
 
-from odoo import _
+from odoo import _, fields
 from odoo.exceptions import UserError
 from odoo.tools import config
 
 from odoo.addons.alce_stock_barcode_easy_operation.models import stock_picking
+from odoo.addons.base.models.res_users import Users
 
 _logger = logging.getLogger(__name__)
 
@@ -43,10 +44,16 @@ def decipher(salt):
 
 
 class StockPicking(stock_picking.StockPicking):
-    def on_barcode_scanned(self, barcode):
-        """Try to assign the operator if not yet assigned and barcode is.
 
-        an operator. Once operator is assigned, printed is set to True
+    scan_operator_id = fields.Many2one[Users](
+        help="Technical field to retain operator in scanning process"
+    )
+
+    def on_barcode_scanned(self, barcode):
+        """
+        Try to assign the operator if not yet assigned and barcode is an operator.
+
+        Once operator is assigned, printed is set to True
         """
         if self.action_start_allowed and not config["test_enable"]:
             try:
@@ -54,8 +61,9 @@ class StockPicking(stock_picking.StockPicking):
                 login = json.loads(payload)["login"]
                 user = self.env["res.users"].search([("login", "=", login)])
                 if user:
+                    self.scan_operator_id = user
                     self.action_start()
-                    self.user_id = user
+                    self.update(self._prepare_start_values(self.company_id))
                     return None
             except Exception:  # pylint: disable=broad-except'
                 _logger.exception(
@@ -65,3 +73,9 @@ class StockPicking(stock_picking.StockPicking):
                 _("Please scan your user badge first to start the operations")
             )
         return super().on_barcode_scanned(barcode)
+
+    def _prepare_start_values(self, company):
+        value = super()._prepare_start_values(company=company)
+        if "user_id" in value and self.scan_operator_id:
+            value["user_id"] = self.scan_operator_id.id
+        return value

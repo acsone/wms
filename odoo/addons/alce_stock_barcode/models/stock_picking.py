@@ -4,10 +4,6 @@ from odoo.addons.alce_stock_barcode_easy_operation.models import stock_picking
 
 
 class StockPicking(stock_picking.StockPicking):
-    @staticmethod
-    def _button_barcodes():
-        return ["O-BTN.validate", "O-BTN.put-in-pack", "O-BTN.button_scrap"]
-
     def _get_std_view_action(self, res_id=None):
         action_picking_form = self.env.ref("stock_barcode.stock_picking_action_form")
         action_picking_form = action_picking_form.read()[0]
@@ -16,6 +12,6 @@ class StockPicking(stock_picking.StockPicking):
 
     def on_barcode_scanned(self, barcode):
         # Avoid bad code popup after the button barcode has been treated
-        if barcode in self._button_barcodes():
+        if barcode.startswith("O-BTN."):
             return None
         return super().on_barcode_scanned(barcode)
