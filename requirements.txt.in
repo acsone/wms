@@ -165,6 +165,8 @@ odoo-addon-stock-picking-group-by-partner-by-carrier-by-customer @ git+https://g
 odoo-addon-stock-picking-is-completed @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1268/head#subdirectory=setup/stock_picking_is_completed
 # https://github.com/OCA/stock-logistics-workflow/pull/1196 - [16.0][ADD] stock_picking_low_priority
 odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock_picking_low_priority-hda#subdirectory=setup/stock_picking_low_priority
+# https://github.com/OCA/stock-logistics-workflow/pull/1394 - [16.0][ADD] stock_picking_operation_loss_quantity
+odoo-addon-stock-picking-operation-loss-quantity @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1394/head#subdirectory=setup/stock_picking_operation_loss_quantity
 # see gitagregate
 odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-stock_picking_start#subdirectory=setup/stock_picking_start
 odoo-addon-stock-picking-batch-start @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1389/head#subdirectory=setup/stock_picking_batch_start
