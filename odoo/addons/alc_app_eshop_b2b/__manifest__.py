@@ -21,6 +21,7 @@
         "alc_base_multi_media_lang",
         "alc_eshop_classifieds",
         "alc_eshop_ads",
+        "alc_eshop_classifieds_responsible",
     ],
     "data": [],
     "demo": [],
