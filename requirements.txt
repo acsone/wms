@@ -213,10 +213,10 @@ odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com
 odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@0d339e8dc034a7da2d554f46ff6b6224859f6438#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@22e70153a9845d9c9316170728ed0a435b39ffee#subdirectory=setup/shopfloor_base
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wms.git@3cdc58cf28547fc6ee3969b514c7e0c5b116f3bb#subdirectory=setup/shopfloor_batch_automatic_creation
-odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@66247cd99ff3b53ab3d56a5146e71d4a1b1ca32d#subdirectory=setup/shopfloor_mobile
+odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@9e7759687d8004b3c7b6578e603952eccc255f21#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@e93ba1225c3e6724b417857b96343d7ed48a2e99#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-mobile-base-auth-api-key @ git+https://github.com/acsone/wms.git@1de9f61eb2ad8757577b38bcf30c006fc0453ffc#subdirectory=setup/shopfloor_mobile_base_auth_api_key
-odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@c25f22ec6adb871aee6d3cae9ffbf4424cd10915#subdirectory=setup/shopfloor_mobile_packing
+odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@06add6aee625ee7b88fa9bb72e7967b2bb45f4d7#subdirectory=setup/shopfloor_mobile_packing
 odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@c25f22ec6adb871aee6d3cae9ffbf4424cd10915#subdirectory=setup/shopfloor_packing
 odoo-addon-shopfloor-rest-log @ git+https://github.com/acsone/wms.git@dbe32e3decb51672ed0a5656ba4fed037bca7f4f#subdirectory=setup/shopfloor_rest_log
 odoo-addon-shopfloor-workstation @ git+https://github.com/acsone/wms.git@758b160304e097300932c358c7dd8bc915db0c45#subdirectory=setup/shopfloor_workstation
