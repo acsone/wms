@@ -1,0 +1,5 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"shopfloor_portal_user_stock_location","stock.location shopfloor portal users","stock.model_stock_location","alc_shopfloor_portal_user","True","","",""
+"shopfloor_portal_user_stock_warehouse","stock.warehouse shopfloor portal users","stock.model_stock_warehouse","alc_shopfloor_portal_user","True","","",""
+"shopfloor_portal_user_stock_move","stock.move shopfloor portal users","stock.model_stock_move","alc_shopfloor_portal_user","True","","",""
+"shopfloor_portal_user_stock_quant","stock.quant shopfloor portal users","stock.model_stock_quant","alc_shopfloor_portal_user","True","","",""
