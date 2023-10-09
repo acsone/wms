@@ -95,7 +95,6 @@ exclude: |
   ^odoo/addons/alc_shopinvader_category/|
   ^odoo/addons/alc_shopinvader_fixes/|
   ^odoo/addons/alc_standby_delivery/|
-  ^odoo/addons/alc_stock_available_immediately_lot_loss/|
   ^odoo/addons/alc_stock_location_barcode_search/|
   ^odoo/addons/alc_stock_picking_assignable/|
   ^odoo/addons/alc_stock_picking_number_package/|

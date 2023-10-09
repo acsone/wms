@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Exclude from immediately usable qty Loss location -->
+
+    <function model="stock.location" name="write">
+        <value
+      model="stock.location"
+      eval="obj().env.ref('stock.warehouse0').with_context(active_test=False).loss_location_id.ids"
+    />
+        <value eval="{'exclude_from_immediately_usable_qty': True}" />
+    </function>
+</odoo>
