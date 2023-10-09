@@ -112,6 +112,11 @@ msgid "User"
 msgstr ""
 
 #. module: alc_reception_pharmacy_printing
+#: model:ir.model,name:alc_reception_pharmacy_printing.model_receive_pharmacy_products
+msgid "Wizard of pharmacy reception"
+msgstr ""
+
+#. module: alc_reception_pharmacy_printing
 #: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy_printing.pharmacy_lot_label
 msgid ""
 "^FS\\r\n"
