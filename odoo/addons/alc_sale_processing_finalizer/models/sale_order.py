@@ -6,7 +6,6 @@ import datetime
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields
-from odoo.tools import config
 
 from odoo.addons.alc_sale_consignment.models.sale_order import SaleOrder as Order
 
@@ -59,9 +58,14 @@ class SaleOrder(Order):
                 wiz = wizard.with_context(active_id=line.id, active_model=line._name)
                 wiz.cancel_remaining_qty()
 
-        if config["test_enable"]:
-            # Do not send mails during tests
+        send_processing_finalizer_email = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("alc_sale_processing_finalizer.send_email", False)
+        )
+        if not send_processing_finalizer_email:
             return
+
         mail_template.model = self._name
         for canceled_order in canceled_orders:
             mail_template.send_mail(canceled_order.id, force_send=True)

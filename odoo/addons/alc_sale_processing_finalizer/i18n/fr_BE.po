@@ -22,9 +22,14 @@ msgid "Auto Finalize Processing"
 msgstr "Finalisation automatique"
 
 #. module: alc_sale_processing_finalizer
+#: model:ir.model.fields,field_description:alc_sale_processing_finalizer.field_res_config_settings__send_processing_finalizer_email
+msgid "Auto-finalized email"
+msgstr "Email de finalisation automatique"
+
+#. module: alc_sale_processing_finalizer
 #: model:ir.model,name:alc_sale_processing_finalizer.model_sale_order_line_cancel
 msgid "Cancel Remaining Wizard"
-msgstr ""
+msgstr "Assistant d'annulation du reste"
 
 #. module: alc_sale_processing_finalizer
 #: model:ir.actions.server,name:alc_sale_processing_finalizer.ir_cron_cancel_sales_bo_gt_3months_ir_actions_server
@@ -38,6 +43,11 @@ msgid "Check to avoid purge for too long delivery"
 msgstr ""
 "Cocher pour empêcher la finalistation automatique en cas de long délai de "
 "livraison"
+
+#. module: alc_sale_processing_finalizer
+#: model:ir.model,name:alc_sale_processing_finalizer.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
 
 #. module: alc_sale_processing_finalizer
 #: model_terms:ir.ui.view,arch_db:alc_sale_processing_finalizer.view_delivery_carrier_search
@@ -58,6 +68,11 @@ msgstr "Bons de commande"
 #: model:mail.template,name:alc_sale_processing_finalizer.mail_template_30
 msgid "Sales Order - Annulation solde"
 msgstr "Bons de commande - Annulation solde"
+
+#. module: alc_sale_processing_finalizer
+#: model_terms:ir.ui.view,arch_db:alc_sale_processing_finalizer.res_config_settings_form_view
+msgid "Send an email for auto-finalized BO older than 3 months."
+msgstr "Envoyer un email pour la finalisation automatique des reliquats plus vieux que 3 mois."
 
 #. module: alc_sale_processing_finalizer
 #: model:ir.model.fields,help:alc_sale_processing_finalizer.field_sale_order__auto_finalize_processing
