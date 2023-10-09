@@ -53,13 +53,13 @@ class ReceivePharmacyProducts(models.TransientModel):
         self._clean_wizard()
 
     def _add(self):
-        self._create_reception_pharmacy_line()
+        return self._create_reception_pharmacy_line()
 
     def _create_reception_pharmacy_line(self):
         product = self.reception_pharmacy_id.product_id
         reception_pharmacy_line = self.env["reception.pharmacy.line"]
         lot = self._create_lot(product)
-        line = reception_pharmacy_line.create(
+        return reception_pharmacy_line.create(
             {
                 "wizard_id": self.reception_pharmacy_id.id,
                 "bin_id": self.bin_id.id,
@@ -69,7 +69,6 @@ class ReceivePharmacyProducts(models.TransientModel):
                 "lot_id": lot.id,
             }
         )
-        return line
 
     def _create_lot(self, product):
         current_year = datetime.now().year
