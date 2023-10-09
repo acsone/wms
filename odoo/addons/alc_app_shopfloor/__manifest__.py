@@ -45,6 +45,7 @@
         "alc_shopfloor_stock_picking_batch_assignment",
         "alc_shopfloor_user",
         "alc_shopfloor_lot_scan",
+        "alc_shopfloor_security",
     ],
     "data": [],
     "demo": [],

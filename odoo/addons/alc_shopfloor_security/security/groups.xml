@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="alc_shopfloor_portal_user" model="res.groups">
+        <field name="name">Shopfloor portal users</field>
+        <field name="category_id" ref="shopfloor_base.module_category_shopfloor" />
+    </record>
+
+</odoo>
