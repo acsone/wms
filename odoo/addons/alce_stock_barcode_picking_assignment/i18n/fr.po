@@ -24,6 +24,16 @@ msgid "Please scan your user badge first to start the operations"
 msgstr "Veuillez scanner votre badge pour commencer la préparation."
 
 #. module: alce_stock_barcode_picking_assignment
+#: model:ir.model.fields,field_description:alce_stock_barcode_picking_assignment.field_stock_picking__scan_operator_id
+msgid "Scan Operator"
+msgstr ""
+
+#. module: alce_stock_barcode_picking_assignment
+#: model:ir.model.fields,help:alce_stock_barcode_picking_assignment.field_stock_picking__scan_operator_id
+msgid "Technical field to retain operator in scanning process"
+msgstr ""
+
+#. module: alce_stock_barcode_picking_assignment
 #: model:ir.model,name:alce_stock_barcode_picking_assignment.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
