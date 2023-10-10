@@ -23,6 +23,7 @@
         "alc_eshop_ads",
         "alc_eshop_classifieds_responsible",
         "alc_eshop_ordering_allowed",
+        "alc_eshop_info_banner",
     ],
     "data": [],
     "demo": [],
