@@ -46,6 +46,7 @@
         "alc_shopfloor_user",
         "alc_shopfloor_lot_scan",
         "alc_shopfloor_security",
+        "alc_shopfloor_loss_quantity",
     ],
     "data": [],
     "demo": [],
