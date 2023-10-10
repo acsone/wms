@@ -253,7 +253,7 @@ post_sync_commands = [
 ]
 
 [tool.pip-preserve-requirements]
-tag_prefix = "alc16-"
+tag_prefix = "16.0+alc+"
 match_any_tag = true
 
 [[tool.pip-preserve-requirements.vcs_vaults]]
