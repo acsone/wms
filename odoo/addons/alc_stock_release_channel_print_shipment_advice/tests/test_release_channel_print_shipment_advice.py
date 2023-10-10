@@ -55,14 +55,17 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         shipment_advice = self.test_00()
         self.assertTrue(shipment_advice.in_release_channel_auto_process)
         action = self.channel.with_context(discard_logo_check=True).action_print()
-        self.assertEqual(self.channel.state, "asleep")
-        self.assertFalse(shipment_advice.in_release_channel_auto_process)
+        self.assertEqual(self.channel.state, "delivered")
+        self.assertTrue(shipment_advice.in_release_channel_auto_process)
         self.assertEqual(action.get("type"), "ir.actions.report")
         self.assertEqual(
             action.get("report_name"), "shipment_advice.report_shipment_advice"
         )
         self.assertEqual(action.get("report_type"), "qweb-pdf")
         self.assertEqual(action.get("context").get("active_ids"), shipment_advice.ids)
+        self.channel.action_sleep()
+        self.assertEqual(self.channel.state, "asleep")
+        self.assertFalse(shipment_advice.in_release_channel_auto_process)
 
     @mute_logger("odoo.addons.alc_stock_release_channel_deliver.models.shipment_advice")
     def test_02(self):
@@ -109,9 +112,9 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         self.assertTrue(done_shipment_advice.in_release_channel_auto_process)
         self.assertTrue(cancel_shipment_advice.in_release_channel_auto_process)
         action = self.channel.with_context(discard_logo_check=True).action_print()
-        self.assertEqual(self.channel.state, "asleep")
-        self.assertFalse(done_shipment_advice.in_release_channel_auto_process)
-        self.assertFalse(cancel_shipment_advice.in_release_channel_auto_process)
+        self.assertEqual(self.channel.state, "delivered")
+        self.assertTrue(done_shipment_advice.in_release_channel_auto_process)
+        self.assertTrue(cancel_shipment_advice.in_release_channel_auto_process)
         self.assertEqual(action.get("type"), "ir.actions.report")
         self.assertEqual(
             action.get("report_name"), "shipment_advice.report_shipment_advice"
@@ -121,3 +124,7 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         self.assertEqual(
             action.get("context").get("active_ids"), done_shipment_advice.ids
         )
+        self.channel.action_sleep()
+        self.assertEqual(self.channel.state, "asleep")
+        self.assertFalse(done_shipment_advice.in_release_channel_auto_process)
+        self.assertFalse(cancel_shipment_advice.in_release_channel_auto_process)
