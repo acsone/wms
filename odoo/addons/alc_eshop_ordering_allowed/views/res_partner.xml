@@ -19,7 +19,7 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_res_partner_filter" />
         <field name="arch" type="xml">
-            <filter name="customer" position="after">
+            <filter name="type_person" position="after">
                 <filter
           string="Eshop ordering not allowed"
           name="eshop_ordering_not_allowed"

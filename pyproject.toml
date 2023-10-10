@@ -118,7 +118,6 @@ exclude = [
   'odoo/addons/alc_eshop_info_banner/*',
   'odoo/addons/alc_eshop_info_banner_elasticsearch/*',
   'odoo/addons/alc_eshop_models_url/*',
-  'odoo/addons/alc_eshop_ordering_allowed/*',
   'odoo/addons/alc_eshop_partner_veterinary/*',
   'odoo/addons/alc_eshop_product_category_sequence/*',
   'odoo/addons/alc_eshop_product_domain/*',
