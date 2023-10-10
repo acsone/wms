@@ -114,7 +114,6 @@ exclude: |
   ^odoo/addons/elasticsearch_security_mixin/|
   ^odoo/addons/keycloak/|
   ^odoo/addons/l10n_be_vat/|
-  ^odoo/addons/mixin_file_id/|
   ^odoo/addons/mixin_user_id/|
   ^odoo/addons/paginated_service_mixin/|
   ^odoo/addons/partner_archive_new_partner/|

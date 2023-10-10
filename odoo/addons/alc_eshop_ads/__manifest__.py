@@ -11,8 +11,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "mixin_file_id",
-# removed        "mixin_image_id",
+        # removed        "mixin_file_id",
+        # removed        "mixin_image_id",
         "mixin_past",
         "sales_team"
     ],
