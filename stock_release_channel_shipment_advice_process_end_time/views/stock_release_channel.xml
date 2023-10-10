@@ -16,6 +16,8 @@
                     name="loading"
                     attrs="{'invisible': [('shipment_planning_method', '=', 'none')]}"
                 >
+                    <!-- As field is retricted to stock manager group in parent form -->
+                    <field name="shipment_planning_method" invisible="1" />
                     <group name="shipment_advice_arrival">
                         <p
                             colspan="2"
