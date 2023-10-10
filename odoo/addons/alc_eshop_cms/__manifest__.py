@@ -17,7 +17,7 @@
         "base_rest",
         "sales_team",
         "mixin_file_id",
-        "mixin_image_id",
+# removed        "mixin_image_id",
         "mixin_past",
     ],
     "data": [

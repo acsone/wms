@@ -686,6 +686,7 @@ def set_modules_to_remove():
         "account_analytic_no_lines",
         "account_credit_control",
         "alcyon_credit_control",
+        "mixin_image_id",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
