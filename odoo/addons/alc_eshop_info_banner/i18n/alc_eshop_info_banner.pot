@@ -1,12 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_eshop_info_banner
+# 	* alc_eshop_info_banner
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2023-10-10 12:28+0000\n"
+"PO-Revision-Date: 2023-10-10 12:28+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,22 +16,22 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_info_banner
-#: selection:alc.eshop.info.banner,visibility:0
+#: model:ir.model.fields.selection,name:alc_eshop_info_banner.selection__alc_eshop_info_banner__visibility__all
 msgid "ALL"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: selection:alc.eshop.info.banner,visibility:0
+#: model:ir.model.fields.selection,name:alc_eshop_info_banner.selection__alc_eshop_info_banner__visibility__auth_only
 msgid "Authenticated Only"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner_create_uid
+#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner_create_date
+#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__create_date
 msgid "Created on"
 msgstr ""
 
@@ -44,17 +46,17 @@ msgid "Current banners"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner_date_end
-msgid "Date end"
+#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__date_end
+msgid "Date End"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner_date_start
-msgid "Date start"
+#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__date_start
+msgid "Date Start"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner_display_name
+#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -66,27 +68,27 @@ msgid "Eshop Info Banner"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner_html
+#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__html
 msgid "Html"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner_id
+#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__id
 msgid "ID"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner___last_update
+#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner_write_uid
+#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner_write_date
+#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -101,18 +103,19 @@ msgid "Past banners from today"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: selection:alc.eshop.info.banner,visibility:0
+#: model:ir.model.fields.selection,name:alc_eshop_info_banner.selection__alc_eshop_info_banner__visibility__public_only
 msgid "Public Only"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: code:addons/alc_eshop_info_banner/models/alc_eshop_info_banner.py:39
+#. odoo-python
+#: code:addons/alc_eshop_info_banner/models/alc_eshop_info_banner.py:0
 #, python-format
-msgid "The defined period is not a valid (%s > %s)"
+msgid "The defined period is not valid (%(start)s > %(end)s)"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner_type
+#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__type
 msgid "Type"
 msgstr ""
 
@@ -127,7 +130,7 @@ msgid "Upcoming banners from today"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner_visibility
+#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__visibility
 msgid "Visibility"
 msgstr ""
 
@@ -137,12 +140,11 @@ msgid "Website info message manager"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: selection:alc.eshop.info.banner,type:0
+#: model:ir.model.fields.selection,name:alc_eshop_info_banner.selection__alc_eshop_info_banner__type__info
 msgid "info"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: selection:alc.eshop.info.banner,type:0
+#: model:ir.model.fields.selection,name:alc_eshop_info_banner.selection__alc_eshop_info_banner__type__warning
 msgid "warning"
 msgstr ""
-

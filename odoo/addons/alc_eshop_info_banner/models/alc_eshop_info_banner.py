@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -32,10 +31,11 @@ class AlcEshopInfoBanner(models.Model):
     @api.constrains("date_start", "date_end")
     def _validate_dates(self):
         for this in self:
-            start = fields.Datetime.from_string(this.date_start)
-            end = fields.Datetime.from_string(this.date_end)
-            if start > end:
+            if this.date_start > this.date_end:
                 raise ValidationError(
-                    _("The defined period is not a valid (%s > %s)")
-                    % (this.date_start, this.date_end)
+                    _(
+                        "The defined period is not valid (%(start)s > %(end)s)",
+                        start=this.date_start,
+                        end=this.date_end,
+                    )
                 )

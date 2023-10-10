@@ -79,7 +79,7 @@
 
     <record model="ir.ui.menu" id="alc_eshop_info_banner_menu">
         <field name="name">Eshop Info Banner</field>
-        <field name="parent_id" ref="sales_team.menu_sale_config" />
+        <field name="parent_id" ref="sale.menu_sale_config" />
         <field name="action" ref="alc_eshop_info_banner_act_window" />
         <field name="sequence" eval="99" />
     </record>
