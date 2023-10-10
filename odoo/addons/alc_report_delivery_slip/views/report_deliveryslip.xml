@@ -289,7 +289,7 @@
                 <span t-esc="int(quant[1])" />
               </td>
               <td>
-                <span t-esc="quant[2] and quant[2][:10]" />
+                <span t-esc="quant[2] and quant[2].date()" />
               </td>
               <td />
               <td />
@@ -449,7 +449,7 @@
                 <span t-esc="int(quant[1])" />
               </td>
               <td>
-                <span t-esc="quant[2] and quant[2][:10]" />
+                <span t-esc="quant[2] and quant[2].date()" />
               </td>
             </tr>
           </t>
@@ -609,7 +609,7 @@
                 <span t-esc="int(quant[1])" />
               </td>
               <td style="white-space:nowrap">
-                <span t-esc="quant[2] and quant[2][:10]" />
+                <span t-esc="quant[2] and quant[2].date()" />
               </td>
             </tr>
           </t>
@@ -806,7 +806,7 @@
                   <span t-esc="int(quant[1])" />
                 </td>
                 <td style="white-space:nowrap">
-                  <span t-esc="quant[2] and quant[2][:10]" />
+                  <span t-esc="quant[2] and quant[2].date()" />
                 </td>
               </tr>
             </t>
