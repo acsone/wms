@@ -1,12 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_eshop_ads
+# 	* alc_eshop_ads
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2023-10-04 12:24+0000\n"
+"PO-Revision-Date: 2023-10-04 12:24+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,22 +16,22 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_ads
-#: selection:alc.eshop.ads,display_slot:0
+#: model:ir.model.fields.selection,name:alc_eshop_ads.selection__alc_eshop_ads__display_slot__bottom_left
 msgid "Bottom left"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: selection:alc.eshop.ads,display_slot:0
+#: model:ir.model.fields.selection,name:alc_eshop_ads.selection__alc_eshop_ads__display_slot__bottom_right
 msgid "Bottom right"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_create_uid
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_create_date
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__create_date
 msgid "Created on"
 msgstr ""
 
@@ -44,28 +46,28 @@ msgid "Current ads"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_date_end
-msgid "Date end"
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__date_end
+msgid "Date End"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_date_start
-msgid "Date start"
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__date_start
+msgid "Date Start"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_display_name
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_display_slot
-msgid "Display slot"
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__display_slot
+msgid "Display Slot"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_display_time
-msgid "Display time"
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__display_time
+msgid "Display Time"
 msgstr ""
 
 #. module: alc_eshop_ads
@@ -81,8 +83,13 @@ msgid "Eshop Ads"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: selection:alc.eshop.ads,visibility:0
+#: model:ir.model.fields.selection,name:alc_eshop_ads.selection__alc_eshop_ads__visibility__everyone
 msgid "Everyone"
+msgstr ""
+
+#. module: alc_eshop_ads
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__file_id
+msgid "File"
 msgstr ""
 
 #. module: alc_eshop_ads
@@ -91,27 +98,52 @@ msgid "From"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_id
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__id
 msgid "ID"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,help:alc_eshop_ads.field_alc_eshop_ads_lang_id
-msgid "If set, the ads will be only visible into the specified lang on the website"
+#: model:ir.model.fields,help:alc_eshop_ads.field_alc_eshop_ads__lang_id
+msgid ""
+"If set, the ads will be only visible into the specified lang on the website"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,help:alc_eshop_ads.field_alc_eshop_ads_site_url
-msgid "If specified, the customer will be redirected to this url click on the ads banner into the website."
+#: model:ir.model.fields,help:alc_eshop_ads.field_alc_eshop_ads__site_url
+msgid ""
+"If specified, the customer will be redirected to this url upon click on the "
+"ads banner into the website."
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,help:alc_eshop_ads.field_alc_eshop_ads_file_id
-msgid "If specified, the file will be downloaded by the customer on click on the ads banner into the website."
+#: model:ir.model.fields,help:alc_eshop_ads.field_alc_eshop_ads__file_id
+msgid ""
+"If specified, the file will be downloaded by the customer upon click on the "
+"ads banner into the website."
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_lang_id
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__image
+msgid "Image"
+msgstr ""
+
+#. module: alc_eshop_ads
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__image_medium
+msgid "Image medium"
+msgstr ""
+
+#. module: alc_eshop_ads
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__is_future
+msgid "Is Future"
+msgstr ""
+
+#. module: alc_eshop_ads
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__is_past
+msgid "Is Past"
+msgstr ""
+
+#. module: alc_eshop_ads
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__lang_id
 msgid "Lang"
 msgstr ""
 
@@ -121,28 +153,28 @@ msgid "Lang:"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads___last_update
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_write_uid
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_write_date
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_name
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__name
 #: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_form_view
 msgid "Name"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: selection:alc.eshop.ads,visibility:0
+#: model:ir.model.fields.selection,name:alc_eshop_ads.selection__alc_eshop_ads__visibility__non-shareholder
 msgid "Non Shareholder"
 msgstr ""
 
@@ -157,12 +189,17 @@ msgid "Past ads from today"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: selection:alc.eshop.ads,visibility:0
+#: model:ir.model.fields.selection,name:alc_eshop_ads.selection__alc_eshop_ads__visibility__shareholder
 msgid "Shareholder"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_site_url
+#: model:ir.model.fields.selection,name:alc_eshop_ads.selection__alc_eshop_ads__visibility__shareholder-under-contract
+msgid "Shareholder under contract"
+msgstr ""
+
+#. module: alc_eshop_ads
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__site_url
 msgid "Site url"
 msgstr ""
 
@@ -172,18 +209,19 @@ msgid "Slot:"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:74
+#. odoo-python
+#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:0
 #, python-format
-msgid "The defined period on %s is not a valid (%s > %s)"
+msgid "The defined period on %(name)s is not a valid (%(start)s > %(end)s)"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: selection:alc.eshop.ads,display_slot:0
+#: model:ir.model.fields.selection,name:alc_eshop_ads.selection__alc_eshop_ads__display_slot__top_left
 msgid "Top left"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: selection:alc.eshop.ads,display_slot:0
+#: model:ir.model.fields.selection,name:alc_eshop_ads.selection__alc_eshop_ads__display_slot__top_right
 msgid "Top right"
 msgstr ""
 
@@ -198,7 +236,7 @@ msgid "Upcoming ads from today"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_visibility
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__visibility
 msgid "Visibility"
 msgstr ""
 
@@ -208,9 +246,17 @@ msgid "Website ads manager"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:61
+#. odoo-python
+#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:0
 #, python-format
-msgid "You must choose between the download of a file OR the redirect to a website on click on the banner"
+msgid ""
+"You must choose between the download of a file OR the redirect to a website "
+"on click on the banner"
+msgstr ""
+
+#. module: alc_eshop_ads
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_kanban_view
+msgid "ad image"
 msgstr ""
 
 #. module: alc_eshop_ads
@@ -219,12 +265,6 @@ msgid "name"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads_file_id
-msgid "storage file"
-msgstr ""
-
-#. module: alc_eshop_ads
 #: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_kanban_view
 msgid "to"
 msgstr ""
-

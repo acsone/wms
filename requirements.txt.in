@@ -265,7 +265,6 @@ odoo-addon-rest-log @ git+https://github.com/OCA/rest-framework.git@refs/pull/35
 # OCA/storage
 
 
-
 checklog-odoo @ git+https://github.com/acsone/checklog-odoo@master#subdirectory=checklog-odoo
 
 openupgradelib @ git+https://github.com/acsone/openupgradelib.git@16.0-alc_master

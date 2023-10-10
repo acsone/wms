@@ -4,9 +4,7 @@
 <odoo>
 
     <record model="ir.ui.view" id="alc_eshop_ads_form_view">
-        <field name="name">alc.eshop.ads.form (in
-            alc_eshop_ads)
-        </field>
+        <field name="name">alc.eshop.ads.form (in alc_eshop_ads)</field>
         <field name="model">alc.eshop.ads</field>
         <field name="arch" type="xml">
             <form>
@@ -14,7 +12,7 @@
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box" />
-                     <field name="image_url" widget="image_url" />
+                     <field name="image_medium" />
                     <div class="oe_title">
                         <label class="oe_edit_only" for="name" string="Name" />
                         <h1><field name="name" placeholder="name" /></h1>
@@ -24,10 +22,12 @@
                             <field name="visibility" placeholder="name" />
                         </group>
                         <group>
-                            <field name="image" filename="image_filename" />
-                            <field name="image_filename" invisible="1" />
-                            <field name="file" filename="filename" />
-                            <field name="filename" invisible="1" />
+                            <field
+                name="image"
+                class="oe_avatar"
+                options="{'preview_image': 'image_medium', 'zoom': true}"
+              />
+                            <field name="file_id" />
                             <field name="site_url" />
                             <field name="lang_id" />
                         </group>
@@ -44,22 +44,19 @@
     </record>
 
     <record model="ir.ui.view" id="alc_eshop_ads_kanban_view">
-       <field name="name">alc.eshop.ads.kanban (in
-            alc_eshop_ads)
-        </field>
+       <field name="name">alc.eshop.ads.kanban (in alc_eshop_ads)</field>
         <field name="model">alc.eshop.ads</field>
         <field name="arch" type="xml">
             <kanban>
-                <field name="image_url" widget="image_url" />
-                <field name="date_start" />
-                <field name="date_end" />
-                <field name="display_slot" />
-                <field name="lang_id" />
+                <field name="id" />
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
                             <div class="o_kanban_image">
-                                <img t-att-src="record.image_url.value" />
+                                <img
+                  t-att-src="kanban_image('alc.eshop.ads', 'image_medium', record.id.raw_value)"
+                  alt="ad image"
+                />
                             </div>
                             <div class="oe_kanban_details">
                                 <strong>
@@ -87,9 +84,7 @@
     </record>
 
     <record model="ir.ui.view" id="alc_eshop_ads_search_view">
-        <field name="name">alc.eshop.ads.search (in
-            alc_eshop_ads)
-        </field>
+        <field name="name">alc.eshop.ads.search (in alc_eshop_ads)</field>
         <field name="model">alc.eshop.ads</field>
         <field name="arch" type="xml">
             <search>
@@ -132,15 +127,13 @@
     </record>
 
     <record model="ir.ui.view" id="alc_eshop_ads_calendar_view">
-        <field name="name">alc.eshop.ads.calendar (in
-            alc_eshop_ads)</field>
+        <field name="name">alc.eshop.ads.calendar (in alc_eshop_ads)</field>
         <field name="model">alc.eshop.ads</field>
         <field name="arch" type="xml">
             <calendar
         string="EShop Ads"
         date_start="date_start"
         date_stop="date_end"
-        display="[display_name]"
         mode="month"
       >
                 <field name="display_name" />
@@ -160,7 +153,7 @@
 
     <record model="ir.ui.menu" id="alc_eshop_ads_menu">
         <field name="name">EShop Ads</field>
-        <field name="parent_id" ref="sales_team.menu_sale_config" />
+        <field name="parent_id" ref="sale.menu_sale_config" />
         <field name="action" ref="alc_eshop_ads_act_window" />
         <field name="sequence" eval="99" />
     </record>

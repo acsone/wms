@@ -38,7 +38,6 @@ omit =
     odoo/addons/alc_elasticsearch_security/*
     odoo/addons/alc_elasticsearch_security_vt_groups/*
     odoo/addons/alc_eshop/*
-    odoo/addons/alc_eshop_ads/*
     odoo/addons/alc_eshop_ads_elasticsearch/*
     odoo/addons/alc_eshop_api_v2/*
     odoo/addons/alc_eshop_app/*

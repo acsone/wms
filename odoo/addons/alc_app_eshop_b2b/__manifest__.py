@@ -20,7 +20,7 @@
         "alc_product_assortment",
         "alc_base_multi_media_lang",
         "alc_eshop_classifieds",
-        "mixin_user_id",
+        "alc_eshop_ads",
     ],
     "data": [],
     "demo": [],
