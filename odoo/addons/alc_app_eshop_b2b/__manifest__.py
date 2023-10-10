@@ -22,6 +22,7 @@
         "alc_eshop_classifieds",
         "alc_eshop_ads",
         "alc_eshop_classifieds_responsible",
+        "alc_eshop_ordering_allowed",
     ],
     "data": [],
     "demo": [],
