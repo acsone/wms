@@ -18,6 +18,7 @@
         "alc_stock_release_channel_tag",
         "alc_stock_release_channel_deliver",
         "alc_stock_release_channel_print_shipment_advice",
+        "alc_stock_release_channel_weight",
     ],
     "data": ["views/stock_picking.xml", "views/stock_release_channel.xml"],
     "assets": {

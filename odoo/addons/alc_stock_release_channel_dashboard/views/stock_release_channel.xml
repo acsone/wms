@@ -226,6 +226,14 @@
                                             </a>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            Total Weight:
+                                            <field name="total_weight" />
+                                            <span class="mr4" />
+                                            <field name="weight_uom_name" />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div
                   class="col-2"
