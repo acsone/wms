@@ -262,7 +262,7 @@
                 <t
                   t-esc="order_line.price_reduce * int(line.product_qty)"
                   t-options="{'widget': 'monetary', 'display_currency': order_line.currency_id}"
-                  t-if="not line.is_additional_move and not line.order_id.is_consignment"
+                  t-if="order_line and not line.is_additional_move and not line.order_id.is_consignment"
                 />
                 <span
                   t-if="line.is_additional_move or line.order_id.is_consignment"
