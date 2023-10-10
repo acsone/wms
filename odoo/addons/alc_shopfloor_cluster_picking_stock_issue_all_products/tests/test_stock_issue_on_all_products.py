@@ -15,6 +15,7 @@ class TestStockIssueOnAllProducts(ClusterPickingCommonCase):
             .sudo()
             .create({"name": "Product A", "type": "product"})
         )
+        cls.env.ref("stock.warehouse0").sudo().use_loss_picking = True
         cls.batch = cls._create_picking_batch(
             [[cls.BatchProduct(product=cls.product_a, quantity=1)]]
         )

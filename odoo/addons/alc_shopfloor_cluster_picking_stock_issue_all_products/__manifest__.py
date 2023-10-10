@@ -10,5 +10,6 @@
     "depends": [
         "shopfloor",
         "alc_shopfloor_cluster_picking_workstation",
+        "alc_shopfloor_loss_quantity",
     ],
 }
