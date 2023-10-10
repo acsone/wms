@@ -6,7 +6,7 @@
     <field name="name">GLS: send package wizard</field>
     <field name="model">delivery.package.gls.wizard</field>
     <field name="arch" type="xml">
-      <form>
+      <form disable_autofocus="1">
         <group>
           <field name="picking_id" />
           <field name="allowed_package_ids" invisible="1" />
