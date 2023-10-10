@@ -109,7 +109,6 @@ exclude = [
   'odoo/addons/alc_eshop_app/*',
   'odoo/addons/alc_eshop_auth_api_key/*',
   'odoo/addons/alc_eshop_auth_jwt/*',
-  'odoo/addons/alc_eshop_classifieds/*',
   'odoo/addons/alc_eshop_classifieds_responsible/*',
   'odoo/addons/alc_eshop_classifieds_service/*',
   'odoo/addons/alc_eshop_cms/*',

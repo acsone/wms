@@ -28,7 +28,6 @@
   >
         <field name="name">Reject Classified</field>
         <field name="res_model">alc.classified.wizard.rejection</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="domain">[]</field>

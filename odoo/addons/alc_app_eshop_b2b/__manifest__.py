@@ -19,6 +19,7 @@
         "alc_price_cache_exclusive",
         "alc_product_assortment",
         "alc_base_multi_media_lang",
+        "alc_eshop_classifieds",
     ],
     "data": [],
     "demo": [],
