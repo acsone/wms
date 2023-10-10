@@ -193,3 +193,12 @@ class StockReleaseChannel(StockReleaseChannelBase):
                 rec.is_action_lock_allowed or rec.state == "delivering_error"
             )
         return res
+
+    @api.depends("state")
+    def _compute_is_action_sleep_allowed(self):
+        res = super()._compute_is_action_sleep_allowed()
+        for rec in self:
+            rec.is_action_sleep_allowed = (
+                rec.is_action_sleep_allowed or rec.state == "delivered"
+            )
+        return res
