@@ -17,85 +17,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mixin_user_id
-#: model:ir.model.fields,field_description:mixin_user_id.field_mixin_user_id__message_needaction
-msgid "Action Needed"
-msgstr "Nécessite une action"
-
-#. module: mixin_user_id
-#: model:ir.model.fields,field_description:mixin_user_id.field_mixin_user_id__message_attachment_count
-msgid "Attachment Count"
-msgstr "Nombre de pièces jointes"
-
-#. module: mixin_user_id
-#: model:ir.model.fields,field_description:mixin_user_id.field_mixin_user_id__message_follower_ids
-msgid "Followers"
-msgstr "Abonnés"
-
-#. module: mixin_user_id
-#: model:ir.model.fields,field_description:mixin_user_id.field_mixin_user_id__message_partner_ids
-msgid "Followers (Partners)"
-msgstr "Abonnés (partenaires)"
-
-#. module: mixin_user_id
-#: model:ir.model.fields,field_description:mixin_user_id.field_mixin_user_id__has_message
-msgid "Has Message"
-msgstr "A un message"
-
-#. module: mixin_user_id
-#: model:ir.model.fields,help:mixin_user_id.field_mixin_user_id__message_needaction
-msgid "If checked, new messages require your attention."
-msgstr "Si coché, de nouveaux messages demandent votre attention."
-
-#. module: mixin_user_id
-#: model:ir.model.fields,help:mixin_user_id.field_mixin_user_id__message_has_error
-#: model:ir.model.fields,help:mixin_user_id.field_mixin_user_id__message_has_sms_error
-msgid "If checked, some messages have a delivery error."
-msgstr "Si coché, certains messages ont une erreur de délivrance."
-
-#. module: mixin_user_id
-#: model:ir.model.fields,field_description:mixin_user_id.field_mixin_user_id__message_is_follower
-msgid "Is Follower"
-msgstr "Est abonné"
-
-#. module: mixin_user_id
-#: model:ir.model.fields,field_description:mixin_user_id.field_mixin_user_id__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Pièce jointe principale"
-
-#. module: mixin_user_id
-#: model:ir.model.fields,field_description:mixin_user_id.field_mixin_user_id__message_has_error
-msgid "Message Delivery error"
-msgstr "Erreur d'envoi du message"
-
-#. module: mixin_user_id
-#: model:ir.model.fields,field_description:mixin_user_id.field_mixin_user_id__message_ids
-msgid "Messages"
-msgstr "Messages"
-
-#. module: mixin_user_id
 #: model:ir.model,name:mixin_user_id.model_mixin_user_id
 msgid "Mixin for responsible user of a record"
 msgstr "Mixin pour l'utilisateur responsable de l'objet"
-
-#. module: mixin_user_id
-#: model:ir.model.fields,field_description:mixin_user_id.field_mixin_user_id__message_needaction_counter
-msgid "Number of Actions"
-msgstr "Nombre d'actions"
-
-#. module: mixin_user_id
-#: model:ir.model.fields,field_description:mixin_user_id.field_mixin_user_id__message_has_error_counter
-msgid "Number of errors"
-msgstr "Nombre d'erreurs"
-
-#. module: mixin_user_id
-#: model:ir.model.fields,help:mixin_user_id.field_mixin_user_id__message_needaction_counter
-msgid "Number of messages requiring action"
-msgstr "Nombre de messages nécessitant une action"
-
-#. module: mixin_user_id
-#: model:ir.model.fields,help:mixin_user_id.field_mixin_user_id__message_has_error_counter
-msgid "Number of messages with delivery error"
-msgstr "Nombre de messages avec des erreurs d'envoi"
 
 #. module: mixin_user_id
 #: model:ir.model.fields,field_description:mixin_user_id.field_mixin_user_id__user_id
@@ -103,21 +27,60 @@ msgid "Responsible"
 msgstr "Responsable"
 
 #. module: mixin_user_id
-#: model:ir.model.fields,field_description:mixin_user_id.field_mixin_user_id__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Erreur d'envoi SMS"
-
-#. module: mixin_user_id
 #: model:ir.model.fields,help:mixin_user_id.field_mixin_user_id__user_id
 msgid "The user in charge of managing this record."
 msgstr "L'utilisateur en charge du management de l'objet."
 
-#. module: mixin_user_id
-#: model:ir.model.fields,field_description:mixin_user_id.field_mixin_user_id__website_message_ids
-msgid "Website Messages"
-msgstr "Messages du site web"
+#~ msgid "Action Needed"
+#~ msgstr "Nécessite une action"
 
-#. module: mixin_user_id
-#: model:ir.model.fields,help:mixin_user_id.field_mixin_user_id__website_message_ids
-msgid "Website communication history"
-msgstr "Historique de communication du site web"
+#~ msgid "Attachment Count"
+#~ msgstr "Nombre de pièces jointes"
+
+#~ msgid "Followers"
+#~ msgstr "Abonnés"
+
+#~ msgid "Followers (Partners)"
+#~ msgstr "Abonnés (partenaires)"
+
+#~ msgid "Has Message"
+#~ msgstr "A un message"
+
+#~ msgid "If checked, new messages require your attention."
+#~ msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#~ msgid "If checked, some messages have a delivery error."
+#~ msgstr "Si coché, certains messages ont une erreur de délivrance."
+
+#~ msgid "Is Follower"
+#~ msgstr "Est abonné"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Pièce jointe principale"
+
+#~ msgid "Message Delivery error"
+#~ msgstr "Erreur d'envoi du message"
+
+#~ msgid "Messages"
+#~ msgstr "Messages"
+
+#~ msgid "Number of Actions"
+#~ msgstr "Nombre d'actions"
+
+#~ msgid "Number of errors"
+#~ msgstr "Nombre d'erreurs"
+
+#~ msgid "Number of messages requiring action"
+#~ msgstr "Nombre de messages nécessitant une action"
+
+#~ msgid "Number of messages with delivery error"
+#~ msgstr "Nombre de messages avec des erreurs d'envoi"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Erreur d'envoi SMS"
+
+#~ msgid "Website Messages"
+#~ msgstr "Messages du site web"
+
+#~ msgid "Website communication history"
+#~ msgstr "Historique de communication du site web"
