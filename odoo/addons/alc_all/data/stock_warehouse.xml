@@ -10,4 +10,8 @@
       eval="{'default_orderpoint_location_id': ref('alc_stock_location_data.stock_location_vlb')}"
     />
     </function>
+    <function model="stock.warehouse" name="write">
+        <value model="stock.warehouse" eval="[ref('stock.warehouse0')]" />
+        <value eval="{'use_loss_picking': True}" />
+    </function>
 </odoo>

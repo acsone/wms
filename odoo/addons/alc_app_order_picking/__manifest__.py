@@ -49,6 +49,7 @@
         "stock_picking_group_by_partner_by_carrier_by_customer",
         "stock_picking_group_by_max_weight",
         "stock_picking_low_priority",
+        "stock_picking_operation_loss_quantity",
         "stock_picking_start",
         "stock_picking_batch_start",
         "stock_picking_progress",
