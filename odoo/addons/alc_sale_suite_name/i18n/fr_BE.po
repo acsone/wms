@@ -24,12 +24,14 @@ msgstr "Contact"
 #. module: alc_sale_suite_name
 #: model:ir.model.fields,field_description:alc_sale_suite_name.field_res_partner__last_suite_name
 #: model:ir.model.fields,field_description:alc_sale_suite_name.field_res_users__last_suite_name
+#: model:ir.model.fields,field_description:alc_sale_suite_name.field_shopinvader_partner__last_suite_name
 msgid "Last Suite Name"
 msgstr "Dernier nom suite"
 
 #. module: alc_sale_suite_name
 #: model:ir.model.fields,field_description:alc_sale_suite_name.field_res_partner__next_suite_name
 #: model:ir.model.fields,field_description:alc_sale_suite_name.field_res_users__next_suite_name
+#: model:ir.model.fields,field_description:alc_sale_suite_name.field_shopinvader_partner__next_suite_name
 msgid "Next Suite Name"
 msgstr "Dernier nom suite"
 
