@@ -147,12 +147,14 @@ msgstr "Prix<br/>unitaire<br/>brut"
 #. module: alc_report_delivery_slip
 #: model:ir.model.fields,field_description:alc_report_delivery_slip.field_res_partner__is_hide_entry_register
 #: model:ir.model.fields,field_description:alc_report_delivery_slip.field_res_users__is_hide_entry_register
+#: model:ir.model.fields,field_description:alc_report_delivery_slip.field_shopinvader_partner__is_hide_entry_register
 msgid "Hide entry register on delivery slip"
 msgstr "Le client n'a pas besoin de registre d'entrée"
 
 #. module: alc_report_delivery_slip
 #: model:ir.model.fields,field_description:alc_report_delivery_slip.field_res_partner__is_hide_prices_deliveryslip
 #: model:ir.model.fields,field_description:alc_report_delivery_slip.field_res_users__is_hide_prices_deliveryslip
+#: model:ir.model.fields,field_description:alc_report_delivery_slip.field_shopinvader_partner__is_hide_prices_deliveryslip
 msgid "Hide prices on deliveryslip"
 msgstr "Cacher les prix sur le bon de livraison"
 
@@ -248,6 +250,7 @@ msgstr "Avis d'expédition:"
 #. module: alc_report_delivery_slip
 #: model:ir.model.fields,field_description:alc_report_delivery_slip.field_res_partner__show_deliveryslip_cnk
 #: model:ir.model.fields,field_description:alc_report_delivery_slip.field_res_users__show_deliveryslip_cnk
+#: model:ir.model.fields,field_description:alc_report_delivery_slip.field_shopinvader_partner__show_deliveryslip_cnk
 msgid "Show CNK on delivery slip"
 msgstr "Montrer CNK sur le bon de livraison"
 
