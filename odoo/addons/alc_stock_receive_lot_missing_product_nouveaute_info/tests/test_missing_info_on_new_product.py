@@ -184,7 +184,7 @@ class TestMissingInfoOnNewProduct(TransactionCase):
             {
                 "name": "Box",
                 "qty": 20,
-                "product_id": cls.p11.product_tmpl_id.id,
+                "product_id": cls.p11.id,
             }
         )
 
