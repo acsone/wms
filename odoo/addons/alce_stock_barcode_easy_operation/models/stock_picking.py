@@ -184,6 +184,10 @@ class StockPicking(stock_picking.StockPicking, BarcodeEventsMixin):
         if m and len(m.groups()) == 2:
             product_default_code = m.group("product_default_code")
             lot_name = m.group("lot_name")
+        if barcode.startswith("S-"):
+            parts = barcode.split("-")
+            product_default_code = parts[1]
+            lot_name = parts[2].strip()
         if lot_name:
             return self._barcode_process_lot(product_default_code, lot_name)
         # Check product

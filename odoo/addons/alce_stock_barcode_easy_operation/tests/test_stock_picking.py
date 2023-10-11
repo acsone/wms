@@ -103,6 +103,10 @@ class TestStockPicking(TransactionCase):
         )
         inventory_quant.action_apply_inventory()
 
+    def _lot_2_zetes_barcode(self, lot):
+        # ZETES code: S-product_code-lot_name-date...
+        return f"S-{lot.product_id.default_code}-{lot.name}-"
+
     def _lot_to_alcyon_barcode(self, lot):
         return f"#{lot.product_id.default_code}#{lot.name}#"
 
@@ -142,6 +146,16 @@ class TestStockPicking(TransactionCase):
         res = self.picking.on_barcode_scanned(lot_1_barcode)
         self.assertEqual(1, sum(pack_op.mapped("qty_done")))
         self.assertIn("warning", res)
+
+    def test_zetes_barcode_process_lot(self):
+        pack_op = self.picking.move_line_ids.filtered(
+            lambda op, product=self.product_lot: op.product_id == product
+        )
+        self.assertEqual(0, sum(pack_op.mapped("qty_done")))
+        # expected 1 lot to be scanned (lot1)
+        lot_1_barcode = self._lot_2_zetes_barcode(self.lot1)
+        res = self.picking.on_barcode_scanned(lot_1_barcode)
+        self.assertFalse(res)
 
     def test_barcode_process_alldone(self):
         self.assertEqual(0, sum(self.picking.move_line_ids.mapped("qty_done")))
