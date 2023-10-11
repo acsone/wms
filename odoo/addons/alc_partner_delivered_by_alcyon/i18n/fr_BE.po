@@ -24,5 +24,6 @@ msgstr "Contact"
 #. module: alc_partner_delivered_by_alcyon
 #: model:ir.model.fields,field_description:alc_partner_delivered_by_alcyon.field_res_partner__is_delivered_by_alcyon
 #: model:ir.model.fields,field_description:alc_partner_delivered_by_alcyon.field_res_users__is_delivered_by_alcyon
+#: model:ir.model.fields,field_description:alc_partner_delivered_by_alcyon.field_shopinvader_partner__is_delivered_by_alcyon
 msgid "Delivered by Alcyon?"
 msgstr "Livré par Alcyon?"
