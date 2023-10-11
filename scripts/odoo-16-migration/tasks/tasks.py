@@ -508,17 +508,6 @@ def click_odoo_update():
 _register_migration_scripts_in_tasks("post-")
 
 
-@task("16.0.1.0.0")
-def uninstall_unused():
-    unused_modules = [
-        "mrp",
-        "quality_control",
-    ]
-    check_call(
-        ["click-odoo-uninstall", "-d", DB_16_POSTMIG, "-m", ",".join(unused_modules)]
-    )
-
-
 @task()
 def set_modules_to_remove():
     """
@@ -707,4 +696,26 @@ def set_modules_to_remove():
 def click_odoo_update_final():
     check_call(
         ["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite", "--update-all"]
+    )
+
+
+# This second call seems necessary to have the registry in a good state
+# (modules where not loaded after first run)
+@task()
+def click_odoo_update_final_2():
+    check_call(
+        ["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite", "--update-all"]
+    )
+
+
+@task("16.0.1.0.0")
+def uninstall_unused():
+    check_call(
+        [
+            "click-odoo",
+            "-d",
+            DB_16_POSTMIG,
+            "click-odoo/uninstall-installed-modules.py",
+            "mrp,quality_control",
+        ]
     )
