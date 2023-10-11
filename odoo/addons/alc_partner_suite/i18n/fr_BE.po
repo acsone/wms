@@ -24,5 +24,6 @@ msgstr ""
 #. module: alc_partner_suite
 #: model:ir.model.fields,field_description:alc_partner_suite.field_res_partner__suite
 #: model:ir.model.fields,field_description:alc_partner_suite.field_res_users__suite
+#: model:ir.model.fields,field_description:alc_partner_suite.field_shopinvader_partner__suite
 msgid "Suite Name"
 msgstr "Nom de suite"
