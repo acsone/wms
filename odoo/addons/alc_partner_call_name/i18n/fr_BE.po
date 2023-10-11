@@ -24,5 +24,6 @@ msgstr ""
 #. module: alc_partner_call_name
 #: model:ir.model.fields,field_description:alc_partner_call_name.field_res_partner__call_name
 #: model:ir.model.fields,field_description:alc_partner_call_name.field_res_users__call_name
+#: model:ir.model.fields,field_description:alc_partner_call_name.field_shopinvader_partner__call_name
 msgid "Nickname"
 msgstr "Nom d'appel"
