@@ -104,6 +104,7 @@ msgstr "Contrainte 'Livraison par Alcyon'"
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__partner_shipping_id
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_partner__partner_shipping_id
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_users__partner_shipping_id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_shopinvader_partner__partner_shipping_id
 msgid "Delivery Address"
 msgstr "Adresse de livraison"
 
@@ -124,16 +125,21 @@ msgstr "Fait"
 #: model:ir.model.fields,help:alc_reception_pharmacy.field_res_company__delivered_by_alcyon_constraint
 #: model:ir.model.fields,help:alc_reception_pharmacy.field_res_config_settings__delivered_by_alcyon_constraint
 msgid "Enable the constaint 'delivered by Alcyon' for pharmacy receptions"
-msgstr "Activer la contrainte 'Livraison par Alcyon' pour les réceptions pharmacie"
+msgstr ""
+"Activer la contrainte 'Livraison par Alcyon' pour les réceptions pharmacie"
 
 #. module: alc_reception_pharmacy
 #: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.res_config_settings_view_form
 msgid ""
-"Enable the constraint that check there is a at least a release channel with Alcyon as\n"
-"                            transporter and a delivery zone containing the geographic location of the customer."
+"Enable the constraint that check there is a at least a release channel with "
+"Alcyon as\n"
+"                            transporter and a delivery zone containing the "
+"geographic location of the customer."
 msgstr ""
-"Active la contrainte vérifiant qu'il existe au moins un canal de livraison dont le transporteur est Alcyon\n"
-"                            et dont la zone de livraison contient la localisation géographique du client."
+"Active la contrainte vérifiant qu'il existe au moins un canal de livraison "
+"dont le transporteur est Alcyon\n"
+"                            et dont la zone de livraison contient la "
+"localisation géographique du client."
 
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__id
