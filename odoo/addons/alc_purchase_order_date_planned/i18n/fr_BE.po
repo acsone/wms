@@ -47,6 +47,7 @@ msgstr ""
 #. module: alc_purchase_order_date_planned
 #: model:ir.model.fields,field_description:alc_purchase_order_date_planned.field_res_partner__delivery_lead_time
 #: model:ir.model.fields,field_description:alc_purchase_order_date_planned.field_res_users__delivery_lead_time
+#: model:ir.model.fields,field_description:alc_purchase_order_date_planned.field_shopinvader_partner__delivery_lead_time
 msgid "Delivery lead time"
 msgstr "Délai de livraison"
 
