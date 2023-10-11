@@ -512,6 +512,7 @@ msgstr "Ticket Helpdesk"
 #: model:ir.model.fields,field_description:alce_helpdesk.field_res_partner__helpdesk_tickets_count
 #: model:ir.model.fields,field_description:alce_helpdesk.field_res_users__helpdesk_tickets_count
 #: model:ir.model.fields,field_description:alce_helpdesk.field_sale_order__helpdesk_tickets_count
+#: model:ir.model.fields,field_description:alce_helpdesk.field_shopinvader_partner__helpdesk_tickets_count
 #: model:ir.model.fields,field_description:alce_helpdesk.field_stock_move__helpdesk_tickets_count
 #: model:ir.model.fields,field_description:alce_helpdesk.field_stock_picking__helpdesk_tickets_count
 msgid "Helpdesk Tickets Count"
