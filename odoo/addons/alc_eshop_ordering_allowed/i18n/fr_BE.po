@@ -24,6 +24,7 @@ msgstr "Contact"
 #. module: alc_eshop_ordering_allowed
 #: model:ir.model.fields,field_description:alc_eshop_ordering_allowed.field_res_partner__eshop_ordering_allowed
 #: model:ir.model.fields,field_description:alc_eshop_ordering_allowed.field_res_users__eshop_ordering_allowed
+#: model:ir.model.fields,field_description:alc_eshop_ordering_allowed.field_shopinvader_partner__eshop_ordering_allowed
 msgid "Eshop Ordering Allowed"
 msgstr "Commande en ligne autorisée"
 
@@ -35,6 +36,7 @@ msgstr "Commande en ligne interdite"
 #. module: alc_eshop_ordering_allowed
 #: model:ir.model.fields,help:alc_eshop_ordering_allowed.field_res_partner__eshop_ordering_allowed
 #: model:ir.model.fields,help:alc_eshop_ordering_allowed.field_res_users__eshop_ordering_allowed
+#: model:ir.model.fields,help:alc_eshop_ordering_allowed.field_shopinvader_partner__eshop_ordering_allowed
 msgid "If not set, this partner is not allowed to pass an order on the eshop."
 msgstr ""
 "Si pas coché, ce contact ne pourra pas passer de commande depuis le site web "
