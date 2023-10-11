@@ -19,6 +19,7 @@ msgstr ""
 #. module: alc_partner_apb_authorization
 #: model:ir.model.fields,field_description:alc_partner_apb_authorization.field_res_partner__apb_authorization
 #: model:ir.model.fields,field_description:alc_partner_apb_authorization.field_res_users__apb_authorization
+#: model:ir.model.fields,field_description:alc_partner_apb_authorization.field_shopinvader_partner__apb_authorization
 msgid "Authorization/APB"
 msgstr "Autorisation/APB"
 
