@@ -55,12 +55,14 @@ msgstr ""
 #. module: alc_stock_delivery_slip
 #: model:ir.model.fields,field_description:alc_stock_delivery_slip.field_res_partner__send_csv_deliveryship
 #: model:ir.model.fields,field_description:alc_stock_delivery_slip.field_res_users__send_csv_deliveryship
+#: model:ir.model.fields,field_description:alc_stock_delivery_slip.field_shopinvader_partner__send_csv_deliveryship
 msgid "Send the deliveryship in CSV format"
 msgstr ""
 
 #. module: alc_stock_delivery_slip
 #: model:ir.model.fields,field_description:alc_stock_delivery_slip.field_res_partner__send_pdf_deliveryship
 #: model:ir.model.fields,field_description:alc_stock_delivery_slip.field_res_users__send_pdf_deliveryship
+#: model:ir.model.fields,field_description:alc_stock_delivery_slip.field_shopinvader_partner__send_pdf_deliveryship
 msgid "Send the deliveryship in PDF format"
 msgstr ""
 

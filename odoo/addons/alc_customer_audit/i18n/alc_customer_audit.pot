@@ -42,18 +42,21 @@ msgstr ""
 #. module: alc_customer_audit
 #: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner__has_anomaly
 #: model:ir.model.fields,field_description:alc_customer_audit.field_res_users__has_anomaly
+#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner__has_anomaly
 msgid "Has Anomaly"
 msgstr ""
 
 #. module: alc_customer_audit
 #: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner__no_pharmacist
 #: model:ir.model.fields,field_description:alc_customer_audit.field_res_users__no_pharmacist
+#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner__no_pharmacist
 msgid "No Pharmacist"
 msgstr ""
 
 #. module: alc_customer_audit
 #: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner__no_release_channel
 #: model:ir.model.fields,field_description:alc_customer_audit.field_res_users__no_release_channel
+#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner__no_release_channel
 msgid "No Release Channel"
 msgstr ""
 

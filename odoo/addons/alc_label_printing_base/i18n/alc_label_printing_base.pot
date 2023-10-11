@@ -58,6 +58,7 @@ msgstr ""
 #. module: alc_label_printing_base
 #: model:ir.model.fields,field_description:alc_label_printing_base.field_res_partner__is_price_on_labels
 #: model:ir.model.fields,field_description:alc_label_printing_base.field_res_users__is_price_on_labels
+#: model:ir.model.fields,field_description:alc_label_printing_base.field_shopinvader_partner__is_price_on_labels
 msgid "Display price on labels"
 msgstr ""
 

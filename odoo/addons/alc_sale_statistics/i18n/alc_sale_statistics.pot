@@ -26,6 +26,7 @@ msgstr ""
 #. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_res_partner__ask_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_res_users__ask_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_shopinvader_partner__ask_sale_statistics
 msgid "Ask for sale statistics "
 msgstr ""
 

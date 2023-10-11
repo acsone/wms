@@ -21,5 +21,6 @@ msgstr ""
 #. module: alc_partner_master
 #: model:ir.model.fields,field_description:alc_partner_master.field_res_partner__master_partner_id
 #: model:ir.model.fields,field_description:alc_partner_master.field_res_users__master_partner_id
+#: model:ir.model.fields,field_description:alc_partner_master.field_shopinvader_partner__master_partner_id
 msgid "Customer master"
 msgstr ""

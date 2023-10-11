@@ -65,6 +65,7 @@ msgstr ""
 #: code:addons/alc_product_label_printing/models/stock_picking.py:0
 #: model:ir.model.fields,help:alc_product_label_printing.field_res_partner__no_labels_products
 #: model:ir.model.fields,help:alc_product_label_printing.field_res_users__no_labels_products
+#: model:ir.model.fields,help:alc_product_label_printing.field_shopinvader_partner__no_labels_products
 #, python-format
 msgid "Customer does not need product labels"
 msgstr ""
@@ -72,6 +73,7 @@ msgstr ""
 #. module: alc_product_label_printing
 #: model:ir.model.fields,help:alc_product_label_printing.field_res_partner__no_labels_food_products
 #: model:ir.model.fields,help:alc_product_label_printing.field_res_users__no_labels_food_products
+#: model:ir.model.fields,help:alc_product_label_printing.field_shopinvader_partner__no_labels_food_products
 msgid "Customer does not need product labels."
 msgstr ""
 
@@ -83,12 +85,14 @@ msgstr ""
 #. module: alc_product_label_printing
 #: model:ir.model.fields,field_description:alc_product_label_printing.field_res_partner__no_labels_food_products
 #: model:ir.model.fields,field_description:alc_product_label_printing.field_res_users__no_labels_food_products
+#: model:ir.model.fields,field_description:alc_product_label_printing.field_shopinvader_partner__no_labels_food_products
 msgid "Do not print food product labels"
 msgstr ""
 
 #. module: alc_product_label_printing
 #: model:ir.model.fields,field_description:alc_product_label_printing.field_res_partner__no_labels_products
 #: model:ir.model.fields,field_description:alc_product_label_printing.field_res_users__no_labels_products
+#: model:ir.model.fields,field_description:alc_product_label_printing.field_shopinvader_partner__no_labels_products
 msgid "Do not print product labels"
 msgstr ""
 

@@ -16,12 +16,14 @@ msgstr ""
 #. module: alc_sale_auto_cancel_unavailable_qty
 #: model:ir.model.fields,field_description:alc_sale_auto_cancel_unavailable_qty.field_res_partner__auto_cancel_unavailable_qty_sold
 #: model:ir.model.fields,field_description:alc_sale_auto_cancel_unavailable_qty.field_res_users__auto_cancel_unavailable_qty_sold
+#: model:ir.model.fields,field_description:alc_sale_auto_cancel_unavailable_qty.field_shopinvader_partner__auto_cancel_unavailable_qty_sold
 msgid "Auto-cancel Unavailable Quantity"
 msgstr ""
 
 #. module: alc_sale_auto_cancel_unavailable_qty
 #: model:ir.model.fields,help:alc_sale_auto_cancel_unavailable_qty.field_res_partner__auto_cancel_unavailable_qty_sold
 #: model:ir.model.fields,help:alc_sale_auto_cancel_unavailable_qty.field_res_users__auto_cancel_unavailable_qty_sold
+#: model:ir.model.fields,help:alc_sale_auto_cancel_unavailable_qty.field_shopinvader_partner__auto_cancel_unavailable_qty_sold
 msgid ""
 "Automatically cancel unavailable ordered quantity to avoid the generation of backorders.\n"
 "In other words it will ship only immediately usable quantity."

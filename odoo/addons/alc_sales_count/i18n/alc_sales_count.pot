@@ -38,6 +38,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_sales_count.field_product_template__sale_lines_count
 #: model:ir.model.fields,field_description:alc_sales_count.field_res_partner__sale_lines_count
 #: model:ir.model.fields,field_description:alc_sales_count.field_res_users__sale_lines_count
+#: model:ir.model.fields,field_description:alc_sales_count.field_shopinvader_partner__sale_lines_count
 msgid "Sale Lines Count"
 msgstr ""
 

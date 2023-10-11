@@ -21,11 +21,13 @@ msgstr ""
 #. module: alc_partner_veterinary
 #: model:ir.model.fields,field_description:alc_partner_veterinary.field_res_partner__vet_depot_number
 #: model:ir.model.fields,field_description:alc_partner_veterinary.field_res_users__vet_depot_number
+#: model:ir.model.fields,field_description:alc_partner_veterinary.field_shopinvader_partner__vet_depot_number
 msgid "Depot number"
 msgstr ""
 
 #. module: alc_partner_veterinary
 #: model:ir.model.fields,field_description:alc_partner_veterinary.field_res_partner__vet_subscription_number
 #: model:ir.model.fields,field_description:alc_partner_veterinary.field_res_users__vet_subscription_number
+#: model:ir.model.fields,field_description:alc_partner_veterinary.field_shopinvader_partner__vet_subscription_number
 msgid "Subscription number"
 msgstr ""

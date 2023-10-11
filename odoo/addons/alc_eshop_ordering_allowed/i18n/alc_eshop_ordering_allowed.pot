@@ -21,6 +21,7 @@ msgstr ""
 #. module: alc_eshop_ordering_allowed
 #: model:ir.model.fields,field_description:alc_eshop_ordering_allowed.field_res_partner__eshop_ordering_allowed
 #: model:ir.model.fields,field_description:alc_eshop_ordering_allowed.field_res_users__eshop_ordering_allowed
+#: model:ir.model.fields,field_description:alc_eshop_ordering_allowed.field_shopinvader_partner__eshop_ordering_allowed
 msgid "Eshop Ordering Allowed"
 msgstr ""
 
@@ -32,5 +33,6 @@ msgstr ""
 #. module: alc_eshop_ordering_allowed
 #: model:ir.model.fields,help:alc_eshop_ordering_allowed.field_res_partner__eshop_ordering_allowed
 #: model:ir.model.fields,help:alc_eshop_ordering_allowed.field_res_users__eshop_ordering_allowed
+#: model:ir.model.fields,help:alc_eshop_ordering_allowed.field_shopinvader_partner__eshop_ordering_allowed
 msgid "If not set, this partner is not allowed to pass an order on the eshop."
 msgstr ""
