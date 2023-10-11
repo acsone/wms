@@ -13,5 +13,4 @@ if uninstall_names:
     modules = env["ir.module.module"].search(
         [("name", "in", uninstall_names), ("state", "=", "installed")]
     )
-    for module in modules:
-        module.button_immediate_uninstall()
+    modules.button_immediate_uninstall()
