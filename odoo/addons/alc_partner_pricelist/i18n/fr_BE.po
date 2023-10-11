@@ -19,6 +19,7 @@ msgstr ""
 #. module: alc_partner_pricelist
 #: model:ir.model.fields,field_description:alc_partner_pricelist.field_res_partner__discount_pricelist_ids
 #: model:ir.model.fields,field_description:alc_partner_pricelist.field_res_users__discount_pricelist_ids
+#: model:ir.model.fields,field_description:alc_partner_pricelist.field_shopinvader_partner__discount_pricelist_ids
 msgid "Alcyon Discount Pricelist"
 msgstr "Liste Remises Alcyon"
 
@@ -30,5 +31,6 @@ msgstr "Contact"
 #. module: alc_partner_pricelist
 #: model:ir.model.fields,field_description:alc_partner_pricelist.field_res_partner__supplier_promotion_sale_allowed
 #: model:ir.model.fields,field_description:alc_partner_pricelist.field_res_users__supplier_promotion_sale_allowed
+#: model:ir.model.fields,field_description:alc_partner_pricelist.field_shopinvader_partner__supplier_promotion_sale_allowed
 msgid "Supplier promotion allowed on sale"
 msgstr "Droit à la promotion fournisseur pour les ventes"
