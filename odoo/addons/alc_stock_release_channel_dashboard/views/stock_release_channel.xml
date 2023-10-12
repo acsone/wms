@@ -201,7 +201,20 @@
                     name="action_print"
                     type="object"
                     icon="fa-print"
-                  >Print</a>
+                  >Print SA</a><br t-if="record.is_action_print_allowed.raw_value" />
+                                    <a
+                    t-if="record.is_action_print_allowed.raw_value"
+                    name="print_all_deliveryslip"
+                    type="object"
+                    icon="fa-print"
+                  >Print DS</a>
+                <br t-if="record.is_action_print_allowed.raw_value" />
+                <a
+                    t-if="record.is_action_print_allowed.raw_value"
+                    name="action_sleep"
+                    type="object"
+                    icon="fa-bed"
+                  >Sleep</a>
                                 </div>
                                 <div class="col-6">
                                 <!-- stats-->
