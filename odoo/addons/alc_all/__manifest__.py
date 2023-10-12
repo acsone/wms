@@ -41,6 +41,7 @@
         # Configuration modules
         "alc_stock_available_immediately_loss",
         "stock_scrap_location_default",
+        "alc_partner_holidays",
         "alc_partner_message_subscribe",
         "alc_partner_name",
         "alc_app_data",

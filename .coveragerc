@@ -131,7 +131,6 @@ omit =
     odoo/addons/l10n_be_vat/*
     odoo/addons/paginated_service_mixin/*
     odoo/addons/partner_archive_new_partner/*
-    odoo/addons/partner_schedule/*
     odoo/addons/price_compute/*
     odoo/addons/shopinvader_assortment_bind/*
     odoo/addons/shopinvader_search_engine_export/*
