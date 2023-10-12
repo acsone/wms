@@ -14,4 +14,9 @@
     "data": ["views/stock_picking_views.xml"],
     "installable": True,
     "license": "Other proprietary",
+    "assets": {
+        "web.assets_backend": [
+            "alce_stock_barcode/static/src/js/*",
+        ],
+    },
 }

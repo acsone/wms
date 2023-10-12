@@ -12,6 +12,6 @@ class StockPicking(stock_picking.StockPicking):
 
     def on_barcode_scanned(self, barcode):
         # Avoid bad code popup after the button barcode has been treated
-        if barcode.startswith("O-BTN."):
+        if barcode.startswith("O-BTN.") or barcode.startswith("O-CMD."):
             return None
         return super().on_barcode_scanned(barcode)

@@ -21,6 +21,13 @@
             <xpath expr="//button[@name='button_scrap']" position="attributes">
                 <attribute name="barcode_trigger">button_scrap</attribute>
             </xpath>
+              <xpath expr="//button[@name='button_scrap']" position="after">
+                <button
+          name="%(stock_barcode.stock_barcode_action_main_menu)d"
+          type="action"
+          class="goto-barcode-app"
+        />
+            </xpath>
         </field>
     </record>
 
