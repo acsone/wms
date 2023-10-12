@@ -60,4 +60,9 @@
     name="set_param"
     eval="('alc_sale_processing_finalizer.send_email', True)"
   />
+  <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('stock_release_channel_process_end_time.stock_release_use_channel_end_date', True)"
+  />
 </odoo>
