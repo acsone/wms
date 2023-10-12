@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-13 11:48+0000\n"
+"POT-Creation-Date: 2023-10-12 06:18+0000\n"
 "PO-Revision-Date: 2020-01-13 11:48+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -17,22 +17,27 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_partner_holidays
-#: model:ir.model.fields,field_description:alc_partner_holidays.field_alc_partner_holidaysd_week_create_uid
+#: model:ir.model,name:alc_partner_holidays.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__create_uid
 msgid "Created by"
 msgstr "Créé par"
 
 #. module: alc_partner_holidays
-#: model:ir.model.fields,field_description:alc_partner_holidays.field_alc_partner_holidaysd_week_create_date
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__create_date
 msgid "Created on"
 msgstr "Créé le"
 
 #. module: alc_partner_holidays
-#: model:ir.model.fields,field_description:alc_partner_holidays.field_alc_partner_holidaysd_week_display_name
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: alc_partner_holidays
-#: model:ir.model.fields,field_description:alc_partner_holidays.field_alc_partner_holidaysd_week_end_date
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__end_date
 msgid "End date"
 msgstr "Date de fin"
 
@@ -42,54 +47,56 @@ msgid "Holidays"
 msgstr "Vacances"
 
 #. module: alc_partner_holidays
-#: model:ir.model.fields,field_description:alc_partner_holidays.field_alc_partner_holidaysd_week_id
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__id
 msgid "ID"
 msgstr "ID"
 
 #. module: alc_partner_holidays
-#: model:ir.model.fields,field_description:alc_partner_holidays.field_alc_partner_holidaysd_week_name
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__name
 msgid "Label"
 msgstr "Libellé"
 
 #. module: alc_partner_holidays
-#: model:ir.model.fields,field_description:alc_partner_holidays.field_alc_partner_holidaysd_week___last_update
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week____last_update
 msgid "Last Modified on"
 msgstr "Dernière Modification le"
 
 #. module: alc_partner_holidays
-#: model:ir.model.fields,field_description:alc_partner_holidays.field_alc_partner_holidaysd_week_write_uid
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__write_uid
 msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
 
 #. module: alc_partner_holidays
-#: model:ir.model.fields,field_description:alc_partner_holidays.field_alc_partner_holidaysd_week_write_date
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: alc_partner_holidays
-#: model:ir.model,name:alc_partner_holidays.model_res_partner
-#: model:ir.model.fields,field_description:alc_partner_holidays.field_alc_partner_holidaysd_week_partner_id
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__partner_id
 msgid "Partner"
 msgstr "Partenaire"
 
 #. module: alc_partner_holidays
-#: model:ir.model.fields,field_description:alc_partner_holidays.field_res_partner_working_schedules_ids
-#: model:ir.model.fields,field_description:alc_partner_holidays.field_res_users_working_schedules_ids
-msgid "Partner Schedule"
-msgstr "Calendrier des partenaires"
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_res_partner__working_schedules_ids
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_res_users__working_schedules_ids
+#, fuzzy
+#| msgid "Partners working days"
+msgid "Partner Holidays"
+msgstr "Jours ouvrés du partenaire"
 
 #. module: alc_partner_holidays
-#: model:ir.model,name:alc_partner_holidays.model_alc_partner_holidaysd_week
+#: model:ir.model,name:alc_partner_holidays.model_partner_scheduled_week
 msgid "Partner non working days"
 msgstr "Jours fériés du partenaire"
 
 #. module: alc_partner_holidays
-#: model:ir.model.fields,field_description:alc_partner_holidays.field_alc_partner_holidaysd_week_start_date
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__start_date
 msgid "Start date"
 msgstr "Date de début"
 
 #. module: alc_partner_holidays
-#: code:addons/alc_partner_holidays/models/partner_working_schedule.py:28
+#. odoo-python
+#: code:addons/alc_partner_holidays/models/partner_working_schedule.py:0
 #, python-format
 msgid "The end date of a schedule must be after the start date or empty"
 msgstr ""
@@ -97,15 +104,20 @@ msgstr ""
 "vide"
 
 #. module: alc_partner_holidays
-#: model:ir.model.fields,help:alc_partner_holidays.field_alc_partner_holidaysd_week_start_date
+#: model:ir.model.fields,help:alc_partner_holidays.field_partner_scheduled_week__start_date
 msgid "To mark only one day set same date as start and end date"
 msgstr ""
 
 #. module: alc_partner_holidays
-#: code:addons/alc_partner_holidays/models/partner_working_schedule.py:52
-#, python-format
-msgid "You cannot have 2 schedules that overlap!."
+#. odoo-python
+#: code:addons/alc_partner_holidays/models/partner_working_schedule.py:0
+#, fuzzy, python-format
+#| msgid "You cannot have 2 schedules that overlap!."
+msgid "You cannot have 2 schedules that overlap!"
 msgstr "Vous ne pouvez pas avoir 2 horaires qui se chevauchent!."
+
+#~ msgid "Partner Schedule"
+#~ msgstr "Calendrier des partenaires"
 
 #~ msgid "Closing delivery dates"
 #~ msgstr "Dates de livraison de clôture"
@@ -118,6 +130,3 @@ msgstr "Vous ne pouvez pas avoir 2 horaires qui se chevauchent!."
 
 #~ msgid "Partner Scheduled Days"
 #~ msgstr "Planning de fermeture"
-
-#~ msgid "Partners working days"
-#~ msgstr "Jours ouvrés du partenaire"
