@@ -1,9 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2019 Iryna Vyshnevska (Camptocamp)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+
+from odoo.addons.base.models.res_partner import Partner
 
 
 class PartnerManagedDays(models.Model):
@@ -18,7 +19,7 @@ class PartnerManagedDays(models.Model):
         help="To mark only one day set same date as start and end date",
     )
     end_date = fields.Date(string="End date", required="True")
-    partner_id = fields.Many2one("res.partner", string="Partner", required="True")
+    partner_id = fields.Many2one[Partner](string="Partner", required="True")
 
     @api.constrains("start_date", "end_date")
     def _check_closing_date(self):
@@ -49,4 +50,4 @@ class PartnerManagedDays(models.Model):
                 ),
             )
             if any(self.env.cr.fetchall()):
-                raise ValidationError(_("You cannot have 2 schedules that overlap!."))
+                raise ValidationError(_("You cannot have 2 schedules that overlap!"))

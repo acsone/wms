@@ -1,0 +1,111 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_partner_holidays
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-12 06:18+0000\n"
+"PO-Revision-Date: 2023-10-12 06:18+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_partner_holidays
+#: model:ir.model,name:alc_partner_holidays.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__end_date
+msgid "End date"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model_terms:ir.ui.view,arch_db:alc_partner_holidays.view_partner_form
+msgid "Holidays"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__id
+msgid "ID"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__name
+msgid "Label"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_res_partner__working_schedules_ids
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_res_users__working_schedules_ids
+msgid "Partner Holidays"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model:ir.model,name:alc_partner_holidays.model_partner_scheduled_week
+msgid "Partner non working days"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_partner_scheduled_week__start_date
+msgid "Start date"
+msgstr ""
+
+#. module: alc_partner_holidays
+#. odoo-python
+#: code:addons/alc_partner_holidays/models/partner_working_schedule.py:0
+#, python-format
+msgid "The end date of a schedule must be after the start date or empty"
+msgstr ""
+
+#. module: alc_partner_holidays
+#: model:ir.model.fields,help:alc_partner_holidays.field_partner_scheduled_week__start_date
+msgid "To mark only one day set same date as start and end date"
+msgstr ""
+
+#. module: alc_partner_holidays
+#. odoo-python
+#: code:addons/alc_partner_holidays/models/partner_working_schedule.py:0
+#, python-format
+msgid "You cannot have 2 schedules that overlap!"
+msgstr ""
