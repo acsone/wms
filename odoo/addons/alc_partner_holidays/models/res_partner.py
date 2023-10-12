@@ -1,5 +1,6 @@
 # Copyright 2019 Iryna Vyshnevska (Camptocamp)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+from datetime import date, datetime
 
 from odoo import fields
 
@@ -15,7 +16,7 @@ class ResPartner(Partner):
         string="Partner Holidays",
     )
 
-    def is_shipping_date_allowed(self, day: fields.Date) -> bool:
+    def is_shipping_date_allowed(self, day: date | datetime) -> bool:
         """
         This is the method to call on a partner to check if it's not closed.
 
@@ -27,8 +28,10 @@ class ResPartner(Partner):
         if not self:
             return True
         self.ensure_one()
+        day_date = fields.Date.to_date(day)
         return not bool(
             self.working_schedules_ids.filtered(
-                lambda l: l.start_date <= day and (l.end_date >= day or not l.end_date)
+                lambda l: l.start_date <= day_date
+                and (l.end_date >= day_date or not l.end_date)
             )
         )
