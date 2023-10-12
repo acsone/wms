@@ -12,7 +12,7 @@
         "alc_b2c_partner",
         "alc_partner_veterinary",
         "base_report_to_printer",  # OCA/report-print-send.git
-        "specific_report",
+        # removed by refactoring "specific_report",
         "specific_product",
         "stock",
     ],
