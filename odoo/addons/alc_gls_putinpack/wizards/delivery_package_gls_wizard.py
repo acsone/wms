@@ -168,4 +168,4 @@ class DeliveryPackageGlsWizard(models.TransientModel):
                     package = env["stock.quant.package"].browse(package_id)
                     package.write(vals)
 
-        return self.picking_id.gls_send_shipping_package(self.package_id)
+        return self.picking_id.gls_send_shipping_package(self.package_id.sudo())
