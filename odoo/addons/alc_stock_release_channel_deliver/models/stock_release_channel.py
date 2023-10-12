@@ -96,6 +96,20 @@ class StockReleaseChannel(StockReleaseChannelBase):
                         pickings=", ".join(started_pickings.mapped("name")),
                     )
                 )
+            shipping_to_unrelease = self._shipping_to_unrelease()
+            shipping_unrelease_not_allowed = shipping_to_unrelease.move_ids.filtered(
+                lambda m: not m.unrelease_allowed
+            ).picking_id
+            if shipping_unrelease_not_allowed:
+                raise UserError(
+                    _(
+                        "There are some preparations that have not been completed."
+                        "If you choose to proceed, these preparations need to be unreleased.\n"
+                        "Please handle them manually before proceeding with the delivery."
+                        "\n\n%(name)s.",
+                        name=", ".join(shipping_unrelease_not_allowed.mapped("name")),
+                    )
+                )
             if not rec.is_action_delivering_allowed:
                 raise UserError(
                     _(
@@ -124,13 +138,36 @@ class StockReleaseChannel(StockReleaseChannelBase):
                     )
                 )
 
+    def _shipping_to_unrelease(self):
+        self.ensure_one()
+        return self.env["stock.picking"].search(
+            [
+                ("picking_type_code", "=", "outgoing"),
+                ("release_channel_id", "=", self.id),
+                ("state", "not in", ("assigned", "canceled", "done")),
+                ("need_release", "=", False),
+            ]
+        )
+
     def action_delivering(self):
+        self.ensure_one()
         self._check_is_action_delivering_allowed()
+        shipping_to_unrelease = self._shipping_to_unrelease()
+        if shipping_to_unrelease:
+            return {
+                "name": _("Confirm delivery"),
+                "type": "ir.actions.act_window",
+                "view_type": "form",
+                "view_mode": "form",
+                "res_model": "stock.release.channel.deliver.check.wizard",
+                "target": "new",
+                "context": {"default_release_channel_id": self.id, **self.env.context},
+            }
         self.write({"state": "delivering"})
-        for rec in self:
-            rec.with_delay(
-                description=_("Delivering release channel %(name)s.", name=rec.name)
-            )._action_deliver()
+        self.with_delay(
+            description=_("Delivering release channel %(name)s.", name=self.name)
+        )._action_deliver()
+        return {}
 
     def action_delivering_error(self):
         self._check_is_action_delivering_error_allowed()
@@ -202,3 +239,6 @@ class StockReleaseChannel(StockReleaseChannelBase):
                 rec.is_action_sleep_allowed or rec.state == "delivered"
             )
         return res
+
+    def unrelease_picking(self):
+        self._shipping_to_unrelease().move_ids.filtered("unrelease_allowed").unrelease()

@@ -21,7 +21,7 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
 
     def test_01(self):
         """Shipemnt advices are creared and automatically processed."""
-
+        self._do_internal_pickings()
         with trap_jobs() as trap_rc:
             self.channel.action_delivering()
             self.assertEqual(self.channel.state, "delivering")
@@ -54,6 +54,7 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
 
         is notified and the error is logged
         """
+        self._do_internal_pickings()
         self.channel.dock_id = False
         with trap_jobs() as trap_rc:
             self.channel.action_delivering()
@@ -80,6 +81,7 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
 
     def test_04(self):
         """No picking to deliver, an error should be raised."""
+        self._do_internal_pickings()
         self.pickings.write({"release_channel_id": False})
         with self.assertRaises(
             UserError, msg="No picking to deliver for channel Default"
@@ -109,6 +111,7 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
         - the backorder should not be assigned to the shipment advice
         """
         channel = self.channel.copy({"name": "channel 2"})
+        self._do_internal_pickings()
         self._update_qty_in_location(self.output_loc, self.product2, 10)
         self.pickings.do_unreserve()
         self.pickings.action_assign()
@@ -119,9 +122,53 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
 
     def test_07(self):
         """Deliver is not allowed if one of the pickings is started."""
+        self._do_internal_pickings()
         self.picking.action_start()
         with self.assertRaises(
             UserError,
             msg="One of the pickings to deliver for channel Default is started.",
+        ):
+            self.channel.action_delivering()
+
+    def test_08(self):
+        """Deliver is allowed by a user confirmation if one of the released picking.
+
+        is not done. the undone picking will be unreleased
+        """
+        self._do_picking(self.internal_pickings[0])
+        self._do_picking(self.internal_pickings[1])
+        not_done_picking = self.internal_pickings.filtered(
+            lambda p: p.state == "assigned"
+        )
+        res = self.channel.action_delivering()
+        self.assertIsInstance(res, dict)
+        wizard = (
+            self.env[res.get("res_model")].with_context(**res.get("context")).create({})
+        )
+        with trap_jobs() as trap_rc:
+            wizard.action_deliver()
+            self.assertEqual(self.channel.state, "delivering")
+            trap_rc.assert_enqueued_job(self.channel._action_deliver)
+            with trap_jobs() as trap_sa:
+                trap_rc.perform_enqueued_jobs()
+                shipment_advice = self.channel.shipment_advice_ids
+                trap_sa.assert_enqueued_job(shipment_advice._auto_process)
+                trap_sa.perform_enqueued_jobs()
+        self.assertEqual(self.channel.state, "delivered")
+        self.assertEqual(not_done_picking.state, "cancel")
+
+    def test_09(self):
+        """Deliver is not allowed if one of the released picking is not done and the unrelease is not possible."""
+        self._do_picking(self.internal_pickings[0])
+        self._do_picking(self.internal_pickings[1])
+        not_done_picking = self.internal_pickings.filtered(
+            lambda p: p.state == "assigned"
+        )
+        not_done_picking.move_ids[0].product_uom_qty = 4
+        with self.assertRaises(
+            UserError,
+            msg="There are some preparations that have not been completed."
+            "If you choose to proceed, these preparations need to be unreleased."
+            " Please handle them manually before proceeding with the delivery.",
         ):
             self.channel.action_delivering()

@@ -17,8 +17,12 @@
         "web_notify",
         "stock_release_channel_process_end_time",
         "stock_picking_start",
+        "stock_available_to_promise_release",
+        "stock_release_channel_propagate_channel_picking",
     ],
     "data": [
+        "security/stock_release_channel_deliver_check_wizard.xml",
+        "wizards/stock_release_channel_deliver_check_wizard.xml",
         "data/queue_job_channel.xml",
         "data/queue_job_function.xml",
         "views/stock_release_channel.xml",
