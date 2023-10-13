@@ -61,6 +61,7 @@ msgstr "Nom affiché"
 #. module: alc_label_printing_base
 #: model:ir.model.fields,field_description:alc_label_printing_base.field_res_partner__is_price_on_labels
 #: model:ir.model.fields,field_description:alc_label_printing_base.field_res_users__is_price_on_labels
+#: model:ir.model.fields,field_description:alc_label_printing_base.field_shopinvader_partner__is_price_on_labels
 msgid "Display price on labels"
 msgstr "Afficher le prix sur les étiquettes"
 
@@ -95,11 +96,6 @@ msgstr "Dernière modification par"
 #: model:ir.model.fields,field_description:alc_label_printing_base.field_print_label__write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
-
-#. module: alc_label_printing_base
-#: model:ir.model.fields,field_description:alc_label_printing_base.field_print_label__lot_ids
-msgid "Lots"
-msgstr "Lots"
 
 #. module: alc_label_printing_base
 #. odoo-python
@@ -269,6 +265,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_label_printing_base.view_picking_form
 msgid "🖶Print Packs"
 msgstr "🖶Imprimer colis médicaments"
+
+#~ msgid "Lots"
+#~ msgstr "Lots"
 
 #~ msgid "Invalid model"
 #~ msgstr "Objet non valide"
