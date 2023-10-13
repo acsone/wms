@@ -113,7 +113,12 @@ msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
-msgid "Print"
+msgid "Print DS"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid "Print SA"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
@@ -143,6 +148,11 @@ msgstr ""
 #: code:addons/alc_stock_release_channel_dashboard/models/stock_release_channel.py:0
 #, python-format
 msgid "Shipment advices"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid "Sleep"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
