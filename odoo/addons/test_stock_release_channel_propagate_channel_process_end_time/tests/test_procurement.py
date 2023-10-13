@@ -7,6 +7,10 @@ from odoo.addons.stock_release_channel_propagate_channel_picking.tests.test_proc
 
 class TestReleaseChannelPropagation(TestReleaseChannelProcurement):
     def test_channel_internal_propagation(self):
+        self.env["ir.config_parameter"].sudo().set_param(
+            "stock_release_channel_process_end_time.stock_release_use_channel_end_date",
+            True,
+        )
         pickings_internal = super().test_channel_internal_propagation()
         self.assertEqual(
             pickings_internal.scheduled_date,
