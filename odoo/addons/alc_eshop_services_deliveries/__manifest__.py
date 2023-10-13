@@ -14,7 +14,7 @@
         # "base_jsonify", renamed to jsonifier
         "jsonifier",
         "stock_delivery_note",
-        "specific_report",
+        # removed by refactoring "specific_report",
         "account_tax_one_vat",
         "stock_groupbypartner",  # customer_id
     ],
