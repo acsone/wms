@@ -122,7 +122,12 @@ msgstr "Transferts"
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
-msgid "Print"
+msgid "Print DS"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid "Print SA"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
@@ -156,6 +161,11 @@ msgstr "Avis d'expédition"
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
+msgid "Sleep"
+msgstr "Endormir"
+
+#. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
 msgid "Start/Stop pickings"
 msgstr "Démarrer/Arrêter les transferts"
 
@@ -178,9 +188,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
 msgid "Unlock"
 msgstr "Ouvrir"
-
-#~ msgid "Sleep"
-#~ msgstr "Endormir"
 
 #~ msgid "Wake Up"
 #~ msgstr "Réveiller"
