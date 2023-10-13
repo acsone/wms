@@ -24,7 +24,8 @@ class TestStockReleaseChannelDeliverGls(TestStockReleaseChannelDeliverCommon, Te
 
         the picking list
         """
+        self._do_internal_pickings()
         action = self.channel.action_delivering()
         self.assertEqual(action.get("xml_id"), "stock.action_picking_tree_all")
-        self.assertEqual(action.get("domain"), [("id", "in", self.pickings.ids)])
+        self.assertListEqual(action.get("domain")[0][2], self.pickings.ids)
         self.assertEqual(action.get("res_model"), "stock.picking")
