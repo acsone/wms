@@ -66,9 +66,38 @@ msgid "Automatically process the shipment advice %(name)s."
 msgstr "Traiter automatiquement l'avis d'expédition %(name)s."
 
 #. module: alc_stock_release_channel_deliver
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_deliver.stock_release_channel_deliver_check_wizard_form_view
+msgid "Cancel the deliver"
+msgstr ""
+
+#. module: alc_stock_release_channel_deliver
+#. odoo-python
+#: code:addons/alc_stock_release_channel_deliver/models/stock_release_channel.py:0
+#, python-format
+msgid "Confirm delivery"
+msgstr ""
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel_deliver_check_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel_deliver_check_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_stock_release_channel_deliver
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_deliver.stock_release_channel_form_view
 msgid "Deliver"
 msgstr "Livrer"
+
+#. module: alc_stock_release_channel_deliver
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_deliver.stock_release_channel_deliver_check_wizard_form_view
+#, fuzzy
+#| msgid "Delivering"
+msgid "Deliver any way"
+msgstr "Livraison"
 
 #. module: alc_stock_release_channel_deliver
 #: model:ir.model.fields.selection,name:alc_stock_release_channel_deliver.selection__stock_release_channel__state__delivered
@@ -93,6 +122,16 @@ msgstr "Erreur de livraison"
 #, python-format
 msgid "Delivering release channel %(name)s."
 msgstr "Livraison du canal de livraison %(name)s"
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel_deliver_check_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel_deliver_check_wizard__id
+msgid "ID"
+msgstr ""
 
 #. module: alc_stock_release_channel_deliver
 #: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel__in_process_shipment_advice_ids
@@ -120,6 +159,21 @@ msgid "Is Action Delivering Error Allowed"
 msgstr ""
 
 #. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel_deliver_check_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel_deliver_check_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel_deliver_check_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: alc_stock_release_channel_deliver
 #. odoo-python
 #: code:addons/alc_stock_release_channel_deliver/models/stock_release_channel.py:0
 #, python-format
@@ -141,6 +195,13 @@ msgstr ""
 "%(pickings)s"
 
 #. module: alc_stock_release_channel_deliver
+#: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel_deliver_check_wizard__release_channel_id
+#, fuzzy
+#| msgid "Stock Release Channels"
+msgid "Release Channel"
+msgstr "Canaux de livraison"
+
+#. module: alc_stock_release_channel_deliver
 #: model:ir.model,name:alc_stock_release_channel_deliver.model_shipment_advice
 msgid "Shipment Advice"
 msgstr "Conseil d'expédition"
@@ -149,6 +210,13 @@ msgstr "Conseil d'expédition"
 #: model:ir.model.fields,field_description:alc_stock_release_channel_deliver.field_stock_release_channel__state
 msgid "State"
 msgstr "État"
+
+#. module: alc_stock_release_channel_deliver
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_deliver.stock_release_channel_deliver_check_wizard_form_view
+#, fuzzy
+#| msgid "Stock Release Channels"
+msgid "Stock Release Channel Deliver Check"
+msgstr "Canaux de livraison"
 
 #. module: alc_stock_release_channel_deliver
 #: model:ir.model,name:alc_stock_release_channel_deliver.model_stock_release_channel
@@ -199,6 +267,32 @@ msgstr ""
 "livraison.\n"
 
 #. module: alc_stock_release_channel_deliver
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_deliver.stock_release_channel_deliver_check_wizard_form_view
+msgid ""
+"There are some preparations that have not been completed.\n"
+"                    If you choose to proceed, these preparations will be "
+"unreleased.<br/>\n"
+"                    Are you sure you want to proceed with the delivery?"
+msgstr ""
+
+#. module: alc_stock_release_channel_deliver
+#. odoo-python
+#: code:addons/alc_stock_release_channel_deliver/models/stock_release_channel.py:0
+#, python-format
+msgid ""
+"There are some preparations that have not been completed.If you choose to "
+"proceed, these preparations need to be unreleased.\n"
+"Please handle them manually before proceeding with the delivery.\n"
+"\n"
+"%(name)s."
+msgstr ""
+
+#. module: alc_stock_release_channel_deliver
 #: model:ir.model,name:alc_stock_release_channel_deliver.model_stock_picking
 msgid "Transfer"
+msgstr ""
+
+#. module: alc_stock_release_channel_deliver
+#: model:ir.model,name:alc_stock_release_channel_deliver.model_stock_release_channel_deliver_check_wizard
+msgid "stock release channel deliver check wizard"
 msgstr ""
