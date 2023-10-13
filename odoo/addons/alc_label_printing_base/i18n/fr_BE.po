@@ -98,11 +98,23 @@ msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: alc_label_printing_base
+#: model:ir.model.fields,field_description:alc_label_printing_base.field_print_label__lot_ids
+msgid "Lots"
+msgstr "Lots"
+
+#. module: alc_label_printing_base
 #. odoo-python
 #: code:addons/alc_label_printing_base/models/stock_picking.py:0
 #, python-format
 msgid "No destination partner defined"
-msgstr "Aucun partneaire de destination défini"
+msgstr "Aucun partenaire de destination défini"
+
+#. module: alc_label_printing_base
+#. odoo-python
+#: code:addons/alc_label_printing_base/models/stock_picking.py:0
+#, python-format
+msgid "No package in this picking"
+msgstr "Aucun colis dans ce transfert"
 
 #. module: alc_label_printing_base
 #: model:ir.model.fields.selection,name:alc_label_printing_base.selection__print_label__label_type__package
