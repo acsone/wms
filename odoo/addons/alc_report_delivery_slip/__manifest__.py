@@ -13,6 +13,7 @@
         "delivery",
         "shipment_advice",
         "alc_report_base",
+        "alc_b2c_partner",
         "alc_sale_consignment",
         "alc_sale_suite_name",
         "alc_partner_suite",
