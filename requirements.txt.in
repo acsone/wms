@@ -261,7 +261,8 @@ odoo-addon-rest-log @ git+https://github.com/OCA/rest-framework.git@refs/pull/35
 fastapi @ git+https://github.com/tiangolo/fastapi@refs/pull/5452/head
 
 # OCA/storage
-odoo-addon-fs-file @ git+https://github.com/OCA/storage@refs/pull/288/head#subdirectory=setup/fs_file
+odoo-addon-fs-attachment @ git+https://github.com/OCA/storage@refs/pull/289/head#subdirectory=setup/fs_attachment
+odoo-addon-fs-storage @ git+https://github.com/OCA/storage@refs/pull/289/head#subdirectory=setup/fs_storage
 
 checklog-odoo @ git+https://github.com/acsone/checklog-odoo@master#subdirectory=checklog-odoo
 
