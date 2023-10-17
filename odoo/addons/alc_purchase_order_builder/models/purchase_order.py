@@ -212,7 +212,7 @@ class PurchaseOrder(PurchaseOrderBase):
         self.env["purchase.order.line"].create(
             {
                 "product_id": vals.get("product_id"),
-                "partner_id": self.partner_id,
+                "partner_id": self.partner_id.id,
                 "order_id": vals.get("order_id"),
             }
         )
