@@ -371,10 +371,10 @@ class StockPicking(stock_picking.StockPicking):
 
         lines = self.mapped("move_ids").filtered(
             lambda line: line.state == "done"
+            and line.product_id.id in all_products.ids
             and (
                 line.product_id.categ_id.has_for_parent(categ_vet)
                 or line.product_id.categ_id.has_for_parent(categ_import)
-                or line.product_id.id in all_products.ids
             )
         )
 

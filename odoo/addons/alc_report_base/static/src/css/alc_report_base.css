@@ -138,8 +138,8 @@ div.page div.row span.partner_inline address > div {
   top: 70px;
   width: 420px;
   height: 160px;
-  font-size: 1.3em;
-  line-height: 1.3;
+  font-size: 1.2em;
+  line-height: 1.1;
 }
 
 #partner_header_entry {
@@ -147,16 +147,16 @@ div.page div.row span.partner_inline address > div {
   left: 460px;
   width: 420px;
   height: 160px;
-  font-size: 1.3em;
-  line-height: 1.3;
+  font-size: 1.2em;
+  line-height: 1.1;
 }
 
 #document_reference td,
 #invoice_reference td,
 #invoice_reference_entry td {
-  padding: 5px;
+  padding: 4px;
   text-align: center;
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 #products_table,
@@ -205,7 +205,6 @@ div.page div.row span.partner_inline address > div {
 #products_table_with_price td,
 #products_table_without_price td,
 #products_table_b2c td {
-  padding: 3px;
   text-align: right;
   padding-right: 1.5mm;
   padding-left: 1.5mm;
@@ -394,4 +393,13 @@ div.page div.row span.partner_inline address > div {
   margin: 10px 10px 0 0;
   font-size: larger;
   page-break-inside: avoid !important;
+}
+
+#delivery_condition p {
+  font-size: 0.9em;
+  line-height: 1;
+}
+
+#product_type_summary {
+  font-size: 0.8em;
 }
