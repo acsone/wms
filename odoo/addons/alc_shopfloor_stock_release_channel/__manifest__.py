@@ -11,6 +11,7 @@
     "depends": [
         "shopfloor_batch_automatic_creation",
         "stock_release_channel",
+        "alc_stock_release_channel_user",
         "alc_stock_release_channel_pick_allowed",
     ],
     "data": ["views/shopfloor_menu.xml"],

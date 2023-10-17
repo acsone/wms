@@ -3,6 +3,8 @@
 
 # pylint: disable=missing-return
 
+from odoo import Command
+
 from odoo.addons.shopfloor.tests.common import CommonCase
 from odoo.addons.stock.models.stock_move import PROCUREMENT_PRIORITIES
 
@@ -127,3 +129,32 @@ class TestBatchCreate(CommonCase):
             shopfloor_menu=self.menu,
         )
         self.assertEqual(batch.picking_ids, released_pickings2)
+
+    def test_05(self):
+        """
+        Restriction to same release channel.
+
+        the channel with user selected is picked first
+        """
+        user_channel = self.channel.sudo().copy(
+            {"name": "channel 2", "user_ids": [Command.set(self.shopfloor_user.ids)]}
+        )
+        self.menu.sudo().restrict_to_same_release_channel = True
+        released_pickings1 = self.picking1 | self.picking3
+        released_pickings1.write({"release_channel_id": self.channel.id})
+        released_pickings2 = self.picking2 | self.picking4
+        released_pickings2.write({"release_channel_id": user_channel.id})
+        batch = self.auto_batch.create_batch(
+            self.picking_type,
+            stock_device_types=self.device,
+            maximum_number_of_preparation_lines=20,
+            shopfloor_menu=self.menu,
+        )
+        self.assertEqual(batch.picking_ids.release_channel_id, user_channel)
+        batch = self.auto_batch.create_batch(
+            self.picking_type,
+            stock_device_types=self.device,
+            maximum_number_of_preparation_lines=20,
+            shopfloor_menu=self.menu,
+        )
+        self.assertEqual(batch.picking_ids.release_channel_id, self.channel)

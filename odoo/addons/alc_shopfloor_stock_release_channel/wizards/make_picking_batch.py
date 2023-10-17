@@ -22,6 +22,8 @@ class MakePickingBatch(MakePickingBatchBase):
             channels = self.env["stock.release.channel"]._get_channels_pick_allowed(
                 self.picking_type_ids
             )
+            if self.user_id and self.env.context.get("restrict_to_user"):
+                channels = channels.filtered(lambda c: self.user_id in c.user_ids)
             if not channels:
                 domain = AND([domain, FALSE_DOMAIN])
             else:
@@ -42,19 +44,17 @@ class MakePickingBatch(MakePickingBatchBase):
         domain = super()._get_picking_domain_for_additional()
         if self.restrict_to_same_release_channel:
             previous_picking = self._previous_selected_picking
-            domain = AND(
-                [
-                    domain,
-                    [
-                        (
-                            "release_channel_id",
-                            "=",
-                            previous_picking.release_channel_id.id,
-                        ),
-                        "|",
-                        ("release_channel_id.user_ids", "=", False),
-                        ("release_channel_id.user_ids", "in", self.user_id.ids),
-                    ],
-                ]
-            )
+            release_channel = previous_picking.release_channel_id
+            domain = AND([domain, [("release_channel_id", "=", release_channel.id)]])
         return domain
+
+    def _get_first_picking(self):
+        """Try at first to get picking from release channels related to the selected user."""
+        if not self.user_id:
+            return super()._get_first_picking()
+        first_picking = super(
+            MakePickingBatch, self.with_context(restrict_to_user=True)
+        )._get_first_picking()
+        if first_picking:
+            return first_picking
+        return super()._get_first_picking()
