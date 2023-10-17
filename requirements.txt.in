@@ -262,7 +262,6 @@ fastapi @ git+https://github.com/tiangolo/fastapi@refs/pull/5452/head
 
 # OCA/storage
 
-
 checklog-odoo @ git+https://github.com/acsone/checklog-odoo@master#subdirectory=checklog-odoo
 
 openupgradelib @ git+https://github.com/acsone/openupgradelib.git@16.0-alc_master

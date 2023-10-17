@@ -36,7 +36,7 @@ class ProductProduct(ProductProductBase):
 
     @api.constrains("active", "is_new", "barcode", "no_barcode_authorized")
     def _check_barcode_is_mandatory(self):
-        if self.env["ir.config_parameter"].get_param(
+        if self.env["ir.config_parameter"].sudo().get_param(
             "product_barcode_required"
         ) and not self.env.context.get("disable_check_barcode_constrains"):
 
