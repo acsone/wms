@@ -119,7 +119,6 @@ exclude = [
   'odoo/addons/alc_eshop_product_category_sequence/*',
   'odoo/addons/alc_eshop_product_domain/*',
   'odoo/addons/alc_eshop_product_expiry/*',
-  'odoo/addons/alc_eshop_product_image_sequence/*',
   'odoo/addons/alc_eshop_product_on_order/*',
   'odoo/addons/alc_eshop_product_promotion_subscription/*',
   'odoo/addons/alc_eshop_product_stock/*',
