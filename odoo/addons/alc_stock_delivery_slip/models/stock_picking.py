@@ -374,7 +374,7 @@ class StockPicking(stock_picking.StockPicking):
             and (
                 line.product_id.categ_id.has_for_parent(categ_vet)
                 or line.product_id.categ_id.has_for_parent(categ_import)
-                or line.product_id in all_products.ids
+                or line.product_id.id in all_products.ids
             )
         )
 

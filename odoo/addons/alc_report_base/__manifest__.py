@@ -17,7 +17,7 @@
     ],
     "assets": {
         "web.report_assets_common": [
-            "/alc_report_base/static/src/css/alc_report_base.css"
+            "alc_report_base/static/src/css/alc_report_base.css",
         ],
     },
     "data": [

@@ -36,8 +36,7 @@
       <div id="partner_header" class="remove_padding_top">
         <div
           t-if="deliveryslip.customer_id != deliveryslip.partner_id"
-          t-field="deliveryslip.customer_id"
-          t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}'
+          t-esc="deliveryslip.customer_id.name"
         />
         <div
           t-field="deliveryslip.partner_id"
@@ -144,7 +143,10 @@
     </div>
   </template>
   <template id="alc_report_delivery_slip.deliveryslip_with_price">
-    <table id="products_table" class="round_table products_table_deliveryslip">
+    <table
+      id="products_table_with_price"
+      class="round_table products_table_deliveryslip"
+    >
       <thead>
         <tr>
           <th rowspan="2">Product<br />reference</th>
@@ -359,7 +361,7 @@
     </table>
   </template>
   <template id="alc_report_delivery_slip.deliveryslip_b2c_customer">
-    <table id="products_table" class="round_table products_table_deliveryslip">
+    <table id="products_table_b2c" class="round_table products_table_deliveryslip">
       <thead>
         <tr>
           <th rowspan="2">Product<br />reference</th>
@@ -507,7 +509,10 @@
     </table>
   </template>
   <template id="alc_report_delivery_slip.deliveryslip_without_price">
-    <table id="products_table" class="round_table products_table_deliveryslip">
+    <table
+      id="products_table_without_price"
+      class="round_table products_table_deliveryslip"
+    >
       <thead>
         <tr>
           <th rowspan="2" t-if="partner.show_deliveryslip_cnk">CNK</th>
@@ -670,8 +675,8 @@
   </template>
   <template id="report_deliveryslip_entry_register_body">
     <div class="page">
-      <div id="left_header" class="remove_padding_top">
-        <table id="invoice_reference" class="border_table round_table">
+      <div id="left_header_entry" class="remove_padding_top">
+        <table id="invoice_reference_entry" class="border_table round_table">
           <tr>
             <td>
               <span>Customer</span>
@@ -702,13 +707,16 @@
           </tr>
         </table>
       </div>
-      <div id="partner_header" class="remove_padding_top">
+      <div id="partner_header_entry" class="remove_padding_top">
         <div
           t-field="deliveryslip.partner_id"
           t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'
         />
       </div>
-      <table id="products_table" class="round_table products_table_entry_register">
+      <table
+        id="products_table_entry"
+        class="round_table products_table_entry_register"
+      >
         <thead>
           <tr>
             <th rowspan="2">Product<br />reference</th>
@@ -825,43 +833,40 @@
     </div>
   </template>
   <template id="alc_report_delivery_slip.alcyon_report_deliveryslip">
-    <t t-call="web.html_container">
-      <t t-set="company" t-value="res_company" />
-      <t t-set="partner" t-value="deliveryslip.partner_id" />
-      <div class="header">
-        <div>
-          <div class="logo">
-            <img
-              t-if="company.logo"
-              t-att-src="'data:image/png;base64,%s' % company.logo"
-              style="max-height: 70px;"
-            />
-          </div>
-          <div class="main_title">
-            <t t-if="deliveryslip.picking_type_code=='outgoing'">Delivery slip</t>
-            <t t-if="deliveryslip.picking_type_code=='incoming'">Goods return note</t>
-          </div>
+   <t t-set="company" t-value="res_company" />
+    <t t-set="partner" t-value="deliveryslip.partner_id" />
+    <div class="header">
+        <div class="logo">
+          <img
+          t-if="company.logo"
+          t-att-src="image_data_uri(company.logo)"
+          style="max-height: 70px;"
+          alt="Logo"
+        />
         </div>
-      </div>
-      <t
-        t-call="alc_report_delivery_slip.report_deliveryslip_alcyon"
-        t-lang="partner.lang"
-      />
-      <t t-call="alc_report_base.page_number_footer" t-lang="partner.lang" />
-    </t>
+        <div class="main_title">
+          <t t-if="deliveryslip.picking_type_code=='outgoing'">Delivery slip</t>
+          <t t-if="deliveryslip.picking_type_code=='incoming'">Goods return note</t>
+        </div>
+    </div>
+    <t
+      t-call="alc_report_delivery_slip.report_deliveryslip_alcyon"
+      t-lang="partner.lang"
+    />
+    <t t-call="alc_report_base.page_number_footer" t-lang="partner.lang" />
   </template>
   <template id="alc_report_delivery_slip.report_deliveryslip_entry_register">
-    <t t-call="web.html_container">
       <t t-set="company" t-value="res_company" />
       <t t-set="partner" t-value="deliveryslip.partner_id" />
       <div class="header">
         <div>
           <div class="logo">
             <img
-              t-if="company.logo"
-              t-att-src="'data:image/png;base64,%s' % company.logo"
-              style="max-height: 70px;"
-            />
+            t-if="company.logo"
+            t-att-src="image_data_uri(company.logo)"
+            style="max-height: 70px;"
+            alt="Logo"
+          />
           </div>
           <div class="main_title">
             Entry register
@@ -869,11 +874,10 @@
         </div>
       </div>
       <t
-        t-call="alc_report_delivery_slip.report_deliveryslip_entry_register_body"
-        t-lang="partner.lang"
-      />
+      t-call="alc_report_delivery_slip.report_deliveryslip_entry_register_body"
+      t-lang="partner.lang"
+    />
       <t t-call="alc_report_base.page_number_footer" t-lang="partner.lang" />
-    </t>
   </template>
   <template
     id="report_deliveryslip"
@@ -881,28 +885,38 @@
     priority="100"
   >
     <xpath expr="//t[@t-foreach='docs']" position="replace">
-      <t t-foreach="docs" t-as="deliveryslip">
-        <div
-          class="article"
-          t-att-data-oe-model="deliveryslip and deliveryslip._name"
-          t-att-data-oe-id="deliveryslip and deliveryslip.id"
-          t-att-data-oe-lang="deliveryslip and deliveryslip.env.context.get('lang')"
-        >
-            <t
-            t-call="alc_report_delivery_slip.alcyon_report_deliveryslip"
-            t-lang="deliveryslip.partner_id.lang"
-          />
-            <t
-            t-set="depot_number"
-            t-value="deliveryslip.partner_id.vet_depot_number or deliveryslip.partner_id.parent_id.vet_depot_number"
-          />
-            <t
-            t-if="not deliveryslip.partner_id.is_hide_entry_register and depot_number and deliveryslip.get_entry_register_lines()"
-            t-call="alc_report_delivery_slip.report_deliveryslip_entry_register"
-            t-lang="deliveryslip.partner_id.lang"
-          />
+      <t t-call="web.html_container">
+        <div t-foreach="docs" t-as="deliveryslip">
+          <div
+            class="article"
+            t-att-data-oe-model="deliveryslip and deliveryslip._name"
+            t-att-data-oe-id="deliveryslip and deliveryslip.id"
+            t-att-data-oe-lang="deliveryslip and deliveryslip.env.context.get('lang')"
+          >
+               <t
+              t-call="alc_report_delivery_slip.alcyon_report_deliveryslip"
+              t-lang="deliveryslip.partner_id.lang"
+            />
+                <t
+              t-set="depot_number"
+              t-value="deliveryslip.partner_id.vet_depot_number or deliveryslip.partner_id.parent_id.vet_depot_number"
+            />
+                <t
+              t-set="register_lines"
+              t-value="deliveryslip.get_entry_register_lines()"
+            />
+                <div
+              t-if="not deliveryslip.partner_id.is_hide_entry_register and depot_number and register_lines"
+              style="page-break-before:always;"
+            />
+                <t
+              t-if="not deliveryslip.partner_id.is_hide_entry_register and depot_number and register_lines"
+              t-call="alc_report_delivery_slip.report_deliveryslip_entry_register"
+              t-lang="deliveryslip.partner_id.lang"
+            />
+          </div>
         </div>
       </t>
-   </xpath>
+    </xpath>
   </template>
 </odoo>
