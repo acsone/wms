@@ -281,3 +281,5 @@ odoo-addon-shopinvader-search-engine-update-image @ git+https://github.com/shopi
 odoo-addon-shopinvader-search-engine-update-product-media @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1424/head#subdirectory=setup/shopinvader_search_engine_update_product_media
 odoo-addon-shopinvader-search-engine-update-product-brand @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1424/head#subdirectory=setup/shopinvader_search_engine_update_product_brand
 odoo-addon-shopinvader-search-engine-update-product-brand-image @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1424/head#subdirectory=setup/shopinvader_search_engine_update_product_brand_image
+odoo-addon-shopinvader-search-engine-product-template-multi-link @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1429/head#subdirectory=setup/shopinvader_search_engine_product_template_multi_link
+odoo-addon-shopinvader-search-engine-update-product-template-multi-link @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1429/head#subdirectory=setup/shopinvader_search_engine_update_product_template_multi_link
