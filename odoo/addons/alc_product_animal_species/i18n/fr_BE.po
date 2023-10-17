@@ -87,11 +87,6 @@ msgid "Guinea pig"
 msgstr "Cobaye"
 
 #. module: alc_product_animal_species
-#: model_terms:ir.ui.view,arch_db:alc_product_animal_species.product_template_view_form
-msgid "Général"
-msgstr ""
-
-#. module: alc_product_animal_species
 #: model:animal.species,name:alc_product_animal_species.horse
 msgid "Horse"
 msgstr "Cheval"
