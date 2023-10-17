@@ -1,7 +1,7 @@
 <odoo noupdate="1">
   <record model="attribute.attribute" id="attribute_species_ids">
     <field
-      ref="alc_pim_attribute_group.marketing_attribute_group"
+      ref="alc_pim_attribute_group.general_attribute_group"
       name="attribute_group_id"
     />
     <field
@@ -15,5 +15,24 @@
     <field ref="product.model_product_template" name="model_id" />
     <field name="nature">native</field>
     <field name="attribute_type">multiselect</field>
+    <field name="sequence">0</field>
+  </record>
+  <record model="attribute.attribute" id="attribute_species_id">
+    <field
+      ref="alc_pim_attribute_group.general_attribute_group"
+      name="attribute_group_id"
+    />
+    <field
+      name="attribute_set_ids"
+      eval="[Command.set([ref('alc_pim_attribute_group.attribute_set_medicaments'), ref('alc_pim_attribute_group.attribute_set_aliments'), ref('alc_pim_attribute_group.attribute_set_materiel')])]"
+    />
+    <field
+      ref="alc_product_animal_species.field_product_template__species_id"
+      name="field_id"
+    />
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="nature">native</field>
+    <field name="attribute_type">select</field>
+    <field name="sequence">1</field>
   </record>
 </odoo>
