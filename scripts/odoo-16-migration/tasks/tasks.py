@@ -678,6 +678,8 @@ def set_modules_to_remove():
         "mixin_file_id",
         "mixin_image_id",
         "specific_report",
+        "shopinvader_search_engine_update_product",
+        "shopinvader_search_engine_update_media",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
