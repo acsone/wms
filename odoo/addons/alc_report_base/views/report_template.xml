@@ -16,7 +16,7 @@
   <!-- footer with only page numbering -->
   <template id="alc_report_base.page_number_footer">
     <div class="footer">
-      <div style="padding-top: 5mm;">
+      <div style="padding-top: 5mm;font-size: 0.9em;">
         <div style="border-top: 1px solid black;">
                     <span t-field="company.street" />,
                     <span t-field="company.zip" />
