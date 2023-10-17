@@ -1,4 +1,9 @@
 <odoo noupdate="1">
+  <record model="attribute.group" id="general_attribute_group">
+    <field ref="product.model_product_template" name="model_id" />
+    <field name="name">general</field>
+    <field name="sequence">1</field>
+  </record>
   <record model="attribute.group" id="logistics_attribute_group">
     <field ref="product.model_product_template" name="model_id" />
     <field name="name">logistics</field>

@@ -13,7 +13,6 @@
     "data": [
         "security/ir.model.access.csv",
         "data/animal_species.xml",
-        "views/product_template.xml",
     ],
     "pre_init_hook": "pre_init_hook",
 }
