@@ -681,6 +681,7 @@ def set_modules_to_remove():
         "shopinvader_search_engine_update_product",
         "shopinvader_search_engine_update_media",
         "shopinvader_search_engine_update_links",
+        "alc_eshop_product_image_sequence",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:

@@ -13,7 +13,7 @@
         "alc_eshop",
         "alc_eshop_ads_elasticsearch",
         "alc_eshop_info_banner_elasticsearch",
-        "alc_eshop_product_image_sequence",
+        # removed "alc_eshop_product_image_sequence",
         "alc_older_stock_production_lot",
         "alc_partner_type",
         "alc_product_brand_image",
