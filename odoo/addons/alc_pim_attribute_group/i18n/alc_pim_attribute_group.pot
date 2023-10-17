@@ -39,6 +39,11 @@ msgid "commercial"
 msgstr ""
 
 #. module: alc_pim_attribute_group
+#: model:attribute.group,name:alc_pim_attribute_group.general_attribute_group
+msgid "general"
+msgstr ""
+
+#. module: alc_pim_attribute_group
 #: model:attribute.group,name:alc_pim_attribute_group.logistics_attribute_group
 msgid "logistics"
 msgstr ""
