@@ -134,11 +134,6 @@ omit =
     odoo/addons/price_compute/*
     odoo/addons/shopinvader_assortment_bind/*
     odoo/addons/shopinvader_search_engine_export/*
-    odoo/addons/shopinvader_search_engine_update/*
-    odoo/addons/shopinvader_search_engine_update_image/*
-    odoo/addons/shopinvader_search_engine_update_links/*
-    odoo/addons/shopinvader_search_engine_update_media/*
-    odoo/addons/shopinvader_search_engine_update_product/*
     odoo/addons/shopinvader_search_engine_update_specials/*
     odoo/addons/shopinvader_search_engine_update_vtgroups/*
     odoo/addons/shopinvader_url_locales/*

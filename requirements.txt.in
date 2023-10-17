@@ -275,19 +275,11 @@ odoo-addon-account-invoice-accrual @ git+https://github.com/OCA/account-closing.
 odoo-addon-account-cutoff-picking-product-category @ git+https://github.com/OCA/account-closing.git@refs/pull/265/head#subdirectory=setup/account_cutoff_picking_product_category
 
 # shopinvader
-odoo-addon-shopinvader-restapi @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1403/head#subdirectory=setup/shopinvader_restapi
-odoo-addon-shopinvader-restapi-auth-jwt @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1418/head#subdirectory=setup/shopinvader_restapi_auth_jwt
-odoo-addon-shopinvader-product @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1390/head#subdirectory=setup/shopinvader_product
-odoo-addon-shopinvader-product-seo @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1390/head#subdirectory=setup/shopinvader_product_seo
-odoo-addon-shopinvader-product-description @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1390/head#subdirectory=setup/shopinvader_product_description
-odoo-addon-shopinvader-product-brand @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1408/head#subdirectory=setup/shopinvader_product_brand
-odoo-addon-shopinvader-product-brand-tag @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1409/head#subdirectory=setup/shopinvader_product_brand_tag
-odoo-addon-shopinvader-product-sale-packaging @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1415/head#subdirectory=setup/shopinvader_product_sale_packaging
-odoo-addon-shopinvader-base-url @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1399/head#subdirectory=setup/shopinvader_base_url
-odoo-addon-shopinvader-search-engine @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1390/head#subdirectory=setup/shopinvader_search_engine
-odoo-addon-shopinvader-search-engine-image @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1413/head#subdirectory=setup/shopinvader_search_engine_image
-odoo-addon-shopinvader-search-engine-product-brand @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1408/head#subdirectory=setup/shopinvader_search_engine_product_brand
-odoo-addon-shopinvader-search-engine-product-brand-image @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1414/head#subdirectory=setup/shopinvader_search_engine_product_brand_image
-odoo-addon-shopinvader-search-engine-product-media @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1420/head#subdirectory=setup/shopinvader_search_engine_product_media
-odoo-addon-shopinvader-base-url @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1399/head#subdirectory=setup/shopinvader_base_url
-odoo-addon-shopinvader-product-url @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1399/head#subdirectory=setup/shopinvader_product_url
+# odoo-addon-shopinvader-restapi-auth-jwt @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1418/head#subdirectory=setup/shopinvader_restapi_auth_jwt
+odoo-addon-shopinvader-search-engine-update @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1424/head#subdirectory=setup/shopinvader_search_engine_update
+odoo-addon-shopinvader-search-engine-update-image @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1424/head#subdirectory=setup/shopinvader_search_engine_update_image
+odoo-addon-shopinvader-search-engine-update-product-media @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1424/head#subdirectory=setup/shopinvader_search_engine_update_product_media
+odoo-addon-shopinvader-search-engine-update-product-brand @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1424/head#subdirectory=setup/shopinvader_search_engine_update_product_brand
+odoo-addon-shopinvader-search-engine-update-product-brand-image @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1424/head#subdirectory=setup/shopinvader_search_engine_update_product_brand_image
+odoo-addon-shopinvader-search-engine-product-template-multi-link @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1429/head#subdirectory=setup/shopinvader_search_engine_product_template_multi_link
+odoo-addon-shopinvader-search-engine-update-product-template-multi-link @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1429/head#subdirectory=setup/shopinvader_search_engine_update_product_template_multi_link
