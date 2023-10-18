@@ -14,6 +14,7 @@
         "alc_delivery_carrier_gls",
         "alc_delivery_carrier_label_gls_server_env",
         "alc_partner_carrier",
+        "alc_product_abc_classification_storage_type",
         "alc_product_category_warning_info",
         "alc_stock_available_immediately",
         "alc_stock_available_to_promise_immediately_exclude_location",

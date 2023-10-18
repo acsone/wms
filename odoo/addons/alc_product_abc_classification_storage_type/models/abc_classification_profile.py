@@ -1,21 +1,22 @@
-# -*- coding: utf-8 -*-
-# Copyright 2021 ACSONE SA/NV
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# Copyright 2021-2023 ACSONE SA/NV
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from psycopg2.extensions import AsIs
 
-from odoo import api, fields, models
+from odoo import api, fields
 from odoo.osv.expression import OR
 
+from odoo.addons.product_abc_classification.models.abc_classification_profile import (
+    AbcClassificationProfile as ABCProfile,
+)
+from odoo.addons.stock.models.stock_package_type import PackageType
 
-class AbcClassificationProfile(models.Model):
 
-    _inherit = "abc.classification.profile"
+class AbcClassificationProfile(ABCProfile):
 
-    picking_zone_ids = fields.Many2many(
-        comodel_name="picking.zone",
-        relation="abc_classification_profile_picking_zone_rel",
+    package_type_ids = fields.Many2many[PackageType](
+        relation="abc_classification_profile_stock_package_type_rel",
         column1="profile_id",
-        column2="picking_zone_id",
+        column2="package_type_id",
     )
 
     exclude_product_mto = fields.Boolean("Excludes MTO products", default=True)
@@ -23,21 +24,19 @@ class AbcClassificationProfile(models.Model):
         "Excludes non sellable products", default=True
     )
 
-    @api.model
-    def create(self, vals):
-        res = super(AbcClassificationProfile, self).create(vals)
-        if (
-            "picking_zone_ids" in vals
-            or "exclude_product_mto" in vals
-            or "exclude_non_sellable" in vals
-        ):
-            res._manage_products()
-        return res
+    @api.model_create_multi
+    def create(self, vals_list):
+        profiles = super().create(vals_list)
+        # As package_type_id is the entry point to gather profiles,
+        # just rely on the presence of package_type_ids on profile
+        # creation.
+        profiles.filtered("package_type_ids")._manage_products()
+        return profiles
 
     def write(self, vals):
-        res = super(AbcClassificationProfile, self).write(vals)
+        res = super().write(vals)
         if (
-            "picking_zone_ids" in vals
+            "package_type_ids" in vals
             or "exclude_product_mto" in vals
             or "exclude_non_sellable" in vals
         ):
@@ -46,7 +45,8 @@ class AbcClassificationProfile(models.Model):
 
     def _unlink_profile_for_zones(self):
         """
-        Remove products linked to the profile but with a picking zone not
+        Remove products linked to the profile but with a picking zone not.
+
         into the list of profile's picking zones
         """
         product_profiles_field = self.env["product.product"]._fields[
@@ -64,11 +64,11 @@ class AbcClassificationProfile(models.Model):
         template_profiles_table = template_profiles_field.relation
         for rec in self:
             domain = [
-                ("picking_zone_id", "not in", rec.picking_zone_ids.ids),
+                ("package_type_id", "not in", rec.package_type_ids.ids),
                 ("abc_classification_profile_ids", "in", rec.ids),
             ]
             if rec.exclude_product_mto:
-                domain = OR([[("is_mto_product", "=", True)], domain])
+                domain = OR([[("is_mto", "=", True)], domain])
             if rec.exclude_non_sellable:
                 domain = OR([[("sale_ok", "=", False)], domain])
             obsolete_products = (
@@ -128,16 +128,17 @@ class AbcClassificationProfile(models.Model):
                 },
             )
 
-        self.env["product.template"].invalidate_cache(
+        self.env["product.template"].invalidate_model(
             ["abc_classification_profile_ids", "abc_classification_product_level_ids"]
         )
-        self.env["product.product"].invalidate_cache(
+        self.env["product.product"].invalidate_model(
             ["abc_classification_profile_ids", "abc_classification_product_level_ids"]
         )
 
     def _link_profile_for_zones(self):
         """
-        Ensure products with a picking zone into the list of profile's picking zone
+        Ensure products with a picking zone into the list of profile's picking zone.
+
         are linked to this profile
         """
         product_profiles_field = self.env["product.product"]._fields[
@@ -154,14 +155,14 @@ class AbcClassificationProfile(models.Model):
         template_profiles_profile_col = template_profiles_field.column2
         template_profiles_table = template_profiles_field.relation
 
-        for rec in self.filtered("picking_zone_ids"):
+        for rec in self.filtered("package_type_ids"):
             self.env.cr.execute(
                 """
                 INSERT into %(table)s (%(product_col)s, %(profile_col)s)
                 SELECT pp.id, %(profile_id)s
                 FROM product_product PP
                 JOIN product_template pt on pp.product_tmpl_id = pt.id
-                WHERE pt.picking_zone_id in %(picking_zone_ids)s
+                WHERE pt.package_type_id in %(package_type_ids)s
                 AND pp.active
                 AND pt.type = 'product'
                 %(exclude_product_mto)s
@@ -173,8 +174,8 @@ class AbcClassificationProfile(models.Model):
                     "product_col": AsIs(product_profiles_product_col),
                     "profile_col": AsIs(product_profiles_profile_col),
                     "profile_id": rec.id,
-                    "picking_zone_ids": tuple(rec.picking_zone_ids.ids),
-                    "exclude_product_mto": AsIs("AND pt.is_mto_product = False")
+                    "package_type_ids": tuple(rec.package_type_ids.ids),
+                    "exclude_product_mto": AsIs("AND pt.is_mto = False")
                     if rec.exclude_product_mto
                     else AsIs(""),
                     "exclude_non_sellable": AsIs("AND pt.sale_ok = True")
@@ -187,7 +188,7 @@ class AbcClassificationProfile(models.Model):
                 INSERT into %(table)s (%(product_col)s, %(profile_col)s)
                 SELECT pt.id, %(profile_id)s
                 FROM  product_template pt
-                WHERE pt.picking_zone_id in %(picking_zone_ids)s
+                WHERE pt.package_type_id in %(package_type_ids)s
                 AND pt.active
                 AND pt.type = 'product'
                 %(exclude_product_mto)s
@@ -199,8 +200,8 @@ class AbcClassificationProfile(models.Model):
                     "product_col": AsIs(template_profiles_product_col),
                     "profile_col": AsIs(template_profiles_profile_col),
                     "profile_id": rec.id,
-                    "picking_zone_ids": tuple(rec.picking_zone_ids.ids),
-                    "exclude_product_mto": AsIs("AND pt.is_mto_product = False")
+                    "package_type_ids": tuple(rec.package_type_ids.ids),
+                    "exclude_product_mto": AsIs("AND pt.is_mto = False")
                     if rec.exclude_product_mto
                     else AsIs(""),
                     "exclude_non_sellable": AsIs("AND pt.sale_ok = True")
@@ -208,13 +209,13 @@ class AbcClassificationProfile(models.Model):
                     else AsIs(""),
                 },
             )
-        self.env["product.template"].invalidate_cache(
+        self.env["product.template"].invalidate_model(
             ["abc_classification_profile_ids"]
         )
-        self.env["product.product"].invalidate_cache(["abc_classification_profile_ids"])
+        self.env["product.product"].invalidate_model(["abc_classification_profile_ids"])
 
     def _manage_products(self):
-        """ Manage profile auto assignment to products
+        """Manage profile auto assignment to products.
 
         Remove products linked to the profile but with a picking zone not
         into the list of profile's picking zones

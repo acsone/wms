@@ -91,7 +91,6 @@ omit =
     odoo/addons/alc_partner_delivery_window_import/*
     odoo/addons/alc_price_cache_import/*
     odoo/addons/alc_print_all_deliveryslip/*
-    odoo/addons/alc_product_abc_classification_picking_zone/*
     odoo/addons/alc_product_mto/*
     odoo/addons/alc_product_promotion_mailing/*
     odoo/addons/alc_product_search_cnk/*

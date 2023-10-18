@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021-2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="abc_classification_profile_form_view">
+        <field
+      name="name"
+    >abc.classification.profile.form (in alc_product_abc_classification_storage_type)</field>
+        <field name="model">abc.classification.profile</field>
+        <field
+      name="inherit_id"
+      ref="product_abc_classification.abc_classification_profile_form_view"
+    />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='additional']/group[1]" position="after">
+                <group name="alc_abc_classification">
+                    <group>
+                        <field
+              name="package_type_ids"
+              widget="many2many_tags"
+              options="{'open': true}"
+            />
+                        <field name="exclude_product_mto" />
+                        <field name="exclude_non_sellable" />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="abc_classification_profile_tree_view">
+        <field
+      name="name"
+    >abc.classification.profile.tree (in alc_product_abc_classification_storage_type)</field>
+        <field name="model">abc.classification.profile</field>
+        <field
+      name="inherit_id"
+      ref="product_abc_classification.abc_classification_profile_tree_view"
+    />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="package_type_ids" />
+                <field name="exclude_product_mto" />
+                <field name="exclude_non_sellable" />
+            </field>
+        </field>
+    </record>
+</odoo>
