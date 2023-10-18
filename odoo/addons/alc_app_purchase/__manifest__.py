@@ -57,5 +57,6 @@
         "alc_b2c_connector",
         "alc_product_last_transaction",
         "alc_stock_orderpoint_product_mto",
+        "alc_purchase_incoming_products",
     ],
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem
+    id="menu_action_picking_tree_in_move"
+    action="alc_purchase_incoming_products.action_receipt_picking_move"
+    parent="purchase.menu_purchase_products"
+    sequence="30"
+  />
+</odoo>
