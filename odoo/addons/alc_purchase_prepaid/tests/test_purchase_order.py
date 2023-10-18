@@ -48,6 +48,8 @@ class TestPurchaseOrder(TransactionCase):
         """
         self.assertFalse(self.po.prepayment)
         self.po.button_confirm()
+        self.assertEqual(self.po.order_line.qty_to_invoice, 0)
+        self.assertEqual(self.po.order_line.qty_invoiced, 0)
         msg = (
             "There is no invoiceable line. If a product has a control policy based "
             "on received quantity, please make sure that a quantity has been "
@@ -55,6 +57,8 @@ class TestPurchaseOrder(TransactionCase):
         )
         with self.assertRaises(UserError, msg=msg):
             self.po.action_create_invoice()
+        self.po.order_line.qty_received = 10
+        self.assertEqual(self.po.order_line.qty_to_invoice, 10)
 
     def test_po_with_prepayment_before_confirm(self):
         """
@@ -68,7 +72,11 @@ class TestPurchaseOrder(TransactionCase):
         """
         self.po.prepayment = True
         self.po.button_confirm()
+        self.assertEqual(self.po.order_line.qty_to_invoice, 365)
+        self.assertEqual(self.po.order_line.qty_invoiced, 0)
         bill_action = self.po.action_create_invoice()
+        self.assertEqual(self.po.order_line.qty_to_invoice, -365)
+        self.assertEqual(self.po.order_line.qty_invoiced, 365)
         self.assertEqual(bill_action["type"], "ir.actions.act_window")
         self.assertEqual(bill_action["name"], "Bills")
         self.assertEqual(bill_action["res_model"], "account.move")
@@ -87,7 +95,11 @@ class TestPurchaseOrder(TransactionCase):
         """
         self.po.button_confirm()
         self.po.prepayment = True
+        self.assertEqual(self.po.order_line.qty_to_invoice, 365)
+        self.assertEqual(self.po.order_line.qty_invoiced, 0)
         bill_action = self.po.action_create_invoice()
+        self.assertEqual(self.po.order_line.qty_to_invoice, -365)
+        self.assertEqual(self.po.order_line.qty_invoiced, 365)
         self.assertEqual(bill_action["type"], "ir.actions.act_window")
         self.assertEqual(bill_action["name"], "Bills")
         self.assertEqual(bill_action["res_model"], "account.move")
