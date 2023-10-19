@@ -30,8 +30,10 @@ class StockBarcodeController(stock_barcode.StockBarcodeController):
         """If barcode represents a picking, open it."""
         res = super()._try_open_picking(barcode=barcode)
         if res:
-            action = request.env["stock.picking"]._get_std_view_action(
-                res["action"]["context"]["active_id"]
+            action = (
+                request.env["stock.picking"]
+                .sudo()
+                ._get_std_view_action(res["action"]["context"]["active_id"])
             )
             return action
         return False
