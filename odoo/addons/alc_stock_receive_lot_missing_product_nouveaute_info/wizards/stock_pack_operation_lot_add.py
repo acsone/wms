@@ -189,8 +189,10 @@ class StockPackOperationLotAdd(StockPackOperationLotAddBase):
                 product_packaging.product_id = product
 
     def _check_barcode_new_product(self):
-        if not self.env["ir.config_parameter"].get_param(
-            "reception_wizard_constraints"
+        if (
+            not self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("reception_wizard_constraints")
         ):
             return
         for rec in self:
@@ -207,8 +209,10 @@ class StockPackOperationLotAdd(StockPackOperationLotAddBase):
                 )
 
     def _check_dimensions_product(self):
-        if not self.env["ir.config_parameter"].get_param(
-            "reception_wizard_constraints"
+        if (
+            not self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("reception_wizard_constraints")
         ):
             return
         for rec in self:
@@ -222,8 +226,10 @@ class StockPackOperationLotAdd(StockPackOperationLotAddBase):
                 )
 
     def _check_weight_product(self):
-        if not self.env["ir.config_parameter"].get_param(
-            "reception_wizard_constraints"
+        if (
+            not self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("reception_wizard_constraints")
         ):
             return
         for rec in self:
@@ -234,7 +240,11 @@ class StockPackOperationLotAdd(StockPackOperationLotAddBase):
 
     def _add(self):
         result = super()._add()
-        if self.env["ir.config_parameter"].get_param("reception_wizard_constraints"):
+        if (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("reception_wizard_constraints")
+        ):
             # Manually check constraints because they depend on product_id.is_new which
             # is a computed field without an inverse. This raises a warning that
             # triggers the errors. For this reason, we check the constraints exactly

@@ -125,7 +125,7 @@ class AlcDocument(models.Model):
             {"name": "Category_NL", "get": "categ_nl"},
             {"name": "Category_EN", "get": "categ_en"},
         ]
-        if self.env["ir.config_parameter"].get_param(
+        if self.env["ir.config_parameter"].sudo().get_param(
             "alc_documents_prices.include_code_amm", ""
         ).lower() in ["true", "1", "t", "y", "yes"]:
             parser.append({"name": "AMM_Number", "get": "code_amm"})

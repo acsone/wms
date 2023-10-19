@@ -84,7 +84,9 @@ class ProductSupplierinfo(SupplierInfo):
     @api.model
     def _is_alcyon_constraints_check_activated(self):
         return not self._context.get("disable_check_dates") and literal_eval(
-            self.env["ir.config_parameter"].get_param(
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param(
                 "alc_product_supplierinfo_check.check_alcyon_constraints_on_supplierinfo",
                 "False",
             )

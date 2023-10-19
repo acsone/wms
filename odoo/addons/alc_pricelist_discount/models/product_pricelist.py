@@ -16,7 +16,7 @@ class ProductPricelist(Pricelist):
     @ormcache()
     def enforce_discount_constraint(self):
         key = "constrain_discount_pricelist"
-        value = self.env["ir.config_parameter"].get_param(key, "").lower()
+        value = self.env["ir.config_parameter"].sudo().get_param(key, "").lower()
         return value in ["true", "1", "t", "y", "yes"]
 
     @api.constrains("is_discount")
