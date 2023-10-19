@@ -4855,7 +4855,7 @@ msgstr ""
 #: model:attribute.option,name:alc_pim.attribute_option_injecteerbaar_vaccin
 #, fuzzy
 msgid "Vaccin injectable"
-msgstr "Vaccins antirabiques"
+msgstr ""
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_vaccin_intranasal
@@ -4867,7 +4867,7 @@ msgstr "Vaccins antirabiques"
 #: model:attribute.option,name:alc_pim.attribute_option_vaccin_administratie_via_het_oog
 #, fuzzy
 msgid "Vaccin occulaire"
-msgstr "Vaccins antirabiques"
+msgstr ""
 
 #. module: alc_pim
 #: model:product.category,name:alc_pim.vacci_vol_rur
@@ -5022,13 +5022,13 @@ msgstr ""
 #: model:attribute.option,name:alc_pim.attribute_option_intra_uterine_toediening
 #, fuzzy
 msgid "Voie intra-utérine"
-msgstr "Intra-utérin"
+msgstr ""
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_intramammaire_toediening
 #, fuzzy
 msgid "Voie intramammaire"
-msgstr "Intramammaire"
+msgstr ""
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_nasale_toediening
@@ -5039,7 +5039,7 @@ msgstr ""
 #: model:attribute.option,name:alc_pim.attribute_option_opthalmologische_toediening
 #, fuzzy
 msgid "Voie ophtalmique"
-msgstr "Vie pratique"
+msgstr ""
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_vaginale_toediening
