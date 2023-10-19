@@ -3,6 +3,7 @@
 import {registry} from "@web/core/registry";
 import {session} from "@web/session";
 import {useService} from "@web/core/utils/hooks";
+import {standardFieldProps} from "@web/views/fields/standard_field_props";
 const {Component, onWillUnmount, onWillStart, onMounted, onError, useState} = owl;
 
 export class WebScale extends Component {
@@ -120,7 +121,9 @@ export class WebScale extends Component {
     }
   }
 }
-
+WebScale.props = {
+  ...standardFieldProps,
+};
 WebScale.template = "WebScale";
 
 registry.category("fields").add("web_scale", WebScale);
