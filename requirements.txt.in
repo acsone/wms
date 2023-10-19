@@ -104,6 +104,7 @@ odoo-addon-product-stock-state @ git+https://github.com/OCA/product-attribute.gi
 
 # purchase-workflow
 odoo-addon-purchase-cancel-reason @ git+https://github.com/OCA/purchase-workflow.git@refs/pull/1776/head#subdirectory=setup/purchase_cancel_reason
+odoo-addon-purchase-delivery-split-date @ git+https://github.com/OCA/purchase-workflow.git@refs/pull/2049/head#subdirectory=setup/purchase_delivery_split_date
 
 # reporting-engine
 odoo-addon-report-csv @ git+https://github.com/OCA/reporting-engine.git@refs/pull/793/head#subdirectory=setup/report_csv
