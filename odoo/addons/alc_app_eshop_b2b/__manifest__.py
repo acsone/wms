@@ -24,6 +24,7 @@
         "alc_eshop_classifieds_responsible",
         "alc_eshop_ordering_allowed",
         "alc_eshop_info_banner",
+        "alc_eshop_api",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",
