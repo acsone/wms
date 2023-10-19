@@ -93,5 +93,5 @@ class MagentoUserImport(Component):
 
     @property
     def magento_url(self):
-        config_param = self.env["ir.config_parameter"]
+        config_param = self.env["ir.config_parameter"].sudo()
         return config_param.sudo().get_param("alc_eshop_user_migration.magento_url")

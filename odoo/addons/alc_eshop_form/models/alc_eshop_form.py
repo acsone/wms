@@ -83,7 +83,7 @@ class AlcEshopForm(models.Model):
         has been submitted by an authenticated partner, the partner is filled
 
         """
-        base_url = self.env["ir.config_parameter"].get_param("web.base.url").rstrip("/")
+        base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url").rstrip("/")
         partner_form_url = ""
         if partner:
             partner_form_url = "{}/web#id={}&view_type=form&model=res.partner".format(

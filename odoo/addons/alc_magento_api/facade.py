@@ -362,7 +362,7 @@ class FacadeShopinvaderCart(Facade):
         setattr(self.service.work, "shopinvader_backend", backend)
 
         location_param = "alc_magento_api.cart_location"
-        self.location = self.env["ir.config_parameter"].get_param(location_param)
+        self.location = self.env["ir.config_parameter"].sudo().get_param(location_param)
 
     def process_errors(self, result, **kwargs):
         error = None

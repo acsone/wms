@@ -19,7 +19,7 @@ class AlcRunningEnvRegistration(models.AbstractModel):
         if system_base_config.get("running_env", "prod").lower() == "prod":
             return
 
-        IrConfigParameter = self.env["ir.config_parameter"]
+        IrConfigParameter = self.env["ir.config_parameter"].sudo()
 
         enterprise_code = IrConfigParameter.get_param("database.enterprise_code")
         if enterprise_code:

@@ -26,7 +26,7 @@ class IrHttp(models.AbstractModel):
         registry = registry_get(request.db)
         with registry.cursor() as cr:
             env = api.Environment(cr, SUPERUSER_ID, {})
-            config_param = env["ir.config_parameter"]
+            config_param = env["ir.config_parameter"].sudo()
             expected_token = config_param.get_param(
                 "alc_eshop_user_migration.bearer_token"
             )
