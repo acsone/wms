@@ -133,7 +133,7 @@ class DeliveryPackageGlsWizard(models.TransientModel):
         return self._send()
 
     def abort(self):
-        self.package_id.gls_cancel_shipment()
+        self.package_id.sudo().gls_cancel_shipment()
         gls_package_refs = filter(
             None, self.mapped("allowed_package_ids.gls_package_ref")
         )
