@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-  <record id="view_picking_form" model="ir.ui.view">
-    <field name="name">view_picking_form (in alc_stock_move_serial_number) </field>
-    <field name="model">stock.picking</field>
-    <field name="inherit_id" ref="stock.view_picking_form" />
-    <field name="arch" type="xml">
-       <xpath expr="//tree/field[@name='company_id']" position="before">
-        <field name="show_serial_number" invisible="1" />
-      </xpath>
-      <xpath expr="//tree/field[@name='product_id']" position="after">
-        <field
-          name="serial_number"
-          attrs="{'invisible': [('show_serial_number', '=', False)]}"
-        />
-        <button
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">view_picking_form (in alc_stock_move_serial_number) </field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath
+        expr="//page//field[@name='move_ids_without_package']/tree/field[@name='company_id']"
+        position="before"
+      >
+                <field name="show_serial_number" invisible="1" />
+            </xpath>
+            <xpath
+        expr="//page//field[@name='move_ids_without_package']/tree/field[@name='product_id']"
+        position="after"
+      >
+                <field name="serial_number" />
+                <button
           name="button_edit_serial_number"
           type="object"
           icon="fa-pencil"
           title="Edit S/N"
-          attrs="{'invisible': [('show_serial_number', '=', False)]}"
         />
-      </xpath>
-    </field>
-  </record>
+            </xpath>
+        </field>
+    </record>
 </odoo>

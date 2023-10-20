@@ -12,8 +12,9 @@
     "website": "https://acsone.eu",
     "depends": ["stock"],
     "data": [
-        "views/stock_picking_views.xml",
-        "wizards/modify_serial_number_views.xml",
         "security/ir.model.access.csv",
+        "views/stock_picking_views.xml",
+        "views/stock_picking_type.xml",
+        "wizards/modify_serial_number_views.xml",
     ],
 }

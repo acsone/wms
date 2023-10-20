@@ -14,12 +14,9 @@ class StockMove(Move):
     serial_number = fields.Char(
         "Serial number", readonly=True, help="For delivery order only"
     )
-    show_serial_number = fields.Boolean(compute="_compute_show_serial_number")
-
-    def _compute_show_serial_number(self):
-        customer_location = self.env.ref("stock.stock_location_customers")
-        for rec in self:
-            rec.show_serial_number = rec.location_dest_id == customer_location
+    show_serial_number = fields.Boolean(
+        related="picking_id.picking_type_id.show_serial_number"
+    )
 
     def button_edit_serial_number(self):
         return self.env["ir.actions.act_window"]._for_xml_id(
