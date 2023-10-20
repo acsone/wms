@@ -9,7 +9,9 @@
       model="stock.rule"
       eval="obj().search([('action', '=', 'buy'), ('company_id', '=', ref('base.main_company'))]).ids"
     />
-    <value eval="{'location_dest_id': ref('stock.stock_location_company')}" />
+    <value
+      eval="{'location_dest_id': ref('alc_stock_location_data.stock_location_vlb')}"
+    />
   </function>
 
   <data noupdate="1">
