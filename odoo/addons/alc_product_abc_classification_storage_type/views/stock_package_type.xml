@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021-2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="stock_package_type_form">
+        <field
+      name="name"
+    >stock.package.type.form (in alc_product_abc_classification_storage_type)</field>
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="stock.stock_package_type_form" />
+        <field name="arch" type="xml">
+            <group name="storage_categories" position="after">
+                <group name="alc_abc_classification">
+                    <group>
+                        <field
+              name="abc_classification_profile_ids"
+              widget="many2many_tags"
+              readonly="1"
+            />
+                    </group>
+                </group>
+            </group>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="stock_package_type_tree">
+        <field
+      name="name"
+    >stock.package.type.tree (in alc_product_abc_classification_storage_type)</field>
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="stock.stock_package_type_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field
+          name="abc_classification_profile_ids"
+          widget="many2many_tags"
+          optional="hide"
+          readonly="1"
+        />
+            </field>
+        </field>
+    </record>
+</odoo>
