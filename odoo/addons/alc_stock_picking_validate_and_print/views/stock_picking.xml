@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record
+    id="stock_picking_action_validate_and_print_delivery"
+    model="ir.actions.server"
+  >
+        <field name="name">Validate and print delivery</field>
+        <field name="model_id" ref="stock.model_stock_picking" />
+        <field name="binding_model_id" ref="stock.model_stock_picking" />
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_validate_and_print_delivery()
+        </field>
+    </record>
+
+</odoo>

@@ -111,6 +111,7 @@
         "alc_stock_picking_cancel_permission",
         "alc_stock_quant_product_last_transaction",
         "alc_stock_quant_product_supplier",
+        "alc_stock_picking_validate_and_print",
     ],
     "data": [],
     "demo": [],
