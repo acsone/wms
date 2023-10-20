@@ -9,12 +9,10 @@ from odoo.addons.purchase.models.purchase import (
     PurchaseOrderLine as PurchaseOrderLineBase,
 )
 
-from .purchase_order import READONLY_STATES
-
 
 class PurchaseOrderLine(PurchaseOrderLineBase):
 
-    date_planned = fields.Datetime(readonly=False, states=READONLY_STATES)
+    date_planned = fields.Datetime(readonly=False, states=False)
 
     @api.model
     def _get_date_planned(self, seller, po=False):
