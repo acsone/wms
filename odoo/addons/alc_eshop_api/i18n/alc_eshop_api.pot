@@ -1,0 +1,39 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_eshop_api
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_eshop_api
+#: model:ir.model.fields.selection,name:alc_eshop_api.selection__fastapi_endpoint__app__alc_eshop_app
+msgid "Alcyon EShop Endpoint"
+msgstr ""
+
+#. module: alc_eshop_api
+#: model:ir.model.fields,field_description:alc_eshop_api.field_fastapi_endpoint__app
+msgid "App"
+msgstr ""
+
+#. module: alc_eshop_api
+#: model:ir.model.fields,field_description:alc_eshop_api.field_fastapi_endpoint__auth_jwt_validator_id
+msgid "Auth Jwt Validator"
+msgstr ""
+
+#. module: alc_eshop_api
+#: model_terms:ir.ui.view,arch_db:alc_eshop_api.fastapi_endpoint_shopinvader_v2_app_demo_form_view
+msgid "Configuration"
+msgstr ""
+
+#. module: alc_eshop_api
+#: model:ir.model,name:alc_eshop_api.model_fastapi_endpoint
+msgid "FastAPI Endpoint"
+msgstr ""
