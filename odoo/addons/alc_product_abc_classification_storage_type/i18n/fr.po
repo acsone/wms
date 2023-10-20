@@ -43,11 +43,6 @@ msgid "Package Type"
 msgstr "Type de Colis"
 
 #. module: alc_product_abc_classification_storage_type
-#: model:ir.model,name:alc_product_abc_classification_storage_type.model_product_template
-msgid "Product"
-msgstr "Produit"
-
-#. module: alc_product_abc_classification_storage_type
 #: model:ir.model,name:alc_product_abc_classification_storage_type.model_product_product
 msgid "Product Variant"
 msgstr "Variante de produit"
@@ -56,3 +51,6 @@ msgstr "Variante de produit"
 #: model:ir.model,name:alc_product_abc_classification_storage_type.model_stock_package_type
 msgid "Stock package type"
 msgstr "Type de colis de stock"
+
+#~ msgid "Product"
+#~ msgstr "Produit"
