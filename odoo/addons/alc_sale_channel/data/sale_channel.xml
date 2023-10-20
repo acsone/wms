@@ -20,6 +20,6 @@
     <record model="sale.channel" id="sale_channel_web">
         <field name="name">Web</field>
         <field name="code">web</field>
-        <field name="is_internal" eval="0" />
+        <field name="is_internal" eval="1" />
     </record>
 </odoo>

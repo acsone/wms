@@ -1,0 +1,26 @@
+# Copyright 2023 ACSONE SA/NV
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+{
+    "name": "Alc Eshop Api",
+    "description": """
+        Alcyon: Eshop api""",
+    "version": "16.0.1.0.0",
+    "license": "AGPL-3",
+    "author": "ACSONE SA/NV",
+    "website": "https://acsone.eu/",
+    "depends": [
+        "fastapi",
+        "shopinvader_api_address",
+        "shopinvader_api_cart",
+        "shopinvader_fastapi_auth_jwt",
+        "shopinvader_restapi",
+        "shopinvader_restapi_auth_jwt",
+        "alc_eshop_sale_statistic",
+    ],
+    "data": [
+        "views/fastapi_endpoint.xml",
+    ],
+    "demo": [],
+    "development_status": "Alpha",
+}

@@ -1,51 +1,48 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from contextlib import contextmanager
 from datetime import datetime
 
-import mock
 from dateutil import relativedelta
 from freezegun import freeze_time
 
 from odoo import fields
-from odoo.tests.common import SavepointCase
 
-from odoo.addons.base_rest.controllers.main import _PseudoCollection
-from odoo.addons.component.core import WorkContext
-from odoo.addons.component.tests.common import ComponentMixin
+from odoo.addons.fastapi.tests.common import FastAPITransactionCase
+
+from ..routers import sale_statistics_router
 
 
-class TestSaleStatistics(SavepointCase, ComponentMixin):
+class TestSaleStatistics(FastAPITransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestSaleStatistics, cls).setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.setUpComponent()
+        super().setUpClass()
+        cls.default_fastapi_router = sale_statistics_router
         cls.supplier = cls.env.ref("base.res_partner_12")
-        cls.supplierpromotion = cls.env["product.supplierinfo"].create(
-            {
-                "name": cls.supplier.id,
-                "discount_sale": 10,
-                "date_start": fields.Date.today(),
-                "date_end": fields.Date.today(),
-            }
-        )
         cls.product_1 = cls.env["product.product"].create(
             {
                 "name": "product_1",
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
                 "categ_id": cls.env.ref("alc_product_food.product_categ_ali").id,
-                "seller_ids": [(6, 0, [cls.supplierpromotion.id])],
+            }
+        )
+        cls.supplierpromotion = cls.env["product.supplierinfo"].create(
+            {
+                "partner_id": cls.supplier.id,
+                "discount_sale": 10,
+                "date_start": fields.Date.today(),
+                "date_end": fields.Date.today(),
+                "product_tmpl_id": cls.product_1.product_tmpl_id.id,
             }
         )
         cls.product_2 = cls.env["product.product"].create(
             {
                 "name": "product_2",
-                "uom_id": cls.env.ref("product.product_uom_unit").id,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
-                "categ_id": cls.env.ref("alc_product_category_data.product_categ_medoc").id,
+                "categ_id": cls.env.ref(
+                    "alc_product_category_data.product_categ_medoc"
+                ).id,
             }
         )
         cls.partner_1 = cls.env["res.partner"].create({"name": "partner_1"})
@@ -59,7 +56,7 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
             ("12", [99, 1, 5, 8]),
         ]:
             for qty in qties:
-                cls.sell(cls.product_1, qty, "2020-%s-01 00:00:00" % month)
+                cls.sell(cls.product_1, qty, f"2020-{month}-01 00:00:00")
 
         # makes sales for top_ordered.... SQL view uses now() ->
         # created sales must be created from now....
@@ -85,6 +82,7 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
             )
             .mapped("date_order")
         )
+        cls.env.flush_all()
         cls.env["alc.eshop.product.ordered.qty"].refresh_view()
 
         # 5 years test
@@ -107,6 +105,7 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
         # service resist to (bad) future data
         future_date = date_exp % (year_now + 1)
         cls.sell(cls.product_1, 21, future_date, partner=p5y, invoice=True)
+        cls.env.flush_all()
         cls.env["alc.eshop.product.ordered.yearly"].refresh_view()
 
     @classmethod
@@ -121,11 +120,14 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
         invoice=False,
     ):
         partner = partner or cls.partner_1
+        qty = int(qty)
         with freeze_time(ttime):
             so = cls.env["sale.order"].create(
                 {
                     "partner_id": partner.id,
-                    "sale_channel": "web",
+                    "sale_channel_id": cls.env.ref(
+                        "alc_sale_channel.sale_channel_web"
+                    ).id,
                     "date_order": ttime,
                     "order_line": [
                         (
@@ -145,31 +147,13 @@ class TestSaleStatistics(SavepointCase, ComponentMixin):
                 so.action_confirm()
             if deliver or invoice:
                 so.picking_ids.action_confirm()
-                so.picking_ids.action_done()
+                so.picking_ids._action_done()
             if invoice:
-                so.action_invoice_create()
+                so._create_invoices()
+                # temp fix account_cutoff_pincking
+                # invoice lines linked to a "draft" move are no more
+                # considered as invoiced... This breaks the test and normal
+                # odoo behavior
+                if "account.cutoff.line.invoice" in cls.env:
+                    so.order_line.invoice_lines.move_id.action_post()
         return so
-
-    # pylint: disable=method-required-super
-    def setUp(self):
-        # resolve an inheritance issue (common.SavepointCase does not call
-        # super)
-        SavepointCase.setUp(self)
-        ComponentMixin.setUp(self)
-
-    @classmethod
-    @contextmanager
-    def sale_statistics_service(cls, authenticated_partner_id):
-        env = cls.env(
-            context=dict(
-                cls.env.context, authenticated_partner_id=authenticated_partner_id,
-            )
-        )
-        collection = _PseudoCollection("shopinvader.backend", env)
-        work = WorkContext(
-            model_name="rest.service.registration",
-            collection=collection,
-            request=mock.Mock(),
-            authenticated_partner_id=authenticated_partner_id,
-        )
-        yield work.component(usage="sale_statistics")

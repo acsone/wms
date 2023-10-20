@@ -12,9 +12,11 @@
     <field name="interval_type">hours</field>
     <field name="numbercall">-1</field>
     <field name="doall" eval="False" />
-    <field name="model" eval="'alc.eshop.product.ordered.qty'" />
-    <field name="function" eval="'refresh_view'" />
-    <field name="args" eval="'()'" />
+    <field
+      name="model_id"
+      ref="alc_eshop_sale_statistic.model_alc_eshop_product_ordered_qty"
+    />
+    <field name="code">model.refresh_view()</field>
   </record>
   <record
     forcecreate="True"
@@ -28,8 +30,10 @@
     <field name="interval_type">days</field>
     <field name="numbercall">-1</field>
     <field name="doall" eval="False" />
-    <field name="model" eval="'alc.eshop.product.ordered.yearly'" />
-    <field name="function" eval="'refresh_view'" />
-    <field name="args" eval="'()'" />
+    <field
+      name="model_id"
+      ref="alc_eshop_sale_statistic.model_alc_eshop_product_ordered_yearly"
+    />
+    <field name="code">model.refresh_view()</field>
   </record>
 </odoo>

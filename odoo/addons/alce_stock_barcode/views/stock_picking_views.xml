@@ -16,7 +16,7 @@
                 <attribute name="barcode_trigger">print</attribute>
             </xpath>
             <xpath expr="//button[@name='action_put_in_pack']" position="attributes">
-                <attribute name="barcode_trigger">put-in-pack</attribute>
+                <attribute name="barcode_trigger">gls-put-in-pack</attribute>
             </xpath>
             <xpath expr="//button[@name='button_scrap']" position="attributes">
                 <attribute name="barcode_trigger">button_scrap</attribute>

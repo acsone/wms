@@ -125,6 +125,7 @@ odoo-addon-endpoint-route-handler==16.0.1.0.0.3
 odoo-addon-extendable==16.0.1.0.1.1
 odoo-addon-extendable-fastapi==16.0.2.0.2
 odoo-addon-fastapi==16.0.1.1.1.1
+odoo-addon-fastapi-auth-jwt==16.0.1.0.1.1
 odoo-addon-fs-attachment==16.0.1.0.3
 odoo-addon-fs-base-multi-image==16.0.1.0.0.2
 odoo-addon-fs-base-multi-media==16.0.1.0.1
@@ -232,7 +233,12 @@ odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@846f970da36
 odoo-addon-shopfloor-rest-log @ git+https://github.com/acsone/wms.git@dbe32e3decb51672ed0a5656ba4fed037bca7f4f#subdirectory=setup/shopfloor_rest_log
 odoo-addon-shopfloor-workstation @ git+https://github.com/acsone/wms.git@758b160304e097300932c358c7dd8bc915db0c45#subdirectory=setup/shopfloor_workstation
 odoo-addon-shopfloor-workstation-mobile @ git+https://github.com/acsone/wms.git@ebe2544d4bd88b0b1d5d7c43f782902873d6fa2c#subdirectory=setup/shopfloor_workstation_mobile
+odoo-addon-shopinvader-address==16.0.1.0.0.2
+odoo-addon-shopinvader-anonymous-partner==16.0.1.0.1
+odoo-addon-shopinvader-api-address==16.0.1.1.1.1
+odoo-addon-shopinvader-api-cart==16.0.1.0.2
 odoo-addon-shopinvader-base-url==16.0.1.0.2.8
+odoo-addon-shopinvader-fastapi-auth-jwt==16.0.1.0.1
 odoo-addon-shopinvader-product==16.0.1.0.0.2
 odoo-addon-shopinvader-product-brand==16.0.1.0.0.3
 odoo-addon-shopinvader-product-description==16.0.1.0.0.2
@@ -240,6 +246,8 @@ odoo-addon-shopinvader-product-seo==16.0.1.0.0.2
 odoo-addon-shopinvader-product-url==16.0.1.0.0.6
 odoo-addon-shopinvader-restapi==16.0.1.0.0.6
 odoo-addon-shopinvader-restapi-auth-jwt==16.0.1.2.0.2
+odoo-addon-shopinvader-sale-cart==16.0.1.0.0.2
+odoo-addon-shopinvader-schema-address==16.0.1.1.1
 odoo-addon-shopinvader-search-engine==16.0.1.0.1
 odoo-addon-shopinvader-search-engine-image==16.0.1.0.1
 odoo-addon-shopinvader-search-engine-product-brand==16.0.1.0.0.2
