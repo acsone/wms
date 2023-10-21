@@ -102,7 +102,7 @@
                         <field name="email" />
                         <field name="contact" />
                         <field name="phone" />
-                        <field name="file_id" />
+                        <field name="file" />
                     </group>
                 </sheet>
                 <div class="oe_chatter">

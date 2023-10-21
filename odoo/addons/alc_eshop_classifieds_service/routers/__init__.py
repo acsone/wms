@@ -1,0 +1,1 @@
+from .classified_ads_router import classified_ads_router

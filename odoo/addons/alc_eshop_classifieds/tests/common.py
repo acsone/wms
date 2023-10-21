@@ -4,7 +4,7 @@
 from odoo.tests.common import TransactionCase
 
 
-class TestClassifiedCase(TransactionCase):
+class TestClassifiedMixin:
     @classmethod
     def create_classified(cls, partner=False, state=False, **params):
         vals = {
@@ -21,9 +21,7 @@ class TestClassifiedCase(TransactionCase):
         return cls.model_classified.create(vals)
 
     @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+    def setUpRecords(cls):
         cls.partner_0 = cls.env["res.partner"].create({"name": "P0"})
         cls.partner_1 = cls.env["res.partner"].create({"name": "P1"})
         cls.partner_2 = cls.env["res.partner"].create({"name": "P2"})
@@ -45,3 +43,11 @@ class TestClassifiedCase(TransactionCase):
         cls.classifieds_2 = cls.classified_2_misc | cls.classified_2_wbr
 
         cls.classifieds = cls.classifieds_1 | cls.classifieds_2
+
+
+class TestClassifiedCase(TransactionCase, TestClassifiedMixin):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        super().setUpRecords()

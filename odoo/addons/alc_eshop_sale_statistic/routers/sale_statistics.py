@@ -18,7 +18,7 @@ from odoo.addons.fastapi.dependencies import (
     authenticated_partner_env,
 )
 
-from ..schema import (
+from ..schemas import (
     FiveYearsResponse,
     MonthlyOrderedResponse,
     ProductFamily,

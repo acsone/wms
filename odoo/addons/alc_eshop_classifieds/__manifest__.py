@@ -13,6 +13,7 @@
         "mail",
         "alc_address_data",
         "sale",  # for the menu
+        "fs_file",
     ],
     "data": [
         "security/alc_classified.xml",
