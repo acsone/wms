@@ -2,8 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Eshop Classified Advertising Shopinvader Services",
-    "description": """Alcyon Eshop Classified Advertising Shopinvader Services""",
+    "name": "Alc Eshop Classified Advertising API",
+    "description": """Alcyon Eshop Classified Advertising API""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
@@ -12,9 +12,6 @@
         "fastapi",
         "alc_eshop_classifieds",
         "alc_cerberus_utils",
-        # "authenticated_partner_mixin",
-        # "base_jsonify", renamed to jsonifier
-        # "jsonifier",
     ],
     "data": [],
     "demo": [],

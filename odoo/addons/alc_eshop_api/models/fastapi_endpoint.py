@@ -9,8 +9,8 @@ from fastapi.security import OAuth2AuthorizationCodeBearer
 
 from odoo import api, fields
 
-from odoo.addons.alc_eshop_classifieds_service.routers import classified_ads_router
-from odoo.addons.alc_eshop_sale_statistic.routers import sale_statistics_router
+from odoo.addons.alc_eshop_api_classifieds.routers import classified_ads_router
+from odoo.addons.alc_eshop_api_sale_statistic.routers import sale_statistics_router
 from odoo.addons.auth_jwt.models.auth_jwt_validator import AuthJwtValidator
 from odoo.addons.fastapi.dependencies import authenticated_partner_impl
 from odoo.addons.fastapi.models.fastapi_endpoint import (
