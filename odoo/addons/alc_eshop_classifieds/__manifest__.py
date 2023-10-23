@@ -25,4 +25,5 @@
     "demo": [],
     "external_dependencies": {"python": ["slugify"]},
     "installable": True,
+    "development_status": "Alpha",
 }

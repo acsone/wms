@@ -12,4 +12,5 @@
     "data": ["views/alc_classified.xml", "data/mail_templates.xml"],
     "demo": [],
     "installable": True,
+    "development_status": "Alpha",
 }
