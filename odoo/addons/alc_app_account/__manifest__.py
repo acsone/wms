@@ -13,6 +13,7 @@
         "account",
         # OCA
         "account_cutoff_picking_product_category",
+        "account_financial_report",
         "account_invoice_line_default_account",
         "account_invoice_check_total",
         "account_invoice_supplier_ref_unique",
