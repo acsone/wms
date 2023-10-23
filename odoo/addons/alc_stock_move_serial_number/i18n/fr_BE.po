@@ -27,6 +27,14 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #. module: alc_stock_move_serial_number
+#: model:ir.model.fields,help:alc_stock_move_serial_number.field_stock_move__show_serial_number
+#: model:ir.model.fields,help:alc_stock_move_serial_number.field_stock_picking_type__show_serial_number
+msgid ""
+"Check this if you want to allow serial numbers fill in for thecorresponding "
+"pickings."
+msgstr ""
+
+#. module: alc_stock_move_serial_number
 #: model:ir.model.fields,field_description:alc_stock_move_serial_number.field_modify_serial_number__create_uid
 msgid "Created by"
 msgstr "Créé par"
@@ -84,6 +92,11 @@ msgid "No active id found"
 msgstr "Aucun id actif trouvé"
 
 #. module: alc_stock_move_serial_number
+#: model:ir.model,name:alc_stock_move_serial_number.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: alc_stock_move_serial_number
 #: model:ir.model.fields,field_description:alc_stock_move_serial_number.field_modify_serial_number__serial_number
 msgid "Serial Number"
 msgstr "Numéro de série"
@@ -95,6 +108,7 @@ msgstr "Numéro de série"
 
 #. module: alc_stock_move_serial_number
 #: model:ir.model.fields,field_description:alc_stock_move_serial_number.field_stock_move__show_serial_number
+#: model:ir.model.fields,field_description:alc_stock_move_serial_number.field_stock_picking_type__show_serial_number
 msgid "Show Serial Number"
 msgstr "Montrer le numéro de série"
 
