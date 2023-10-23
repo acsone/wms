@@ -1,0 +1,128 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_eshop_api_sale_statistic
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_qty__date_last_ordered
+msgid "Date Last Ordered"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_qty__display_name
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_yearly__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model,name:alc_eshop_api_sale_statistic.model_alc_eshop_sale_statistics_router_helper
+msgid "Helper for the sale statistics router"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_qty__id
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_yearly__id
+msgid "ID"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_qty__in_supplier_promotion
+msgid "In Supplier Promotion"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_qty__is_equipment
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_yearly__is_equipment
+msgid "Is Equipment"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_qty__is_food
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_yearly__is_food
+msgid "Is Food"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_qty__is_meds
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_yearly__is_meds
+msgid "Is Meds"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_qty____last_update
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_yearly____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_yearly__order_year
+msgid "Order Year"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_qty__ordered_count
+msgid "Ordered Count"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_qty__partner_id
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_yearly__partner_id
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_sale_statistics_router_helper__partner
+msgid "Partner"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_qty__product_id
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_yearly__product_id
+msgid "Product"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model,name:alc_eshop_api_sale_statistic.model_alc_eshop_product_ordered_qty
+msgid "Product Ordered Qty"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_qty__product_tmpl_id
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_yearly__product_tmpl_id
+msgid "Product Tmpl"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#. odoo-python
+#: code:addons/alc_eshop_api_sale_statistic/routers/sale_statistics.py:0
+#, python-format
+msgid "Product not found for id %(product_id)s"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.actions.server,name:alc_eshop_api_sale_statistic.alc_eshop_product_ordered_qty_refresh_materialized_view_ir_actions_server
+#: model:ir.cron,cron_name:alc_eshop_api_sale_statistic.alc_eshop_product_ordered_qty_refresh_materialized_view
+msgid "Refresh EShop Sales Statistic materialized view"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.actions.server,name:alc_eshop_api_sale_statistic.alc_eshop_product_ordered_yearly_refresh_materialized_view_ir_actions_server
+#: model:ir.cron,cron_name:alc_eshop_api_sale_statistic.alc_eshop_product_ordered_yearly_refresh_materialized_view
+msgid "Refresh EShop Sales Yearly Statistics materialized view"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model.fields,field_description:alc_eshop_api_sale_statistic.field_alc_eshop_product_ordered_yearly__total
+msgid "Total"
+msgstr ""
+
+#. module: alc_eshop_api_sale_statistic
+#: model:ir.model,name:alc_eshop_api_sale_statistic.model_alc_eshop_product_ordered_yearly
+msgid "Yearly Ordered Product"
+msgstr ""

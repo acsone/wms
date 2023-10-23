@@ -1,0 +1,26 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_eshop_api_classifieds
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_eshop_api_classifieds
+#: model:ir.model,name:alc_eshop_api_classifieds.model_res_country_state
+msgid "Country state"
+msgstr ""
+
+#. module: alc_eshop_api_classifieds
+#. odoo-python
+#: code:addons/alc_eshop_api_classifieds/routers/classified_ads_router.py:0
+#, python-format
+msgid "This classified ad cannot be retrieved."
+msgstr ""
