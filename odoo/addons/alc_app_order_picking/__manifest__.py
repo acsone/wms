@@ -109,6 +109,8 @@
         "alc_stock_release_channel_state_editable",
         "alc_stock_available",
         "alc_stock_picking_cancel_permission",
+        "alc_stock_quant_product_last_transaction",
+        "alc_stock_quant_product_supplier",
     ],
     "data": [],
     "demo": [],
