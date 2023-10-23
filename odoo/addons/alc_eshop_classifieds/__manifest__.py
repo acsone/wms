@@ -13,6 +13,7 @@
         "mail",
         "alc_address_data",
         "sale",  # for the menu
+        "fs_file",
     ],
     "data": [
         "security/alc_classified.xml",
@@ -24,4 +25,5 @@
     "demo": [],
     "external_dependencies": {"python": ["slugify"]},
     "installable": True,
+    "development_status": "Alpha",
 }

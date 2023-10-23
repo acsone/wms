@@ -14,7 +14,7 @@
     <field name="doall" eval="False" />
     <field
       name="model_id"
-      ref="alc_eshop_sale_statistic.model_alc_eshop_product_ordered_qty"
+      ref="alc_eshop_api_sale_statistic.model_alc_eshop_product_ordered_qty"
     />
     <field name="code">model.refresh_view()</field>
   </record>
@@ -32,7 +32,7 @@
     <field name="doall" eval="False" />
     <field
       name="model_id"
-      ref="alc_eshop_sale_statistic.model_alc_eshop_product_ordered_yearly"
+      ref="alc_eshop_api_sale_statistic.model_alc_eshop_product_ordered_yearly"
     />
     <field name="code">model.refresh_view()</field>
   </record>

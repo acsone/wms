@@ -2,14 +2,18 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Eshop Classified Advertising",
-    "description": """Alcyon: Eshop Classified Advertising""",
+    "name": "Alc Eshop Classified Advertising API",
+    "description": """Alcyon Eshop Classified Advertising API""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["mixin_user_id", "alc_eshop_classifieds"],
-    "data": ["views/alc_classified.xml", "data/mail_templates.xml"],
+    "depends": [
+        "fastapi",
+        "alc_eshop_classifieds",
+        "alc_cerberus_utils",
+    ],
+    "data": [],
     "demo": [],
     "installable": True,
     "development_status": "Alpha",

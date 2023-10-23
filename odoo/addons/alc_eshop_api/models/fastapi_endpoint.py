@@ -9,7 +9,8 @@ from fastapi.security import OAuth2AuthorizationCodeBearer
 
 from odoo import api, fields
 
-from odoo.addons.alc_eshop_sale_statistic.routers import sale_statistics_router
+from odoo.addons.alc_eshop_api_classifieds.routers import classified_ads_router
+from odoo.addons.alc_eshop_api_sale_statistic.routers import sale_statistics_router
 from odoo.addons.auth_jwt.models.auth_jwt_validator import AuthJwtValidator
 from odoo.addons.fastapi.dependencies import authenticated_partner_impl
 from odoo.addons.fastapi.models.fastapi_endpoint import (
@@ -41,7 +42,12 @@ class FastapiEndpoint(FastapiEndpointBase):
     def _get_alc_eshop_app_fastapi_routers(self) -> list[APIRouter]:
         if "address" not in address_router.tags:
             address_router.tags.append("address")
-        return [address_router, cart_router, sale_statistics_router]
+        return [
+            address_router,
+            cart_router,
+            sale_statistics_router,
+            classified_ads_router,
+        ]
 
     def _get_alc_eshop_app_tags(self, params) -> list:
         tags_metadata = params.get("openapi_tags", []) or []
@@ -62,6 +68,12 @@ class FastapiEndpoint(FastapiEndpointBase):
             {
                 "name": "carts",
                 "description": "Set of services to manage carts",
+            }
+        )
+        tags_metadata.append(
+            {
+                "name": "classified_ads",
+                "description": "Set of services to manage classified advertisements",
             }
         )
         return tags_metadata

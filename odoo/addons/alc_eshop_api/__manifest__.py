@@ -16,7 +16,8 @@
         "shopinvader_fastapi_auth_jwt",
         "shopinvader_restapi",
         "shopinvader_restapi_auth_jwt",
-        "alc_eshop_sale_statistic",
+        "alc_eshop_api_sale_statistic",
+        "alc_eshop_api_classifieds",
     ],
     "data": [
         "views/fastapi_endpoint.xml",

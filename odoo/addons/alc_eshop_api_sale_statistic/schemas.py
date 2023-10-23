@@ -34,13 +34,23 @@ class ProductFamily(Enum):
     equipment = "equipment"
 
 
-class OrderedProductInfo(BaseModel):
+class OrderedProductInfo(
+    BaseModel,
+    revalidate_instances="always",
+    validate_assignment=True,
+    extra="forbid",
+):
     date_last_ordered: datetime
     product_family: ProductFamily | None = None
     product_id: int
     ordered_count: int
 
 
-class TopOrderedResponse(BaseModel):
+class TopOrderedResponse(
+    BaseModel,
+    revalidate_instances="always",
+    validate_assignment=True,
+    extra="forbid",
+):
     data: list[OrderedProductInfo] = []
     size: int

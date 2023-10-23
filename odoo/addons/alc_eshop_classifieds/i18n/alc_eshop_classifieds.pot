@@ -134,7 +134,7 @@ msgid "Equipment"
 msgstr ""
 
 #. module: alc_eshop_classifieds
-#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified__file_id
+#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_alc_classified__file
 msgid "File"
 msgstr ""
 

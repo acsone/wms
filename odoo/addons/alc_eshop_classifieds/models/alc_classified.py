@@ -86,7 +86,7 @@ class AlcClassified(models.Model):
     email = fields.Char("Email", required=True, tracking=True)
     phone = fields.Char("Phone", required=True, tracking=True)
     contact = fields.Char("Contact", required=True, tracking=True)
-    file_id = FSFile()
+    file = FSFile()
 
     @api.model
     def default_today(self):
