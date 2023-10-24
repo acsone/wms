@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_eshop_cms
+# 	* alc_eshop_cms
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -15,7 +15,8 @@ msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_about-us
-msgid "\n"
+msgid ""
+"\n"
 "<h1>About us?</h1>\n"
 "<p>Alcyon, the leader in the distribution of medicines for animals, food and equipment, was created by and for vets, in order to provide them with the best solutions in conducting their daily practice.</p>\n"
 "<h2>Alcyon is guided by a single strategy: fostering and strengthening the veterimary profession</h2>\n"
@@ -42,12 +43,12 @@ msgid "\n"
 "<p>ALCYON’s size favours adaptability. We can react very quickly to deal with any situation. We don’t need to follow the arbitrary regulations of big groups more ruled by short-term profits and stock-exchange results than by their customers’ satisfaction.</p>\n"
 "<h2> </h2>\n"
 "<h1>Alcyon is the sole distributeur by and for veterinary practitioners</h1>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_born-to-share
-msgid "\n"
+msgid ""
+"\n"
 "<h1>Born to share</h1>\n"
 "<h2>Showroom</h2>\n"
 "<p>Our Villiers-le-Bouillet premises are designed to respond as efficiently as possible to our profession’s logistical challenges, but we also wanted to be able to receive our clients with the same degree of efficiency. Our showroom welcomes vets who would like to place their orders directly on-site and more generally all vets who take part in seminars and conferences. Each year, the general meeting allows our many shareholders (over 100 at this time) to visit our showroom. Here you will find various equipment and work instruments, which you can compare and analyse in order to meet your needs as effectively as possible.</p>\n"
@@ -61,12 +62,12 @@ msgid "\n"
 "<p><strong>Patricia DERYCKE</strong><br/> Brussels, Walloon Brabant, Hainaut<br/> Tel. : 0486 / 63 53 65<br/> E-mail : <a href=\"mailto:patricia.derycke@alcyonbelux.be\">patricia.derycke@alcyonbelux.be</a></p>\n"
 "<h2>Our Seminars</h2>\n"
 "<p>Would you like to organise a course, conference or product demonstration for vets? Are you looking for a completely equipped and well located room? The Alcyon seminar room is exactly what you need.</p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_chronology-crazy-dream
-msgid "\n"
+msgid ""
+"\n"
 "<h1>Chronology of a rather crazy dream</h1>\n"
 "<p>It could all be summed up by a quote from Dom Helder CAMARA: “When we are dreaming alone, it’s only a dream. When we are dreaming with others, it’s the beginning of reality. Shared utopia is the province of history.”</p>\n"
 "<p>It all began back in the nineteen nineties. In response to particular circumstances, a few kamikaze vets decided to set up a veterinary group following a model that had already existed in France for over 20 years. Two cooperatives were born, PROLIPHARM and PROLIMAT. They were joined by around fifty practising vets.</p>\n"
@@ -91,24 +92,24 @@ msgid "\n"
 "<p>This has allowed ALCYON to remain faithful to its values, which you also share - realism, transparency, innovation and collegiality - and its promises:</p>\n"
 "<p>Creating an effective professional tool in the service of practitioners and ensuring the continued development of its economic activities.</p>\n"
 "<p>Deserving your trust is what makes us strong.</p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_export
-msgid "\n"
+msgid ""
+"\n"
 "<h1>Export</h1>\n"
 "<p>The legislation on medication in Europe does not allow the free circulation of medicines. On the other hand, as regards other products, such as over-the-counter drugs, nutrition and equipment of any kind, ALCYON Belux can help you in your choices and can supply you anywhere in the world.</p>\n"
 "<p>Our terms and conditions of sale relating to exports are entirely specific to the country in question. Thank you in advance for contacting us in order to obtain an offer and find out the precise terms and conditions for delivery and payment.</p>\n"
 "<p>ALCYON Belux has positioned itself as an exit point for the group vis-à-vis the world. Our exports cover numerous continents and countries such as, obviously, the bordering countries, Luxembourg, France etc. but also countries much further afield, like Hong-Kong, China, Saudi Arabia, Rwanda, Gabon, the Democratic Republic of Congo, etc.</p>\n"
 "<p>Do send us your questions so that we can meet your needs.</p>\n"
 "<p>The world is a village!</p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_general-conditions
-msgid "\n"
+msgid ""
+"\n"
 "<h1>General conditions of sale</h1>\n"
 "<p>The sale and delivery of goods and the provision of services under the conditions laid down in these general terms and conditions of sale apply only to customers established in Belgium. For other customers, the conditions of sale must be negotiated on a case-by-case basis with our Alcyon Belux Distribution Vétérinaire S.A. sales department (callcenter@alcyonbelux.be).</p>\n"
 "<p>These general terms and conditions for the sale of goods or the provision of services apply exclusively to all orders placed with Alcyon Belux Distribution Veterinaire S.A (hereinafter Alcyon Belux) and shall take precedence over any other terms and conditions of sale, subject to provisions to the contrary in a written agreement.</p>\n"
@@ -160,12 +161,12 @@ msgid "\n"
 "<p>Any disputes come under the sole jurisdiction of the justice of peace in the county or the courts in the district in which Alcyon Belux’ head office is situated.</p>\n"
 "<h2>10. Invalid conditions</h2>\n"
 "<p>If certain clauses of these general terms and conditions of sale and delivery are invalid, this will not affect the legitimacy of the other clauses or parts thereof. The parties must replace an invalid provision by one that is valid and that comes as close as possible to achieving the economic objective of the invalid provision.</p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_legal-notices
-msgid "\n"
+msgid ""
+"\n"
 "<h1>Legal Notices</h1>\n"
 "<p>SA ALCYON BELUX VETERINARY DISTRIBUTION</p>\n"
 "<p>Rue le Marais,17 - 4530 Villers-le-Bouillet - BELGIUM</p>\n"
@@ -214,12 +215,12 @@ msgid "\n"
 "<p>Save prior written authorisation, any use of the works other than for individual and private reproduction and consultation are prohibited.</p>\n"
 "<p>The trademarks featured on the Website are registered trademarks. Any total or partial reproduction of these trademarks is prohibited.</p>\n"
 "<p>Violation of all these compulsory provisions subjects the offender, and any responsible persons, to the criminal and civil penalties provided by law.</p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_tailor-made-setup
-msgid "\n"
+msgid ""
+"\n"
 "<h1>My tailor-made set-up</h1>\n"
 "<p>Created by and for vets, ALCYON Belux will assist you throughout your career. Setting up constitutes the first stage of a long-term, high-quality partnership. Your Alcyon teams are available for advising and assisting you towards a successful outcome for your project in numerous areas.</p>\n"
 "<h2>Alcyon equipment</h2>\n"
@@ -243,12 +244,12 @@ msgid "\n"
 "<p>Given the range and variety of the equipment made available to you, it is clearly impossible for ALCYON to have replacement equipment permanently available. However, we always do our very best to try to sort you out while your own equipment is unavailable.</p>\n"
 "<p>For your after-sales service, please contact:</p>\n"
 "<p>By email: <a href=\"mailto:Erik.Hoitinga@alcyonbelux.be\">Erik.Hoitinga@alcyonbelux.be</a><br/> By phone: 0470/60.06.14</p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_obligations-ordering-medication
-msgid "\n"
+msgid ""
+"\n"
 "<h1>Obligations to meet when ordering medication</h1>\n"
 "<h2>For belgian veterinary practioners</h2>\n"
 "<ul>\n"
@@ -266,12 +267,12 @@ msgid "\n"
 "<li>Please contact Alcyon in order to send a copy of a certificate/ degree/ permit on an ad hoc basis.</li>\n"
 "</ul>\n"
 "<p>Royal Decree of 21 July 2016 relating to the conditions of use of medicines by veterinary practitioners and those taking care of animals.</p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_rgpd
-msgid "\n"
+msgid ""
+"\n"
 "<h1>Privacy and personal data confidentiality policy</h1>\n"
 "<p>Alcyon is concerned with protecting the personal data that it processes. To this end, Alcyon hereby commits to respect the enforceable regulations applicable to processing of personal data and, particularly, EU regulation 2016/679 of the European Parliament and Council dated 27th April 2016 that came into effect on 25th May 2018 (also known as the “general data protection regulation”).</p>\n"
 "<p>This privacy policy declaration aims to describe how Alcyon collects and processes your personal data, whether within the scope of the assistance which we provide to you for any questions you may ask us, the supply of your data via a form, the provision of a service by ourselves or yourselves, your application for a job vacancy or simply as part of our collaboration.</p>\n"
@@ -513,12 +514,12 @@ msgid "\n"
 "<p>For applicants for a job vacancy with Alcyon, the personal data shall be kept following completion of the selection process for the job vacancy in question for a maximum period of 2 years.</p>\n"
 "<h2>10. Modifications and amendments</h2>\n"
 "<p>We may occasionally make modifications to this Privacy and Confidentiality Policy Declaration in order chiefly to comply with new regulatory requirements. Any modification shall take effect immediately after publication of the updated Privacy and Confidentiality Policy Declaration. In the case of a substantial modification, before it enters into force, a notification shall be published or shall be directly sent to you. Should you continue to use our services following the effective date of the updated Privacy and Confidentiality Policy Declaration, we shall consider that you accept these modifications.</p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_privacy-policy
-msgid "\n"
+msgid ""
+"\n"
 "<h1>Privacy policy</h1>\n"
 "<h2>Introduction</h2>\n"
 "<p>With the development of the new communication tools, special attention needs to be focused on protecting privacy. That is why we undertake to respect the confidentiality of the personal information we gather.</p>\n"
@@ -694,12 +695,12 @@ msgid "\n"
 "</ul>\n"
 "<h2>Legislation</h2>\n"
 "<p>We undertake to adhere to the provisions of Law 8 December 1992 regarding the protection of privacy with respect to the processing of personal details and its implementation decrees.</p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_fridge-return
-msgid "\n"
+msgid ""
+"\n"
 "<h1>Procédure retours produits frigos</h1>\n"
 "<p>Chers clients,</p>\n"
 "<p>Lors d’inspections récentes effectuées, l’AFMPS a constaté à plusieurs reprises que la remise en stock de médicaments retournés n’était pas toujours conforme à la législation en vigueur. Nous souhaitons donc spécifiquement attirer votre attention sur les exigences liées au retour des médicaments qui exigent des conditions de stockage à basse température.</p>\n"
@@ -734,12 +735,12 @@ msgid "\n"
 "<p>Veuillez agréer chers clients, l’expression de nos sentiments dévoués.</p>\n"
 "<p><strong>Samuel Van Bael</strong><br/> Pharmacien<br/> Personne Responsable GDP<br/> Alcyon Belux SA</p>\n"
 "<p><strong>Gregory Leyens</strong><br/> Vétérinaire<br/> Directeur Scientifique<br/> Alcyon Belux SA</p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_quality-identity-veterinary
-msgid "\n"
+msgid ""
+"\n"
 "<h1>Seven qualities, one identity: veterinary!</h1>\n"
 "<h2>1. Unique identity</h2>\n"
 "<p>Alcyon is the only veterinary distribution company that is 100% owned by you. All of the directors and shareholders are colleagues. Why not join?</p>\n"
@@ -757,12 +758,12 @@ msgid "\n"
 "<h2>7. Eco-attitude</h2>\n"
 "<p>Ecological building, recovering packaging, waste sorting, etc. Like you, we are taking steps towards a better environment.</p>\n"
 "<h2>Alcyon is a Vet. Alcyon is a Partner Alcyon is you !</h2>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_seminar-room
-msgid "\n"
+msgid ""
+"\n"
 "<h1>The seminar room</h1>\n"
 "<h2>Description</h2>\n"
 "<p>You would like to organise a course, conference or product demonstration for vets. You are looking for a completely equipped and well located room. The Alcyon seminar room is exactly what you need.</p>\n"
@@ -773,32 +774,32 @@ msgid "\n"
 "<h2>Are you interested? Let us know!</h2>\n"
 "<p>Show us your project and we’ll send you a detailed estimate very soon.</p>\n"
 "<p>Contact: 04/355.85.00</p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_legal-organisations
-msgid "\n"
+msgid ""
+"\n"
 "<h1>Useful links</h1>\n"
 "<h2>Legal organisations</h2>\n"
 "<p><a href=\"https://www.famhp.be/en\"> FAMHP: Federal Agency for Medecines and Health Products </a></p>\n"
 "<p><a href=\"https://www.fasfc.be/\"> FASFC : Federal Agency for the Safety of the Food Chain </a></p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_veterinary-organisations
-msgid "\n"
+msgid ""
+"\n"
 "<h1>Useful links</h1>\n"
 "<h2>Veterinary organisations</h2>\n"
 "<p><a href=\"https://www.ordre-veterinaires.be/\"> College of Veterinarians </a></p>\n"
 "<p><a href=\"https://upv.be/\"> UPV </a></p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,content:alc_eshop_cms.alc_eshop_cms_page_your-team-alcyon
-msgid "\n"
+msgid ""
+"\n"
 "<h1>Your team Alcyon</h1>\n"
 "<p>Each employee is aware of the importance of the role of the veterinarian and does his or her utmost to support you in your activity.</p>\n"
 "<h3>Fabrice - Sales representative</h3>\n"
@@ -819,28 +820,42 @@ msgid "\n"
 "<p><img src=\"/web/image/alc_eshop_cms.ir_att_img_team_bertrand\"/></p>\n"
 "<h3>Philippe - Livreur</h3>\n"
 "<p><img src=\"/web/image/alc_eshop_cms.ir_att_img_team_philippe\"/></p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.snippet,content:alc_eshop_cms.alc_eshop_cms_snippet_alcyonnaire_howto
-msgid "\n"
+msgid ""
+"\n"
 "<p>Devenir Alcyonnaire...</p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.snippet,content:alc_eshop_cms.alc_eshop_cms_snippet_product_on_order_cancel_intro
-msgid "\n"
+msgid ""
+"\n"
 "<p>You can ask to modify the quantities in back order using the form here under. You will be able to see the modification in your account, under \"Product orders\", once our team will have manually modified your order.</p>\n"
 "<p>All questions concerning backorders can be addressed to our team by phone: <strong>+32 4 338 84 39</strong> or by email: <a href=\"mailto:callcenter@alcyonbelux.be\">callcenter@alcyonbelux.be</a>.</p>\n"
-""
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,name:alc_eshop_cms.alc_eshop_cms_page_about-us
 #: model:alc.eshop.cms.page.group,name:alc_eshop_cms.alc_eshop_cms_page_group_about-us
 msgid "About us"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_content_image_mixin
+msgid "Alc Content Image Mixin"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_content_lang_mixin
+msgid "Alc Content Lang Mixin"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_content_url_mixin
+msgid "Alc Content URL Mixin"
 msgstr ""
 
 #. module: alc_eshop_cms
@@ -851,6 +866,26 @@ msgstr ""
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,name:alc_eshop_cms.alc_eshop_cms_page_born-to-share
 msgid "Born to share"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_cms_mixin
+msgid "CMS Mixin"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_eshop_cms_news
+msgid "CMS News"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_eshop_cms_page
+msgid "CMS Page"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_eshop_cms_snippet
+msgid "CMS Snippet"
 msgstr ""
 
 #. module: alc_eshop_cms
@@ -882,33 +917,33 @@ msgid "Cms Pages"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_code
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__code
 msgid "Code"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_image_mixin_content
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_content
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_content
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_content
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_image_mixin__content
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__content
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__content
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__content
 msgid "Content"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_create_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_create_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group_create_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_create_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_create_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__create_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__create_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group__create_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot__create_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_create_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_create_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group_create_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_create_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_create_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__create_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__create_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group__create_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot__create_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__create_date
 msgid "Created on"
 msgstr ""
 
@@ -918,25 +953,21 @@ msgid "Current"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_date_end
-msgid "Date end"
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__date_end
+msgid "Date End"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_date_start
-msgid "Date start"
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__date_start
+msgid "Date Start"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_cms_mixin_display_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_image_mixin_display_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_display_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_display_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_display_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_display_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group_display_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_display_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group__display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot__display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -967,12 +998,12 @@ msgid "Export"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_filename
-msgid "Filename"
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__file
+msgid "File"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_foreword
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__foreword
 msgid "Foreword"
 msgstr ""
 
@@ -982,13 +1013,8 @@ msgid "General Conditions"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_cms_page_group_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__cms_page_group_id
 msgid "Group"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model.fields,help:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_url
-msgid "HTTP accessible path to the file"
 msgstr ""
 
 #. module: alc_eshop_cms
@@ -997,38 +1023,27 @@ msgid "Header: 1176x384 (px)"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_cms_mixin_id
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_image_mixin_id
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_id
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_id
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_id
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group_id
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_id
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_id
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group__id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot__id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__id
 msgid "ID"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_image
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_ir_attachment_storage_image_id
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_shipping_label_storage_image_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__image
 msgid "Image"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_medium_url
-msgid "Image medium url"
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__image_medium
+msgid "Image medium"
 msgstr ""
 
 #. module: alc_eshop_cms
 #: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
-msgid "Image preview"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_small_url
-msgid "Image small url"
+msgid "Images"
 msgstr ""
 
 #. module: alc_eshop_cms
@@ -1042,41 +1057,47 @@ msgid "Info"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_lang_ids
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_lang_ids
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_lang_ids
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_lang_ids
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__is_future
+msgid "Is Future"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__is_past
+msgid "Is Past"
+msgstr ""
+
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin__lang_ids
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__lang_ids
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__lang_ids
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__lang_ids
 msgid "Lang"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_cms_mixin___last_update
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_image_mixin___last_update
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin___last_update
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin___last_update
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news___last_update
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page___last_update
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group___last_update
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot___last_update
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet___last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news____last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page____last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group____last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot____last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_write_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group_write_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_write_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_write_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_write_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__write_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__write_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group__write_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot__write_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_write_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group_write_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_write_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_write_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_write_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__write_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__write_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group__write_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot__write_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -1096,13 +1117,13 @@ msgid "My tailor-made set-up"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin__name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin__name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group__name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot__name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__name
 #: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 #: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_form_view
 #: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_snippet_form_view
@@ -1155,13 +1176,13 @@ msgid "Procédure retours produits frigos"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_published
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__published
 #: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_search_view
 msgid "Published"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_sequence
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__sequence
 msgid "Sequence"
 msgstr ""
 
@@ -1171,14 +1192,15 @@ msgid "Seven qualities, one identity: veterinary!"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_cms_page_slot_ids
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__cms_page_slot_ids
 msgid "Slots"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: code:addons/alc_eshop_cms/models/alc_eshop_cms_news.py:78
+#. odoo-python
+#: code:addons/alc_eshop_cms/models/alc_eshop_cms_news.py:0
 #, python-format
-msgid "The defined period is not a valid (%s > %s)"
+msgid "The defined period is not a valid (%(date_start)s > %(date_end)s"
 msgstr ""
 
 #. module: alc_eshop_cms
@@ -1187,13 +1209,8 @@ msgid "The seminar room"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image
-msgid "Thumbnail image"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_filename
-msgid "Thumbnail image filename"
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__thumbnail_image
+msgid "Thumbnail Image"
 msgstr ""
 
 #. module: alc_eshop_cms
@@ -1212,21 +1229,20 @@ msgid "Upcoming from today"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_url
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_url
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_url
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_url
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_url
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin__url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin__url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__url
 msgid "Url"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_url_locales
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_url_locales
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_url_locales
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_url_locales
-msgid "Url locales"
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin__url_locales
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__url_locales
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__url_locales
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__url_locales
+msgid "Url Locales"
 msgstr ""
 
 #. module: alc_eshop_cms
@@ -1255,54 +1271,8 @@ msgid "Your team Alcyon"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model,name:alc_eshop_cms.model_alc_cms_mixin
-msgid "alc.cms.mixin"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model,name:alc_eshop_cms.model_alc_content_image_mixin
-msgid "alc.content.image.mixin"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model,name:alc_eshop_cms.model_alc_content_lang_mixin
-msgid "alc.content.lang.mixin"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model,name:alc_eshop_cms.model_alc_content_url_mixin
-msgid "alc.content.url.mixin"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model,name:alc_eshop_cms.model_alc_eshop_cms_news
-msgid "alc.eshop.cms.news"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model,name:alc_eshop_cms.model_alc_eshop_cms_page
-msgid "alc.eshop.cms.page"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model,name:alc_eshop_cms.model_alc_eshop_cms_snippet
-msgid "alc.eshop.cms.snippet"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model,name:alc_eshop_cms.model_ir_attachment
-msgid "ir.attachment"
-msgstr ""
-
-#. module: alc_eshop_cms
 #: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 #: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_form_view
 #: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_snippet_form_view
 msgid "name"
 msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_id
-msgid "storage image"
-msgstr ""
-
