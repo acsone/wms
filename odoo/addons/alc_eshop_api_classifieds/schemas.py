@@ -170,7 +170,7 @@ class ClassifiedAds(ClassifiedAdsCommonData):
         return instance
 
 
-class ClassifiedAdsSearhParameters(ClassifiedAdsUpdate):
+class ClassifiedAdsSearchParams(ClassifiedAdsUpdate):
     from_date: date | None = None
 
 
