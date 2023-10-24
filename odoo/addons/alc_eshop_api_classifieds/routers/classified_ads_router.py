@@ -20,7 +20,7 @@ from ..dependencies import state_code_to_state_id
 from ..schemas import (
     ClassifiedAdsCreate,
     ClassifiedAdsList,
-    ClassifiedAdsSearhParameters,
+    ClassifiedAdsSearchParams,
     ClassifiedAdsUpdate,
     State,
 )
@@ -54,7 +54,7 @@ def search(
     env: Annotated[api.Environment, Depends(authenticated_partner_env)],
     partner: Annotated[Partner, Depends(authenticated_partner)],
     code_to_state_id: Annotated[dict[str, int], Depends(state_code_to_state_id)],
-    params: Annotated[ClassifiedAdsSearhParameters, Depends()],
+    params: Annotated[ClassifiedAdsSearchParams, Depends()],
     page: int | None = 1,
     per_page: int | None = 10,
 ) -> ClassifiedAdsList:
@@ -79,7 +79,7 @@ def my_classified_ads(
     env: Annotated[api.Environment, Depends(authenticated_partner_env)],
     partner: Annotated[Partner, Depends(authenticated_partner)],
     code_to_state_id: Annotated[dict[str, int], Depends(state_code_to_state_id)],
-    params: Annotated[ClassifiedAdsSearhParameters, Depends()],
+    params: Annotated[ClassifiedAdsSearchParams, Depends()],
     state: State | None = None,
     page: int | None = 1,
     per_page: int | None = 10,
