@@ -11,7 +11,32 @@
                 <header>
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_button_box" name="button_box">
+                        <field name="is_published" invisible="1" />
+                        <button
+              name="action_toggle_is_published"
+              attrs="{'invisible': [('is_published', '=', False)]}"
+              class="oe_stat_button"
+              type="object"
+              icon="fa-globe"
+            >
+                            <div class="o_stat_info o_field_widget">
+                                <span class="text-success">Published</span>
+                            </div>
+                        </button>
+                        <button
+              name="action_toggle_is_published"
+              attrs="{'invisible': [('is_published', '=', True)]}"
+              class="oe_stat_button"
+              type="object"
+              icon="fa-eye-slash"
+            >
+                            <div class="o_stat_info o_field_widget">
+                                <span class="text-danger">Unpublished</span>
+                            </div>
+                        </button>
+                    </div>
+
                      <field name="image_medium" />
                     <div class="oe_title">
                         <label class="oe_edit_only" for="name" string="Name" />
