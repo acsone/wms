@@ -1,18 +1,18 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.addons.component.tests.common import SavepointComponentCase
+from odoo.tests.common import TransactionCase
 
+from ..schemas import Content
 from .common import CommonMixin
 
 
-class TestAlcEshopPage(SavepointComponentCase, CommonMixin):
+class TestCmsContentImage(TransactionCase, CommonMixin):
     @classmethod
     def setUpClass(cls):
-        super(TestAlcEshopPage, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        super(TestAlcEshopPage, cls)._init_langs()
+        super()._init_langs()
         cls.ir_att_img_xml_id = "alc_eshop_cms.ir_att_img_team_bertrand"
         cls.ir_att_img = cls.env.ref(cls.ir_att_img_xml_id)
         cls.page = cls.env["alc.eshop.cms.page"].create(
@@ -34,34 +34,32 @@ class TestAlcEshopPage(SavepointComponentCase, CommonMixin):
                     )
                 ],
                 "content": cls._gen_content(
-                    "/web/image/{}/test.jpg".format(cls.ir_att_img.id),
-                    "/web/image/{}/test.jpg".format(cls.ir_att_img_xml_id),
+                    f"/web/image/{cls.ir_att_img.id}/test.jpg",
+                    f"/web/image/{cls.ir_att_img_xml_id}/test.jpg",
                 ),
             }
+        )
+
+    def setUp(self):
+        super().setUp()
+        self._init_fs_storage()
+        self.fs_storage.model_ids |= self.env.ref(
+            "fs_image_thumbnail.model_fs_thumbnail"
         )
 
     @classmethod
     def _gen_content(cls, *image_urls):
         return "<p>Test content</p>" + "".join(
-            '<img src="{}" class="test class" width="100%"/>'.format(url)
-            for url in image_urls
+            f'<img src="{url}" class="test class" width="100%"/>' for url in image_urls
         )
 
     def test_get_content_generate_storage_image(self):
-        existing_storage_image = self.env["storage.image"].search([])
-        json = self.page._to_json()
-        self.assertTrue(json)
-        new_storage_image = (
-            self.env["storage.image"].search([]) - existing_storage_image
-        )
-        self.assertEqual(len(new_storage_image), 1)
-        content = json[0]["data"]["content"]
-        self.assertEqual(
-            content, self._gen_content(new_storage_image.url, new_storage_image.url)
-        )
-        existing_storage_image |= new_storage_image
-        self.page._to_json()
-        new_storage_image = (
-            self.env["storage.image"].search([]) - existing_storage_image
-        )
-        self.assertFalse(new_storage_image)
+        self.assertFalse(self.ir_att_img.thumbnail_ids)
+        content = Content.from_odoo_record(self.page)
+        self.assertTrue(content.data.content)
+        self.assertEqual(len(self.ir_att_img.thumbnail_ids), 1)
+        url = self.ir_att_img.thumbnail_ids.image.url
+        self.assertEqual(content.data.content, self._gen_content(url, url))
+        content = Content.from_odoo_record(self.page)
+        self.assertEqual(len(self.ir_att_img.thumbnail_ids), 1)
+        self.assertEqual(content.data.content, self._gen_content(url, url))

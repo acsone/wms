@@ -32,23 +32,16 @@
                   />
                                 </group>
                                 <group name="right">
-                                    <field
-                    name="thumbnail_image"
-                    filename="thumbnail_image_filename"
-                  />
-                                    <field
-                    name="thumbnail_image_filename"
-                    invisible="1"
-                  />
-                                    <field name="image" filename="image_filename" />
-                                    <field name="image_filename" invisible="1" />
-                                    <field name="file" filename="filename" />
-                                    <field name="filename" invisible="1" />
+                                    <field name="file" />
                                 </group>
                             </group>
                          </page>
-                         <page string="Image preview">
-                             <div class="alert alert-warning" id="images_info">
+                         <page string="Images">
+                             <div
+                role="alert"
+                class="alert alert-warning"
+                id="images_info"
+              >
                                  <p>Images should be in the following format:
                                      <ul>
                                          <li>Thumbnail: 288x128 (px)</li>
@@ -57,14 +50,8 @@
                                  </p>
                              </div>
                              <group>
-                             <label for="thumbnail_image" />
-                             <field
-                  name="thumbnail_image_url"
-                  widget="image_url"
-                  nolabel="1"
-                />
-                             <label for="image" />
-                             <field name="image_url" widget="image_url" nolabel="1" />
+                                    <field name="thumbnail_image" />
+                                    <field name="image" />
                              </group>
                          </page>
                      </notebook>

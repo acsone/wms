@@ -1,18 +1,15 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo import api, models
+from odoo import models
 
 
 class AlcCmsMixin(models.AbstractModel):
-    """This mixin should be the root of other CMS mixins,
-       to make sure they have a common root.
+    """This mixin should be the root of other CMS mixins,.
+
+    to make sure they have a common root.
     """
 
     _name = "alc.cms.mixin"
-
-    @api.model
-    def _get_data_parser(self):
-        return []
+    _description = "CMS Mixin"

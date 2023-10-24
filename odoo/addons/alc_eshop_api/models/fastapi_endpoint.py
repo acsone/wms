@@ -10,6 +10,7 @@ from fastapi.security import OAuth2AuthorizationCodeBearer
 from odoo import api, fields
 
 from odoo.addons.alc_eshop_api_classifieds.routers import classified_ads_router
+from odoo.addons.alc_eshop_api_cms.routers import cms_router
 from odoo.addons.alc_eshop_api_sale_statistic.routers import sale_statistics_router
 from odoo.addons.auth_jwt.models.auth_jwt_validator import AuthJwtValidator
 from odoo.addons.fastapi.dependencies import authenticated_partner_impl
@@ -45,8 +46,9 @@ class FastapiEndpoint(FastapiEndpointBase):
         return [
             address_router,
             cart_router,
-            sale_statistics_router,
             classified_ads_router,
+            cms_router,
+            sale_statistics_router,
         ]
 
     def _get_alc_eshop_app_tags(self, params) -> list:
@@ -74,6 +76,12 @@ class FastapiEndpoint(FastapiEndpointBase):
             {
                 "name": "classified_ads",
                 "description": "Set of services to manage classified advertisements",
+            }
+        )
+        tags_metadata.append(
+            {
+                "name": "cms",
+                "description": "Set of services to manage cms content",
             }
         )
         return tags_metadata
