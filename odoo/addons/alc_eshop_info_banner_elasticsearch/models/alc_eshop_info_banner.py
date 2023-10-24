@@ -58,3 +58,7 @@ class AlcEshopInfoMessage(Model):
             ("date_start", ">", now),
             ("date_end", "<", now),
         ]
+
+    def write(self, vals):
+        self._se_mark_to_update()
+        return super().write(vals)

@@ -52,6 +52,17 @@ class TestEShopInfoBannerElasticsearch(TestBindingIndexBaseFake):
     def _get_date(cls, day_offset=0):
         return datetime.date.today() + datetime.timedelta(days=day_offset)
 
+    @classmethod
+    def _expected_result(cls, banner):
+        return {
+            "id": banner.id,
+            "html": str(banner.html),
+            "date_start": banner.date_start.isoformat(),
+            "date_end": banner.date_end.isoformat(),
+            "type": "info",
+            "visibility": "auth_only",
+        }
+
     def test_00(self):
         """Cron will export all new published banners."""
         self.backend.cron_synchronize_info_banners()
@@ -65,17 +76,7 @@ class TestEShopInfoBannerElasticsearch(TestBindingIndexBaseFake):
             msg1_args = list(
                 filter(lambda c: c.get("id") == self.msg_1.id, index_call.get("args"))
             )[0]
-            self.assertDictEqual(
-                msg1_args,
-                {
-                    "id": self.msg_1.id,
-                    "html": str(self.msg_1.html),
-                    "date_start": self.msg_1.date_start.isoformat(),
-                    "date_end": self.msg_1.date_end.isoformat(),
-                    "type": "info",
-                    "visibility": "auth_only",
-                },
-            )
+            self.assertDictEqual(msg1_args, self._expected_result(self.msg_1))
         self.assertEqual(self.msg_1.se_binding_ids.state, "done")
 
     def test_01(self):
@@ -99,17 +100,7 @@ class TestEShopInfoBannerElasticsearch(TestBindingIndexBaseFake):
             msg1_args = list(
                 filter(lambda c: c.get("id") == self.msg_1.id, index_call.get("args"))
             )[0]
-            self.assertDictEqual(
-                msg1_args,
-                {
-                    "id": self.msg_1.id,
-                    "html": str(self.msg_1.html),
-                    "date_start": self.msg_1.date_start.isoformat(),
-                    "date_end": self.msg_1.date_end.isoformat(),
-                    "type": "info",
-                    "visibility": "auth_only",
-                },
-            )
+            self.assertDictEqual(msg1_args, self._expected_result(self.msg_1))
         self.assertEqual(self.msg_1.se_binding_ids.state, "done")
 
     def test_03(self):
@@ -127,17 +118,7 @@ class TestEShopInfoBannerElasticsearch(TestBindingIndexBaseFake):
             msg1_args = list(
                 filter(lambda c: c.get("id") == self.msg_1.id, index_call.get("args"))
             )[0]
-            self.assertDictEqual(
-                msg1_args,
-                {
-                    "id": self.msg_1.id,
-                    "html": str(self.msg_1.html),
-                    "date_start": self.msg_1.date_start.isoformat(),
-                    "date_end": self.msg_1.date_end.isoformat(),
-                    "type": "info",
-                    "visibility": "auth_only",
-                },
-            )
+            self.assertDictEqual(msg1_args, self._expected_result(self.msg_1))
         self.assertEqual(self.msg_1.se_binding_ids.state, "done")
 
     def test_04(self):
@@ -174,3 +155,9 @@ class TestEShopInfoBannerElasticsearch(TestBindingIndexBaseFake):
         self.backend.cron_synchronize_info_banners()
         self.assertFalse(self.msg_1.is_published)
         self.assertEqual(self.msg_1.se_binding_ids.state, "to_delete")
+
+    def test_07(self):
+        """Banner set to be recomputed after edit."""
+        self.test_00()
+        self.msg_1.html = "<h1>ok<h1/>"
+        self.assertEqual(self.msg_1.se_binding_ids.state, "to_recompute")

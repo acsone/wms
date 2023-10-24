@@ -7,7 +7,7 @@ from odoo.addons.search_engine_serializer_pydantic.tools.serializer import (
 from ..schemas import AlcEshopInfoBanner
 
 
-class AlcEshopInfoBannerShopinvaderSerializer(PydanticModelSerializer):
+class AlcEshopInfoBannerSerializer(PydanticModelSerializer):
     def get_model_class(self):
         return AlcEshopInfoBanner
 

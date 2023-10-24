@@ -7,9 +7,7 @@ from odoo.exceptions import ValidationError
 
 from odoo.addons.connector_search_engine.models.se_index import SeIndex as SeIndexBase
 
-from ..tools.alc_eshop_info_banner_serializer import (
-    AlcEshopInfoBannerShopinvaderSerializer,
-)
+from ..tools.alc_eshop_info_banner_serializer import AlcEshopInfoBannerSerializer
 
 
 class SeIndex(SeIndexBase):
@@ -35,5 +33,5 @@ class SeIndex(SeIndexBase):
     def _get_serializer(self):
         self.ensure_one()
         if self.serializer_type == "alc_eshop_info_banner":
-            return AlcEshopInfoBannerShopinvaderSerializer()
+            return AlcEshopInfoBannerSerializer()
         return super()._get_serializer()
