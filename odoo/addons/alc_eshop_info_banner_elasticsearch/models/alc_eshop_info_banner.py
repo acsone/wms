@@ -1,81 +1,60 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import Command, api, fields
+from odoo.models import Model
 
-from odoo.addons.alc_cerberus_utils import utils
+from odoo.addons.connector_search_engine.models.se_index import SeIndex
 
 
-class AlcEshopInfoMessage(models.Model):
-
-    _inherit = "alc.eshop.info.banner"
-
-    sync_state = fields.Selection(
-        [
-            ("new", "New"),
-            ("to_update", "To update"),
-            ("scheduled", "Scheduled"),
-            ("done", "Done"),
-        ],
-        default="new",
-        readonly=True,
-    )
-
-    # technical field. Never used. Used only to avoid but with methods searching
-    # from index to bindings
-    index_id = fields.Many2one("se.index", string="Index",)
-
-    se_index_ids = fields.Many2many(
-        comodel_name="se.index", compute="_compute_se_index"
-    )
-
-    json_doc = fields.Serialized(compute="_compute_json_doc")
-
-    def write(self, vals):
-        if "sync_state" not in vals:
-            vals["sync_state"] = "to_update"
-        return super(AlcEshopInfoMessage, self).write(vals)
-
-    def unlink(self):
-        for idx in self.sudo().mapped("se_index_ids"):
-            idx.with_delay().delete_obsolete_item(self.ids)
-        return super(AlcEshopInfoMessage, self).unlink()
-
-    @api.model
-    def _get_banners_to_sync(self):
-        now = fields.Datetime.now()
-        return self.search(
-            [
-                ("date_start", "<=", now),
-                ("date_end", ">=", now),
-                ("sync_state", "in", ["new", "to_update"]),
-            ]
-        )
-
-    @api.model
-    def _get_active_banners(self):
-        now = fields.Datetime.now()
-        return self.search([("date_start", "<=", now), ("date_end", ">=", now)])
+class AlcEshopInfoMessage(Model):
+    _name = "alc.eshop.info.banner"
+    _inherit = ["alc.eshop.info.banner", "se.indexable.record"]
+    se_index_ids = fields.Many2many[SeIndex](compute="_compute_se_index")
 
     def _compute_se_index(self):
         model = self.env.ref("alc_eshop_info_banner.model_alc_eshop_info_banner")
         indexes = self.env["se.index"].search([("model_id", "=", model.id)])
-        for rec in self:
-            rec.se_index_ids = indexes
+        self.update({"se_index_ids": [Command.set(indexes.ids)]})
 
-    def action_export_to_se(self):
-        self.sudo().mapped(
-            "se_index_ids.backend_id.specific_backend"
-        ).export_info_banners(self)
-
-    def _compute_json_doc(self):
+    def action_toggle_is_published(self):
+        res = super().action_toggle_is_published()
+        self._compute_se_index()
         for rec in self:
-            rec.json_doc = dict(
-                id=rec.id,
-                html=rec.html,
-                date_start=utils.odoo_str_dt_to_dt_utc(rec.date_start).isoformat(),
-                date_end=utils.odoo_str_dt_to_dt_utc(rec.date_end).isoformat(),
-                type=rec.type,
-                visibility=rec.visibility,
-            )
+            if rec.is_published:
+                rec._add_to_index(rec.se_index_ids)
+            else:
+                rec._remove_from_index(rec.se_index_ids)
+        return res
+
+    def action_synchronize_info_banners(self):
+        for rec in self:
+            rec.button_synchronize_info_banner()
+
+    def button_synchronize_info_banner(self):
+        self.ensure_one()
+        self.filtered_domain(
+            self._get_banner_to_export_domain()
+        ).se_binding_ids.recompute_json()
+        self.filtered_domain(
+            self._get_banner_to_delete_domain()
+        ).action_toggle_is_published()
+
+    @api.model
+    def _get_banner_to_export_domain(self):
+        now = fields.Datetime.now()
+        return [
+            ("date_start", "<=", now),
+            ("date_end", ">=", now),
+            ("is_published", "=", True),
+        ]
+
+    @api.model
+    def _get_banner_to_delete_domain(self):
+        now = fields.Datetime.now()
+        return [
+            ("is_published", "=", True),
+            "|",
+            ("date_start", ">", now),
+            ("date_end", "<", now),
+        ]
