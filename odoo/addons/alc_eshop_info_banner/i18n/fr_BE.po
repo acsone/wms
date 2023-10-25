@@ -17,6 +17,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_info_banner
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_form_view
+msgid "<span class=\"text-danger\">Unpublished</span>"
+msgstr ""
+
+#. module: alc_eshop_info_banner
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_form_view
+msgid "<span class=\"text-success\">Published</span>"
+msgstr ""
+
+#. module: alc_eshop_info_banner
 #: model:ir.model.fields.selection,name:alc_eshop_info_banner.selection__alc_eshop_info_banner__visibility__all
 msgid "ALL"
 msgstr "Tous"
@@ -107,6 +117,11 @@ msgstr "Bannières échues au jour d'aujourd'hui"
 #: model:ir.model.fields.selection,name:alc_eshop_info_banner.selection__alc_eshop_info_banner__visibility__public_only
 msgid "Public Only"
 msgstr "Publique uniquement"
+
+#. module: alc_eshop_info_banner
+#: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__is_published
+msgid "Published?"
+msgstr ""
 
 #. module: alc_eshop_info_banner
 #. odoo-python
