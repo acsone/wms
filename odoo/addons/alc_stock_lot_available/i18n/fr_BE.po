@@ -17,11 +17,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_lot_available
-#: model:ir.model,name:alc_stock_lot_available.model_stock_production_lot
+#: model:ir.model,name:alc_stock_lot_available.model_stock_lot
 msgid "Lot/Serial"
 msgstr "Lot/N° série"
 
 #. module: alc_stock_lot_available
-#: model:ir.model.fields,field_description:alc_stock_lot_available.field_stock_production_lot_qty_available
+#: model:ir.model.fields,field_description:alc_stock_lot_available.field_stock_lot__qty_available
 msgid "Quantity on hand"
 msgstr "Quantité en stock"
