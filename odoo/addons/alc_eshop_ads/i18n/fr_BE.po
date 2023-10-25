@@ -17,6 +17,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_ads
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_form_view
+msgid "<span class=\"text-danger\">Unpublished</span>"
+msgstr ""
+
+#. module: alc_eshop_ads
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_form_view
+msgid "<span class=\"text-success\">Published</span>"
+msgstr ""
+
+#. module: alc_eshop_ads
 #: model:ir.model.fields.selection,name:alc_eshop_ads.selection__alc_eshop_ads__display_slot__bottom_left
 msgid "Bottom left"
 msgstr "En bas à gauche"
@@ -215,6 +225,11 @@ msgid "Past ads from today"
 msgstr "Annonces échues au jour d'aujourd'hui"
 
 #. module: alc_eshop_ads
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__is_published
+msgid "Published?"
+msgstr ""
+
+#. module: alc_eshop_ads
 #: model:ir.model.fields.selection,name:alc_eshop_ads.selection__alc_eshop_ads__visibility__shareholder
 msgid "Shareholder"
 msgstr "Alcyonnaire"
@@ -240,7 +255,8 @@ msgstr "Emplacement dans le bandeau:"
 #, fuzzy, python-format
 #| msgid "The defined period on %s is not a valid (%s > %s)"
 msgid "The defined period on %(name)s is not a valid (%(start)s > %(end)s)"
-msgstr "La période définie pour %(name)s n'est pas valide (%(start)s > %(end)s)"
+msgstr ""
+"La période définie pour %(name)s n'est pas valide (%(start)s > %(end)s)"
 
 #. module: alc_eshop_ads
 #: model:ir.model.fields.selection,name:alc_eshop_ads.selection__alc_eshop_ads__display_slot__top_left
