@@ -17,27 +17,30 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_ordering_allowed
-#: model:ir.model.fields,field_description:alc_eshop_ordering_allowed.field_res_partner_eshop_ordering_allowed
-#: model:ir.model.fields,field_description:alc_eshop_ordering_allowed.field_res_users_eshop_ordering_allowed
-#: model:ir.model.fields,field_description:alc_eshop_ordering_allowed.field_shopinvader_partner_eshop_ordering_allowed
-msgid "Eshop ordering allowed"
+#: model:ir.model,name:alc_eshop_ordering_allowed.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_eshop_ordering_allowed
+#: model:ir.model.fields,field_description:alc_eshop_ordering_allowed.field_res_partner__eshop_ordering_allowed
+#: model:ir.model.fields,field_description:alc_eshop_ordering_allowed.field_res_users__eshop_ordering_allowed
+#, fuzzy
+#| msgid "Eshop ordering allowed"
+msgid "Eshop Ordering Allowed"
 msgstr "Commandes en ligne autorisées"
 
 #. module: alc_eshop_ordering_allowed
-#: model:ir.ui.view,arch_db:alc_eshop_ordering_allowed.res_partner_search_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ordering_allowed.res_partner_search_view
 msgid "Eshop ordering not allowed"
 msgstr "Commandes en ligne interdites"
 
 #. module: alc_eshop_ordering_allowed
-#: model:ir.model.fields,help:alc_eshop_ordering_allowed.field_res_partner_eshop_ordering_allowed
-#: model:ir.model.fields,help:alc_eshop_ordering_allowed.field_res_users_eshop_ordering_allowed
-#: model:ir.model.fields,help:alc_eshop_ordering_allowed.field_shopinvader_partner_eshop_ordering_allowed
+#: model:ir.model.fields,help:alc_eshop_ordering_allowed.field_res_partner__eshop_ordering_allowed
+#: model:ir.model.fields,help:alc_eshop_ordering_allowed.field_res_users__eshop_ordering_allowed
 msgid "If not set, this partner is not allowed to pass an order on the eshop."
 msgstr ""
 "Si pas coché, ce contact ne pourra pas passer de commande depuis le site web "
 "même s'il possède un compte."
 
-#. module: alc_eshop_ordering_allowed
-#: model:ir.model,name:alc_eshop_ordering_allowed.model_res_partner
-msgid "Partner"
-msgstr "Partenaire"
+#~ msgid "Partner"
+#~ msgstr "Partenaire"
