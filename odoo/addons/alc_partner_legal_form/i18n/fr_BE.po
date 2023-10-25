@@ -64,7 +64,6 @@ msgstr "Formes Juridiques"
 #. module: alc_partner_legal_form
 #: model:ir.model.fields,field_description:alc_partner_legal_form.field_res_partner__legal_form_id
 #: model:ir.model.fields,field_description:alc_partner_legal_form.field_res_users__legal_form_id
-#: model:ir.model.fields,field_description:alc_partner_legal_form.field_shopinvader_partner__legal_form_id
 #, fuzzy
 #| msgid "Legal Forms"
 msgid "Legal form"
