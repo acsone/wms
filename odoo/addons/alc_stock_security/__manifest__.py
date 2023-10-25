@@ -8,11 +8,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["stock"],
+    "depends": ["stock", "alc_product_category_data"],
     "data": [
         "security/res_groups.xml",
         "security/ir_rule.xml",
         "security/ir.model.access.csv",
     ],
-    "demo": [],
 }
