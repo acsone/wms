@@ -17,20 +17,36 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_shop_category
-#: model:ir.ui.view,arch_db:alc_product_shop_category.product_category_search_view
+#: model:product.category,name:alc_product_shop_category.master
+#, fuzzy
+#| msgid "Alcyon category"
+msgid "Alcyon Catalog"
+msgstr "Catégorie Alcyon"
+
+#. module: alc_product_shop_category
+#: model_terms:ir.ui.view,arch_db:alc_product_shop_category.product_category_search_view
 msgid "Alcyon category"
 msgstr "Catégorie Alcyon"
 
 #. module: alc_product_shop_category
-#: model:product.category,name:alc_product_shop_category.master
-msgid "Catalogue Alcyon"
-msgstr "Catalogue Alcyon"
+#: model:ir.model.fields,field_description:alc_product_shop_category.field_product_product__categ_ids
+#: model:ir.model.fields,field_description:alc_product_shop_category.field_product_template__categ_ids
+#, fuzzy
+#| msgid "Product Categories Web"
+msgid "Extra Categories"
+msgstr "Catégories d'articles web"
 
 #. module: alc_product_shop_category
-#: model:ir.model.fields,field_description:alc_product_shop_category.field_product_category_is_web
-#: model:ir.model.fields,field_description:alc_product_shop_category.field_shopinvader_category_is_web
-msgid "Is web"
-msgstr "web"
+#: model:ir.model.fields,field_description:alc_product_shop_category.field_product_category__is_web
+msgid "Is Web"
+msgstr ""
+
+#. module: alc_product_shop_category
+#: model:ir.model,name:alc_product_shop_category.model_product_template
+#, fuzzy
+#| msgid "Product Category"
+msgid "Product"
+msgstr "Catégorie d'article"
 
 #. module: alc_product_shop_category
 #: model:ir.actions.act_window,name:alc_product_shop_category.product_category_action_form_web
@@ -40,15 +56,21 @@ msgstr "Catégories d'articles web"
 
 #. module: alc_product_shop_category
 #: model:ir.model,name:alc_product_shop_category.model_product_category
+#: model:ir.model.fields,field_description:alc_product_shop_category.field_product_product__categ_id
+#: model:ir.model.fields,field_description:alc_product_shop_category.field_product_template__categ_id
 msgid "Product Category"
 msgstr "Catégorie d'article"
 
 #. module: alc_product_shop_category
-#: model:ir.model,name:alc_product_shop_category.model_product_template
-msgid "Product Template"
-msgstr "Modèle de produit"
-
-#. module: alc_product_shop_category
-#: model:ir.ui.view,arch_db:alc_product_shop_category.product_category_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_shop_category.product_category_search_view
 msgid "Web category"
 msgstr "Catégorie web"
+
+#~ msgid "Catalogue Alcyon"
+#~ msgstr "Catalogue Alcyon"
+
+#~ msgid "Is web"
+#~ msgstr "web"
+
+#~ msgid "Product Template"
+#~ msgstr "Modèle de produit"
