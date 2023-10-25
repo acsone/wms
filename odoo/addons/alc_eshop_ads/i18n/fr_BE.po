@@ -240,7 +240,7 @@ msgstr "Emplacement dans le bandeau:"
 #, fuzzy, python-format
 #| msgid "The defined period on %s is not a valid (%s > %s)"
 msgid "The defined period on %(name)s is not a valid (%(start)s > %(end)s)"
-msgstr "La période définie pour %s n'est pas valide (%s > %s)"
+msgstr "La période définie pour %(name)s n'est pas valide (%(start)s > %(end)s)"
 
 #. module: alc_eshop_ads
 #: model:ir.model.fields.selection,name:alc_eshop_ads.selection__alc_eshop_ads__display_slot__top_left

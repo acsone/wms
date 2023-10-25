@@ -3040,7 +3040,7 @@ msgstr "Slots"
 #, fuzzy, python-format
 #| msgid "The defined period is not a valid (%s > %s)"
 msgid "The defined period is not a valid (%(date_start)s > %(date_end)s"
-msgstr "The defined period is not a valid (%s > %s)"
+msgstr "The defined period is not a valid (%(date_start)s > %(date_end)s"
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,name:alc_eshop_cms.alc_eshop_cms_page_seminar-room

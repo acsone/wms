@@ -552,7 +552,8 @@ msgid ""
 "Received more than expected qties for product '%(name)s'. (Expected: "
 "%(qty)d, Received %(qty_done)d)"
 msgstr ""
-"Quantité reçue exédentaire pour le produit '%s'. (Attendu: %d, Reçu %d)"
+"Quantité reçue exédentaire pour le produit '%(name)s'. (Attendu: "
+"%(qty)d, Reçu %(qty_done)d)"
 
 #. module: alce_helpdesk
 #: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket__qty_received

@@ -133,7 +133,7 @@ msgstr ""
 #, fuzzy, python-format
 #| msgid "The defined period is not a valid (%s > %s)"
 msgid "The defined period is not valid (%(start)s > %(end)s)"
-msgstr "La période définie n'est pas valide (%s > %s)"
+msgstr "La période définie n'est pas valide (%(start)s > %(end)s)"
 
 #. module: alc_eshop_info_banner
 #: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__type
