@@ -17,20 +17,23 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_label_printing_gls
-#: model:ir.model.fields,field_description:alc_label_printing_gls.field_res_users_printing_gls_printer_id
+#: model:ir.model.fields,field_description:alc_label_printing_gls.field_res_users__printing_gls_printer_id
 msgid "Gls Printer"
 msgstr "Imprimante GLS"
 
 #. module: alc_label_printing_gls
-#: code:addons/alc_label_printing_gls/models/shipping_label.py:31
+#. odoo-python
+#: code:addons/alc_label_printing_gls/models/shipping_label.py:0
 #, python-format
 msgid "No GLS printer assigned."
 msgstr "Pas d'imprimante GLS assignée à l'utilisateur."
 
 #. module: alc_label_printing_gls
-#: code:addons/alc_label_printing_gls/models/shipping_label.py:21
-#, python-format
-msgid "Printing label {}"
+#. odoo-python
+#: code:addons/alc_label_printing_gls/models/shipping_label.py:0
+#, fuzzy, python-format
+#| msgid "Printing label {}"
+msgid "Printing label %(name)s"
 msgstr "Impression de l'étiquette {}"
 
 #. module: alc_label_printing_gls
@@ -40,5 +43,7 @@ msgstr "Etiquette logistique"
 
 #. module: alc_label_printing_gls
 #: model:ir.model,name:alc_label_printing_gls.model_res_users
-msgid "Users"
+#, fuzzy
+#| msgid "Users"
+msgid "User"
 msgstr "Utilisateurs"
