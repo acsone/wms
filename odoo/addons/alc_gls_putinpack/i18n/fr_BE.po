@@ -17,49 +17,61 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard_can_put_in_pack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_stock_picking_can_put_in_pack
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__allowed_package_ids
 #, fuzzy
-msgid "Can put in pack"
+#| msgid "Package"
+msgid "Allowed Packages"
+msgstr "Colis"
+
+#. module: alc_gls_putinpack
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__can_put_in_pack
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_stock_picking__can_put_in_pack
+#, fuzzy
+msgid "Can Put In Pack"
 msgstr "↳Ajouter au colis"
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_stock_picking_can_unreserve_moves
-msgid "Can unreserve moves"
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_stock_picking__can_unreserve_moves
+msgid "Can Unreserve Moves"
 msgstr ""
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "Cancel"
 msgstr "Annuler"
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard_create_uid
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__create_uid
 msgid "Created by"
 msgstr "Créé par"
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard_create_date
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__create_date
 msgid "Created on"
 msgstr "Créé le"
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard_display_name
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.package_level_tree_view_picking
+msgid "Display package content"
+msgstr ""
+
+#. module: alc_gls_putinpack
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "GLS: Cancel"
 msgstr "GLS: Annuler"
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "GLS: Resend"
 msgstr "GLS: Renvoyer"
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "GLS: Send"
 msgstr "GLS: Envoyer"
 
@@ -69,44 +81,48 @@ msgid "GLS: send package wizard"
 msgstr "GLS: Wizard d'envoi de packages"
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard_id
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__id
 msgid "ID"
 msgstr "ID"
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard_is_sent
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__is_sent
 msgid "Is sent"
 msgstr "Envoyé"
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard___last_update
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard____last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard_write_uid
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__write_uid
 msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard_write_date
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: alc_gls_putinpack
-#: code:addons/alc_gls_putinpack/wizards/delivery_package_gls_wizard.py:108
-#, python-format
-msgid "Missing parameter: %s"
+#. odoo-python
+#: code:addons/alc_gls_putinpack/wizards/delivery_package_gls_wizard.py:0
+#, fuzzy, python-format
+#| msgid "Missing parameter: %s"
+msgid "Missing parameter: %(field)s"
 msgstr "Paramètre manquant: %s"
 
 #. module: alc_gls_putinpack
-#: code:addons/alc_gls_putinpack/models/stock_picking.py:40
+#. odoo-python
+#: code:addons/alc_gls_putinpack/models/stock_picking.py:0
 #, python-format
 msgid "More than one pack"
 msgstr ""
 
 #. module: alc_gls_putinpack
-#: code:addons/alc_gls_putinpack/models/stock_picking.py:75
+#. odoo-python
+#: code:addons/alc_gls_putinpack/models/stock_picking.py:0
 #, python-format
 msgid "Moves cannot be unreserved because a GLS package already exist."
 msgstr ""
@@ -114,60 +130,68 @@ msgstr ""
 "picking."
 
 #. module: alc_gls_putinpack
-#: code:addons/alc_gls_putinpack/wizards/delivery_package_gls_wizard.py:114
+#. odoo-python
+#: code:addons/alc_gls_putinpack/wizards/delivery_package_gls_wizard.py:0
 #, python-format
 msgid "No package to process."
 msgstr ""
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard_allowed_package_ids
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard_package_id
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__package_id
 msgid "Package"
 msgstr "Colis"
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard_package_id_domain
-msgid "Package id domain"
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__package_id_domain
+#, fuzzy
+#| msgid "Package id domain"
+msgid "Package Id Domain"
 msgstr "Package id domain"
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard_packaging_id
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__package_type_id
 msgid "Packaging Type"
 msgstr "Type de colisage"
 
 #. module: alc_gls_putinpack
-#: model:ir.model,name:alc_gls_putinpack.model_stock_pack_operation
-msgid "Packing Operation"
-msgstr "Colisage"
-
-#. module: alc_gls_putinpack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard_picking_id
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__picking_id
 msgid "Picking"
 msgstr "Opération de manutention"
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 #, fuzzy
 msgid "Put in Pack"
 msgstr "↳Ajouter au colis"
 
 #. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
-msgid "Report"
-msgstr "Lettre"
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_stock_picking__is_put_in_pack_done
+#, fuzzy
+msgid "Put in Pack done"
+msgstr "↳Ajouter au colis"
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard_shipping_weight
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_stock_picking__quant_reserved_exist
+msgid "Quant Reserved Exist"
+msgstr ""
+
+#. module: alc_gls_putinpack
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__shipping_weight
 msgid "Shipping Weight"
 msgstr "Poids d'expédition"
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,help:alc_gls_putinpack.field_delivery_package_gls_wizard_is_sent
+#: model:ir.model,name:alc_gls_putinpack.model_stock_package_level
+msgid "Stock Package Level"
+msgstr ""
+
+#. module: alc_gls_putinpack
+#: model:ir.model.fields,help:alc_gls_putinpack.field_delivery_package_gls_wizard__is_sent
 msgid "Technical field to know if we need to force resend."
 msgstr "Technical field to know if we need to force resend."
 
 #. module: alc_gls_putinpack
-#: model:ir.model.fields,help:alc_gls_putinpack.field_delivery_package_gls_wizard_package_id
+#: model:ir.model.fields,help:alc_gls_putinpack.field_delivery_package_gls_wizard__package_id
 msgid "The package to send to GLS."
 msgstr "Colis à transmettre à GLS."
 
@@ -181,10 +205,14 @@ msgstr "Transfert"
 msgid "Wizard to prepare the package and send it to GLS."
 msgstr "Wizard to prepare the package and send it to GLS."
 
-#. module: alc_gls_putinpack
-#: model:ir.ui.view,arch_db:alc_gls_putinpack.view_picking_form
-msgid "↳Put in Pack"
-msgstr "↳Ajouter au colis"
+#~ msgid "Packing Operation"
+#~ msgstr "Colisage"
+
+#~ msgid "Report"
+#~ msgstr "Lettre"
+
+#~ msgid "↳Put in Pack"
+#~ msgstr "↳Ajouter au colis"
 
 #~ msgid ""
 #~ "The package is too heavy compared to the maximum weight for carrier (%s "
