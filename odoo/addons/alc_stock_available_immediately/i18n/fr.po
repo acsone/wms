@@ -17,26 +17,20 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_available_immediately
-#: model:ir.model.fields,field_description:alc_stock_available_immediately.field_stock_location_exclude_from_immediately_usable_qty
-msgid "Exclude from immediately usable quantity"
-msgstr "Exclure de la quantité immédiatement utilisable"
-
-#. module: alc_stock_available_immediately
-#: model:ir.ui.view,arch_db:alc_stock_available_immediately.stock_location_search_view
-msgid "Excluded from immediately usable quantities"
-msgstr "Exclu de la quantité immédiatement utilisable"
-
-#. module: alc_stock_available_immediately
-#: model:ir.model,name:alc_stock_available_immediately.model_stock_location
-msgid "Inventory Locations"
-msgstr "Emplacements de stock"
-
-#. module: alc_stock_available_immediately
 #: model:ir.model,name:alc_stock_available_immediately.model_product_product
-msgid "Product"
+#, fuzzy
+#| msgid "Product"
+msgid "Product Variant"
 msgstr "Article"
 
-#. module: alc_stock_available_immediately
-#: model:ir.model.fields,help:alc_stock_available_immediately.field_stock_location_exclude_from_immediately_usable_qty
-msgid "This property is not inherited by children locations"
-msgstr "Cette propriété n'est pas héritée par les enfants"
+#~ msgid "Exclude from immediately usable quantity"
+#~ msgstr "Exclure de la quantité immédiatement utilisable"
+
+#~ msgid "Excluded from immediately usable quantities"
+#~ msgstr "Exclu de la quantité immédiatement utilisable"
+
+#~ msgid "Inventory Locations"
+#~ msgstr "Emplacements de stock"
+
+#~ msgid "This property is not inherited by children locations"
+#~ msgstr "Cette propriété n'est pas héritée par les enfants"
