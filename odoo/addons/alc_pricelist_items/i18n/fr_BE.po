@@ -17,27 +17,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_pricelist_items
-#: model:ir.ui.view,arch_db:alc_pricelist_items.view_product_pricelist_item_tree
-msgid "Applicable On"
-msgstr "Applicable à"
+#: model_terms:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_form_view
+msgid "Items"
+msgstr ""
 
 #. module: alc_pricelist_items
-#: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_form_view
-msgid "Display pricelist items"
-msgstr "Éléments de la liste de prix"
-
-#. module: alc_pricelist_items
-#: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_item_search_view
-msgid "Name"
-msgstr "Nom"
-
-#. module: alc_pricelist_items
-#: model:ir.ui.view,arch_db:alc_pricelist_items.view_product_pricelist_item_tree
-msgid "Price"
-msgstr "Prix"
-
-#. module: alc_pricelist_items
-#: code:addons/alc_pricelist_items/models/product_pricelist.py:23
+#. odoo-python
+#: code:addons/alc_pricelist_items/models/product_pricelist.py:0
 #, python-format
 msgid "Price list items"
 msgstr "Éléments de la liste de prix"
@@ -47,11 +33,21 @@ msgstr "Éléments de la liste de prix"
 msgid "Pricelist"
 msgstr "Tarif"
 
-#. module: alc_pricelist_items
-#: model:ir.ui.view,arch_db:alc_pricelist_items.product_pricelist_item_search_view
+#~ msgid "Applicable On"
+#~ msgstr "Applicable à"
+
+#~ msgid "Display pricelist items"
+#~ msgstr "Éléments de la liste de prix"
+
+#~ msgid "Name"
+#~ msgstr "Nom"
+
+#~ msgid "Price"
+#~ msgstr "Prix"
+
 #, fuzzy
-msgid "Products Price List Items Search"
-msgstr "Recherche"
+#~ msgid "Products Price List Items Search"
+#~ msgstr "Recherche"
 
 #~ msgid "min_quantity"
 #~ msgstr "Quantité minimum"
