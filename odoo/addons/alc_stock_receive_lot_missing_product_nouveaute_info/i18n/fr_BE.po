@@ -17,63 +17,101 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add_product_barcode
+#: model:ir.model,name:alc_stock_receive_lot_missing_product_nouveaute_info.model_stock_pack_operation_lot_add
+msgid "Add a wizard that facilitates purchases reception."
+msgstr ""
+
+#. module: alc_stock_receive_lot_missing_product_nouveaute_info
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add__product_barcode
 msgid "Barcode"
 msgstr "Code Barre"
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add_display_product_barcode
-msgid "Display product barcode"
-msgstr "Afficher le champ code barre"
+#: model:ir.model,name:alc_stock_receive_lot_missing_product_nouveaute_info.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add_display_product_dimensions
-msgid "Display product dimensions"
-msgstr "Afficher les champs de dimensions"
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add__edit_dimensions_barcode_fields
+msgid "Edit Dimensions Barcode Fields"
+msgstr ""
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add_display_product_weight
-msgid "Display product weight"
-msgstr "Affichier le champ de poids"
+#: model_terms:ir.ui.view,arch_db:alc_stock_receive_lot_missing_product_nouveaute_info.res_config_settings_form_view
+#, fuzzy
+#| msgid ""
+#| "You must enter a barcode for the product to receive or allow the "
+#| "reception without barcode"
+msgid ""
+"Force the user to enter dimensions, weight and barcode of a new product "
+"received through the purchase reception wizard."
+msgstr ""
+"Vous devez entrer un code barre pour le produit ou spécifier qu'il s'agit "
+"d'un produit sans code barre pour procéder à la réception"
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_has_missing_info
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_picking_has_missing_info
-msgid "Has missing info"
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_move__has_missing_info
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_move_line__has_missing_info
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_picking__has_missing_info
+#, fuzzy
+#| msgid "Has missing info"
+msgid "Has Missing Info"
 msgstr "Informations manquantes"
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add_no_barcode_authorized
-msgid "Barcode not required"
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add__product_is_new
+msgid "Is New"
+msgstr ""
+
+#. module: alc_stock_receive_lot_missing_product_nouveaute_info
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add__product_packaging_ids
+msgid "Logistical Units"
+msgstr ""
+
+#. module: alc_stock_receive_lot_missing_product_nouveaute_info
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add__no_barcode_authorized
+#, fuzzy
+#| msgid "Barcode not required"
+msgid "No Barcode Authorized"
 msgstr "Code Barre non requis"
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: model:ir.model,name:alc_stock_receive_lot_missing_product_nouveaute_info.model_stock_pack_operation
-msgid "Packing Operation"
-msgstr "Colisage"
+#: model:ir.model,name:alc_stock_receive_lot_missing_product_nouveaute_info.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add_product_height
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add__product_height
 msgid "Product height (cm)"
 msgstr " Hauteur (cm)"
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add_product_length
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add__product_length
 msgid "Product length (cm)"
 msgstr "Longueur (cm)"
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add_product_weight
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add__product_weight
 msgid "Product weight"
 msgstr "Poids"
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add_product_width
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add__product_width
 msgid "Product width (cm)"
 msgstr "Largeur (cm)"
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: model:ir.ui.view,arch_db:alc_stock_receive_lot_missing_product_nouveaute_info.stock_picking_form_view
+#: model:res.groups,name:alc_stock_receive_lot_missing_product_nouveaute_info.new_product_reception_manager
+msgid "RECEPTION - Edit new products"
+msgstr ""
+
+#. module: alc_stock_receive_lot_missing_product_nouveaute_info
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_res_config_settings__reception_wizard_constraints
+msgid "Reception Wizard Constraints"
+msgstr ""
+
+#. module: alc_stock_receive_lot_missing_product_nouveaute_info
+#: model_terms:ir.ui.view,arch_db:alc_stock_receive_lot_missing_product_nouveaute_info.stock_picking_form_view
 msgid ""
 "Some information are missing on new products (dimensions, weight or "
 "barcode), please complete them before picking."
@@ -82,12 +120,18 @@ msgstr ""
 "Veuillez les compléter pendant la réception."
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
+#: model:ir.model,name:alc_stock_receive_lot_missing_product_nouveaute_info.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: alc_stock_receive_lot_missing_product_nouveaute_info
 #: model:ir.model,name:alc_stock_receive_lot_missing_product_nouveaute_info.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: code:addons/alc_stock_receive_lot_missing_product_nouveaute_info/exceptions.py:26
+#. odoo-python
+#: code:addons/alc_stock_receive_lot_missing_product_nouveaute_info/wizards/stock_pack_operation_lot_add.py:0
 #, python-format
 msgid ""
 "You must enter a barcode for the product to receive or allow the reception "
@@ -97,19 +141,30 @@ msgstr ""
 "d'un produit sans code barre pour procéder à la réception"
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: code:addons/alc_stock_receive_lot_missing_product_nouveaute_info/exceptions.py:12
+#. odoo-python
+#: code:addons/alc_stock_receive_lot_missing_product_nouveaute_info/wizards/stock_pack_operation_lot_add.py:0
 #, python-format
 msgid "You must enter a weight for the product to receive"
 msgstr "Veuillez entrer le poids sur le produit à recevoir"
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: code:addons/alc_stock_receive_lot_missing_product_nouveaute_info/exceptions.py:19
+#. odoo-python
+#: code:addons/alc_stock_receive_lot_missing_product_nouveaute_info/wizards/stock_pack_operation_lot_add.py:0
 #, python-format
 msgid "You must enter dimensions for the product to receive"
 msgstr "Veuillez entrer les dimensions sur le produit à recevoir"
 
-#. module: alc_stock_receive_lot_missing_product_nouveaute_info
-#: model:ir.model,name:alc_stock_receive_lot_missing_product_nouveaute_info.model_stock_pack_operation_lot_add
-msgid "stock.pack.operation.lot.add"
-msgstr "stock.pack.operation.lot.add"
+#~ msgid "Display product barcode"
+#~ msgstr "Afficher le champ code barre"
 
+#~ msgid "Display product dimensions"
+#~ msgstr "Afficher les champs de dimensions"
+
+#~ msgid "Display product weight"
+#~ msgstr "Affichier le champ de poids"
+
+#~ msgid "Packing Operation"
+#~ msgstr "Colisage"
+
+#~ msgid "stock.pack.operation.lot.add"
+#~ msgstr "stock.pack.operation.lot.add"
