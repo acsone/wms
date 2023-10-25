@@ -108,7 +108,6 @@ omit =
     odoo/addons/alc_turnover_reporting/*
     odoo/addons/alc_veterinary_group/*
     odoo/addons/alce_purchase_report/*
-    odoo/addons/authenticated_partner_mixin/*
     odoo/addons/base_cached_xmlid/*
     odoo/addons/connector_esb/*
     odoo/addons/delivery_rounds/*
