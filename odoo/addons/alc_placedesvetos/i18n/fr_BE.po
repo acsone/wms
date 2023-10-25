@@ -21,10 +21,8 @@ msgstr ""
 msgid "Domiciliation Place des Vétos"
 msgstr "Domiciliation Place des Vétos"
 
-#. module: alc_placedesvetos
-#: model:ir.model,name:alc_placedesvetos.model_sale_order
-msgid "Sales Order"
-msgstr "Bon de commande"
+#~ msgid "Sales Order"
+#~ msgstr "Bon de commande"
 
 #~ msgid "You cannot use this sale channel for manuel order"
 #~ msgstr "Impossible d'utiliser ce canal de vente pour une vente manuelle"
