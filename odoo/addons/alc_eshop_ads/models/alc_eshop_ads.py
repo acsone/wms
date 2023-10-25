@@ -52,6 +52,11 @@ class AlcEshopAds(models.Model):
         "lang on the website",
     )
     display_time = fields.Integer(required=True, default=-1)
+    is_published = fields.Boolean(string="Published?", readonly=True)
+
+    def action_toggle_is_published(self):
+        for record in self:
+            record.is_published = not record.is_published
 
     @api.constrains("site_url", "file_id")
     def _check_site_url_or_file_id(self):

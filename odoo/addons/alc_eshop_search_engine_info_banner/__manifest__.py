@@ -2,20 +2,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Eshop Info Message Elasticsearch",
+    "name": "Alc search engine Eshop Info Message",
     "description": """
-        Alcyon: export info banners to elasticsearch""",
+        Alcyon: export info banners to es""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": [
-        "alc_cerberus_utils",
-        "alc_eshop_info_banner",
-        "connector_elasticsearch",
-        "connector_search_engine",
-        "queue_job_cron",
-    ],
+    "depends": ["alc_eshop_info_banner", "connector_search_engine", "queue_job_cron"],
     "data": [
         "views/se_backend.xml",
         "views/alc_eshop_info_banner.xml",

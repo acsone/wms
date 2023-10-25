@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="alc_eshop_ads_form_view">
+        <field name="model">alc.eshop.ads</field>
+        <field name="inherit_id" ref="alc_eshop_ads.alc_eshop_ads_form_view" />
+        <field name="arch" type="xml">
+           <xpath expr="//header" position="inside">
+                    <button
+          name="button_synchronize_ads"
+          string="Synchronize"
+          class="oe_highlight"
+          type="object"
+        />
+           </xpath>
+        </field>
+    </record>
+
+</odoo>
