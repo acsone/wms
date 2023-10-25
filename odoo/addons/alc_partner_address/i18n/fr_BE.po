@@ -19,14 +19,12 @@ msgstr ""
 #. module: alc_partner_address
 #: model:ir.model.fields,field_description:alc_partner_address.field_res_partner__type_name
 #: model:ir.model.fields,field_description:alc_partner_address.field_res_users__type_name
-#: model:ir.model.fields,field_description:alc_partner_address.field_shopinvader_partner__type_name
 msgid "Address Type Name"
 msgstr ""
 
 #. module: alc_partner_address
 #: model:ir.model.fields,help:alc_partner_address.field_res_partner__type_delivery
 #: model:ir.model.fields,help:alc_partner_address.field_res_users__type_delivery
-#: model:ir.model.fields,help:alc_partner_address.field_shopinvader_partner__type_delivery
 msgid "Allow to mark an invoice address and also delivery address"
 msgstr ""
 
@@ -45,6 +43,5 @@ msgstr ""
 #. module: alc_partner_address
 #: model:ir.model.fields,field_description:alc_partner_address.field_res_partner__type_delivery
 #: model:ir.model.fields,field_description:alc_partner_address.field_res_users__type_delivery
-#: model:ir.model.fields,field_description:alc_partner_address.field_shopinvader_partner__type_delivery
 msgid "Is Also Delivery"
 msgstr ""
