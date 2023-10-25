@@ -17,18 +17,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_picking_gls_check_validation
-#: model:ir.ui.view,arch_db:alc_stock_picking_gls_check_validation.stock_picking_form_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_picking_gls_check_validation.stock_picking_form_view
 msgid "Force validate"
 msgstr "Forcer validation"
 
 #. module: alc_stock_picking_gls_check_validation
-#: model:ir.model.fields,field_description:alc_stock_picking_gls_check_validation.field_stock_picking_gls_pack_in_picking
+#: model:ir.model.fields,field_description:alc_stock_picking_gls_check_validation.field_stock_picking__gls_pack_in_picking
 #, fuzzy
-msgid "Gls pack in picking"
+msgid "Gls Pack In Picking"
 msgstr "Pack dans le picking"
 
 #. module: alc_stock_picking_gls_check_validation
-#: model:ir.model.fields,help:alc_stock_picking_gls_check_validation.field_stock_picking_gls_pack_in_picking
+#: model:ir.model.fields,help:alc_stock_picking_gls_check_validation.field_stock_picking__gls_pack_in_picking
 msgid ""
 "Technical field to check if there are packs in the current picking meaning "
 "they have to be processed first"
@@ -40,26 +40,32 @@ msgid "Transfer"
 msgstr "Transfert"
 
 #. module: alc_stock_picking_gls_check_validation
-#: model:ir.model.fields,field_description:alc_stock_picking_gls_check_validation.field_stock_picking_validate_allowed
-msgid "Validate allowed"
+#: model:ir.model.fields,field_description:alc_stock_picking_gls_check_validation.field_stock_picking__validate_allowed
+#, fuzzy
+#| msgid "Validate allowed"
+msgid "Validate Allowed"
 msgstr "Validation autorisée"
 
 #. module: alc_stock_picking_gls_check_validation
-#: code:addons/alc_stock_picking_gls_check_validation/models/stock_picking.py:51
+#. odoo-python
+#: code:addons/alc_stock_picking_gls_check_validation/models/stock_picking.py:0
 #, python-format
 msgid "You are not allowed to force the validation"
 msgstr "Vous ne disposez pas des droits pour forcer la validation"
 
 #. module: alc_stock_picking_gls_check_validation
-#: code:addons/alc_stock_picking_gls_check_validation/models/stock_picking.py:68
+#. odoo-python
+#: code:addons/alc_stock_picking_gls_check_validation/models/stock_picking.py:0
 #, fuzzy, python-format
-msgid "You cannot validate the picking before all the packs are done"
+msgid ""
+"You cannot validate the picking before all the packs are done "
+"(%(picking_names)s)"
 msgstr ""
 "Vous ne pouvez pas valider le picking avant d'avoir traité toutes les "
 "opérations"
 
 #. module: alc_stock_picking_gls_check_validation
-#: model:ir.ui.view,arch_db:alc_stock_picking_gls_check_validation.stock_picking_form_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_picking_gls_check_validation.stock_picking_form_view
 msgid ""
 "You have at least one pack in the picking. Please process it/them first."
 msgstr ""
