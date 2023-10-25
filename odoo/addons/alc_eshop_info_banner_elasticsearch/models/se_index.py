@@ -1,49 +1,37 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo import _, api, models
+from odoo import _, api, fields
+from odoo.exceptions import ValidationError
 
-from odoo.addons.queue_job.job import identity_exact
+from odoo.addons.connector_search_engine.models.se_index import SeIndex as SeIndexBase
+
+from ..tools.alc_eshop_info_banner_serializer import AlcEshopInfoBannerSerializer
 
 
-class SeIndex(models.Model):
+class SeIndex(SeIndexBase):
+    serializer_type = fields.Selection(
+        selection_add=[
+            ("alc_eshop_info_banner", "Eshop Info Banner"),
+        ],
+        ondelete={"alc_eshop_info_banner": "cascade"},
+    )
 
-    _inherit = "se.index"
-
-    @api.model
-    def recompute_all_index(self, domain=None):
-        if domain is None:
-            domain = []
-        domain.append(
-            (
-                "model_id",
-                "!=",
-                self.env.ref("alc_eshop_info_banner.model_alc_eshop_info_banner").id,
-            )
+    @api.constrains("model_id", "serializer_type")
+    def _check_model(self):
+        eshop_info_banner_model = self.env["ir.model"].search(
+            [("model", "=", "alc.eshop.info.banner")], limit=1
         )
-        return self.search(domain).recompute_all_binding()
+        for se_index in self:
+            if (
+                se_index.serializer_type == "alc_eshop_info_banner"
+                and se_index.model_id != eshop_info_banner_model
+            ):
+                raise ValidationError(_("'Serializer Type' must match 'Model'"))
 
-    def force_batch_export(self):
+    def _get_serializer(self):
         self.ensure_one()
-        if self.is_alc_info_banner():
-            self.env[self.model_id.model].search(
-                [("sync_state", "!=", "to_update")]
-            ).write({"sync_state": "to_update"})
-            self.batch_export_info_banners()
-        return super(SeIndex, self).force_batch_export()
-
-    def batch_export_info_banners(self):
-        for specific_backend in self.mapped("backend_id.specific_backend"):
-            description = (
-                _(u"%s: Batch export EShop Info banners") % specific_backend.name
-            )
-            specific_backend.with_delay(
-                identity_key=identity_exact, description=description
-            ).export_info_banners()
-
-    def is_alc_info_banner(self):
-        return self.model_id == self.env.ref(
-            "alc_eshop_info_banner.model_alc_eshop_info_banner"
-        )
+        if self.serializer_type == "alc_eshop_info_banner":
+            return AlcEshopInfoBannerSerializer()
+        return super()._get_serializer()

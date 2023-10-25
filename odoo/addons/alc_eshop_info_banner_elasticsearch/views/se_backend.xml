@@ -3,20 +3,14 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
 
-    <record model="ir.ui.view" id="se_backend_elasticsearch_form_view">
-        <field
-      name="name"
-    >se.backend.elasticsearch.form (in alc_eshop_info_banner_elasticsearch)</field>
-        <field name="model">se.backend.elasticsearch</field>
-        <field
-      name="inherit_id"
-      ref="connector_elasticsearch.se_backend_elasticsearch_form_view"
-    />
+    <record model="ir.ui.view" id="se_backend_form_view">
+        <field name="model">se.backend</field>
+        <field name="inherit_id" ref="connector_search_engine.se_backend_form_view" />
         <field name="arch" type="xml">
            <xpath expr="//sheet" position="inside">
                 <group name="eshop_info_banner" string="Info banners">
                     <button
-            name="synchronize_info_banners"
+            name="button_synchronize_info_banners"
             string="Synchronize info banners"
             class="oe_highlight"
             type="object"

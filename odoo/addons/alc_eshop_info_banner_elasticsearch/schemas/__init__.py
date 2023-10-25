@@ -1,0 +1,1 @@
+from .alc_eshop_info_banner import AlcEshopInfoBanner

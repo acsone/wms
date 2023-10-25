@@ -27,6 +27,11 @@ class AlcEshopInfoBanner(models.Model):
     )
     date_start = fields.Datetime(required=True)
     date_end = fields.Datetime(required=True)
+    is_published = fields.Boolean(string="Published?", readonly=True)
+
+    def action_toggle_is_published(self):
+        for record in self:
+            record.is_published = not record.is_published
 
     @api.constrains("date_start", "date_end")
     def _validate_dates(self):

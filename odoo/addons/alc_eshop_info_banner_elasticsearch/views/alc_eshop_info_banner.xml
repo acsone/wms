@@ -1,55 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright 2022 ACSONE SA/NV
+<!-- Copyright 2023 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
 
     <record model="ir.ui.view" id="alc_eshop_info_banner_form_view">
-        <field name="name">alc.eshop.info.banner.form (in
-            alc_eshop_info_banner_elasticsearch)
-        </field>
         <field name="model">alc.eshop.info.banner</field>
         <field
       name="inherit_id"
       ref="alc_eshop_info_banner.alc_eshop_info_banner_form_view"
     />
         <field name="arch" type="xml">
-            <div class="oe_button_box" name="button_box" position="inside">
-                <field name="sync_state" invisible="1" />
-                <button
-          name="action_export_to_se"
+           <xpath expr="//header" position="inside">
+                    <button
+          name="button_synchronize_info_banner"
+          string="Synchronize"
+          class="oe_highlight"
           type="object"
-          fg_color="red:sync_state in ('new', 'to_update');"
-          icon="fa-life-ring"
-        >
-                    <span>Export to EShop</span>
-                </button>
-            </div>
+        />
+           </xpath>
         </field>
     </record>
 
-    <record model="ir.actions.server" id="action_eshop_manual_export">
-        <field name="name">Force EShop Export</field>
-        <field
-      name="model_id"
-      ref="alc_eshop_info_banner.model_alc_eshop_info_banner"
-    />
-        <field name="state">code</field>
-        <field name="code">records.action_export_to_se()
-        </field>
-    </record>
-    <record id="run_action_eshop_manual_export" model="ir.values">
-            <field
-      name="model_id"
-      ref="alc_eshop_info_banner.model_alc_eshop_info_banner"
-    />
-            <field name="name">Force EShop Export</field>
-            <field name="key2">client_action_multi</field>
-            <field name="key">action</field>
-            <field name="model">alc.eshop.info.banner</field>
-            <field
-      name="value"
-      eval="'ir.actions.server,' + str(ref('alc_eshop_info_banner_elasticsearch.action_eshop_manual_export'))"
-    />
-    </record>
+
 
 </odoo>
