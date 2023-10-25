@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_receive_lot_expiry
-#: model:ir.ui.view,arch_db:alc_stock_receive_lot_expiry.stock_pack_operation_lot_add_form_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_receive_lot_expiry.stock_pack_operation_lot_add_form_view
 #, fuzzy
 msgid ""
 "<i class=\"fa fa-exclamation-triangle\" style=\"color:red\">\n"
@@ -28,16 +28,11 @@ msgstr ""
 "\"margin:0 5px\">Expired</span></i>"
 
 #. module: alc_stock_receive_lot_expiry
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_expiry.field_stock_pack_operation_lot_is_product_expired
-msgid "Is expired"
-msgstr ""
-
-#. module: alc_stock_receive_lot_expiry
-#: model:ir.model,name:alc_stock_receive_lot_expiry.model_stock_pack_operation_lot
-msgid "Lot/Serial number for pack ops"
-msgstr ""
-
-#. module: alc_stock_receive_lot_expiry
 #: model:ir.model,name:alc_stock_receive_lot_expiry.model_stock_pack_operation_lot_add
-msgid "stock.pack.operation.lot.add"
+msgid "Add a wizard that facilitates purchases reception."
+msgstr ""
+
+#. module: alc_stock_receive_lot_expiry
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_expiry.field_stock_pack_operation_lot_add__is_removal_date_expired
+msgid "Removal Date Expired"
 msgstr ""
