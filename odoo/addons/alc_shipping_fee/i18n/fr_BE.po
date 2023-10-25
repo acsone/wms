@@ -40,6 +40,7 @@ msgstr "Frais de livraison fixes"
 #. module: alc_shipping_fee
 #: model:ir.model.fields,field_description:alc_shipping_fee.field_res_partner__help_with_fixed_fee
 #: model:ir.model.fields,field_description:alc_shipping_fee.field_res_users__help_with_fixed_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_shopinvader_partner__help_with_fixed_fee
 msgid "Fixed fee applied for deliveries"
 msgstr "Appliquer des rais de livraison fixes"
 
@@ -56,12 +57,14 @@ msgstr "Utilisé pour le calcul des frais de livraison fixes"
 #. module: alc_shipping_fee
 #: model:ir.model.fields,field_description:alc_shipping_fee.field_res_partner__help_with_fee
 #: model:ir.model.fields,field_description:alc_shipping_fee.field_res_users__help_with_fee
+#: model:ir.model.fields,field_description:alc_shipping_fee.field_shopinvader_partner__help_with_fee
 msgid "Helps with fees"
 msgstr "Participe aux frais"
 
 #. module: alc_shipping_fee
 #: model:ir.model.fields,help:alc_shipping_fee.field_res_partner__help_with_fixed_fee
 #: model:ir.model.fields,help:alc_shipping_fee.field_res_users__help_with_fixed_fee
+#: model:ir.model.fields,help:alc_shipping_fee.field_shopinvader_partner__help_with_fixed_fee
 msgid ""
 "If checked, a fixed amount for delivery will be apply, no matter the amount "
 "of the delivery"
