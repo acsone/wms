@@ -5,13 +5,7 @@
 from odoo.tests.common import TransactionCase
 
 
-class TestRegistration(TransactionCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.model = cls.env["alc.registration"]
-
+class TestRegistrationMixin(TransactionCase):
     def _get_registration_vals(self, **kwargs):
         vals = {
             "name": "first last",

@@ -19,6 +19,7 @@
         "alc_eshop_api_sale_statistic",
         "alc_eshop_api_classifieds",
         "alc_eshop_api_cms",
+        "alc_eshop_api_registration",
     ],
     "data": [
         "views/fastapi_endpoint.xml",

@@ -16,10 +16,10 @@ class AlcRegistration(alc_registration.AlcRegistration, MixinUserId):
         user = self.env.ref("__setup__.res_user_jmercy", raise_if_not_found=False)
         return user or res
 
-    @api.model
-    def create(self, vals):
+    @api.model_create_multi
+    def create(self, vals_list):
         no_send_self = self.with_context(tracking_disable=True)
-        res = super(AlcRegistration, no_send_self).create(vals)
+        res = super(AlcRegistration, no_send_self).create(vals_list)
         template_xmlid = "alc_registration_responsible.create_mail_template"
         res.notify_responsible(template_xmlid)
         return res
