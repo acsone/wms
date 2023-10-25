@@ -17,62 +17,59 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_link_notice
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_delivery_carrier_link_info
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_product_link_info
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_template_link_info
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_product_link_info
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_variant_link_info
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_product__link_info
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_template__link_info
 msgid "Additional information link"
 msgstr "Lien Informations complémentaires"
 
 #. module: alc_product_link_notice
-#: code:addons/alc_product_link_notice/models/product_template.py:47
-#, python-format
-msgid "Check online links for product %s."
+#: model:ir.actions.server,name:alc_product_link_notice.cron_check_links_online_ir_actions_server
+#: model:ir.cron,cron_name:alc_product_link_notice.cron_check_links_online
+#, fuzzy
+#| msgid "Check online links for product %s."
+msgid "Check online links"
 msgstr "Check online links for product %s."
 
 #. module: alc_product_link_notice
-#: model:ir.model.fields,help:alc_product_link_notice.field_delivery_carrier_links_offline
-#: model:ir.model.fields,help:alc_product_link_notice.field_product_product_links_offline
-#: model:ir.model.fields,help:alc_product_link_notice.field_product_template_links_offline
-#: model:ir.model.fields,help:alc_product_link_notice.field_shopinvader_product_links_offline
-#: model:ir.model.fields,help:alc_product_link_notice.field_shopinvader_variant_links_offline
+#. odoo-python
+#: code:addons/alc_product_link_notice/models/product_template.py:0
+#, fuzzy, python-format
+#| msgid "Check online links for product %s."
+msgid "Check online links for product {product_name}."
+msgstr "Check online links for product %s."
+
+#. module: alc_product_link_notice
+#: model:ir.model.fields,help:alc_product_link_notice.field_product_product__links_offline
+#: model:ir.model.fields,help:alc_product_link_notice.field_product_template__links_offline
 msgid "Filled links for info or video or notice are offline?"
 msgstr "Les liens d'information ou vidéo ou de notice sont-ils joignables?"
 
 #. module: alc_product_link_notice
-#: model:ir.ui.view,arch_db:alc_product_link_notice.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_link_notice.product_template_form_view
 msgid "Links"
 msgstr "Liens"
 
 #. module: alc_product_link_notice
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_delivery_carrier_link_notice
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_product_link_notice
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_template_link_notice
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_product_link_notice
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_variant_link_notice
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_product__link_notice
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_template__link_notice
 msgid "Notice link"
 msgstr "Lien Notice"
 
 #. module: alc_product_link_notice
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_delivery_carrier_links_offline
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_product_links_offline
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_template_links_offline
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_product_links_offline
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_variant_links_offline
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_product__links_offline
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_template__links_offline
 msgid "Offline Links"
 msgstr "Liens inactifs"
 
 #. module: alc_product_link_notice
 #: model:ir.model,name:alc_product_link_notice.model_product_template
-msgid "Product Template"
+#, fuzzy
+#| msgid "Product Template"
+msgid "Product"
 msgstr "Modèle de produit"
 
 #. module: alc_product_link_notice
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_delivery_carrier_link_video
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_product_link_video
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_template_link_video
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_product_link_video
-#: model:ir.model.fields,field_description:alc_product_link_notice.field_shopinvader_variant_link_video
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_product__link_video
+#: model:ir.model.fields,field_description:alc_product_link_notice.field_product_template__link_video
 msgid "Video link"
 msgstr "Lien Vidéo"
