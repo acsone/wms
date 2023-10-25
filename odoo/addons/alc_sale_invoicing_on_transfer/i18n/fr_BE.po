@@ -17,21 +17,24 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_sale_invoicing_on_transfer
-#: model:ir.model.fields,field_description:alc_sale_invoicing_on_transfer.field_stock_picking_type_create_invoice_on_transfer
-msgid "Create invoice on transfer"
+#: model:ir.model.fields,field_description:alc_sale_invoicing_on_transfer.field_stock_picking_type__create_invoice_on_transfer
+#, fuzzy
+#| msgid "Create invoice on transfer"
+msgid "Create Invoice On Transfer"
 msgstr "Créer une facture lors du transfert"
 
 #. module: alc_sale_invoicing_on_transfer
-#: model:ir.model,name:alc_sale_invoicing_on_transfer.model_sale_order
-msgid "Sales Order"
-msgstr "Bon de commande"
-
-#. module: alc_sale_invoicing_on_transfer
 #: model:ir.model,name:alc_sale_invoicing_on_transfer.model_stock_picking_type
-msgid "The picking type determines the picking view"
-msgstr "Le type de préparation détermine la vue de préparation"
+msgid "Picking Type"
+msgstr ""
 
 #. module: alc_sale_invoicing_on_transfer
 #: model:ir.model,name:alc_sale_invoicing_on_transfer.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
+
+#~ msgid "Sales Order"
+#~ msgstr "Bon de commande"
+
+#~ msgid "The picking type determines the picking view"
+#~ msgstr "Le type de préparation détermine la vue de préparation"
