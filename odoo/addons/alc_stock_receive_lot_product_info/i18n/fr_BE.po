@@ -17,21 +17,27 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_receive_lot_product_info
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_product_info.field_stock_pack_operation_lot_add_lot_ids
+#: model:ir.model,name:alc_stock_receive_lot_product_info.model_stock_pack_operation_lot_add
+msgid "Add a wizard that facilitates purchases reception."
+msgstr ""
+
+#. module: alc_stock_receive_lot_product_info
+#: model:ir.model.fields,help:alc_stock_receive_lot_product_info.field_stock_pack_operation_lot_add__tracking
+msgid "Ensure the traceability of a storable product in your warehouse."
+msgstr ""
+
+#. module: alc_stock_receive_lot_product_info
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_product_info.field_stock_pack_operation_lot_add__lot_ids
 msgid "Lots"
 msgstr "Lots"
 
 #. module: alc_stock_receive_lot_product_info
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_product_info.field_stock_pack_operation_lot_add_stock_bin_ids
-msgid "Stock Bins"
-msgstr "Bacs de rangements"
-
-#. module: alc_stock_receive_lot_product_info
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_product_info.field_stock_pack_operation_lot_add_tracking
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_product_info.field_stock_pack_operation_lot_add__tracking
 msgid "Tracking"
 msgstr "Suivi"
 
-#. module: alc_stock_receive_lot_product_info
-#: model:ir.model,name:alc_stock_receive_lot_product_info.model_stock_pack_operation_lot_add
-msgid "stock.pack.operation.lot.add"
-msgstr "stock.pack.operation.lot.add"
+#~ msgid "Stock Bins"
+#~ msgstr "Bacs de rangements"
+
+#~ msgid "stock.pack.operation.lot.add"
+#~ msgstr "stock.pack.operation.lot.add"
