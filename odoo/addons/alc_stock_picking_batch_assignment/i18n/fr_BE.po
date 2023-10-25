@@ -17,23 +17,17 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_picking_batch_assignment
-#: model:ir.model.fields,field_description:alc_stock_picking_batch_assignment.field_stock_picking_wave_operator_id
-msgid "Operator"
-msgstr "Opérateur"
-
-#. module: alc_stock_picking_batch_assignment
-#: model:ir.model,name:alc_stock_picking_batch_assignment.model_stock_picking_wave
-msgid "Picking Wave"
-msgstr "Vague de préparation"
-
-#. module: alc_stock_picking_batch_assignment
-#: model:ir.model.fields,field_description:alc_stock_picking_batch_assignment.field_stock_picking_wave_printed
-msgid "Printed"
-msgstr "Imprimé"
-
-#. module: alc_stock_picking_batch_assignment
-#: code:addons/alc_stock_picking_batch_assignment/models/stock_picking_wave.py:27
-#: sql_constraint:stock.picking.wave:0
+#. odoo-python
+#: code:addons/alc_stock_picking_batch_assignment/models/stock_picking_batch.py:0
 #, python-format
-msgid "This operator is already assigned to a wave"
+msgid "This operator is already assigned to a batch"
 msgstr ""
+
+#~ msgid "Operator"
+#~ msgstr "Opérateur"
+
+#~ msgid "Picking Wave"
+#~ msgstr "Vague de préparation"
+
+#~ msgid "Printed"
+#~ msgstr "Imprimé"
