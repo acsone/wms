@@ -22,6 +22,7 @@ msgstr ""
 #. module: alc_sale_consignment
 #: model:ir.model.fields,field_description:alc_sale_consignment.field_res_partner__property_stock_consignment_customer
 #: model:ir.model.fields,field_description:alc_sale_consignment.field_res_users__property_stock_consignment_customer
+#: model:ir.model.fields,field_description:alc_sale_consignment.field_shopinvader_partner__property_stock_consignment_customer
 msgid "Customer Consignment Location"
 msgstr "Emplacement de consignation client"
 
@@ -54,6 +55,7 @@ msgstr "Ligne de commande client"
 #. module: alc_sale_consignment
 #: model:ir.model.fields,help:alc_sale_consignment.field_res_partner__property_stock_consignment_customer
 #: model:ir.model.fields,help:alc_sale_consignment.field_res_users__property_stock_consignment_customer
+#: model:ir.model.fields,help:alc_sale_consignment.field_shopinvader_partner__property_stock_consignment_customer
 msgid ""
 "This stock location will be used for consignment orders as the destination "
 "location for goods you send to this partner"
