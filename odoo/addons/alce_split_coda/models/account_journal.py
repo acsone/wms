@@ -1,19 +1,9 @@
 # Copyright 2018 Okia SPRL (sylvain@okia.be)
 # Copyright 2023 ACSONE SA/NV
-
-from io import BytesIO
+import base64
+import re
 
 from odoo.addons.l10n_be_coda.models.account_journal import AccountJournal as Journal
-
-
-class CodaStatement:
-    """
-    Simple object to simulate the raw property of an attachment that.
-
-    super()._parse_bank_statement_file is waiting for
-    """
-
-    raw = BytesIO
 
 
 class AccountJournal(Journal):
@@ -28,15 +18,59 @@ class AccountJournal(Journal):
         and import statement by statement.
         Moreover the bank can send several bank statement in the same file.
         """
+        pattern = re.compile("[\u0020-\u1EFF\n\r]+")  # printable characters
+        final_attachment_ids = set()
+        # This in order to return super() with account.journal model instead of
+        # recordset to avoid constraints triggered in _find_additional_data()
+        codas_in_attachments = False
         for attachment in attachments:
-            data = attachment.raw
-            if not self._check_coda(data):
-                return super()._import_bank_statement(attachment)
-            # Split the coda file by statement and pass it to the parser
-            res = None
-            for coda in self._split_codas(data):
-                res = super()._parse_bank_statement_file(coda)
-            return res
+            for encoding in (
+                "utf_8",
+                "cp850",
+                "cp858",
+                "cp1140",
+                "cp1252",
+                "iso8859_15",
+                "utf_32",
+                "utf_16",
+                "windows-1252",
+            ):
+                try:
+                    record_data = attachment.raw.decode(encoding)
+                except UnicodeDecodeError:
+                    continue
+                if pattern.fullmatch(record_data, re.MULTILINE):
+                    break
+            if self._check_coda(record_data):
+                i = 1
+                for coda in self._split_codas(record_data):
+                    # Naïve name (don't take into account possible file extension)
+                    coda_part_name = "-".join([attachment.name, str(i)])
+                    final_attachment_ids.add(
+                        self.env["ir.attachment"]
+                        .create(
+                            {
+                                "name": coda_part_name,
+                                "datas": base64.b64encode(coda),
+                            }
+                        )
+                        .id
+                    )
+                    i += 1
+                if i > 1:
+                    # Only set this if there are several statements in coda
+                    codas_in_attachments = True
+            else:
+                # Simply add the current attachement to those that will be returned
+                # to super()
+                final_attachment_ids.add(attachment.id)
+        if codas_in_attachments:
+            new_self = self.env["account.journal"].browse()
+        else:
+            new_self = self
+        return super(AccountJournal, new_self)._import_bank_statement(
+            self.env["ir.attachment"].browse(final_attachment_ids)
+        )
 
     def _split_codas(self, data):
         """
@@ -63,10 +97,8 @@ class AccountJournal(Journal):
             if line[0] == "0":
                 current_coda = ""
 
-            current_coda += line
+            current_coda += line + "\n"
 
             # Code 9 => the end of the statement
             if line[0] == "9":
-                statement = CodaStatement()
-                statement.raw = current_coda.encode()
-                yield statement
+                yield current_coda.encode("utf-8")
