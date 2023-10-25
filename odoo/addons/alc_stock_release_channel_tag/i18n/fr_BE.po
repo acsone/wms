@@ -85,6 +85,7 @@ msgstr "Étiquettes"
 #. module: alc_stock_release_channel_tag
 #: model:ir.model.fields,field_description:alc_stock_release_channel_tag.field_res_partner__stock_release_channel_tag_ids
 #: model:ir.model.fields,field_description:alc_stock_release_channel_tag.field_res_users__stock_release_channel_tag_ids
+#: model:ir.model.fields,field_description:alc_stock_release_channel_tag.field_shopinvader_partner__stock_release_channel_tag_ids
 #: model:ir.model.fields,field_description:alc_stock_release_channel_tag.field_stock_release_channel__stock_release_channel_tag_ids
 msgid "Release channel tags"
 msgstr "Étiquettes de canaux de livraison"
