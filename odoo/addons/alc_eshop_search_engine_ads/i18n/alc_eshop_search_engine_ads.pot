@@ -1,0 +1,89 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_eshop_search_engine_ads
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_eshop_search_engine_ads
+#. odoo-python
+#: code:addons/alc_eshop_search_engine_ads/models/se_index.py:0
+#, python-format
+msgid "'Serializer Type' must match 'Model'"
+msgstr ""
+
+#. module: alc_eshop_search_engine_ads
+#: model_terms:ir.ui.view,arch_db:alc_eshop_search_engine_ads.se_backend_form_view
+msgid "Ads"
+msgstr ""
+
+#. module: alc_eshop_search_engine_ads
+#: model:ir.model.fields,field_description:alc_eshop_search_engine_ads.field_alc_eshop_ads__count_se_binding_done
+msgid "Count Se Binding Done"
+msgstr ""
+
+#. module: alc_eshop_search_engine_ads
+#: model:ir.model.fields,field_description:alc_eshop_search_engine_ads.field_alc_eshop_ads__count_se_binding_error
+msgid "Count Se Binding Error"
+msgstr ""
+
+#. module: alc_eshop_search_engine_ads
+#: model:ir.model.fields,field_description:alc_eshop_search_engine_ads.field_alc_eshop_ads__count_se_binding_pending
+msgid "Count Se Binding Pending"
+msgstr ""
+
+#. module: alc_eshop_search_engine_ads
+#: model:ir.model.fields,field_description:alc_eshop_search_engine_ads.field_alc_eshop_ads__count_se_binding_total
+msgid "Count Se Binding Total"
+msgstr ""
+
+#. module: alc_eshop_search_engine_ads
+#: model:ir.actions.server,name:alc_eshop_search_engine_ads.ir_cron_export_eshop_ads_ir_actions_server
+#: model:ir.cron,cron_name:alc_eshop_search_engine_ads.ir_cron_export_eshop_ads
+msgid "EShop: Export ads"
+msgstr ""
+
+#. module: alc_eshop_search_engine_ads
+#: model:ir.model,name:alc_eshop_search_engine_ads.model_alc_eshop_ads
+#: model:ir.model.fields.selection,name:alc_eshop_search_engine_ads.selection__se_index__serializer_type__alc_eshop_ads
+msgid "Eshop Ads"
+msgstr ""
+
+#. module: alc_eshop_search_engine_ads
+#: model:ir.model,name:alc_eshop_search_engine_ads.model_se_backend
+msgid "Se Backend"
+msgstr ""
+
+#. module: alc_eshop_search_engine_ads
+#: model:ir.model,name:alc_eshop_search_engine_ads.model_se_index
+#: model:ir.model.fields,field_description:alc_eshop_search_engine_ads.field_alc_eshop_ads__se_index_ids
+msgid "Se Index"
+msgstr ""
+
+#. module: alc_eshop_search_engine_ads
+#: model:ir.model.fields,field_description:alc_eshop_search_engine_ads.field_alc_eshop_ads__se_binding_ids
+msgid "Seacrh Engine Bindings"
+msgstr ""
+
+#. module: alc_eshop_search_engine_ads
+#: model:ir.model.fields,field_description:alc_eshop_search_engine_ads.field_se_index__serializer_type
+msgid "Serializer Type"
+msgstr ""
+
+#. module: alc_eshop_search_engine_ads
+#: model_terms:ir.ui.view,arch_db:alc_eshop_search_engine_ads.alc_eshop_ads_form_view
+msgid "Synchronize"
+msgstr ""
+
+#. module: alc_eshop_search_engine_ads
+#: model_terms:ir.ui.view,arch_db:alc_eshop_search_engine_ads.se_backend_form_view
+msgid "Synchronize ads"
+msgstr ""
