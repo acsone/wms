@@ -9,7 +9,7 @@
                 <field name="format" />
                 <field name="partner_id" />
                 <field name="allowed_partner_types" />
-                <field name="sale_channel" />
+                <field name="sale_channel_id" />
                 <field name="res_model" />
             </search>
         </field>
@@ -24,7 +24,7 @@
                 <field name="format" />
                 <field name="partner_id" />
                 <field name="allowed_partner_types" />
-                <field name="sale_channel" />
+                <field name="sale_channel_id" />
                 <field name="res_model" />
             </tree>
         </field>
@@ -57,7 +57,7 @@
                         <field name="allowed_partner_types" />
                     </group>
                     <group>
-                        <field name="sale_channel" />
+                        <field name="sale_channel_id" />
                     </group>
                 </sheet>
             </form>
@@ -68,7 +68,6 @@
         <field name="name">Alcyon Documents</field>
         <field name="res_model">alc.document</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_type">form</field>
         <field name="domain">[]</field>
         <field name="search_view_id" ref="alc_document_search_view" />
         <field name="view_id" ref="alc_document_tree_view" />
@@ -77,7 +76,7 @@
     <menuitem
     id="alc_document_menu"
     name="Alcyon Documents"
-    parent="sales_team.menu_sales"
+    parent="sale.menu_sales_config"
     action="alc_document_act_window"
     sequence="99"
   />
