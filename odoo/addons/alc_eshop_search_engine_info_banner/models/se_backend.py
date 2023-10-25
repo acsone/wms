@@ -3,7 +3,7 @@
 
 from odoo import api
 
-from odoo.addons.connector_elasticsearch.models.se_backend import (
+from odoo.addons.connector_search_engine.models.se_backend import (
     SeBackend as SeBackendBase,
 )
 
