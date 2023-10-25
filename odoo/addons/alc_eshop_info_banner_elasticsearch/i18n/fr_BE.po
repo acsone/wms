@@ -17,82 +17,116 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_info_banner_elasticsearch
-#: code:addons/alc_eshop_info_banner_elasticsearch/models/se_index.py:40
+#. odoo-python
+#: code:addons/alc_eshop_info_banner_elasticsearch/models/se_index.py:0
 #, python-format
-msgid "%s: Batch export EShop Info banners"
-msgstr "%s: Batch export EShop Info banners"
+msgid "'Serializer Type' must match 'Model'"
+msgstr ""
 
 #. module: alc_eshop_info_banner_elasticsearch
-#: model:ir.ui.view,arch_db:alc_eshop_info_banner_elasticsearch.alc_eshop_info_banner_form_view
-msgid "<span>Export to EShop</span>"
-msgstr "<span>Export to EShop</span>"
+#: model:ir.model.fields,field_description:alc_eshop_info_banner_elasticsearch.field_alc_eshop_info_banner__count_se_binding_done
+msgid "Count Se Binding Done"
+msgstr ""
 
 #. module: alc_eshop_info_banner_elasticsearch
-#: selection:alc.eshop.info.banner,sync_state:0
-msgid "Done"
-msgstr "Done"
+#: model:ir.model.fields,field_description:alc_eshop_info_banner_elasticsearch.field_alc_eshop_info_banner__count_se_binding_error
+msgid "Count Se Binding Error"
+msgstr ""
 
 #. module: alc_eshop_info_banner_elasticsearch
-#: model:ir.model,name:alc_eshop_info_banner_elasticsearch.model_se_backend_elasticsearch
-msgid "Elasticsearch Backend"
-msgstr "Elasticsearch Backend"
+#: model:ir.model.fields,field_description:alc_eshop_info_banner_elasticsearch.field_alc_eshop_info_banner__count_se_binding_pending
+msgid "Count Se Binding Pending"
+msgstr ""
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: model:ir.model.fields,field_description:alc_eshop_info_banner_elasticsearch.field_alc_eshop_info_banner__count_se_binding_total
+msgid "Count Se Binding Total"
+msgstr ""
+
+#. module: alc_eshop_info_banner_elasticsearch
+#: model:ir.actions.server,name:alc_eshop_info_banner_elasticsearch.ir_cron_contract_costs_generator_ir_actions_server
+#: model:ir.cron,cron_name:alc_eshop_info_banner_elasticsearch.ir_cron_contract_costs_generator
+#, fuzzy
+#| msgid "Eshop Info Banner"
+msgid "EShop: Export Info banners"
+msgstr "Bannières d'information"
 
 #. module: alc_eshop_info_banner_elasticsearch
 #: model:ir.model,name:alc_eshop_info_banner_elasticsearch.model_alc_eshop_info_banner
+#: model:ir.model.fields.selection,name:alc_eshop_info_banner_elasticsearch.selection__se_index__serializer_type__alc_eshop_info_banner
 msgid "Eshop Info Banner"
 msgstr "Bannières d'information"
 
 #. module: alc_eshop_info_banner_elasticsearch
-#: model:ir.actions.server,name:alc_eshop_info_banner_elasticsearch.action_eshop_manual_export
-msgid "Force EShop Export"
-msgstr "Force EShop Export"
-
-#. module: alc_eshop_info_banner_elasticsearch
-#: model:ir.model.fields,field_description:alc_eshop_info_banner_elasticsearch.field_alc_eshop_info_banner_index_id
-msgid "Index"
-msgstr "Index"
-
-#. module: alc_eshop_info_banner_elasticsearch
-#: model:ir.ui.view,arch_db:alc_eshop_info_banner_elasticsearch.se_backend_elasticsearch_form_view
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner_elasticsearch.se_backend_form_view
 msgid "Info banners"
 msgstr "Bannières info"
 
 #. module: alc_eshop_info_banner_elasticsearch
-#: model:ir.model.fields,field_description:alc_eshop_info_banner_elasticsearch.field_alc_eshop_info_banner_json_doc
-msgid "Json doc"
-msgstr "Json doc"
-
-#. module: alc_eshop_info_banner_elasticsearch
-#: selection:alc.eshop.info.banner,sync_state:0
-msgid "New"
-msgstr "New"
-
-#. module: alc_eshop_info_banner_elasticsearch
-#: selection:alc.eshop.info.banner,sync_state:0
-msgid "Scheduled"
-msgstr "Scheduled"
+#: model:ir.model,name:alc_eshop_info_banner_elasticsearch.model_se_backend
+msgid "Se Backend"
+msgstr ""
 
 #. module: alc_eshop_info_banner_elasticsearch
 #: model:ir.model,name:alc_eshop_info_banner_elasticsearch.model_se_index
+#: model:ir.model.fields,field_description:alc_eshop_info_banner_elasticsearch.field_alc_eshop_info_banner__se_index_ids
 msgid "Se Index"
 msgstr "Se Index"
 
 #. module: alc_eshop_info_banner_elasticsearch
-#: model:ir.model.fields,field_description:alc_eshop_info_banner_elasticsearch.field_alc_eshop_info_banner_se_index_ids
-msgid "Se index ids"
-msgstr "Se index ids"
+#: model:ir.model.fields,field_description:alc_eshop_info_banner_elasticsearch.field_alc_eshop_info_banner__se_binding_ids
+msgid "Seacrh Engine Bindings"
+msgstr ""
 
 #. module: alc_eshop_info_banner_elasticsearch
-#: model:ir.model.fields,field_description:alc_eshop_info_banner_elasticsearch.field_alc_eshop_info_banner_sync_state
-msgid "Sync state"
-msgstr "Sync state"
+#: model:ir.model.fields,field_description:alc_eshop_info_banner_elasticsearch.field_se_index__serializer_type
+msgid "Serializer Type"
+msgstr ""
 
 #. module: alc_eshop_info_banner_elasticsearch
-#: model:ir.ui.view,arch_db:alc_eshop_info_banner_elasticsearch.se_backend_elasticsearch_form_view
-msgid "Synchronize info banners"
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner_elasticsearch.alc_eshop_info_banner_form_view
+#, fuzzy
+#| msgid "Synchronize info banners"
+msgid "Synchronize"
 msgstr "Synchronize info banners"
 
 #. module: alc_eshop_info_banner_elasticsearch
-#: selection:alc.eshop.info.banner,sync_state:0
-msgid "To update"
-msgstr "To update"
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner_elasticsearch.se_backend_form_view
+msgid "Synchronize info banners"
+msgstr "Synchronize info banners"
+
+#~ msgid "%s: Batch export EShop Info banners"
+#~ msgstr "%s: Batch export EShop Info banners"
+
+#~ msgid "<span>Export to EShop</span>"
+#~ msgstr "<span>Export to EShop</span>"
+
+#~ msgid "Done"
+#~ msgstr "Done"
+
+#~ msgid "Elasticsearch Backend"
+#~ msgstr "Elasticsearch Backend"
+
+#~ msgid "Force EShop Export"
+#~ msgstr "Force EShop Export"
+
+#~ msgid "Index"
+#~ msgstr "Index"
+
+#~ msgid "Json doc"
+#~ msgstr "Json doc"
+
+#~ msgid "New"
+#~ msgstr "New"
+
+#~ msgid "Scheduled"
+#~ msgstr "Scheduled"
+
+#~ msgid "Se index ids"
+#~ msgstr "Se index ids"
+
+#~ msgid "Sync state"
+#~ msgstr "Sync state"
+
+#~ msgid "To update"
+#~ msgstr "To update"
