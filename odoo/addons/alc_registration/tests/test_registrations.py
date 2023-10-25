@@ -1,12 +1,17 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from .common import TestRegistration
+from .common import TestRegistrationMixin
 
 
-class TestRegistrationFlow(TestRegistration):
+class TestRegistration(TestRegistrationMixin):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.model = cls.env["alc.registration"]
+
     def test_creation_flow(self):
         vals = self._get_registration_vals()
         vals.pop("company_name")

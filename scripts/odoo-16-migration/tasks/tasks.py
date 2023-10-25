@@ -358,12 +358,12 @@ def fix_product_packaging_data_and_structure():
 
 
 @task("16.0.1.0.0")
-def recover_partner_geopoint():
+def recover_partner_info():
     recover_columns(
         DB_10_SRC_NOT_CLEANED,
         DB_16_POSTMIG,
         "res_partner",
-        {"geo_point": "geometry(Point, 3857)"},
+        {"geo_point": "geometry(Point, 3857)", "opt_out": "boolean"},
     )
 
 

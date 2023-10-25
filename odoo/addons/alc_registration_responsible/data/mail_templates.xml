@@ -6,19 +6,19 @@
             <field name="name">New Registration</field>
             <field
       name="email_from"
-    >${(object.partner_id.email and '%s &lt;%s&gt;' % (object.partner_id.name, object.partner_id.email) or '')|safe}</field>
+    ><![CDATA[{{ (object.partner_id.email and '%s <%s>' % (object.partner_id.name, object.partner_id.email) or '') }}]]></field>
             <field
       name="subject"
-    >Une nouvelle demande d'inscription vient d'être créée: ${object.name}</field>
-            <field name="email_to">${object.user_id.email}</field>
+    >Une nouvelle demande d'inscription vient d'être créée: {{ object.name }}</field>
+            <field name="email_to">{{object.user_id.email}}</field>
             <field name="model_id" ref="alc_registration.model_alc_registration" />
             <field name="auto_delete" eval="True" />
-            <field name="lang">${object.partner_id.lang}</field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
             <field
       name="body_html"
     ><![CDATA[
 <p>Bonjour,</p>
-<p>Une demande d'inscription au nom de ${object.name} vient d'être créée'.</p>
+<p>Une demande d'inscription au nom de <t t-out="object.name"/> vient d'être créée'.</p>
 <p>Merci de faire le nécessaire.</p>
 ]]></field>
         </record>

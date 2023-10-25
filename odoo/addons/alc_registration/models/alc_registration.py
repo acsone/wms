@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -6,16 +5,18 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.osv.expression import OR
 
-from odoo.addons.base.res.res_partner import FormatAddress
+from odoo.addons.base.models.res_country import Country, CountryState
+from odoo.addons.base.models.res_partner import Partner, PartnerTitle
 
 
-class AlcRegistration(FormatAddress, models.Model):
+class AlcRegistration(models.Model):
 
     _name = "alc.registration"
+    _inherit = "format.address.mixin"  # nosemgrep: is-old-style-inheritance
     _description = "Partner Registration"
 
     active = fields.Boolean("Active", default=True)
-    partner_id = fields.Many2one("res.partner", string="Created Partner", readonly=True)
+    partner_id = fields.Many2one[Partner](string="Created Partner", readonly=True)
 
     # we want a multiselect with "Livestock", "Equine", "Pets", "Exotic Pets"
     # it might become a m2m if there's a real usage for it
@@ -35,15 +36,15 @@ class AlcRegistration(FormatAddress, models.Model):
     )
 
     name = fields.Char()
-    title = fields.Many2one("res.partner.title")
+    title = fields.Many2one[PartnerTitle]()
     company_name = fields.Char()
     opt_out = fields.Boolean(string="Opt-Out")
     street = fields.Char("Street")
     street2 = fields.Char("Street2")
     zip = fields.Char("Zip", change_default=True)
     city = fields.Char("City")
-    state_id = fields.Many2one("res.country.state", string="State")
-    country_id = fields.Many2one("res.country", string="Country")
+    state_id = fields.Many2one[CountryState](string="State")
+    country_id = fields.Many2one[Country](string="Country")
     country_name = fields.Char(string="Country Name")
     phone = fields.Char("Phone")
     fax = fields.Char("Fax")
@@ -90,8 +91,7 @@ class AlcRegistration(FormatAddress, models.Model):
         compute="_compute_state",
     )
 
-    similar_partner_ids = fields.One2many(
-        comodel_name="res.partner",
+    similar_partner_ids = fields.One2many[Partner](
         compute="_compute_similar_partner_ids",
         string="Similar Partners",
         help="Restricted to 10 parnters, use the action to show all potential matches.",
@@ -136,15 +136,18 @@ class AlcRegistration(FormatAddress, models.Model):
             "equine": "alc_partner_category.equins",
             "exotic": "alc_partner_category.nac",
         }
-        for key in mapping:
+        for key, xml_id in mapping.items():
             if key in self.clientele:
-                categories.append(self.env.ref(mapping[key]).id)
+                categories.append(self.env.ref(xml_id).id)
         return categories
 
     def _get_partner_vals(self):
         self.ensure_one()
         fields_to_sync = self._creation_fields()
-        g = lambda v, f: v.id if self._fields[f].relational else v
+
+        def g(v, f):
+            return v.id if self._fields[f].relational else v
+
         vals = {f: g(self[f], f) for f in fields_to_sync}
         if vals.get("company_name"):
             vals["suite"] = vals["name"]

@@ -1,17 +1,11 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestRegistration(SavepointCase):
-    @classmethod
-    def setUpClass(cls):
-        super(TestRegistration, cls).setUpClass()
-        cls.model = cls.env["alc.registration"]
-
+class TestRegistrationMixin(TransactionCase):
     def _get_registration_vals(self, **kwargs):
         vals = {
             "name": "first last",

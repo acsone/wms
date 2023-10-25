@@ -157,18 +157,10 @@
         <field name="name">Registrations</field>
         <field name="res_model">alc.registration</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_type">form</field>
         <field name="domain">[]</field>
         <field name="context">{'search_default_pending': 1}</field>
         <field name="search_view_id" ref="alc_registration_search_view" />
         <field name="view_id" ref="alc_registration_tree_view" />
     </record>
 
-    <menuitem
-    id="alc_registration_menu"
-    name="Registrations"
-    parent="sales_team.menu_sales"
-    action="alc_registration_act_window"
-    sequence="99"
-  />
 </odoo>
