@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_move_list
-#: model:ir.ui.view,arch_db:alc_stock_move_list.stock_move_search_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_move_list.stock_move_search_view
 msgid "Previous Month"
 msgstr "Mois précédent"
 
