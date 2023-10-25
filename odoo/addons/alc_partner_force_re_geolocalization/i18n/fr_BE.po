@@ -17,19 +17,21 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_partner_force_re_geolocalization
-#: model:ir.model.fields,field_description:alc_partner_force_re_geolocalization.field_res_partner_coordinates_should_be_checked
-#: model:ir.model.fields,field_description:alc_partner_force_re_geolocalization.field_res_users_coordinates_should_be_checked
-#: model:ir.model.fields,field_description:alc_partner_force_re_geolocalization.field_shopinvader_partner_coordinates_should_be_checked
-msgid "Coordinates should be checked"
+#: model:ir.model,name:alc_partner_force_re_geolocalization.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_partner_force_re_geolocalization
+#: model:ir.model.fields,field_description:alc_partner_force_re_geolocalization.field_res_partner__coordinates_should_be_checked
+#: model:ir.model.fields,field_description:alc_partner_force_re_geolocalization.field_res_users__coordinates_should_be_checked
+#: model:ir.model.fields,field_description:alc_partner_force_re_geolocalization.field_shopinvader_partner__coordinates_should_be_checked
+#, fuzzy
+#| msgid "Coordinates should be checked"
+msgid "Coordinates Should Be Checked"
 msgstr "Vérifiez les coordonées"
 
 #. module: alc_partner_force_re_geolocalization
-#: model:ir.model,name:alc_partner_force_re_geolocalization.model_res_partner
-msgid "Partner"
-msgstr "Partenaire"
-
-#. module: alc_partner_force_re_geolocalization
-#: model:ir.ui.view,arch_db:alc_partner_force_re_geolocalization.res_partner_form_view
+#: model_terms:ir.ui.view,arch_db:alc_partner_force_re_geolocalization.res_partner_form_view
 msgid ""
 "The address has changed for this partner. Please press 'Geolocalize' once "
 "again (Partner Assignation tab) and check that the point correspond to the "
@@ -39,6 +41,9 @@ msgstr ""
 "'Géolocaliser' (Onglet assignation du partenaire) et vérifier que le point "
 "correspond bien à l'adresse entrée. Si ce n'est pas le cas, placez le point "
 "le point sur la carte manuellement."
+
+#~ msgid "Partner"
+#~ msgstr "Partenaire"
 
 #~ msgid "Next invoice date"
 #~ msgstr "Prochaine date de facturation"
