@@ -2,19 +2,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Eshop Ads Elasticsearch",
+    "name": "alc eshop search engine ads",
     "description": """
         Alcyon: Manage publication of alcyon ads to ES""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": [
-        "alc_eshop_ads",
-        "connector_elasticsearch",
-        "connector_search_engine",
-        "queue_job_cron",
-    ],
+    "depends": ["alc_eshop_ads", "connector_search_engine", "queue_job_cron"],
     "data": [
         "views/alc_eshop_ads.xml",
         "views/se_backend.xml",

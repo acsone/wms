@@ -3,7 +3,7 @@ import datetime
 from odoo.addons.connector_search_engine.tests.test_all import TestBindingIndexBaseFake
 
 
-class TestEShopAdsElasticsearch(TestBindingIndexBaseFake):
+class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
     @classmethod
     def _prepare_index_values(cls, backend=None):
         backend = backend or cls.backend

@@ -686,6 +686,7 @@ def set_modules_to_remove():
         "alc_eshop_sale_statistic",  # renamed to alc_eshop_api_sale_statistic
         "alc_registration_eshop_service",  # renamed to alc_eshop_api_registration
         "elasticsearch_search",
+        "alc_eshop_ads_elasticsearch",  # renamed to alc_eshop_search_engine_ads
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
