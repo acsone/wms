@@ -1,0 +1,51 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_partner_opt_out
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_partner_opt_out
+#: model_terms:ir.ui.view,arch_db:alc_partner_opt_out.view_res_partner_filter
+msgid "Available for mass mailing"
+msgstr ""
+
+#. module: alc_partner_opt_out
+#: model:ir.model,name:alc_partner_opt_out.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_partner_opt_out
+#: model:ir.model.fields,help:alc_partner_opt_out.field_res_partner__opt_out
+#: model:ir.model.fields,help:alc_partner_opt_out.field_res_users__opt_out
+#: model:ir.model.fields,help:alc_partner_opt_out.field_shopinvader_partner__opt_out
+msgid ""
+"If opt-out is checked, this contact has refused to receive emails for mass "
+"mailing and marketing campaign. Filter 'Available for Mass Mailing' allows "
+"users to filter the partners when performing mass mailing."
+msgstr ""
+
+#. module: alc_partner_opt_out
+#: model_terms:ir.ui.view,arch_db:alc_partner_opt_out.view_partner_form
+msgid "Mailing Opt-Out"
+msgstr ""
+
+#. module: alc_partner_opt_out
+#: model:ir.model.fields,field_description:alc_partner_opt_out.field_res_partner__opt_out
+#: model:ir.model.fields,field_description:alc_partner_opt_out.field_res_users__opt_out
+#: model:ir.model.fields,field_description:alc_partner_opt_out.field_shopinvader_partner__opt_out
+msgid "Opt-Out"
+msgstr ""
+
+#. module: alc_partner_opt_out
+#: model_terms:ir.ui.view,arch_db:alc_partner_opt_out.view_res_partner_filter
+msgid "Partners that did not ask not to be included in mass mailing campaigns"
+msgstr ""

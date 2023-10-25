@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* alc_registration
+# 	* alc_registration
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,13 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_registration
-#: selection:alc.registration,state:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__state__accepted
 #: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_search_view
 msgid "Accepted"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_active
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__active
 msgid "Active"
 msgstr ""
 
@@ -30,44 +30,44 @@ msgid "Address"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_partner_type
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__partner_type
 msgid "Alcyon Partner Category"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_apb_authorization
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__apb_authorization
 msgid "Authorization/APB"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_city
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__city
 #: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 msgid "City"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_clientele
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__clientele
 msgid "Clientele"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_comment
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__comment
 msgid "Comment"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_company_name
-msgid "Company name"
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__company_name
+msgid "Company Name"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_country_id
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__country_id
 #: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 msgid "Country"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_country_name
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__country_name
 msgid "Country Name"
 msgstr ""
 
@@ -77,119 +77,121 @@ msgid "Create Partner"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_partner_id
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__partner_id
 msgid "Created Partner"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_create_uid
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_create_date
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_vet_depot_number
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__vet_depot_number
 msgid "Depot number"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_display_name
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_email
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__email
 msgid "Email"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,partner_type:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__partner_type__equipment_only
 msgid "Equipment Only"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,partner_type:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__partner_type__export_customer
 msgid "Export Customer"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,partner_type:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__partner_type__export_meds
 msgid "Export Medicine"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_fax
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__fax
 msgid "Fax"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,partner_type:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__partner_type__food_only
 msgid "Food Only"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,partner_type:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__partner_type__guest
 msgid "Guest"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_id
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__id
 msgid "ID"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration___last_update
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_write_uid
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_write_date
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,partner_type:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__partner_type__misc
 msgid "Miscellaneous"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_mobile
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__mobile
 msgid "Mobile"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_name
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__name
 msgid "Name"
 msgstr ""
 
 #. module: alc_registration
-#: code:addons/alc_registration/models/alc_registration.py:191
+#. odoo-python
+#: code:addons/alc_registration/models/alc_registration.py:0
 #, python-format
 msgid "No Registration to reset."
 msgstr ""
 
 #. module: alc_registration
-#: code:addons/alc_registration/models/alc_registration.py:167
+#. odoo-python
+#: code:addons/alc_registration/models/alc_registration.py:0
 #, python-format
 msgid "No new partners."
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_occupation
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__occupation
 msgid "Occupation"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_opt_out
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__opt_out
 msgid "Opt-Out"
 msgstr ""
 
@@ -199,23 +201,23 @@ msgid "Partner Registration"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,state:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__state__pending
 #: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_search_view
 msgid "Pending"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,occupation:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__occupation__pharmacist
 msgid "Pharmacist"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,partner_type:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__partner_type__wholesaler_pharmacy
 msgid "Pharmacy Wholesaler"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_phone
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__phone
 msgid "Phone"
 msgstr ""
 
@@ -225,14 +227,14 @@ msgid "Registration Manager"
 msgstr ""
 
 #. module: alc_registration
-#: code:addons/alc_registration/models/alc_registration.py:182
+#. odoo-python
+#: code:addons/alc_registration/models/alc_registration.py:0
 #, python-format
 msgid "Registration has already been accepted."
 msgstr ""
 
 #. module: alc_registration
 #: model:ir.actions.act_window,name:alc_registration.alc_registration_act_window
-#: model:ir.ui.menu,name:alc_registration.alc_registration_menu
 msgid "Registrations"
 msgstr ""
 
@@ -242,14 +244,15 @@ msgid "Reject"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,state:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__state__rejected
 #: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_search_view
 msgid "Rejected"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,help:alc_registration.field_alc_registration_similar_partner_ids
-msgid "Restricted to 10 parnters, use the action to show all potential matches."
+#: model:ir.model.fields,help:alc_registration.field_alc_registration__similar_partner_ids
+msgid ""
+"Restricted to 10 parnters, use the action to show all potential matches."
 msgstr ""
 
 #. module: alc_registration
@@ -258,31 +261,32 @@ msgid "Set to pending"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,partner_type:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__partner_type__shareholder
 msgid "Shareholder"
 msgstr ""
 
 #. module: alc_registration
-#: code:addons/alc_registration/models/alc_registration.py:222
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_similar_partner_ids
+#. odoo-python
+#: code:addons/alc_registration/models/alc_registration.py:0
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__similar_partner_ids
 #: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 #, python-format
 msgid "Similar Partners"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_state_id
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__state_id
 #: model_terms:ir.ui.view,arch_db:alc_registration.alc_registration_form_view
 msgid "State"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_state
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__state
 msgid "Status"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_street
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__street
 msgid "Street"
 msgstr ""
 
@@ -297,68 +301,68 @@ msgid "Street..."
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_street2
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__street2
 msgid "Street2"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,occupation:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__occupation__student
 msgid "Student"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,partner_type:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__partner_type__student_like
 msgid "Student and similar"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_vet_subscription_number
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__vet_subscription_number
 msgid "Subscription number"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,occupation:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__occupation__supplier
 msgid "Supplier"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,partner_type:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__partner_type__supplier
 msgid "Suppliers"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_vat
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__vat
 msgid "TIN"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,help:alc_registration.field_alc_registration_vat
+#: model:ir.model.fields,help:alc_registration.field_alc_registration__vat
 msgid "Tax Identification Number."
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_title
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__title
 msgid "Title"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,occupation:0
-#: selection:alc.registration,partner_type:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__occupation__veterinary
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__partner_type__veterinary
 msgid "Veterinary"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,occupation:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__occupation__assistant
 msgid "Veterinary Assistant"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,partner_type:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__partner_type__wholesaler_veterinary
 msgid "Veterinary Wholesaler"
 msgstr ""
 
 #. module: alc_registration
-#: selection:alc.registration,occupation:0
+#: model:ir.model.fields.selection,name:alc_registration.selection__alc_registration__occupation__wholesaler
 msgid "Wholesaler"
 msgstr ""
 
@@ -368,7 +372,6 @@ msgid "ZIP"
 msgstr ""
 
 #. module: alc_registration
-#: model:ir.model.fields,field_description:alc_registration.field_alc_registration_zip
+#: model:ir.model.fields,field_description:alc_registration.field_alc_registration__zip
 msgid "Zip"
 msgstr ""
-
