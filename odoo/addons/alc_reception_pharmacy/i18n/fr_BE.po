@@ -17,240 +17,218 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.receive_pharmacy_products_form_view
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.receive_pharmacy_products_form_view
 msgid "ADD"
 msgstr "Ajouter"
 
 #. module: alc_reception_pharmacy
-#: model:ir.actions.report.xml,name:alc_reception_pharmacy.report_pharmacy_lot_label
-msgid "Alcyon pharmacy lot Label"
-msgstr "Alcyon pharmacy lot Label"
-
-#. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:142
-#, python-format
-msgid ""
-"All pickings at destination of a same shipping must be in the same delivery "
-"round"
-msgstr ""
-"All pickings at destination of a same shipping must be in the same delivery "
-"round"
-
-#. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:153
-#, python-format
-msgid "Assign pickings to delivery round %s after pharmacy reception."
-msgstr "Assigner les pickings %s après la réception pharmacie."
-
-#. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_bin_id
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_bin_id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__bin_id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__bin_id
 msgid "Bin"
 msgstr "Bac"
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.select_pharmacy_printing_printer_form_view
-msgid "Cancel"
-msgstr "Annuler"
-
-#. module: alc_reception_pharmacy
-#: model:product.product,name:alc_reception_pharmacy.product_colis_souverain
 #: model:product.template,name:alc_reception_pharmacy.product_colis_souverain_product_template
 msgid "Colis Souverain"
 msgstr "Colis Souverain"
 
 #. module: alc_reception_pharmacy
-#: model:product.product,name:alc_reception_pharmacy.product_colis_souverain_frigo
 #: model:product.template,name:alc_reception_pharmacy.product_colis_souverain_frigo_product_template
 msgid "Colis Souverain Frigo"
 msgstr "Colis Souverain Frigo"
 
 #. module: alc_reception_pharmacy
-#: model:product.product,name:alc_reception_pharmacy.product_colis_souverain_frigo_immunopharma
 #: model:product.template,name:alc_reception_pharmacy.product_colis_souverain_frigo_immunopharma_product_template
 #, fuzzy
 msgid "Colis Souverain Frigo Immunopharma"
 msgstr "Colis Souverain Frigo"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_create_uid
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_create_uid
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_create_uid
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer_create_uid
+#: model:ir.model,name:alc_reception_pharmacy.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: alc_reception_pharmacy
+#: model:ir.model,name:alc_reception_pharmacy.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: alc_reception_pharmacy
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.res_config_settings_view_form
+#, fuzzy
+#| msgid "Assign pickings to delivery round %s after pharmacy reception."
+msgid "Constrain customers for pharmacy receptions"
+msgstr "Assigner les pickings %s après la réception pharmacie."
+
+#. module: alc_reception_pharmacy
+#: model:ir.model,name:alc_reception_pharmacy.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_reception_pharmacy
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__create_uid
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__create_uid
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__create_uid
 msgid "Created by"
 msgstr "Créé par"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_create_date
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_create_date
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_create_date
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer_create_date
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__create_date
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__create_date
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__create_date
 msgid "Created on"
 msgstr "Créé le"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_customer_id
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_customer_id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__customer_id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__customer_id
 msgid "Customer"
 msgstr "Client"
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:96
+#. odoo-python
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:0
 #, python-format
 msgid "Customer location is missing"
 msgstr "Customer location is missing"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_date
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__date
 msgid "Date"
 msgstr "Date "
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_partner_shipping_id
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_partner_partner_shipping_id
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_users_partner_shipping_id
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_shopinvader_partner_partner_shipping_id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_company__delivered_by_alcyon_constraint
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_config_settings__delivered_by_alcyon_constraint
+#, fuzzy
+#| msgid "Is delivered by alcyon"
+msgid "Delivered By Alcyon Constraint"
+msgstr "Livré par Alcyon"
+
+#. module: alc_reception_pharmacy
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__partner_shipping_id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_partner__partner_shipping_id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_users__partner_shipping_id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_shopinvader_partner__partner_shipping_id
 msgid "Delivery Address"
 msgstr "Adresse de livraison"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_procurement_id
-msgid "Delivery Procurement"
-msgstr "Livraison"
-
-#. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_display_name
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_display_name
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_display_name
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer_display_name
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__display_name
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__display_name
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: alc_reception_pharmacy
-#: selection:reception.pharmacy,state:0
-#: selection:reception.pharmacy.line,state:0
+#: model:ir.model.fields.selection,name:alc_reception_pharmacy.selection__reception_pharmacy__state__done
+#: model:ir.model.fields.selection,name:alc_reception_pharmacy.selection__reception_pharmacy_line__state__done
 msgid "Done"
 msgstr "Fait"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_id
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_id
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_id
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer_id
+#: model:ir.model.fields,help:alc_reception_pharmacy.field_res_company__delivered_by_alcyon_constraint
+#: model:ir.model.fields,help:alc_reception_pharmacy.field_res_config_settings__delivered_by_alcyon_constraint
+#, fuzzy
+#| msgid "Assign pickings to delivery round %s after pharmacy reception."
+msgid "Enable the constaint 'delivered by Alcyon' for pharmacy receptions"
+msgstr "Assigner les pickings %s après la réception pharmacie."
+
+#. module: alc_reception_pharmacy
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.res_config_settings_view_form
+msgid ""
+"Enable the constraint that check there is a at least a release channel with "
+"Alcyon as\n"
+"                            transporter and a delivery zone containing the "
+"geographic location of the customer."
+msgstr ""
+
+#. module: alc_reception_pharmacy
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__id
 msgid "ID"
 msgstr "ID"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_partner_is_delivered_by_alcyon
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_users_is_delivered_by_alcyon
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_shopinvader_partner_is_delivered_by_alcyon
-msgid "Is delivered by alcyon"
-msgstr "Livré par Alcyon"
-
-#. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products___last_update
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy___last_update
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line___last_update
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer___last_update
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products____last_update
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy____last_update
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line____last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_write_uid
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_write_uid
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_write_uid
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer_write_uid
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__write_uid
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__write_uid
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__write_uid
 msgid "Last Updated by"
 msgstr "Derniere fois mis à jour par"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_write_date
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_write_date
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_write_date
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer_write_date
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__write_date
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__write_date
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__write_date
 msgid "Last Updated on"
 msgstr "Dernière mis à jour le"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_ids
+#: model:ir.model,name:alc_reception_pharmacy.model_reception_pharmacy_line
+#, fuzzy
+#| msgid "reception.pharmacy"
+msgid "Line of reception pharmacy"
+msgstr "Réception Pharmacie"
+
+#. module: alc_reception_pharmacy
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__line_ids
 msgid "Lines"
 msgstr "Lignes"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_lot_name
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_lot_id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__lot_name
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__lot_id
 msgid "Lot"
 msgstr "Lot"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_name
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__name
 msgid "Name"
 msgstr "Nom"
 
 #. module: alc_reception_pharmacy
-#: selection:reception.pharmacy,state:0
-#: selection:reception.pharmacy.line,state:0
+#: model:ir.model.fields.selection,name:alc_reception_pharmacy.selection__reception_pharmacy__state__draft
+#: model:ir.model.fields.selection,name:alc_reception_pharmacy.selection__reception_pharmacy_line__state__draft
 msgid "New"
 msgstr "Nouveau"
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:75
-#, python-format
-msgid "No printer defined for reception, please select one first"
-msgstr ""
-"Il n'y a pas d'imprimante de réception définie. Veuillez en sélectionner une."
-
-#. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.select_pharmacy_printing_printer_form_view
-msgid "OK"
-msgstr "Ok"
-
-#. module: alc_reception_pharmacy
-#: model:ir.model,name:alc_reception_pharmacy.model_res_partner
-msgid "Partner"
-msgstr "Partenaire"
-
-#. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:65
-#, python-format
-msgid "Partner {} does not belong to any itinerary"
+#. odoo-python
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:0
+#, fuzzy, python-format
+#| msgid "Partner {} does not belong to any itinerary"
+msgid "Partner %(partner)s does not belong to any release channel"
 msgstr "Le client {} n'est pas livré par Alcyon (Aucune tournée associée)"
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
 msgid "Pharmacy Reception"
 msgstr "Réception Pharmacie"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_users_printing_pharmacy_reception_printer_id
-msgid "Pharmacy Reception Printer"
-msgstr "Imprimante de réception pharmacie"
-
-#. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:50
+#. odoo-python
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:0
 #, python-format
 msgid "Please insert at least one line"
 msgstr "Please insert at least one line"
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.view_reception_pharmacy_line_tree
-msgid "Print"
-msgstr "Imprimer"
-
-#. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer_printer_id
-msgid "Printer"
-msgstr "Imprimante"
-
-#. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_product_id
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_product_id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__product_id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__product_id
 msgid "Product"
 msgstr "Article"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_product_qty
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_product_qty
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__product_qty
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__product_qty
 msgid "Quantity"
 msgstr "Quantité"
 
@@ -260,22 +238,23 @@ msgid "Queue Job"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
 msgid "Receive"
 msgstr "Recevoir"
 
 #. module: alc_reception_pharmacy
 #: model:ir.actions.act_window,name:alc_reception_pharmacy.receive_pharmacy_products_act_window
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.receive_pharmacy_products_form_view
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.receive_pharmacy_products_form_view
 msgid "Receive Pharmacy Products"
 msgstr "Recevoir des produits pharmacie"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_reception_move_id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__reception_move_id
 msgid "Reception Move"
 msgstr "Mouvement Réception"
 
 #. module: alc_reception_pharmacy
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__reception_pharmacy_id
 #: model:ir.ui.menu,name:alc_reception_pharmacy.reception_pharmacy_menu
 msgid "Reception Pharmacy"
 msgstr "Réception Pharmacie"
@@ -286,60 +265,57 @@ msgid "Reception Pharmacy List"
 msgstr "Réceptions pharmacie"
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:64
+#: model:ir.model,name:alc_reception_pharmacy.model_reception_pharmacy
+#, fuzzy
+#| msgid "Reception Pharmacy"
+msgid "Reception pharmacy"
+msgstr "Réception Pharmacie"
+
+#. module: alc_reception_pharmacy
+#. odoo-python
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:0
 #, python-format
 msgid "Reception pharmacy : lines are validated in background"
 msgstr "Réception pharmacie: les lignes sont validées en arrière plan"
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:58
+#. odoo-python
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:0
 #, fuzzy, python-format
-msgid "Reception pharmacy for %s"
+msgid "Reception pharmacy for %(name)s"
 msgstr "Reception pharmacie pour %s"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_reception_pharmacy_id
-msgid "Reception pharmacy id"
-msgstr "Reception pharmacy id"
-
-#. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/queue_job.py:22
+#. odoo-python
+#: code:addons/alc_reception_pharmacy/models/queue_job.py:0
 #, python-format
 msgid "Related Record"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/queue_job.py:33
+#. odoo-python
+#: code:addons/alc_reception_pharmacy/models/queue_job.py:0
 #, python-format
 msgid "Related Records"
 msgstr ""
 
 #. module: alc_reception_pharmacy
-#: model:ir.actions.act_window,name:alc_reception_pharmacy.select_pharmacy_printing_printer_act_window
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.select_pharmacy_printing_printer_form_view
-msgid "Select Pharmacy Printer"
-msgstr "Sélectionner une imprimante réception pharmacie"
-
-#. module: alc_reception_pharmacy
-#: model:ir.ui.menu,name:alc_reception_pharmacy.select_pharmacy_printing_printer_menu
-msgid "Select Pharmacy Printing Printer"
-msgstr "Sélectionner une imprimante réception pharmacie"
-
-#. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products_state
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_state
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_state
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__state
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__state
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__state
 msgid "State"
 msgstr "État"
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:99
+#. odoo-python
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:0
 #, python-format
 msgid "Supplier location is missing"
 msgstr "Supplier location is missing"
 
 #. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/wizards/receive_pharmacy_products.py:49
+#. odoo-python
+#: code:addons/alc_reception_pharmacy/wizards/receive_pharmacy_products.py:0
 #, python-format
 msgid ""
 "This reception is transferred, please create a new one before adding "
@@ -349,121 +325,82 @@ msgstr ""
 "des produits à recevoir."
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
 msgid "Transfer"
 msgstr "Transfert"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model,name:alc_reception_pharmacy.model_res_users
-msgid "Users"
-msgstr "Utilisateurs"
-
-#. module: alc_reception_pharmacy
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:93
+#. odoo-python
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:0
 #, python-format
 msgid "Warehouse is missing"
 msgstr "Warehouse is missing"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line_wizard_id
+#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__wizard_id
 msgid "Wizard"
 msgstr "Assistant"
 
 #. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
-msgid ""
-"^FS\\r\n"
-"^FO32,105^A0N,34,28^FDLot:^FS\\r\n"
-"^FO90,105^A0N,34,28^FD"
-msgstr ""
-
-#. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
-msgid ""
-"^FS\\r\n"
-"^FO32,145^A0N,34,28^FDBac:^FS\\r\n"
-"^FO90,145^A0N,34,28^FD"
-msgstr ""
-
-#. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
-msgid ""
-"^FS\\r\n"
-"^FO32,190^A0N,34,28^FDDate limite:^FS\\r\n"
-"^FO175,186^A0N,40,30^FD"
-msgstr ""
-
-#. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
-msgid ""
-"^FS\\r\n"
-"^FO32,240^A0N,34,28^FDArticle:^FS\\r\n"
-"^FO120,240^A0N,34,36^FD"
-msgstr ""
-
-#. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
-msgid ""
-"^FS\\r\n"
-"^FO32,283^A0N,31,23^FD"
-msgstr ""
-
-#. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
-msgid ""
-"^FS\\r\n"
-"^FO32,70^A0N,29,31^FDClient:^FS\\r\n"
-"^FO120,68^A0N,34,28^FD"
-msgstr ""
-
-#. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
-msgid ""
-"^FS\\r\n"
-"^FO420,150\\r\n"
-"^BQN,2,6\\r\n"
-"^FDQA,"
-msgstr ""
-
-#. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
-msgid ""
-"^FS\\r\n"
-"^FO420,33^A0N,29,31^FD"
-msgstr ""
-
-#. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
-msgid ""
-"^FS\\r\n"
-"^XZ"
-msgstr ""
-
-#. module: alc_reception_pharmacy
-#: model:ir.ui.view,arch_db:alc_reception_pharmacy.pharmacy_lot_label
-msgid ""
-"^XA\n"
-"^PRC\n"
-"^LH0,0^FS\\r\n"
-"^FO32,33^A0N,29,31^FD"
-msgstr ""
-
-#. module: alc_reception_pharmacy
 #: model:ir.model,name:alc_reception_pharmacy.model_receive_pharmacy_products
-msgid "receive.pharmacy.products"
-msgstr "receive.pharmacy.products"
-
-#. module: alc_reception_pharmacy
-#: model:ir.model,name:alc_reception_pharmacy.model_reception_pharmacy
-msgid "reception.pharmacy"
+#, fuzzy
+#| msgid "Pharmacy Reception"
+msgid "Wizard of pharmacy reception"
 msgstr "Réception Pharmacie"
 
-#. module: alc_reception_pharmacy
-#: model:ir.model,name:alc_reception_pharmacy.model_reception_pharmacy_line
-msgid "reception.pharmacy.line"
-msgstr "Détail Réception Pharmacie"
+#~ msgid "Alcyon pharmacy lot Label"
+#~ msgstr "Alcyon pharmacy lot Label"
 
-#. module: alc_reception_pharmacy
-#: model:ir.model,name:alc_reception_pharmacy.model_select_pharmacy_printing_printer
-msgid "select.pharmacy.printing.printer"
-msgstr "select.pharmacy.printing.printer"
+#~ msgid ""
+#~ "All pickings at destination of a same shipping must be in the same "
+#~ "delivery round"
+#~ msgstr ""
+#~ "All pickings at destination of a same shipping must be in the same "
+#~ "delivery round"
+
+#~ msgid "Cancel"
+#~ msgstr "Annuler"
+
+#~ msgid "Delivery Procurement"
+#~ msgstr "Livraison"
+
+#~ msgid "No printer defined for reception, please select one first"
+#~ msgstr ""
+#~ "Il n'y a pas d'imprimante de réception définie. Veuillez en sélectionner "
+#~ "une."
+
+#~ msgid "OK"
+#~ msgstr "Ok"
+
+#~ msgid "Partner"
+#~ msgstr "Partenaire"
+
+#~ msgid "Pharmacy Reception Printer"
+#~ msgstr "Imprimante de réception pharmacie"
+
+#~ msgid "Print"
+#~ msgstr "Imprimer"
+
+#~ msgid "Printer"
+#~ msgstr "Imprimante"
+
+#~ msgid "Reception pharmacy id"
+#~ msgstr "Reception pharmacy id"
+
+#~ msgid "Select Pharmacy Printer"
+#~ msgstr "Sélectionner une imprimante réception pharmacie"
+
+#~ msgid "Select Pharmacy Printing Printer"
+#~ msgstr "Sélectionner une imprimante réception pharmacie"
+
+#~ msgid "Users"
+#~ msgstr "Utilisateurs"
+
+#~ msgid "receive.pharmacy.products"
+#~ msgstr "receive.pharmacy.products"
+
+#~ msgid "reception.pharmacy.line"
+#~ msgstr "Détail Réception Pharmacie"
+
+#~ msgid "select.pharmacy.printing.printer"
+#~ msgstr "select.pharmacy.printing.printer"
