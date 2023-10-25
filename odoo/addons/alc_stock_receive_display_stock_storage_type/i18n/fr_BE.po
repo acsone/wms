@@ -17,21 +17,31 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_receive_display_stock_storage_type
-#: model:ir.model.fields,help:alc_stock_receive_display_stock_storage_type.field_stock_pack_operation_lot_add_product_stock_storage_type_id
+#: model:ir.model,name:alc_stock_receive_display_stock_storage_type.model_stock_pack_operation_lot_add
+msgid "Add a wizard that facilitates purchases reception."
+msgstr ""
+
+#. module: alc_stock_receive_display_stock_storage_type
+#: model:ir.model.fields,help:alc_stock_receive_display_stock_storage_type.field_stock_pack_operation_lot_add__package_type_id
+#, fuzzy
+#| msgid ""
+#| "Defines a 'default' package storage type for this product to be applied "
+#| "on packages without product packagings for put-away computations."
 msgid ""
-"Defines a 'default' package storage type for this product to be applied on "
-"packages without product packagings for put-away computations."
+"Defines a 'default' package type for this product to be applied on packages "
+"without product packagings and on put-away computation based on package type "
+"for product not in a package"
 msgstr ""
 "Définit un type de stockage de coli par défaut pour ce article, à appliquer "
 "sur les colis de ce article ou les articles sans coli pour les calculs de "
 "rangement."
 
 #. module: alc_stock_receive_display_stock_storage_type
-#: model:ir.model.fields,field_description:alc_stock_receive_display_stock_storage_type.field_stock_pack_operation_lot_add_product_stock_storage_type_id
-msgid "Package storage type"
+#: model:ir.model.fields,field_description:alc_stock_receive_display_stock_storage_type.field_stock_pack_operation_lot_add__package_type_id
+#, fuzzy
+#| msgid "Package storage type"
+msgid "Package type"
 msgstr "Type de Stockage Coli/article"
 
-#. module: alc_stock_receive_display_stock_storage_type
-#: model:ir.model,name:alc_stock_receive_display_stock_storage_type.model_stock_pack_operation_lot_add
-msgid "stock.pack.operation.lot.add"
-msgstr "stock.pack.operation.lot.add"
+#~ msgid "stock.pack.operation.lot.add"
+#~ msgstr "stock.pack.operation.lot.add"
