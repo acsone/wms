@@ -27,6 +27,7 @@
         "sale_product_set",
         "product_stock_state",
         "sale_wishlist",
+        "product_sequence",
         # OCA/sale-channel
         "sale_channel",
         # OCA/product-attribute
