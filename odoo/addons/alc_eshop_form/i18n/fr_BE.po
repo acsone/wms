@@ -28,7 +28,7 @@ msgstr "Audience"
 
 #. module: alc_eshop_form
 #: selection:alc.eshop.form,audience:0
-#: model_terms:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_search_view
+#: model:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_search_view
 msgid "Authenticated"
 msgstr "Authentifié"
 
@@ -77,7 +77,7 @@ msgid "Eshop Form"
 msgstr "Formulaire Web"
 
 #. module: alc_eshop_form
-#: model_terms:ir.ui.view,arch_db:alc_eshop_form.report_alc_eshop_form_submission
+#: model:ir.ui.view,arch_db:alc_eshop_form.report_alc_eshop_form_submission
 msgid "Eshop:"
 msgstr "Site Web:"
 
@@ -150,7 +150,7 @@ msgstr ""
 
 #. module: alc_eshop_form
 #: model:ir.model.fields,field_description:alc_eshop_form.field_alc_eshop_form_name
-#: model_terms:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_form_view
+#: model:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_form_view
 msgid "Name"
 msgstr "Nom"
 
@@ -162,12 +162,12 @@ msgstr "Les options ne sont pas un json valide"
 
 #. module: alc_eshop_form
 #: selection:alc.eshop.form,audience:0
-#: model_terms:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_search_view
+#: model:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_search_view
 msgid "Public"
 msgstr "Publique"
 
 #. module: alc_eshop_form
-#: model_terms:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_search_view
+#: model:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_search_view
 msgid "Published"
 msgstr "Publié"
 
@@ -197,7 +197,7 @@ msgid "Visible on EShop"
 msgstr "Visible sur l'EShop"
 
 #. module: alc_eshop_form
-#: model_terms:ir.ui.view,arch_db:alc_eshop_form.report_alc_eshop_form_submission
+#: model:ir.ui.view,arch_db:alc_eshop_form.report_alc_eshop_form_submission
 msgid ""
 "Vous trouverez ci-dessous les informations fournies\n"
 "                            par"
@@ -211,12 +211,12 @@ msgid "Website form manager"
 msgstr "Gestionnaire des formulaires Web"
 
 #. module: alc_eshop_form
-#: model_terms:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_form_view
+#: model:ir.ui.view,arch_db:alc_eshop_form.alc_eshop_form_form_view
 msgid "name"
 msgstr "Intitulé"
 
 #. module: alc_eshop_form
-#: model_terms:ir.ui.view,arch_db:alc_eshop_form.report_alc_eshop_form_submission
+#: model:ir.ui.view,arch_db:alc_eshop_form.report_alc_eshop_form_submission
 msgid "pour le formulaire"
 msgstr "pour le formulaire"
 
@@ -226,6 +226,6 @@ msgid "report.report_alc_eshop_form_submission"
 msgstr "report.report_alc_eshop_form_submission"
 
 #. module: alc_eshop_form
-#: model_terms:ir.ui.view,arch_db:alc_eshop_form.report_alc_eshop_form_submission
+#: model:ir.ui.view,arch_db:alc_eshop_form.report_alc_eshop_form_submission
 msgid "un visiteur"
 msgstr "un visiteur"

@@ -1,65 +1,37 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* alc_product_is_new
+#	* alc_product_is_new
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-07 09:09+0000\n"
-"PO-Revision-Date: 2023-03-07 09:09+0000\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2021-12-02 14:43+0000\n"
+"PO-Revision-Date: 2021-12-02 14:43+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: alc_product_is_new
-#: model:ir.model.fields,help:alc_product_is_new.field_product_product__package_type_id
-#: model:ir.model.fields,help:alc_product_is_new.field_product_template__package_type_id
-msgid ""
-"Defines a 'default' package type for this product to be applied on packages "
-"without product packagings and on put-away computation based on package type "
-"for product not in a package"
-msgstr ""
+#: model:ir.ui.view,arch_db:alc_product_is_new.product_template_form_view
+msgid "- Product has the storage type 'new' but is older than a month"
+msgstr "- Produit classé comme nouveauté mais créé il y a plus d'un mois"
 
 #. module: alc_product_is_new
-#: model:ir.model.fields,field_description:alc_product_is_new.field_product_product__is_new
-#: model:ir.model.fields,field_description:alc_product_is_new.field_product_template__is_new
-#: model:ir.model.fields,field_description:alc_product_is_new.field_stock_package_type__is_new
-msgid "Is New"
+#: model:ir.model.fields,field_description:alc_product_is_new.field_product_template_is_new
+msgid "Is new"
 msgstr "Nouveauté"
 
 #. module: alc_product_is_new
-#: model:ir.model.fields,field_description:alc_product_is_new.field_product_product__new_product_with_old_date
-#: model:ir.model.fields,field_description:alc_product_is_new.field_product_template__new_product_with_old_date
-msgid "New Product With Old Date"
-msgstr ""
-
-#. module: alc_product_is_new
-#: model:ir.model.fields,field_description:alc_product_is_new.field_product_product__package_type_id
-#: model:ir.model.fields,field_description:alc_product_is_new.field_product_template__package_type_id
-msgid "Package type"
-msgstr ""
-
-#. module: alc_product_is_new
 #: model:ir.model,name:alc_product_is_new.model_product_template
-msgid "Product"
-msgstr "Article"
+msgid "Product Template"
+msgstr "Modèle de produit"
 
 #. module: alc_product_is_new
-#: model_terms:ir.ui.view,arch_db:alc_product_is_new.product_template_form_view
-msgid "Product has the storage type 'new' but is older than a month"
-msgstr "Article nouveauté créé il y a plus d'un mois"
-
-#. module: alc_product_is_new
-#: model_terms:ir.ui.view,arch_db:alc_product_is_new.product_template_search_view
+#: model:ir.ui.view,arch_db:alc_product_is_new.product_template_search_view
 msgid "Product is categorized as 'new' but is older than a month"
-msgstr "Article classé comme nouveauté mais créé il y a plus d'un mois"
+msgstr "Produit nouveauté créé il y a plus d'un mois"
 
-#. module: alc_product_is_new
-#: model:ir.model,name:alc_product_is_new.model_stock_package_type
-msgid "Stock package type"
-msgstr ""

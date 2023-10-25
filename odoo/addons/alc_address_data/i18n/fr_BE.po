@@ -16,35 +16,57 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#~ msgid "Antwerp"
-#~ msgstr "Anvers"
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_van
+msgid "Antwerp"
+msgstr "Anvers"
 
-#~ msgid "Brussels Capital Region"
-#~ msgstr "Région de Bruxelles-Capitale"
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_bbr
+msgid "Brussels Capital Region"
+msgstr "Région de Bruxelles-Capitale"
 
-#~ msgid "East Flanders"
-#~ msgstr "Flandre orientale"
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_vov
+msgid "East Flanders"
+msgstr "Flandre orientale"
 
-#~ msgid "Flemish Brabant"
-#~ msgstr "Brabant flamand"
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_vbr
+msgid "Flemish Brabant"
+msgstr "Brabant flamand"
 
-#~ msgid "Hainaut"
-#~ msgstr "Hainaut"
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_wht
+msgid "Hainaut"
+msgstr "Hainaut"
 
-#~ msgid "Limburg"
-#~ msgstr "Limbourg"
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_vli
+msgid "Limburg"
+msgstr "Limbourg"
 
-#~ msgid "Liège"
-#~ msgstr "Liège"
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_wlg
+msgid "Liège"
+msgstr "Liège"
 
-#~ msgid "Luxembourg"
-#~ msgstr "Luxembourg"
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_wlx
+msgid "Luxembourg"
+msgstr "Luxembourg"
 
-#~ msgid "Namur"
-#~ msgstr "Namur"
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_wna
+msgid "Namur"
+msgstr "Namur"
 
-#~ msgid "Walloon Brabant"
-#~ msgstr "Brabant wallon"
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_wbr
+msgid "Walloon Brabant"
+msgstr "Brabant wallon"
 
-#~ msgid "West Flanders"
-#~ msgstr "Flandre occidentale"
+#. module: alc_address_data
+#: model:res.country.state,name:alc_address_data.province_vwv
+msgid "West Flanders"
+msgstr "Flandre occidentale"

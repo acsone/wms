@@ -17,28 +17,29 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_weighing_widget
-#. odoo-javascript
-#: code:addons/alc_weighing_widget/static/src/components/web_scale/web_scale.js:0
+#. openerp-web
+#: code:addons/alc_weighing_widget/static/src/js/web_weighing_widget.js:121
+#, python-format
+msgid "Connection restored"
+msgstr "Connexion rétablie"
+
+#. module: alc_weighing_widget
+#. openerp-web
+#: code:addons/alc_weighing_widget/static/src/js/web_weighing_widget.js:122
+#, python-format
+msgid "Connection to weighing machine restored"
+msgstr "Connexion à la balance rétablie"
+
+#. module: alc_weighing_widget
+#. openerp-web
+#: code:addons/alc_weighing_widget/static/src/js/web_weighing_widget.js:111
 #, python-format
 msgid "Could not connect to weighing machine"
 msgstr "Impossible de se connecter à la balance"
 
 #. module: alc_weighing_widget
-#. odoo-javascript
-#: code:addons/alc_weighing_widget/static/src/components/web_scale/web_scale.js:0
+#. openerp-web
+#: code:addons/alc_weighing_widget/static/src/js/web_weighing_widget.js:72
 #, python-format
 msgid "Trying to reconnect..."
 msgstr "Tentative de reconnexion..."
-
-#. module: alc_weighing_widget
-#. odoo-javascript
-#: code:addons/alc_weighing_widget/static/src/components/web_scale/web_scale.xml:0
-#, python-format
-msgid "state.error"
-msgstr ""
-
-#~ msgid "Connection restored"
-#~ msgstr "Connexion rétablie"
-
-#~ msgid "Connection to weighing machine restored"
-#~ msgstr "Connexion à la balance rétablie"

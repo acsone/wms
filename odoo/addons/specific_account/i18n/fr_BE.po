@@ -31,7 +31,7 @@ msgid ""
 msgstr ""
 
 #. module: specific_account
-#: model_terms:ir.ui.view,arch_db:specific_account.invoice_supplier_form_inherit
+#: model:ir.ui.view,arch_db:specific_account.invoice_supplier_form_inherit
 msgid "<span>Lines Fast Entry</span>"
 msgstr ""
 
@@ -92,17 +92,17 @@ msgid "December"
 msgstr "Décembre"
 
 #. module: specific_account
-#: model_terms:ir.ui.view,arch_db:specific_account.view_account_move_line_filter
+#: model:ir.ui.view,arch_db:specific_account.view_account_move_line_filter
 msgid "Due date between 90 to 210 days"
 msgstr "Échu entre 90 et 210 jours"
 
 #. module: specific_account
-#: model_terms:ir.ui.view,arch_db:specific_account.view_account_move_line_filter
+#: model:ir.ui.view,arch_db:specific_account.view_account_move_line_filter
 msgid "Due date over 210 days"
 msgstr "Échu depuis + de 210 jours"
 
 #. module: specific_account
-#: model_terms:ir.ui.view,arch_db:specific_account.view_account_move_line_filter
+#: model:ir.ui.view,arch_db:specific_account.view_account_move_line_filter
 msgid "Due date up to 89 days"
 msgstr "Échu jusqu'à 89 jours"
 

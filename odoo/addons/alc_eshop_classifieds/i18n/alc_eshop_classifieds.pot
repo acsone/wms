@@ -16,7 +16,6 @@ msgstr ""
 #. module: alc_eshop_classifieds
 #: model:ir.model.fields,field_description:alc_eshop_classifieds.field_res_partner__alc_classified_count
 #: model:ir.model.fields,field_description:alc_eshop_classifieds.field_res_users__alc_classified_count
-#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_shopinvader_partner__alc_classified_count
 msgid "# of classifieds"
 msgstr ""
 
@@ -67,7 +66,6 @@ msgstr ""
 #: model:ir.actions.act_window,name:alc_eshop_classifieds.alc_classified_act_window
 #: model:ir.model.fields,field_description:alc_eshop_classifieds.field_res_partner__alc_classified_ids
 #: model:ir.model.fields,field_description:alc_eshop_classifieds.field_res_users__alc_classified_ids
-#: model:ir.model.fields,field_description:alc_eshop_classifieds.field_shopinvader_partner__alc_classified_ids
 #: model:ir.ui.menu,name:alc_eshop_classifieds.alc_classified_menu
 #: model_terms:ir.ui.view,arch_db:alc_eshop_classifieds.view_partner_form
 #, python-format

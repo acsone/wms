@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_partner_delivery_person
-#: model_terms:ir.ui.view,arch_db:alc_partner_delivery_person.res_partner_search_view
+#: model:ir.ui.view,arch_db:alc_partner_delivery_person.res_partner_search_view
 #: model:res.partner.category,name:alc_partner_delivery_person.res_partner_category_delivery_person
 msgid "Delivery person"
 msgstr "Livreur Alcyon"

@@ -27,7 +27,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_partner_manual_sale_order.field_res_partner__manual_sale_order_allowed
 #: model:ir.model.fields,field_description:alc_partner_manual_sale_order.field_res_users__manual_sale_order_allowed
 #: model:ir.model.fields,field_description:alc_partner_manual_sale_order.field_sale_order__manual_sale_order_allowed
-#: model:ir.model.fields,field_description:alc_partner_manual_sale_order.field_shopinvader_partner__manual_sale_order_allowed
 msgid "Manual Sale Order Allowed"
 msgstr ""
 

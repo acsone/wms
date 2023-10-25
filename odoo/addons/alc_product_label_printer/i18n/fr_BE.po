@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-06 09:22+0000\n"
-"PO-Revision-Date: 2023-06-06 09:22+0000\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2021-11-17 07:28+0000\n"
+"PO-Revision-Date: 2021-11-17 07:28+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_label_printer
-#: model:ir.model.fields,field_description:alc_product_label_printer.field_res_users__printing_product_label_printer_id
+#: model:ir.model.fields,field_description:alc_product_label_printer.field_res_users_printing_product_label_printer_id
 msgid "Product Label Printer"
-msgstr "Imprimante étiquette produit"
+msgstr "Imprimante Etiquette Produit"
 
 #. module: alc_product_label_printer
 #: model:ir.model,name:alc_product_label_printer.model_res_users
-msgid "User"
+msgid "Users"
 msgstr "Utilisateurs"

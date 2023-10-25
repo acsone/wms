@@ -17,34 +17,24 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_partner_manual_sale_order
-#: model:ir.model,name:alc_partner_manual_sale_order.model_res_partner
-msgid "Contact"
-msgstr ""
-
-#. module: alc_partner_manual_sale_order
-#: model:ir.model.fields,field_description:alc_partner_manual_sale_order.field_sale_order__partner_id
-msgid "Customer"
-msgstr ""
-
-#. module: alc_partner_manual_sale_order
-#: model:ir.model.fields,field_description:alc_partner_manual_sale_order.field_res_partner__manual_sale_order_allowed
-#: model:ir.model.fields,field_description:alc_partner_manual_sale_order.field_res_users__manual_sale_order_allowed
-#: model:ir.model.fields,field_description:alc_partner_manual_sale_order.field_sale_order__manual_sale_order_allowed
-#: model:ir.model.fields,field_description:alc_partner_manual_sale_order.field_shopinvader_partner__manual_sale_order_allowed
-#, fuzzy
-#| msgid "Manual sale order allowed"
-msgid "Manual Sale Order Allowed"
+#: model:ir.model.fields,field_description:alc_partner_manual_sale_order.field_res_partner_manual_sale_order_allowed
+#: model:ir.model.fields,field_description:alc_partner_manual_sale_order.field_res_users_manual_sale_order_allowed
+#: model:ir.model.fields,field_description:alc_partner_manual_sale_order.field_sale_order_manual_sale_order_allowed
+#: model:ir.model.fields,field_description:alc_partner_manual_sale_order.field_shopinvader_partner_manual_sale_order_allowed
+msgid "Manual sale order allowed"
 msgstr "Encodage manuel de commandes autorisé"
 
 #. module: alc_partner_manual_sale_order
-#: model_terms:ir.ui.view,arch_db:alc_partner_manual_sale_order.sale_order_form_view
+#: model:ir.ui.view,arch_db:alc_partner_manual_sale_order.sale_order_form_view
 msgid "Manual sale order are not allowed for this customer."
 msgstr "Les ventes manuelles ne sont pas autorisées pour ce client."
+
+#. module: alc_partner_manual_sale_order
+#: model:ir.model,name:alc_partner_manual_sale_order.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"
 
 #. module: alc_partner_manual_sale_order
 #: model:ir.model,name:alc_partner_manual_sale_order.model_sale_order
 msgid "Sales Order"
 msgstr ""
-
-#~ msgid "Partner"
-#~ msgstr "Partenaire"

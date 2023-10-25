@@ -27,6 +27,6 @@ msgid "Picking Wave"
 msgstr "Vague de préparation"
 
 #. module: alc_stock_picking_wave_type
-#: model_terms:ir.ui.view,arch_db:alc_stock_picking_wave_type.stock_picking_wave_search_view
+#: model:ir.ui.view,arch_db:alc_stock_picking_wave_type.stock_picking_wave_search_view
 msgid "Picking type"
 msgstr "Type de préparation"

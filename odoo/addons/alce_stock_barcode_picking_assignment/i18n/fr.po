@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 08:43+0000\n"
-"PO-Revision-Date: 2023-04-12 08:43+0000\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2021-06-14 16:39+0000\n"
+"PO-Revision-Date: 2021-06-14 16:39+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -17,21 +17,10 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alce_stock_barcode_picking_assignment
-#. odoo-python
-#: code:addons/alce_stock_barcode_picking_assignment/models/stock_picking.py:0
+#: code:addons/alce_stock_barcode_picking_assignment/models/stock_picking.py:64
 #, python-format
 msgid "Please scan your user badge first to start the operations"
 msgstr "Veuillez scanner votre badge pour commencer la préparation."
-
-#. module: alce_stock_barcode_picking_assignment
-#: model:ir.model.fields,field_description:alce_stock_barcode_picking_assignment.field_stock_picking__scan_operator_id
-msgid "Scan Operator"
-msgstr ""
-
-#. module: alce_stock_barcode_picking_assignment
-#: model:ir.model.fields,help:alce_stock_barcode_picking_assignment.field_stock_picking__scan_operator_id
-msgid "Technical field to retain operator in scanning process"
-msgstr ""
 
 #. module: alce_stock_barcode_picking_assignment
 #: model:ir.model,name:alce_stock_barcode_picking_assignment.model_stock_picking

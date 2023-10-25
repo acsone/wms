@@ -48,12 +48,12 @@ msgstr ""
 "optimisée."
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "API key"
 msgstr "Clef d'API"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "API url"
 msgstr "Url API"
 
@@ -138,7 +138,7 @@ msgstr ""
 "TourSolver."
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "Default delivery window"
 msgstr "Fenêtre de livraison par défaut"
 
@@ -149,7 +149,7 @@ msgid "Delivery Resource"
 msgstr "Ressource de livraison"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "Delivery Windows disabled?"
 msgstr ""
 
@@ -226,8 +226,8 @@ msgstr ""
 "%s"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.round_instance_form_view
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.round_instance_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.view_round_instance_kanban
 msgid "Export to Mobile App"
 msgstr "Exporter vers l'app mobile "
 
@@ -258,18 +258,18 @@ msgstr "Temps fixe consacré à la livraison d'un client"
 
 #. module: alc_delivery_rounds_geooptimize
 #: model:ir.model.fields,field_description:alc_delivery_rounds_geooptimize.field_stock_config_settings_geo_optimization_dw_start
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "From"
 msgstr "De"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.round_instance_form_view
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.round_instance_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "Geo Optimization"
 msgstr "Optimisation géographique"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.round_template_search_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.round_template_search_view
 msgid "Geo Optimized"
 msgstr "Géo optimisé"
 
@@ -335,14 +335,14 @@ msgstr ""
 "devez fournir une durée."
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.view_round_instance_kanban
 msgid ""
 "Ignore Optimization\n"
 "                        Failure"
 msgstr "Ignorer les erreurs d'optimisation"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.round_instance_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.round_instance_form_view
 msgid "Ignore Optimization Failure"
 msgstr "Ignorer les erreurs d'optimisation"
 
@@ -388,7 +388,7 @@ msgid "Loading time in minutes"
 msgstr "Temps de chargement en minutes"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "Method"
 msgstr "Méthode"
 
@@ -403,7 +403,7 @@ msgid "Number of available resource"
 msgstr "Nombre de ressources disponibles"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "Number of resources available"
 msgstr "Nombre de ressources disponibles"
 
@@ -413,7 +413,7 @@ msgid "Optimization activated"
 msgstr "Optimisation activée"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "Optimization activated?"
 msgstr "Optimisation activée?"
 
@@ -460,7 +460,7 @@ msgid "Optimization task start time"
 msgstr "Heure de début de la tâche d'optimisation"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 #, fuzzy
 msgid "Options additional configuration"
 msgstr "Configuration supplémentaire des ressources"
@@ -501,7 +501,7 @@ msgid "Resource ID must be unique"
 msgstr "Resource ID must be unique"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "Resource additional configuration"
 msgstr "Configuration supplémentaire des ressources"
 
@@ -516,8 +516,8 @@ msgid "Resources Daily Working Hours"
 msgstr "Heures de travail quotidiennes des ressources"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.round_instance_form_view
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.round_instance_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.view_round_instance_kanban
 msgid "Retry Geo Optimize"
 msgstr "Réessayer de géooptimiser"
 
@@ -608,12 +608,12 @@ msgid "Your delivery slip are now ready. Click to print"
 msgstr "Vos bons de livaison sont prêts. Cliquez pour imprimer."
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "euros per distance unit"
 msgstr "euros par unité de distance"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "euros per hour"
 msgstr "euros par heure"
 
@@ -623,7 +623,7 @@ msgid "ir.config_parameter"
 msgstr "ir.config_parameter"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "minutes"
 msgstr "minutes"
 
@@ -643,7 +643,7 @@ msgid "round.template"
 msgstr "Modèle"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "seconds"
 msgstr "secondes"
 
@@ -653,6 +653,6 @@ msgid "stock.config.settings"
 msgstr "stock.config.settings"
 
 #. module: alc_delivery_rounds_geooptimize
-#: model_terms:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
+#: model:ir.ui.view,arch_db:alc_delivery_rounds_geooptimize.stock_config_settings_form_view
 msgid "to"
 msgstr "au"

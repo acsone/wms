@@ -17,119 +17,105 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_promotion_subscription
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_res_partner__alc_product_promotion_subscription_count
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_res_users__alc_product_promotion_subscription_count
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_shopinvader_partner__alc_product_promotion_subscription_count
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_res_partner_alc_product_promotion_subscription_count
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_res_users_alc_product_promotion_subscription_count
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_shopinvader_partner_alc_product_promotion_subscription_count
 msgid "# of product promotion subscriptions"
 msgstr "# d'abonnements aux produits en promotion"
 
 #. module: alc_product_promotion_subscription
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription__active
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription_active
 msgid "Active"
 msgstr "Actif"
 
 #. module: alc_product_promotion_subscription
-#: model:ir.model,name:alc_product_promotion_subscription.model_res_partner
-msgid "Contact"
-msgstr ""
-
-#. module: alc_product_promotion_subscription
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription__create_uid
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription_create_uid
 msgid "Created by"
 msgstr "Créé par"
 
 #. module: alc_product_promotion_subscription
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription__create_date
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription_create_date
 msgid "Created on"
 msgstr "Créé le"
 
 #. module: alc_product_promotion_subscription
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription__display_name
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription_display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: alc_product_promotion_subscription
-#: model_terms:ir.ui.view,arch_db:alc_product_promotion_subscription.alc_promotion_subscription_search_view
+#: model:ir.ui.view,arch_db:alc_product_promotion_subscription.alc_promotion_subscription_search_view
 msgid "Group By"
 msgstr "Grouper par"
 
 #. module: alc_product_promotion_subscription
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription__id
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription_id
 msgid "ID"
 msgstr "ID"
 
 #. module: alc_product_promotion_subscription
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription____last_update
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription___last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
 #. module: alc_product_promotion_subscription
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription__write_uid
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription_write_uid
 msgid "Last Updated by"
 msgstr "Derniere fois mis à jour par"
 
 #. module: alc_product_promotion_subscription
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription__write_date
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription_write_date
 msgid "Last Updated on"
 msgstr "Dernière mis à jour le"
 
 #. module: alc_product_promotion_subscription
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription__partner_id
-#: model_terms:ir.ui.view,arch_db:alc_product_promotion_subscription.alc_promotion_subscription_search_view
+#: model:ir.model,name:alc_product_promotion_subscription.model_res_partner
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription_partner_id
+#: model:ir.ui.view,arch_db:alc_product_promotion_subscription.alc_promotion_subscription_search_view
 msgid "Partner"
 msgstr "Partenaire"
 
 #. module: alc_product_promotion_subscription
-#. odoo-python
-#: code:addons/alc_product_promotion_subscription/models/alc_product_promotion_subscription.py:0
-#, fuzzy, python-format
-#| msgid "Partner %s already subscribed to promotion on product %s"
-msgid ""
-"Partner {partner_name} already subscribed to promotion on product "
-"{product_name}"
+#: code:addons/alc_product_promotion_subscription/models/alc_product_promotion_subscription.py:51
+#, python-format
+msgid "Partner %s already subscribed to promotion on product %s"
 msgstr "Le partneaire %s est déjà abonné aux promotions pour le produit %s"
 
 #. module: alc_product_promotion_subscription
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription__product_id
-#: model_terms:ir.ui.view,arch_db:alc_product_promotion_subscription.alc_promotion_subscription_search_view
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription_product_id
+#: model:ir.ui.view,arch_db:alc_product_promotion_subscription.alc_promotion_subscription_search_view
 msgid "Product"
 msgstr "Produit"
-
-#. module: alc_product_promotion_subscription
-#: model:ir.model,name:alc_product_promotion_subscription.model_alc_product_promotion_subscription
-#, fuzzy
-#| msgid "Product Promotion Subscriptions"
-msgid "Product Promotion Subscription"
-msgstr "Abonnements aux promotions produits"
 
 #. module: alc_product_promotion_subscription
 #: model:ir.actions.act_window,name:alc_product_promotion_subscription.act_res_partner_2_product_promotion_subscription
 #: model:ir.actions.act_window,name:alc_product_promotion_subscription.alc_promotion_subscription_act_window
 #: model:ir.ui.menu,name:alc_product_promotion_subscription.alc_promotion_subscription_menu
-#: model_terms:ir.ui.view,arch_db:alc_product_promotion_subscription.res_partner_form_view
+#: model:ir.ui.view,arch_db:alc_product_promotion_subscription.res_partner_form_view
 msgid "Product Promotion Subscriptions"
 msgstr "Abonnements aux promotions produits"
 
 #. module: alc_product_promotion_subscription
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription__product_tmpl_id
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_alc_product_promotion_subscription_product_tmpl_id
 #, fuzzy
 msgid "Product Template"
 msgstr "Produit"
 
 #. module: alc_product_promotion_subscription
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_res_partner__alc_product_promotion_subscription_ids
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_res_users__alc_product_promotion_subscription_ids
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_shopinvader_partner__alc_product_promotion_subscription_ids
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_res_partner_alc_product_promotion_subscription_ids
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_res_users_alc_product_promotion_subscription_ids
+#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_shopinvader_partner_alc_product_promotion_subscription_ids
 msgid "Product promotion subscriptions"
 msgstr "Abonnements aux promotions produits"
 
 #. module: alc_product_promotion_subscription
-#. odoo-python
-#: code:addons/alc_product_promotion_subscription/models/alc_product_promotion_subscription.py:0
-#: model:ir.model.constraint,message:alc_product_promotion_subscription.constraint_alc_product_promotion_subscription_promotion_unique_subscription
+#: code:addons/alc_product_promotion_subscription/models/alc_product_promotion_subscription.py:34
+#: sql_constraint:alc.product.promotion.subscription:0
 #, python-format
 msgid "You're already subscribed to the promotions for this product."
 msgstr "Vous êtes déjà abonné aux promotions pour ce produit."
 
-#~ msgid "alc.product.promotion.subscription"
-#~ msgstr "Abonnement aux promotions produit"
+#. module: alc_product_promotion_subscription
+#: model:ir.model,name:alc_product_promotion_subscription.model_alc_product_promotion_subscription
+msgid "alc.product.promotion.subscription"
+msgstr "Abonnement aux promotions produit"

@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-16 13:23+0000\n"
-"PO-Revision-Date: 2023-06-16 13:23+0000\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2021-02-04 15:14+0000\n"
+"PO-Revision-Date: 2021-02-04 15:14+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -17,60 +17,50 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_customer_audit
-#: model_terms:ir.ui.view,arch_db:alc_customer_audit.res_partner_form_view
+#: model:ir.ui.view,arch_db:alc_customer_audit.res_partner_form_view
 msgid ""
 "- Customer is a veterinarian with a depot and does not have a pharmacist"
 msgstr "- Vétérinaire actif, autorisé au dépôt et sans pharmacie associée"
 
 #. module: alc_customer_audit
-#: model_terms:ir.ui.view,arch_db:alc_customer_audit.res_partner_form_view
-#, fuzzy
-#| msgid "- Customer is active but not in a delivery round"
-msgid "- Customer is active without any release channel"
+#: model:ir.ui.view,arch_db:alc_customer_audit.res_partner_form_view
+msgid "- Customer is active but not in a delivery round"
 msgstr "- Actif et n'est pas affecté à une tournée"
 
 #. module: alc_customer_audit
-#: model:ir.model,name:alc_customer_audit.model_res_partner
-msgid "Contact"
-msgstr "Contact"
-
-#. module: alc_customer_audit
-#: model_terms:ir.ui.view,arch_db:alc_customer_audit.res_partner_search_view
+#: model:ir.ui.view,arch_db:alc_customer_audit.res_partner_search_view
 msgid "Customer has an anomaly"
 msgstr "Avec anomalie(s)"
 
 #. module: alc_customer_audit
-#: model_terms:ir.ui.view,arch_db:alc_customer_audit.res_partner_form_view
+#: model:ir.ui.view,arch_db:alc_customer_audit.res_partner_form_view
 msgid "Following issue(s) is/are observed on the customer:"
 msgstr "Le/les problèmes suivants sont observés pour le client:"
 
 #. module: alc_customer_audit
-#: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner__has_anomaly
-#: model:ir.model.fields,field_description:alc_customer_audit.field_res_users__has_anomaly
-#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner__has_anomaly
-msgid "Has Anomaly"
+#: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner_has_anomaly
+#: model:ir.model.fields,field_description:alc_customer_audit.field_res_users_has_anomaly
+#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner_has_anomaly
+msgid "Has anomaly"
 msgstr "Avec anomalie(s)"
 
 #. module: alc_customer_audit
-#: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner__no_pharmacist
-#: model:ir.model.fields,field_description:alc_customer_audit.field_res_users__no_pharmacist
-#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner__no_pharmacist
-msgid "No Pharmacist"
-msgstr "Vétérinaire avec dépôt sans pharmacie associée"
+#: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner_no_delivery_round
+#: model:ir.model.fields,field_description:alc_customer_audit.field_res_users_no_delivery_round
+#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner_no_delivery_round
+#: model:ir.ui.view,arch_db:alc_customer_audit.res_partner_search_view
+msgid "No delivery round"
+msgstr "Actif sans tournée affectée"
 
 #. module: alc_customer_audit
-#: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner__no_release_channel
-#: model:ir.model.fields,field_description:alc_customer_audit.field_res_users__no_release_channel
-#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner__no_release_channel
-msgid "No Release Channel"
-msgstr "Actif sans canal de livraison"
-
-#. module: alc_customer_audit
-#: model_terms:ir.ui.view,arch_db:alc_customer_audit.res_partner_search_view
+#: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner_no_pharmacist
+#: model:ir.model.fields,field_description:alc_customer_audit.field_res_users_no_pharmacist
+#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner_no_pharmacist
+#: model:ir.ui.view,arch_db:alc_customer_audit.res_partner_search_view
 msgid "No pharmacist"
 msgstr "Vétérinaire avec dépôt sans pharmacie associée"
 
 #. module: alc_customer_audit
-#: model_terms:ir.ui.view,arch_db:alc_customer_audit.res_partner_search_view
-msgid "No release channel"
-msgstr "Actif sans canal de livraison"
+#: model:ir.model,name:alc_customer_audit.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"

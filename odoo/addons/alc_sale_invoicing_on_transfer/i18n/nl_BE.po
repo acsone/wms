@@ -17,24 +17,21 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_sale_invoicing_on_transfer
-#: model:ir.model.fields,field_description:alc_sale_invoicing_on_transfer.field_stock_picking_type__create_invoice_on_transfer
-#, fuzzy
-#| msgid "Create invoice on transfer"
-msgid "Create Invoice On Transfer"
+#: model:ir.model.fields,field_description:alc_sale_invoicing_on_transfer.field_stock_picking_type_create_invoice_on_transfer
+msgid "Create invoice on transfer"
 msgstr "Create invoice on transfer"
 
 #. module: alc_sale_invoicing_on_transfer
+#: model:ir.model,name:alc_sale_invoicing_on_transfer.model_sale_order
+msgid "Sales Order"
+msgstr "Verkooporder"
+
+#. module: alc_sale_invoicing_on_transfer
 #: model:ir.model,name:alc_sale_invoicing_on_transfer.model_stock_picking_type
-msgid "Picking Type"
-msgstr ""
+msgid "The picking type determines the picking view"
+msgstr "De verzamelsoort bepaald de weergave van de levering"
 
 #. module: alc_sale_invoicing_on_transfer
 #: model:ir.model,name:alc_sale_invoicing_on_transfer.model_stock_picking
 msgid "Transfer"
 msgstr "Verplaatsing"
-
-#~ msgid "Sales Order"
-#~ msgstr "Verkooporder"
-
-#~ msgid "The picking type determines the picking view"
-#~ msgstr "De verzamelsoort bepaald de weergave van de levering"

@@ -17,23 +17,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_sale_channel
-#: model:ir.model.fields,field_description:alc_sale_channel.field_sale_channel__code
-msgid "Code"
-msgstr ""
-
-#. module: alc_sale_channel
-#: model:ir.model.fields,field_description:alc_sale_channel.field_sale_channel__is_internal
-msgid "Internal?"
-msgstr ""
-
-#. module: alc_sale_channel
-#: model:ir.model,name:alc_sale_channel.model_sale_channel
-#: model:ir.model.fields,field_description:alc_sale_channel.field_crm_team__sale_channel_id
-#: model:ir.model.fields,field_description:alc_sale_channel.field_sale_order__sale_channel_id
-#: model:ir.model.fields,field_description:alc_sale_channel.field_sale_order_line__sale_channel_id
-#, fuzzy
-#| msgid "Sale channel"
-msgid "Sale Channel"
+#: model:ir.model.fields,field_description:alc_sale_channel.field_sale_order_line_sale_channel
+#: model:ir.model.fields,field_description:alc_sale_channel.field_sale_order_sale_channel
+msgid "Sale channel"
 msgstr "Canal de vente"
 
 #. module: alc_sale_channel
@@ -45,13 +31,6 @@ msgstr "Bon de commande"
 #: model:ir.model,name:alc_sale_channel.model_sale_order_line
 msgid "Sales Order Line"
 msgstr "Ligne du bon de commande"
-
-#. module: alc_sale_channel
-#: model:ir.model,name:alc_sale_channel.model_crm_team
-#, fuzzy
-#| msgid "Sales Order"
-msgid "Sales Team"
-msgstr "Bon de commande"
 
 #~ msgid "Mail"
 #~ msgstr "Email"

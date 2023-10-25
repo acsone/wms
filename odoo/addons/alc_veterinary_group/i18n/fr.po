@@ -141,7 +141,7 @@ msgstr "Groupement vétérinaire"
 #. module: alc_veterinary_group
 #: model:ir.actions.act_window,name:alc_veterinary_group.veterinary_group_act_window
 #: model:ir.ui.menu,name:alc_veterinary_group.veterinary_group_menu
-#: model_terms:ir.ui.view,arch_db:alc_veterinary_group.product_template_form_view_discount_specials
+#: model:ir.ui.view,arch_db:alc_veterinary_group.product_template_form_view_discount_specials
 msgid "Veterinary Groups"
 msgstr "Groupements vétérinaires"
 

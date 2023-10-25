@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_mto
-#: model_terms:ir.ui.view,arch_db:alc_product_mto.product_template_search_view
+#: model:ir.ui.view,arch_db:alc_product_mto.product_template_search_view
 msgid "Normal product"
 msgstr "Produit normal"
 
@@ -27,7 +27,7 @@ msgstr "Produit normal"
 #: model:ir.model.fields,field_description:alc_product_mto.field_product_template_is_mto_product
 #: model:ir.model.fields,field_description:alc_product_mto.field_shopinvader_product_is_mto_product
 #: model:ir.model.fields,field_description:alc_product_mto.field_shopinvader_variant_is_mto_product
-#: model_terms:ir.ui.view,arch_db:alc_product_mto.product_template_search_view
+#: model:ir.ui.view,arch_db:alc_product_mto.product_template_search_view
 msgid "On Order"
 msgstr "A la commande"
 

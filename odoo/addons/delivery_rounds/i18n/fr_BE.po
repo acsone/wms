@@ -17,32 +17,32 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "# Cold"
 msgstr "# Froid"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "# Drug"
 msgstr "# Médic."
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "# Food"
 msgstr "# Alim."
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "# Mat."
 msgstr "# Mat."
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "# Tot."
 msgstr "# Tot."
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "<span>Actions</span>"
 msgstr "<span>Actions</span>"
 
@@ -76,7 +76,7 @@ msgid "Anticipated"
 msgstr "Anticipé"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Arriving time"
 msgstr "Heure d'arrivée"
 
@@ -97,9 +97,9 @@ msgid "Can edit stat time loading"
 msgstr "Can edit stat time loading"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_picking_assign_delivery_round
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_import
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_wizard_makeplan
+#: model:ir.ui.view,arch_db:delivery_rounds.view_picking_assign_delivery_round
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_import
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_wizard_makeplan
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -135,9 +135,9 @@ msgid "Color Index"
 msgstr "Couleur"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_picking_assign_delivery_round
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_import
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_wizard_makeplan
+#: model:ir.ui.view,arch_db:delivery_rounds.view_picking_assign_delivery_round
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_import
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_wizard_makeplan
 msgid "Confirm"
 msgstr "Confirmer"
 
@@ -178,21 +178,21 @@ msgid "Cron delivery plan"
 msgstr "Plan automatique de tournée"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_search
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_search
 msgid "Current"
 msgstr "Non-échu"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_partner_id
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.round_itinerary_view_search
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_template_search
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.round_itinerary_view_search
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_search
 msgid "Customer"
 msgstr "Client"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_instance_customer_ids
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Customers"
 msgstr "Clients"
 
@@ -203,7 +203,7 @@ msgstr "Customers delivery not allowed"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_instance_customer_to_deliver_ids
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Customers to deliver"
 msgstr "Clients à livrer"
 
@@ -224,9 +224,9 @@ msgid "Default version"
 msgstr "Version par défaut"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_customer_tree
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_customer_tree
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Deliver"
 msgstr "Livrer"
 
@@ -243,7 +243,7 @@ msgstr "Livré"
 
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_shipping_ids
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Deliveries"
 msgstr "Livraisons"
 
@@ -256,12 +256,12 @@ msgstr "En cours de Livraison"
 #: model:ir.model.fields,field_description:delivery_rounds.field_res_partner_round_itinerary_ids
 #: model:ir.model.fields,field_description:delivery_rounds.field_res_users_round_itinerary_ids
 #: model:ir.model.fields,field_description:delivery_rounds.field_shopinvader_partner_round_itinerary_ids
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.round_itinerary_view_search
+#: model:ir.ui.view,arch_db:delivery_rounds.round_itinerary_view_search
 msgid "Delivery Itineraries"
 msgstr "Itinéraires de livraison"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_picking_internal_search
+#: model:ir.ui.view,arch_db:delivery_rounds.view_picking_internal_search
 msgid "Delivery Itinerary Missing"
 msgstr "Itinéraire de livraison manquant"
 
@@ -274,8 +274,8 @@ msgstr "Echec d'optimisation des livraisons"
 #: model:ir.model.fields,field_description:delivery_rounds.field_picking_assign_delivery_round_delivery_round_id
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_delivery_round_id
 #: model:ir.model.fields,field_description:delivery_rounds.field_stock_picking_delivery_round_id
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_picking_internal_search
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_picking_internal_search
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Delivery Round"
 msgstr "Tournée"
 
@@ -299,8 +299,8 @@ msgstr "Tournée démarrée"
 #: model:ir.actions.act_window,name:delivery_rounds.action_round_instance
 #: model:ir.ui.menu,name:delivery_rounds.menu_delivery_round
 #: model:ir.ui.menu,name:delivery_rounds.menu_round_instance
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_search
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_template_search
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_search
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_search
 msgid "Delivery Rounds"
 msgstr "Tournées"
 
@@ -358,12 +358,12 @@ msgid "Delivery round will be delivered in background."
 msgstr "La tournée sera livrée en arrière-plan."
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Departure time"
 msgstr "Heure de départ"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Destinations"
 msgstr "Destinations"
 
@@ -389,17 +389,17 @@ msgid "Done"
 msgstr "Fini"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Edit"
 msgstr "Modifier"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_search
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_search
 msgid "Effective Customer"
 msgstr "Client effectif"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "End mileage"
 msgstr "Kilométrage final"
 
@@ -410,12 +410,12 @@ msgid "Error when delivering %s: %s"
 msgstr "Erreur lors de la livraison %s: %s"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Exp:"
 msgstr ""
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.round_report_delivery
+#: model:ir.ui.view,arch_db:delivery_rounds.round_report_delivery
 msgid ""
 "Failed to deliver some shippings, you can retry manually from this view."
 msgstr ""
@@ -449,22 +449,22 @@ msgstr "ID"
 
 #. module: delivery_rounds
 #: model:ir.actions.act_window,name:delivery_rounds.action_round_itinerary_import
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_import
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_import
 msgid "Import Itinerary"
 msgstr "Importer un itinéraire"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Import from itinerary"
 msgstr "Import depuis un itinéraire"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_picking_assign_delivery_round
+#: model:ir.ui.view,arch_db:delivery_rounds.view_picking_assign_delivery_round
 msgid "Include in a Delivery Round"
 msgstr "Inclure dans une tournée"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_vpicktree
+#: model:ir.ui.view,arch_db:delivery_rounds.view_vpicktree
 msgid "Include in a delivery round"
 msgstr "Inclure dans une tournée"
 
@@ -484,8 +484,8 @@ msgstr "Is assignable to round"
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_itinerary_ids
 #: model:ir.model.fields,field_description:delivery_rounds.field_stock_picking_partner_itinerary_ids
 #: model:ir.ui.menu,name:delivery_rounds.menu_round_itinerary
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_form
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_template_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_form
 msgid "Itineraries"
 msgstr "Itinéraires"
 
@@ -564,24 +564,24 @@ msgstr ""
 "tournées confirmées sont affichées."
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Lock Destinations"
 msgstr "Verrouiller les destinations"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Lock destinations"
 msgstr "Verrouiller les destinations"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Lock/Unlock destinations"
 msgstr "Verrouiller / déverrouiller des destinations"
 
 #. module: delivery_rounds
 #: model:ir.actions.act_window,name:delivery_rounds.action_round_wizard_makeplan
 #: model:ir.ui.menu,name:delivery_rounds.menu_round_wizard_makeplan
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_wizard_makeplan
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_wizard_makeplan
 msgid "Make Today's Delivery Plan"
 msgstr "Générer le plan de tournée du jour"
 
@@ -598,7 +598,7 @@ msgid "Monday"
 msgstr "Lundi"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "More <i class=\"fa fa-caret-down\"/>"
 msgstr "Plus <i class=\"fa fa-caret-down\"/>"
 
@@ -633,7 +633,7 @@ msgstr ""
 "Impossible d'assigner cette tournée à ce bon de transfert"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Notes"
 msgstr "Notes"
 
@@ -682,7 +682,7 @@ msgid "Partners"
 msgstr "Partenaires"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Phone"
 msgstr "Téléphone"
 
@@ -720,8 +720,8 @@ msgstr "Nombre de préparations"
 #. module: delivery_rounds
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_customer_picking_ids
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_instance_picking_ids
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Pickings"
 msgstr "Préparations"
 
@@ -749,18 +749,18 @@ msgid "Please configure your timezone in your user preferences"
 msgstr "Please configure your timezone in your user preferences"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_search
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_search
 msgid "Potential Customer"
 msgstr "Client potentiel"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Print all deliveryslip"
 msgstr "Imprimer tous les bon de livraisons"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_customer_tree
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_customer_tree
 msgid "Print delivery slip"
 msgstr "Imprimer le bon de livraison"
 
@@ -780,17 +780,17 @@ msgid "Reserve stock"
 msgstr "Réserver le stock"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Reset to Anticipated"
 msgstr "Réinitialiser à Anticipé"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Reset to Draft"
 msgstr "Remettre en brouillon"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Reset to draft"
 msgstr "Réinitialiser à Ouvert"
 
@@ -815,7 +815,7 @@ msgid "Saturday"
 msgstr "Samedi"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Seq."
 msgstr "Seq."
 
@@ -852,12 +852,12 @@ msgid "Should be delivered manually, could not deliver because of %s"
 msgstr "Doit être livré manuellement, n'a pas pu être livré en raison de %s"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Start mileage"
 msgstr "Kilométrage au départ"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Start/Stop pickings"
 msgstr "Démarrer / arrêter les préparations"
 
@@ -867,7 +867,7 @@ msgid "State"
 msgstr "État"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_form
 msgid "Statistics"
 msgstr "Statistiques"
 
@@ -883,7 +883,7 @@ msgid "Stock Operations"
 msgstr "Opérations de stock"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Stops"
 msgstr "Arrêts"
 
@@ -912,13 +912,13 @@ msgstr "Modèle"
 #: model:ir.actions.act_window,name:delivery_rounds.action_round_template_tree
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_version_template_ids
 #: model:ir.ui.menu,name:delivery_rounds.menu_round_template
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_template_form
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_template_version_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_version_form
 msgid "Templates"
 msgstr "Modèles"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.partner_shippings_not_allowed
+#: model:ir.ui.view,arch_db:delivery_rounds.partner_shippings_not_allowed
 msgid ""
 "The following partners cannot be delivered because they are in holidays "
 "during the delivery period:"
@@ -943,22 +943,22 @@ msgid "Thursday"
 msgstr "Jeudi"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_search
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_search
 msgid "Today"
 msgstr "Aujourd'hui"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Total number of box(es)"
 msgstr "Nombre total de boîte(s)"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Total number of parcel(s)"
 msgstr "Nombre total de colis"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "Total number of unit(s)"
 msgstr "Nombre total d'unité(s)"
 
@@ -1004,7 +1004,7 @@ msgstr "Version"
 #: model:ir.actions.act_window,name:delivery_rounds.action_round_template_version
 #: model:ir.model.fields,field_description:delivery_rounds.field_round_template_version_ids
 #: model:ir.ui.menu,name:delivery_rounds.menu_round_template_version
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_template_version_form
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_template_version_form
 msgid "Versions"
 msgstr "Versions"
 
@@ -1019,7 +1019,7 @@ msgid "Week day"
 msgstr "Jour de la semaine"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "Weight"
 msgstr "Poids"
 
@@ -1087,7 +1087,7 @@ msgid "You have to set the week day or the date overwrite"
 msgstr "Vous devez définir un jour de la semaine ou une date spécifique"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "box(es)"
 msgstr "Boîte(s)"
 
@@ -1097,14 +1097,14 @@ msgid "cron.delivery.plan"
 msgstr "cron.delivery.plan"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_instance_kanban
 msgid "kg"
 msgstr "kg"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_picking_assign_delivery_round
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_import
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.view_round_wizard_makeplan
+#: model:ir.ui.view,arch_db:delivery_rounds.view_picking_assign_delivery_round
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_itinerary_import
+#: model:ir.ui.view,arch_db:delivery_rounds.view_round_wizard_makeplan
 msgid "or"
 msgstr "ou"
 
@@ -1159,7 +1159,7 @@ msgid "round.wizard.makeplan"
 msgstr "round.wizard.makeplan"
 
 #. module: delivery_rounds
-#: model_terms:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
+#: model:ir.ui.view,arch_db:delivery_rounds.delivery_round_report_lines
 msgid "unit(s)"
 msgstr "unités(s)"
 

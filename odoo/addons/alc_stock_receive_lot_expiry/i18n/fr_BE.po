@@ -1,14 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* alc_stock_receive_lot_expiry
+#   * alc_stock_receive_lot_expiry
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 9.0e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-05 12:56+0000\n"
-"PO-Revision-Date: 2023-05-05 12:56+0000\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2017-03-07 12:08+0000\n"
+"PO-Revision-Date: 2017-03-07 12:08+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -17,25 +17,27 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_receive_lot_expiry
-#: model_terms:ir.ui.view,arch_db:alc_stock_receive_lot_expiry.stock_pack_operation_lot_add_form_view
+#: model:ir.ui.view,arch_db:alc_stock_receive_lot_expiry.stock_pack_operation_lot_add_form_view
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-exclamation-triangle\" style=\"color:red\">\n"
 "            <span style=\"margin:0 5px\">Expired</span>\n"
 "          </i>"
 msgstr ""
-"<i class=\"fa fa-exclamation-triangle\" style=\"color:red\">\n"
-"            <span style=\"margin:0 5px\">Expiré</span>\n"
-"          </i>"
+"<i class=\"fa fa-exclamation-triangle\" style=\"color:red\"><span style="
+"\"margin:0 5px\">Expired</span></i>"
+
+#. module: alc_stock_receive_lot_expiry
+#: model:ir.model.fields,field_description:alc_stock_receive_lot_expiry.field_stock_pack_operation_lot_is_product_expired
+msgid "Is expired"
+msgstr ""
+
+#. module: alc_stock_receive_lot_expiry
+#: model:ir.model,name:alc_stock_receive_lot_expiry.model_stock_pack_operation_lot
+msgid "Lot/Serial number for pack ops"
+msgstr ""
 
 #. module: alc_stock_receive_lot_expiry
 #: model:ir.model,name:alc_stock_receive_lot_expiry.model_stock_pack_operation_lot_add
-msgid "Add a wizard that facilitates purchases reception."
-msgstr "Ajoute un assistant pour faciliter la réception des achats."
-
-#. module: alc_stock_receive_lot_expiry
-#: model:ir.model.fields,field_description:alc_stock_receive_lot_expiry.field_stock_pack_operation_lot_add__is_removal_date_expired
-msgid "Removal Date Expired"
-msgstr "Date de retrait expirée"
-
-#~ msgid "Lot/Serial number for pack ops"
-#~ msgstr "Lot/N°série d'opération"
+msgid "stock.pack.operation.lot.add"
+msgstr ""

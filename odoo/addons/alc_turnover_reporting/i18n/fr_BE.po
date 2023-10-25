@@ -22,17 +22,17 @@ msgid "ALC Turnover Reporting"
 msgstr "Rapports comptable Alcyon"
 
 #. module: alc_turnover_reporting
-#: model_terms:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
+#: model:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
 msgid "Cancel"
 msgstr "Annuler"
 
 #. module: alc_turnover_reporting
-#: model_terms:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
+#: model:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
 msgid "Click on the export button to export your report."
 msgstr "Cliquez sur le bouton pour exporter votre rapport."
 
 #. module: alc_turnover_reporting
-#: model_terms:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
+#: model:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
 msgid "Close"
 msgstr "Fermer"
 
@@ -52,19 +52,19 @@ msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: alc_turnover_reporting
-#: model_terms:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
+#: model:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
 msgid "Export"
 msgstr "Exporter"
 
 #. module: alc_turnover_reporting
-#: model_terms:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
+#: model:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
 msgid "Export Complete"
 msgstr "Export Terminé"
 
 #. module: alc_turnover_reporting
 #: model:ir.actions.act_window,name:alc_turnover_reporting.export_report_turnover_act_window
 #: model:ir.ui.menu,name:alc_turnover_reporting.menu_wizard_turnover_export
-#: model_terms:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
+#: model:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
 msgid "Export Report Turnover"
 msgstr "Exporter le rapport comptable"
 
@@ -79,7 +79,7 @@ msgid "File Name"
 msgstr "Nom de Fichier"
 
 #. module: alc_turnover_reporting
-#: model_terms:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
+#: model:ir.ui.view,arch_db:alc_turnover_reporting.export_report_turnover_form_view
 msgid "Here is the exported report file:"
 msgstr "Voici votre fichier:"
 

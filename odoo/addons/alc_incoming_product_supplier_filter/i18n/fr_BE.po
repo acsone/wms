@@ -22,9 +22,11 @@ msgid "Stock Move"
 msgstr "Mouvement de stock"
 
 #. module: alc_incoming_product_supplier_filter
-#: model:ir.model.fields,field_description:alc_incoming_product_supplier_filter.field_stock_move__supplier_id
+#: model:ir.model.fields,field_description:alc_incoming_product_supplier_filter.field_stock_move_supplier_id
 msgid "Vendor"
 msgstr "Fournisseur"
 
-#~ msgid "Vendor of this product"
-#~ msgstr "Fournisseur de cet article"
+#. module: alc_incoming_product_supplier_filter
+#: model:ir.model.fields,help:alc_incoming_product_supplier_filter.field_stock_move_supplier_id
+msgid "Vendor of this product"
+msgstr "Fournisseur de cet article"

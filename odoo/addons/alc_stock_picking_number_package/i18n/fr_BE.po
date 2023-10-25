@@ -27,7 +27,7 @@ msgid "Maximum weight per package"
 msgstr "Poids maximum par colis"
 
 #. module: alc_stock_picking_number_package
-#: model_terms:ir.ui.view,arch_db:alc_stock_picking_number_package.stock_picking_form_view
+#: model:ir.ui.view,arch_db:alc_stock_picking_number_package.stock_picking_form_view
 #, fuzzy
 msgid "Number of packages"
 msgstr "Le nombre de colis est visible"
@@ -44,7 +44,7 @@ msgid "Number of packages visible"
 msgstr "Le nombre de colis est visible"
 
 #. module: alc_stock_picking_number_package
-#: model_terms:ir.ui.view,arch_db:alc_stock_picking_number_package.stock_picking_form_view
+#: model:ir.ui.view,arch_db:alc_stock_picking_number_package.stock_picking_form_view
 msgid "The number of packages outranged the adviced number of packages"
 msgstr "Le nombre de colis dépasse le nombre de colis recommandé"
 

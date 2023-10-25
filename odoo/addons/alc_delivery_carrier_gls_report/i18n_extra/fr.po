@@ -22,6 +22,6 @@ msgid "GLS Delivery Report"
 msgstr "Rapports d'expéditions GLS Belgique"
 
 #. module: delivery_carrier_label_gls
-#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+#: model:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
 msgid "GLS Delivery Report:"
 msgstr "Rapport d'expéditions GLS Belgique:"

@@ -2663,21 +2663,6 @@ msgid "About us"
 msgstr "Wie zijn wij?"
 
 #. module: alc_eshop_cms
-#: model:ir.model,name:alc_eshop_cms.model_alc_content_image_mixin
-msgid "Alc Content Image Mixin"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model,name:alc_eshop_cms.model_alc_content_lang_mixin
-msgid "Alc Content Lang Mixin"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model,name:alc_eshop_cms.model_alc_content_url_mixin
-msgid "Alc Content URL Mixin"
-msgstr ""
-
-#. module: alc_eshop_cms
 #: model:alc.eshop.cms.page.group,name:alc_eshop_cms.alc_eshop_cms_page_group_alcyon-services
 msgid "Alcyon Services"
 msgstr "Alcyon diensten"
@@ -2686,26 +2671,6 @@ msgstr "Alcyon diensten"
 #: model:alc.eshop.cms.page,name:alc_eshop_cms.alc_eshop_cms_page_born-to-share
 msgid "Born to share"
 msgstr "De smaak van het vak met u delen"
-
-#. module: alc_eshop_cms
-#: model:ir.model,name:alc_eshop_cms.model_alc_cms_mixin
-msgid "CMS Mixin"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model,name:alc_eshop_cms.model_alc_eshop_cms_news
-msgid "CMS News"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model,name:alc_eshop_cms.model_alc_eshop_cms_page
-msgid "CMS Page"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model,name:alc_eshop_cms.model_alc_eshop_cms_snippet
-msgid "CMS Snippet"
-msgstr ""
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,name:alc_eshop_cms.alc_eshop_cms_page_chronology-crazy-dream
@@ -2736,57 +2701,61 @@ msgid "Cms Pages"
 msgstr "Cms Pages"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__code
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_code
 msgid "Code"
 msgstr "Code"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_image_mixin__content
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__content
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__content
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__content
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_image_mixin_content
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_content
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_content
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_content
 msgid "Content"
 msgstr "Content"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__create_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__create_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group__create_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot__create_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__create_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_create_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_create_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group_create_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_create_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_create_uid
 msgid "Created by"
 msgstr "Aangemaakt door"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__create_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__create_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group__create_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot__create_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__create_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_create_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_create_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group_create_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_create_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_create_date
 msgid "Created on"
 msgstr "Aangemaakt op"
 
 #. module: alc_eshop_cms
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Current"
 msgstr "Huidig"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__date_end
-msgid "Date End"
-msgstr ""
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_date_end
+msgid "Date end"
+msgstr "Date end"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__date_start
-msgid "Date Start"
-msgstr ""
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_date_start
+msgid "Date start"
+msgstr "Date start"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__display_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__display_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group__display_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot__display_name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_cms_mixin_display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_image_mixin_display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group_display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_display_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_display_name
 msgid "Display Name"
 msgstr "Weergave naam"
 
@@ -2817,12 +2786,12 @@ msgid "Export"
 msgstr "Export"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__file
-msgid "File"
-msgstr "Bestand"
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_filename
+msgid "Filename"
+msgstr "Bestandsnaam"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__foreword
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_foreword
 msgid "Foreword"
 msgstr "Foreword"
 
@@ -2832,91 +2801,101 @@ msgid "General Conditions"
 msgstr "Algemene verkoopvoorwaarden"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__cms_page_group_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_cms_page_group_id
 msgid "Group"
 msgstr "Groep"
 
 #. module: alc_eshop_cms
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model:ir.model.fields,help:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_url
+msgid "HTTP accessible path to the file"
+msgstr "HTTP accessible path to the file"
+
+#. module: alc_eshop_cms
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 msgid "Header: 1176x384 (px)"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__id
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__id
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group__id
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot__id
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_cms_mixin_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_image_mixin_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_id
 msgid "ID"
 msgstr "ID"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__image
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_image
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_ir_attachment_storage_image_id
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_shipping_label_storage_image_id
 msgid "Image"
 msgstr "Afbeelding"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__image_medium
-msgid "Image medium"
-msgstr ""
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_medium_url
+msgid "Image medium url"
+msgstr "Image medium url"
 
 #. module: alc_eshop_cms
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
-msgid "Images"
-msgstr ""
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+msgid "Image preview"
+msgstr "Image preview"
 
 #. module: alc_eshop_cms
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_small_url
+msgid "Image small url"
+msgstr "Image small url"
+
+#. module: alc_eshop_cms
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 msgid "Images should be in the following format:"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 msgid "Info"
 msgstr "Informatie"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__is_future
-msgid "Is Future"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__is_past
-msgid "Is Past"
-msgstr ""
-
-#. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin__lang_ids
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__lang_ids
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__lang_ids
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__lang_ids
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_lang_ids
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_lang_ids
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_lang_ids
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_lang_ids
 msgid "Lang"
 msgstr "Lang"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news____last_update
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page____last_update
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group____last_update
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot____last_update
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet____last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_cms_mixin___last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_image_mixin___last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin___last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin___last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news___last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page___last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group___last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot___last_update
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet___last_update
 msgid "Last Modified on"
 msgstr "Laatst gewijzigd op"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__write_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__write_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group__write_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot__write_uid
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__write_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_write_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group_write_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_write_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_write_uid
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_write_uid
 msgid "Last Updated by"
 msgstr "Laatst bijgewerkt door"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__write_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__write_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group__write_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot__write_date
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__write_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_write_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group_write_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_write_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_write_date
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_write_date
 msgid "Last Updated on"
 msgstr "Laatst bijgewerkt op"
 
@@ -2936,21 +2915,21 @@ msgid "My tailor-made set-up"
 msgstr "Mijn installatie op maat"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin__name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin__name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group__name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot__name
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__name
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_form_view
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_snippet_form_view
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_group_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_slot_name
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_name
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_form_view
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_snippet_form_view
 msgid "Name"
 msgstr "Naam"
 
 #. module: alc_eshop_cms
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_search_view
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_search_view
 msgid "Not published"
 msgstr "Not published"
 
@@ -2970,12 +2949,12 @@ msgid "Page Slot"
 msgstr "Page Slot"
 
 #. module: alc_eshop_cms
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Past"
 msgstr "Past"
 
 #. module: alc_eshop_cms
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Past from today"
 msgstr "Past from today"
 
@@ -2995,13 +2974,13 @@ msgid "Procédure retours produits frigos"
 msgstr "Het terugsturen van gekoelde producten"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__published
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_search_view
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_published
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_search_view
 msgid "Published"
 msgstr "Published"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__sequence
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_sequence
 msgid "Sequence"
 msgstr "Volgorde"
 
@@ -3011,16 +2990,15 @@ msgid "Seven qualities, one identity: veterinary!"
 msgstr "Zeven kwaliteiten, één identiteit: dierenarts!"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__cms_page_slot_ids
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_cms_page_slot_ids
 msgid "Slots"
 msgstr "Slots"
 
 #. module: alc_eshop_cms
-#. odoo-python
-#: code:addons/alc_eshop_cms/models/alc_eshop_cms_news.py:0
+#: code:addons/alc_eshop_cms/models/alc_eshop_cms_news.py:78
 #, python-format
-msgid "The defined period is not a valid (%(date_start)s > %(date_end)s"
-msgstr ""
+msgid "The defined period is not a valid (%s > %s)"
+msgstr "The defined period is not a valid (%s > %s)"
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page,name:alc_eshop_cms.alc_eshop_cms_page_seminar-room
@@ -3028,41 +3006,47 @@ msgid "The seminar room"
 msgstr "De seminarieruimte"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__thumbnail_image
-msgid "Thumbnail Image"
-msgstr ""
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image
+msgid "Thumbnail image"
+msgstr "Thumbnail image"
 
 #. module: alc_eshop_cms
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_filename
+msgid "Thumbnail image filename"
+msgstr "Thumbnail image filename"
+
+#. module: alc_eshop_cms
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
 msgid "Thumbnail: 288x128 (px)"
 msgstr ""
 
 #. module: alc_eshop_cms
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Upcoming"
 msgstr "Upcoming"
 
 #. module: alc_eshop_cms
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_search_view
 msgid "Upcoming from today"
 msgstr "Upcoming from today"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin__url
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin__url
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__url
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__url
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_url_mixin_url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_url
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_url
 msgid "Url"
 msgstr "Url"
 
 #. module: alc_eshop_cms
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin__url_locales
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news__url_locales
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page__url_locales
-#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet__url_locales
-msgid "Url Locales"
-msgstr ""
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_content_lang_mixin_url_locales
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_url_locales
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_page_url_locales
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_snippet_url_locales
+msgid "Url locales"
+msgstr "Url locales"
 
 #. module: alc_eshop_cms
 #: model:alc.eshop.cms.page.group,name:alc_eshop_cms.alc_eshop_cms_page_group_useful-information
@@ -3090,73 +3074,61 @@ msgid "Your team Alcyon"
 msgstr "Uw Alcyon team"
 
 #. module: alc_eshop_cms
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_form_view
-#: model_terms:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_snippet_form_view
+#: model:ir.model,name:alc_eshop_cms.model_alc_cms_mixin
+#, fuzzy
+msgid "alc.cms.mixin"
+msgstr "alc.content.lang.mixin"
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_content_image_mixin
+#, fuzzy
+msgid "alc.content.image.mixin"
+msgstr "alc.content.lang.mixin"
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_content_lang_mixin
+msgid "alc.content.lang.mixin"
+msgstr "alc.content.lang.mixin"
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_content_url_mixin
+msgid "alc.content.url.mixin"
+msgstr "alc.content.url.mixin"
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_eshop_cms_news
+msgid "alc.eshop.cms.news"
+msgstr "alc.eshop.cms.news"
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_eshop_cms_page
+msgid "alc.eshop.cms.page"
+msgstr "alc.eshop.cms.page"
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_alc_eshop_cms_snippet
+msgid "alc.eshop.cms.snippet"
+msgstr "alc.eshop.cms.snippet"
+
+#. module: alc_eshop_cms
+#: model:ir.model,name:alc_eshop_cms.model_ir_attachment
+msgid "ir.attachment"
+msgstr "ir.attachment"
+
+#. module: alc_eshop_cms
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_news_form_view
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_page_form_view
+#: model:ir.ui.view,arch_db:alc_eshop_cms.alc_eshop_cms_snippet_form_view
 msgid "name"
 msgstr "name"
 
-#~ msgid "Date end"
-#~ msgstr "Date end"
+#. module: alc_eshop_cms
+#: model:ir.model.fields,field_description:alc_eshop_cms.field_alc_eshop_cms_news_thumbnail_image_id
+msgid "storage image"
+msgstr "storage image"
 
-#~ msgid "Date start"
-#~ msgstr "Date start"
-
-#~ msgid "Filename"
-#~ msgstr "Bestandsnaam"
-
-#~ msgid "HTTP accessible path to the file"
-#~ msgstr "HTTP accessible path to the file"
-
-#~ msgid "Image medium url"
-#~ msgstr "Image medium url"
-
-#~ msgid "Image preview"
-#~ msgstr "Image preview"
-
-#~ msgid "Image small url"
-#~ msgstr "Image small url"
-
-#~ msgid "The defined period is not a valid (%s > %s)"
-#~ msgstr "The defined period is not a valid (%s > %s)"
-
-#~ msgid "Thumbnail image"
-#~ msgstr "Thumbnail image"
-
-#~ msgid "Thumbnail image filename"
-#~ msgstr "Thumbnail image filename"
-
-#~ msgid "Url locales"
-#~ msgstr "Url locales"
-
-#, fuzzy
-#~ msgid "alc.cms.mixin"
-#~ msgstr "alc.content.lang.mixin"
-
-#, fuzzy
-#~ msgid "alc.content.image.mixin"
-#~ msgstr "alc.content.lang.mixin"
-
-#~ msgid "alc.content.lang.mixin"
-#~ msgstr "alc.content.lang.mixin"
-
-#~ msgid "alc.content.url.mixin"
-#~ msgstr "alc.content.url.mixin"
-
-#~ msgid "alc.eshop.cms.news"
-#~ msgstr "alc.eshop.cms.news"
-
-#~ msgid "alc.eshop.cms.page"
-#~ msgstr "alc.eshop.cms.page"
-
-#~ msgid "alc.eshop.cms.snippet"
-#~ msgstr "alc.eshop.cms.snippet"
-
-#~ msgid "ir.attachment"
-#~ msgstr "ir.attachment"
-
-#~ msgid "storage image"
-#~ msgstr "storage image"
+#~ msgid "File"
+#~ msgstr "Bestand"
 
 #~ msgid "Image filename"
 #~ msgstr "Image filename"

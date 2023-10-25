@@ -33,7 +33,7 @@ msgstr ""
 "p>\n"
 
 #. module: alc_partner_delivery_window_import
-#: model_terms:ir.ui.view,arch_db:alc_partner_delivery_window_import.alc_delivery_window_importer_form_view
+#: model:ir.ui.view,arch_db:alc_partner_delivery_window_import.alc_delivery_window_importer_form_view
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -54,7 +54,7 @@ msgid "Delivery Window Importer"
 msgstr "Import des fenêtres de livraison"
 
 #. module: alc_partner_delivery_window_import
-#: model_terms:ir.ui.view,arch_db:alc_partner_delivery_window_import.alc_delivery_window_importer_form_view
+#: model:ir.ui.view,arch_db:alc_partner_delivery_window_import.alc_delivery_window_importer_form_view
 msgid "Delivery Windows Importer"
 msgstr "Import des fenêtres de livraison"
 
@@ -80,7 +80,7 @@ msgid "ID"
 msgstr "ID"
 
 #. module: alc_partner_delivery_window_import
-#: model_terms:ir.ui.view,arch_db:alc_partner_delivery_window_import.alc_delivery_window_importer_form_view
+#: model:ir.ui.view,arch_db:alc_partner_delivery_window_import.alc_delivery_window_importer_form_view
 msgid "Import"
 msgstr "Import"
 

@@ -1,5 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
+# 	* alc_all
 #
 msgid ""
 msgstr ""
@@ -11,3 +12,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: alc_all
+#: model:stock.rule,name:alc_all.stock_rule_reserve_to_stock
+msgid "Reserve to stock"
+msgstr ""
+
+#. module: alc_all
+#: model:stock.picking.type,name:alc_all.stock_picking_type_reassort
+#: model:stock.route,name:alc_all.stock_route_reassort
+msgid "Réassort"
+msgstr ""

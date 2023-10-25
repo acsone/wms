@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-13 07:55+0000\n"
-"PO-Revision-Date: 2022-12-13 07:55+0000\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2021-01-21 09:45+0000\n"
+"PO-Revision-Date: 2021-01-21 09:45+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -17,22 +17,22 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_partner_carrier
+#: model:ir.ui.view,arch_db:alc_partner_carrier.res_partner_search_view
 #: model:res.partner.category,name:alc_partner_carrier.res_partner_category_carrier
-#: model_terms:ir.ui.view,arch_db:alc_partner_carrier.res_partner_search_view
 msgid "Carrier"
 msgstr "Transporteur"
 
 #. module: alc_partner_carrier
-#: model:ir.model,name:alc_partner_carrier.model_res_partner
-msgid "Contact"
-msgstr ""
+#: model:ir.model.fields,field_description:alc_partner_carrier.field_res_partner_is_carrier
+#: model:ir.model.fields,field_description:alc_partner_carrier.field_res_users_is_carrier
+#: model:ir.model.fields,field_description:alc_partner_carrier.field_shopinvader_partner_is_carrier
+msgid "Is carrier"
+msgstr "Transporteur?"
 
 #. module: alc_partner_carrier
-#: model:ir.model.fields,field_description:alc_partner_carrier.field_res_partner__is_carrier
-#: model:ir.model.fields,field_description:alc_partner_carrier.field_res_users__is_carrier
-#: model:ir.model.fields,field_description:alc_partner_carrier.field_shopinvader_partner__is_carrier
-msgid "Is Carrier"
-msgstr "Transporteur?"
+#: model:ir.model,name:alc_partner_carrier.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"
 
 #. module: alc_partner_carrier
 #: model:ir.model,name:alc_partner_carrier.model_res_partner_category
@@ -40,8 +40,7 @@ msgid "Partner Tags"
 msgstr "Étiquettes du partenaire"
 
 #. module: alc_partner_carrier
-#. odoo-python
-#: code:addons/alc_partner_carrier/models/res_partner_category.py:0
+#: code:addons/alc_partner_carrier/models/res_partner_category.py:17
 #, python-format
 msgid "The category 'Carrier' can't be removed."
 msgstr ""
