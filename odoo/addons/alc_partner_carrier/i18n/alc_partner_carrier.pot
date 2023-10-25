@@ -27,6 +27,7 @@ msgstr ""
 #. module: alc_partner_carrier
 #: model:ir.model.fields,field_description:alc_partner_carrier.field_res_partner__is_carrier
 #: model:ir.model.fields,field_description:alc_partner_carrier.field_res_users__is_carrier
+#: model:ir.model.fields,field_description:alc_partner_carrier.field_shopinvader_partner__is_carrier
 msgid "Is Carrier"
 msgstr ""
 

@@ -26,6 +26,7 @@ msgstr ""
 #. module: alc_sale_auto_confirm_max_delay
 #: model:ir.model.fields,help:alc_sale_auto_confirm_max_delay.field_res_partner__auto_confirm_max_delay
 #: model:ir.model.fields,help:alc_sale_auto_confirm_max_delay.field_res_users__auto_confirm_max_delay
+#: model:ir.model.fields,help:alc_sale_auto_confirm_max_delay.field_shopinvader_partner__auto_confirm_max_delay
 msgid ""
 "Max delay between the order creation and the auto confirmation by the "
 "system. This value applies to orders created by the api."
@@ -34,6 +35,7 @@ msgstr ""
 #. module: alc_sale_auto_confirm_max_delay
 #: model:ir.model.fields,field_description:alc_sale_auto_confirm_max_delay.field_res_partner__auto_confirm_max_delay
 #: model:ir.model.fields,field_description:alc_sale_auto_confirm_max_delay.field_res_users__auto_confirm_max_delay
+#: model:ir.model.fields,field_description:alc_sale_auto_confirm_max_delay.field_shopinvader_partner__auto_confirm_max_delay
 msgid "Max delay on sale order operation"
 msgstr ""
 

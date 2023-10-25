@@ -1,0 +1,36 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alce_stock_barcode_picking_assignment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alce_stock_barcode_picking_assignment
+#. odoo-python
+#: code:addons/alce_stock_barcode_picking_assignment/models/stock_picking.py:0
+#, python-format
+msgid "Please scan your user badge first to start the operations"
+msgstr ""
+
+#. module: alce_stock_barcode_picking_assignment
+#: model:ir.model.fields,field_description:alce_stock_barcode_picking_assignment.field_stock_picking__scan_operator_id
+msgid "Scan Operator"
+msgstr ""
+
+#. module: alce_stock_barcode_picking_assignment
+#: model:ir.model.fields,help:alce_stock_barcode_picking_assignment.field_stock_picking__scan_operator_id
+msgid "Technical field to retain operator in scanning process"
+msgstr ""
+
+#. module: alce_stock_barcode_picking_assignment
+#: model:ir.model,name:alce_stock_barcode_picking_assignment.model_stock_picking
+msgid "Transfer"
+msgstr ""

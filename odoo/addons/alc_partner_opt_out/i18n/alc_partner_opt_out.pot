@@ -26,6 +26,7 @@ msgstr ""
 #. module: alc_partner_opt_out
 #: model:ir.model.fields,help:alc_partner_opt_out.field_res_partner__opt_out
 #: model:ir.model.fields,help:alc_partner_opt_out.field_res_users__opt_out
+#: model:ir.model.fields,help:alc_partner_opt_out.field_shopinvader_partner__opt_out
 msgid ""
 "If opt-out is checked, this contact has refused to receive emails for mass "
 "mailing and marketing campaign. Filter 'Available for Mass Mailing' allows "
@@ -40,6 +41,7 @@ msgstr ""
 #. module: alc_partner_opt_out
 #: model:ir.model.fields,field_description:alc_partner_opt_out.field_res_partner__opt_out
 #: model:ir.model.fields,field_description:alc_partner_opt_out.field_res_users__opt_out
+#: model:ir.model.fields,field_description:alc_partner_opt_out.field_shopinvader_partner__opt_out
 msgid "Opt-Out"
 msgstr ""
 

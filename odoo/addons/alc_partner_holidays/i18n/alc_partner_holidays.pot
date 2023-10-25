@@ -76,6 +76,7 @@ msgstr ""
 #. module: alc_partner_holidays
 #: model:ir.model.fields,field_description:alc_partner_holidays.field_res_partner__working_schedules_ids
 #: model:ir.model.fields,field_description:alc_partner_holidays.field_res_users__working_schedules_ids
+#: model:ir.model.fields,field_description:alc_partner_holidays.field_shopinvader_partner__working_schedules_ids
 msgid "Partner Holidays"
 msgstr ""
 

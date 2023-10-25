@@ -1,0 +1,136 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alce_stock_barcode_easy_operation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alce_stock_barcode_easy_operation
+#. odoo-python
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#, python-format
+msgid "%(barcode)s"
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#: model:ir.model.fields,field_description:alce_stock_barcode_easy_operation.field_stock_picking___barcode_scanned
+msgid "Barcode Scanned"
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#. odoo-python
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#, python-format
+msgid "Expected lot quantity exceeded"
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#. odoo-python
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#, python-format
+msgid "Expected quantity exceeded"
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#. odoo-python
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#, python-format
+msgid "Invalid document reference"
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#. odoo-python
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#, python-format
+msgid "Lot required"
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#. odoo-python
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#, python-format
+msgid "No match for lot %(lot)s product %(product)s."
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#. odoo-python
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#, python-format
+msgid "No operation matched for product %(product)s."
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#. odoo-python
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#, python-format
+msgid "Operation with product %(product)s does not accept lot %(lot)s."
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#. odoo-python
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#, python-format
+msgid "Operation with product %(product)s needs a lot."
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#. odoo-python
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#, python-format
+msgid ""
+"Too much product %(product)s scanned for operation with lot %(lot)s.\n"
+"Expected quantity for this lot is: %(qty)s."
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#. odoo-python
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#, python-format
+msgid ""
+"Too much product scanned for operation with product %(product)s.\n"
+"Expected %(qty)s."
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#: model:ir.model,name:alce_stock_barcode_easy_operation.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#. odoo-python
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#, python-format
+msgid "Unsupported code"
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#: model:ir.model.fields,help:alce_stock_barcode_easy_operation.field_stock_picking___barcode_scanned
+msgid "Value of the last barcode scanned."
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#. odoo-python
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#, python-format
+msgid "Wrong lot"
+msgstr ""
+
+#. module: alce_stock_barcode_easy_operation
+#. odoo-python
+#: code:addons/alce_stock_barcode_easy_operation/models/stock_picking.py:0
+#, python-format
+msgid "Wrong product"
+msgstr ""

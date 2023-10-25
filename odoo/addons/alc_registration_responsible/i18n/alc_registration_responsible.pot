@@ -1,0 +1,49 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_registration_responsible
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_registration_responsible
+#: model:mail.template,body_html:alc_registration_responsible.create_mail_template
+msgid ""
+"\n"
+"<p>Bonjour,</p>\n"
+"<p>Une demande d'inscription au nom de <t t-out=\"object.name\"/> vient d'être créée'.</p>\n"
+"<p>Merci de faire le nécessaire.</p>\n"
+msgstr ""
+
+#. module: alc_registration_responsible
+#: model:mail.template,name:alc_registration_responsible.create_mail_template
+msgid "New Registration"
+msgstr ""
+
+#. module: alc_registration_responsible
+#: model:ir.model,name:alc_registration_responsible.model_alc_registration
+msgid "Partner Registration"
+msgstr ""
+
+#. module: alc_registration_responsible
+#: model:ir.model.fields,field_description:alc_registration_responsible.field_alc_registration__user_id
+msgid "Responsible"
+msgstr ""
+
+#. module: alc_registration_responsible
+#: model:ir.model.fields,help:alc_registration_responsible.field_alc_registration__user_id
+msgid "The user in charge of managing this record."
+msgstr ""
+
+#. module: alc_registration_responsible
+#: model:mail.template,subject:alc_registration_responsible.create_mail_template
+msgid ""
+"Une nouvelle demande d'inscription vient d'être créée: {{ object.name }}"
+msgstr ""

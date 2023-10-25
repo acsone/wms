@@ -16,6 +16,7 @@ msgstr ""
 #. module: alc_partner_pharmacist
 #: model:ir.model.fields,field_description:alc_partner_pharmacist.field_res_partner__pharmacist_id
 #: model:ir.model.fields,field_description:alc_partner_pharmacist.field_res_users__pharmacist_id
+#: model:ir.model.fields,field_description:alc_partner_pharmacist.field_shopinvader_partner__pharmacist_id
 msgid "Associated pharmacist"
 msgstr ""
 
@@ -27,5 +28,6 @@ msgstr ""
 #. module: alc_partner_pharmacist
 #: model:ir.model.fields,field_description:alc_partner_pharmacist.field_res_partner__pharmacist_of_ids
 #: model:ir.model.fields,field_description:alc_partner_pharmacist.field_res_users__pharmacist_of_ids
+#: model:ir.model.fields,field_description:alc_partner_pharmacist.field_shopinvader_partner__pharmacist_of_ids
 msgid "Pharmacist associated to"
 msgstr ""
