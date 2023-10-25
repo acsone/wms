@@ -17,146 +17,120 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_partner_type
-#: model:ir.model.fields,field_description:alc_partner_type.field_res_partner_partner_type
-#: model:ir.model.fields,field_description:alc_partner_type.field_res_users_partner_type
-#: model:ir.model.fields,field_description:alc_partner_type.field_shopinvader_partner_partner_type
+#: model:ir.model.fields,field_description:alc_partner_type.field_res_partner__partner_type
+#: model:ir.model.fields,field_description:alc_partner_type.field_res_users__partner_type
 msgid "Alcyon Partner Category"
 msgstr "Type de client"
 
 #. module: alc_partner_type
-#: model:ir.model.fields,field_description:alc_partner_type.field_delivery_carrier_allowed_partner_types
-#: model:ir.model.fields,field_description:alc_partner_type.field_product_product_allowed_partner_types
-#: model:ir.model.fields,field_description:alc_partner_type.field_product_template_allowed_partner_types
-#: model:ir.model.fields,field_description:alc_partner_type.field_shopinvader_product_allowed_partner_types
-#: model:ir.model.fields,field_description:alc_partner_type.field_shopinvader_variant_allowed_partner_types
+#: model:ir.model.fields,field_description:alc_partner_type.field_product_product__allowed_partner_types
+#: model:ir.model.fields,field_description:alc_partner_type.field_product_template__allowed_partner_types
 msgid "Allowed Partner Types"
 msgstr "Types de client autorisés"
 
 #. module: alc_partner_type
-#: model:ir.model.fields,field_description:alc_partner_type.field_delivery_carrier_allowed_partner_types_list
-#: model:ir.model.fields,field_description:alc_partner_type.field_product_product_allowed_partner_types_list
-#: model:ir.model.fields,field_description:alc_partner_type.field_product_template_allowed_partner_types_list
-#: model:ir.model.fields,field_description:alc_partner_type.field_shopinvader_product_allowed_partner_types_list
-#: model:ir.model.fields,field_description:alc_partner_type.field_shopinvader_variant_allowed_partner_types_list
+#: model:ir.model.fields,field_description:alc_partner_type.field_product_product__allowed_partner_types_list
+#: model:ir.model.fields,field_description:alc_partner_type.field_product_template__allowed_partner_types_list
 #, fuzzy
 msgid "Allowed Partner Types List"
 msgstr "Types de client autorisés"
 
 #. module: alc_partner_type
-#: model:ir.model.fields,field_description:alc_partner_type.field_product_partner_type_display_name
-msgid "Display Name"
+#: model:ir.model,name:alc_partner_type.model_res_partner
+msgid "Contact"
 msgstr ""
 
 #. module: alc_partner_type
-#: selection:res.partner,partner_type:0
+#: model:ir.model.fields.selection,name:alc_partner_type.selection__res_partner__partner_type__equipment_only
 msgid "Equipment Only"
 msgstr "Exclusif matériel"
 
 #. module: alc_partner_type
-#: selection:res.partner,partner_type:0
+#: model:ir.model.fields.selection,name:alc_partner_type.selection__res_partner__partner_type__export_customer
 msgid "Export Customer"
 msgstr "Clients export"
 
 #. module: alc_partner_type
-#: selection:res.partner,partner_type:0
+#: model:ir.model.fields.selection,name:alc_partner_type.selection__res_partner__partner_type__export_meds
 msgid "Export Medicine"
 msgstr "Médicament export"
 
 #. module: alc_partner_type
-#: selection:res.partner,partner_type:0
+#: model:ir.model.fields.selection,name:alc_partner_type.selection__res_partner__partner_type__food_only
 msgid "Food Only"
 msgstr "Exclusif aliments (Non supporté par akénéo)"
 
 #. module: alc_partner_type
-#: selection:res.partner,partner_type:0
+#: model:ir.model.fields.selection,name:alc_partner_type.selection__res_partner__partner_type__guest
 msgid "Guest"
 msgstr "Mode non connecté (Non supporté par akénéo)"
 
 #. module: alc_partner_type
-#: model:ir.model.fields,field_description:alc_partner_type.field_product_partner_type_id
-msgid "ID"
-msgstr ""
-
-#. module: alc_partner_type
-#: model:ir.model.fields,field_description:alc_partner_type.field_product_partner_type___last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: alc_partner_type
-#: selection:res.partner,partner_type:0
+#: model:ir.model.fields.selection,name:alc_partner_type.selection__res_partner__partner_type__misc
 msgid "Miscellaneous"
 msgstr "Divers (Non supporté par akénéo)"
 
 #. module: alc_partner_type
-#: model:ir.model,name:alc_partner_type.model_res_partner
-msgid "Partner"
-msgstr "Partenaire"
-
-#. module: alc_partner_type
-#: selection:res.partner,partner_type:0
+#: model:ir.model.fields.selection,name:alc_partner_type.selection__res_partner__partner_type__wholesaler_pharmacy
 msgid "Pharmacy Wholesaler"
 msgstr "Pharmaciens et Grossistes humains"
 
 #. module: alc_partner_type
-#: model:ir.model,name:alc_partner_type.model_product_product
+#: model:ir.model,name:alc_partner_type.model_product_template
 msgid "Product"
 msgstr "Produit"
 
 #. module: alc_partner_type
-#: model:ir.model,name:alc_partner_type.model_product_template
+#: model:ir.model,name:alc_partner_type.model_product_product
 #, fuzzy
-msgid "Product Template"
+msgid "Product Variant"
 msgstr "Produit"
 
 #. module: alc_partner_type
-#: selection:res.partner,partner_type:0
+#: model:ir.model.fields.selection,name:alc_partner_type.selection__res_partner__partner_type__shareholder
 msgid "Shareholder"
 msgstr "Alcyonnaire"
 
 #. module: alc_partner_type
-#: model:ir.model.fields,field_description:alc_partner_type.field_res_partner_is_student
-#: model:ir.model.fields,field_description:alc_partner_type.field_res_users_is_student
-#: model:ir.model.fields,field_description:alc_partner_type.field_shopinvader_partner_is_student
+#: model:ir.model.fields,field_description:alc_partner_type.field_res_partner__is_student
+#: model:ir.model.fields,field_description:alc_partner_type.field_res_users__is_student
 msgid "Student"
 msgstr "Etudiant"
 
 #. module: alc_partner_type
-#: selection:res.partner,partner_type:0
+#: model:ir.model.fields.selection,name:alc_partner_type.selection__res_partner__partner_type__student_like
 msgid "Student and similar"
 msgstr "Etudiants et assimilés sans dépôt"
 
 #. module: alc_partner_type
-#: selection:res.partner,partner_type:0
+#: model:ir.model.fields.selection,name:alc_partner_type.selection__res_partner__partner_type__supplier
 msgid "Suppliers"
 msgstr "Fournisseurs (Non supporté par akénéo)"
 
 #. module: alc_partner_type
-#: model:ir.model.fields,help:alc_partner_type.field_delivery_carrier_allowed_partner_types
-#: model:ir.model.fields,help:alc_partner_type.field_delivery_carrier_allowed_partner_types_list
-#: model:ir.model.fields,help:alc_partner_type.field_product_product_allowed_partner_types
-#: model:ir.model.fields,help:alc_partner_type.field_product_product_allowed_partner_types_list
-#: model:ir.model.fields,help:alc_partner_type.field_product_template_allowed_partner_types
-#: model:ir.model.fields,help:alc_partner_type.field_product_template_allowed_partner_types_list
-#: model:ir.model.fields,help:alc_partner_type.field_shopinvader_product_allowed_partner_types
-#: model:ir.model.fields,help:alc_partner_type.field_shopinvader_product_allowed_partner_types_list
-#: model:ir.model.fields,help:alc_partner_type.field_shopinvader_variant_allowed_partner_types
-#: model:ir.model.fields,help:alc_partner_type.field_shopinvader_variant_allowed_partner_types_list
+#: model:ir.model.fields,help:alc_partner_type.field_product_product__allowed_partner_types
+#: model:ir.model.fields,help:alc_partner_type.field_product_product__allowed_partner_types_list
+#: model:ir.model.fields,help:alc_partner_type.field_product_template__allowed_partner_types
+#: model:ir.model.fields,help:alc_partner_type.field_product_template__allowed_partner_types_list
 msgid ""
 "Technical field. Stores all partner types allowed to access the product."
 msgstr ""
 "Technical field. Stores all partner types allowed to access the product."
 
 #. module: alc_partner_type
-#: selection:res.partner,partner_type:0
+#: model:ir.model,name:alc_partner_type.model_product_partner_type
+msgid "Type of customer from Alcyon business point of vue"
+msgstr ""
+
+#. module: alc_partner_type
+#: model:ir.model.fields.selection,name:alc_partner_type.selection__res_partner__partner_type__veterinary
 msgid "Veterinary"
 msgstr "Vétérinaires avec dépôt"
 
 #. module: alc_partner_type
-#: selection:res.partner,partner_type:0
+#: model:ir.model.fields.selection,name:alc_partner_type.selection__res_partner__partner_type__wholesaler_veterinary
 msgid "Veterinary Wholesaler"
 msgstr "Grossistes vétérinaires"
 
-#. module: alc_partner_type
-#: model:ir.model,name:alc_partner_type.model_product_partner_type
-msgid "product.partner_type"
-msgstr ""
+#~ msgid "Partner"
+#~ msgstr "Partenaire"
