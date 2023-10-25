@@ -17,18 +17,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- MTO Product purchased by a supplier but not sold"
 msgstr ""
 "- Produit acheté/vendu avec une commande fournisseur et sans commande client"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- MTO Product with abnormal routes"
 msgstr "- Produit acheté/vendu avec une route incohérente"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid ""
 "- More than one route is selected for the product, leading to a mismatch "
 "with the picking zone"
@@ -37,348 +37,288 @@ msgstr ""
 "incohérence entre route et zone de picking"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product can be purchased but does not have the buy route"
 msgstr "- Le produit peut être acheté sans route Acheter "
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product has min/max and is 'on command reappro'"
 msgstr "- Min/Max défini pour un produit en achetés/vendus"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product has no min/max and is not 'on command reappro'"
 msgstr "- Min/Max non défini pour un produit non achetés/vendus"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product is missing dimensions"
 msgstr "- Le produit n'a pas toutes les dimensions"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product is missing packaging dimensions"
 msgstr "- Le produit n'a pas toutes les dimensions de conditionnement"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-msgid "- Product is not salable and still has a bin"
-msgstr ""
-"- Le produit ne peut être vendu ou est archivé et est associé à un rangement"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product is not salable but not archived"
 msgstr "- Le produit ne peut être vendu et non archivé"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product not sold but on website"
 msgstr "- Produit ne pouvant être vendu mais publié sur le site web"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product stocked in a MTO location for more than 5 days"
 msgstr "- Produit acheté/vendu non livré depuis plus de 5 jours"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product stocked in a MTO location with new route"
 msgstr ""
 "- Produit stocké dans un emplacement dont le parent est acheté/vendu pour "
 "lequel la route 'nouveauté' est pas active"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product stocked in a MTO location without MTO route"
 msgstr ""
 "- Produit stocké dans un emplacement dont le parent est acheté/vendu pour "
 "lequel la route 'approvisionner à la commande' n'est pas active"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "- Product without dimensions in stock"
 msgstr "- Produit en stock et sans dimensions"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
-msgid "- The selected picking zone does not match the bin"
-msgstr "- Rangement et zone de picking incohérent"
-
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_can_be_bought_without_buy_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_can_be_bought_without_buy_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_can_be_bought_without_buy_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_can_be_bought_without_buy_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_can_be_bought_without_buy_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product__can_be_bought_without_buy_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template__can_be_bought_without_buy_route
 #, fuzzy
-msgid "Can be bought without buy route"
+msgid "Can Be Bought Without Buy Route"
 msgstr "Peut être acheté sans route Acheter"
 
 #. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_dimensions_in_stock
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_dimensions_in_stock
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_dimensions_in_stock
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_dimensions_in_stock
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_dimensions_in_stock
-msgid "Dimensions in stock"
-msgstr ""
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product__dimensions_in_stock
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template__dimensions_in_stock
+#, fuzzy
+msgid "Dimensions In Stock"
+msgstr "Dimensions manquantes"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_form_view
 msgid "Following issue(s) is/are observed on the product:"
 msgstr "Le/les problèmes suivants sont observés pour le produit:"
 
 #. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_has_anomaly
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_has_anomaly
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_has_anomaly
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_has_anomaly
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_has_anomaly
-msgid "Has anomaly"
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product__has_anomaly
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template__has_anomaly
+#, fuzzy
+#| msgid "Has anomaly"
+msgid "Has Anomaly"
 msgstr "Produits avec anomalies"
 
 #. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_has_no_dimensions
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_has_no_dimensions
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_has_no_dimensions
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_has_no_dimensions
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_has_no_dimensions
-#, fuzzy
-msgid "Has no dimensions"
-msgstr "Dimensions manquantes"
-
-#. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "MTO product has abnormal routes"
 msgstr "Produits achetés/vendus avec une route incohérente"
 
 #. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_min_max_on_command_reappro
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_min_max_on_command_reappro
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_min_max_on_command_reappro
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_min_max_on_command_reappro
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_min_max_on_command_reappro
-msgid "Min max on command reappro"
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product__min_max_on_command_reappro
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template__min_max_on_command_reappro
+#, fuzzy
+#| msgid "Min max on command reappro"
+msgid "Min Max On Command Reappro"
 msgstr "Min/Max défini pour des produits achetés/vendus "
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Min/max and 'on command reappro'"
 msgstr "Min/Max défini pour des produits achetés/vendus "
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "Mismatch between picking zone and bin"
-msgstr "Rangement et zone de picking incohérent"
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product__mismatch_route_picking
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template__mismatch_route_picking
+#, fuzzy
+#| msgid "Mismatch route picking"
+msgid "Mismatch Route Picking"
+msgstr "Route et zone de picking incohérente"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Mismatch between route and picking zone"
 msgstr "Route et zone de picking incohérente"
 
 #. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mismatch_picking_bin
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mismatch_picking_bin
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mismatch_picking_bin
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mismatch_picking_bin
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mismatch_picking_bin
-msgid "Mismatch picking bin"
-msgstr "Rangement et zone de picking incohérent"
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product__mto_purchased_not_sold
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template__mto_purchased_not_sold
+#, fuzzy
+msgid "Mto Purchased Not Sold"
+msgstr "Produits achetés/vendus sans commande client"
 
 #. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mismatch_route_picking
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mismatch_route_picking
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mismatch_route_picking
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mismatch_route_picking
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mismatch_route_picking
-msgid "Mismatch route picking"
-msgstr "Route et zone de picking incohérente"
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product__mto_stock_5_days
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template__mto_stock_5_days
+#, fuzzy
+#| msgid "Mto stock 5 days"
+msgid "Mto Stock 5 Days"
+msgstr "Produits achetés/vendus en stock depuis plus de 5 jours"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "Missing dimensions"
-msgstr "Dimensions manquantes"
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product__mto_stock_new_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template__mto_stock_new_route
+#, fuzzy
+msgid "Mto Stock New Route"
+msgstr "Produits achetés/vendus avec une route incohérente"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "Missing packaging dimensions"
-msgstr "Dimensions de conditionnement manquantes"
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product__mto_stock_no_mto_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template__mto_stock_no_mto_route
+#, fuzzy
+msgid "Mto Stock No Mto Route"
+msgstr "Produits achetés/vendus avec une route incohérente"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product__mto_with_abnormal_route
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template__mto_with_abnormal_route
+#, fuzzy
+msgid "Mto With Abnormal Route"
+msgstr "Produits achetés/vendus avec une route incohérente"
+
+#. module: alc_product_audit
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Mto product purchased and not sold"
 msgstr "Produits achetés/vendus sans commande client"
 
 #. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_purchased_not_sold
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_purchased_not_sold
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_purchased_not_sold
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mto_purchased_not_sold
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mto_purchased_not_sold
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product__no_dimensions_in_stock
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template__no_dimensions_in_stock
 #, fuzzy
-msgid "Mto purchased not sold"
-msgstr "Produits achetés/vendus sans commande client"
-
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_stock_5_days
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_stock_5_days
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_stock_5_days
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mto_stock_5_days
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mto_stock_5_days
-msgid "Mto stock 5 days"
-msgstr "Produits achetés/vendus en stock depuis plus de 5 jours"
-
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_stock_new_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_stock_new_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_stock_new_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mto_stock_new_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mto_stock_new_route
-#, fuzzy
-msgid "Mto stock new route"
-msgstr "Produits achetés/vendus avec une route incohérente"
-
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_stock_no_mto_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_stock_no_mto_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_stock_no_mto_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mto_stock_no_mto_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mto_stock_no_mto_route
-#, fuzzy
-msgid "Mto stock no mto route"
-msgstr "Produits achetés/vendus avec une route incohérente"
-
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_mto_with_abnormal_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_mto_with_abnormal_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_mto_with_abnormal_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_mto_with_abnormal_route
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_mto_with_abnormal_route
-#, fuzzy
-msgid "Mto with abnormal route"
-msgstr "Produits achetés/vendus avec une route incohérente"
-
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_dimensions_in_stock
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_dimensions_in_stock
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_dimensions_in_stock
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_no_dimensions_in_stock
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_no_dimensions_in_stock
-#, fuzzy
-msgid "No dimensions in stock"
+msgid "No Dimensions In Stock"
 msgstr "Dimensions manquantes"
 
 #. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_no_min_max_no_on_command_reappro
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_no_min_max_no_on_command_reappro
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_no_min_max_no_on_command_reappro
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_no_min_max_no_on_command_reappro
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_no_min_max_no_on_command_reappro
-msgid "No min max no on command reappro"
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product__no_min_max_no_on_command_reappro
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template__no_min_max_no_on_command_reappro
+#, fuzzy
+#| msgid "No min max no on command reappro"
+msgid "No Min Max No On Command Reappro"
 msgstr "Min/Max non défini pour des produits non achetés/vendus"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "No min/max and no 'on command reappro'"
 msgstr "Min/Max non défini pour des produits non achetés/vendus"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product__not_sold_on_website
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template__not_sold_on_website
+#, fuzzy
+msgid "Not Sold On Website"
+msgstr "- Produit ne pouvant être vendu mais publié sur le site web"
+
+#. module: alc_product_audit
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Not salable but not archived"
 msgstr "Ne peut être vendu et non archivé"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
-msgid "Not salable or archived but with a bin"
-msgstr "Ne peut être vendu ou est archivé et associé à un rangement"
-
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_not_sold_on_website
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_not_sold_on_website
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_not_sold_on_website
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_not_sold_on_website
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_not_sold_on_website
-#, fuzzy
-msgid "Not sold on website"
-msgstr "- Produit ne pouvant être vendu mais publié sur le site web"
-
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_packaging_has_no_dimensions
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_packaging_has_no_dimensions
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_packaging_has_no_dimensions
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_packaging_has_no_dimensions
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_packaging_has_no_dimensions
-#, fuzzy
-msgid "Packaging has no dimensions"
-msgstr "Dimensions de conditionnement manquantes"
-
-#. module: alc_product_audit
 #: model:ir.model,name:alc_product_audit.model_product_template
-msgid "Product Template"
+#, fuzzy
+msgid "Product"
 msgstr "Modèle de produit"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product has an anomaly"
 msgstr "Produits avec anomalies"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product in a MTO stock location for more than 5 days"
 msgstr "Produits achetés/vendus non livrés depuis plus de 5 jours"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product in a MTO stock location with mto route"
 msgstr ""
 "Produits dans un emplacement de stock achetés/vendus sans route "
 "'approvisionner à la commande'"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product in a MTO stock location with route new"
 msgstr ""
 "Produits dans un emplacement de stock achetés/vendus avec route 'nouveautés'"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product is not sold anymore but still on website"
 msgstr "Ne peut être vendu et publié sur le site web"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product with dimensions in stock"
 msgstr "Produit en stock avec toutes les dimensions"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "Product without dimensions in stock"
 msgstr "Le produit n'a pas toutes les dimensions"
 
 #. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_sale_not_ok_archived_bin_available
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_sale_not_ok_archived_bin_available
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_sale_not_ok_archived_bin_available
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_sale_not_ok_archived_bin_available
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_sale_not_ok_archived_bin_available
-msgid "Sale not ok archived bin available"
-msgstr "Ne peut être vendu ou est archivé et associé à un rangement"
-
-#. module: alc_product_audit
-#: model:ir.model.fields,field_description:alc_product_audit.field_delivery_carrier_sale_not_ok_not_archived
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_product_sale_not_ok_not_archived
-#: model:ir.model.fields,field_description:alc_product_audit.field_product_template_sale_not_ok_not_archived
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_product_sale_not_ok_not_archived
-#: model:ir.model.fields,field_description:alc_product_audit.field_shopinvader_variant_sale_not_ok_not_archived
-msgid "Sale not ok not archived"
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_product__sale_not_ok_not_archived
+#: model:ir.model.fields,field_description:alc_product_audit.field_product_template__sale_not_ok_not_archived
+#, fuzzy
+#| msgid "Sale not ok not archived"
+msgid "Sale Not Ok Not Archived"
 msgstr "Ne peut être vendu et non archivé"
 
 #. module: alc_product_audit
-#: model:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:alc_product_audit.product_template_search_view
 msgid "can be bought without buy routes"
 msgstr "Peut être acheté sans route Acheter"
+
+#~ msgid "- Product is not salable and still has a bin"
+#~ msgstr ""
+#~ "- Le produit ne peut être vendu ou est archivé et est associé à un "
+#~ "rangement"
+
+#~ msgid "- The selected picking zone does not match the bin"
+#~ msgstr "- Rangement et zone de picking incohérent"
+
+#, fuzzy
+#~ msgid "Has no dimensions"
+#~ msgstr "Dimensions manquantes"
+
+#~ msgid "Mismatch between picking zone and bin"
+#~ msgstr "Rangement et zone de picking incohérent"
+
+#~ msgid "Mismatch picking bin"
+#~ msgstr "Rangement et zone de picking incohérent"
+
+#~ msgid "Missing dimensions"
+#~ msgstr "Dimensions manquantes"
+
+#~ msgid "Missing packaging dimensions"
+#~ msgstr "Dimensions de conditionnement manquantes"
+
+#~ msgid "Not salable or archived but with a bin"
+#~ msgstr "Ne peut être vendu ou est archivé et associé à un rangement"
+
+#, fuzzy
+#~ msgid "Packaging has no dimensions"
+#~ msgstr "Dimensions de conditionnement manquantes"
+
+#~ msgid "Product Template"
+#~ msgstr "Modèle de produit"
+
+#~ msgid "Sale not ok archived bin available"
+#~ msgstr "Ne peut être vendu ou est archivé et associé à un rangement"
 
 #~ msgid "- Product has the storage type 'new' but is older than a month"
 #~ msgstr "- Produit classé comme nouveauté mais créé il y a plus d'un mois"
@@ -397,10 +337,6 @@ msgstr "Peut être acheté sans route Acheter"
 #, fuzzy
 #~ msgid "New product with old date"
 #~ msgstr "- Produit acheté/vendu avec une route incohérente"
-
-#, fuzzy
-#~ msgid "Product"
-#~ msgstr "Modèle de produit"
 
 #~ msgid "Product is categorized as 'new' but is older than a month"
 #~ msgstr "Produit nouveauté créé il y a plus d'un mois"
