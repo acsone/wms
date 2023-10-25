@@ -17,50 +17,70 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_customer_audit
-#: model:ir.ui.view,arch_db:alc_customer_audit.res_partner_form_view
+#: model_terms:ir.ui.view,arch_db:alc_customer_audit.res_partner_form_view
 msgid ""
 "- Customer is a veterinarian with a depot and does not have a pharmacist"
 msgstr "- Vétérinaire actif, autorisé au dépôt et sans pharmacie associée"
 
 #. module: alc_customer_audit
-#: model:ir.ui.view,arch_db:alc_customer_audit.res_partner_form_view
-msgid "- Customer is active but not in a delivery round"
+#: model_terms:ir.ui.view,arch_db:alc_customer_audit.res_partner_form_view
+#, fuzzy
+#| msgid "- Customer is active but not in a delivery round"
+msgid "- Customer is active without any release channel"
 msgstr "- Actif et n'est pas affecté à une tournée"
 
 #. module: alc_customer_audit
-#: model:ir.ui.view,arch_db:alc_customer_audit.res_partner_search_view
+#: model:ir.model,name:alc_customer_audit.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_customer_audit
+#: model_terms:ir.ui.view,arch_db:alc_customer_audit.res_partner_search_view
 msgid "Customer has an anomaly"
 msgstr "Avec anomalie(s)"
 
 #. module: alc_customer_audit
-#: model:ir.ui.view,arch_db:alc_customer_audit.res_partner_form_view
+#: model_terms:ir.ui.view,arch_db:alc_customer_audit.res_partner_form_view
 msgid "Following issue(s) is/are observed on the customer:"
 msgstr "Le/les problèmes suivants sont observés pour le client:"
 
 #. module: alc_customer_audit
-#: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner_has_anomaly
-#: model:ir.model.fields,field_description:alc_customer_audit.field_res_users_has_anomaly
-#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner_has_anomaly
-msgid "Has anomaly"
+#: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner__has_anomaly
+#: model:ir.model.fields,field_description:alc_customer_audit.field_res_users__has_anomaly
+#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner__has_anomaly
+#, fuzzy
+#| msgid "Has anomaly"
+msgid "Has Anomaly"
 msgstr "Avec anomalie(s)"
 
 #. module: alc_customer_audit
-#: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner_no_delivery_round
-#: model:ir.model.fields,field_description:alc_customer_audit.field_res_users_no_delivery_round
-#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner_no_delivery_round
-#: model:ir.ui.view,arch_db:alc_customer_audit.res_partner_search_view
-msgid "No delivery round"
-msgstr "Actif sans tournée affectée"
+#: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner__no_pharmacist
+#: model:ir.model.fields,field_description:alc_customer_audit.field_res_users__no_pharmacist
+#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner__no_pharmacist
+#, fuzzy
+#| msgid "No pharmacist"
+msgid "No Pharmacist"
+msgstr "Vétérinaire avec dépôt sans pharmacie associée"
 
 #. module: alc_customer_audit
-#: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner_no_pharmacist
-#: model:ir.model.fields,field_description:alc_customer_audit.field_res_users_no_pharmacist
-#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner_no_pharmacist
-#: model:ir.ui.view,arch_db:alc_customer_audit.res_partner_search_view
+#: model:ir.model.fields,field_description:alc_customer_audit.field_res_partner__no_release_channel
+#: model:ir.model.fields,field_description:alc_customer_audit.field_res_users__no_release_channel
+#: model:ir.model.fields,field_description:alc_customer_audit.field_shopinvader_partner__no_release_channel
+msgid "No Release Channel"
+msgstr ""
+
+#. module: alc_customer_audit
+#: model_terms:ir.ui.view,arch_db:alc_customer_audit.res_partner_search_view
 msgid "No pharmacist"
 msgstr "Vétérinaire avec dépôt sans pharmacie associée"
 
 #. module: alc_customer_audit
-#: model:ir.model,name:alc_customer_audit.model_res_partner
-msgid "Partner"
-msgstr "Partenaire"
+#: model_terms:ir.ui.view,arch_db:alc_customer_audit.res_partner_search_view
+msgid "No release channel"
+msgstr ""
+
+#~ msgid "No delivery round"
+#~ msgstr "Actif sans tournée affectée"
+
+#~ msgid "Partner"
+#~ msgstr "Partenaire"
