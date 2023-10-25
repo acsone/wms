@@ -17,48 +17,46 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_packaging
-#: model:product.packaging.type,name:alc_product_packaging.product_packaging_type_box
+#: model:product.packaging.level,name:alc_product_packaging.product_packaging_type_box
 msgid "Boîte"
 msgstr "Boîte"
 
 #. module: alc_product_packaging
-#: model:product.packaging.type,name:alc_product_packaging.product_packaging_type_shrink_wrap
+#: model:product.packaging.level,name:alc_product_packaging.product_packaging_type_shrink_wrap
 msgid "Fardelage"
 msgstr "Fardelage"
 
 #. module: alc_product_packaging
-#: model:product.packaging.type,name:alc_product_packaging.product_packaging_type_palette
+#: model:product.packaging.level,name:alc_product_packaging.product_packaging_type_palette
 msgid "Palette"
 msgstr "Palette"
 
 #. module: alc_product_packaging
 #: model:ir.model,name:alc_product_packaging.model_product_template
-msgid "Product Template"
+#, fuzzy
+#| msgid "Product Template"
+msgid "Product"
 msgstr "Modèle de produit"
 
 #. module: alc_product_packaging
-#: model:ir.model.fields,field_description:alc_product_packaging.field_delivery_carrier_unit_in_box
-#: model:ir.model.fields,field_description:alc_product_packaging.field_product_product_unit_in_box
-#: model:ir.model.fields,field_description:alc_product_packaging.field_product_template_unit_in_box
-#: model:ir.model.fields,field_description:alc_product_packaging.field_shopinvader_product_unit_in_box
-#: model:ir.model.fields,field_description:alc_product_packaging.field_shopinvader_variant_unit_in_box
+#: model:ir.model.fields,field_description:alc_product_packaging.field_product_product__unit_in_box
+#: model:ir.model.fields,field_description:alc_product_packaging.field_product_template__unit_in_box
 msgid "Unit in box"
 msgstr ""
 
 #. module: alc_product_packaging
-#: model:ir.model.fields,field_description:alc_product_packaging.field_delivery_carrier_unit_in_pallet
-#: model:ir.model.fields,field_description:alc_product_packaging.field_product_product_unit_in_pallet
-#: model:ir.model.fields,field_description:alc_product_packaging.field_product_template_unit_in_pallet
-#: model:ir.model.fields,field_description:alc_product_packaging.field_shopinvader_product_unit_in_pallet
-#: model:ir.model.fields,field_description:alc_product_packaging.field_shopinvader_variant_unit_in_pallet
+#: model:ir.model.fields,field_description:alc_product_packaging.field_product_product__unit_in_pallet
+#: model:ir.model.fields,field_description:alc_product_packaging.field_product_template__unit_in_pallet
 msgid "Unit in pallet"
 msgstr ""
 
 #. module: alc_product_packaging
-#: model:ir.model.fields,field_description:alc_product_packaging.field_delivery_carrier_unit_in_shrink_wrap
-#: model:ir.model.fields,field_description:alc_product_packaging.field_product_product_unit_in_shrink_wrap
-#: model:ir.model.fields,field_description:alc_product_packaging.field_product_template_unit_in_shrink_wrap
-#: model:ir.model.fields,field_description:alc_product_packaging.field_shopinvader_product_unit_in_shrink_wrap
-#: model:ir.model.fields,field_description:alc_product_packaging.field_shopinvader_variant_unit_in_shrink_wrap
+#: model:ir.model.fields,field_description:alc_product_packaging.field_product_product__unit_in_shrink_wrap
+#: model:ir.model.fields,field_description:alc_product_packaging.field_product_template__unit_in_shrink_wrap
 msgid "Unit in shrink-wrap"
+msgstr ""
+
+#. module: alc_product_packaging
+#: model_terms:ir.ui.view,arch_db:alc_product_packaging.product_template_form_view_procurement_button
+msgid "Units"
 msgstr ""
