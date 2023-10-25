@@ -17,27 +17,35 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_restocking_exclude_not_salable
-#: model:ir.model.fields,field_description:alc_restocking_exclude_not_salable.field_stock_return_picking_archived_products_message
-msgid "Archived products message"
+#: model:ir.model.fields,field_description:alc_restocking_exclude_not_salable.field_stock_return_picking__archived_products_message
+#, fuzzy
+#| msgid "Archived products message"
+msgid "Archived Products Message"
 msgstr "Archived products message"
 
 #. module: alc_restocking_exclude_not_salable
-#: model:ir.model.fields,field_description:alc_restocking_exclude_not_salable.field_stock_return_picking_has_archived_product
-msgid "Has archived product"
+#: model:ir.model.fields,field_description:alc_restocking_exclude_not_salable.field_stock_return_picking__has_archived_product
+#, fuzzy
+#| msgid "Has archived product"
+msgid "Has Archived Product"
 msgstr "Dispose de produits archivés"
 
 #. module: alc_restocking_exclude_not_salable
-#: model:ir.model.fields,field_description:alc_restocking_exclude_not_salable.field_stock_return_picking_has_not_salable_product
-msgid "Has not salable product"
+#: model:ir.model.fields,field_description:alc_restocking_exclude_not_salable.field_stock_return_picking__has_not_salable_product
+#, fuzzy
+#| msgid "Has not salable product"
+msgid "Has Not Salable Product"
 msgstr "Dispose de produit qui ne sont plus vendus"
 
 #. module: alc_restocking_exclude_not_salable
-#: model:ir.model.fields,field_description:alc_restocking_exclude_not_salable.field_stock_return_picking_line_not_salable_product
-msgid "Not salable product"
+#: model:ir.model.fields,field_description:alc_restocking_exclude_not_salable.field_stock_return_picking_line__not_salable_product
+#, fuzzy
+#| msgid "Not salable product"
+msgid "Not Salable Product"
 msgstr "Ce produit ne peut être vendu"
 
 #. module: alc_restocking_exclude_not_salable
-#: model:ir.ui.view,arch_db:alc_restocking_exclude_not_salable.stock_return_picking_form_view
+#: model_terms:ir.ui.view,arch_db:alc_restocking_exclude_not_salable.stock_return_picking_form_view
 msgid "Products in red are not sold anymore."
 msgstr "Les produits en rouge sont des produits qui ne sont plus vendus."
 
@@ -47,11 +55,16 @@ msgid "Return Picking"
 msgstr "Opération de manutention"
 
 #. module: alc_restocking_exclude_not_salable
-#: model:ir.ui.view,arch_db:alc_restocking_exclude_not_salable.archived_products_message
+#: model:ir.model,name:alc_restocking_exclude_not_salable.model_stock_return_picking_line
+#, fuzzy
+#| msgid "Return Picking"
+msgid "Return Picking Line"
+msgstr "Opération de manutention"
+
+#. module: alc_restocking_exclude_not_salable
+#: model_terms:ir.ui.view,arch_db:alc_restocking_exclude_not_salable.archived_products_message
 msgid "The following products have been archived and cannot be returned:"
 msgstr "Les produits suivants ont été archivés et ne peuvent être retournés:"
 
-#. module: alc_restocking_exclude_not_salable
-#: model:ir.model,name:alc_restocking_exclude_not_salable.model_stock_return_picking_line
-msgid "stock.return.picking.line"
-msgstr "stock.return.picking.line"
+#~ msgid "stock.return.picking.line"
+#~ msgstr "stock.return.picking.line"
