@@ -17,20 +17,19 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_lot_info
-#: model:ir.model.fields,field_description:alc_product_lot_info.field_delivery_carrier_lot_ids
-#: model:ir.model.fields,field_description:alc_product_lot_info.field_product_product_lot_ids
-#: model:ir.model.fields,field_description:alc_product_lot_info.field_product_template_lot_ids
-#: model:ir.model.fields,field_description:alc_product_lot_info.field_shopinvader_product_lot_ids
-#: model:ir.model.fields,field_description:alc_product_lot_info.field_shopinvader_variant_lot_ids
+#: model:ir.model.fields,field_description:alc_product_lot_info.field_product_product__lot_ids
+#: model:ir.model.fields,field_description:alc_product_lot_info.field_product_template__lot_ids
 msgid "Lots"
 msgstr ""
 
 #. module: alc_product_lot_info
-#: model:ir.model,name:alc_product_lot_info.model_product_product
+#: model:ir.model,name:alc_product_lot_info.model_product_template
 msgid "Product"
 msgstr "Article"
 
 #. module: alc_product_lot_info
-#: model:ir.model,name:alc_product_lot_info.model_product_template
-msgid "Product Template"
+#: model:ir.model,name:alc_product_lot_info.model_product_product
+#, fuzzy
+#| msgid "Product Template"
+msgid "Product Variant"
 msgstr "Article"
