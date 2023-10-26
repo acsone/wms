@@ -3,10 +3,10 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
   <record model="ir.ui.view" id="export_report_turnover_form_view">
-    <field name="name">export.report.turnover.form (in alc_turnover_reporting)</field>
+    <field name="name">export.report.turnover.form</field>
     <field name="model">export.report.turnover</field>
     <field name="arch" type="xml">
-      <form string="Export Report Turnover">
+      <form>
         <field invisible="1" name="state" />
         <field name="name" invisible="1" />
         <div states="get">
@@ -37,11 +37,9 @@
   </record>
   <record model="ir.actions.act_window" id="export_report_turnover_act_window">
     <field name="name">Export Report Turnover</field>
-    <!-- TODO -->
     <field name="res_model">export.report.turnover</field>
     <field name="view_mode">form</field>
     <field name="context">{}</field>
-    <field name="view_type">form</field>
     <field name="target">new</field>
   </record>
   <menuitem

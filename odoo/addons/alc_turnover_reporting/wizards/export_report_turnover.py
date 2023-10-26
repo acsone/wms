@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -10,13 +9,14 @@ import numpy as np
 import pandas as pd
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 
 class ExportReportTurnover(models.TransientModel):
 
     _name = "export.report.turnover"
+    _description = "Export Report Turnover"
 
     name = fields.Char("File Name", readonly=True, default="report_compta.xlsx")
     data = fields.Binary("File", readonly=True)
@@ -37,7 +37,7 @@ class ExportReportTurnover(models.TransientModel):
                     date_trunc(%(groupby_type)s, sm.date) AS date,
                     SUM((sol.price_subtotal/sol.product_uom_qty) * sm.product_qty) AS debit_from_sm,
                     SUM(sm.price_unit * sm.product_qty) AS pp200_debit_from_sm FROM stock_move sm
-                    JOIN sale_order_line sol ON sol.id = sm.order_line_id
+                    JOIN sale_order_line sol ON sol.id = sm.sale_line_id
                     JOIN stock_location from_loc ON from_loc.id = sm.location_id
                     WHERE sm.state = 'done' AND from_loc.usage = 'customer' AND sol.product_uom_qty != 0  AND sm.product_id=sol.product_id
                     GROUP BY date_trunc(%(groupby_type)s, sm.date)
@@ -52,7 +52,7 @@ class ExportReportTurnover(models.TransientModel):
                     date_trunc(%(groupby_type)s, sm.date) AS date,
                     SUM((sol.price_subtotal/sol.product_uom_qty) * sm.product_qty) AS credit_from_sm,
                     SUM(sm.price_unit *sm.product_qty) AS pp200_credit_from_sm FROM stock_move sm
-                    JOIN sale_order_line sol ON sol.id = sm.order_line_id
+                    JOIN sale_order_line sol ON sol.id = sm.sale_line_id
                     JOIN stock_location to_loc ON to_loc.id = sm.location_dest_id
                     WHERE sm.state = 'done' AND to_loc.usage = 'customer' AND sol.product_uom_qty != 0 AND sm.product_id=sol.product_id
                     GROUP BY date_trunc(%(groupby_type)s, sm.date)
@@ -244,8 +244,8 @@ class ExportReportTurnover(models.TransientModel):
         data_by_day.rename(
             columns={
                 "Day": "Jour",
-                "Turnover (stock moves)": u"CA jour \n(stock moves)",
-                "Credit notes (stock moves)": u"Notes de crédit \n(stock moves)",
+                "Turnover (stock moves)": "CA jour \n(stock moves)",
+                "Credit notes (stock moves)": "Notes de crédit \n(stock moves)",
             },
             inplace=True,
         )
@@ -278,19 +278,19 @@ class ExportReportTurnover(models.TransientModel):
 
         data_by_month.rename(
             columns={
-                "Year": u"Année",
+                "Year": "Année",
                 "Month": "Mois",
-                "Turnover (stock moves)": u"CA année \n (stock moves)",
-                "Turnover (prev. Month)": u"CA année-1 \n (stock moves)",
+                "Turnover (stock moves)": "CA année \n (stock moves)",
+                "Turnover (prev. Month)": "CA année-1 \n (stock moves)",
                 "Mensual grow": "Taux de croissance \nmensuel",
                 "Mean daily turnover": "Moyenne CA",
-                "Credit notes (stock moves)": u"Notes de crédit \n (stock moves)",
-                "Turnover (accounting)": u"CA année \n (comptabilité)",
-                "Delta accounting - Stock moves": u"Différence CA \n (stock moves - compta)",
-                "Business days": u"Jours ouvrés",
-                "Business days (prev. Month)": u"Jours ouvrés \nannée-1",
+                "Credit notes (stock moves)": "Notes de crédit \n (stock moves)",
+                "Turnover (accounting)": "CA année \n (comptabilité)",
+                "Delta accounting - Stock moves": "Différence CA \n (stock moves - compta)",
+                "Business days": "Jours ouvrés",
+                "Business days (prev. Month)": "Jours ouvrés \nannée-1",
                 "Margin (stock moves)": "Marge \n (stock moves)",
-                "Margin (accounting)": u"Marge \n (comptabilité)",
+                "Margin (accounting)": "Marge \n (comptabilité)",
             },
             inplace=True,
         )
@@ -317,14 +317,14 @@ class ExportReportTurnover(models.TransientModel):
         data_by_year = data_by_year[cols]
         data_by_year.rename(
             columns={
-                "Year": u"Année",
-                "Turnover (stock moves)": u"CA année \n (stock moves)",
+                "Year": "Année",
+                "Turnover (stock moves)": "CA année \n (stock moves)",
                 "Global grow": "Taux de croissance \n global",
                 "Mean daily turnover": "Moyenne CA",
-                "Credit notes (stock moves)": u"Notes de crédit \n (stock moves)",
-                "Turnover (accounting)": u"CA année \n (comptabilité)",
-                "Delta accounting - Stock moves": u"Différence CA \n (stock moves - compta)",
-                "Business days": u"Jours ouvrés",
+                "Credit notes (stock moves)": "Notes de crédit \n (stock moves)",
+                "Turnover (accounting)": "CA année \n (comptabilité)",
+                "Delta accounting - Stock moves": "Différence CA \n (stock moves - compta)",
+                "Business days": "Jours ouvrés",
             },
             inplace=True,
         )
@@ -348,20 +348,12 @@ class ExportReportTurnover(models.TransientModel):
 
         cumulative_monthly_data.rename(
             columns={
-                "Cumulative CA this year": u"CA cumulé exercice \n {}".format(
-                    current_exercice
-                ),
-                "Cumulative CA last year": u"CA cumulé exercice \n {} \n (période identique)".format(
-                    prev_exercice
-                ),
-                "Cumulative business days this year": u"Jours ouvrés exercice \n {}".format(
-                    current_exercice
-                ),
-                "Cumulative business days last year": u"Jours ouvrés exercice \n {} \n (période identique)".format(
-                    prev_exercice
-                ),
-                "Grow unponderated": u"Croissance non pondérée",
-                "Grow ponderated": u"Croissance pondérée",
+                "Cumulative CA this year": f"CA cumulé exercice \n {current_exercice}",
+                "Cumulative CA last year": f"CA cumulé exercice \n {prev_exercice} \n (période identique)",
+                "Cumulative business days this year": f"Jours ouvrés exercice \n {current_exercice}",
+                "Cumulative business days last year": f"Jours ouvrés exercice \n {prev_exercice} \n (période identique)",
+                "Grow unponderated": "Croissance non pondérée",
+                "Grow ponderated": "Croissance pondérée",
             },
             inplace=True,
         )
@@ -430,20 +422,20 @@ class ExportReportTurnover(models.TransientModel):
 
         red_format = workbook.add_format({"font_color": "#f50710"})
         worksheet1.conditional_format(
-            "F2:F{}".format(len(data_by_month) + 1),
+            f"F2:F{len(data_by_month) + 1}",
             {"type": "cell", "criteria": "<", "value": 0, "format": red_format},
         )
         worksheet2.conditional_format(
-            "F2:F{}".format(len(cumulative_monthly_data) + 1),
+            f"F2:F{len(cumulative_monthly_data) + 1}",
             {"type": "cell", "criteria": "<", "value": 0, "format": red_format},
         )
         worksheet2.conditional_format(
-            "G2:G{}".format(len(cumulative_monthly_data) + 1),
+            f"G2:G{len(cumulative_monthly_data) + 1}",
             {"type": "cell", "criteria": "<", "value": 0, "format": red_format},
         )
 
         worksheet3.conditional_format(
-            "D2:D{}".format(len(data_by_year) + 1),
+            f"D2:D{len(data_by_year) + 1}",
             {"type": "cell", "criteria": "<", "value": 0, "format": red_format},
         )
 
@@ -465,7 +457,7 @@ class ExportReportTurnover(models.TransientModel):
         # Configure the first series.
         chart.add_series(
             {
-                "name": u"CA Exercice {}".format(prev_exercice),
+                "name": f"CA Exercice {prev_exercice}",
                 "categories": "=rapportMensuel!C$2:$C$13",
                 "values": "=rapportMensuel!$D$2:$D$13",
             }
@@ -474,15 +466,15 @@ class ExportReportTurnover(models.TransientModel):
         # Configure a second series. Note use of alternative syntax to define ranges.
         chart.add_series(
             {
-                "name": u"CA Exercice {}".format(current_exercice),
-                "categories": "=rapportMensuel!$C$14:$C${}".format(13 + len_serie_2),
-                "values": "=rapportMensuel!$D$14:$D${}".format(13 + len_serie_2),
+                "name": f"CA Exercice {current_exercice}",
+                "categories": f"=rapportMensuel!$C$14:$C${13 + len_serie_2}",
+                "values": f"=rapportMensuel!$D$14:$D${13 + len_serie_2}",
             }
         )
 
         # Add a chart title and some axis labels.
         chart.set_title({"name": "CA annuel"})
-        chart.set_y_axis({"name": u"CA (€)"})
+        chart.set_y_axis({"name": "CA (€)"})
         chart.set_x_axis(
             {
                 "name": "Mois",
@@ -496,14 +488,13 @@ class ExportReportTurnover(models.TransientModel):
         chart.set_style(11)
         chart.set_size({"x_scale": 1.5, "y_scale": 2})
         # Insert the chart into the worksheet (with an offset).
-        worksheet1.insert_chart("C{}".format(len_data_charts + 4), chart)
+        worksheet1.insert_chart(f"C{len_data_charts + 4}", chart)
 
         writer.save()
 
         excel_data = output.getvalue()
         return base64.b64encode(excel_data)
 
-    @api.multi
     def get_export_data(self):
         this = self[0]
 

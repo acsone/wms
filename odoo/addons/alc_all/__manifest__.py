@@ -46,6 +46,7 @@
         "alc_partner_name",
         "alc_app_data",
         "alc_app_b2c",
+        "alc_turnover_reporting",
         # TO BE REMOVED
         "base_report_to_printer",
     ],
