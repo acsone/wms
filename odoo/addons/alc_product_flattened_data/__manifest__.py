@@ -28,5 +28,5 @@
     ],
     "data": ["data/ir_cron.xml", "security/alc_product_flattened_data.xml"],
     "demo": [],
-    "external_dependencies": {"python": ["ujson"]},
+    "external_dependencies": {"python": ["orjson"]},
 }

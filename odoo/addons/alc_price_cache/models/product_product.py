@@ -212,12 +212,14 @@ class ProductProduct(ProductProductBase):
         # however, in tests, the matter is different...
         mixin = self.env["mixin.past"]
         date_ref = date_ref or fields.Date.today()
-        candidates = filter(
-            lambda it: (
-                not mixin._is_past_date(it["date_end"], date_ref)
-                and not mixin._is_future_date(it["date_start"], date_ref)
-            ),
-            items,
+        candidates = list(
+            filter(
+                lambda it: (
+                    not mixin._is_past_date(it["date_end"], date_ref)
+                    and not mixin._is_future_date(it["date_start"], date_ref)
+                ),
+                items,
+            )
         )
         item = {}
         if candidates:
