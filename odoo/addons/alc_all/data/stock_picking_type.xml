@@ -23,7 +23,7 @@
   <function model="stock.picking.type" name="write">
     <value
       model="stock.picking.type"
-      eval="(obj().env.cr.execute(&quot;select id from stock_picking_type where sequence_code=&apos;PICK&apos;&quot;) or True) and [i[0] for i in obj().env.cr.fetchall()]"
+      eval="(obj().env.cr.execute(&quot;select id from stock_picking_type where sequence_code=&apos;WH/PICK/&apos;&quot;) or True) and [i[0] for i in obj().env.cr.fetchall()]"
     />
     <value
       eval="{'set_delivery_package_type_on_put_in_pack': True, 'allow_additional_product_on_reserved_qty': True}"
