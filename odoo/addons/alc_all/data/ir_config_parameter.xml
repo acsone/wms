@@ -65,4 +65,14 @@
     name="set_param"
     eval="('stock_release_channel_process_end_time.stock_release_use_channel_end_date', True)"
   />
+  <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('alc_report_sale.on_confirm_generate_quotation_report', True)"
+  />
+  <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('alc_report_sale.on_confirm_generate_and_send_pharmacist_report', True)"
+  />
 </odoo>
