@@ -3,7 +3,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
         <record id="keycloak_user_search_view" model="ir.ui.view">
-        <field name="name">keycloak.user.search</field>
         <field name="model">keycloak.user</field>
         <field name="arch" type="xml">
             <search>
@@ -31,7 +30,6 @@
     </record>
 
     <record model="ir.ui.view" id="keycloak_user_form_view">
-        <field name="name">keycloak.user.form</field>
         <field name="model">keycloak.user</field>
         <field name="arch" type="xml">
             <form string="Keycloak User">
@@ -44,7 +42,7 @@
           />
                 </header>
                 <sheet>
-                    <label for="name" class="oe_edit_only" />
+                    <label for="username" class="oe_edit_only" />
                     <h1>
                         <field name="username" />
                     </h1>
@@ -59,7 +57,6 @@
     </record>
 
     <record model="ir.ui.view" id="keycloak_user_tree_view">
-        <field name="name">keycloak.user.tree</field>
         <field name="model">keycloak.user</field>
         <field name="arch" type="xml">
             <tree>
@@ -71,6 +68,7 @@
           name="action_open_update_wizard"
           type="object"
           icon="fa-cog"
+          title="Update password or send actions to user."
           help="Update password or send actions to user."
           groups="keycloak.group_keycloak_manager"
         />
@@ -78,6 +76,7 @@
           name="action_sync_keycloak_info"
           type="object"
           icon="fa-bolt"
+          title="Force Keycloak info synchronisation ."
           help="Force Keycloak info synchronisation ."
           groups="keycloak.group_keycloak_manager"
         />

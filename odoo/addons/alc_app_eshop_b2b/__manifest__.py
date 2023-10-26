@@ -27,6 +27,7 @@
         "alc_eshop_search_engine_info_banner",
         "alc_eshop_api",
         "alc_eshop_search_engine_ads",
+        "keycloak",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",

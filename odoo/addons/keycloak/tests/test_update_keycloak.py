@@ -1,7 +1,8 @@
 # Copyright 2021 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import unittest
+
+from odoo.addons.queue_job.tests.common import trap_jobs
 
 from .common import TestKeycloak
 
@@ -17,50 +18,50 @@ class TestKeycloakUpdateFlow(TestKeycloak):
 
     def test_update_keycloak_user(self):
         user = self.env["keycloak.user"].create(self.vals_user)
-        job_counter = self.job_counter()
-
-        # if we write on the password, it does not trigger an update
-        user.password = "VeRyS4f3!"
-        # then
-        queue_jobs = job_counter.search_created()
-        self.assertEqual(len(queue_jobs), 0)
-
         # when we write on the username, it does trigger an update
-        user.username = "CoolerUsername33"
-        # then
-        queue_job = job_counter.search_created()
-        self.assertTrue("Update" in queue_job.name)
-
-        # when we write again the username,
-        user.username = "CoolestUsername333"
-        # then it does not trigger an update: identity_key on the job
-        self.assertEqual(len(job_counter.search_created()), 1)
+        with trap_jobs() as trap:
+            user.username = "CoolerUsername33"
+            trap.assert_jobs_count(1)
+            trap.assert_enqueued_job(
+                self.keycloak_backend.update_user_fields,
+                args=(user, ["username"]),
+                properties={"description": "Update Keycloak User CoolerUsername33"},
+            )
 
         # when we write on the name, it triggers another update
-        self.partner.name = "NewFirstname NewLastname"
-        # then
-        self.assertEqual(len(job_counter.search_created()), 2)
+        with trap_jobs() as trap:
+            self.partner.name = "NewFirstname NewLastname"
+            trap.assert_jobs_count(1)
+            trap.assert_enqueued_job(
+                self.keycloak_backend.update_user_fields,
+                args=(user, ["name"]),
+                properties={"description": "Update Keycloak User CoolerUsername33"},
+            )
 
     def test_update_keycloak_partner(self):
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
-        job_counter = self.job_counter()
 
         # if we write on the ref, it does not trigger an update
-        self.partner.ref = "CustomerRef!"
-        # then
-        queue_jobs = job_counter.search_created()
-        self.assertEqual(len(queue_jobs), 0)
+        with trap_jobs() as trap:
+            self.partner.ref = "CustomerRef!"
+            trap.assert_jobs_count(0)
 
         # when we write on the name, it does trigger an update
-        self.partner.name = "NewFirstname NewLastname"
-        # then
-        queue_job = job_counter.search_created()
-        self.assertTrue("Update" in queue_job.name)
+        with trap_jobs() as trap:
+            self.partner.name = "NewFirstname NewLastname"
+            trap.assert_jobs_count(1)
+            trap.assert_enqueued_job(
+                self.keycloak_backend.update_user_fields,
+                args=(keycloak_user, ["name"]),
+                properties={"description": "Update Keycloak User username"},
+            )
         expected_payload = {"lastName": "NewLastname", "firstName": "NewFirstname"}
-        payload = keycloak_user.keycloak_backend_id._get_user_payload(*queue_job.args)
+        payload = keycloak_user.keycloak_backend_id._get_user_payload(
+            keycloak_user, ["name"]
+        )
         self.assertEqual(payload, expected_payload)
 
-    @unittest.skip("Needs a running Keycloak backend.")
+    # @unittest.skip("Needs a running Keycloak backend.")
     def test_wizard(self):
         # the wizard works in no_delay, so we can't test it without a backend
         window_action = self.partner.action_create_keycloak_user()

@@ -1,20 +1,21 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import fields
+
+from odoo.addons.base.models.res_partner import Partner
+
+from .keycloak_user import KeycloakUser
 
 
-class ResPartner(models.Model):
+class ResPartner(Partner):
 
-    _inherit = "res.partner"
-
-    keycloak_user_ids = fields.One2many(
-        "keycloak.user", "partner_id", string="Keycloak Users", copy=False
+    keycloak_user_ids = fields.One2many[KeycloakUser](
+        inverse_name="partner_id", string="Keycloak Users", copy=False
     )
 
     def write(self, vals):
-        res = super(ResPartner, self).write(vals)
+        res = super().write(vals)
         self.mapped("keycloak_user_ids").check_update_on_keycloak_backend(vals)
         return res
 

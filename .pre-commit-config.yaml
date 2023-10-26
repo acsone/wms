@@ -91,7 +91,6 @@ exclude: |
   ^odoo/addons/elasticsearch_product_cache/|
   ^odoo/addons/elasticsearch_security/|
   ^odoo/addons/elasticsearch_security_mixin/|
-  ^odoo/addons/keycloak/|
   ^odoo/addons/l10n_be_vat/|
   ^odoo/addons/paginated_service_mixin/|
   ^odoo/addons/partner_archive_new_partner/|

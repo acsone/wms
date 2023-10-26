@@ -2,7 +2,6 @@
 <odoo>
 
     <record model="ir.ui.view" id="keycloak_backend_form_view">
-        <field name="name">keycloak.backend.form</field>
         <field name="model">keycloak.backend</field>
         <field name="arch" type="xml">
             <form string="Keycloak Backend">
@@ -31,7 +30,6 @@
     </record>
 
     <record model="ir.ui.view" id="keycloak_backend_tree_view">
-        <field name="name">keycloak.backend.tree</field>
         <field name="model">keycloak.backend</field>
         <field name="arch" type="xml">
             <tree>

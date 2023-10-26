@@ -1,15 +1,13 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import keycloak
 
-from odoo import api, fields, models
+from odoo import api, fields
+from odoo.models import Model
 
-from odoo.addons.queue_job.job import job
 
-
-class KeycloakBackend(models.Model):
+class KeycloakBackend(Model):
 
     _name = "keycloak.backend"
     _description = "Keycloak Backend"
@@ -31,7 +29,7 @@ class KeycloakBackend(models.Model):
 
     @property
     def _server_env_fields(self):
-        env_fields = super(KeycloakBackend, self)._server_env_fields
+        env_fields = super()._server_env_fields
         new = {
             "server_url": {},
             "client_id": {},
@@ -79,7 +77,6 @@ class KeycloakBackend(models.Model):
     def _get_token_from_user_info(self, username, password):
         return self._get_openid_client().token(username, password)
 
-    @job()
     def create_user(self, keycloak_user):
         self.ensure_one()
         payload = self._keycloak_user_to_payload(keycloak_user)
@@ -91,8 +88,9 @@ class KeycloakBackend(models.Model):
     @api.model
     def _keycloak_user_to_payload(self, keycloak_user):
         """Extract fields from the user and the partner.
-           To register custom attributes, override this with _get_update_fields
-           to keep them in sync.
+
+        To register custom attributes, override this with _get_update_fields
+        to keep them in sync.
         """
         keycloak_user.ensure_one()
         split_name = keycloak_user.partner_id.name.split(None, 1)
@@ -102,14 +100,12 @@ class KeycloakBackend(models.Model):
             "enabled": keycloak_user.enabled,
             "firstName": split_name[0] if len(split_name) > 0 else "",
             "lastName": split_name[1] if len(split_name) > 1 else "",
-            "attributes": {},
         }
         keycloak_password = self.env.context.get("keycloak_password", None)
         if keycloak_password:
             payload["credentials"] = [{"value": keycloak_password, "type": "password"}]
         return payload
 
-    @job()
     def delete_user(self, keycloak_id):
         self.ensure_one()
         client = self._get_admin_client()
@@ -124,15 +120,16 @@ class KeycloakBackend(models.Model):
     @api.model
     def _get_update_fields(self):
         """A dictionary of fields that, if updated, trigger an update on Keycloak.
-           The value, if different, is the field name in the keycloak payload:
-           "custom_field": "keycloak-custom-name"
-           Note that the fields may either be on keycloak.user or res.partner.
-           Note also that by simplicity this list is for all backends.
-           If the backend is configured to 'login with email', username is tacitly
-           ignored if email is set (without triggering any error).
-           In that case, there's implicitly a unicity constraint on the email field.
-           Password is omitted as it should only be updated through the wizard.
-           Name is a special case, since it updates first and last name.
+
+        The value, if different, is the field name in the keycloak payload:
+        "custom_field": "keycloak-custom-name"
+        Note that the fields may either be on keycloak.user or res.partner.
+        Note also that by simplicity this list is for all backends.
+        If the backend is configured to 'login with email', username is tacitly
+        ignored if email is set (without triggering any error).
+        In that case, there's implicitly a unicity constraint on the email field.
+        Password is omitted as it should only be updated through the wizard.
+        Name is a special case, since it updates first and last name.
         """
         return {
             "username": "username",
@@ -156,7 +153,6 @@ class KeycloakBackend(models.Model):
             result["attributes"] = attrs
         return result
 
-    @job()
     def update_user_fields(self, user, updated_fields):
         client = self._get_admin_client()
         payload = self._get_user_payload(user, updated_fields)
