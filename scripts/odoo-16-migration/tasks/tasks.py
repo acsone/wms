@@ -485,6 +485,41 @@ def recover_account_analytyc_tag_ids():
     copytable(DB_10_SRC_NOT_CLEANED, DB_16_POSTMIG, table)
 
 
+@task("16.0.2.5.2")
+def recover_invoices_without_move():
+    """
+    Invoices with amount == 0 have no account move generated.
+
+    They are paid.
+
+    During migration, Odoo creates a new account_move but does not
+    validate it - stays as draft.
+
+    Collect all these invoices from account_invoice table v10 and
+    set name and state
+    """
+
+    def __build_dict(cr, row):
+        return {d.name: row[i] for i, d in enumerate(cr.description)}
+
+    query = """
+        SELECT id, name
+            FROM account_invoice
+            WHERE state = 'paid' AND move_id IS NULL
+    """
+    with cursor(DB_10_SRC_NOT_CLEANED) as cr:
+        openupgrade.logged_query(cr, query)
+        zero_invoices = [__build_dict(cr, row) for row in cr.fetchall()]
+    with OdooEnvironment(DB_16_POSTMIG) as env:
+        query = """
+            UPDATE account_move
+                SET name = %(name)s, state = 'posted', payment_state = 'paid'
+                WHERE id = (SELECT move_id FROM account_invoice WHERE id = %(id)s)
+                AND state = 'draft';
+        """
+        env.cr.executemany(query, zero_invoices)
+
+
 _register_migration_scripts_in_tasks("pre-")
 
 
