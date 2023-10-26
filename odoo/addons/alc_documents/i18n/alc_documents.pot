@@ -1,0 +1,214 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_documents
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_res_partner__alc_document_count
+#: model:ir.model.fields,field_description:alc_documents.field_res_users__alc_document_count
+#: model:ir.model.fields,field_description:alc_documents.field_shopinvader_partner__alc_document_count
+msgid "# of documents"
+msgstr ""
+
+#. module: alc_documents
+#. odoo-python
+#: code:addons/alc_documents/models/alc_document.py:0
+#, python-format
+msgid "A document without an attachment needs a compute method."
+msgstr ""
+
+#. module: alc_documents
+#. odoo-python
+#: code:addons/alc_documents/models/alc_document.py:0
+#, python-format
+msgid "A public document should be accessible."
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model,name:alc_documents.model_alc_document
+msgid "Alcyon Document"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.actions.act_window,name:alc_documents.alc_document_act_window
+#: model:ir.ui.menu,name:alc_documents.alc_document_menu
+#: model_terms:ir.ui.view,arch_db:alc_documents.res_partner_form_view
+msgid "Alcyon Documents"
+msgstr ""
+
+#. module: alc_documents
+#: model:res.groups,name:alc_documents.group_alc_document_manager
+msgid "Alcyon Documents Manager"
+msgstr ""
+
+#. module: alc_documents
+#: model:res.groups,name:alc_documents.group_alc_document_user
+msgid "Alcyon Documents User"
+msgstr ""
+
+#. module: alc_documents
+#. odoo-python
+#: code:addons/alc_documents/models/alc_document.py:0
+#, python-format
+msgid "All partner_types should be valid."
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__allowed_partner_types
+msgid "Allowed Partner Types"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model,name:alc_documents.model_ir_attachment
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__attachment_id
+msgid "Attachment"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__compute
+#: model_terms:ir.ui.view,arch_db:alc_documents.alc_document_form_view
+msgid "Compute"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model,name:alc_documents.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields.selection,name:alc_documents.selection__alc_document__type__credit_note
+msgid "Credit Note"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields.selection,name:alc_documents.selection__alc_document__type__delivery_note
+msgid "Delivery Note"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__document_date
+msgid "Document Date"
+msgstr ""
+
+#. module: alc_documents
+#. odoo-python
+#: code:addons/alc_documents/models/res_partner.py:0
+#, python-format
+msgid "Documents"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__format
+msgid "Format"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__id
+msgid "ID"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields.selection,name:alc_documents.selection__alc_document__type__invoice
+msgid "Invoice"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__name
+msgid "Name"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_res_partner__needs_dossier
+#: model:ir.model.fields,field_description:alc_documents.field_res_users__needs_dossier
+#: model:ir.model.fields,field_description:alc_documents.field_shopinvader_partner__needs_dossier
+msgid "Needs Dossier"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields.selection,name:alc_documents.selection__alc_document__type__order
+msgid "Order"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: alc_documents
+#. odoo-python
+#: code:addons/alc_documents/models/alc_document.py:0
+#, python-format
+msgid "Process dossier for attachment %(name)s"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__res_model
+msgid "Resource Model"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__sale_channel_id
+msgid "Sale Channel"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__is_null_document_date_start
+msgid "The document date is null"
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.constraint,message:alc_documents.constraint_alc_document_attachment_uniq
+msgid "There can be only one document per attachment."
+msgstr ""
+
+#. module: alc_documents
+#: model:ir.model.fields,field_description:alc_documents.field_alc_document__type
+msgid "Type"
+msgstr ""
+
+#. module: alc_documents
+#. odoo-python
+#: code:addons/alc_documents/models/alc_document.py:0
+#, python-format
+msgid "You cannot have a public document with a partner."
+msgstr ""
