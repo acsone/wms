@@ -1,18 +1,19 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, api, fields
+
+from odoo.addons.base.models.res_partner import Partner
 
 
-class ResPartner(models.Model):
-
+class ResPartner(Partner):
     _inherit = "res.partner"
 
     needs_dossier = fields.Boolean(compute="_compute_needs_dossier")
 
     alc_document_count = fields.Integer(
-        compute="_compute_alc_document_count", string="# of documents",
+        compute="_compute_alc_document_count",
+        string="# of documents",
     )
 
     def _compute_alc_document_count(self):

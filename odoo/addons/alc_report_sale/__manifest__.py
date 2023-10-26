@@ -21,6 +21,7 @@
     ],
     "data": [
         "views/report_saleorder_document.xml",
+        "views/res_config_settings.xml",
         "data/mail_template.xml",
     ],
     "demo": [],

@@ -1,36 +1,27 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from psycopg2.extensions import AsIs
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
-from odoo.addons.alc_pg_trgm.utils import install_trgm_extension
-from odoo.addons.queue_job.job import job
-
-
-def create_index(cr, index_name, table, expression):
-    cr.execute("SELECT indexname FROM pg_indexes WHERE indexname = %s", (index_name,))
-    if not cr.fetchone():
-        cr.execute(
-            "CREATE INDEX %s " "ON %s %s",
-            (AsIs(index_name), AsIs(table), AsIs(expression)),
-        )
+from odoo.addons.base.models.ir_attachment import IrAttachment
+from odoo.addons.base.models.res_partner import Partner
+from odoo.addons.sale_channel.models.sale_channel import SaleChannel
 
 
 class AlcDocument(models.Model):
     """A document is a facade for an attachment, that can be computed 'on the fly'.
-       So the idea is to have two types: one where we generate the attachment based on the
-       document, and one where we have an attachment, and create the document to access it.
+
+    So the idea is to have two types: one where we generate the attachment based on the
+    document, and one where we have an attachment, and create the document to access it.
     """
 
     _name = "alc.document"
     _description = "Alcyon Document"
     _order = "is_null_document_date_start desc, document_date desc, type, name"
 
-    attachment_id = fields.Many2one("ir.attachment", readonly=True)
+    attachment_id = fields.Many2one[IrAttachment](readonly=True)
     compute = fields.Selection([], readonly=True)  # to extend
     res_model = fields.Char(related="attachment_id.res_model", readonly=True)
     document_date = fields.Datetime(
@@ -42,11 +33,11 @@ class AlcDocument(models.Model):
         store=True,
         readonly=True,
     )
-    partner_id = fields.Many2one(
-        "res.partner", readonly=True, ondelete="cascade", index=True
+    partner_id = fields.Many2one[Partner](readonly=True, ondelete="cascade", index=True)
+    sale_channel_id = fields.Many2one[SaleChannel](readonly=True)
+    allowed_partner_types = fields.Char(
+        string="Allowed Partner Types", readonly=True, index="trigram"
     )
-    sale_channel = fields.Selection(selection="_selection_sale_channel", readonly=True)
-    allowed_partner_types = fields.Char(string="Allowed Partner Types", readonly=True)
     type = fields.Selection(
         selection=[
             ("order", "Order"),
@@ -68,39 +59,21 @@ class AlcDocument(models.Model):
         ),
     ]
 
-    @api.model
-    def _selection_sale_channel(self):
-        return self.env["sale.order"]._get_sale_channels_selection()
-
-    @api.model_cr
-    def init(self):
-        trgm_installed = install_trgm_extension(self.env)
-        if trgm_installed:
-            index_name = "alc_document_allowed_partner_types_index"
-            self.env.cr.execute(
-                "SELECT indexname FROM pg_indexes WHERE indexname = %s", (index_name,)
-            )
-            if not self.env.cr.fetchone():
-                self.env.cr.execute(
-                    "CREATE INDEX %s ON %s USING GIN (allowed_partner_types gin_trgm_ops)",
-                    (AsIs(index_name), AsIs(self._table)),
-                )
-
     def _get_data(self):
         self.ensure_one()
         if self.compute:
-            getattr(self, "_compute_data_%s" % self.compute)()
+            getattr(self, f"_compute_data_{self.compute}")()
         return self.attachment_id.datas
 
     def compute_data(self):
         for document in self:
             if document.compute:
-                getattr(document, "_compute_data_%s" % document.compute)()
+                getattr(document, f"_compute_data_{document.compute}")()
 
     @api.model
     def _get_watched_models(self):
         # each one should be in a separate module extending this function
-        return ["sale.order", "account.invoice", "stock.picking"]
+        return ["sale.order", "account.move", "stock.picking"]
 
     @api.model
     def _get_prefixes(self):
@@ -132,7 +105,7 @@ class AlcDocument(models.Model):
 
     @api.model
     def _get_format(self, attachment):
-        split = (attachment.datas_fname or "").rsplit(".", 1)
+        split = (attachment.name or "").rsplit(".", 1)
         return split[1] if len(split) > 1 else ""
 
     @api.model
@@ -149,10 +122,10 @@ class AlcDocument(models.Model):
         return partner
 
     @api.model
-    def _get_sale_channel(self, attachment):
-        sale_channel = False
+    def _get_sale_channel(self, attachment) -> SaleChannel:
+        sale_channel = self.env["sale.channel"].browse()
         if attachment.res_model == "sale.order":
-            sale_channel = self._record(attachment).sale_channel
+            sale_channel = self._record(attachment).sale_channel_id
         return sale_channel
 
     @api.model
@@ -162,9 +135,11 @@ class AlcDocument(models.Model):
             document_type = "order"
         elif attachment.res_model == "stock.picking":
             document_type = "delivery_note"
-        elif attachment.res_model == "account.invoice":
-            is_invoice = self._record(attachment).type == "out_invoice"
-            document_type = "invoice" if is_invoice else "credit_note"
+        elif attachment.res_model == "account.move":
+            if self._record(attachment).type == "out_invoice":
+                document_type = "invoice"
+            elif self._record(attachment).type == "out_refund":
+                document_type = "credit_note"
         return document_type
 
     @api.model
@@ -177,7 +152,7 @@ class AlcDocument(models.Model):
         attachment.ensure_one()
         return (
             attachment.res_model in self._get_watched_models()
-            or any(attachment.name.startswith("%s_" % s) for s in self._get_prefixes())
+            or any(attachment.name.startswith(f"{s}_") for s in self._get_prefixes())
         ) and self._partner_needs_dossier(attachment)
 
     @api.model
@@ -187,22 +162,22 @@ class AlcDocument(models.Model):
             "attachment_id": attachment.id,
             "partner_id": self._get_partner(attachment).id,
             "format": self._get_format(attachment),
-            "sale_channel": self._get_sale_channel(attachment),
+            "sale_channel_id": self._get_sale_channel(attachment).id,
             "type": self._get_type(attachment),
         }
 
     @api.model
     def jobify_process_dossier(self, attachment):
-        description = _("Process dossier for attachment %s") % attachment.datas_fname
+        description = _("Process dossier for attachment %(name)s", name=attachment.name)
         return self.with_delay(description=description).process_dossier(attachment)
 
     @api.model
-    @job(default_channel="root.background.process")
     def process_dossier(self, attachment):
         document = None
         if attachment.exists() and self.is_dossier_attachment(attachment):
             vals = self._get_vals_from_attachment(attachment)
-            document = self.create(vals)
+            if vals.get("type"):
+                document = self.create(vals)
         return document
 
     @api.model
@@ -225,7 +200,8 @@ class AlcDocument(models.Model):
     @api.depends("document_date")
     def _compute_is_null_document_date_start(self):
         """
-        By default we cannot order DESC and put all nulls at the end with Odoo
+        By default we cannot order DESC and put all nulls at the end with Odoo.
+
         (ORDER BY document_date DESC NULLS FIRST)
         Change the code of Odoo to allows ordering nulls first is really touchy.
         To avoid that I create a simply boolean to say if the field document_date

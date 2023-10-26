@@ -164,8 +164,15 @@ class SaleOrder(Order, ReportAsync):
         # if config["test_enable"] or self.env.context.get("skip_pdf_gen"):
         #     # Do not generate the report during test or during import
         #     return res
-        self.create_reports()
-        self.create_pharmacist_reports()
+        if self.env["ir.config_parameter"].sudo().get_param(
+            "alc_report_sale.on_confirm_generate_quotation_report", ""
+        ).lower() in ["true", "1", "t", "y", "yes"]:
+            self.create_reports()
+        if self.env["ir.config_parameter"].sudo().get_param(
+            "alc_report_sale.on_confirm_generate_and_send_pharmacist_report",
+            "",
+        ).lower() in ["true", "1", "t", "y", "yes"]:
+            self.create_pharmacist_reports()
         return res
 
     def print_quotation(self):
