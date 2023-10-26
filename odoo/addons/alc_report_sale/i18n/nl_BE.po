@@ -124,6 +124,11 @@ msgid ""
 msgstr ""
 
 #. module: alc_report_sale
+#: model:ir.model,name:alc_report_sale.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: alc_report_sale
 #: model:ir.model.fields,field_description:alc_report_sale.field_sale_order_line__contribution_ids
 msgid "Contribution"
 msgstr ""
@@ -144,6 +149,28 @@ msgstr "stortingsnummer"
 #: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
 msgid "Description"
 msgstr "Beschrijving"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.res_config_settings_form_view
+msgid "Generate and save quotation on confirmation."
+msgstr ""
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.res_config_settings_form_view
+msgid ""
+"Generate and send order to pharmacist on confirm if SO contains products "
+"from drugstore."
+msgstr ""
+
+#. module: alc_report_sale
+#: model:ir.model.fields,field_description:alc_report_sale.field_res_config_settings__on_confirm_generate_and_send_pharmacist_report
+msgid "Generate pharmacist report on confirm"
+msgstr ""
+
+#. module: alc_report_sale
+#: model:ir.model.fields,field_description:alc_report_sale.field_res_config_settings__on_confirm_generate_quotation_report
+msgid "Generate quotation report on confirm"
+msgstr ""
 
 #. module: alc_report_sale
 #: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
