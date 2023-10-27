@@ -226,9 +226,7 @@ class ExportReportTurnover(models.TransientModel):
         writer = pd.ExcelWriter(output, engine="xlsxwriter")
 
         today = datetime.today().date().strftime("%Y-%m-%d")
-        data_by_day["Day"] = pd.to_datetime(
-            data_by_day["Day"], errors="raise", format="%Y-%m-%d"
-        )
+        data_by_day["Day"] = pd.to_datetime(data_by_day["Day"], errors="raise")
         previous_month = int(today.split("-")[1]) - 1
         current_year = int(today.split("-")[0])
         data_by_day = data_by_day[
@@ -250,9 +248,7 @@ class ExportReportTurnover(models.TransientModel):
             inplace=True,
         )
 
-        data_by_month["Month"] = pd.to_datetime(
-            data_by_month["Month"], errors="raise", format="%Y-%m-%d"
-        )
+        data_by_month["Month"] = pd.to_datetime(data_by_month["Month"], errors="raise")
         data_by_month["Year"] = data_by_month["Month"].dt.strftime("%Y")
         data_by_month[["Year"]] = data_by_month[["Year"]].mask(
             data_by_month.duplicated(["Year"])
@@ -294,10 +290,7 @@ class ExportReportTurnover(models.TransientModel):
             },
             inplace=True,
         )
-
-        data_by_year["Year"] = pd.to_datetime(
-            data_by_year["Year"], errors="raise", format="%Y-%m-%d"
-        )
+        data_by_year["Year"] = pd.to_datetime(data_by_year["Year"], errors="raise")
 
         data_by_year = data_by_year[
             (data_by_year["Year"].dt.year == current_year)
@@ -490,7 +483,7 @@ class ExportReportTurnover(models.TransientModel):
         # Insert the chart into the worksheet (with an offset).
         worksheet1.insert_chart(f"C{len_data_charts + 4}", chart)
 
-        writer.save()
+        writer.close()
 
         excel_data = output.getvalue()
         return base64.b64encode(excel_data)
