@@ -1,6 +1,5 @@
 # Copyright 2022 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import base64
 
 from .common import TestAlcDocumentsPrices
 
@@ -70,7 +69,7 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
         domain_discount = domain_base + [("compute", "=", "discount")]
         document_discount = self.alc_document_model.search(domain_discount)
         with self.mock_product_data(return_value=return_value):
-            return base64.b64decode(document_discount._get_data()).decode("utf-8")
+            return document_discount._get_data().decode("utf-8")
 
     def test_supplier_promotion_guest(self):
         self.partner.partner_type = "guest"

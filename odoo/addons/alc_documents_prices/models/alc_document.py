@@ -1,6 +1,5 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import base64
 
 import unicodecsv as csv
 import xlsxwriter
@@ -97,10 +96,10 @@ class AlcDocument(alc_document.AlcDocument):
             else:
                 tmp_file = docs_by_format[file_format]._create_attachment_csv(lines)
             with open(tmp_file, "rb") as f:
-                data = base64.b64encode(f.read())
+                data = f.read()
             vals = {
                 "name": document.name,
-                "datas": data,
+                "raw": data,
                 "res_model": "res.partner",
                 "res_id": document.partner_id.id,
             }

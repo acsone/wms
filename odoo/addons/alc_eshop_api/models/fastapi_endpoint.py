@@ -11,6 +11,7 @@ from odoo import api, fields
 
 from odoo.addons.alc_eshop_api_classifieds.routers import classified_ads_router
 from odoo.addons.alc_eshop_api_cms.routers import cms_router
+from odoo.addons.alc_eshop_api_documents.routers import documents_router
 from odoo.addons.alc_eshop_api_registration.routers import registrations_router
 from odoo.addons.alc_eshop_api_sale_statistic.routers import sale_statistics_router
 from odoo.addons.auth_jwt.models.auth_jwt_validator import AuthJwtValidator
@@ -51,6 +52,7 @@ class FastapiEndpoint(FastapiEndpointBase):
             cms_router,
             sale_statistics_router,
             registrations_router,
+            documents_router,
         ]
 
     def _get_alc_eshop_app_tags(self, params) -> list:
@@ -90,6 +92,13 @@ class FastapiEndpoint(FastapiEndpointBase):
             {
                 "name": "registrations",
                 "description": "Set of services to manage registrations",
+            }
+        )
+        tags_metadata.append(
+            {
+                "name": "documents",
+                "description": "Set of services to get access to the partner's "
+                "documents",
             }
         )
         return tags_metadata

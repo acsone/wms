@@ -8,11 +8,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": [
-        "fastapi",
-        "alc_eshop_classifieds",
-        "alc_cerberus_utils",
-    ],
+    "depends": ["fastapi", "alc_eshop_classifieds"],
     "data": [],
     "demo": [],
     "installable": True,

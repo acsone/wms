@@ -14,6 +14,15 @@ class SaleChannel(SaleChannelBase):
 
     @api.model
     @ormcache()
+    def _get_id_by_code(self):
+        return {r.code: r.id for r in self.search([])}
+
+    @api.model
+    def _get_id_from_code(self, code):
+        return self._get_id_by_code().get(code)
+
+    @api.model
+    @ormcache()
     def _get_internal_ids(self):
         return self.search([("is_internal", "=", True)]).ids
 
@@ -21,15 +30,19 @@ class SaleChannel(SaleChannelBase):
     def create(self, vals_list):
         res = super().create(vals_list)
         res._get_internal_ids.clear_cache(self)
+        res._get_id_by_code.clear_cache(self)
         return res
 
     def write(self, vals):
         res = super().write(vals)
         if "is_internal" in vals:
             self._get_internal_ids.clear_cache(self)
+        if "code" in vals:
+            self._get_id_by_code.clear_cache(self)
         return res
 
     def unlink(self):
         res = super().unlink()
         self._get_internal_ids.clear_cache(self)
+        res._get_id_by_code.clear_cache(self)
         return res
