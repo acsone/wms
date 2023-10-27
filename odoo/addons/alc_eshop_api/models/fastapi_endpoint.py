@@ -9,6 +9,7 @@ from fastapi.security import OAuth2AuthorizationCodeBearer
 
 from odoo import api, fields
 
+from odoo.addons.alc_eshop_api_catalog.routers import brands_router, catalog_router
 from odoo.addons.alc_eshop_api_classifieds.routers import classified_ads_router
 from odoo.addons.alc_eshop_api_cms.routers import cms_router
 from odoo.addons.alc_eshop_api_documents.routers import documents_router
@@ -53,6 +54,8 @@ class FastapiEndpoint(FastapiEndpointBase):
             sale_statistics_router,
             registrations_router,
             documents_router,
+            brands_router,
+            catalog_router,
         ]
 
     def _get_alc_eshop_app_tags(self, params) -> list:
@@ -99,6 +102,20 @@ class FastapiEndpoint(FastapiEndpointBase):
                 "name": "documents",
                 "description": "Set of services to get access to the partner's "
                 "documents",
+            }
+        )
+        tags_metadata.append(
+            {
+                "name": "brands",
+                "description": "Set of services to get access to the product's "
+                "brands",
+            }
+        )
+        tags_metadata.append(
+            {
+                "name": "catalog",
+                "description": "Set of services to get access to the product's "
+                "catalog available for the partner catalog",
             }
         )
         return tags_metadata

@@ -726,6 +726,7 @@ def set_modules_to_remove():
         "authenticated_partner_mixin",  # renamed to shopinvader_restapi
         "alc_documents_eshop_services",  # renamed to alc_eshop_api_documents
         "alc_eshop_user_migration",
+        "alc_eshop_services_catalog",  # renamed to alc_eshop_api_catalog
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
