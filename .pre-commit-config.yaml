@@ -48,7 +48,6 @@ exclude: |
   ^odoo/addons/alc_eshop_sale_suite_name/|
   ^odoo/addons/alc_eshop_sale_triple_discount/|
   ^odoo/addons/alc_eshop_salesperson/|
-  ^odoo/addons/alc_eshop_services_catalog/|
   ^odoo/addons/alc_eshop_services_deliveries/|
   ^odoo/addons/alc_eshop_services_discounts/|
   ^odoo/addons/alc_eshop_services_orders/|
