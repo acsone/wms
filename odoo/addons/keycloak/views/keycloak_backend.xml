@@ -18,11 +18,7 @@
                         <field name="client_id" />
                         <field name="realm_name" />
                         <field name="client_secret_key" password="True" />
-                        <field name="realm_client_id" />
-                        <field name="realm_client_secret_key" password="True" />
-                        <field name="username" />
                         <field name="user_realm_name" />
-                        <field name="password" password="True" />
                     </group>
                 </sheet>
             </form>

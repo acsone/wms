@@ -1,12 +1,12 @@
 # Copyright 2021 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from vcr_unittest import VCRTestCase
+
 from odoo.tests import TransactionCase
 
-from odoo.addons.queue_job.tests.common import JobMixin
 
-
-class TestKeycloak(TransactionCase, JobMixin):
+class TestKeycloak(VCRTestCase, TransactionCase):
     @classmethod
     def setUpClass(cls):
         # Note that adding TEST_QUEUE_JOB_NO_DELAY in context/environment

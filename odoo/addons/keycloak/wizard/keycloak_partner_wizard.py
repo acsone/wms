@@ -1,7 +1,11 @@
 # Copyright 2021 ACSONE SA/NV.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
+# pylint: disable=odoo-addons-relative-import
+# pylint: disable=cyclic-import
 from odoo import api, fields, models
+
+from odoo.addons.base.models.res_partner import Partner
+from odoo.addons.keycloak.models.keycloak_backend import KeycloakBackend
 
 
 class KeycloakPartnerWizard(models.TransientModel):
@@ -12,10 +16,10 @@ class KeycloakPartnerWizard(models.TransientModel):
     def _default_backend(self):
         return self.env["keycloak.backend"].search([], limit=1)
 
-    keycloak_backend_id = fields.Many2one(
-        default=_default_backend, required=True, comodel_name="keycloak.backend",
+    keycloak_backend_id = fields.Many2one[KeycloakBackend](
+        default=_default_backend, required=True
     )
-    partner_id = fields.Many2one("res.partner", string="Partner", required=True)
+    partner_id = fields.Many2one[Partner](string="Partner", required=True)
     username = fields.Char()
     password = fields.Char()
     enabled = fields.Boolean(default=True)
@@ -39,11 +43,12 @@ class KeycloakPartnerWizard(models.TransientModel):
             test_queue_job_no_delay=True, keycloak_password=self.password
         ).create(vals)
 
-    @api.model
-    def create(self, vals):
-        if "username" not in vals:
-            vals["username"] = self.partner_id.browse(vals["partner_id"]).email
-        return super(KeycloakPartnerWizard, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if "username" not in vals:
+                vals["username"] = self.partner_id.browse(vals["partner_id"]).email
+        return super().create(vals_list)
 
     @api.onchange("partner_id")
     def onchange_partner_id(self):

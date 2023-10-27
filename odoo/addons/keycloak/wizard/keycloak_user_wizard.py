@@ -1,8 +1,11 @@
 # Copyright 2021 ACSONE SA/NV.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
+# pylint: disable=odoo-addons-relative-import
+# pylint: disable=cyclic-import
 from odoo import _, api, fields, models
 from odoo.exceptions import AccessError, ValidationError
+
+from odoo.addons.keycloak.models.keycloak_user import KeycloakUser
 
 
 class KeycloakPartnerWizard(models.TransientModel):
@@ -17,8 +20,8 @@ class KeycloakPartnerWizard(models.TransientModel):
     def _get_default_action(self):
         return self._get_action_selection()[0][0]
 
-    keycloak_user_id = fields.Many2one(
-        required=True, readonly=True, comodel_name="keycloak.user", ondelete="cascade"
+    keycloak_user_id = fields.Many2one[KeycloakUser](
+        required=True, readonly=True, ondelete="cascade"
     )
     password = fields.Char()
     temporary = fields.Boolean(default=True)
@@ -28,7 +31,8 @@ class KeycloakPartnerWizard(models.TransientModel):
         selection=[("action", "action"), ("password", "password")],
     )
     action = fields.Selection(
-        default=_get_default_action, selection=_get_action_selection,
+        default=_get_default_action,
+        selection=_get_action_selection,
     )
 
     def execute(self):

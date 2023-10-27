@@ -76,13 +76,15 @@ class KeycloakUser(models.Model):
         users = self.search(domain + args, limit=limit)
         return users.name_get()
 
-    @api.model
-    def create(self, vals):
-        res = super().create(vals)
-        if not self.env.context.get("disable_keycloak_sync", False):
-            desc = _("Create Keycloak User %(username)s", username=res.username)
-            res.keycloak_backend_id.with_delay(description=desc).create_user(res)
-        return res
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        if self.env.context.get("disable_keycloak_sync", False):
+            return records
+        for rec in records:
+            desc = _("Create Keycloak User %(username)s", username=rec.username)
+            rec.keycloak_backend_id.with_delay(description=desc).create_user(rec)
+        return records
 
     def unlink(self):
         for user in self:

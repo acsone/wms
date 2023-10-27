@@ -16,7 +16,7 @@ class ResPartner(Partner):
 
     def write(self, vals):
         res = super().write(vals)
-        self.mapped("keycloak_user_ids").check_update_on_keycloak_backend(vals)
+        self.sudo().keycloak_user_ids.check_update_on_keycloak_backend(vals)
         return res
 
     def action_create_keycloak_user(self):

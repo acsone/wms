@@ -18,14 +18,7 @@ class KeycloakBackend(Model):
     client_id = fields.Char(string="Client", help="Client to create users.")
     realm_name = fields.Char()
     client_secret_key = fields.Char()
-    realm_client_id = fields.Char(
-        string="Realm Client", help="Client to get user tokens."
-    )
-    realm_client_secret_key = fields.Char()
-
-    username = fields.Char()
     user_realm_name = fields.Char()
-    password = fields.Char()
 
     @property
     def _server_env_fields(self):
@@ -35,11 +28,7 @@ class KeycloakBackend(Model):
             "client_id": {},
             "realm_name": {},
             "client_secret_key": {},
-            "username": {},
             "user_realm_name": {},
-            "password": {},
-            "realm_client_id": {},
-            "realm_client_secret_key": {},
         }
         env_fields.update(new)
         return env_fields
@@ -47,17 +36,13 @@ class KeycloakBackend(Model):
     def _get_admin_client(self):
         """The client should be defined on the master realm to perform admin tasks."""
         self.ensure_one()
-        params = {
-            "server_url": self.server_url,
-            "client_id": self.client_id,
-            "realm_name": self.realm_name,
-            "client_secret_key": self.client_secret_key,
-            "username": self.username,
-            "password": self.password,
-        }
-        if self.user_realm_name and self.user_realm_name != self.realm_name:
-            params["user_realm_name"] = self.user_realm_name
-        return keycloak.KeycloakAdmin(**params)
+        return keycloak.KeycloakAdmin(
+            server_url=self.server_url,
+            client_id=self.client_id,
+            client_secret_key=self.client_secret_key,
+            realm_name=self.realm_name,
+            user_realm_name=self.realm_name,
+        )
 
     def _get_openid_client(self):
         """The client should be defined on the target realm."""
@@ -100,6 +85,7 @@ class KeycloakBackend(Model):
             "enabled": keycloak_user.enabled,
             "firstName": split_name[0] if len(split_name) > 0 else "",
             "lastName": split_name[1] if len(split_name) > 1 else "",
+            "attributes": {},
         }
         keycloak_password = self.env.context.get("keycloak_password", None)
         if keycloak_password:

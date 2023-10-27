@@ -9,12 +9,12 @@ from .common import TestKeycloak
 
 class TestKeycloakUpdateFlow(TestKeycloak):
     def test_create(self):
-        job_counter = self.job_counter()
-        # when
-        self.env["keycloak.user"].create(self.vals_user)
-        # then
-        queue_jobs = job_counter.search_created()
-        self.assertTrue("create_user" in queue_jobs.func_string)  # implicitly 1 job
+        with trap_jobs() as trap:
+            keycloak_user = self.env["keycloak.user"].create(self.vals_user)
+            trap.assert_jobs_count(1)
+            trap.assert_enqueued_job(
+                self.keycloak_backend.create_user, args=(keycloak_user,)
+            )
 
     def test_update_keycloak_user(self):
         user = self.env["keycloak.user"].create(self.vals_user)
@@ -61,13 +61,29 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         )
         self.assertEqual(payload, expected_payload)
 
-    # @unittest.skip("Needs a running Keycloak backend.")
     def test_wizard(self):
         # the wizard works in no_delay, so we can't test it without a backend
+        self.assertFalse(self.partner.keycloak_user_ids)
         window_action = self.partner.action_create_keycloak_user()
         wizard = self.env["keycloak.partner.wizard"].browse(window_action["res_id"])
         wizard.password = "VeRyS4f3!"
         # when
         wizard.execute()
         # then: we created the keycloak user, we get the correct password
-        self.assertEqual(wizard.password, self.partner.keycloak_user_ids.password)
+        self.assertTrue(self.partner.keycloak_user_ids)
+        self.assertTrue(self.partner.keycloak_user_ids.keycloak_id)
+        with trap_jobs() as trap:
+            keycloak_user = self.partner.keycloak_user_ids
+            keycloak_user.partner_id.email = "test@test.com"
+            trap.assert_enqueued_job(
+                self.keycloak_backend.update_user_fields,
+                args=(keycloak_user, ["email"]),
+            )
+            trap.perform_enqueued_jobs()
+        with trap_jobs() as trap:
+            keycloak_id = keycloak_user.keycloak_id
+            keycloak_user.unlink()
+            trap.assert_enqueued_job(
+                self.keycloak_backend.delete_user, args=(keycloak_id,)
+            )
+            trap.perform_enqueued_jobs()
