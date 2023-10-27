@@ -725,6 +725,7 @@ def set_modules_to_remove():
         "alc_eshop_info_banner_elasticsearch",  # renamed to alc_eshop_search_engine_info_banner
         "authenticated_partner_mixin",  # renamed to shopinvader_restapi
         "alc_documents_eshop_services",  # renamed to alc_eshop_api_documents
+        "alc_eshop_user_migration",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
