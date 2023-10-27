@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
+import orjson
 from psycopg2.extensions import AsIs
 
 from odoo import api, fields
@@ -274,6 +275,8 @@ class _ProductDataContainer(_Container):
         self._env = env
         self._partner = partner
         super().__init__(**kwargs)
+        self.price_cache = orjson.loads(self.price_cache) if self.price_cache else {}
+        # init and compute prices
         # init and compute prices
         self.gross_price = 0
         self.gross_price_with_vat = 0

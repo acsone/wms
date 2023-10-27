@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -12,6 +11,6 @@ class TestAlcDocumentsPrices(TestAlcDocuments, TestProductFlattenedData):
     @classmethod
     @mute_logger("odoo.addons.queue_job.models.base")
     def setUpClass(cls):
-        super(TestAlcDocumentsPrices, cls).setUpClass()
+        super().setUpClass()
         cls.env["product.product"].search([]).write({"web_published": True})
         cls.env["alc.product.flattened.data"].refresh_view()

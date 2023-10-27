@@ -59,11 +59,23 @@ class AlcDocument(models.Model):
         ),
     ]
 
-    def _get_data(self):
+    def _ensure_data(self):
         self.ensure_one()
         if self.compute:
             getattr(self, f"_compute_data_{self.compute}")()
-        return self.attachment_id.datas
+
+    def _get_data(self) -> bytes:
+        """Get data in raw format.
+
+        IOW the data is not  b64 encoded...
+        """
+        self._ensure_data()
+        return self.attachment_id.raw or b""
+
+    def _get_attachment(self):
+        self.ensure_one()
+        self._ensure_data()
+        return self.attachment_id
 
     def compute_data(self):
         for document in self:

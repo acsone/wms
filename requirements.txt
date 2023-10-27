@@ -347,6 +347,7 @@ odoo-addon-web-tree-many2one-clickable==16.0.1.0.0.3
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@504297edcd0f157375b3d797c047086b250ff3ca
 ofxparse==0.21
 openupgradelib @ git+https://github.com/acsone/openupgradelib.git@d6a7093a8c89fb51ecee58f886b352aa9592de5c
+orjson==3.9.9
 packaging==23.1
 parse-accept-language==0.1.2
 passlib==1.7.4

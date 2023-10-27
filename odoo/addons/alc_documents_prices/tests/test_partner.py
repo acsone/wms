@@ -7,7 +7,7 @@ from .common import TestAlcDocumentsPrices
 class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
     @classmethod
     def setUpClass(cls):
-        super(TestAlcDocumentsPricesFlow, cls).setUpClass()
+        super().setUpClass()
         cls.partner = cls.partner.with_context(test_queue_job_no_delay=True)
         cls.partner.supplier_promotion_sale_allowed = False
         cls.partner.partner_type = "guest"
@@ -69,7 +69,7 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
         domain_discount = domain_base + [("compute", "=", "discount")]
         document_discount = self.alc_document_model.search(domain_discount)
         with self.mock_product_data(return_value=return_value):
-            return document_discount._get_data().decode("base64")
+            return document_discount._get_data().decode("utf-8")
 
     def test_supplier_promotion_guest(self):
         self.partner.partner_type = "guest"

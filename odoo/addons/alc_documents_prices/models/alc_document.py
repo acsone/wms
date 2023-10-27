@@ -1,15 +1,15 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 import unicodecsv as csv
 import xlsxwriter
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.alc_documents.models import alc_document
 
 
-class AlcDocument(models.Model):
-
-    _inherit = "alc.document"
+class AlcDocument(alc_document.AlcDocument):
 
     compute = fields.Selection(
         selection_add=[("pricelist", "Pricelist"), ("discount", "Discount")]
@@ -27,7 +27,7 @@ class AlcDocument(models.Model):
         documents = self.browse()
         for file_format in self._generation_formats():
             vals = {
-                "name": "FR_PromotionsAlcyon.%s" % file_format,
+                "name": f"FR_PromotionsAlcyon.{file_format}",
                 "compute": "discount",
                 "type": "discount",
                 "partner_id": partner.id,
@@ -41,7 +41,7 @@ class AlcDocument(models.Model):
         documents = self.browse()
         for file_format in self._generation_formats():
             vals = {
-                "name": "Liste de prix Alcyon Belux.%s" % file_format,
+                "name": f"Liste de prix Alcyon Belux.{file_format}",
                 "compute": "pricelist",
                 "type": "pricelist",
                 "partner_id": partner.id,
@@ -57,10 +57,10 @@ class AlcDocument(models.Model):
         self._compute_daily_file()
 
     def _compute_daily_file(self):
-        today = fields.Date.from_string(fields.Date.today())
+        today = fields.Date.today()
         for document in self:
             document_date = document.attachment_id.create_date
-            if not document_date or fields.Date.from_string(document_date) < today:
+            if not document_date or document_date < today:
                 document._generate_attachment_file()
 
     def _all_by_format(self):
@@ -95,10 +95,11 @@ class AlcDocument(models.Model):
                 tmp_file = docs_by_format[file_format]._create_attachment_xlsx(lines)
             else:
                 tmp_file = docs_by_format[file_format]._create_attachment_csv(lines)
+            with open(tmp_file, "rb") as f:
+                data = f.read()
             vals = {
                 "name": document.name,
-                "datas": open(tmp_file, "rb").read().encode("base64"),
-                "datas_fname": document.name,
+                "raw": data,
                 "res_model": "res.partner",
                 "res_id": document.partner_id.id,
             }
@@ -138,7 +139,7 @@ class AlcDocument(models.Model):
             headers = [
                 "Famille",
                 "Fabriquant",
-                u"Référence interne",
+                "Référence interne",
                 "Nom du produit",
                 "Type de promotion",
                 "Date de fin de promotion",
@@ -158,7 +159,7 @@ class AlcDocument(models.Model):
         parser = self._get_lang_price_parser()
         for prices_data in prices_data_lines_iterator:
             prices = {
-                "TVA": "%s%%" % prices_data.vat,
+                "TVA": f"{prices_data.vat}%%",
                 "Prix_Brut_HTVA_EUR": prices_data.gross_price,
                 "Prix_Brut_TVAC_EUR": prices_data.gross_price_with_vat,
             }
@@ -172,7 +173,7 @@ class AlcDocument(models.Model):
                         if isinstance(get, str)
                         else get(prices_data)
                     ) or ""
-                line.append("%s" % value)
+                line.append(f"{value}")
             lines.append(line)
         return lines
 
@@ -190,9 +191,8 @@ class AlcDocument(models.Model):
                     discount_def == "supplier_discount"
                     and prices_data.supplier_discount_discount_sale
                 ):
-                    discount_type = "%s%% off" % (
-                        prices_data.supplier_discount_discount_sale or 0
-                    )
+                    dtype = prices_data.supplier_discount_discount_sale or 0
+                    discount_type = f"{dtype}%% off" % ()
                     date_end = prices_data.supplier_discount_date_end
                 elif (
                     discount_def == "supplier_promotion"
@@ -208,7 +208,7 @@ class AlcDocument(models.Model):
                     discount_def == "discount_special"
                     and prices_data.has_discount_special
                 ):
-                    discount_type = u"Promotion spéciale"
+                    discount_type = "Promotion spéciale"
                     date_end = prices_data.discount_special_date_end
                 if discount_type:
                     date_end = fields.Date.from_string(date_end)
@@ -225,8 +225,8 @@ class AlcDocument(models.Model):
 
     def _create_attachment_csv(self, lines):
         headers = self._get_headers()
-        filename = "/tmp/%s" % self.name
-        with open(filename, "w") as f:
+        filename = f"/tmp/{self.name}"
+        with open(filename, "wb") as f:
             writer = csv.writer(f, delimiter=";")
             writer.writerow(headers)
             for line in lines:
@@ -234,7 +234,7 @@ class AlcDocument(models.Model):
         return filename
 
     def _create_attachment_xlsx(self, lines):
-        filename = "/tmp/%s" % self.name
+        filename = f"/tmp/{self.name}"
         workbook = xlsxwriter.Workbook(filename)
         worksheet = workbook.add_worksheet()
         headers = self._get_headers()
@@ -247,7 +247,7 @@ class AlcDocument(models.Model):
         return filename
 
     def _get_document_date(self):
-        res = super(AlcDocument, self)._get_document_date()
+        res = super()._get_document_date()
         if self.compute in ["pricelist", "discount"]:
             res = False
         return res
