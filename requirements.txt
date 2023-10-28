@@ -27,9 +27,11 @@ cryptography==41.0.2
 cssselect==1.2.0
 dbfread==2.0.7
 decorator==5.1.1
+deprecation==2.1.0
 docopt==0.6.2
 docutils==0.20.1
 ebaysdk==2.2.0
+ecdsa==0.18.0
 extendable==1.2.2
 extendable_pydantic==1.2.0
 fastapi @ git+https://github.com/acsone/fastapi@344e322cdbb5d36006d45ea0d9d9dac85d378ca5
@@ -374,6 +376,8 @@ pyquerystring==1.1
 pyserial==3.5
 pyshp==2.3.1
 python-dateutil==2.8.2
+python-jose==3.3.0
+python-keycloak==3.3.0
 python-multipart==0.0.6
 python-slugify==8.0.1
 python-stdnum==1.18

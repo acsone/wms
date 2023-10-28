@@ -1,8 +1,9 @@
 # Copyright 2021 ACSONE SA/NV.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 from odoo import _, api, fields, models
 from odoo.exceptions import AccessError, ValidationError
+
+from ..models.keycloak_user import KeycloakUser
 
 
 class KeycloakPartnerWizard(models.TransientModel):
@@ -17,8 +18,8 @@ class KeycloakPartnerWizard(models.TransientModel):
     def _get_default_action(self):
         return self._get_action_selection()[0][0]
 
-    keycloak_user_id = fields.Many2one(
-        required=True, readonly=True, comodel_name="keycloak.user", ondelete="cascade"
+    keycloak_user_id = fields.Many2one[KeycloakUser](
+        required=True, readonly=True, ondelete="cascade"
     )
     password = fields.Char()
     temporary = fields.Boolean(default=True)
@@ -28,11 +29,12 @@ class KeycloakPartnerWizard(models.TransientModel):
         selection=[("action", "action"), ("password", "password")],
     )
     action = fields.Selection(
-        default=_get_default_action, selection=_get_action_selection,
+        default=_get_default_action,
+        selection=_get_action_selection,
     )
 
     def execute(self):
-        if not self.env.user.has_group("keycloak.group_keycloak_manager"):
+        if not self.env.user.has_group("connector_keycloak.group_keycloak_manager"):
             raise AccessError(_("You are not allowed to update keycloak user."))
         self.ensure_one()
         if self.type == "password":
