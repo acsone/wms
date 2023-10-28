@@ -3,7 +3,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="veterinary_group_search_view" model="ir.ui.view">
-        <field name="name">veterinary.group.search (in alc_veterinary_group)</field>
         <field name="model">veterinary.group</field>
         <field name="arch" type="xml">
             <search>
@@ -16,7 +15,6 @@
     </record>
 
     <record id="veterinary_group_tree_view" model="ir.ui.view">
-        <field name="name">veterinary.group.tree (in alc_veterinary_group)</field>
         <field name="model">veterinary.group</field>
         <field name="arch" type="xml">
             <tree>
@@ -29,7 +27,6 @@
     </record>
 
     <record id="veterinary_group_form_view" model="ir.ui.view">
-        <field name="name">veterinary.group.form (in alc_veterinary_group)</field>
         <field name="model">veterinary.group</field>
         <field name="arch" type="xml">
             <form>
@@ -38,7 +35,7 @@
                     <group>
                         <field name="name" />
                         <field name="is_alcyonnaire" />
-                        <field name="display_color" widget="color" />
+                        <field name="display_color" widget="color_picker" />
                         <field name="sequence" />
                         <field name="partner_ids" options="{'no_create': True}" />
                         <field
@@ -55,7 +52,6 @@
         <field name="name">Veterinary Groups</field>
         <field name="res_model">veterinary.group</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_type">form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
         <field name="search_view_id" ref="veterinary_group_search_view" />
@@ -65,7 +61,7 @@
     <menuitem
     id="veterinary_group_menu"
     name="Veterinary Groups"
-    parent="sales_team.menu_sales"
+    parent="sale.sale_menu_root"
     action="veterinary_group_act_window"
     sequence="100"
   />

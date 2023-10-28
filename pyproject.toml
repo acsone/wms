@@ -166,7 +166,6 @@ exclude = [
   'odoo/addons/alc_stock_storage_type/*',
   'odoo/addons/alc_storage/*',
   'odoo/addons/alc_turnover_reporting/*',
-  'odoo/addons/alc_veterinary_group/*',
   'odoo/addons/alce_purchase_report/*',
   'odoo/addons/base_cached_xmlid/*',
   'odoo/addons/connector_esb/*',
