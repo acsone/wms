@@ -1,11 +1,10 @@
 # Copyright 2021 ACSONE SA/NV.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-# pylint: disable=odoo-addons-relative-import
-# pylint: disable=cyclic-import
 from odoo import api, fields, models
 
 from odoo.addons.base.models.res_partner import Partner
-from odoo.addons.keycloak.models.keycloak_backend import KeycloakBackend
+
+from ..models.keycloak_backend import KeycloakBackend
 
 
 class KeycloakPartnerWizard(models.TransientModel):

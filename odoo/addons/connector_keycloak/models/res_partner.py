@@ -23,7 +23,7 @@ class ResPartner(Partner):
         self.ensure_one()
         wizard_model = self.env["keycloak.partner.wizard"]
         wizard = wizard_model.create({"partner_id": self.id})
-        action_xml_id = "keycloak.keycloak_partner_wizard_action"
+        action_xml_id = "connector_keycloak.keycloak_partner_wizard_action"
         window_action = self.env.ref(action_xml_id).read()[0]
         window_action["res_id"] = wizard.id
         return window_action

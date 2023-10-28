@@ -3,8 +3,8 @@
 
 
 {
-    "name": "Keycloak",
-    "description": """Keycloak""",
+    "name": "Connector keycloak",
+    "description": """Manage Keycloak users for portal partners""",
     "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",

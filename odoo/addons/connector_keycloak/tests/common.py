@@ -12,7 +12,7 @@ class TestKeycloak(VCRTestCase, TransactionCase):
         # Note that adding TEST_QUEUE_JOB_NO_DELAY in context/environment
         # requires a properly configured backend to run the tests.
         super().setUpClass()
-        cls.keycloak_backend = cls.env.ref("keycloak.keycloak_backend")
+        cls.keycloak_backend = cls.env.ref("connector_keycloak.keycloak_backend")
         partner_vals = {
             "email": "email@provider.com",
             "name": "Firstname Lastname",

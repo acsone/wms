@@ -1,11 +1,9 @@
 # Copyright 2021 ACSONE SA/NV.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-# pylint: disable=odoo-addons-relative-import
-# pylint: disable=cyclic-import
 from odoo import _, api, fields, models
 from odoo.exceptions import AccessError, ValidationError
 
-from odoo.addons.keycloak.models.keycloak_user import KeycloakUser
+from ..models.keycloak_user import KeycloakUser
 
 
 class KeycloakPartnerWizard(models.TransientModel):
@@ -36,7 +34,7 @@ class KeycloakPartnerWizard(models.TransientModel):
     )
 
     def execute(self):
-        if not self.env.user.has_group("keycloak.group_keycloak_manager"):
+        if not self.env.user.has_group("connector_keycloak.group_keycloak_manager"):
             raise AccessError(_("You are not allowed to update keycloak user."))
         self.ensure_one()
         if self.type == "password":

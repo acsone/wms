@@ -119,13 +119,13 @@ class KeycloakUser(models.Model):
         self.ensure_one()
         wizard_model = self.env["keycloak.user.wizard"]
         wizard = wizard_model.create({"keycloak_user_id": self.id})
-        action_xml_id = "keycloak.keycloak_user_wizard_action"
+        action_xml_id = "connector_keycloak.keycloak_user_wizard_action"
         window_action = self.env.ref(action_xml_id).read()[0]
         window_action["res_id"] = wizard.id
         return window_action
 
     def action_sync_keycloak_info(self):
-        if not self.env.user.has_group("keycloak.group_keycloak_manager"):
+        if not self.env.user.has_group("connector_keycloak.group_keycloak_manager"):
             raise AccessError(_("You are not allowed to sync keycloak info."))
         updated_fields = self.env["keycloak.backend"]._get_update_fields()
         self.delay_keycloak_update(list(updated_fields))

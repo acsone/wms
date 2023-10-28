@@ -1,7 +1,7 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import keycloak
+from keycloak import KeycloakAdmin, KeycloakOpenID
 
 from odoo import api, fields
 from odoo.models import Model
@@ -36,7 +36,7 @@ class KeycloakBackend(Model):
     def _get_admin_client(self):
         """The client should be defined on the master realm to perform admin tasks."""
         self.ensure_one()
-        return keycloak.KeycloakAdmin(
+        return KeycloakAdmin(
             server_url=self.server_url,
             client_id=self.client_id,
             client_secret_key=self.client_secret_key,
@@ -53,7 +53,7 @@ class KeycloakBackend(Model):
             "realm_name": self.realm_name,
             "client_secret_key": self.realm_client_secret_key,
         }
-        return keycloak.KeycloakOpenID(**params)
+        return KeycloakOpenID(**params)
 
     def _get_user_token(self, keycloak_user):
         username = keycloak_user.keycloak_username
