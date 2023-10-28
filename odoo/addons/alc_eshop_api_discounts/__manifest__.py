@@ -4,17 +4,15 @@
 {
     "name": "Alc Discount Webservice",
     "description": """Alcyon: Discount Webservices""",
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        "fastapi",
         "alc_partner_type",
         "alc_supplier_promotion",
-        "authenticated_partner_mixin",
-        "standard_service_mixin",
-        "paginated_service_mixin",
     ],
     "demo": [],
-    "installable": False,
+    "installable": True,
 }
