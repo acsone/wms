@@ -1,18 +1,18 @@
 # Copyright 2021 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests import SavepointCase
+from vcr_unittest import VCRTestCase
 
-from odoo.addons.queue_job.tests.common import JobMixin
+from odoo.tests import TransactionCase
 
 
-class TestKeycloak(SavepointCase, JobMixin):
+class TestKeycloak(VCRTestCase, TransactionCase):
     @classmethod
     def setUpClass(cls):
         # Note that adding TEST_QUEUE_JOB_NO_DELAY in context/environment
         # requires a properly configured backend to run the tests.
-        super(TestKeycloak, cls).setUpClass()
-        cls.keycloak_backend = cls.env.ref("keycloak.keycloak_backend")
+        super().setUpClass()
+        cls.keycloak_backend = cls.env.ref("connector_keycloak.keycloak_backend")
         partner_vals = {
             "email": "email@provider.com",
             "name": "Firstname Lastname",

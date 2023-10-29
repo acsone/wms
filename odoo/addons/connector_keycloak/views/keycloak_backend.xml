@@ -2,7 +2,6 @@
 <odoo>
 
     <record model="ir.ui.view" id="keycloak_backend_form_view">
-        <field name="name">keycloak.backend.form</field>
         <field name="model">keycloak.backend</field>
         <field name="arch" type="xml">
             <form string="Keycloak Backend">
@@ -19,11 +18,7 @@
                         <field name="client_id" />
                         <field name="realm_name" />
                         <field name="client_secret_key" password="True" />
-                        <field name="realm_client_id" />
-                        <field name="realm_client_secret_key" password="True" />
-                        <field name="username" />
                         <field name="user_realm_name" />
-                        <field name="password" password="True" />
                     </group>
                 </sheet>
             </form>
@@ -31,7 +26,6 @@
     </record>
 
     <record model="ir.ui.view" id="keycloak_backend_tree_view">
-        <field name="name">keycloak.backend.tree</field>
         <field name="model">keycloak.backend</field>
         <field name="arch" type="xml">
             <tree>

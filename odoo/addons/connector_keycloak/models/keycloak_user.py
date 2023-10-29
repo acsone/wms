@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -6,7 +5,10 @@ from odoo import _, api, fields, models
 from odoo.exceptions import AccessError
 from odoo.osv import expression
 
+from odoo.addons.base.models.res_partner import Partner
 from odoo.addons.queue_job.job import identity_exact
+
+from .keycloak_backend import KeycloakBackend
 
 
 class KeycloakUser(models.Model):
@@ -16,10 +18,10 @@ class KeycloakUser(models.Model):
 
     display_name = fields.Char(compute="_compute_display_name")
 
-    keycloak_backend_id = fields.Many2one(
-        "keycloak.backend", string="Backend", required=True
+    keycloak_backend_id = fields.Many2one[KeycloakBackend](
+        string="Backend", required=True
     )
-    partner_id = fields.Many2one("res.partner", string="Partner", required=True)
+    partner_id = fields.Many2one[Partner](string="Partner", required=True)
     username = fields.Char(required=True)
     keycloak_username = fields.Char(
         compute="_compute_keycloak_username",
@@ -74,24 +76,26 @@ class KeycloakUser(models.Model):
         users = self.search(domain + args, limit=limit)
         return users.name_get()
 
-    @api.model
-    def create(self, vals):
-        res = super(KeycloakUser, self).create(vals)
-        if not self.env.context.get("disable_keycloak_sync", False):
-            desc = _("Create Keycloak User %s") % res.username
-            res.keycloak_backend_id.with_delay(description=desc).create_user(res)
-        return res
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        if self.env.context.get("disable_keycloak_sync", False):
+            return records
+        for rec in records:
+            desc = _("Create Keycloak User %(username)s", username=rec.username)
+            rec.keycloak_backend_id.with_delay(description=desc).create_user(rec)
+        return records
 
     def unlink(self):
         for user in self:
-            desc = _("Delete Keycloak User %s") % user.username
+            desc = _("Delete Keycloak User %(username)s", username=user.username)
             user.keycloak_backend_id.with_delay(description=desc).delete_user(
                 user.keycloak_id
             )
-        return super(KeycloakUser, self).unlink()
+        return super().unlink()
 
     def write(self, vals):
-        res = super(KeycloakUser, self).write(vals)
+        res = super().write(vals)
         self.check_update_on_keycloak_backend(vals)
         return res
 
@@ -105,7 +109,9 @@ class KeycloakUser(models.Model):
     def delay_keycloak_update(self, update_fields=None):
         for user in self:
             user.keycloak_backend_id.with_delay(
-                description=_("Update Keycloak User %s") % user.username,
+                description=_(
+                    "Update Keycloak User %(username)s", username=user.username
+                ),
                 identity_key=identity_exact,  # optimize chained writes
             ).update_user_fields(user, update_fields or [])
 
@@ -113,13 +119,13 @@ class KeycloakUser(models.Model):
         self.ensure_one()
         wizard_model = self.env["keycloak.user.wizard"]
         wizard = wizard_model.create({"keycloak_user_id": self.id})
-        action_xml_id = "keycloak.keycloak_user_wizard_action"
+        action_xml_id = "connector_keycloak.keycloak_user_wizard_action"
         window_action = self.env.ref(action_xml_id).read()[0]
         window_action["res_id"] = wizard.id
         return window_action
 
     def action_sync_keycloak_info(self):
-        if not self.env.user.has_group("keycloak.group_keycloak_manager"):
+        if not self.env.user.has_group("connector_keycloak.group_keycloak_manager"):
             raise AccessError(_("You are not allowed to sync keycloak info."))
         updated_fields = self.env["keycloak.backend"]._get_update_fields()
         self.delay_keycloak_update(list(updated_fields))

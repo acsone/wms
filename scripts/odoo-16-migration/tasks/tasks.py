@@ -728,6 +728,7 @@ def set_modules_to_remove():
         "alc_eshop_user_migration",
         "alc_eshop_services_catalog",  # renamed to alc_eshop_api_catalog
         "alc_eshop_services_discounts",  # renamed to alc_eshop_api_discounts
+        "keycloak",  # renamed to connector_keycloak
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:

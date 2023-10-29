@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="job_function_keycloak_create_user" model="queue.job.function">
+        <field name="model_id" ref="connector_keycloak.model_keycloak_backend" />
+        <field name="method">create_user</field>
+        <field name="channel_id" ref="connector_keycloak.channel_keycloak" />
+    </record>
+    <record id="job_function_keycloak_delete_user" model="queue.job.function">
+        <field name="model_id" ref="connector_keycloak.model_keycloak_backend" />
+        <field name="method">delete_user</field>
+        <field name="channel_id" ref="connector_keycloak.channel_keycloak" />
+    </record>
+    <record id="job_function_keycloak_update_user_fields" model="queue.job.function">
+        <field name="model_id" ref="connector_keycloak.model_keycloak_backend" />
+        <field name="method">update_user_fields</field>
+        <field name="channel_id" ref="connector_keycloak.channel_keycloak" />
+    </record>
+
+</odoo>

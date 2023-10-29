@@ -3,7 +3,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="keycloak_user_wizard_form" model="ir.ui.view">
-        <field name="name">keycloak.user.wizard.form</field>
         <field name="model">keycloak.user.wizard</field>
         <field name="arch" type="xml">
             <form string="Keycloak User">
@@ -39,7 +38,6 @@
     <record id="keycloak_user_wizard_action" model="ir.actions.act_window">
         <field name="name">Update Keycloak User</field>
         <field name="res_model">keycloak.user.wizard</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="keycloak_user_wizard_form" />
         <field name="target">new</field>
