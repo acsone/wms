@@ -62,7 +62,7 @@ class StockPackOperationLotAdd(StockPackOperationLotAddBase):
         "product_id.is_food",
         "product_id.is_meds",
         "product_id.is_equipment",
-        "product_id.is_mto_product",
+        "product_id.is_mto",
     )
     def _compute_edit_dimensions_barcode_fields(self):
         for rec in self:
