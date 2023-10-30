@@ -5,14 +5,13 @@
 {
     "name": "Elasticsearch Security Mixin",
     "description": """Link a model to an ElasticSearch role.""",
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": ["elasticsearch_security"],
     "application": False,
-    "data": [],
+    "data": ["data/queue_job_function.xml"],
     "demo": [],
     "external_dependencies": {"python": ["slugify"]},
-    "installable": False,
 }

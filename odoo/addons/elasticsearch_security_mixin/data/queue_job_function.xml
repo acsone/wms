@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="job_function_create_or_update_linked_role" model="queue.job.function">
+      <field name="model_id" ref="connector_search_engine.model_se_backend" />
+    <field name="method">create_or_update_linked_role</field>
+    <field name="channel_id" ref="elasticsearch_security.opensearch_role_channel" />
+  </record>
+</odoo>
