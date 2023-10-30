@@ -730,7 +730,8 @@ def set_modules_to_remove():
         "alc_eshop_services_discounts",  # renamed to alc_eshop_api_discounts
         "keycloak",  # renamed to connector_keycloak
         "paginated_service_mixin",  # services are migrated to fastapi
-        "alc_product_mto", # replaced by product_route_mto
+        "alc_eshop_product_on_order",  # renamed to alc_eshop_api_products_on_order
+        "alc_product_mto",  # replaced by product_route_mto
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:

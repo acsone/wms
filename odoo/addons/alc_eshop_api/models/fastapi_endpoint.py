@@ -14,6 +14,7 @@ from odoo.addons.alc_eshop_api_classifieds.routers import classified_ads_router
 from odoo.addons.alc_eshop_api_cms.routers import cms_router
 from odoo.addons.alc_eshop_api_discounts.routers import discounts_router
 from odoo.addons.alc_eshop_api_documents.routers import documents_router
+from odoo.addons.alc_eshop_api_products_on_order.routers import products_on_order_router
 from odoo.addons.alc_eshop_api_registration.routers import registrations_router
 from odoo.addons.alc_eshop_api_sale_statistic.routers import sale_statistics_router
 from odoo.addons.auth_jwt.models.auth_jwt_validator import AuthJwtValidator
@@ -58,6 +59,7 @@ class FastapiEndpoint(FastapiEndpointBase):
             brands_router,
             catalog_router,
             discounts_router,
+            products_on_order_router,
         ]
 
     def _get_alc_eshop_app_tags(self, params) -> list:
@@ -125,6 +127,14 @@ class FastapiEndpoint(FastapiEndpointBase):
                 "name": "discounts",
                 "description": "Set of services to get access to the product's "
                 "discounts available for the partner",
+            }
+        )
+        tags_metadata.append(
+            {
+                "name": "products_on_order",
+                "description": "Set of services to get access to the product's "
+                "on order for the logged partner. It also provides the possibility "
+                "to cancel a product on order.",
             }
         )
         return tags_metadata
