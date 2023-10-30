@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api
-from odoo.tools.float_utils import float_compare
 
 from odoo.addons.purchase.models import purchase
 
@@ -20,20 +19,14 @@ class PurchaseOrderLine(purchase.PurchaseOrderLine):
     def _compute_qty_invoiced(self):
         super()._compute_qty_invoiced()
         for line in self:
-            # recompute qty_to_invoice
-            qty = 0
+            # When no invoice has been created yet and the order is marked as
+            # prepayment, then allow to create an invoice based on the ordered
+            # quantity
             if (
                 line.product_id.purchase_method != "purchase"
                 and line.order_id.prepayment
                 and line.order_id.state in ["purchase", "done"]
+                and not line.qty_invoiced
             ):
-                qty = line.product_qty - line.qty_invoiced
-                if (
-                    float_compare(
-                        qty, 0.0, precision_rounding=line.product_uom.rounding
-                    )
-                    <= 0
-                ):
-                    qty = 0.0
-            line.qty_to_invoice = qty
+                line.qty_to_invoice = line.product_qty
         return True

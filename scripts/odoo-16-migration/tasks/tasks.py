@@ -704,7 +704,7 @@ def set_modules_to_remove():
         "alc_storage_media_product",
         "alc_product_brand_image",
         "alc_product_consolidated_price",
-        "specific_cutoff",  # replaced by alc_account_invoice_accrual & alc_account_cutoff_picking
+        "specific_cutoff",  # replaced by alc_account_invoice_accrual & account_cutoff_accrual_sale & account_cutoff_accrual_purchase
         "stock_valuation",  # replaced by STD
         "alc_product_packaging_stock_reserve",
         "account_analytic_no_lines",

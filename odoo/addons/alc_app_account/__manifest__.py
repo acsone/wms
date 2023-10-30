@@ -12,7 +12,9 @@
         # Odoo
         "account",
         # OCA
-        "account_cutoff_picking_product_category",
+        "account_cutoff_accrual_order_product_category",
+        "account_cutoff_accrual_purchase_stock",
+        "account_cutoff_accrual_sale_stock",
         "account_financial_report",
         "account_invoice_line_default_account",
         "account_invoice_check_total",
@@ -31,7 +33,6 @@
         "partner_invoicing_mode_fourteen_days",
         "partner_invoicing_mode_monthly",
         "partner_invoicing_mode_ten_days",
-        "account_cutoff_picking",
         "account_invoice_accrual",
         "l10n_be_iso20022_pain",
         "account_reconcile_restrict_partner_mismatch",
@@ -42,7 +43,6 @@
         "alc_partner_invoicing_mode_default",
         "alc_account_invoice_accrual",
         "alc_account_invoice_product_no_reference",
-        "alc_account_cutoff_picking",
         "alc_account_payment_globalization",
         "alc_placedesvetos_payment_globalization",
         "alc_chronovet_payment_globalization",
