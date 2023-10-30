@@ -1,6 +1,5 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 {
     "name": "Alc Purchase Prepaid",
     "description": "Allow to mark a PO for prepayment",

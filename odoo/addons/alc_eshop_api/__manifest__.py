@@ -23,6 +23,7 @@
         "alc_eshop_api_documents",
         "alc_eshop_api_catalog",
         "alc_eshop_api_discounts",
+        "alc_eshop_api_products_on_order",
     ],
     "data": [
         "views/fastapi_endpoint.xml",
