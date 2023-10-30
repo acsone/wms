@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -20,8 +19,7 @@ class PromoSubscriptionService(Component):
         output_param=restapi.CerberusValidator("_get_output_schema"),
     )
     def get(self, product_id):
-        """Check if a subscription exists for the given product_id.
-        """
+        """Check if a subscription exists for the given product_id."""
         record = self.env["alc.product.promotion.subscription"].search(
             [("product_id", "=", product_id), ("partner_id", "=", self.partner.id)]
         )
@@ -46,8 +44,10 @@ class PromoSubscriptionService(Component):
     )
     # pylint: disable=method-required-super
     def create(self, product_id):
-        """Subscribe the customer to the promotions for the given product
-        id."""
+        """Subscribe the customer to the promotions for the given product.
+
+        id.
+        """
         product = self.env["product.product"].browse(product_id)
         self.env["alc.product.promotion.subscription"].subscribe(
             partner=self.partner, product=product
@@ -56,8 +56,10 @@ class PromoSubscriptionService(Component):
 
     @restapi.method([(["/<int:product_id>"], "DELETE")])
     def delete(self, product_id):
-        """Unsubscribe the customer to the promotions of the given product
-        id."""
+        """Unsubscribe the customer to the promotions of the given product.
+
+        id.
+        """
         product = self.env["product.product"].browse(product_id)
         self.env["alc.product.promotion.subscription"].unsubscribe(
             partner=self.partner, product=product
@@ -69,7 +71,8 @@ class PromoSubscriptionService(Component):
     ############
     def _get_output_schema(self):
         """
-        Output validator for the search
+        Output validator for the search.
+
         :return: dict
         """
         return self._get_status_schema()
@@ -93,7 +96,8 @@ class PromoSubscriptionService(Component):
 
     def _search_output_schema(self):
         """
-        Output validator for the search
+        Output validator for the search.
+
         :return: dict
         """
         promo_schema = self._get_promo_schema()
@@ -127,7 +131,8 @@ class PromoSubscriptionService(Component):
 
     def _get_promo_schema(self):
         """
-        Get details about invoice to return
+        Get details about invoice to return.
+
         (used into validator_return)
         :return: dict
         """
