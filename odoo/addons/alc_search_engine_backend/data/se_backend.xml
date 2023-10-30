@@ -3,10 +3,10 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="0">
 
-    <record id="elasticsearch_backend" model="se.backend.elasticsearch">
+    <record id="elasticsearch_backend" model="se.backend">
         <field name="name">elasticsearch_backend</field>
         <field name="tech_name">elasticsearch_backend</field>
-        <field name="security">opensearch</field>
+        <field name="backend_type">elasticsearch</field>
     </record>
 
 </odoo>

@@ -2,7 +2,7 @@
 <!-- Copyright 2021 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-  <record id="alc_search_engine.elasticsearch_backend" model="se.backend.elasticsearch">
-    <field name="security">opensearch</field>
+  <record id="alc_search_engine.elasticsearch_backend" model="se.backend">
+
   </record>
 </odoo>

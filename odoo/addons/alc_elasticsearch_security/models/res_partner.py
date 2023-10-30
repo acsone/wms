@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.base.models.res_partner import Partner
 
 
-class ResPartner(models.Model):
-
-    _inherit = "res.partner"
+class ResPartner(Partner):
 
     elasticsearch_role = fields.Char(compute="_compute_elasticsearch_role", store=False)
 
