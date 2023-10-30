@@ -17,6 +17,7 @@ from odoo.addons.alc_eshop_api_documents.routers import documents_router
 from odoo.addons.alc_eshop_api_products_on_order.routers import products_on_order_router
 from odoo.addons.alc_eshop_api_registration.routers import registrations_router
 from odoo.addons.alc_eshop_api_sale_statistic.routers import sale_statistics_router
+from odoo.addons.alc_eshop_api_veterinary_groups.routers import veterinary_groups_router
 from odoo.addons.auth_jwt.models.auth_jwt_validator import AuthJwtValidator
 from odoo.addons.fastapi.dependencies import authenticated_partner_impl
 from odoo.addons.fastapi.models.fastapi_endpoint import (
@@ -60,6 +61,7 @@ class FastapiEndpoint(FastapiEndpointBase):
             catalog_router,
             discounts_router,
             products_on_order_router,
+            veterinary_groups_router,
         ]
 
     def _get_alc_eshop_app_tags(self, params) -> list:
@@ -135,6 +137,13 @@ class FastapiEndpoint(FastapiEndpointBase):
                 "description": "Set of services to get access to the product's "
                 "on order for the logged partner. It also provides the possibility "
                 "to cancel a product on order.",
+            }
+        )
+        tags_metadata.append(
+            {
+                "name": "veterinary_groups",
+                "description": "Service to get access to the partner's "
+                "veterinary groups informations",
             }
         )
         return tags_metadata

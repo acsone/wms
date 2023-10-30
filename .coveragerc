@@ -69,7 +69,6 @@ omit =
     odoo/addons/alc_eshop_services_deliveries/*
     odoo/addons/alc_eshop_services_orders/*
     odoo/addons/alc_eshop_services_orders_suite_channel/*
-    odoo/addons/alc_eshop_veterinary_group/*
     odoo/addons/alc_eshop_wishlist/*
     odoo/addons/alc_internal_package_groupbypartner/*
     odoo/addons/alc_keycloak/*
