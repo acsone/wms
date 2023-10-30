@@ -28,7 +28,6 @@ exclude: |
   ^odoo/addons/alc_eshop_product_category_sequence/|
   ^odoo/addons/alc_eshop_product_domain/|
   ^odoo/addons/alc_eshop_product_expiry/|
-  ^odoo/addons/alc_eshop_product_promotion_subscription/|
   ^odoo/addons/alc_eshop_product_stock/|
   ^odoo/addons/alc_eshop_sale_cart_channel/|
   ^odoo/addons/alc_eshop_sale_cart_confirm/|

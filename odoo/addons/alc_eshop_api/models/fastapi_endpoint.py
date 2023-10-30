@@ -15,6 +15,9 @@ from odoo.addons.alc_eshop_api_cms.routers import cms_router
 from odoo.addons.alc_eshop_api_discounts.routers import discounts_router
 from odoo.addons.alc_eshop_api_documents.routers import documents_router
 from odoo.addons.alc_eshop_api_products_on_order.routers import products_on_order_router
+from odoo.addons.alc_eshop_api_promotion_subscriptions.routers import (
+    promo_subscriptions_router,
+)
 from odoo.addons.alc_eshop_api_registration.routers import registrations_router
 from odoo.addons.alc_eshop_api_sale_statistic.routers import sale_statistics_router
 from odoo.addons.alc_eshop_api_veterinary_groups.routers import veterinary_groups_router
@@ -62,6 +65,7 @@ class FastapiEndpoint(FastapiEndpointBase):
             discounts_router,
             products_on_order_router,
             veterinary_groups_router,
+            promo_subscriptions_router,
         ]
 
     def _get_alc_eshop_app_tags(self, params) -> list:
@@ -144,6 +148,13 @@ class FastapiEndpoint(FastapiEndpointBase):
                 "name": "veterinary_groups",
                 "description": "Service to get access to the partner's "
                 "veterinary groups informations",
+            }
+        )
+        tags_metadata.append(
+            {
+                "name": "promo_subscriptions",
+                "description": "Set of services to manage subscriptions on "
+                "product promotions",
             }
         )
         return tags_metadata

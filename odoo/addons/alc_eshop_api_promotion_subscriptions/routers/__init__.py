@@ -1,0 +1,1 @@
+from .promo_subscriptions import promo_subscriptions_router
