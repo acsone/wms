@@ -149,6 +149,11 @@ class FastapiEndpoint(FastapiEndpointBase):
             params["swagger_ui_init_oauth"] = {
                 "clientId": "demo16.shopinvader.com",
             }
+            params["swagger_ui_parameters"] = {
+                "docExpansion": "none",
+                "filter": True,
+                "tagsSorter": "alpha",
+            }
         return params
 
     def _get_alc_eshop_app_app_dependencies_overrides(self):
