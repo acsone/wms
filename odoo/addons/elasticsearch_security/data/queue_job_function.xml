@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="job_function_put_role" model="queue.job.function">
+      <field name="model_id" ref="elasticsearch_security.model_elasticsearch_role" />
+    <field name="method">put_role</field>
+    <field name="channel_id" ref="elasticsearch_security.opensearch_role_channel" />
+  </record>
+  <record id="job_function_delete_role" model="queue.job.function">
+      <field name="model_id" ref="elasticsearch_security.model_elasticsearch_role" />
+    <field name="method">delete_role</field>
+    <field name="channel_id" ref="elasticsearch_security.opensearch_role_channel" />
+  </record>
+</odoo>

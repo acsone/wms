@@ -1,0 +1,88 @@
+interactions:
+  - request:
+      body: null
+      headers:
+        authorization:
+          - Basic b2RvbzpxXYdIRHf2RHQ1RGJFOEpYeXIzUDNnZUY=
+        connection:
+          - keep-alive
+        content-type:
+          - application/json
+        user-agent:
+          - opensearch-py/2.3.2 (Python 3.11.4)
+      method: DELETE
+      uri: https://localhost/_plugins/_security/api/roles/role_1
+    response:
+      body:
+        string: '{"status":"OK","message":"''role_1'' deleted."}'
+      headers:
+        Access-Control-Allow-Credentials:
+          - "true"
+        Access-Control-Allow-Headers:
+          - DNT, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control,
+            Content-Type, Range, Authorization
+        Access-Control-Allow-Methods:
+          - GET, POST, OPTIONS
+        Access-Control-Allow-Origin:
+          - "*"
+        Access-Control-Expose-Headers:
+          - Content-Length, Content-Range
+        Access-Control-Max-Age:
+          - "1728000"
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "45"
+        Content-Type:
+          - application/json; charset=UTF-8
+        Date:
+          - Mon, 30 Oct 2023 13:28:34 GMT
+        Strict-Transport-Security:
+          - max-age=15724800; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        authorization:
+          - Basic b2RvbzpxXYdIRHf2RHQ1RGJFOEpYeXIzUDNnZUY=
+        connection:
+          - keep-alive
+        content-type:
+          - application/json
+        user-agent:
+          - opensearch-py/2.3.2 (Python 3.11.4)
+      method: DELETE
+      uri: https://localhost/_plugins/_security/api/rolesmapping/role_1
+    response:
+      body:
+        string: '{"status":"OK","message":"''role_1'' deleted."}'
+      headers:
+        Access-Control-Allow-Credentials:
+          - "true"
+        Access-Control-Allow-Headers:
+          - DNT, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control,
+            Content-Type, Range, Authorization
+        Access-Control-Allow-Methods:
+          - GET, POST, OPTIONS
+        Access-Control-Allow-Origin:
+          - "*"
+        Access-Control-Expose-Headers:
+          - Content-Length, Content-Range
+        Access-Control-Max-Age:
+          - "1728000"
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "45"
+        Content-Type:
+          - application/json; charset=UTF-8
+        Date:
+          - Mon, 30 Oct 2023 13:28:35 GMT
+        Strict-Transport-Security:
+          - max-age=15724800; includeSubDomains
+      status:
+        code: 200
+        message: OK
+version: 1

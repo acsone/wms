@@ -7,15 +7,12 @@
         <field name="model">se.backend</field>
         <field name="inherit_id" ref="connector_search_engine.se_backend_form_view" />
         <field name="arch" type="xml">
-           <xpath expr="//sheet" position="inside">
-                <group name="eshop_info_banner" string="Info banners">
-                    <button
-            name="button_synchronize_info_banners"
-            string="Synchronize info banners"
-            class="oe_highlight"
-            type="object"
-          />
-                </group>
+           <xpath expr="//header" position="inside">
+                <button
+          name="button_synchronize_info_banners"
+          string="Synchronize info banners"
+          type="object"
+        />
            </xpath>
         </field>
     </record>
