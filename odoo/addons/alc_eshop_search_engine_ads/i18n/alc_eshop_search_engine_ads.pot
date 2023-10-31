@@ -21,11 +21,6 @@ msgid "'Serializer Type' must match 'Model'"
 msgstr ""
 
 #. module: alc_eshop_search_engine_ads
-#: model_terms:ir.ui.view,arch_db:alc_eshop_search_engine_ads.se_backend_form_view
-msgid "Ads"
-msgstr ""
-
-#. module: alc_eshop_search_engine_ads
 #: model:ir.model.fields,field_description:alc_eshop_search_engine_ads.field_alc_eshop_ads__count_se_binding_done
 msgid "Count Se Binding Done"
 msgstr ""

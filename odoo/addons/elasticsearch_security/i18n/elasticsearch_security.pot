@@ -1,0 +1,185 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* elasticsearch_security
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_elasticsearch_role__backend_id
+msgid "Backend"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_elasticsearch_role__body
+msgid "Body"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model,name:elasticsearch_security.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: elasticsearch_security
+#. odoo-python
+#: code:addons/elasticsearch_security/models/elasticsearch_role.py:0
+#, python-format
+msgid ""
+"Could not delete role %(name)s.\n"
+"Original error:\n"
+"%(error)s"
+msgstr ""
+
+#. module: elasticsearch_security
+#. odoo-python
+#: code:addons/elasticsearch_security/models/elasticsearch_role.py:0
+#, python-format
+msgid ""
+"Could not put role %(name)s.\n"
+"Original error:\n"
+"%(error)s"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_elasticsearch_role__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_elasticsearch_role__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: elasticsearch_security
+#. odoo-python
+#: code:addons/elasticsearch_security/models/elasticsearch_role.py:0
+#, python-format
+msgid "Delete Security Role %(name)s"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_elasticsearch_role__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model,name:elasticsearch_security.model_elasticsearch_role
+#: model:ir.model.fields,field_description:elasticsearch_security.field_res_partner__elasticsearch_role
+#: model:ir.model.fields,field_description:elasticsearch_security.field_res_users__elasticsearch_role
+#: model:ir.model.fields,field_description:elasticsearch_security.field_shopinvader_partner__elasticsearch_role
+msgid "Elasticsearch Role"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_elasticsearch_role__extra_backend_roles
+msgid "Extra Backend Roles"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_elasticsearch_role__id
+msgid "ID"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_elasticsearch_role____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_elasticsearch_role__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_elasticsearch_role__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_elasticsearch_role__name
+msgid "Name"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_se_backend__opensearch_user
+msgid "Opensearch User"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_se_backend__opensearch_user_password
+msgid "Opensearch User Password"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_se_backend__role_ids
+msgid "Role"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model,name:elasticsearch_security.model_se_backend
+msgid "Se Backend"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model_terms:ir.ui.view,arch_db:elasticsearch_security.se_backend_form_view
+msgid "Security"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model_terms:ir.ui.view,arch_db:elasticsearch_security.se_backend_form_view
+msgid "Security Roles"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,help:elasticsearch_security.field_elasticsearch_role__extra_backend_roles
+msgid "Separate roles by a comma, without spaces"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,field_description:elasticsearch_security.field_se_backend__ssl
+msgid "Ssl"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model_terms:ir.ui.view,arch_db:elasticsearch_security.se_backend_form_view
+msgid "Synchronize"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model_terms:ir.ui.view,arch_db:elasticsearch_security.se_backend_form_view
+msgid "Synchronize Roles"
+msgstr ""
+
+#. module: elasticsearch_security
+#. odoo-python
+#: code:addons/elasticsearch_security/models/elasticsearch_role.py:0
+#, python-format
+msgid "Synchronize Security Role %(name)s"
+msgstr ""
+
+#. module: elasticsearch_security
+#. odoo-python
+#: code:addons/elasticsearch_security/models/elasticsearch_role.py:0
+#: model:ir.model.constraint,message:elasticsearch_security.constraint_elasticsearch_role_name_backend_uniq
+#, python-format
+msgid "The name must be unique by backend!"
+msgstr ""
+
+#. module: elasticsearch_security
+#: model:ir.model.fields,help:elasticsearch_security.field_se_backend__ssl
+msgid ""
+"Verify SSL certificates. Only set to False in development environments."
+msgstr ""
+
+#. module: elasticsearch_security
+#: model_terms:ir.ui.view,arch_db:elasticsearch_security.se_backend_form_view
+msgid "settings"
+msgstr ""
