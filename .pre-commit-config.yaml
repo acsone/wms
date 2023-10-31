@@ -49,7 +49,6 @@ exclude: |
   ^odoo/addons/alc_eshop_services_orders_suite_channel/|
   ^odoo/addons/alc_eshop_wishlist/|
   ^odoo/addons/alc_internal_package_groupbypartner/|
-  ^odoo/addons/alc_keycloak/|
   ^odoo/addons/alc_magento_api/|
   ^odoo/addons/alc_mrp_repair/|
   ^odoo/addons/alc_partner_delivery_person/|

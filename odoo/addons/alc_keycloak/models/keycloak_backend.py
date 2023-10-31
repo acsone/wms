@@ -1,16 +1,17 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo.addons.connector_keycloak.models.keycloak_backend import (
+    KeycloakBackend as KeycloakBackendBase,
+)
 
 
-class KeycloakBackend(models.Model):
+class KeycloakBackend(KeycloakBackendBase):
 
     _inherit = "keycloak.backend"
 
     def _get_update_fields(self):
-        res = super(KeycloakBackend, self)._get_update_fields()
+        res = super()._get_update_fields()
         new = {  # elasticsearch_role is a compute depending on these
             "partner_type": "shopinvader-vt-roles",
             "property_product_pricelist": "shopinvader-vt-roles",
@@ -28,7 +29,7 @@ class KeycloakBackend(models.Model):
         return res
 
     def _keycloak_user_to_payload(self, keycloak_user):
-        payload = super(KeycloakBackend, self)._keycloak_user_to_payload(keycloak_user)
+        payload = super()._keycloak_user_to_payload(keycloak_user)
         partner = keycloak_user.partner_id
         discounts = partner.discount_pricelist_ids.mapped("discount_role_name")
         new_attributes = {
