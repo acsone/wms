@@ -10,7 +10,11 @@ class TestPrices(TransactionCase, JobMixin):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context, tracking_disable=True, es_security_no_autosync=True
+            )
+        )
 
         cls.cat_1 = cls.env["product.category"].create({"name": "C1"})
         cls.cat_2 = cls.env["product.category"].create({"name": "C2"})

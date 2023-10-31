@@ -12,9 +12,14 @@ class TestPricing(TestSupplierInfo, TestPrices):
     @mute_logger("odoo.addons.queue_job.delay")
     def setUpClass(cls):
         super().setUpClass()
-        ctx = dict(cls.env.context, tracking_disable=True, test_queue_job_no_delay=True)
+        ctx = dict(
+            cls.env.context,
+            tracking_disable=True,
+            test_queue_job_no_delay=True,
+            es_security_no_autosync=True,
+        )
         cls.env = cls.env(context=ctx)
-
+        cls.model_pl_nodelay = cls.model_pl_nodelay.with_context(**ctx)
         # base pricelist with nothing, to make sure we get standard price
         vals_pricelist_base = cls._get_pricelist_vals("PLbase", [], is_discount=False)
         cls.pricelist_base = cls.model_pl_nodelay.create(vals_pricelist_base)

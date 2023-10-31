@@ -7,6 +7,8 @@ from freezegun import freeze_time
 from odoo.fields import Date
 from odoo.tools import mute_logger
 
+from odoo.addons.queue_job.tests.common import trap_jobs
+
 from .common import TestPrices
 
 
@@ -19,52 +21,59 @@ class TestPricelistItemFlow(TestPrices):
 
     @freeze_time("2022-01-01 12:00:00")
     def test_pricelist_item_is_past(self):
-        job_counter = self.job_counter()
         items = [self._get_item_vals()]
         vals = self._get_pricelist_vals("Date witness 1", items)
-        pricelist = self.model_pl.create(vals)
+        with trap_jobs() as trap:
+            pricelist = self.model_pl.create(vals)
+            trap.assert_enqueued_job(pricelist._update_price_cache)
         item = pricelist.item_ids
-        queue_job = job_counter.search_created()
-        self.assertEqual(len(queue_job), 1)
-
         self.assertFalse(item.is_past)
-
-        item.date_end = "2021-12-12"
-
+        with trap_jobs() as trap:
+            item.date_end = "2021-12-12"
+            trap.assert_enqueued_job(
+                item.pricelist_id._update_price_cache,
+                kwargs={
+                    "domain_extend": [(1, "=", 1)],
+                    "dates": {"price-date-witness-1": [Date.from_string("2022-01-01")]},
+                    "eids": [item.id, None],
+                },
+            )
         self.assertTrue(item.is_past)
-        queue_job = job_counter.search_created()
-        self.assertEqual(len(queue_job), 2)
-        expected = {"price-date-witness-1": [Date.from_string("2022-01-01")]}
-        last_job = max(queue_job, key=lambda x: x.id)
-        self.assertEqual(last_job.kwargs["dates"], expected)
+        with trap_jobs() as trap:
+            item.date_end = "2022-12-12"
+            self.assertSetEqual(
+                set(
+                    trap.enqueued_jobs[0]
+                    .kwargs.get("dates")
+                    .get("price-date-witness-1")
+                ),
+                {Date.from_string("2022-12-13"), Date.from_string("2022-01-01")},
+            )
 
-        item.date_end = "2022-12-12"
-
-        self.assertFalse(item.is_past)
-        queue_job = job_counter.search_created()
-        last_job = max(queue_job, key=lambda x: x.id)
-        self.assertEqual(len(queue_job), 3)
-        expected = {Date.from_string(s) for s in ("2022-1-1", "2022-12-13")}
-        dates = set(last_job.kwargs["dates"]["price-date-witness-1"])
-        self.assertEqual(dates, expected)
-
+    @freeze_time("2022-01-01 12:00:00")
     def test_pricelist_item_change_domain(self):
-        job_counter = self.job_counter()
         items = [self._get_item_vals()]
         vals = self._get_pricelist_vals("Domain change", items)
-        pricelist = self.model_pl.create(vals)
+        with trap_jobs() as trap:
+            pricelist = self.model_pl.create(vals)
+            trap.assert_enqueued_job(pricelist._update_price_cache)
         item = pricelist.item_ids
-        queue_job = job_counter.search_created()
-        self.assertEqual(len(queue_job), 1)
 
         expected_domain = [(1, "=", 1)]
         self.assertEqual(item._get_product_domain(), expected_domain)
+        with trap_jobs() as trap:
+            item.write(
+                {"applied_on": "0_product_variant", "product_id": self.product_1.id}
+            )
+            trap.assert_enqueued_job(
+                item.pricelist_id._update_price_cache,
+                kwargs={
+                    "domain_extend": [(1, "=", 1)],
+                    "dates": {"price-domain-change": [Date.from_string("2022-01-01")]},
+                    "eids": [item.id, None],
+                },
+            )
 
-        item.write({"applied_on": "0_product_variant", "product_id": self.product_1.id})
-
-        queue_job = job_counter.search_created()
-        # last_job = max(queue_job, key=lambda x: x.id)
-        self.assertEqual(len(queue_job), 2)
         # because the item was global, all products are affected
         # we added an intermediary job...
         # expected_ids = self.env["product.product"].search(expected_domain).ids
@@ -72,14 +81,20 @@ class TestPricelistItemFlow(TestPrices):
 
         expected_domain = [("id", "=", self.product_1.id)]
         self.assertEqual(item._get_product_domain(), expected_domain)
-
-        item.write({"percent_price": 12})
-
-        queue_job = job_counter.search_created()
-        # last_job = max(queue_job, key=lambda x: x.id)
-        self.assertEqual(len(queue_job), 3)
-        # the item was already restricted to one product
-        # self.assertEqual(last_job.record_ids, self.product_1.ids)
+        with trap_jobs() as trap:
+            item.write({"percent_price": 12})
+            trap.assert_enqueued_job(
+                item.pricelist_id._update_price_cache,
+                kwargs={
+                    "domain_extend": [
+                        "|",
+                        ("id", "=", self.product_1.id),
+                        ("id", "=", self.product_1.id),
+                    ],
+                    "dates": {"price-domain-change": [Date.from_string("2022-01-01")]},
+                    "eids": [item.id, None],
+                },
+            )
 
     @freeze_time("2022-01-01 12:00:00")
     @mute_logger("odoo.addons.queue_job.delay")
