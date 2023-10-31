@@ -122,7 +122,7 @@ msgstr "Le contact doit avoir une date de début pour mettre fin à un contrat."
 #: code:addons/alc_veterinary_group/models/res_partner.py:65
 #, python-format
 msgid "The start date must be anterior or equal to today."
-msgstr "La date de début doit être antérieure ou égale à aujourd'hui.
+msgstr "La date de début doit être antérieure ou égale à aujourd'hui."
 
 #. module: alc_veterinary_group
 #: code:addons/alc_veterinary_group/models/res_partner.py:58
