@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import contextlib
-
-import mock
+from unittest import mock
 
 from odoo.exceptions import ValidationError
 from odoo.tests.common import SavepointCase
 
 
-class MailRecorder(object):
+class MailRecorder:
     def __init__(self, env):
         self.env = env
         self.Mail = self.env["mail.mail"]
@@ -30,7 +28,7 @@ class MailRecorder(object):
 class TestAlcEShopForm(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(TestAlcEShopForm, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, test_queue_job_no_delay=True))
         cls.mail_recorder = MailRecorder(cls.env)
         cls.partner = cls.env["res.partner"].create(
