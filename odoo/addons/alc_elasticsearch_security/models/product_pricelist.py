@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo.models import Model
 
 
-class ProductPricelist(models.Model):
+class ProductPricelist(Model):
 
     _name = "product.pricelist"
     _inherit = ["product.pricelist", "elasticsearch.role.mixin"]
@@ -14,7 +13,7 @@ class ProductPricelist(models.Model):
         return self.role_name
 
     def _get_role_body(self):
-        BODY = """{
+        body = """{
             "index_permissions":[
                 {
                     "index_patterns":["alc_shopinvader_variant_*"],
@@ -24,7 +23,7 @@ class ProductPricelist(models.Model):
             }
         """
         price_role_name = self.role_name
-        return BODY % (
+        return body % (
             price_role_name,
             self.discount_role_name,
             price_role_name,
@@ -34,4 +33,4 @@ class ProductPricelist(models.Model):
 
     def _get_vals(self):
         self._compute_role_name()  # it is a compute store, value might be outdated
-        return super(ProductPricelist, self)._get_vals()
+        return super()._get_vals()

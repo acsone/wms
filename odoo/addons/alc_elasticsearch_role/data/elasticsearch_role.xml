@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
   <record id="role_guest" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">guest</field>
     <field name="body">{
   "cluster_permissions": ["read"],
@@ -32,7 +32,7 @@
     <field name="extra_backend_roles">opendistro_security_anonymous_backendrole</field>
   </record>
   <record id="role_misc" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">misc</field>
     <field name="body">{
   "index_permissions": [
@@ -45,7 +45,7 @@
     </field>
   </record>
   <record id="role_student_like" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">student_like</field>
     <field name="body">{
   "index_permissions": [
@@ -58,7 +58,7 @@
     </field>
   </record>
   <record id="role_food_only" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">food_only</field>
     <field name="body">{
   "index_permissions": [
@@ -72,7 +72,7 @@
     </field>
   </record>
   <record id="role_equipment_only" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">equipment_only</field>
     <field name="body">{
   "index_permissions": [
@@ -86,7 +86,7 @@
     </field>
   </record>
   <record id="role_veterinary" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">veterinary</field>
     <field name="body">{
   "index_permissions": [
@@ -100,7 +100,7 @@
     </field>
   </record>
   <record id="role_wholesaler_veterinary" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">wholesaler_veterinary</field>
     <field name="body">{
   "index_permissions": [
@@ -114,7 +114,7 @@
     </field>
   </record>
   <record id="role_wholesaler_pharmacy" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">wholesaler_pharmacy</field>
     <field name="body">{
   "index_permissions": [
@@ -128,7 +128,7 @@
     </field>
   </record>
   <record id="role_export_customer" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">export_customer</field>
     <field name="body">{
   "index_permissions": [
@@ -142,7 +142,7 @@
     </field>
   </record>
   <record id="role_export_meds" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">export_meds</field>
     <field name="body">{
   "index_permissions": [
@@ -156,7 +156,7 @@
     </field>
   </record>
   <record id="role_shareholder" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">shareholder</field>
     <field name="body">{
   "index_permissions": [
@@ -170,7 +170,7 @@
     </field>
   </record>
   <record id="role_supplier" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">supplier</field>
     <field name="body">{
   "cluster_permissions": ["read"],
@@ -197,7 +197,7 @@
     </field>
   </record>
   <record id="role_supplier_promotion" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">supplier_promotion</field>
     <field name="body">{
   "index_permissions": [
@@ -210,7 +210,7 @@
     </field>
   </record>
   <record id="role_is_alcyonnaire" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">is_alcyonnaire</field>
     <field name="body">{
   "cluster_permissions": ["read"],
@@ -227,7 +227,7 @@
     </field>
   </record>
   <record id="role_is_alcyonnaire_under_contract" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">is_alcyonnaire_under_contract</field>
     <field name="body">{
   "cluster_permissions": ["read"],
@@ -244,7 +244,7 @@
     </field>
   </record>
   <record id="role_non_alcyonnaire" model="elasticsearch.role">
-    <field name="backend_id" ref="alc_search_engine.elasticsearch_backend" />
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">non_alcyonnaire</field>
     <field name="body">{
   "cluster_permissions": ["read"],

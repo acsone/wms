@@ -97,7 +97,6 @@ exclude = [
   'odoo/addons/alc_edi_connector/*',
   'odoo/addons/alc_elasticsearch_price_sorting/*',
   'odoo/addons/alc_elasticsearch_score_script/*',
-  'odoo/addons/alc_elasticsearch_security/*',
   'odoo/addons/alc_elasticsearch_security_vt_groups/*',
   'odoo/addons/alc_eshop/*',
   'odoo/addons/alc_eshop_api_v2/*',

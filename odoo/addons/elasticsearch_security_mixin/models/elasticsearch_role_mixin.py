@@ -28,8 +28,7 @@ class ElasticsearchRoleMixin(models.AbstractModel):
     def unlink(self):
         domain_roles = self._get_linked_roles_domain()
         roles = self.env["elasticsearch.role"].search(domain_roles)
-        for role in roles:
-            role.delay_delete_role(role.name)
+        roles.unlink()
         return super().unlink()
 
     @api.model

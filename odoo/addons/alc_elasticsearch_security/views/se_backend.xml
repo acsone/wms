@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="se_backend_form_view">
+        <field name="model">se.backend</field>
+        <field name="inherit_id" ref="connector_search_engine.se_backend_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="before">
+                <button
+          name="create_pricelist_roles"
+          string="Create Pricelist Roles"
+          type="object"
+        />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
