@@ -134,7 +134,7 @@ odoo-addon-delivery-procurement-group-carrier==16.0.1.0.0.2
 odoo-addon-endpoint-route-handler==16.0.1.0.0.3
 odoo-addon-extendable==16.0.1.0.1.1
 odoo-addon-extendable-fastapi==16.0.2.0.2
-odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@d662281029fc59878a4145b9610f9786978971e8#subdirectory=setup/fastapi
+odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@f6bb9ab4a42cc2b32fa336b6a43bea308756dcf8#subdirectory=setup/fastapi
 odoo-addon-fastapi-auth-jwt==16.0.1.0.1.1
 odoo-addon-fs-attachment==16.0.1.0.3
 odoo-addon-fs-base-multi-image==16.0.1.0.0.2
