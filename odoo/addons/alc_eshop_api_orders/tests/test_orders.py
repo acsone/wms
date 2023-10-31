@@ -6,14 +6,17 @@ from .common import TestOrders
 
 class TestOrdersFlow(TestOrders):
     def test_orders_flow(self):
-        with self.orders_service() as service:
+        with self._create_test_client(partner=self.partner) as test_client:
             params = {"page": 1, "per_page": 10}
-            result = service.dispatch("search", params=params)
+            response = test_client.get("/orders", params=params)
+            self.assertEqual(200, response.status_code)
+            result = response.json()
             self.assertEqual(result["size"], 1)
             self.assertEqual(result["data"][0]["state_label"], "Pending")
 
             # tolerate missing state
             self.sale_order.shopinvader_state = False
-            params = {"page": 1, "per_page": 10}
-            result = service.dispatch("search", params=params)
+            response = test_client.get("/orders", params=params)
+            self.assertEqual(200, response.status_code)
+            result = response.json()
             self.assertEqual(result["data"][0]["state_label"], None)

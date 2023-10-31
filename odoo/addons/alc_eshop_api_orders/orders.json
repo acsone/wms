@@ -1,0 +1,178 @@
+{
+  "info": {"version": "", "description": "", "title": "orders REST services"},
+  "paths": {
+    "/": {
+      "get": {
+        "security": [{"api_key": []}],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "amount_total",
+                          "date_order",
+                          "id",
+                          "name",
+                          "sale_channel",
+                          "state",
+                          "state_label"
+                        ],
+                        "properties": {
+                          "state": {"nullable": false, "type": "string"},
+                          "suite_name": {"nullable": true, "type": "string"},
+                          "name": {"nullable": false, "type": "string"},
+                          "state_label": {"nullable": true, "type": "string"},
+                          "sale_channel": {"nullable": false, "type": "string"},
+                          "customer_ref": {"nullable": true, "type": "string"},
+                          "date_order": {
+                            "nullable": false,
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "lines": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "required": [
+                                "line_id",
+                                "price",
+                                "qty_canceled",
+                                "qty_delivered",
+                                "qty_ordered",
+                                "reference"
+                              ],
+                              "properties": {
+                                "qty_delivered": {
+                                  "nullable": false,
+                                  "type": "number",
+                                  "format": "float"
+                                },
+                                "reference": {"nullable": false, "type": "string"},
+                                "price": {
+                                  "nullable": false,
+                                  "type": "number",
+                                  "format": "float"
+                                },
+                                "line_id": {"nullable": false, "type": "integer"},
+                                "qty_canceled": {
+                                  "nullable": false,
+                                  "type": "number",
+                                  "format": "float"
+                                },
+                                "qty_ordered": {
+                                  "nullable": false,
+                                  "type": "number",
+                                  "format": "float"
+                                }
+                              }
+                            }
+                          },
+                          "id": {"nullable": false, "type": "integer"},
+                          "amount_total": {
+                            "nullable": false,
+                            "type": "number",
+                            "format": "float"
+                          }
+                        }
+                      }
+                    },
+                    "size": {"type": "integer"}
+                  }
+                }
+              }
+            }
+          },
+          "404": {"description": "Requested resource not found"},
+          "403": {
+            "description": "You don't have the permission to access the requested resource."
+          },
+          "401": {
+            "description": "The user is not authorized. Authentication is required"
+          },
+          "400": {"description": "One of the given parameter is not valid"}
+        },
+        "parameters": [
+          {
+            "style": "simple",
+            "name": "PARTNER-IDENTITY",
+            "description": "Partner identity: The partner identity is the concatenation of the partner reference and the partner login into the alcyon website separated by a pipe character. Example: 123456789|john.doe. This field is required when authenticated by auth_api_key.",
+            "required": false,
+            "in": "header",
+            "schema": {"type": "string"}
+          },
+          {
+            "name": "from_date",
+            "allowEmptyValue": false,
+            "default": null,
+            "required": false,
+            "in": "query",
+            "schema": {"type": "string"}
+          },
+          {
+            "name": "limit",
+            "allowEmptyValue": true,
+            "default": null,
+            "required": false,
+            "in": "query",
+            "schema": {"type": "integer"}
+          },
+          {
+            "name": "page",
+            "allowEmptyValue": true,
+            "default": null,
+            "required": false,
+            "in": "query",
+            "schema": {"type": "integer"}
+          },
+          {
+            "name": "per_page",
+            "allowEmptyValue": true,
+            "default": null,
+            "required": false,
+            "in": "query",
+            "schema": {"type": "integer"}
+          },
+          {
+            "name": "sale_channel",
+            "allowEmptyValue": false,
+            "default": null,
+            "required": false,
+            "in": "query",
+            "schema": {"enum": ["phone", "mail", "fax", "web"], "type": "string"}
+          }
+        ],
+        "summary": ""
+      }
+    }
+  },
+  "openapi": "3.0.0",
+  "components": {
+    "securitySchemes": {
+      "api_key": {"type": "apiKey", "name": "API-KEY", "in": "header"},
+      "jwt": {
+        "scheme": "bearer",
+        "type": "http",
+        "name": "jwt",
+        "bearerFormat": "JWT",
+        "description": "Enter JWT Bearer Token ** only **"
+      },
+      "user": {"type": "apiKey", "name": "session_id", "in": "cookie"},
+      "magento_migration_bearer_token": {
+        "scheme": "bearer",
+        "type": "http",
+        "name": "magento_migration_bearer_token",
+        "bearerFormat": "String",
+        "description": "Enter Magento Migration Bearer Token ** only **"
+      }
+    }
+  },
+  "servers": [{"url": "https://erp.alcyonbelux.be/shopinvader/orders"}]
+}
