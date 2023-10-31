@@ -58,11 +58,6 @@ msgid "Eshop Info Banner"
 msgstr "Bannières d'information"
 
 #. module: alc_eshop_search_engine_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_search_engine_info_banner.se_backend_form_view
-msgid "Info banners"
-msgstr "Bannières info"
-
-#. module: alc_eshop_search_engine_info_banner
 #: model:ir.model,name:alc_eshop_search_engine_info_banner.model_se_backend
 msgid "Se Backend"
 msgstr ""
@@ -94,6 +89,9 @@ msgstr "Synchronize info banners"
 #: model_terms:ir.ui.view,arch_db:alc_eshop_search_engine_info_banner.se_backend_form_view
 msgid "Synchronize info banners"
 msgstr "Synchronize info banners"
+
+#~ msgid "Info banners"
+#~ msgstr "Bannières info"
 
 #~ msgid "%s: Batch export EShop Info banners"
 #~ msgstr "%s: Batch export EShop Info banners"
