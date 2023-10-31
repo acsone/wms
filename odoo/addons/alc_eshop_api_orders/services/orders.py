@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -128,9 +127,10 @@ class OrdersService(Component):
 
     def _get_parser(self):
         field = self.model._fields["shopinvader_state"]
-        state_label = (
-            lambda r, fn: field.convert_to_export(r.shopinvader_state, r) or None
-        )
+
+        def state_label(r, fn):
+            return field.convert_to_export(r.shopinvader_state, r) or None
+
         parser_lines = self._get_parser_lines()
         return [
             "id",
