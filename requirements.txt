@@ -359,6 +359,7 @@ opensearch-py==2.3.2
 openupgradelib @ git+https://github.com/acsone/openupgradelib.git@d6a7093a8c89fb51ecee58f886b352aa9592de5c
 orjson==3.9.9
 packaging==23.1
+pandas==2.1.1
 parse-accept-language==0.1.2
 passlib==1.7.4
 pdfminer==20191125
@@ -408,6 +409,7 @@ starlette==0.27.0
 text-unidecode==1.3
 typing_extensions==4.7.1
 typodoo==0.3
+tzdata==2023.3
 ujson==5.8.0
 unicodecsv==0.14.1
 Unidecode==1.3.6
