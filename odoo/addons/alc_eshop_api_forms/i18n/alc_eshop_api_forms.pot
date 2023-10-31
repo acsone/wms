@@ -1,0 +1,218 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_eshop_api_forms
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_eshop_api_forms
+#: model:alc.eshop.form,name:alc_eshop_api_forms.alc_eshop_form_authenticated_sav
+msgid "After-sales service"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__audience
+msgid "Audience"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields.selection,name:alc_eshop_api_forms.selection__alc_eshop_form__audience__authenticated_only
+#: model_terms:ir.ui.view,arch_db:alc_eshop_api_forms.alc_eshop_form_search_view
+msgid "Authenticated"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:alc.eshop.form,name:alc_eshop_api_forms.alc_eshop_form_authenticated_update_address
+msgid "Change my contact information"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__code
+msgid "Code"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:alc.eshop.form,name:alc_eshop_api_forms.alc_eshop_form_authenticated_contact
+#: model:alc.eshop.form,name:alc_eshop_api_forms.alc_eshop_form_public_contact
+msgid "Contact"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__email
+msgid "Email"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__email_subject
+msgid "Email Subject"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.actions.act_window,name:alc_eshop_api_forms.alc_eshop_form_act_window
+#: model:ir.model,name:alc_eshop_api_forms.model_alc_eshop_form
+#: model:ir.ui.menu,name:alc_eshop_api_forms.alc_eshop_form_menu
+msgid "Eshop Form"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model_terms:ir.ui.view,arch_db:alc_eshop_api_forms.report_alc_eshop_form_submission
+msgid "Eshop:"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__form
+msgid "Form"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__form_options
+msgid "Form Options"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#. odoo-python
+#: code:addons/alc_eshop_api_forms/models/alc_eshop_form.py:0
+#, python-format
+msgid "Form is not a json valid string"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__id
+msgid "ID"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,help:alc_eshop_api_forms.field_alc_eshop_form__log_on_partner
+msgid ""
+"If checked, each time a partner submit a form, a comment will be added into "
+"the partner's chatter"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__log_on_partner
+msgid "Log On Partner"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__name
+#: model_terms:ir.ui.view,arch_db:alc_eshop_api_forms.alc_eshop_form_form_view
+msgid "Name"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:alc.eshop.form,name:alc_eshop_api_forms.alc_eshop_form_authenticated_opinion
+msgid "Opinion on the website"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#. odoo-python
+#: code:addons/alc_eshop_api_forms/models/alc_eshop_form.py:0
+#, python-format
+msgid "Options are not a json valid string"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields.selection,name:alc_eshop_api_forms.selection__alc_eshop_form__audience__public_only
+#: model_terms:ir.ui.view,arch_db:alc_eshop_api_forms.alc_eshop_form_search_view
+msgid "Public"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model_terms:ir.ui.view,arch_db:alc_eshop_api_forms.alc_eshop_form_search_view
+msgid "Published"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:alc.eshop.form,name:alc_eshop_api_forms.alc_eshop_form_public_registration
+msgid "Registration"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:alc.eshop.form,name:alc_eshop_api_forms.alc_eshop_form_authenticated_pvi_labels
+msgid "Request for PVI on label"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:alc.eshop.form,name:alc_eshop_api_forms.alc_eshop_form_authenticated_rma
+msgid "Return products"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.constraint,message:alc_eshop_api_forms.constraint_alc_eshop_form_code_uniq
+msgid "The code must be unique!"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:ir.model.fields,field_description:alc_eshop_api_forms.field_alc_eshop_form__published
+msgid "Visible on EShop"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model_terms:ir.ui.view,arch_db:alc_eshop_api_forms.report_alc_eshop_form_submission
+msgid ""
+"Vous trouverez ci-dessous les informations fournies\n"
+"                            par"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model:res.groups,name:alc_eshop_api_forms.eshop_form_manager_group
+msgid "Website form manager"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model_terms:ir.ui.view,arch_db:alc_eshop_api_forms.alc_eshop_form_form_view
+msgid "name"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model_terms:ir.ui.view,arch_db:alc_eshop_api_forms.report_alc_eshop_form_submission
+msgid "pour le formulaire"
+msgstr ""
+
+#. module: alc_eshop_api_forms
+#: model_terms:ir.ui.view,arch_db:alc_eshop_api_forms.report_alc_eshop_form_submission
+msgid "un visiteur"
+msgstr ""
