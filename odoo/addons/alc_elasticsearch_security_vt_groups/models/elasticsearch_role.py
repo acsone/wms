@@ -1,16 +1,20 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import _, fields
+
+from odoo.addons.alc_veterinary_group.models.veterinary_group import VeterinaryGroup
+from odoo.addons.elasticsearch_security.models.elasticsearch_role import (
+    ElasticSearchRole as ElasticSearchRoleBase,
+)
 
 
-class ElasticSearchRole(models.Model):
+class ElasticSearchRole(ElasticSearchRoleBase):
 
-    _inherit = "elasticsearch.role"
-
-    vt_group_id = fields.Many2one(
-        "veterinary.group", string="Veterinary Group", readonly=True, copy=False,
+    vt_group_id = fields.Many2one[VeterinaryGroup](
+        string="Veterinary Group",
+        readonly=True,
+        copy=False,
     )
 
     _sql_constraints = [

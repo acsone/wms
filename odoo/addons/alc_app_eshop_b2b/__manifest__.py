@@ -32,6 +32,7 @@
         "elasticsearch_security_mixin",
         "alc_elasticsearch_security",
         "alc_elasticsearch_role",
+        "alc_elasticsearch_security_vt_groups",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",

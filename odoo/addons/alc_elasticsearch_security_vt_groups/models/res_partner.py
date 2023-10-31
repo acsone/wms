@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
+from odoo import api
+
+from odoo.addons.base.models.res_partner import Partner
 
 
-class ResPartner(models.Model):
-
-    _inherit = "res.partner"
-
+class ResPartner(Partner):
     @api.depends(
         "partner_type",
         "supplier_promotion_sale_allowed",
@@ -23,7 +21,7 @@ class ResPartner(models.Model):
             p: ",".join(p.veterinary_group_ids.mapped(lambda v: v._get_role_name()))
             for p in self.with_context(lang=False)
         }
-        res = super(ResPartner, self)._compute_elasticsearch_role()
+        res = super()._compute_elasticsearch_role()
         for partner in self:
             roles = partner.elasticsearch_role
             vt_roles = partner_vt_roles[partner]

@@ -1,15 +1,16 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields
+
+from odoo.addons.product.models.product_template import (
+    ProductTemplate as ProductTemplateBase,
+)
 
 
-class ProductTemplate(models.Model):
+class ProductTemplate(ProductTemplateBase):
 
-    _inherit = "product.template"
-
-    vt_groups = fields.Serialized(compute="_compute_vt_groups")
+    vt_groups = fields.Json(compute="_compute_vt_groups")
 
     @api.depends("veterinary_group_ids")
     def _compute_vt_groups(self):

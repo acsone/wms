@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from slugify import slugify
 
-from odoo import api, models
+from odoo import api
+from odoo.models import Model
 
 
-class VeterinaryGroup(models.Model):
+class VeterinaryGroup(Model):
 
     _name = "veterinary.group"
     _inherit = ["veterinary.group", "elasticsearch.role.mixin"]
@@ -18,7 +18,7 @@ class VeterinaryGroup(models.Model):
 
     def _get_role_name(self):
         name = self.with_context(lang=False).name
-        return slugify(u"vtgroup_{}_{}".format(name, self.id))
+        return slugify(f"vtgroup_{name}_{self.id}")
 
     def _get_role_body(self):
         body = """{
@@ -33,6 +33,6 @@ class VeterinaryGroup(models.Model):
         return body % self.id
 
     def _get_vals(self):
-        vals = super(VeterinaryGroup, self)._get_vals()
+        vals = super()._get_vals()
         vals["extra_backend_roles"] = self._get_role_name()
         return vals

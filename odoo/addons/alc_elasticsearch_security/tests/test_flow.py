@@ -29,9 +29,10 @@ class TestESRolesFlow(TestESRoles):
         # when
         partner.property_product_pricelist = self.pricelist
         # then
-        expected1 = "price-bons-prixs,guest"
-        expected2 = "guest,price-bons-prixs"
-        self.assertTrue(partner.elasticsearch_role in (expected1, expected2))
+        self.assertSetEqual(
+            set(partner.elasticsearch_role.split(",")),
+            {"price-bons-prixs", "guest", "non_alcyonnaire"},
+        )
 
     def test_unique_pricelist_role(self):
         self.assertFalse(self.backend.role_ids)
