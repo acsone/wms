@@ -16,7 +16,7 @@
     <record model="ir.model.access" id="alc_eshop_form_manage">
         <field name="name">alc.eshop.form manager</field>
         <field name="model_id" ref="model_alc_eshop_form" />
-        <field name="group_id" ref="alc_eshop_form.eshop_form_manager_group" />
+        <field name="group_id" ref="alc_eshop_api_forms.eshop_form_manager_group" />
         <field name="perm_read" eval="1" />
         <field name="perm_create" eval="1" />
         <field name="perm_write" eval="1" />

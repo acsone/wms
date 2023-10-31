@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -45,16 +44,16 @@ class AlcEshopForm(models.Model):
         for record in self:
             try:
                 json.loads(record.form_options)
-            except ValueError:
-                raise ValidationError(_("Options are not a json valid string"))
+            except ValueError as e:
+                raise ValidationError(_("Options are not a json valid string")) from e
 
     @api.constrains("form")
     def _check_form(self):
         for record in self:
             try:
                 json.loads(record.form)
-            except ValueError:
-                raise ValidationError(_("Form is not a json valid string"))
+            except ValueError as e:
+                raise ValidationError(_("Form is not a json valid string")) from e
 
     @property
     def _default_form_options(self):
@@ -70,24 +69,26 @@ class AlcEshopForm(models.Model):
         audience = vals["audience"]
         return "_".join((name[:3].upper(), audience[:3].upper()))
 
-    @api.model
-    def create(self, vals):
-        if not vals.get("code"):
-            vals["code"] = self._get_default_code_from_vals(vals)
-        return super(AlcEshopForm, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if not vals.get("code"):
+                vals["code"] = self._get_default_code_from_vals(vals)
+        return super().create(vals_list)
 
     def _send_collected_info(self, info, partner=None):
-        """ send an email with the collected info from the form submission
+        """Send an email with the collected info from the form submission.
 
         info is a dict of ('name' : 'value') info submitted. If the form
         has been submitted by an authenticated partner, the partner is filled
-
         """
-        base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url").rstrip("/")
+        base_url = (
+            self.env["ir.config_parameter"].sudo().get_param("web.base.url").rstrip("/")
+        )
         partner_form_url = ""
         if partner:
-            partner_form_url = "{}/web#id={}&view_type=form&model=res.partner".format(
-                base_url, partner.id,
+            partner_form_url = (
+                f"{base_url}/web#id={partner.id}&view_type=form&model=res.partner"
             )
         data = {
             "info": info,
@@ -97,8 +98,8 @@ class AlcEshopForm(models.Model):
             "partner_form_url": partner_form_url,
             "base_url": base_url,
         }
-        html = self.env["report"].get_html(
-            docids=None, report_name="report_alc_eshop_form_submission", data=data,
+        html = self.env["ir.qweb"]._render(
+            "alc_eshop_api_forms.report_alc_eshop_form_submission", data
         )
         mail_values = {
             "email_to": self.email,
@@ -109,7 +110,9 @@ class AlcEshopForm(models.Model):
         if partner and self.log_on_partner:
             # add the message into the mail thread of the given partner
             partner.message_post(
-                body=html, subject=self.email_subject, message_type="notification",
+                body=html,
+                subject=self.email_subject,
+                message_type="notification",
             )
         new_mail = self.env["mail.mail"].create(mail_values)
         new_mail.mail_message_id.subject = self.email_subject

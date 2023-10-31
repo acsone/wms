@@ -1,23 +1,17 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from contextlib import contextmanager
+from unittest import mock
 
-import mock
+from odoo.addons.fastapi.tests.common import FastAPITransactionCase
 
-from odoo.tests.common import SavepointCase
-
-from odoo.addons.base_rest.controllers.main import _PseudoCollection
-from odoo.addons.component.core import WorkContext
-from odoo.addons.component.tests.common import ComponentMixin
+from ..routers import forms_router
 
 
-class TestEShopForm(SavepointCase, ComponentMixin):
+class TestEShopForm(FastAPITransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestEShopForm, cls).setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.setUpComponent()
+        super().setUpClass()
+        cls.default_fastapi_router = forms_router
         cls.partner = cls.env["res.partner"].create({"name": "partner"})
         cls.EShopForm = cls.env["alc.eshop.form"]
         cls.EShopForm.search([]).unlink()
@@ -53,65 +47,51 @@ class TestEShopForm(SavepointCase, ComponentMixin):
             }
         )
 
-    # pylint: disable=method-required-super
-    def setUp(self):
-        # resolve an inheritance issue (common.SavepointCase does not call
-        # super)
-        SavepointCase.setUp(self)
-        ComponentMixin.setUp(self)
-
-    @classmethod
-    @contextmanager
-    def form_service(cls, authenticated_partner_id):
-        env = cls.env(
-            context=dict(
-                cls.env.context, authenticated_partner_id=authenticated_partner_id,
-            )
-        )
-        collection = _PseudoCollection("shopinvader.backend", env)
-        work = WorkContext(
-            model_name="rest.service.registration",
-            collection=collection,
-            request=mock.Mock(),
-            authenticated_partner_id=authenticated_partner_id,
-        )
-        yield work.component(usage="form")
-
     def test_search_public(self):
-        with self.form_service(None) as service:
-            res = service.dispatch("search")
-        self.assertTrue(res)
+        with self._create_test_client(partner=None) as test_client:
+            response = test_client.get("/forms")
+        self.assertEqual(200, response.status_code)
+        res = response.json()
         self.assertEqual(1, res.get("size"))
         self.assertEqual(self.form_public.id, res["data"][0]["id"])
 
     def test_search_published_only(self):
-        with self.form_service(None) as service:
-            res = service.dispatch("search")
+        with self._create_test_client(partner=None) as test_client:
+            response = test_client.get("/forms")
+        self.assertEqual(200, response.status_code)
+        res = response.json()
         self.assertTrue(res)
         self.assertEqual(1, res.get("size"))
         self.assertEqual(self.form_public.id, res["data"][0]["id"])
         self.form_public_not_published.published = True
-        with self.form_service(None) as service:
-            res = service.dispatch("search")
+        with self._create_test_client(partner=None) as test_client:
+            response = test_client.get("/forms")
+        self.assertEqual(200, response.status_code)
+        res = response.json()
         self.assertTrue(res)
         self.assertEqual(2, res.get("size"))
 
     def test_search_authenticated(self):
-        with self.form_service(self.partner.id) as service:
-            res = service.dispatch("search")
+        with self._create_test_client(partner=self.partner) as test_client:
+            response = test_client.get("/forms")
+        self.assertEqual(200, response.status_code)
+        res = response.json()
         self.assertTrue(res)
         self.assertEqual(1, res.get("size"))
         self.assertEqual(self.form_authenticated.id, res["data"][0]["id"])
 
     def test_submit(self):
-        with self.form_service(self.partner.id) as service, mock.patch.object(
+        with self._create_test_client(
+            partner=self.partner
+        ) as test_client, mock.patch.object(
             self.EShopForm.__class__, "_send_collected_info"
         ) as mocked_send_info:
-            res = service.dispatch(
-                "submit",
-                self.form_authenticated.id,
-                params={"data": {"a": "a", "b": "b"}},
+            response = test_client.post(
+                f"/forms/{self.form_authenticated.id}",
+                json={"data": {"a": "a", "b": "b"}},
             )
+            self.assertEqual(200, response.status_code)
+            res = response.json()
             self.assertTrue(res)
             mocked_send_info.assert_called_once()
             mocked_send_info.assert_called_with({"a": "a", "b": "b"}, self.partner)

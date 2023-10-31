@@ -2,15 +2,12 @@
 <!-- Copyright 2022 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-    <template
-    id="report_alc_eshop_form_submission"
-    name="alc_eshop_form.report_alc_eshop_form_submission"
-  >
+    <template id="report_alc_eshop_form_submission">
         <t t-set="title">Eshop:
             <t t-esc="eshop_form.name" />
         </t>
-        <t t-call="report.html_container">
-            <t t-call="report.external_layout">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
                 <div class="page">
                     <div class="oe_structure" />
                     <div class="row">
