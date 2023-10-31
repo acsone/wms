@@ -29,6 +29,7 @@
         "alc_eshop_search_engine_ads",
         "connector_keycloak",
         "elasticsearch_security",
+        "elasticsearch_security_mixin",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",
