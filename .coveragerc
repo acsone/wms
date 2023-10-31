@@ -102,7 +102,6 @@ omit =
     odoo/addons/delivery_rounds/*
     odoo/addons/delivery_rounds_alcyon/*
     odoo/addons/elasticsearch_product_cache/*
-    odoo/addons/elasticsearch_security/*
     odoo/addons/elasticsearch_security_mixin/*
     odoo/addons/l10n_be_vat/*
     odoo/addons/partner_archive_new_partner/*
