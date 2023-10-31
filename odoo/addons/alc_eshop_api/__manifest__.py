@@ -26,6 +26,7 @@
         "alc_eshop_api_products_on_order",
         "alc_eshop_api_veterinary_groups",
         "alc_eshop_api_promotion_subscriptions",
+        "alc_eshop_api_forms",
     ],
     "data": [
         "views/fastapi_endpoint.xml",

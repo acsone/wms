@@ -4,8 +4,11 @@
 from functools import partial
 from typing import Any
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from fastapi.security import OAuth2AuthorizationCodeBearer
+from starlette.middleware import Middleware
+from starlette.middleware.base import BaseHTTPMiddleware, DispatchFunction
+from starlette.types import ASGIApp
 
 from odoo import api, fields
 
@@ -14,6 +17,7 @@ from odoo.addons.alc_eshop_api_classifieds.routers import classified_ads_router
 from odoo.addons.alc_eshop_api_cms.routers import cms_router
 from odoo.addons.alc_eshop_api_discounts.routers import discounts_router
 from odoo.addons.alc_eshop_api_documents.routers import documents_router
+from odoo.addons.alc_eshop_api_forms.routers import forms_router
 from odoo.addons.alc_eshop_api_products_on_order.routers import products_on_order_router
 from odoo.addons.alc_eshop_api_promotion_subscriptions.routers import (
     promo_subscriptions_router,
@@ -22,7 +26,10 @@ from odoo.addons.alc_eshop_api_registration.routers import registrations_router
 from odoo.addons.alc_eshop_api_sale_statistic.routers import sale_statistics_router
 from odoo.addons.alc_eshop_api_veterinary_groups.routers import veterinary_groups_router
 from odoo.addons.auth_jwt.models.auth_jwt_validator import AuthJwtValidator
-from odoo.addons.fastapi.dependencies import authenticated_partner_impl
+from odoo.addons.fastapi.dependencies import (
+    authenticated_partner_impl,
+    optionally_authenticated_partner_impl,
+)
 from odoo.addons.fastapi.models.fastapi_endpoint import (
     FastapiEndpoint as FastapiEndpointBase,
 )
@@ -30,6 +37,7 @@ from odoo.addons.fastapi_auth_jwt.dependencies import (
     auth_jwt_authenticated_partner,
     auth_jwt_default_validator_name,
     auth_jwt_http_header_authorization,
+    auth_jwt_optionally_authenticated_partner,
 )
 from odoo.addons.shopinvader_api_address.routers.address_service import address_router
 from odoo.addons.shopinvader_api_cart.routers import cart_router
@@ -54,7 +62,6 @@ class FastapiEndpoint(FastapiEndpointBase):
             address_router.tags.append("address")
         return [
             address_router,
-            cart_router,
             classified_ads_router,
             cms_router,
             sale_statistics_router,
@@ -66,6 +73,7 @@ class FastapiEndpoint(FastapiEndpointBase):
             products_on_order_router,
             veterinary_groups_router,
             promo_subscriptions_router,
+            forms_router,
         ]
 
     def _get_alc_eshop_app_tags(self, params) -> list:
@@ -86,7 +94,10 @@ class FastapiEndpoint(FastapiEndpointBase):
         tags_metadata.append(
             {
                 "name": "carts",
-                "description": "Set of services to manage carts",
+                "description": "Set of services to manage carts. Previously, cart "
+                "services were available under /v2/cart. They are now available "
+                "under /carts. The /v2/cart endpoint is still available but "
+                "is deprecated and internally redirect to /carts.",
             }
         )
         tags_metadata.append(
@@ -157,15 +168,19 @@ class FastapiEndpoint(FastapiEndpointBase):
                 "product promotions",
             }
         )
+        tags_metadata.append(
+            {
+                "name": "forms",
+                "description": "Set of services to manage forms",
+            }
+        )
         return tags_metadata
 
     def _prepare_fastapi_app_params(self) -> dict[str, Any]:
         params = super()._prepare_fastapi_app_params()
         if self.app == "alc_eshop_app":
             params["openapi_tags"] = self._get_alc_eshop_app_tags(params)
-            params[
-                "swagger_ui_oauth2_redirect_url"
-            ] = "/alc_eshop_app/docs/oauth2-redirect"
+            params["swagger_ui_oauth2_redirect_url"] = "/docs/oauth2-redirect"
             params["swagger_ui_init_oauth"] = {
                 "clientId": "demo16.shopinvader.com",
             }
@@ -176,24 +191,60 @@ class FastapiEndpoint(FastapiEndpointBase):
             }
         return params
 
-    def _get_alc_eshop_app_app_dependencies_overrides(self):
-        oauth2_scheme = OAuth2AuthorizationCodeBearer(
-            authorizationUrl=(
-                "https://keycloak.demo16.shopinvader.com/"
-                "auth/realms/master/protocol/openid-connect/auth"
-            ),
-            tokenUrl=(
-                "https://keycloak.demo16.shopinvader.com/"
-                "auth/realms/master/protocol/openid-connect/token"
-            ),
-            scopes={"openid": "", "email": "", "profile": ""},
-            # Don't fail if missing Authorization header, as we look for the cookie too.
-            auto_error=False,
-        )
-        return {
-            authenticated_partner_impl: auth_jwt_authenticated_partner,
-            auth_jwt_default_validator_name: partial(
-                lambda a: a, self.auth_jwt_validator_id.name or None
-            ),
-            auth_jwt_http_header_authorization: oauth2_scheme,
-        }
+    def _get_app(self):
+        app = super()._get_app()
+        if self.app == "alc_eshop_app":
+            app.include_router(router=cart_router, prefix="/carts")
+        return app
+
+    def _get_app_dependencies_overrides(self):
+        overrides = super()._get_app_dependencies_overrides()
+        if self.app == "alc_eshop_app":
+            oauth2_scheme = OAuth2AuthorizationCodeBearer(
+                authorizationUrl=(
+                    "https://keycloak.demo16.shopinvader.com/"
+                    "auth/realms/master/protocol/openid-connect/auth"
+                ),
+                tokenUrl=(
+                    "https://keycloak.demo16.shopinvader.com/"
+                    "auth/realms/master/protocol/openid-connect/token"
+                ),
+                scopes={"openid": "", "email": "", "profile": ""},
+                # Don't fail if missing Authorization header, as we look for the cookie too.
+                auto_error=False,
+            )
+            overrides.update(
+                {
+                    authenticated_partner_impl: auth_jwt_authenticated_partner,
+                    auth_jwt_default_validator_name: partial(
+                        lambda a: a, self.auth_jwt_validator_id.name or None
+                    ),
+                    auth_jwt_http_header_authorization: oauth2_scheme,
+                    optionally_authenticated_partner_impl: auth_jwt_optionally_authenticated_partner,
+                }
+            )
+        return overrides
+
+    def _get_fastapi_app_middlewares(self) -> list[Middleware]:
+        middlewares = super()._get_fastapi_app_middlewares()
+        if self.app == "alc_eshop_app":
+            middlewares.append(
+                Middleware(RedirectV2CartMiddleware, root_path=self.root_path)
+            )
+        return middlewares
+
+
+class RedirectV2CartMiddleware(BaseHTTPMiddleware):
+    def __init__(
+        self,
+        app: ASGIApp,
+        dispatch: DispatchFunction | None = None,
+        root_path: str = "",
+    ) -> None:
+        super().__init__(app, dispatch)
+        self.root_path = root_path
+
+    async def dispatch(self, request: Request, call_next):
+        if request.url.path.startswith(f"{self.root_path}/v2/cart"):
+            request.scope["path"] = request.scope["path"].replace("/v2/cart", "/carts")
+        return await call_next(request)
