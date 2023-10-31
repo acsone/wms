@@ -4,8 +4,7 @@
 from openupgradelib import openupgrade
 
 
-@openupgrade.migrate()
-def migrate(env, version):
+def pre_init_hook(cr):
     data = [
         ("alc_elasticsearch_security.role_guest", "alc_elasticsearch_role.role_guest"),
         ("alc_elasticsearch_security.role_misc", "alc_elasticsearch_role.role_misc"),
@@ -66,4 +65,4 @@ def migrate(env, version):
             "alc_elasticsearch_role.role_non_alcyonnaire",
         ),
     ]
-    openupgrade.rename_xmlids(env.cr, data, allow_merge=True)
+    openupgrade.rename_xmlids(cr, data, allow_merge=True)
