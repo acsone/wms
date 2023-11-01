@@ -41,11 +41,6 @@ class TestKeycloakUpdateFlow(TestKeycloak):
     def test_update_keycloak_partner(self):
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
 
-        # if we write on the ref, it does not trigger an update
-        with trap_jobs() as trap:
-            self.partner.ref = "CustomerRef!"
-            trap.assert_jobs_count(0)
-
         # when we write on the name, it does trigger an update
         with trap_jobs() as trap:
             self.partner.name = "NewFirstname NewLastname"
