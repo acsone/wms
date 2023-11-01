@@ -737,6 +737,7 @@ def set_modules_to_remove():
         "alc_eshop_form",  # renamed to alc_eshop_api_forms
         "alc_eshop_services_orders",  # renamed to alc_eshop_api_orders
         "alc_eshop_services_orders_suite_channel",  # logic put into alc_eshop_api_orders
+        "alc_eshop_services_deliveries",  # renamed to alc_eshop_api_deliveries
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:

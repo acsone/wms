@@ -28,6 +28,7 @@
         "alc_eshop_api_promotion_subscriptions",
         "alc_eshop_api_forms",
         "alc_eshop_api_orders",
+        "alc_eshop_api_deliveries",
     ],
     "data": [
         "views/fastapi_endpoint.xml",
