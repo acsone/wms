@@ -740,6 +740,7 @@ def set_modules_to_remove():
         "alc_eshop_services_deliveries",  # renamed to alc_eshop_api_deliveries
         "standard_service_mixin",  # no more used
         "alc_base_rest_api_doc",  # no more used
+        "alc_eshop_partner_veterinary",  # renamed in alc_eshop_schema_address
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
