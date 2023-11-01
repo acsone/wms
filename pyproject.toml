@@ -171,7 +171,6 @@ exclude = [
   'odoo/addons/specific_account/*',
   'odoo/addons/specific_print/*',
   'odoo/addons/specific_stock/*',
-  'odoo/addons/standard_service_mixin/*',
   'odoo/addons/stock_inventory_constrains/*',
   'odoo/addons/stock_picking_zone/*',
   'odoo/addons/storage_file_url_store/*',
