@@ -15,6 +15,7 @@ from odoo import api, fields
 from odoo.addons.alc_eshop_api_catalog.routers import brands_router, catalog_router
 from odoo.addons.alc_eshop_api_classifieds.routers import classified_ads_router
 from odoo.addons.alc_eshop_api_cms.routers import cms_router
+from odoo.addons.alc_eshop_api_deliveries.routers import deliveries_router
 from odoo.addons.alc_eshop_api_discounts.routers import discounts_router
 from odoo.addons.alc_eshop_api_documents.routers import documents_router
 from odoo.addons.alc_eshop_api_forms.routers import forms_router
@@ -76,6 +77,7 @@ class FastapiEndpoint(FastapiEndpointBase):
             promo_subscriptions_router,
             forms_router,
             orders_router,
+            deliveries_router,
         ]
 
     def _get_alc_eshop_app_tags(self, params) -> list:
