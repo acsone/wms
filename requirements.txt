@@ -133,7 +133,7 @@ odoo-addon-delivery-package-type-number-parcels==16.0.1.0.1
 odoo-addon-delivery-procurement-group-carrier==16.0.1.0.0.2
 odoo-addon-endpoint-route-handler==16.0.1.0.0.3
 odoo-addon-extendable==16.0.1.0.1.1
-odoo-addon-extendable-fastapi==16.0.2.0.2
+odoo-addon-extendable-fastapi==16.0.2.1.0
 odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@639bdf720f3ab49bf3553e00fde3a002770d13fa#subdirectory=setup/fastapi
 odoo-addon-fastapi-auth-jwt==16.0.1.0.1.1
 odoo-addon-fs-attachment==16.0.1.0.3

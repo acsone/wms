@@ -11,6 +11,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "fastapi",
+        "extendable_fastapi",
         "shopinvader_api_address",
         "shopinvader_api_cart",
         "shopinvader_fastapi_auth_jwt",
@@ -30,6 +31,7 @@
         "alc_eshop_api_forms",
         "alc_eshop_api_orders",
         "alc_eshop_api_deliveries",
+        "alc_eshop_api_customer",
     ],
     "data": [
         "views/fastapi_endpoint.xml",

@@ -1,16 +1,18 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import json
 
-from contextlib import contextmanager
+from odoo.addons.extendable_fastapi.tests.common import FastAPITransactionCase
+from odoo.addons.shopinvader_schema_address.schemas import Address
 
-from odoo.addons.shopinvader.tests.common import CommonCase
+from ..routers import customer_router
 
 
-class TestEshopCustomerSalesPerson(CommonCase):
+class TestEshopCustomerSalesPerson(FastAPITransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestEshopCustomerSalesPerson, cls).setUpClass()
+        super().setUpClass()
+        cls.default_fastapi_router = customer_router
         cls.data = {
             "email": "new@customer.example.com",
             "name": "Purple",
@@ -32,22 +34,17 @@ class TestEshopCustomerSalesPerson(CommonCase):
             {"name": "with sales person", "user_id": cls.sales_person_user.id}
         )
 
-    @contextmanager
-    def customer_service(self, partner=None):
-        with self.work_on_services(
-            partner=partner, shopinvader_session=self.shopinvader_session
-        ) as work:
-            yield work.component(usage="customer")
-
     def _assert_sales_person(self, partner_customer, partner_sales_person):
-        with self.customer_service(partner_customer) as service:
+        with self._create_test_client(partner=partner_customer) as test_client:
             self.maxDiff = 2000
-            res = service.dispatch("get_sales_person")
+            response = test_client.get("/customer/sales_person")
+            self.assertEqual(response.status_code, 200)
+            res = response.json()
             self.assertDictEqual(
                 {
                     "name": partner_sales_person.name,
-                    "address": self.env["res.partner.serializer"]._to_json_address(
-                        partner_sales_person
+                    "address": json.loads(
+                        Address.from_res_partner(partner_sales_person).model_dump_json()
                     ),
                 },
                 res,
@@ -56,7 +53,7 @@ class TestEshopCustomerSalesPerson(CommonCase):
     def test_partner_without_sales_person(self):
         # the sales person must be the backend company
         self._assert_sales_person(
-            self.partner_without_sales_person, self.backend.company_id.partner_id
+            self.partner_without_sales_person, self.env.company.partner_id
         )
 
     def test_partner_with_sales_person(self):
@@ -64,3 +61,19 @@ class TestEshopCustomerSalesPerson(CommonCase):
         self._assert_sales_person(
             self.partner_with_sales_person, self.sales_person_user.partner_id
         )
+
+    def test_customer_info(self):
+        partner = self.partner_without_sales_person
+        with self._create_test_client(partner=partner) as test_client:
+            self.maxDiff = 2000
+            response = test_client.get("/customer")
+            self.assertEqual(response.status_code, 200)
+            res = response.json()
+            self.assertDictEqual(
+                {
+                    "data": json.loads(
+                        Address.from_res_partner(partner).model_dump_json()
+                    ),
+                },
+                res,
+            )
