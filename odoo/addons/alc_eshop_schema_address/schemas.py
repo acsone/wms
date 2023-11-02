@@ -43,7 +43,7 @@ class CountryState(StrictExtendableBaseModel):
         return cls(id=odoo_rec.id, name=odoo_rec.name, code=odoo_rec.code or None)
 
 
-class Address(schemas.Address):
+class Address(schemas.Address, extends=True):
     vet_depot_number: str | None = None
     vet_subscription_number: str | None = None
     # The following fields are deprecated and should be removed once
