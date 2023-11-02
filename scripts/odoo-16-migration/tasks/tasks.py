@@ -543,6 +543,54 @@ def click_odoo_update():
 _register_migration_scripts_in_tasks("post-")
 
 
+@task("16.0.2.5.3")
+def recover_intrastat():
+    """
+    Recover intrastat codes from v10 as they have been deleted by Odoo on.
+
+    categories.
+
+    Set them to specific fields (both categories and products).
+    """
+
+    def __build_dict(cr, row):
+        return {"id": row[0], "intrastat_id": row[1]}
+
+    query = """
+        SELECT id, intrastat_id
+            FROM product_category
+            WHERE intrastat_id IS NOT NULL
+    """
+    with cursor(DB_10_SRC_NOT_CLEANED) as cr:
+        openupgrade.logged_query(cr, query)
+        categories = [__build_dict(cr, row) for row in cr.fetchall()]
+
+    with OdooEnvironment(DB_16_POSTMIG) as env:
+        query = """
+            UPDATE product_category
+                SET specific_intrastat_code_id = %(intrastat_id)s
+                WHERE id = %(id)s;
+        """
+        env.cr.executemany(query, categories)
+
+    query = """
+        SELECT id, intrastat_id
+            FROM product_product
+            WHERE intrastat_id IS NOT NULL
+    """
+    with cursor(DB_10_SRC_NOT_CLEANED) as cr:
+        openupgrade.logged_query(cr, query)
+        categories = [__build_dict(cr, row) for row in cr.fetchall()]
+
+    with OdooEnvironment(DB_16_POSTMIG) as env:
+        query = """
+            UPDATE product_product
+                SET specific_intrastat_code_id = %(intrastat_id)s
+                WHERE id = %(id)s;
+        """
+        env.cr.executemany(query, categories)
+
+
 @task()
 def set_modules_to_remove():
     """
