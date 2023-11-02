@@ -106,6 +106,7 @@ class PurchaseOrder(PurchaseOrderBase):
                     "is_in_bo": is_in_bo,
                 }
             )
+        result.sort(key=lambda p: p["name"])
         return result
 
     def update_or_create_line(self, vals):
