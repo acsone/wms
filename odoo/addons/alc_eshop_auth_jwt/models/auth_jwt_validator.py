@@ -1,16 +1,15 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
-from odoo import fields, models
+from odoo import fields
+
+from odoo.addons.auth_jwt.models import auth_jwt_validator
 
 _logger = logging.getLogger(__name__)
 
 
-class AuthJwtValidator(models.Model):
-
-    _inherit = "auth.jwt.validator"
+class AuthJwtValidator(auth_jwt_validator.AuthJwtValidator):
 
     partner_id_strategy = fields.Selection(
         selection_add=[("keycloak_pref_user", "Keycloak User")]
@@ -34,4 +33,4 @@ class AuthJwtValidator(models.Model):
                 )
                 return None
             return keycloak_user.partner_id.id
-        return super(AuthJwtValidator, self)._get_partner_id(payload)
+        return super()._get_partner_id(payload)
