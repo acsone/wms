@@ -100,7 +100,6 @@ exclude = [
   'odoo/addons/alc_eshop_api_v2/*',
   'odoo/addons/alc_eshop_app/*',
   'odoo/addons/alc_eshop_auth_api_key/*',
-  'odoo/addons/alc_eshop_auth_jwt/*',
   'odoo/addons/alc_eshop_customer_sales_person/*',
   'odoo/addons/alc_eshop_filter_data/*',
   'odoo/addons/alc_eshop_models_url/*',
