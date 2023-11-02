@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License Other proprietary -->
+<odoo>
+    <record
+    id="product_template_form_view_inherit_account_intrastat"
+    model="ir.ui.view"
+  >
+        <field name="name">product.template.form.inherit.account.intrastat</field>
+        <field name="model">product.template</field>
+        <field
+      name="inherit_id"
+      ref="account_intrastat.product_template_form_view_inherit_account_intrastat"
+    />
+        <field name="arch" type="xml">
+            <field name="intrastat_code_id" position="after">
+                <field name="specific_intrastat_code_id" />
+            </field>
+        </field>
+    </record>
+</odoo>

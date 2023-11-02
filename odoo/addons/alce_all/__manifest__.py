@@ -11,6 +11,7 @@
     "depends": [
         "alce_helpdesk",
         # "alce_purchase_report",
+        "alce_account_intrastat",
         "alce_account_reports_followup_data",
         # "alce_l10n_be_reports",
         "alce_split_coda",
