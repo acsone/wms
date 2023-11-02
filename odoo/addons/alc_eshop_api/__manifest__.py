@@ -32,6 +32,7 @@
         "alc_eshop_api_orders",
         "alc_eshop_api_deliveries",
         "alc_eshop_api_customer",
+        "alc_eshop_api_cart_info",
     ],
     "data": [
         "views/fastapi_endpoint.xml",
