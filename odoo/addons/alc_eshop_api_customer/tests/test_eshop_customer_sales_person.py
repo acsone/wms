@@ -1,5 +1,6 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import json
 
 from odoo.addons.extendable_fastapi.tests.common import FastAPITransactionCase
 from odoo.addons.shopinvader_schema_address.schemas import Address
@@ -42,9 +43,9 @@ class TestEshopCustomerSalesPerson(FastAPITransactionCase):
             self.assertDictEqual(
                 {
                     "name": partner_sales_person.name,
-                    "address": Address.from_res_partner(
-                        partner_sales_person
-                    ).model_dump(),
+                    "address": json.loads(
+                        Address.from_res_partner(partner_sales_person).model_dump_json()
+                    ),
                 },
                 res,
             )
@@ -70,7 +71,9 @@ class TestEshopCustomerSalesPerson(FastAPITransactionCase):
             res = response.json()
             self.assertDictEqual(
                 {
-                    "data": Address.from_res_partner(partner).model_dump(),
+                    "data": json.loads(
+                        Address.from_res_partner(partner).model_dump_json()
+                    ),
                 },
                 res,
             )
