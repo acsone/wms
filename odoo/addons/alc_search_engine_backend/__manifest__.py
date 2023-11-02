@@ -11,5 +11,6 @@
     "website": "https://acsone.eu",
     "depends": ["connector_elasticsearch"],
     "data": ["data/se_backend.xml"],
+    "pre_init_hook": "pre_init_hook",
     "demo": [],
 }
