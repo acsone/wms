@@ -50,11 +50,17 @@ class Address(schemas.Address, extends=True):
     # the frontend will be adapted to use the new shopinvader_address_api
     country: Annotated[
         Country | None,
-        Field(deprecated=True, description="Prefer use of country_id"),
+        Field(
+            description="Prefer use of country_id",
+            json_schema_extra={"deprecated": True},
+        ),
     ] = None
     state: Annotated[
         CountryState | None,
-        Field(deprecated=True, description="Prefer use of country_id"),
+        Field(
+            description="Prefer use of country_id",
+            json_schema_extra={"deprecated": True},
+        ),
     ]
     display_name: str | None = None
     is_company: bool = False
