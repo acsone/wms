@@ -83,6 +83,7 @@
         "alc_stock_release_channel_user_gls",
         "alc_restocking_exclude_not_salable",
         "alc_stock_receive_lot_expiry",
+        "alc_stock_release_channel_partner_holidays",
         "alc_stock_release_channel_pick_allowed",
         "alc_stock_release_channel_picking_batch_creation",
         "alc_stock_release_channel_dashboard",
