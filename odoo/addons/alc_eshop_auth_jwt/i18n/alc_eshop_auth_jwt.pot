@@ -1,0 +1,29 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_eshop_auth_jwt
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_eshop_auth_jwt
+#: model:ir.model,name:alc_eshop_auth_jwt.model_auth_jwt_validator
+msgid "JWT Validator Configuration"
+msgstr ""
+
+#. module: alc_eshop_auth_jwt
+#: model:ir.model.fields.selection,name:alc_eshop_auth_jwt.selection__auth_jwt_validator__partner_id_strategy__keycloak_pref_user
+msgid "Keycloak User"
+msgstr ""
+
+#. module: alc_eshop_auth_jwt
+#: model:ir.model.fields,field_description:alc_eshop_auth_jwt.field_auth_jwt_validator__partner_id_strategy
+msgid "Partner Id Strategy"
+msgstr ""
