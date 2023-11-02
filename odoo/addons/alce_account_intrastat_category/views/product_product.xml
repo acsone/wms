@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License Other proprietary -->
+<odoo>
+
+    <record id="product_product_tree_view_account_intrastat" model="ir.ui.view">
+        <field name="name">product.product.tree.account.intrastat</field>
+        <field name="model">product.product</field>
+        <field
+      name="inherit_id"
+      ref="account_intrastat.product_product_tree_view_account_intrastat"
+    />
+        <field name="arch" type="xml">
+            <field name="intrastat_code_id" position="after">
+                <field name="specific_intrastat_code_id" optional="hide" />
+            </field>
+        </field>
+    </record>
+</odoo>
