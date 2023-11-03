@@ -37,7 +37,7 @@ class TestStockMove(StockPickingTestCase):
 
         self.assertEqual(main_product_move.state, "cancel")
         additional_move = self._get_additional_move(ship)
-        self.assertEqual(additional_move.state, "cancel")
+        self.assertFalse(additional_move)
 
     def test_01(self):
         """

@@ -121,7 +121,9 @@ class TestStockMove(TransactionCase):
         """
         self.partner.charge_restocking_fee = True
         # One line for main product, one for additional product
-        self.assertEqual(2, len(self.picking.move_ids))
+        self.assertEqual(
+            2, len(self.picking.move_ids.filtered(lambda move: move.state != "cancel"))
+        )
 
         wizard = self._create_return_wizard()
         self.assertTrue(wizard.is_customer_return)
