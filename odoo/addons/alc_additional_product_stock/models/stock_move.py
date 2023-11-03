@@ -1,7 +1,7 @@
 # Copyright 2018 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 import logging
+from typing import Self
 
 from odoo import _, api, fields
 from odoo.tools import float_compare
@@ -119,7 +119,8 @@ class StockMove(StockMoveBase):
             return additional_moves._action_cancel()
         return res
 
-    def _get_all_not_done_additional_moves(self):
+    def _get_all_not_done_additional_moves(self) -> Self:
+        """This will returns all moves that should be cancelled."""
         if not self.is_additional_move:
             first_move = self.first_move_id
             first_additional_move = first_move.additional_move_ids
@@ -127,7 +128,7 @@ class StockMove(StockMoveBase):
                 self.search(
                     [
                         ("first_move_id", "in", first_additional_move.ids),
-                        ("state", "!=", "done"),
+                        ("state", "not in", ("done", "cancel")),
                         ("quantity_done", "=", 0),
                     ]
                 )
@@ -142,7 +143,10 @@ class StockMove(StockMoveBase):
             moves_to_remove = move._get_all_not_done_additional_moves()
             if moves_to_remove:
                 moves_to_remove._action_cancel()
-                moves_to_remove.sudo().unlink()
+                # TODO: Mark moves as 'to delete' instead. This is a workaround as
+                # a glue module should be done between this and stock_dynamic_routing
+                # (to confirm)
+                # moves_to_remove.sudo().unlink()
 
     @api.model
     def _prepare_merge_moves_distinct_fields(self):

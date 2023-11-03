@@ -150,6 +150,7 @@ class StockPickingTestCase(TransactionCase):
         return picking.move_ids.filtered(
             lambda m, product=self.additional_product: m.product_id == product
             and m.is_additional_move
+            and m.state not in ("done", "cancel")
         )
 
     def _check_move_assigned(self, move, qty):
