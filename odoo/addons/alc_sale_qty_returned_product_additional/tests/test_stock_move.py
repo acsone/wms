@@ -14,12 +14,13 @@ class TestStockMove(StockPickingTestCase):
         self.assertIn(self.additional_product, ship.mapped("move_ids.product_id"))
         pick.action_confirm()
         pick.action_assign()
-        for move in pick.move_ids:
+        # In the interface, you cannot modify cancelled moves
+        for move in pick.move_ids.filtered(lambda move: move.state != "cancel"):
             move.quantity_done = move.product_qty
         pick._action_done()
         ship.action_confirm()
         ship.action_assign()
-        for move in ship.move_ids:
+        for move in ship.move_ids.filtered(lambda move: move.state != "cancel"):
             move.quantity_done = move.product_qty
         ship._action_done()
 
