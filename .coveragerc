@@ -41,14 +41,12 @@ omit =
     odoo/addons/alc_eshop_product_domain/*
     odoo/addons/alc_eshop_product_expiry/*
     odoo/addons/alc_eshop_product_stock/*
-    odoo/addons/alc_eshop_sale_cart_channel/*
     odoo/addons/alc_eshop_sale_cart_confirm/*
     odoo/addons/alc_eshop_sale_cart_csv/*
     odoo/addons/alc_eshop_sale_cart_payment_info/*
     odoo/addons/alc_eshop_sale_cart_product_unavailable/*
     odoo/addons/alc_eshop_sale_cart_product_unavailable_pharmacy/*
     odoo/addons/alc_eshop_sale_cart_suite_name/*
-    odoo/addons/alc_eshop_sale_channel/*
     odoo/addons/alc_eshop_sale_no_backend/*
     odoo/addons/alc_eshop_sale_no_cart_get/*
     odoo/addons/alc_eshop_sale_payment_info/*

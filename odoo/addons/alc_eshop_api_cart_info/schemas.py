@@ -5,16 +5,22 @@ from typing import Annotated
 from extendable_pydantic.models import StrictExtendableBaseModel
 from pydantic import Field
 
-from odoo.addons.shopinvader_api_cart import schemas
+from odoo.addons.shopinvader_schema_sale import schemas
 
 
-class CartResponse(schemas.CartResponse, extends=True):
-    customer_ref: str | None = None
+class Sale(schemas.Sale, extends=True):
+    customer_ref: Annotated[
+        str | None,
+        Field(
+            description="Prefer the use of the client_order_ref field",
+            json_schema_extra={"deprecated": True},
+        ),
+    ] = None
 
     @classmethod
-    def from_cart(cls, odoo_rec):
-        res = super().from_cart(odoo_rec)
-        res.customer_ref = odoo_rec.client_order_ref
+    def from_sale_order(cls, odoo_rec):
+        res = super().from_sale_order(odoo_rec)
+        res.customer_ref = odoo_rec.client_order_ref or None
         return res
 
 

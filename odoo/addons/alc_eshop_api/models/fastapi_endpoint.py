@@ -45,6 +45,7 @@ from odoo.addons.fastapi_auth_jwt.dependencies import (
 )
 from odoo.addons.shopinvader_api_address.routers.address_service import address_router
 from odoo.addons.shopinvader_api_cart.routers import cart_router
+from odoo.addons.shopinvader_api_sale.routers.sales import sale_router
 
 
 class FastapiEndpoint(FastapiEndpointBase):
@@ -82,6 +83,7 @@ class FastapiEndpoint(FastapiEndpointBase):
             deliveries_router,
             customer_router,
             carts_router,
+            sale_router,
         ]
 
     def _get_alc_eshop_app_tags(self, params) -> list:

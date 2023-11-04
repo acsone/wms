@@ -11,8 +11,9 @@ from odoo.addons.fastapi.dependencies import (
     authenticated_partner,
     authenticated_partner_env,
 )
+from odoo.addons.shopinvader_schema_sale.schemas import Sale
 
-from ..schemas import CartResponse, CartUpdateRequest
+from ..schemas import CartUpdateRequest
 
 carts_router = APIRouter(tags=["carts"])
 
@@ -24,7 +25,7 @@ def update_cart_info(
     partner: Annotated[Partner, Depends(authenticated_partner)],
     cart_info: CartUpdateRequest,
     uuid: str | None = None,
-) -> CartResponse:
+) -> Sale:
     """Update cart info."""
     params = cart_info.model_dump(exclude_unset=True)
     uuid = uuid or params.get("uuid")
@@ -42,4 +43,4 @@ def update_cart_info(
             upd_vals["note"] = note
         if upd_vals:
             cart.write(upd_vals)
-    return CartResponse.from_cart(cart)
+    return Sale.from_sale_order(cart)
