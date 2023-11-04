@@ -257,7 +257,9 @@ odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@r
 # OCA/rest-framework
 odoo-addon-base-rest @ git+https://github.com/OCA/rest-framework.git@refs/pull/368/head#subdirectory=setup/base_rest
 odoo-addon-rest-log @ git+https://github.com/OCA/rest-framework.git@refs/pull/354/head#subdirectory=setup/rest_log
-odoo-addon-fastapi @ git+https://github.com/OCA/rest-framework.git@refs/pull/387/head#subdirectory=setup/fastapi
+# https://github.com/OCA/rest-framework/pull/382
+# https://github.com/OCA/rest-framework/pull/387
+odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@16.0-alc-fastapi#subdirectory=setup/fastapi
 
 # OCA/web-api
 
@@ -289,11 +291,11 @@ odoo-addon-account-cutoff-accrual-sale-stock @ git+https://github.com/OCA/accoun
 odoo-addon-account-invoice-accrual @ git+https://github.com/OCA/account-closing.git@refs/pull/264/head#subdirectory=setup/account_invoice_accrual
 
 # shopinvader
-# odoo-addon-shopinvader-restapi-auth-jwt @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1418/head#subdirectory=setup/shopinvader_restapi_auth_jwt
-odoo-addon-shopinvader-search-engine-update @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1424/head#subdirectory=setup/shopinvader_search_engine_update
-odoo-addon-shopinvader-search-engine-update-image @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1424/head#subdirectory=setup/shopinvader_search_engine_update_image
-odoo-addon-shopinvader-search-engine-update-product-media @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1424/head#subdirectory=setup/shopinvader_search_engine_update_product_media
-odoo-addon-shopinvader-search-engine-update-product-brand @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1424/head#subdirectory=setup/shopinvader_search_engine_update_product_brand
-odoo-addon-shopinvader-search-engine-update-product-brand-image @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1424/head#subdirectory=setup/shopinvader_search_engine_update_product_brand_image
 odoo-addon-shopinvader-search-engine-product-template-multi-link @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1429/head#subdirectory=setup/shopinvader_search_engine_product_template_multi_link
 odoo-addon-shopinvader-search-engine-update-product-template-multi-link @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1429/head#subdirectory=setup/shopinvader_search_engine_update_product_template_multi_link
+#odoo-addon-shopinvader-api-cart @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1421/head#subdirectory=setup/shopinvader_api_cart
+#odoo-addon-shopinvader-api-sale @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1421/head#subdirectory=setup/shopinvader_api_sale
+#odoo-addon-shopinvader-schema-sale @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1421/head#subdirectory=setup/shopinvader_schema_sale
+odoo-addon-shopinvader-api-cart @ git+https://github.com/acsone/odoo-shopinvader.git@16.0-add-api-sale-lmi#subdirectory=setup/shopinvader_api_cart
+odoo-addon-shopinvader-api-sale @ git+https://github.com/acsone/odoo-shopinvader.git@16.0-add-api-sale-lmi#subdirectory=setup/shopinvader_api_sale
+odoo-addon-shopinvader-schema-sale @ git+https://github.com/acsone/odoo-shopinvader.git@16.0-add-api-sale-lmi#subdirectory=setup/shopinvader_schema_sale
