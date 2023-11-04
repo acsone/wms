@@ -38,6 +38,7 @@
         "alc_eshop_schema_sale_channel",
         "alc_eshop_schema_sale_suite_name",
         "alc_eshop_schema_sale_qty_canceled",
+        "alc_eshop_schema_sale_product_unavailable",
     ],
     "data": [
         "views/fastapi_endpoint.xml",
