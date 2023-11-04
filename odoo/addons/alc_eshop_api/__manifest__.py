@@ -36,6 +36,7 @@
         "alc_eshop_api_cart_info",
         "alc_eshop_sale_cart_channel",
         "alc_eshop_schema_sale_channel",
+        "alc_eshop_schema_sale_suite_name",
     ],
     "data": [
         "views/fastapi_endpoint.xml",

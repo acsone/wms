@@ -117,7 +117,6 @@ exclude = [
   'odoo/addons/alc_eshop_sale_payment_info/*',
   'odoo/addons/alc_eshop_sale_product_unavailable/*',
   'odoo/addons/alc_eshop_sale_qty_canceled/*',
-  'odoo/addons/alc_eshop_sale_suite_name/*',
   'odoo/addons/alc_eshop_sale_triple_discount/*',
   'odoo/addons/alc_eshop_salesperson/*',
   'odoo/addons/alc_eshop_wishlist/*',
