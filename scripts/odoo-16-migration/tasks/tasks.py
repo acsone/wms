@@ -557,8 +557,8 @@ def recover_intrastat():
         return {"id": row[0], "intrastat_id": row[1]}
 
     query = """
-        SELECT id, intrastat_id
-            FROM product_category
+        SELECT pc.id, ric.name
+            FROM product_category pc JOIN report_intrastat_code ric ON pc.intrastat_id = ric.id
             WHERE intrastat_id IS NOT NULL
     """
     with cursor(DB_10_SRC_NOT_CLEANED) as cr:
@@ -568,15 +568,16 @@ def recover_intrastat():
     with OdooEnvironment(DB_16_POSTMIG) as env:
         query = """
             UPDATE product_category
-                SET specific_intrastat_code_id = %(intrastat_id)s
+                SET specific_intrastat_code_id = (SELECT id FROM account_intrastat_code WHERE code = %(intrastat_id)s ORDER BY id LIMIT 1)
                 WHERE id = %(id)s;
         """
         env.cr.executemany(query, categories)
 
     query = """
-        SELECT id, intrastat_id
-            FROM product_product
-            WHERE intrastat_id IS NOT NULL
+        SELECT pp.id AS id, ric.name AS intrastat_code
+            FROM product_product pp JOIN product_template pt ON pp.product_tmpl_id = pt.id
+            JOIN report_intrastat_code ric ON pt.intrastat_id = ric.id
+            WHERE pt.intrastat_id IS NOT NULL
     """
     with cursor(DB_10_SRC_NOT_CLEANED) as cr:
         openupgrade.logged_query(cr, query)
@@ -585,10 +586,22 @@ def recover_intrastat():
     with OdooEnvironment(DB_16_POSTMIG) as env:
         query = """
             UPDATE product_product
-                SET specific_intrastat_code_id = %(intrastat_id)s
+                SET specific_intrastat_code_id = (SELECT id FROM account_intrastat_code WHERE code = %(intrastat_id)s ORDER BY id LIMIT 1)
                 WHERE id = %(id)s;
         """
         env.cr.executemany(query, categories)
+
+
+@task("16.0.2.5.3")
+def update_intrastat_code():
+    check_call(
+        [
+            "click-odoo",
+            "-d",
+            DB_16_POSTMIG,
+            "click-odoo/update-intrastat-code.py",
+        ]
+    )
 
 
 @task()
