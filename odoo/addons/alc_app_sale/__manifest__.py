@@ -140,5 +140,6 @@
         "test_alc_shipping_fee_auto_process",
         "alc_product_consolidated_price_report",
         "alc_product_consolidated_price_newpharma",
+        "alc_sale_order_partner_delivery_carrier",
     ],
 }
