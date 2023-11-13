@@ -1,0 +1,78 @@
+# Copyright 2023 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+from datetime import datetime
+
+from dateutil.relativedelta import relativedelta
+
+from odoo.addons.shopinvader_search_engine_product_stock.tests.common import (
+    StockCommonCase,
+)
+
+from ..schemas import ProductProduct
+
+
+class TestProductExpiryInSchema(StockCommonCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context, test_queue_job_no_delay=True, index_id=cls.index.id
+            )
+        )
+        cls.product = cls.env["product.product"].create(
+            {"name": "test product", "tracking": "lot", "type": "product"}
+        )
+        cls.location_physical = cls.env.ref(
+            "alc_stock_location_data.stock_location_vlb"
+        )
+        cls.location = cls.env["stock.location"].create(
+            {
+                "name": "Test physical",
+                "usage": "internal",
+                "location_id": cls.location_physical.id,
+            }
+        )
+        cls.binding = cls.product._add_to_index(cls.index)
+        cls.product._compute_binding_ids()
+
+    def _create_lot_at_date(self, date):
+        lot = self.env["stock.lot"].create(
+            {
+                "name": date.isoformat(),
+                "product_id": self.product.id,
+                "expiration_date": date,
+            }
+        )
+        self.env["stock.quant"].with_context(
+            inventory_mode=True, queue_job__no_delay=True
+        ).create(
+            {
+                "product_id": self.product.id,
+                "inventory_quantity": 10,
+                "location_id": self.location.id,
+                "lot_id": lot.id,
+            }
+        ).action_apply_inventory()
+        self.product.invalidate_recordset()
+
+    def assertBestBeforeDate(self, date):
+        date_iso = date.date().isoformat()
+        product = ProductProduct.from_product_product(self.product)
+        self.assertEqual(product.best_before_date, date_iso)
+        self.assertEqual(self.binding.state, "to_recompute")
+        self.binding.recompute_json()
+        self.assertEqual(self.binding.state, "to_export")
+        self.assertEqual(self.binding.data.get("best_before_date"), date_iso)
+
+    def test_0(self):
+        product = ProductProduct.from_product_product(self.product)
+        self.assertEqual(product.best_before_date, None)
+
+    def test_1(self):
+        best_before_date = datetime.now() + relativedelta(days=30)
+        self._create_lot_at_date(best_before_date)
+        self.assertBestBeforeDate(best_before_date)
+        self._create_lot_at_date(best_before_date - relativedelta(days=1))
+        self.assertBestBeforeDate(best_before_date - relativedelta(days=1))

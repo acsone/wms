@@ -289,7 +289,6 @@ odoo-addon-account-invoice-accrual @ git+https://github.com/OCA/account-closing.
 # shopinvader
 odoo-addon-shopinvader-search-engine-product-template-multi-link @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1429/head#subdirectory=setup/shopinvader_search_engine_product_template_multi_link
 odoo-addon-shopinvader-search-engine-update-product-template-multi-link @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1429/head#subdirectory=setup/shopinvader_search_engine_update_product_template_multi_link
-
 odoo-addon-shopinvader-api-sale @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1449/head#subdirectory=setup/shopinvader_api_sale
 odoo-addon-shopinvader-filtered-model @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1449/head#subdirectory=setup/shopinvader_filtered_model
 odoo-addon-shopinvader-api-security-sale @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1449/head#subdirectory=setup/shopinvader_api_security_sale
