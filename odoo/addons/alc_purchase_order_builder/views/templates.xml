@@ -322,7 +322,7 @@
                               name="unit_qty"
                               id="unit_qty"
                               t-att-value="unit_qty"
-                              required="required"
+                              readonly="True"
                             />
                           </td>
                         </tr>
