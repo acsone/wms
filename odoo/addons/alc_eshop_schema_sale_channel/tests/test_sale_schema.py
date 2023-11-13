@@ -6,6 +6,10 @@ from odoo.addons.shopinvader_schema_sale.tests.common import SchemaSaleCase
 
 
 class TestSaleSchema(SchemaSaleCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+
     def test_sale_no_channel(self):
         self.sale_order.sale_channel_id = False
         sale = Sale.from_sale_order(self.sale_order)
