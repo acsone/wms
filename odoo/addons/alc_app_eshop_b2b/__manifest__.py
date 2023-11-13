@@ -55,6 +55,8 @@
         "shopinvader_search_engine_update_product_brand",
         "shopinvader_search_engine_update_product_brand_image",
         "shopinvader_search_engine_update_product_template_multi_link",
+        "shopinvader_search_engine_product_stock",
+        "shopinvader_search_engine_product_stock_state",
     ],
     "data": [],
     "demo": [],

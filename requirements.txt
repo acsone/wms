@@ -134,7 +134,7 @@ odoo-addon-delivery-procurement-group-carrier==16.0.1.0.0.2
 odoo-addon-endpoint-route-handler==16.0.1.0.0.3
 odoo-addon-extendable==16.0.1.0.1.1
 odoo-addon-extendable-fastapi==16.0.2.1.0
-odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@8bd8216494e09dd4f52916872f5e0ebb6958affd#subdirectory=setup/fastapi
+odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@593519a0ffc3eeec96f3de8293875cd36b8d0a80#subdirectory=setup/fastapi
 odoo-addon-fastapi-auth-jwt==16.0.1.0.1.1
 odoo-addon-fs-attachment==16.0.1.0.3
 odoo-addon-fs-base-multi-image==16.0.1.0.0.2
@@ -270,6 +270,8 @@ odoo-addon-shopinvader-search-engine-image==16.0.1.0.1
 odoo-addon-shopinvader-search-engine-product-brand==16.0.1.0.0.2
 odoo-addon-shopinvader-search-engine-product-brand-image==16.0.1.0.0.2
 odoo-addon-shopinvader-search-engine-product-media==16.0.1.0.0.2
+odoo-addon-shopinvader-search-engine-product-stock==16.0.1.0.1
+odoo-addon-shopinvader-search-engine-product-stock-state==16.0.1.0.0.4
 odoo-addon-shopinvader-search-engine-product-template-multi-link @ git+https://github.com/acsone/odoo-shopinvader.git@eef81ac5ddc01484564c8472c009711147261535#subdirectory=setup/shopinvader_search_engine_product_template_multi_link
 odoo-addon-shopinvader-search-engine-update==16.0.1.0.0.2
 odoo-addon-shopinvader-search-engine-update-image==16.0.1.0.0.2

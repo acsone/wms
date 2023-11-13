@@ -12,8 +12,8 @@ from odoo.addons.fastapi.dependencies import (
     fastapi_endpoint_id,
 )
 
+from ..dependencies import authenticated_partner_impl
 from ..hooks import _initialize_product_assortment_filter
-from ..models.fastapi_endpoint import authenticated_partner_impl
 
 
 class CommonB2CServiceCase(FastAPITransactionCase):

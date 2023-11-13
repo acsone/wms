@@ -813,6 +813,8 @@ def set_modules_to_remove():
         "alc_eshop_wishlist",
         "shopinvader_wishlist",  # replaced by shopinvader_api_wishlist
         "alc_eshop_filter_data",
+        "shopinvader_product_stock",
+        "shopinvader_product_stock_state",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
