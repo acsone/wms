@@ -46,6 +46,7 @@ from odoo.addons.fastapi_auth_jwt.dependencies import (
 from odoo.addons.shopinvader_api_address.routers.address_service import address_router
 from odoo.addons.shopinvader_api_cart.routers import cart_router
 from odoo.addons.shopinvader_api_sale.routers.sales import sale_router
+from odoo.addons.shopinvader_api_wishlist.routers import wishlist_router
 
 
 class FastapiEndpoint(FastapiEndpointBase):
@@ -84,6 +85,7 @@ class FastapiEndpoint(FastapiEndpointBase):
             customer_router,
             carts_router,
             sale_router,
+            wishlist_router,
         ]
 
     def _get_alc_eshop_app_tags(self, params) -> list:
@@ -244,8 +246,11 @@ class FastapiEndpoint(FastapiEndpointBase):
     def _get_fastapi_app_middlewares(self) -> list[Middleware]:
         middlewares = super()._get_fastapi_app_middlewares()
         if self.app == "alc_eshop_app":
-            middlewares.append(
-                Middleware(RedirectV2CartMiddleware, root_path=self.root_path)
+            middlewares.extend(
+                [
+                    Middleware(RedirectV2CartMiddleware, root_path=self.root_path),
+                    Middleware(RedirectWishlistMiddleware, root_path=self.root_path),
+                ]
             )
         return middlewares
 
@@ -263,4 +268,27 @@ class RedirectV2CartMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         if request.url.path.startswith(f"{self.root_path}/v2/cart"):
             request.scope["path"] = request.scope["path"].replace("/v2/cart", "/carts")
+        return await call_next(request)
+
+
+class RedirectWishlistMiddleware(BaseHTTPMiddleware):
+    def __init__(
+        self,
+        app: ASGIApp,
+        dispatch: DispatchFunction | None = None,
+        root_path: str = "",
+    ) -> None:
+        super().__init__(app, dispatch)
+        self.root_path = root_path
+
+    async def dispatch(self, request: Request, call_next):
+        path = request.url.path
+        # replace into the path wishlist by wishlists to be compliant with the new
+        # wishlist endpoint route only if the path is not already wishlists
+        if path.startswith(f"{self.root_path}/wishlist") and not path.startswith(
+            f"{self.root_path}/wishlists"
+        ):
+            request.scope["path"] = request.scope["path"].replace(
+                "/wishlist", "/wishlists"
+            )
         return await call_next(request)

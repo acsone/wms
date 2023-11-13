@@ -797,6 +797,8 @@ def set_modules_to_remove():
         "alc_eshop_sale_no_backend",
         "alc_eshop_sale_product_unavailable",  # renamed alc_eshop_schema_sale_product_unavailable
         "alc_eshop_sale_no_cart_get",
+        "alc_eshop_wishlist",
+        "shopinvader_wishlist",  # replaced by shopinvader_api_wishlist
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:

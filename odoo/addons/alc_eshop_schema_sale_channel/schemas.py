@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from odoo import api
 
-from odoo.addons.shopinvader_schema_sale.schemas import sale_order
+from odoo.addons.shopinvader_schema_sale.schemas import sale
 
 
-class Sale(sale_order.Sale, extends=True):
+class Sale(sale.Sale, extends=True):
     channel: str | None = None
 
     @classmethod
@@ -19,7 +19,7 @@ class Sale(sale_order.Sale, extends=True):
         return res
 
 
-class SaleSearch(sale_order.SaleSearch, extends=True):
+class SaleSearch(sale.SaleSearch, extends=True):
     def to_odoo_domain(self, env: api.Environment) -> list:
         domain = super().to_odoo_domain(env)
         domain.append(

@@ -2,10 +2,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from __future__ import annotations
 
-from odoo.addons.shopinvader_schema_sale.schemas import sale_order
+from odoo.addons.shopinvader_schema_sale.schemas import sale_line
 
 
-class SaleOrderLine(sale_order.SaleOrderLine, extends=True):
+class SaleLine(sale_line.SaleLine, extends=True):
     qty_canceled: float = 0.0
 
     @classmethod
