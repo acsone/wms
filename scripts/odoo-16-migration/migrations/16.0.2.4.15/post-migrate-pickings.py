@@ -18,7 +18,7 @@ def _migrate_pickings(env):
 
     pickings = env["stock.picking"].search(
         [
-            ("state", "=", "confirmed"),
+            ("state", "in", ["confirmed", "assigned"]),
             ("printed", "=", False),
             ("release_channel_id", "=", False),
             ("picking_type_id", "in", picking_type_ids),
