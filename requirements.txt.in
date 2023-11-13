@@ -292,4 +292,3 @@ odoo-addon-shopinvader-search-engine-update-product-template-multi-link @ git+ht
 odoo-addon-shopinvader-api-sale @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1449/head#subdirectory=setup/shopinvader_api_sale
 odoo-addon-shopinvader-filtered-model @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1449/head#subdirectory=setup/shopinvader_filtered_model
 odoo-addon-shopinvader-api-security-sale @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1449/head#subdirectory=setup/shopinvader_api_security_sale
-

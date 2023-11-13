@@ -12,7 +12,7 @@ from odoo.addons.shopinvader_search_engine_product_stock.tests.common import (
 from ..schemas import ProductProduct
 
 
-class TestUrlInSchemas(StockCommonCase):
+class TestProductExpiryInSchema(StockCommonCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

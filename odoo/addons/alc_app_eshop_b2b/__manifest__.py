@@ -35,7 +35,7 @@
         "alc_elasticsearch_security_vt_groups",
         "alc_keycloak",
         "alc_eshop_schema_address",
-        "alc_eshop_product_expiry",
+        "alc_eshop_search_engine_product_expiry",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",
