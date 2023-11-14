@@ -82,7 +82,7 @@
               t-set="source_summary"
               t-value="deliveryslip_single.get_numbers_per_source()"
             />
-            <table style="margin:0 15px; width:100%">
+            <table style="width:100%">
               <tr>
                 <t t-foreach="source_summary.keys()" t-as="source">
                   <th><span t-esc="source" /></th>

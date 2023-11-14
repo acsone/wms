@@ -54,6 +54,12 @@ div.page div.row span.partner_inline address > div {
   padding: 5px;
 }
 
+.summary_deliverslip th,
+td {
+  border-style: hidden;
+  text-align: center;
+}
+
 .intrastat_table {
   width: 35%;
   margin-left: 5px;
@@ -187,9 +193,16 @@ div.page div.row span.partner_inline address > div {
   margin-top: 5mm !important;
 }
 
+.products_table_deliveryslip td {
+  border-style: hidden;
+}
 .products_table_entry_register {
   height: 245mm !important;
   margin-top: 5mm !important;
+}
+
+.products_table_entry_register td {
+  border-style: hidden;
 }
 
 #products_table th:not(:first-child),
