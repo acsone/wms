@@ -213,10 +213,6 @@
         <field name="name">is_equipment</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
-    <record id="ir_exp_shopinvader_variant_is_food" model="ir.exports.line">
-        <field name="name">is_food</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
     <record id="ir_exp_shopinvader_variant_is_psychotropic" model="ir.exports.line">
         <field name="name">is_psychotropic</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
