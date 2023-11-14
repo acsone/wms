@@ -37,3 +37,18 @@ msgstr ""
 #: model:ir.model,name:alc_eshop_api.model_fastapi_endpoint
 msgid "FastAPI Endpoint"
 msgstr ""
+
+#. module: alc_eshop_api
+#: model:ir.model.fields,field_description:alc_eshop_api.field_fastapi_endpoint__oauth_client_id
+msgid "Oauth Client"
+msgstr ""
+
+#. module: alc_eshop_api
+#: model:ir.model.fields,field_description:alc_eshop_api.field_fastapi_endpoint__oauth_host
+msgid "Oauth Host"
+msgstr ""
+
+#. module: alc_eshop_api
+#: model:ir.model.fields,field_description:alc_eshop_api.field_fastapi_endpoint__oauth_realm_name
+msgid "Oauth Realm Name"
+msgstr ""
