@@ -57,6 +57,10 @@ class FastapiEndpoint(FastapiEndpointBase):
     )
     auth_jwt_validator_id = fields.Many2one[AuthJwtValidator]()
 
+    oauth_host = fields.Char(default="https://account.test.alcyon.acsone.eu")
+    oauth_realm_name = fields.Char(default="alcyon")
+    oauth_client_id = fields.Char(default="shopinvader")
+
     def _get_fastapi_routers(self):
         if self.app == "alc_eshop_app":
             return self._get_alc_eshop_app_fastapi_routers()
@@ -200,7 +204,7 @@ class FastapiEndpoint(FastapiEndpointBase):
             params["openapi_tags"] = self._get_alc_eshop_app_tags(params)
             params["swagger_ui_oauth2_redirect_url"] = "/docs/oauth2-redirect"
             params["swagger_ui_init_oauth"] = {
-                "clientId": "demo16.shopinvader.com",
+                "clientId": self.oauth_client_id,
             }
             params["swagger_ui_parameters"] = {
                 "docExpansion": "none",
@@ -220,12 +224,10 @@ class FastapiEndpoint(FastapiEndpointBase):
         if self.app == "alc_eshop_app":
             oauth2_scheme = OAuth2AuthorizationCodeBearer(
                 authorizationUrl=(
-                    "https://keycloak.demo16.shopinvader.com/"
-                    "auth/realms/master/protocol/openid-connect/auth"
+                    f"{self.oauth_host}/auth/realms/{self.oauth_realm_name}/protocol/openid-connect/auth"
                 ),
                 tokenUrl=(
-                    "https://keycloak.demo16.shopinvader.com/"
-                    "auth/realms/master/protocol/openid-connect/token"
+                    f"{self.oauth_host}/auth/realms/{self.oauth_realm_name}/protocol/openid-connect/token"
                 ),
                 scopes={"openid": "", "email": "", "profile": ""},
                 # Don't fail if missing Authorization header, as we look for the cookie too.

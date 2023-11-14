@@ -17,6 +17,18 @@
             name="auth_jwt_validator_id"
             attrs="{'required': [('app', '=', 'alc_eshop_app')]}"
           />
+                      <field
+            name="oauth_host"
+            attrs="{'required': [('app', '=', 'alc_eshop_app')]}"
+          />
+                      <field
+            name="oauth_realm_name"
+            attrs="{'required': [('app', '=', 'alc_eshop_app')]}"
+          />
+                      <field
+            name="oauth_client_id"
+            attrs="{'required': [('app', '=', 'alc_eshop_app')]}"
+          />
                     </group>
                 </span>
         </field>
