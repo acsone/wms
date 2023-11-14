@@ -9,6 +9,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
+    "application": True,
     "depends": [
         # OCA/storage
         "fs_product_brand_multi_image",
