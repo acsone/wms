@@ -5,7 +5,7 @@ from __future__ import annotations
 from pydantic import BaseModel
 
 
-class SubscriptionRequest(BaseModel):
+class SubscriptionRequest(BaseModel, extra="ignore"):
     product_id: int
 
 

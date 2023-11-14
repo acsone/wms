@@ -30,7 +30,7 @@ class ClienteleEnum(Enum):
     exotic = "exotic"
 
 
-class RegistrationRqst(BaseModel):
+class RegistrationRqst(BaseModel, extra="ignore"):
     function: Function
     apb_authorization: str | None = None
     fax: str | None = None

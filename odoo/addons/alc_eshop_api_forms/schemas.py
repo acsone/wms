@@ -37,7 +37,7 @@ class FormList(BaseModel):
     size: int
 
 
-class FormSubmitRequest(BaseModel):
+class FormSubmitRequest(BaseModel, extra="ignore"):
     data: Annotated[
         dict[str, str],
         Field(
