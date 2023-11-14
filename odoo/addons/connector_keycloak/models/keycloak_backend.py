@@ -41,7 +41,7 @@ class KeycloakBackend(Model):
             client_id=self.client_id,
             client_secret_key=self.client_secret_key,
             realm_name=self.realm_name,
-            user_realm_name=self.realm_name,
+            user_realm_name=self.user_realm_name,
         )
 
     def _get_openid_client(self):
