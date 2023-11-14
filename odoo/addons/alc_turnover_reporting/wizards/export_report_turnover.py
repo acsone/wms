@@ -51,7 +51,7 @@ class ExportReportTurnover(models.TransientModel):
                     SELECT
                     date_trunc(%(groupby_type)s, sm.date) AS date,
                     SUM((sol.price_subtotal/sol.product_uom_qty) * sm.product_qty) AS credit_from_sm,
-                    SUM(sm.price_unit *sm.product_qty) AS pp200_credit_from_sm FROM stock_move sm
+                    SUM(abs(sm.price_unit)*sm.product_qty) AS pp200_credit_from_sm FROM stock_move sm
                     JOIN sale_order_line sol ON sol.id = sm.sale_line_id
                     JOIN stock_location to_loc ON to_loc.id = sm.location_dest_id
                     WHERE sm.state = 'done' AND to_loc.usage = 'customer' AND sol.product_uom_qty != 0 AND sm.product_id=sol.product_id
@@ -499,14 +499,12 @@ class ExportReportTurnover(models.TransientModel):
         debit_day_from_sm_df = self._sql_data_to_dataframe(
             result, ["date", "debit_from_sm", "pp200_debit_from_sm"]
         )
-
         result2 = self._get_data_from_stock_moves(
             in_or_out_move="in_move", groupby_type="day"
         )
         credit_day_from_sm_df = self._sql_data_to_dataframe(
             result2, ["date", "credit_from_sm", "pp200_credit_from_sm"]
         )
-
         credit_debit_day_from_sm_df = pd.merge(
             credit_day_from_sm_df, debit_day_from_sm_df, on="date", how="outer"
         )
