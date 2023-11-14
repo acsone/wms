@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="stock_release_channel_tree_view" model="ir.ui.view">
+        <field
+      name="name"
+    >stock.release.channel.tree.view (in alc_stock_release_channel_sequence)</field>
+        <field name="model">stock.release.channel</field>
+        <field
+      name="inherit_id"
+      ref="alc_stock_release_channel_tree.stock_release_channel_tree_view"
+    />
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field name="sequence" widget="handle" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_release_channel_form_view">
+        <field
+      name="name"
+    >stock.release.channel.form.view (in alc_stock_release_channel_sequence)</field>
+        <field name="model">stock.release.channel</field>
+        <field
+      name="inherit_id"
+      ref="stock_release_channel.stock_release_channel_form_view"
+    />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']/parent::h1" position="after">
+                <group>
+                    <field name="sequence" class="oe_inline" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+ </odoo>
