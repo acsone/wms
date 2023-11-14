@@ -24,7 +24,7 @@ class Sale(schemas.Sale, extends=True):
         return res
 
 
-class CartUpdateRequest(StrictExtendableBaseModel):
+class CartUpdateRequest(StrictExtendableBaseModel, extra="ignore"):
     uuid: Annotated[
         str | None,
         Field(

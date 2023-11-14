@@ -27,7 +27,7 @@ class ContentType(Enum):
     snippet = "snippet"
 
 
-class ContentSearchParams(BaseModel):
+class ContentSearchParams(BaseModel, extra="ignore"):
     lang: ContentLang | None = None
     type: ContentType | None = None
 

@@ -72,7 +72,7 @@ class ClassifiedAdsCommonData(
         )
 
 
-class ClassifiedAdsCreate(ClassifiedAdsCommonData):
+class ClassifiedAdsCreate(ClassifiedAdsCommonData, extra="ignore"):
     """Data required to create a classified advertisement."""
 
     country_state_code: CountryStateCode
@@ -99,7 +99,7 @@ class File(BaseModel):
     name: str
 
 
-class ClassifiedAdsUpdate(ClassifiedAdsCommonData):
+class ClassifiedAdsUpdate(ClassifiedAdsCommonData, extra="ignore"):
     body: str | None = None
     category: Category | None = None
     name: str | None = None
@@ -170,7 +170,7 @@ class ClassifiedAds(ClassifiedAdsCommonData):
         return instance
 
 
-class ClassifiedAdsSearchParams(ClassifiedAdsUpdate):
+class ClassifiedAdsSearchParams(ClassifiedAdsUpdate, extra="ignore"):
     from_date: date | None = None
 
 
