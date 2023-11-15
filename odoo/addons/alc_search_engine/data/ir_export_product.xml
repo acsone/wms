@@ -19,20 +19,6 @@
     </record>
 
     <record
-    id="ir_exp_shopinvader_variant_storage_temperature_id_id"
-    model="ir.exports.line"
-  >
-        <field name="name">storage_temperature_id/id</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record
-    id="ir_exp_shopinvader_variant_storage_temperature_id_name"
-    model="ir.exports.line"
-  >
-        <field name="name">storage_temperature_id/name</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record
     id="ir_exp_shopinvader_variant_dimensional_uom_id_id"
     model="ir.exports.line"
   >
