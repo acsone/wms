@@ -819,6 +819,7 @@ def set_modules_to_remove():
         "alc_eshop_product_category_sequence",
         "alc_eshop_sale_cart_confirm",  # moved into alc_eshop_api_cart
         "alc_eshop_sale_cart_csv",  # moved into alc_eshop_api_cart
+        "alc_eshop_sale_cart_suite_name",  # moved into alc_eshop_api_cart
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
