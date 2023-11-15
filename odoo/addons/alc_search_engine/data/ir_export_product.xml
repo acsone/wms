@@ -18,28 +18,6 @@
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
 
-    <record
-    id="ir_exp_shopinvader_variant_dimensional_uom_id_id"
-    model="ir.exports.line"
-  >
-        <field name="name">dimensional_uom_id/id</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record
-    id="ir_exp_shopinvader_variant_dimensional_uom_id_name"
-    model="ir.exports.line"
-  >
-        <field name="name">dimensional_uom_id/name</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_manufacturer_id" model="ir.exports.line">
-        <field name="name">manufacturer/id</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_manufacturer_name" model="ir.exports.line">
-        <field name="name">manufacturer/name</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
     <record id="ir_exp_shopinvader_variant_indicated_price" model="ir.exports.line">
         <field name="name">indicated_price</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
