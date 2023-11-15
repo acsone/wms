@@ -10,6 +10,8 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_eshop_ordering_allowed",
+        "alc_partner_type",
+        "alc_sale_suite_name",
         "shopinvader_schema_sale",
         "shopinvader_api_cart",
     ],

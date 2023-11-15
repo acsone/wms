@@ -803,7 +803,7 @@ def set_modules_to_remove():
         "alc_base_rest_api_doc",  # no more used
         "alc_eshop_partner_veterinary",  # renamed in alc_eshop_schema_address
         "alc_eshop_customer_sales_person",  # renamed in alc_eshop_api_customer
-        "alc_eshop_sale_cart_info",  # renamed in alc_eshop_api_cart_info
+        "alc_eshop_sale_cart_info",  # moved into alc_eshop_api_cart
         "alc_eshop_sale_channel",  # replaced
         "alc_eshop_sale_suite_name",  # renamed alc_eshop_schema_sale_suite_name
         "alc_eshop_sale_qty_canceled",  # renamed alc_eshop_schema_sale_qty_canceled
@@ -817,7 +817,8 @@ def set_modules_to_remove():
         "shopinvader_product_stock_state",
         "alc_eshop_product_expiry",  # renamed alc_eshop_search_engine_product_expiry
         "alc_eshop_product_category_sequence",
-        "alc_eshop_sale_cart_confirm",  # renamed alc_eshop_api_cart_confirm
+        "alc_eshop_sale_cart_confirm",  # moved into alc_eshop_api_cart
+        "alc_eshop_sale_cart_csv",  # moved into alc_eshop_api_cart
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
