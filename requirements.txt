@@ -252,7 +252,7 @@ odoo-addon-shopinvader-api-address @ git+https://github.com/acsone/odoo-shopinva
 odoo-addon-shopinvader-api-cart @ git+https://github.com/acsone/odoo-shopinvader.git@e5331c5906a2a6944076491918d0610ef0a0a9ce#subdirectory=setup/shopinvader_api_cart
 odoo-addon-shopinvader-api-sale @ git+https://github.com/acsone/odoo-shopinvader.git@ef1634382bdd78ed00b0c9cc0ce15881a591d4b4#subdirectory=setup/shopinvader_api_sale
 odoo-addon-shopinvader-api-security-sale @ git+https://github.com/acsone/odoo-shopinvader.git@ef1634382bdd78ed00b0c9cc0ce15881a591d4b4#subdirectory=setup/shopinvader_api_security_sale
-odoo-addon-shopinvader-api-wishlist @ git+https://github.com/acsone/odoo-shopinvader.git@28e90ce1cb3c388958009d5f29fa5676d2072072#subdirectory=setup/shopinvader_api_wishlist
+odoo-addon-shopinvader-api-wishlist @ git+https://github.com/acsone/odoo-shopinvader.git@715edb9ea965d45e0448d5eb88601863f809d616#subdirectory=setup/shopinvader_api_wishlist
 odoo-addon-shopinvader-base-url==16.0.1.0.2.8
 odoo-addon-shopinvader-fastapi-auth-jwt==16.0.1.0.1
 odoo-addon-shopinvader-filtered-model @ git+https://github.com/acsone/odoo-shopinvader.git@ef1634382bdd78ed00b0c9cc0ce15881a591d4b4#subdirectory=setup/shopinvader_filtered_model
