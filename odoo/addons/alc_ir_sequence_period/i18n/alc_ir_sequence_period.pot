@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_ir_sequence_period
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_ir_sequence_period
+#: model:ir.model.fields,help:alc_ir_sequence_period.field_ir_sequence__use_end_date
+msgid ""
+"By default Odoo will use the start date (from) to compute date with the\n"
+"        prefix range_ (eg: range_year). If you set this flag Odoo will use the end date\n"
+"        (to) to compute date with the prefix range. Eg: From 1/10/2016 to 31/9/2017\n"
+"        without the flag: %(range_year)s => 2016 with the flag %(range_year)s => 2017"
+msgstr ""
+
+#. module: alc_ir_sequence_period
+#: model:ir.model,name:alc_ir_sequence_period.model_ir_sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: alc_ir_sequence_period
+#: model:ir.model,name:alc_ir_sequence_period.model_ir_sequence_date_range
+msgid "Sequence Date Range"
+msgstr ""
+
+#. module: alc_ir_sequence_period
+#: model:ir.model.fields,field_description:alc_ir_sequence_period.field_ir_sequence__use_end_date
+msgid "Use the end date of the range"
+msgstr ""
