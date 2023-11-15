@@ -16,10 +16,26 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: alc_eshop_sale_cart_confirm
-#: model:ir.model,name:alc_eshop_sale_cart_confirm.model_sale_order
+#. module: alc_eshop_sale_cart_csv
+#: model:ir.model.fields,field_description:alc_eshop_sale_cart_csv.field_sale_order_import_warning_msg
+msgid "Import warning msg"
+msgstr "Avertissement sur la commande importée"
+
+#. module: alc_eshop_sale_cart_csv
+#: model:ir.model,name:alc_eshop_sale_cart_csv.model_sale_order
 msgid "Sales Order"
 msgstr "Bon de commande"
+
+#. module: alc_eshop_sale_cart_csv
+#: code:addons/alc_eshop_sale_cart_csv/services/cart.py:60
+#, python-format
+msgid ""
+"The following sku are unknown: %(skus)s\n"
+"The corresponding lines have been ignored by the import process."
+msgstr ""
+"Le(s) réference(s) suivante(s) est/sont inconnue(s): %(skus)s.\n"
+"La/les ligne(s) correspondante(s) a/ont été ignorée(s) lors de l'import."
+
 
 #. module: alc_eshop_sale_cart_confirm
 #: code:addons/alc_eshop_sale_cart_confirm/services/cart.py:30

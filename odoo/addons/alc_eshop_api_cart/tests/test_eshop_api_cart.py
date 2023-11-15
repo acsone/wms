@@ -1,5 +1,6 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import io
 from contextlib import contextmanager
 from datetime import datetime
 
@@ -86,3 +87,37 @@ class TestSaleCartRestApiInfo(TestSaleCartRestApiInfoCase):
             self.so.partner_id.eshop_ordering_allowed = True
             response = test_client.post("carts/confirm", json={"uuid": self.so.uuid})
             self.assertEqual(200, response.status_code)
+
+    def test_csv(self):
+        # we create a csv file with 2 lines
+        # the first line is the cart info
+        # the second line is the product line
+        # the third line is a line with an unknown sku
+        first_line = ["suite", "ref", "mail@alcyonbelux.be", "note"]
+        # one column had a trailing ';', meaning an empty column
+        csv_lines = [
+            first_line,
+            [self.product_sku_n.default_code, "2", ""],
+            ["missing", "4"],
+        ]
+        # we write the lines into a csv file that will be passed to the FastAPI test client
+        # the file is not a real file, it is a BytesIO object
+        csv_content = "\r\n".join(";".join(line) for line in csv_lines)
+        csv_file = io.BytesIO(csv_content.encode("utf-8"))
+        with self._create_test_client() as test_client:
+            # specify the file in the mimetype
+            response = test_client.post(
+                "carts/csv", files={"file": ("cart.csv", csv_file)}
+            )
+        self.assertEqual(200, response.status_code)
+        info = response.json()
+        so = self.env["sale.order"].browse(info["id"])
+        self.assertEqual("ref", so.client_order_ref)
+        self.assertEqual("<p>note</p>", so.note)
+        self.assertEqual("suite", so.suite_name)
+        self.assertEqual(self.product_sku_n, so.order_line.product_id)
+        self.assertEqual(2, so.order_line.product_uom_qty)
+        self.assertTrue(so.import_warning_msg)
+        self.assertIn("missing", so.import_warning_msg)
+        self.assertIn("import_warning_msg", info)
+        self.assertEqual(info["import_warning_msg"], so.import_warning_msg)

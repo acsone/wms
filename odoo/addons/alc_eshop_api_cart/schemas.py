@@ -17,10 +17,15 @@ class Sale(schemas.Sale, extends=True):
         ),
     ] = None
 
+    import_warning_msg: str | None = None
+    suite_name: str | None = None
+
     @classmethod
     def from_sale_order(cls, odoo_rec):
         res = super().from_sale_order(odoo_rec)
         res.customer_ref = odoo_rec.client_order_ref or None
+        res.import_warning_msg = odoo_rec.import_warning_msg or None
+        res.suite_name = odoo_rec.suite_name or None
         return res
 
 

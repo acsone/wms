@@ -42,6 +42,8 @@ class TestSaleCartRestApiInfoCase(FastAPITransactionCase):
         ]
 
         cls.default_fastapi_authenticated_partner = partner
+        vals_product = {"name": "N", "default_code": "sku"}
+        cls.product_sku_n = cls.env["product.product"].create(vals_product)
 
     def _create_test_client(
         self,
