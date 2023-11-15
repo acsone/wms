@@ -14,18 +14,6 @@
         <field name="name">barcode</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
-    <record id="ir_exp_shopinvader_variant_belgium_only" model="ir.exports.line">
-        <field name="name">belgium_only</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_veterinary_only" model="ir.exports.line">
-        <field name="name">veterinary_only</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_cnk_code" model="ir.exports.line">
-        <field name="name">cnk_code</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
     <record id="ir_exp_shopinvader_variant_create_date" model="ir.exports.line">
         <field name="name">create_date</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
@@ -101,10 +89,6 @@
     </record>
     <record id="ir_exp_shopinvader_variant_code_amm" model="ir.exports.line">
         <field name="name">code_amm</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_code_cti" model="ir.exports.line">
-        <field name="name">code_cti</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
     <record id="ir_exp_shopinvader_variant_supplier_id" model="ir.exports.line">
@@ -205,37 +189,9 @@
         <field name="name">price_cache</field>
         <field name="alias">price_cache:price</field>
     </record>
-    <record id="ir_exp_shopinvader_variant_is_meds" model="ir.exports.line">
-        <field name="name">is_meds</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_is_equipment" model="ir.exports.line">
-        <field name="name">is_equipment</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_is_psychotropic" model="ir.exports.line">
-        <field name="name">is_psychotropic</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_is_pharmaceutical" model="ir.exports.line">
-        <field name="name">is_pharmaceutical</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_is_import" model="ir.exports.line">
-        <field name="name">is_import</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_is_narcotic_vet" model="ir.exports.line">
-        <field name="name">is_narcotic_vet</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
     <record id="ir_exp_shopinvader_variant_is_mto" model="ir.exports.line">
         <field name="name">is_mto_product</field>
         <field name="alias">is_mto_product:is_mto</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_is_human" model="ir.exports.line">
-        <field name="name">is_human</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
     <record id="ir_exp_shopinvader_variant_brand_name" model="ir.exports.line">

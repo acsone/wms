@@ -40,6 +40,7 @@
         "alc_sale_cart_price_recalculation",
         "alc_connector_esb",
         "alc_eshop_schema_product_food",
+        "alc_eshop_schema_product_pharmacy",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",

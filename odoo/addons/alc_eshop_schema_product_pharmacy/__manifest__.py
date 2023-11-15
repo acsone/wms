@@ -2,14 +2,14 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Eshop Schema Product Food",
+    "name": "Alc Eshop Schema Product Pharmacy",
     "description": """
-        This addon add is_food product label to the product schema""",
+        This addon add pharmacy product labels to the product schema""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["alc_product_food", "shopinvader_product"],
+    "depends": ["alc_product_pharmacy", "shopinvader_product"],
     "data": [],
     "demo": [],
     "development_status": "Alpha",
