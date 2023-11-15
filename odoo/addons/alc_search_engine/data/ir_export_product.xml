@@ -2,22 +2,6 @@
 <!-- Copyright 2021 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="0">
-    <record
-    id="ir_exp_shopinvader_variant_allowed_partner_types"
-    model="ir.exports.line"
-  >
-        <field name="name">allowed_partner_types_list</field>
-        <field name="alias">allowed_partner_types_list:allowed_partner_types</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_barcode" model="ir.exports.line">
-        <field name="name">barcode</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_create_date" model="ir.exports.line">
-        <field name="name">create_date</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
     <record id="ir_exp_shopinvader_variant_taxes_id" model="ir.exports.line">
         <field name="name">taxes_id</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />

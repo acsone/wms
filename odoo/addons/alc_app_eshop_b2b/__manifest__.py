@@ -43,6 +43,7 @@
         "alc_eshop_schema_product_pharmacy",
         "alc_eshop_schema_product_supplier",
         "alc_eshop_schema_product_partner_type",
+        "alc_eshop_schema_product",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",
