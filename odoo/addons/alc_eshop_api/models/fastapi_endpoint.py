@@ -13,6 +13,9 @@ from starlette.types import ASGIApp
 from odoo import api, fields
 
 from odoo.addons.alc_eshop_api_cart.routers import carts_router
+from odoo.addons.alc_eshop_api_cart_product_unavailable.routers import (
+    carts_router as carts_router_product_unavailable,
+)
 from odoo.addons.alc_eshop_api_catalog.routers import brands_router, catalog_router
 from odoo.addons.alc_eshop_api_classifieds.routers import classified_ads_router
 from odoo.addons.alc_eshop_api_cms.routers import cms_router
@@ -88,6 +91,7 @@ class FastapiEndpoint(FastapiEndpointBase):
             deliveries_router,
             customer_router,
             carts_router,
+            carts_router_product_unavailable,
             sale_router,
             wishlist_router,
         ]
