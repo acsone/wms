@@ -20,7 +20,6 @@ exclude: |
   ^odoo/addons/alc_eshop_product_domain/|
   ^odoo/addons/alc_eshop_product_stock/|
   ^odoo/addons/alc_eshop_sale_cart_payment_info/|
-  ^odoo/addons/alc_eshop_sale_cart_product_unavailable/|
   ^odoo/addons/alc_eshop_sale_cart_product_unavailable_pharmacy/|
   ^odoo/addons/alc_eshop_sale_payment_info/|
   ^odoo/addons/alc_eshop_sale_triple_discount/|
