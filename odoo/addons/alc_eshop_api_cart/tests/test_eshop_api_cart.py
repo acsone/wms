@@ -121,3 +121,32 @@ class TestSaleCartRestApiInfo(TestSaleCartRestApiInfoCase):
         self.assertIn("missing", so.import_warning_msg)
         self.assertIn("import_warning_msg", info)
         self.assertEqual(info["import_warning_msg"], so.import_warning_msg)
+
+    def test_get_next_suite_name(self):
+        with self._create_test_client() as test_client:
+            response = test_client.get("carts/next_suite_name")
+            self.assertEqual(200, response.status_code, response.content)
+            self.assertEqual(None, response.json()["value"])
+
+            self.product_1.categ_id = self.env.ref(
+                "alc_product_category_data.product_categ_medoc"
+            )
+            response = test_client.get("carts/next_suite_name")
+            self.assertEqual(200, response.status_code, response.content)
+            self.assertEqual("1", response.json()["value"])
+
+            # if a suite_name is already on the cat, it's returned...
+            self.so.suite_name = "my suite name"
+            response = test_client.get("carts/next_suite_name")
+            self.assertEqual(200, response.status_code, response.content)
+            self.assertEqual("my suite name", response.json()["value"])
+
+    def test_save_suite_name_on_confirm(self):
+        with self._create_test_client() as test_client:
+            response = test_client.post(
+                f"carts/{self.so.uuid}/confirm",
+                json={"customer_ref": "my_ref", "note": "my note", "suite_name": "sn1"},
+            )
+            self.assertEqual(200, response.status_code)
+            self.assertEqual("sn1", self.so.suite_name)
+            self.assertEqual("sn1", response.json()["suite_name"])

@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import csv
 import uuid as uuid_lib
-from typing import Annotated, Any
+from typing import Annotated, Any, Protocol
 
 from fastapi import APIRouter, Depends, HTTPException, UploadFile
 
@@ -22,8 +22,7 @@ from odoo.addons.shopinvader_api_cart.routers.cart import (
 from odoo.addons.shopinvader_api_cart.schemas import CartTransaction
 from odoo.addons.shopinvader_schema_sale.schemas import Sale
 
-from ..schemas import CartUpdateRequest
-from ..typing import ByteReader
+from ..schemas import CartSuiteNameValue, CartUpdateRequest
 
 carts_router = APIRouter(tags=["carts"])
 
@@ -110,6 +109,35 @@ def import_csv(
         ._import_csv(file.file, uuid=uuid)
     )
     return Sale.from_sale_order(cart)
+
+
+@carts_router.get("/carts/next_suite_name")
+@carts_router.get("/carts/{uuid}/next_suite_name")
+def get_next_suite_name(
+    env: Annotated[api.Environment, Depends(authenticated_partner_env)],
+    partner: Annotated[Partner, Depends(authenticated_partner)],
+    uuid: str | None = None,
+) -> CartSuiteNameValue:
+    """This service return the next suite name to apply to the cart.
+
+    if the cart contains meds products
+    """
+    cart = env["sale.order"]._find_open_cart(partner.id, uuid)
+    value = None
+    if cart:
+        value = cart.suite_name or cart.get_next_suite_name(cart)
+    return CartSuiteNameValue(value=value)
+
+
+class ByteReader(Protocol):
+    """Protocol for a file-like object that can be read as bytes."""
+
+    # pylint: disable=method-required-super
+    def read(self, n: int | None = None) -> bytes:
+        ...
+
+    def seek(self, n: int) -> None:
+        ...
 
 
 class ShopinvaderApiCartRouterHelper(ShopinvaderApiCartRouterHelperBase):

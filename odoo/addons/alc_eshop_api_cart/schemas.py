@@ -39,6 +39,7 @@ class CartUpdateRequest(StrictExtendableBaseModel, extra="ignore"):
     ] = None
     customer_ref: str | None = None
     note: str | None = None
+    suite_name: str | None = None
 
     def to_sale_order_vals(self):
         values = self.model_dump(exclude_unset=True)
@@ -47,8 +48,14 @@ class CartUpdateRequest(StrictExtendableBaseModel, extra="ignore"):
             vals["client_order_ref"] = self.customer_ref
         if "note" in values:
             vals["note"] = self.note
+        if "suite_name" in values:
+            vals["suite_name"] = self.suite_name
         return vals
 
 
 class CartConfirmRequest(CartUpdateRequest):
     ...
+
+
+class CartSuiteNameValue(StrictExtendableBaseModel):
+    value: str | None
