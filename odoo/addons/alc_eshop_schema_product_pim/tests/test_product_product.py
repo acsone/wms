@@ -42,3 +42,24 @@ class TestProductExpiryInSchema(TransactionCase):
         self.product.fabric = True
         product = ProductProduct.from_product_product(self.product)
         self.assertTrue(product.fabric)
+
+    def test_03(self):
+        product = ProductProduct.from_product_product(self.product)
+        self.assertIsNone(product.description_shop_short)
+        self.product.description_shop_short = "description_shop_short"
+        product = ProductProduct.from_product_product(self.product)
+        self.assertEqual(product.description_shop_short, "description_shop_short")
+
+    def test_04(self):
+        product = ProductProduct.from_product_product(self.product)
+        self.assertIsNone(product.description_shop_long)
+        self.product.description_shop_long = "description_shop_long"
+        product = ProductProduct.from_product_product(self.product)
+        self.assertEqual(product.description_shop_long, "description_shop_long")
+
+    def test_05(self):
+        product = ProductProduct.from_product_product(self.product)
+        self.assertIsNone(product.class_amcra)
+        self.product.class_amcra = "yellow"
+        product = ProductProduct.from_product_product(self.product)
+        self.assertEqual(product.class_amcra, "yellow")

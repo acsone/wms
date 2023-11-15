@@ -17,24 +17,7 @@
         <field name="name">route_from_categ_ids</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
-    <record
-    id="ir_exp_shopinvader_variant_description_shop_short"
-    model="ir.exports.line"
-  >
-        <field name="name">description_shop_short</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record
-    id="ir_exp_shopinvader_variant_description_shop_long"
-    model="ir.exports.line"
-  >
-        <field name="name">description_shop_long</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_class_amcra" model="ir.exports.line">
-        <field name="name">class_amcra</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
+
     <record
     id="ir_exp_shopinvader_variant_storage_temperature_id_id"
     model="ir.exports.line"
