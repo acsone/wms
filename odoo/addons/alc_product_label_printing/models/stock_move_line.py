@@ -61,7 +61,10 @@ class StockMoveLine(MoveLine):
         self.print_product_product_label()
 
     def print_product_product_label(self, printer_id=False, quantity=1):
-        self.product_id.print_product_label(quantity, printer_id)
+        if self.lot_id:
+            self.print_lot_label(quantity=quantity, printer_id=printer_id)
+        else:
+            self.product_id.print_product_label(quantity, printer_id)
 
     def get_qty_by_lot(self):
         """
