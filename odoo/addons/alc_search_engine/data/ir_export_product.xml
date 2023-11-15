@@ -6,10 +6,6 @@
         <field name="name">taxes_id</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
-    <record id="ir_exp_shopinvader_variant_not_sold_on_website" model="ir.exports.line">
-        <field name="name">not_sold_on_website</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
     <record id="ir_exp_shopinvader_variant_packaging_ids" model="ir.exports.line">
         <field name="name">packaging_ids</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
