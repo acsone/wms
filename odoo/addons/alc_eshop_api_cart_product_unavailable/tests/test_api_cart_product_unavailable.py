@@ -87,9 +87,8 @@ class TestSaleCartApi(FastAPITransactionCase):
             response = test_client.get("/carts/sync")
             self.assertEqual(200, response.status_code)
 
-            info = response.json()
             # not product in stock
-            self.assertEqual(1.0, info["lines"][0]["qty_unavailable"])
+            self.assertEqual(self.so.order_line.product_qty_unavailable, 1.0)
 
             # add product in stock
             self._define_product_qty(self.product_1, 10)
@@ -97,5 +96,5 @@ class TestSaleCartApi(FastAPITransactionCase):
             response = test_client.post("/carts/refresh_qty_unavailable")
             self.assertEqual(200, response.status_code)
             info = response.json()
-            self.assertEqual(0.0, info["lines"][0]["qty_unavailable"])
+            self.assertEqual(self.so.order_line.product_qty_unavailable, 0)
             self.assertEqual(-1.0, info["lines"][0]["qty_unavailable_diff"])

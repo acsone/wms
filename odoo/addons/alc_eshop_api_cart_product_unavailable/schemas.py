@@ -23,13 +23,3 @@ class SaleWithQtyUnavailableDiff(schemas.Sale):
             lines.append(line)
         res.lines = lines
         return res
-
-
-class SaleLine(schemas.SaleLine, extends=True):
-    qty_unavailable: int = 0
-
-    @classmethod
-    def from_sale_order_line(cls, odoo_rec):
-        res = super().from_sale_order_line(odoo_rec)
-        res.qty_unavailable = odoo_rec.product_qty_unavailable or 0
-        return res
