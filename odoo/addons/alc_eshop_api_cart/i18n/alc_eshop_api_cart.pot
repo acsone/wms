@@ -32,6 +32,11 @@ msgid "Demande spécifique"
 msgstr ""
 
 #. module: alc_eshop_api_cart
+#: model:ir.model.fields,field_description:alc_eshop_api_cart.field_sale_order__import_warning_msg
+msgid "Import Warning Msg"
+msgstr ""
+
+#. module: alc_eshop_api_cart
 #: model:mail.template,subject:alc_eshop_api_cart.sale_order_notify_note
 msgid ""
 "Ref {{ object.name }}: Demande spécifique de {{ object.partner_id.name}}"
@@ -40,6 +45,15 @@ msgstr ""
 #. module: alc_eshop_api_cart
 #: model:ir.model,name:alc_eshop_api_cart.model_sale_order
 msgid "Sales Order"
+msgstr ""
+
+#. module: alc_eshop_api_cart
+#. odoo-python
+#: code:addons/alc_eshop_api_cart/routers/cart.py:0
+#, python-format
+msgid ""
+"The following sku are unknown: %(skus)s\n"
+"The corresponding lines have been ignored by the import process."
 msgstr ""
 
 #. module: alc_eshop_api_cart
