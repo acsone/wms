@@ -16,18 +16,45 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: alc_eshop_sale_cart_csv
-#: model:ir.model.fields,field_description:alc_eshop_sale_cart_csv.field_sale_order_import_warning_msg
-msgid "Import warning msg"
-msgstr "Avertissement sur la commande importée"
+#. module: alc_eshop_api_cart
+#: model:mail.template,body_html:alc_eshop_api_cart.sale_order_notify_note
+msgid ""
+"\n"
+"<p>Bonjour,</p>\n"
+"<br/>\n"
+"<p><t t-out\"object.partner_id.name\"/> vous fait part du commentaire "
+"suivant:</p>\n"
+"<p><t t-out\"object.note/></p>\n"
+"<br/>\n"
+"<p>Commande <t t-out\"object.name\"> du <t t-out=\"format_datetime(dt=object."
+"date_order, tz=user.tz)\"/>.</p>\n"
+"<p>Merci de faire le nécessaire.</p>\n"
+msgstr ""
 
-#. module: alc_eshop_sale_cart_csv
-#: model:ir.model,name:alc_eshop_sale_cart_csv.model_sale_order
+#. module: alc_eshop_api_cart
+#: model:mail.template,name:alc_eshop_api_cart.sale_order_notify_note
+msgid "Demande spécifique"
+msgstr ""
+
+#. module: alc_eshop_api_cart
+#: model:ir.model.fields,field_description:alc_eshop_api_cart.field_sale_order__import_warning_msg
+msgid "Import Warning Msg"
+msgstr ""
+
+#. module: alc_eshop_api_cart
+#: model:mail.template,subject:alc_eshop_api_cart.sale_order_notify_note
+msgid ""
+"Ref {{ object.name }}: Demande spécifique de {{ object.partner_id.name}}"
+msgstr ""
+
+#. module: alc_eshop_api_cart
+#: model:ir.model,name:alc_eshop_api_cart.model_sale_order
 msgid "Sales Order"
 msgstr "Bon de commande"
 
-#. module: alc_eshop_sale_cart_csv
-#: code:addons/alc_eshop_sale_cart_csv/services/cart.py:60
+#. module: alc_eshop_api_cart
+#. odoo-python
+#: code:addons/alc_eshop_api_cart/routers/cart.py:0
 #, python-format
 msgid ""
 "The following sku are unknown: %(skus)s\n"
@@ -36,9 +63,12 @@ msgstr ""
 "Le(s) réference(s) suivante(s) est/sont inconnue(s): %(skus)s.\n"
 "La/les ligne(s) correspondante(s) a/ont été ignorée(s) lors de l'import."
 
-
-#. module: alc_eshop_sale_cart_confirm
-#: code:addons/alc_eshop_sale_cart_confirm/services/cart.py:30
+#. module: alc_eshop_api_cart
+#. odoo-python
+#: code:addons/alc_eshop_api_cart/routers/cart.py:0
 #, python-format
 msgid "You are no allowed to pass an order on the EShop"
 msgstr "Vous n'êtes pas autorisé à passer des commandes sur ce site."
+
+#~ msgid "Import warning msg"
+#~ msgstr "Avertissement sur la commande importée"
