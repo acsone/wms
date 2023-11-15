@@ -27,11 +27,13 @@ class TestProductExpiryInSchema(TransactionCase):
         cls.product_packaging = cls.env["product.packaging"].create(
             {"name": "p11_packaging", "qty": 30.0}
         )
-        cls.product.packaging_ids = cls.product_packaging
 
     def test_00(self):
         product = ProductProduct.from_product_product(self.product)
+        self.assertEqual(product.packaging_ids, [])
         self.assertEqual(product.unit_in_shrink_wrap, 0)
+        self.product.packaging_ids = self.product_packaging
         self.product_packaging.packaging_level_id = self.packaging_shrink
         product = ProductProduct.from_product_product(self.product)
+        self.assertEqual(product.packaging_ids, ["Fardelage (FAR)"])
         self.assertEqual(product.unit_in_shrink_wrap, 30)

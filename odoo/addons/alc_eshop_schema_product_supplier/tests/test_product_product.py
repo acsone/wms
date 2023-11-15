@@ -24,15 +24,18 @@ class TestProductExpiryInSchema(TransactionCase):
         cls.supplier = cls.env["res.partner"].create(
             {"name": "Supplier", "ref": "9001"}
         )
-        cls.supplierinfo = cls.env["product.supplierinfo"].create(
-            {"partner_id": cls.supplier.id, "product_code": "product_code"}
-        )
 
     def test_00(self):
         product = ProductProduct.from_product_product(self.product)
         self.assertIsNone(product.vendor_product_code)
         self.assertIsNone(product.supplier_id)
-        self.product.seller_ids = self.supplierinfo
+        self.env["product.supplierinfo"].create(
+            {
+                "partner_id": self.supplier.id,
+                "product_code": "product_code",
+                "product_tmpl_id": self.product.product_tmpl_id.id,
+            }
+        )
         product = ProductProduct.from_product_product(self.product)
         self.assertEqual(product.vendor_product_code, "product_code")
         self.assertEqual(product.supplier_id, self.supplier.id)
