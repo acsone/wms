@@ -34,7 +34,7 @@ class TestPromoSubscriptions(FastAPITransactionCase):
                 "/promo_subscriptions",
                 json={"product_id": self.product_1.id},
             )
-            self.assertEqual(response.status_code, 205)
+            self.assertEqual(response.status_code, 200)
             self.assertDictEqual({"status": True}, response.json())
 
     def test_unlink(self):
@@ -43,7 +43,7 @@ class TestPromoSubscriptions(FastAPITransactionCase):
                 "/promo_subscriptions",
                 json={"product_id": self.product_1.id},
             )
-            self.assertEqual(response.status_code, 205)
+            self.assertEqual(response.status_code, 200)
             self.assertDictEqual({"status": True}, response.json())
 
             # check that the subscription exists
@@ -66,7 +66,7 @@ class TestPromoSubscriptions(FastAPITransactionCase):
                 "/promo_subscriptions",
                 json={"product_id": self.product_1.id},
             )
-            self.assertEqual(response.status_code, 205)
+            self.assertEqual(response.status_code, 200)
             self.assertDictEqual({"status": True}, response.json())
 
             # get all subscriptions

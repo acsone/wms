@@ -224,7 +224,7 @@ class TestDocumentsServiceFlow(FastAPITransactionCase, TestClassifiedMixin):
             response = test_client.post(
                 f"/classified_ads/{_id}/update_set_to_draft", data=params_update
             )
-            self.assertEqual(response.status_code, status.HTTP_205_RESET_CONTENT)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
             self.assertEqual(classified.name, parameters_update["name"])
             self.assertEqual(classified.state, "draft")
 
@@ -245,7 +245,7 @@ class TestDocumentsServiceFlow(FastAPITransactionCase, TestClassifiedMixin):
             response = test_client.post(
                 f"/classified_ads/{_id}/update_set_to_pending", data=params_update
             )
-            self.assertEqual(response.status_code, status.HTTP_205_RESET_CONTENT)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
             self.assertEqual(classified.name, parameters_update["name"])
             self.assertEqual(classified.state, "pending")
 
@@ -291,7 +291,7 @@ class TestDocumentsServiceFlow(FastAPITransactionCase, TestClassifiedMixin):
             response = test_client.post(
                 f"/classified_ads/{_id}/update_set_to_draft", files=files
             )
-            self.assertEqual(response.status_code, status.HTTP_205_RESET_CONTENT)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
             result = response.json()
             self.assertEqual(result["data"][0]["file"]["mimetype"], "application/pdf")
             self.assertEqual(classified.file.getvalue(), b"new_content")
@@ -301,7 +301,7 @@ class TestDocumentsServiceFlow(FastAPITransactionCase, TestClassifiedMixin):
             response = test_client.post(
                 f"/classified_ads/{_id}/update_set_to_pending", data=data
             )
-            self.assertEqual(response.status_code, status.HTTP_205_RESET_CONTENT)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
             result = response.json()
             self.assertEqual(result["data"][0]["file"], None)
             self.assertFalse(classified.file)  # we removed the file
