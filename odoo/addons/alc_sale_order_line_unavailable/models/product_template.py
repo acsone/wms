@@ -15,7 +15,7 @@ class ProductTemplate(ProductTemplateBase):
             "alc_sale_order_line_unavailable_list.action_sale_order_line_unavailable_list"
         ).read()[0]
         action_data["domain"] = [
-            ("state", "in", ["sale"]),
+            ("state", "in", ["sale", "done"]),
             ("product_id.product_tmpl_id", "=", self.id),
         ]
 
