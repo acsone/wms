@@ -6,23 +6,23 @@
             <field name="name">Demande spécifique</field>
             <field
       name="email_from"
-    >${(object.partner_id.email and '%s &lt;%s&gt;' % (object.partner_id.name, object.partner_id.email) or '')|safe}</field>
+    >{{ (object.partner_id.email and '%s &lt;%s&gt;' % (object.partner_id.name, object.partner_id.email) or '') }}</field>
             <field
       name="subject"
-    >Ref ${object.name}: Demande spécifique de ${object.partner_id.name}</field>
+    >Ref {{ object.name }}: Demande spécifique de {{ object.partner_id.name}}</field>
             <field name="email_to">callcenter@alcyonbelux.be</field>
             <field name="model_id" ref="sale.model_sale_order" />
             <field name="auto_delete" eval="False" />
-            <field name="lang">${object.partner_id.lang}</field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
             <field
       name="body_html"
     ><![CDATA[
 <p>Bonjour,</p>
 <br/>
-<p>${object.partner_id.name} vous fait part du commentaire suivant:</p>
-<p>${object.note} </p>
+<p><t t-out"object.partner_id.name"/> vous fait part du commentaire suivant:</p>
+<p><t t-out"object.note/></p>
 <br/>
-<p>Commande ${object.name} du ${format_tz(object.date_order, tz=user.tz)}.</p>
+<p>Commande <t t-out"object.name"> du <t t-out="format_datetime(dt=object.date_order, tz=user.tz)"/>.</p>
 <p>Merci de faire le nécessaire.</p>
 ]]></field>
         </record>

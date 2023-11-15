@@ -34,3 +34,16 @@ class CartUpdateRequest(StrictExtendableBaseModel, extra="ignore"):
     ] = None
     customer_ref: str | None = None
     note: str | None = None
+
+    def to_sale_order_vals(self):
+        values = self.model_dump(exclude_unset=True)
+        vals = {}
+        if "customer_ref" in values:
+            vals["client_order_ref"] = self.customer_ref
+        if "note" in values:
+            vals["note"] = self.note
+        return vals
+
+
+class CartConfirmRequest(CartUpdateRequest):
+    ...

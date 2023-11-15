@@ -1,7 +1,18 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from collections.abc import Callable
+from typing import Any
 
+from fastapi import APIRouter, FastAPI
+
+from odoo.api import Environment
+
+from odoo.addons.base.models.res_partner import Partner
+from odoo.addons.base.models.res_users import Users
 from odoo.addons.extendable_fastapi.tests.common import FastAPITransactionCase
+from odoo.addons.shopinvader_api_cart.routers import cart
+
+from ..routers import carts_router
 
 
 class TestSaleCartRestApiInfoCase(FastAPITransactionCase):
@@ -31,6 +42,30 @@ class TestSaleCartRestApiInfoCase(FastAPITransactionCase):
         ]
 
         cls.default_fastapi_authenticated_partner = partner
+
+    def _create_test_client(
+        self,
+        app: FastAPI | None = None,
+        router: APIRouter | None = None,
+        user: Users | None = None,
+        partner: Partner | None = None,
+        env: Environment = None,
+        dependency_overrides: dict[Callable[..., Any], Callable[..., Any]] = None,
+        raise_server_exceptions: bool = True,
+    ):
+        if not app:
+            app = FastAPI()
+            app.include_router(carts_router)
+            app.include_router(cart.cart_router, prefix="/carts")
+        return super()._create_test_client(
+            app=app,
+            router=router,
+            user=user,
+            partner=partner,
+            env=env,
+            dependency_overrides=dependency_overrides,
+            raise_server_exceptions=raise_server_exceptions,
+        )
 
         # Disable the following code while all the security rules are not
         # implemented

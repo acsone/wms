@@ -218,7 +218,7 @@ class TestProductOnOrder(FastAPITransactionCase):
             response = test_client.post(
                 "/products_on_order/cancel/-1", json={"quantity": 1}
             )
-            self.assertEqual(response.status_code, 205)
+            self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json()["status"], False)
 
     def test_cancel_no_back_order(self):
@@ -227,7 +227,7 @@ class TestProductOnOrder(FastAPITransactionCase):
                 f"/products_on_order/cancel/{self.so_medoc_in_stock.order_line.id}",
                 json={"quantity": 1},
             )
-            self.assertEqual(response.status_code, 205)
+            self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json()["status"], False)
 
     def test_cancel(self):
@@ -242,7 +242,7 @@ class TestProductOnOrder(FastAPITransactionCase):
                 f"/products_on_order/cancel/{self.so_ali_out_of_stock.order_line.id}",
                 json={"quantity": 1},
             )
-            self.assertEqual(response.status_code, 205)
+            self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json()["status"], True)
         new_mail = self.env["mail.mail"].search([]) - all_mails
         self.assertTrue(new_mail)

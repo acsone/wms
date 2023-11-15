@@ -22,7 +22,7 @@ from ..schemas import (
 promo_subscriptions_router = APIRouter(tags=["promo_subscriptions"])
 
 
-@promo_subscriptions_router.post("/promo_subscriptions", status_code=205)
+@promo_subscriptions_router.post("/promo_subscriptions")
 def subscribe(
     env: Annotated[api.Environment, Depends(authenticated_partner_env)],
     partner: Annotated[Partner, Depends(authenticated_partner)],

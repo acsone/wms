@@ -118,9 +118,7 @@ def get_for_order_line_id(
     return ProductOnOrder.from_alc_eshop_product_on_order(record)
 
 
-@products_on_order_router.post(
-    "/products_on_order/cancel/{order_line_id}", status_code=205
-)
+@products_on_order_router.post("/products_on_order/cancel/{order_line_id}")
 def cancel_order_line_id(
     domain: Annotated[list, Depends(_default_domain)],
     model: Annotated[AlcEshopProductOnOrder, Depends(_model)],

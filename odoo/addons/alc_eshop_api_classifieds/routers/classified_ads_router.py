@@ -126,9 +126,7 @@ def submit(
     classified.submit()
 
 
-@classified_ads_router.post(
-    "/classified_ads/{_id}/update_set_to_draft", status_code=205
-)
+@classified_ads_router.post("/classified_ads/{_id}/update_set_to_draft")
 def update_set_to_draft(
     env: Annotated[api.Environment, Depends(authenticated_partner_env)],
     partner: Annotated[Partner, Depends(authenticated_partner)],
@@ -150,9 +148,7 @@ def update_set_to_draft(
     return ClassifiedAdsList.from_alc_classified(classified, private=True)
 
 
-@classified_ads_router.post(
-    "/classified_ads/{_id}/update_set_to_pending", status_code=205
-)
+@classified_ads_router.post("/classified_ads/{_id}/update_set_to_pending")
 def update_set_to_pending(
     env: Annotated[api.Environment, Depends(authenticated_partner_env)],
     partner: Annotated[Partner, Depends(authenticated_partner)],
