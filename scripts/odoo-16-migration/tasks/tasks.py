@@ -816,6 +816,7 @@ def set_modules_to_remove():
         "shopinvader_product_stock",
         "shopinvader_product_stock_state",
         "alc_eshop_product_expiry",  # renamed alc_eshop_search_engine_product_expiry
+        "alc_eshop_product_category_sequence",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
