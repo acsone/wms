@@ -17,10 +17,6 @@
         <field name="name">route_from_categ_ids</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
-    <record id="ir_exp_shopinvader_variant_unit_in_shrink_wrap" model="ir.exports.line">
-        <field name="name">unit_in_shrink_wrap</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
     <record id="ir_exp_shopinvader_variant_promo_bag" model="ir.exports.line">
         <field name="name">promo_bag</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
