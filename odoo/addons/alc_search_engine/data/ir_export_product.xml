@@ -18,10 +18,6 @@
         <field name="name">create_date</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
-    <record id="ir_exp_shopinvader_variant_vendor_product_code" model="ir.exports.line">
-        <field name="name">vendor_product_code</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
     <record id="ir_exp_shopinvader_variant_taxes_id" model="ir.exports.line">
         <field name="name">taxes_id</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
@@ -85,15 +81,6 @@
     </record>
     <record id="ir_exp_shopinvader_variant_class_amcra" model="ir.exports.line">
         <field name="name">class_amcra</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_code_amm" model="ir.exports.line">
-        <field name="name">code_amm</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_supplier_id" model="ir.exports.line">
-        <field name="name">supplier_rel_id</field>
-        <field name="alias">supplier_rel_id:supplier_id</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
     <record
