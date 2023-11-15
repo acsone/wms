@@ -47,6 +47,7 @@
         "alc_eshop_schema_product_audit",
         "alc_eshop_schema_product_packaging",
         "alc_eshop_schema_product_pim",
+        "alc_eshop_schema_product_link_notice",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",
