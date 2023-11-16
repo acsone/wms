@@ -258,7 +258,7 @@ odoo-addon-shopinvader-fastapi-auth-jwt==16.0.1.0.1
 odoo-addon-shopinvader-filtered-model @ git+https://github.com/acsone/odoo-shopinvader.git@ef1634382bdd78ed00b0c9cc0ce15881a591d4b4#subdirectory=setup/shopinvader_filtered_model
 odoo-addon-shopinvader-product==16.0.1.0.1
 odoo-addon-shopinvader-product-attribute-set @ git+https://github.com/acsone/odoo-shopinvader.git@c823236572da3254c4be806448262a264b636b4d#subdirectory=setup/shopinvader_product_attribute_set
-odoo-addon-shopinvader-product-brand==16.0.1.0.0.3
+odoo-addon-shopinvader-product-brand @ git+https://github.com/acsone/odoo-shopinvader.git@4ca5f8f84201a85165cab59f8958ab0e3f26a2ac#subdirectory=setup/shopinvader_product_brand
 odoo-addon-shopinvader-product-description==16.0.1.0.0.2
 odoo-addon-shopinvader-product-seo==16.0.1.0.0.2
 odoo-addon-shopinvader-product-url==16.0.1.0.1

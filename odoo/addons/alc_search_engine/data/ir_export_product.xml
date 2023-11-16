@@ -21,21 +21,7 @@
         <field name="alias">is_mto_product:is_mto</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
-    <record id="ir_exp_shopinvader_variant_brand_name" model="ir.exports.line">
-        <field name="name">product_brand_id/name</field>
-        <field name="alias">product_brand_id:brand/name</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_brand_id" model="ir.exports.line">
-        <field name="name">product_brand_id/id</field>
-        <field name="alias">product_brand_id:brand/id</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_brand_image_url" model="ir.exports.line">
-        <field name="name">product_brand_id/image_url</field>
-        <field name="alias">product_brand_id:brand/image_url</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
+
     <record id="ir_exp_shopinvader_variant_vat_name" model="ir.exports.line">
         <field name="name">vat_id/name</field>
         <field name="alias">vat_id:vat/name</field>
