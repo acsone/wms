@@ -536,6 +536,34 @@ def uninstallable_uninstalled():
 
 
 @task()
+def cleanup_indexes():
+    """Removes all existing indexes to let odoo recreate only the one defined.
+
+    by the installed addons
+    """
+    query = """
+    select format('DROP INDEX IF EXISTS %I.%I CASCADE;', s.nspname, i.relname) as drop_statement
+    from pg_index idx
+      join pg_class i on i.oid = idx.indexrelid
+      join pg_class t on t.oid = idx.indrelid
+      join pg_namespace s on i.relnamespace = s.oid
+    where s.nspname  not in ('pg_catalog', 'pg_toast', 'topology')
+      and not idx.indisprimary;
+
+    """
+    with cursor(DB_16_POSTMIG) as cr:
+        openupgrade.logged_query(cr, query)
+        drop_index_queries = [row[0] for row in cr.fetchall()]
+        total = len(drop_index_queries)
+        _logger.info("Start dropping %d indexes", len(drop_index_queries))
+        count = 0
+        for drop_query in drop_index_queries:
+            count += 1
+            _logger.info("Drop index %d of %s", count, total)
+            openupgrade.logged_query(cr, drop_query)
+
+
+@task()
 def click_odoo_update():
     check_call(["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite"])
 
