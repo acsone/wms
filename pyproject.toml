@@ -105,7 +105,6 @@ exclude = [
   'odoo/addons/alc_eshop_product_stock/*',
   'odoo/addons/alc_eshop_sale_cart_payment_info/*',
   'odoo/addons/alc_eshop_sale_payment_info/*',
-  'odoo/addons/alc_eshop_sale_triple_discount/*',
   'odoo/addons/alc_internal_package_groupbypartner/*',
   'odoo/addons/alc_magento_api/*',
   'odoo/addons/alc_mrp_repair/*',
