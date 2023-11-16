@@ -13,6 +13,7 @@ exclude: |
   ^odoo/addons/alc_elasticsearch_price_sorting/|
   ^odoo/addons/alc_elasticsearch_score_script/|
   ^odoo/addons/alc_eshop/|
+  ^odoo/addons/alc_eshop_api_cart_delivery/|
   ^odoo/addons/alc_eshop_api_v2/|
   ^odoo/addons/alc_eshop_app/|
   ^odoo/addons/alc_eshop_auth_api_key/|
