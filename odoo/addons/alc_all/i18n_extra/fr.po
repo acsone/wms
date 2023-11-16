@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Alcyon 10.0+e\n"
+"Project-Id-Version: Alcyon 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-17 15:22+0000\n"
 "PO-Revision-Date: 2020-09-17 15:22+0000\n"
@@ -17,5 +17,5 @@ msgstr ""
 
 #. module: base_geolocalize
 #: model:ir.ui.view,arch_db:base_geolocalize.view_crm_partner_geo_form
-msgid "Partner Assignation"
+msgid "Partner Assignment"
 msgstr "Localisation géographique"
