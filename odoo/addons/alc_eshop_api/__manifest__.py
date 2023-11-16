@@ -47,6 +47,7 @@
         "alc_eshop_schema_sale_product_unavailable_pharmacy",
         "alc_eshop_schema_sale_triple_discount",
         "alc_eshop_api_cart_discount_pricelist",
+        "alc_eshop_schema_sale_payment",
     ],
     "data": [
         "views/fastapi_endpoint.xml",
