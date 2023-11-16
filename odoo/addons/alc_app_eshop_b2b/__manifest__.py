@@ -51,6 +51,7 @@
         "alc_eshop_schema_product_storage_temperature",
         "alc_eshop_schema_product_dimensions",
         "alc_eshop_schema_product_additional_price",
+        "alc_eshop_schema_product_discount_special",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",
