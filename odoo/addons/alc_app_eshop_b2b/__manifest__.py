@@ -52,6 +52,7 @@
         "alc_eshop_schema_product_dimensions",
         "alc_eshop_schema_product_additional_price",
         "alc_eshop_schema_product_discount_special",
+        "alc_eshop_schema_product_supplier_promotion",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",

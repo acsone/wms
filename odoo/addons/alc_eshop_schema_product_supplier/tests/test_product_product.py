@@ -21,9 +21,7 @@ class TestProductExpiryInSchema(TransactionCase):
         cls.product = cls.env["product.product"].create(
             {"name": "test product", "tracking": "lot", "type": "product"}
         )
-        cls.supplier = cls.env["res.partner"].create(
-            {"name": "Supplier", "ref": "9001"}
-        )
+        cls.supplier = cls.env["res.partner"].create({"name": "Supplier"})
 
     def test_00(self):
         product = ProductProduct.from_product_product(self.product)
