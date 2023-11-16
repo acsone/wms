@@ -21,7 +21,6 @@
     - odoo refs/pull/106512/head # [IMP] Use importlib find_spec() instead of find_module()
     - odoo refs/pull/120538/head # [IMP] product_expiry: Don't trigger move lines expiration date recomputation
     - odoo refs/pull/128732/head # [IMP] stock: Improves product.action_open_quants performances
-    - odoo refs/pull/133719/head # [IMP] stock_account: Set index on stock move to analytic account line
   shell_command_after:
     # pyproject.toml
     - curl -sSL https://github.com/odoo/odoo/pull/44001.patch | git am
