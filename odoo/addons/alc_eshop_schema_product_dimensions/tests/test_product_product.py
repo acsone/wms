@@ -8,15 +8,12 @@ from odoo.addons.extendable.tests.common import ExtendableMixin
 from ..schemas import ProductProduct
 
 
-class TestProductExpiryInSchema(TransactionCase):
+class TestProductExpiryInSchema(TransactionCase, ExtendableMixin):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        ExtendableMixin.init_extendable_registry()
-
-        @cls.addClassCleanup
-        def cleanup():
-            ExtendableMixin.reset_extendable_registry()
+        cls.init_extendable_registry()
+        cls.addClassCleanup(cls.reset_extendable_registry)
 
         cls.product = cls.env["product.product"].create({"name": "test product"})
         cls.uom = cls.env.ref("uom.product_uom_meter")
