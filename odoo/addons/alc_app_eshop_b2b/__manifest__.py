@@ -50,6 +50,7 @@
         "alc_eshop_schema_product_link_notice",
         "alc_eshop_schema_product_storage_temperature",
         "alc_eshop_schema_product_dimensions",
+        "alc_eshop_schema_product_additional_price",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",
