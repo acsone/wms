@@ -12,12 +12,13 @@
     "name": "Alc Eshop Sale Cart Product Unavailable: Pharmacy Products",
     "description": """
         Alcyon: Unavailable qty announcement for pharmacy products""",
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_product_pharmacy", "alc_eshop_sale_cart_product_unavailable", "alc_product_category_data"],
+    "depends": ["alc_product_pharmacy", "alc_eshop_schema_sale_product_unavailable"],
     "data": [],
     "demo": [],
-    "installable": False,
+    "installable": True,
+    "development_status": "Alpha",
 }
