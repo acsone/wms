@@ -13,6 +13,9 @@ from starlette.types import ASGIApp
 from odoo import api, fields
 
 from odoo.addons.alc_eshop_api_cart.routers import carts_router
+from odoo.addons.alc_eshop_api_cart_delivery.routers import (
+    carts_router as carts_router_delivery,
+)
 from odoo.addons.alc_eshop_api_cart_product_unavailable.routers import (
     carts_router as carts_router_product_unavailable,
 )
@@ -96,6 +99,7 @@ class FastapiEndpoint(FastapiEndpointBase):
             sale_router,
             wishlist_router,
             delivery_carriers_router,
+            carts_router_delivery,
         ]
 
     def _get_alc_eshop_app_tags(self, params) -> list:

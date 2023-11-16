@@ -36,6 +36,7 @@
         "alc_eshop_api_customer",
         "alc_eshop_api_cart",
         "alc_eshop_api_cart_product_unavailable",
+        "alc_eshop_api_cart_delivery",
         "alc_eshop_api_delivery_carriers",
         "alc_eshop_sale_cart_channel",
         "alc_eshop_sale_cart_salesperson",

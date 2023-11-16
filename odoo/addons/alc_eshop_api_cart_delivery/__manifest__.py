@@ -2,19 +2,23 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Delivery Carriers Webservice",
-    "description": """Alcyon: Delivery Carriers Webservices""",
+    "name": "Sale Cart Delivery Rest Api",
+    "summary": """
+        Manage deliveries on sale.cart""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "website": "https://acsone.eu/",
+    "website": "https://github.com/shopinvader/odoo-shopinvader",
     "depends": [
         "fastapi",
+        "delivery",
         "shopinvader_sale_cart",
+        "onchange_helper",
         "alc_eshop_delivery_method",
         "alc_eshop_schema_sale_delivery",
     ],
     "data": [],
+    "demo": [],
     "installable": True,
     "development_status": "Alpha",
 }

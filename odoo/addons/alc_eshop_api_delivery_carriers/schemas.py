@@ -4,38 +4,20 @@ from __future__ import annotations
 
 from pydantic import BaseModel
 
+from odoo.addons.alc_eshop_schema_sale_delivery.schemas import DeliveryMethod
 from odoo.addons.delivery.models import delivery_carrier
 
 
-class DeliveryCarrier(
+class DeliveryMethodList(
     BaseModel,
     revalidate_instances="always",
     validate_assignment=True,
     extra="forbid",
 ):
-    id: int
-    name: str
+    data: list[DeliveryMethod]
 
     @classmethod
     def from_delivery_carrier(
         cls, record: delivery_carrier.DeliveryCarrier
     ) -> self:  # noqa: F821  pylint: disable=undefined-variable
-        return cls(
-            id=record.id,
-            name=record.name,
-        )
-
-
-class DeliveryCarrierList(
-    BaseModel,
-    revalidate_instances="always",
-    validate_assignment=True,
-    extra="forbid",
-):
-    data: list[DeliveryCarrier]
-
-    @classmethod
-    def from_delivery_carrier(
-        cls, record: delivery_carrier.DeliveryCarrier
-    ) -> self:  # noqa: F821  pylint: disable=undefined-variable
-        return cls(data=[DeliveryCarrier.from_delivery_carrier(rec) for rec in record])
+        return cls(data=[DeliveryMethod.from_delivery_carrier(rec) for rec in record])

@@ -12,20 +12,21 @@ from odoo.addons.fastapi.dependencies import (
     authenticated_partner_env,
 )
 
-from ..schemas import DeliveryCarrierList
+from ..schemas import DeliveryMethodList
 
 delivery_carriers_router = APIRouter(tags=["delivery_carriers"])
 
 
-@delivery_carriers_router.get("/delivery_carriers")
+@delivery_carriers_router.get("/delivery_carriers", deprecated=True)
+@delivery_carriers_router.get("/delivery_methods")
 def search(
     env: Annotated[api.Environment, Depends(authenticated_partner_env)],
     partner: Annotated[Partner, Depends(authenticated_partner)],
     cart_uuid: str | None = None,
-) -> DeliveryCarrierList:
+) -> DeliveryMethodList:
     """Get all delivery carriers."""
     cart = env["sale.order"]._find_open_cart(partner.id, cart_uuid)
     if not cart:
         return HTTPException(status_code=404, detail="Cart not found")
     carriers = cart._get_available_carriers()
-    return DeliveryCarrierList.from_delivery_carrier(carriers)
+    return DeliveryMethodList.from_delivery_carrier(carriers)

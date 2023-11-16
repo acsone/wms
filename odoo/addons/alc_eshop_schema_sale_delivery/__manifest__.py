@@ -2,19 +2,20 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Delivery Carriers Webservice",
-    "description": """Alcyon: Delivery Carriers Webservices""",
+    "name": "Alc Eshop Sale Cart Channel",
+    "description": """
+        Alcyon: Add sale channel to cart schema""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "fastapi",
-        "shopinvader_sale_cart",
-        "alc_eshop_delivery_method",
-        "alc_eshop_schema_sale_delivery",
+        "delivery",
+        "sale_shipping_info_helper",
+        "shopinvader_schema_sale",
     ],
     "data": [],
+    "demo": [],
     "installable": True,
     "development_status": "Alpha",
 }
