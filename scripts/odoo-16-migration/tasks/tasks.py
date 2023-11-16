@@ -542,17 +542,18 @@ def cleanup_indexes():
     by the installed addons
     """
     query = """
-    select format('DROP INDEX IF EXISTS %I.%I CASCADE;', s.nspname, i.relname) as drop_statement
-    from pg_index idx
-      join pg_class i on i.oid = idx.indexrelid
-      join pg_class t on t.oid = idx.indrelid
-      join pg_namespace s on i.relnamespace = s.oid
-    where s.nspname  not in ('pg_catalog', 'pg_toast', 'topology')
-      and not idx.indisprimary;
-
+        select format('DROP INDEX IF EXISTS %I.%I CASCADE;', s.nspname, i.relname) as drop_statement
+            from pg_index idx
+                join pg_class i on i.oid = idx.indexrelid
+                join pg_class t on t.oid = idx.indrelid
+                join pg_namespace s on i.relnamespace = s.oid
+                left join pg_constraint c on c.conindid = i.oid
+            where s.nspname  not in ('pg_catalog', 'pg_toast', 'topology')
+                and not idx.indisprimary
+                and c.conname is null;
     """
     with cursor(DB_16_POSTMIG) as cr:
-        openupgrade.logged_query(cr, query)
+        cr.execute(query)
         drop_index_queries = [row[0] for row in cr.fetchall()]
         total = len(drop_index_queries)
         _logger.info("Start dropping %d indexes", len(drop_index_queries))
