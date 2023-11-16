@@ -855,6 +855,7 @@ def set_modules_to_remove():
         "shopinvader_delivery_carrier",
         "shopinvader_sale_cart_delivery",
         "alc_eshop_api_delivery_carriers",  # renamed alc_eshop_cart_api_delivery
+        "alc_eshop_sale_triple_discount",  # replaced by alc_eshop_schema_sale_triple_discount
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
