@@ -9,7 +9,7 @@ from .common import TestDeliveriesService
 class TestDocumentsServiceFlow(TestDeliveriesService):
     def test_search_done_records(self):
         with self._create_test_client(partner=self.partner) as test_client:
-            response = test_client.get("/deliveries/done")
+            response = test_client.get("/pickings/done")
             self.assertEqual(response.status_code, 200)
             self.assertEqual(len(response.json()["data"]), 2)
             ids = [r["id"] for r in response.json()["data"]]
@@ -17,7 +17,7 @@ class TestDocumentsServiceFlow(TestDeliveriesService):
 
     def test_search_canceled_records(self):
         with self._create_test_client(partner=self.partner) as test_client:
-            response = test_client.get("/deliveries/canceled")
+            response = test_client.get("/pickings/canceled")
             self.assertEqual(response.status_code, 200)
             self.assertEqual(len(response.json()["data"]), 2)
             ids = [r["id"] for r in response.json()["data"]]
@@ -27,7 +27,7 @@ class TestDocumentsServiceFlow(TestDeliveriesService):
 
     def test_search_done(self):
         with self._create_test_client(partner=self.partner) as test_client:
-            response = test_client.get("/deliveries/done")
+            response = test_client.get("/pickings/done")
             self.assertEqual(response.status_code, 200)
             result = response.json()
             self.assertEqual(result["size"], 2)

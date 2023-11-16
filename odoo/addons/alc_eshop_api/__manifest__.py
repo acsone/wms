@@ -32,7 +32,7 @@
         "alc_eshop_api_promotion_subscriptions",
         "alc_eshop_api_forms",
         "alc_eshop_api_orders",
-        "alc_eshop_api_deliveries",
+        "alc_eshop_api_pickings",
         "alc_eshop_api_customer",
         "alc_eshop_api_cart",
         "alc_eshop_api_cart_product_unavailable",
