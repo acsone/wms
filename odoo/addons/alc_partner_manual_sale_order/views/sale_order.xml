@@ -6,11 +6,6 @@
     <field name="model">sale.order</field>
     <field name="inherit_id" ref="sale.view_order_form" />
     <field name="arch" type="xml">
-      <header position="attributes">
-        <attribute
-          name="attrs"
-        >{'invisible': [("manual_sale_order_allowed", "!=", True)]}</attribute>
-      </header>
       <header position="after">
         <div
           class="alert alert-danger"
