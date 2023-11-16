@@ -17,10 +17,10 @@ from odoo.addons.fastapi.dependencies import (
 
 from ..schemas import Picking, PickingList
 
-deliveries_router = APIRouter(tags=["deliveries"])
+pickings_router = APIRouter(tags=["pickings"])
 
 
-@deliveries_router.get("/deliveries")
+@pickings_router.get("/pickings")
 def get_all(
     env: Annotated[api.Environment, Depends(authenticated_partner_env)],
     partner: Annotated[Partner, Depends(authenticated_partner)],
@@ -35,11 +35,11 @@ def get_all(
     ] = 1,
     per_page: int | None = 10,
 ) -> PickingList:
-    """Get all deliveries."""
+    """Get all pickings."""
     return _search(env, partner, page, per_page, from_date=from_date)
 
 
-@deliveries_router.get("/deliveries/canceled")
+@pickings_router.get("/pickings/canceled")
 def get_canceled(
     env: Annotated[api.Environment, Depends(authenticated_partner_env)],
     partner: Annotated[Partner, Depends(authenticated_partner)],
@@ -54,14 +54,14 @@ def get_canceled(
     ] = 1,
     per_page: int | None = 10,
 ) -> PickingList:
-    """Get canceled deliveries."""
+    """Get canceled pickings."""
     states = ["cancel"]
     return _search(
         env, partner, page, per_page, states=states, from_date=from_date, canceled=True
     )
 
 
-@deliveries_router.get("/deliveries/done")
+@pickings_router.get("/pickings/done")
 def get_done(
     env: Annotated[api.Environment, Depends(authenticated_partner_env)],
     partner: Annotated[Partner, Depends(authenticated_partner)],
@@ -76,7 +76,7 @@ def get_done(
     ] = 1,
     per_page: int | None = 10,
 ) -> PickingList:
-    """Get completed deliveries."""
+    """Get completed pickings."""
     states = ["done"]
     return _search(env, partner, page, per_page, states=states, from_date=from_date)
 

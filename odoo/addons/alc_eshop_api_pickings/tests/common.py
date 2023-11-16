@@ -3,7 +3,7 @@
 
 from odoo.addons.fastapi.tests.common import FastAPITransactionCase
 
-from ..routers import deliveries_router
+from ..routers import pickings_router
 
 
 class TestDeliveriesService(FastAPITransactionCase):
@@ -11,7 +11,7 @@ class TestDeliveriesService(FastAPITransactionCase):
     def setUpClass(cls):
         super().setUpClass()
 
-        cls.default_fastapi_router = deliveries_router
+        cls.default_fastapi_router = pickings_router
         cls.partner = cls.env["res.partner"].create({"name": "Partner"})
         cls.product_ship = cls.env["product.product"].create(
             {"name": "Shipit", "default_code": "SHP"}
