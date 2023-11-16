@@ -33,7 +33,6 @@ exclude: |
   ^odoo/addons/alc_product_search_cnk/|
   ^odoo/addons/alc_purchase_order_import_ubl/|
   ^odoo/addons/alc_purchase_order_ubl/|
-  ^odoo/addons/alc_sale_cart_price_recalculation/|
   ^odoo/addons/alc_search_engine/|
   ^odoo/addons/alc_shopfloor_cluster_picking_by_partners/|
   ^odoo/addons/alc_shopfloor_cluster_picking_transfer_async/|
