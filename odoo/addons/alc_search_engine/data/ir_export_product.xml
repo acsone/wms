@@ -15,13 +15,7 @@
     </record>
 
     <!-- override price to avoid price getting overwritten at module updates   -->
-    <record
-    id="shopinvader_search_engine.ir_exp_shopinvader_variant_price"
-    model="ir.exports.line"
-  >
-        <field name="name">price_cache</field>
-        <field name="alias">price_cache:price</field>
-    </record>
+
     <record id="ir_exp_shopinvader_variant_is_mto" model="ir.exports.line">
         <field name="name">is_mto_product</field>
         <field name="alias">is_mto_product:is_mto</field>
