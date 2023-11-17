@@ -202,6 +202,7 @@ odoo-addon-product-uom-updatable==16.0.1.0.0.4
 odoo-addon-purchase-cancel-reason @ git+https://github.com/acsone/purchase-workflow.git@4a4854e049e94815b1f83d1166e885c617bc8d7f#subdirectory=setup/purchase_cancel_reason
 odoo-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purchase-workflow.git@f95d28242293c5b5a040b8de8ce4e9f26db886b8#subdirectory=setup/purchase_delivery_split_date
 odoo-addon-purchase-discount==16.0.1.1.0
+odoo-addon-purchase-force-invoiced==16.0.1.0.1.2
 odoo-addon-purchase-order-approved==16.0.1.0.0.6
 odoo-addon-purchase-stock-packaging==16.0.1.0.0.4
 odoo-addon-pydantic==16.0.1.0.0.3
@@ -216,6 +217,7 @@ odoo-addon-sale-cart==16.0.1.0.0.2
 odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@e3920cb6276556e98afed18a828d5a7c5103bf67#subdirectory=setup/sale_channel
 odoo-addon-sale-discount-display-amount==16.0.1.0.0.3
 odoo-addon-sale-exception==16.0.1.2.0.2
+odoo-addon-sale-force-invoiced==16.0.1.0.0.10
 odoo-addon-sale-order-line-cancel @ git+https://github.com/acsone/sale-workflow.git@6940f11bbac96be35eff39a0e85edd7462026359#subdirectory=setup/sale_order_line_cancel
 odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@ef0c216f30a0fd7fd1fb0d782f8b9aaac3f7d487#subdirectory=setup/sale_procurement_customer
 odoo-addon-sale-product-set==16.0.1.1.0.6
