@@ -61,16 +61,6 @@
     - oca refs/pull/1264/head # [ADD] - add stock_move_propagate_first_move_cancel
   target: origin 16.0-alc_stock_move_propagate_first_move
 
-./src/stock_storage_type:
-  remotes:
-    origin: git@github.com:acsone/wms.git
-    oca: git@github.com:oca/wms.git
-  merges:
-    - oca 16.0
-    - oca refs/pull/676/head # [FIX] stock_storage_type: Don't rely on max_weight on product.packaging
-    - oca refs/pull/731/head # [FIX] stock_storage_type: Now quants (recordset) is passed to conditions
-  target: origin 16.0-alc_stock_storage_type
-
 ./src/fastapi:
   remotes:
     origin: git@github.com:lmignon/fastapi.git
