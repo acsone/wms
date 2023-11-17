@@ -97,7 +97,8 @@ class DeliveryPackageGlsWizard(models.TransientModel):
     def create(self, vals_list):
         res = super().create(vals_list)
         for wiz in res:
-            wiz._set_shipping_weight()
+            if not wiz.shipping_weight:
+                wiz._set_shipping_weight()
         return res
 
     def _validate_parameters(self, put_in_pack=False):
