@@ -5,11 +5,10 @@ from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 
+from odoo.addons.shopinvader_product.schemas.product import ProductProduct
 from odoo.addons.shopinvader_search_engine_product_stock.tests.common import (
     StockCommonCase,
 )
-
-from ..schemas import ProductProduct
 
 
 class TestProductExpiryInSchema(StockCommonCase):
