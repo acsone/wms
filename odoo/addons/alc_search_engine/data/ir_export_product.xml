@@ -2,10 +2,7 @@
 <!-- Copyright 2021 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="0">
-    <record id="ir_exp_shopinvader_variant_taxes_id" model="ir.exports.line">
-        <field name="name">taxes_id</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
+
     <record
     id="ir_exp_shopinvader_variant_route_from_categ_ids"
     model="ir.exports.line"
@@ -19,17 +16,6 @@
     <record id="ir_exp_shopinvader_variant_is_mto" model="ir.exports.line">
         <field name="name">is_mto_product</field>
         <field name="alias">is_mto_product:is_mto</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-
-    <record id="ir_exp_shopinvader_variant_vat_name" model="ir.exports.line">
-        <field name="name">vat_id/name</field>
-        <field name="alias">vat_id:vat/name</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_vat_amount" model="ir.exports.line">
-        <field name="name">vat_id/amount</field>
-        <field name="alias">vat_id:vat/amount</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
     <record id="ir_exp_shopinvader_variant_media_lang" model="ir.exports.line">
