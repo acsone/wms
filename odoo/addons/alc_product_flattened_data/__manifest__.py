@@ -15,6 +15,8 @@
         "product_multi_category",
         "account_tax_one_vat",
         "queue_job_cron",
+        # shopinvader
+        "shopinvader_base_url",
         # ALC
         "alc_price_cache",
         "alc_product_additional_price",
