@@ -20,7 +20,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_res_partner__alc_b2c_client_id
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_res_users__alc_b2c_client_id
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_sale_order__alc_b2c_client_id
-#: model:ir.model.fields,field_description:alc_b2c_connector.field_shopinvader_partner__alc_b2c_client_id
 msgid "Alc B2C Client"
 msgstr ""
 
