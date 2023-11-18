@@ -21,13 +21,11 @@ msgstr ""
 #. module: alc_b2c_partner_no_geooptimize
 #: model:ir.model.fields,field_description:alc_b2c_partner_no_geooptimize.field_res_partner__in_geo_release_channel
 #: model:ir.model.fields,field_description:alc_b2c_partner_no_geooptimize.field_res_users__in_geo_release_channel
-#: model:ir.model.fields,field_description:alc_b2c_partner_no_geooptimize.field_shopinvader_partner__in_geo_release_channel
 msgid "Delivery based on geo-localization?"
 msgstr ""
 
 #. module: alc_b2c_partner_no_geooptimize
 #: model:ir.model.fields,help:alc_b2c_partner_no_geooptimize.field_res_partner__in_geo_release_channel
 #: model:ir.model.fields,help:alc_b2c_partner_no_geooptimize.field_res_users__in_geo_release_channel
-#: model:ir.model.fields,help:alc_b2c_partner_no_geooptimize.field_shopinvader_partner__in_geo_release_channel
 msgid "Include in release channels based on geographic zones"
 msgstr ""

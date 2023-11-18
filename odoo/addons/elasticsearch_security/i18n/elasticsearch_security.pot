@@ -74,7 +74,6 @@ msgstr ""
 #: model:ir.model,name:elasticsearch_security.model_elasticsearch_role
 #: model:ir.model.fields,field_description:elasticsearch_security.field_res_partner__elasticsearch_role
 #: model:ir.model.fields,field_description:elasticsearch_security.field_res_users__elasticsearch_role
-#: model:ir.model.fields,field_description:elasticsearch_security.field_shopinvader_partner__elasticsearch_role
 msgid "Elasticsearch Role"
 msgstr ""
 

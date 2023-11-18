@@ -37,7 +37,6 @@ msgstr ""
 #. module: alc_shipping_fee
 #: model:ir.model.fields,field_description:alc_shipping_fee.field_res_partner__help_with_fixed_fee
 #: model:ir.model.fields,field_description:alc_shipping_fee.field_res_users__help_with_fixed_fee
-#: model:ir.model.fields,field_description:alc_shipping_fee.field_shopinvader_partner__help_with_fixed_fee
 msgid "Fixed fee applied for deliveries"
 msgstr ""
 
@@ -54,14 +53,12 @@ msgstr ""
 #. module: alc_shipping_fee
 #: model:ir.model.fields,field_description:alc_shipping_fee.field_res_partner__help_with_fee
 #: model:ir.model.fields,field_description:alc_shipping_fee.field_res_users__help_with_fee
-#: model:ir.model.fields,field_description:alc_shipping_fee.field_shopinvader_partner__help_with_fee
 msgid "Helps with fees"
 msgstr ""
 
 #. module: alc_shipping_fee
 #: model:ir.model.fields,help:alc_shipping_fee.field_res_partner__help_with_fixed_fee
 #: model:ir.model.fields,help:alc_shipping_fee.field_res_users__help_with_fixed_fee
-#: model:ir.model.fields,help:alc_shipping_fee.field_shopinvader_partner__help_with_fixed_fee
 msgid ""
 "If checked, a fixed amount for delivery will be apply, no matter the amount "
 "of the delivery"

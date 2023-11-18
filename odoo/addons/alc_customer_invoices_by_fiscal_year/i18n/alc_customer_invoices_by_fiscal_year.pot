@@ -21,6 +21,5 @@ msgstr ""
 #. module: alc_customer_invoices_by_fiscal_year
 #: model:ir.model.fields,field_description:alc_customer_invoices_by_fiscal_year.field_res_partner__total_invoiced_in_current_fiscal_year
 #: model:ir.model.fields,field_description:alc_customer_invoices_by_fiscal_year.field_res_users__total_invoiced_in_current_fiscal_year
-#: model:ir.model.fields,field_description:alc_customer_invoices_by_fiscal_year.field_shopinvader_partner__total_invoiced_in_current_fiscal_year
 msgid "Total Invoiced during the current fiscal year"
 msgstr ""

@@ -46,6 +46,5 @@ msgstr ""
 #. module: alc_purchase_discount
 #: model:ir.model.fields,field_description:alc_purchase_discount.field_res_partner__supplier_discount
 #: model:ir.model.fields,field_description:alc_purchase_discount.field_res_users__supplier_discount
-#: model:ir.model.fields,field_description:alc_purchase_discount.field_shopinvader_partner__supplier_discount
 msgid "Supplier discount %"
 msgstr ""

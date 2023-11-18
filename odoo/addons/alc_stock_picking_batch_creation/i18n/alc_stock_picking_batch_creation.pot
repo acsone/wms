@@ -62,6 +62,5 @@ msgstr ""
 #. module: alc_stock_picking_batch_creation
 #: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_res_partner__device_type_ids
 #: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_res_users__device_type_ids
-#: model:ir.model.fields,field_description:alc_stock_picking_batch_creation.field_shopinvader_partner__device_type_ids
 msgid "Specific device types"
 msgstr ""

@@ -21,6 +21,5 @@ msgstr ""
 #. module: alc_partner_invoicing_mode_default
 #: model:ir.model.fields,field_description:alc_partner_invoicing_mode_default.field_res_partner__invoicing_mode
 #: model:ir.model.fields,field_description:alc_partner_invoicing_mode_default.field_res_users__invoicing_mode
-#: model:ir.model.fields,field_description:alc_partner_invoicing_mode_default.field_shopinvader_partner__invoicing_mode
 msgid "Invoicing Mode"
 msgstr ""

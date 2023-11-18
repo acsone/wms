@@ -16,7 +16,6 @@ msgstr ""
 #. module: alc_documents
 #: model:ir.model.fields,field_description:alc_documents.field_res_partner__alc_document_count
 #: model:ir.model.fields,field_description:alc_documents.field_res_users__alc_document_count
-#: model:ir.model.fields,field_description:alc_documents.field_shopinvader_partner__alc_document_count
 msgid "# of documents"
 msgstr ""
 
@@ -160,7 +159,6 @@ msgstr ""
 #. module: alc_documents
 #: model:ir.model.fields,field_description:alc_documents.field_res_partner__needs_dossier
 #: model:ir.model.fields,field_description:alc_documents.field_res_users__needs_dossier
-#: model:ir.model.fields,field_description:alc_documents.field_shopinvader_partner__needs_dossier
 msgid "Needs Dossier"
 msgstr ""
 

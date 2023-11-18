@@ -41,7 +41,6 @@ msgstr ""
 #. module: alc_stock_scheduler_filter
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_partner__is_manage_day_5
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_users__is_manage_day_5
-#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_shopinvader_partner__is_manage_day_5
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__is_manage_day_5
 msgid "Friday"
 msgstr ""
@@ -54,7 +53,6 @@ msgstr ""
 #. module: alc_stock_scheduler_filter
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_partner__is_manage_day_1
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_users__is_manage_day_1
-#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_shopinvader_partner__is_manage_day_1
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__is_manage_day_1
 msgid "Monday"
 msgstr ""
@@ -86,7 +84,6 @@ msgstr ""
 #. module: alc_stock_scheduler_filter
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_partner__is_manage_day_6
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_users__is_manage_day_6
-#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_shopinvader_partner__is_manage_day_6
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__is_manage_day_6
 msgid "Saturday"
 msgstr ""
@@ -94,7 +91,6 @@ msgstr ""
 #. module: alc_stock_scheduler_filter
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_partner__is_manage_day_7
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_users__is_manage_day_7
-#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_shopinvader_partner__is_manage_day_7
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__is_manage_day_7
 msgid "Sunday"
 msgstr ""
@@ -107,7 +103,6 @@ msgstr ""
 #. module: alc_stock_scheduler_filter
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_partner__is_manage_day_4
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_users__is_manage_day_4
-#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_shopinvader_partner__is_manage_day_4
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__is_manage_day_4
 msgid "Thursday"
 msgstr ""
@@ -115,7 +110,6 @@ msgstr ""
 #. module: alc_stock_scheduler_filter
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_partner__is_manage_day_2
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_users__is_manage_day_2
-#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_shopinvader_partner__is_manage_day_2
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__is_manage_day_2
 msgid "Tuesday"
 msgstr ""
@@ -135,7 +129,6 @@ msgstr ""
 #. module: alc_stock_scheduler_filter
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_partner__is_manage_day_3
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_users__is_manage_day_3
-#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_shopinvader_partner__is_manage_day_3
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_stock_scheduler_compute__is_manage_day_3
 msgid "Wednesday"
 msgstr ""

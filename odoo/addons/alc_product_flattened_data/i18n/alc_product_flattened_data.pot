@@ -175,6 +175,21 @@ msgid "Tax Amount"
 msgstr ""
 
 #. module: alc_product_flattened_data
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__url_key_en
+msgid "Url Key En"
+msgstr ""
+
+#. module: alc_product_flattened_data
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__url_key_fr
+msgid "Url Key Fr"
+msgstr ""
+
+#. module: alc_product_flattened_data
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__url_key_nl
+msgid "Url Key Nl"
+msgstr ""
+
+#. module: alc_product_flattened_data
 #: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__web_published
 msgid "Web Published"
 msgstr ""

@@ -21,13 +21,11 @@ msgstr ""
 #. module: alc_reception_pharmacy_geo_release_channel
 #: model:ir.model.fields,field_description:alc_reception_pharmacy_geo_release_channel.field_res_partner__is_delivered_by_alcyon
 #: model:ir.model.fields,field_description:alc_reception_pharmacy_geo_release_channel.field_res_users__is_delivered_by_alcyon
-#: model:ir.model.fields,field_description:alc_reception_pharmacy_geo_release_channel.field_shopinvader_partner__is_delivered_by_alcyon
 msgid "Delivered by Alcyon?"
 msgstr ""
 
 #. module: alc_reception_pharmacy_geo_release_channel
 #: model:ir.model.fields,field_description:alc_reception_pharmacy_geo_release_channel.field_res_partner__partner_shipping_id
 #: model:ir.model.fields,field_description:alc_reception_pharmacy_geo_release_channel.field_res_users__partner_shipping_id
-#: model:ir.model.fields,field_description:alc_reception_pharmacy_geo_release_channel.field_shopinvader_partner__partner_shipping_id
 msgid "Delivery Address"
 msgstr ""

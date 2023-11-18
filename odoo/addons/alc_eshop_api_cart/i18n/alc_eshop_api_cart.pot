@@ -37,6 +37,11 @@ msgid "Import Warning Msg"
 msgstr ""
 
 #. module: alc_eshop_api_cart
+#: model:ir.model.fields,field_description:alc_eshop_api_cart.field_shopinvader_api_cart_cart_router_helper__partner
+msgid "Partner"
+msgstr ""
+
+#. module: alc_eshop_api_cart
 #: model:mail.template,subject:alc_eshop_api_cart.sale_order_notify_note
 msgid ""
 "Ref {{ object.name }}: Demande spécifique de {{ object.partner_id.name}}"
@@ -45,6 +50,11 @@ msgstr ""
 #. module: alc_eshop_api_cart
 #: model:ir.model,name:alc_eshop_api_cart.model_sale_order
 msgid "Sales Order"
+msgstr ""
+
+#. module: alc_eshop_api_cart
+#: model:ir.model,name:alc_eshop_api_cart.model_shopinvader_api_cart_cart_router_helper
+msgid "ShopInvader API Cart Router Helper"
 msgstr ""
 
 #. module: alc_eshop_api_cart

@@ -206,7 +206,6 @@ msgstr ""
 #: model:ir.actions.act_window,name:connector_keycloak.keycloak_user_act_window
 #: model:ir.model.fields,field_description:connector_keycloak.field_res_partner__keycloak_user_ids
 #: model:ir.model.fields,field_description:connector_keycloak.field_res_users__keycloak_user_ids
-#: model:ir.model.fields,field_description:connector_keycloak.field_shopinvader_partner__keycloak_user_ids
 #: model:ir.ui.menu,name:connector_keycloak.keycloak_user_menu
 msgid "Keycloak Users"
 msgstr ""
@@ -258,6 +257,36 @@ msgid "Password"
 msgstr ""
 
 #. module: connector_keycloak
+#: model:ir.model.fields,field_description:connector_keycloak.field_keycloak_backend__realm_client_id
+msgid "Realm Client"
+msgstr ""
+
+#. module: connector_keycloak
+#: model:ir.model.fields,field_description:connector_keycloak.field_keycloak_backend__realm_client_id_env_default
+msgid "Realm Client Env Default"
+msgstr ""
+
+#. module: connector_keycloak
+#: model:ir.model.fields,field_description:connector_keycloak.field_keycloak_backend__realm_client_id_env_is_editable
+msgid "Realm Client Id Env Is Editable"
+msgstr ""
+
+#. module: connector_keycloak
+#: model:ir.model.fields,field_description:connector_keycloak.field_keycloak_backend__realm_client_secret_key
+msgid "Realm Client Secret Key"
+msgstr ""
+
+#. module: connector_keycloak
+#: model:ir.model.fields,field_description:connector_keycloak.field_keycloak_backend__realm_client_secret_key_env_default
+msgid "Realm Client Secret Key Env Default"
+msgstr ""
+
+#. module: connector_keycloak
+#: model:ir.model.fields,field_description:connector_keycloak.field_keycloak_backend__realm_client_secret_key_env_is_editable
+msgid "Realm Client Secret Key Env Is Editable"
+msgstr ""
+
+#. module: connector_keycloak
 #: model:ir.model.fields,field_description:connector_keycloak.field_keycloak_backend__realm_name
 msgid "Realm Name"
 msgstr ""
@@ -295,6 +324,15 @@ msgstr ""
 #. module: connector_keycloak
 #: model:ir.model.fields,field_description:connector_keycloak.field_keycloak_user_wizard__temporary
 msgid "Temporary"
+msgstr ""
+
+#. module: connector_keycloak
+#: model_terms:ir.ui.view,arch_db:connector_keycloak.keycloak_backend_form_view
+msgid ""
+"The following fields are used to request an access token for the website.\n"
+"                            This is used to authenticate the users requests from the magento\n"
+"                            api based on the provided credentials. You must therefore give a specific\n"
+"                            client and secret key for the realm used by the website."
 msgstr ""
 
 #. module: connector_keycloak
@@ -365,6 +403,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_keycloak.field_keycloak_partner_wizard__username
 #: model:ir.model.fields,field_description:connector_keycloak.field_keycloak_user__username
 msgid "Username"
+msgstr ""
+
+#. module: connector_keycloak
+#: model_terms:ir.ui.view,arch_db:connector_keycloak.keycloak_backend_form_view
+msgid "Website realms infos"
 msgstr ""
 
 #. module: connector_keycloak
