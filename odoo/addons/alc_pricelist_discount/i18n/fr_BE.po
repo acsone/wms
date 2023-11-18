@@ -24,7 +24,6 @@ msgstr "Remise Alcyon"
 #. module: alc_pricelist_discount
 #: model:ir.model.fields,field_description:alc_pricelist_discount.field_res_partner__discount_pricelist_ids
 #: model:ir.model.fields,field_description:alc_pricelist_discount.field_res_users__discount_pricelist_ids
-#: model:ir.model.fields,field_description:alc_pricelist_discount.field_shopinvader_partner__discount_pricelist_ids
 msgid "Alcyon Discount Pricelist"
 msgstr "Liste Remises Alcyon"
 
@@ -53,7 +52,6 @@ msgstr ""
 #: model:ir.model,name:alc_pricelist_discount.model_product_pricelist
 #: model:ir.model.fields,field_description:alc_pricelist_discount.field_res_partner__property_product_pricelist
 #: model:ir.model.fields,field_description:alc_pricelist_discount.field_res_users__property_product_pricelist
-#: model:ir.model.fields,field_description:alc_pricelist_discount.field_shopinvader_partner__property_product_pricelist
 msgid "Pricelist"
 msgstr "Liste de prix"
 
@@ -104,7 +102,6 @@ msgstr "Droit à la promotion fournisseur"
 #. module: alc_pricelist_discount
 #: model:ir.model.fields,help:alc_pricelist_discount.field_res_partner__property_product_pricelist
 #: model:ir.model.fields,help:alc_pricelist_discount.field_res_users__property_product_pricelist
-#: model:ir.model.fields,help:alc_pricelist_discount.field_shopinvader_partner__property_product_pricelist
 msgid ""
 "This pricelist will be used, instead of the default one, for sales to the "
 "current partner"
