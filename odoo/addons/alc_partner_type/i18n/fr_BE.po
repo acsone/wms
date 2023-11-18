@@ -19,7 +19,6 @@ msgstr ""
 #. module: alc_partner_type
 #: model:ir.model.fields,field_description:alc_partner_type.field_res_partner__partner_type
 #: model:ir.model.fields,field_description:alc_partner_type.field_res_users__partner_type
-#: model:ir.model.fields,field_description:alc_partner_type.field_shopinvader_partner__partner_type
 msgid "Alcyon Partner Category"
 msgstr "Type de client"
 
@@ -95,7 +94,6 @@ msgstr "Alcyonnaire"
 #. module: alc_partner_type
 #: model:ir.model.fields,field_description:alc_partner_type.field_res_partner__is_student
 #: model:ir.model.fields,field_description:alc_partner_type.field_res_users__is_student
-#: model:ir.model.fields,field_description:alc_partner_type.field_shopinvader_partner__is_student
 msgid "Student"
 msgstr "Etudiant"
 
