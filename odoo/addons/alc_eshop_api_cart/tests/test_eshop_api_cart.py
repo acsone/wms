@@ -8,10 +8,10 @@ from freezegun import freeze_time
 
 from odoo.exceptions import ValidationError
 
-from .common import TestSaleCartRestApiInfoCase
+from .common import TestEshopApiCartCase
 
 
-class TestSaleCartRestApiInfo(TestSaleCartRestApiInfoCase):
+class TestSaleCartRestApiInfo(TestEshopApiCartCase):
     @contextmanager
     def _record_new_note_template(self, so):
         class _Result:
