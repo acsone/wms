@@ -68,7 +68,6 @@ msgstr ""
 #: code:addons/alc_product_label_printing/models/stock_picking.py:0
 #: model:ir.model.fields,help:alc_product_label_printing.field_res_partner__no_labels_products
 #: model:ir.model.fields,help:alc_product_label_printing.field_res_users__no_labels_products
-#: model:ir.model.fields,help:alc_product_label_printing.field_shopinvader_partner__no_labels_products
 #, python-format
 msgid "Customer does not need product labels"
 msgstr "Le client n'a pas besoin des étiquettes d'article"
@@ -76,7 +75,6 @@ msgstr "Le client n'a pas besoin des étiquettes d'article"
 #. module: alc_product_label_printing
 #: model:ir.model.fields,help:alc_product_label_printing.field_res_partner__no_labels_food_products
 #: model:ir.model.fields,help:alc_product_label_printing.field_res_users__no_labels_food_products
-#: model:ir.model.fields,help:alc_product_label_printing.field_shopinvader_partner__no_labels_food_products
 msgid "Customer does not need product labels."
 msgstr "Le client n'a pas besoin des étiquettes d'article."
 
@@ -88,14 +86,12 @@ msgstr "Opération détaillée"
 #. module: alc_product_label_printing
 #: model:ir.model.fields,field_description:alc_product_label_printing.field_res_partner__no_labels_food_products
 #: model:ir.model.fields,field_description:alc_product_label_printing.field_res_users__no_labels_food_products
-#: model:ir.model.fields,field_description:alc_product_label_printing.field_shopinvader_partner__no_labels_food_products
 msgid "Do not print food product labels"
 msgstr "Ne pas imprimer d'étiquette de produits alimentaires"
 
 #. module: alc_product_label_printing
 #: model:ir.model.fields,field_description:alc_product_label_printing.field_res_partner__no_labels_products
 #: model:ir.model.fields,field_description:alc_product_label_printing.field_res_users__no_labels_products
-#: model:ir.model.fields,field_description:alc_product_label_printing.field_shopinvader_partner__no_labels_products
 msgid "Do not print product labels"
 msgstr "Ne pas imprimer d'étiquette article"
 
