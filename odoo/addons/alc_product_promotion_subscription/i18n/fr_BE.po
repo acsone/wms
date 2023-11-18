@@ -19,7 +19,6 @@ msgstr ""
 #. module: alc_product_promotion_subscription
 #: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_res_partner__alc_product_promotion_subscription_count
 #: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_res_users__alc_product_promotion_subscription_count
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_shopinvader_partner__alc_product_promotion_subscription_count
 msgid "# of product promotion subscriptions"
 msgstr "# d'abonnements aux produits en promotion"
 
@@ -119,7 +118,6 @@ msgstr "Produit"
 #. module: alc_product_promotion_subscription
 #: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_res_partner__alc_product_promotion_subscription_ids
 #: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_res_users__alc_product_promotion_subscription_ids
-#: model:ir.model.fields,field_description:alc_product_promotion_subscription.field_shopinvader_partner__alc_product_promotion_subscription_ids
 msgid "Product promotion subscriptions"
 msgstr "Abonnements aux promotions produits"
 
