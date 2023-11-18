@@ -24,7 +24,6 @@ msgstr ""
 #. module: alc_partner_force_re_geolocalization
 #: model:ir.model.fields,field_description:alc_partner_force_re_geolocalization.field_res_partner__coordinates_should_be_checked
 #: model:ir.model.fields,field_description:alc_partner_force_re_geolocalization.field_res_users__coordinates_should_be_checked
-#: model:ir.model.fields,field_description:alc_partner_force_re_geolocalization.field_shopinvader_partner__coordinates_should_be_checked
 #, fuzzy
 #| msgid "Coordinates should be checked"
 msgid "Coordinates Should Be Checked"
