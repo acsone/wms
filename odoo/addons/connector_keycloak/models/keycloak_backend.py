@@ -19,6 +19,8 @@ class KeycloakBackend(Model):
     realm_name = fields.Char()
     client_secret_key = fields.Char()
     user_realm_name = fields.Char()
+    realm_client_id = fields.Char()
+    realm_client_secret_key = fields.Char()
 
     @property
     def _server_env_fields(self):
@@ -29,6 +31,8 @@ class KeycloakBackend(Model):
             "realm_name": {},
             "client_secret_key": {},
             "user_realm_name": {},
+            "realm_client_id": {},
+            "realm_client_secret_key": {},
         }
         env_fields.update(new)
         return env_fields
