@@ -3,6 +3,7 @@ odoo @ git+https://github.com/acsone/odoo.git@16.0-alc_master
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@16.0-alc_master
 werkzeug<2.1
 pypdf2<2
+dicttoxml @ git+https://github.com/acsone/dicttoxml.git@alc-master-perf
 
 # account-analytic
 # https://github.com/elego/account-analytic/pull/1
@@ -187,7 +188,7 @@ odoo-addon-stock-move-free-reservation-reassign @ git+https://github.com/oca/sto
 odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@16.0-mig-base_sparse_field_list_support-hda#subdirectory=setup/base_sparse_field_list_support
 odoo-addon-base-partition @ git+https://github.com/OCA/server-tools.git@refs/pull/2615/head#subdirectory=setup/base_partition
 odoo-addon-base-exception @ git+https://github.com/OCA/server-tools.git@refs/pull/2670/head#subdirectory=setup/base_exception
-odoo-addon-jsonifier @ git+https://github.com/OCA/server-tools.git@refs/pull/2671/head#subdirectory=setup/jsonifier
+odoo-addon-jsonifier @ git+https://github.com/OCA/server-tools.git@refs/pull/2762/head#subdirectory=setup/jsonifier
 
 # OCA/server-auth
 odoo-addon-auth-api-key-group @ git+https://github.com/OCA/server-auth.git@refs/pull/544/head#subdirectory=setup/auth_api_key_group

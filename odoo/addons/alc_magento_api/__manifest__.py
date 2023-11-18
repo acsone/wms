@@ -1,24 +1,29 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "Alc Magento API Facade",
     "description": """Alcyon: Magento API Facade""",
-    "version": "10.0.2.0.0",
+    "version": "16.0.2.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "alc_eshop",  # bring all fields
-        "alc_eshop_services_catalog",
-        "alc_eshop_services_deliveries",
-        "alc_eshop_services_orders",
-        "alc_eshop_sale_cart_info",
+        "connector_keycloak",
         "alc_product_flattened_data",
+        "alc_eshop_api_sale_statistic",
+        "alc_eshop_api_pickings",
+        "alc_eshop_api_cart",
+        "jsonifier",
+        # for order façade
+        "sale_order_line_cancel",
+        "sale_cart",
+        "alc_sale_channel",
+        "alc_sale_suite_name",
         "alc_sale_order_date_order_short",
     ],
     "demo": [],
     "external_dependencies": {"python": ["xmltodict", "dicttoxml"]},
-    'installable': False
+    "installable": True,
+    "development_status": "Alpha",
 }

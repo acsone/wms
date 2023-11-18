@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -17,9 +16,9 @@ class MagentoApi(Controller):
     def _authenticate(self, sudo_env, headers, expected_username):
         basic = headers["HTTP_AUTHORIZATION"]
         encoded = basic.replace("Basic ", "")
-        decoded = base64.b64decode(encoded)  # TODO: Port to 3
+        decoded = base64.b64decode(encoded).decode("utf-8")
         username, password = decoded.split(":")
-        backend = sudo_env.ref("keycloak.keycloak_backend")
+        backend = sudo_env.ref("connector_keycloak.keycloak_backend")
         token = backend._get_token_from_user_info(username, password)
         assert token["token_type"] == "Bearer"
         return username
@@ -47,7 +46,7 @@ class MagentoApi(Controller):
         try:
             keycloak_username = self._authenticate(sudo_env, headers, username)
             partner = self._get_partner(sudo_env, keycloak_username)
-        except Exception:
+        except Exception:  # pylint: disable=broad-except
             _logger.exception("Magento API: User %s not found.", username)
             return Response(response="User not found.", status=401)
         try:
@@ -59,7 +58,7 @@ class MagentoApi(Controller):
             _logger.info("Magento API Args: %s, kwargs: %s", service, kwargs)
             facade = Facade.factory(sudo_env, partner, service)
             result, error, location = facade(**kwargs)
-        except Exception as e:
+        except Exception as e:  # pylint: disable=broad-except
             _logger.exception("Magento API Call: %s", str(e))
             return Response(response="Cannot resolve API call.", status=202)
         status = 201 if request.httprequest.method == "POST" and not error else 200

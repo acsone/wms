@@ -33,6 +33,7 @@ class TestProductFlattenedData(TransactionCase):
     @classmethod
     def _example_product_flattened_data(cls):
         return {
+            "id": 8248538,
             "allowed_partner_types": "food_only,student_like,equipment_only,guest,veterinary,misc,export_meds,wholesaler_veterinary,shareholder,supplier,export_customer,wholesaler_pharmacy",
             "barcode": False,
             "categ_en": "Medical Material / Pets / Dog / Baskets",
