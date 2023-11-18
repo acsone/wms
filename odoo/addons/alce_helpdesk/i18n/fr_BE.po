@@ -429,7 +429,6 @@ msgstr "Nombre de tickets helpdesk"
 #: model:ir.model.fields,field_description:alce_helpdesk.field_res_partner__helpdesk_tickets_count
 #: model:ir.model.fields,field_description:alce_helpdesk.field_res_users__helpdesk_tickets_count
 #: model:ir.model.fields,field_description:alce_helpdesk.field_sale_order__helpdesk_tickets_count
-#: model:ir.model.fields,field_description:alce_helpdesk.field_shopinvader_partner__helpdesk_tickets_count
 #: model:ir.model.fields,field_description:alce_helpdesk.field_stock_move__helpdesk_tickets_count
 #: model:ir.model.fields,field_description:alce_helpdesk.field_stock_picking__helpdesk_tickets_count
 #, fuzzy
@@ -552,8 +551,8 @@ msgid ""
 "Received more than expected qties for product '%(name)s'. (Expected: "
 "%(qty)d, Received %(qty_done)d)"
 msgstr ""
-"Quantité reçue exédentaire pour le produit '%(name)s'. (Attendu: "
-"%(qty)d, Reçu %(qty_done)d)"
+"Quantité reçue exédentaire pour le produit '%(name)s'. (Attendu: %(qty)d, "
+"Reçu %(qty_done)d)"
 
 #. module: alce_helpdesk
 #: model:ir.model.fields,field_description:alce_helpdesk.field_helpdesk_ticket__qty_received
