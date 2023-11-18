@@ -1,17 +1,21 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
+import datetime
 import logging
 import uuid
 
 import dicttoxml
+import pytz
 import xmltodict
+from dateutil.relativedelta import relativedelta
 
 from odoo import fields
 
-from odoo.addons.base_rest.controllers.main import _PseudoCollection
-from odoo.addons.component.core import WorkContext
+from odoo.addons.alc_eshop_api_cart.schemas import CartUpdateRequest
+from odoo.addons.alc_eshop_api_pickings.routers.pickings import (
+    _search as search_pickings,
+)
+from odoo.addons.shopinvader_api_cart.schemas import CartSyncInput, CartTransaction
 
 LANGS = {"en": "en_US", "fr": "fr_BE", "nl": "nl_BE"}
 LANGS_INVERSE = {"en_US": "en", "fr_BE": "fr", "nl_BE": "nl"}
@@ -19,9 +23,7 @@ LANGS_INVERSE = {"en_US": "en", "fr_BE": "fr", "nl_BE": "nl"}
 _logger = logging.getLogger(__name__)
 
 
-class Facade(object):
-    collection = "shopinvader.backend"
-
+class Facade:
     @staticmethod  # factory method
     def factory(env, partner, service_name):
         return Facade._get_service_class(service_name)(env, partner)
@@ -38,20 +40,9 @@ class Facade(object):
             "sales_order": FacadeOrder,
         }[service_name]
 
-    def _get_odoo_service(self):
-        partner = self.partner
-        context = dict(partner._context, authenticated_partner_id=partner.id)
-        work = WorkContext(
-            model_name="rest.service.registration",
-            collection=_PseudoCollection(self.collection, self.env(context=context)),
-            authenticated_partner_id=partner.id,
-        )
-        return work.component(usage=self.usage)
-
     def __init__(self, env, partner):
         self.env = env
         self.partner = partner
-        self.service = self._get_odoo_service()
         self.errors = []
         self.location = None
 
@@ -81,7 +72,7 @@ class Facade(object):
         return xmltodict.parse(xml)
 
     def _json_to_xml(self, data, **kwargs):
-        return dicttoxml.dicttoxml(data, attr_type=False, **kwargs)
+        return dicttoxml.dicttoxml(data, attr_type=False, return_bytes=False, **kwargs)
 
     @staticmethod
     def _datetime_to_date(ds):
@@ -89,11 +80,11 @@ class Facade(object):
 
     @staticmethod
     def wrap_xml(root, element, xml_by_pairs):
-        result = '<?xml version="1.0" encoding="UTF-8" ?><%s>' % root
+        result = f'<?xml version="1.0" encoding="UTF-8" ?><{root}>'
         iterator = iter(xml_by_pairs)
-        for first, second in zip(iterator, iterator):
-            result += "<{e}>{f}{s}</{e}>".format(e=element, f=first, s=second)
-        return result + ("</%s>" % root)
+        for first, second in zip(iterator, iterator, strict=True):
+            result += f"<{element}>{first}{second}</{element}>"
+        return result + (f"</{root}>")
 
 
 class FacadeProduct(Facade):
@@ -101,7 +92,7 @@ class FacadeProduct(Facade):
         raise NotImplementedError
 
     def __init__(self, env, partner):
-        super(FacadeProduct, self).__init__(env, partner)
+        super().__init__(env, partner)
         self.today = fields.Date.today()
 
     def _data_parser(self, include_amm=False):
@@ -142,7 +133,7 @@ class FacadeProduct(Facade):
         else:
             url_suffix = data.url_key_en
         lang_slug = LANGS_INVERSE[lang]
-        url = "https://www.alcyonbelux.be/{}/{}".format(lang_slug, url_suffix)
+        url = f"https://www.alcyonbelux.be/{lang_slug}/{url_suffix}"
         values["url"] = url
 
         if self.partner.supplier_promotion_sale_allowed:
@@ -190,7 +181,11 @@ class FacadePriceList(FacadeProduct):
     usage = "sale_statistics"
 
     def apply(self, **kwargs):
-        return self.service._get_top_ordered()
+        return (
+            self.env["alc.eshop.sale_statistics_router.helper"]
+            .new({"partner": self.partner})
+            ._get_top_ordered()
+        )
 
     def process_result(self, result, **kwargs):
         ids = [r["product_id"] for r in result["data"]]
@@ -213,11 +208,25 @@ class FacadeBackorders(Facade):
 
     def process_kwargs(self, **kwargs):
         from_date = kwargs.pop("date_cancelled", None)
+        if not from_date:
+            # takes the last 30 days
+            from_date = datetime.date.today() - relativedelta(months=1)
         kwargs["from_date"] = from_date
         return kwargs
 
     def apply(self, **kwargs):
-        return self.service._search_canceled(**kwargs)
+        from_date = kwargs.pop("from_date")
+        if from_date:
+            from_date = fields.Datetime.to_datetime(from_date)
+        _total, records = search_pickings(
+            self.env,
+            partner=self.partner,
+            states=["cancel"],
+            from_date=from_date,
+            canceled=True,
+            include_total_count=False,
+        )
+        return records
 
     def _json_for_xml(self, data):
         date_cancelled = self._datetime_to_date(data.pop("date_cancelled"))
@@ -249,8 +258,8 @@ class FacadeBackorders(Facade):
         ]
         return [
             "id:internal_order_id",
-            "date_done:date_cancelled",
-            ("move_lines:items", parser_move_lines),
+            "date:date_cancelled",
+            ("move_ids:items", parser_move_lines),
         ]
 
 
@@ -258,11 +267,25 @@ class FacadePackingSlip(Facade):
     usage = "pickings"
 
     def process_kwargs(self, **kwargs):
-        kwargs["from_date"] = kwargs.pop("date")
+        from_date = kwargs.pop("date", None)
+        if not from_date:
+            # takes the last 30 days
+            from_date = datetime.date.today() - relativedelta(months=1)
+        kwargs["from_date"] = from_date
         return kwargs
 
     def apply(self, **kwargs):
-        return self.service._search_done(**kwargs)
+        from_date = kwargs.pop("from_date")
+        if from_date:
+            from_date = fields.Datetime.to_datetime(from_date)
+        _total, records = search_pickings(
+            self.env,
+            partner=self.partner,
+            from_date=from_date,
+            states=["done"],
+            include_total_count=False,
+        )
+        return records
 
     @staticmethod
     def _item_func(parent):
@@ -272,16 +295,17 @@ class FacadePackingSlip(Facade):
         partner_dict = data.pop("partner_id")
         if not partner_dict:
             _logger.exception("Magento API packing data: %s", data)
-        country_dict = partner_dict.pop("country_id")
-        partner_dict["country"] = country_dict["name"]
+        country_dict = partner_dict.pop("country_id", {}) or {}
+        partner_dict["country"] = country_dict.get("name", "Belgique")
         data.update(partner_dict)
         data["items"] = [i for i in data["items"] if i.get("state") != "cancel"]
         for item in data["items"]:
             item.pop("state", None)
             item.update(item.pop("product_id"))
-            lots = item.pop("lot_ids")
-            if lots:  # we should not need to drop other lots in future versions
-                item.update(lots[0])
+            item.update(item.pop("move_id"))
+            lot = item.pop("lot_id")
+            if lot:  # we should not need to drop other lots in future versions
+                item.update(lot)
             else:
                 item["lot"] = None
             if item.get("peremption"):
@@ -290,7 +314,7 @@ class FacadePackingSlip(Facade):
                 item["peremption"] = None
             # TVA is from vat, which is a related to the name (e.g. 21%)
             tva = item["tva"]
-            item["tva"] = tva[:-1] if isinstance(tva, (str, unicode)) else tva
+            item["tva"] = tva[:-1] if isinstance(tva, str) else tva
         data["date"] = self._datetime_to_date(data["date"])
         return data
 
@@ -317,28 +341,33 @@ class FacadePackingSlip(Facade):
         ]
         parser_product = ["default_code:reference", "name:article", "vat:tva"]
         parser_lot = ["name:lot", "life_date:peremption"]
-        parser_move_lines = [
-            "name",
+        parser_move_line_ids = [
             "state",
-            "product_qty:qty",
-            ("prix_net_htva", self._get_price_from_move),
-            ("prix_brut_htva", self._get_price_from_move),
-            "suite_name:numero_de_suite",
+            "qty_done:qty",
             ("product_id", parser_product),
-            ("lot_ids", parser_lot),
+            ("lot_id", parser_lot),
+            (
+                "move_id",
+                [
+                    "name",
+                    "suite_name:numero_de_suite",
+                    ("prix_net_htva", self._get_price_from_move),
+                    ("prix_brut_htva", self._get_price_from_move),
+                ],
+            ),
         ]
         return [
             "id:ne_id",
             "date_done:date",
             ("partner_id", parser_partner),
-            ("move_lines:items", parser_move_lines),
+            ("move_line_ids:items", parser_move_line_ids),
         ]
 
     def _get_price_from_move(self, stock_move, field_name):
         if field_name == "prix_net_htva":
-            return stock_move.order_line_id.price_reduce
+            return stock_move.sale_line_id.price_reduce
         if field_name == "prix_brut_htva":
-            return stock_move.order_line_id.price_unit
+            return stock_move.sale_line_id.price_unit
         return 0.0
 
 
@@ -347,8 +376,19 @@ class FacadeShopinvaderCart(Facade):
     collection = "shopinvader.api.v2"
 
     def apply(self, **kwargs):
-        self.service.update(**kwargs["info"])
-        self.service.sync(**kwargs["sync"])  # return None
+        info = kwargs.pop("info", None)
+        if info:
+            cart = self.cart_router_helper._update_cart_info(None, info)
+        else:
+            cart = self.cart_router_helper._find_open_cart(self.partner.id, None)
+        sync = kwargs.pop("sync", None)
+        if sync:
+            self.cart_router_helper._sync_cart(
+                partner=self.partner,
+                cart=cart,
+                uuid=None,
+                transactions=sync.transactions,
+            )
 
     def _get_product_by_sku(self, sku):
         domain = self.env["product.product"].get_partner_type_domain(self.partner)
@@ -356,21 +396,20 @@ class FacadeShopinvaderCart(Facade):
         return self.env["product.product"].search(domain, limit=1)
 
     def __init__(self, env, partner):
-        super(FacadeShopinvaderCart, self).__init__(env, partner)
-
-        backend = self.env.ref("alc_eshop.backend")
-        setattr(self.service.work, "shopinvader_backend", backend)
-
+        super().__init__(env, partner)
+        self.cart_router_helper = self.env[
+            "shopinvader_api_cart.cart_router.helper"
+        ].new({"partner": partner})
         location_param = "alc_magento_api.cart_location"
         self.location = self.env["ir.config_parameter"].sudo().get_param(location_param)
 
     def process_errors(self, result, **kwargs):
         error = None
         if len(self.errors) == 1:
-            error = "<error>The product %s is not available</error>" % self.errors[0]
+            error = f"<error>The product {self.errors[0]} is not available</error>"
         elif len(self.errors) > 1:
             missing = ", ".join(self.errors)
-            error = "<error>The products %s are not available</error>" % missing
+            error = f"<error>The products {missing} are not available</error>"
         return error
 
 
@@ -379,7 +418,7 @@ class FacadeQuote(FacadeShopinvaderCart):
         quote_xml = kwargs.pop("data")
         quote_dict = self._xml_to_json(quote_xml)["quote"]
 
-        lines = []
+        transactions: list[CartTransaction] = []
         items = quote_dict.pop("item", [])
         items = [items] if isinstance(items, dict) else items
         for line_xml in items:
@@ -387,52 +426,30 @@ class FacadeQuote(FacadeShopinvaderCart):
             if product:
                 qty = int(line_xml["qty"])
                 line_id = str(uuid.uuid4())
-                line = {"product_id": product.id, "qty": qty, "uuid": line_id}
-                lines.append(line)
+                transactions.append(
+                    CartTransaction(
+                        product_id=product.id,
+                        qty=qty,
+                        uuid=line_id,
+                    )
+                )
             else:
                 self.errors.append(line_xml["sku"])
-        kwargs["sync"] = {"transactions": lines}
+        kwargs["sync"] = CartSyncInput(transactions=transactions)
 
-        info = {}
-        args_to_fields = {
-            "comments": "note",
-            "serial_number": "suite_name",
-            "order_reference": "customer_ref",
-        }
-        for key in args_to_fields:
-            if quote_dict.get(key):
-                info[args_to_fields[key]] = quote_dict[key]
-        kwargs["info"] = info
-
+        kwargs["info"] = CartUpdateRequest(
+            note=quote_dict.get("comments"),
+            suite_name=quote_dict.get("serial_number"),
+            customer_ref=quote_dict.get("order_reference"),
+        )
         return kwargs
 
 
 class FacadeQuoteCsv(FacadeShopinvaderCart):
-    def process_kwargs(self, **kwargs):
-        quote_csv = kwargs.pop("file").read().split("\n")
-        if not len(quote_csv) > 1:
-            raise ValueError("Not enough lines.")  # ERROR
-
-        lines = []
-        for csv_line in [l for l in quote_csv[1:] if l]:
-            sku, qty = csv_line.split(";")
-            product = self._get_product_by_sku(sku)
-            if product:
-                line_id = str(uuid.uuid4())
-                line = {"product_id": product.id, "qty": int(qty), "uuid": line_id}
-                lines.append(line)
-            else:
-                self.errors.append(sku)
-        kwargs["sync"] = {"transactions": lines}
-
-        info = {}
-        first_line = quote_csv[0].split(";")
-        info["suite_name"] = first_line[0] or False
-        info["client_order_ref"] = first_line[1] or False
-        # "email": first_line[2]
-        info["note"] = first_line[3] or False
-        kwargs["info"] = info
-
+    def apply(self, **kwargs):
+        csv_file = kwargs.pop("file")
+        not_found_skus, _cart = self.cart_router_helper._import_csv(csv_file)
+        self.errors.extend(not_found_skus)
         return kwargs
 
 
@@ -448,7 +465,20 @@ class FacadeOrder(Facade):
         return "order" if parent == "data" else "line"
 
     def apply(self, **kwargs):
-        return self.service._search(**kwargs)
+        domain = [("partner_id", "=", self.partner.id), ("typology", "=", "sale")]
+        from_date = kwargs.pop("from_date")
+        if from_date:
+            from_date = fields.Datetime.to_datetime(from_date)
+            from_date = from_date.astimezone(pytz.timezone("UTC"))
+            domain.append(("create_date", ">=", from_date))
+        domain.append(
+            (
+                "sale_channel_id",
+                "in",
+                self.env["sale.channel"].sudo()._get_internal_ids(),
+            )
+        )
+        return self.env["sale.order"].sudo().search(domain)
 
     def _json_for_xml(self, data):
         for line in data["lines"]:

@@ -15,7 +15,9 @@
         "alc_sale_channel",
         "alc_sale_suite_name",
         "alc_cerberus_utils",
+        "shopinvader_sale_state",
     ],
     "demo": [],
     "installable": True,
+    "development_status": "Alpha",
 }

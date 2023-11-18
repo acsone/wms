@@ -17,8 +17,6 @@
         "shopinvader_api_sale",
         "shopinvader_api_wishlist",
         "shopinvader_fastapi_auth_jwt",
-        "shopinvader_restapi",
-        "shopinvader_restapi_auth_jwt",
         "alc_eshop_auth_jwt",
         "alc_eshop_api_sale_statistic",
         "alc_eshop_api_classifieds",
@@ -48,6 +46,7 @@
         "alc_eshop_schema_sale_triple_discount",
         "alc_eshop_api_cart_discount_pricelist",
         "alc_eshop_schema_sale_payment",
+        "shopinvader_delivery_state",
     ],
     "data": [
         "views/fastapi_endpoint.xml",

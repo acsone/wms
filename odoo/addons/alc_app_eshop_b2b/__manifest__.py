@@ -41,8 +41,6 @@
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",
-        "shopinvader_restapi",
-        "shopinvader_restapi_auth_jwt",
         "shopinvader_product_seo",
         "shopinvader_product_description",
         "shopinvader_product_brand",

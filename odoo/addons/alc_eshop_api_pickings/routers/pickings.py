@@ -14,6 +14,7 @@ from odoo.addons.fastapi.dependencies import (
     authenticated_partner,
     authenticated_partner_env,
 )
+from odoo.addons.stock.models.stock_picking import Picking as StockPicking
 
 from ..schemas import Picking, PickingList
 
@@ -36,7 +37,10 @@ def get_all(
     per_page: int | None = 10,
 ) -> PickingList:
     """Get all pickings."""
-    return _search(env, partner, page, per_page, from_date=from_date)
+    total, records = _search(env, partner, page, per_page, from_date=from_date)
+    return PickingList(
+        data=[Picking.from_stock_picking(record) for record in records], size=total
+    )
 
 
 @pickings_router.get("/pickings/canceled")
@@ -56,8 +60,11 @@ def get_canceled(
 ) -> PickingList:
     """Get canceled pickings."""
     states = ["cancel"]
-    return _search(
+    total, records = _search(
         env, partner, page, per_page, states=states, from_date=from_date, canceled=True
+    )
+    return PickingList(
+        data=[Picking.from_stock_picking(record) for record in records], size=total
     )
 
 
@@ -78,18 +85,30 @@ def get_done(
 ) -> PickingList:
     """Get completed pickings."""
     states = ["done"]
-    return _search(env, partner, page, per_page, states=states, from_date=from_date)
+    total, records = _search(
+        env, partner, page, per_page, states=states, from_date=from_date
+    )
+    return PickingList(
+        data=[Picking.from_stock_picking(record) for record in records], size=total
+    )
 
 
 def _search(
     env: api.Environment,
     partner: Partner,
-    page: int | None,
-    per_page: int | None,
+    page: int | None = None,
+    per_page: int | None = None,
     states: list[str] = None,
     from_date: datetime | None = None,
     canceled: bool = False,
-) -> PickingList:
+    include_total_count: bool = True,
+) -> tuple[int | None, StockPicking]:
+    """
+    Search pickings.
+
+    returns a tuple with the total count of pickings and the list of pickings.
+    If 'include_total_count' is False, the total count in the tuple is None
+    """
     lid = env.ref("stock.stock_location_customers").id
     domain = [
         # the final client should not be a B2C customer it should be the VT
@@ -107,10 +126,12 @@ def _search(
     if canceled:
         domain += ["|", ("state", "=", "cancel"), ("move_ids.state", "=", "cancel")]
     model = env["stock.picking"].sudo()
-    total_count = model.search_count(domain)
+    total_count = None
+    if include_total_count:
+        total_count = model.search_count(domain)
     offset = per_page * (page - 1) if per_page and page else 0
-    records = model.search(domain, limit=per_page, offset=offset)
-    return PickingList(
-        data=[Picking.from_stock_picking(record) for record in records],
-        size=total_count,
-    )
+    if not include_total_count or total_count > 0:
+        records = model.search(domain, limit=per_page, offset=offset)
+    else:
+        records = model.browse()
+    return total_count, records

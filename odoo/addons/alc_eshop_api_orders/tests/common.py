@@ -6,7 +6,7 @@ from odoo.addons.fastapi.tests.common import FastAPITransactionCase
 from ..routers import orders_router
 
 
-class TestOrders(FastAPITransactionCase):
+class TestOrdersCase(FastAPITransactionCase):
     @classmethod
     def _get_vals_sale_line(cls, product):
         return {

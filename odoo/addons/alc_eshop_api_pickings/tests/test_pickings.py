@@ -3,10 +3,10 @@
 
 import pytz
 
-from .common import TestDeliveriesService
+from .common import TestPickingsServiceBase
 
 
-class TestDocumentsServiceFlow(TestDeliveriesService):
+class TestPickingsService(TestPickingsServiceBase):
     def test_search_done_records(self):
         with self._create_test_client(partner=self.partner) as test_client:
             response = test_client.get("/pickings/done")

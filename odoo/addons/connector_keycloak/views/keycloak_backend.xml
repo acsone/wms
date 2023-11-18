@@ -19,6 +19,19 @@
                         <field name="realm_name" />
                         <field name="client_secret_key" password="True" />
                         <field name="user_realm_name" />
+                        <separator
+              name="separator"
+              string="Website realms infos"
+              colspan="4"
+            />
+                        <p class="oe_grey" colspan="2">
+                            The following fields are used to request an access token for the website.
+                            This is used to authenticate the users requests from the magento
+                            api based on the provided credentials. You must therefore give a specific
+                            client and secret key for the realm used by the website.
+                        </p>
+                        <field name="realm_client_id" />
+                        <field name="realm_client_secret_key" password="True" />
                     </group>
                 </sheet>
             </form>

@@ -15,7 +15,7 @@ from odoo.addons.shopinvader_api_cart.routers import cart
 from ..routers import carts_router
 
 
-class TestSaleCartRestApiInfoCase(FastAPITransactionCase):
+class TestEshopApiCartCase(FastAPITransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

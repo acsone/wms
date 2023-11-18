@@ -56,9 +56,9 @@ class AlcProductFlattenedData(Model):
     web_published = fields.Boolean(readonly=True)
     supplier_name = fields.Char(readonly=True)
     tax_amount = fields.Float(readonly=True, digits=(16, 4))
-    # url_key_fr = fields.Char(readonly=True) # FIXME: do after shopinvider migration
-    # url_key_en = fields.Char(readonly=True)
-    # url_key_nl = fields.Char(readonly=True)
+    url_key_fr = fields.Char(readonly=True)
+    url_key_en = fields.Char(readonly=True)
+    url_key_nl = fields.Char(readonly=True)
 
     @api.model
     def get_init_query(self):
@@ -133,7 +133,10 @@ SELECT
     discount_special.date_end as discount_special_date_end,
     tax.amount as tax_amount,
     supplier.name as supplier_name,
-    web_published
+    web_published,
+    url_key_fr.key as url_key_fr,
+    url_key_nl.key as url_key_nl,
+    url_key_en.key as url_key_en
 FROM
     product_template pt
     join product_product pp on pp.product_tmpl_id = pt.id
@@ -160,6 +163,45 @@ FROM
         ON tax.prod_id = pt.id
     LEFT join res_partner as supplier
         ON supplier.id = pt.supplier_id
+    LEFT JOIN LATERAL (
+        SELECT
+            key
+        FROM url_url
+        JOIN res_lang
+            ON res_lang.id = url_url.lang_id
+        WHERE
+            res_id = pt.id
+            AND res_lang.code = 'fr_BE'
+            AND res_model = 'product.template'
+            AND redirect = False
+        limit 1
+    ) as url_key_fr ON TRUE
+    LEFT JOIN LATERAL (
+        SELECT
+            key
+        FROM url_url
+        JOIN res_lang
+            ON res_lang.id = url_url.lang_id
+        WHERE
+            res_id = pt.id
+            AND res_lang.code = 'n_BE'
+            AND res_model = 'product.template'
+            AND redirect = False
+        limit 1
+    ) as url_key_nl ON TRUE
+    LEFT JOIN LATERAL (
+        SELECT
+            key
+        FROM url_url
+        JOIN res_lang
+            ON res_lang.id = url_url.lang_id
+        WHERE
+            res_id = pt.id
+            AND res_lang.code = 'en_US'
+            AND res_model = 'product.template'
+            AND redirect = False
+        limit 1
+    ) as url_key_en ON TRUE
 
 WHERE pp.active and web_published
 
@@ -201,7 +243,11 @@ CREATE UNIQUE INDEX pk_%(table)s ON %(table)s (id);
         e = expression.expression(domain, self)
         query = e.query
         query_from, query_where, query_params = query.get_sql()
-        sql_query = f"SELECT * from {query_from} WHERE {query_where}"
+        # we don't want to receive the json as dict but as string
+        # we instruct psycopg2 to do so
+        cols = ", ".join([f.name for f in self._fields.values() if f.store])
+        cols = cols.replace("price_cache", "price_cache::text")
+        sql_query = f"SELECT {cols} from {query_from} WHERE {query_where}"
         if limit:
             query_params.append(limit)
             sql_query += " limit %s"

@@ -36,16 +36,11 @@ def update_cart_info(
     uuid: str | None = None,
 ) -> Sale:
     """Update cart info."""
-    params = cart_info.model_dump(exclude_unset=True)
-    uuid = uuid or params.get("uuid")
-    cart = env["sale.order"]._find_open_cart(partner.id, uuid)
-    if not cart:
-        cart = env["sale.order"]._create_empty_cart(partner.id)
-    if not uuid or cart.uuid == uuid:
-        # update only if the cart is the one requested
-        upd_vals = cart_info.to_sale_order_vals()
-        if upd_vals:
-            cart.write(upd_vals)
+    cart = (
+        env["shopinvader_api_cart.cart_router.helper"]
+        .new({"partner": partner})
+        ._update_cart_info(uuid, cart_info)
+    )
     return Sale.from_sale_order(cart)
 
 
@@ -103,7 +98,7 @@ def import_csv(
 
     The csv file therefore contains at least 2 lines.
     """
-    cart = (
+    _no_found, cart = (
         env["shopinvader_api_cart.cart_router.helper"]
         .new({"partner": partner})
         ._import_csv(file.file, uuid=uuid)
@@ -144,7 +139,23 @@ class ShopinvaderApiCartRouterHelper(ShopinvaderApiCartRouterHelperBase):
 
     partner = fields.Many2one[Partner]()
 
-    def _import_csv(self, csv_file: ByteReader, uuid: str | None) -> SaleOrder:
+    def _update_cart_info(self, uuid: str | None, cart_info: CartUpdateRequest):
+        """Update cart info."""
+        params = cart_info.model_dump(exclude_unset=True)
+        uuid = uuid or params.get("uuid")
+        cart = self.env["sale.order"]._find_open_cart(self.partner.id, uuid)
+        if not cart:
+            cart = self.env["sale.order"]._create_empty_cart(self.partner.id)
+        if not uuid or cart.uuid == uuid:
+            # update only if the cart is the one requested
+            upd_vals = cart_info.to_sale_order_vals()
+            if upd_vals:
+                cart.write(upd_vals)
+        return cart
+
+    def _import_csv(
+        self, csv_file: ByteReader, uuid: str | None = None
+    ) -> tuple[list[str], SaleOrder]:
         """Import a CSV file to create / update a cart.
 
         The content of the file must follow the following rules:
@@ -171,7 +182,7 @@ class ShopinvaderApiCartRouterHelper(ShopinvaderApiCartRouterHelperBase):
         cart = self._sync_cart(self.partner, None, uuid, transactions)
         if cart and cart_info:
             cart.write(cart_info)
-        return cart
+        return _not_found_skus, cart
 
     def _get_cart_info_and_transactions(
         self, csv_file: ByteReader

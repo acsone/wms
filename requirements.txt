@@ -28,6 +28,7 @@ cssselect==1.2.0
 dbfread==2.0.7
 decorator==5.1.1
 deprecation==2.1.0
+dicttoxml @ git+https://github.com/acsone/dicttoxml.git@cd2fd179d0755f2020f42d358d87c0cacbb8d969
 docopt==0.6.2
 docutils==0.20.1
 ebaysdk==2.2.0
@@ -152,7 +153,7 @@ odoo-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@ff4a
 odoo-addon-hr-holidays-public==16.0.1.1.0
 odoo-addon-image-tag==16.0.1.0.1
 odoo-addon-internal-stock-quant-package @ git+https://github.com/acsone/stock-logistics-tracking.git@46777fba77919e3998bebc17ec3a60b35f11de62#subdirectory=setup/internal_stock_quant_package
-odoo-addon-jsonifier @ git+https://github.com/acsone/server-tools.git@d0f16e3186ca85bd2a93899af1a642db6d662356#subdirectory=setup/jsonifier
+odoo-addon-jsonifier @ git+https://github.com/acsone/server-tools.git@d5f4b14dc12736c0a0796ddf6b65b5998dfbee45#subdirectory=setup/jsonifier
 odoo-addon-l10n-be-antibiotic-tax @ git+https://github.com/acsone/l10n-belgium.git@e51d1f2dfe6cedbda81afcaeb56c3b0ff09def9d#subdirectory=setup/l10n_be_antibiotic_tax
 odoo-addon-l10n-be-apb-tax @ git+https://github.com/acsone/l10n-belgium.git@2435082a72b574c3e421872dca18710fcc04c4a5#subdirectory=setup/l10n_be_apb_tax
 odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/acsone/l10n-belgium.git@63b4fce463858ea41cbf8417711f2850a915400d#subdirectory=setup/l10n_be_bpost_address_autocomplete
@@ -214,6 +215,7 @@ odoo-addon-report-xml==16.0.1.1.0.1
 odoo-addon-rest-log @ git+https://github.com/acsone/rest-framework.git@36ee037eb05642682d238b7a2a9814d4cc0f83da#subdirectory=setup/rest_log
 odoo-addon-sale-cart==16.0.1.0.0.2
 odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@e3920cb6276556e98afed18a828d5a7c5103bf67#subdirectory=setup/sale_channel
+odoo-addon-sale-delivery-state @ git+https://github.com/acsone/sale-workflow.git@aabc76afcc9b92f0831485e20574c88965cd99e5#subdirectory=setup/sale_delivery_state
 odoo-addon-sale-discount-display-amount==16.0.1.0.0.3
 odoo-addon-sale-exception==16.0.1.2.0.2
 odoo-addon-sale-order-line-cancel @ git+https://github.com/acsone/sale-workflow.git@6940f11bbac96be35eff39a0e85edd7462026359#subdirectory=setup/sale_order_line_cancel
@@ -248,12 +250,13 @@ odoo-addon-shopfloor-workstation @ git+https://github.com/acsone/wms.git@758b160
 odoo-addon-shopfloor-workstation-mobile @ git+https://github.com/acsone/wms.git@ebe2544d4bd88b0b1d5d7c43f782902873d6fa2c#subdirectory=setup/shopfloor_workstation_mobile
 odoo-addon-shopinvader-address==16.0.1.0.0.2
 odoo-addon-shopinvader-anonymous-partner==16.0.1.0.1
-odoo-addon-shopinvader-api-address @ git+https://github.com/acsone/odoo-shopinvader.git@e5331c5906a2a6944076491918d0610ef0a0a9ce#subdirectory=setup/shopinvader_api_address
-odoo-addon-shopinvader-api-cart @ git+https://github.com/acsone/odoo-shopinvader.git@e5331c5906a2a6944076491918d0610ef0a0a9ce#subdirectory=setup/shopinvader_api_cart
+odoo-addon-shopinvader-api-address==16.0.1.2.1
+odoo-addon-shopinvader-api-cart==16.0.1.2.1
 odoo-addon-shopinvader-api-sale @ git+https://github.com/acsone/odoo-shopinvader.git@ef1634382bdd78ed00b0c9cc0ce15881a591d4b4#subdirectory=setup/shopinvader_api_sale
 odoo-addon-shopinvader-api-security-sale @ git+https://github.com/acsone/odoo-shopinvader.git@ef1634382bdd78ed00b0c9cc0ce15881a591d4b4#subdirectory=setup/shopinvader_api_security_sale
 odoo-addon-shopinvader-api-wishlist @ git+https://github.com/acsone/odoo-shopinvader.git@715edb9ea965d45e0448d5eb88601863f809d616#subdirectory=setup/shopinvader_api_wishlist
 odoo-addon-shopinvader-base-url==16.0.1.0.2.8
+odoo-addon-shopinvader-delivery-state @ git+https://github.com/acsone/odoo-shopinvader.git@748ffcf7b4f221b8cf28d9789568f461f516946d#subdirectory=setup/shopinvader_delivery_state
 odoo-addon-shopinvader-fastapi-auth-jwt==16.0.1.0.1
 odoo-addon-shopinvader-filtered-model @ git+https://github.com/acsone/odoo-shopinvader.git@ef1634382bdd78ed00b0c9cc0ce15881a591d4b4#subdirectory=setup/shopinvader_filtered_model
 odoo-addon-shopinvader-product==16.0.1.0.1
@@ -262,11 +265,10 @@ odoo-addon-shopinvader-product-brand==16.0.1.0.0.3
 odoo-addon-shopinvader-product-description==16.0.1.0.0.2
 odoo-addon-shopinvader-product-seo==16.0.1.0.0.2
 odoo-addon-shopinvader-product-url==16.0.1.0.1
-odoo-addon-shopinvader-restapi==16.0.1.0.0.6
-odoo-addon-shopinvader-restapi-auth-jwt==16.0.1.2.0.2
 odoo-addon-shopinvader-sale-cart==16.0.1.0.2
+odoo-addon-shopinvader-sale-state @ git+https://github.com/acsone/odoo-shopinvader.git@748ffcf7b4f221b8cf28d9789568f461f516946d#subdirectory=setup/shopinvader_sale_state
 odoo-addon-shopinvader-schema-address==16.0.1.2.0
-odoo-addon-shopinvader-schema-sale @ git+https://github.com/acsone/odoo-shopinvader.git@e5331c5906a2a6944076491918d0610ef0a0a9ce#subdirectory=setup/shopinvader_schema_sale
+odoo-addon-shopinvader-schema-sale @ git+https://github.com/acsone/odoo-shopinvader.git@748ffcf7b4f221b8cf28d9789568f461f516946d#subdirectory=setup/shopinvader_schema_sale
 odoo-addon-shopinvader-search-engine==16.0.1.0.3
 odoo-addon-shopinvader-search-engine-image==16.0.1.0.2
 odoo-addon-shopinvader-search-engine-product-brand==16.0.1.0.0.2
@@ -432,6 +434,7 @@ xlrd==1.2.0
 XlsxWriter==3.1.2
 xlwt==1.3.0
 xmlsec==1.3.13
+xmltodict==0.13.0
 yarl==1.9.2
 zeep==4.2.1
 zope.event==5.0
