@@ -109,7 +109,6 @@ msgstr "Livré par Alcyon"
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__partner_shipping_id
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_partner__partner_shipping_id
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_users__partner_shipping_id
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_shopinvader_partner__partner_shipping_id
 msgid "Delivery Address"
 msgstr "Adresse de livraison"
 
