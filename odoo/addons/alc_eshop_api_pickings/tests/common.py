@@ -6,7 +6,7 @@ from odoo.addons.fastapi.tests.common import FastAPITransactionCase
 from ..routers import pickings_router
 
 
-class TestDeliveriesService(FastAPITransactionCase):
+class TestPickingsServiceBase(FastAPITransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
