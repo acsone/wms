@@ -44,14 +44,12 @@ msgstr ""
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__date_end_contract_alcyonnaire
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__date_end_contract_alcyonnaire
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_shopinvader_partner__date_end_contract_alcyonnaire
 msgid "Date end contract"
 msgstr "Date de fin du contrat"
 
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__date_start_contract_alcyonnaire
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__date_start_contract_alcyonnaire
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_shopinvader_partner__date_start_contract_alcyonnaire
 msgid "Date start contract"
 msgstr "Date de début du contrat"
 
@@ -68,7 +66,6 @@ msgstr ""
 #. module: alc_veterinary_group
 #: model:ir.model.fields,help:alc_veterinary_group.field_res_partner__date_end_contract_alcyonnaire
 #: model:ir.model.fields,help:alc_veterinary_group.field_res_users__date_end_contract_alcyonnaire
-#: model:ir.model.fields,help:alc_veterinary_group.field_shopinvader_partner__date_end_contract_alcyonnaire
 msgid ""
 "If the date end contract is not set, the contract is considered as "
 "indefinite. If the date end contract is set, the contract is considered as "
@@ -85,7 +82,6 @@ msgstr ""
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__is_alcyonnaire
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_alcyonnaire
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_shopinvader_partner__is_alcyonnaire
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group__is_alcyonnaire
 msgid "Is Alcyonnaire"
 msgstr ""
@@ -93,28 +89,24 @@ msgstr ""
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__is_alcyonnaire_under_contract
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_alcyonnaire_under_contract
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_shopinvader_partner__is_alcyonnaire_under_contract
 msgid "Is Alcyonnaire Under Contract"
 msgstr ""
 
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__is_date_end_contract_editable
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_date_end_contract_editable
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_shopinvader_partner__is_date_end_contract_editable
 msgid "Is Date End Contract Editable"
 msgstr ""
 
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__is_date_start_contract_editable
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_date_start_contract_editable
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_shopinvader_partner__is_date_start_contract_editable
 msgid "Is Date Start Contract Editable"
 msgstr ""
 
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__is_dates_contract_visible
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_dates_contract_visible
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_shopinvader_partner__is_dates_contract_visible
 msgid "Is Dates Contract Visible"
 msgstr ""
 
@@ -208,7 +200,6 @@ msgstr "La date de début doit être antérieure à la date de fin."
 #: model:ir.model,name:alc_veterinary_group.model_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__veterinary_group_ids
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__veterinary_group_ids
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_shopinvader_partner__veterinary_group_ids
 msgid "Veterinary Group"
 msgstr "Groupement vétérinaire"
 
