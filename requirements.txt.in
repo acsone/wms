@@ -5,8 +5,6 @@ werkzeug<2.1
 pypdf2<2
 
 # account-analytic
-# https://github.com/elego/account-analytic/pull/1
-odoo-addon-product-analytic @ git+https://github.com/elego/account-analytic@refs/pull/1/head#subdirectory=setup/product_analytic
 # https://github.com/OCA/account-analytic/pull/576
 odoo-addon-product-analytic-purchase @ git+https://github.com/OCA/account-analytic@refs/pull/576/head#subdirectory=setup/product_analytic_purchase
 # https://github.com/OCA/account-analytic/pull/572
@@ -276,6 +274,7 @@ odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/OCA/bank-p
 # OCA/account-closing
 # https://github.com/OCA/account-closing/pull/270 - auto reverse
 # https://github.com/OCA/account-closing/pull/271 - account cutoff accrual on order
+# https://github.com/OCA/account-closing/pull/283 - configure different account for refunds
 odoo-addon-account-cutoff-base @ git+https://github.com/jbaudoux/account-closing.git@16-PR270-PR271#subdirectory=setup/account_cutoff_base
 odoo-addon-account-cutoff-accrual-order-base @ git+https://github.com/OCA/account-closing.git@refs/pull/271/head#subdirectory=setup/account_cutoff_accrual_order_base
 odoo-addon-account-cutoff-accrual-order-product-category @ git+https://github.com/OCA/account-closing.git@refs/pull/273/head#subdirectory=setup/account_cutoff_accrual_order_product_category
