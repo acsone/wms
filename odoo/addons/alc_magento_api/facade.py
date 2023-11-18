@@ -4,6 +4,7 @@ import datetime
 import logging
 import uuid
 
+import dicttoxml
 import pytz
 import xmltodict
 from dateutil.relativedelta import relativedelta
@@ -15,8 +16,6 @@ from odoo.addons.alc_eshop_api_pickings.routers.pickings import (
     _search as search_pickings,
 )
 from odoo.addons.shopinvader_api_cart.schemas import CartSyncInput, CartTransaction
-
-import dicttoxml
 
 LANGS = {"en": "en_US", "fr": "fr_BE", "nl": "nl_BE"}
 LANGS_INVERSE = {"en_US": "en", "fr_BE": "fr", "nl_BE": "nl"}
