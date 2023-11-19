@@ -46,6 +46,8 @@ class ElasticsearchRoleMixin(models.AbstractModel):
         return slugify(self.name)
 
     def delay_create_or_update_linked_role(self):
+        if self.env.context.get("ignore_es_update_role"):
+            return
         backends = self.env["se.backend"].search([])
         for bkd in backends:
             for record in self:

@@ -44,13 +44,12 @@ class ProductTemplate(ProductTemplateBase):
             product.supplier_discount_json = supplier_discount_json = []
             current_info = product.seller_ids.filtered(lambda si: not si.is_past)
             for info in current_info:
+                date_start = info.date_start.isoformat() if info.date_start else None
+                date_end = info.date_end.isoformat() if info.date_end else None
                 info_json = {
-                    "date_start": info.date_start.isoformat(),
-                    "date_end": info.date_end.isoformat(),
-                    "time_frame": {
-                        "gte": info.date_start.isoformat(),
-                        "lte": info.date_end.isoformat(),
-                    },
+                    "date_start": date_start,
+                    "date_end": date_end,
+                    "time_frame": {"gte": date_start, "lte": date_end},
                 }
                 if info.is_promotion:
                     info_json["ratio_main_product"] = info.ratio_main_product

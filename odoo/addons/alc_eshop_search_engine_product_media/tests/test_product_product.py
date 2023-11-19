@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-
 from odoo.addons.shopinvader_product.schemas.product import ProductProduct
 from odoo.addons.shopinvader_search_engine_product_media.tests.common import (
     ProductMediaCase,

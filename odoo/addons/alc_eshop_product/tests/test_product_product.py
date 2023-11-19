@@ -20,7 +20,6 @@ class TestProductExpiryInSchema(TransactionCase, ExtendableMixin):
         cls.manufacturer = cls.env["res.partner"].create({"name": "manufacturer"})
 
     def test_00(self):
-        self.product.barcode = "barcode"
         product = ProductProduct.from_product_product(self.product)
         self.assertIsNone(product.barcode)
         self.product.barcode = "barcode"

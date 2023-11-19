@@ -21,7 +21,7 @@ class TestProductExpiryInSchema(TransactionCase, ExtendableMixin):
             {"name": "test product", "lst_price": 100}
         )
         cls.model_pl = cls.env["product.pricelist"].with_context(
-            queue_job__no_delay=True
+            queue_job__no_delay=True, ignore_es_update_role=True
         )
 
     def test_00(self):
