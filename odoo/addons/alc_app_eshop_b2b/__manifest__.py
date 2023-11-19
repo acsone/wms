@@ -56,6 +56,7 @@
         "alc_eshop_product_supplier",
         "alc_eshop_product_supplier_promotion",
         "alc_eshop_product_tax",
+        "alc_eshop_search_engine_product_media",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",
