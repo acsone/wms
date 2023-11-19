@@ -18,16 +18,6 @@
         <field name="alias">is_mto_product:is_mto</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
     </record>
-    <record id="ir_exp_shopinvader_variant_vt_groups_id" model="ir.exports.line">
-        <field name="name">veterinary_group_ids/id</field>
-        <field name="alias">veterinary_group_ids:veterinary_groups/id</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-    <record id="ir_exp_shopinvader_variant_vt_groups_name" model="ir.exports.line">
-        <field name="name">veterinary_group_ids/name</field>
-        <field name="alias">veterinary_group_ids:veterinary_groups/name</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
     <record id="ir_exp_shopinvader_variant_cross" model="ir.exports.line">
         <field name="name">cross</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
