@@ -38,6 +38,7 @@
         "alc_eshop_schema_address",
         "alc_eshop_search_engine_product_expiry",
         "alc_sale_cart_price_recalculation",
+        "alc_connector_esb",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",

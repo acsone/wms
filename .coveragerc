@@ -62,7 +62,6 @@ omit =
     odoo/addons/alc_storage/*
     odoo/addons/alce_purchase_report/*
     odoo/addons/base_cached_xmlid/*
-    odoo/addons/connector_esb/*
     odoo/addons/delivery_rounds/*
     odoo/addons/delivery_rounds_alcyon/*
     odoo/addons/elasticsearch_product_cache/*
