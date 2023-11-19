@@ -14,9 +14,7 @@ class TestProductExpiryInSchema(TransactionCase, ExtendableMixin):
         cls.init_extendable_registry()
         cls.addClassCleanup(cls.reset_extendable_registry)
 
-        cls.product = cls.env["product.product"].create(
-            {"name": "test product", "tracking": "lot", "type": "product"}
-        )
+        cls.product = cls.env["product.product"].create({"name": "test product"})
 
     def test_00(self):
         product = ProductProduct.from_product_product(self.product)

@@ -14,9 +14,7 @@ class TestProductExpiryInSchema(TransactionCase, ExtendableMixin):
         cls.init_extendable_registry()
         cls.addClassCleanup(cls.reset_extendable_registry)
 
-        cls.product = cls.env["product.product"].create(
-            {"name": "test product", "tracking": "lot", "type": "product"}
-        )
+        cls.product = cls.env["product.product"].create({"name": "test product"})
         cls.storage_temperature = cls.env.ref(
             "alc_product_storage_temperature.product_storage_temperature_minus_12"
         )
