@@ -3,21 +3,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="0">
 
-    <record
-    id="ir_exp_shopinvader_variant_route_from_categ_ids"
-    model="ir.exports.line"
-  >
-        <field name="name">route_from_categ_ids</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-
-    <!-- override price to avoid price getting overwritten at module updates   -->
-
-    <record id="ir_exp_shopinvader_variant_is_mto" model="ir.exports.line">
-        <field name="name">is_mto_product</field>
-        <field name="alias">is_mto_product:is_mto</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
     <record id="ir_exp_shopinvader_variant_cross" model="ir.exports.line">
         <field name="name">cross</field>
         <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
