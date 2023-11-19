@@ -59,6 +59,7 @@
         "alc_eshop_search_engine_product_media",
         "alc_eshop_product_veterinary_group",
         "alc_eshop_product_route_mto",
+        "alc_eshop_product_promoted_links",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",
