@@ -11,7 +11,7 @@ from odoo.addons.shopinvader_search_engine_product_stock.tests.common import (
 )
 
 
-class TestProductExpiryInSchema(StockCommonCase):
+class TestProductSchema(StockCommonCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

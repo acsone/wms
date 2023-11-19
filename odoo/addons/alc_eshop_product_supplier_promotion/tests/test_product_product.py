@@ -9,7 +9,7 @@ from odoo.addons.extendable.tests.common import ExtendableMixin
 from odoo.addons.shopinvader_product.schemas.product import ProductProduct
 
 
-class TestProductExpiryInSchema(TransactionCase, ExtendableMixin):
+class TestProductSchema(TransactionCase, ExtendableMixin):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

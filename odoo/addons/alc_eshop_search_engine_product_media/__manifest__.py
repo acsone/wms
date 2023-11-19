@@ -12,6 +12,7 @@
     "depends": [
         "shopinvader_search_engine_product_media",
         "alc_base_multi_media_lang",
+        "alc_fs_attachment",
     ],
     "data": [],
     "demo": [],

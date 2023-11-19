@@ -10,7 +10,7 @@ from odoo.addons.extendable.tests.common import ExtendableMixin
 from odoo.addons.shopinvader_product.schemas.product import ProductProduct
 
 
-class TestProductExpiryInSchema(TransactionCase, ExtendableMixin):
+class TestProductSchema(TransactionCase, ExtendableMixin):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -46,8 +46,9 @@ class TestProductExpiryInSchema(TransactionCase, ExtendableMixin):
             }
         )
         product = ProductProduct.from_product_product(self.product)
-        self.assertEqual(len(product.price.get("price-pl")), 2)
-        price = product.price.get("price-pl")[0]
+        prices = product.price.get("price-pl")
+        self.assertEqual(len(prices), 2)
+        price = list(filter(lambda p, i=pl.item_ids: p.get("id") == i.id, prices))[0]
         self.assertEqual(
             datetime.fromisoformat(price.get("date_start")).date(), date_start
         )
@@ -55,7 +56,7 @@ class TestProductExpiryInSchema(TransactionCase, ExtendableMixin):
         self.assertEqual(price.get("id"), pl.item_ids.id)
         self.assertEqual(price.get("price"), 90)
 
-        price = product.price.get("price-pl")[1]
+        price = list(filter(lambda p, i=pl.item_ids: p.get("id") != i.id, prices))[0]
         self.assertIsNone(price.get("date_start"))
         self.assertIsNone(price.get("date_end"))
         self.assertIsNone(price.get("id"))
