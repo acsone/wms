@@ -5,6 +5,8 @@ werkzeug<2.1
 pypdf2<2
 dicttoxml @ git+https://github.com/acsone/dicttoxml.git@alc-master-perf
 
+extendable-pydantic @ git+https://github.com/lmignon/extendable-pydantic.git@refs/pull/19/head
+
 # account-analytic
 # https://github.com/elego/account-analytic/pull/1
 odoo-addon-product-analytic @ git+https://github.com/elego/account-analytic@refs/pull/1/head#subdirectory=setup/product_analytic
