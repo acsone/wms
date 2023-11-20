@@ -11,6 +11,7 @@ from .veterinary_group import VeterinaryGroup
 
 class ProductProduct(BaseProductProduct, extends=True):
     veterinary_groups: list[VeterinaryGroup] = []
+    vt_groups: dict[int, str] = {}
 
     @classmethod
     def from_product_product(cls, odoo_rec):
@@ -23,4 +24,5 @@ class ProductProduct(BaseProductProduct, extends=True):
             if odoo_rec.veterinary_group_ids
             else []
         )
+        obj.vt_groups = odoo_rec.vt_groups if odoo_rec.vt_groups else {}
         return obj

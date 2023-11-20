@@ -22,8 +22,12 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
     def test_00(self):
         product = ProductProduct.from_product_product(self.product)
         self.assertEqual(product.veterinary_groups, [])
+        self.assertEqual(product.vt_groups, {})
         self.product.veterinary_group_ids = self.veterinary_group
         product = ProductProduct.from_product_product(self.product)
+        self.assertDictEqual(
+            product.vt_groups, {self.veterinary_group.id: self.veterinary_group.name}
+        )
         self.assertEqual(len(product.veterinary_groups), 1)
         veterinary_group = product.veterinary_groups[0]
         self.assertEqual(veterinary_group.id, self.veterinary_group.id)
