@@ -860,6 +860,14 @@ def set_modules_to_remove():
         "alc_eshop_sale_cart_payment_info",  # renamed alc_eshop_schema_sale_payment
         "alc_eshop_sale_payment_info",  # replaced by alc_eshop_schema_sale_payment
         "connector_esb",  # renamed alc_connector_esb
+        "alc_eshop_api_v2",
+        "delivery_rounds",
+        "delivery_rounds_alcyon",
+        "specific_print",
+        "specific_account",
+        "specific_stock",
+        "stock_picking_zone",
+        "price_compute",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:

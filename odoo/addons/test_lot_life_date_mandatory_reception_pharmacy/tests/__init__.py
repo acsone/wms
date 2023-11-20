@@ -1,1 +1,0 @@
-from . import test_life_date_on_reception_pharmacy
