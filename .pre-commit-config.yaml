@@ -55,7 +55,8 @@ exclude: |
   ^odoo/addons/test_alc_shopfloor_stock_issue_product_additional/|
   ^odoo/addons/test_product_additional_groupbypartner/|
   # END NOT INSTALLABLE ADDONS
-  ^LICENCE$
+  ^LICENCE$|
+  ^scripts/odoo-16-migration/upgrade.py
 default_language_version:
   python: python3
   node: "16.17.0"
