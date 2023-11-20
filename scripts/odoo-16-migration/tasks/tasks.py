@@ -262,6 +262,17 @@ def cleanup_non_odoo_views():
 
 
 @task("16.0.1.0.0")
+def _clean_veterinary():
+    query = """
+        delete from res_partner_veterinary_group_rel
+            WHERE NOT EXISTS
+                (SELECT 1 FROM res_partner WHERE id = res_partner_id);
+    """
+    with cursor(DB_16_POSTMIG) as cr:
+        openupgrade.logged_query(cr, query)
+
+
+@task("16.0.1.0.0")
 def cleanup_stock_quant_package():
     psql_file(
         DB_16_POSTMIG,
