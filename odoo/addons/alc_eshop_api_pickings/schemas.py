@@ -8,12 +8,24 @@ from pydantic import BaseModel
 
 from odoo.addons.alc_cerberus_utils import utils
 from odoo.addons.stock.models import stock_picking
+from odoo.addons.stock.models.stock_lot import StockLot
 from odoo.addons.stock.models.stock_move import StockMove
 
 
 class Lot(BaseModel):
     name: str
-    peremption: date
+    peremption: date | None
+
+    @classmethod
+    def from_stock_lot(
+        cls, record: StockLot
+    ) -> self:  # noqa: F821  pylint: disable=undefined-variable
+        return cls(
+            name=record.name,
+            peremption=record.expiration_date.date()
+            if record.expiration_date
+            else None,
+        )
 
 
 class Move(BaseModel):
@@ -28,16 +40,16 @@ class Move(BaseModel):
     qty_ordered: float
 
     @classmethod
-    def from_stock_move(cls, record: StockMove):
+    def from_stock_move(
+        cls, record: StockMove
+    ) -> self:  # noqa: F821  pylint: disable=undefined-variable
         return cls(
             remaining_qty=record.product_uom_qty - record.quantity_done,
             prix_net_htva=record.sale_line_id.price_reduce,
             state=record.state,
             name=record.name,
             reference=record.product_id.default_code,
-            lots=[
-                Lot(name=lot.name, peremption=lot.life_date) for lot in record.lot_ids
-            ],
+            lots=[Lot.from_stock_lot(lot) for lot in record.lot_ids],
             suite=record.suite_name,
             prix_brut_htva=record.sale_line_id.price_unit,
             qty_ordered=record.product_qty,
@@ -60,7 +72,9 @@ class Picking(BaseModel):
     name: str
 
     @classmethod
-    def from_stock_picking(cls, record: stock_picking.Picking):
+    def from_stock_picking(
+        cls, record: stock_picking.Picking
+    ) -> self:  # noqa: F821  pylint: disable=undefined-variable
         date_done = None
         if record.date_done:
             date_done = utils.odoo_dt_to_dt_utc(record.date_done)
