@@ -46,6 +46,10 @@ class ExportReportTurnover(models.TransientModel):
             )
 
         if in_or_out_move == "in_move":
+            # We consider ABS(price_unit) because the move is incoming and the price
+            # is therefore negative. However later on, we use debit - credit.
+            # If credit is negative, we will add it to the debit, leading to
+            # incorrect numbers.
             self.env.cr.execute(
                 """
                     SELECT
