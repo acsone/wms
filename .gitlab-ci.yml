@@ -132,6 +132,16 @@ build-uat-image:
     - job: build-dependencies-image
   when: manual
 
+build-prod-image:
+  extends: .build-publish-image
+  variables:
+    ACIT_IMAGE_FLAVOR: /prod16
+  only:
+    - /^\d+\.\d+\.\d+$/
+  needs:
+    - job: build-dependencies-image
+  when: manual
+
 # deployments
 
 .deploy-trigger:
@@ -184,5 +194,17 @@ deploy-uat-trigger:
     name: uat16
   needs:
     - job: build-uat-image
+  only:
+    - /^\d+\.\d+\.\d+$/
+
+deploy-prod-trigger:
+  extends: .deploy-trigger
+  variables:
+    DEPLOY_BRANCH: deploy-test
+    IMAGE_FLAVOR: /prod16
+  environment:
+    name: prod16
+  needs:
+    - job: build-prod-image
   only:
     - /^\d+\.\d+\.\d+$/
