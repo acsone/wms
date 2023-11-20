@@ -895,6 +895,29 @@ def set_modules_to_remove():
 
 
 @task()
+def set_modules_to_remove_core():
+    """Set modules to remove in core as immediate uninstall does not work."""
+    modules_list = [
+        "mrp",
+        "mrp_workorder_hr",
+        "mrp_workorder_hr_account",
+        "quality_control",
+    ]
+    _logger.info("Modules to remove: %s", ",".join(modules_list))
+    with cursor(DB_16_POSTMIG) as cr:
+        query = """
+            UPDATE ir_module_module
+                SET state = 'to remove'
+                WHERE name IN %s AND state <> 'uninstallable'
+        """
+        openupgrade.logged_query(
+            cr,
+            query,
+            (tuple(modules_list),),
+        )
+
+
+@task()
 def click_odoo_update_final():
     check_call(
         ["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite", "--update-all"]
