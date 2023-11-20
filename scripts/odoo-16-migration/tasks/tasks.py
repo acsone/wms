@@ -859,6 +859,7 @@ def set_modules_to_remove():
         "shopinvader_auth_jwt",
         "alc_eshop_sale_cart_payment_info",  # renamed alc_eshop_schema_sale_payment
         "alc_eshop_sale_payment_info",  # replaced by alc_eshop_schema_sale_payment
+        "connector_esb",  # renamed alc_connector_esb
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:

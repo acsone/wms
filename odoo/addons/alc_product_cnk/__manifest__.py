@@ -9,5 +9,5 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["alc_product_newpharma"],
+    "depends": ["alc_product_newpharma", "alc_product_pharmacy"],
 }

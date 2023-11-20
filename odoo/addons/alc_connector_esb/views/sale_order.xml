@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="sale_channel_view_form" model="ir.ui.view">
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale_channel.view_sale_order_form_channel" />
+    <field name="arch" type="xml">
+      <field name="sale_channel_id" position="after">
+        <field name="esb_ref" readonly="1" />
+        <field name="newpharma_ref" readonly="1" />
+      </field>
+    </field>
+  </record>
+</odoo>
