@@ -107,3 +107,14 @@
     - oca refs/pull/1303/head # [FIX] - don't overwrite arrival and departure dates if they have already been set by the user
     - oca refs/pull/1390/head # [FIX] stock_picking_start: fix user_id vals in _prepare_start_values
   target: origin 16.0-stock_picking_start
+
+./src/account-closing:
+  remotes:
+    origin: git@github.com:acsone/account-closing.git
+    oca: git@github.com:oca/account-closing.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/270/head # [IMP] account-closing: auto reverse
+    - oca refs/pull/271/head # [IMP] account-closing: account cutoff accrual on order
+    - oca refs/pull/283/head # [IMP] account-closing: configure different account for refunds
+  target: origin 16.0-account-cutoff-base

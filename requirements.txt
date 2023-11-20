@@ -70,7 +70,7 @@ odoo-addon-account-cutoff-accrual-purchase @ git+https://github.com/acsone/accou
 odoo-addon-account-cutoff-accrual-purchase-stock @ git+https://github.com/acsone/account-closing.git@5520c56a7022b845068865cf3c0cf3e19fac7fe4#subdirectory=setup/account_cutoff_accrual_purchase_stock
 odoo-addon-account-cutoff-accrual-sale @ git+https://github.com/acsone/account-closing.git@5520c56a7022b845068865cf3c0cf3e19fac7fe4#subdirectory=setup/account_cutoff_accrual_sale
 odoo-addon-account-cutoff-accrual-sale-stock @ git+https://github.com/acsone/account-closing.git@5520c56a7022b845068865cf3c0cf3e19fac7fe4#subdirectory=setup/account_cutoff_accrual_sale_stock
-odoo-addon-account-cutoff-base @ git+https://github.com/acsone/account-closing.git@9bc8bb46cf54d56bd2b71d9fe80620772461e734#subdirectory=setup/account_cutoff_base
+odoo-addon-account-cutoff-base @ git+https://github.com/acsone/account-closing.git@8f4680b2544ed412b30ca48a1bb72bb1d21a3993#subdirectory=setup/account_cutoff_base
 odoo-addon-account-financial-report @ git+https://github.com/acsone/account-financial-reporting@441b82d953cce7bba049b0db777d516a0632424c#subdirectory=setup/account_financial_report
 odoo-addon-account-invoice-accrual @ git+https://github.com/acsone/account-closing.git@42710267a8ed7351ba1f70a58491ce04beac04a2#subdirectory=setup/account_invoice_accrual
 odoo-addon-account-invoice-check-total==16.0.1.0.0.6
