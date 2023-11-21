@@ -880,6 +880,7 @@ def set_modules_to_remove():
         "stock_picking_zone",
         "price_compute",
         "shopinvader_url_locales",  # replaced by alc_eshop_search_engine_product_url_locales
+        "shopinvader_search_engine_update_vtgroups",  # replaced by alc_eshop_search_engine_update_veterinary_group
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
