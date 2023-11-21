@@ -289,7 +289,7 @@ odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com
 odoo-addon-stock-available-location-get-domain @ git+https://github.com/acsone/stock-logistics-availability.git@aed5cd18e4a944ca51eac2bf89d3bbe1be984260#subdirectory=setup/stock_available_location_get_domain
 odoo-addon-stock-available-location-orderpoint @ git+https://github.com/acsone/stock-logistics-availability.git@1a8c535d754346383254d94f9767279c1d2c83de#subdirectory=setup/stock_available_location_orderpoint
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@8d2e7ba586049691b9f28494592f5c21ad540d7c#subdirectory=setup/stock_available_to_promise_release
-odoo-addon-stock-average-daily-sale @ git+https://github.com/acsone/stock-logistics-reporting.git@3f33905aa2b704c65c047a3f187be7c726e404d6#subdirectory=setup/stock_average_daily_sale
+odoo-addon-stock-average-daily-sale @ git+https://github.com/acsone/stock-logistics-reporting.git@879e4cf5bff5626906f19a5c347d92c10f153052#subdirectory=setup/stock_average_daily_sale
 odoo-addon-stock-dock==16.0.1.0.1
 odoo-addon-stock-dynamic-routing==16.0.1.0.1
 odoo-addon-stock-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@c96b8aa6b6df50c3c910742db419d15dd606ea39#subdirectory=setup/stock_grn
