@@ -5,7 +5,7 @@
     "name": "Alc Product Flattened Data",
     "description": """
         Alcyon: Materialized view to get accesse to flattened product's data in a efficient way""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",

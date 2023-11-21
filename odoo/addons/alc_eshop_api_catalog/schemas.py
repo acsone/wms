@@ -37,7 +37,7 @@ class Product(BaseModel):
 
     @classmethod
     def from_product_flattened_data(cls, record: AlcProductFlattenedData):
-        price_htva = record.gross_price
+        price_htva = record.gross_price or 0
         vat = record.tax_amount
         return cls(
             category=record.categ,
@@ -47,10 +47,10 @@ class Product(BaseModel):
             ext_cti=record.code_cti or None,
             ean_13=record.barcode or None,
             code_amm=record.code_amm or None,
-            price_tvac=price_htva + (price_htva * vat / 100),
+            price_tvac=price_htva + (price_htva * (vat or 1) / 100),
             price_htva=price_htva,
             cnk_code=record.cnk_code or None,
-            vat=vat,
+            vat=vat or 0,
             manufacturer=record.manufacturer or None,
         )
 
