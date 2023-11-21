@@ -46,19 +46,3 @@ class AccountCutoff(AccountCutoffBase):
     @api.model
     def _cron_cutoff_revenue_refund(self):
         self._cron_cutoff_refund("out_refund")
-
-    def _get_sale_lines(self):
-        sale_order_line_model = self.env["sale.order.line"]
-        with sale_order_line_model._auto_join(["order_id"]):
-            lines = self.env["sale.order.line"].search(
-                [("qty_to_invoice", "!=", 0), ("order_id.state", "!=", "done")]
-            )
-        return lines
-
-    def _get_purchase_lines(self):
-        purchase_order_line_model = self.env["purchase.order.line"]
-        with purchase_order_line_model._auto_join(["order_id"]):
-            lines = self.env["purchase.order.line"].search(
-                [("qty_to_invoice", "!=", 0), ("order_id.state", "!=", "done")]
-            )
-        return lines
