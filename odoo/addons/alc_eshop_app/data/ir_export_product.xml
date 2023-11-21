@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright 2022 ACSONE SA/NV
-     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-<odoo noupdate="0">
-    <record id="ir_exp_shopinvader_variant_vt_groups" model="ir.exports.line">
-        <field name="name">vt_groups</field>
-        <field name="export_id" ref="shopinvader.ir_exp_shopinvader_variant" />
-    </record>
-</odoo>

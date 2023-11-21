@@ -1,0 +1,2 @@
+from .product_storage_temperature import ProductStorageTemperature
+from .product import ProductProduct
