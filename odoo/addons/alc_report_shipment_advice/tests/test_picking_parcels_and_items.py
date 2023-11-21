@@ -106,14 +106,22 @@ class TestPickingTotal(PickingParcelsItemsCommon, TransactionCase):
         self.assertIn(self.pharma_location.id, report.location_ids._ids)
         self.assertIn(False, report.location_ids._ids)
 
-        self.assertDictEqual(
-            {
-                "total_parcels": 14.0,
-                "total_items": 6.0,
-                "total": 20.0,
-            },
-            report.parcels_and_items_per_source,
-        )
+        paips = report.parcels_and_items_per_source
+        self.assertEqual(paips["total_parcels"], 14)
+        self.assertEqual(paips["total_items"], 6)
+        self.assertEqual(paips["total"], 20)
+        paips_zone = paips["total_zone"]
+        self.assertEqual(paips_zone[str(self.pharma_location.id)], 7)
+        self.assertEqual(paips_zone[str(self.food_location.id)], 7)
+        self.assertEqual(paips_zone["false"], 6)
+        paips_zone_items = paips["total_zone_items"]
+        self.assertEqual(paips_zone_items[str(self.pharma_location.id)], 0)
+        self.assertEqual(paips_zone_items[str(self.food_location.id)], 0)
+        self.assertEqual(paips_zone_items["false"], 6)
+        paips_zone_parcels = paips["total_zone_parcels"]
+        self.assertEqual(paips_zone_parcels[str(self.pharma_location.id)], 7)
+        self.assertEqual(paips_zone_parcels[str(self.food_location.id)], 7)
+        self.assertEqual(paips_zone_parcels["false"], 0)
 
         # Check if report is correctly generated
         _content, _content_type = self.env["ir.actions.report"]._render_qweb_pdf(
@@ -212,14 +220,19 @@ class TestPickingTotal(PickingParcelsItemsCommon, TransactionCase):
         self.assertIn(self.food_location.id, report.location_ids._ids)
         self.assertIn(False, report.location_ids._ids)
 
-        self.assertDictEqual(
-            {
-                "total_parcels": 14.0,
-                "total_items": 6.0,
-                "total": 20.0,
-            },
-            report.parcels_and_items_per_source,
-        )
+        paips = report.parcels_and_items_per_source
+        self.assertEqual(paips["total_parcels"], 14)
+        self.assertEqual(paips["total_items"], 6)
+        self.assertEqual(paips["total"], 20)
+        paips_zone = paips["total_zone"]
+        self.assertEqual(paips_zone[str(self.food_location.id)], 7)
+        self.assertEqual(paips_zone["false"], 13)
+        paips_zone_items = paips["total_zone_items"]
+        self.assertEqual(paips_zone_items[str(self.food_location.id)], 0)
+        self.assertEqual(paips_zone_items["false"], 6)
+        paips_zone_parcels = paips["total_zone_parcels"]
+        self.assertEqual(paips_zone_parcels[str(self.food_location.id)], 7)
+        self.assertEqual(paips_zone_parcels["false"], 7)
 
         # Check if report is correctly generated
         _content, _content_type = self.env["ir.actions.report"]._render_qweb_pdf(
