@@ -18,6 +18,6 @@ def migrate(env, version):
           SET external_report_layout_id = model_data.res_id
           FROM (SELECT res_id from ir_model_data
                 WHERE name = 'external_layout_alcyon'
-                AND module = 'alc_report_base') AS model_data'
+                AND module = 'alc_report_base') AS model_data
         """
     )
