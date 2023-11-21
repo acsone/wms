@@ -5,7 +5,7 @@
 {
     "name": "Connector keycloak",
     "description": """Manage Keycloak users for portal partners""",
-    "version": "16.0.1.0.1",
+    "version": "16.0.1.0.2",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -25,4 +25,6 @@
     ],
     "demo": [],
     "external_dependencies": {"python": ["python-keycloak"]},
+    "pre_init_hook": "pre_init_hook",
+    "installable": True,
 }

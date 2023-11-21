@@ -41,6 +41,7 @@
         "alc_eshop_schema_sale_channel",
         "alc_eshop_schema_sale_suite_name",
         "alc_eshop_schema_sale_qty_canceled",
+        "alc_eshop_schema_sale_product",
         "alc_eshop_schema_sale_product_unavailable",
         "alc_eshop_schema_sale_product_unavailable_pharmacy",
         "alc_eshop_schema_sale_triple_discount",
