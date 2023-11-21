@@ -24,6 +24,11 @@ class TestProductSchema(TestProductBindingBase, TestURLLocalesCommon):
         cls._setup_record_url()
 
     def test_0(self):
+        product = self.env["product.product"].create({"name": "product"})
+        product = ProductProduct.from_product_product(product)
+        self.assertEqual(product.url_key_locales, {})
+
+    def test_1(self):
         product = ProductProduct.from_product_product(self.product)
         self.assertEqual(
             product.url_key_locales, {"en_US": "url_key_en", "fr_FR": "url_key_fr"}

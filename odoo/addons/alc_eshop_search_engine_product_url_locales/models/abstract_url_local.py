@@ -15,5 +15,7 @@ class AbstractUrlLocal(models.AbstractModel):
         for binding in self.se_binding_ids:
             binding = binding._contextualize(binding)
             if binding.record.url_key:
+                if not binding.index_id.lang_id:
+                    continue
                 res[binding.index_id.lang_id.code] = binding.record.url_key
         return res

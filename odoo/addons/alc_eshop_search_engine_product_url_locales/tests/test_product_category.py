@@ -24,7 +24,18 @@ class TestProductCategorySchema(TestCategoryBindingBase, TestURLLocalesCommon):
         cls._setup_record_url()
 
     def test_0(self):
+        category = self.env["product.category"].create({"name": "category"})
+        category = ProductCategory.from_product_category(category)
+        self.assertEqual(category.url_key_locales, {})
+
+    def test_1(self):
         category = ProductCategory.from_product_category(self.category)
         self.assertEqual(
             category.url_key_locales, {"en_US": "url_key_en", "fr_FR": "url_key_fr"}
         )
+
+    def test_2(self):
+        """No lang set for the index."""
+        self.se_index.lang_id = False
+        category = ProductCategory.from_product_category(self.category)
+        self.assertEqual(category.url_key_locales, {"fr_FR": "url_key_fr"})
