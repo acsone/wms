@@ -416,3 +416,16 @@ td {
 #product_type_summary {
   font-size: 0.8em;
 }
+
+#shipment_header td {
+  text-align: left;
+}
+
+#shipment_content th,
+td {
+  text-align: left;
+}
+#shipment_content tr,
+td {
+  border: 1px solid lightgrey;
+}

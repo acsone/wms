@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from __future__ import annotations
 
+from collections import defaultdict
 from typing import TYPE_CHECKING
 
 from odoo import api, fields, models
@@ -51,16 +52,25 @@ class AlcReportShipmentAdvice(models.TransientModel):
             total_parcels = 0
             total_items = 0
             total = 0
-            for picking in self.line_ids.picking_ids:
-                total_parcels += sum(
-                    list(picking.parcels_and_items_per_source["parcels"].values())
-                )
-                total_items += sum(
-                    list(picking.parcels_and_items_per_source["items"].values())
-                )
+            total_zone_parcels = defaultdict(lambda: 0)
+            total_zone_items = defaultdict(lambda: 0)
+            total_zone = defaultdict(lambda: 0)
+            for line in self.line_ids:
+                paips = line.parcels_and_items_per_source
+                for zone in paips["locations"]:
+                    sz_zone = str(zone).lower()  # because it can be False
+                    total_parcels += paips["parcels"].get(sz_zone, 0)
+                    total_items += paips["items"].get(sz_zone, 0)
+                    total_zone_parcels[sz_zone] += paips["parcels"].get(sz_zone, 0)
+                    total_zone[sz_zone] += paips["parcels"].get(sz_zone, 0)
+                    total_zone_items[sz_zone] += paips["items"].get(sz_zone, 0)
+                    total_zone[sz_zone] += paips["items"].get(sz_zone, 0)
                 total += total_parcels + total_items
             advice.parcels_and_items_per_source = {
                 "total_parcels": total_parcels,
                 "total_items": total_items,
                 "total": total,
+                "total_zone_parcels": dict(total_zone_parcels),
+                "total_zone_items": dict(total_zone_items),
+                "total_zone": dict(total_zone),
             }

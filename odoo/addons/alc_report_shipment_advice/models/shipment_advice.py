@@ -40,7 +40,9 @@ class ShipmentAdvice(Advice):
     def _get_sorted_shipping_ids(self):
         """Return the shippings into the expected delivery order."""
         self.ensure_one()
-        return self.loaded_picking_ids.sorted("toursolver_shipment_advice_rank")
+        return self.loaded_picking_ids.filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        ).sorted("toursolver_shipment_advice_rank")
 
     def _get_location_zones(self, pickings):
         # This will gather all source (Stock) locations zones from parcels numbers and isolated

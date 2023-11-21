@@ -1,1 +1,2 @@
-from . import test_alc_eshop_models_url
+from . import test_product_category_url
+from . import test_product_product_url
