@@ -67,7 +67,6 @@ omit =
     odoo/addons/shopinvader_search_engine_export/*
     odoo/addons/shopinvader_search_engine_update_specials/*
     odoo/addons/shopinvader_search_engine_update_vtgroups/*
-    odoo/addons/shopinvader_url_locales/*
     odoo/addons/stock_inventory_constrains/*
     odoo/addons/storage_file_url_store/*
     odoo/addons/test_alc_shopfloor_stock_issue_product_additional/*
