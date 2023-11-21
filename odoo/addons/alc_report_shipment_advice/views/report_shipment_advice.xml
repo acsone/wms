@@ -1,209 +1,271 @@
 <odoo>
-    <template
-    id="report_shipment_advice_document"
-    inherit_id="shipment_advice.report_shipment_advice_document"
-  >
-
-        <xpath expr="//div[hasclass('page')]" position="before">
+    <template id="alc_report_shipment_advice_document">
+        <t t-call="web.html_container">
             <t t-set="index" t-value="1" />
             <t t-set="report" t-value="o.get_alc_report_shipment_advice()" />
             <t t-set="lines" t-value="report.line_ids" />
-            <t t-set="company" t-value="o.company_id" />
-        </xpath>
-        <xpath expr="//table[@name='header']" position="attributes">
-            <attribute name="invisible">1</attribute>
-        </xpath>
-        <xpath expr="//table[@name='header']" position="after">
-            <h2>
-                <t t-if="o.toursolver_resource_id">
-                    <span t-field="o.display_name" /> -
-                    <span t-field="o.toursolver_resource_id.display_name" />
-                </t>
-                <t t-else="">
-                    <span t-field="o.display_name" />
-                </t>
-            </h2>
-            <div class="row">
-                <div class="col-5">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Exp: <span t-field="company.name" />
-                                    <br />
-                                    <span t-field="company.street" />
-                                    <br />
-                                    <span t-field="company.zip" />,
-                                    <span t-field="company.city" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Start mileage</td>
-                                <td />
-                            </tr>
-                            <tr>
-                                <td>End mileage</td>
-                                <td />
-                            </tr>
-                        </tbody>
-                    </table>
+            <t t-set="company" t-value="o.company_id or res_company" />
+            <div class="page">
+                <h2>
+                    <t t-if="o.toursolver_resource_id">
+                        <span t-field="o.display_name" /> -
+                        <span t-field="o.toursolver_resource_id.display_name" />
+                    </t>
+                    <t t-else="">
+                        <span t-field="o.display_name" />
+                    </t>
+                </h2>
+                <div class="row mb-3" id="shipment_header">
+                    <div class="col-5">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Exp: <span t-field="company.name" />
+                                        <br />
+                                        <span t-field="company.street" />
+                                        <br />
+                                        <span t-field="company.zip" />,
+                                        <span t-field="company.city" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Start mileage</td>
+                                    <td />
+                                </tr>
+                                <tr>
+                                    <td>End mileage</td>
+                                    <td />
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-5 offset-2">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td class="col-4">Stops</td>
+                                    <td class="col-8">
+                                        <span t-esc="len(lines)" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Departure time</td>
+                                    <td>
+                                        <t t-if="o.departure_date">
+                                            <span
+                        t-esc="o.departure_date.strftime('%H:%M')"
+                      />
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Arriving time</td>
+                                    <td>
+                                        <t t-if="o.arrival_date">
+                                            <span
+                        t-esc="o.arrival_date.strftime('%H:%M')"
+                      />
+                                        </t>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="col-5 offset-2">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td class="col-4">Stops</td>
-                                <td class="col-8">
-                                    <span t-esc="len(lines)" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Departure time</td>
-                                <td>
-                                    <t t-if="o.departure_date">
-                                        <span
-                      t-esc="o.departure_date.strftime('%H:%M')"
-                    />
-                                    </t>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Arriving time</td>
-                                    <t t-if="o.arrival_date">
-                                        <span
-                    t-esc="o.arrival_date.strftime('%H:%M')"
-                  />
-                                    </t>
-                                <td />
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </xpath>
-        <xpath expr="//table[@name='package_content']" position="attributes">
-            <attribute name="t-if">1 == 0</attribute>
-        </xpath>
-        <xpath expr="//table[@name='bulk_content']" position="attributes">
-            <attribute name="t-if">1 == 0</attribute>
-        </xpath>
-        <xpath expr="//table[@name='bulk_content']" position="after">
-            <div class="row">
-                <table
-          class="table table-bordered table-condensed"
-          name="bulk_content"
-          t-if="lines"
-        >
-                    <thead>
-                        <tr class="active">
-                            <th>Seq.</th>
-                            <th>Customer</th>
-                            <th>Notes</th>
-                            <th>Phone</th>
-                            <t
-                t-foreach="report.location_ids._ids"
-                t-as="zone_location_id"
-              >
-                                <th>
-                                    <t t-if="zone_location_id">
-                                        <t
-                      t-esc="o.env['stock.location'].browse(zone_location_id).name"
-                    />
-                                    </t>
-                                    <t t-else="">
-                                        <span>Unknown Zone</span>
-                                    </t>
-
-                                </th>
-                            </t>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr t-foreach="lines" t-as="line">
-                            <t t-set="partner" t-value="line['partner_id']" />
-                            <tr>
-                                <td>
-                                    <span t-esc="index" />
-                                </td>
-                                <td>
-                                    <div
-                    t-esc="partner"
-                    t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'
-                  />
-                                    <span t-field="partner.ref" />
-                                </td>
-                                <td style="width: 40%;">
-                                    <strong>
-                                        <span t-esc="line['note']" />
-                                    </strong>
-                                </td>
-                                <td>
-                                    <span t-field="partner.mobile" />
-                                    <br />
-                                    <span t-field="partner.phone" />
-                                </td>
+                <div class="row" id="shipment_content">
+                    <t
+            t-set="zone_mapping"
+            t-value="{'Médicaments':'Médic.','Matériel':'Mat.','Aliments':'Alim.', 'Frigo': 'Froid'}"
+          />
+                    <table
+            class="table table-bordered table-sm"
+            name="bulk_content"
+            t-if="lines"
+          >
+                        <thead>
+                            <tr class="active">
+                                <th>Seq.</th>
+                                <th>Customer</th>
+                                <th>Notes</th>
+                                <th>Phone</th>
+                                <t t-set="max_zones" t-value="0" />
                                 <t
-                  t-foreach="line.parcels_and_items_per_source['locations']"
-                  t-as="location_key"
+                  t-foreach="report.location_ids._ids"
+                  t-as="zone_location_id"
                 >
+                                    <th>
+                                        <t t-if="zone_location_id">
+                                            <t
+                        t-esc="zone_mapping.get(o.env['stock.location'].browse(zone_location_id).name, '???')"
+                      />
+                                        </t>
+                                        <t t-else="">
+                                            <span>Other</span>
+                                        </t>
+                                        <t t-set="max_zones" t-value="max_zones + 1" />
+                                    </th>
+                                </t>
+                                <th>Tot.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="lines" t-as="line">
+                                <t t-set="partner" t-value="line['partner_id']" />
+                                <tr>
+                                    <td>
+                                        <span t-esc="index" />
+                                    </td>
+                                    <td>
+                                        <div
+                      t-esc="partner"
+                      t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'
+                    />
+                                        <span t-field="partner.ref" />
+                                    </td>
+                                    <td style="width: 40%;">
+                                        <strong>
+                                            <span t-esc="line['note']" />
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <span t-field="partner.mobile" />
+                                        <br />
+                                        <span t-field="partner.phone" />
+                                    </td>
+                                    <t t-set="nb_zones" t-value="0" />
+                                    <t
+                    t-foreach="line.parcels_and_items_per_source['locations']"
+                    t-as="location_key"
+                  >
+                                        <td>
+                                            <t
+                        t-if="line.parcels_and_items_per_source['parcels'].get(str(location_key) if location_key else 'false')"
+                      >
+                                                <t
+                          t-esc="int(line.parcels_and_items_per_source['parcels'][str(location_key) if location_key else 'false'])"
+                        />
+                                                box(es)
+                                                <br />
+                                            </t>
+                                            <t
+                        t-if="line.parcels_and_items_per_source['items'].get(str(location_key) if location_key else 'false')"
+                      >
+                                                <t
+                          t-esc="int(line.parcels_and_items_per_source['items'][str(location_key) if location_key else 'false'])"
+                        />
+                                                unit(s)
+                                            </t>
+                                            <t
+                        t-set="nb_zones"
+                        t-value="nb_zones + 1"
+                      />
+                                        </td>
+                                    </t>
+                                    <t t-foreach="max_zones - nb_zones" t-as="idx">
+                                        <td />
+                                    </t>
                                     <td>
                                         <t
-                      t-if="line.parcels_and_items_per_source['parcels'].get(str(location_key) if location_key else 'false')"
-                    >
-                                            <t
-                        t-esc="line.parcels_and_items_per_source['parcels'][str(location_key) if location_key else 'false']"
-                      />
-                                            box(es)
-                                            <br />
-                                        </t>
+                      t-esc="int(line.parcels_and_items_per_source['parcels_total'])"
+                    />
+                                        box(es)
+                                        <br />
                                         <t
-                      t-if="line.parcels_and_items_per_source['items'].get(str(location_key) if location_key else 'false')"
-                    >
-                                            <t
-                        t-esc="line.parcels_and_items_per_source['items'][str(location_key) if location_key else 'false']"
-                      />
-                                            unit(s)
-                                        </t>
-
+                      t-esc="int(line.parcels_and_items_per_source['items_total'])"
+                    />
+                                        unit(s)
                                     </td>
-
-                                </t>
+                                </tr>
+                                <t t-set="index" t-value="index + 1" />
                             </tr>
-                        <t t-set="index" t-value="index + 1" />
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="active">Total number of box(es)</td>
-                            <td>
+                            <tr>
+                                <td
+                  colspan="4"
+                  class="active"
+                >Total number of box(es)</td>
                                 <t
-                  t-esc="o.parcels_and_items_per_source['total_parcels']"
-                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="active">Total number of unit(s)</td>
-                            <td>
+                  t-foreach="report.location_ids._ids"
+                  t-as="zone_location_id"
+                >
+                                    <td class="text-end">
+                                        <t
+                      t-esc="int(report.parcels_and_items_per_source['total_zone_parcels'].get(str(zone_location_id), 0))"
+                    />
+                                    </td>
+                                </t>
+                                <td class="text-end">
+                                    <t
+                    t-esc="int(sum(x for x in report.parcels_and_items_per_source['total_zone_parcels'].values()))"
+                  />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                  colspan="4"
+                  class="active"
+                >Total number of unit(s)</td>
+                                 <t
+                  t-foreach="report.location_ids._ids"
+                  t-as="zone_location_id"
+                >
+                                    <td class="text-end">
+                                        <t
+                      t-esc="int(report.parcels_and_items_per_source['total_zone_items'].get(str(zone_location_id), 0))"
+                    />
+                                    </td>
+                                </t>
+                                <td class="text-end">
+                                    <t
+                    t-esc="int(sum(x for x in report.parcels_and_items_per_source['total_zone_items'].values()))"
+                  />
+                                </td>
+                           </tr>
+                            <tr>
+                                <td colspan="4" class="active">Total of parcel(s)</td>
                                 <t
-                  t-esc="o.parcels_and_items_per_source['total_items']"
-                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="active">Total of parcel(s)</td>
-                            <td>
-                                <t t-esc="o.parcels_and_items_per_source['total']" />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                  t-foreach="report.location_ids._ids"
+                  t-as="zone_location_id"
+                >
+                                    <td class="text-end">
+                                        <t
+                      t-esc="int(report.parcels_and_items_per_source['total_zone'].get(str(zone_location_id), 0))"
+                    />
+                                    </td>
+                                </t>
+                                <td class="text-end">
+                                    <t
+                    t-esc="int(sum(x for x in report.parcels_and_items_per_source['total_zone'].values()))"
+                  />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </xpath>
+        </t>
     </template>
 
-    <template id="report_shipment_advice">
-        <t t-foreach="docs" t-as="o">
-            <t t-call="alc_report_shipment_advice.report_shipment_advice_document" />
-        </t>
+    <template
+    id="report_shipment_advice"
+    inherit_id="shipment_advice.report_shipment_advice"
+    priority="99"
+  >
+        <xpath
+      expr="//t[@t-call='shipment_advice.report_shipment_advice_document']"
+      position="replace"
+    >
+            <div
+        class="article"
+        t-att-data-oe-model="o and o._name"
+        t-att-data-oe-id="o and o.id"
+        t-att-data-oe-lang="o and o.env.context.get('lang')"
+      >
+                <t
+          t-call="alc_report_shipment_advice.alc_report_shipment_advice_document"
+        />
+            </div>
+        </xpath>
     </template>
 
     <record
