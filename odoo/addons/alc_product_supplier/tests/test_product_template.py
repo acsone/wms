@@ -93,3 +93,10 @@ class TestProductTemplate(TransactionCase):
             .name_search("ABCD"),
             [(self.product_seller.product_variant_ids.id, "[ABCD] with seller")],
         )
+
+    def test_name_search_vendor_product_code(self):
+        """Test search by vendor code without context."""
+        self.assertEqual(
+            self.env["product.product"].name_search("ABCD"),
+            [(self.product_seller.product_variant_ids.id, "[1234] with seller")],
+        )
