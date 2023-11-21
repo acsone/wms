@@ -14,12 +14,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
-msgid "<span>Unknown Zone</span>"
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "<span>Other</span>"
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Arriving time"
 msgstr ""
 
@@ -36,12 +36,12 @@ msgid "Created on"
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Customer"
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Departure time"
 msgstr ""
 
@@ -52,12 +52,12 @@ msgid "Display Name"
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "End mileage"
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Exp:"
 msgstr ""
 
@@ -101,7 +101,7 @@ msgid "Note"
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Notes"
 msgstr ""
 
@@ -118,7 +118,7 @@ msgid "Partner"
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Phone"
 msgstr ""
 
@@ -133,7 +133,7 @@ msgid "Report"
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Seq."
 msgstr ""
 
@@ -154,38 +154,50 @@ msgid "Shipment Advice Report for Alc"
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Start mileage"
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Stops"
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Tot."
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Total number of box(es)"
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Total number of unit(s)"
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Total of parcel(s)"
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid ""
 "box(es)\n"
-"                                            <br/>"
+"                                                <br/>"
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid ""
+"box(es)\n"
+"                                        <br/>"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "unit(s)"
 msgstr ""
