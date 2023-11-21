@@ -60,6 +60,7 @@
         "alc_eshop_product_veterinary_group",
         "alc_eshop_product_route_mto",
         "alc_eshop_product_promoted_links",
+        "alc_eshop_models_url",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",
