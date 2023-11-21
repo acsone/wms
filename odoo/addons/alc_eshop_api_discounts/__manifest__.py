@@ -12,6 +12,7 @@
         "fastapi",
         "alc_partner_type",
         "alc_supplier_promotion",
+        "alc_partner_pricelist",
     ],
     "demo": [],
     "installable": True,
