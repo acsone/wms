@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field
+      name="name"
+    >view_picking_form (in alc_stock_picking_responsible_portal) </field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath
+        expr="//group[@name='other_infos']/field[@name='user_id']"
+        position="attributes"
+      >
+                 <attribute name="domain" operation="delete" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
