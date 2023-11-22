@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="eshop_technical_user_group" model="res.groups">
+        <field name="name">Utilisateur technique EShop</field>
+    </record>
+    <record id="eshop_manager_group" model="res.groups">
+        <field name="name">Gestionnaire EShop</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]" />
+        <field
+      name="implied_ids"
+      eval="[(4, ref('alc_eshop_cms.eshop_cms_manager_group')),
+                      (4, ref('alc_eshop_ads.eshop_ads_manager_group')),
+                      (4, ref('alc_eshop_api_forms.eshop_form_manager_group')),
+                      (4, ref('alc_registration.alc_registration_manager_group')),
+                      (4, ref('alc_eshop_info_banner.eshop_info_banner_manager_group')),
+                      (4, ref('alc_eshop_cms.eshop_cms_manager_group'))
+                      ]"
+    />
+    </record>
+</odoo>

@@ -5,7 +5,7 @@
     "name": "Alc search engine Eshop Info Message",
     "description": """
         Alcyon: export info banners to es""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",

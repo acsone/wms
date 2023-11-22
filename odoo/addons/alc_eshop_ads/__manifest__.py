@@ -12,6 +12,7 @@
     "depends": [
         "fs_image",
         "mixin_past",
+        "sales_team",
     ],
     "data": [
         "security/res_groups.xml",

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017 Akretion
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <menuitem
+    id="menu_eshop_app"
+    name="EShop"
+    sequence="10"
+    web_icon="alc_app_eshop_b2b,static/description/icon.png"
+    groups="eshop_manager_group,alc_eshop_ads.eshop_ads_manager_group,alc_eshop_cms.eshop_cms_manager_group,alc_eshop_api_forms.eshop_form_manager_group,alc_eshop_info_banner.eshop_info_banner_manager_group,alc_eshop_cms.eshop_cms_manager_group"
+  />
+    <menuitem
+    id="menu_eshop_app_config"
+    name="Configuration"
+    sequence="100"
+    parent="menu_eshop_app"
+    groups="eshop_manager_group"
+  />
+
+    <record
+    model="ir.ui.menu"
+    id="alc_product_discount_special.product_discount_special_menu"
+  >
+        <field name="parent_id" ref="alc_app_eshop_b2b.menu_eshop_app" />
+        <field name="sequence" eval="5" />
+    </record>
+    <record model="ir.ui.menu" id="alc_eshop_ads.alc_eshop_ads_menu">
+        <field name="parent_id" ref="alc_app_eshop_b2b.menu_eshop_app" />
+        <field name="sequence" eval="10" />
+    </record>
+    <record model="ir.ui.menu" id="alc_eshop_info_banner.alc_eshop_info_banner_menu">
+        <field name="parent_id" ref="alc_app_eshop_b2b.menu_eshop_app" />
+        <field name="sequence" eval="20" />
+    </record>
+    <record model="ir.ui.menu" id="alc_eshop_api_forms.alc_eshop_form_menu">
+        <field name="parent_id" ref="alc_app_eshop_b2b.menu_eshop_app" />
+        <field name="sequence" eval="30" />
+    </record>
+    <record model="ir.ui.menu" id="alc_eshop_cms.alc_eshop_cms_menu">
+        <field name="parent_id" ref="alc_app_eshop_b2b.menu_eshop_app" />
+        <field name="sequence" eval="40" />
+    </record>
+    <record model="ir.ui.menu" id="alc_eshop_cms.alc_eshop_cms_page_group_menu">
+        <field name="parent_id" ref="alc_app_eshop_b2b.menu_eshop_app_config" />
+        <field name="sequence" eval="16" />
+    </record>
+    <record model="ir.ui.menu" id="alc_eshop_cms.alc_eshop_cms_page_slot_menu">
+        <field name="parent_id" ref="alc_app_eshop_b2b.menu_eshop_app_config" />
+        <field name="sequence" eval="26" />
+    </record>
+    <record model="ir.ui.menu" id="alc_eshop_classifieds.alc_classified_menu">
+        <field name="parent_id" ref="alc_app_eshop_b2b.menu_eshop_app" />
+        <field name="sequence" eval="30" />
+    </record>
+    <record model="ir.ui.menu" id="alc_registration_menu">
+        <field name="name">Registrations</field>
+        <field name="parent_id" ref="alc_app_eshop_b2b.menu_eshop_app" />
+        <field name="action" ref="alc_registration.alc_registration_act_window" />
+        <field name="sequence" eval="34" />
+    </record>
+</odoo>
