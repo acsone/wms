@@ -883,6 +883,7 @@ def set_modules_to_remove():
         "shopinvader_url_locales",  # replaced by alc_eshop_search_engine_product_url_locales
         "shopinvader_search_engine_update_vtgroups",  # replaced by alc_eshop_search_engine_update_veterinary_group
         "shopinvader_search_engine_update_specials",  # replaced by alc_eshop_search_engine_update_product_discount_special
+        "elasticsearch_product_cache",  # removed see #62795
         "alc_eshop_product_stock",  # replaced by alc_eshop_search_engine_product_stock
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))

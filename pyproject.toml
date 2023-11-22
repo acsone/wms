@@ -124,7 +124,6 @@ exclude = [
   'odoo/addons/alc_storage/*',
   'odoo/addons/alce_purchase_report/*',
   'odoo/addons/base_cached_xmlid/*',
-  'odoo/addons/elasticsearch_product_cache/*',
   'odoo/addons/l10n_be_vat/*',
   'odoo/addons/partner_archive_new_partner/*',
   'odoo/addons/shopinvader_assortment_bind/*',
