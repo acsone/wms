@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/V
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="view_move_form_inherit_purchase" model="ir.ui.view">
+        <field
+      name="name"
+    >account.move.inherit.purchase (in alc_account_invoice_vendor_bill_autocomplete)</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="purchase.view_move_form_inherit_purchase" />
+        <field name="arch" type="xml">
+            <field name="purchase_vendor_bill_id" position="attributes">
+                <attribute name="domain">
+                    partner_id and [('company_id', '=', company_id), ('partner_id.commercial_partner_id', '=', commercial_partner_id)] or [('company_id', '=', company_id)] and ['|', ('vendor_bill_id', '!=', False), '&amp;', ('purchase_order_id', '!=', False), ('purchase_order_id.invoice_status', '=', 'to invoice')]
+                </attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>

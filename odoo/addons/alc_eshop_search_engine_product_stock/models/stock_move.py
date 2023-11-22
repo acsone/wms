@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo.addons.shopinvader_search_engine_product_stock.models.stock_move import (
+    StockMove as StockMoveBase,
+)
 
 
-class StockMove(models.Model):
-
-    _inherit = "stock.move"
-
+class StockMove(StockMoveBase):
     def _get_product_to_update(self):
         # This method return the list of product we will recompute the
         # stock for the eshop. Filter out internal moves before calling super
