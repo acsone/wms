@@ -35,13 +35,13 @@
       />
         </function>
         <!-- Average orderpoints should always exclude supplier locations -->
-        <function model="stock.location.orderpoint" name="write">
+        <!-- <function model="stock.location.orderpoint" name="write">
             <value
         model="stock.location.orderpoint"
         eval="obj().search([('replenish_method', '=', 'average_daily_sale')]).ids"
       />
-            <value eval="{'use_to_compute_available_quantities': True}" />
-        </function>
+             <value eval="{'use_to_compute_available_quantities': True}" />
+        </function> -->
     </data>
 
 
