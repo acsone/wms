@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="action_shopinvader_product_category_bind" model="ir.actions.server">
+        <field name="name">Shopinvader Category Bind</field>
+        <field name="model_id" ref="product.model_product_category" />
+        <field name="binding_model_id" ref="product.model_product_category" />
+        <field name="state">code</field>
+        <field name="code">records.shopinvader_category_bind()</field>
+      </record>
+
+    <record id="action_shopinvader_product_category_unbind" model="ir.actions.server">
+        <field name="name">Shopinvader Category Unbind</field>
+        <field name="model_id" ref="product.model_product_category" />
+        <field name="binding_model_id" ref="product.model_product_category" />
+        <field name="state">code</field>
+        <field name="code">records.shopinvader_category_unbind()</field>
+      </record>
+</odoo>

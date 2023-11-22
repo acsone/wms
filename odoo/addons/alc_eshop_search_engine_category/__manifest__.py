@@ -4,12 +4,16 @@
 {
     "name": "Alcyon eShop Categories",
     "description": """Alcyon eShop Categories integration with Shopinvader""",
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "author": "ACSONE SA/NV",
     "website": "http://www.acsone.eu",
     "license": "AGPL-3",
     "category": "alc",
-    "depends": ["shopinvader_multi_category", "alc_product_shop_category"],
-    "data": [],
-    'installable': False
+    "depends": [
+        "shopinvader_multi_category",
+        "alc_product_shop_category",
+        "shopinvader_search_engine",
+    ],
+    "data": ["views/product_category.xml"],
+    "development_status": "Alpha",
 }
