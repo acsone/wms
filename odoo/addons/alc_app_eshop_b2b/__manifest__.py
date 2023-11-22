@@ -62,6 +62,7 @@
         "alc_eshop_product_promoted_links",
         "alc_eshop_search_engine_product_url_locales",
         "alc_eshop_models_url",
+        "alc_eshop_search_engine_update_veterinary_group",
         "alc_eshop_search_engine_update_product_discount_special",
         # shopinvader
         "shopinvader_search_engine",
