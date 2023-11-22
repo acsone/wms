@@ -64,6 +64,7 @@
         "alc_eshop_models_url",
         "alc_eshop_search_engine_update_veterinary_group",
         "alc_eshop_search_engine_update_product_discount_special",
+        "alc_eshop_search_engine_assortment_bind",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",
