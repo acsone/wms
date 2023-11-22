@@ -96,7 +96,7 @@ msgid "Everyone"
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__file_id
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__file
 msgid "File"
 msgstr ""
 
@@ -124,7 +124,7 @@ msgid ""
 msgstr ""
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,help:alc_eshop_ads.field_alc_eshop_ads__file_id
+#: model:ir.model.fields,help:alc_eshop_ads.field_alc_eshop_ads__file
 msgid ""
 "If specified, the file will be downloaded by the customer upon click on the "
 "ads banner into the website."
