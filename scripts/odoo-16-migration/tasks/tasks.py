@@ -521,14 +521,15 @@ def recover_invoices_without_move():
     with cursor(DB_10_SRC_NOT_CLEANED) as cr:
         openupgrade.logged_query(cr, query)
         zero_invoices = [__build_dict(cr, row) for row in cr.fetchall()]
-    with OdooEnvironment(DB_16_POSTMIG) as env:
+    with cursor(DB_16_POSTMIG) as cr:
         query = """
             UPDATE account_move
                 SET name = %(name)s, state = 'posted', payment_state = 'paid'
                 WHERE id = (SELECT move_id FROM account_invoice WHERE id = %(id)s)
                 AND state = 'draft';
         """
-        env.cr.executemany(query, zero_invoices)
+        for zero_invoice in zero_invoices:
+            openupgrade.logged_query(cr, query, zero_invoice)
 
 
 _register_migration_scripts_in_tasks("pre-")
@@ -883,6 +884,7 @@ def set_modules_to_remove():
         "shopinvader_search_engine_update_vtgroups",  # replaced by alc_eshop_search_engine_update_veterinary_group
         "shopinvader_search_engine_update_specials",  # replaced by alc_eshop_search_engine_update_product_discount_special
         "elasticsearch_product_cache",  # removed see #62795
+        "alc_eshop_product_stock",  # replaced by alc_eshop_search_engine_product_stock
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
