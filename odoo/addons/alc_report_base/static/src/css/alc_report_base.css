@@ -417,6 +417,11 @@ td {
   font-size: 0.8em;
 }
 
+#shipment_header,
+#shipment_content {
+  font-size: 0.8em;
+}
+
 #shipment_header td {
   text-align: left;
 }
@@ -428,4 +433,7 @@ td {
 #shipment_content tr,
 td {
   border: 1px solid lightgrey;
+}
+.bg-grey {
+  background-color: #e9e9e9;
 }
