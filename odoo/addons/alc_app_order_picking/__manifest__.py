@@ -115,6 +115,7 @@
         "alc_stock_quant_product_supplier",
         "alc_stock_picking_validate_and_print",
         "alc_stock_release_channel_sequence",
+        "alc_stock_picking_responsible_portal",
     ],
     "data": [],
     "demo": [],

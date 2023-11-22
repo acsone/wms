@@ -881,6 +881,7 @@ def set_modules_to_remove():
         "price_compute",
         "shopinvader_url_locales",  # replaced by alc_eshop_search_engine_product_url_locales
         "shopinvader_search_engine_update_vtgroups",  # replaced by alc_eshop_search_engine_update_veterinary_group
+        "shopinvader_search_engine_update_specials",  # replaced by alc_eshop_search_engine_update_product_discount_special
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
