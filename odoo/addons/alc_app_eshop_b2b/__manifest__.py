@@ -85,6 +85,7 @@
         "shopinvader_search_engine_product_stock",
         "shopinvader_search_engine_product_stock_state",
         "shopinvader_product_attribute_set",
+        "shopinvader_multi_category",
         "alc_eshop_search_engine_product_stock",
     ],
     "data": [],
