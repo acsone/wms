@@ -84,7 +84,7 @@
             t-if="lines"
           >
                         <thead>
-                            <tr class="active">
+                            <tr class="active bg-grey">
                                 <th>Seq.</th>
                                 <th>Customer</th>
                                 <th>Notes</th>
@@ -182,7 +182,7 @@
                             <tr>
                                 <td
                   colspan="4"
-                  class="active"
+                  class="active bg-grey"
                 >Total number of box(es)</td>
                                 <t
                   t-foreach="report.location_ids._ids"
@@ -203,7 +203,7 @@
                             <tr>
                                 <td
                   colspan="4"
-                  class="active"
+                  class="active bg-grey"
                 >Total number of unit(s)</td>
                                  <t
                   t-foreach="report.location_ids._ids"
@@ -222,7 +222,10 @@
                                 </td>
                            </tr>
                             <tr>
-                                <td colspan="4" class="active">Total of parcel(s)</td>
+                                <td
+                  colspan="4"
+                  class="active bg-grey"
+                >Total of parcel(s)</td>
                                 <t
                   t-foreach="report.location_ids._ids"
                   t-as="zone_location_id"
