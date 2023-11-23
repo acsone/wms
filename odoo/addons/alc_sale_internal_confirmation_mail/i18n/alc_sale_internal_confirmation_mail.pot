@@ -19,6 +19,13 @@ msgid "Config Settings"
 msgstr ""
 
 #. module: alc_sale_internal_confirmation_mail
+#. odoo-python
+#: code:addons/alc_sale_internal_confirmation_mail/models/sale_order.py:0
+#, python-format
+msgid "Order confirmation mail sent for order %(name)s from %(partner_name)s"
+msgstr ""
+
+#. module: alc_sale_internal_confirmation_mail
 #: model:ir.model,name:alc_sale_internal_confirmation_mail.model_sale_order
 msgid "Sales Order"
 msgstr ""
