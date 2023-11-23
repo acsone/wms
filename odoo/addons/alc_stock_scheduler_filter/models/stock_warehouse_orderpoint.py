@@ -56,6 +56,7 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpointBase):
     def _create_missing_orderpoint(self, warehouse, products=None):
         product_model = self.env["product.product"].with_context(warehouse=warehouse.id)
         products = product_model.search(self._get_missing_orderpoint_domain(products))
+        products = products.filtered_domain([("virtual_available", "<", 0)])
         vals_list = self._prepare_missing_orderpoint_list_vals(warehouse, products)
         if vals_list:
             return self.create(vals_list)
@@ -66,7 +67,7 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpointBase):
         domain = [
             ("orderpoint_ids", "=", False),
             ("type", "=", "product"),
-            ("virtual_available", "<", 0),
+            ("sale_ok", "=", True),
         ]
         if products:
             domain.append(("id", "in", products.ids))
