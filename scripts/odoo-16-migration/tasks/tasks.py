@@ -915,9 +915,13 @@ def set_modules_to_remove_core():
     """Set modules to remove in core as immediate uninstall does not work."""
     modules_list = [
         "mrp",
+        "mrp_workorder",
         "mrp_workorder_hr",
         "mrp_workorder_hr_account",
+        "quality_mrp",
+        "quality_mrp_workorder",
         "quality_control",
+        "quality_control_picking_batch",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
