@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <record id="elasticsearch_shopinvader_variant_index_fr_BE" model="se.index">
+        <field
+      name="backend_id"
+      ref="alc_search_engine_backend.elasticsearch_backend"
+    />
+        <field name="custom_tech_name">shopinvader_variant</field>
+        <field name="model_id" ref="product.model_product_product" />
+        <field name="lang_id" eval="ref('base.lang_fr_BE')" />
+        <field name="config_id" ref="index_config_shopinvader_variant_fr" />
+        <field name="serializer_type">shopinvader_product_exports</field>
+    </record>
+
+    <record id="elasticsearch_shopinvader_variant_index_nl_BE" model="se.index">
+        <field
+      name="backend_id"
+      ref="alc_search_engine_backend.elasticsearch_backend"
+    />
+        <field name="custom_tech_name">shopinvader_variant</field>
+        <field name="model_id" ref="product.model_product_product" />
+        <field name="lang_id" eval="ref('base.lang_nl_BE')" />
+        <field name="config_id" ref="index_config_shopinvader_variant_nl" />
+        <field name="serializer_type">shopinvader_product_exports</field>
+    </record>
+
+    <record id="elasticsearch_shopinvader_variant_index_en_US" model="se.index">
+        <field
+      name="backend_id"
+      ref="alc_search_engine_backend.elasticsearch_backend"
+    />
+        <field name="custom_tech_name">shopinvader_variant</field>
+        <field name="model_id" ref="product.model_product_product" />
+        <field name="lang_id" eval="ref('base.lang_en')" />
+        <field name="config_id" ref="index_config_shopinvader_variant_en" />
+        <field name="serializer_type">shopinvader_product_exports</field>
+    </record>
+
+    <record id="elasticsearch_shopinvader_category_index_fr_BE" model="se.index">
+        <field
+      name="backend_id"
+      ref="alc_search_engine_backend.elasticsearch_backend"
+    />
+        <field name="custom_tech_name">shopinvader_category</field>
+        <field name="model_id" ref="product.model_product_category" />
+        <field name="lang_id" eval="ref('base.lang_fr_BE')" />
+        <field name="config_id" ref="index_config_shopinvader_category" />
+        <field name="serializer_type">shopinvader_category_exports</field>
+    </record>
+
+    <record id="elasticsearch_shopinvader_category_index_nl_BE" model="se.index">
+        <field
+      name="backend_id"
+      ref="alc_search_engine_backend.elasticsearch_backend"
+    />
+        <field name="custom_tech_name">shopinvader_category</field>
+        <field name="model_id" ref="product.model_product_category" />
+        <field name="lang_id" eval="ref('base.lang_nl_BE')" />
+        <field name="config_id" ref="index_config_shopinvader_category" />
+        <field name="serializer_type">shopinvader_category_exports</field>
+    </record>
+
+    <record id="elasticsearch_shopinvader_category_index_en_US" model="se.index">
+        <field
+      name="backend_id"
+      ref="alc_search_engine_backend.elasticsearch_backend"
+    />
+        <field name="custom_tech_name">shopinvader_category</field>
+        <field name="model_id" ref="product.model_product_category" />
+        <field name="lang_id" eval="ref('base.lang_en')" />
+        <field name="config_id" ref="index_config_shopinvader_category" />
+        <field name="serializer_type">shopinvader_category_exports</field>
+    </record>
+
+    <record id="eshop_ads_index_fr_BE" model="se.index">
+        <field
+      name="backend_id"
+      ref="alc_search_engine_backend.elasticsearch_backend"
+    />
+        <field name="custom_tech_name">eshop_ads</field>
+        <field name="model_id" ref="alc_eshop_ads.model_alc_eshop_ads" />
+        <field name="lang_id" eval="ref('base.lang_fr_BE')" />
+        <field
+      name="config_id"
+      ref="alc_eshop_search_engine_ads.index_config_eshop_ads"
+    />
+    </record>
+    <record id="eshop_ads_index_nl_BE" model="se.index">
+        <field
+      name="backend_id"
+      ref="alc_search_engine_backend.elasticsearch_backend"
+    />
+        <field name="custom_tech_name">eshop_ads</field>
+        <field name="model_id" ref="alc_eshop_ads.model_alc_eshop_ads" />
+        <field name="lang_id" eval="ref('base.lang_nl_BE')" />
+        <field
+      name="config_id"
+      ref="alc_eshop_search_engine_ads.index_config_eshop_ads"
+    />
+    </record>
+    <record id="eshop_ads_index_en" model="se.index">
+        <field
+      name="backend_id"
+      ref="alc_search_engine_backend.elasticsearch_backend"
+    />
+        <field name="custom_tech_name">eshop_ads</field>
+        <field name="model_id" ref="alc_eshop_ads.model_alc_eshop_ads" />
+        <field name="lang_id" eval="ref('base.lang_en')" />
+        <field
+      name="config_id"
+      ref="alc_eshop_search_engine_ads.index_config_eshop_ads"
+    />
+    </record>
+
+    <record id="eshop_info_banner_index_fr_BE" model="se.index">
+        <field
+      name="backend_id"
+      ref="alc_search_engine_backend.elasticsearch_backend"
+    />
+        <field name="custom_tech_name">eshop_info_banner</field>
+        <field
+      name="model_id"
+      ref="alc_eshop_info_banner.model_alc_eshop_info_banner"
+    />
+        <field name="lang_id" eval="ref('base.lang_fr_BE')" />
+        <field
+      name="config_id"
+      ref="alc_eshop_search_engine_info_banner.index_config_eshop_info_banner"
+    />
+    </record>
+    <record id="eshop_info_banner_index_nl_BE" model="se.index">
+        <field
+      name="backend_id"
+      ref="alc_search_engine_backend.elasticsearch_backend"
+    />
+        <field name="custom_tech_name">eshop_info_banner</field>
+        <field
+      name="model_id"
+      ref="alc_eshop_info_banner.model_alc_eshop_info_banner"
+    />
+        <field name="lang_id" eval="ref('base.lang_nl_BE')" />
+        <field
+      name="config_id"
+      ref="alc_eshop_search_engine_info_banner.index_config_eshop_info_banner"
+    />
+    </record>
+    <record id="eshop_info_banner_index_en" model="se.index">
+        <field
+      name="backend_id"
+      ref="alc_search_engine_backend.elasticsearch_backend"
+    />
+        <field name="custom_tech_name">eshop_info_banner</field>
+        <field
+      name="model_id"
+      ref="alc_eshop_info_banner.model_alc_eshop_info_banner"
+    />
+        <field name="lang_id" eval="ref('base.lang_en')" />
+        <field
+      name="config_id"
+      ref="alc_eshop_search_engine_info_banner.index_config_eshop_info_banner"
+    />
+    </record>
+</odoo>

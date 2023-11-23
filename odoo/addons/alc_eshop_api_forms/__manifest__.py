@@ -5,7 +5,7 @@
     "name": "Alc Eshop Form",
     "description": """
         Alcyon: Manage Forms on website""",
-    "version": "16.0.1.0.3",
+    "version": "16.0.1.0.4",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",

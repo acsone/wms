@@ -107,7 +107,7 @@ msgid "Everyone"
 msgstr "Everyone"
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__file_id
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__file
 msgid "File"
 msgstr "Fichier"
 
@@ -142,7 +142,7 @@ msgstr ""
 "url."
 
 #. module: alc_eshop_ads
-#: model:ir.model.fields,help:alc_eshop_ads.field_alc_eshop_ads__file_id
+#: model:ir.model.fields,help:alc_eshop_ads.field_alc_eshop_ads__file
 #, fuzzy
 #| msgid ""
 #| "If specified, the file will be downloaded by the customer on click on the "

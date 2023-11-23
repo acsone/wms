@@ -15,6 +15,7 @@ def pre_init_hook(cr):
         "alc_eshop_form_authenticated_pvi_labels",
         "alc_eshop_form_authenticated_update_address",
         "alc_eshop_form_authenticated_opinion",
+        "eshop_form_manager_group",
     ]
 
     openupgrade.rename_xmlids(

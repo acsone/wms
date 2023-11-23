@@ -25,7 +25,7 @@ class AlcEshopAds(models.Model):
         ],
         default="everyone",
     )
-    file_id = FSFile(
+    file = FSFile(
         help="If specified, the file will be downloaded by the customer upon "
         "click on the ads banner into the website.",
     )
@@ -58,10 +58,10 @@ class AlcEshopAds(models.Model):
         for record in self:
             record.is_published = not record.is_published
 
-    @api.constrains("site_url", "file_id")
-    def _check_site_url_or_file_id(self):
+    @api.constrains("site_url", "file")
+    def _check_site_url_or_file(self):
         for rec in self:
-            if rec.site_url and rec.file_id:
+            if rec.site_url and rec.file:
                 raise ValidationError(
                     _(
                         "You must choose between the download of a file OR the "

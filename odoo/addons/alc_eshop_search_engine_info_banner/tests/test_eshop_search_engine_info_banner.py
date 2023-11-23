@@ -24,6 +24,8 @@ class TestEshopSearchEngineInfoBanner(TestBindingIndexBaseFake):
     def setup_records(cls, backend=None):
         cls.EShopInfoBanner = cls.env["alc.eshop.info.banner"]
         backend = backend or cls.backend
+        # ensure we only work with the index we'll create
+        cls.se_index_model.search([]).unlink()
         # create an index for partner model
         cls.se_index = cls.se_index_model.create(cls._prepare_index_values(backend))
         date_start = cls._get_date()

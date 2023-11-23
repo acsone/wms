@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
 
-  <record forcecreate="True" id="ir_cron_contract_costs_generator" model="ir.cron">
+  <record forcecreate="True" id="ir_cron_export_eshop_info_banners" model="ir.cron">
     <field name="name">EShop: Export Info banners</field>
       <field name="model_id" ref="connector_search_engine.model_se_backend" />
       <field name="state">code</field>

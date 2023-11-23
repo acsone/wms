@@ -137,7 +137,7 @@ odoo-addon-extendable==16.0.1.0.1.1
 odoo-addon-extendable-fastapi==16.0.2.1.0
 odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@593519a0ffc3eeec96f3de8293875cd36b8d0a80#subdirectory=setup/fastapi
 odoo-addon-fastapi-auth-jwt==16.0.1.0.1.1
-odoo-addon-fs-attachment==16.0.1.0.3
+odoo-addon-fs-attachment==16.0.1.0.4
 odoo-addon-fs-base-multi-image==16.0.1.0.0.2
 odoo-addon-fs-base-multi-media==16.0.1.0.1
 odoo-addon-fs-file @ git+https://github.com/acsone/storage.git@d1a645a9fa06ebedd8fb11248f17079eda8ef999#subdirectory=setup/fs_file
@@ -227,7 +227,7 @@ odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-work
 odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/stock-logistics-workflow.git@1fba8cf43ce18100099b7b3d1bd6f31a8ab1aa6d#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo-addon-sale-triple-discount==16.0.1.0.1.4
 odoo-addon-sale-wishlist==16.0.1.0.0.2
-odoo-addon-search-engine-image-thumbnail==16.0.1.0.0.2
+odoo-addon-search-engine-image-thumbnail==16.0.1.0.1
 odoo-addon-search-engine-serializer-pydantic==16.0.1.0.0.2
 odoo-addon-server-action-mass-edit==16.0.2.0.1.5
 odoo-addon-server-environment==16.0.1.0.3.1

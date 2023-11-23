@@ -5,7 +5,7 @@
     "name": "alc eshop search engine ads",
     "description": """
         Alcyon: Manage publication of alcyon ads to ES""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -18,4 +18,5 @@
     ],
     "demo": [],
     "development_status": "Alpha",
+    "pre_init_hook": "pre_init_hook",
 }
