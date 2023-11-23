@@ -7,9 +7,9 @@ from openupgradelib import openupgrade
 _logger = logging.getLogger(__name__)
 
 
-def _mig_alc_product_supplier(env):
+def _mig_alc_product_supplier(cr):
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "product.template",
         ["supplier_id", "supplier_rel_id", "vendor_product_code"],
         "specific_purchase",
@@ -17,9 +17,9 @@ def _mig_alc_product_supplier(env):
     )
 
 
-def _mig_alc_product_nb_days_out_of_stock(env):
+def _mig_alc_product_nb_days_out_of_stock(cr):
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "product.template",
         ["nb_days_out_of_stock"],
         "specific_purchase",
@@ -27,8 +27,8 @@ def _mig_alc_product_nb_days_out_of_stock(env):
     )
 
 
-def _mig_alc_purchase_order_discount(env):
-    env.cr.execute(
+def _mig_alc_purchase_order_discount(cr):
+    cr.execute(
         """
         UPDATE purchase_order_line set price_unit=price_unit_base;
         ALTER TABLE purchase_order_line ADD COLUMN IF NOT EXISTS discount NUMERIC;
@@ -37,7 +37,7 @@ def _mig_alc_purchase_order_discount(env):
         """
     )
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "product.supplierinfo",
         ["discount_purchase"],
         "pricelist_discount",
@@ -51,17 +51,17 @@ def _mig_alc_purchase_order_discount(env):
             "discount",
         )
     ]
-    openupgrade.rename_fields(env=env, field_spec=field_spec, no_deep=True)
+    openupgrade.rename_fields(cr=cr, field_spec=field_spec, no_deep=True)
 
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "purchase.order.line",
         ["discount_global", "promotion_supplier"],
         "specific_purchase",
         "alc_purchase_order_discount",
     )
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "res.partner",
         ["supplier_discount"],
         "specific_purchase",
@@ -69,9 +69,9 @@ def _mig_alc_purchase_order_discount(env):
     )
 
 
-def _mig_alc_purchase_order_date_planned(env):
+def _mig_alc_purchase_order_date_planned(cr):
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "res.partner",
         ["delivery_lead_time"],
         "specific_purchase",
@@ -79,11 +79,11 @@ def _mig_alc_purchase_order_date_planned(env):
     )
 
 
-def _mig_alc_stock_scheduler_filter(env):
+def _mig_alc_stock_scheduler_filter(cr):
     # no need for transient model migration procurement_orderpoint_compute replaced by
     # stock_scheduler_compute
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "res.partner",
         [
             "is_manage_day_1",
@@ -99,14 +99,14 @@ def _mig_alc_stock_scheduler_filter(env):
     )
 
 
-def _mig_bank_holiday(env):
+def _mig_bank_holiday(cr):
     # FIXME: is this table used any more, the data in the db are for 2017 and 2018
     pass
 
 
-def _mig_acl_product_supplierinfo_import(env):
+def _mig_acl_product_supplierinfo_import(cr):
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "product.supplierinfo",
         ["product_cnk_code"],
         "specific_purchase",
@@ -114,10 +114,10 @@ def _mig_acl_product_supplierinfo_import(env):
     )
 
 
-def _mig_purchase_order_user(env):
-    if not openupgrade.column_exists(env.cr, "purchase_order", "responsible_id"):
+def _mig_purchase_order_user(cr):
+    if not openupgrade.column_exists(cr, "purchase_order", "responsible_id"):
         return
-    env.cr.execute(
+    cr.execute(
         """
         ALTER TABLE purchase_order ADD COLUMN IF NOT EXISTS user_id integer;
         UPDATE purchase_order
@@ -126,16 +126,16 @@ def _mig_purchase_order_user(env):
     )
 
 
-def _mig_alc_purchase_order_bo_line(env):
+def _mig_alc_purchase_order_bo_line(cr):
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "purchase.order",
         ["nbr_lines", "nbr_lines_bo"],
         "specific_purchase",
         "alc_purchase_order_bo_line",
     )
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "purchase.order.line",
         ["is_bo_line"],
         "specific_purchase",
@@ -143,9 +143,9 @@ def _mig_alc_purchase_order_bo_line(env):
     )
 
 
-def _mig_alc_purchase_order_total_weight(env):
+def _mig_alc_purchase_order_total_weight(cr):
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "purchase.order",
         ["total_weight"],
         "specific_purchase",
@@ -153,9 +153,9 @@ def _mig_alc_purchase_order_total_weight(env):
     )
 
 
-def _mig_alc_purchase_order_cancel_email_template(env):
+def _mig_alc_purchase_order_cancel_email_template(cr):
     openupgrade.rename_xmlids(
-        env.cr,
+        cr,
         [
             (
                 "specific_purchase.cancel_purchase_order",
@@ -166,16 +166,15 @@ def _mig_alc_purchase_order_cancel_email_template(env):
     )
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _mig_alc_product_supplier(env)
-    _mig_alc_product_nb_days_out_of_stock(env)
-    _mig_alc_purchase_order_discount(env)
-    _mig_alc_purchase_order_date_planned(env)
-    _mig_alc_stock_scheduler_filter(env)
-    _mig_bank_holiday(env)
-    _mig_acl_product_supplierinfo_import(env)
-    _mig_purchase_order_user(env)
-    _mig_alc_purchase_order_bo_line(env)
-    _mig_alc_purchase_order_total_weight(env)
-    _mig_alc_purchase_order_cancel_email_template(env)
+def migrate(cr, version):
+    _mig_alc_product_supplier(cr)
+    _mig_alc_product_nb_days_out_of_stock(cr)
+    _mig_alc_purchase_order_discount(cr)
+    _mig_alc_purchase_order_date_planned(cr)
+    _mig_alc_stock_scheduler_filter(cr)
+    _mig_bank_holiday(cr)
+    _mig_acl_product_supplierinfo_import(cr)
+    _mig_purchase_order_user(cr)
+    _mig_alc_purchase_order_bo_line(cr)
+    _mig_alc_purchase_order_total_weight(cr)
+    _mig_alc_purchase_order_cancel_email_template(cr)

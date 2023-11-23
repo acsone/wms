@@ -7,12 +7,12 @@ from openupgradelib import openupgrade
 _logger = logging.getLogger(__name__)
 
 
-def _migrate_data(env):
+def _migrate_data(cr):
     # Remove l10n_be_mis_reports xmlids to avoid name changing in migrated data
     # and keep noupdate=False reports unchanged
     _logger.info("Remove l10n_be_mis_reports xmlids")
     openupgrade.logged_query(
-        env.cr,
+        cr,
         """
         DELETE FROM ir_model_data
         WHERE module = 'l10n_be_mis_reports'
@@ -26,9 +26,8 @@ def _migrate_data(env):
     # Belgium Value Added Tax Report Sheet / 7
     # Marge avec comparatif mensuel(J - E) / 22
     _logger.info("Removing 5 Mis report instances with ids: 3, 4, 7, 22, 27")
-    env["mis.report.instance"].browse([3, 4, 7, 22, 27]).unlink()
+    cr["mis.report.instance"].browse([3, 4, 7, 22, 27]).unlink()
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _migrate_data(env)
+def migrate(cr, version):
+    _migrate_data(cr)

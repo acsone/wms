@@ -7,10 +7,10 @@ from openupgradelib import openupgrade
 _logger = logging.getLogger(__name__)
 
 
-def _move_product_template(env):
+def _move_product_template(cr):
     _logger.info("product.template: move fields 'sale_price_2' and 'indicated_price'")
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "product.template",
         [
             "sale_price_2",
@@ -21,6 +21,5 @@ def _move_product_template(env):
     )
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _move_product_template(env)
+def migrate(cr, version):
+    _move_product_template(cr)

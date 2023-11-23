@@ -7,10 +7,10 @@ from openupgradelib import openupgrade
 _logger = logging.getLogger(__name__)
 
 
-def _move_stock_quant_package(env):
+def _move_stock_quant_package(cr):
     _logger.info("stock.quant.package: move field 'is_internal'")
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "stock.quant.package",
         ["is_internal"],
         "alc_internal_stock_quant_package",
@@ -18,10 +18,10 @@ def _move_stock_quant_package(env):
     )
 
 
-def _move_stock_picking(env):
+def _move_stock_picking(cr):
     _logger.info("stock.picking: move field 'empty_internal_package_on_transfer'")
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "stock.picking",
         ["empty_internal_package_on_transfer"],
         "alc_internal_stock_quant_package",
@@ -29,13 +29,13 @@ def _move_stock_picking(env):
     )
 
 
-def _move_stock_picking_type(env):
+def _move_stock_picking_type(cr):
     _logger.info(
         "stock.picking.type: move fields 'empty_internal_package_on_transfer' "
         "and 'stock_internal_package_config_line_ids'"
     )
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "stock.picking.type",
         [
             "empty_internal_package_on_transfer",
@@ -46,13 +46,13 @@ def _move_stock_picking_type(env):
     )
 
 
-def _move_stock_internal_package_config_line(env):
+def _move_stock_internal_package_config_line(cr):
     _logger.info(
         "stock.internal.package.config.line: move fields 'empty', "
         "'delivery_carrier_id' and 'stock_picking_type_id'"
     )
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "stock.picking.type",
         [
             "empty",
@@ -64,9 +64,8 @@ def _move_stock_internal_package_config_line(env):
     )
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _move_stock_picking(env)
-    _move_stock_picking_type(env)
-    _move_stock_quant_package(env)
-    _move_stock_internal_package_config_line(env)
+def migrate(cr, version):
+    _move_stock_picking(cr)
+    _move_stock_picking_type(cr)
+    _move_stock_quant_package(cr)
+    _move_stock_internal_package_config_line(cr)

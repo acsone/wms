@@ -5,10 +5,9 @@
 from openupgradelib import openupgrade
 
 
-@openupgrade.migrate()
-def migrate(env, version):
+def migrate(cr, version):
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "keycloak.backend",
         [
             "name",
@@ -22,7 +21,7 @@ def migrate(env, version):
         "connector_keycloak",
     )
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "keycloak.user",
         [
             "display_name",
@@ -37,14 +36,14 @@ def migrate(env, version):
         "connector_keycloak",
     )
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "res.partner",
         ["keycloak_user_ids"],
         "keycloak",
         "connector_keycloak",
     )
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "keycloak.partner.wizard",
         [
             "keycloak_backend_id",
@@ -57,7 +56,7 @@ def migrate(env, version):
         "connector_keycloak",
     )
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "keycloak.user.wizard",
         [
             "keycloak_user_id",

@@ -4,12 +4,11 @@
 from openupgradelib import openupgrade
 
 
-@openupgrade.migrate()
-def migrate(env, version):
+def migrate(cr, version):
     data = [
         (
             "specific_security.group_product_assortment_manager",
             "alc_product_assortment.group_product_assortment_manager",
         )
     ]
-    openupgrade.rename_xmlids(env.cr, data, allow_merge=True)
+    openupgrade.rename_xmlids(cr, data, allow_merge=True)

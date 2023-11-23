@@ -3,16 +3,15 @@
 from openupgradelib import openupgrade
 
 
-def _remove_product_bin(env):
+def _remove_product_bin(cr):
     """Remove the module stock_product_bin."""
     query = """
         UPDATE ir_module_module
             SET state = 'to remove'
             WHERE name = 'stock_product_bin'
     """
-    openupgrade.logged_query(env.cr, query)
+    openupgrade.logged_query(cr, query)
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _remove_product_bin(env)
+def migrate(cr, version):
+    _remove_product_bin(cr)

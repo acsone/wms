@@ -7,13 +7,13 @@ from openupgradelib import openupgrade
 _logger = logging.getLogger(__name__)
 
 
-def _move_so_product_qty_unavailable_fields(env):
+def _move_so_product_qty_unavailable_fields(cr):
     _logger.info(
         "sale.order.line: move fields 'current_product_qty_unavailable' "
         "and 'product_qty_unavailable'"
     )
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "sale.order.line",
         [
             "product_qty_unavailable",
@@ -24,6 +24,5 @@ def _move_so_product_qty_unavailable_fields(env):
     )
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _move_so_product_qty_unavailable_fields(env)
+def migrate(cr, version):
+    _move_so_product_qty_unavailable_fields(cr)

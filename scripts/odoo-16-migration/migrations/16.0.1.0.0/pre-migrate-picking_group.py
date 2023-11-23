@@ -3,7 +3,7 @@
 from openupgradelib import openupgrade
 
 
-def _rename_pickings_group_by(env):
+def _rename_pickings_group_by(cr):
     fields = [
         (
             "stock.picking.type",
@@ -18,9 +18,8 @@ def _rename_pickings_group_by(env):
             "group_pickings_maxweight",
         ),
     ]
-    openupgrade.rename_fields(env, fields)
+    openupgrade.rename_fields(cr, fields)
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _rename_pickings_group_by(env)
+def migrate(cr, version):
+    _rename_pickings_group_by(cr)

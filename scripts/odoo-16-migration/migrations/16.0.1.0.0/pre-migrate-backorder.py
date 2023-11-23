@@ -3,7 +3,7 @@
 from openupgradelib import openupgrade
 
 
-def _migrate_data(env):
+def _migrate_data(cr):
     data = [
         (
             "stock_picking_backorder.stock_backorder_reason_1",
@@ -22,9 +22,8 @@ def _migrate_data(env):
             "alc_stock_picking_backorder_reason.stock_backorder_reason_4",
         ),
     ]
-    openupgrade.rename_xmlids(env.cr, data, allow_merge=True)
+    openupgrade.rename_xmlids(cr, data, allow_merge=True)
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _migrate_data(env)
+def migrate(cr, version):
+    _migrate_data(cr)

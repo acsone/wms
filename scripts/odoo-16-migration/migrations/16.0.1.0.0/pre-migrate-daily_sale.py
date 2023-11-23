@@ -3,20 +3,20 @@
 from openupgradelib import openupgrade
 
 
-def _rename_daily_sale(env):
+def _rename_daily_sale(cr):
     # Rename only configuration model as the data one is recreated at each time
 
     # First rename model
     models = [
         ("alc.product.average.daily.sale.config", "stock.average.daily.sale.config")
     ]
-    openupgrade.rename_models(env.cr, models)
+    openupgrade.rename_models(cr, models)
 
     # Then, rename table
     tables = [
         ("alc_product_average_daily_sale_config", "stock_average_daily_sale_config")
     ]
-    openupgrade.rename_tables(env.cr, tables)
+    openupgrade.rename_tables(cr, tables)
 
     # Then, rename fields that have been adapted
     fields = [
@@ -27,9 +27,8 @@ def _rename_daily_sale(env):
             "standard_deviation_exclude_factor",
         )
     ]
-    openupgrade.rename_fields(env, fields)
+    openupgrade.rename_fields(cr, fields)
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _rename_daily_sale(env)
+def migrate(cr, version):
+    _rename_daily_sale(cr)

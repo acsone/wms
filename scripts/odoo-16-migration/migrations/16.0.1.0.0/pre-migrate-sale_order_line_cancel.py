@@ -4,10 +4,9 @@
 from openupgradelib import openupgrade
 
 
-@openupgrade.migrate()
-def migrate(env, version):
+def migrate(cr, version):
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "sale.order.line",
         ["product_qty_canceled", "product_qty_remains_to_deliver"],
         "sale_cancel_remaining",

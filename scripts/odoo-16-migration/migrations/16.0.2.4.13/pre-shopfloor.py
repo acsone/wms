@@ -2,20 +2,17 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from openupgradelib import openupgrade
-
-
-def _pre_14_0_1_0_0(env):
+def _pre_14_0_1_0_0(cr):
     query = """
             UPDATE ir_model_data
             SET module='shopfloor_manual_product_transfer'
             WHERE module='shopfloor'
             AND name = 'scenario_manual_product_transfer';
         """
-    env.cr.execute(query)
+    cr.execute(query)
 
 
-def _pre_14_0_2_3_0(env):
+def _pre_14_0_2_3_0(cr):
     queries = [
         """
             ALTER TABLE stock_move_line
@@ -30,10 +27,9 @@ def _pre_14_0_2_3_0(env):
         """,
     ]
     for query in queries:
-        env.cr.execute(query)
+        cr.execute(query)
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _pre_14_0_1_0_0(env)
-    _pre_14_0_2_3_0(env)
+def migrate(cr, version):
+    _pre_14_0_1_0_0(cr)
+    _pre_14_0_2_3_0(cr)

@@ -4,10 +4,9 @@
 from openupgradelib import openupgrade
 
 
-@openupgrade.migrate()
-def migrate(env, version):
+def migrate(cr, version):
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "product.template",
         [
             "number_labels_to_print",
@@ -17,7 +16,7 @@ def migrate(env, version):
     )
 
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "res.partner",
         [
             "no_labels_products",

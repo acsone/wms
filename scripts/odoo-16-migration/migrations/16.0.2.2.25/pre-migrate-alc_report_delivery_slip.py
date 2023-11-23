@@ -3,16 +3,15 @@
 from openupgradelib import openupgrade
 
 
-def _migrate_data(env):
+def _migrate_data(cr):
     data = [
         (
             "specific_print.deliveryslip_orderref",
             "alc_report_delivery_slip.deliveryslip_orderref",
         ),
     ]
-    openupgrade.rename_xmlids(env.cr, data, allow_merge=True)
+    openupgrade.rename_xmlids(cr, data, allow_merge=True)
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _migrate_data(env)
+def migrate(cr, version):
+    _migrate_data(cr)

@@ -3,9 +3,9 @@
 from openupgradelib import openupgrade
 
 
-def _rename_delivery_window(env):
+def _rename_delivery_window(cr):
     openupgrade.rename_columns(
-        env.cr,
+        cr,
         {
             "alc_delivery_window": [
                 ("start", "time_window_start"),
@@ -18,7 +18,7 @@ def _rename_delivery_window(env):
         },
     )
     openupgrade.rename_tables(
-        env.cr,
+        cr,
         [
             ("alc_delivery_week_day", "time_weekday"),
             ("alc_delivery_window", "toursolver_delivery_window"),
@@ -28,7 +28,7 @@ def _rename_delivery_window(env):
             ),
         ],
     )
-    openupgrade.rename_models(env.cr, [("alc.delivery.week.day", "time.weekday")])
+    openupgrade.rename_models(cr, [("alc.delivery.week.day", "time.weekday")])
     # change xmlid model
     days = [
         "monday",
@@ -40,7 +40,7 @@ def _rename_delivery_window(env):
         "sunday",
     ]
     openupgrade.rename_xmlids(
-        env.cr,
+        cr,
         [
             (
                 f"alc_partner_delivery_window.alc_delivery_weed_day_{day}",
@@ -51,6 +51,5 @@ def _rename_delivery_window(env):
     )
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _rename_delivery_window(env)
+def migrate(cr, version):
+    _rename_delivery_window(cr)

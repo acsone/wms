@@ -7,10 +7,10 @@ from openupgradelib import openupgrade
 _logger = logging.getLogger(__name__)
 
 
-def _move_product_template(env):
+def _move_product_template(cr):
     _logger.info("product.template: move field 'state_id'")
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "product.template",
         ["state_id"],
         "alc_product_state",
@@ -18,10 +18,10 @@ def _move_product_template(env):
     )
 
 
-def _move_product_state(env):
+def _move_product_state(cr):
     _logger.info("product_state: move field 'name', 'code' and 'sequence'")
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "product.state",
         ["name", "code", "sequence"],
         "alc_product_state",
@@ -29,8 +29,8 @@ def _move_product_state(env):
     )
 
 
-def _rename_state_id_in_product_template(env):
-    if not openupgrade.column_exists(env.cr, "product_template", "product_state_id"):
+def _rename_state_id_in_product_template(cr):
+    if not openupgrade.column_exists(cr, "product_template", "product_state_id"):
         _logger.info("product.template: rename field 'state_id' in 'product_state_id")
         fields = [
             (
@@ -40,11 +40,11 @@ def _rename_state_id_in_product_template(env):
                 "product_state_id",
             )
         ]
-        openupgrade.rename_fields(env, fields)
+        openupgrade.rename_fields(cr, fields)
     else:
         _logger.info("product.template: initialize field 'product_state_id")
         openupgrade.logged_query(
-            env.cr,
+            cr,
             """
             UPDATE product_template
             SET product_state_id = state_id
@@ -53,8 +53,7 @@ def _rename_state_id_in_product_template(env):
         )
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _move_product_template(env)
-    _move_product_state(env)
-    _rename_state_id_in_product_template(env)
+def migrate(cr, version):
+    _move_product_template(cr)
+    _move_product_state(cr)
+    _rename_state_id_in_product_template(cr)

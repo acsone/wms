@@ -3,7 +3,7 @@
 from openupgradelib import openupgrade
 
 
-def _rename_scenarios(env):
+def _rename_scenarios(cr):
     xmlids = [
         (
             "alc_shopfloor.scenario_location_content_transfer",
@@ -15,9 +15,8 @@ def _rename_scenarios(env):
         ),
     ]
 
-    openupgrade.rename_xmlids(env.cr, xmlids)
+    openupgrade.rename_xmlids(cr, xmlids)
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _rename_scenarios(env)
+def migrate(cr, version):
+    _rename_scenarios(cr)
