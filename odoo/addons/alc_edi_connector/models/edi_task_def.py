@@ -1,15 +1,19 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import typing
 
 from odoo import _, api, fields, models
+
+if typing.TYPE_CHECKING:
+    from .edi_backend import EdiBackend  # noqa: F401
 
 
 class EdiTaskDef(models.AbstractModel):
     _name = "edi.task.def"
     _description = "Edi Task Definition"
 
-    backend_id = fields.Many2one(
-        comodel_name="edi.backend", string="Backend Id", required=True, readonly=True
+    backend_id = fields.Many2one["EdiBackend"](
+        string="Backend Id", required=True, readonly=True
     )
     channel = fields.Selection(related="backend_id.channel", readonly=True, store=True)
     kind = fields.Selection(selection=[], string="Kind of EDI Process")

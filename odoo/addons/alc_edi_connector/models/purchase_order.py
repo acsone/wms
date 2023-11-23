@@ -1,13 +1,13 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, api, fields
 from odoo.exceptions import UserError
 
+from odoo.addons.purchase_order_ubl.models import purchase
 
-class PurchaseOrder(models.Model):
 
-    _inherit = "purchase.order"
+class PurchaseOrder(purchase.PurchaseOrder):
 
     is_edi_available = fields.Boolean(
         related="partner_id.use_edi_connector", readonly=True

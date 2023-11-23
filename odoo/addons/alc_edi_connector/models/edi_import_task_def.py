@@ -13,7 +13,7 @@ MODEL_NAME_BY_KIND = {
 class EdiImportTaskDef(models.Model):
     _name = "edi.import.task.def"
     _description = "Edi Import Task Definition"
-    _inherit = "edi.task.def"
+    _inherit = "edi.task.def"  # nosemgrep: is-old-style-inheritance
 
     last_import_dt = fields.Datetime(string="Timestamp last import")
 

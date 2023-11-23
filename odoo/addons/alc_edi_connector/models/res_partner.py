@@ -1,15 +1,17 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, api, fields
 from odoo.exceptions import UserError, ValidationError
 
+from odoo.addons.base.models import res_partner
 
-class ResPartner(models.Model):
+from .edi_backend import EdiBackend
 
-    _inherit = "res.partner"
 
-    edi_backend_id = fields.Many2one(comodel_name="edi.backend", string="Edi connector")
+class ResPartner(res_partner.Partner):
+
+    edi_backend_id = fields.Many2one[EdiBackend](string="Edi connector")
     use_edi_connector = fields.Boolean()
 
     @api.constrains("use_edi_connector", "edi_backend_id")

@@ -10,6 +10,9 @@ from odoo.exceptions import UserError
 
 from odoo.addons.server_environment import serv_config
 
+from .edi_export_task_def import EdiExportTaskDef
+from .edi_import_task_def import EdiImportTaskDef
+
 SFTP_TIMEOUT = 30
 
 
@@ -17,7 +20,7 @@ class EdiBackend(models.Model):
 
     _name = "edi.backend"
     _description = "Edi Backend"
-    _inherit = "connector.backend"
+    _inherit = ["connector.backend"]  # nosemgrep: is-old-style-inheritance
 
     key = fields.Char(compute="_compute_key")
     name = fields.Char(required=True)
@@ -39,14 +42,12 @@ class EdiBackend(models.Model):
     path_read = fields.Char(compute="_compute_from_config")
     path_write = fields.Char(compute="_compute_from_config")
 
-    edi_import_task_def_ids = fields.One2many(
-        comodel_name="edi.import.task.def",
+    edi_import_task_def_ids = fields.One2many[EdiImportTaskDef](
         inverse_name="backend_id",
         string="Import Task Definition",
     )
 
-    edi_export_task_def_ids = fields.One2many(
-        comodel_name="edi.export.task.def",
+    edi_export_task_def_ids = fields.One2many[EdiExportTaskDef](
         inverse_name="backend_id",
         string="Export Task Definition",
     )

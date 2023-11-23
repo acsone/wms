@@ -12,7 +12,7 @@ MODEL_NAME_BY_KIND = {"ubl.order.exporter": "purchase.order"}
 class EdiExportTaskDef(models.Model):
     _name = "edi.export.task.def"
     _description = "Edi Export Task Definition"
-    _inherit = "edi.task.def"
+    _inherit = "edi.task.def"  # nosemgrep: is-old-style-inheritance
 
     last_export_dt = fields.Datetime(string="Timestamp last export")
 
