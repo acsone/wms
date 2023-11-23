@@ -4,8 +4,6 @@
 import logging
 from datetime import datetime
 
-from odoo import api
-
 from odoo.addons.stock.models.stock_orderpoint import (
     StockWarehouseOrderpoint as StockWarehouseOrderpointBase,
 )
@@ -25,18 +23,7 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpointBase):
         # products with a negative stock have a procurement order
         if not company_id:
             company_id = self.env.company
-        warehouses = self.env["stock.warehouse"].search(
-            [("company_id", "=", company_id.id)]
-        )
-        missing_orderpoint_ids = set()
-        for warehouse in warehouses:
-            missing_orderpoint_ids.update(
-                self._create_missing_orderpoint(warehouse).ids
-            )
-        missing_orderpoint_ids.update(self._filter_orderpoint_to_process().ids)
-        to_process = self.env["stock.warehouse.orderpoint"].browse(
-            missing_orderpoint_ids
-        )
+        to_process = self._filter_orderpoint_to_process()
         _logger.info("Run the procurement")
         result = super(
             StockWarehouseOrderpoint, to_process
@@ -51,46 +38,6 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpointBase):
 
     def _filter_orderpoint_to_process(self):
         return self.filtered_domain(self._filter_orderpoint_to_process_domain())
-
-    @api.model
-    def _create_missing_orderpoint(self, warehouse, products=None):
-        product_model = self.env["product.product"].with_context(warehouse=warehouse.id)
-        products = product_model.search(self._get_missing_orderpoint_domain(products))
-        products = products.filtered_domain([("virtual_available", "<", 0)])
-        vals_list = self._prepare_missing_orderpoint_list_vals(warehouse, products)
-        if vals_list:
-            return self.create(vals_list)
-        return self.browse()
-
-    @api.model
-    def _get_missing_orderpoint_domain(self, products=None):
-        domain = [
-            ("orderpoint_ids", "=", False),
-            ("type", "=", "product"),
-            ("sale_ok", "=", True),
-        ]
-        if products:
-            domain.append(("id", "in", products.ids))
-        return domain
-
-    @api.model
-    def _prepare_missing_orderpoint_list_vals(self, warehouse, products):
-        list_vals = []
-        for product in products:
-            list_vals.append(self._prepare_missing_orderpoint_vals(warehouse, product))
-        return list_vals
-
-    @api.model
-    def _prepare_missing_orderpoint_vals(self, warehouse, product):
-        return {
-            "warehouse_id": warehouse.id,
-            "product_id": product.id,
-            "company_id": warehouse.company_id.id,
-            "product_min_qty": 0,
-            "product_max_qty": 0,
-            "location_id": warehouse.lot_stock_id.id,
-            "product_uom": product.uom_id.id,
-        }
 
     def _filter_orderpoint_to_process_domain(self):
         domain = []

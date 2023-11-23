@@ -56,5 +56,6 @@
         "alc_stock_move_line_show_quantity",
         "alc_b2c_connector",
         "alc_product_last_transaction",
+        "alc_stock_orderpoint_product_mto",
     ],
 }
