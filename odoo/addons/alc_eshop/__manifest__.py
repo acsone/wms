@@ -50,7 +50,6 @@
     "data": [
         "data/auth_jwt_validator.xml",
         "data/shopinvader_image_resize.xml",
-        "data/shopinvader_assortment.xml",
         "data/product_pricelist.xml",
         "data/shopinvader_backend.xml",
         "views/shopinvader_backend.xml",

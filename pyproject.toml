@@ -99,7 +99,6 @@ exclude = [
   'odoo/addons/alc_eshop/*',
   'odoo/addons/alc_eshop_app/*',
   'odoo/addons/alc_eshop_auth_api_key/*',
-  'odoo/addons/alc_eshop_product_domain/*',
   'odoo/addons/alc_internal_package_groupbypartner/*',
   'odoo/addons/alc_mrp_repair/*',
   'odoo/addons/alc_partner_delivery_person/*',
