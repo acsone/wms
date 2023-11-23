@@ -15,7 +15,7 @@ class TestSaleOrderLine(TransactionCase):
             )
         )
         cls.partner = cls.env.ref("base.res_partner_1")
-        cls.product_1 = cls.env.ref("product.product_product_1")
+        cls.product_1 = cls.env["product.product"].create({"name": "Product 1"})
         cls.sale_oder = cls.env["sale.order"].create(
             {
                 "partner_id": cls.partner.id,

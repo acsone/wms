@@ -44,9 +44,5 @@ def set_delivery_method(
     if not cart._is_delivery_method_available(rqst.method_id):
         raise UserError(_("This delivery method is not available for your order"))
 
-    wizard_model = env["choose.delivery.carrier"]
-    create_vals = {"carrier_id": carrier_id.id, "order_id": cart.id}
-    create_vals = wizard_model.play_onchanges(create_vals, ["carrier_id", "order_id"])
-    choose_method_wizard = env["choose.delivery.carrier"].new(create_vals)
-    choose_method_wizard.button_confirm()
+    cart.carrier_id = carrier_id
     return Sale.from_sale_order(cart)

@@ -26,6 +26,8 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
     @api.model
     def get_product_qty_unavailable(self, product, product_uom_qty, confirmed, line_id):
         if product and product_uom_qty:
+            if product.type == "service":
+                return 0
             immediately_usable_qty = product.immediately_usable_qty
             if confirmed:
                 # If sale order line confirmed, ordered quantity
