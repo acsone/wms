@@ -127,13 +127,13 @@ msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
-msgid "Print SA"
-msgstr ""
+msgid "Print INV"
+msgstr "Print FAC"
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
-msgid "Print INV"
-msgstr "Print FAC"
+msgid "Print SA"
+msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
 #: model:ir.model.fields,field_description:alc_stock_release_channel_dashboard.field_stock_release_channel__count_move_release_ready
