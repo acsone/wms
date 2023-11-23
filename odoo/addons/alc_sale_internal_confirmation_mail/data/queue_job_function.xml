@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record
+    id="job_function_sale_order_send_order_confirmation_mail"
+    model="queue.job.function"
+  >
+        <field name="model_id" ref="sale.model_sale_order" />
+        <field name="method">_send_order_confirmation_mail</field>
+        <field name="channel_id" ref="queue_job.channel_root" />
+      </record>
+
+
+
+
+</odoo>

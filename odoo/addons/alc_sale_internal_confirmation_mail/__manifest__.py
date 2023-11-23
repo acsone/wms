@@ -8,7 +8,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_sale_channel"],
-    "data": ["wizards/res_config_settings.xml"],
+    "depends": ["alc_sale_channel", "queue_job"],
+    "data": ["wizards/res_config_settings.xml", "data/queue_job_function.xml"],
     "demo": [],
 }
