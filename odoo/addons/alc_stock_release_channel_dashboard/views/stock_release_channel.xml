@@ -25,6 +25,7 @@
                 <field name="is_action_lock_allowed" />
                 <field name="is_action_delivering_allowed" />
                 <field name="is_action_print_allowed" />
+                <field name="is_action_print_cash_invoices_allowed" />
                 <field name="release_forbidden" />
                 <field name="active" />
                 <field name="kanban_dashboard" />
@@ -209,6 +210,14 @@
                     icon="fa-print"
                   >Print DS</a>
                 <br t-if="record.is_action_print_allowed.raw_value" />
+                                    <a
+                    t-if="record.is_action_print_cash_invoices_allowed.raw_value"
+                    name="action_print_cash_invoices"
+                    type="object"
+                    icon="fa-print"
+                  >Print INV</a><br
+                    t-if="record.is_action_print_cash_invoices_allowed.raw_value"
+                  />
                 <a
                     t-if="record.is_action_print_allowed.raw_value"
                     name="action_sleep"

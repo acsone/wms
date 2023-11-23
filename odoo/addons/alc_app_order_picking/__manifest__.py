@@ -116,6 +116,7 @@
         "alc_stock_picking_validate_and_print",
         "alc_stock_release_channel_sequence",
         "alc_stock_picking_responsible_portal",
+        "alc_stock_release_channel_print_cash_on_delivery",
     ],
     "data": [],
     "demo": [],
