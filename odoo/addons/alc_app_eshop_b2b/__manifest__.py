@@ -71,6 +71,7 @@
         "alc_price_cache_import",
         "alc_eshop_product_domain",
         "alc_elasticsearch_score_script",
+        "alc_eshop_search_engine_manual_export",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",

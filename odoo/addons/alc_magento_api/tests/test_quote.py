@@ -44,7 +44,9 @@ class TestQuote(TestFacadeCart):
         quote_csv_facade = self._get_service_facade("quote-csv")
         _result, error, _location = quote_csv_facade(file=csv_file)
         so = self.env["sale.order"].search([("typology", "=", "cart")]) - existing_cart
-        self.assertEqual(error, "<error>The product missing is not available</error>")
+        self.assertEqual(
+            error, "<error>The products sku, missing are not available</error>"
+        )
         self.assertEqual("ref", so.client_order_ref)
         self.assertEqual("<p>note</p>", so.note)
         self.assertEqual("suite", so.suite_name)
