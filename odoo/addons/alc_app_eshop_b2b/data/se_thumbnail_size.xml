@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<odoo>
+<odoo noupdate="1">
 
     <record id="small" model="se.thumbnail.size">
         <field name="name">Shop Small</field>
@@ -18,8 +18,8 @@
     <record id="large" model="se.thumbnail.size">
         <field name="name">Shop Large</field>
         <field name="key">large</field>
-        <field name="size_x">500</field>
-        <field name="size_y">500</field>
+        <field name="size_x">550</field>
+        <field name="size_y">550</field>
     </record>
 
 </odoo>

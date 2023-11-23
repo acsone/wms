@@ -5,7 +5,7 @@
     "name": "Alc App Eshop B2b",
     "description": """
         Gather all B2B related modules for Alcyon""",
-    "version": "16.0.1.0.1",
+    "version": "16.0.1.0.2",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
@@ -64,6 +64,8 @@
         "alc_eshop_models_url",
         "alc_eshop_search_engine_update_veterinary_group",
         "alc_eshop_search_engine_update_product_discount_special",
+        "alc_eshop_search_engine_image",
+        "alc_eshop_search_engine_product_stock",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",
@@ -86,7 +88,6 @@
         "shopinvader_search_engine_product_stock_state",
         "shopinvader_product_attribute_set",
         "shopinvader_multi_category",
-        "alc_eshop_search_engine_product_stock",
     ],
     "data": [
         "security/res_groups.xml",
