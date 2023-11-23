@@ -81,10 +81,19 @@ def _register_migration_scripts_in_tasks(prefix):
             try:
                 logging_config = logging.getLogger().getEffectiveLevel()
                 logging.disable(logging.CRITICAL)
-                with OdooEnvironment(DB_16_POSTMIG) as env:
-                    logging.disable(logging.NOTSET)
-                    logging.getLogger().setLevel(logging_config)
-                    callable_def.callable(env.cr, version=CURRENT_VERSION)
+                if prefix == "pre-":
+                    # Don't load environment as not already migrated to
+                    # last version
+                    with cursor(DB_16_POSTMIG) as cr:
+                        logging.disable(logging.NOTSET)
+                        logging.getLogger().setLevel(logging_config)
+                        callable_def.callable(cr, version=CURRENT_VERSION)
+                elif prefix == "post-":
+                    with OdooEnvironment(DB_16_POSTMIG) as env:
+                        logging.disable(logging.NOTSET)
+                        logging.getLogger().setLevel(logging_config)
+                        callable_def.callable(env.cr, version=CURRENT_VERSION)
+
             finally:
                 # Restore the original logging configuration
                 logging.disable(logging.NOTSET)
