@@ -4,17 +4,16 @@
 from openupgradelib import openupgrade
 
 
-@openupgrade.migrate()
-def migrate(env, version):
+def migrate(cr, version):
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "stock.picking",
         ["ignore_delivery_round_assign_block"],
         "alc_delivery_rounds_assign_blocking_unavailable_product",
         "alc_stock_release_channel_assign_blocking_unavailable_product",
     )
     openupgrade.rename_fields(
-        env,
+        cr,
         [
             (
                 "stock.picking",
@@ -26,14 +25,14 @@ def migrate(env, version):
     )
 
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "stock.move",
         ["delivery_requires_other_lines"],
         "alc_delivery_rounds_assign_blocking",
         "alc_stock_release_channel_assign_blocking_unavailable_product",
     )
     openupgrade.rename_fields(
-        env,
+        cr,
         [
             (
                 "stock.picking",
@@ -44,7 +43,7 @@ def migrate(env, version):
         ],
     )
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "stock.move",
         ["product_qty_unavailable"],
         "alc_delivery_rounds_assign_blocking_unavailable_product",

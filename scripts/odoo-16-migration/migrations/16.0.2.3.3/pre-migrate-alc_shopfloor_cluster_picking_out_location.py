@@ -3,7 +3,7 @@
 from openupgradelib import openupgrade
 
 
-def _migrate_data(env):
+def _migrate_data(cr):
     fields = [
         (
             "stock.location",
@@ -18,9 +18,8 @@ def _migrate_data(env):
             "release_channel_id",
         ),
     ]
-    openupgrade.rename_fields(env, fields)
+    openupgrade.rename_fields(cr, fields)
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _migrate_data(env)
+def migrate(cr, version):
+    _migrate_data(cr)

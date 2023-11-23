@@ -30,7 +30,6 @@ def _unlock_data(cr):
     )
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _move_data(env.cr)
-    _unlock_data(env.cr)
+def migrate(cr, version):
+    _move_data(cr)
+    _unlock_data(cr)

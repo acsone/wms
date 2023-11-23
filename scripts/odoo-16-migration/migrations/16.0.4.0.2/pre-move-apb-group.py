@@ -4,11 +4,10 @@
 from openupgradelib import openupgrade
 
 
-def _move_apb(env):
+def _move_apb(cr):
     fieldspec = [("specific_account.tax_group_apb", "l10n_be_apb_tax.tax_group_apb")]
-    openupgrade.rename_xmlids(env.cr, fieldspec)
+    openupgrade.rename_xmlids(cr, fieldspec)
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _move_apb(env)
+def migrate(cr, version):
+    _move_apb(cr)

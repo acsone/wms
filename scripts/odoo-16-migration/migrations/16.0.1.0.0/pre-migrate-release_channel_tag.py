@@ -3,13 +3,13 @@
 from openupgradelib import openupgrade
 
 
-def _rename_round_tag_table(env):
+def _rename_round_tag_table(cr):
     openupgrade.rename_tables(
-        env.cr,
+        cr,
         [("round_tag", "alc_stock_release_channel_tag")],
     )
     openupgrade.rename_tables(
-        env.cr,
+        cr,
         [
             (
                 "res_partner_round_tag_rel",
@@ -18,7 +18,7 @@ def _rename_round_tag_table(env):
         ],
     )
     openupgrade.rename_columns(
-        env.cr,
+        cr,
         {
             "res_partner_stock_release_channel_tag_rel": [
                 ("round_tag_id", "alc_stock_release_channel_tag_id")
@@ -27,6 +27,5 @@ def _rename_round_tag_table(env):
     )
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _rename_round_tag_table(env)
+def migrate(cr, version):
+    _rename_round_tag_table(cr)

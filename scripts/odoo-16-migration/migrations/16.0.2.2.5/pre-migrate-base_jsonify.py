@@ -4,16 +4,15 @@
 from openupgradelib import openupgrade
 
 
-def _rename_base_jsonify(env):
+def _rename_base_jsonify(cr):
     modules = [
         (
             "base_jsonify",
             "jsonifier",
         )
     ]
-    openupgrade.update_module_names(env.cr, modules, merge_modules=True)
+    openupgrade.update_module_names(cr, modules, merge_modules=True)
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _rename_base_jsonify(env)
+def migrate(cr, version):
+    _rename_base_jsonify(cr)

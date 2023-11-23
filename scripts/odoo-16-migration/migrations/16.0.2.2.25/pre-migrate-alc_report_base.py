@@ -3,16 +3,15 @@
 from openupgradelib import openupgrade
 
 
-def _migrate_data(env):
+def _migrate_data(cr):
     data = [
         (
             "specific_print.paperformat_alcyon_report",
             "alc_report_base.paperformat_alcyon_report",
         ),
     ]
-    openupgrade.rename_xmlids(env.cr, data, allow_merge=True)
+    openupgrade.rename_xmlids(cr, data, allow_merge=True)
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _migrate_data(env)
+def migrate(cr, version):
+    _migrate_data(cr)

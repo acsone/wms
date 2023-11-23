@@ -7,12 +7,12 @@ from openupgradelib import openupgrade
 _logger = logging.getLogger(__name__)
 
 
-def _mig_res_users(env):
+def _mig_res_users(cr):
     if not openupgrade.column_exists(
-        env.cr, "res_users", "printing_package_label_printer_id"
+        cr, "res_users", "printing_package_label_printer_id"
     ):
         return
-    env.cr.execute(
+    cr.execute(
         """
         ALTER TABLE res_users
         ADD COLUMN IF NOT EXISTS default_label_printer_id integer;
@@ -22,6 +22,5 @@ def _mig_res_users(env):
     )
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _mig_res_users(env)
+def migrate(cr, version):
+    _mig_res_users(cr)

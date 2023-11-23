@@ -4,8 +4,8 @@
 from openupgradelib import openupgrade
 
 
-def _migrate_fields(env):
-    if not openupgrade.column_exists(env.cr, "account_invoice", "sent"):
+def _migrate_fields(cr):
+    if not openupgrade.column_exists(cr, "account_invoice", "sent"):
         return
     query = """
         UPDATE account_move
@@ -13,11 +13,11 @@ def _migrate_fields(env):
             WHERE EXISTS (SELECT 1 FROM account_invoice WHERE move_id = account_move.id AND sent = True)
             AND is_move_sent <> True
     """
-    openupgrade.logged_query(env.cr, query)
+    openupgrade.logged_query(cr, query)
 
 
-def _migrate_method(env):
-    if not openupgrade.column_exists(env.cr, "res_partner", "invoice_sending_method"):
+def _migrate_method(cr):
+    if not openupgrade.column_exists(cr, "res_partner", "invoice_sending_method"):
         return
     query = """
         UPDATE res_partner
@@ -29,17 +29,16 @@ def _migrate_method(env):
         WHERE invoice_sending_method IS NOT NULL
 
     """
-    openupgrade.logged_query(env.cr, query)
+    openupgrade.logged_query(cr, query)
 
     # Rename column to avoid column deletion
     query = """
         ALTER TABLE res_partner
             RENAME COLUMN invoice_sending_method TO invoice_sending_method_old
     """
-    openupgrade.logged_query(env.cr, query)
+    openupgrade.logged_query(cr, query)
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _migrate_fields(env)
-    _migrate_method(env)
+def migrate(cr, version):
+    _migrate_fields(cr)
+    _migrate_method(cr)

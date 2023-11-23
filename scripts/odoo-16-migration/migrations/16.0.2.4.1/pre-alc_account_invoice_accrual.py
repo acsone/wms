@@ -7,11 +7,9 @@ from openupgradelib import openupgrade
 _logger = logging.getLogger(__name__)
 
 
-@openupgrade.migrate()
-def migrate(env, version):
+def migrate(cr, version):
     openupgrade.rename_xmlids(
-        env.cr,
-        [
+        cr[
             (
                 "specific_cutoff.ir_cron_cutoff_expense",
                 "alc_account_invoice_accrual.ir_cron_cutoff_expense",

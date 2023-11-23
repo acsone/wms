@@ -4,10 +4,9 @@
 from openupgradelib import openupgrade
 
 
-@openupgrade.migrate()
-def migrate(env, version):
+def migrate(cr, version):
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "product.pricelist",
         ("role_name", "discount_role_name"),
         "pricelist_role_name",

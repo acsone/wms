@@ -8,6 +8,5 @@ field_renames = [
 ]
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    openupgrade.rename_fields(env, field_renames)
+def migrate(cr, version):
+    openupgrade.rename_fields(cr, field_renames)

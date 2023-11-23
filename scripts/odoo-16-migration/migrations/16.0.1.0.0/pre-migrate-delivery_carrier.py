@@ -7,11 +7,11 @@ from openupgradelib import openupgrade
 _logger = logging.getLogger(__name__)
 
 
-def _move_maximum_weight_per_package(env):
+def _move_maximum_weight_per_package(cr):
     _logger.info("delivery_carrier: move field maximum_weight_per_package")
     # Moved field from alc_product_audit
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "delivery.carrier",
         ["maximum_weight_per_package"],
         "alc_stock_picking_number_package",
@@ -19,6 +19,5 @@ def _move_maximum_weight_per_package(env):
     )
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _move_maximum_weight_per_package(env)
+def migrate(cr, version):
+    _move_maximum_weight_per_package(cr)

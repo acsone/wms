@@ -3,8 +3,6 @@
 
 import logging
 
-from openupgradelib import openupgrade
-
 _logger = logging.getLogger(__name__)
 
 
@@ -23,6 +21,5 @@ def _create_and_init_nbr_picking_lines_column(cr):
     )
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _create_and_init_nbr_picking_lines_column(env.cr)
+def migrate(cr, version):
+    _create_and_init_nbr_picking_lines_column(cr)

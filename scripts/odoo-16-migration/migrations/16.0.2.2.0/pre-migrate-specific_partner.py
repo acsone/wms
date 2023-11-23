@@ -4,8 +4,7 @@
 from openupgradelib import openupgrade
 
 
-@openupgrade.migrate()
-def migrate(env, version):
+def migrate(cr, version):
     fields = [
         (
             "helpdesk.ticket",
@@ -14,4 +13,4 @@ def migrate(env, version):
             "account_move_id",
         )
     ]
-    openupgrade.rename_fields(env, fields)
+    openupgrade.rename_fields(cr, fields)

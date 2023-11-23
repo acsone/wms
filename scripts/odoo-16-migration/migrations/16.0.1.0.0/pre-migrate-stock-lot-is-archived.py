@@ -3,9 +3,9 @@
 from openupgradelib import openupgrade
 
 
-def _change_column(env):
+def _change_column(cr):
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "stock.lot",
         ("is_archived",),
         "alc_stock_production_lot_archive",
@@ -13,6 +13,5 @@ def _change_column(env):
     )
 
 
-@openupgrade.migrate()
-def migrate(env, version):
-    _change_column(env)
+def migrate(cr, version):
+    _change_column(cr)

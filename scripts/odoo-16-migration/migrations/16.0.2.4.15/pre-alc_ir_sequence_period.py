@@ -5,10 +5,9 @@
 from openupgradelib import openupgrade
 
 
-@openupgrade.migrate()
-def migrate(env, version):
+def migrate(cr, version):
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "ir.sequence",
         ["use_end_date"],
         "ir_sequence_period",

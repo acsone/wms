@@ -4,10 +4,9 @@
 from openupgradelib import openupgrade
 
 
-@openupgrade.migrate()
-def migrate(env, version):
+def migrate(cr, version):
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "res.partner",
         [
             "is_price_on_labels",
@@ -19,13 +18,13 @@ def migrate(env, version):
     )
 
     openupgrade.update_module_moved_models(
-        env.cr,
+        cr,
         "print.label",
         "specific_print",
         "alc_label_printing_base",
     )
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "print.label",
         [
             "label_type",
@@ -38,7 +37,7 @@ def migrate(env, version):
     )
 
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "print.label",
         [
             "lot_ids",
@@ -49,7 +48,7 @@ def migrate(env, version):
     )
 
     openupgrade.update_module_moved_fields(
-        env.cr,
+        cr,
         "stock.picking",
         [
             "checksum",
@@ -60,7 +59,7 @@ def migrate(env, version):
     )
 
     openupgrade.rename_xmlids(
-        env.cr,
+        cr,
         [
             (
                 "specific_print.report_stock_pick_packs_label",
