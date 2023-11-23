@@ -896,6 +896,8 @@ def set_modules_to_remove():
         "elasticsearch_product_cache",  # removed see #62795
         "alc_eshop_product_stock",  # replaced by alc_eshop_search_engine_product_stock
         "alc_shopinvader_category",  # replaced by alc_eshop_search_engine_category
+        "shopinvader_assortment",  # replaced by shopinvader_search_engine_assortment
+        "shopinvader_assortment_bind",  # replaced by alc_eshop_search_engine_assortment_bind
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
