@@ -1,5 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
+# 	* alc_app_eshop_b2b
 #
 msgid ""
 msgstr ""
@@ -11,3 +12,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: alc_app_eshop_b2b
+#: model:ir.ui.menu,name:alc_app_eshop_b2b.menu_eshop_app_config
+msgid "Configuration"
+msgstr ""
+
+#. module: alc_app_eshop_b2b
+#: model:ir.ui.menu,name:alc_app_eshop_b2b.menu_eshop_app
+msgid "EShop"
+msgstr ""
+
+#. module: alc_app_eshop_b2b
+#: model:res.groups,name:alc_app_eshop_b2b.eshop_manager_group
+msgid "Gestionnaire EShop"
+msgstr ""
+
+#. module: alc_app_eshop_b2b
+#: model:ir.ui.menu,name:alc_app_eshop_b2b.alc_registration_menu
+msgid "Registrations"
+msgstr ""
+
+#. module: alc_app_eshop_b2b
+#: model:res.groups,name:alc_app_eshop_b2b.eshop_technical_user_group
+msgid "Utilisateur technique EShop"
+msgstr ""
