@@ -15,14 +15,16 @@ class TestPricelistItemFlow(TestPrices, TestImport):
     @freeze_time("2022-01-01 12:00:00")
     @mute_logger("odoo.addons.queue_job.models.base")
     def test_no_delay_import_change_min_qty(self):
-        """Items with minimum quantities and without belong to two different categories
-        changing one without must ensure we clean it from the standard cache."""
+        """Items with minimum quantities and without belong to two different categories.
+
+        changing one without must ensure we clean it from the standard cache.
+        """
         # given
         tmpl = self.product_1.product_tmpl_id
         vals = self._get_pricelist_vals("DPL", [], is_discount=True)
         discount_pricelist = self.model_pl_nodelay.create(vals)
         role = discount_pricelist.discount_role_name
-        self.assertEqual(self.product_1.price_cache, {})
+        self.assertFalse(self.product_1.price_cache)
         vals_item_min_qty = self._get_item_vals(
             discount_pricelist,
             min_quantity=0,
@@ -41,22 +43,22 @@ class TestPricelistItemFlow(TestPrices, TestImport):
         label_price = next(s[1] for s in field_base.selection if s[0] == "list_price")
 
         fields = [
-            u"id",
-            u"applied_on",
-            u"base",
-            u"compute_price",
-            u"min_quantity",
-            u"percent_price",
-            u"product_tmpl_id/id",
+            "id",
+            "applied_on",
+            "base",
+            "compute_price",
+            "min_quantity",
+            "percent_price",
+            "product_tmpl_id/id",
         ]
         data = [
             [
                 external_id_item,
-                u"Product",
+                "Product",
                 label_price,
-                u"Percentage (discount)",
-                u"20",
-                u"10",
+                "Discount",
+                "20",
+                "10",
                 external_id_template,
             ]
         ]
@@ -72,5 +74,8 @@ class TestPricelistItemFlow(TestPrices, TestImport):
             "min_quantity": 20,
         }
         self.assertEqual(len(price_cache), 1)
-        for key in expected_cache_element:  # allow other modules to add keys in cache
-            self.assertEqual(price_cache[0][key], expected_cache_element[key])
+        for (
+            field,
+            value,
+        ) in expected_cache_element.items():  # allow other modules to add keys in cache
+            self.assertEqual(price_cache[0][field], value)

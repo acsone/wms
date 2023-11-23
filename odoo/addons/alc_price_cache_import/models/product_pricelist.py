@@ -1,13 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
+from odoo import api
+
+from odoo.addons.alc_price_cache.models.product_pricelist import (
+    ProductPricelist as ProductPricelistBase,
+)
 
 
-class ProductPricelist(models.Model):
-    _inherit = "product.pricelist"
-
+class ProductPricelist(ProductPricelistBase):
     @api.model
     def load(self, fields, data):
         """Batch price re-computation that happen with consecutive writes."""
@@ -17,5 +18,5 @@ class ProductPricelist(models.Model):
         if "item_ids/id" in fields:
             index = fields.index("item_ids/id")
             eids = [self.env.ref(d[index]).id for d in data]
-        self.browse(res["ids"]).delay_update_price_cache(eids=eids)
+        self.browse(res["ids"])._delay_update_price_cache(eids=eids)
         return res
