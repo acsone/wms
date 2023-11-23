@@ -68,6 +68,7 @@
         "alc_eshop_search_engine_assortment_bind",
         "alc_eshop_search_engine_image",
         "alc_eshop_search_engine_product_stock",
+        "alc_price_cache_import",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",
