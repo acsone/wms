@@ -458,24 +458,35 @@ def migrate_product_image(cr):
         UPDATE
             product_product
         SET
-            main_image_id = sub.id
-        FROM (
-            SELECT
-                fs.id,
-                pt.id as product_tmpl_id
-            FROM
-                fs_product_image fs,
-                product_template pt,
-                storage_image si
-            WHERE
-                fs.x_old_storage_file_id = si.file_id
-                AND si.id = pt.x_main_image_id
-            ) AS sub
+            main_image_id = tmpl.main_image_id
+        FROM product_template tmpl
         WHERE
-            sub.product_tmpl_id = product_product.product_tmpl_id;
+            tmpl.id = product_product.product_tmpl_id;
         """
     )
     _logger.info("%s main image linked", cr.rowcount)
+
+    _logger.info("Link variant image on product_product")
+    cr.execute(
+        """
+        INSERT INTO fs_product_image_product_product_rel (
+            product_product_id,
+            fs_product_image_id
+        )
+        SELECT
+            pp.id,
+            fs.id
+        FROM
+            product_product pp,
+            product_template pt,
+            fs_product_image fs
+        WHERE
+            pp.product_tmpl_id = pt.id
+            AND fs.product_tmpl_id = pt.id;
+        """
+    )
+
+    _logger.info("%s variant image linked", cr.rowcount)
 
     _logger.info("Migrate image_medium for fs_product_image")
     cr.execute(
