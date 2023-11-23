@@ -17,7 +17,7 @@ class TestProductSchema(StockCommonCase):
         super().setUpClass()
         cls.env = cls.env(
             context=dict(
-                cls.env.context, test_queue_job_no_delay=True, index_id=cls.index.id
+                cls.env.context, queue_job__no_delay=True, index_id=cls.index.id
             )
         )
         cls.product = cls.env["product.product"].create(

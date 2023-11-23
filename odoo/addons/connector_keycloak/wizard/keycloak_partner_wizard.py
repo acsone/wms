@@ -39,7 +39,7 @@ class KeycloakPartnerWizard(models.TransientModel):
         vals = self._get_vals()
         user_model = self.env["keycloak.user"]
         return user_model.with_context(
-            test_queue_job_no_delay=True, keycloak_password=self.password
+            queue_job__no_delay=True, keycloak_password=self.password
         ).create(vals)
 
     @api.model_create_multi

@@ -24,7 +24,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         super(TestRoundInstance, cls).setUpClass()
         cls.env = cls.env(
             context=dict(
-                cls.env.context, test_queue_job_no_delay=True, mail_notrack=True,
+                cls.env.context, queue_job__no_delay=True, mail_notrack=True,
             )
         )
         cls.delivery_round_1 = cls.delivery_round_1.with_context(cls.env.context)

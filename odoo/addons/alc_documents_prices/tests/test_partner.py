@@ -8,7 +8,7 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.partner = cls.partner.with_context(test_queue_job_no_delay=True)
+        cls.partner = cls.partner.with_context(queue_job__no_delay=True)
         cls.partner.supplier_promotion_sale_allowed = False
         cls.partner.partner_type = "guest"
 
@@ -18,7 +18,7 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
         self.assertEqual(self.partner.alc_document_count, 2)
 
         # given
-        partner = self.partner.with_context(test_queue_job_no_delay=True)
+        partner = self.partner.with_context(queue_job__no_delay=True)
         # when
         partner.supplier_promotion_sale_allowed = True
         # then: we also have discount files
