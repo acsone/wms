@@ -31,7 +31,7 @@ def _remove_model(cr):
     openupgrade.logged_query(cr, query)
 
     # remove _ir_translation
-    query = f"DELETE FROM _ir_translation WHERE name LIKE '{model},%'"
+    query = f"DELETE FROM _ir_translation WHERE name LIKE '{model},%%'"
     openupgrade.logged_query(cr, query)
 
     # remove ir_filters
@@ -39,9 +39,9 @@ def _remove_model(cr):
     openupgrade.logged_query(cr, query)
 
     # remove ir_property
-    query = f"DELETE FROM ir_property WHERE res_id LIKE '{model},%'"
+    query = f"DELETE FROM ir_property WHERE res_id LIKE '{model},%%'"
     openupgrade.logged_query(cr, query)
-    query = f"DELETE FROM ir_property WHERE value_reference LIKE '{model},%'"
+    query = f"DELETE FROM ir_property WHERE value_reference LIKE '{model},%%'"
     openupgrade.logged_query(cr, query)
 
     # remove ir_exports
