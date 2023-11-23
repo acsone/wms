@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -45,6 +44,6 @@ class PurchaseOrder(models.Model):
                 )
 
     def send_ubl_order_document(self):
-        for rec in self.suspend_security():
+        for rec in self.sudo():
             rec.check_can_send_ubl_document()
             rec.partner_id.edi_backend_id.send_order_document(rec)

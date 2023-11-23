@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
-
-import mock
+from unittest import mock
 
 from odoo.tools import file_open
 
@@ -28,7 +26,7 @@ _STATUS_TO_LINE_STATUS = {p[1]: p[0] for p in _ORDER_LINE_STATUS_TO_STATUS.items
 class TestUblOrderResponseImporter(AlcEdiConnectorCase):
     @classmethod
     def setUpClass(cls):
-        super(TestUblOrderResponseImporter, cls).setUpClass()
+        super().setUpClass()
         cls.import_task_def = cls.edi_backend._get_task("ubl.order.response.importer")
         cls.OrderResponseImport = cls.env["order.response.import"]
         with file_open("alc_edi_connector/tests/files/order_response1.xml", "rb") as f:
@@ -40,6 +38,7 @@ class TestUblOrderResponseImporter(AlcEdiConnectorCase):
     def test_01(self):
         """
         Data:
+
             No file found on the ftp sever
         Test case:
             Execute the task
@@ -54,6 +53,7 @@ class TestUblOrderResponseImporter(AlcEdiConnectorCase):
     def test_02(self):
         """
         Data:
+
             Files found on the ftp server
         Test Case:
             Execute the task
@@ -73,14 +73,13 @@ class TestUblOrderResponseImporter(AlcEdiConnectorCase):
         )
         result = {}
         for attachment in attachments:
-            # remove pylint deprecated once on py3
-            # pylint: disable=deprecated-method
             result[attachment.name] = base64.decodestring(attachment.datas)
         self.assertDictEqual({"PO1.xml": "content1", "PO2.xml": "content2"}, result)
 
     def test_03(self):
         """
          Data:
+
             One File found on the ftp server
         Test Case:
             Execute the task
@@ -107,9 +106,9 @@ class TestUblOrderResponseImporter(AlcEdiConnectorCase):
     def test_04(self):
         """
          Data:
+
         Test Case:
         Expected result:
-
         """
 
         xml_content1 = self.order_response_xml1.format(
@@ -146,7 +145,7 @@ class TestUblOrderResponseImporter(AlcEdiConnectorCase):
             {
                 "name": "order_response1.xml",
                 "datas": base64.b64encode(xml_content1),
-                "datas_fname": "order_response1.xml",
+                "store_fname": "order_response1.xml",
             }
         )
 
@@ -154,7 +153,7 @@ class TestUblOrderResponseImporter(AlcEdiConnectorCase):
             {
                 "name": "order_response2.xml",
                 "datas": base64.b64encode(xml_content2),
-                "datas_fname": "order_response2.xml",
+                "store_fname": "order_response2.xml",
             }
         )
         self.env["order.response.import"].process_attachment(attachment_in)

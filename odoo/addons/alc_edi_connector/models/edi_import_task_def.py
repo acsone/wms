@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -19,7 +18,7 @@ class EdiImportTaskDef(models.Model):
     last_import_dt = fields.Datetime(string="Timestamp last import")
 
     kind = fields.Selection(
-        selection=[
+        selection_add=[
             ("ubl.order.response.importer", "Import UBL Order Response"),
             ("ubl.despatch.advice.importer", "Import UBL Despatch Advice"),
         ],
@@ -41,10 +40,10 @@ class EdiImportTaskDef(models.Model):
             if record.channel == "sftp" and not record.file_matcher_pattern:
                 raise ValidationError(
                     _(
-                        "A File Matcher Pattern is required for task %s "
-                        "with an SFTP backend"
+                        "A File Matcher Pattern is required for task %(name)s "
+                        "with an SFTP backend",
+                        name=record.display_name,
                     )
-                    % record.display_name
                 )
 
     @api.depends("kind")

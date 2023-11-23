@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -6,21 +5,20 @@
     "name": "Alc Edi Connector",
     "description": """
         Alcyon EDI connector""",
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
         "alc_purchase_order_ubl",
-        "alc_purchase_order_import_ubl",
+        #        "alc_purchase_order_import_ubl",
         "stock",
-        "base_suspend_security",
         "connector",
         "purchase_order_approved",
         "purchase_order_ubl",
-        "purchase_order_import_ubl",
-        "despatch_advice_import_ubl",
-        "despatch_advice_import",
+        #        "purchase_order_import_ubl",
+        #        "despatch_advice_import_ubl",
+        #        "despatch_advice_import",
         "queue_job",
         "queue_job_cron",
     ],
@@ -33,8 +31,9 @@
         "views/edi_backend.xml",
         "views/purchase_order.xml",
         "data/ir_cron.xml",
+        "data/queue_job.xml",
     ],
     "demo": ["demo/alc_edi_connector.xml"],
     "external_dependencies": {"python": ["paramiko", "slugify"]},
-    'installable': False
+    "installable": True,
 }

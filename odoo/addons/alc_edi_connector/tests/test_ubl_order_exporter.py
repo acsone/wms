@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -12,7 +11,7 @@ from .common import AlcEdiConnectorCase
 class TestUblOrderExporter(AlcEdiConnectorCase):
     @classmethod
     def setUpClass(cls):
-        super(TestUblOrderExporter, cls).setUpClass()
+        super().setUpClass()
         cls.draft_purchase_order = cls.purchase_order.copy()
         cls.ubl_order_exporter_task_def = cls.edi_backend._get_task(
             "ubl.order.exporter"
@@ -22,6 +21,7 @@ class TestUblOrderExporter(AlcEdiConnectorCase):
     def test_00(self):
         """
         Data:
+
             A supplier using the edi connector
             A purchase order that can sent via edi-UBL
         Test case:
@@ -45,6 +45,7 @@ class TestUblOrderExporter(AlcEdiConnectorCase):
     def test_01(self):
         """
         Data:
+
             A supplier not using the edi connector
             A purchase order approved
         Test case:
@@ -68,6 +69,7 @@ class TestUblOrderExporter(AlcEdiConnectorCase):
     def test_02(self):
         """
         Data:
+
             A supplier using the edi connector
             A draft purchase
         Test case:
@@ -89,6 +91,7 @@ class TestUblOrderExporter(AlcEdiConnectorCase):
     def test_03(self):
         """
         Data:
+
             A supplier using the edi connector
             An approved purchase
             The user does not have purchase manager permission

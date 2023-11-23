@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -22,4 +21,4 @@ class ResPartner(models.Model):
     def check_is_edi_supported(self):
         for record in self:
             if not record.use_edi_connector:
-                raise UserError(_("EDI is not supported by %s") % record.name)
+                raise UserError(_("EDI is not supported by %(name)s", name=record.name))

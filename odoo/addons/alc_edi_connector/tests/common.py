@@ -1,20 +1,19 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import mock
+from unittest import mock
 
 from odoo import fields
 
-from odoo.addons.component.tests.common import SavepointComponentCase
+from odoo.addons.component.tests.common import TransactionComponentCase
 from odoo.addons.queue_job.tests.common import JobMixin
 from odoo.addons.server_environment import serv_config
 
 
-class AlcEdiConnectorCase(SavepointComponentCase, JobMixin):
+class AlcEdiConnectorCase(TransactionComponentCase, JobMixin):
     @classmethod
     def setUpClass(cls):
-        super(AlcEdiConnectorCase, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         if "edi_backend_edi_test" not in serv_config.sections():
             serv_config.add_section("edi_backend_edi_test")
@@ -85,13 +84,17 @@ class AlcEdiConnectorCase(SavepointComponentCase, JobMixin):
         cls.product_1 = cls.env["product.product"].create(
             {
                 "name": "Product 1",
-                "seller_ids": [(0, 0, {"name": cls.supplier.id, "product_code": "P1"})],
+                "seller_ids": [
+                    (0, 0, {"partner_id": cls.supplier.id, "product_code": "P1"})
+                ],
             }
         )
         cls.product_2 = cls.env["product.product"].create(
             {
                 "name": "Product 2",
-                "seller_ids": [(0, 0, {"name": cls.supplier.id, "product_code": "P2"})],
+                "seller_ids": [
+                    (0, 0, {"partner_id": cls.supplier.id, "product_code": "P2"})
+                ],
             }
         )
         cls.purchase_order = cls.env["purchase.order"].create(
@@ -109,7 +112,7 @@ class AlcEdiConnectorCase(SavepointComponentCase, JobMixin):
                 "name": cls.product_2.name,
                 "date_planned": fields.Datetime.now(),
                 "product_qty": 10,
-                "product_uom": cls.env.ref("product.product_uom_unit").id,
+                "product_uom": cls.env.ref("uom.product_uom_unit").id,
                 "price_unit": 15,
             }
         )
@@ -120,15 +123,14 @@ class AlcEdiConnectorCase(SavepointComponentCase, JobMixin):
                 "name": cls.product_2.name,
                 "date_planned": fields.Datetime.now(),
                 "product_qty": 5,
-                "product_uom": cls.env.ref("product.product_uom_unit").id,
+                "product_uom": cls.env.ref("uom.product_uom_unit").id,
                 "price_unit": 25,
             }
         )
         cls.purchase_order.button_approve()
 
     def setUp(self):
-        super(AlcEdiConnectorCase, self).setUp()
-        JobMixin.setUp(self)
+        super().setUp()
         with self.edi_backend.work_on("edi.backend") as work:
             sftp_adapter = work.component(usage="sftp.backend.adapter")
         sftp_push_patcher = mock.patch.object(sftp_adapter.__class__, "push")
@@ -136,7 +138,6 @@ class AlcEdiConnectorCase(SavepointComponentCase, JobMixin):
         self.mocked_sftp_push = sftp_push_patcher.start()
         self.mocked_sftp_pull = sftp_pull_patcher.start()
 
-        # pylint: disable=unused-variable
         @self.addCleanup
         def stop_mock():
             sftp_push_patcher.stop()

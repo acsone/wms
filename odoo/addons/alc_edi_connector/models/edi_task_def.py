@@ -1,10 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
-
-from odoo.addons.queue_job.job import job
 
 
 class EdiTaskDef(models.AbstractModel):
@@ -28,12 +25,10 @@ class EdiTaskDef(models.AbstractModel):
         kind_field = self._fields["kind"]
         kind_label_by_value = dict(kind_field._description_selection(self.env))
         for record in self:
-            record.display_name = u"{backend_name}: {kind_label}".format(
-                backend_name=record.backend_id.name,
-                kind_label=kind_label_by_value[record.kind],
-            )
+            backend_name = (record.backend_id.name,)
+            kind_label = (kind_label_by_value[record.kind],)
+            record.display_name = f"{backend_name}: {kind_label}"
 
-    @job(default_channel="root.background.edi")
     def execute(self, *args, **kwargs):
         for record in self:
             with record.backend_id.work_on(

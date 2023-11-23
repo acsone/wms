@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -18,7 +17,7 @@ class EdiExportTaskDef(models.Model):
     last_export_dt = fields.Datetime(string="Timestamp last export")
 
     kind = fields.Selection(
-        selection=[("ubl.order.exporter", "Export UBL Order document")],
+        selection_add=[("ubl.order.exporter", "Export UBL Order document")],
         string="Kind of EDI document",
     )
 
@@ -40,10 +39,10 @@ class EdiExportTaskDef(models.Model):
             if record.channel == "sftp" and not record.export_filename:
                 raise ValidationError(
                     _(
-                        "An export filename is required for task %s "
-                        "with an SFTP backend"
+                        "An export filename is required for task %(display_name)s "
+                        "with an SFTP backend",
+                        display_name=record.display_name,
                     )
-                    % record.display_name
                 )
 
     @api.depends("kind")
@@ -55,8 +54,10 @@ class EdiExportTaskDef(models.Model):
         pattern = self.export_filename.strip()
         return pattern.format(
             name=record.name.replace(".", "_"),
-            date=fields.Date.today().replace("-", ""),
-            time=fields.Datetime.now().split(" ")[1].replace(":", ""),
+            date=fields.Date.to_string(fields.Date.today()).replace("-", ""),
+            time=fields.Datetime.to_string(fields.Datetime.now())
+            .split(" ")[1]
+            .replace(":", ""),
             id=record.id if record else uuid.uuid4(),
         )
 
