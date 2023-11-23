@@ -19,7 +19,6 @@ class SaleOrderLine(SaleOrderLineBase):
         # orderpoint to trigger a MTS resupply actually.
         if not self:
             return
-        Orderpoint = self.env["stock.warehouse.orderpoint"]
         route_mto = self.env.ref("stock.route_warehouse0_mto")
         lines = self.filtered(lambda r: r.state == "sale")
         products = lines.mapped("product_id").filtered(
@@ -31,7 +30,6 @@ class SaleOrderLine(SaleOrderLineBase):
             # *all* products
             return
         warehouse = lines.mapped("order_id.warehouse_id")
-        Orderpoint._create_missing_orderpoint(warehouse, products=products)
         orderpoints = self.env["stock.warehouse.orderpoint"].search(
             [
                 ("product_id", "in", products.ids),

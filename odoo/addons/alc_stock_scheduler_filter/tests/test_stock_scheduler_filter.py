@@ -72,51 +72,6 @@ class TestStockSchedulerFilter(TransactionCase):
         self.assertFalse(self.product.orderpoint_ids)
         self.assertFalse(self.product2.orderpoint_ids)
 
-    def test_01(self):
-        """Test orderpoint automatic creation for unavailable products."""
-        self.product.purchase_order_line_ids.filtered(
-            lambda l: l.state in ("draft", "sent")
-        ).unlink()
-        self._create_delivery_move(self.product, 100)
-        self._create_delivery_move(self.product2, 100)
-        product_demand = self.product_virtual_available - 100
-        product_2_demand = self.product_2_virtual_available - 100
-        self.assertEqual(
-            self.product.with_context(warehouse=self.warehouse.id).virtual_available,
-            product_demand,
-        )
-        self.assertEqual(
-            self.product2.with_context(warehouse=self.warehouse.id).virtual_available,
-            product_2_demand,
-        )
-        self.env["procurement.group"].with_context(
-            procure_type="by_suppliers", supplier_ids=self.supplier.ids
-        ).run_scheduler()
-        self.assertTrue(self.product.orderpoint_ids)
-        self.assertFalse(self.product2.orderpoint_ids)
-        new_lines = self.product.purchase_order_line_ids.filtered(
-            lambda l: l.state in ("draft", "sent")
-        )
-        self.assertEqual(new_lines.product_uom_qty, -product_demand)
-        new_lines.order_id.button_confirm()
-        self.assertEqual(
-            self.product.with_context(warehouse=self.warehouse.id).virtual_available,
-            0,
-        )
-
-    def test_02(self):
-        """Test orderpoint is not automatic created for unavailable products if there is.
-
-        already one
-        """
-        self._create_orderpoint(self.product, self.product_seller)
-        self.assertEqual(len(self.product.orderpoint_ids), 1)
-        self._create_delivery_move(self.product, 100)
-        self.env["procurement.group"].with_context(
-            procure_type="by_suppliers", supplier_ids=self.supplier.ids
-        ).run_scheduler()
-        self.assertEqual(len(self.product.orderpoint_ids), 1)
-
     def test_03(self):
         """Test orderpoint selection by supplier."""
         old_lines = self.product.purchase_order_line_ids
