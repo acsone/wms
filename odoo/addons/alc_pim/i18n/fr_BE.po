@@ -1835,7 +1835,7 @@ msgstr ""
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_fluralaner
 msgid "Fluralaner"
-msgstr ""
+msgstr "Rurale"
 
 #. module: alc_pim
 #: model:attribute.option,name:alc_pim.attribute_option_follitropine
