@@ -5,7 +5,7 @@
     "name": "Alc App Eshop B2b",
     "description": """
         Gather all B2B related modules for Alcyon""",
-    "version": "16.0.1.0.1",
+    "version": "16.0.1.0.2",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
