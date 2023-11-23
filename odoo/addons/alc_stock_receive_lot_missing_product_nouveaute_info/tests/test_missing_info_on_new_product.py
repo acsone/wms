@@ -13,7 +13,7 @@ class TestMissingInfoOnNewProduct(TransactionCase):
 
         cls.env = cls.env(
             context=dict(
-                cls.env.context, tracking_disable=True, test_queue_job_no_delay=True
+                cls.env.context, tracking_disable=True, queue_job__no_delay=True
             )
         )
         storage_type_new = cls.env["stock.package.type"].create(

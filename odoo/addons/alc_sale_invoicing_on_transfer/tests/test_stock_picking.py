@@ -103,6 +103,6 @@ class TestStockPicking(TransactionCase):
         self.warehouse_1.out_type_id.create_invoice_on_transfer = False
         self.assertFalse(self.sale_order.invoice_ids)
         self._create_and_deliver_picking(
-            self.sale_order.with_context(test_queue_job_no_delay=True)
+            self.sale_order.with_context(queue_job__no_delay=True)
         )
         self.assertFalse(self.sale_order.invoice_ids)

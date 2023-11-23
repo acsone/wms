@@ -29,7 +29,7 @@ class TestAlcEShopForm(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, test_queue_job_no_delay=True))
+        cls.env = cls.env(context=dict(cls.env.context, queue_job__no_delay=True))
         cls.mail_recorder = MailRecorder(cls.env)
         cls.partner = cls.env["res.partner"].create(
             {"name": "partner", "email": "partner@test.com"}

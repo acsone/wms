@@ -8,7 +8,7 @@ class TestCategoryUrl(TestUrlCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, test_queue_job_no_delay=True))
+        cls.env = cls.env(context=dict(cls.env.context, queue_job__no_delay=True))
         cls.lang_en = cls.env.ref("base.lang_en")
         cls.categ_1 = cls.env["product.category"].create({"name": "Root"})
         cls.categ_2 = cls.env["product.category"].create(

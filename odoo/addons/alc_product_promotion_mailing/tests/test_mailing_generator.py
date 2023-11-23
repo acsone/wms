@@ -34,7 +34,7 @@ class TestMailingGenerator(CommonCase):
     @classmethod
     def setUpClass(cls):
         super(TestMailingGenerator, cls).setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, test_queue_job_no_delay=True))
+        cls.env = cls.env(context=dict(cls.env.context, queue_job__no_delay=True))
         cls.supplier = cls.env.ref("base.res_partner_12")
         cls.date_start = fields.Date.to_string(datetime.now() - timedelta(days=3))
         cls.date_end = fields.Date.to_string(datetime.now() + timedelta(days=3))

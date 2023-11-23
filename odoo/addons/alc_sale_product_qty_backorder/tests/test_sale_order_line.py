@@ -11,7 +11,7 @@ class TestSaleOrderLine(TransactionCase):
         super().setUpClass()
         cls.env = cls.env(
             context=dict(
-                cls.env.context, tracking_disable=True, test_queue_job_no_delay=True
+                cls.env.context, tracking_disable=True, queue_job__no_delay=True
             )
         )
         cls.partner = cls.env.ref("base.res_partner_1")

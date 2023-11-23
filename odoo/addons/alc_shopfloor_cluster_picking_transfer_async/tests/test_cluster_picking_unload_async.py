@@ -22,11 +22,11 @@ class TestClusterPickingUnloadAsync(ClusterPickingUnloadingCommonCase):
         # to ensure that the env contains the required context to avoid trouble when
         # test are run with delivery_rounds installed.
         super(TestClusterPickingUnloadAsync, cls).setUpComponent()
-        cls.env = cls.env(context=dict(cls.env.context, test_queue_job_no_delay=False))
+        cls.env = cls.env(context=dict(cls.env.context, queue_job__no_delay=False))
 
     def test_set_destination_all_ok(self):
         """Set destination on all lines for the full batch and end the process"""
-        self.env = self.env(context=dict(test_queue_job_no_delay=False))
+        self.env = self.env(context=dict(queue_job__no_delay=False))
         operations = self.pack_operation_ids
         # put destination packages, the whole quantity on lines and a similar
         # destination (when /set_destination_all is called, all the lines to

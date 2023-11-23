@@ -9,7 +9,7 @@ from odoo.tests import TransactionCase
 class TestKeycloak(VCRTestCase, TransactionCase):
     @classmethod
     def setUpClass(cls):
-        # Note that adding TEST_QUEUE_JOB_NO_DELAY in context/environment
+        # Note that adding queue_job__no_delay in context/environment
         # requires a properly configured backend to run the tests.
         super().setUpClass()
         cls.keycloak_backend = cls.env.ref("connector_keycloak.keycloak_backend")
