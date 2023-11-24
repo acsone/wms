@@ -1,0 +1,51 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_elasticsearch_score_script
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_elasticsearch_score_script
+#. odoo-python
+#: code:addons/alc_elasticsearch_score_script/models/se_backend.py:0
+#, python-format
+msgid ""
+"Fail to put the score script.\n"
+"%(error)s"
+msgstr ""
+
+#. module: alc_elasticsearch_score_script
+#: model:ir.model.fields,field_description:alc_elasticsearch_score_script.field_se_backend__score_on_position_script
+#: model_terms:ir.ui.view,arch_db:alc_elasticsearch_score_script.se_backend_elasticsearch_form_view
+msgid "Score On Position Script"
+msgstr ""
+
+#. module: alc_elasticsearch_score_script
+#: model_terms:ir.ui.view,arch_db:alc_elasticsearch_score_script.se_backend_elasticsearch_form_view
+msgid "Score script"
+msgstr ""
+
+#. module: alc_elasticsearch_score_script
+#: model:ir.model.fields,help:alc_elasticsearch_score_script.field_se_backend__score_on_position_script
+msgid ""
+"Script used in ES query to compute the score of query on specific fields "
+"according to the position of searched terms in the field"
+msgstr ""
+
+#. module: alc_elasticsearch_score_script
+#: model:ir.model,name:alc_elasticsearch_score_script.model_se_backend
+msgid "Se Backend"
+msgstr ""
+
+#. module: alc_elasticsearch_score_script
+#: model_terms:ir.ui.view,arch_db:alc_elasticsearch_score_script.se_backend_elasticsearch_form_view
+msgid "Sync Score On Position Script"
+msgstr ""
