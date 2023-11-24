@@ -49,5 +49,6 @@
         "alc_automatic_account_move_line_reconcile",
         "alc_account_invoice_supplier_ref_unique_mandatory",
         "alc_account_invoice_vendor_bill_autocomplete",
+        "alc_account_invoice_email",
     ],
 }
