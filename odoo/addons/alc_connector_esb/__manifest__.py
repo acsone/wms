@@ -22,6 +22,7 @@
         "alc_sale_auto_confirm_max_delay",
         "alc_sale_product_qty_unavailable",
         "queue_job",
+        "web",
     ],
     "data": [
         "data/sale_channel.xml",
