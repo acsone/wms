@@ -230,6 +230,18 @@ def cleanup_assets():
 
 
 @task("16.0.1.0.0")
+def clean_vlb_content():
+    # Odoo gives us a migration DB with a zero quantity quant in VLB
+    with cursor(DB_16_POSTMIG) as cr:
+        query = """
+            DELETE FROM stock_quant
+                WHERE location_id = 11
+                AND quantity = 0
+        """
+        openupgrade.logged_query(cr, query)
+
+
+@task("16.0.1.0.0")
 def cleanup_sale_typology_domain():
     with cursor(DB_16_POSTMIG) as cr:
         query = """
@@ -271,7 +283,7 @@ def cleanup_non_odoo_views():
 
 
 @task("16.0.1.0.0")
-def _clean_veterinary():
+def clean_veterinary():
     query = """
         delete from res_partner_veterinary_group_rel
             WHERE NOT EXISTS
