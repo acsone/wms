@@ -16,7 +16,7 @@
 <!-- BACKPORT         <field name="tech_name">shopinvader_backend</field>-->
 <!-- BACKPORT         <field name="auth_api_key_id" ref="shopinvader_auth_key"/>-->
         <field name="product_manual_binding" eval="False" />
-        <field name="product_assortment_id" ref="shopinvader_assortment_store" />
+        <field name="product_assortment_id" ref="alc_eshop_product_domain.shopinvader_assortment_store" />
         <field
       name="shopinvader_variant_resize_ids"
       eval="[(6, 0, [ref('image_resize_small'), ref('image_resize_medium'), ref('image_resize_large')])]"

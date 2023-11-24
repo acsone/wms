@@ -66,6 +66,12 @@ class TestDiscountService(FastAPITransactionCase):
         cls.discount_food = cls.discount_model.create(vals_discount_food)
 
         cls.Date = Date
+        assortment = cls.env.ref(
+            "alc_eshop_product_domain.shopinvader_assortment_store",
+            raise_if_not_found=False,
+        )
+        if assortment:
+            assortment.domain = [(1, "=", 1)]
 
     @classmethod
     def today_plus(cls, days):
