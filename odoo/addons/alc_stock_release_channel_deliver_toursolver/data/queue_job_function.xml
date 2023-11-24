@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record
+    id="job_function_export_optimization_to_operational_planning"
+    model="queue.job.function"
+  >
+    <field
+      name="model_id"
+      ref="alc_stock_release_channel_deliver_toursolver.model_stock_release_channel"
+    />
+    <field name="method">_export_optimization_to_operational_planning</field>
+    <field
+      name="channel_id"
+      ref="shipment_advice_planner_toursolver_queue_job.toursolver_channel"
+    />
+    </record>
+
+</odoo>

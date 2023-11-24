@@ -26,6 +26,7 @@
                 <field name="is_action_delivering_allowed" />
                 <field name="is_action_print_allowed" />
                 <field name="is_action_print_cash_invoices_allowed" />
+                <field name="is_mobile_export_allowed" />
                 <field name="release_forbidden" />
                 <field name="active" />
                 <field name="kanban_dashboard" />
@@ -147,6 +148,18 @@
                         </div>
                     </t>
                     <t t-name="ChannelManage">
+                        <div class="row">
+                            <span>Actions</span>
+                        </div>
+                        <div
+              t-if="record.is_mobile_export_allowed.raw_value"
+              class="row"
+            >
+                          <a
+                name="button_export_to_mobile_app"
+                type="object"
+              >Export to mobile app</a>
+                        </div>
                         <div
               t-if="widget.editable"
               class="o_kanban_card_manage_settings row"
