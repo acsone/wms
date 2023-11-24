@@ -6,6 +6,10 @@ from odoo.tests.common import TransactionCase
 
 class TestEshopProductDomain(TransactionCase):
     def test_0(self):
+        assortment = self.env.ref(
+            "alc_eshop_product_domain.shopinvader_assortment_store"
+        )
+        assortment.domain = [("web_published", "=", True)]
         partner = self.env["res.partner"].create(
             {"name": "partner", "partner_type": "veterinary"}
         )
