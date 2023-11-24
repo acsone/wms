@@ -6,12 +6,11 @@
     "description": """
         Alcyon: Allows to configure a script_score in the elasticsearch backend
         """,
-    "version": "10.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_search_engine", "queue_job_cron"],
-    "data": ["views/se_backend_elasticsearch.xml", "data/elasticsearch_backend.xml"],
+    "depends": ["alc_se_backend_notebook", "alc_search_engine_backend"],
+    "data": ["views/se_backend.xml", "data/se_backend.xml"],
     "demo": [],
-    "installable": False,
 }
