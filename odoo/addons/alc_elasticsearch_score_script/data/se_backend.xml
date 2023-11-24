@@ -2,7 +2,7 @@
 <!-- Copyright 2022 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-  <record id="alc_search_engine.elasticsearch_backend" model="se.backend.elasticsearch">
+  <record id="alc_search_engine_backend.elasticsearch_backend" model="se.backend">
     <field
       name="score_on_position_script"
     ><![CDATA[
