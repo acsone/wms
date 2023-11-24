@@ -26,7 +26,12 @@ def _migrate_data(cr):
     # Belgium Value Added Tax Report Sheet / 7
     # Marge avec comparatif mensuel(J - E) / 22
     _logger.info("Removing 5 Mis report instances with ids: 3, 4, 7, 22, 27")
-    cr["mis.report.instance"].browse([3, 4, 7, 22, 27]).unlink()
+    report_ids = [3, 4, 7, 22, 27]
+    query = """
+        DELETE FROM mis_report_instance
+            WHERE id IN %s
+    """
+    openupgrade.logged_query(cr, query, [tuple(report_ids)])
 
 
 def migrate(cr, version):

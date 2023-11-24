@@ -43,7 +43,7 @@ def migrate_product_media(cr):
                 SELECT
                     f.name,
                     'binary',
-                    '%(model)s',
+                    %(model)s,
                     m.id,
                     'file',
                     f.create_uid,
@@ -194,7 +194,7 @@ def migrate_cms_ads_image(cr):
                 adds.image_medium = adds.image
                 env.cr.flush()
             except Exception:
-                _logger.Info(
+                _logger.info(
                     "Error generating thumbnail for %s: Image %s not found at url",
                     (adds.name, adds.image.name, adds.image.url),
                 )

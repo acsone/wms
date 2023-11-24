@@ -904,7 +904,7 @@ def set_modules_to_remove():
         query = """
             UPDATE ir_module_module
                 SET state = 'to remove'
-                WHERE name IN %s AND state <> 'uninstallable'
+                WHERE name IN %s AND state NOT IN ('uninstallable', 'uninstalled')
         """
         openupgrade.logged_query(
             cr,
@@ -917,17 +917,66 @@ def set_modules_to_remove():
 def set_modules_to_remove_core():
     """Set modules to remove in core as immediate uninstall does not work."""
     modules_list = [
+        # quality_control and co_depends
+        "mrp_subcontracting_quality",
+        "quality_mrp_workorder_worksheet",
+        "stock_barcode_quality_control_picking_batch",
+        "stock_barcode_quality_control",
+        "quality_control_picking_batch",
+        "quality_control_worksheet",
+        "quality_mrp_workorder",
+        "quality_control_iot",
+        "quality_mrp_workorder_iot",
+        "purchase_mrp_workorder_quality",
+        "quality_control",
+        "quality_mrp",
+        # mrp and co_depends"
+        "mrp_subcontracting_quality",
+        "mrp_account_enterprise",
         "mrp",
         "mrp_workorder_hr",
+        "mrp_maintenance",
+        "quality_mrp",
+        "purchase_mrp_workorder_quality",
+        "mrp_account",
+        "mrp_product_expiry",
+        "purchase_mrp",
+        "quality_mrp_workorder_iot",
+        "mrp_plm",
+        "mrp_mps",
+        "test_main_flows",
+        "pos_mrp",
+        "mrp_subcontracting_repair",
+        "sale_mrp",
+        "mrp_workorder_iot",
+        "sale_mrp_margin",
+        "mrp_subcontracting_enterprise",
+        "mrp_workorder_plm",
+        "mrp_subcontracting_account_enterprise",
+        "mrp_subcontracting_account",
+        "project_mrp",
+        "mrp_subcontracting_dropshipping",
+        "mrp_subcontracting",
+        "quality_mrp_workorder",
+        "stock_barcode_mrp_subcontracting",
         "mrp_workorder_hr_account",
-        "quality_control",
+        "mrp_repair",
+        "mrp_subcontracting_studio",
+        "mrp_workorder_expiry",
+        "mrp_workorder",
+        "quality_mrp_workorder_worksheet",
+        "stock_barcode_mrp",
+        "mrp_subcontracting_purchase",
+        "mrp_subonctracting_landed_costs",
+        "mrp_landed_costs",
+        "spreadsheet_dashboard_mrp_account",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
         query = """
             UPDATE ir_module_module
                 SET state = 'to remove'
-                WHERE name IN %s AND state <> 'uninstallable'
+                WHERE name IN %s AND state NOT IN ('uninstallable', 'uninstalled')
         """
         openupgrade.logged_query(
             cr,

@@ -2,8 +2,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
-from openupgradelib import openupgrade
-
 _logger = logging.getLogger(__name__)
 
 
@@ -22,6 +20,5 @@ def _migrate_order_line_to_sale_line(cr):
     )
 
 
-@openupgrade.migrate()
 def migrate(cr, version):
     _migrate_order_line_to_sale_line(cr)
