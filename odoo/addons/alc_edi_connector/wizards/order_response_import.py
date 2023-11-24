@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -22,7 +21,9 @@ class OrderResponseImport(models.TransientModel):
         po_name = parsed_order_document.get("ref")
         order = self.env["purchase.order"].search([("name", "=", po_name)])
         if not order:
-            raise ValidationError(_("No purchase order found for name %s.") % po_name)
+            raise ValidationError(
+                _("No purchase order found for name %(name)s.", name=po_name)
+            )
 
         # PO is already validated by an order response
         if order.state == "purchase":

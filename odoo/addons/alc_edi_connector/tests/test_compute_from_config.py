@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -10,7 +9,7 @@ from odoo.addons.server_environment import serv_config
 class TestComputeFromConfig(TransactionCase):
     @classmethod
     def setUpClass(cls, *args, **kwargs):
-        super(TestComputeFromConfig, cls).setUpClass(*args, **kwargs)
+        super().setUpClass(*args, **kwargs)
 
         serv_config.add_section("edi_backend_test_config")
         serv_config.set("edi_backend_test_config", "channel", "sftp")
@@ -43,6 +42,7 @@ class TestComputeFromConfig(TransactionCase):
     def test_00(self):
         """
         DATA:
+
         config file with info for edi_backend
 
         Test case:

@@ -5,7 +5,7 @@
     "name": "Alc All",
     "description": """
         Alcyon Odoo App""",
-    "version": "16.0.2.6.3",
+    "version": "16.0.2.6.8",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -36,6 +36,7 @@
         "alc_app_account",
         "alc_app_account_payment",
         "alc_app_shopfloor",
+        "alc_edi_connector",
         "alc_fs_attachment",
         "alc_running_env",
         # Configuration modules

@@ -51,7 +51,7 @@ def _mig_alc_purchase_order_discount(cr):
             "discount",
         )
     ]
-    openupgrade.rename_fields(cr=cr, field_spec=field_spec, no_deep=True)
+    openupgrade.rename_fields(cr, field_spec=field_spec, no_deep=True)
 
     openupgrade.update_module_moved_fields(
         cr,

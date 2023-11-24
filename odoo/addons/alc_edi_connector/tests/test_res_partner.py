@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -11,6 +10,7 @@ class TestResPartner(AlcEdiConnectorCase):
     def test_01(self):
         """
         Data:
+
             supplier not linked to an edi connector
         Test Case:
             Set use_edi_connector on the supplier
@@ -25,6 +25,7 @@ class TestResPartner(AlcEdiConnectorCase):
     def test_02(self):
         """
         Data:
+
             supplier linked to an edi connector and using the edi connector
         Test Case:
             Unset the edi connector

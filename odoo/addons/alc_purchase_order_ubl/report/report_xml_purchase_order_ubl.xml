@@ -2,11 +2,14 @@
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-  <report
-    id="report_xml_purchase_order_ubl"
-    name="alc_purchase_order_ubl.report_xml_purchase_order_ubl"
-    string="UBL Order document"
-    report_type="qweb-xml"
-    model="purchase.order"
-  />
+  <record id="report_xml_purchase_order_ubl" model="ir.actions.report">
+    <field name="name">UBL Order document</field>
+    <field name="model">ir.module.module</field>
+    <field name="report_type">qweb-xml</field>
+    <field
+      name="report_name"
+    >alc_purchase_order_ubl.report_xml_purchase_order_ubl</field>
+    <field name="binding_model_id" ref="model_purchase_order" />
+    <field name="binding_type">report</field>
+  </record>
 </odoo>

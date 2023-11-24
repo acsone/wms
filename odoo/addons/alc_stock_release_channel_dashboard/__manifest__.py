@@ -21,6 +21,7 @@
         "alc_stock_release_channel_weight",
         "alc_report_delivery_slip",
         "alc_stock_release_channel_print_cash_on_delivery",
+        "alc_stock_release_channel_deliver_toursolver",
     ],
     "data": ["views/stock_picking.xml", "views/stock_release_channel.xml"],
     "assets": {
