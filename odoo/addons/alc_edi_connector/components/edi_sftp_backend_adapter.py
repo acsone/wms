@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -7,7 +6,7 @@ import os
 import re
 from contextlib import contextmanager
 from functools import partial
-from StringIO import StringIO
+from io import StringIO
 
 import paramiko
 
@@ -49,27 +48,30 @@ class EdiSftpBackendAdapter(Component):
         pk_env_variable = self.backend_record.pk_env_variable
         if not pk_env_variable and not self.backend_record.password:
             raise ConnectorException(
-                _("Please set the private key environment variable " "or a password")
+                _("Please set the private key environment variable or a password")
             )
         private_key = os.environ.get(pk_env_variable)
         pkey = None
         if pk_env_variable and not private_key:
-            raise ConnectorException(_("%s must be set in environ") % pk_env_variable)
+            raise ConnectorException(
+                _("%(pk_env_variable)s must be set in environ"),
+                pk_env_variable=pk_env_variable,
+            )
 
         if private_key:
             pkey = paramiko.RSAKey.from_private_key(
                 StringIO(private_key.decode("utf8"))
             )
-        return dict(
-            hostname=self.backend_record.hostname,
-            port=self.backend_record.port,
-            username=self.backend_record.username,
-            password=self.backend_record.password,
-            pkey=pkey,
-            look_for_keys=False,
-            timeout=SFTP_TIMEOUT,
-            banner_timeout=BANNER_TIMEOUT,
-        )
+        return {
+            "hostname": self.backend_record.hostname,
+            "port": self.backend_record.port,
+            "username": self.backend_record.username,
+            "password": self.backend_record.password,
+            "pkey": pkey,
+            "look_for_keys": False,
+            "timeout": SFTP_TIMEOUT,
+            "banner_timeout": BANNER_TIMEOUT,
+        }
 
     @contextmanager
     def open_sftp(self):
@@ -91,6 +93,7 @@ class EdiSftpBackendAdapter(Component):
     def pull(self):
         """
         Return a list of tuple with the content to process.
+
         The first item into the tuple is a name that could be used to store
         the pulled content into Odoo and the second one is the content.
         """

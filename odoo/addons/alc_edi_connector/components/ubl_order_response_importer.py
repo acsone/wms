@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -11,7 +10,7 @@ from odoo.addons.queue_job.job import Job
 
 
 class UblOrderResponseImporter(Component):
-    """ Synchronizer for importing data from a backend to Odoo """
+    """Synchronizer for importing data from a backend to Odoo."""
 
     _name = "ubl.order.response.importer"
     _inherit = ["edi.importer"]
@@ -21,15 +20,16 @@ class UblOrderResponseImporter(Component):
     def execute(self):
         wizard = self.env["order.response.import"]
         for filename, content in self.backend_adapter.pull():
-            description = _("Import Order Response %s from %s") % (
-                filename,
-                self.backend_record.name,
+            description = _(
+                "Import Order Response %(filename)s from %(name)s",
+                filename=filename,
+                name=self.backend_record.name,
             )
             attachment = self.env["ir.attachment"].create(
                 {
                     "name": filename,
                     "datas": base64.b64encode(content),
-                    "datas_fname": filename,
+                    "store_fname": filename,
                 }
             )
             new_job = wizard.with_delay(description=description).process_attachment(

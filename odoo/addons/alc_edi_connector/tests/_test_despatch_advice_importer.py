@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
-
-import mock
+from unittest import mock
 
 from odoo import fields
 from odoo.tools import file_open
@@ -17,7 +15,7 @@ from .common import AlcEdiConnectorCase
 class TestUblDespatchAdviceImporter(AlcEdiConnectorCase):
     @classmethod
     def setUpClass(cls):
-        super(TestUblDespatchAdviceImporter, cls).setUpClass()
+        super().setUpClass()
         cls.import_task_def = cls.edi_backend._get_task("ubl.despatch.advice.importer")
         cls.DespatchAdviceImport = cls.env["despatch.advice.import"]
         with file_open(
@@ -33,6 +31,7 @@ class TestUblDespatchAdviceImporter(AlcEdiConnectorCase):
     def test_01(self):
         """
         Data:
+
             No file found on the ftp sever
         Test case:
             Execute the task
@@ -47,6 +46,7 @@ class TestUblDespatchAdviceImporter(AlcEdiConnectorCase):
     def test_02(self):
         """
         Data:
+
             Files found on the ftp server
         Test Case:
             Execute the task
@@ -66,8 +66,6 @@ class TestUblDespatchAdviceImporter(AlcEdiConnectorCase):
         )
         result = {}
         for attachment in attachments:
-            # remove pylint deprecated once on py3
-            # pylint: disable=deprecated-method
             result[attachment.name] = base64.decodestring(attachment.datas)
         self.assertDictEqual(
             {"DespatchAdvice1.xml": "content1", "DespatchAdvice2.xml": "content2"},
@@ -77,6 +75,7 @@ class TestUblDespatchAdviceImporter(AlcEdiConnectorCase):
     def test_03(self):
         """
          Data:
+
             One File found on the ftp server
         Test Case:
             Execute the task
@@ -102,7 +101,8 @@ class TestUblDespatchAdviceImporter(AlcEdiConnectorCase):
 
     def test_04(self):
         """
-        Data: process DespatchAdvice
+        Data: process DespatchAdvice.
+
         Test case: Check that after updating PO, the DO is attatched to
         Expected result: We retrieve the DO at the PO level
         """
@@ -122,7 +122,7 @@ class TestUblDespatchAdviceImporter(AlcEdiConnectorCase):
             {
                 "name": "despatch_advice_tmpl.xml",
                 "datas": base64.b64encode(xml_content),
-                "datas_fname": "despatch_advice_tmpl.xml",
+                "store_fname": "despatch_advice_tmpl.xml",
             }
         )
 
@@ -137,7 +137,8 @@ class TestUblDespatchAdviceImporter(AlcEdiConnectorCase):
 
     def test_05(self):
         """
-        Data: process DespatchAdvice
+        Data: process DespatchAdvice.
+
         Test case: Check that after updating PO, the DO is attatched to
         Expected result: We retrieve the DO at the PO level
         """
@@ -217,7 +218,7 @@ class TestUblDespatchAdviceImporter(AlcEdiConnectorCase):
             {
                 "name": "despatch_advice_2.xml",
                 "datas": base64.b64encode(xml_content),
-                "datas_fname": "despatch_advice_2.xml",
+                "store_fname": "despatch_advice_2.xml",
             }
         )
 
