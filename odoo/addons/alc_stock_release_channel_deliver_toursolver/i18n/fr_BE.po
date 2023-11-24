@@ -20,33 +20,33 @@ msgstr ""
 #: code:addons/alc_stock_release_channel_deliver_toursolver/models/stock_release_channel.py:0
 #, python-format
 msgid "%(channel)s has nothing to export to Mobile App"
-msgstr ""
+msgstr "%(channel)s n'a rien à exporter vers l'app mobile"
 
 #. module: alc_stock_release_channel_deliver_toursolver
 #. odoo-python
 #: code:addons/alc_stock_release_channel_deliver_toursolver/models/stock_release_channel.py:0
 #, python-format
 msgid "Action 'Export to Mobile App' is not allowed for channel %(name)s."
-msgstr ""
+msgstr "l'action 'Export vers App Mobile' n'est pas permis pour le canal %(name)s"
 
 #. module: alc_stock_release_channel_deliver_toursolver
 #. odoo-python
 #: code:addons/alc_stock_release_channel_deliver_toursolver/models/stock_release_channel.py:0
 #, python-format
 msgid "Can't export a not complete optimization for %(shipment_advice)s"
-msgstr ""
+msgstr "Impossible d'exporter une optimisation incomplète pour %(shipment_advice)s"
 
 #. module: alc_stock_release_channel_deliver_toursolver
 #. odoo-python
 #: code:addons/alc_stock_release_channel_deliver_toursolver/models/stock_release_channel.py:0
 #, python-format
 msgid "Export optimization result to operational planning for %(channel)s"
-msgstr ""
+msgstr "Export du résultat de l'optimisation vers le planning pour %(channel)s"
 
 #. module: alc_stock_release_channel_deliver_toursolver
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_deliver_toursolver.stock_release_channel_form_view
 msgid "Export to mobile app"
-msgstr ""
+msgstr "Export vers App Mobile"
 
 #. module: alc_stock_release_channel_deliver_toursolver
 #: model:ir.model.fields,field_description:alc_stock_release_channel_deliver_toursolver.field_stock_release_channel__is_mobile_export_allowed
@@ -58,7 +58,7 @@ msgstr ""
 #: code:addons/alc_stock_release_channel_deliver_toursolver/models/stock_release_channel.py:0
 #, python-format
 msgid "Optimization for %(channel)s exported to operational planning."
-msgstr ""
+msgstr "Optimisation pour %(channel)s exportée vers le planning opérationnel."
 
 #. module: alc_stock_release_channel_deliver_toursolver
 #: model:ir.model,name:alc_stock_release_channel_deliver_toursolver.model_shipment_advice
@@ -68,7 +68,7 @@ msgstr ""
 #. module: alc_stock_release_channel_deliver_toursolver
 #: model:ir.model,name:alc_stock_release_channel_deliver_toursolver.model_stock_release_channel
 msgid "Stock Release Channels"
-msgstr ""
+msgstr "Canaux de livraison"
 
 #. module: alc_stock_release_channel_deliver_toursolver
 #. odoo-python
@@ -78,6 +78,8 @@ msgid ""
 "The release channel %(channel)s will be exported to the Mobile App into "
 "background."
 msgstr ""
+"Le canal de livraison %(channel)s va être exporté vers l'App Mobile en "
+"tâche de fond."
 
 #. module: alc_stock_release_channel_deliver_toursolver
 #: model:ir.model,name:alc_stock_release_channel_deliver_toursolver.model_toursolver_task

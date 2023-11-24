@@ -14,6 +14,9 @@
         "stock_release_channel_shipment_advice_toursolver",
         "shipment_advice_planner_toursolver_queue_job",
     ],
-    "data": [],
+    "data": [
+        "data/queue_job_function.xml",
+        "views/stock_release_channel_views.xml",
+    ],
     "demo": [],
 }
