@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright 2022 ACSONE SA/NV
-     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-<odoo noupdate="1">
-    <record id="alc_eshop.backend" model="shopinvader.backend">
-        <field name="charge_delivery_fee_on_order" eval="0" />
-    </record>
-</odoo>
