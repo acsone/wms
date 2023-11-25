@@ -17,6 +17,7 @@ from .migration import MigrationScriptsManager
 DB_10_SRC_NOT_CLEANED = "odoo-alcyon-prod"  # the db with geo fields..
 DB_16_MIG = "alcyon-migrated"
 DB_16_POSTMIG = "alcyon-16-postmig"
+DB_16_FINAL = "alcyon-16-final"
 DB_16_RECETTE = "alcyon-16-recette"
 
 tasks = []
@@ -24,6 +25,7 @@ tasks = []
 logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
 
 _logger = logging.getLogger(__name__)
+
 
 # get version from alc_all addons
 def get_version():
@@ -665,6 +667,11 @@ def update_intrastat_code():
     )
 
 
+@task("16.0.1.0.0")
+def copydb_16_before_big_remove():
+    copydb(DB_16_POSTMIG, DB_16_FINAL)
+
+
 @task()
 def set_modules_to_remove():
     """
@@ -912,7 +919,7 @@ def set_modules_to_remove():
         "account_invoice_email",  # renamed to alc_account_invoice_email
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
-    with cursor(DB_16_POSTMIG) as cr:
+    with cursor(DB_16_FINAL) as cr:
         query = """
             UPDATE ir_module_module
                 SET state = 'to remove'
@@ -984,7 +991,7 @@ def set_modules_to_remove_core():
         "spreadsheet_dashboard_mrp_account",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
-    with cursor(DB_16_POSTMIG) as cr:
+    with cursor(DB_16_FINAL) as cr:
         query = """
             UPDATE ir_module_module
                 SET state = 'to remove'
@@ -1000,14 +1007,14 @@ def set_modules_to_remove_core():
 @task()
 def click_odoo_update_final():
     check_call(
-        ["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite", "--update-all"]
+        ["click-odoo-update", "-d", DB_16_FINAL, "--i18n-overwrite", "--update-all"]
     )
 
 
 @task()
 def deactivate_all_crons():
     # To avoid high charge at restart and undesired behaviors
-    with cursor(DB_16_POSTMIG) as cr:
+    with cursor(DB_16_FINAL) as cr:
         query = """
             UPDATE ir_cron
                 SET active = False
