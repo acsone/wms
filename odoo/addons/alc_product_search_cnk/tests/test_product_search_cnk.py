@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -7,9 +6,10 @@ from .common import TestSearchCnk
 
 
 class TestSearchCnkFlow(TestSearchCnk):
-    """These tests might break if there are so many products that searching on
-       something might go over the limit even before reaching the test examples.
-       That would seem very unlikely though.
+    """These tests might break if there are so many products that searching on.
+
+    something might go over the limit even before reaching the test examples.
+    That would seem very unlikely though.
     """
 
     def test_search_222(self):
