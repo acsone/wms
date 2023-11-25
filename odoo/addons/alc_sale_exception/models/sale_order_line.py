@@ -50,5 +50,9 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
         res = super()._compute_name()
         for line in self:
             if line.warning_text:
-                line.name = line.name + "\n" + line.warning_text
+                line.name = (
+                    (line.name or line.product_id.display_name or "")
+                    + "\n"
+                    + line.warning_text
+                )
         return res
