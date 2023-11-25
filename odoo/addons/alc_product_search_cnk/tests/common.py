@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestSearchCnk(SavepointCase):
+class TestSearchCnk(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestSearchCnk, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.model_template = cls.env["product.template"]
         cls.model_product = cls.env["product.product"]
