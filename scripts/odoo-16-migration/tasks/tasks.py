@@ -914,6 +914,8 @@ def set_modules_to_remove():
         "shopinvader_search_engine_export",  # replaced by alc_eshop_search_engine_manual_export
         "alc_eshop",
         "alc_eshop_app",
+        "alc_stock_picking_assignable",
+        "alc_internal_package_groupbypartner",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
