@@ -7,8 +7,8 @@
     name="alc_product_promotion_mailing.report_alc_product_promotion_mailing"
   >
         <t t-set="title">Alcyon: Alert fin de promotion.</t>
-        <t t-call="report.html_container">
-            <t t-call="report.external_layout">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
                 <div class="page">
                     <div class="oe_structure" />
                     <div class="row">
@@ -23,27 +23,23 @@
                             du fournisseur.
                         </p>
                         <ul>
-                            <t t-foreach="promotions[promo_date]" t-as="shop_variant">
+                            <t t-foreach="promotions[promo_date]" t-as="product">
                                 <li>
-                                    <t t-if="shop_variant.images">
+                                    <t t-if="product.main_image_id">
                                         <t
                       t-set="image"
-                      t-value="shop_variant.images[0]"
+                      t-value="product.main_image_id"
                     />
-                                        <t t-if="image.get('src')">
+                                        <t t-if="image.url">
                                             <img
-                        t-att-src="image['src']"
-                        t-att-alt="image['alt']"
-                        t-att-tag="image['tag']"
+                        t-att-src="image.url"
+                        t-att-alt="image.name"
                         style="height: 80px; box-shadow: 10px 10px 20px black;"
                       />
                                         </t>
                                     </t>
-                                    <a t-att-href="get_variant_url(shop_variant)">
-                                        <span
-                      itemprop="website"
-                      t-esc="shop_variant.name"
-                    />
+                                    <a t-att-href="get_variant_url(product)">
+                                        <span itemprop="website" t-esc="product.name" />
                                     </a>
                                 </li>
                             </t>
@@ -55,4 +51,15 @@
             </t>
         </t>
     </template>
+    <record model="ir.actions.report" id="report_action_alc_product_promotion_mailing">
+    <field name="name">Alcyon product mailing list</field>
+    <field name="report_type">qweb-html</field>
+      <field name="model">res.partner</field>
+    <field
+      name="report_name"
+    >alc_product_promotion_mailing.report_alc_product_promotion_mailing</field>
+    <field
+      name="report_file"
+    >alc_product_promotion_mailing.report_alc_product_promotion_mailing</field>
+  </record>
 </odoo>

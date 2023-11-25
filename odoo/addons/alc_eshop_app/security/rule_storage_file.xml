@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<odoo noupdate="1">
-
-<record model="ir.rule" id="storage_image.storage_file_image_rule">
-    <field name="perm_read" eval="1" />
-</record>
-
-</odoo>

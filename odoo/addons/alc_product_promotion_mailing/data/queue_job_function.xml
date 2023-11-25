@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="job_function_send_promotion_mailing" model="queue.job.function">
+        <field
+      name="model_id"
+      ref="alc_product_promotion_mailing.model_product_promotion_mailing_generator"
+    />
+        <field name="method">_send_promotion_mailing</field>
+        <field
+      name="channel_id"
+      ref="alc_product_promotion_mailing.channel_root_background_eshop_mailing"
+    />
+      </record>
+
+</odoo>

@@ -912,6 +912,8 @@ def set_modules_to_remove():
         "shopinvader_assortment_bind",  # replaced by alc_eshop_search_engine_assortment_bind
         "account_invoice_email",  # renamed to alc_account_invoice_email
         "shopinvader_search_engine_export",  # replaced by alc_eshop_search_engine_manual_export
+        "alc_eshop",
+        "alc_eshop_app",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_POSTMIG) as cr:
