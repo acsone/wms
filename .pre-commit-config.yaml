@@ -19,7 +19,6 @@ exclude: |
   ^odoo/addons/alc_shopfloor_cluster_picking_transfer_async/|
   ^odoo/addons/alc_shopfloor_mobile_workstation/|
   ^odoo/addons/alc_standby_delivery/|
-  ^odoo/addons/alc_stock_location_barcode_search/|
   ^odoo/addons/alc_stock_picking_number_package/|
   ^odoo/addons/alc_stock_picking_wave_type/|
   ^odoo/addons/alc_stock_storage_type/|
