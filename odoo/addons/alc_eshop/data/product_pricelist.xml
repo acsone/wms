@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<odoo noupdate="1">
-  <record id="shopinvader_default_pricelist" model="product.pricelist">
-    <field name="name">Shopinvader Default</field>
-    <field name="discount_policy">with_discount</field>
-    <field name="currency_id" ref="base.EUR" />
-  </record>
-</odoo>
