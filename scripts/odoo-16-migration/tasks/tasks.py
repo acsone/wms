@@ -13,7 +13,6 @@ from . import VERSION
 from .call import check_call
 from .dbtools import copydb, copytable, cursor, psql_file, recover_columns, ref_id
 from .migration import MigrationScriptsManager
-from .pseudo_env import pseudo_env
 
 DB_10_SRC_NOT_CLEANED = "odoo-alcyon-prod"  # the db with geo fields..
 DB_16_MIG = "alcyon-migrated"
@@ -350,12 +349,12 @@ def cleanup_queue_job():
 
 @task("16.0.1.0.0")
 def migrate_product_packaging_level():
-    with pseudo_env(DB_16_POSTMIG) as env:
+    with cursor(DB_16_POSTMIG) as cr:
         # Former version of the module is present
         tables = [("product_packaging_type", "product_packaging_level")]
-        openupgrade.rename_tables(env.cr, tables)
+        openupgrade.rename_tables(cr, tables)
         models = [("product.packaging.type", "product.packaging.level")]
-        openupgrade.rename_models(env.cr, models)
+        openupgrade.rename_models(cr, models)
         fields = [
             (
                 "product.packaging",
@@ -364,12 +363,12 @@ def migrate_product_packaging_level():
                 "packaging_level_id",
             )
         ]
-        openupgrade.rename_fields(env, fields, no_deep=True)
+        openupgrade.rename_fields(cr, fields, no_deep=True)
 
         modules = [("product_packaging_type", "product_packaging_level")]
-        openupgrade.update_module_names(env.cr, modules, merge_modules=True)
+        openupgrade.update_module_names(cr, modules, merge_modules=True)
         openupgrade.rename_xmlids(
-            env.cr,
+            cr,
             [
                 (
                     "product_packaging_level.product_packaging_type_default",
