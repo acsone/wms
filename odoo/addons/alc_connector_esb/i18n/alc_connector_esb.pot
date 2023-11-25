@@ -33,11 +33,6 @@ msgid "Field 'lines' must be a <type 'list'> got %s."
 msgstr ""
 
 #. module: alc_connector_esb
-#: model:ir.model,name:alc_connector_esb.model_ir_http
-msgid "HTTP Routing"
-msgstr ""
-
-#. module: alc_connector_esb
 #: model:ir.model.fields,field_description:alc_connector_esb.field_sale_order_line__initial_exception
 msgid "Initial Exception"
 msgstr ""
