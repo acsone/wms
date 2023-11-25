@@ -10,7 +10,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_se_backend_notebook", "alc_search_engine_backend"],
-    "data": ["views/se_backend.xml", "data/se_backend.xml"],
+    "depends": [
+        "alc_se_backend_notebook",
+        "alc_search_engine_backend",
+        "alc_connector_search_engine_put_script_mixin",
+    ],
+    "data": [
+        "views/se_backend.xml",
+        "data/se_backend.xml",
+    ],
     "demo": [],
 }
