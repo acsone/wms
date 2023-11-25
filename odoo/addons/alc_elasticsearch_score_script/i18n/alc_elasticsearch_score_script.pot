@@ -14,15 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_elasticsearch_score_script
-#. odoo-python
-#: code:addons/alc_elasticsearch_score_script/models/se_backend.py:0
-#, python-format
-msgid ""
-"Fail to put the score script.\n"
-"%(error)s"
-msgstr ""
-
-#. module: alc_elasticsearch_score_script
 #: model:ir.model.fields,field_description:alc_elasticsearch_score_script.field_se_backend__score_on_position_script
 #: model_terms:ir.ui.view,arch_db:alc_elasticsearch_score_script.se_backend_elasticsearch_form_view
 msgid "Score On Position Script"
