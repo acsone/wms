@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -6,8 +5,6 @@ from collections import defaultdict, namedtuple
 from datetime import timedelta
 
 from odoo import _, api, fields, models
-
-from odoo.addons.queue_job.job import job
 
 PromotionDef = namedtuple(
     "PromotionDef", ["partner_id", "product_id", "date_end", "supplierinfo_id"]
@@ -17,16 +14,24 @@ PromotionDef = namedtuple(
 class ProductPromotionMailingGenerator(models.TransientModel):
 
     _name = "product.promotion.mailing.generator"
+    _description = "Product Promotion Mailing Generator"
 
     def _get_valid_promotions(self):
         """Return a list PromotionDef tuple."""
-        nbr_days = self.env[
-            "sale.config.settings"
-        ].get_nbr_before_end_promotion_mailing()
+        nbr_days = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param(
+                "alc_product_promotion_mailing.nbr_before_end_promotion_mailing_setting",
+                3,
+            )
+        )
 
         today = fields.Date.today()
-        end = fields.Datetime.from_string(today) + timedelta(days=nbr_days)
+        end = today + timedelta(days=nbr_days)
         date_end = fields.Date.to_string(end)
+        self.env["product.supplierinfo"].flush_model()
+        self.env["alc.product.promotion.subscription"].flush_model()
         self.env.cr.execute(
             """
             SELECT
@@ -73,50 +78,59 @@ class ProductPromotionMailingGenerator(models.TransientModel):
             partner_id,
             proms,
         ) in self._get_promos_by_partner_id_and_mark_as_processed().items():
-            description = _("Generate promotion mailing for partner_id %s") % partner_id
+            description = _(
+                "Generate promotion mailing for partner_id %(partner_id)s",
+                partner_id=partner_id,
+            )
             self.with_delay(description=description)._send_promotion_mailing(
                 partner_id=partner_id, promotions=proms
             )
 
     @api.model
-    def _build_shop_variant_url(self, shopinvader_variant):
-        return u"{}/{}/{}".format(
-            shopinvader_variant.backend_id.name,
-            shopinvader_variant.lang_id.code[:2],
-            shopinvader_variant.url_key,
+    def _build_shop_variant_url(self, product):
+        website_url = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param(
+                "alc_product_promotion_mailing.promotion_website_url_setting",
+                "https://www.alcyonbelux.be",
+            )
         )
+        lang_prfx = self.env.lang[:2]
+        url_key = product.url_key
+        return f"{website_url}/{lang_prfx}/{url_key}"
 
     @api.model
-    @job(default_channel="root.background.eshop.mailing")
+    # @job(default_channel="root.background.eshop.mailing")
     def _send_promotion_mailing(self, partner_id, promotions):
         partner = self.env["res.partner"].browse(partner_id)
         if partner.lang and partner.lang != self.env.lang:
             return self.with_context(lang=partner.lang)._send_promotion_mailing(
                 partner_id, promotions
             )
-        backend = self.env.ref("alc_eshop.backend")
         # groups products by date
         res = defaultdict(list)
         for product_id, date in promotions:
             res[date].append(product_id)
         # load all shopinvader_variant to get the product url in the right lang
         product_ids = [p[0] for p in promotions]
-        shop_variants = self._get_shop_variants(backend, product_ids)
+        product_by_id = {
+            p.id: p for p in self.env["product.product"].browse(product_ids)
+        }
         data_promotions = {}
         for date, product_ids in res.items():
             date_localized = self.env["ir.qweb.field.date"].value_to_html(date, {})
-            data_promotions[date_localized] = shop_variants.filtered(
-                lambda p, product_ids=product_ids: p.record_id.id in product_ids
-            )
+            data_promotions[date_localized] = [product_by_id[p] for p in product_ids]
         data = {
             "partner": partner,
             "promotions": data_promotions,
-            "backend": backend,
             "company": self.env.user.company_id,
             "get_variant_url": self._build_shop_variant_url,
         }
-        html = self.env["report"].get_html(
-            docids=None, report_name="report_alc_product_promotion_mailing", data=data,
+        html, _ext = self.env["ir.actions.report"]._render_qweb_html(
+            "alc_product_promotion_mailing.report_action_alc_product_promotion_mailing",
+            None,
+            data=data,
         )
 
         mail_values = {
@@ -124,7 +138,14 @@ class ProductPromotionMailingGenerator(models.TransientModel):
             "body_html": html,
             "auto_delete": True,
         }
-        email_from = self.env["sale.config.settings"].get_promotion_mailing_email_from()
+        email_from = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param(
+                "alc_product_promotion_mailing.promotion_mailing_email_from_setting",
+                "secretariat@alcyonbelux.be",
+            )
+        )
 
         if email_from:
             mail_values["email_from"] = email_from
@@ -132,16 +153,3 @@ class ProductPromotionMailingGenerator(models.TransientModel):
         new_mail.mail_message_id.subject = _("Alcyon: End of promotion period alert")
         new_mail.send()
         return new_mail
-
-    @api.model
-    def _get_shop_variants(self, backend, product_ids):
-        """Return the shopinvader variant in the context lang for the given
-        product_ids."""
-        lang = self.env.lang
-
-        if lang not in backend.lang_ids.mapped("code"):
-            lang = "fr_BE"
-        lang_id = self.env["res.lang"]._lang_get(code=lang).id
-        return self.env["shopinvader.variant"].search(
-            [("lang_id", "=", lang_id), ("record_id", "in", product_ids)]
-        )

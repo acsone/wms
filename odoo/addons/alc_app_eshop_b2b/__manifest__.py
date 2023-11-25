@@ -95,6 +95,7 @@
         "shopinvader_multi_category",
         "alc_eshop_search_engine_product_stock",
         "shopinvader_search_engine_assortment",
+        "alc_product_promotion_mailing",
     ],
     "data": [
         "security/res_groups.xml",

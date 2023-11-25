@@ -1,19 +1,17 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import contextlib
 import logging
 from datetime import datetime, timedelta
+from unittest import mock
 
-import mock
 from freezegun import freeze_time
 
 from odoo import fields
+from odoo.tests.common import TransactionCase
 
-from odoo.addons.shopinvader.tests.common import CommonCase
 
-
-class MailRecorder(object):
+class MailRecorder:
     def __init__(self, env):
         self.env = env
         self.Mail = self.env["mail.mail"]
@@ -30,10 +28,10 @@ class MailRecorder(object):
         self.created_mails = self.Mail.search([]) - mails
 
 
-class TestMailingGenerator(CommonCase):
+class TestMailingGenerator(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestMailingGenerator, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, queue_job__no_delay=True))
         cls.supplier = cls.env.ref("base.res_partner_12")
         cls.date_start = fields.Date.to_string(datetime.now() - timedelta(days=3))
@@ -41,7 +39,7 @@ class TestMailingGenerator(CommonCase):
         cls.product_1 = cls.env.ref("product.product_product_4b")
         cls.supplierinfo1 = cls.env["product.supplierinfo"].create(
             {
-                "name": cls.supplier.id,
+                "partner_id": cls.supplier.id,
                 "discount_sale": 10,
                 "date_start": cls.date_start,
                 "date_end": cls.date_end,
@@ -52,7 +50,7 @@ class TestMailingGenerator(CommonCase):
         cls.product_2.seller_ids.unlink()
         cls.supplierinfo2 = cls.env["product.supplierinfo"].create(
             {
-                "name": cls.supplier.id,
+                "partner_id": cls.supplier.id,
                 "discount_sale": 10,
                 "date_start": cls.date_start,
                 "date_end": cls.date_end,
@@ -70,9 +68,9 @@ class TestMailingGenerator(CommonCase):
         cls.mail_recorder = MailRecorder(cls.env)
 
     def setUp(self):
-        super(TestMailingGenerator, self).setUp()
+        super().setUp()
         # mute logger
-        loggers = ["odoo.addons.queue_job.models.base"]
+        loggers = ["odoo.addons.queue_job.utils"]
         for logger in loggers:
             logging.getLogger(logger).addFilter(self)
 
