@@ -707,7 +707,6 @@ def set_modules_to_remove():
         "grid",
         "partner_delivery",
         "partner_helper",
-        "portal",
         "portal_sale",
         "portal_stock",
         "procurement_sale",
