@@ -668,6 +668,20 @@ def update_intrastat_code():
 
 
 @task("16.0.1.0.0")
+def migrate_fs_storage_attachments():
+    with cursor(DB_16_POSTMIG) as cr:
+        query = """
+            UPDATE ir_attachment
+            SET fs_storage_id=(select id from fs_storage where code='fsprod'),
+                fs_storage_code='fsprod',
+                fs_filename=replace(store_fname, 's3://odoo-alcyon-prod/', ''),
+                store_fname=replace(store_fname, 's3://odoo-alcyon-prod/', 'fsprod://')
+            WHERE store_fname LIKE 's3://%'
+        """
+        cr.execute(query)
+
+
+@task("16.0.1.0.0")
 def copydb_16_before_big_remove():
     copydb(DB_16_POSTMIG, DB_16_FINAL)
 
