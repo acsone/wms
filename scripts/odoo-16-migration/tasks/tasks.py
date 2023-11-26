@@ -890,7 +890,6 @@ def set_modules_to_remove():
         "alc_shopinvader_fixes",
         "shopinvader_delivery_carrier",
         "shopinvader_sale_cart_delivery",
-        "alc_eshop_api_delivery_carriers",  # renamed alc_eshop_cart_api_delivery
         "alc_eshop_sale_triple_discount",  # replaced by alc_eshop_schema_sale_triple_discount
         "shopinvader_auth_jwt",
         "alc_eshop_sale_cart_payment_info",  # renamed alc_eshop_schema_sale_payment
