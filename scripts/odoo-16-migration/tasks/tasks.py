@@ -1,5 +1,6 @@
 import functools
 import logging
+from pathlib import Path
 
 from click_odoo.env import OdooEnvironment
 from openupgradelib import openupgrade
@@ -101,6 +102,26 @@ def _register_migration_scripts_in_tasks(prefix):
                 logging.getLogger().setLevel(logging_config)
 
         tasks.append((name, functools.partial(wrapped, callable_def=callable_def)))
+
+
+def _filestore_to_db(cr, filestore_root):
+    cr.execute(
+        "SELECT id, store_fname FROM ir_attachment "
+        "WHERE store_fname IS NOT NULL "
+        "  AND db_datas IS NULL "
+        "  AND fs_storage_code IS NULL "
+        "  AND store_fname NOT LIKE '%://%' "
+    )
+    for id, store_fname in cr.fetchall():
+        filename = filestore_root / store_fname
+        if not filename.is_file():
+            print(f"Attachment file not found: {filename}")
+            continue
+        print(f"Moving {store_fname} to database")
+        cr.execute(
+            "UPDATE ir_attachment SET db_datas = %s, store_fname=NULL WHERE id = %s",
+            (filename.read_bytes(), id),
+        )
 
 
 @task("16.0.1.0.0")
@@ -1033,3 +1054,11 @@ def deactivate_all_crons():
             cr,
             query,
         )
+
+
+@task("16.0.1.0.0")
+def file_store_to_db_final():
+    with cursor(DB_16_FINAL) as cr:
+        _filestore_to_db(cr, Path("/migration-workspace", "filestore"))
+        _filestore_to_db(cr, Path("/data", "odoo", "filestore", DB_16_POSTMIG))
+        _filestore_to_db(cr, Path("/data", "odoo", "filestore", DB_16_FINAL))
