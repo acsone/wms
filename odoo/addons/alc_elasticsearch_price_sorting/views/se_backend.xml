@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="se_backend_elasticsearch_form_view">
+        <field name="model">se.backend</field>
+        <field name="inherit_id" ref="connector_search_engine.se_backend_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="price_sorting" string="Price Sorting">
+                    <button
+            name="create_or_update_current_price_pipeline_script"
+            string="Sync Pipeline Script"
+            class="oe_highlight mr4"
+            type="object"
+          />
+                        <button
+            name="create_or_update_net_price_sort_script"
+            string="Sync Sort Script"
+            class="oe_highlight"
+            type="object"
+          />
+                    <group string="Scripts">
+                        <separator string="Net Price Sort" />
+                        <field
+              name="net_price_sort_script"
+              nolabel="1"
+              colspan="2"
+              widget="ace"
+              options="{'mode': 'python'}"
+            />
+                        <separator string="Current Price Pipeline" />
+                        <field
+              name="current_price_pipeline_script"
+              nolabel="1"
+              colspan="2"
+              widget="ace"
+              options="{'mode': 'python'}"
+            />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
