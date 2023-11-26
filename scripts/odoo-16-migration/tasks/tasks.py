@@ -799,7 +799,6 @@ def set_modules_to_remove():
         "account_mass_reconcile",
         "alc_shopfloor",  # replaced by OCA module shopfloor
         "alc_shopfloor_mobile",  # replaced by shopfloor_mobile
-        "alc_shopfloor_user",  # replaced by shopfloor_mobile_base_auth_api_key
         "alc_shopfloor_cluster_picking",  # replaced by shopfloor_batch_automatic_creation
         "alc_shopfloor_rest_log",  # replaced by shopfloor_rest_log
         "alc_shopfloor_delivery_rounds",  # replaced by alc_shopfloor_stock_release_channel
