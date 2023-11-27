@@ -1,5 +1,6 @@
 import functools
 import logging
+from pathlib import Path
 
 from click_odoo.env import OdooEnvironment
 from openupgradelib import openupgrade
@@ -13,11 +14,11 @@ from . import VERSION
 from .call import check_call
 from .dbtools import copydb, copytable, cursor, psql_file, recover_columns, ref_id
 from .migration import MigrationScriptsManager
-from .pseudo_env import pseudo_env
 
 DB_10_SRC_NOT_CLEANED = "odoo-alcyon-prod"  # the db with geo fields..
 DB_16_MIG = "alcyon-migrated"
 DB_16_POSTMIG = "alcyon-16-postmig"
+DB_16_FINAL = "alcyon-16-final"
 DB_16_RECETTE = "alcyon-16-recette"
 
 tasks = []
@@ -25,6 +26,7 @@ tasks = []
 logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.INFO)
 
 _logger = logging.getLogger(__name__)
+
 
 # get version from alc_all addons
 def get_version():
@@ -100,6 +102,26 @@ def _register_migration_scripts_in_tasks(prefix):
                 logging.getLogger().setLevel(logging_config)
 
         tasks.append((name, functools.partial(wrapped, callable_def=callable_def)))
+
+
+def _filestore_to_db(cr, filestore_root):
+    cr.execute(
+        "SELECT id, store_fname FROM ir_attachment "
+        "WHERE store_fname IS NOT NULL "
+        "  AND db_datas IS NULL "
+        "  AND fs_storage_code IS NULL "
+        "  AND store_fname NOT LIKE '%://%' "
+    )
+    for id, store_fname in cr.fetchall():
+        filename = filestore_root / store_fname
+        if not filename.is_file():
+            print(f"Attachment file not found: {filename}")
+            continue
+        print(f"Moving {store_fname} to database")
+        cr.execute(
+            "UPDATE ir_attachment SET db_datas = %s, store_fname=NULL WHERE id = %s",
+            (filename.read_bytes(), id),
+        )
 
 
 @task("16.0.1.0.0")
@@ -350,12 +372,12 @@ def cleanup_queue_job():
 
 @task("16.0.1.0.0")
 def migrate_product_packaging_level():
-    with pseudo_env(DB_16_POSTMIG) as env:
+    with cursor(DB_16_POSTMIG) as cr:
         # Former version of the module is present
         tables = [("product_packaging_type", "product_packaging_level")]
-        openupgrade.rename_tables(env.cr, tables)
+        openupgrade.rename_tables(cr, tables)
         models = [("product.packaging.type", "product.packaging.level")]
-        openupgrade.rename_models(env.cr, models)
+        openupgrade.rename_models(cr, models)
         fields = [
             (
                 "product.packaging",
@@ -364,12 +386,12 @@ def migrate_product_packaging_level():
                 "packaging_level_id",
             )
         ]
-        openupgrade.rename_fields(env, fields, no_deep=True)
+        openupgrade.rename_fields(cr, fields, no_deep=True)
 
         modules = [("product_packaging_type", "product_packaging_level")]
-        openupgrade.update_module_names(env.cr, modules, merge_modules=True)
+        openupgrade.update_module_names(cr, modules, merge_modules=True)
         openupgrade.rename_xmlids(
-            env.cr,
+            cr,
             [
                 (
                     "product_packaging_level.product_packaging_type_default",
@@ -666,6 +688,25 @@ def update_intrastat_code():
     )
 
 
+@task("16.0.1.0.0")
+def migrate_fs_storage_attachments():
+    with cursor(DB_16_POSTMIG) as cr:
+        query = """
+            UPDATE ir_attachment
+            SET fs_storage_id=(select id from fs_storage where code='fsprod'),
+                fs_storage_code='fsprod',
+                fs_filename=replace(store_fname, 's3://odoo-alcyon-prod/', ''),
+                store_fname=replace(store_fname, 's3://odoo-alcyon-prod/', 'fsprod://')
+            WHERE store_fname LIKE 's3://%'
+        """
+        cr.execute(query)
+
+
+@task("16.0.1.0.0")
+def copydb_16_before_big_remove():
+    copydb(DB_16_POSTMIG, DB_16_FINAL)
+
+
 @task()
 def set_modules_to_remove():
     """
@@ -701,7 +742,6 @@ def set_modules_to_remove():
         "grid",
         "partner_delivery",
         "partner_helper",
-        "portal",
         "portal_sale",
         "portal_stock",
         "procurement_sale",
@@ -749,7 +789,6 @@ def set_modules_to_remove():
         "alc_delivery_rounds_close_pickings_by_zone",  # replaced by alc_stock_release_channel_pick_allowed
         "alc_delivery_rounds_allatonce_assignment",
         "alc_delivery_rounds_partner_geolocalize",
-        "alce_stock_barcode_easy_operation",  # replaced by STD
         "web_decimal_numpad_dot",
         "alc_stock_picking_batch_delivery_rounds",  # replaced by alc_stock_release_channel_picking_batch_creation
         "specific_shipping_costs",  # replaced by alc_shipping_fee
@@ -794,7 +833,6 @@ def set_modules_to_remove():
         "account_mass_reconcile",
         "alc_shopfloor",  # replaced by OCA module shopfloor
         "alc_shopfloor_mobile",  # replaced by shopfloor_mobile
-        "alc_shopfloor_user",  # replaced by shopfloor_mobile_base_auth_api_key
         "alc_shopfloor_cluster_picking",  # replaced by shopfloor_batch_automatic_creation
         "alc_shopfloor_rest_log",  # replaced by shopfloor_rest_log
         "alc_shopfloor_delivery_rounds",  # replaced by alc_shopfloor_stock_release_channel
@@ -887,7 +925,6 @@ def set_modules_to_remove():
         "alc_shopinvader_fixes",
         "shopinvader_delivery_carrier",
         "shopinvader_sale_cart_delivery",
-        "alc_eshop_api_delivery_carriers",  # renamed alc_eshop_cart_api_delivery
         "alc_eshop_sale_triple_discount",  # replaced by alc_eshop_schema_sale_triple_discount
         "shopinvader_auth_jwt",
         "alc_eshop_sale_cart_payment_info",  # renamed alc_eshop_schema_sale_payment
@@ -919,7 +956,7 @@ def set_modules_to_remove():
         "alc_stock_location_barcode_search",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
-    with cursor(DB_16_POSTMIG) as cr:
+    with cursor(DB_16_FINAL) as cr:
         query = """
             UPDATE ir_module_module
                 SET state = 'to remove'
@@ -991,7 +1028,7 @@ def set_modules_to_remove_core():
         "spreadsheet_dashboard_mrp_account",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
-    with cursor(DB_16_POSTMIG) as cr:
+    with cursor(DB_16_FINAL) as cr:
         query = """
             UPDATE ir_module_module
                 SET state = 'to remove'
@@ -1007,14 +1044,14 @@ def set_modules_to_remove_core():
 @task()
 def click_odoo_update_final():
     check_call(
-        ["click-odoo-update", "-d", DB_16_POSTMIG, "--i18n-overwrite", "--update-all"]
+        ["click-odoo-update", "-d", DB_16_FINAL, "--i18n-overwrite", "--update-all"]
     )
 
 
 @task()
 def deactivate_all_crons():
     # To avoid high charge at restart and undesired behaviors
-    with cursor(DB_16_POSTMIG) as cr:
+    with cursor(DB_16_FINAL) as cr:
         query = """
             UPDATE ir_cron
                 SET active = False
@@ -1023,3 +1060,11 @@ def deactivate_all_crons():
             cr,
             query,
         )
+
+
+@task("16.0.1.0.0")
+def file_store_to_db_final():
+    with cursor(DB_16_FINAL) as cr:
+        _filestore_to_db(cr, Path("/migration-workspace", "filestore"))
+        _filestore_to_db(cr, Path("/data", "odoo", "filestore", DB_16_POSTMIG))
+        _filestore_to_db(cr, Path("/data", "odoo", "filestore", DB_16_FINAL))
