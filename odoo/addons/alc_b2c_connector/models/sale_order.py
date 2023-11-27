@@ -246,6 +246,7 @@ class SaleOrder(SaleOrderBase):
         for rec in self:
             if (
                 not user._is_superuser()
+                and not self.env.su
                 and not rec.b2c_ref
                 and not rec.sale_channel_id.is_internal
             ):
