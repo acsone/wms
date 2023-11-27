@@ -13,15 +13,6 @@
             class="oe_highlight"
             type="object"
           />
-                    <group string="settings">
-                        <group>
-                            <field name="ssl" />
-                        </group>
-                        <group>
-                            <field name="opensearch_user" />
-                            <field name="opensearch_user_password" widget="password" />
-                        </group>
-                    </group>
                     <group name="security_roles" string="Security Roles">
                         <field name="role_ids" nolabel="1" colspan="2">
                             <tree editable="bottom">

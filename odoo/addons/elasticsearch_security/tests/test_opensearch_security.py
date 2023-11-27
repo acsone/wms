@@ -18,8 +18,8 @@ class TestOpensearchSecurity(VCRTestCase, TransactionCase):
         cls.backend.write(
             {
                 "es_server_host": "https://localhost/",
-                "opensearch_user": "user",
-                "opensearch_user_password": "fake_password",
+                "es_user": "user",
+                "es_password": "fake_password",
                 "ssl": True,
                 "role_ids": [
                     Command.create(

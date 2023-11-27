@@ -12,12 +12,6 @@ from .elasticsearch_role import ElasticSearchRole
 
 class SeBackendElasticsearch(SeBackend):
 
-    opensearch_user = fields.Char()
-    opensearch_user_password = fields.Char()
-    ssl = fields.Boolean(
-        default=True,
-        help="Verify SSL certificates. Only set to False in development environments.",
-    )
     role_ids = fields.One2many[ElasticSearchRole](inverse_name="backend_id")
 
     @property
@@ -25,8 +19,8 @@ class SeBackendElasticsearch(SeBackend):
         env_fields = super()._server_env_fields
         env_fields.update(
             {
-                "opensearch_user": {},
-                "opensearch_user_password": {},
+                "es_user": {},
+                "es_password": {},
                 "ssl": {},
             }
         )
@@ -36,7 +30,7 @@ class SeBackendElasticsearch(SeBackend):
         return self.role_ids.put_roles()
 
     def _get_client_security(self):
-        auth = (self.opensearch_user, self.opensearch_user_password)
+        auth = (self.es_user, self.es_password)
         client = OpenSearch(
             hosts=[self.es_server_host], http_auth=auth, use_ssl=self.ssl
         )
