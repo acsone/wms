@@ -1,0 +1,101 @@
+interactions:
+  - request:
+      body:
+        '{"description":"compute current price information into
+        doc","processors":[{"set":{"field":"_source.ingest_time","value":"{{_ingest.timestamp}}"},"script":{"lang":"painless","source":"          ZonedDateTime
+        safe_get_zoned_dt(Object date){            if (date instanceof ZonedDateTime)
+        {              return (ZonedDateTime)date;            } else if (date instanceof
+        String){              LocalDate localDate =
+        LocalDate.parse((String)date);              return
+        localDate.atStartOfDay(ZoneId.systemDefault());            }            return
+        null;          }          Map get_price_data_for_day(List prices, ZonedDateTime
+        curDate){            for (int i = 0; i < prices.length; ++i) {              Map
+        price = prices[i];              ZonedDateTime date_start =
+        safe_get_zoned_dt(price[''date_start'']);              ZonedDateTime date_end =
+        safe_get_zoned_dt(price[''date_end'']);              long date_cur_milli =
+        curDate != null ? curDate.toInstant().toEpochMilli() : -1;              long
+        date_start_milli = date_start != null ? date_start.toInstant().toEpochMilli() :
+        -1;              long date_end_milli = date_end != null ?
+        date_end.toInstant().toEpochMilli() : -1;              if
+        (price.containsKey(''min_quantity'') && price[''min_quantity''] > 1)
+        {                return price;              } else if (curDate == null &&
+        date_start == null && date_end == null) {                return
+        price;              } else if (curDate != null && date_start != null && date_end
+        != null && date_cur_milli >= date_start_milli && date_cur_milli <=
+        date_end_milli) {                return price;              } else if (curDate
+        != null && date_start != null && date_end == null && date_cur_milli >=
+        date_start_milli) {                return price;              } else if (curDate
+        != null && date_start == null && date_end != null && date_cur_milli <=
+        date_end_milli) {                return
+        price;              }            }            return
+        null;          }          Map get_price_data(List prices, ZonedDateTime curDate)
+        {            Map price_data = get_price_data_for_day(prices,
+        curDate);            if (price_data != null){              return
+        price_data            }            return get_price_data_for_day(prices,
+        null);          }          double current_supplier_discount =
+        0;          ZonedDateTime today =
+        ZonedDateTime.parse(ctx[''ingest_time'']);          String
+        supplier_discount_path = ''supplier_discount'';          if
+        (ctx.containsKey(supplier_discount_path)) {            List prices =
+        ctx.supplier_discount;            Map price_data = get_price_data(prices,
+        today);            if (price_data !=
+        null){              ctx.current_supplier_discount =
+        price_data[''discount_sale''];            }          }          if
+        (ctx.containsKey(''price'')){            for (String i : ctx.price.keySet())
+        {              Map price_data = get_price_data(ctx.price[i],
+        today);              if (price_data != null){                String price_field
+        = i.startsWith(''discount'') ? ''discount'': ''price'';                String
+        current_value_field = ''current_'' + i;                ctx[current_value_field]
+        = price_data[price_field];                if
+        (price_data.containsKey(''min_quantity'') && price_data[''min_quantity''] > 1)
+        {                  ctx[current_value_field] =
+        0;                }                boolean exclusive = false;                if
+        (price_data.containsKey(''exclusive'')) {                  exclusive =
+        price_data[''exclusive''];                }                String
+        current_value_exclusive_field = ''current_'' + i +
+        ''_exclusive'';                ctx[current_value_exclusive_field] =
+        exclusive;              }            }          }"}}]}'
+      headers:
+        authorization:
+          - Basic b2RvbzpxWGdIRHc4RHQ2VGJFOEpYeXIzUDNnZUY=
+        connection:
+          - keep-alive
+        content-type:
+          - application/json
+        user-agent:
+          - elasticsearch-py/7.13.4 (Python 3.11.4)
+        x-elastic-client-meta:
+          - es=7.13.4,py=3.11.4,t=7.13.4,ur=1.26.16
+      method: PUT
+      uri: https://index.test.alcyon.acsone.eu/_ingest/pipeline/set-current-price
+    response:
+      body:
+        string: '{"acknowledged":true}'
+      headers:
+        Access-Control-Allow-Credentials:
+          - "true"
+        Access-Control-Allow-Headers:
+          - DNT, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control,
+            Content-Type, Range, Authorization
+        Access-Control-Allow-Methods:
+          - GET, POST, OPTIONS
+        Access-Control-Allow-Origin:
+          - "*"
+        Access-Control-Expose-Headers:
+          - Content-Length, Content-Range
+        Access-Control-Max-Age:
+          - "1728000"
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "21"
+        Content-Type:
+          - application/json; charset=UTF-8
+        Date:
+          - Mon, 27 Nov 2023 10:58:17 GMT
+        Strict-Transport-Security:
+          - max-age=15724800; includeSubDomains
+      status:
+        code: 200
+        message: OK
+version: 1

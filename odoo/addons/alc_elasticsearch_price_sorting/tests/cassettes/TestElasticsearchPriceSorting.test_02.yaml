@@ -1,0 +1,96 @@
+interactions:
+  - request:
+      body: null
+      headers:
+        authorization:
+          - Basic b2RvbzpxWGdIRHc4RHQ2VGJFOEpYeXIzUDNnZUY=
+        connection:
+          - keep-alive
+        content-type:
+          - application/json
+        user-agent:
+          - elasticsearch-py/7.13.4 (Python 3.11.4)
+        x-elastic-client-meta:
+          - es=7.13.4,py=3.11.4,t=7.13.4,ur=1.26.16
+      method: POST
+      uri: https://index.test.alcyon.acsone.eu/alc_product_variant/_update_by_query?pipeline=set-current-price&wait_for_completion=false
+    response:
+      body:
+        string: '{"task":"GT5B6XDMSgaS9eDVeM2gLQ:9264475"}'
+      headers:
+        Access-Control-Allow-Credentials:
+          - "true"
+        Access-Control-Allow-Headers:
+          - DNT, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control,
+            Content-Type, Range, Authorization
+        Access-Control-Allow-Methods:
+          - GET, POST, OPTIONS
+        Access-Control-Allow-Origin:
+          - "*"
+        Access-Control-Expose-Headers:
+          - Content-Length, Content-Range
+        Access-Control-Max-Age:
+          - "1728000"
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "41"
+        Content-Type:
+          - application/json; charset=UTF-8
+        Date:
+          - Mon, 27 Nov 2023 10:58:16 GMT
+        Strict-Transport-Security:
+          - max-age=15724800; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        authorization:
+          - Basic b2RvbzpxWGdIRHc4RHQ2VGJFOEpYeXIzUDNnZUY=
+        connection:
+          - keep-alive
+        content-type:
+          - application/json
+        user-agent:
+          - elasticsearch-py/7.13.4 (Python 3.11.4)
+        x-elastic-client-meta:
+          - es=7.13.4,py=3.11.4,t=7.13.4,ur=1.26.16
+      method: GET
+      uri: https://index.test.alcyon.acsone.eu/_tasks/GT5B6XDMSgaS9eDVeM2gLQ%3A9264475?wait_for_completion=false
+    response:
+      body:
+        string:
+          '{"completed":true,"task":{"node":"GT5B6XDMSgaS9eDVeM2gLQ","id":9264475,"type":"transport","action":"indices:data/write/update/byquery","status":{"total":0,"updated":0,"created":0,"deleted":0,"batches":0,"version_conflicts":0,"noops":0,"retries":{"bulk":0,"search":0},"throttled_millis":0,"requests_per_second":-1.0,"throttled_until_millis":0},"description":"update-by-query
+          [alc_product_variant]","start_time_in_millis":1701082696959,"running_time_in_nanos":2290672,"cancellable":true,"headers":{}},"error":{"type":"index_not_found_exception","reason":"no
+          such index
+          [alc_product_variant]","index":"alc_product_variant","resource.id":"alc_product_variant","resource.type":"index_or_alias","index_uuid":"_na_"}}'
+      headers:
+        Access-Control-Allow-Credentials:
+          - "true"
+        Access-Control-Allow-Headers:
+          - DNT, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control,
+            Content-Type, Range, Authorization
+        Access-Control-Allow-Methods:
+          - GET, POST, OPTIONS
+        Access-Control-Allow-Origin:
+          - "*"
+        Access-Control-Expose-Headers:
+          - Content-Length, Content-Range
+        Access-Control-Max-Age:
+          - "1728000"
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "710"
+        Content-Type:
+          - application/json; charset=UTF-8
+        Date:
+          - Mon, 27 Nov 2023 10:58:17 GMT
+        Strict-Transport-Security:
+          - max-age=15724800; includeSubDomains
+      status:
+        code: 200
+        message: OK
+version: 1

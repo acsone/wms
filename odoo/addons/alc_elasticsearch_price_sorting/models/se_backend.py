@@ -31,7 +31,11 @@ class SeBackend(SeBackendBase):
         self._put_script("sort-net-price", self.net_price_sort_script)
 
     def create_or_update_current_price_pipeline_script(self):
-        self._put_script("sort-current-price", self.current_price_pipeline_script)
+        client = self._get_es_client()
+        client.ingest.put_pipeline(
+            "set-current-price",
+            self._scrip_field_json(self.current_price_pipeline_script),
+        )
 
     def cron_execute_pipeline_set_current_price(self):
         product_indexes = self.env["se.index"].search(

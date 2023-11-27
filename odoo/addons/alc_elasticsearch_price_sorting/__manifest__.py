@@ -14,6 +14,7 @@
         "queue_job_cron",
         "alc_search_engine_backend",
         "alc_connector_search_engine_put_script_mixin",
+        "shopinvader_search_engine",
     ],
     "data": [
         "views/se_backend.xml",
