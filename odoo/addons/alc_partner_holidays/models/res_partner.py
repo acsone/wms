@@ -28,7 +28,7 @@ class ResPartner(Partner):
         if not self:
             return True
         self.ensure_one()
-        day_date = fields.Date.to_date(day)
+        day_date = fields.Date.to_date(day) if day else fields.Date.today()
         return not bool(
             self.working_schedules_ids.filtered(
                 lambda l: l.start_date <= day_date
