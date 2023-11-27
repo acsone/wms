@@ -80,7 +80,9 @@ def get_top_ordered(
     partner: Annotated[Partner, Depends(authenticated_partner)],
     page: int | None = None,
     per_page: int | None = None,
-    product_families: Annotated[list[ProductFamily] | None, Query()] = None,
+    product_families: Annotated[
+        list[ProductFamily] | None, Query(alias="product_families[]")
+    ] = None,
     supplier_discount_only: bool | None = None,
 ) -> TopOrderedResponse:
     """Search the most ordered product along the last 12 months."""
