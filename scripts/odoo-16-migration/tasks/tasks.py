@@ -553,6 +553,37 @@ def recover_invoices_without_move():
             openupgrade.logged_query(cr, query, zero_invoice)
 
 
+@task("16.0.2.6.8")
+def restore_account_journal_sequence():
+    # As Odoo deleted the sequence_id on account_journal and as
+    # account_move_name_sequence module create new ones for every exisiting
+    # journal at init, restore the sequence_id field and restore v10 values.
+    # See: https://github.com/OCA/account-financial-tools/blob/da515faddbd4849900a4861d171b16628902ce55/account_move_name_sequence/hooks.py#L16
+    query = """
+        SELECT id, sequence_id
+            FROM account_journal
+            WHERE sequence_id IS NOT NULL
+    """
+    with cursor(DB_10_SRC_NOT_CLEANED) as cr:
+        openupgrade.logged_query(cr, query)
+        journal_values = cr.fetchall()
+    with cursor(DB_16_POSTMIG) as cr:
+        if not openupgrade.column_exists(cr, "account_journal", "sequence_id"):
+            query = """
+                ALTER TABLE account_journal ADD COLUMN sequence_id INTEGER
+            """
+            openupgrade.logged_query()
+        query = """
+            UPDATE account_journal
+                SET sequence_id = %(sequence_id)s
+                WHERE id = %(id)s;
+        """
+        for journal_value in journal_values:
+            openupgrade.logged_query(
+                cr, query, {"sequence_id": journal_value[1], "id": journal_value[0]}
+            )
+
+
 _register_migration_scripts_in_tasks("pre-")
 
 
