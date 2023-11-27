@@ -6,8 +6,6 @@ from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
-from odoo.addons.queue_job.tests.common import trap_jobs
-
 
 class TestElasticsearchPriceSorting(VCRTestCase, TransactionCase):
     @classmethod
@@ -36,23 +34,12 @@ class TestElasticsearchPriceSorting(VCRTestCase, TransactionCase):
         )
 
     def test_0(self):
-        self.backend.create_or_update_net_price_sort_script()
-
-    def test_1(self):
-        self.backend.create_or_update_current_price_pipeline_script()
-
-    def test_02(self):
-        with trap_jobs() as trap:
-            self.backend.cron_execute_pipeline_set_current_price()
-            self.assertEqual(
-                trap.enqueued_jobs[0].method_name, "_check_es_task_completion"
-            )
-            trap.perform_enqueued_jobs()
+        self.backend.create_or_update_score_on_position_script()
 
     @mute_logger(
         "odoo.addons.alc_connector_search_engine_put_script_mixin.models.se_backend"
     )
-    def test_03(self):
+    def test_02(self):
         self.backend.es_password = "wrong_password"
         with self.assertRaises(UserError, msg="HTTPSConnection"):
-            self.backend.create_or_update_net_price_sort_script()
+            self.backend.create_or_update_score_on_position_script()

@@ -22,5 +22,5 @@
         "data/ir_cron.xml",
         "data/queue_job_functions.xml",
     ],
-    "demo": [],
+    "development_status": "Alpha",
 }
