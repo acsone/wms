@@ -162,7 +162,7 @@ class TestSaleStatisticsMonthly(TestSaleStatistics):
     def test_top_ordered_product_family(self):
         with self._create_test_client(partner=self.partner_1) as test_client:
             response: Response = test_client.get(
-                "/sale_statistics/top_ordered", params={"product_families": ["meds"]}
+                "/sale_statistics/top_ordered", params={"product_families[]": ["meds"]}
             )
             self.assertEqual(response.status_code, status.HTTP_200_OK)
             res = response.json()
@@ -171,7 +171,7 @@ class TestSaleStatisticsMonthly(TestSaleStatistics):
             self.assertEqual(res["data"][0]["product_id"], self.product_2.id)
             response: Response = test_client.get(
                 "/sale_statistics/top_ordered",
-                params={"product_families": ["equipment"]},
+                params={"product_families[]": ["equipment"]},
             )
             self.assertEqual(response.status_code, status.HTTP_200_OK)
             res = response.json()

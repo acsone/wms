@@ -49,8 +49,10 @@ def get(
     order_date_max: datetime | None = None,
     order_date_min: datetime | None = None,
     order_ref: str | None = None,
-    product_families: Annotated[list[ProductFamily] | None, Query()] = None,
-    restricts: Annotated[list[Restrict] | None, Query()] = None,
+    product_families: Annotated[
+        list[ProductFamily] | None, Query(alias="product_families[]")
+    ] = None,
+    restricts: Annotated[list[Restrict] | None, Query(alias="restricts[]")] = None,
     page: int | None = 1,
     per_page: int | None = 10,
 ) -> ProductOnOrderList:

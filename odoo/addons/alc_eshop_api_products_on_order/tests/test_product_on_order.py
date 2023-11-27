@@ -142,19 +142,20 @@ class TestProductOnOrder(FastAPITransactionCase):
     def test_search_restricts(self):
         with self._create_test_client(partner=self.partner_1) as test_client:
             response = test_client.get(
-                "/products_on_order", params={"restricts": ["is_mto"]}
+                "/products_on_order", params={"restricts[]": ["is_mto"]}
             )
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json()["size"], 1)
 
             response = test_client.get(
-                "/products_on_order", params={"restricts": ["has_backorder"]}
+                "/products_on_order", params={"restricts[]": ["has_backorder"]}
             )
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json()["size"], 2)
 
             response = test_client.get(
-                "/products_on_order", params={"restricts": ["has_backorder", "is_mto"]}
+                "/products_on_order",
+                params={"restricts[]": ["has_backorder", "is_mto"]},
             )
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json()["size"], 2)
@@ -162,18 +163,18 @@ class TestProductOnOrder(FastAPITransactionCase):
     def test_search_family(self):
         with self._create_test_client(partner=self.partner_1) as test_client:
             response = test_client.get(
-                "/products_on_order", params={"product_families": ["meds"]}
+                "/products_on_order", params={"product_families[]": ["meds"]}
             )
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json()["size"], 1)
 
             response = test_client.get(
-                "/products_on_order", params={"product_families": ["food"]}
+                "/products_on_order", params={"product_families[]": ["food"]}
             )
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json()["size"], 1)
             response = test_client.get(
-                "/products_on_order", params={"product_families": ["meds", "food"]}
+                "/products_on_order", params={"product_families[]": ["meds", "food"]}
             )
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json()["size"], 2)
