@@ -1,5 +1,7 @@
 # Copyright 2019 Iryna Vyshnevska (Camptocamp)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from freezegun import freeze_time
+
 from odoo.exceptions import ValidationError
 from odoo.fields import Date
 from odoo.tests.common import TransactionCase
@@ -74,3 +76,11 @@ class TestCustomerWorkingScheduleBase(TransactionCase):
                 }
             )
         self.assertEqual(error_msg, constraint_error.exception.name)
+
+    def test_void_date(self):
+        # A void date should use today as reference date
+        with freeze_time("2018-05-05"):
+            self.assertTrue(self.partner.is_shipping_date_allowed(False))
+        # holidays are not allowed
+        with freeze_time("2019-01-01"):
+            self.assertFalse(self.partner.is_shipping_date_allowed(False))
