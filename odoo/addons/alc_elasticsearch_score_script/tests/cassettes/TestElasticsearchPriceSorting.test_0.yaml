@@ -1,0 +1,62 @@
+interactions:
+  - request:
+      body:
+        '{"script":{"lang":"painless","source":"      if
+        (doc[params.docFieldname].size() == 0) {        return 0      }      def field =
+        doc[params.docFieldname].value.toLowerCase();      def boost = 1.0;      def
+        terms = params.terms;      def finalFactor = 100;      if (terms.size() == 1)
+        {        def currentTerm = terms[0].toLowerCase();        def currentTermIndex =
+        field.indexOf(currentTerm) + 1;        boost = 1.0 /
+        currentTermIndex      }      for (int i = 0; i < terms.size() - 1; i++)
+        {        def currentTerm = terms[i].toLowerCase();        def nextTerm = terms[i
+        + 1].toLowerCase();        def currentTermIndex = field.indexOf(currentTerm) +
+        1;        def nextTermIndex = field.indexOf(nextTerm) + 1;        if
+        (currentTermIndex >= 0 && nextTermIndex >= 0) {          boost *= (1.0 /
+        (currentTermIndex + Math.abs(currentTermIndex - nextTermIndex)));          if
+        (currentTermIndex > nextTermIndex) {            // not the right
+        order            finalFactor = 20;          }        }      }      return
+        finalFactor * boost;    "}}'
+      headers:
+        authorization:
+          - Basic b2RvbzpxWGdIRHc4RHQ2VGJFOEpYeXIzUDNnZUY=
+        connection:
+          - keep-alive
+        content-type:
+          - application/json
+        user-agent:
+          - elasticsearch-py/7.13.4 (Python 3.11.4)
+        x-elastic-client-meta:
+          - es=7.13.4,py=3.11.4,t=7.13.4,ur=1.26.16
+      method: PUT
+      uri: https://index.test.alcyon.acsone.eu/_scripts/score_on_position
+    response:
+      body:
+        string: '{"acknowledged":true}'
+      headers:
+        Access-Control-Allow-Credentials:
+          - "true"
+        Access-Control-Allow-Headers:
+          - DNT, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control,
+            Content-Type, Range, Authorization
+        Access-Control-Allow-Methods:
+          - GET, POST, OPTIONS
+        Access-Control-Allow-Origin:
+          - "*"
+        Access-Control-Expose-Headers:
+          - Content-Length, Content-Range
+        Access-Control-Max-Age:
+          - "1728000"
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "21"
+        Content-Type:
+          - application/json; charset=UTF-8
+        Date:
+          - Mon, 27 Nov 2023 11:13:02 GMT
+        Strict-Transport-Security:
+          - max-age=15724800; includeSubDomains
+      status:
+        code: 200
+        message: OK
+version: 1

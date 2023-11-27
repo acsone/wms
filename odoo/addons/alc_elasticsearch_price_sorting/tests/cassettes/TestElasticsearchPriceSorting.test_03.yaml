@@ -1,0 +1,80 @@
+interactions:
+  - request:
+      body:
+        '{"script":{"lang":"painless","source":"      double gross_price =
+        0;      double discount = 0;      double supplier_discount = 0;      if
+        (params.pricelist_gross != null) {        String gross_price_field =
+        ''current_''+
+        params.pricelist_gross;        if(doc.containsKey(gross_price_field) &&
+        doc[gross_price_field].size()==1) {          gross_price =
+        doc[gross_price_field].value;        }      }      boolean discount_exclusive =
+        false;      if (params.pricelist_discounts != null) {        for(String
+        pricelist_discount: params.pricelist_discounts){          String discount_field
+        = ''current_'' + pricelist_discount;          if
+        (doc.containsKey(discount_field) &&
+        doc[discount_field].size()==1){            double discount_candidate =
+        doc[discount_field].value;            if (discount_candidate >
+        discount){              discount = discount_candidate;              String
+        discount_exclusive_field = ''current_'' + pricelist_discount +
+        ''_exclusive'';              if (doc.containsKey(discount_exclusive_field) &&
+        doc[discount_exclusive_field].size()==1){                discount_exclusive =
+        doc[discount_exclusive_field].value;              } else
+        {                discount_exclusive =
+        false;              }            }          }        }      } else if
+        (params.pricelist_discount != null) {        String discount_field =
+        ''current_'' + params.pricelist_discount;        if
+        (doc.containsKey(discount_field) &&
+        doc[discount_field].size()==1){          discount =
+        doc[discount_field].value;        }      }      if (!discount_exclusive &&
+        params.supplier_promotion != null && params.supplier_promotion &&
+        doc.containsKey(''current_supplier_discount'') &&
+        doc[''current_supplier_discount''].size()==1) {        supplier_discount =
+        doc.current_supplier_discount.value;      }      double price = gross_price -
+        (gross_price * discount / 100);      price = price - (price * supplier_discount
+        / 100);      return price;        "}}'
+      headers:
+        authorization:
+          - Basic b2Rvbzp3cm9uZ19wYXNzd29yZA==
+        connection:
+          - keep-alive
+        content-type:
+          - application/json
+        user-agent:
+          - elasticsearch-py/7.13.4 (Python 3.11.4)
+        x-elastic-client-meta:
+          - es=7.13.4,py=3.11.4,t=7.13.4,ur=1.26.16
+      method: PUT
+      uri: https://index.test.alcyon.acsone.eu/_scripts/sort-net-price
+    response:
+      body:
+        string: Unauthorized
+      headers:
+        Access-Control-Allow-Credentials:
+          - "true"
+        Access-Control-Allow-Headers:
+          - DNT, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control,
+            Content-Type, Range, Authorization
+        Access-Control-Allow-Methods:
+          - GET, POST, OPTIONS
+        Access-Control-Allow-Origin:
+          - "*"
+        Access-Control-Expose-Headers:
+          - Content-Length, Content-Range
+        Access-Control-Max-Age:
+          - "1728000"
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "12"
+        Content-Type:
+          - text/plain; charset=UTF-8
+        Date:
+          - Mon, 27 Nov 2023 11:14:31 GMT
+        Strict-Transport-Security:
+          - max-age=15724800; includeSubDomains
+        WWW-Authenticate:
+          - Basic realm="OpenSearch Security"
+      status:
+        code: 401
+        message: Unauthorized
+version: 1
