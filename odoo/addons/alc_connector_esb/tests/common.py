@@ -22,7 +22,7 @@ def MockRequest(
     remote_addr=HOST,
     environ_base=None,
     session_info: dict = None,
-    jsonrequest=None,
+    json=None,
     params=None,
 ):
     context = context or frozendict()
@@ -64,7 +64,7 @@ def MockRequest(
         context=env.context,
         lang=env["res.lang"]._lang_get(lang_code),
         render=lambda *a, **kw: "<MockResponse>",
-        jsonrequest=jsonrequest or {},
+        get_json_data=lambda: json or {},
     )
     # The following code mocks match() to return a fake rule with a fake
     # 'routing' attribute (routing=True) or to raise a NotFound

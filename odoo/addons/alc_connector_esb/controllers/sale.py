@@ -8,7 +8,6 @@ from datetime import datetime
 
 import werkzeug
 
-import odoo
 from odoo import _, http
 from odoo.exceptions import UserError
 from odoo.http import request
@@ -125,11 +124,12 @@ class SaleController(http.Controller):
                 EOF
         """
         ensure_db()
-        request.uid = odoo.SUPERUSER_ID
+        request.update_env(su=True)
         env = request.env
-        _logger.debug("Calling sales_order/create with data : %s", request.jsonrequest)
-        self._validate_request(request.jsonrequest)
-        values = request.jsonrequest["params"]["data"]
+        json_data = request.get_json_data()
+        _logger.debug("Calling sales_order/create with data : %s", json_data)
+        self._validate_request(json_data)
+        values = json_data["params"]["data"]
         self._validate_create_sale_order(values)
         delayable = env["sale.order"].with_delay(priority=2)
         delayable.ws_create_new(values, datetime.now())
@@ -157,11 +157,12 @@ class SaleController(http.Controller):
                 EOF
         """
         ensure_db()
-        request.uid = odoo.SUPERUSER_ID
+        request.update_env(su=True)
         env = request.env
-        _logger.debug("Calling sales_order/status with data : %s", request.jsonrequest)
-        self._validate_request(request.jsonrequest)
-        values = request.jsonrequest["params"]["data"]
+        json_data = request.get_json_data()
+        _logger.debug("Calling sales_order/status with data : %s", json_data)
+        self._validate_request(json_data)
+        values = json_data["params"]["data"]
         self._validate_status_sale_order(values)
 
         partner_ref = values["customer_id"]
