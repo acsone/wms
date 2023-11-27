@@ -36,6 +36,7 @@ class StockPackOperationLotAdd(PackOperationLotAdd):
                     "product_id": self.product_id.id,
                     "product_qty": self.product_qty,
                     "company_id": self.move_line_id.company_id.id,
+                    "expiration_date": self.expiration_date or fields.datetime.now(),
                 }
             )
             lot.print_lot_label(self.print_qty, printer_id=printer_id)
