@@ -28,7 +28,7 @@
                                     <t t-if="product.main_image_id">
                                         <t
                       t-set="image"
-                      t-value="product.main_image_id"
+                      t-value="product.main_image_id.image"
                     />
                                         <t t-if="image.url">
                                             <img
