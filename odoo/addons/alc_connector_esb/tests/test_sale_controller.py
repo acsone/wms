@@ -75,7 +75,7 @@ class TestSaleController(TransactionCase):
         with MockRequest(
             self.env,
             session_info={"db": self.env.cr.dbname},
-            jsonrequest={
+            json={
                 "params": {
                     "data": {"customer_id": partner_ref, "increment_id": esb_ref}
                 }
@@ -104,7 +104,7 @@ class TestSaleController(TransactionCase):
         with MockRequest(
             self.env,
             session_info={"db": self.env.cr.dbname},
-            jsonrequest={
+            json={
                 "params": {
                     "data": {"customer_id": partner_ref, "increment_id": esb_ref}
                 }
@@ -153,7 +153,7 @@ class TestSaleController(TransactionCase):
         with MockRequest(
             self.env,
             session_info={"db": self.env.cr.dbname},
-            jsonrequest={
+            json={
                 "params": {
                     "data": {"customer_id": partner_ref, "increment_id": esb_ref}
                 }
@@ -215,7 +215,7 @@ class TestSaleController(TransactionCase):
         with MockRequest(
             self.env,
             session_info={"db": self.env.cr.dbname},
-            jsonrequest={
+            json={
                 "params": {
                     "data": {"customer_id": partner_ref, "increment_id": esb_ref}
                 }
