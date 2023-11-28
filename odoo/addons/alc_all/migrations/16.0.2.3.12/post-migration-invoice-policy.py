@@ -39,7 +39,6 @@ def migrate(env, version):
         UPDATE sale_order
             SET invoicing_mode = rp.invoicing_mode
             FROM res_partner rp WHERE rp.id = sale_order.partner_invoice_id
-            AND sale_order.invoicing_mode IS NULL
     """
     openupgrade.logged_query(env.cr, query)
 
