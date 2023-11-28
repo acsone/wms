@@ -6,6 +6,7 @@ the wheel and looking for the migrations directory.
 Read addons names, from stdin, outputs oca.csv.
 """
 import csv
+import re
 import subprocess
 import sys
 import tempfile
@@ -15,7 +16,10 @@ from zipfile import ZipFile
 
 
 def oca_needs_mig(addon_name, odoo_version, venv):
-    dist_name = f"odoo{odoo_version}-addon-{addon_name}"
+    if odoo_version < 15:
+        dist_name = f"odoo{odoo_version}-addon-{addon_name}"
+    else:
+        dist_name = f"odoo-addon-{addon_name}"
     with tempfile.TemporaryDirectory() as tmpdir:
         r = subprocess.call(
             [
@@ -25,12 +29,11 @@ def oca_needs_mig(addon_name, odoo_version, venv):
                 # "-q",
                 "download",
                 "--index",
-                "https://wheelhouse.odoo-community.org/oca-simple",
+                "https://wheelhouse.odoo-community.org/oca-simple-and-pypi",
                 "--extra-index-url",
                 "https://wheelhouse.shopinvader.com/simple",
-                "--extra-index-url",
-                "https://wheelhouse.acsone.eu/acsone-simple",
                 "--no-deps",
+                "--pre",
                 dist_name,
             ],
             cwd=tmpdir,
@@ -58,28 +61,33 @@ def venvs():
         yield Path(venv)
 
 
-with open("oca.csv", "a") as f:
+with open("oca.csv", "w") as f:
     writer = csv.DictWriter(
         f,
         [
             "addon_name",
-            "mig_status_11",
-            "mig_status_12",
-            "mig_status_13",
-            "mig_status_14",
-            "mig_status_15",
+            "odoo_version",
+            "mig_status",
         ],
     )
     writer.writeheader()
     with venvs() as venv:
         for line in sys.stdin:
-            addon_name = line.strip()
-            if addon_name.startswith("#"):
+            line = line.strip()
+            if line.startswith("#"):
                 continue
-            print(addon_name, "... ", file=sys.stderr, end="")
-            row = {"addon_name": addon_name}
-            for odoo_version in (11, 12, 13, 14, 15):
+            mo = re.match("^odoo[0-9]*[-_]addon[-_]([a-zA-Z-_0-9]+)", line)
+            if not mo:
+                print("skipping", line, file=sys.stderr)
+                continue
+            addon_name = mo.group(1).replace("-", "_")
+            print(addon_name, "... ", file=sys.stderr)
+            for odoo_version in (11, 12, 13, 14, 15, 16):
                 mig_status = oca_needs_mig(addon_name, odoo_version, venv)
-                row[f"mig_status_{odoo_version}"] = mig_status
-            print(row, file=sys.stderr)
-            writer.writerow(row)
+                row = {
+                    "addon_name": addon_name,
+                    "odoo_version": odoo_version,
+                    "mig_status": mig_status,
+                }
+                print(row, file=sys.stderr)
+                writer.writerow(row)

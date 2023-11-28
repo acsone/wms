@@ -1,10 +1,1879 @@
-addon_name,mig_status_11,mig_status_12,mig_status_13,mig_status_14,mig_status_15
-addon_name,mig_status_11,mig_status_12,mig_status_13,mig_status_14,mig_status_15
-work	o,no wheel,no wheel,no wheel,no wheel,no wheel
-,no wheel,no wheel,no wheel,no wheel,no wheel
-,no wheel,no wheel,no wheel,no wheel,no wheel
-,no wheel,no wheel,no wheel,no wheel,no wheel
-,no wheel,no wheel,no wheel,no wheel,no wheel
-,no wheel,no wheel,no wheel,no wheel,no wheel
-,no wheel,no wheel,no wheel,no wheel,no wheel
-,no wheel,no wheel,no wheel,no wheel,no wheel
+addon_name,odoo_version,mig_status
+account_analytic_account_tag,11,no wheel
+account_analytic_account_tag,12,no wheel
+account_analytic_account_tag,13,no wheel
+account_analytic_account_tag,14,no wheel
+account_analytic_account_tag,15,no wheel
+account_analytic_account_tag,16,no wheel
+account_analytic_required,11,no
+account_analytic_required,12,mig
+account_analytic_required,13,mig
+account_analytic_required,14,no
+account_analytic_required,15,no
+account_analytic_required,16,no
+account_analytic_tag,11,no wheel
+account_analytic_tag,12,no wheel
+account_analytic_tag,13,no wheel
+account_analytic_tag,14,no wheel
+account_analytic_tag,15,no wheel
+account_analytic_tag,16,no wheel
+account_banking_mandate,11,mig
+account_banking_mandate,12,mig
+account_banking_mandate,13,mig
+account_banking_mandate,14,mig
+account_banking_mandate,15,no
+account_banking_mandate,16,no
+account_banking_pain_base,11,no
+account_banking_pain_base,12,no
+account_banking_pain_base,13,no
+account_banking_pain_base,14,no
+account_banking_pain_base,15,no
+account_banking_pain_base,16,no
+account_banking_sepa_credit_transfer,11,no
+account_banking_sepa_credit_transfer,12,no
+account_banking_sepa_credit_transfer,13,no
+account_banking_sepa_credit_transfer,14,no
+account_banking_sepa_credit_transfer,15,no
+account_banking_sepa_credit_transfer,16,no
+account_banking_sepa_direct_debit,11,no
+account_banking_sepa_direct_debit,12,no
+account_banking_sepa_direct_debit,13,no
+account_banking_sepa_direct_debit,14,no
+account_banking_sepa_direct_debit,15,no
+account_banking_sepa_direct_debit,16,no
+account_cutoff_accrual_order_base,11,no wheel
+account_cutoff_accrual_order_base,12,no wheel
+account_cutoff_accrual_order_base,13,no wheel
+account_cutoff_accrual_order_base,14,no wheel
+account_cutoff_accrual_order_base,15,no wheel
+account_cutoff_accrual_order_base,16,no wheel
+account_cutoff_accrual_order_product_category,11,no wheel
+account_cutoff_accrual_order_product_category,12,no wheel
+account_cutoff_accrual_order_product_category,13,no wheel
+account_cutoff_accrual_order_product_category,14,no wheel
+account_cutoff_accrual_order_product_category,15,no wheel
+account_cutoff_accrual_order_product_category,16,no wheel
+account_cutoff_accrual_order_stock_base,11,no wheel
+account_cutoff_accrual_order_stock_base,12,no wheel
+account_cutoff_accrual_order_stock_base,13,no wheel
+account_cutoff_accrual_order_stock_base,14,no wheel
+account_cutoff_accrual_order_stock_base,15,no wheel
+account_cutoff_accrual_order_stock_base,16,no wheel
+account_cutoff_accrual_purchase,11,no wheel
+account_cutoff_accrual_purchase,12,no wheel
+account_cutoff_accrual_purchase,13,no wheel
+account_cutoff_accrual_purchase,14,no wheel
+account_cutoff_accrual_purchase,15,no wheel
+account_cutoff_accrual_purchase,16,no wheel
+account_cutoff_accrual_purchase_stock,11,no wheel
+account_cutoff_accrual_purchase_stock,12,no wheel
+account_cutoff_accrual_purchase_stock,13,no wheel
+account_cutoff_accrual_purchase_stock,14,no wheel
+account_cutoff_accrual_purchase_stock,15,no wheel
+account_cutoff_accrual_purchase_stock,16,no wheel
+account_cutoff_accrual_sale,11,no wheel
+account_cutoff_accrual_sale,12,no wheel
+account_cutoff_accrual_sale,13,no wheel
+account_cutoff_accrual_sale,14,no wheel
+account_cutoff_accrual_sale,15,no wheel
+account_cutoff_accrual_sale,16,no wheel
+account_cutoff_accrual_sale_stock,11,no wheel
+account_cutoff_accrual_sale_stock,12,no wheel
+account_cutoff_accrual_sale_stock,13,no wheel
+account_cutoff_accrual_sale_stock,14,no wheel
+account_cutoff_accrual_sale_stock,15,no wheel
+account_cutoff_accrual_sale_stock,16,no wheel
+account_cutoff_base,11,no
+account_cutoff_base,12,no
+account_cutoff_base,13,mig
+account_cutoff_base,14,no
+account_cutoff_base,15,no
+account_cutoff_base,16,no
+account_financial_report,11,no
+account_financial_report,12,no
+account_financial_report,13,no
+account_financial_report,14,no
+account_financial_report,15,no
+account_financial_report,16,no
+account_invoice_accrual,11,no wheel
+account_invoice_accrual,12,no wheel
+account_invoice_accrual,13,no wheel
+account_invoice_accrual,14,no wheel
+account_invoice_accrual,15,no wheel
+account_invoice_accrual,16,no wheel
+account_invoice_check_total,11,no
+account_invoice_check_total,12,no
+account_invoice_check_total,13,mig
+account_invoice_check_total,14,no
+account_invoice_check_total,15,no
+account_invoice_check_total,16,no
+account_invoice_line_default_account,11,no wheel
+account_invoice_line_default_account,12,no
+account_invoice_line_default_account,13,no wheel
+account_invoice_line_default_account,14,no wheel
+account_invoice_line_default_account,15,no wheel
+account_invoice_line_default_account,16,no wheel
+account_invoice_purchase_quantity,11,no wheel
+account_invoice_purchase_quantity,12,no wheel
+account_invoice_purchase_quantity,13,no wheel
+account_invoice_purchase_quantity,14,no wheel
+account_invoice_purchase_quantity,15,no wheel
+account_invoice_purchase_quantity,16,no wheel
+account_invoice_split_refund,11,no wheel
+account_invoice_split_refund,12,no wheel
+account_invoice_split_refund,13,no wheel
+account_invoice_split_refund,14,no wheel
+account_invoice_split_refund,15,no wheel
+account_invoice_split_refund,16,no wheel
+account_invoice_supplier_ref_unique,11,no
+account_invoice_supplier_ref_unique,12,no
+account_invoice_supplier_ref_unique,13,no
+account_invoice_supplier_ref_unique,14,no
+account_invoice_supplier_ref_unique,15,no
+account_invoice_supplier_ref_unique,16,no
+account_invoice_tax_required,11,no
+account_invoice_tax_required,12,no
+account_invoice_tax_required,13,no
+account_invoice_tax_required,14,no
+account_invoice_tax_required,15,no
+account_invoice_tax_required,16,no
+account_invoice_transmit_method,11,no
+account_invoice_transmit_method,12,no
+account_invoice_transmit_method,13,mig
+account_invoice_transmit_method,14,no
+account_invoice_transmit_method,15,no
+account_invoice_transmit_method,16,no
+account_invoice_triple_discount,11,no
+account_invoice_triple_discount,12,no
+account_invoice_triple_discount,13,no
+account_invoice_triple_discount,14,no
+account_invoice_triple_discount,15,no
+account_invoice_triple_discount,16,no
+account_move_line_product_category,11,no wheel
+account_move_line_product_category,12,no wheel
+account_move_line_product_category,13,no wheel
+account_move_line_product_category,14,no wheel
+account_move_line_product_category,15,no wheel
+account_move_line_product_category,16,no wheel
+account_move_name_sequence,11,no wheel
+account_move_name_sequence,12,no wheel
+account_move_name_sequence,13,no wheel
+account_move_name_sequence,14,no
+account_move_name_sequence,15,no
+account_move_name_sequence,16,no
+account_move_sent_usability,11,no wheel
+account_move_sent_usability,12,no wheel
+account_move_sent_usability,13,no wheel
+account_move_sent_usability,14,no wheel
+account_move_sent_usability,15,no wheel
+account_move_sent_usability,16,no wheel
+account_payment_mode,11,mig
+account_payment_mode,12,no
+account_payment_mode,13,mig
+account_payment_mode,14,no
+account_payment_mode,15,no
+account_payment_mode,16,no
+account_payment_mode_auto_reconcile,11,no wheel
+account_payment_mode_auto_reconcile,12,no wheel
+account_payment_mode_auto_reconcile,13,no wheel
+account_payment_mode_auto_reconcile,14,no wheel
+account_payment_mode_auto_reconcile,15,no wheel
+account_payment_mode_auto_reconcile,16,no wheel
+account_payment_order,11,no
+account_payment_order,12,mig
+account_payment_order,13,mig
+account_payment_order,14,mig
+account_payment_order,15,mig
+account_payment_order,16,mig
+account_payment_partner,11,mig
+account_payment_partner,12,no
+account_payment_partner,13,mig
+account_payment_partner,14,no
+account_payment_partner,15,no
+account_payment_partner,16,no
+account_payment_sale,11,no
+account_payment_sale,12,no
+account_payment_sale,13,no
+account_payment_sale,14,no
+account_payment_sale,15,no
+account_payment_sale,16,no
+account_reconcile_restrict_partner_mismatch,11,no
+account_reconcile_restrict_partner_mismatch,12,no
+account_reconcile_restrict_partner_mismatch,13,no
+account_reconcile_restrict_partner_mismatch,14,no
+account_reconcile_restrict_partner_mismatch,15,no wheel
+account_reconcile_restrict_partner_mismatch,16,no wheel
+account_reversal,11,no
+account_reversal,12,no wheel
+account_reversal,13,no wheel
+account_reversal,14,no wheel
+account_reversal,15,no wheel
+account_reversal,16,no wheel
+account_tax_one_vat,11,no wheel
+account_tax_one_vat,12,no wheel
+account_tax_one_vat,13,no wheel
+account_tax_one_vat,14,no wheel
+account_tax_one_vat,15,no wheel
+account_tax_one_vat,16,no wheel
+account_tax_one_vat_purchase,11,no wheel
+account_tax_one_vat_purchase,12,no wheel
+account_tax_one_vat_purchase,13,no wheel
+account_tax_one_vat_purchase,14,no wheel
+account_tax_one_vat_purchase,15,no wheel
+account_tax_one_vat_purchase,16,no wheel
+account_tax_one_vat_sale,11,no wheel
+account_tax_one_vat_sale,12,no wheel
+account_tax_one_vat_sale,13,no wheel
+account_tax_one_vat_sale,14,no wheel
+account_tax_one_vat_sale,15,no wheel
+account_tax_one_vat_sale,16,no wheel
+account_tax_unece,11,no
+account_tax_unece,12,no
+account_tax_unece,13,no
+account_tax_unece,14,mig
+account_tax_unece,15,no
+account_tax_unece,16,no
+account_usability,11,no wheel
+account_usability,12,no wheel
+account_usability,13,no wheel
+account_usability,14,no wheel
+account_usability,15,no
+account_usability,16,no
+attachment_unindex_content,11,no
+attachment_unindex_content,12,no
+attachment_unindex_content,13,no
+attachment_unindex_content,14,no
+attachment_unindex_content,15,no
+attachment_unindex_content,16,no
+attribute_set,11,no wheel
+attribute_set,12,no
+attribute_set,13,mig
+attribute_set,14,mig
+attribute_set,15,no
+attribute_set,16,no
+auth_api_key,11,no wheel
+auth_api_key,12,mig
+auth_api_key,13,mig
+auth_api_key,14,mig
+auth_api_key,15,no
+auth_api_key,16,no
+auth_api_key_group,11,no wheel
+auth_api_key_group,12,no wheel
+auth_api_key_group,13,no wheel
+auth_api_key_group,14,no
+auth_api_key_group,15,no
+auth_api_key_group,16,no
+auth_jwt,11,no
+auth_jwt,12,no wheel
+auth_jwt,13,no
+auth_jwt,14,no
+auth_jwt,15,no wheel
+auth_jwt,16,no wheel
+base_business_document_import,11,no
+base_business_document_import,12,no
+base_business_document_import,13,no
+base_business_document_import,14,no
+base_business_document_import,15,no wheel
+base_business_document_import,16,no wheel
+base_delivery_carrier_label,11,no
+base_delivery_carrier_label,12,no
+base_delivery_carrier_label,13,no
+base_delivery_carrier_label,14,no
+base_delivery_carrier_label,15,no
+base_delivery_carrier_label,16,no
+base_exception,11,no
+base_exception,12,no
+base_exception,13,no
+base_exception,14,no
+base_exception,15,no
+base_exception,16,no
+base_geoengine,11,no
+base_geoengine,12,no
+base_geoengine,13,no
+base_geoengine,14,no
+base_geoengine,15,no wheel
+base_geoengine,16,no wheel
+base_import_security_group,11,no
+base_import_security_group,12,no
+base_import_security_group,13,no
+base_import_security_group,14,no
+base_import_security_group,15,no
+base_import_security_group,16,no
+base_optional_quick_create,11,no
+base_optional_quick_create,12,no
+base_optional_quick_create,13,no
+base_optional_quick_create,14,no
+base_optional_quick_create,15,no
+base_optional_quick_create,16,no
+base_partition,11,no wheel
+base_partition,12,no wheel
+base_partition,13,no wheel
+base_partition,14,no wheel
+base_partition,15,no wheel
+base_partition,16,no wheel
+base_partner_sequence,11,no
+base_partner_sequence,12,no
+base_partner_sequence,13,no
+base_partner_sequence,14,no
+base_partner_sequence,15,no
+base_partner_sequence,16,no
+base_report_to_label_printer,11,no wheel
+base_report_to_label_printer,12,no wheel
+base_report_to_label_printer,13,no wheel
+base_report_to_label_printer,14,no
+base_report_to_label_printer,15,no wheel
+base_report_to_label_printer,16,no wheel
+base_report_to_printer,11,no
+base_report_to_printer,12,no
+base_report_to_printer,13,no
+base_report_to_printer,14,no
+base_report_to_printer,15,no
+base_report_to_printer,16,no
+base_rest,11,no
+base_rest,12,no
+base_rest,13,no
+base_rest,14,no
+base_rest,15,no
+base_rest,16,no
+base_sparse_field_list_support,11,no wheel
+base_sparse_field_list_support,12,no
+base_sparse_field_list_support,13,no
+base_sparse_field_list_support,14,no
+base_sparse_field_list_support,15,no
+base_sparse_field_list_support,16,no
+base_technical_features,11,no
+base_technical_features,12,no
+base_technical_features,13,no
+base_technical_features,14,no
+base_technical_features,15,no
+base_technical_features,16,no
+base_time_window,11,no wheel
+base_time_window,12,no wheel
+base_time_window,13,no
+base_time_window,14,no
+base_time_window,15,no
+base_time_window,16,no
+base_ubl,11,no
+base_ubl,12,no
+base_ubl,13,no
+base_ubl,14,no
+base_ubl,15,no
+base_ubl,16,no
+base_unece,11,no
+base_unece,12,no
+base_unece,13,no
+base_unece,14,no
+base_unece,15,no
+base_unece,16,no
+base_view_inheritance_extension,11,no
+base_view_inheritance_extension,12,no
+base_view_inheritance_extension,13,no
+base_view_inheritance_extension,14,no
+base_view_inheritance_extension,15,no
+base_view_inheritance_extension,16,no
+component,11,no
+component,12,no
+component,13,no
+component,14,no
+component,15,no
+component,16,no
+component_event,11,no
+component_event,12,no
+component_event,13,no
+component_event,14,no
+component_event,15,no
+component_event,16,no
+connector,11,no
+connector,12,mig
+connector,13,no
+connector,14,no
+connector,15,no
+connector,16,no
+connector_elasticsearch,11,no wheel
+connector_elasticsearch,12,no
+connector_elasticsearch,13,mig
+connector_elasticsearch,14,mig
+connector_elasticsearch,15,no
+connector_elasticsearch,16,no
+connector_search_engine,11,no wheel
+connector_search_engine,12,mig
+connector_search_engine,13,no
+connector_search_engine,14,mig
+connector_search_engine,15,no
+connector_search_engine,16,no
+date_range,11,mig
+date_range,12,no
+date_range,13,mig
+date_range,14,no
+date_range,15,no
+date_range,16,no
+delivery_automatic_package,11,no wheel
+delivery_automatic_package,12,no wheel
+delivery_automatic_package,13,no wheel
+delivery_automatic_package,14,no wheel
+delivery_automatic_package,15,no wheel
+delivery_automatic_package,16,no wheel
+delivery_carrier_account,11,no wheel
+delivery_carrier_account,12,no wheel
+delivery_carrier_account,13,no wheel
+delivery_carrier_account,14,no wheel
+delivery_carrier_account,15,no wheel
+delivery_carrier_account,16,no wheel
+delivery_carrier_info,11,no wheel
+delivery_carrier_info,12,no
+delivery_carrier_info,13,no
+delivery_carrier_info,14,no
+delivery_carrier_info,15,no
+delivery_carrier_info,16,no
+delivery_carrier_label_gls,11,no wheel
+delivery_carrier_label_gls,12,no wheel
+delivery_carrier_label_gls,13,no wheel
+delivery_carrier_label_gls,14,no wheel
+delivery_carrier_label_gls,15,no wheel
+delivery_carrier_label_gls,16,no wheel
+delivery_carrier_max_weight_constraint,11,no wheel
+delivery_carrier_max_weight_constraint,12,no wheel
+delivery_carrier_max_weight_constraint,13,no wheel
+delivery_carrier_max_weight_constraint,14,no wheel
+delivery_carrier_max_weight_constraint,15,no wheel
+delivery_carrier_max_weight_constraint,16,no wheel
+delivery_carrier_partner,11,no
+delivery_carrier_partner,12,no
+delivery_carrier_partner,13,no
+delivery_carrier_partner,14,no
+delivery_carrier_partner,15,no wheel
+delivery_carrier_partner,16,no wheel
+delivery_estimated_package_quantity_by_weight,11,no wheel
+delivery_estimated_package_quantity_by_weight,12,no wheel
+delivery_estimated_package_quantity_by_weight,13,no wheel
+delivery_estimated_package_quantity_by_weight,14,no wheel
+delivery_estimated_package_quantity_by_weight,15,no wheel
+delivery_estimated_package_quantity_by_weight,16,no wheel
+delivery_package_type_number_parcels,11,no wheel
+delivery_package_type_number_parcels,12,no wheel
+delivery_package_type_number_parcels,13,no wheel
+delivery_package_type_number_parcels,14,no wheel
+delivery_package_type_number_parcels,15,no wheel
+delivery_package_type_number_parcels,16,no wheel
+delivery_procurement_group_carrier,11,no wheel
+delivery_procurement_group_carrier,12,no wheel
+delivery_procurement_group_carrier,13,no wheel
+delivery_procurement_group_carrier,14,no
+delivery_procurement_group_carrier,15,no
+delivery_procurement_group_carrier,16,no
+endpoint_route_handler,11,no wheel
+endpoint_route_handler,12,no wheel
+endpoint_route_handler,13,no wheel
+endpoint_route_handler,14,mig
+endpoint_route_handler,15,no wheel
+endpoint_route_handler,16,no wheel
+extendable,11,no wheel
+extendable,12,no wheel
+extendable,13,no
+extendable,14,no
+extendable,15,no
+extendable,16,no
+extendable_fastapi,11,no wheel
+extendable_fastapi,12,no wheel
+extendable_fastapi,13,no wheel
+extendable_fastapi,14,no
+extendable_fastapi,15,no wheel
+extendable_fastapi,16,no wheel
+fastapi,11,no wheel
+fastapi,12,no wheel
+fastapi,13,no wheel
+fastapi,14,no
+fastapi,15,no wheel
+fastapi,16,no wheel
+fastapi_auth_jwt,11,no wheel
+fastapi_auth_jwt,12,no wheel
+fastapi_auth_jwt,13,no wheel
+fastapi_auth_jwt,14,no wheel
+fastapi_auth_jwt,15,no wheel
+fastapi_auth_jwt,16,no wheel
+fs_attachment,11,no wheel
+fs_attachment,12,no wheel
+fs_attachment,13,no wheel
+fs_attachment,14,no wheel
+fs_attachment,15,no wheel
+fs_attachment,16,no wheel
+fs_base_multi_image,11,no wheel
+fs_base_multi_image,12,no wheel
+fs_base_multi_image,13,no wheel
+fs_base_multi_image,14,no wheel
+fs_base_multi_image,15,no wheel
+fs_base_multi_image,16,no wheel
+fs_base_multi_media,11,no wheel
+fs_base_multi_media,12,no wheel
+fs_base_multi_media,13,no wheel
+fs_base_multi_media,14,no wheel
+fs_base_multi_media,15,no wheel
+fs_base_multi_media,16,no wheel
+fs_file,11,no wheel
+fs_file,12,no wheel
+fs_file,13,no wheel
+fs_file,14,no wheel
+fs_file,15,no wheel
+fs_file,16,no wheel
+fs_image,11,no wheel
+fs_image,12,no wheel
+fs_image,13,no wheel
+fs_image,14,no wheel
+fs_image,15,no wheel
+fs_image,16,no wheel
+fs_image_thumbnail,11,no wheel
+fs_image_thumbnail,12,no wheel
+fs_image_thumbnail,13,no wheel
+fs_image_thumbnail,14,no wheel
+fs_image_thumbnail,15,no wheel
+fs_image_thumbnail,16,no wheel
+fs_product_brand_multi_image,11,no wheel
+fs_product_brand_multi_image,12,no wheel
+fs_product_brand_multi_image,13,no wheel
+fs_product_brand_multi_image,14,no wheel
+fs_product_brand_multi_image,15,no wheel
+fs_product_brand_multi_image,16,no wheel
+fs_product_multi_image,11,no wheel
+fs_product_multi_image,12,no wheel
+fs_product_multi_image,13,no wheel
+fs_product_multi_image,14,no wheel
+fs_product_multi_image,15,no wheel
+fs_product_multi_image,16,no wheel
+fs_product_multi_media,11,no wheel
+fs_product_multi_media,12,no wheel
+fs_product_multi_media,13,no wheel
+fs_product_multi_media,14,no wheel
+fs_product_multi_media,15,no wheel
+fs_product_multi_media,16,no wheel
+fs_storage,11,no wheel
+fs_storage,12,no wheel
+fs_storage,13,no wheel
+fs_storage,14,no wheel
+fs_storage,15,no wheel
+fs_storage,16,no wheel
+geoengine_base_geolocalize,11,no
+geoengine_base_geolocalize,12,no
+geoengine_base_geolocalize,13,no
+geoengine_base_geolocalize,14,no wheel
+geoengine_base_geolocalize,15,no wheel
+geoengine_base_geolocalize,16,no wheel
+geoengine_partner,11,no
+geoengine_partner,12,no
+geoengine_partner,13,no
+geoengine_partner,14,no wheel
+geoengine_partner,15,no wheel
+geoengine_partner,16,no wheel
+hr_holidays_public,11,no
+hr_holidays_public,12,mig
+hr_holidays_public,13,mig
+hr_holidays_public,14,no
+hr_holidays_public,15,no
+hr_holidays_public,16,no
+image_tag,11,no wheel
+image_tag,12,no wheel
+image_tag,13,no wheel
+image_tag,14,no wheel
+image_tag,15,no wheel
+image_tag,16,no wheel
+internal_stock_quant_package,11,no wheel
+internal_stock_quant_package,12,no wheel
+internal_stock_quant_package,13,no wheel
+internal_stock_quant_package,14,no wheel
+internal_stock_quant_package,15,no wheel
+internal_stock_quant_package,16,no wheel
+jsonifier,11,no wheel
+jsonifier,12,no wheel
+jsonifier,13,no wheel
+jsonifier,14,no
+jsonifier,15,no
+jsonifier,16,no
+l10n_be_antibiotic_tax,11,no wheel
+l10n_be_antibiotic_tax,12,no wheel
+l10n_be_antibiotic_tax,13,no wheel
+l10n_be_antibiotic_tax,14,no wheel
+l10n_be_antibiotic_tax,15,no wheel
+l10n_be_antibiotic_tax,16,no wheel
+l10n_be_apb_tax,11,no wheel
+l10n_be_apb_tax,12,no wheel
+l10n_be_apb_tax,13,no wheel
+l10n_be_apb_tax,14,no wheel
+l10n_be_apb_tax,15,no wheel
+l10n_be_apb_tax,16,no wheel
+l10n_be_bpost_address_autocomplete,11,no wheel
+l10n_be_bpost_address_autocomplete,12,no wheel
+l10n_be_bpost_address_autocomplete,13,no wheel
+l10n_be_bpost_address_autocomplete,14,no wheel
+l10n_be_bpost_address_autocomplete,15,no wheel
+l10n_be_bpost_address_autocomplete,16,no wheel
+l10n_be_bpost_address_validation,11,no wheel
+l10n_be_bpost_address_validation,12,no wheel
+l10n_be_bpost_address_validation,13,no wheel
+l10n_be_bpost_address_validation,14,no wheel
+l10n_be_bpost_address_validation,15,no wheel
+l10n_be_bpost_address_validation,16,no wheel
+l10n_be_eco_tax,11,no wheel
+l10n_be_eco_tax,12,no wheel
+l10n_be_eco_tax,13,no wheel
+l10n_be_eco_tax,14,no wheel
+l10n_be_eco_tax,15,no wheel
+l10n_be_eco_tax,16,no wheel
+l10n_be_iso20022_pain,11,no wheel
+l10n_be_iso20022_pain,12,no wheel
+l10n_be_iso20022_pain,13,no
+l10n_be_iso20022_pain,14,no wheel
+l10n_be_iso20022_pain,15,no wheel
+l10n_be_iso20022_pain,16,no wheel
+mail_environment,11,no
+mail_environment,12,no
+mail_environment,13,no
+mail_environment,14,no
+mail_environment,15,no
+mail_environment,16,no
+mis_builder,11,mig
+mis_builder,12,no
+mis_builder,13,no
+mis_builder,14,mig
+mis_builder,15,mig
+mis_builder,16,mig
+mis_builder_budget,11,no
+mis_builder_budget,12,no
+mis_builder_budget,13,no
+mis_builder_budget,14,no
+mis_builder_budget,15,no
+mis_builder_budget,16,no
+onchange_helper,11,no
+onchange_helper,12,no
+onchange_helper,13,no
+onchange_helper,14,no
+onchange_helper,15,no
+onchange_helper,16,no
+partner_fax,11,no
+partner_fax,12,no
+partner_fax,13,no
+partner_fax,14,no
+partner_fax,15,no
+partner_fax,16,no
+partner_invoicing_mode,11,no wheel
+partner_invoicing_mode,12,no wheel
+partner_invoicing_mode,13,no wheel
+partner_invoicing_mode,14,no wheel
+partner_invoicing_mode,15,no
+partner_invoicing_mode,16,no
+partner_invoicing_mode_at_shipping,11,no wheel
+partner_invoicing_mode_at_shipping,12,no wheel
+partner_invoicing_mode_at_shipping,13,no wheel
+partner_invoicing_mode_at_shipping,14,no wheel
+partner_invoicing_mode_at_shipping,15,no
+partner_invoicing_mode_at_shipping,16,no
+partner_invoicing_mode_fourteen_days,11,no wheel
+partner_invoicing_mode_fourteen_days,12,no wheel
+partner_invoicing_mode_fourteen_days,13,no wheel
+partner_invoicing_mode_fourteen_days,14,no wheel
+partner_invoicing_mode_fourteen_days,15,no wheel
+partner_invoicing_mode_fourteen_days,16,no wheel
+partner_invoicing_mode_monthly,11,no wheel
+partner_invoicing_mode_monthly,12,no wheel
+partner_invoicing_mode_monthly,13,no wheel
+partner_invoicing_mode_monthly,14,no wheel
+partner_invoicing_mode_monthly,15,no wheel
+partner_invoicing_mode_monthly,16,no wheel
+partner_invoicing_mode_ten_days,11,no wheel
+partner_invoicing_mode_ten_days,12,no wheel
+partner_invoicing_mode_ten_days,13,no wheel
+partner_invoicing_mode_ten_days,14,no wheel
+partner_invoicing_mode_ten_days,15,no wheel
+partner_invoicing_mode_ten_days,16,no wheel
+partner_manual_rank,11,no wheel
+partner_manual_rank,12,no wheel
+partner_manual_rank,13,no
+partner_manual_rank,14,no
+partner_manual_rank,15,no
+partner_manual_rank,16,no
+partner_tz,11,no wheel
+partner_tz,12,no wheel
+partner_tz,13,no
+partner_tz,14,no
+partner_tz,15,no wheel
+partner_tz,16,no wheel
+pdf_helper,11,no wheel
+pdf_helper,12,no wheel
+pdf_helper,13,no wheel
+pdf_helper,14,no
+pdf_helper,15,no
+pdf_helper,16,no
+procurement_auto_create_group,11,no
+procurement_auto_create_group,12,no
+procurement_auto_create_group,13,no
+procurement_auto_create_group,14,no
+procurement_auto_create_group,15,no
+procurement_auto_create_group,16,no
+product_abc_classification,11,no wheel
+product_abc_classification,12,no wheel
+product_abc_classification,13,no
+product_abc_classification,14,no wheel
+product_abc_classification,15,no
+product_abc_classification,16,no
+product_abc_classification_sale_stock,11,no wheel
+product_abc_classification_sale_stock,12,no wheel
+product_abc_classification_sale_stock,13,no wheel
+product_abc_classification_sale_stock,14,no wheel
+product_abc_classification_sale_stock,15,no wheel
+product_abc_classification_sale_stock,16,no wheel
+product_analytic,11,no
+product_analytic,12,no
+product_analytic,13,no
+product_analytic,14,no
+product_analytic,15,no
+product_analytic,16,no
+product_analytic_purchase,11,no wheel
+product_analytic_purchase,12,no wheel
+product_analytic_purchase,13,no wheel
+product_analytic_purchase,14,no
+product_analytic_purchase,15,no wheel
+product_analytic_purchase,16,no wheel
+product_assortment,11,no wheel
+product_assortment,12,no
+product_assortment,13,no
+product_assortment,14,no
+product_assortment,15,no
+product_assortment,16,no
+product_attribute_set,11,no wheel
+product_attribute_set,12,no
+product_attribute_set,13,no
+product_attribute_set,14,no
+product_attribute_set,15,no wheel
+product_attribute_set,16,no wheel
+product_brand,11,no
+product_brand,12,mig
+product_brand,13,no
+product_brand,14,no
+product_brand,15,no
+product_brand,16,no
+product_dimension,11,no
+product_dimension,12,mig
+product_dimension,13,no
+product_dimension,14,no
+product_dimension,15,no
+product_dimension,16,no
+product_expiry_configurable,11,no wheel
+product_expiry_configurable,12,no wheel
+product_expiry_configurable,13,no
+product_expiry_configurable,14,mig
+product_expiry_configurable,15,no wheel
+product_expiry_configurable,16,no wheel
+product_logistics_uom,11,no wheel
+product_logistics_uom,12,no
+product_logistics_uom,13,no wheel
+product_logistics_uom,14,no
+product_logistics_uom,15,no
+product_logistics_uom,16,no
+product_manufacturer,11,no
+product_manufacturer,12,no
+product_manufacturer,13,mig
+product_manufacturer,14,no
+product_manufacturer,15,no
+product_manufacturer,16,no
+product_multi_category,11,no
+product_multi_category,12,no
+product_multi_category,13,no
+product_multi_category,14,no
+product_multi_category,15,no wheel
+product_multi_category,16,no wheel
+product_packaging_dimension,11,no wheel
+product_packaging_dimension,12,no
+product_packaging_dimension,13,no
+product_packaging_dimension,14,mig
+product_packaging_dimension,15,no wheel
+product_packaging_dimension,16,no wheel
+product_packaging_level,11,no wheel
+product_packaging_level,12,no wheel
+product_packaging_level,13,no wheel
+product_packaging_level,14,no wheel
+product_packaging_level,15,no wheel
+product_packaging_level,16,no wheel
+product_packaging_level_pallet,11,no wheel
+product_packaging_level_pallet,12,no wheel
+product_packaging_level_pallet,13,no wheel
+product_packaging_level_pallet,14,no wheel
+product_packaging_level_pallet,15,no wheel
+product_packaging_level_pallet,16,no wheel
+product_price_category,11,no wheel
+product_price_category,12,no wheel
+product_price_category,13,no wheel
+product_price_category,14,no wheel
+product_price_category,15,no wheel
+product_price_category,16,no wheel
+product_route_mto,11,no wheel
+product_route_mto,12,no wheel
+product_route_mto,13,no wheel
+product_route_mto,14,no wheel
+product_route_mto,15,no wheel
+product_route_mto,16,no wheel
+product_sale_description,11,no wheel
+product_sale_description,12,no wheel
+product_sale_description,13,no wheel
+product_sale_description,14,no wheel
+product_sale_description,15,no wheel
+product_sale_description,16,no wheel
+product_sequence,11,no
+product_sequence,12,no
+product_sequence,13,no
+product_sequence,14,no
+product_sequence,15,no
+product_sequence,16,no
+product_set,11,no wheel
+product_set,12,no wheel
+product_set,13,no wheel
+product_set,14,no wheel
+product_set,15,no wheel
+product_set,16,no wheel
+product_state,11,no
+product_state,12,mig
+product_state,13,mig
+product_state,14,mig
+product_state,15,no
+product_state,16,no
+product_stock_state,11,no wheel
+product_stock_state,12,no
+product_stock_state,13,no
+product_stock_state,14,no
+product_stock_state,15,no
+product_stock_state,16,no
+product_template_has_one_variant,11,no wheel
+product_template_has_one_variant,12,no wheel
+product_template_has_one_variant,13,no wheel
+product_template_has_one_variant,14,no wheel
+product_template_has_one_variant,15,no wheel
+product_template_has_one_variant,16,no wheel
+product_template_multi_link,11,no wheel
+product_template_multi_link,12,no wheel
+product_template_multi_link,13,no
+product_template_multi_link,14,no
+product_template_multi_link,15,no
+product_template_multi_link,16,no
+product_total_weight_from_packaging,11,no wheel
+product_total_weight_from_packaging,12,no wheel
+product_total_weight_from_packaging,13,no
+product_total_weight_from_packaging,14,no
+product_total_weight_from_packaging,15,no wheel
+product_total_weight_from_packaging,16,no wheel
+product_uom_updatable,11,no wheel
+product_uom_updatable,12,no wheel
+product_uom_updatable,13,no
+product_uom_updatable,14,no
+product_uom_updatable,15,no wheel
+product_uom_updatable,16,no wheel
+purchase_cancel_reason,11,no wheel
+purchase_cancel_reason,12,no wheel
+purchase_cancel_reason,13,no wheel
+purchase_cancel_reason,14,no
+purchase_cancel_reason,15,no wheel
+purchase_cancel_reason,16,no wheel
+purchase_delivery_split_date,11,no
+purchase_delivery_split_date,12,no
+purchase_delivery_split_date,13,no
+purchase_delivery_split_date,14,no
+purchase_delivery_split_date,15,no
+purchase_delivery_split_date,16,no
+purchase_discount,11,no
+purchase_discount,12,no
+purchase_discount,13,no
+purchase_discount,14,no
+purchase_discount,15,no
+purchase_discount,16,no
+purchase_force_invoiced,11,no
+purchase_force_invoiced,12,no
+purchase_force_invoiced,13,no
+purchase_force_invoiced,14,no
+purchase_force_invoiced,15,no
+purchase_force_invoiced,16,no
+purchase_order_approved,11,no
+purchase_order_approved,12,no
+purchase_order_approved,13,no
+purchase_order_approved,14,no
+purchase_order_approved,15,no
+purchase_order_approved,16,no
+purchase_order_ubl,11,no
+purchase_order_ubl,12,no
+purchase_order_ubl,13,no
+purchase_order_ubl,14,no
+purchase_order_ubl,15,no wheel
+purchase_order_ubl,16,no wheel
+purchase_stock_packaging,11,no wheel
+purchase_stock_packaging,12,no wheel
+purchase_stock_packaging,13,no wheel
+purchase_stock_packaging,14,no wheel
+purchase_stock_packaging,15,no wheel
+purchase_stock_packaging,16,no wheel
+pydantic,11,no wheel
+pydantic,12,no wheel
+pydantic,13,no
+pydantic,14,no
+pydantic,15,no
+pydantic,16,no
+queue_job,11,no
+queue_job,12,mig
+queue_job,13,mig
+queue_job,14,mig
+queue_job,15,mig
+queue_job,16,mig
+queue_job_cron,11,no
+queue_job_cron,12,no
+queue_job_cron,13,no
+queue_job_cron,14,no
+queue_job_cron,15,no
+queue_job_cron,16,no
+report_csv,11,no
+report_csv,12,no
+report_csv,13,no
+report_csv,14,no
+report_csv,15,no
+report_csv,16,no
+report_xlsx,11,no
+report_xlsx,12,no
+report_xlsx,13,no
+report_xlsx,14,no
+report_xlsx,15,no
+report_xlsx,16,no
+report_xlsx_helper,11,no
+report_xlsx_helper,12,no
+report_xlsx_helper,13,no
+report_xlsx_helper,14,no
+report_xlsx_helper,15,no
+report_xlsx_helper,16,no
+report_xml,11,no
+report_xml,12,no
+report_xml,13,no
+report_xml,14,no
+report_xml,15,no
+report_xml,16,no
+rest_log,11,no wheel
+rest_log,12,no wheel
+rest_log,13,no
+rest_log,14,no
+rest_log,15,no
+rest_log,16,no
+sale_cart,11,no wheel
+sale_cart,12,no wheel
+sale_cart,13,no wheel
+sale_cart,14,no wheel
+sale_cart,15,no wheel
+sale_cart,16,no wheel
+sale_channel,11,no wheel
+sale_channel,12,no wheel
+sale_channel,13,no wheel
+sale_channel,14,no wheel
+sale_channel,15,no wheel
+sale_channel,16,no wheel
+sale_discount_display_amount,11,no wheel
+sale_discount_display_amount,12,no
+sale_discount_display_amount,13,no
+sale_discount_display_amount,14,mig
+sale_discount_display_amount,15,no
+sale_discount_display_amount,16,no
+sale_exception,11,no
+sale_exception,12,no
+sale_exception,13,no
+sale_exception,14,no
+sale_exception,15,no
+sale_exception,16,no
+sale_force_invoiced,11,no
+sale_force_invoiced,12,no
+sale_force_invoiced,13,no
+sale_force_invoiced,14,no
+sale_force_invoiced,15,no
+sale_force_invoiced,16,no
+sale_order_line_cancel,11,no wheel
+sale_order_line_cancel,12,no wheel
+sale_order_line_cancel,13,no wheel
+sale_order_line_cancel,14,no wheel
+sale_order_line_cancel,15,no wheel
+sale_order_line_cancel,16,no wheel
+sale_procurement_customer,11,no wheel
+sale_procurement_customer,12,no wheel
+sale_procurement_customer,13,no wheel
+sale_procurement_customer,14,no wheel
+sale_procurement_customer,15,no wheel
+sale_procurement_customer,16,no wheel
+sale_product_set,11,no
+sale_product_set,12,no
+sale_product_set,13,no
+sale_product_set,14,no
+sale_product_set,15,no
+sale_product_set,16,no
+sale_route_amendment,11,no wheel
+sale_route_amendment,12,no wheel
+sale_route_amendment,13,no wheel
+sale_route_amendment,14,no wheel
+sale_route_amendment,15,no wheel
+sale_route_amendment,16,no wheel
+sale_shipping_info_helper,11,no wheel
+sale_shipping_info_helper,12,no
+sale_shipping_info_helper,13,no
+sale_shipping_info_helper,14,no
+sale_shipping_info_helper,15,no
+sale_shipping_info_helper,16,no
+sale_stock_picking_blocking,11,no
+sale_stock_picking_blocking,12,no
+sale_stock_picking_blocking,13,no
+sale_stock_picking_blocking,14,no
+sale_stock_picking_blocking,15,no
+sale_stock_picking_blocking,16,no
+sale_stock_restocking_fee_invoicing,11,no wheel
+sale_stock_restocking_fee_invoicing,12,no wheel
+sale_stock_restocking_fee_invoicing,13,no wheel
+sale_stock_restocking_fee_invoicing,14,no wheel
+sale_stock_restocking_fee_invoicing,15,no wheel
+sale_stock_restocking_fee_invoicing,16,no wheel
+sale_triple_discount,11,no wheel
+sale_triple_discount,12,no
+sale_triple_discount,13,no wheel
+sale_triple_discount,14,no
+sale_triple_discount,15,no
+sale_triple_discount,16,no
+sale_wishlist,11,no wheel
+sale_wishlist,12,no
+sale_wishlist,13,no
+sale_wishlist,14,no
+sale_wishlist,15,no
+sale_wishlist,16,no
+search_engine_image_thumbnail,11,no wheel
+search_engine_image_thumbnail,12,no wheel
+search_engine_image_thumbnail,13,no wheel
+search_engine_image_thumbnail,14,no wheel
+search_engine_image_thumbnail,15,no wheel
+search_engine_image_thumbnail,16,no wheel
+search_engine_serializer_pydantic,11,no wheel
+search_engine_serializer_pydantic,12,no wheel
+search_engine_serializer_pydantic,13,no wheel
+search_engine_serializer_pydantic,14,no wheel
+search_engine_serializer_pydantic,15,no wheel
+search_engine_serializer_pydantic,16,no wheel
+server_action_mass_edit,11,no wheel
+server_action_mass_edit,12,no wheel
+server_action_mass_edit,13,no wheel
+server_action_mass_edit,14,no wheel
+server_action_mass_edit,15,no wheel
+server_action_mass_edit,16,no wheel
+server_environment,11,no
+server_environment,12,no
+server_environment,13,no
+server_environment,14,no
+server_environment,15,no
+server_environment,16,no
+server_environment_ir_config_parameter,11,no
+server_environment_ir_config_parameter,12,no
+server_environment_ir_config_parameter,13,no
+server_environment_ir_config_parameter,14,no
+server_environment_ir_config_parameter,15,no
+server_environment_ir_config_parameter,16,no
+session_db,11,no wheel
+session_db,12,no wheel
+session_db,13,no
+session_db,14,no
+session_db,15,no wheel
+session_db,16,no wheel
+shipment_advice,11,no wheel
+shipment_advice,12,no wheel
+shipment_advice,13,no
+shipment_advice,14,no
+shipment_advice,15,no wheel
+shipment_advice,16,no wheel
+shipment_advice_planner,11,no wheel
+shipment_advice_planner,12,no wheel
+shipment_advice_planner,13,no wheel
+shipment_advice_planner,14,no wheel
+shipment_advice_planner,15,no wheel
+shipment_advice_planner,16,no wheel
+shipment_advice_planner_toursolver,11,no wheel
+shipment_advice_planner_toursolver,12,no wheel
+shipment_advice_planner_toursolver,13,no wheel
+shipment_advice_planner_toursolver,14,no wheel
+shipment_advice_planner_toursolver,15,no wheel
+shipment_advice_planner_toursolver,16,no wheel
+shipment_advice_planner_toursolver_queue_job,11,no wheel
+shipment_advice_planner_toursolver_queue_job,12,no wheel
+shipment_advice_planner_toursolver_queue_job,13,no wheel
+shipment_advice_planner_toursolver_queue_job,14,no wheel
+shipment_advice_planner_toursolver_queue_job,15,no wheel
+shipment_advice_planner_toursolver_queue_job,16,no wheel
+shopfloor,11,no wheel
+shopfloor,12,no wheel
+shopfloor,13,mig
+shopfloor,14,mig
+shopfloor,15,no wheel
+shopfloor,16,no wheel
+shopfloor_base,11,no wheel
+shopfloor_base,12,no wheel
+shopfloor_base,13,no
+shopfloor_base,14,mig
+shopfloor_base,15,no wheel
+shopfloor_base,16,no wheel
+shopfloor_batch_automatic_creation,11,no wheel
+shopfloor_batch_automatic_creation,12,no wheel
+shopfloor_batch_automatic_creation,13,no
+shopfloor_batch_automatic_creation,14,no
+shopfloor_batch_automatic_creation,15,no wheel
+shopfloor_batch_automatic_creation,16,no wheel
+shopfloor_mobile,11,no wheel
+shopfloor_mobile,12,no wheel
+shopfloor_mobile,13,no
+shopfloor_mobile,14,mig
+shopfloor_mobile,15,no wheel
+shopfloor_mobile,16,no wheel
+shopfloor_mobile_base,11,no wheel
+shopfloor_mobile_base,12,no wheel
+shopfloor_mobile_base,13,no
+shopfloor_mobile_base,14,no
+shopfloor_mobile_base,15,no wheel
+shopfloor_mobile_base,16,no wheel
+shopfloor_mobile_base_auth_api_key,11,no wheel
+shopfloor_mobile_base_auth_api_key,12,no wheel
+shopfloor_mobile_base_auth_api_key,13,no wheel
+shopfloor_mobile_base_auth_api_key,14,no
+shopfloor_mobile_base_auth_api_key,15,no wheel
+shopfloor_mobile_base_auth_api_key,16,no wheel
+shopfloor_mobile_packing,11,no wheel
+shopfloor_mobile_packing,12,no wheel
+shopfloor_mobile_packing,13,no wheel
+shopfloor_mobile_packing,14,no wheel
+shopfloor_mobile_packing,15,no wheel
+shopfloor_mobile_packing,16,no wheel
+shopfloor_packing,11,no wheel
+shopfloor_packing,12,no wheel
+shopfloor_packing,13,no wheel
+shopfloor_packing,14,no wheel
+shopfloor_packing,15,no wheel
+shopfloor_packing,16,no wheel
+shopfloor_rest_log,11,no wheel
+shopfloor_rest_log,12,no wheel
+shopfloor_rest_log,13,mig
+shopfloor_rest_log,14,mig
+shopfloor_rest_log,15,no wheel
+shopfloor_rest_log,16,no wheel
+shopfloor_workstation,11,no wheel
+shopfloor_workstation,12,no wheel
+shopfloor_workstation,13,no
+shopfloor_workstation,14,no
+shopfloor_workstation,15,no wheel
+shopfloor_workstation,16,no wheel
+shopfloor_workstation_mobile,11,no wheel
+shopfloor_workstation_mobile,12,no wheel
+shopfloor_workstation_mobile,13,no
+shopfloor_workstation_mobile,14,no
+shopfloor_workstation_mobile,15,no wheel
+shopfloor_workstation_mobile,16,no wheel
+shopinvader_address,11,no wheel
+shopinvader_address,12,no wheel
+shopinvader_address,13,no wheel
+shopinvader_address,14,no wheel
+shopinvader_address,15,no wheel
+shopinvader_address,16,no wheel
+shopinvader_anonymous_partner,11,no wheel
+shopinvader_anonymous_partner,12,no wheel
+shopinvader_anonymous_partner,13,no wheel
+shopinvader_anonymous_partner,14,no wheel
+shopinvader_anonymous_partner,15,no wheel
+shopinvader_anonymous_partner,16,no wheel
+shopinvader_api_address,11,no wheel
+shopinvader_api_address,12,no wheel
+shopinvader_api_address,13,no wheel
+shopinvader_api_address,14,no wheel
+shopinvader_api_address,15,no wheel
+shopinvader_api_address,16,no wheel
+shopinvader_api_cart,11,no wheel
+shopinvader_api_cart,12,no wheel
+shopinvader_api_cart,13,no wheel
+shopinvader_api_cart,14,no wheel
+shopinvader_api_cart,15,no wheel
+shopinvader_api_cart,16,no wheel
+shopinvader_api_sale,11,no wheel
+shopinvader_api_sale,12,no wheel
+shopinvader_api_sale,13,no wheel
+shopinvader_api_sale,14,no wheel
+shopinvader_api_sale,15,no wheel
+shopinvader_api_sale,16,no wheel
+shopinvader_api_security_sale,11,no wheel
+shopinvader_api_security_sale,12,no wheel
+shopinvader_api_security_sale,13,no wheel
+shopinvader_api_security_sale,14,no wheel
+shopinvader_api_security_sale,15,no wheel
+shopinvader_api_security_sale,16,no wheel
+shopinvader_api_wishlist,11,no wheel
+shopinvader_api_wishlist,12,no wheel
+shopinvader_api_wishlist,13,no wheel
+shopinvader_api_wishlist,14,no wheel
+shopinvader_api_wishlist,15,no wheel
+shopinvader_api_wishlist,16,no wheel
+shopinvader_base_url,11,no wheel
+shopinvader_base_url,12,no wheel
+shopinvader_base_url,13,no wheel
+shopinvader_base_url,14,no wheel
+shopinvader_base_url,15,no wheel
+shopinvader_base_url,16,no wheel
+shopinvader_fastapi_auth_jwt,11,no wheel
+shopinvader_fastapi_auth_jwt,12,no wheel
+shopinvader_fastapi_auth_jwt,13,no wheel
+shopinvader_fastapi_auth_jwt,14,no wheel
+shopinvader_fastapi_auth_jwt,15,no wheel
+shopinvader_fastapi_auth_jwt,16,no wheel
+shopinvader_filtered_model,11,no wheel
+shopinvader_filtered_model,12,no wheel
+shopinvader_filtered_model,13,no wheel
+shopinvader_filtered_model,14,no wheel
+shopinvader_filtered_model,15,no wheel
+shopinvader_filtered_model,16,no wheel
+shopinvader_multi_category,11,no wheel
+shopinvader_multi_category,12,no
+shopinvader_multi_category,13,no wheel
+shopinvader_multi_category,14,no
+shopinvader_multi_category,15,no wheel
+shopinvader_multi_category,16,no wheel
+shopinvader_product,11,no wheel
+shopinvader_product,12,no wheel
+shopinvader_product,13,no wheel
+shopinvader_product,14,no wheel
+shopinvader_product,15,no wheel
+shopinvader_product,16,no wheel
+shopinvader_product_attribute_set,11,no wheel
+shopinvader_product_attribute_set,12,no wheel
+shopinvader_product_attribute_set,13,no
+shopinvader_product_attribute_set,14,no
+shopinvader_product_attribute_set,15,no wheel
+shopinvader_product_attribute_set,16,no wheel
+shopinvader_product_brand,11,no wheel
+shopinvader_product_brand,12,no wheel
+shopinvader_product_brand,13,no wheel
+shopinvader_product_brand,14,no
+shopinvader_product_brand,15,no wheel
+shopinvader_product_brand,16,no wheel
+shopinvader_product_description,11,no wheel
+shopinvader_product_description,12,no wheel
+shopinvader_product_description,13,no wheel
+shopinvader_product_description,14,no wheel
+shopinvader_product_description,15,no wheel
+shopinvader_product_description,16,no wheel
+shopinvader_product_seo,11,no wheel
+shopinvader_product_seo,12,no wheel
+shopinvader_product_seo,13,no wheel
+shopinvader_product_seo,14,no wheel
+shopinvader_product_seo,15,no wheel
+shopinvader_product_seo,16,no wheel
+shopinvader_product_url,11,no wheel
+shopinvader_product_url,12,no wheel
+shopinvader_product_url,13,no wheel
+shopinvader_product_url,14,no wheel
+shopinvader_product_url,15,no wheel
+shopinvader_product_url,16,no wheel
+shopinvader_sale_cart,11,no wheel
+shopinvader_sale_cart,12,no wheel
+shopinvader_sale_cart,13,no wheel
+shopinvader_sale_cart,14,no wheel
+shopinvader_sale_cart,15,no wheel
+shopinvader_sale_cart,16,no wheel
+shopinvader_sale_state,11,no wheel
+shopinvader_sale_state,12,no wheel
+shopinvader_sale_state,13,no wheel
+shopinvader_sale_state,14,no wheel
+shopinvader_sale_state,15,no wheel
+shopinvader_sale_state,16,no wheel
+shopinvader_schema_address,11,no wheel
+shopinvader_schema_address,12,no wheel
+shopinvader_schema_address,13,no wheel
+shopinvader_schema_address,14,no wheel
+shopinvader_schema_address,15,no wheel
+shopinvader_schema_address,16,no wheel
+shopinvader_schema_sale,11,no wheel
+shopinvader_schema_sale,12,no wheel
+shopinvader_schema_sale,13,no wheel
+shopinvader_schema_sale,14,no wheel
+shopinvader_schema_sale,15,no wheel
+shopinvader_schema_sale,16,no wheel
+shopinvader_search_engine,11,no wheel
+shopinvader_search_engine,12,no
+shopinvader_search_engine,13,no
+shopinvader_search_engine,14,no
+shopinvader_search_engine,15,no wheel
+shopinvader_search_engine,16,no wheel
+shopinvader_search_engine_assortment,11,no wheel
+shopinvader_search_engine_assortment,12,no wheel
+shopinvader_search_engine_assortment,13,no wheel
+shopinvader_search_engine_assortment,14,no wheel
+shopinvader_search_engine_assortment,15,no wheel
+shopinvader_search_engine_assortment,16,no wheel
+shopinvader_search_engine_image,11,no wheel
+shopinvader_search_engine_image,12,no wheel
+shopinvader_search_engine_image,13,no wheel
+shopinvader_search_engine_image,14,no wheel
+shopinvader_search_engine_image,15,no wheel
+shopinvader_search_engine_image,16,no wheel
+shopinvader_search_engine_product_brand,11,no wheel
+shopinvader_search_engine_product_brand,12,no wheel
+shopinvader_search_engine_product_brand,13,no wheel
+shopinvader_search_engine_product_brand,14,no wheel
+shopinvader_search_engine_product_brand,15,no wheel
+shopinvader_search_engine_product_brand,16,no wheel
+shopinvader_search_engine_product_brand_image,11,no wheel
+shopinvader_search_engine_product_brand_image,12,no wheel
+shopinvader_search_engine_product_brand_image,13,no wheel
+shopinvader_search_engine_product_brand_image,14,no wheel
+shopinvader_search_engine_product_brand_image,15,no wheel
+shopinvader_search_engine_product_brand_image,16,no wheel
+shopinvader_search_engine_product_media,11,no wheel
+shopinvader_search_engine_product_media,12,no wheel
+shopinvader_search_engine_product_media,13,no wheel
+shopinvader_search_engine_product_media,14,no wheel
+shopinvader_search_engine_product_media,15,no wheel
+shopinvader_search_engine_product_media,16,no wheel
+shopinvader_search_engine_product_stock,11,no wheel
+shopinvader_search_engine_product_stock,12,no wheel
+shopinvader_search_engine_product_stock,13,no wheel
+shopinvader_search_engine_product_stock,14,no wheel
+shopinvader_search_engine_product_stock,15,no wheel
+shopinvader_search_engine_product_stock,16,no wheel
+shopinvader_search_engine_product_stock_state,11,no wheel
+shopinvader_search_engine_product_stock_state,12,no wheel
+shopinvader_search_engine_product_stock_state,13,no wheel
+shopinvader_search_engine_product_stock_state,14,no wheel
+shopinvader_search_engine_product_stock_state,15,no wheel
+shopinvader_search_engine_product_stock_state,16,no wheel
+shopinvader_search_engine_product_template_multi_link,11,no wheel
+shopinvader_search_engine_product_template_multi_link,12,no wheel
+shopinvader_search_engine_product_template_multi_link,13,no wheel
+shopinvader_search_engine_product_template_multi_link,14,no wheel
+shopinvader_search_engine_product_template_multi_link,15,no wheel
+shopinvader_search_engine_product_template_multi_link,16,no wheel
+shopinvader_search_engine_update,11,no wheel
+shopinvader_search_engine_update,12,no wheel
+shopinvader_search_engine_update,13,no wheel
+shopinvader_search_engine_update,14,no wheel
+shopinvader_search_engine_update,15,no wheel
+shopinvader_search_engine_update,16,no wheel
+shopinvader_search_engine_update_image,11,no wheel
+shopinvader_search_engine_update_image,12,no wheel
+shopinvader_search_engine_update_image,13,no wheel
+shopinvader_search_engine_update_image,14,no wheel
+shopinvader_search_engine_update_image,15,no wheel
+shopinvader_search_engine_update_image,16,no wheel
+shopinvader_search_engine_update_product_brand,11,no wheel
+shopinvader_search_engine_update_product_brand,12,no wheel
+shopinvader_search_engine_update_product_brand,13,no wheel
+shopinvader_search_engine_update_product_brand,14,no wheel
+shopinvader_search_engine_update_product_brand,15,no wheel
+shopinvader_search_engine_update_product_brand,16,no wheel
+shopinvader_search_engine_update_product_brand_image,11,no wheel
+shopinvader_search_engine_update_product_brand_image,12,no wheel
+shopinvader_search_engine_update_product_brand_image,13,no wheel
+shopinvader_search_engine_update_product_brand_image,14,no wheel
+shopinvader_search_engine_update_product_brand_image,15,no wheel
+shopinvader_search_engine_update_product_brand_image,16,no wheel
+shopinvader_search_engine_update_product_media,11,no wheel
+shopinvader_search_engine_update_product_media,12,no wheel
+shopinvader_search_engine_update_product_media,13,no wheel
+shopinvader_search_engine_update_product_media,14,no wheel
+shopinvader_search_engine_update_product_media,15,no wheel
+shopinvader_search_engine_update_product_media,16,no wheel
+shopinvader_search_engine_update_product_template_multi_link,11,no wheel
+shopinvader_search_engine_update_product_template_multi_link,12,no wheel
+shopinvader_search_engine_update_product_template_multi_link,13,no wheel
+shopinvader_search_engine_update_product_template_multi_link,14,no wheel
+shopinvader_search_engine_update_product_template_multi_link,15,no wheel
+shopinvader_search_engine_update_product_template_multi_link,16,no wheel
+stock_available,11,no
+stock_available,12,no
+stock_available,13,no
+stock_available,14,no
+stock_available,15,no
+stock_available,16,no
+stock_available_base_exclude_location,11,no wheel
+stock_available_base_exclude_location,12,no wheel
+stock_available_base_exclude_location,13,no wheel
+stock_available_base_exclude_location,14,no
+stock_available_base_exclude_location,15,no wheel
+stock_available_base_exclude_location,16,no wheel
+stock_available_immediately,11,no
+stock_available_immediately,12,no
+stock_available_immediately,13,no
+stock_available_immediately,14,no
+stock_available_immediately,15,no
+stock_available_immediately,16,no
+stock_available_immediately_exclude_location,11,no wheel
+stock_available_immediately_exclude_location,12,no wheel
+stock_available_immediately_exclude_location,13,no wheel
+stock_available_immediately_exclude_location,14,no wheel
+stock_available_immediately_exclude_location,15,no wheel
+stock_available_immediately_exclude_location,16,no wheel
+stock_available_location_get_domain,11,no wheel
+stock_available_location_get_domain,12,no wheel
+stock_available_location_get_domain,13,no wheel
+stock_available_location_get_domain,14,no wheel
+stock_available_location_get_domain,15,no wheel
+stock_available_location_get_domain,16,no wheel
+stock_available_location_orderpoint,11,no wheel
+stock_available_location_orderpoint,12,no wheel
+stock_available_location_orderpoint,13,no wheel
+stock_available_location_orderpoint,14,no wheel
+stock_available_location_orderpoint,15,no wheel
+stock_available_location_orderpoint,16,no wheel
+stock_available_to_promise_release,11,no wheel
+stock_available_to_promise_release,12,no wheel
+stock_available_to_promise_release,13,no
+stock_available_to_promise_release,14,mig
+stock_available_to_promise_release,15,no wheel
+stock_available_to_promise_release,16,no wheel
+stock_average_daily_sale,11,no wheel
+stock_average_daily_sale,12,no wheel
+stock_average_daily_sale,13,no wheel
+stock_average_daily_sale,14,no wheel
+stock_average_daily_sale,15,no wheel
+stock_average_daily_sale,16,no wheel
+stock_dock,11,no wheel
+stock_dock,12,no wheel
+stock_dock,13,no
+stock_dock,14,no
+stock_dock,15,no wheel
+stock_dock,16,no wheel
+stock_dynamic_routing,11,no wheel
+stock_dynamic_routing,12,no wheel
+stock_dynamic_routing,13,no
+stock_dynamic_routing,14,no
+stock_dynamic_routing,15,no wheel
+stock_dynamic_routing,16,no wheel
+stock_grn,11,no wheel
+stock_grn,12,no wheel
+stock_grn,13,no wheel
+stock_grn,14,no wheel
+stock_grn,15,no wheel
+stock_grn,16,no wheel
+stock_helper,11,no wheel
+stock_helper,12,no wheel
+stock_helper,13,no
+stock_helper,14,no
+stock_helper,15,no
+stock_helper,16,no
+stock_inventory,11,no wheel
+stock_inventory,12,no wheel
+stock_inventory,13,no wheel
+stock_inventory,14,no wheel
+stock_inventory,15,no
+stock_inventory,16,no
+stock_location_orderpoint,11,no wheel
+stock_location_orderpoint,12,no wheel
+stock_location_orderpoint,13,no wheel
+stock_location_orderpoint,14,no
+stock_location_orderpoint,15,no wheel
+stock_location_orderpoint,16,no wheel
+stock_location_orderpoint_average_daily_sale,11,no wheel
+stock_location_orderpoint_average_daily_sale,12,no wheel
+stock_location_orderpoint_average_daily_sale,13,no wheel
+stock_location_orderpoint_average_daily_sale,14,no wheel
+stock_location_orderpoint_average_daily_sale,15,no wheel
+stock_location_orderpoint_average_daily_sale,16,no wheel
+stock_location_position,11,no wheel
+stock_location_position,12,no
+stock_location_position,13,no
+stock_location_position,14,no
+stock_location_position,15,no wheel
+stock_location_position,16,no wheel
+stock_location_product_restriction,11,no wheel
+stock_location_product_restriction,12,no wheel
+stock_location_product_restriction,13,no wheel
+stock_location_product_restriction,14,no wheel
+stock_location_product_restriction,15,no wheel
+stock_location_product_restriction,16,no wheel
+stock_location_zone,11,no wheel
+stock_location_zone,12,no
+stock_location_zone,13,no
+stock_location_zone,14,no
+stock_location_zone,15,no wheel
+stock_location_zone,16,no wheel
+stock_lot_is_archived,11,no wheel
+stock_lot_is_archived,12,no wheel
+stock_lot_is_archived,13,no wheel
+stock_lot_is_archived,14,no wheel
+stock_lot_is_archived,15,no wheel
+stock_lot_is_archived,16,no wheel
+stock_move_auto_assign,11,no wheel
+stock_move_auto_assign,12,no wheel
+stock_move_auto_assign,13,no
+stock_move_auto_assign,14,no
+stock_move_auto_assign,15,no wheel
+stock_move_auto_assign,16,no wheel
+stock_move_auto_assign_auto_release,11,no wheel
+stock_move_auto_assign_auto_release,12,no wheel
+stock_move_auto_assign_auto_release,13,no wheel
+stock_move_auto_assign_auto_release,14,no
+stock_move_auto_assign_auto_release,15,no wheel
+stock_move_auto_assign_auto_release,16,no wheel
+stock_move_common_dest,11,no wheel
+stock_move_common_dest,12,no wheel
+stock_move_common_dest,13,no
+stock_move_common_dest,14,no
+stock_move_common_dest,15,no wheel
+stock_move_common_dest,16,no wheel
+stock_move_free_reservation_reassign,11,no wheel
+stock_move_free_reservation_reassign,12,no wheel
+stock_move_free_reservation_reassign,13,no wheel
+stock_move_free_reservation_reassign,14,no
+stock_move_free_reservation_reassign,15,no wheel
+stock_move_free_reservation_reassign,16,no wheel
+stock_move_line_reserved_quant,11,no wheel
+stock_move_line_reserved_quant,12,no wheel
+stock_move_line_reserved_quant,13,no wheel
+stock_move_line_reserved_quant,14,no wheel
+stock_move_line_reserved_quant,15,no wheel
+stock_move_line_reserved_quant,16,no wheel
+stock_move_location,11,no
+stock_move_location,12,no
+stock_move_location,13,no
+stock_move_location,14,no
+stock_move_location,15,no
+stock_move_location,16,no
+stock_move_manage_priority,11,no wheel
+stock_move_manage_priority,12,no wheel
+stock_move_manage_priority,13,no wheel
+stock_move_manage_priority,14,no wheel
+stock_move_manage_priority,15,no wheel
+stock_move_manage_priority,16,no wheel
+stock_move_propagate_first_move,11,no wheel
+stock_move_propagate_first_move,12,no wheel
+stock_move_propagate_first_move,13,no wheel
+stock_move_propagate_first_move,14,no wheel
+stock_move_propagate_first_move,15,no wheel
+stock_move_propagate_first_move,16,no wheel
+stock_move_propagate_first_move_cancel,11,no wheel
+stock_move_propagate_first_move_cancel,12,no wheel
+stock_move_propagate_first_move_cancel,13,no wheel
+stock_move_propagate_first_move_cancel,14,no wheel
+stock_move_propagate_first_move_cancel,15,no wheel
+stock_move_propagate_first_move_cancel,16,no wheel
+stock_move_zone_location_source,11,no wheel
+stock_move_zone_location_source,12,no wheel
+stock_move_zone_location_source,13,no wheel
+stock_move_zone_location_source,14,no wheel
+stock_move_zone_location_source,15,no wheel
+stock_move_zone_location_source,16,no wheel
+stock_orderpoint_default_location,11,no wheel
+stock_orderpoint_default_location,12,no wheel
+stock_orderpoint_default_location,13,no wheel
+stock_orderpoint_default_location,14,no wheel
+stock_orderpoint_default_location,15,no wheel
+stock_orderpoint_default_location,16,no wheel
+stock_override_procurement,11,no wheel
+stock_override_procurement,12,no wheel
+stock_override_procurement,13,no wheel
+stock_override_procurement,14,no wheel
+stock_override_procurement,15,no wheel
+stock_override_procurement,16,no wheel
+stock_packaging_calculator,11,no wheel
+stock_packaging_calculator,12,no wheel
+stock_packaging_calculator,13,no
+stock_packaging_calculator,14,no
+stock_packaging_calculator,15,no
+stock_packaging_calculator,16,no
+stock_picking_back2draft,11,no
+stock_picking_back2draft,12,no
+stock_picking_back2draft,13,no
+stock_picking_back2draft,14,no
+stock_picking_back2draft,15,no
+stock_picking_back2draft,16,no
+stock_picking_backorder_reason,11,no wheel
+stock_picking_backorder_reason,12,no wheel
+stock_picking_backorder_reason,13,no wheel
+stock_picking_backorder_reason,14,no wheel
+stock_picking_backorder_reason,15,no wheel
+stock_picking_backorder_reason,16,no wheel
+stock_picking_backorder_reason_grn,11,no wheel
+stock_picking_backorder_reason_grn,12,no wheel
+stock_picking_backorder_reason_grn,13,no wheel
+stock_picking_backorder_reason_grn,14,no wheel
+stock_picking_backorder_reason_grn,15,no wheel
+stock_picking_backorder_reason_grn,16,no wheel
+stock_picking_batch_creation,11,no wheel
+stock_picking_batch_creation,12,no wheel
+stock_picking_batch_creation,13,no wheel
+stock_picking_batch_creation,14,no wheel
+stock_picking_batch_creation,15,no wheel
+stock_picking_batch_creation,16,no wheel
+stock_picking_batch_start,11,no wheel
+stock_picking_batch_start,12,no wheel
+stock_picking_batch_start,13,no wheel
+stock_picking_batch_start,14,no wheel
+stock_picking_batch_start,15,no wheel
+stock_picking_batch_start,16,no wheel
+stock_picking_completion_info,11,no wheel
+stock_picking_completion_info,12,no
+stock_picking_completion_info,13,no
+stock_picking_completion_info,14,no
+stock_picking_completion_info,15,no wheel
+stock_picking_completion_info,16,no wheel
+stock_picking_delivery_link,11,no wheel
+stock_picking_delivery_link,12,no wheel
+stock_picking_delivery_link,13,no
+stock_picking_delivery_link,14,no
+stock_picking_delivery_link,15,no
+stock_picking_delivery_link,16,no
+stock_picking_grn_mandatory,11,no wheel
+stock_picking_grn_mandatory,12,no wheel
+stock_picking_grn_mandatory,13,no wheel
+stock_picking_grn_mandatory,14,no wheel
+stock_picking_grn_mandatory,15,no wheel
+stock_picking_grn_mandatory,16,no wheel
+stock_picking_group_by_base,11,no wheel
+stock_picking_group_by_base,12,no wheel
+stock_picking_group_by_base,13,no wheel
+stock_picking_group_by_base,14,no wheel
+stock_picking_group_by_base,15,no wheel
+stock_picking_group_by_base,16,no wheel
+stock_picking_group_by_max_weight,11,no wheel
+stock_picking_group_by_max_weight,12,no wheel
+stock_picking_group_by_max_weight,13,no wheel
+stock_picking_group_by_max_weight,14,no wheel
+stock_picking_group_by_max_weight,15,no wheel
+stock_picking_group_by_max_weight,16,no wheel
+stock_picking_group_by_partner_by_carrier,11,no wheel
+stock_picking_group_by_partner_by_carrier,12,no wheel
+stock_picking_group_by_partner_by_carrier,13,mig
+stock_picking_group_by_partner_by_carrier,14,no
+stock_picking_group_by_partner_by_carrier,15,no wheel
+stock_picking_group_by_partner_by_carrier,16,no wheel
+stock_picking_group_by_partner_by_carrier_by_customer,11,no wheel
+stock_picking_group_by_partner_by_carrier_by_customer,12,no wheel
+stock_picking_group_by_partner_by_carrier_by_customer,13,no wheel
+stock_picking_group_by_partner_by_carrier_by_customer,14,no wheel
+stock_picking_group_by_partner_by_carrier_by_customer,15,no wheel
+stock_picking_group_by_partner_by_carrier_by_customer,16,no wheel
+stock_picking_is_completed,11,no wheel
+stock_picking_is_completed,12,no wheel
+stock_picking_is_completed,13,no wheel
+stock_picking_is_completed,14,no wheel
+stock_picking_is_completed,15,no wheel
+stock_picking_is_completed,16,no wheel
+stock_picking_kind,11,no wheel
+stock_picking_kind,12,no wheel
+stock_picking_kind,13,no wheel
+stock_picking_kind,14,no wheel
+stock_picking_kind,15,no wheel
+stock_picking_kind,16,no wheel
+stock_picking_low_priority,11,no wheel
+stock_picking_low_priority,12,no wheel
+stock_picking_low_priority,13,no wheel
+stock_picking_low_priority,14,no wheel
+stock_picking_low_priority,15,no wheel
+stock_picking_low_priority,16,no wheel
+stock_picking_operation_loss_quantity,11,no wheel
+stock_picking_operation_loss_quantity,12,no wheel
+stock_picking_operation_loss_quantity,13,no wheel
+stock_picking_operation_loss_quantity,14,no wheel
+stock_picking_operation_loss_quantity,15,no wheel
+stock_picking_operation_loss_quantity,16,no wheel
+stock_picking_progress,11,no wheel
+stock_picking_progress,12,no wheel
+stock_picking_progress,13,no wheel
+stock_picking_progress,14,mig
+stock_picking_progress,15,no wheel
+stock_picking_progress,16,no wheel
+stock_picking_start,11,no wheel
+stock_picking_start,12,no wheel
+stock_picking_start,13,no wheel
+stock_picking_start,14,no wheel
+stock_picking_start,15,no wheel
+stock_picking_start,16,no wheel
+stock_picking_type_shipping_policy,11,no wheel
+stock_picking_type_shipping_policy,12,no wheel
+stock_picking_type_shipping_policy,13,no
+stock_picking_type_shipping_policy,14,no
+stock_picking_type_shipping_policy,15,no wheel
+stock_picking_type_shipping_policy,16,no wheel
+stock_picking_volume,11,no wheel
+stock_picking_volume,12,no wheel
+stock_picking_volume,13,no wheel
+stock_picking_volume,14,no
+stock_picking_volume,15,no wheel
+stock_picking_volume,16,no wheel
+stock_procurement_customer,11,no wheel
+stock_procurement_customer,12,no wheel
+stock_procurement_customer,13,no wheel
+stock_procurement_customer,14,no wheel
+stock_procurement_customer,15,no wheel
+stock_procurement_customer,16,no wheel
+stock_production_lot_expired_date,11,no wheel
+stock_production_lot_expired_date,12,no wheel
+stock_production_lot_expired_date,13,no wheel
+stock_production_lot_expired_date,14,no wheel
+stock_production_lot_expired_date,15,no wheel
+stock_production_lot_expired_date,16,no wheel
+stock_putaway_hook,11,no wheel
+stock_putaway_hook,12,no wheel
+stock_putaway_hook,13,no
+stock_putaway_hook,14,no
+stock_putaway_hook,15,no
+stock_putaway_hook,16,no
+stock_quant_package_dimension,11,no wheel
+stock_quant_package_dimension,12,no wheel
+stock_quant_package_dimension,13,no
+stock_quant_package_dimension,14,mig
+stock_quant_package_dimension,15,no wheel
+stock_quant_package_dimension,16,no wheel
+stock_quant_package_product_packaging,11,no wheel
+stock_quant_package_product_packaging,12,no wheel
+stock_quant_package_product_packaging,13,no
+stock_quant_package_product_packaging,14,no
+stock_quant_package_product_packaging,15,no wheel
+stock_quant_package_product_packaging,16,no wheel
+stock_release_channel,11,no wheel
+stock_release_channel,12,no wheel
+stock_release_channel,13,no wheel
+stock_release_channel,14,no
+stock_release_channel,15,no wheel
+stock_release_channel,16,no wheel
+stock_release_channel_auto_release,11,no wheel
+stock_release_channel_auto_release,12,no wheel
+stock_release_channel_auto_release,13,no wheel
+stock_release_channel_auto_release,14,no wheel
+stock_release_channel_auto_release,15,no wheel
+stock_release_channel_auto_release,16,no wheel
+stock_release_channel_delivery,11,no wheel
+stock_release_channel_delivery,12,no wheel
+stock_release_channel_delivery,13,no wheel
+stock_release_channel_delivery,14,no wheel
+stock_release_channel_delivery,15,no wheel
+stock_release_channel_delivery,16,no wheel
+stock_release_channel_geoengine,11,no wheel
+stock_release_channel_geoengine,12,no wheel
+stock_release_channel_geoengine,13,no wheel
+stock_release_channel_geoengine,14,no wheel
+stock_release_channel_geoengine,15,no wheel
+stock_release_channel_geoengine,16,no wheel
+stock_release_channel_process_end_time,11,no wheel
+stock_release_channel_process_end_time,12,no wheel
+stock_release_channel_process_end_time,13,no wheel
+stock_release_channel_process_end_time,14,no wheel
+stock_release_channel_process_end_time,15,no wheel
+stock_release_channel_process_end_time,16,no wheel
+stock_release_channel_propagate_channel_picking,11,no wheel
+stock_release_channel_propagate_channel_picking,12,no wheel
+stock_release_channel_propagate_channel_picking,13,no wheel
+stock_release_channel_propagate_channel_picking,14,no wheel
+stock_release_channel_propagate_channel_picking,15,no wheel
+stock_release_channel_propagate_channel_picking,16,no wheel
+stock_release_channel_shipment_advice,11,no wheel
+stock_release_channel_shipment_advice,12,no wheel
+stock_release_channel_shipment_advice,13,no wheel
+stock_release_channel_shipment_advice,14,no wheel
+stock_release_channel_shipment_advice,15,no wheel
+stock_release_channel_shipment_advice,16,no wheel
+stock_release_channel_shipment_advice_process_end_time,11,no wheel
+stock_release_channel_shipment_advice_process_end_time,12,no wheel
+stock_release_channel_shipment_advice_process_end_time,13,no wheel
+stock_release_channel_shipment_advice_process_end_time,14,no wheel
+stock_release_channel_shipment_advice_process_end_time,15,no wheel
+stock_release_channel_shipment_advice_process_end_time,16,no wheel
+stock_release_channel_shipment_advice_toursolver,11,no wheel
+stock_release_channel_shipment_advice_toursolver,12,no wheel
+stock_release_channel_shipment_advice_toursolver,13,no wheel
+stock_release_channel_shipment_advice_toursolver,14,no wheel
+stock_release_channel_shipment_advice_toursolver,15,no wheel
+stock_release_channel_shipment_advice_toursolver,16,no wheel
+stock_reserve_rule,11,no wheel
+stock_reserve_rule,12,no
+stock_reserve_rule,13,mig
+stock_reserve_rule,14,no
+stock_reserve_rule,15,no
+stock_reserve_rule,16,no
+stock_restrict_lot,11,no wheel
+stock_restrict_lot,12,no wheel
+stock_restrict_lot,13,no wheel
+stock_restrict_lot,14,no
+stock_restrict_lot,15,no
+stock_restrict_lot,16,no
+stock_route_mto,11,no wheel
+stock_route_mto,12,no wheel
+stock_route_mto,13,no wheel
+stock_route_mto,14,no wheel
+stock_route_mto,15,no wheel
+stock_route_mto,16,no wheel
+stock_scrap_location_default,11,no wheel
+stock_scrap_location_default,12,no wheel
+stock_scrap_location_default,13,no wheel
+stock_scrap_location_default,14,no wheel
+stock_scrap_location_default,15,no wheel
+stock_scrap_location_default,16,no wheel
+stock_storage_category_capacity_name,11,no wheel
+stock_storage_category_capacity_name,12,no wheel
+stock_storage_category_capacity_name,13,no wheel
+stock_storage_category_capacity_name,14,no wheel
+stock_storage_category_capacity_name,15,no wheel
+stock_storage_category_capacity_name,16,no wheel
+stock_storage_type,11,no wheel
+stock_storage_type,12,no
+stock_storage_type,13,no
+stock_storage_type,14,no
+stock_storage_type,15,no wheel
+stock_storage_type,16,no wheel
+stock_storage_type_putaway_abc,11,no wheel
+stock_storage_type_putaway_abc,12,no wheel
+stock_storage_type_putaway_abc,13,no
+stock_storage_type_putaway_abc,14,no
+stock_storage_type_putaway_abc,15,no wheel
+stock_storage_type_putaway_abc,16,no wheel
+stock_storage_type_putaway_abc_classification_sale_stock,11,no wheel
+stock_storage_type_putaway_abc_classification_sale_stock,12,no wheel
+stock_storage_type_putaway_abc_classification_sale_stock,13,no wheel
+stock_storage_type_putaway_abc_classification_sale_stock,14,no wheel
+stock_storage_type_putaway_abc_classification_sale_stock,15,no wheel
+stock_storage_type_putaway_abc_classification_sale_stock,16,no wheel
+uom_unece,11,no wheel
+uom_unece,12,no
+uom_unece,13,no
+uom_unece,14,no
+uom_unece,15,no
+uom_unece,16,no
+web_chatter_position,11,no wheel
+web_chatter_position,12,no wheel
+web_chatter_position,13,no
+web_chatter_position,14,no wheel
+web_chatter_position,15,no
+web_chatter_position,16,no
+web_environment_ribbon,11,no
+web_environment_ribbon,12,no
+web_environment_ribbon,13,no
+web_environment_ribbon,14,no
+web_environment_ribbon,15,no
+web_environment_ribbon,16,no
+web_notify,11,no
+web_notify,12,no
+web_notify,13,no
+web_notify,14,no
+web_notify,15,no
+web_notify,16,no
+web_refresher,11,no
+web_refresher,12,no
+web_refresher,13,no
+web_refresher,14,no
+web_refresher,15,no
+web_refresher,16,no
+web_remember_tree_column_width,11,no wheel
+web_remember_tree_column_width,12,no wheel
+web_remember_tree_column_width,13,no wheel
+web_remember_tree_column_width,14,no
+web_remember_tree_column_width,15,no
+web_remember_tree_column_width,16,no
+web_search_with_and,11,no
+web_search_with_and,12,no
+web_search_with_and,13,no
+web_search_with_and,14,no
+web_search_with_and,15,no
+web_search_with_and,16,no
+web_sheet_full_width,11,no
+web_sheet_full_width,12,no
+web_sheet_full_width,13,no
+web_sheet_full_width,14,no
+web_sheet_full_width,15,no
+web_sheet_full_width,16,no
+web_tree_many2one_clickable,11,no
+web_tree_many2one_clickable,12,no
+web_tree_many2one_clickable,13,no
+web_tree_many2one_clickable,14,no
+web_tree_many2one_clickable,15,no
+web_tree_many2one_clickable,16,no
