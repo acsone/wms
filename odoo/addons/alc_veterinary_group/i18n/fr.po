@@ -132,6 +132,7 @@ msgstr ""
 
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group__partner_ids
+#: model_terms:ir.ui.view,arch_db:alc_veterinary_group.veterinary_group_form_view
 msgid "Partners"
 msgstr ""
 
@@ -142,6 +143,7 @@ msgstr ""
 
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group__product_template_ids
+#: model_terms:ir.ui.view,arch_db:alc_veterinary_group.veterinary_group_form_view
 msgid "Products"
 msgstr ""
 
