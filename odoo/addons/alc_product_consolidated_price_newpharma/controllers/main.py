@@ -7,7 +7,7 @@ from odoo import http
 from odoo.exceptions import AccessDenied
 from odoo.http import request
 
-from odoo.addons.web.controllers.main import ensure_db
+from odoo.addons.web.controllers.utils import ensure_db
 
 _logger = logging.getLogger(__name__)
 

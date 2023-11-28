@@ -300,5 +300,9 @@ odoo-addon-shopinvader-api-wishlist @ git+https://github.com/shopinvader/odoo-sh
 odoo-addon-shopinvader-multi-category @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1469/head#subdirectory=setup/shopinvader_multi_category
 odoo-addon-shopinvader-search-engine-assortment @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1468/head#subdirectory=setup/shopinvader_search_engine_assortment
 odoo-addon-shopinvader-search-engine-product-stock @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1473/head#subdirectory=setup/shopinvader_search_engine_product_stock
+odoo-addon-shopinvader-base-url @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1475/head#subdirectory=setup/shopinvader_base_url
+odoo-addon-shopinvader-search-engine @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1478/head#subdirectory=setup/shopinvader_search_engine
+
 # OCA/search-engine
 odoo-addon-connector-elasticsearch @ git+https://github.com/OCA/search-engine.git@refs/pull/171/head#subdirectory=setup/connector_elasticsearch
+odoo-addon-connector-search-engine @ git+https://github.com/OCA/search-engine.git@refs/pull/173/head#subdirectory=setup/connector_search_engine
