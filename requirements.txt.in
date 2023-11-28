@@ -304,3 +304,4 @@ odoo-addon-shopinvader-base-url @ git+https://github.com/shopinvader/odoo-shopin
 
 # OCA/search-engine
 odoo-addon-connector-elasticsearch @ git+https://github.com/OCA/search-engine.git@refs/pull/171/head#subdirectory=setup/connector_elasticsearch
+odoo-addon-connector-search-engine @ git+https://github.com/OCA/search-engine.git@refs/pull/173/head#subdirectory=setup/connector_search_engine
