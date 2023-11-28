@@ -5,6 +5,12 @@ from odoo.addons.shopinvader_search_engine.tests.common import TestProductBindin
 
 
 class TestManualExport(TestProductBindingBase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        # remove others backend
+        cls.env["se.backend"].search([("id", "!=", cls.backend.id)]).unlink()
+
     def test_0(self):
         """Existing binding."""
         self.assertEqual(self.product_binding.state, "to_recompute")
