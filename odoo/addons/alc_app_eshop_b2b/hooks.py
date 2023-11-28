@@ -46,20 +46,6 @@ def pre_init_hook(cr):
         ],
     )
 
-    # xml_ids from shopinvader_image
-    xml_ids = [
-        "small",
-        "medium",
-        "large",
-    ]
-    openupgrade.rename_xmlids(
-        cr,
-        [
-            (f"shopinvader_image.{xml_id}", f"alc_app_eshop_b2b.{xml_id}")
-            for xml_id in xml_ids
-        ],
-    )
-
 
 def post_init_hook(cr, registry=None):
     # reload index definitions
