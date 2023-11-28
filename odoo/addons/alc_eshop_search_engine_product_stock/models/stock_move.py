@@ -13,7 +13,10 @@ class StockMove(StockMoveBase):
         # to only take into account product from incoming and outgoing
         # moves
         moves = self.filtered(
-            lambda m: m._is_outgoing() or m._is_incoming() or m._is_scrap()
+            lambda m: m.is_inventory
+            or m._is_outgoing()
+            or m._is_incoming()
+            or m._is_scrap()
         )
         return super(StockMove, moves)._get_product_to_update()
 
