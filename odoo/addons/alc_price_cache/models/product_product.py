@@ -50,6 +50,8 @@ class ProductProduct(ProductProductBase):
         res = []
         added = False
         for element in cache_list:
+            if not element.get("id"):
+                continue
             if element["id"] != eid and (
                 element["date_start"] != ds
                 or element["date_end"] != de
