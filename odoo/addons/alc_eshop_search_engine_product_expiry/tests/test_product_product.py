@@ -57,13 +57,14 @@ class TestProductSchema(StockCommonCase):
         self.product.invalidate_recordset()
 
     def assertBestBeforeDate(self, date):
-        date_iso = date.date().isoformat()
         product = ProductProduct.from_product_product(self.product)
-        self.assertEqual(product.best_before_date, date_iso)
+        self.assertEqual(product.best_before_date, date.date())
         self.assertEqual(self.binding.state, "to_recompute")
         self.binding.recompute_json()
         self.assertEqual(self.binding.state, "to_export")
-        self.assertEqual(self.binding.data.get("best_before_date"), date_iso)
+        self.assertEqual(
+            self.binding.data.get("best_before_date"), date.date().isoformat()
+        )
 
     def test_0(self):
         product = ProductProduct.from_product_product(self.product)
