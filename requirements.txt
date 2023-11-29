@@ -232,7 +232,7 @@ odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-work
 odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/stock-logistics-workflow.git@1fba8cf43ce18100099b7b3d1bd6f31a8ab1aa6d#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo-addon-sale-triple-discount==16.0.1.0.1.4
 odoo-addon-sale-wishlist==16.0.1.0.0.2
-odoo-addon-search-engine-image-thumbnail==16.0.1.0.1
+odoo-addon-search-engine-image-thumbnail @ git+https://github.com/acsone/search-engine.git@7cef155543f23356d448110e06ecfd6fce93758b#subdirectory=setup/search_engine_image_thumbnail
 odoo-addon-search-engine-serializer-pydantic==16.0.1.0.0.2
 odoo-addon-server-action-mass-edit==16.0.2.0.1.5
 odoo-addon-server-environment==16.0.1.0.3.1
