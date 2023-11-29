@@ -128,10 +128,12 @@ class ProductPricelist(Pricelist):
         self.ensure_one()
         product.ensure_one()
         date = date or fields.Date.context_today(self)
-        return [
-            rule._cache_discount(product)
-            for rule in self._get_applicable_rules(product, date)
-        ]
+        res = []
+        for rule in self._get_applicable_rules(product, date):
+            cache = rule._cache_discount(product)
+            if cache:
+                res.append(cache)
+        return res
 
     def _get_cache_price(self, product, date=False):
         self.ensure_one()
