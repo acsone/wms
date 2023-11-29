@@ -194,9 +194,11 @@ def migrate_cms_ads_image(cr):
                 adds.image_medium = adds.image
                 env.cr.flush()
             except Exception:
-                _logger.info(
-                    "Error generating thumbnail for %s: Image %s not found at url",
-                    (adds.name, adds.image.name, adds.image.url),
+                _logger.exception(
+                    "Error generating thumbnail for %s: Image %s not found at url %s",
+                    adds.name,
+                    adds.image.name,
+                    adds.image.url,
                 )
 
 

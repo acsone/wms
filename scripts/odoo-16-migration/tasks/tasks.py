@@ -594,7 +594,7 @@ def restore_account_journal_sequence():
             query = """
                 ALTER TABLE account_journal ADD COLUMN sequence_id INTEGER
             """
-            openupgrade.logged_query()
+            openupgrade.logged_query(cr, query)
         query = """
             UPDATE account_journal
                 SET sequence_id = %(sequence_id)s
