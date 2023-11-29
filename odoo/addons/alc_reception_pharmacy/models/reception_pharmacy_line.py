@@ -24,7 +24,7 @@ class ReceptionPharmacyLine(models.Model):
         string="Customer", required=True, ondelete="restrict"
     )
     bin_id = fields.Many2one[Location](
-        domain=[("usage", "=", "internal"), ("act_as_view", "=", False)],
+        domain=[("usage", "=", "internal")],
         string="Bin",
         required=True,
         ondelete="restrict",
