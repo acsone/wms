@@ -104,7 +104,6 @@ exclude = [
   'odoo/addons/alc_stock_picking_number_package/*',
   'odoo/addons/alc_stock_picking_wave_type/*',
   'odoo/addons/alc_stock_storage_type/*',
-  'odoo/addons/alc_storage/*',
   'odoo/addons/alce_purchase_report/*',
   'odoo/addons/base_cached_xmlid/*',
   'odoo/addons/l10n_be_vat/*',

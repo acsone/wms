@@ -986,6 +986,7 @@ def set_modules_to_remove():
         "alc_internal_package_groupbypartner",
         "alc_stock_location_barcode_search",
         "alc_shopfloor_cluster_picking_by_partners",  # replaced by STD
+        "alc_storage",
     ]
     _logger.info("Modules to remove: %s", ",".join(modules_list))
     with cursor(DB_16_FINAL) as cr:
