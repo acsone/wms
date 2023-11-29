@@ -14,18 +14,6 @@ class SeBackendElasticsearch(SeBackend):
 
     role_ids = fields.One2many[ElasticSearchRole](inverse_name="backend_id")
 
-    @property
-    def _server_env_fields(self):
-        env_fields = super()._server_env_fields
-        env_fields.update(
-            {
-                "es_user": {},
-                "es_password": {},
-                "ssl": {},
-            }
-        )
-        return env_fields
-
     def synchronize_roles(self):
         return self.role_ids.put_roles()
 

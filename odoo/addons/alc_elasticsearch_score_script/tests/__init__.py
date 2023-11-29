@@ -1,1 +1,1 @@
-from . import test_elasticsearch_price_sorting
+from . import test_elasticsearch_score
