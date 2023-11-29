@@ -17,6 +17,7 @@ class TestOpensearchSecurity(VCRTestCase, TransactionCase):
         cls.backend = cls.env.ref("connector_elasticsearch.backend_1")
         cls.backend.write(
             {
+                "backend_type": "elasticsearch",
                 "es_server_host": "https://localhost/",
                 "es_user": "user",
                 "es_password": "fake_password",

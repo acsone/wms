@@ -16,6 +16,7 @@ class TestElasticsearchPriceSorting(VCRTestCase, TransactionCase):
         cls.backend = cls.env.ref("alc_search_engine_backend.elasticsearch_backend")
         cls.backend.write(
             {
+                "backend_type": "elasticsearch",
                 "es_server_host": "https://index.test.alcyon.acsone.eu/",
                 "es_user": "odoo",
                 "es_password": "fake_password",
