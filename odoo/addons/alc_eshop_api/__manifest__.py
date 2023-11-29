@@ -17,6 +17,7 @@
         "shopinvader_api_sale",
         "shopinvader_api_wishlist",
         "shopinvader_fastapi_auth_jwt",
+        "auth_jwt_server_env",
         "alc_eshop_auth_jwt",
         "alc_eshop_api_sale_statistic",
         "alc_eshop_api_classifieds",
