@@ -99,13 +99,3 @@
     - oca refs/pull/271/head # [IMP] account-closing: account cutoff accrual on order
     - oca refs/pull/283/head # [IMP] account-closing: configure different account for refunds
   target: origin 16.0-account-cutoff-base
-
-./src/search-engine:
-  remotes:
-    origin: git@github.com:acsone/search-engine.git
-    oca: git@github.com:oca/search-engine.git
-  merges:
-    - oca 16.0
-    - oca refs/pull/171/head # [IMP] connector_elasticsearch: add http auth
-    - oca refs/pull/173/head # [16.0][FIX] connector_search_engine: export and delete on multi bindings
-  target: origin 16.0-alc_connector_search_engine

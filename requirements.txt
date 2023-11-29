@@ -124,8 +124,8 @@ odoo-addon-base-view-inheritance-extension==16.0.1.0.0.8
 odoo-addon-component==16.0.1.1.0
 odoo-addon-component-event==16.0.1.0.1.3
 odoo-addon-connector==16.0.1.0.0.5
-odoo-addon-connector-elasticsearch @ git+https://github.com/acsone/search-engine.git@6bfe6fb0b324fbfb0afa76a652df65bff4854bb1#subdirectory=setup/connector_elasticsearch
-odoo-addon-connector-search-engine @ git+https://github.com/acsone/search-engine.git@fe01115056d8421842d85746a896809ca7388cb0#subdirectory=setup/connector_search_engine
+odoo-addon-connector-elasticsearch==16.0.0.0.3
+odoo-addon-connector-search-engine==16.0.0.1.4
 odoo-addon-date-range==16.0.1.0.2
 odoo-addon-delivery-automatic-package==16.0.1.0.0.2
 odoo-addon-delivery-carrier-account==16.0.1.0.0.4
@@ -420,7 +420,6 @@ requests-file==1.5.1
 requests-toolbelt==1.0.0
 rsa==4.9
 s3fs==2023.6.0
-setuptools==69.0.2
 shapely==2.0.1
 simplejson==3.19.1
 six==1.16.0
