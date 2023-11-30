@@ -9,7 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["connector_elasticsearch"],
+    "depends": [
+        "alc_se_index_lowercase_name",
+        "connector_elasticsearch",
+    ],
     "data": ["data/se_backend.xml"],
     "pre_init_hook": "pre_init_hook",
     "demo": [],
