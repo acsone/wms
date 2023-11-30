@@ -73,6 +73,8 @@
         "alc_elasticsearch_score_script",
         "alc_eshop_search_engine_manual_export",
         "alc_elasticsearch_price_sorting",
+        "alc_eshop_search_engine_product_stock",
+        "alc_product_promotion_mailing",
         # shopinvader
         "shopinvader_search_engine",
         "shopinvader_search_engine_image",
@@ -95,9 +97,8 @@
         "shopinvader_search_engine_product_stock_state",
         "shopinvader_product_attribute_set",
         "shopinvader_multi_category",
-        "alc_eshop_search_engine_product_stock",
         "shopinvader_search_engine_assortment",
-        "alc_product_promotion_mailing",
+        "shopinvader_es_product_categ",
     ],
     "data": [
         "security/res_groups.xml",
