@@ -19,6 +19,7 @@ test = [
   "coverage",
   "pytest-cov",
   "pytest-odoo",
+  "pytest-subtests",
   "pygments",
   "freezegun",
   "odoo-test-helper",
