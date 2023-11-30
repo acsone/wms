@@ -22,8 +22,8 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
         cls.supplier = cls.env["res.partner"].create({"name": "Supplier"})
 
     def test_00(self):
-        date_start = date.today().isoformat()
-        date_end = (date.today() + timedelta(days=30)).isoformat()
+        date_start = date.today()
+        date_end = date.today() + timedelta(days=30)
         product = ProductProduct.from_product_product(self.product)
         self.assertEqual(product.supplier_promotion, [])
         self.env["product.supplierinfo"].create(
@@ -40,17 +40,17 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
         product = ProductProduct.from_product_product(self.product)
         self.assertEqual(len(product.supplier_promotion), 1)
         promotion = product.supplier_promotion[0]
-        self.assertEqual(promotion.get("date_start"), date_start)
-        self.assertEqual(promotion.get("date_end"), date_end)
-        self.assertEqual(promotion.get("ratio_main_product"), 1)
-        self.assertEqual(promotion.get("ratio_promotional_product"), 1)
+        self.assertEqual(promotion.date_start, date_start)
+        self.assertEqual(promotion.date_end, date_end)
+        self.assertEqual(promotion.ratio_main_product, 1)
+        self.assertEqual(promotion.ratio_promotional_product, 1)
         self.assertDictEqual(
-            promotion.get("time_frame"), {"gte": date_start, "lte": date_end}
+            promotion.time_frame.model_dump(), {"gte": date_start, "lte": date_end}
         )
 
     def test_01(self):
-        date_start = date.today().isoformat()
-        date_end = (date.today() + timedelta(days=30)).isoformat()
+        date_start = date.today()
+        date_end = date.today() + timedelta(days=30)
         product = ProductProduct.from_product_product(self.product)
         self.assertEqual(product.supplier_promotion_veterinary, [])
         self.env["product.supplierinfo"].create(
@@ -68,17 +68,17 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
         product = ProductProduct.from_product_product(self.product)
         self.assertEqual(len(product.supplier_promotion_veterinary), 1)
         promotion = product.supplier_promotion_veterinary[0]
-        self.assertEqual(promotion.get("date_start"), date_start)
-        self.assertEqual(promotion.get("date_end"), date_end)
-        self.assertEqual(promotion.get("ratio_main_product"), 1)
-        self.assertEqual(promotion.get("ratio_promotional_product"), 1)
+        self.assertEqual(promotion.date_start, date_start)
+        self.assertEqual(promotion.date_end, date_end)
+        self.assertEqual(promotion.ratio_main_product, 1)
+        self.assertEqual(promotion.ratio_promotional_product, 1)
         self.assertDictEqual(
-            promotion.get("time_frame"), {"gte": date_start, "lte": date_end}
+            promotion.time_frame.model_dump(), {"gte": date_start, "lte": date_end}
         )
 
     def test_02(self):
-        date_start = date.today().isoformat()
-        date_end = (date.today() + timedelta(days=30)).isoformat()
+        date_start = date.today()
+        date_end = date.today() + timedelta(days=30)
         product = ProductProduct.from_product_product(self.product)
         self.assertEqual(product.supplier_discount, [])
         self.env["product.supplierinfo"].create(
@@ -94,9 +94,9 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
         product = ProductProduct.from_product_product(self.product)
         self.assertEqual(len(product.supplier_discount), 1)
         promotion = product.supplier_discount[0]
-        self.assertEqual(promotion.get("date_start"), date_start)
-        self.assertEqual(promotion.get("date_end"), date_end)
-        self.assertEqual(promotion.get("discount_sale"), 10.0)
+        self.assertEqual(promotion.date_start, date_start)
+        self.assertEqual(promotion.date_end, date_end)
+        self.assertEqual(promotion.discount_sale, 10.0)
         self.assertDictEqual(
-            promotion.get("time_frame"), {"gte": date_start, "lte": date_end}
+            promotion.time_frame.model_dump(), {"gte": date_start, "lte": date_end}
         )

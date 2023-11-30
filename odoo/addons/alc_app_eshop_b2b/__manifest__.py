@@ -102,6 +102,7 @@
     "data": [
         "security/res_groups.xml",
         "views/eshop_app_menu.xml",
+        "data/se_backend.xml",
         "data/se_thumbnail_size.xml",
         "data/se_index_config.xml",
         "data/se_index.xml",

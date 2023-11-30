@@ -1,7 +1,7 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 
 from odoo import Command
 from odoo.tests.common import TransactionCase
@@ -48,16 +48,16 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
         product = ProductProduct.from_product_product(self.product)
         prices = product.price.get("price-pl")
         self.assertEqual(len(prices), 2)
-        price = list(filter(lambda p, i=pl.item_ids: p.get("id") == i.id, prices))[0]
-        self.assertEqual(
-            datetime.fromisoformat(price.get("date_start")).date(), date_start
-        )
-        self.assertEqual(datetime.fromisoformat(price.get("date_end")).date(), date_end)
-        self.assertEqual(price.get("id"), pl.item_ids.id)
-        self.assertEqual(price.get("price"), 90)
+        price = list(filter(lambda p, i=pl.item_ids: p.id == i.id, prices))[0]
+        self.assertEqual(price.date_start, date_start)
+        self.assertEqual(price.date_end, date_end)
+        self.assertEqual(price.id, pl.item_ids.id)
+        self.assertEqual(price.price, 90)
+        self.assertEqual(price.exclusive, False)
 
-        price = list(filter(lambda p, i=pl.item_ids: p.get("id") != i.id, prices))[0]
-        self.assertIsNone(price.get("date_start"))
-        self.assertIsNone(price.get("date_end"))
-        self.assertIsNone(price.get("id"))
-        self.assertEqual(price.get("price"), 100)
+        price = list(filter(lambda p, i=pl.item_ids: p.id != i.id, prices))[0]
+        self.assertIsNone(price.date_start)
+        self.assertIsNone(price.date_end)
+        self.assertIsNone(price.id)
+        self.assertEqual(price.price, 100)
+        self.assertEqual(price.exclusive, False)
