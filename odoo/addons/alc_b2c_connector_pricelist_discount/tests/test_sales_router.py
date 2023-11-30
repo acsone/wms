@@ -70,7 +70,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
         self.assertTrue(new_so)
         self.assertEqual(
             new_so.partner_id.ref,
-            f"{self.b2c_client.sale_channel_id.name}_{recipient_info['id']}",
+            f"{self.b2c_client.sale_channel_id.code}_{recipient_info['id']}",
         )
         self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
         self.assertEqual(new_so.partner_shipping_id, self.vt_partner)
