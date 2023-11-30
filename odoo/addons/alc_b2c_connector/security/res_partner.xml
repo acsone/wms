@@ -6,7 +6,7 @@
     <record id="fastapi.res_partner_fastapi_running_user_rule" model="ir.rule">
         <field
       name="domain_force"
-    > [('alc_b2c_client_id', '=', alc_b2c_client_id), ('is_b2c_customer', '=', True)]</field>
+    >[('alc_b2c_client_id', '=', alc_b2c_client_id), ('is_b2c_customer', '=', True)]</field>
         <field name="perm_create" eval="1" />
         <field name="perm_write" eval="1" />
     </record>
