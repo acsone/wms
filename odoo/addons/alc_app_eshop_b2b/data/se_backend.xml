@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="0">
+
+    <record id="alc_search_engine_backend.elasticsearch_backend" model="se.backend">
+        <field name="image_data_url_strategy">storage_url</field>
+        <field name="product_manual_binding" eval="False" />
+        <field
+      name="product_assortment_id"
+      ref="alc_eshop_product_domain.shopinvader_assortment_store"
+    />
+        <field name="stock_level_config">only_state</field>
+    </record>
+
+</odoo>
