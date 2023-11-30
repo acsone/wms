@@ -97,7 +97,7 @@ class ResPartner(ResPartnerBase):
 
     @api.model
     def _b2c_id_to_b2c_ref(self, b2c_id, b2c_client):
-        return f"{b2c_client.sale_channel_id.name}_{b2c_id}"
+        return f"{b2c_client.sale_channel_id.code}_{b2c_id}"
 
     @api.model
     def _b2c_ref_to_b2c_id(self, ref):

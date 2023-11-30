@@ -16,8 +16,6 @@ router = APIRouter(tags=["recipients"])
 
 @router.get("/recipients/{id}")
 @router.get("/recipients/{id}/get")
-@router.post("/recipients/{id}")
-@router.put("/recipients/{id}")
 def _get_partners(
     id: str,  # pylint: disable=redefined-builtin
     env: Annotated[Environment, Depends(authenticated_partner_env)],
@@ -30,6 +28,8 @@ def _get_partners(
 
 
 @router.post("/recipients/{id}/update")
+@router.post("/recipients/{id}")
+@router.put("/recipients/{id}")
 def _update_partner(
     id: str,  # pylint: disable=redefined-builtin
     body: PartnerRequest,

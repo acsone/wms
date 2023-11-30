@@ -6,10 +6,10 @@ from fastapi import APIRouter, Depends, Query
 
 from odoo.api import Environment
 
-from odoo.addons.fastapi.dependencies import authenticated_partner_env, paging
+from odoo.addons.fastapi.dependencies import authenticated_partner_env
 from odoo.addons.fastapi.schemas import Paging
 
-from ..dependencies import AlcB2cClient, alc_b2c_client
+from ..dependencies import AlcB2cClient, alc_b2c_client, paging
 from ..schemas.paged_collection import PagedCollection
 from ..schemas.sale_order import (
     SaleOrderCreateRequest,
@@ -44,7 +44,7 @@ def get_sale_orders(
     paging_: Annotated[Paging, Depends(paging)],
     env: Annotated[Environment, Depends(authenticated_partner_env)],
     client: Annotated[AlcB2cClient, Depends(alc_b2c_client)],
-    ids: Annotated[list[int] | None, Query()] = None,
+    ids: Annotated[list[int] | None, Query(alias="ids[]")] = None,
 ) -> PagedCollection[SaleOrderResponse]:
     """
     Get orders info.

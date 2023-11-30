@@ -89,9 +89,9 @@ msgstr "Annulé"
 #. odoo-python
 #: code:addons/alc_b2c_connector/models/sale_order.py:0
 #, fuzzy, python-format
-#| msgid "Cannot cancel order %s , being process already"
+#| msgid "Cannot cancel order {name} , being process already"
 msgid "Cannot cancel order {name} , being process already"
-msgstr "Cannot cancel order %s , being process already"
+msgstr "Cannot cancel order {name} , being process already"
 
 #. module: alc_b2c_connector
 #: model:ir.model.fields,help:alc_b2c_connector.field_alc_b2c_client__sale_reason_backorder_strategy
@@ -218,25 +218,25 @@ msgstr "Le nom doit être unique"
 #. odoo-python
 #: code:addons/alc_b2c_connector/models/res_partner.py:0
 #, fuzzy, python-format
-#| msgid "No match found for customer_id: %s"
+#| msgid "No match found for customer_id: {b2c_ref}"
 msgid "No match found for customer_id: {b2c_ref}"
-msgstr "Aucun client trouvé pour customer_id: %s"
+msgstr "Aucun client trouvé pour customer_id: {b2c_ref}"
 
 #. module: alc_b2c_connector
 #. odoo-python
 #: code:addons/alc_b2c_connector/models/sale_order.py:0
 #, fuzzy, python-format
-#| msgid "Order  %s cancelled from b2c api."
+#| msgid "Order  {name} cancelled from b2c api."
 msgid "Order  {name} cancelled from b2c api."
-msgstr "Order  %s cancelled from b2c api."
+msgstr "Order  {name} cancelled from b2c api."
 
 #. module: alc_b2c_connector
 #. odoo-python
 #: code:addons/alc_b2c_connector/models/sale_order.py:0
 #, fuzzy, python-format
-#| msgid "Order created from json: %s."
+#| msgid "Order created from json: {data}."
 msgid "Order created from json: {data}."
-msgstr "Order created from json: %s."
+msgstr "Order created from json: {data}."
 
 #. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_client__partner_id
@@ -317,9 +317,9 @@ msgstr "Equipe commerciale"
 #. odoo-python
 #: code:addons/alc_b2c_connector/models/sale_order.py:0
 #, fuzzy, python-format
-#| msgid "Sale order not found for id %s"
+#| msgid "Sale order not found for id {b2c_ref}"
 msgid "Sale order not found for id {b2c_ref}"
-msgstr "Bon de commande inconnu avec l'id %s"
+msgstr "Bon de commande inconnu avec l'id {b2c_ref}"
 
 #. module: alc_b2c_connector
 #: model:ir.model,name:alc_b2c_connector.model_sale_order
@@ -355,9 +355,9 @@ msgstr ""
 #. odoo-python
 #: code:addons/alc_b2c_connector/models/res_country.py:0
 #, fuzzy, python-format
-#| msgid "Unknown country code %s"
+#| msgid "Unknown country code {code}"
 msgid "Unknown country code {code}"
-msgstr "Unknown country code %s"
+msgstr "Unknown country code {code}"
 
 #. module: alc_b2c_connector
 #. odoo-python
@@ -379,13 +379,13 @@ msgstr "You cannot update a sale order that is already ready for delivery"
 #, fuzzy, python-format
 #| msgid ""
 #| "You cannot update this address since there are already closed Sale Orders "
-#| "for this partner. Incoherent field: %s, current value: %s"
+#| "for this partner. Incoherent field: {key}, current value: {value}"
 msgid ""
 "You cannot update this address since there are already closed Sale Orders "
 "for this partner. Incoherent field: {key}, current value: {value}"
 msgstr ""
 "You cannot update this address since there are already closed Sale Orders "
-"for this partner. Incoherent field: %s, current value: %s"
+"for this partner. Incoherent field: {key}, current value: {value}"
 
 #. module: alc_b2c_connector
 #. odoo-python
