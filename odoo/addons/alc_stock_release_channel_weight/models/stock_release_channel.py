@@ -31,4 +31,4 @@ class StockReleaseChannel(StockReleaseChannelBase):
             if not pickings:
                 rec.total_weight = 0
             else:
-                rec.total_weight = sum(pickings.mapped("total_weight"))
+                rec.total_weight = sum(pickings.mapped("weight"))
