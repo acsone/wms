@@ -57,7 +57,6 @@ odoo-addon-delivery-carrier-partner @ git+https://github.com/oca/delivery-carrie
 odoo-addon-stock-picking-delivery-link @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/661/head#subdirectory=setup/stock_picking_delivery_link
 
 # wms
-odoo-addon-stock-release-channel @ git+https://github.com/OCA/wms.git@refs/pull/779/head#subdirectory=setup/stock_release_channel
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@16.0-alc_stock_available_to_promise_release#subdirectory=setup/stock_available_to_promise_release
 odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/OCA/wms.git@refs/pull/764/head=setup/stock_release_channel_process_end_time
 # https://github.com/OCA/wms/pull/497 - [ADD] stock_storage_type_putaway_abc_classification_sale_stock
