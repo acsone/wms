@@ -16,7 +16,11 @@ def _initialize_partner_b2c_client(env):
             [("sale_channel_id.code", "=", client_code)]
         )
         assert client
-        partners = env["res.partner"].search([("ref", "like", client_code)])
+        partners = (
+            env["res.partner"]
+            .with_context(active_test=False)
+            .search([("ref", "like", client_code)])
+        )
         partners.alc_b2c_client_id = client
 
 
