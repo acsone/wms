@@ -21,29 +21,29 @@ class TestCategoryUrl(TestUrlCase):
     def test_00(self):
         """Main category."""
         self.categ_1._update_url_key(lang="en_US")
-        self.assertUrlForLang(self.categ_1, "en_US", "c/root")
+        # no root in url
+        self.assertUrlForLang(self.categ_1, "en_US", "c")
 
     def test_01(self):
         """Subcategory."""
         self.categ_3._update_url_key(lang="en_US")
-        self.assertUrlForLang(self.categ_1, "en_US", "c/root")
-        self.assertUrlForLang(self.categ_2, "en_US", "c/root/level-1")
-        self.assertUrlForLang(self.categ_3, "en_US", "c/root/level-1/level-2")
+        self.assertUrlForLang(self.categ_1, "en_US", "c")
+        self.assertUrlForLang(self.categ_2, "en_US", "c/level-1")
+        self.assertUrlForLang(self.categ_3, "en_US", "c/level-1/level-2")
 
     def test_02(self):
         """Update main."""
         self.categ_3._update_url_key(lang="en_US")
         self.categ_1.name = "New Root"
         self.categ_3._update_url_key(lang="en_US")
-        self.assertUrlForLang(self.categ_1, "en_US", "c/new-root")
-        self.assertUrlForLang(self.categ_2, "en_US", "c/new-root/level-1")
-        self.assertUrlForLang(self.categ_3, "en_US", "c/new-root/level-1/level-2")
+        self.assertUrlForLang(self.categ_1, "en_US", "c")
+        self.assertUrlForLang(self.categ_2, "en_US", "c/level-1")
+        self.assertUrlForLang(self.categ_3, "en_US", "c/level-1/level-2")
 
     def test_03(self):
         """Update child."""
         self.categ_3._update_url_key(lang="en_US")
         self.categ_2.name = "New Level 1"
         self.categ_3._update_url_key(lang="en_US")
-        self.assertUrlForLang(self.categ_1, "en_US", "c/root")
-        self.assertUrlForLang(self.categ_2, "en_US", "c/root/new-level-1")
-        self.assertUrlForLang(self.categ_3, "en_US", "c/root/new-level-1/level-2")
+        self.assertUrlForLang(self.categ_2, "en_US", "c/new-level-1")
+        self.assertUrlForLang(self.categ_3, "en_US", "c/new-level-1/level-2")
