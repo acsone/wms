@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from typing import Annotated
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, Query, status
 from fastapi.security import APIKeyHeader
 
 from odoo.api import Environment
@@ -13,6 +13,7 @@ from odoo.addons.fastapi.dependencies import (
     odoo_env,
 )
 from odoo.addons.fastapi.models import FastapiEndpoint
+from odoo.addons.fastapi.schemas import Paging
 
 from .models.alc_b2c_client import AlcB2cClient
 from .models.res_partner import ResPartner
@@ -51,3 +52,10 @@ def authenticated_partner_impl(
         )
     client = env["alc.b2c.client"].browse(client_id)
     return client.partner_id.with_context(alc_b2c_client_id=client.id)
+
+
+def paging(
+    offset: Annotated[int, Query(gte=1)] = 0, limit: Annotated[int, Query(gte=1)] = 80
+) -> Paging:
+    """Return a Paging object from the page and page_size parameters."""
+    return Paging(limit=limit, offset=offset)
