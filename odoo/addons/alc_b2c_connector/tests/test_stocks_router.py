@@ -78,7 +78,7 @@ class TestStocksService(CommonB2CServiceCase):
             response: Response = client.get(
                 "/stocks/search",
                 headers={"api-key": "1234"},
-                params={"skus": [sku]},
+                params={"skus[]": [sku]},
             )
         self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
@@ -101,7 +101,7 @@ class TestStocksService(CommonB2CServiceCase):
             response: Response = client.get(
                 "/stocks/search",
                 headers={"api-key": "1234"},
-                params={"skus": [sku + "old"]},
+                params={"skus[]": [sku + "old"]},
             )
         self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()

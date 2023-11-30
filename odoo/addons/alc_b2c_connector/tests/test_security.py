@@ -105,7 +105,7 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
             response: Response = client.get(
                 "/sales/search",
                 headers={"api-key": "1234"},
-                params={"ids": [2]},
+                params={"ids[]": [2]},
             )
         self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
@@ -117,7 +117,7 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
             response: Response = client.get(
                 "/sales/search",
                 headers={"api-key": "5678"},
-                params={"ids": [2]},
+                params={"ids[]": [2]},
             )
         self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
@@ -138,7 +138,7 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
             response: Response = client.get(
                 "/sales/search",
                 headers={"api-key": "1234"},
-                params={"ids": [10]},
+                params={"ids[]": [10]},
             )
         self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
@@ -148,7 +148,7 @@ class TestSaleOrder(CommonB2CSaleServiceCase):
             response: Response = client.get(
                 "/sales/search",
                 headers={"api-key": "5678"},
-                params={"ids": [10]},
+                params={"ids[]": [10]},
             )
         self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()

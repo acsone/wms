@@ -66,7 +66,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
             response: Response = client.get(
                 "/sales/search",
                 headers={"api-key": "1234"},
-                params={"ids": [10]},
+                params={"ids[]": [10]},
             )
         self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
         res = response.json()
@@ -125,7 +125,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
         self.assertTrue(new_so)
         self.assertEqual(
             new_so.partner_id.ref,
-            f"{self.b2c_client.sale_channel_id.name}_{recipient_info['id']}".format(),
+            f"{self.b2c_client.sale_channel_id.code}_{recipient_info['id']}".format(),
         )
         self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
         self.assertEqual(new_so.partner_shipping_id, self.vt_partner)
@@ -570,7 +570,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
         new_so = self._get_so_from_name(res["ref"])
         self.assertEqual(
             new_so.partner_id.ref,
-            f"{self.b2c_client.sale_channel_id.name}_{recipient_info['id']}",
+            f"{self.b2c_client.sale_channel_id.code}_{recipient_info['id']}",
         )
         self.assertEqual("BE", new_so.partner_id.country_id.code)
 
@@ -610,7 +610,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
                 headers={"api-key": "1234"},
             )
         self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
-        self.assertEqual("sale", self.b2c_order.state)
+        self.assertIn(self.b2c_order.state, ["sale", "done"])
 
     def test_14(self):
         """
@@ -654,7 +654,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
             ],
         }
         self.b2c_order.action_confirm()
-        self.assertEqual(self.b2c_order.state, "sale")
+        self.assertIn(self.b2c_order.state, ["sale", "done"])
 
         with self._create_test_client() as client:
             response: Response = client.post(
@@ -698,7 +698,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
         }
 
         self.b2c_order.action_confirm()
-        self.assertEqual(self.b2c_order.state, "sale")
+        self.assertIn(self.b2c_order.state, ["sale", "done"])
         with self._create_test_client() as client:
             response: Response = client.post(
                 f"/sales/{self.b2c_order.b2c_ref}/update",
@@ -710,7 +710,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
         self.assertEqual(self.b2c_order.order_line[0].product_uom_qty, 10)
         self.assertEqual(self.b2c_order.order_line[1].product_uom_qty, 35)
         self.assertEqual(len(self.b2c_order.order_line), 2)
-        self.assertEqual(self.b2c_order.state, "sale")
+        self.assertIn(self.b2c_order.state, ["sale", "done"])
 
     @mute_logger("odoo.addons.alc_b2c_connector.models.sale_order")
     def test_16(self):

@@ -103,7 +103,9 @@ class CommonB2CServiceCase(FastAPITransactionCase):
         )
         cls.b2c_user = cls.env.ref("alc_b2c_connector.alc_b2c_rest_api_user")
         cls.sale_channel = cls.env.ref("sale_channel.sale_channel_amazon")
+        cls.sale_channel.code = cls.sale_channel.name
         cls.sale_channel2 = cls.env.ref("sale_channel.sale_channel_ebay")
+        cls.sale_channel2.code = cls.sale_channel2.name
         cls.endpoint = cls.env.ref("alc_b2c_connector.fastapi_endpoint_b2c")
         cls.endpoint.user_id = cls.b2c_user
         cls.b2c_client = cls.env["alc.b2c.client"].create(

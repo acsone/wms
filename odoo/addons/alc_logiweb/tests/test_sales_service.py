@@ -148,7 +148,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
             self.env.ref("alc_delivery_carrier_gls.delivery_carrier_gls_be"),
         )
         customer_partner = self._get_customer(
-            recipient_info, b2c_client.sale_channel_id.name
+            recipient_info, b2c_client.sale_channel_id.code
         )
         self.assertEqual(new_so.partner_id, customer_partner)
         self.assertEqual(new_so.partner_invoice_id, self.vt_partner)
@@ -194,7 +194,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
         )
         self.assertEqual(new_so.gls_parcel_shop, gls_parcel_shop)
         customer_partner = self._get_customer(
-            recipient_info, b2c_client.sale_channel_id.name
+            recipient_info, b2c_client.sale_channel_id.code
         )
         self.assertEqual(new_so.partner_id, customer_partner)
         self.assertEqual(new_so.partner_invoice_id, self.logiweb_be_partner)
@@ -269,7 +269,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         customer_partner = self._get_customer(
-            recipient_info, b2c_client.sale_channel_id.name
+            recipient_info, b2c_client.sale_channel_id.code
         )
         so = self._get_so_from_name(res["ref"])
         self.assertEqual(so.partner_invoice_id, self.logiweb_partner)
@@ -313,7 +313,7 @@ class TestSalesService(CommonB2CSaleServiceCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         res = response.json()
         customer_partner = self._get_customer(
-            recipient_info, b2c_client.sale_channel_id.name
+            recipient_info, b2c_client.sale_channel_id.code
         )
         so = self._get_so_from_name(res["ref"])
         self.assertTrue(so)
