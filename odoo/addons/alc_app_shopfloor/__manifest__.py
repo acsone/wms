@@ -47,6 +47,7 @@
         "alc_shopfloor_lot_scan",
         "alc_shopfloor_security",
         "alc_shopfloor_loss_quantity",
+        "alc_shopfloor_cluster_picking_exclude_apply_dynamic_routing",
     ],
     "data": [],
     "demo": [],
