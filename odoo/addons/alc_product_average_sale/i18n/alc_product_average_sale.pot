@@ -19,6 +19,11 @@ msgid "Average annual sale"
 msgstr ""
 
 #. module: alc_product_average_sale
+#: model:ir.model.fields,help:alc_product_average_sale.field_product_product__average_three_months_sale
+msgid "Average sale of the same three months period of the previous year."
+msgstr ""
+
+#. module: alc_product_average_sale
 #: model:ir.model.fields,field_description:alc_product_average_sale.field_product_product__average_three_months_sale
 msgid "Average three months sale"
 msgstr ""
