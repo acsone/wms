@@ -7,9 +7,12 @@ from psycopg2 import sql
 
 from odoo import api, fields, models
 from odoo.fields import Command
-from odoo.tools import float_compare
+from odoo.tools import float_compare, index_exists
 
 _logger = logging.getLogger(__name__)
+OUT_MOVE_LINE_DOMAIN = [
+    ("state", "in", ("waiting", "confirmed", "partially_available", "assigned"))
+]
 
 
 class StockLocation(models.Model):
@@ -87,9 +90,7 @@ class StockLocation(models.Model):
     out_move_line_ids = fields.One2many(
         "stock.move.line",
         "location_id",
-        domain=[
-            ("state", "in", ("waiting", "confirmed", "partially_available", "assigned"))
-        ],
+        domain=OUT_MOVE_LINE_DOMAIN,
         help="technical field: the pending outgoing "
         "stock.move.lines in the location",
     )
@@ -140,6 +141,18 @@ class StockLocation(models.Model):
     only_empty = fields.Boolean(
         compute="_compute_only_empty", store=True, recursive=True
     )
+
+    def init(self):
+        if not index_exists(self._cr, "stock_move_line_location_state_index"):
+            self._cr.execute(
+                """
+                CREATE INDEX stock_move_line_location_state_index
+                ON
+                    stock_move_line (location_id, state)
+                WHERE
+                    (state IS NULL OR state NOT IN ('cancel', 'done'))
+                """
+            )
 
     @api.depends(
         "usage",
@@ -314,9 +327,12 @@ class StockLocation(models.Model):
             # to enforce concurrent transaction safety: 2 moves taking
             # quantities in a location have to be executed sequentially
             # or the location could remain "not empty"
+            location_domain = [("location_id", "=", rec.id)]
+            domain = OUT_MOVE_LINE_DOMAIN + location_domain
+            out_move_lines = self.env["stock.move.line"].search(domain, order="id")
+            quants = self.env["stock.quant"].search(location_domain, order="id")
             if (
-                sum(rec.quant_ids.mapped("quantity"))
-                - sum(rec.out_move_line_ids.mapped("qty_done"))
+                sum(quants.mapped("quantity")) - sum(out_move_lines.mapped("qty_done"))
                 > 0
                 or rec.in_move_ids
                 or rec.in_move_line_ids
