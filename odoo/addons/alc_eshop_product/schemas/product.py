@@ -5,15 +5,28 @@ from datetime import date
 
 from odoo.addons.shopinvader_product.schemas.product import (
     ProductProduct as BaseProductProduct,
+    ProductTemplate as BaseProductTemplate,
 )
 
 from .manufacturer import Manufacturer
+
+
+class ProductTemplate(BaseProductTemplate, extends=True):
+    @classmethod
+    def from_product_template(cls, odoo_rec):
+        obj = super().from_product_template(odoo_rec)
+        # We use the name of the product not the display_name and we
+        # remove the extra spaces
+        obj.name = " ".join(odoo_rec.name.split())
+        return obj
 
 
 class ProductProduct(BaseProductProduct, extends=True):
     barcode: str | None = None
     create_date: date
     manufacturer: Manufacturer | None = None
+    # for compatibility with shopinvader_product
+    objectID: int
 
     @classmethod
     def from_product_product(cls, odoo_rec):
@@ -25,4 +38,8 @@ class ProductProduct(BaseProductProduct, extends=True):
             if odoo_rec.manufacturer_id
             else None
         )
+        # We use the name of the product not the display_name and we
+        # remove the extra spaces
+        obj.name = " ".join(odoo_rec.name.split())
+        obj.objectID = odoo_rec.id
         return obj
