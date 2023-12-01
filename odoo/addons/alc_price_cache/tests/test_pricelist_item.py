@@ -449,3 +449,53 @@ class TestPricelistItemFlow(TestPrices):
         }
         expected_price_cache = [expected_cache_element_1, expected_cache_element_2]
         self.assertEqual(self._remove_extra_keys(price_cache), expected_price_cache)
+
+    @freeze_time("2022-01-01 12:00:00")
+    @mute_logger("odoo.addons.queue_job.delay")
+    def test_no_delay_write_min_qtys_with_dates(self):
+        # In this tests we but dates wit min quantities to check that the cache is
+        # date are correctly serialized also in this case (BUG after migrating
+        # in v16)
+
+        # given
+        tmpl = self.product_1.product_tmpl_id
+        vals = self._get_pricelist_vals("DPL", [], is_discount=True)
+        discount_pricelist = self.model_pl_nodelay.create(vals)
+        role = discount_pricelist.discount_role_name
+        self.assertFalse(self.product_1.price_cache)
+
+        # given
+        vals_item_min_qty_0 = self._get_item_vals(
+            discount_pricelist,
+            min_quantity=0,
+            percent_price=11,
+            applied_on="1_product",
+            product_tmpl_id=tmpl.id,
+        )
+        vals_item_min_qty_1 = self._get_item_vals(
+            discount_pricelist,
+            percent_price=12,
+            min_quantity=3,
+            applied_on="1_product",
+            product_tmpl_id=tmpl.id,
+            date_start="2022-01-01",
+            date_end="2022-01-03",
+        )
+        item_min_qty_0 = self.model_pl_item_nodelay.create(vals_item_min_qty_0)
+        item_min_qty_1 = self.model_pl_item_nodelay.create(vals_item_min_qty_1)
+        price_cache = self.product_1.price_cache[role]
+        expected_cache_element_0 = {
+            "discount": 11.0,
+            "date_start": None,
+            "id": item_min_qty_0.id,
+            "date_end": None,
+        }
+        expected_cache_element_1 = {
+            "discount": 12.0,
+            "date_start": "2022-01-01 00:00:00",
+            "id": item_min_qty_1.id,
+            "date_end": "2022-01-03 00:00:00",
+            "min_quantity": 3.0,
+        }
+        expected_price_cache = [expected_cache_element_0, expected_cache_element_1]
+        self.assertEqual(self._remove_extra_keys(price_cache), expected_price_cache)
