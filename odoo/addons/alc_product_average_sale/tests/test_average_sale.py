@@ -49,9 +49,12 @@ class TestAveragesale(TestAverageSaleCommon):
         so_4 = self._create_so(self.product_1, quantity_4)
 
         first_day_last_year = (date.today() - relativedelta(years=1)).replace(day=1)
+        # order out of scope
         so_1.date_order = first_day_last_year - relativedelta(days=1)
+        # orders in 3 months average sale same period last year
         so_2.date_order = first_day_last_year
-        so_3.date_order = first_day_last_year + relativedelta(months=2, days=28)
+        so_3.date_order = first_day_last_year + relativedelta(months=3, days=-1)
+        # order out of the cope of 3 months average sale same period last year
         so_4.date_order = first_day_last_year + relativedelta(months=3)
 
         self.so.flush_model()

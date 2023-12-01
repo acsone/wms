@@ -64,6 +64,7 @@
         "data/ir_config_parameter.xml",
         "data/ir_sequence.xml",
         "data/res_company.xml",
+        "data/se_backend.xml",
         "data/stock_location.xml",
         "data/stock_picking_type.xml",
         "data/stock_route.xml",
