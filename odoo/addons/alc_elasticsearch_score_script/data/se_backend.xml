@@ -30,7 +30,6 @@
         if (currentTermIndex >= 0 && nextTermIndex >= 0) {
           boost *= (1.0 / (currentTermIndex + Math.abs(currentTermIndex - nextTermIndex)));
           if (currentTermIndex > nextTermIndex) {
-            // not the right order
             finalFactor = 20;
           }
         }
