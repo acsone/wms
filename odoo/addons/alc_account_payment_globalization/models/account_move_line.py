@@ -14,4 +14,5 @@ class AccountMoveLine(AccountMoveLineBase):
     globalization_move_id = fields.Many2one[AccountMove](
         readonly=True,
         help="Technical field used for payment globalization reconciliation",
+        index="btree_not_null",
     )
