@@ -11,5 +11,6 @@ class ProductCategory(ProductCategoryBase):
         url_key = super()._generate_url_key(referential, lang)
         if not self.parent_id or not self.parent_id.active:
             # we are at the root category. We must add the prefix
-            return f"c/{url_key}"
+            # For alcyon we remove the first level of category
+            return "c"
         return url_key
