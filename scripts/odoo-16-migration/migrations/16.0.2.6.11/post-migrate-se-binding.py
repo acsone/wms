@@ -33,7 +33,9 @@ def migrate_shopinvader_variant(env):
                 create_date,
                 write_date,
                 create_uid,
-                write_uid)
+                write_uid,
+                active
+                )
             SELECT
                 %(backend_id)s,
                 %(index_id)s,
@@ -44,7 +46,8 @@ def migrate_shopinvader_variant(env):
                 shopinvader_variant.create_date,
                 shopinvader_variant.write_date,
                 shopinvader_variant.create_uid,
-                shopinvader_variant.write_uid
+                shopinvader_variant.write_uid,
+                shopinvader_variant.active
             FROM
                 shopinvader_variant
                 JOIN shopinvader_product ON shopinvader_product.id = shopinvader_variant.shopinvader_product_id
@@ -88,7 +91,9 @@ def migrate_shopinvader_category(env):
                 create_date,
                 write_date,
                 create_uid,
-                write_uid)
+                write_uid,
+                active
+                )
             SELECT
                 %(backend_id)s,
                 %(index_id)s,
@@ -99,7 +104,8 @@ def migrate_shopinvader_category(env):
                 shopinvader_category.create_date,
                 shopinvader_category.write_date,
                 shopinvader_category.create_uid,
-                shopinvader_category.write_uid
+                shopinvader_category.write_uid,
+                shopinvader_category.active
             FROM
                 shopinvader_category
             WHERE
