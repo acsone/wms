@@ -23,6 +23,7 @@ class ProductProduct(ProductBase):
         readonly=True,
         compute="_compute_average_sale",
         digits="Product Unit of Measure",
+        help="Average sale of the same three months period of the previous year.",
     )
 
     def _compute_average_sale(self):
@@ -30,23 +31,18 @@ class ProductProduct(ProductBase):
         # Otherwise SQL query will fail (ids = [])
         if not self:
             return
-        to_str = fields.Date.to_string
         today = date.today()
-        today_str = to_str(today)
         ids = tuple(self.ids)
 
         # Compute annual sale
-        today_minus_one_year_str = to_str(today - relativedelta(years=1))
-        annual_sale_per_products = self._average_sale(
-            ids, today_minus_one_year_str, today_str
-        )
+        today_minus_one_year = today - relativedelta(years=1)
+        annual_sale_per_products = self._average_sale(ids, today_minus_one_year, today)
 
         # Compute three months sale
-        last_year_start = (date.today() - relativedelta(years=1)).replace(day=1)
-        last_year_start_str = to_str(last_year_start)
-        last_year_end_str = to_str(last_year_start + relativedelta(months=3))
+        last_year_start = (today - relativedelta(years=1)).replace(day=1)
+        last_year_end = last_year_start + relativedelta(months=3)
         three_months_sale_per_products = self._average_sale(
-            ids, last_year_start_str, last_year_end_str
+            ids, last_year_start, last_year_end
         )
 
         for product in self:
