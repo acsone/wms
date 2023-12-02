@@ -1126,11 +1126,16 @@ class ClusterPicking(Component):
             # We set the picking to done only when the last line is
             # unloaded to avoid backorders.
             picking = line.picking_id
-            if picking.state == "done":
-                continue
-            picking_lines = picking.mapped("move_line_ids")
-            if all(line.shopfloor_unloaded for line in picking_lines):
-                picking._action_done()
+            self._unload_set_picking_to_done(
+                picking, lines.filtered(lambda l, p=picking: line.picking_id == p)
+            )
+
+    def _unload_set_picking_to_done(self, picking, lines):
+        if picking.state == "done":
+            return
+        picking_lines = picking.mapped("move_line_ids")
+        if all(line.shopfloor_unloaded for line in picking_lines):
+            picking._action_done()
         if self.work.menu.unload_package_at_destination:
             lines.result_package_id = False
 
@@ -1157,21 +1162,24 @@ class ClusterPicking(Component):
                 message=self.msg_store.batch_transfer_line_done(),
                 popup=completion_info_popup,
             )
-        else:
-            # TODO add tests for this (for instance a picking is not 'done'
-            # because a move was unassigned, we want to validate the batch to
-            # produce backorders)
-            all_pickings.filtered(lambda x: x.state == "assigned")._action_done()
-            batch.state = "done"
-            # Unassign not validated pickings from the batch, they will be
-            # processed in another batch automatically later on
-            all_pickings.invalidate_recordset(["state"])
-            pickings_not_done = all_pickings.filtered(lambda p: p.state != "done")
-            pickings_not_done.batch_id = False
-            return self._response_for_start(
-                message=self.msg_store.batch_transfer_complete(),
-                popup=completion_info_popup,
-            )
+        return self._unload_end_set_batch_to_done()
+
+    def _unload_end_set_batch_to_done(self, batch, completion_info_popup=None):
+        all_pickings = batch.picking_ids
+        # TODO add tests for this (for instance a picking is not 'done'
+        # because a move was unassigned, we want to validate the batch to
+        # produce backorders)
+        all_pickings.filtered(lambda x: x.state == "assigned")._action_done()
+        batch.state = "done"
+        # Unassign not validated pickings from the batch, they will be
+        # processed in another batch automatically later on
+        all_pickings.invalidate_recordset(["state"])
+        pickings_not_done = all_pickings.filtered(lambda p: p.state != "done")
+        pickings_not_done.batch_id = False
+        return self._response_for_start(
+            message=self.msg_store.batch_transfer_complete(),
+            popup=completion_info_popup,
+        )
 
     def unload_split(self, picking_batch_id):
         """Indicates that now the batch must be treated line per line
