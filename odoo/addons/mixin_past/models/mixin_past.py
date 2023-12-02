@@ -1,7 +1,6 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from datetime import datetime
 
 from odoo import api, fields, models
 from odoo.osv.expression import FALSE_LEAF, NEGATIVE_TERM_OPERATORS, TRUE_LEAF
@@ -24,18 +23,22 @@ class MixinPast(models.AbstractModel):
     def _is_past_date(self, maybe_date_end, reference_date=False):
         if not maybe_date_end:
             return False
-        if isinstance(maybe_date_end, datetime):
-            maybe_date_end = maybe_date_end.date()
-        reference_date = reference_date or fields.Date.context_today(self)
+        maybe_date_end = fields.Date.to_date(maybe_date_end)
+        if reference_date:
+            reference_date = fields.Date.to_date(reference_date)
+        else:
+            reference_date = fields.Date.context_today(self)
         return maybe_date_end < reference_date
 
     @api.model
     def _is_future_date(self, maybe_date_start, reference_date=False):
         if not maybe_date_start:
             return False
-        if isinstance(maybe_date_start, datetime):
-            maybe_date_start = maybe_date_start.date()
-        reference_date = reference_date or fields.Date.context_today(self)
+        maybe_date_start = fields.Date.to_date(maybe_date_start)
+        if reference_date:
+            reference_date = fields.Date.to_date(reference_date)
+        else:
+            reference_date = fields.Date.context_today(self)
         return maybe_date_start > reference_date
 
     @api.depends("date_end")

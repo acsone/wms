@@ -144,8 +144,8 @@ class ProductPricelistItem(PricelistItem, MixinPast):
         return {
             "id": self.id or None,  # typed json compatibility
             "price": self._get_price(product, self.date_start),
-            "date_start": self.date_start or None,
-            "date_end": self.date_end or None,
+            "date_start": str(self.date_start) if self.date_start else None,
+            "date_end": str(self.date_end) if self.date_end else None,
         }
 
     def _get_product_discount(self, product):
@@ -168,8 +168,8 @@ class ProductPricelistItem(PricelistItem, MixinPast):
             cache = {
                 "id": self.id,
                 "discount": alcyon_discount,
-                "date_start": self.date_start or None,
-                "date_end": self.date_end or None,
+                "date_start": str(self.date_start) if self.date_start else None,
+                "date_end": str(self.date_end) if self.date_end else None,
             }
             if self.has_min_quantity:
                 cache["min_quantity"] = self.min_quantity
