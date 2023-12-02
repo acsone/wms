@@ -63,7 +63,11 @@ class ClusterPicking(Component):
             [("result_package_id", "=", package_id)]
         )
         scanned_location = self._actions_for("search").location_from_scan(barcode)
-        release_channel = line.mapped("picking_id").release_channel_id
+        if not scanned_location:
+            return self._response_for_unload_set_destination(
+                batch, package, message=self.msg_store.no_location_found()
+            )
+        release_channel = line.picking_id.release_channel_id
         (
             parent_location,
             existing_release_channel,
@@ -72,7 +76,7 @@ class ClusterPicking(Component):
         if (
             (
                 scanned_location.keep_track_of_release_channel
-                or parent_location.keep_track_of_release_channel
+                or (parent_location and parent_location.keep_track_of_release_channel)
             )
             and existing_release_channel
             and existing_release_channel != release_channel
@@ -86,7 +90,7 @@ class ClusterPicking(Component):
         package.sudo().is_scanned = True
         if (
             scanned_location.keep_track_of_release_channel
-            or parent_location.keep_track_of_release_channel
+            or (parent_location and parent_location.keep_track_of_release_channel)
         ) and not existing_release_channel:
             parent_location.sudo().write({"release_channel_id": release_channel.id})
 
