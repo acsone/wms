@@ -145,7 +145,7 @@ odoo-addon-fs-attachment @ git+https://github.com/acsone/storage.git@3923e41dd2e
 odoo-addon-fs-base-multi-image==16.0.1.0.0.2
 odoo-addon-fs-base-multi-media==16.0.1.0.1
 odoo-addon-fs-file==16.0.1.0.5
-odoo-addon-fs-image @ git+https://github.com/acsone/storage.git@3923e41dd2e6918ed71420d24448bd2903c733e5#subdirectory=setup/fs_image
+odoo-addon-fs-image==16.0.1.0.2
 odoo-addon-fs-image-thumbnail==16.0.1.0.1
 odoo-addon-fs-product-brand-multi-image==16.0.1.0.0.2
 odoo-addon-fs-product-multi-image==16.0.1.0.1
@@ -421,6 +421,7 @@ requests-file==1.5.1
 requests-toolbelt==1.0.0
 rsa==4.9
 s3fs==2023.6.0
+setuptools==69.0.2
 shapely==2.0.1
 simplejson==3.19.1
 six==1.16.0
