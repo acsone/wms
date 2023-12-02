@@ -264,7 +264,6 @@ fastapi @ git+https://github.com/tiangolo/fastapi@refs/pull/5452/head
 
 # OCA/storage
 odoo-addon-fs-attachment @ git+https://github.com/OCA/storage.git@refs/pull/307/head#subdirectory=setup/fs_attachment
-odoo-addon-fs-image @ git+https://github.com/OCA/storage.git@refs/pull/307/head#subdirectory=setup/fs_image
 
 checklog-odoo @ git+https://github.com/acsone/checklog-odoo@master#subdirectory=checklog-odoo
 
