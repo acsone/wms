@@ -33,8 +33,7 @@ def migrate_shopinvader_variant(env):
                 create_date,
                 write_date,
                 create_uid,
-                write_uid,
-                active
+                write_uid
                 )
             SELECT
                 %(backend_id)s,
@@ -46,13 +45,13 @@ def migrate_shopinvader_variant(env):
                 shopinvader_variant.create_date,
                 shopinvader_variant.write_date,
                 shopinvader_variant.create_uid,
-                shopinvader_variant.write_uid,
-                shopinvader_variant.active
+                shopinvader_variant.write_uid
             FROM
                 shopinvader_variant
                 JOIN shopinvader_product ON shopinvader_product.id = shopinvader_variant.shopinvader_product_id
             WHERE
                 shopinvader_product.lang_id = %(lang_id)s
+                AND shopinvader_product.active
             """,
             {
                 "backend_id": product_index.backend_id.id,
@@ -91,8 +90,7 @@ def migrate_shopinvader_category(env):
                 create_date,
                 write_date,
                 create_uid,
-                write_uid,
-                active
+                write_uid
                 )
             SELECT
                 %(backend_id)s,
@@ -104,12 +102,12 @@ def migrate_shopinvader_category(env):
                 shopinvader_category.create_date,
                 shopinvader_category.write_date,
                 shopinvader_category.create_uid,
-                shopinvader_category.write_uid,
-                shopinvader_category.active
+                shopinvader_category.write_uid
             FROM
                 shopinvader_category
             WHERE
                 shopinvader_category.lang_id = %(lang_id)s
+                AND shopinvader_category.active
             """,
             {
                 "backend_id": category_index.backend_id.id,
