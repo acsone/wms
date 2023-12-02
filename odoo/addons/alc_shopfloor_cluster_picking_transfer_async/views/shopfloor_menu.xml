@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="shopfloor_menu_form_view">
+        <field name="model">shopfloor.menu</field>
+        <field name="inherit_id" ref="shopfloor.shopfloor_menu_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='options']" position="inside">
+                <group>
+                    <field
+            name="process_picking_in_background"
+            attrs="{'invisible': [('scenario', '!=', 'cluster_picking')]}"
+          />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>

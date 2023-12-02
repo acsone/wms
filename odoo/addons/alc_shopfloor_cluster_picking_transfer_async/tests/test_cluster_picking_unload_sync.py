@@ -1,6 +1,5 @@
 # Copyright 2021 ACSONE SA/NV (https://www.acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo.addons.queue_job.tests.common import trap_jobs
 from odoo.addons.shopfloor.tests.test_cluster_picking_unload import (
     ClusterPickingUnloadingCommonCase,
 )
@@ -16,7 +15,7 @@ class TestClusterPickingUnloadAsync(ClusterPickingUnloadingCommonCase):
 
     def setUp(self):
         super().setUp()
-        self.menu.sudo().process_picking_in_background = True
+        self.menu.sudo().process_picking_in_background = False
 
     def test_set_destination_all_ok(self):
         """Set destination on all lines for the full batch and end the process."""
@@ -27,37 +26,16 @@ class TestClusterPickingUnloadAsync(ClusterPickingUnloadingCommonCase):
         self._set_dest_package_and_done(move_lines[:2], self.bin1)
         self._set_dest_package_and_done(move_lines[2:], self.bin2)
         move_lines.write({"location_dest_id": self.packing_location.id})
-        with trap_jobs() as trap:
-            response = self.service.dispatch(
-                "set_destination_all",
-                params={
-                    "picking_batch_id": self.batch.id,
-                    "barcode": self.packing_location.barcode,
-                },
-            )
-            # the user can start a new batch immediately
-            self.assert_response(
-                response,
-                next_state="start",
-                message={"message_type": "success", "body": "Batch Transfer complete"},
-            )
-            self.assertEqual(trap.jobs_count(), 2)
-            trap.assert_enqueued_job(
-                self.two_lines_picking._shopfloor_unload_set_picking_to_done,
-                args=(self.two_lines_picking.move_line_ids, False),
-            )
-            trap.assert_enqueued_job(
-                self.one_line_picking._shopfloor_unload_set_picking_to_done,
-                args=(self.one_line_picking.move_line_ids, False),
-            )
-            # since the batch is processed in background, we expect the batch to be done
-            # and all pickings to be 'assigned'
-            self.assertRecordValues(
-                move_lines.picking_id, [{"state": "assigned"}, {"state": "assigned"}]
-            )
-            self.assertEqual(self.batch.state, "done")
-            trap.perform_enqueued_jobs()
-        # now all picking should be done
+
+        response = self.service.dispatch(
+            "set_destination_all",
+            params={
+                "picking_batch_id": self.batch.id,
+                "barcode": self.packing_location.barcode,
+            },
+        )
+        # since the whole batch is complete, we expect the batch and all
+        # pickings to be 'done'
         self.assertRecordValues(
             move_lines.picking_id, [{"state": "done"}, {"state": "done"}]
         )
@@ -84,6 +62,12 @@ class TestClusterPickingUnloadAsync(ClusterPickingUnloadingCommonCase):
                 },
             ],
         )
+        self.assertRecordValues(self.batch, [{"state": "done"}])
+        self.assert_response(
+            response,
+            next_state="start",
+            message={"message_type": "success", "body": "Batch Transfer complete"},
+        )
 
     def test_set_destination_all_remaining_lines(self):
         """Set destination on all lines for a part of the batch."""
@@ -96,56 +80,19 @@ class TestClusterPickingUnloadAsync(ClusterPickingUnloadingCommonCase):
         lines_to_unload = self.move_lines[:2]
         self._set_dest_package_and_done(lines_to_unload, self.bin1)
         lines_to_unload.write({"location_dest_id": self.packing_location.id})
-        with trap_jobs() as trap:
-            response = self.service.dispatch(
-                "set_destination_all",
-                params={
-                    "picking_batch_id": self.batch.id,
-                    "barcode": self.packing_location.barcode,
-                },
-            )
-            # the user can start a new immediately
-            self.assert_response(
-                response,
-                next_state="start",
-                message={"message_type": "success", "body": "Batch Transfer complete"},
-            )
-            self.assertRecordValues(self.one_line_picking, [{"state": "assigned"}])
-            self.assertRecordValues(
-                self.two_lines_picking,
-                [
-                    {
-                        "state": "assigned",
-                        "batch_id": self.batch.id,
-                        "user_id": self.shopfloor_user.id,
-                    }
-                ],
-            )
-            self.assertEqual(trap.jobs_count(), 2)
-            trap.assert_enqueued_job(
-                self.two_lines_picking._shopfloor_unload_set_picking_to_done,
-                args=(
-                    lines_to_unload.filtered(
-                        lambda l, p=self.two_lines_picking: l.picking_id == p
-                    ),
-                    False,
-                ),
-            )
-            trap.assert_enqueued_job(
-                self.one_line_picking._shopfloor_unload_set_picking_to_done,
-                args=(self.one_line_picking.move_line_ids, False),
-            )
-            trap.perform_enqueued_jobs()
 
+        response = self.service.dispatch(
+            "set_destination_all",
+            params={
+                "picking_batch_id": self.batch.id,
+                "barcode": self.packing_location.barcode,
+            },
+        )
         # Since the whole batch is not complete, state should not be done.
         # The picking with one line should be "done" because we unloaded its line.
         # The second one still has a line to pick.
         self.assertRecordValues(self.one_line_picking, [{"state": "done"}])
-        self.assertRecordValues(
-            self.two_lines_picking,
-            [{"state": "assigned", "batch_id": False, "user_id": False}],
-        )
-        self.assertRecordValues(self.batch, [{"state": "done"}])
+        self.assertRecordValues(self.two_lines_picking, [{"state": "assigned"}])
         self.assertRecordValues(
             self.move_lines,
             [
@@ -173,6 +120,15 @@ class TestClusterPickingUnloadAsync(ClusterPickingUnloadingCommonCase):
                 },
             ],
         )
+        self.assertRecordValues(self.batch, [{"state": "in_progress"}])
+
+        self.assert_response(
+            # the remaining move line still needs to be picked
+            response,
+            next_state="start_line",
+            data=self._line_data(self.move_lines[2]),
+            message={"body": "Batch Transfer line done", "message_type": "success"},
+        )
 
     def test_set_destination_all_picking_unassigned(self):
         """Set destination on lines for some transfers of the batch.
@@ -192,28 +148,13 @@ class TestClusterPickingUnloadAsync(ClusterPickingUnloadingCommonCase):
         self._set_dest_package_and_done(lines, self.bin1)
         lines.write({"location_dest_id": self.packing_location.id})
 
-        with trap_jobs() as trap:
-            response = self.service.dispatch(
-                "set_destination_all",
-                params={
-                    "picking_batch_id": self.batch.id,
-                    "barcode": self.packing_location.barcode,
-                },
-            )
-            # the user can start a new batch immediately
-            self.assert_response(
-                response,
-                next_state="start",
-                message={"message_type": "success", "body": "Batch Transfer complete"},
-            )
-            self.assertEqual(trap.jobs_count(), 2)
-            self.assertRecordValues(self.one_line_picking, [{"state": "assigned"}])
-            self.assertRecordValues(self.two_lines_picking, [{"state": "confirmed"}])
-            trap.assert_enqueued_job(
-                self.one_line_picking._shopfloor_unload_set_picking_to_done,
-                args=(self.one_line_picking.move_line_ids, False),
-            )
-            trap.perform_enqueued_jobs()
+        response = self.service.dispatch(
+            "set_destination_all",
+            params={
+                "picking_batch_id": self.batch.id,
+                "barcode": self.packing_location.barcode,
+            },
+        )
         # The batch should be done with only one picking.
         # The remaining picking has been removed from the current batch
         self.assertRecordValues(self.one_line_picking, [{"state": "done"}])
