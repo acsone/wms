@@ -5,9 +5,10 @@ from openupgradelib import openupgrade
 
 @openupgrade.migrate()
 def migrate(env, version):
-    action = env["ir.actions.server"].search(
+    actions = env["ir.actions.server"].search(
         [("name", "=", "Price Cache Recompute"), ("state", "=", "code")]
     )
-    if not action:
+    if not actions:
         return
-    action.code = action.code.replace(".update_price_cache", "._update_price_cache")
+    for action in actions:
+        action.code = action.code.replace(".update_price_cache", "._update_price_cache")
