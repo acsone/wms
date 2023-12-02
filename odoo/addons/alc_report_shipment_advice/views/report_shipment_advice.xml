@@ -135,7 +135,7 @@
                                     </td>
                                     <t t-set="nb_zones" t-value="0" />
                                     <t
-                    t-foreach="line.parcels_and_items_per_source['locations']"
+                    t-foreach="report.location_ids._ids"
                     t-as="location_key"
                   >
                                         <td>
