@@ -71,6 +71,9 @@ WORKDIR /reqs/
 COPY requirements*.txt /reqs/
 RUN pip-split-requirements \
     --group-spec="odoo:^(odoo|odoo-addons-enterprise)\s*@" \
+    --group-spec="odoo-addons-shopinvader:odoo-addon-.*shopinvader" \
+    --group-spec="odoo-addons-shopfloor:odoo-addon-.*shopfloor" \
+    --group-spec="odoo-addons-account:odoo-addon-.*account" \
     --group-spec="odoo-addons-stock:odoo-addon-.*stock" \
     --group-spec="odoo-addons:odoo-addon" \
     --prefix="requirements-group" \
@@ -84,6 +87,24 @@ RUN --mount=type=ssh \
 
 FROM build-deps as build-odoo-addons
 COPY --from=split-requirements /reqs/requirements-group-odoo-addons.txt /build/reqs.txt
+RUN --mount=type=ssh \
+    --mount=type=cache,target=/root/.cache/pip \
+    pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
+
+FROM build-deps as build-odoo-addons-shopinvader
+COPY --from=split-requirements /reqs/requirements-group-odoo-addons-shopinvader.txt /build/reqs.txt
+RUN --mount=type=ssh \
+    --mount=type=cache,target=/root/.cache/pip \
+    pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
+
+FROM build-deps as build-odoo-addons-shopfloor
+COPY --from=split-requirements /reqs/requirements-group-odoo-addons-shopfloor.txt /build/reqs.txt
+RUN --mount=type=ssh \
+    --mount=type=cache,target=/root/.cache/pip \
+    pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
+
+FROM build-deps as build-odoo-addons-account
+COPY --from=split-requirements /reqs/requirements-group-odoo-addons-account.txt /build/reqs.txt
 RUN --mount=type=ssh \
     --mount=type=cache,target=/root/.cache/pip \
     pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
@@ -114,6 +135,15 @@ RUN --mount=type=bind,target=/build,source=/build,from=build-odoo \
   pip install --no-deps --no-index /build/*.whl
 
 RUN --mount=type=bind,target=/build,source=/build,from=build-other \
+  pip install --no-deps --no-index /build/*.whl
+
+RUN --mount=type=bind,target=/build,source=/build,from=build-odoo-addons-shopinvader \
+  pip install --no-deps --no-index /build/*.whl
+
+RUN --mount=type=bind,target=/build,source=/build,from=build-odoo-addons-shopfloor \
+  pip install --no-deps --no-index /build/*.whl
+
+RUN --mount=type=bind,target=/build,source=/build,from=build-odoo-addons-account \
   pip install --no-deps --no-index /build/*.whl
 
 RUN --mount=type=bind,target=/build,source=/build,from=build-odoo-addons-stock \
