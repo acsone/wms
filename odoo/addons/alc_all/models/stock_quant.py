@@ -7,13 +7,14 @@ from odoo.addons.stock.models.stock_quant import StockQuant as StockQuantBase
 
 
 class StockQuant(StockQuantBase):
-    def init(self):
+    def init(self):  # pylint: disable=missing-return
         """
         This index improves the overall performance of picking validation.
 
         A flush_all in _update_reserved_quantity makes the computed fields recomputed
         with each stock.move action_done.
         """
+        super().init()
         if not index_exists(self._cr, "stock_quant_location_id_product_id_manidx"):
             self._cr.execute(
                 """

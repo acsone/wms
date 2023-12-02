@@ -7,7 +7,7 @@ from odoo.addons.sale.models.sale_order_line import SaleOrderLine as SaleOrderLi
 
 
 class SaleOrderLine(SaleOrderLineBase):
-    def init(self):
+    def init(self):  # pylint: disable=missing-return
         """
         This index improves the overall performance of picking validation.
 
@@ -16,6 +16,7 @@ class SaleOrderLine(SaleOrderLineBase):
         The qty_invoiced in the sale.order.line model depends on stock.move qty_done
         and uses sale_order_line_invoice_rel to get invoice_lines.
         """
+        super().init()
         if not index_exists(
             self._cr, "sale_order_line_invoice_rel_order_line_id_manidx"
         ):

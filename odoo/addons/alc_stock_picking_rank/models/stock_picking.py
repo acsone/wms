@@ -18,7 +18,8 @@ class StockPicking(Picking):
         states={"done": [("readonly", True)], "cancel": [("readonly", True)]},
     )
 
-    def init(self):
+    def init(self):  # pylint: disable=missing-return
+        super().init()
         # if column rank already exists and is not a numeric column, convert it to numeric
         self.env.cr.execute(
             "SELECT column_name, data_type "
