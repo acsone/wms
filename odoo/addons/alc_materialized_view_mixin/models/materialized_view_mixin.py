@@ -48,6 +48,7 @@ class MaterializedViewMixin(models.AbstractModel):
         return {"table": AsIs(self._table)}
 
     def init(self):
+        super().init()
         if self._abstract:
             return  # called even on abstract models
         query_drop = "DROP MATERIALIZED VIEW IF EXISTS %s CASCADE"
