@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2021 ACSONE SA/NV
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
-<odoo>
+<odoo noupdate="1">
   <record id="fs_storage_prod" model="fs.storage">
     <!-- This storage is used in the production environment as default storage
       for the attachments. Configuration is provided by server environment files.
