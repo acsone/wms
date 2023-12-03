@@ -148,9 +148,9 @@ class AlcDocument(models.Model):
         elif attachment.res_model == "stock.picking":
             document_type = "delivery_note"
         elif attachment.res_model == "account.move":
-            if self._record(attachment).type == "out_invoice":
+            if self._record(attachment).move_type == "out_invoice":
                 document_type = "invoice"
-            elif self._record(attachment).type == "out_refund":
+            elif self._record(attachment).move_type == "out_refund":
                 document_type = "credit_note"
         return document_type
 
