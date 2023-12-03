@@ -22,6 +22,10 @@ router = APIRouter(tags=["products"])
     response_model_exclude_unset=True,
 )
 @router.get(
+    "/products/",
+    response_model_exclude_unset=True,
+)
+@router.get(
     "/products/search",
     response_model_exclude_unset=True,
 )

@@ -55,7 +55,8 @@ def authenticated_partner_impl(
 
 
 def paging(
-    offset: Annotated[int, Query(gte=1)] = 0, limit: Annotated[int, Query(gte=1)] = 80
+    offset: Annotated[int | None, Query(gte=1)] = 0,
+    limit: Annotated[int | None, Query(gte=1)] = 80,
 ) -> Paging:
     """Return a Paging object from the page and page_size parameters."""
     return Paging(limit=limit, offset=offset)

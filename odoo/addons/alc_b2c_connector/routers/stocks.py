@@ -21,6 +21,10 @@ router = APIRouter(tags=["stocks"])
     response_model_exclude_unset=True,
 )
 @router.get(
+    "/stocks/",
+    response_model_exclude_unset=True,
+)
+@router.get(
     "/stocks/search",
     response_model_exclude_unset=True,
 )
