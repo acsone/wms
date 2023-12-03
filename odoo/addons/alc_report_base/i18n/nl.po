@@ -1,0 +1,86 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_report_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: alc_report_base
+#: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
+#: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+msgid ""
+"-\n"
+"                    <span>Fax:</span>"
+msgstr ""
+
+#. module: alc_report_base
+#: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
+#: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+msgid ""
+"<br/>\n"
+"                    <span>Email:</span>"
+msgstr ""
+
+#. module: alc_report_base
+#: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
+#: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+msgid "<span>RPM Liège division Huy - TVA</span>"
+msgstr ""
+
+#. module: alc_report_base
+#: model_terms:ir.ui.view,arch_db:alc_report_base.alcyon_header
+#: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
+msgid "Logo"
+msgstr ""
+
+#. module: alc_report_base
+#: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
+#: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
+msgstr ""
+
+#. module: alc_report_base
+#. odoo-python
+#: code:addons/alc_report_base/models/report_async.py:0
+#, python-format
+msgid "Sending fax for %(obj)s with id %(objid)s"
+msgstr ""
+
+#. module: alc_report_base
+#: model:ir.model,name:alc_report_base.model_report_async
+msgid "job queued report"
+msgstr ""
+
+#. module: alc_report_base
+#: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
+#: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+msgid ""
+"|\n"
+"                    <span>Fax:</span>"
+msgstr ""
+
+#. module: alc_report_base
+#: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
+#: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+msgid ""
+"|\n"
+"                    <span>For commands;</span>\n"
+"                    <span>Phone:</span>"
+msgstr ""
+
+#. module: alc_report_base
+#: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
+#: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+msgid ""
+"|\n"
+"                    <span>Phone:</span>"
+msgstr ""
