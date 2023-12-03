@@ -55,8 +55,14 @@ def authenticated_partner_impl(
 
 
 def paging(
-    offset: Annotated[int | None, Query(gte=1)] = 0,
-    limit: Annotated[int | None, Query(gte=1)] = 80,
+    offset: Annotated[str | int | None, Query()] = 0,
+    limit: Annotated[str | int | None, Query()] = 80,
 ) -> Paging:
     """Return a Paging object from the page and page_size parameters."""
+    if isinstance(offset, str) and offset.isdigit():
+        offset = int(offset)
+    if isinstance(limit, str) and limit.isdigit():
+        limit = int(limit)
+    limit = limit or 80
+    offset = offset or 0
     return Paging(limit=limit, offset=offset)
