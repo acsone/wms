@@ -43,7 +43,8 @@
       </t>
 ^FO25,190^A0N,37,32^CI13^FR^FDDate limite:^FS\r
 ^FO190,180^A0N,50,40^CI13^FR^FD<t
-          t-esc="lot.expiration_date and lot.expiration_date.strftime('%d/%m/%Y') or ''"
+          t-out="lot.expiration_date and lot.expiration_date or ''"
+          t-options='{"widget": "date"}'
         />^FS\r
 ^FO25,240^A0N,37,32^CI13^FR^FDArticle:^FS\r
 ^FO140,240^A0N,37,40^CI13^FR^FD<t t-esc="lot.product_id.default_code" />^FS\r
