@@ -6,35 +6,43 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-12-03 10:57+0000\n"
+"Last-Translator: Denis Roussel <denis.roussel@acsone.eu>\n"
 "Language-Team: none\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #. module: alc_report_base
 #: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
 #: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+#, fuzzy
 msgid ""
 "-\n"
 "                    <span>Fax:</span>"
 msgstr ""
+"-\n"
+"                    <span>Fax:</span>"
 
 #. module: alc_report_base
 #: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
 #: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+#, fuzzy
 msgid ""
 "<br/>\n"
 "                    <span>Email:</span>"
 msgstr ""
+"<br/>\n"
+"                    <span>Email:</span>"
 
 #. module: alc_report_base
 #: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
 #: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
 msgid "<span>RPM Liège division Huy - TVA</span>"
-msgstr ""
+msgstr "<span>RPM Liège division Huy - BTW</span>"
 
 #. module: alc_report_base
 #: model_terms:ir.ui.view,arch_db:alc_report_base.alcyon_header
@@ -46,7 +54,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
 #: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
 msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
-msgstr ""
+msgstr "Pagina: <span class=\"page\"/> / <span class=\"topage\"/>"
 
 #. module: alc_report_base
 #. odoo-python
@@ -63,10 +71,13 @@ msgstr ""
 #. module: alc_report_base
 #: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
 #: model_terms:ir.ui.view,arch_db:alc_report_base.page_number_footer
+#, fuzzy
 msgid ""
 "|\n"
 "                    <span>Fax:</span>"
 msgstr ""
+"|\n"
+"                    <span>Fax:</span>"
 
 #. module: alc_report_base
 #: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
@@ -76,6 +87,9 @@ msgid ""
 "                    <span>For commands;</span>\n"
 "                    <span>Phone:</span>"
 msgstr ""
+"|\n"
+"                    <span>Om te bestellen;</span>\n"
+"                    <span>Telefoon:</span>"
 
 #. module: alc_report_base
 #: model_terms:ir.ui.view,arch_db:alc_report_base.external_layout_alcyon
@@ -84,3 +98,5 @@ msgid ""
 "|\n"
 "                    <span>Phone:</span>"
 msgstr ""
+"|\n"
+"                    <span>Telefoon:</span>"
