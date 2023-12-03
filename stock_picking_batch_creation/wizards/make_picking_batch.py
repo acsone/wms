@@ -59,7 +59,7 @@ class MakePickingBatch(models.TransientModel):
         selection=[
             ("sql_for_update_skip_locked", "SQL FOR UPDATE SKIP LOCKED"),
         ],
-        default=None,
+        default="sql_for_update_skip_locked",
         string="Picking locking mode",
         help="Define the way the system will search and lock the pickings. "
         "In the same time, picking already locked by another transaction will "
