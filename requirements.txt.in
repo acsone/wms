@@ -261,9 +261,6 @@ odoo-addon-fastapi @ git+https://github.com/OCA/rest-framework.git@refs/pull/387
 # https://github.com/tiangolo/fastapi/pull/5452
 fastapi @ git+https://github.com/tiangolo/fastapi@refs/pull/5452/head
 
-# OCA/storage
-odoo-addon-fs-attachment @ git+https://github.com/OCA/storage.git@refs/pull/307/head#subdirectory=setup/fs_attachment
-
 checklog-odoo @ git+https://github.com/acsone/checklog-odoo@master#subdirectory=checklog-odoo
 
 openupgradelib @ git+https://github.com/acsone/openupgradelib.git@16.0-alc_master
