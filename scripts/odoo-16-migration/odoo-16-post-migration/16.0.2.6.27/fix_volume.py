@@ -3,6 +3,11 @@ from openupgradelib import openupgrade
 
 @openupgrade.migrate()
 def migrate(env, version):
+    """
+    Recompute volume for not done pickings.
+
+    after migration we found pickings with voule null, this script recompute the value
+    """
     env.cr.execute(
         "select id from stock_picking where volume is null and state not in ('cancel', 'done')"
     )
