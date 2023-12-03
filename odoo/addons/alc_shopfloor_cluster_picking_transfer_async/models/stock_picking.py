@@ -1,32 +1,32 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
-
-from odoo.addons.queue_job.job import identity_exact, job
+from odoo.addons.stock.models.stock_picking import Picking
 
 
-class StockPicking(models.Model):
+class StockPicking(Picking):
+    def _shopfloor_unload_set_picking_to_done(
+        self, lines, unload_package_at_destination
+    ):
+        """
+        This method is called with a delay to set pickings to 'done.'.
 
-    _inherit = "stock.picking"
-
-    def _get_picking_to_validate(self):
-        return self.filtered(lambda p: p.state not in ("done", "cancel"))
-
-    def _delay_do_transfer(self):
-        for picking in self._get_picking_to_validate():
-            description = _("Validate picking %s") % picking.display_name
-            picking.with_delay(
-                identity_key=identity_exact, description=description
-            )._do_transfer()
-
-    @job(default_channel="root.background.stock_picking_validate")
-    def _do_transfer(self):
-        for rec in self._get_picking_to_validate():
-            if rec.pack_operation_ids:
-                rec.do_transfer()
-            if rec.state != "done" and rec.batch_id:
-                # Unassign not validated pickings from the batch, they will be
-                # processed in another batch automatically later on
-                rec.write({"batch_id": False, "operator_id": False, "printed": False})
+        At this stage, we assume the batch is set to 'done', and each picking should
+        perform its own checks:
+        - If the picking is not set to 'done' after '_action_done,'
+            - cut the link with the batch
+            - unassign the user.
+        - Unload line packages.
+        """
+        self.ensure_one()
+        if self.state in ("done", "cancel"):
+            return
+        picking_lines = self.move_line_ids
+        if all(line.shopfloor_unloaded for line in picking_lines):
+            self._action_done()
+        if self.state != "done" and self.batch_id:
+            # Unassign not validated pickings from the batch, they will be
+            # processed in another batch automatically later on
+            self.write({"batch_id": False, "user_id": False, "printed": False})
+        if unload_package_at_destination:
+            lines.result_package_id = False

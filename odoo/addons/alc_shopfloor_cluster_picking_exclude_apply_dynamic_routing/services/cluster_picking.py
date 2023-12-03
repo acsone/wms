@@ -12,7 +12,9 @@ class ClusterPicking(Component):
 
         validation the batch, at this stage the location_dest is already set
         """
-        self.env.context = dict(exclude_apply_dynamic_routing=True, **self.env.context)
+        context = dict(**self.env.context)
+        context.update({"exclude_apply_dynamic_routing": True})
+        self.env.context = context
         return super().set_destination_all(
             picking_batch_id, barcode, confirmation=confirmation
         )

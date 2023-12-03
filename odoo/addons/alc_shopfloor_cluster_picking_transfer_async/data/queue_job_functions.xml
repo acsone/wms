@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="job_picking_unload_set_picking_to_done" model="queue.job.function">
+        <field name="model_id" ref="stock.model_stock_picking" />
+        <field name="method">_shopfloor_unload_set_picking_to_done</field>
+        <field name="channel_id" ref="channel_stock_picking_validate" />
+    </record>
+
+</odoo>
