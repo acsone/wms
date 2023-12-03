@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import mock
 
-from odoo.addons.alc_shopfloor.tests.test_cluster_picking_base import (
+from odoo.addons.shopfloor.tests.test_cluster_picking_base import (
     ClusterPickingCommonCase,
 )
 
@@ -11,17 +9,15 @@ from odoo.addons.alc_shopfloor.tests.test_cluster_picking_base import (
 class TestClusterPickingByPartner(ClusterPickingCommonCase):
     @classmethod
     def setUpClass(cls):
-        super(TestClusterPickingByPartner, cls).setUpClass()
-        cls.env["stock.picking.wave"].search([]).unlink()
-        cls.device1 = cls._create_device("device1", 0, 300, 300, 8, 50)
-        cls.product_a.write(
-            {"weight": 1, "length": 1, "height": 2, "width": 1, "volume": 2}
-        )
+        super().setUpClass()
 
+        cls.env["stock.picking.batch"].search([]).unlink()
+        cls.device1 = cls._create_device("device1", 0, 300, 300, 8, 50)
         cls.menu.sudo().write(
             {
                 "batch_create": True,
                 "group_pickings_by_partner": True,
+                "multiple_move_single_pack": True,
                 "stock_device_type_ids": [(4, cls.device1.id)],
             }
         )
@@ -43,32 +39,19 @@ class TestClusterPickingByPartner(ClusterPickingCommonCase):
             .sudo()
             .create({"name": "customer2 for vet", "ref": "1234222876"})
         )
-        cls.picking = cls._create_picking(lines=[(cls.product_a, 3)])
-        cls.picking.picking_type_id = cls.picking_type.id
-
-        cls._fill_stock_for_moves(cls.picking.mapped("move_lines"))
-        cls.picking.action_confirm()
-        cls.picking.action_assign()
-        cls.picking1 = cls._create_picking(lines=[(cls.product_b, 1)])
-        cls.picking1.picking_type_id = cls.picking_type.id
-        cls._fill_stock_for_moves(cls.picking1.mapped("move_lines"))
-        cls.picking1.action_confirm()
-        cls.picking1.action_assign()
-
-    def setUp(self):
-        super(TestClusterPickingByPartner, self).setUp()
-        # Avoid to have to create a delivery round for our simple tests
-        MakePickingBatch = self.env["make.picking.batch"].__class__
-        get_delivery_round_patcher = mock.patch.object(
-            MakePickingBatch, "_get_delivery_rounds"
+        cls.picking = cls._create_picking(
+            picking_type=cls.picking_type, lines=[(cls.product_a, 3)]
         )
-        self.mocked_get_delivery_round = get_delivery_round_patcher.start()
-        self.mocked_get_delivery_round.return_value = None
-
-        # pylint: disable=unused-variable
-        @self.addCleanup
-        def stop_mock():
-            get_delivery_round_patcher.stop()
+        cls._fill_stock_for_moves(cls.picking.move_ids)
+        cls.picking.action_confirm()
+        cls.picking1 = cls._create_picking(
+            picking_type=cls.picking_type, lines=[(cls.product_b, 1)]
+        )
+        cls._fill_stock_for_moves(cls.picking1.move_ids)
+        cls.picking1.action_confirm()
+        (cls.product_a | cls.product_b).write({"weight": 1, "volume": 2})
+        cls.picking.action_assign()
+        cls.picking1.action_assign()
 
     @classmethod
     def _create_device(
@@ -77,54 +60,76 @@ class TestClusterPickingByPartner(ClusterPickingCommonCase):
         return cls.env["stock.device.type"].create(
             {
                 "name": name,
-                "min_volume_liter": min_volume * 1000,
-                "max_volume_liter": max_volume * 1000,
+                "min_volume": min_volume,
+                "max_volume": max_volume,
                 "max_weight": max_weight,
                 "nbr_bins": nbr_bins,
                 "sequence": sequence,
             }
         )
 
-    def test_create_batch(self):
-        response = self.service.dispatch("find_batch")
-        data = self.data.picking_batch(self.picking.batch_id, with_pickings=True)
-        self.assert_response(
-            response, next_state="confirm_start", data=data,
-        )
-        batch = self.env["stock.picking.wave"].browse(data["id"])
-        self.assertEqual(batch.operator_id, self.shopfloor_user)
-        self.assertTrue(batch.printed)
-        self.assertEqual(batch.state, "in_progress")
-        self.assertEqual(batch.wave_nbr_bins, 1)
+    def setUp(self):
+        super().setUp()
+        context = dict(self.service.env.context)
+        context.update({"test__ignore_label_print": True})
+        self.service.env.context = context
+        # self.picking1.move_ids.volume = 2
+        # self.picking.move_ids.volume = 2
 
-    def test_several_customer_in_one_bin_and_unload_all(self):
-        self.picking.customer_id = self.customer1.id
-        self.picking1.customer_id = self.customer2.id
-        line1 = self.picking.pack_operation_ids[0]
-        line2 = self.picking1.pack_operation_ids[0]
+    def test_00(self):
+        """Make sure batch is correctly created."""
+        self.assertEqual(self.picking.volume, 6)
+        self.assertEqual(self.picking1.volume, 2)
         response = self.service.dispatch("find_batch")
         data = self.data.picking_batch(self.picking.batch_id, with_pickings=True)
         self.assert_response(
-            response, next_state="confirm_start", data=data,
+            response,
+            next_state="confirm_start",
+            data=data,
+        )
+        batch = self.env["stock.picking.batch"].browse(data["id"])
+        self.assertEqual(batch.user_id, self.shopfloor_user)
+        self.assertEqual(batch.state, "in_progress")
+        self.assertEqual(batch.batch_nbr_bins, 1)
+
+    def test_01(self):
+        """
+        Group by partner is set to False.
+
+        line from a different partner is  accepted in the same bin
+        """
+        self.menu.sudo().group_pickings_by_partner = False
+        self.picking.partner_id = self.customer1
+        self.picking1.partner_id = self.customer2
+        line1 = self.picking.move_line_ids[0]
+        line2 = self.picking1.move_line_ids[0]
+        response = self.service.dispatch("find_batch")
+        data = self.data.picking_batch(self.picking.batch_id, with_pickings=True)
+        self.assert_response(
+            response,
+            next_state="confirm_start",
+            data=data,
         )
         batch = self.picking.batch_id
         response = self.service.dispatch(
             "scan_line",
             params={
                 "picking_batch_id": batch.id,
-                "operation_id": line1.id,
+                "move_line_id": line1.id,
                 "barcode": line1.product_id.barcode,
             },
         )
         self.assert_response(
-            response, next_state="scan_destination", data=self._operation_data(line1)
+            response,
+            next_state="scan_destination",
+            data=self._line_data(line1, qty_done=3.0),
         )
-        qty_done1 = line1.product_qty
+        qty_done1 = line1.reserved_uom_qty
         response = self.service.dispatch(
             "scan_destination_pack",
             params={
                 "picking_batch_id": batch.id,
-                "operation_id": line1.id,
+                "move_line_id": line1.id,
                 "barcode": self.bin1.name,
                 "quantity": qty_done1,
             },
@@ -134,21 +139,19 @@ class TestClusterPickingByPartner(ClusterPickingCommonCase):
         )
         self.assert_response(
             response,
-            next_state="start_operation",
-            data=self._operation_data(line2),
+            next_state="start_line",
+            data=self._line_data(line2),
             message={
                 "message_type": "success",
-                "body": "{} {} put in {}".format(
-                    line1.qty_done, line1.product_id.display_name, self.bin1.name,
-                ),
+                "body": f"{line1.qty_done} {line1.product_id.display_name} put in {self.bin1.name}",
             },
         )
-        qty_done2 = line2.product_qty
+        qty_done2 = line2.reserved_uom_qty
         response = self.service.dispatch(
             "scan_destination_pack",
             params={
                 "picking_batch_id": batch.id,
-                "operation_id": line2.id,
+                "move_line_id": line2.id,
                 "barcode": self.bin1.name,
                 "quantity": qty_done2,
             },
@@ -156,7 +159,7 @@ class TestClusterPickingByPartner(ClusterPickingCommonCase):
         self.assertRecordValues(
             line2, [{"qty_done": qty_done2, "result_package_id": self.bin1.id}]
         )
-        operations = batch.picking_ids.mapped("pack_operation_ids")
+        operations = batch.picking_ids.mapped("move_line_ids")
         operations.write({"location_dest_id": self.packing_location.id})
         response = self.service.dispatch(
             "set_destination_all",
@@ -194,34 +197,43 @@ class TestClusterPickingByPartner(ClusterPickingCommonCase):
             message={"message_type": "success", "body": "Batch Transfer complete"},
         )
 
-    def test_several_partner_in_one_bin(self):
+    def test_02(self):
+        """
+        Group by partner is set to True.
+
+        line from a different partner is not accepted in the same bin
+        """
         self.picking.partner_id = self.customer1.id
         self.picking1.partner_id = self.customer2.id
-        line1 = self.picking.pack_operation_ids[0]
-        line2 = self.picking1.pack_operation_ids[0]
+        line1 = self.picking.move_line_ids[0]
+        line2 = self.picking1.move_line_ids[0]
         response = self.service.dispatch("find_batch")
         data = self.data.picking_batch(self.picking.batch_id, with_pickings=True)
         self.assert_response(
-            response, next_state="confirm_start", data=data,
+            response,
+            next_state="confirm_start",
+            data=data,
         )
         batch = self.picking.batch_id
         response = self.service.dispatch(
             "scan_line",
             params={
                 "picking_batch_id": batch.id,
-                "operation_id": line1.id,
+                "move_line_id": line1.id,
                 "barcode": line1.product_id.barcode,
             },
         )
         self.assert_response(
-            response, next_state="scan_destination", data=self._operation_data(line1)
+            response,
+            next_state="scan_destination",
+            data=self._line_data(line1, qty_done=3.0),
         )
-        qty_done1 = line1.product_qty
+        qty_done1 = line1.reserved_uom_qty
         response = self.service.dispatch(
             "scan_destination_pack",
             params={
                 "picking_batch_id": batch.id,
-                "operation_id": line1.id,
+                "move_line_id": line1.id,
                 "barcode": self.bin1.name,
                 "quantity": qty_done1,
             },
@@ -231,21 +243,19 @@ class TestClusterPickingByPartner(ClusterPickingCommonCase):
         )
         self.assert_response(
             response,
-            next_state="start_operation",
-            data=self._operation_data(line2),
+            next_state="start_line",
+            data=self._line_data(line2),
             message={
                 "message_type": "success",
-                "body": "{} {} put in {}".format(
-                    line1.qty_done, line1.product_id.display_name, self.bin1.name,
-                ),
+                "body": f"{line1.qty_done} {line1.product_id.display_name} put in {self.bin1.name}",
             },
         )
-        qty_done2 = line2.product_qty
+        qty_done2 = line2.reserved_uom_qty
         response = self.service.dispatch(
             "scan_destination_pack",
             params={
                 "picking_batch_id": batch.id,
-                "operation_id": line2.id,
+                "move_line_id": line2.id,
                 "barcode": self.bin1.name,
                 "quantity": qty_done2,
             },
@@ -254,10 +264,9 @@ class TestClusterPickingByPartner(ClusterPickingCommonCase):
         self.assert_response(
             response,
             next_state="scan_destination",
-            data=self._operation_data(line2),
+            data=self._line_data(line2, qty_done=1.0),
             message={
                 "message_type": "error",
-                "body": "The destination bin {} is not empty,"
-                " please take another.".format(self.bin1.name),
+                "body": f"The destination bin {self.bin1.name} is not empty, please take another.",
             },
         )

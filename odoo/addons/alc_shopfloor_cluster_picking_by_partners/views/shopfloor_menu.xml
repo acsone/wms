@@ -4,23 +4,16 @@
 <odoo>
 
     <record model="ir.ui.view" id="shopfloor_menu_form_view">
-        <field
-      name="name"
-    >shopfloor.menu.form (in alc_shopfloor_cluster_picking_by_partners)</field>
         <field name="model">shopfloor.menu</field>
-        <field name="inherit_id" ref="alc_shopfloor.shopfloor_menu_form_view" />
+        <field
+      name="inherit_id"
+      ref="shopfloor_batch_automatic_creation.shopfloor_menu_form_view"
+    />
         <field name="arch" type="xml">
-            <group name="options" position="inside">
-                <group
-          name="cluster_by_delivery_rounds"
-          attrs="{'invisible': [('scenario', '!=', 'cluster_picking')]}"
-        >
+            <xpath expr="//field[@name='batch_create']" position="after">
                   <field name="group_pickings_by_partner" />
-                </group>
-             </group>
+            </xpath>
         </field>
     </record>
-
-
 
 </odoo>
