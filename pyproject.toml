@@ -99,6 +99,7 @@ exclude = [
   'odoo/addons/alc_partner_delivery_window_import/*',
   'odoo/addons/alc_print_all_deliveryslip/*',
   'odoo/addons/alc_purchase_order_import_ubl/*',
+  'odoo/addons/alc_shopfloor_cluster_picking_by_partners/*',
   'odoo/addons/alc_shopfloor_mobile_workstation/*',
   'odoo/addons/alc_standby_delivery/*',
   'odoo/addons/alc_stock_picking_number_package/*',
