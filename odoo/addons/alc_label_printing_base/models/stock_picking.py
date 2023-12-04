@@ -18,6 +18,7 @@ class StockPicking(Picking):
 
     def print_packages_label(self, quantity=1, printer_id=False, packages=None):
         self.ensure_one()
+        packages = packages or self.mapped("move_line_ids.result_package_id")
         if not packages:
             raise UserError(_("No package in this picking"))
         if not self.partner_id:
