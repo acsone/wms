@@ -24,6 +24,15 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: alc_stock_picking_cancel_permission
+#. odoo-python
+#: code:addons/alc_stock_picking_cancel_permission/models/stock_move.py:0
+#, python-format
+msgid ""
+"This action is not allowed because it leads to the cancellation of a move of a started picking.\n"
+"%(pickings)s"
+msgstr ""
+
+#. module: alc_stock_picking_cancel_permission
 #: model:ir.model,name:alc_stock_picking_cancel_permission.model_stock_picking
 msgid "Transfer"
 msgstr ""
@@ -33,11 +42,4 @@ msgstr ""
 #: code:addons/alc_stock_picking_cancel_permission/models/stock_picking.py:0
 #, python-format
 msgid "You are not allowed to cancel such operation"
-msgstr ""
-
-#. module: alc_stock_picking_cancel_permission
-#. odoo-python
-#: code:addons/alc_stock_picking_cancel_permission/models/stock_move.py:0
-#, python-format
-msgid "You cannot cancel a move that is part of a started picking"
 msgstr ""
