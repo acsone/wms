@@ -123,6 +123,11 @@ msgid "Pickings"
 msgstr ""
 
 #. module: alc_label_printing_base
+#: model_terms:ir.ui.view,arch_db:alc_label_printing_base.view_picking_form
+msgid "Print Packs"
+msgstr ""
+
+#. module: alc_label_printing_base
 #: model:ir.actions.act_window,name:alc_label_printing_base.print_label_action
 #: model_terms:ir.ui.view,arch_db:alc_label_printing_base.print_label_view_form
 msgid "Print label"
@@ -252,9 +257,4 @@ msgid ""
 "^XA\n"
 "\n"
 "^FO30,30^GB"
-msgstr ""
-
-#. module: alc_label_printing_base
-#: model_terms:ir.ui.view,arch_db:alc_label_printing_base.view_picking_form
-msgid "Print Packs"
 msgstr ""

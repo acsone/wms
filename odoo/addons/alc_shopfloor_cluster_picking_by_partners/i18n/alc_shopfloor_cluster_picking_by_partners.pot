@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_shopfloor_cluster_picking_by_partners
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_shopfloor_cluster_picking_by_partners
+#: model:ir.model.fields,field_description:alc_shopfloor_cluster_picking_by_partners.field_shopfloor_menu__group_pickings_by_partner
+msgid "Group pickings by partner"
+msgstr ""
+
+#. module: alc_shopfloor_cluster_picking_by_partners
+#: model:ir.model.fields,help:alc_shopfloor_cluster_picking_by_partners.field_shopfloor_menu__group_pickings_by_partner
+msgid ""
+"If set to true, all the pickings related to one partner will be put in one "
+"bin"
+msgstr ""
+
+#. module: alc_shopfloor_cluster_picking_by_partners
+#: model:ir.model,name:alc_shopfloor_cluster_picking_by_partners.model_shopfloor_menu
+msgid "Menu displayed in the scanner application"
+msgstr ""
+
+#. module: alc_shopfloor_cluster_picking_by_partners
+#. odoo-python
+#: code:addons/alc_shopfloor_cluster_picking_by_partners/services/cluster_picking.py:0
+#, python-format
+msgid "The destination bin {} is not empty, please take another."
+msgstr ""
