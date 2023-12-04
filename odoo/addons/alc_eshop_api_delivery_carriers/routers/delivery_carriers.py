@@ -17,8 +17,10 @@ from ..schemas import DeliveryMethodList
 delivery_carriers_router = APIRouter(tags=["delivery_carriers"])
 
 
+@delivery_carriers_router.get("/delivery_carriers/", deprecated=True)
 @delivery_carriers_router.get("/delivery_carriers", deprecated=True)
 @delivery_carriers_router.get("/delivery_methods")
+@delivery_carriers_router.get("/delivery_methods/", deprecated=True)
 def search(
     env: Annotated[api.Environment, Depends(authenticated_partner_env)],
     partner: Annotated[Partner, Depends(authenticated_partner)],
