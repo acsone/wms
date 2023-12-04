@@ -9,20 +9,20 @@
           <button
           type="object"
           name="button_print_product_label"
-          string="&#128438;Print Med Product Label"
-          class="oe-link"
+          string="Print Med Product Label"
+          class="oe-link fa fa-print"
         />
           <button
           name="print_food_report"
           type="object"
-          string="&#128438;Print Ali Product Label"
+          string="Print Ali Product Label"
           context="{'default_label_type': 'food_product'}"
           class="oe-link"
         />
           <button
           type="object"
           name="button_print_product_product_label"
-          string="&#128438;Print Product Label"
+          string="Print Product Label"
           class="oe-link"
         />
       </xpath>

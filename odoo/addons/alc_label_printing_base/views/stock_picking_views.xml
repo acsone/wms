@@ -10,10 +10,10 @@
         position="after"
       >
         <button
-          class="oe_link oe_right"
+          class="oe_link oe_right fa fa-print"
           name="%(print_label_action)d"
           type="action"
-          string="&#128438;Print Packs"
+          string="Print Packs"
           context="{'default_label_type': 'package'}"
         />
       </xpath>
