@@ -250,6 +250,104 @@ class TestPackOperationLotAdd(PackOperationLotAddCommon, TransactionCase):
         wiz.move_line_id = op
         self.assertEqual(wiz.remaining_qty, 2)
 
+    def test_recive_no_lot_change_destination(self):
+        no_lot_product = self.product_model.create(
+            {
+                "name": "Unittest Reception P3",
+                "uom_id": self.ref("uom.product_uom_unit"),
+                "tracking": "none",
+                "barcode": "122345644322134",
+                "type": "product",
+            }
+        )
+
+        moves = self.env["stock.move"].create(
+            [
+                {
+                    "location_id": self.supplier_location.id,
+                    "location_dest_id": self.reception_location.id,
+                    "name": "TEST MOVE RECEPTION ",
+                    "product_id": no_lot_product.id,
+                    "product_uom": no_lot_product.uom_id.id,
+                    "product_uom_qty": 5.0,
+                    "state": "waiting",
+                }
+            ]
+        )
+
+        picking = self.stock_picking_model.create(
+            {
+                "picking_type_id": self.ref("stock.picking_type_in"),
+                "location_id": self.supplier_location.id,
+                "location_dest_id": self.reception_location.id,
+                "move_ids": moves.ids,
+                "move_line_ids": moves.move_line_ids.ids,
+            }
+        )
+        picking = picking.with_context(test_mode=1)
+        picking.action_assign()
+        # launch wizard
+        wiz = self.stock_reception_wizard.with_context(
+            default_expiration_date_allowed=True
+        ).create({"picking_id": picking.id})
+
+        # select operation
+        op = picking.move_ids.move_line_ids
+        # we only have one operation
+        self.assertEqual(len(op), 1)
+        op.location_dest_id = self.bin1
+        wiz.move_line_id = op
+
+        # select destination
+        wiz.location_dest_id = self.bin2.id
+
+        self.assertNotEqual(op.location_dest_id, self.bin2)
+
+        # receive qties
+        wiz.qty = 3
+
+        # go to next lot
+        wiz.button_nextlot()
+
+        # check destination
+        self.assertEqual(op.location_dest_id, self.bin2)
+        # do transfert and check product are in bin2
+
+        # select an other destination
+        new_bin = self.env["stock.location"].create(
+            {
+                "name": "New Bin",
+                "location_id": self.env.ref("stock.stock_location_locations").id,
+            }
+        )
+
+        wiz.location_dest_id = new_bin.id
+        wiz.qty = 2
+        wiz.button_nextlot()
+
+        # we now have two operations
+        op = picking.move_ids.move_line_ids
+        self.assertEqual(len(op), 2)
+        self.assertEqual(op[0].location_dest_id, self.bin2)
+        self.assertEqual(op[1].location_dest_id, new_bin)
+
+        wiz.button_transfer()
+
+        quant_in_bin2 = self.env["stock.quant"].search(
+            [
+                ("product_id", "=", no_lot_product.id),
+                ("location_id", "=", self.bin2.id),
+            ]
+        )
+        self.assertEqual(quant_in_bin2.quantity, 3)
+        quant_in_new_bin = self.env["stock.quant"].search(
+            [
+                ("product_id", "=", no_lot_product.id),
+                ("location_id", "=", new_bin.id),
+            ]
+        )
+        self.assertEqual(quant_in_new_bin.quantity, 2)
+
     def test_receive_existing_lot_surplus_quantities_aliment(self):
         """
         Create a lot with an expiration date for an aliment product.

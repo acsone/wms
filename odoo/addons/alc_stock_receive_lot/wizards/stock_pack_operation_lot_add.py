@@ -150,21 +150,20 @@ class StockPackOperationLotAdd(models.TransientModel):
         for rec in self:
             rec.remaining_qty = rec.move_id.product_uom_qty - rec.move_id.quantity_done
 
-    def _split_move(self) -> StockMove:
-        move = self.move_id
-        move_line_new = move.copy(
+    def _split_move_line(self) -> StockMove:
+        move_line = self.move_line_id
+        initial_reserved_uom_qty = move_line.reserved_uom_qty
+        qty_done_in_uom = move_line.product_uom_id._compute_quantity(
+            move_line.qty_done, move_line.product_id.uom_id
+        )
+        move_line.reserved_uom_qty = qty_done_in_uom
+        move_line_new = self.move_line_id.copy(
             default={
-                "quantity_done": 0.0,
-                "product_qty": move.product_qty - move.quantity_done,
+                "qty_done": 0.0,
+                "reserved_uom_qty": initial_reserved_uom_qty - qty_done_in_uom,
             }
         )
-        self._level_move_line_quantities()
-        self.move_line_id = move_line_new
         return move_line_new
-
-    def _level_move_line_quantities(self) -> None:
-        for move_line in self.move_id.move_line_ids:
-            move_line.reserved_uom_qty = move_line.qty_done
 
     def _prepare_move_line_values(self) -> dict:
         self.ensure_one()
@@ -210,7 +209,9 @@ class StockPackOperationLotAdd(models.TransientModel):
         # remaining quantities
         move = self.move_id
         current_operation = self.move_line_id
-        if self.location_dest_id != move.location_dest_id:  # Location changed
+        if (
+            self.location_dest_id != current_operation.location_dest_id
+        ):  # Location changed
             if self.location_dest_id.scrap_location:
                 # Do not allow this as it is linked through the product to a
                 # move to a non scrap location that will be considered as
@@ -218,9 +219,9 @@ class StockPackOperationLotAdd(models.TransientModel):
                 # This was allowed in the wizard to only be able to log a
                 # ticket but we don't process any qty
                 return
-            if move.quantity_done:  # split the move
-                move = self._split_move()
-            move.location_dest_id = self.location_dest_id
+            if current_operation.qty_done:  # split the move
+                current_operation = self._split_move_line()
+            current_operation.location_dest_id = self.location_dest_id
         if self.lot_name:
             move_line = move.move_line_ids.filtered(
                 lambda ml, wiz=self: ml.lot_name == wiz.lot_name
