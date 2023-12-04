@@ -30,6 +30,7 @@
         "onchange_helper",
         "sale_exception",
         "sale_procurement_customer",
+        "server_environment",
         # ALC
         "alc_product_pharmacy",
         "alc_partner_type",
