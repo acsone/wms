@@ -13,5 +13,5 @@ class ShopfloorMenu(ShopfloorMenuBase):
     restrict_to_same_release_channel = fields.Boolean(
         string="Restrict to the same release channel",
         help="Only the pickings with the same release channel will be selected for this batch.",
-        default=True,
+        default=False,
     )

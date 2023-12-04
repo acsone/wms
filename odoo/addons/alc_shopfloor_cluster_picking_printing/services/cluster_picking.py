@@ -76,6 +76,8 @@ class ClusterPicking(Component):
         # report template relies on quantity_done, but it might not be computed yet
         # when the report is generated.
         # bug observed by Jacques-Etienne and Lindsay who might know more.
+        if self.env.context.get("test__ignore_label_print"):
+            return
         if do_not_print_food_labels:
             if not move_line.picking_id.printed_once:
                 move_line.sudo().print_food_product_label(

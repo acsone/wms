@@ -49,6 +49,7 @@
         "alc_shopfloor_loss_quantity",
         "alc_shopfloor_cluster_picking_exclude_apply_dynamic_routing",
         "alc_shopfloor_cluster_picking_transfer_async",
+        "alc_shopfloor_cluster_picking_by_partners",
     ],
     "data": [],
     "demo": [],
