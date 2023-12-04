@@ -28,12 +28,15 @@ class TestCancelAdditionalMove(StockPickingTestCase):
 
     def test_00(self):
         """
-        Fail to deliver due to additional product cancel.
+        Deliver due to additional product cancel.
 
         how to reproduce:
         1- create so with additional product
         2- do the pick and a create a backorder
         3- deliver the release channel
+
+        expect:
+        the release channel delivered
         """
         # create the os, only ship is generated
         sale = self._confirm_sale_order(products=[self.main_product])
@@ -55,14 +58,10 @@ class TestCancelAdditionalMove(StockPickingTestCase):
         pick.action_set_quantities_to_reservation()
         pick.move_ids.filtered("is_additional_move").move_line_ids.qty_done -= 1
         pick._action_done()
-        self.assertTrue(pick.backorder_ids)
+        self.assertEqual(pick.backorder_ids.state, "assigned")
         # deliver the release channel
         self.channel.action_lock()
         self.channel.action_delivering()
-        # FIXME: the additional line should be canceled
-        self.assertEqual(self.channel.state, "delivering_error")
-        expected_error = (
-            "This action is not allowed because it leads to the "
-            "cancellation of a move of a started picking."
-        )
-        self.assertIn(expected_error, self.channel.delivering_error)
+        self.assertEqual(self.channel.state, "delivered")
+        self.assertFalse(self.channel.delivering_error)
+        self.assertEqual(pick.backorder_ids.state, "cancel")
