@@ -144,7 +144,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
             [
                 ("picking_type_code", "=", "outgoing"),
                 ("release_channel_id", "=", self.id),
-                ("state", "not in", ("assigned", "canceled", "done")),
+                ("state", "not in", ("assigned", "cancel", "done")),
                 ("need_release", "=", False),
             ]
         )
