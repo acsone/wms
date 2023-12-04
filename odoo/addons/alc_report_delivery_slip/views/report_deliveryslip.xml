@@ -223,7 +223,7 @@
                     />)</small></div>
               </td>
               <td class="text-center">
-                <span t-if="line.move_orig_ids.picking_type_id.is_cold">
+                <span t-if="any(line.move_orig_ids.picking_type_id.mapped('is_cold'))">
                   <i class="fa fa-check" aria-hidden="true" />
                 </span>
               </td>
@@ -419,7 +419,7 @@
                   />)</div>
               </td>
               <td class="text-center">
-                <span t-if="line.move_orig_ids.picking_type_id.is_cold">
+                <span t-if="any(line.move_orig_ids.picking_type_id.mapped('is_cold'))">
                   <i class="fa fa-check" aria-hidden="true" />
                 </span>
               </td>
@@ -581,7 +581,7 @@
                   />)</div>
               </td>
               <td class="text-center">
-                <span t-if="line.move_orig_ids.picking_type_id.is_cold">
+                <span t-if="any(line.move_orig_ids.picking_type_id.mapped('is_cold'))">
                   <i class="fa fa-check" aria-hidden="true" />
                 </span>
               </td>
@@ -782,7 +782,9 @@
                       />)</small></div>
                 </td>
                 <td class="text-center">
-                  <span t-if="line.move_orig_ids.picking_type_id.is_cold">
+                  <span
+                    t-if="any(line.move_orig_ids.picking_type_id.mapped('is_cold'))"
+                  >
                     <i class="fa fa-check" aria-hidden="true" />
                   </span>
                 </td>
