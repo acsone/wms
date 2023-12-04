@@ -85,7 +85,7 @@ class TestStockReleaseChannelUnlock(TransactionCase):
         self.assertEqual(self.channel_asleep_tag_2.state, "open")
         self.assertEqual(
             self.channel_asleep_tag_2.process_end_date,
-            fields.Datetime.to_datetime("2023-06-15 14:00:00"),
+            fields.Datetime.to_datetime("2023-06-15 00:00:00"),
         )
 
     def test_03(self):
@@ -100,3 +100,11 @@ class TestStockReleaseChannelUnlock(TransactionCase):
         self.assertEqual(self.channel_locked_tag_1.state, "locked")
         self.assertEqual(self.channel_asleep_tag_2.state, "asleep")
         self.assertEqual(self.channel_asleep_plan_2_tag_2.state, "open")
+
+    def test_process_end_date(self):
+        self.channel_asleep_tag_2.process_end_time = 8.5
+        self._unlock_channel(self.tag_2, self.preparation_plan_1)
+        self.assertEqual(
+            self.channel_asleep_tag_2.process_end_date,
+            fields.Datetime.to_datetime("2023-06-15 08:30:00"),
+        )
