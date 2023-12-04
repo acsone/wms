@@ -14,12 +14,11 @@ from odoo.addons.product.models.product_pricelist import Pricelist
 from odoo.addons.product_assortment.models.ir_filters import IrFilters
 from odoo.addons.sale_channel.models.sale_channel import SaleChannel
 from odoo.addons.sales_team.models.crm_team import CrmTeam
-from odoo.addons.server_environment.models.server_env_mixin import ServerEnvMixin
 
 
 class AlcB2cClient(models.Model):
-
     _name = "alc.b2c.client"
+    _inherit = ["server.env.techname.mixin", "server.env.mixin"]  # nosemgrep
     _description = "Alc B2c Client"
 
     name = fields.Char(required=True)
@@ -67,6 +66,10 @@ class AlcB2cClient(models.Model):
         ),
     ]
 
+    @property
+    def _server_env_fields(self):
+        return {"api_key": {}}
+
     @api.model
     def _selection_picking_policy(self):
         return self.env["sale.order"]._fields["picking_policy"].selection
@@ -98,18 +101,4 @@ class AlcB2cClient(models.Model):
     def unlink(self):
         res = super().unlink()
         self._get_id_by_endpoint_id_and_api_key.clear_cache(self)
-        return res
-
-
-class AlcB2cClientServerEnv(AlcB2cClient, ServerEnvMixin):
-
-    _name = "alc.b2c.client"
-
-    @property
-    def _server_env_fields(self):
-        _b2c_env_fields = [
-            "api_key",
-        ]
-        res = super()._server_env_fields
-        res.update({k: {} for k in _b2c_env_fields})
         return res
