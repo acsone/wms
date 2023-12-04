@@ -57,15 +57,6 @@ class AlcB2cClient(models.Model):
     )
     fastapi_endpoint_id = fields.Many2one[FastapiEndpoint](required=True)
 
-    _sql_constraints = [
-        ("name_uniq", "UNIQUE(name)", _("Name must be unique")),
-        (
-            "auth_api_key_uniq",
-            "UNIQUE(api_key)",
-            _("Auth api key can only be used by 1 backend at same time"),
-        ),
-    ]
-
     @property
     def _server_env_fields(self):
         return {"api_key": {}}
@@ -85,13 +76,14 @@ class AlcB2cClient(models.Model):
     @api.model
     @ormcache("endpoint_id", "api_key")
     def _get_id_by_endpoint_id_and_api_key(self, endpoint_id, api_key):
-        return self.search(
-            [
-                ("fastapi_endpoint_id", "=", endpoint_id),
-                ("api_key", "=", api_key),
-            ],
-            limit=1,
-        ).id
+        res = self.search([("fastapi_endpoint_id", "=", endpoint_id)]).filtered(
+            lambda r: r.api_key == api_key
+        )
+        if not res:
+            raise SystemError(_("No b2c client found for this api key"))
+        if len(res) > 1:
+            raise SystemError(_("More than one b2c client found for this api key"))
+        return res.id
 
     def write(self, vals):
         res = super().write(vals)
