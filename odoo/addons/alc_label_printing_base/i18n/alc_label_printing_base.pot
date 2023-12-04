@@ -256,5 +256,5 @@ msgstr ""
 
 #. module: alc_label_printing_base
 #: model_terms:ir.ui.view,arch_db:alc_label_printing_base.view_picking_form
-msgid "🖶Print Packs"
+msgid "Print Packs"
 msgstr ""

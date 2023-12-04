@@ -7,17 +7,17 @@
     <field name="arch" type="xml">
         <button name="%(alc_label_printing_base.print_label_action)d" position="after">
           <button
-          class="oe_link oe_right"
+          class="oe_link oe_right fa fa-print"
           name="print_labels_report"
           type="object"
-          string="&#128438;Print Med Products"
+          string="Print Med Products"
           context="{'default_label_type': 'product'}"
         />
           <button
-          class="oe_link oe_right"
+          class="oe_link oe_right fa fa-print"
           name="print_food_report"
           type="object"
-          string="&#128438;Print Food Products"
+          string="Print Food Products"
           context="{'default_label_type': 'food_product'}"
         />
         </button>

@@ -21,4 +21,8 @@ class ResCompany(Company):
         """
         if not isinstance(str_to_convert, str):
             str_to_convert = ""
-        return unicodedata.normalize("NFKD", str_to_convert).encode("ascii", "ignore")
+        string = unicodedata.normalize("NFKD", str_to_convert)
+        # Encode to ascii to remove accents and special characters
+        # Then decode it to get the raw string
+        string = string.encode("ascii", "ignore").decode()
+        return string
