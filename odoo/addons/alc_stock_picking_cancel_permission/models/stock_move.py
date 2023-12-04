@@ -11,10 +11,15 @@ from odoo.addons.stock_picking_back2draft.models.stock_move import StockMove
 class Move(StockMove):
     def _action_cancel(self):
         """Prevent to cancel a move from a printed picking."""
-        if self.filtered("picking_id.printed") and not self.env.context.get(
-            "force_cancel"
-        ):
+        if self.env.context.get("force_cancel"):
+            return super()._action_cancel()
+        started_pickings = self.picking_id.filtered("printed")
+        if started_pickings:
             raise UserError(
-                _("You cannot cancel a move that is part of a started picking")
+                _(
+                    "This action is not allowed because it leads to the cancellation of"
+                    " a move of a started picking.\n%(pickings)s",
+                    pickings=", ".join(started_pickings.mapped("display_name")),
+                )
             )
         return super()._action_cancel()
