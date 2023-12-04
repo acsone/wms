@@ -1,5 +1,6 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from datetime import datetime
 
 from odoo import fields, models
 
@@ -9,6 +10,8 @@ from odoo.addons.alc_stock_release_channel_preparation_plan.models.stock_release
 from odoo.addons.alc_stock_release_channel_tag.models.alc_stock_release_channel_tag import (
     AlcStockReleaseChannelTag,
 )
+from odoo.addons.partner_tz.tools.tz_utils import tz_to_utc_naive_datetime
+from odoo.addons.stock_release_channel_process_end_time.utils import float_to_time
 
 
 class AlcStockReleaseChannelUnlock(models.TransientModel):
@@ -65,7 +68,13 @@ class AlcStockReleaseChannelUnlock(models.TransientModel):
         channels_to_unlock = self._get_channels_to_unlock()
         channels_to_unlock.filtered("is_action_unlock_allowed").action_unlock()
         channels_to_unlock.filtered("is_action_wake_up_allowed").action_wake_up()
-        channels_to_unlock.write({"process_end_date": self.process_end_date})
+        for channel in channels_to_unlock:
+            end_time = float_to_time(channel.process_end_time)  # in TZ
+            end_date = datetime.combine(self.process_end_date, end_time)  # in TZ
+            tz = channel.process_end_time_tz or "UTC"
+            end_date_utc = tz_to_utc_naive_datetime(tz, end_date)
+            channel.process_end_date = end_date_utc
+
         action = self.env["ir.actions.actions"]._for_xml_id(
             "stock_release_channel.stock_release_channel_act_window"
         )
