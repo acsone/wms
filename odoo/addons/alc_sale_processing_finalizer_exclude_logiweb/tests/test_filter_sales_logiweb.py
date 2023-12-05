@@ -24,12 +24,8 @@ class TestFilterSalesLogiweb(TransactionCase):
         cls.partner = cls.env["res.partner"].create(
             {"name": "Unittest partner", "ref": "12344566777874"}
         )
-        cls.logiweb_partner = cls.env.ref(
-            "alc_sale_processing_finalizer_exclude_logiweb.logiweb_partner"
-        )
-        cls.logiweb_be_partner = cls.env.ref(
-            "alc_sale_processing_finalizer_exclude_logiweb.logiweb_be_partner"
-        )
+        cls.logiweb_partner = cls.env.ref("alc_logiweb.logiweb_partner")
+        cls.logiweb_be_partner = cls.env.ref("alc_logiweb.logiweb_be_partner")
         cls.p1 = cls.env["product.product"].create(
             {"name": "Unittest P1", "type": "product"}
         )
