@@ -41,16 +41,18 @@ msgid "Api Key"
 msgstr ""
 
 #. module: alc_b2c_connector
-#: model:ir.model.fields,field_description:alc_b2c_connector.field_fastapi_endpoint__app
-msgid "App"
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_client__api_key_env_default
+msgid "Api Key Env Default"
 msgstr ""
 
 #. module: alc_b2c_connector
-#. odoo-python
-#: code:addons/alc_b2c_connector/models/alc_b2c_client.py:0
-#: model:ir.model.constraint,message:alc_b2c_connector.constraint_alc_b2c_client_auth_api_key_uniq
-#, python-format
-msgid "Auth api key can only be used by 1 backend at same time"
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_client__api_key_env_is_editable
+msgid "Api Key Env Is Editable"
+msgstr ""
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_fastapi_endpoint__app
+msgid "App"
 msgstr ""
 
 #. module: alc_b2c_connector
@@ -193,6 +195,13 @@ msgid "Missing update parameters, lines or recipient."
 msgstr ""
 
 #. module: alc_b2c_connector
+#. odoo-python
+#: code:addons/alc_b2c_connector/models/alc_b2c_client.py:0
+#, python-format
+msgid "More than one b2c client found for this api key"
+msgstr ""
+
+#. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_client__name
 msgid "Name"
 msgstr ""
@@ -200,9 +209,8 @@ msgstr ""
 #. module: alc_b2c_connector
 #. odoo-python
 #: code:addons/alc_b2c_connector/models/alc_b2c_client.py:0
-#: model:ir.model.constraint,message:alc_b2c_connector.constraint_alc_b2c_client_name_uniq
 #, python-format
-msgid "Name must be unique"
+msgid "No b2c client found for this api key"
 msgstr ""
 
 #. module: alc_b2c_connector
@@ -312,8 +320,18 @@ msgid "Sales Order Line"
 msgstr ""
 
 #. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_client__server_env_defaults
+msgid "Server Env Defaults"
+msgstr ""
+
+#. module: alc_b2c_connector
 #: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_client__picking_policy
 msgid "Shipping Policy"
+msgstr ""
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,field_description:alc_b2c_connector.field_alc_b2c_client__tech_name
+msgid "Tech Name"
 msgstr ""
 
 #. module: alc_b2c_connector
@@ -329,6 +347,11 @@ msgstr ""
 #. module: alc_b2c_connector
 #: model:ir.model,name:alc_b2c_connector.model_stock_picking
 msgid "Transfer"
+msgstr ""
+
+#. module: alc_b2c_connector
+#: model:ir.model.fields,help:alc_b2c_connector.field_alc_b2c_client__tech_name
+msgid "Unique name for technical purposes. Eg: server env keys."
 msgstr ""
 
 #. module: alc_b2c_connector
