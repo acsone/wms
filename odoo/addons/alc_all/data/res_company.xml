@@ -6,7 +6,15 @@
     <function model="res.company" name="write">
         <value model="res.company" eval="ref('base.main_company')" />
         <value
-      eval="{'stock_picking_assign_operator_at_start': True, 'account_tax_one_vat': True, 'account_tax_one_vat': True, 'stock_move_manage_priority': True, 'toursolver_backend_id': ref('shipment_advice_planner_toursolver.toursolver_backend_default'), 'delivered_by_alcyon_constraint': True, 'check_invoice_supplier_number_mandatory': True}"
+      eval="{
+            'stock_picking_assign_operator_at_start': True,
+            'account_tax_one_vat': True,
+            'account_tax_one_vat': True,
+            'stock_move_manage_priority': True,
+            'toursolver_backend_id': ref('shipment_advice_planner_toursolver.toursolver_backend_default'),
+            'delivered_by_alcyon_constraint': True,
+            'check_invoice_supplier_number_mandatory': True,
+            'no_user_on_backorder': True, }"
     />
     </function>
 </odoo>

@@ -19,6 +19,7 @@
         "alc_stock_available_immediately",
         "alc_stock_available_to_promise_immediately_exclude_location",
         "alc_stock_delivery_slip",
+        "alc_stock_picking_backorder_no_user",
         "alc_stock_picking_backorder_reason",
         "alc_stock_picking_batch_assignment",
         "alc_stock_picking_name",
