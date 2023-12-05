@@ -9,7 +9,6 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": ["alc_sale_processing_finalizer"],
-    "data": ["data/res_partner.xml"],
     "demo": [],
     "installable": True,
 }

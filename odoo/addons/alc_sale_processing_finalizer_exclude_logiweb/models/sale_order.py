@@ -8,11 +8,11 @@ class SaleOrder(sale_order.SaleOrder):
     def _filter_sale_order_lines_to_cancel(self, lines):
         lines = super()._filter_sale_order_lines_to_cancel(lines)
         logiweb_sa = self.env.ref(
-            "alc_sale_processing_finalizer_exclude_logiweb.logiweb_partner",
+            "alc_logiweb.logiweb_partner",
             raise_if_not_found=False,
         )
         logiweb_be = self.env.ref(
-            "alc_sale_processing_finalizer_exclude_logiweb.logiweb_be_partner",
+            "alc_logiweb.logiweb_be_partner",
             raise_if_not_found=False,
         )
         return lines.filtered(
