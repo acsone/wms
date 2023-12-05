@@ -34,9 +34,33 @@ class MaterializedViewMixin(models.AbstractModel):
         if cron:  # refresh data asap, but not during the upgrade
             cron.nextcall = date
 
+    @classmethod
+    def _check_materialize_view_populated(cls, cr):
+        """
+        Check if the materialized view is populated.
+
+        :param cr: database cursor
+        :return: True if the materialized view is populated, False otherwise
+        """
+        cr.execute(
+            "SELECT ispopulated FROM pg_matviews WHERE matviewname = %s;",
+            (cls._table,),
+        )
+        records = cr.fetchone()
+        return records and records[0]
+
     @api.model
     def refresh_view(self):
-        self.env.cr.execute("refresh materialized view %s", (AsIs(self._table),))
+        concurrently = ""
+        if self._check_materialize_view_populated(self.env.cr):
+            concurrently = "CONCURRENTLY"
+        self.env.cr.execute(
+            "refresh materialized view %s %s",
+            (
+                AsIs(concurrently),
+                AsIs(self._table),
+            ),
+        )
         self.set_refresh_date()
 
     @api.model
