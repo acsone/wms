@@ -1,6 +1,13 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import functools
+import logging
+from collections.abc import Awaitable, Callable
+
+from fastapi import Request, Response
+from fastapi.exception_handlers import request_validation_exception_handler
+from fastapi.exceptions import RequestValidationError, ResponseValidationError
 
 from odoo import api, fields
 
@@ -17,6 +24,8 @@ from ..routers.recipients import router as recipients_router
 from ..routers.sales import router as sales_router
 from ..routers.stocks import router as stocks_router
 from .alc_b2c_client import AlcB2cClient
+
+_logger = logging.getLogger(__name__)
 
 
 class FastapiEndpoint(FastapiEndpointBase):
@@ -41,3 +50,32 @@ class FastapiEndpoint(FastapiEndpointBase):
                 authenticated_partner_impl_base
             ] = authenticated_partner_impl
         return app
+
+    def _get_app_exception_handlers(
+        self,
+    ) -> dict[
+        int | type[Exception],
+        Callable[[Request, Exception], Response | Awaitable[Response]],
+    ]:
+        handlers = super()._get_app_exception_handlers()
+        new_handlers = {}
+        if self.app == "b2c":
+            for exception, handler in handlers.items():
+                # we will wrap the handler to log the exception in any case
+                async def wrapped_handler(request, exc, handle):
+                    _logger.info(
+                        "Exception while handling request %s", str(exc), exc_info=exc
+                    )
+                    return await handle(request, exc)
+
+                new_handlers[exception] = functools.partial(
+                    wrapped_handler, handle=handler
+                )
+            new_handlers[RequestValidationError] = validation_exception_handler
+            new_handlers[ResponseValidationError] = validation_exception_handler
+        return new_handlers
+
+
+async def validation_exception_handler(request, exc):
+    _logger.info("The client sent invalid data!: %s", exc.errors())
+    return await request_validation_exception_handler(request, exc)
