@@ -209,7 +209,7 @@ class StockPicking(stock_picking.StockPicking):
         if "email_from" in values and not values.get("email_from"):
             values.pop("email_from")
         values["attachment_ids"] = [Command.set(attachements)]
-        self.env["mail.mail"].create(values)
+        self.env["mail.mail"].sudo().create(values)
 
     def create_delivery_note(self):
         """Used for the action menu."""
