@@ -3,14 +3,14 @@
 
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends
 
 from odoo.api import Environment
 
 from odoo.addons.fastapi.dependencies import authenticated_partner_env
 from odoo.addons.fastapi.schemas import Paging
 
-from ..dependencies import AlcB2cClient, alc_b2c_client, paging
+from ..dependencies import AlcB2cClient, alc_b2c_client, paging, sku_list
 from ..schemas.paged_collection import PagedCollection
 from ..schemas.product import Product
 
@@ -33,7 +33,7 @@ def get_products(
     paging_: Annotated[Paging, Depends(paging)],
     env: Annotated[Environment, Depends(authenticated_partner_env)],
     client: Annotated[AlcB2cClient, Depends(alc_b2c_client)],
-    skus: Annotated[list[str] | None, Query(alias="skus[]")] = None,
+    skus: Annotated[list[str] | None, Depends(sku_list)] = None,
 ) -> PagedCollection[Product]:
     """
     Return the list of available products.
