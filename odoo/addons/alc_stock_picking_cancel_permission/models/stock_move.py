@@ -11,7 +11,9 @@ from odoo.addons.stock_picking_back2draft.models.stock_move import StockMove
 class Move(StockMove):
     def _action_cancel(self):
         """Prevent to cancel a move from a printed picking."""
-        if self.env.context.get("force_cancel"):
+        if self.env.context.get("force_cancel") or self.env.context.get(
+            "cancel_backorder"
+        ):
             return super()._action_cancel()
         started_pickings = self.picking_id.filtered("printed")
         if started_pickings:
