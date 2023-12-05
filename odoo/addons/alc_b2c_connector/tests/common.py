@@ -247,6 +247,7 @@ class CommonB2CSaleServiceCase(CommonB2CServiceCase):
         return self.SaleOrder.search([("name", "=", name)])
 
     def _do_picking(self, picking):
+        picking.printed = True
         for move in picking.move_ids:
             move.quantity_done = move.product_qty
         picking._action_done()

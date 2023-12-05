@@ -65,6 +65,7 @@ class ResPartner(ResPartnerBase):
 
     def _update_b2c_data(self, data, b2c_client):
         self.ensure_one()
+        data.pop("id", None)
         if data.get("country_code"):
             country = self.env["res.country"]._get_by_code(data.pop("country_code"))
             data["country_id"] = country.id
