@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+
+  <record forcecreate="True" id="alc_stock_quant_cleanup_cron" model="ir.cron">
+    <field name="name">Quants cleanup: unlink zero quants</field>
+        <field name="model_id" ref="stock.model_stock_quant" />
+        <field name="state">code</field>
+        <field
+      name="code"
+    >model.with_context(unlink_zero_quants=True)._unlink_zero_quants()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+        <field name="active" eval="True" />
+        <field name="user_id" ref="base.user_root" />
+        <field eval="1" name="run_as_queue_job" />
+        <field
+      name="nextcall"
+      eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 01:00:00')"
+    />
+    </record>
+</odoo>
