@@ -574,6 +574,36 @@ class TestSalesService(CommonB2CSaleServiceCase):
         )
         self.assertEqual("BE", new_so.partner_id.country_id.code)
 
+        # we now validate the order
+        new_so._action_confirm()
+        self.assertEqual(new_so.state, "sale")
+
+        # from here it's no more possible to update the partner. We call the
+        # service with the same info and it should work
+        self._deliver_orders(new_so)
+
+        # a new so can be safely created
+        params = {
+            "id": 3,
+            "customer_ref": self.vt_partner.ref,
+            "date": ISO_DT_WITH_TZ,
+            "recipient": recipient_info,
+            "lines": [
+                {
+                    "line_id": 3,
+                    "sku": self.saleable_product.default_code,
+                    "quantity": 10,
+                }
+            ],
+        }
+        with self._create_test_client() as client:
+            response: Response = client.post(
+                "/sales/create",
+                headers={"api-key": "1234"},
+                json=params,
+            )
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.json())
+
     def test_12(self):
         """
         Data:
