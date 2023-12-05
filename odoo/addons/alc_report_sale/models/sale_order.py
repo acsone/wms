@@ -161,18 +161,19 @@ class SaleOrder(Order, ReportAsync):
     def action_confirm(self):
         """Generate the sale order pdf and save it in ir.attachment."""
         res = super().action_confirm()
+        confirmed_orders = self.filtered(lambda o: o.state in ("sale", "done"))
         # if config["test_enable"] or self.env.context.get("skip_pdf_gen"):
         #     # Do not generate the report during test or during import
         #     return res
         if self.env["ir.config_parameter"].sudo().get_param(
             "alc_report_sale.on_confirm_generate_quotation_report", ""
         ).lower() in ["true", "1", "t", "y", "yes"]:
-            self.create_reports()
+            confirmed_orders.create_reports()
         if self.env["ir.config_parameter"].sudo().get_param(
             "alc_report_sale.on_confirm_generate_and_send_pharmacist_report",
             "",
         ).lower() in ["true", "1", "t", "y", "yes"]:
-            self.create_pharmacist_reports()
+            confirmed_orders.create_pharmacist_reports()
         return res
 
     def print_quotation(self):
