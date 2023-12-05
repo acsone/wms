@@ -15,11 +15,19 @@ class TestStockPickingName(TransactionCase):
         cls.picking_cancel_group = cls.env.ref(
             "alc_stock_picking_cancel_permission.group_picking_cancel"
         )
-        loc_stock = cls.env.ref("stock.stock_location_stock")
-        loc_customer = cls.env.ref("stock.stock_location_customers")
-        product_1 = cls.env["product.product"].create(
+        cls.loc_stock = cls.env.ref("stock.stock_location_stock")
+        cls.loc_customer = cls.env.ref("stock.stock_location_customers")
+        cls.product_1 = cls.env["product.product"].create(
             {
                 "name": "test product 1",
+                "type": "product",
+                "sale_ok": True,
+            }
+        )
+
+        cls.product_2 = cls.env["product.product"].create(
+            {
+                "name": "test product 2",
                 "type": "product",
                 "sale_ok": True,
             }
@@ -34,22 +42,41 @@ class TestStockPickingName(TransactionCase):
                 "name": "Picking 1",
                 "partner_id": partner.id,
                 "picking_type_id": cls.env.ref("stock.picking_type_out").id,
-                "location_id": loc_stock.id,
-                "location_dest_id": loc_customer.id,
+                "location_id": cls.loc_stock.id,
+                "location_dest_id": cls.loc_customer.id,
                 "move_ids": [
                     Command.create(
                         {
                             "name": "test move p1",
-                            "product_id": product_1.id,
+                            "product_id": cls.product_1.id,
                             "product_uom_qty": 5,
-                            "location_id": loc_stock.id,
-                            "location_dest_id": loc_customer.id,
+                            "location_id": cls.loc_stock.id,
+                            "location_dest_id": cls.loc_customer.id,
                         },
-                    )
+                    ),
+                    Command.create(
+                        {
+                            "name": "test move p2",
+                            "product_id": cls.product_2.id,
+                            "product_uom_qty": 5,
+                            "location_id": cls.loc_stock.id,
+                            "location_dest_id": cls.loc_customer.id,
+                        },
+                    ),
                 ],
             }
         )
         cls.picking.action_confirm()
+
+    @classmethod
+    def _create_quantities(cls, product):
+        cls.env["stock.quant"].create(
+            {
+                "product_id": product.id,
+                "location_id": cls.loc_stock.id,
+                "inventory_quantity": 50.0,
+            }
+        )._apply_inventory()
 
     def test_stock_picking_cancel_permission(self):
         """
@@ -91,3 +118,28 @@ class TestStockPickingName(TransactionCase):
         self.picking.printed = False
         move._action_cancel()
         self.assertEqual(move.state, "cancel")
+
+    def test_stock_picking_backorder(self):
+        """
+        Data: 1 confirmed picking with 1 move.
+
+        case: - set printed of the picking
+              - Partially transfer the picking
+        result: - the backorder should be successfully created
+        """
+        self._create_quantities(self.product_1)
+        self._create_quantities(self.product_2)
+        self.picking.action_assign()
+        self.picking.printed = True
+        self.picking.move_line_ids[0].qty_done = 4.0
+        res = self.picking.button_validate()
+        self.assertEqual(res.get("res_model"), "stock.backorder.confirmation")
+        wizard = (
+            self.env["stock.backorder.confirmation"]
+            .with_context(
+                **res.get("context"),
+            )
+            .create({})
+        )
+        wizard.process_cancel_backorder()
+        self.assertFalse(self.picking.backorder_ids)
