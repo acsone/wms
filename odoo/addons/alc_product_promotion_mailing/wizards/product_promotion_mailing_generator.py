@@ -1,10 +1,13 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import logging
 from collections import defaultdict, namedtuple
 from datetime import timedelta
 
 from odoo import _, api, fields, models
+
+_logger = logging.getLogger(__name__)
 
 PromotionDef = namedtuple(
     "PromotionDef", ["partner_id", "product_id", "date_end", "supplierinfo_id"]
@@ -16,17 +19,23 @@ class ProductPromotionMailingGenerator(models.TransientModel):
     _name = "product.promotion.mailing.generator"
     _description = "Product Promotion Mailing Generator"
 
+    def _get_nbr_before_end_promotion_mailing_setting(self):
+        _get_param = self.env["ir.config_parameter"].sudo().get_param
+        nbr_days = _get_param(
+            "alc_product_promotion_mailing.nbr_before_end_promotion_mailing_setting", 3
+        )
+        try:
+            return int(nbr_days)
+        except ValueError as e:
+            _logger.exception(
+                "nbr_before_end_promotion_mailing setting must be an int.\n%(error)s",
+                error=e,
+            )
+            return 3
+
     def _get_valid_promotions(self):
         """Return a list PromotionDef tuple."""
-        nbr_days = (
-            self.env["ir.config_parameter"]
-            .sudo()
-            .get_param(
-                "alc_product_promotion_mailing.nbr_before_end_promotion_mailing_setting",
-                3,
-            )
-        )
-
+        nbr_days = self._get_nbr_before_end_promotion_mailing_setting()
         today = fields.Date.today()
         end = today + timedelta(days=nbr_days)
         date_end = fields.Date.to_string(end)
