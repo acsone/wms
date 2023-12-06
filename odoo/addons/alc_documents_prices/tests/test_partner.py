@@ -1,5 +1,6 @@
 # Copyright 2022 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from unittest import mock
 
 from .common import TestAlcDocumentsPrices
 
@@ -102,3 +103,22 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
             has_supplier_promotion=True, supplier_promotion_only_for_veterinaries=False
         )
         self.assertIn("Produits GRATUITS", csv)
+
+    def test_no_recompute_same_day(self):
+        self.partner.partner_type = "veterinary"
+        self.partner.supplier_promotion_sale_allowed = True
+        csv = self._get_discount_data(
+            has_supplier_promotion=True, supplier_promotion_only_for_veterinaries=False
+        )
+        self.assertIn("Produits GRATUITS", csv)
+        # A second call the same dy should not regenerate the document.
+        # The system should return the same document.
+        with mock.patch.object(
+            type(self.env["alc.document"]), "_generate_attachment_file"
+        ) as mocked_generate:
+            csv = self._get_discount_data(
+                has_supplier_promotion=True,
+                supplier_promotion_only_for_veterinaries=False,
+            )
+            self.assertIn("Produits GRATUITS", csv)
+            mocked_generate.assert_not_called()
