@@ -36,6 +36,7 @@
         "stock_available_base_exclude_location",
         "stock_available_location_orderpoint",
         "stock_dynamic_routing",
+        "stock_full_location_reservation",
         "stock_inventory",
         "stock_location_orderpoint",
         "stock_location_orderpoint_average_daily_sale",
