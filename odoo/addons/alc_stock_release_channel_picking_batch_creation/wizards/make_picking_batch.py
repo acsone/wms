@@ -25,7 +25,6 @@ class MakePickingBatch(MakePickingBatchBase):
         domain.extend(
             [
                 ("release_channel_id", "=", self.release_channel_id.id),
-                ("release_channel_id.pick_allowed", "=", True),
                 ("picking_type_id", "in", picking_type_ids_pick_allowed),
             ]
         )
