@@ -18,7 +18,7 @@ ISO_DT_WITH_TZ = "2020-05-28T13:45:47+02:00"
 
 class TestSalesService(CommonB2CSaleServiceCase):
     @classmethod
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.utils")
     def setUpClass(cls):
         super().setUpClass()
 

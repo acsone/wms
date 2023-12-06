@@ -13,7 +13,7 @@ from ..routers import documents_router
 
 class TestDocumentsService(FastAPITransactionCase, TestAlcDocuments):
     @classmethod
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.utils")
     def setUpClass(cls):
         super().setUpClass()
         cls.default_fastapi_router = documents_router
@@ -51,7 +51,7 @@ class TestDocumentsService(FastAPITransactionCase, TestAlcDocuments):
 
     def setUp(self):
         super().setUp()
-        loggers = ["odoo.addons.queue_job.models.base"]
+        loggers = ["odoo.addons.queue_job.utils"]
         for logger in loggers:
             logging.getLogger(logger).addFilter(self)
 
