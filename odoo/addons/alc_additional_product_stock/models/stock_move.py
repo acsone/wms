@@ -191,5 +191,8 @@ class StockMove(StockMoveBase):
                 + move.copy(move_to_cancel_vals)
                 - move
             )
-            moves_to_cancel._action_cancel()
+            # moves to cancel may be linked to done preparation moves.
+            # the propagation of the cancel action will cause a cancel on them
+            # we force cancel to avoid blockage on cancel permission
+            moves_to_cancel.with_context(force_cancel=True)._action_cancel()
             move.product_uom_qty = quantity_done
