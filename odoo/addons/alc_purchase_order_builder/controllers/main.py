@@ -1,4 +1,3 @@
-import json
 import logging
 from datetime import datetime
 from urllib.parse import urlencode
@@ -86,7 +85,7 @@ class PurchaseOrderBuilder(Home):
 
     def _base_values(self, po, product):
         values = {
-            "session_info": json.dumps(request.env["ir.http"].session_info()),
+            # "session_info": json.dumps(request.env["ir.http"].session_info()),  # Not used anywhere but high bulky
             "po": po,
             "res_company": request.env.user.company_id,
             "current_product": product,
