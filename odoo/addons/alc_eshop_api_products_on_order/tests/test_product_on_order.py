@@ -246,7 +246,12 @@ class TestProductOnOrder(FastAPITransactionCase):
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json()["status"], True)
         new_mail = self.env["mail.mail"].search([]) - all_mails
+        subject = (
+            f"Ref {self.so_ali_out_of_stock.name}: "
+            "Demande annulation backorder product_ali"
+        )
         self.assertTrue(new_mail)
+        self.assertEqual(new_mail.subject, subject)
         self.assertEqual(self.so_ali_out_of_stock.id, new_mail.res_id)
         self.assertEqual(self.so_ali_out_of_stock._name, new_mail.model)
 
