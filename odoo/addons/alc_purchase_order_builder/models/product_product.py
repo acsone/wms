@@ -200,7 +200,9 @@ class ProductProduct(ProductBase):
         sellers_with_discount = sellers.filtered(
             lambda s: s.discount or s.ratio_promotional_product
         )
-        sellers_with_discount.sorted(lambda seller: seller.date_start)
+        sellers_with_discount.sorted(
+            lambda seller: (seller.is_null_date_start, seller.date_start)
+        )
 
         return list(sellers_with_discount)
 
