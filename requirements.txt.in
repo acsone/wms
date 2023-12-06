@@ -59,7 +59,7 @@ odoo-addon-stock-picking-delivery-link @ git+https://github.com/OCA/delivery-car
 # wms
 odoo-addon-stock-release-channel @ git+https://github.com/OCA/wms.git@refs/pull/789/head#subdirectory=setup/stock_release_channel
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@16.0-alc_stock_available_to_promise_release#subdirectory=setup/stock_available_to_promise_release
-odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/OCA/wms.git@refs/pull/764/head=setup/stock_release_channel_process_end_time
+odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/OCA/wms.git@refs/pull/799/head=setup/stock_release_channel_process_end_time
 # https://github.com/OCA/wms/pull/497 - [ADD] stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@16.0-add-stock_storage_type_abc_classification-dro#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-stock-storage-type @ git+https://github.com/OCA/wms.git@refs/pull/788/head#subdirectory=setup/stock_storage_type
