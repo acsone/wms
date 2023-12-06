@@ -45,7 +45,7 @@ class Move(BaseModel):
     ) -> self:  # noqa: F821  pylint: disable=undefined-variable
         return cls(
             remaining_qty=record.product_uom_qty - record.quantity_done,
-            prix_net_htva=record.sale_line_id.price_reduce,
+            prix_net_htva=record.sale_line_id.price_reduce_taxexcl,
             state=record.state,
             name=record.name,
             reference=record.product_id.default_code,

@@ -71,7 +71,7 @@ class StockMove(stock.StockMove):
 
     def _get_net_price(self):
         """Should be overridden to invove additonal product and consignment."""
-        return self.sale_line_id.price_reduce
+        return self.sale_line_id.price_reduce_taxexcl
 
     def _get_crude_price(self):
         """Should be overridden to invove additonal product and consignment."""

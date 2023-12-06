@@ -365,7 +365,7 @@ class FacadePackingSlip(Facade):
 
     def _get_price_from_move(self, stock_move, field_name):
         if field_name == "prix_net_htva":
-            return stock_move.sale_line_id.price_reduce
+            return stock_move.sale_line_id.price_reduce_taxexcl
         if field_name == "prix_brut_htva":
             return stock_move.sale_line_id.price_unit
         return 0.0

@@ -261,7 +261,7 @@
               </td>
               <td>
                 <t
-                  t-esc="order_line.price_reduce * int(line.product_qty)"
+                  t-esc="order_line.price_reduce_taxexcl * int(line.product_qty)"
                   t-options="{'widget': 'monetary', 'display_currency': order_line.currency_id}"
                   t-if="order_line and not line.is_additional_move and not line.order_id.is_consignment"
                 />
