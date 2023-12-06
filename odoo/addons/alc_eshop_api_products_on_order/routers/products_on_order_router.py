@@ -95,7 +95,9 @@ def get(
 
     count = model.sudo().search_count(domain)
     offset = per_page * (page - 1)
-    records = model.sudo().search(domain, limit=per_page, offset=offset)
+    records = model.sudo().search(
+        domain, limit=per_page, offset=offset, order="order_date DESC"
+    )
     return {
         "size": count,
         "data": [
