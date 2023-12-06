@@ -14,3 +14,12 @@ def migrate(env, version):
             "is_full_location_reservation_visible": True,
         }
     )
+
+    # Set full location reservation in shopfloor scenarii
+    ids = [9, 15]
+    menus = env["shopfloor.menu"].browse(ids)
+    menus.write(
+        {
+            "full_location_reservation": True,
+        }
+    )
