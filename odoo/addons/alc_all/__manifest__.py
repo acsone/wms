@@ -5,7 +5,7 @@
     "name": "Alc All",
     "description": """
         Alcyon Odoo App""",
-    "version": "16.0.2.6.35",
+    "version": "16.0.2.6.36",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
