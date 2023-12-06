@@ -75,10 +75,29 @@ class StockReleaseChannel(StockReleaseChannelBase):
             self._toggle_pick_allowed_channel()
 
     def _toggle_pick_allowed_channel(self):
+        picking_type_ids = (
+            self.env["stock.picking.type"]
+            .search([("release_channel_can_allow_pick", "=", True)])
+            .ids
+        )
         started = self.filtered("pick_allowed")
         stopped = self - started
-        started.write({"pick_allowed": False, "pick_allowed_by_picking_type": False})
-        stopped.write({"pick_allowed": True, "pick_allowed_by_picking_type": False})
+        started.write(
+            {
+                "pick_allowed": False,
+                "pick_allowed_by_picking_type": {
+                    p_id: False for p_id in picking_type_ids
+                },
+            }
+        )
+        stopped.write(
+            {
+                "pick_allowed": True,
+                "pick_allowed_by_picking_type": {
+                    p_id: True for p_id in picking_type_ids
+                },
+            }
+        )
 
     def _toggle_pick_allowed_for_picking_type_id(self, picking_type_id: int):
         for rec in self:
@@ -90,6 +109,13 @@ class StockReleaseChannel(StockReleaseChannelBase):
             pick_allowed = rec._get_picking_type_pick_allowed(picking_type_id)
             pick_allowed_by_picking_type.update({picking_type_id: not pick_allowed})
             rec.pick_allowed_by_picking_type = pick_allowed_by_picking_type
+            picking_types_states = rec._get_all_picking_type_ids_state()
+            if any(picking_types_states.values()):
+                # if any picking_type is enabled, the channel should be enabled
+                rec.pick_allowed = True
+            else:
+                # if all picking_type are disabled, the channel should be disabled
+                rec.pick_allowed = False
 
     def _set_pick_allowed(self, pick_allowed: bool, picking_type=None):
         self.ensure_one()
@@ -136,6 +162,18 @@ class StockReleaseChannel(StockReleaseChannelBase):
         ):
             if self._get_picking_type_pick_allowed(picking_type_id=picking_type.id):
                 res.append(picking_type.id)
+        return res
+
+    def _get_all_picking_type_ids_state(self):
+        """For a release channel return all picking types where pick is allowed."""
+        self.ensure_one()
+        res = {}
+        for picking_type in self.env["stock.picking.type"].search(
+            [("release_channel_can_allow_pick", "=", True)]
+        ):
+            res[picking_type.id] = self._get_picking_type_pick_allowed(
+                picking_type_id=picking_type.id
+            )
         return res
 
     def _delay_set_pick_allowed(
