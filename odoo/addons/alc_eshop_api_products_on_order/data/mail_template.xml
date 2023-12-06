@@ -6,20 +6,24 @@
             <field name="name">Demande d'annulation produit en backorder</field>
             <field
       name="email_from"
-    >${(object.partner_id.email and '%s &lt;%s&gt;' % (object.partner_id.name, object.partner_id.email) or '')|safe}</field>
+    >{{ (object.partner_id.email and '%s &lt;%s&gt;' % (object.partner_id.name, object.partner_id.email) or '') }}</field>
             <field
       name="subject"
-    >Ref ${object.name}: Demande annulation backorder ${ctx.product.name}</field>
+    >Ref {{ object.name }}: Demande annulation backorder {{ ctx['product'].name }}</field>
             <field name="email_to">callcenter@alcyonbelux.be</field>
             <field name="model_id" ref="sale.model_sale_order" />
             <field name="auto_delete" eval="True" />
-            <field name="lang">${object.partner_id.lang}</field>
-            <field
-      name="body_html"
-    ><![CDATA[
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="body_html" type="html">
 <p>Bonjour,</p>
-<p>${object.partner_id.name} demande l'annulation de ${ctx.quantity} unité(s) en backorder pour le produit ${ctx.product.display_name} dans la commande ${object.name} du ${format_tz(object.date_order, tz=user.tz)}.</p>
+<p><t t-out="object.partner_id.name" /> demande l'annulation de <t
+          t-out="ctx['quantity']"
+        /> unité(s) en backorder pour le produit <t
+          t-out="ctx['product'].display_name"
+        /> dans la commande <t t-out="object.name" /> du <t
+          t-out="format_datetime(dt=object.date_order, tz=user.tz)"
+        />.</p>
 <p>Merci de faire le nécessaire.</p>
-]]></field>
+</field>
         </record>
 </odoo>
