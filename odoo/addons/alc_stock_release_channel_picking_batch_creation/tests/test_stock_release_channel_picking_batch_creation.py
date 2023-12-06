@@ -69,3 +69,14 @@ class TestStockReleaseChannelPickingBatchCreation(ClusterPickingCommonFeatures):
         self.picking_type_1.release_channel_can_allow_pick = False
         batch = self.make_picking_batch._create_batch()
         self.assertFalse(batch)
+
+    def test_06(self):
+        """Channel don't allow pick but on of picking types allow it."""
+        self.channel._toggle_pick_allowed_channel()
+        self.channel._toggle_pick_allowed_for_picking_type_id(self.picking_type_1.id)
+        self.assertFalse(self.channel.pick_allowed)
+        self.assertTrue(
+            self.channel._get_picking_type_pick_allowed(self.picking_type_1.id)
+        )
+        batch = self.make_picking_batch._create_batch()
+        self.assertTrue(batch)
