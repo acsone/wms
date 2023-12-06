@@ -203,3 +203,31 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         self.assertTrue(self.channel.pick_allowed)
         self.channel.action_sleep()
         self.assertFalse(self.channel.pick_allowed)
+
+    def test_09(self):
+        """
+        Test channel pick_allowed depending on pickings pick_allowed.
+
+        - if all pickings disabled -> channel disabled
+        - if one picking enabled -> channel enable
+        - channel enable -> enable all pickings
+        - channel disable -> disable all pickings
+        """
+        _states = self.channel._get_all_picking_type_ids_state
+        picking_types = self.env["stock.picking.type"].search([], limit=2)
+        pt1_id = picking_types[0].id
+        pt2_id = picking_types[1].id
+        picking_types.release_channel_can_allow_pick = True
+        self.assertTrue(self.channel.pick_allowed)
+        self.assertDictEqual(_states(), {pt1_id: True, pt2_id: True})
+        self.channel._toggle_pick_allowed_channel()
+        self.assertFalse(self.channel.pick_allowed)
+        self.assertDictEqual(_states(), {pt1_id: False, pt2_id: False})
+        self.channel._toggle_pick_allowed_for_picking_type_id(pt1_id)
+        self.assertTrue(self.channel.pick_allowed)
+        self.assertDictEqual(_states(), {pt1_id: True, pt2_id: False})
+        self.channel._toggle_pick_allowed_for_picking_type_id(pt1_id)
+        self.assertFalse(self.channel.pick_allowed)
+        self.assertDictEqual(_states(), {pt1_id: False, pt2_id: False})
+        self.channel._toggle_pick_allowed_channel()
+        self.assertDictEqual(_states(), {pt1_id: True, pt2_id: True})
