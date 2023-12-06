@@ -60,7 +60,7 @@ class AlcDocument(alc_document.AlcDocument):
         today = fields.Date.today()
         for document in self:
             document_date = document.attachment_id.create_date
-            if not document_date or document_date < today:
+            if not document_date or document_date.date() < today:
                 document._generate_attachment_file()
 
     def _all_by_format(self):

@@ -11,7 +11,7 @@ from odoo.addons.alc_price_cache.tests.common import TestPrices
 
 class TestPricelistItemFlow(TestPrices):
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.utils")
     def test_no_delay(self):
         # given
         vals = self._get_pricelist_vals("nodelay", [])

@@ -27,7 +27,7 @@ class TestAlcDocuments(TransactionCase):
         }
 
     @classmethod
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.utils")
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
@@ -42,7 +42,7 @@ class TestAlcDocuments(TransactionCase):
 
     def setUp(self):
         super().setUp()
-        loggers = ["odoo.addons.queue_job.models.base"]
+        loggers = ["odoo.addons.queue_job.utils"]
         for logger in loggers:
             logging.getLogger(logger).addFilter(self)
 

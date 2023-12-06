@@ -9,7 +9,7 @@ from odoo.addons.alc_product_flattened_data.tests.common import TestProductFlatt
 
 class TestAlcDocumentsPrices(TestAlcDocuments, TestProductFlattenedData):
     @classmethod
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.utils")
     def setUpClass(cls):
         super().setUpClass()
         cls.env["product.product"].search([]).write({"web_published": True})

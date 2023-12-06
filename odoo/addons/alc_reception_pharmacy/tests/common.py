@@ -82,7 +82,7 @@ class CommonReceptionPharmacyCase(TransactionCase):
     def setUp(self):
         super().setUp()
         # mute logger
-        loggers = ["odoo.addons.queue_job.models.base"]
+        loggers = ["odoo.addons.queue_job.utils"]
         for logger in loggers:
             logging.getLogger(logger).addFilter(self)
 

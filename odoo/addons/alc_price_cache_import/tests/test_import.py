@@ -13,7 +13,7 @@ from .common import TestImport
 
 class TestPricelistItemFlow(TestPrices, TestImport):
     @freeze_time("2022-01-01 12:00:00")
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.utils")
     def test_no_delay_import_change_min_qty(self):
         """Items with minimum quantities and without belong to two different categories.
 

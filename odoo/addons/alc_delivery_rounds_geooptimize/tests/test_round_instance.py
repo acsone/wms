@@ -19,7 +19,7 @@ from odoo.addons.delivery_rounds.tests import common
 
 class TestRoundInstance(common.DeliveryRoundTestCase):
     @classmethod
-    @mute_logger("odoo.addons.queue_job.models.base")
+    @mute_logger("odoo.addons.queue_job.utils")
     def setUpClass(cls):
         super(TestRoundInstance, cls).setUpClass()
         cls.env = cls.env(
@@ -100,7 +100,7 @@ class TestRoundInstance(common.DeliveryRoundTestCase):
         # mute logger
         loggers = [
             "odoo.addons.alc_delivery_rounds_geooptimize.models.round_instance",
-            "odoo.addons.queue_job.models.base",
+            "odoo.addons.queue_job.utils",
         ]
         for logger in loggers:
             logging.getLogger(logger).addFilter(self)
