@@ -113,11 +113,12 @@ td {
 }
 
 #left_header {
-  padding-top: 20mm;
+  /*padding-top: 20mm;*/
   width: 45%;
   display: inline-block;
   vertical-align: top;
-  min-height: 240px;
+  min-height: 140px;
+  font-size: 0.9em;
 }
 
 #left_header_entry {
@@ -141,10 +142,10 @@ td {
 #partner_header {
   position: absolute;
   left: 460px;
-  top: 70px;
+  top: 10px;
   width: 420px;
   height: 160px;
-  font-size: 1.2em;
+  font-size: 1em;
   line-height: 1.1;
 }
 
@@ -284,13 +285,15 @@ td {
 }
 
 #sale_condition {
-  font-size: 0.7em;
+  font-size: 0.5em;
 }
 
 #total_table {
   width: 100%;
-  height: 15mm;
+  /*height: 15mm;*/
   margin-bottom: 3mm;
+  font-size: 0.8em;
+  line-height: 0.9;
 }
 
 #total_table td {
@@ -311,6 +314,7 @@ td {
 #summary_table.round_table {
   display: inline-table;
   height: 140px;
+  font-size: 0.9em;
 }
 
 #summary_table.round_table tr:nth-child(-n + 2) td {
@@ -332,7 +336,7 @@ td {
 }
 
 #summary_table.round_table tr:first-child td:first-child {
-  font-size: 1.3em;
+  font-size: 1.1em;
   height: 10mm;
   width: 85mm;
 }
@@ -363,12 +367,13 @@ td {
 #bank_table {
   display: inline-table;
   float: right;
-  height: 140px;
+  height: 120px;
+  font-size: 0.9em;
 }
 
 #bank_table td {
   padding: 1mm;
-  line-height: 1.1;
+  line-height: 0.9;
 }
 
 #bank_table tr:nth-of-type(1) td:nth-of-type(1) {
@@ -379,7 +384,7 @@ td {
 }
 
 #bank_table tr:nth-of-type(1) td:nth-of-type(1) span {
-  font-size: 1.3em;
+  font-size: 1.2em;
 }
 
 #bank_table tr:nth-last-of-type(1) td {
@@ -392,7 +397,7 @@ td {
 
 #bank_table tr:nth-last-of-type(1) td:nth-child(2) {
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 .page .bicol {
