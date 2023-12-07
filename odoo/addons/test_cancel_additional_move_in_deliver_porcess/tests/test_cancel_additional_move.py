@@ -22,9 +22,15 @@ class TestCancelAdditionalMove(StockPickingTestCase):
                 "dock_id": cls.dock.id,
             }
         )
-        cls.warehouse_1.route_ids[1].available_to_promise_defer_pull = True
+        cls.warehouse_1.route_ids.available_to_promise_defer_pull = True
         cls.warehouse_1.out_type_id.propagate_to_pickings_chain = True
         cls.warehouse_1.out_type_id.no_backorder_for_additional_product = True
+        cls.warehouse_1.out_type_id.group_pickings_by_customer = True
+        cls.warehouse_1.out_type_id.group_pickings = True
+        cls.warehouse_1.pick_type_id.no_backorder_for_additional_product = True
+        cls.env.user.groups_id += cls.env.ref(
+            "alc_stock_picking_cancel_permission.group_picking_cancel"
+        )
 
     def test_00(self):
         """
@@ -32,14 +38,15 @@ class TestCancelAdditionalMove(StockPickingTestCase):
 
         how to reproduce:
         1- create so with additional product
-        2- do the pick and a create a backorder
+        2- do the pick, no backorder for additional product
         3- deliver the release channel
 
         expect:
         the release channel delivered
         """
         # create the os, only ship is generated
-        sale = self._confirm_sale_order(products=[self.main_product])
+        sale = self._confirm_sale_order(products=[self.main_product], qty=2)
+        self._confirm_sale_order(products=[self.main_product], qty=2)
         ship = self._get_picking_ship(sale)
         pick = self._get_picking_pick(sale)
         self.assertEqual(len(ship), 1)
@@ -49,19 +56,32 @@ class TestCancelAdditionalMove(StockPickingTestCase):
         self.channel.action_unlock()
         pick = self._get_picking_pick(sale)
         ships = self._get_picking_ship(sale).filtered(lambda p: p.state == "waiting")
-        self.assertEqual(len(pick), 1)
         self.assertEqual(ships.release_channel_id, self.channel)
         self.assertEqual(pick.release_channel_id, self.channel)
         self.assertEqual(pick.state, "assigned")
-        # do the pick
-        pick.action_start()
-        pick.action_set_quantities_to_reservation()
-        pick.move_ids.filtered("is_additional_move").move_line_ids.qty_done -= 1
-        pick._action_done()
-        self.assertEqual(pick.backorder_ids.state, "assigned")
-        # deliver the release channel
         self.channel.action_lock()
+        # do the pick
+        pick._put_in_pack(pick.move_line_ids)
+        for move_line in pick.move_ids.move_line_ids:
+            move_line.qty_done -= 1
+        pick._action_done()
+        self.assertTrue(pick.backorder_ids)
+        #
+        sale3 = self._confirm_sale_order(products=[self.product_2])
+        ships = self._get_picking_ship(sale3)
+        ships._put_in_pack(ships.move_line_ids)
+        # deliver the release channel
         self.channel.action_delivering()
-        self.assertEqual(self.channel.state, "delivered")
         self.assertFalse(self.channel.delivering_error)
-        self.assertEqual(pick.backorder_ids.state, "cancel")
+        self.assertEqual(self.channel.state, "delivered")
+        self.channel.action_sleep()
+        sale4 = self._confirm_sale_order(products=[self.main_product], qty=1000)
+        self.channel.action_wake_up()
+        picks = self._get_picking_pick(sale4).filtered(lambda p: p.state == "assigned")
+        self.channel.action_lock()
+        picks._put_in_pack(picks.move_line_ids)
+        picks._action_done()
+        ships = self._get_picking_ship(sale4)
+        ships._put_in_pack(ships.move_line_ids)
+        self.channel.action_delivering()
+        self.assertFalse(self.channel.delivering_error)

@@ -96,8 +96,8 @@ class StockReleaseChannel(StockReleaseChannelBase):
                         pickings=", ".join(started_pickings.mapped("name")),
                     )
                 )
-            shipping_to_unrelease = self._shipping_to_unrelease()
-            shipping_unrelease_not_allowed = shipping_to_unrelease.move_ids.filtered(
+            shipping_moves_to_unrelease = self._shipping_moves_to_unrelease()
+            shipping_unrelease_not_allowed = shipping_moves_to_unrelease.filtered(
                 lambda m: not m.unrelease_allowed
             ).picking_id
             if shipping_unrelease_not_allowed:
@@ -138,22 +138,25 @@ class StockReleaseChannel(StockReleaseChannelBase):
                     )
                 )
 
-    def _shipping_to_unrelease(self):
+    def _shipping_moves_to_unrelease(self):
         self.ensure_one()
-        return self.env["stock.picking"].search(
-            [
-                ("picking_type_code", "=", "outgoing"),
-                ("release_channel_id", "=", self.id),
-                ("state", "not in", ("assigned", "cancel", "done")),
-                ("need_release", "=", False),
-            ]
+        return (
+            self.env["stock.move"]
+            .search(
+                [
+                    ("picking_type_id.code", "=", "internal"),
+                    ("picking_id.release_channel_id", "=", self.id),
+                    ("state", "not in", ("cancel", "done")),
+                ]
+            )
+            .move_dest_ids
         )
 
     def action_delivering(self):
         self.ensure_one()
         self._check_is_action_delivering_allowed()
-        shipping_to_unrelease = self._shipping_to_unrelease()
-        if shipping_to_unrelease:
+        shipping_moves_to_unrelease = self._shipping_moves_to_unrelease()
+        if shipping_moves_to_unrelease:
             return {
                 "name": _("Confirm delivery"),
                 "type": "ir.actions.act_window",
@@ -241,4 +244,4 @@ class StockReleaseChannel(StockReleaseChannelBase):
         return res
 
     def unrelease_picking(self):
-        self._shipping_to_unrelease().move_ids.filtered("unrelease_allowed").unrelease()
+        self._shipping_moves_to_unrelease().unrelease(safe_unrelease=True)
