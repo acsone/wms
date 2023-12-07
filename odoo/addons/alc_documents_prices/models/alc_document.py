@@ -1,6 +1,8 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import os
+
 import unicodecsv as csv
 import xlsxwriter
 
@@ -81,30 +83,34 @@ class AlcDocument(alc_document.AlcDocument):
 
     def _generate_attachment_file(self):
         self.ensure_one()
-        docs_by_format = self._all_by_format()
+        self._all_by_format()
 
         prices_data_lines_iterator = self.env[
             "alc.product.flattened.data"
         ]._get_partner_products_iterator(self.partner_id)
-
-        lines = []
-        self._process_prices_data_lines(prices_data_lines_iterator, lines)
-
-        for file_format, document in docs_by_format.items():
-            if file_format == "xlsx":
-                tmp_file = docs_by_format[file_format]._create_attachment_xlsx(lines)
-            else:
-                tmp_file = docs_by_format[file_format]._create_attachment_csv(lines)
-            with open(tmp_file, "rb") as f:
-                data = f.read()
+        # if no attachment, we create an empty one to be able to stream the
+        # new content to it
+        if not self.attachment_id:
             vals = {
-                "name": document.name,
-                "raw": data,
+                "name": self.name,
+                "raw": "empty",
                 "res_model": "res.partner",
-                "res_id": document.partner_id.id,
+                "res_id": self.partner_id.id,
             }
-            document.attachment_id.unlink()
-            document.attachment_id = self.env["ir.attachment"].create(vals)
+            self.attachment_id = self.env["ir.attachment"].create(vals)
+
+        with self.attachment_id.open("wb") as output_file:
+            price_data_lines_processor = self._process_prices_data_lines_discount
+            if self.compute == "pricelist":
+                price_data_lines_processor = self._process_prices_data_lines_pricelist
+            if self.format == "xlsx":
+                self._create_attachment_xlsx(
+                    price_data_lines_processor(prices_data_lines_iterator), output_file
+                )
+            else:
+                self._create_attachment_csv(
+                    price_data_lines_processor(prices_data_lines_iterator), output_file
+                )
 
     def _get_lang_price_parser(self):
         parser = [
@@ -153,7 +159,12 @@ class AlcDocument(alc_document.AlcDocument):
         started = discount_records.filtered(lambda d: not d.is_past and not d.is_future)
         return started.ordered("date_start")[0] if len(started) > 1 else started
 
-    def _process_prices_data_lines_pricelist(self, prices_data_lines_iterator, lines):
+    def _process_prices_data_lines_pricelist(self, prices_data_lines_iterator):
+        """
+        :param prices_data_lines_iterator: iterator of alc.product.flattened.data.
+
+        :return: a generator of lines
+        """
         # the langs are only used for the names, so we could possible optimize
         # by putting values in a dict from a read before, and not rely on ORM
         parser = self._get_lang_price_parser()
@@ -174,10 +185,14 @@ class AlcDocument(alc_document.AlcDocument):
                         else get(prices_data)
                     ) or ""
                 line.append(f"{value}")
-            lines.append(line)
-        return lines
+            yield line
 
-    def _process_prices_data_lines_discount(self, prices_data_lines_iterator, lines):
+    def _process_prices_data_lines_discount(self, prices_data_lines_iterator):
+        """
+        :param prices_data_lines_iterator: iterator of alc.product.flattened.data.
+
+        :return: a generator of lines
+        """
         for prices_data in prices_data_lines_iterator:
 
             for discount_def in [
@@ -220,31 +235,30 @@ class AlcDocument(alc_document.AlcDocument):
                         discount_type,
                         date_end.strftime("%d/%m/%Y") if date_end else "",
                     ]
-                    lines.append(line)
-        return lines
+                    yield line
 
-    def _create_attachment_csv(self, lines):
+    def _create_attachment_csv(self, lines_generator, output_file):
         headers = self._get_headers()
-        filename = f"/tmp/{self.name}"
-        with open(filename, "wb") as f:
-            writer = csv.writer(f, delimiter=";")
-            writer.writerow(headers)
-            for line in lines:
-                writer.writerow(line)
-        return filename
+        writer = csv.writer(output_file, delimiter=";")
+        writer.writerow(headers)
+        for line in lines_generator:
+            writer.writerow(line)
 
-    def _create_attachment_xlsx(self, lines):
+    def _create_attachment_xlsx(self, lines_generator, output_file):
         filename = f"/tmp/{self.name}"
         workbook = xlsxwriter.Workbook(filename)
         worksheet = workbook.add_worksheet()
         headers = self._get_headers()
         for column, header in enumerate(headers):
             worksheet.write(0, column, header)
-        for row, line in enumerate(lines):
+        for row, line in enumerate(lines_generator):
             for column, item in enumerate(line):
                 worksheet.write(row + 1, column, item)
         workbook.close()
-        return filename
+        with open(filename, "rb") as f:
+            output_file.write(f.read())
+        # remove the temporary file
+        os.remove(filename)
 
     def _get_document_date(self):
         res = super()._get_document_date()
