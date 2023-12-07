@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
+
+# ruff: noqa: T201 print found
+# ruff: noqa: S603,S607  subprocess
+
 import os
 import subprocess
 import sys
 import time
+
+import psycopg2
 
 
 def check_call(cmd):
@@ -10,6 +16,40 @@ def check_call(cmd):
     sys.stdout.flush()
     subprocess.check_call(cmd)
 
+
+def is_neutralized(database):
+    with psycopg2.connect(f"dbname={database}") as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT value FROM ir_config_parameter
+                WHERE key = 'database.is_neutralized'
+                """
+            )
+            rec = cur.fetchone()
+            return rec and rec[0] and rec[0].lower() == "true"
+
+
+running_env = os.getenv("RUNNING_ENV")
+if not running_env:
+    print("ERROR : RUNNING_ENV variable is not set")
+    sys.exit(1)
+
+# wait for postgres to be ready
+sleep = 1
+while sleep < 64:
+    if subprocess.call(["pg_isready"]) == 0:
+        break
+    print("Waiting for postgres...")
+    time.sleep(sleep)
+    sleep = sleep * 2
+
+os.environ.update(
+    {
+        "PGUSER": os.getenv("DB_USER"),
+        "PGPASSWORD": os.getenv("DB_PASSWORD"),
+    }
+)
 
 db_name = os.getenv("DB_NAME")
 db_base = os.getenv("DB_BASE")
@@ -29,6 +69,35 @@ if db_name:
             )
         check_call(
             [
+                "click-odoo-initdb",
+                "--unless-exists",
+                "-n",
+                database,
+                "--no-cache",
+                "-m",
+                "mail",  # hack for post-neutralize to work
+            ]
+        )
+        if running_env != "prod" and not is_neutralized(database):
+            check_call(
+                [
+                    "odoo",
+                    "neutralize",
+                    "-d",
+                    database,
+                ]
+            )
+            check_call(
+                [
+                    "psql",
+                    "-d",
+                    database,
+                    "-f",
+                    "/odoo/src/post-neutralize.sql",
+                ]
+            )
+        check_call(
+            [
                 "click-odoo-update",
                 "--if-exists",
                 "-d",
@@ -37,17 +106,12 @@ if db_name:
                 "--ignore-core-addons",
             ]
         )
-        check_call(
-            [
-                "click-odoo-initdb",
-                "--unless-exists",
-                "-n",
-                database,
-                # "-m",
-                # TODO "alc_all,alc_all_enterprise",
-            ]
-        )
 
-while subprocess.call(["wkhtmltopdf", "--version"]) != 0:
+# wait for wkhtmltopdf to be ready
+sleep = 1
+while sleep < 64:
+    if subprocess.call(["wkhtmltopdf", "--version"]) == 0:
+        break
     print("Waiting for wkhtmltopdf...")
-    time.sleep(10)
+    time.sleep(sleep)
+    sleep = sleep * 2
