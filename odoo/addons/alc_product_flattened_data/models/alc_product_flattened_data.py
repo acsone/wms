@@ -70,8 +70,8 @@ WITH RECURSIVE categ_info AS (
         parent_id,
         product_category.name,
         product_category.name->>'en_US' as fullname_en,
-        product_category.name->>'fr_BE' as fullname_fr,
-        product_category.name->>'nl_BE' as fullname_nl
+        coalesce(product_category.name->>'fr_BE', product_category.name->>'en_US') as fullname_fr,
+        coalesce(product_category.name->>'nl_BE', product_category.name->>'en_US') as fullname_nl
     FROM product_category
     WHERE product_category.parent_id = %(main_web_category_id)s
     UNION
@@ -80,8 +80,8 @@ WITH RECURSIVE categ_info AS (
             product_category.parent_id,
             product_category.name,
             concat(cs.fullname_en, ' / ', product_category.name->>'en_US') as fullname_en,
-            concat(cs.fullname_fr, ' / ', product_category.name->>'fr_BE') as fullname_fr,
-            concat(cs.fullname_nl, ' / ', product_category.name->>'nl_BE') as fullname_nl
+            concat(cs.fullname_fr, ' / ', coalesce(product_category.name->>'fr_BE', product_category.name->>'en_US')) as fullname_fr,
+            concat(cs.fullname_nl, ' / ', coalesce(product_category.name->>'nl_BE', product_category.name->>'en_US')) as fullname_nl
         FROM
             categ_info cs
         JOIN
@@ -110,9 +110,9 @@ SELECT
     pp.id as product_id,
     pt.default_code,
     pt.name->>'en_US' as name_en,
-    pt.name->>'fr_BE' as name_fr,
-    pt.name->>'nl_BE' as name_nl,
-    pt.name->>'de_DE' as name_de,
+    coalesce(pt.name->>'fr_BE', pt.name->>'en_US') as name_fr,
+    coalesce(pt.name->>'nl_BE', pt.name->>'en_US') as name_nl,
+    coalesce(pt.name->>'de_DE', pt.name->>'en_US') as name_de,
     manufacturer.name as manufacturer,
     cnk_code,
     code_amm,
