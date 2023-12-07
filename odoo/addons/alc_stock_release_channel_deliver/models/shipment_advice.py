@@ -4,6 +4,7 @@
 import logging
 
 from odoo import _, api, fields
+from odoo.exceptions import UserError
 
 from odoo.addons.stock_release_channel_shipment_advice.models.shipment_advice import (
     ShipmentAdvice as ShipmentAdviceBase,
@@ -58,7 +59,7 @@ class ShipmentAdvice(ShipmentAdviceBase):
             self.planned_picking_ids._load_in_shipment(self)
             self.action_in_progress()
             self.action_done()
-        except Exception as error:  # pylint: disable=broad-except
+        except UserError as error:
             _logger.error(error)
             self.action_cancel()
             self.planned_picking_ids.move_ids.write({"shipment_advice_id": False})
