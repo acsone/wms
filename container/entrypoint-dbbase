@@ -78,7 +78,7 @@ if db_name:
                 "mail",  # hack for post-neutralize to work
             ]
         )
-        if running_env != "prod" and not is_neutralized(database):
+        if running_env.lower() != "prod" and not is_neutralized(database):
             check_call(
                 [
                     "odoo",
