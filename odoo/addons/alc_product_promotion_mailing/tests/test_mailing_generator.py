@@ -9,6 +9,7 @@ from freezegun import freeze_time
 
 from odoo import fields
 from odoo.tests.common import TransactionCase
+from odoo.tools import mute_logger
 
 
 class MailRecorder:
@@ -130,3 +131,27 @@ class TestMailingGenerator(TransactionCase):
             self.PromoGenerator._generate_promotion_mailing()
         new_mail = self.mail_recorder.created_mails
         self.assertEqual(0, len(new_mail))
+
+    def test_get_nbr_before_end_promotion_mailing_setting(self):
+        param_key = (
+            "alc_product_promotion_mailing.nbr_before_end_promotion_mailing_setting"
+        )
+        _get_param = self.env["ir.config_parameter"].get_param
+        _set_param = self.env["ir.config_parameter"].set_param
+        _get_nbr_day = self.PromoGenerator._get_nbr_before_end_promotion_mailing_setting
+
+        self.assertFalse(_get_param(param_key))
+        self.assertEqual(_get_nbr_day(), 3)
+        _set_param(param_key, 4)
+        self.assertEqual(_get_param(param_key), "4")
+        self.assertEqual(_get_nbr_day(), 4)
+        _set_param(param_key, "5")
+        self.assertEqual(_get_param(param_key), "5")
+        self.assertEqual(_get_nbr_day(), 5)
+        _set_param(param_key, "AX")
+        self.assertEqual(_get_param(param_key), "AX")
+        with mute_logger(
+            "odoo.addons.alc_product_promotion_mailing."
+            "wizards.product_promotion_mailing_generator"
+        ):
+            self.assertEqual(_get_nbr_day(), 3)
