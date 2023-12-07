@@ -39,7 +39,7 @@ def download(
     document = model.sudo().search(domain, limit=1)
     if not document:
         raise HTTPException(status_code=404, detail=f"Document with id {_id} not found")
-    attachment = document.attachment_id
+    attachment = document._get_attachment()
 
     def stream(chunk_size: int = 4096):
         with attachment.open("rb") as f:
