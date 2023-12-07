@@ -300,6 +300,10 @@ class FacadePackingSlip(Facade):
         data.update(partner_dict)
         data["items"] = [i for i in data["items"] if i.get("state") != "cancel"]
         for item in data["items"]:
+            if not item.get("move_id"):
+                # a move_line without move_id is a move_line that has been
+                # cancelled or is not done... we should not have it
+                continue
             item.pop("state", None)
             item.update(item.pop("product_id"))
             item.update(item.pop("move_id"))
