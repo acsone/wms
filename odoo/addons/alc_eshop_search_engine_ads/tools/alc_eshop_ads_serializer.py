@@ -12,4 +12,4 @@ class AlcEshopAdsSerializer(PydanticModelSerializer):
         return AlcEshopAds
 
     def serialize(self, record):
-        return self.get_model_class().from_eshop_ads(record).model_dump()
+        return self.get_model_class().from_eshop_ads(record).model_dump(mode="json")

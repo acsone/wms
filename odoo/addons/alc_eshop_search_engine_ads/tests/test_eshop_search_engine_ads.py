@@ -1,9 +1,23 @@
+# Copyright 2023 ACSONE SA/NV
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import datetime
+import io
+
+from PIL import Image
 
 from odoo.addons.connector_search_engine.tests.test_all import TestBindingIndexBaseFake
+from odoo.addons.fs_file.fields import FSFileValue
+from odoo.addons.fs_image.fields import FSImageValue
 
 
 class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
+    @classmethod
+    def _create_image(cls, width, height, color="#4169E1", img_format="PNG"):
+        f = io.BytesIO()
+        Image.new("RGB", (width, height), color).save(f, img_format)
+        f.seek(0)
+        return f.read()
+
     @classmethod
     def _prepare_index_values(cls, backend=None):
         backend = backend or cls.backend
@@ -17,6 +31,19 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
 
     @classmethod
     def setup_records(cls, backend=None):
+        # unlink existing storage
+        cls.env["fs.storage"].search([]).unlink()
+        # create our own storage
+        cls.env["fs.storage"].create(
+            {
+                "name": "Temp FS Storage",
+                "protocol": "memory",
+                "code": "mem_dir",
+                "directory_path": "/tmp/",
+                "model_xmlids": "alc_eshop_ads.model_alc_eshop_ads",
+                "base_url": "http://localhost:8069",
+            }
+        )
         cls.EShopAds = cls.env["alc.eshop.ads"]
         backend = backend or cls.backend
         # ensure we only work with the index we'll create
@@ -31,7 +58,8 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
                 "date_start": date_start,
                 "date_end": date_end,
                 "display_slot": "top_left",
-                "image": None,
+                "image": FSImageValue(name="test.png", value=cls._create_image(4, 2)),
+                "file": FSFileValue(name="test.txt", value=b"test"),
             }
         )
         cls.adv_bottom_left = cls.EShopAds.create(
@@ -53,7 +81,7 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
 
     @classmethod
     def _expected_result(cls, ads):
-        return {
+        result = {
             "id": ads.id,
             "allowed_roles": "is_alcyonnaire,is_alcyonnaire_under_contract,non_alcyonnaire",
             "name": ads.name,
@@ -65,6 +93,15 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
             "file": None,
             "image": None,
         }
+        if ads.file:
+            result["file"] = {
+                "url": ads.file.url,
+                "name": ads.file.name,
+                "mimetype": ads.file.mimetype,
+            }
+        if ads.image:
+            result["image"] = {"name": ads.image.name, "url": ads.image.url}
+        return result
 
     def test_00(self):
         """Cron will export all new published ads."""
