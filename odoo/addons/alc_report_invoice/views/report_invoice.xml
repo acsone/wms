@@ -222,7 +222,7 @@
           class="small"
         />
         <t t-set="tax_summary" t-value="o._get_taxes_summary()" />
-        <table id="total_table" class="border_table round_table">
+        <table id="total_table" class="border_table round_table table-condensed">
           <tr>
             <td>Totals</td>
             <td>
@@ -263,7 +263,7 @@
             </td>
           </tr>
         </table>
-        <table id="summary_table" class="round_table">
+        <table id="summary_table" class="round_table table-condensed">
           <tr>
             <td colspan="4" class="pl-5px">
               <span>SUMMARY</span>
@@ -302,7 +302,7 @@
             </tr>
           </t>
         </table>
-        <table id="bank_table" class="round_table">
+        <table id="bank_table" class="round_table table-condensed">
           <t
             t-set="bank_cbc"
             t-value="o.env['account.journal'].search([('code', '=', 'BNK1')])"
