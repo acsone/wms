@@ -222,6 +222,7 @@ td {
   text-align: right;
   padding-right: 1.5mm;
   padding-left: 1.5mm;
+  border-style: none;
 }
 
 #products_table td.text-left,
@@ -363,6 +364,9 @@ td {
   width: 100%;
   text-align: center;
 }
+#summary_table td {
+  border-style: none;
+}
 
 #bank_table {
   display: inline-table;
@@ -374,6 +378,7 @@ td {
 #bank_table td {
   padding: 1mm;
   line-height: 0.9;
+  border-style: none;
 }
 
 #bank_table tr:nth-of-type(1) td:nth-of-type(1) {
