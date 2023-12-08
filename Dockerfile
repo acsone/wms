@@ -52,7 +52,7 @@ RUN mkdir $HOME/.ssh \
 # Configure pip:
 # - use pep517 builds always (no setup.py bdist_wheel)
 # - constraint build depdendencies for better reproducibility
-ENV PIP_USE_PEP517=1 PIP_CONSTRAINTS=/build-deps/requirements-build.txt
+ENV PIP_USE_PEP517=1 PIP_CONSTRAINTS=/build-deps/requirements-build.txt PIP_DISABLE_PIP_VERSION_CHECK=1
 
 # Download build dependencies to /build-deps.
 # --only-binary=:all: is to avoid trying building build dependencies from source
@@ -75,7 +75,7 @@ RUN pip-split-requirements \
     --group-spec="odoo-addons-shopfloor:odoo-addon-.*shopfloor" \
     --group-spec="odoo-addons-account:odoo-addon-.*account" \
     --group-spec="odoo-addons-stock:odoo-addon-.*stock" \
-    --group-spec="odoo-addons:odoo-addon" \
+    --group-spec="odoo-addons:odoo-addon-" \
     --prefix="requirements-group" \
     requirements.txt requirements-test.txt
 
@@ -165,6 +165,7 @@ FROM dependencies as runtime
 # Here we don't use --no-deps but we do use --no-index to be sure that all dependencies
 # have been installed before (i.e. they have been pinned in requirements.txt).
 COPY . /app
+RUN python -m compileall /app/odoo/addons
 RUN --mount=type=bind,target=/build-deps,source=/build-deps,from=build-deps \
-  --mount=type=cache,target=/root/.cache/pip \
+    --mount=type=cache,target=/root/.cache/pip \
   pip install --no-index --find-links /build-deps --editable /app
