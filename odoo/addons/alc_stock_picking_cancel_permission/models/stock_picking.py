@@ -22,7 +22,15 @@ class Picking(StockPicking):
             "alc_stock_picking_cancel_permission.group_picking_cancel"
         ) or self.env.context.get("force_cancel"):
             return super().action_cancel()
-        codes = self.mapped("picking_type_code")
-        if "outgoing" in codes or "internal" in codes:
-            raise UserError(_("You are not allowed to cancel such operation"))
+        for picking in self:
+            if (
+                "outgoing" in picking.picking_type_code
+                or "internal" in picking.picking_type_code
+            ):
+                raise UserError(
+                    _(
+                        "You are not allowed to cancel such operation (Picking: %(picking_name)s)",
+                        picking_name=picking.name,
+                    )
+                )
         return super().action_cancel()

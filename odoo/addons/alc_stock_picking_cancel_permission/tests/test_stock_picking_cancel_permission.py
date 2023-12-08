@@ -88,9 +88,13 @@ class TestStockPickingName(TransactionCase):
                 - succeed and the picking is canceled
         """
         self.assertEqual(self.picking.state, "confirmed")
-        error_msg = "You are not allowed to cancel such operation"
-        with self.assertRaises(UserError, msg=error_msg):
+        picking_name = self.picking.name
+        error_msg = (
+            f"You are not allowed to cancel such operation (Picking: {picking_name})"
+        )
+        with self.assertRaises(UserError) as raises:
             self.picking.action_cancel()
+        self.assertEqual(raises.exception.name, error_msg)
         self.assertEqual(self.picking.state, "confirmed")
         # add picking cancel permission group to current user
         self.env.user.groups_id += self.picking_cancel_group
