@@ -10,10 +10,19 @@ from odoo.addons.stock_picking_back2draft.models.stock_picking import StockPicki
 
 class Picking(StockPicking):
     def action_cancel(self):
+        """
+        Restrict picking cancel in such cases:
+
+        - We are in 'internal' and 'outgoing' pickings
+        - User has no rights to cancel
+        - Cancel is forced in context
+        """
+        # Don't browse pickings if we have these contexts
+        if self.user_has_groups(
+            "alc_stock_picking_cancel_permission.group_picking_cancel"
+        ) or self.env.context.get("force_cancel"):
+            return super().action_cancel()
         codes = self.mapped("picking_type_code")
         if "outgoing" in codes or "internal" in codes:
-            if not self.user_has_groups(
-                "alc_stock_picking_cancel_permission.group_picking_cancel"
-            ) and not self.env.context.get("force_cancel"):
-                raise UserError(_("You are not allowed to cancel such operation"))
+            raise UserError(_("You are not allowed to cancel such operation"))
         return super().action_cancel()
