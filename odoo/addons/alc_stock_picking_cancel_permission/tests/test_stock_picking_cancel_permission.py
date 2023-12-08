@@ -17,6 +17,7 @@ class TestStockPickingName(TransactionCase):
         )
         cls.loc_stock = cls.env.ref("stock.stock_location_stock")
         cls.loc_customer = cls.env.ref("stock.stock_location_customers")
+        cls.loc_suppliers = cls.env.ref("stock.stock_location_suppliers")
         cls.product_1 = cls.env["product.product"].create(
             {
                 "name": "test product 1",
@@ -61,6 +62,37 @@ class TestStockPickingName(TransactionCase):
                             "product_uom_qty": 5,
                             "location_id": cls.loc_stock.id,
                             "location_dest_id": cls.loc_customer.id,
+                        },
+                    ),
+                ],
+            }
+        )
+        cls.picking.action_confirm()
+
+        cls.picking_in = cls.env["stock.picking"].create(
+            {
+                "name": "Picking IN",
+                "partner_id": partner.id,
+                "picking_type_id": cls.env.ref("stock.picking_type_in").id,
+                "location_id": cls.loc_suppliers.id,
+                "location_dest_id": cls.loc_stock.id,
+                "move_ids": [
+                    Command.create(
+                        {
+                            "name": "test move p1",
+                            "product_id": cls.product_1.id,
+                            "product_uom_qty": 5,
+                            "location_id": cls.loc_suppliers.id,
+                            "location_dest_id": cls.loc_stock.id,
+                        },
+                    ),
+                    Command.create(
+                        {
+                            "name": "test move p2",
+                            "product_id": cls.product_2.id,
+                            "product_uom_qty": 5,
+                            "location_id": cls.loc_suppliers.id,
+                            "location_dest_id": cls.loc_stock.id,
                         },
                     ),
                 ],
@@ -133,10 +165,10 @@ class TestStockPickingName(TransactionCase):
         """
         self._create_quantities(self.product_1)
         self._create_quantities(self.product_2)
-        self.picking.action_assign()
-        self.picking.printed = True
-        self.picking.move_line_ids[0].qty_done = 4.0
-        res = self.picking.button_validate()
+        self.picking_in.action_assign()
+        self.picking_in.printed = True
+        self.picking_in.move_line_ids[0].qty_done = 4.0
+        res = self.picking_in.button_validate()
         self.assertEqual(res.get("res_model"), "stock.backorder.confirmation")
         wizard = (
             self.env["stock.backorder.confirmation"]
@@ -146,4 +178,4 @@ class TestStockPickingName(TransactionCase):
             .create({})
         )
         wizard.process_cancel_backorder()
-        self.assertFalse(self.picking.backorder_ids)
+        self.assertFalse(self.picking_in.backorder_ids)
