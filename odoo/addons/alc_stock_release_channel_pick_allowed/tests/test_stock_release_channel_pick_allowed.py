@@ -231,3 +231,54 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         self.assertDictEqual(_states(), {pt1_id: False, pt2_id: False})
         self.channel._toggle_pick_allowed_channel()
         self.assertDictEqual(_states(), {pt1_id: True, pt2_id: True})
+
+    def test_10(self):
+        """
+        Test action sleep and wakeup impact on pick_allowed.
+
+        if auto_allow_pick is set, pick_allowed is enabled for channel and pick types
+        if auto_disallow_pick is set, pick_allowed is disabled for channel and pick types
+        """
+        _states = self.channel._get_all_picking_type_ids_state
+        picking_types = self.env["stock.picking.type"].search([], limit=2)
+        pt1_id = picking_types[0].id
+        pt2_id = picking_types[1].id
+        picking_types.release_channel_can_allow_pick = True
+        channel = self.channel.with_context(queue_job__no_delay=True)
+        channel.write({"auto_allow_pick": True, "auto_disallow_pick": True})
+        channel._toggle_pick_allowed_channel()
+        self.assertFalse(channel.pick_allowed)
+        self.assertDictEqual(_states(), {pt1_id: False, pt2_id: False})
+        channel.action_wake_up()
+        self.assertTrue(channel.pick_allowed)
+        self.assertDictEqual(_states(), {pt1_id: True, pt2_id: True})
+        channel.action_sleep()
+        self.assertFalse(channel.pick_allowed)
+        self.assertDictEqual(_states(), {pt1_id: False, pt2_id: False})
+
+    def test_11(self):
+        """
+        Test action sleep and wakeup impact on pick_allowed.
+
+        if auto_allow_pick is not set, no change at pick_allowed
+        if auto_disallow_pick is set, no change at pick_allowed
+        """
+        _states = self.channel._get_all_picking_type_ids_state
+        picking_types = self.env["stock.picking.type"].search([], limit=2)
+        pt1_id = picking_types[0].id
+        pt2_id = picking_types[1].id
+        picking_types.release_channel_can_allow_pick = True
+        channel = self.channel.with_context(queue_job__no_delay=True)
+        channel.write({"auto_allow_pick": False, "auto_disallow_pick": False})
+        channel._toggle_pick_allowed_channel()
+        self.assertFalse(channel.pick_allowed)
+        self.assertDictEqual(_states(), {pt1_id: False, pt2_id: False})
+        channel.action_wake_up()
+        self.assertFalse(channel.pick_allowed)
+        self.assertDictEqual(_states(), {pt1_id: False, pt2_id: False})
+        channel._toggle_pick_allowed_channel()
+        self.assertTrue(channel.pick_allowed)
+        self.assertDictEqual(_states(), {pt1_id: True, pt2_id: True})
+        channel.action_sleep()
+        self.assertTrue(channel.pick_allowed)
+        self.assertDictEqual(_states(), {pt1_id: True, pt2_id: True})

@@ -123,16 +123,15 @@ class StockReleaseChannel(StockReleaseChannelBase):
             return self._set_pick_allowed_for_picking_type_id(
                 picking_type.id, pick_allowed
             )
-        if self.pick_allowed != pick_allowed:
-            picking_type_ids = (
-                self.env["stock.picking.type"]
-                .search([("release_channel_can_allow_pick", "=", True)])
-                .ids
-            )
-            self.pick_allowed = pick_allowed
-            self.pick_allowed_by_picking_type = {
-                p_id: False for p_id in picking_type_ids
-            }
+        picking_type_ids = (
+            self.env["stock.picking.type"]
+            .search([("release_channel_can_allow_pick", "=", True)])
+            .ids
+        )
+        self.pick_allowed = pick_allowed
+        self.pick_allowed_by_picking_type = {
+            p_id: pick_allowed for p_id in picking_type_ids
+        }
         return True
 
     def _set_pick_allowed_for_picking_type_id(
