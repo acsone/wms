@@ -75,7 +75,7 @@ class DeliveryPackageGlsWizard(models.TransientModel):
     def onchange_package_id(self):
         for rec in self:
             packaging = rec.package_id.package_type_id
-            if not packaging:
+            if not packaging or packaging.package_carrier_type != "gls":
                 xml_id = "delivery_carrier_label_gls.packaging_gls_parcel"
                 packaging = self.env.ref(xml_id)
             rec._set_shipping_weight()
