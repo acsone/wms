@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_picking_cancel_permission
+#: model:ir.model.fields,field_description:alc_stock_picking_cancel_permission.field_stock_picking__alc_should_raise_cancel_error
+msgid "Alc Should Raise Cancel Error"
+msgstr ""
+
+#. module: alc_stock_picking_cancel_permission
 #: model:res.groups,name:alc_stock_picking_cancel_permission.group_picking_cancel
 msgid "Picking Cancel"
 msgstr ""
@@ -33,6 +38,13 @@ msgid ""
 msgstr ""
 
 #. module: alc_stock_picking_cancel_permission
+#: model:ir.model.fields,help:alc_stock_picking_cancel_permission.field_stock_picking__alc_should_raise_cancel_error
+msgid ""
+"This indicates that the record should raise an error in case of "
+"cancellation.(Based currently on picking types codes)"
+msgstr ""
+
+#. module: alc_stock_picking_cancel_permission
 #: model:ir.model,name:alc_stock_picking_cancel_permission.model_stock_picking
 msgid "Transfer"
 msgstr ""
@@ -41,5 +53,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/alc_stock_picking_cancel_permission/models/stock_picking.py:0
 #, python-format
-msgid "You are not allowed to cancel such operation"
+msgid ""
+"You are not allowed to cancel such operation (Picking: %(picking_name)s)"
 msgstr ""
