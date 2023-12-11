@@ -10,6 +10,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_weighing_widget",
+        "alc_delivery_carrier_gls",
         "delivery_carrier_label_gls",
     ],
     "data": [

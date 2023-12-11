@@ -33,7 +33,8 @@ class StockPicking(PickingBase):
         precision = move_line.product_uom_id.rounding
         return (
             float_compare(qty, 0.0, precision_rounding=precision) > 0
-            and not move_line.result_package_id
+            and move_line.result_package_id.package_type_id.package_carrier_type
+            != "gls"
         )
 
     @api.depends(
