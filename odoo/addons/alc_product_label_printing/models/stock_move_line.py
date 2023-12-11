@@ -126,3 +126,29 @@ class StockMoveLine(MoveLine):
         window_action = self.env.ref(action_xml_id).read()[0]
         window_action["res_id"] = self.id
         return window_action
+
+    def _product_food_label_partner_info(self):
+        res = {
+            "partner_name_first_line": "",
+            "partner_name_second_line": "",
+            "partner_zip": "",
+            "partner_city": "",
+            "customer_name": "",
+        }
+        if not self:
+            return res
+        move = self.move_id
+        partner = move.partner_id
+        customer = move.group_id.customer_id
+        if partner:
+            res.update(
+                {
+                    "partner_name_first_line": partner.display_name[:38],
+                    "partner_name_second_line": partner.display_name[38:60],
+                    "partner_zip": partner.zip or "",
+                    "partner_city": partner.city or "",
+                }
+            )
+        if customer and customer != partner:
+            res.update({"customer_name": customer.name[:29]})
+        return res

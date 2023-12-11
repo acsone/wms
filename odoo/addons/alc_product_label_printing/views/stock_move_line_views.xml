@@ -32,6 +32,7 @@
 <div class="raw">
 <t t-foreach="docs" t-as="line">
 <t t-set="pick" t-value="line.picking_id" />
+<t t-set="partner_info" t-value="line._product_food_label_partner_info()" />
 <t
           t-set="ships"
           t-value="pick._get_all_dest_pickings().filtered(lambda r: r.picking_type_code == 'outgoing' and r.state not in ('cancel', 'done'))"
@@ -61,18 +62,12 @@ t t-set="lot_id" t-value="line.lot_id"
 
     ^FO310,480^A040,40^FD<t t-esc="index" /> / <t t-esc="int(qty_done)" />^FS\r
 
-    ^FO255,60^A025,25^FD<t
-            t-esc="pick.partner_id.display_name and pick.partner_id.display_name[:38] or ''"
+    ^FO255,60^A025,25^FD<t t-esc="partner_info['partner_name_first_line']" />^FS\r
+    ^FO225,60^A025,25^FD<t t-esc="partner_info['partner_name_second_line']" />^FS\r
+    ^FO195,60^A030,25^FD<t t-esc="partner_info['partner_zip']" /> <t
+            t-esc="partner_info['partner_city']"
           />^FS\r
-    ^FO225,60^A025,25^FD<t
-            t-esc="pick.partner_id.display_name and pick.partner_id.display_name[38:60] or ''"
-          />^FS\r
-    ^FO195,60^A030,25^FD<t t-esc="pick.partner_id.zip" /> <t
-            t-esc="pick.partner_id.city"
-          />^FS\r
-    ^FO165,60^A025,25^FD<t
-            t-esc="('customer_id' in pick) and (pick.partner_id != pick.customer_id) and pick.customer_id.name and pick.customer_id.name[:29] or ''"
-          />^FS\r
+    ^FO165,60^A025,25^FD<t t-esc="partner_info['customer_name']" />^FS\r
 
 
     <t t-if="pick.partner_id.is_price_on_labels and line.product_id.indicated_price">
