@@ -12,6 +12,7 @@
     "depends": [
         # OCA
         "shopfloor",
+        "shopfloor_full_location_reservation",
         "shopfloor_workstation",
         "shopfloor_workstation_mobile",
         "shopfloor_mobile",
