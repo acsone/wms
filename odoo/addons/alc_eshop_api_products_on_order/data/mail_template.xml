@@ -9,7 +9,7 @@
     >{{ (object.partner_id.email and '%s &lt;%s&gt;' % (object.partner_id.name, object.partner_id.email) or '') }}</field>
             <field
       name="subject"
-    >Ref {{ object.name }}: Demande annulation backorder {{ ctx['product'].name }}</field>
+    >Ref {{ object.name }}: Demande annulation backorder {{ ctx['product'].name if "product" in ctx else '' }}</field>
             <field name="email_to">callcenter@alcyonbelux.be</field>
             <field name="model_id" ref="sale.model_sale_order" />
             <field name="auto_delete" eval="True" />
@@ -17,9 +17,9 @@
             <field name="body_html" type="html">
 <p>Bonjour,</p>
 <p><t t-out="object.partner_id.name" /> demande l'annulation de <t
-          t-out="ctx['quantity']"
+          t-out="ctx['quantity'] if 'quantity' in ctx else 0"
         /> unité(s) en backorder pour le produit <t
-          t-out="ctx['product'].display_name"
+          t-out="ctx['product'].display_name if 'product' in ctx else ''"
         /> dans la commande <t t-out="object.name" /> du <t
           t-out="format_datetime(dt=object.date_order, tz=user.tz)"
         />.</p>
