@@ -10,7 +10,7 @@ from odoo.addons.product.models.product_product import (
 
 class ProductProduct(ProductProductBase):
 
-    price_cache = fields.Json(readonly=True)
+    price_cache = fields.Json(readonly=True, prefetch=False)
 
     @api.model
     def _get_price_cache_products(self, domain=None, domain_extend=None):
