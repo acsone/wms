@@ -1,5 +1,6 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import pytz
 
 from odoo import api, fields
 from odoo.osv.expression import FALSE_LEAF, NEGATIVE_TERM_OPERATORS, OR, TRUE_LEAF
@@ -140,12 +141,24 @@ class ProductPricelistItem(PricelistItem, MixinPast):
             product.currency_id,
         )
 
+    @api.model
+    def _datetime_to_date_at_tz(self, dt):
+        if not dt:
+            return None
+        tz = self.env.user.tz or "GMT"
+        return dt.astimezone(pytz.timezone(tz)).date()
+
+    @api.model
+    def _datetime_to_date_at_tz_iso(self, dt):
+        d = self._datetime_to_date_at_tz(dt)
+        return d.isoformat() if d else None
+
     def _cache_price(self, product):
         return {
             "id": self.id or None,  # typed json compatibility
             "price": self._get_price(product, self.date_start),
-            "date_start": str(self.date_start) if self.date_start else None,
-            "date_end": str(self.date_end) if self.date_end else None,
+            "date_start": self._datetime_to_date_at_tz_iso(self.date_start),
+            "date_end": self._datetime_to_date_at_tz_iso(self.date_end),
         }
 
     def _get_product_discount(self, product):
@@ -168,8 +181,8 @@ class ProductPricelistItem(PricelistItem, MixinPast):
             cache = {
                 "id": self.id,
                 "discount": alcyon_discount,
-                "date_start": str(self.date_start) if self.date_start else None,
-                "date_end": str(self.date_end) if self.date_end else None,
+                "date_start": self._datetime_to_date_at_tz_iso(self.date_start),
+                "date_end": self._datetime_to_date_at_tz_iso(self.date_end),
             }
             if self.has_min_quantity:
                 cache["min_quantity"] = self.min_quantity
