@@ -1,5 +1,6 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import logging
 
 from odoo.tests.common import TransactionCase
 
@@ -32,6 +33,20 @@ class TestPrices(TransactionCase, JobMixin):
         cls.model_pl_item_nodelay = cls.model_pl_item.with_context(
             queue_job__no_delay=True
         )
+
+    def setUp(self):
+        super().setUp()
+        loggers = ["odoo.addons.queue_job.utils"]
+        for logger in loggers:
+            logging.getLogger(logger).addFilter(self)
+
+        @self.addCleanup
+        def un_mute_logger():
+            for logger_ in loggers:
+                logging.getLogger(logger_).removeFilter(self)
+
+    def filter(self, record):
+        return 0
 
     @classmethod
     def _get_item_vals(cls, pricelist=None, **kwargs):

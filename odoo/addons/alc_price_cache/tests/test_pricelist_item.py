@@ -143,7 +143,7 @@ class TestPricelistItemFlow(TestPrices):
         expected_price_cache = [
             {
                 "price": 5.0,
-                "date_start": "2022-02-02 00:00:00",
+                "date_start": "2022-02-02",
                 "id": item.id,
                 "date_end": None,
             },
@@ -492,9 +492,9 @@ class TestPricelistItemFlow(TestPrices):
         }
         expected_cache_element_1 = {
             "discount": 12.0,
-            "date_start": "2022-01-01 00:00:00",
+            "date_start": "2022-01-01",
             "id": item_min_qty_1.id,
-            "date_end": "2022-01-03 00:00:00",
+            "date_end": "2022-01-03",
             "min_quantity": 3.0,
         }
         expected_price_cache = [expected_cache_element_0, expected_cache_element_1]

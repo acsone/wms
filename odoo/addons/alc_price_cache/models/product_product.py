@@ -44,9 +44,7 @@ class ProductProduct(ProductProductBase):
         eid = cache_element.get("id")
         ds, de = cache_element.get("date_start"), cache_element.get("date_end")
         min_quantity = cache_element.get("min_quantity", 1)
-        cache_element.update(
-            {"date_start": str(ds) if ds else ds, "date_end": str(de) if de else de}
-        )
+        cache_element.update({"date_start": ds, "date_end": de})
         res = []
         added = False
         for element in cache_list:
