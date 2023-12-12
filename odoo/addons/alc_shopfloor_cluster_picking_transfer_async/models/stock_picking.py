@@ -1,6 +1,8 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo import _
+
 from odoo.addons.stock.models.stock_picking import Picking
 
 
@@ -20,13 +22,22 @@ class StockPicking(Picking):
         """
         self.ensure_one()
         if self.state in ("done", "cancel"):
-            return
+            return _("Nothing to do. Picking is in %(state)s", state=self.state)
         picking_lines = self.move_line_ids
         if all(line.shopfloor_unloaded for line in picking_lines):
             self._action_done()
-        if self.state != "done" and self.batch_id:
+        if unload_package_at_destination and lines:
+            lines.result_package_id = False
+        if self.state != "done" and self.batch_id and self.batch_id.state == "done":
             # Unassign not validated pickings from the batch, they will be
             # processed in another batch automatically later on
             self.write({"batch_id": False, "user_id": False, "printed": False})
-        if unload_package_at_destination:
-            lines.result_package_id = False
+            return _(
+                "Picking unlinked from the batch. Picking is in %(state)s and the batch is done",
+                state=self.state,
+            )
+        return _(
+            "Picking state: %(state)s, batch state %(batch_state)s",
+            state=self.state,
+            batch_state=self.batch_id.state,
+        )
