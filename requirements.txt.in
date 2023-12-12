@@ -307,5 +307,6 @@ odoo-addon-shopinvader-search-engine @ git+https://github.com/shopinvader/odoo-s
 odoo-addon-shopinvader-es-product-categ @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1481/head#subdirectory=setup/shopinvader_es_product_categ
 
 
-# OCA/search-engine
+# OCA/search-engineer
+odoo-addon-connector-search-engine @ git+https://github.com/OCA/search-engine.git@refs/pull/178/head#subdirectory=setup/connector_search_engine
 odoo-addon-search-engine-image-thumbnail @ git+https://github.com/OCA/search-engine.git@refs/pull/176/head#subdirectory=setup/search_engine_image_thumbnail
