@@ -19,6 +19,29 @@ msgid "Menu displayed in the scanner application"
 msgstr ""
 
 #. module: alc_shopfloor_cluster_picking_transfer_async
+#. odoo-python
+#: code:addons/alc_shopfloor_cluster_picking_transfer_async/models/stock_picking.py:0
+#, python-format
+msgid "Nothing to do. Picking is in %(state)s"
+msgstr ""
+
+#. module: alc_shopfloor_cluster_picking_transfer_async
+#. odoo-python
+#: code:addons/alc_shopfloor_cluster_picking_transfer_async/models/stock_picking.py:0
+#, python-format
+msgid "Picking state: %(state)s, batch state %(batch_state)s"
+msgstr ""
+
+#. module: alc_shopfloor_cluster_picking_transfer_async
+#. odoo-python
+#: code:addons/alc_shopfloor_cluster_picking_transfer_async/models/stock_picking.py:0
+#, python-format
+msgid ""
+"Picking unlinked from the batch. Picking is in %(state)s and the batch is "
+"done"
+msgstr ""
+
+#. module: alc_shopfloor_cluster_picking_transfer_async
 #: model:ir.model.fields,field_description:alc_shopfloor_cluster_picking_transfer_async.field_shopfloor_menu__process_picking_in_background
 msgid "Process Picking In Background"
 msgstr ""
