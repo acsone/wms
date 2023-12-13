@@ -23,13 +23,26 @@ class ClusterPicking(Component):
         to the user and lets each picking perform its own checks and cut the link
         with the batch if needed.
         """
-        if self.work.menu.process_picking_in_background:
-            batch.state = "done"
-            return self._response_for_start(
-                message=self.msg_store.batch_transfer_complete(),
+        if not self.work.menu.process_picking_in_background:
+            return super()._unload_end(
+                batch, completion_info_popup=completion_info_popup
+            )
+        next_line = self._next_line_for_pick(batch)
+        if next_line:
+            return self._response_for_start_line(
+                next_line,
+                message=self.msg_store.batch_transfer_line_done(),
                 popup=completion_info_popup,
             )
-        return super()._unload_end(batch, completion_info_popup=completion_info_popup)
+        batch.state = "done"
+        for picking in batch.picking_ids.filtered(
+            lambda p: p.state not in ("assigned", "done")
+        ):
+            self._unload_set_picking_to_done(picking, None)
+        return self._response_for_start(
+            message=self.msg_store.batch_transfer_complete(),
+            popup=completion_info_popup,
+        )
 
     def _unload_set_picking_to_done(self, picking, lines):
         """

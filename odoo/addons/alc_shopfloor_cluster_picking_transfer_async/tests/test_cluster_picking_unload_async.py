@@ -104,48 +104,12 @@ class TestClusterPickingUnloadAsync(ClusterPickingUnloadingCommonCase):
                     "barcode": self.packing_location.barcode,
                 },
             )
-            # the user can start a new immediately
-            self.assert_response(
-                response,
-                next_state="start",
-                message={"message_type": "success", "body": "Batch Transfer complete"},
-            )
-            self.assertRecordValues(self.one_line_picking, [{"state": "assigned"}])
-            self.assertRecordValues(
-                self.two_lines_picking,
-                [
-                    {
-                        "state": "assigned",
-                        "batch_id": self.batch.id,
-                        "user_id": self.shopfloor_user.id,
-                    }
-                ],
-            )
-            self.assertEqual(trap.jobs_count(), 2)
-            trap.assert_enqueued_job(
-                self.two_lines_picking._shopfloor_unload_set_picking_to_done,
-                args=(
-                    lines_to_unload.filtered(
-                        lambda l, p=self.two_lines_picking: l.picking_id == p
-                    ),
-                    False,
-                ),
-            )
-            trap.assert_enqueued_job(
-                self.one_line_picking._shopfloor_unload_set_picking_to_done,
-                args=(self.one_line_picking.move_line_ids, False),
-            )
             trap.perform_enqueued_jobs()
-
         # Since the whole batch is not complete, state should not be done.
         # The picking with one line should be "done" because we unloaded its line.
         # The second one still has a line to pick.
         self.assertRecordValues(self.one_line_picking, [{"state": "done"}])
-        self.assertRecordValues(
-            self.two_lines_picking,
-            [{"state": "assigned", "batch_id": False, "user_id": False}],
-        )
-        self.assertRecordValues(self.batch, [{"state": "done"}])
+        self.assertRecordValues(self.two_lines_picking, [{"state": "assigned"}])
         self.assertRecordValues(
             self.move_lines,
             [
@@ -173,6 +137,8 @@ class TestClusterPickingUnloadAsync(ClusterPickingUnloadingCommonCase):
                 },
             ],
         )
+        self.assertRecordValues(self.batch, [{"state": "in_progress"}])
+        self.assertEqual(response.get("next_state"), "start_line")
 
     def test_set_destination_all_picking_unassigned(self):
         """Set destination on lines for some transfers of the batch.
@@ -206,7 +172,7 @@ class TestClusterPickingUnloadAsync(ClusterPickingUnloadingCommonCase):
                 next_state="start",
                 message={"message_type": "success", "body": "Batch Transfer complete"},
             )
-            self.assertEqual(trap.jobs_count(), 2)
+            self.assertEqual(trap.jobs_count(), 3)
             self.assertRecordValues(self.one_line_picking, [{"state": "assigned"}])
             self.assertRecordValues(self.two_lines_picking, [{"state": "confirmed"}])
             trap.assert_enqueued_job(
@@ -372,4 +338,135 @@ class TestClusterPickingUnloadAsync(ClusterPickingUnloadingCommonCase):
             response,
             next_state="start",
             message={"message_type": "success", "body": "Batch Transfer complete"},
+        )
+
+    def _test_line_set_destination_all(
+        self,
+        move_line,
+        expected_batch_state: str,
+        expected_next_step: str,
+        expected_next_line_id: int = None,
+    ):
+        self._set_dest_package_and_done(move_line, self.bin1)
+        move_line.write({"location_dest_id": self.packing_location.id})
+
+        with trap_jobs() as trap:
+            response = self.service.dispatch(
+                "set_destination_all",
+                params={
+                    "picking_batch_id": self.batch.id,
+                    "barcode": self.packing_location.barcode,
+                },
+            )
+            trap.perform_enqueued_jobs()
+
+        self.assertRecordValues(self.batch, [{"state": expected_batch_state}])
+        self.assertEqual(response.get("next_state"), expected_next_step)
+        if expected_next_line_id:
+            self.assertEqual(
+                response.get("data", {}).get("start_line", {}).get("id"),
+                expected_next_line_id,
+            )
+
+    def test_set_destination_all_on_line_at_a_time(self):
+        """
+        Test partial set destination.
+
+        This test ensures that a batch isn't marked as complete until all lines are picked.
+        When the user selects "full bin" allowing them to place already picked items
+        in a pack to potentially empty the bin and resume where they left off.
+
+        We assume a batch with two pickings and 3 moves.
+
+        1- After unloading the first line, if there are still unpicked items, the batch
+        and picking are not considered complete. The user is redirected to the "next line"
+        page to pick the remaining items.
+
+        2- Upon unloading the second line, its picking is processed in the background
+        and marked as completed with no more items to pick. However, the batch remains
+        in progress due to the third item still being unpicked. The user is directed to
+        the "next line" page to pick the last line.
+
+        3- When the last item is picked, both the picking and the batch are marked as done.
+        The user is then returned to the "start" page to initiate a new batch.
+        """
+        self.assertEqual(len(self.batch.move_line_ids), 3)
+        self._test_line_set_destination_all(
+            move_line=self.two_lines_picking.move_line_ids[0],
+            expected_batch_state="in_progress",
+            expected_next_step="start_line",
+            expected_next_line_id=self.two_lines_picking.move_line_ids[1].id,
+        )
+        self.assertRecordValues(
+            self.two_lines_picking, [{"state": "assigned", "batch_id": self.batch.id}]
+        )
+        self.assertRecordValues(
+            self.one_line_picking, [{"state": "assigned", "batch_id": self.batch.id}]
+        )
+        self._test_line_set_destination_all(
+            move_line=self.two_lines_picking.move_line_ids[1],
+            expected_batch_state="in_progress",
+            expected_next_step="start_line",
+            expected_next_line_id=self.one_line_picking.move_line_ids[0].id,
+        )
+        self.assertRecordValues(
+            self.two_lines_picking, [{"state": "done", "batch_id": self.batch.id}]
+        )
+        self.assertRecordValues(
+            self.one_line_picking, [{"state": "assigned", "batch_id": self.batch.id}]
+        )
+        self._test_line_set_destination_all(
+            move_line=self.one_line_picking.move_line_ids[0],
+            expected_batch_state="done",
+            expected_next_step="start",
+        )
+        self.assertRecordValues(
+            self.two_lines_picking, [{"state": "done", "batch_id": self.batch.id}]
+        )
+        self.assertRecordValues(
+            self.one_line_picking, [{"state": "done", "batch_id": self.batch.id}]
+        )
+
+    def test_set_destination_all_on_line_at_a_time_but_not_the_last(self):
+        """
+        Test partial set destination but not the last item.
+
+        same scenario as the previous test but this time we will not unload the last line
+        """
+        self.assertEqual(len(self.batch.move_line_ids), 3)
+        self._test_line_set_destination_all(
+            move_line=self.two_lines_picking.move_line_ids[0],
+            expected_batch_state="in_progress",
+            expected_next_step="start_line",
+            expected_next_line_id=self.two_lines_picking.move_line_ids[1].id,
+        )
+        self.assertRecordValues(
+            self.two_lines_picking, [{"state": "assigned", "batch_id": self.batch.id}]
+        )
+        self.assertRecordValues(
+            self.one_line_picking, [{"state": "assigned", "batch_id": self.batch.id}]
+        )
+        self._test_line_set_destination_all(
+            move_line=self.two_lines_picking.move_line_ids[1],
+            expected_batch_state="in_progress",
+            expected_next_step="start_line",
+            expected_next_line_id=self.one_line_picking.move_line_ids[0].id,
+        )
+        self.assertRecordValues(
+            self.two_lines_picking, [{"state": "done", "batch_id": self.batch.id}]
+        )
+        self.assertRecordValues(
+            self.one_line_picking, [{"state": "assigned", "batch_id": self.batch.id}]
+        )
+        self.one_line_picking.move_line_ids[0].package_id = self.bin1
+        self._test_line_set_destination_all(
+            move_line=self.one_line_picking.move_line_ids[0],
+            expected_batch_state="done",
+            expected_next_step="start",
+        )
+        self.assertRecordValues(
+            self.two_lines_picking, [{"state": "done", "batch_id": self.batch.id}]
+        )
+        self.assertRecordValues(
+            self.one_line_picking, [{"state": "confirmed", "batch_id": False}]
         )

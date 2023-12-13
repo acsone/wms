@@ -23,6 +23,8 @@ class ClusterPicking(Component):
                 pickings.move_line_ids.filtered(
                     lambda l: l.qty_done > 0
                     and l.result_package_id
+                    # Lines with external package indicate that they have already been picked
+                    and l.result_package_id.is_internal
                     # if we are moving the entire package, we shouldn't
                     # add stuff inside it, it's not a new package
                     and l.package_id != l.result_package_id
