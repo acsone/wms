@@ -113,3 +113,23 @@ class TestCancelAdditionalMove(StockPickingTestCase):
         self.channel.action_sleep()
         self.channel.action_wake_up()
         self.assertEqual(backorder.release_channel_id, self.channel)
+
+    def test_02(self):
+        sale = self._confirm_sale_order(products=[self.main_product], qty=2)
+        # open the channel, pick must be generated
+        self.channel.action_unlock()
+        pick = self._get_picking_pick(sale)
+        ships = self._get_picking_ship(sale)
+        self.channel.action_lock()
+        # do the pick
+        pick._put_in_pack(pick.move_line_ids)
+        pick._action_done()
+        ships = self._get_picking_ship(sale).filtered(lambda s: s.state == "assigned")
+        ship1 = ships[0]
+        ship2 = ships[1]
+        ship2._put_in_pack(ships.move_line_ids)
+        ship1.release_channel_id = False
+        # deliver the release channel
+        self.channel.action_delivering()
+        self.assertFalse(self.channel.delivering_error)
+        self.assertEqual(self.channel.state, "delivered")
