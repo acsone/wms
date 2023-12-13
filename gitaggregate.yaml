@@ -101,3 +101,13 @@
     - oca refs/pull/271/head # [IMP] account-closing: account cutoff accrual on order
     - oca refs/pull/283/head # [IMP] account-closing: configure different account for refunds
   target: origin 16.0-account-cutoff-base
+
+./src/connector-search-engine:
+  remotes:
+    origin: git@github.com:acsone/search-engine.git
+    oca: git@github.com:oca/search-engine.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/178/head # [FIX] connector_search_engine: avoid catching pg error in binding recompute json
+    - oca refs/pull/179/head # [IMP] connector_search_engine: No prefetch for binding data
+  target: origin 16.0-connector-search-engine
