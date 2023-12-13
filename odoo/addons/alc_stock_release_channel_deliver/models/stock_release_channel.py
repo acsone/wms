@@ -187,6 +187,9 @@ class StockReleaseChannel(StockReleaseChannelBase):
     def action_delivered(self):
         self._check_is_action_delivered_allowed()
         self.write({"state": "delivered"})
+        # after deliver, we need to unrelease backorders so they can be assigned
+        # to release channel later
+        self.unrlease_backorders()
         self.env.user.notify_success(
             message=_(
                 "The delivery background task is done for channel %(name)s",
@@ -245,3 +248,9 @@ class StockReleaseChannel(StockReleaseChannelBase):
 
     def unrelease_picking(self):
         self._shipping_moves_to_unrelease().unrelease(safe_unrelease=True)
+
+    def unrlease_backorders(self):
+        backorders = (
+            self.in_process_shipment_advice_ids.loaded_picking_ids.backorder_ids
+        )
+        backorders.unrelease(safe_unrelease=True)
