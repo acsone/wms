@@ -329,3 +329,41 @@ class TestSaleOrder(TransactionCase):
             lambda line: line.product_uom_qty == 1.0
         )
         self.assertEqual(promotional_line.sequence, 2)
+
+    def test_action_confirm_1_with_section_and_note(self):
+        """
+        Add a simple supplier info (ratio 3/1) without date or min quantity.
+
+        Add a section
+        Add a note
+        """
+        self.sinfo_model.create(
+            {
+                "partner_id": self.supplier.id,
+                "product_tmpl_id": self.main_product.product_tmpl_id.id,
+                "product_code": "123456",
+                "delay": 1,
+                "ratio_main_product": 3,
+                "ratio_promotional_product": 1,
+            }
+        )
+        self.sale_order.order_line = [
+            Command.create(
+                {
+                    "name": "This is a test section",
+                    "display_type": "line_section",
+                    "sequence": 2,
+                }
+            ),
+            Command.create(
+                {
+                    "name": "This is a test note",
+                    "display_type": "line_note",
+                    "sequence": 3,
+                }
+            ),
+        ]
+        self.assertEqual(len(self.sale_order.order_line), 3)
+
+        self.sale_order.action_confirm()
+        self.assertEqual(len(self.sale_order.order_line), 4)
