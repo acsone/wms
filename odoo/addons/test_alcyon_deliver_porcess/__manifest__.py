@@ -2,9 +2,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Test Cancel Additional Move In Deliver Porcess",
-    "description": """
-        This addon add tests to make sur deliver is correctlly done where there are additinal moves to cancel""",
+    "name": "Test Alcyon Deliver Porcess",
+    "description": """Test Alcyon Deliver Porcess""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
