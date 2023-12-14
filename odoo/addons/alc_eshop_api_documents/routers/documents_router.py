@@ -56,6 +56,7 @@ def download(
     return StreamingResponse(stream(), headers=header, media_type=mimetype)
 
 
+@documents_router.get("/documents", status_code=200, deprecated=True)
 @documents_router.get("/documents/", status_code=200)
 def search(
     env: Annotated[api.Environment, Depends(authenticated_partner_env)],
