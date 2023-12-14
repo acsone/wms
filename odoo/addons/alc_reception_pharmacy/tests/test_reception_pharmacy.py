@@ -129,7 +129,7 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
         pickings = self._validate_reception_and_return_picking(reception)
         shippings = pickings.filtered(lambda p: p.picking_type_id.code == "outgoing")
 
-        self.assertEqual(len(shippings), 2)
+        self.assertEqual(len(shippings), 1)  # same carrier, pickings are merged
         self.assertEqual(reception.state, "done")
         self.assertEqual(reception.line_ids.mapped("state"), ["done", "done"])
 
