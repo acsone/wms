@@ -56,7 +56,7 @@ class ShipmentAdvice(ShipmentAdviceBase):
             self.arrival_date = fields.Date.context_today(self)
         self.in_release_channel_auto_process = True
         try:
-            self.planned_picking_ids._load_in_shipment(self)
+            self.planned_move_ids.move_line_ids._load_in_shipment(self)
             self.action_in_progress()
             self.action_done()
         except UserError as error:

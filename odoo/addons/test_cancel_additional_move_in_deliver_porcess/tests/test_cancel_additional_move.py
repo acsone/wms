@@ -123,6 +123,7 @@ class TestCancelAdditionalMove(StockPickingTestCase):
         the delivery should fail, and the user should be informed of the reason for
         the failure.
         This test load the planned shipment first
+        The reservation cancel of the not done pick should allow the delivery
         """
         sale = self._confirm_sale_order(products=[self.main_product], qty=2)
         # open the channel, pick must be generated
@@ -140,10 +141,16 @@ class TestCancelAdditionalMove(StockPickingTestCase):
         # deliver the release channel
         self.channel.action_delivering()
         self.assertIn(
-            "You cannot load this into this shipment because its content is planned already",
+            "You cannot load this move line alone, you have to move the whole package content",
             self.channel.delivering_error,
         )
         self.assertEqual(self.channel.state, "delivering_error")
+        #
+        ship1.do_unreserve()
+        #
+        self.channel.action_delivering()
+        self.assertFalse(self.channel.delivering_error)
+        self.assertEqual(self.channel.state, "delivered")
 
     def test_03(self):
         """
@@ -154,6 +161,7 @@ class TestCancelAdditionalMove(StockPickingTestCase):
         the delivery should fail, and the user should be informed of the reason for
         the failure.
         This test load the planned shipment last
+        The reservation cancel of the not done pick should allow the delivery
         """
         sale = self._confirm_sale_order(products=[self.main_product], qty=2)
         # open the channel, pick must be generated
@@ -174,6 +182,12 @@ class TestCancelAdditionalMove(StockPickingTestCase):
             self.channel.delivering_error,
         )
         self.assertEqual(self.channel.state, "delivering_error")
+        #
+        ship2.do_unreserve()
+        #
+        self.channel.action_delivering()
+        self.assertFalse(self.channel.delivering_error)
+        self.assertEqual(self.channel.state, "delivered")
 
     def test_04(self):
         """
@@ -181,8 +195,7 @@ class TestCancelAdditionalMove(StockPickingTestCase):
 
         The user prepares two orders and utilizes the same package for both.
         However, they choose to manually deliver one of the shipments. In this case,
-        the automatic delivery should fail, and the user should be informed of the reason
-        for the failure.
+        the automatic delivery shouldn't fail and the process should ignore done moves
         """
         sale = self._confirm_sale_order(products=[self.main_product], qty=2)
         # open the channel, pick must be generated
@@ -198,8 +211,5 @@ class TestCancelAdditionalMove(StockPickingTestCase):
         ship2._action_done()
         # deliver the release channel
         self.channel.action_delivering()
-        self.assertIn(
-            "You cannot load this into this shipment because its content is planned already",
-            self.channel.delivering_error,
-        )
-        self.assertEqual(self.channel.state, "delivering_error")
+        self.assertFalse(self.channel.delivering_error)
+        self.assertEqual(self.channel.state, "delivered")

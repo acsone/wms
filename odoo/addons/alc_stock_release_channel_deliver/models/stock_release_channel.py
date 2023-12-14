@@ -166,7 +166,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
                 "target": "new",
                 "context": {"default_release_channel_id": self.id, **self.env.context},
             }
-        self.write({"state": "delivering"})
+        self.write({"state": "delivering", "delivering_error": False})
         self.with_delay(
             description=_("Delivering release channel %(name)s.", name=self.name)
         )._action_deliver()
