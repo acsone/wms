@@ -20,7 +20,7 @@ class SaleOrder(SaleOrderBase):
             if not rec.supplier_promotion_allowed:
                 continue
             sequence = 1
-            for line in rec.order_line:
+            for line in rec.order_line.filtered(lambda x: not x.display_type):
                 product_tmpl = line.product_id.product_tmpl_id
                 promotional_qty = product_tmpl.get_promotional_product(
                     line.product_uom_qty, line.product_id.uom_id, rec.partner_id
