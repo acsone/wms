@@ -96,8 +96,8 @@ class StockReleaseChannel(StockReleaseChannelBase):
                         pickings=", ".join(started_pickings.mapped("name")),
                     )
                 )
-            shipping_to_unrelease = self._shipping_to_unrelease()
-            shipping_unrelease_not_allowed = shipping_to_unrelease.move_ids.filtered(
+            shipping_moves_to_unrelease = self._shipping_moves_to_unrelease()
+            shipping_unrelease_not_allowed = shipping_moves_to_unrelease.filtered(
                 lambda m: not m.unrelease_allowed
             ).picking_id
             if shipping_unrelease_not_allowed:
@@ -138,22 +138,25 @@ class StockReleaseChannel(StockReleaseChannelBase):
                     )
                 )
 
-    def _shipping_to_unrelease(self):
+    def _shipping_moves_to_unrelease(self):
         self.ensure_one()
-        return self.env["stock.picking"].search(
-            [
-                ("picking_type_code", "=", "outgoing"),
-                ("release_channel_id", "=", self.id),
-                ("state", "not in", ("assigned", "cancel", "done")),
-                ("need_release", "=", False),
-            ]
+        return (
+            self.env["stock.move"]
+            .search(
+                [
+                    ("picking_type_id.code", "=", "internal"),
+                    ("picking_id.release_channel_id", "=", self.id),
+                    ("state", "not in", ("cancel", "done")),
+                ]
+            )
+            .move_dest_ids
         )
 
     def action_delivering(self):
         self.ensure_one()
         self._check_is_action_delivering_allowed()
-        shipping_to_unrelease = self._shipping_to_unrelease()
-        if shipping_to_unrelease:
+        shipping_moves_to_unrelease = self._shipping_moves_to_unrelease()
+        if shipping_moves_to_unrelease:
             return {
                 "name": _("Confirm delivery"),
                 "type": "ir.actions.act_window",
@@ -163,7 +166,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
                 "target": "new",
                 "context": {"default_release_channel_id": self.id, **self.env.context},
             }
-        self.write({"state": "delivering"})
+        self.write({"state": "delivering", "delivering_error": False})
         self.with_delay(
             description=_("Delivering release channel %(name)s.", name=self.name)
         )._action_deliver()
@@ -184,6 +187,9 @@ class StockReleaseChannel(StockReleaseChannelBase):
     def action_delivered(self):
         self._check_is_action_delivered_allowed()
         self.write({"state": "delivered"})
+        # after deliver, we need to unrelease backorders so they can be assigned
+        # to release channel later
+        self.unrlease_backorders()
         self.env.user.notify_success(
             message=_(
                 "The delivery background task is done for channel %(name)s",
@@ -241,4 +247,10 @@ class StockReleaseChannel(StockReleaseChannelBase):
         return res
 
     def unrelease_picking(self):
-        self._shipping_to_unrelease().move_ids.filtered("unrelease_allowed").unrelease()
+        self._shipping_moves_to_unrelease().unrelease(safe_unrelease=True)
+
+    def unrlease_backorders(self):
+        backorders = (
+            self.in_process_shipment_advice_ids.loaded_picking_ids.backorder_ids
+        )
+        backorders.unrelease(safe_unrelease=True)
