@@ -209,6 +209,11 @@ msgid "Pharmacist order - Send by Email"
 msgstr "Commande pharmacien - Envoi par email"
 
 #. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
+msgid "Pro-Forma Invoice #"
+msgstr "Facture pro forma #"
+
+#. module: alc_report_sale
 #: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
 msgid "Quantity"
 msgstr "Quantité"

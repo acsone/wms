@@ -203,6 +203,11 @@ msgid "Pharmacist order - Send by Email"
 msgstr "Apothekersbestelling - Per e-mail verzenden"
 
 #. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
+msgid "Pro-Forma Invoice #"
+msgstr "Pro-forma factuur #"
+
+#. module: alc_report_sale
 #: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
 msgid "Quantity"
 msgstr "Hoeveelheid"

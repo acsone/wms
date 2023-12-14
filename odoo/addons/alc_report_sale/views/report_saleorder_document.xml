@@ -50,7 +50,7 @@
           />
                 </div>
             </div>
-      <div>
+      <div t-if="not (env.context.get('proforma', False) or is_pro_forma)">
           <span
           style="font-weight:bold;text-decoration:underline;font-size:18px;"
         ><center>DON'T FORGET TO BRING BACK COOLPACK IF ANY</center></span>
@@ -62,8 +62,11 @@
           <span>Consignment # </span>
         </t>
         <t t-else="">
-          <span t-if="doc.state not in ['draft','sent']">Order # </span>
-          <span t-if="doc.state in ['draft','sent']">Quotation # </span>
+          <span
+            t-if="env.context.get('proforma', False) or is_pro_forma"
+          >Pro-Forma Invoice # </span>
+          <span t-elif="doc.state not in ['draft','sent']">Order # </span>
+          <span t-else="doc.state in ['draft','sent']">Quotation # </span>
         </t>
         <span t-field="doc.name" />
         <t t-if="doc.suite_name">
