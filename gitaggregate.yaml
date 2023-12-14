@@ -71,16 +71,6 @@
     - origin refs/pull/355/head # [IMP] rename_fields: Be able to use a cursor instead of Environment
   target: acsone 16.0-alc_master
 
-./src/shipment_advice:
-  remotes:
-    origin: git@github.com:acsone/stock-logistics-transport.git
-    oca: git@github.com:oca/stock-logistics-transport.git
-  merges:
-    - oca 16.0
-    - oca refs/pull/104/head # [FIX] - don't overwrite arrival and departure dates if they have already been set by the user
-    - oca refs/pull/105/head # [IMP] shipment_advice: Don't take done, cancel records for 'To plan' filter #105
-  target: origin 16.0-alc_shipment_advice
-
 ./src/stock_picking_start:
   remotes:
     origin: git@github.com:acsone/stock-logistics-workflow.git
