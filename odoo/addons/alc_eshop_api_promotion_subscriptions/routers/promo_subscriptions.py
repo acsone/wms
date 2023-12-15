@@ -23,6 +23,7 @@ promo_subscriptions_router = APIRouter(tags=["promo_subscriptions"])
 
 
 @promo_subscriptions_router.post("/promo_subscriptions")
+@promo_subscriptions_router.post("/promo_subscriptions/", deprecated=True)
 def subscribe(
     env: Annotated[api.Environment, Depends(authenticated_partner_env)],
     partner: Annotated[Partner, Depends(authenticated_partner)],

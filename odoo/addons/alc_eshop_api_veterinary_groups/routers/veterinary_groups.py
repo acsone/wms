@@ -18,6 +18,7 @@ veterinary_groups_router = APIRouter(tags=["veterinary_groups"])
 
 
 @veterinary_groups_router.get("/veterinary_groups")
+@veterinary_groups_router.get("/veterinary_groups/", deprecated=True)
 def get(
     env: Annotated[api.Environment, Depends(authenticated_partner_env)],
     partner: Annotated[Partner, Depends(authenticated_partner)],
