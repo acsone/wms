@@ -157,8 +157,6 @@ odoo-addon-stock-picking-backorder-reason-grn @ git+https://github.com/acsone/st
 odoo-addon-stock-picking-grn-mandatory @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1256/head#subdirectory=setup/stock_picking_grn_mandatory
 # https://github.com/OCA/stock-logistics-workflow/pull/1328
 odoo-addon-stock-picking-group-by-base @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1328/head#subdirectory=setup/stock_picking_group_by_base
-# https://github.com/OCA/stock-logistics-workflow/pull/1165
-odoo-addon-stock-picking-group-by-partner-by-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-stock-picking-group-by-carrier-dro#subdirectory=setup/stock_picking_group_by_partner_by_carrier
 # https://github.com/OCA/stock-logistics-workflow/pull/1186
 odoo-addon-stock-picking-group-by-partner-by-carrier-by-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock-picking-group-by-customer-dro#subdirectory=setup/stock_picking_group_by_partner_by_carrier_by_customer
 # https://github.com/OCA/stock-logistics-workflow/pull/1268
