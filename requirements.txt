@@ -234,6 +234,7 @@ odoo-addon-sale-triple-discount==16.0.1.0.1.4
 odoo-addon-sale-wishlist==16.0.1.0.0.2
 odoo-addon-search-engine-image-thumbnail @ git+https://github.com/acsone/search-engine.git@60aef39bfcfb419a400e29ed79b17eed8162b7c8#subdirectory=setup/search_engine_image_thumbnail
 odoo-addon-search-engine-serializer-pydantic==16.0.1.0.0.2
+odoo-addon-sentry==16.0.3.0.1.1
 odoo-addon-server-action-mass-edit==16.0.2.0.1.5
 odoo-addon-server-environment==16.0.1.0.3.1
 odoo-addon-server-environment-ir-config-parameter==16.0.1.0.0.6
@@ -423,6 +424,7 @@ requests-file==1.5.1
 requests-toolbelt==1.0.0
 rsa==4.9
 s3fs==2023.6.0
+sentry-sdk==1.9.0
 shapely==2.0.1
 simplejson==3.19.1
 six==1.16.0
