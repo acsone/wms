@@ -201,7 +201,7 @@ class TestCsvFaclign(TestAlcAccountPaymentGlobalizationCommon):
                         self.assertEqual(row["MONTTVA"], "-10.0")
 
     def test_unlinked_picking(self):
-        self.so1.picking_ids.action_cancel()
+        self.so1.picking_ids.with_context(force_cancel=True).action_cancel()
         # If people cancel and delete pickings
         self.so1.picking_ids.unlink()
         wizard = (
