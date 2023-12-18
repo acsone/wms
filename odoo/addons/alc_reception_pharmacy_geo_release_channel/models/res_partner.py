@@ -30,8 +30,7 @@ class ResPartner(Partner):
         partner_alcyon = self.env.user.company_id.partner_id
         for rec in self:
             rec.is_delivered_by_alcyon = (
-                rec.partner_shipping_id.in_geo_release_channel
-                and partner_alcyon
+                partner_alcyon
                 in rec.partner_shipping_id.located_in_stock_release_channel_ids.mapped(
                     "carrier_id"
                 ).mapped("partner_id")

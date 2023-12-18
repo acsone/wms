@@ -55,7 +55,6 @@ class TestResPartner(TransactionCase):
 
         any geo release channel having Alcyon as carrier partner
         """
-        self.assertTrue(self.partner.in_geo_release_channel)  # geo rc mode
         self.assertFalse(self.partner.is_delivered_by_alcyon)  # not delivered by Alc
         # assign delivery zone to release channel
         self._assign_multipolygon(self.default_channel)
