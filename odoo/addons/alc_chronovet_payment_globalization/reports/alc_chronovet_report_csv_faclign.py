@@ -42,9 +42,13 @@ class AlcChronovetReportCsvFaclign(models.AbstractModel):
             "COMMANDE": sale_order.order_id.name,
             "NCOMM": sale_order.order_id.b2c_ref,
             "DATCDE": sale_order.date_order,
-            "NLIVR": sale_order.order_id.picking_ids[0].name,
+            "NLIVR": sale_order.order_id.picking_ids[0].name
+            if sale_order.order_id.picking_ids
+            else "",
             "PROPRIETAIRE": sale_order.order_id.partner_id.name,
-            "DATLIV": sale_order.order_id.picking_ids[0].date_done,
+            "DATLIV": sale_order.order_id.picking_ids[0].date_done
+            if sale_order.order_id.picking_ids
+            else "",
         }
         common_data.update(sale_order_data)
         return common_data
@@ -69,6 +73,7 @@ class AlcChronovetReportCsvFaclign(models.AbstractModel):
             for invoice_line in invoice.invoice_line_ids:
                 common_data = self._get_common_data(invoice, invoice_line)
                 if invoice_line.sale_line_ids:
+                    # TODO: FIX sale_order -> line everywhere
                     for sale_order in invoice_line.sale_line_ids:
                         vals = self._add_sale_order_data(sale_order, common_data.copy())
                         file.writerow(vals)

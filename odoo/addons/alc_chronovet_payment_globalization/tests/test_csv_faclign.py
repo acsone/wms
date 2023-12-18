@@ -70,6 +70,8 @@ class TestCsvFaclign(TestAlcAccountPaymentGlobalizationCommon):
         )
         cls.so1.action_confirm()
 
+    @classmethod
+    def _transfer_picking(cls):
         picking = cls.so1.picking_ids.filtered(
             lambda p: p.picking_type_id.code == "internal"
         )
@@ -98,6 +100,7 @@ class TestCsvFaclign(TestAlcAccountPaymentGlobalizationCommon):
         return self.env["account.move"].browse(res["res_id"])
 
     def test_00(self):
+        self._transfer_picking()
         for invoice in self.invoices:
             invoice.payment_mode_id = self.payment_mode.id
             for line in invoice.invoice_line_ids:
@@ -132,6 +135,7 @@ class TestCsvFaclign(TestAlcAccountPaymentGlobalizationCommon):
 
         a line for the refund is created in the faclign file.
         """
+        self._transfer_picking()
         for invoice in self.invoices:
             invoice.payment_mode_id = self.payment_mode.id
             for line in invoice.invoice_line_ids:
@@ -195,3 +199,38 @@ class TestCsvFaclign(TestAlcAccountPaymentGlobalizationCommon):
                         self.assertEqual(row["TVA"], "10.0")
                         self.assertEqual(row["MONTHT"], "-100.0")
                         self.assertEqual(row["MONTTVA"], "-10.0")
+
+    def test_unlinked_picking(self):
+        self.so1.picking_ids.action_cancel()
+        # If people cancel and delete pickings
+        self.so1.picking_ids.unlink()
+        wizard = (
+            self.env["sale.advance.payment.inv"]
+            .with_context(active_ids=self.so1.ids)
+            .create(
+                {
+                    "advance_payment_method": "percentage",
+                    "amount": 10.0,
+                }
+            )
+        )
+        wizard.create_invoices()
+        self.payment_mode = self.env.ref("alc_chronovet.account_payment_mode_chronovet")
+        self.so1.invoice_ids.payment_mode_id = self.payment_mode
+        self.so1.invoice_ids._post()
+
+        account_globalization = self._do_globalization(
+            self.partner_1, self.account_receivable_1
+        )
+        self.assertTrue(account_globalization)
+
+        attachments = self.env["ir.attachment"].search(
+            [
+                ("res_id", "=", account_globalization.id),
+                ("res_model", "=", account_globalization._name),
+            ]
+        )
+        # Faclign & Facpied are generated now
+        self.assertEqual(len(attachments), 2)
+        for attachment in attachments:
+            self.assertTrue(attachment.name.endswith(".csv"))
