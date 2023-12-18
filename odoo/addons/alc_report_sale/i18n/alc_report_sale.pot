@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-14 17:38+0000\n"
+"PO-Revision-Date: 2023-12-14 17:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -182,6 +184,11 @@ msgstr ""
 #. module: alc_report_sale
 #: model:mail.template,name:alc_report_sale.email_template_pharmacist_supplier_order
 msgid "Pharmacist order - Send by Email"
+msgstr ""
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_inherit
+msgid "Pro-Forma Invoice #"
 msgstr ""
 
 #. module: alc_report_sale

@@ -5,12 +5,13 @@
     "name": "Alc Report Sale",
     "summary": """
         Sale reporting for Alcyon""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
         "sale",
+        "sale_triple_discount",
         "alc_accounting_data",
         "alc_partner_pharmacist",
         "alc_partner_veterinary",

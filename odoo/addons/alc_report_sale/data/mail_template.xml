@@ -26,4 +26,36 @@
         <p>Your Team Alcyon</p>
     </field>
   </record>
+   <record id="sale.email_template_edi_sale" model="mail.template">
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        <t
+            t-set="doc_name"
+            t-value="'quotation' if object.state in ('draft', 'sent') else 'order'"
+          />
+        Dear Client,
+        <br />
+        We thank you for your your command <t t-out="object.name">SO123456</t>
+        <br />
+        Please find attached
+        <t t-if="ctx.get('proforma')">
+            the pro forma invoice in PDF format.
+        </t>
+        <t t-else="">
+            the quotation in PDF format.
+        </t>
+        <br /><br />
+        Yours sincerely..
+        <br />
+        Alcyon Belux SA
+    </p>
+</div>
+            </field>
+            <field
+      name="report_name"
+    >{{ (object.name or '').replace('/','_') }}{{ object.state == 'draft' and '_draft' or '' }}</field>
+        </record>
+
+
 </odoo>
