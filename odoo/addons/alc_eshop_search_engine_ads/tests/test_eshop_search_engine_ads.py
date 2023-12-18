@@ -210,3 +210,50 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
         self.test_00()
         self.adv_top_left.name = "ads updated"
         self.assertEqual(self.adv_top_left.se_binding_ids.state, "to_recompute")
+
+    def test_lang_ads(self):
+        # ads are exported into the right index according to their lang if
+        # specified
+        self.adv_top_left.lang_id = self.env.ref("base.lang_fr")
+        self.adv_top_left.action_synchronize_ads()
+        self.assertFalse(
+            self.adv_top_left.se_binding_ids.filtered(lambda b: b.state != "to_delete")
+        )
+        index2_vals = self._prepare_index_values(self.backend)
+        index2_vals.update(
+            {"name": "Index 2", "lang_id": self.env.ref("base.lang_fr").id}
+        )
+        self.se_index_model.create(index2_vals)
+        # we must recompute the se_index_ids field manually since we created
+        # a new index
+        self.adv_top_left._compute_se_index()
+        self.adv_top_left.action_synchronize_ads()
+        self.assertEqual(
+            1,
+            len(
+                self.adv_top_left.se_binding_ids.filtered(
+                    lambda b: b.state != "to_delete"
+                )
+            ),
+        )
+        self.adv_top_left.lang_id = None
+        self.adv_top_left.action_synchronize_ads()
+        self.assertEqual(
+            2,
+            len(
+                self.adv_top_left.se_binding_ids.filtered(
+                    lambda b: b.state != "to_delete"
+                )
+            ),
+        )
+        self.adv_top_left.lang_id = self.env.ref("base.lang_fr")
+        self.adv_top_left.action_synchronize_ads()
+        self.assertEqual(
+            1,
+            len(
+                self.adv_top_left.se_binding_ids.filtered(
+                    lambda b: b.state != "to_delete"
+                    and b.index_id.lang_id == self.env.ref("base.lang_fr")
+                )
+            ),
+        )
