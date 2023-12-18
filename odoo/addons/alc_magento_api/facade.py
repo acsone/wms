@@ -298,8 +298,10 @@ class FacadePackingSlip(Facade):
         country_dict = partner_dict.pop("country_id", {}) or {}
         partner_dict["country"] = country_dict.get("name", "Belgique")
         data.update(partner_dict)
-        data["items"] = [i for i in data["items"] if i.get("state") != "cancel"]
-        for item in data["items"]:
+        items = []
+        for item in data.pop("items"):
+            if item.get("state") == "cancel":
+                continue
             if not item.get("move_id"):
                 # a move_line without move_id is a move_line that has been
                 # cancelled or is not done... we should not have it
@@ -319,6 +321,8 @@ class FacadePackingSlip(Facade):
             # TVA is from vat, which is a related to the name (e.g. 21%)
             tva = item["tva"]
             item["tva"] = tva[:-1] if isinstance(tva, str) else tva
+            items.append(item)
+        data["items"] = items
         data["date"] = self._datetime_to_date(data["date"])
         return data
 
