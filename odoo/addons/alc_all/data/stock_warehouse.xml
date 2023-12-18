@@ -12,6 +12,8 @@
     </function>
     <function model="stock.warehouse" name="write">
         <value model="stock.warehouse" eval="[ref('stock.warehouse0')]" />
-        <value eval="{'use_loss_picking': True}" />
+        <value
+      eval="{'use_loss_picking': True, 'alc_constrains_configuration': True}"
+    />
     </function>
 </odoo>
