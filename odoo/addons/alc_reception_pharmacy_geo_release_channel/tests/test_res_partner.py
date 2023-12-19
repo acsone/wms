@@ -63,3 +63,18 @@ class TestResPartner(TransactionCase):
         self.partner.invalidate_recordset()
         self.default_channel.carrier_id = self.delivery_alcyon
         self.assertTrue(self.partner.is_delivered_by_alcyon)  # delivered by Alcyon
+
+    def test_is_delivered_by_alcyon_manual(self):
+        """
+        A customer is delivered by Alcyon if it's shipping_partner_id is linked to.
+
+        any stock release channel having Alcyon as carrier partner
+        """
+        self.assertFalse(self.partner.is_delivered_by_alcyon)  # not delivered by Alc
+        # assign Alcyon carrier to release channel
+        self.partner.invalidate_recordset()
+        self.default_channel.carrier_id = self.delivery_alcyon
+        self.assertFalse(
+            self.partner.is_delivered_by_alcyon
+        )  # not delivered by Alcyon as not in manual release channels
+        self.partner.stock_release_channel_ids = self.default_channel
