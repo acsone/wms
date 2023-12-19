@@ -44,6 +44,12 @@
                         <table class="table table-borderless">
                             <tbody>
                                 <tr>
+                                    <td class="col-4">Date</td>
+                                    <td class="col-8">
+                                        <span t-esc="datetime.date.today()" />
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class="col-4">Stops</td>
                                     <td class="col-8">
                                         <span t-esc="len(lines)" />
