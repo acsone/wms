@@ -124,15 +124,14 @@ class StockMove(StockMoveBase):
         if not self.is_additional_move:
             first_move = self.first_move_id
             first_additional_move = first_move.additional_move_ids
-            return (
-                self.search(
-                    [
-                        ("first_move_id", "in", first_additional_move.ids),
-                        ("state", "not in", ("done", "cancel")),
-                        ("quantity_done", "=", 0),
-                    ]
-                )
-                | first_additional_move
+            return self.search(
+                [
+                    ("first_move_id", "in", first_additional_move.ids),
+                    ("state", "not in", ("done", "cancel")),
+                    ("quantity_done", "=", 0),
+                ]
+            ) | first_additional_move.filtered(
+                lambda move: move.state not in ("cancel", "done")
             )
         return self.browse()
 
