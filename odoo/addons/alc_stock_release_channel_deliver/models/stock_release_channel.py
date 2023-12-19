@@ -96,6 +96,10 @@ class StockReleaseChannel(StockReleaseChannelBase):
                         pickings=", ".join(started_pickings.mapped("name")),
                     )
                 )
+            picking_moves_to_unrelease = self._picking_moves_to_unrelease()
+            # unset "printed" on all preparation moves not done
+            # otherwise the unrlease will not be allowed
+            picking_moves_to_unrelease.picking_id.printed = False
             shipping_moves_to_unrelease = self._shipping_moves_to_unrelease()
             shipping_unrelease_not_allowed = shipping_moves_to_unrelease.filtered(
                 lambda m: not m.unrelease_allowed
@@ -138,19 +142,19 @@ class StockReleaseChannel(StockReleaseChannelBase):
                     )
                 )
 
+    def _picking_moves_to_unrelease(self):
+        self.ensure_one()
+        return self.env["stock.move"].search(
+            [
+                ("picking_type_id.code", "=", "internal"),
+                ("picking_id.release_channel_id", "=", self.id),
+                ("state", "not in", ("cancel", "done")),
+            ]
+        )
+
     def _shipping_moves_to_unrelease(self):
         self.ensure_one()
-        return (
-            self.env["stock.move"]
-            .search(
-                [
-                    ("picking_type_id.code", "=", "internal"),
-                    ("picking_id.release_channel_id", "=", self.id),
-                    ("state", "not in", ("cancel", "done")),
-                ]
-            )
-            .move_dest_ids
-        )
+        return self._picking_moves_to_unrelease().move_dest_ids
 
     def action_delivering(self):
         self.ensure_one()
@@ -247,7 +251,8 @@ class StockReleaseChannel(StockReleaseChannelBase):
         return res
 
     def unrelease_picking(self):
-        self._shipping_moves_to_unrelease().unrelease(safe_unrelease=True)
+        shipping_moves_to_unrelease = self._shipping_moves_to_unrelease()
+        shipping_moves_to_unrelease.unrelease(safe_unrelease=True)
 
     def unrlease_backorders(self):
         backorders = (

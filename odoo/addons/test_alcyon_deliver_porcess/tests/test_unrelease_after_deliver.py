@@ -43,7 +43,16 @@ class TestPartialDeliver(TestDeliverProcessBase):
         self.assertEqual(backorder.release_channel_id, self.channel)
 
     def test_01(self):
-        """Test backorder unreleased after deliver an assigned to release channel at wakeup."""
+        """
+        Unrlease not allowed before delivering.
+
+        When a picking is released and picked on the shopfloor, it is marked as printed.
+        If the user discovers that the stock for a particular product is low, they
+        declare a stock out, which unreserves the stock move, and the preparation pick
+        becomes confirmed, not assigned.
+        During delivery, the unrelease of this move is not allowed until the preparation
+        loses the printed flag.
+        """
         sale = self._confirm_sale_order(products=[self.product], qty=2)
         sale2 = self._confirm_sale_order(
             products=[self.product], qty=2, partner=self.partner2
@@ -60,14 +69,16 @@ class TestPartialDeliver(TestDeliverProcessBase):
             move_line.qty_done = 2
         pick._action_done()
         self.assertEqual(pick2.state, "assigned")
+        pick2.action_start()
         self.env["stock.quant"]._update_available_quantity(
             self.product, self.loc_stock, -1
         )
-        pick2.printed = True
         pick2.move_ids._do_unreserve()
+        pick2.move_ids._action_assign()
         self.assertEqual(pick2.state, "confirmed")
         # deliver the release channel
         self.channel.action_lock()
+        self.channel.action_delivering()
         self.channel.unrelease_picking()
         self.channel.action_delivering()
         self.assertFalse(self.channel.delivering_error)
