@@ -42,11 +42,6 @@ msgstr ""
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
-msgid "Date"
-msgstr ""
-
-#. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Departure time"
 msgstr ""
 
