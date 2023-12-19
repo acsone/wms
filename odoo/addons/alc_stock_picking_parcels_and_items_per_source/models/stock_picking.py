@@ -23,6 +23,12 @@ class StockPicking(Picking):
             for location, moves in picking.move_ids.partition(
                 "source_zone_location_ids"
             ).items():
+                # Workaround for the case mixed products (e.g.: Matériel and Médicaments)
+                # have been put in the same package in the same picking.
+                # TODO: Decide how to display this in the report.
+                if len(location) > 1:
+                    # Unknown
+                    location = self.env["stock.location"].browse()
                 parcels_quantity = sum(
                     package.number_of_parcels
                     for package in moves.move_line_ids.result_package_id
