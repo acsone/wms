@@ -32,6 +32,14 @@
         # OCA/edi
         "base_ubl",
         "base_business_document_import",
+        "pdf_helper",
+        "account_einvoice_generate",
+        "account_invoice_ubl",
+        "base_ubl_payment",
+        # edido-eu/peppol
+        "account_invoice_export_ubl",
+        "base_ubl_payment_mode_required",
+        "l10n_be_account_einvoice_generate",
         # ALC
         "alc_cash_on_delivery",
         "alc_account_invoice_cancel_permissions",

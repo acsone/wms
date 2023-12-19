@@ -101,3 +101,14 @@
     - oca refs/pull/178/head # [FIX] connector_search_engine: avoid catching pg error in binding recompute json
     - oca refs/pull/179/head # [IMP] connector_search_engine: No prefetch for binding data
   target: origin 16.0-connector-search-engine
+
+./src/edi:
+  remotes:
+    origin: git@github.com:acsone/edi.git
+    oca: git@github.com:oca/edi.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/892/head # [16.0][FIX] base_ubl: schemeID for GTIN is 0160
+    - oca refs/pull/886/head # [16.0][MIG] account_invoice_ubl
+    - oca refs/pull/898/head # [16.0][FIX + IMP] pdf helper: Fix multi-attachments + Add pdf_embed_xml
+  target: origin 16.0-edi-base-ubl
