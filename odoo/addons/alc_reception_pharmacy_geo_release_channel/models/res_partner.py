@@ -22,6 +22,7 @@ class ResPartner(Partner):
     )
 
     @api.depends(
+        "stock_release_channel_ids",
         "child_ids",
         "partner_shipping_id",
         "partner_shipping_id.located_in_stock_release_channel_ids",
@@ -29,11 +30,17 @@ class ResPartner(Partner):
     def _compute_is_delivered_by_alcyon(self):
         partner_alcyon = self.env.user.company_id.partner_id
         for rec in self:
+            # Compute the field depending on manual release channels and computed ones
+            # based on geo localization.
+            result_stock_release_channel_ids = (
+                rec.partner_shipping_id.located_in_stock_release_channel_ids
+                | rec.stock_release_channel_ids
+            )
             rec.is_delivered_by_alcyon = (
                 partner_alcyon
-                in rec.partner_shipping_id.located_in_stock_release_channel_ids.mapped(
-                    "carrier_id"
-                ).mapped("partner_id")
+                in result_stock_release_channel_ids.mapped("carrier_id").mapped(
+                    "partner_id"
+                )
             )
 
     def _search_partner_shipping_id(self, operator, value):
