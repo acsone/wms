@@ -1,45 +1,23 @@
 #!/usr/bin/env python
-from contextlib import contextmanager
+import csv
 
 import click
 import click_odoo
-import psycopg2
-
-DB_16_POSTMIG = "alcyon-16-migrated-by-odoo"
 
 # Call the script with -d <destination db name>
-
-
-@contextmanager
-def cursor(db):
-    with psycopg2.connect("dbname=" + db) as conn:
-        with conn.cursor() as cr:
-            yield cr
 
 
 @click.command()
 @click_odoo.env_options()
 def main(env):
-    with cursor(DB_16_POSTMIG) as cr:
-        query = """
-            SELECT id, invoice_frequency
-                FROM res_partner
-                WHERE invoice_grouping = 'by_delivery';
-        """
-        cr.execute(query)
-        partners_delivery = cr.fetchall()
+    id = []
+    invoice_frequency = []
+    with open("./partners_delivery.csv") as partners_delivery_csv:
+        csv_reader = csv.reader(partners_delivery_csv, delimiter=";")
+        for row in csv_reader:
+            id.append(row[0])
+            invoice_frequency.append(row[1])
 
-        print(partners_delivery)
-    id = (x[0] for x in partners_delivery)
-    invoice_frequency = (x[1] for x in partners_delivery)
-
-    # converting to list
-    id = list(id)
-    invoice_frequency = list(invoice_frequency)
-    env.cr.execute(
-        "SELECT UNNEST(%(id)s)::int, UNNEST(%(invoice_frequency)s)::VARCHAR AS t",
-        {"id": id, "invoice_frequency": invoice_frequency},
-    )
     query = """
         WITH partners_delivery AS (
             SELECT UNNEST(%(id)s)::int id, UNNEST(%(invoice_frequency)s)::VARCHAR invoice_frequency
