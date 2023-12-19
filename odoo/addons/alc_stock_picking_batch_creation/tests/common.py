@@ -8,7 +8,9 @@ class TestGetDeviceToUseCommon(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.env = cls.env(
+            context=dict(cls.env.context, tracking_disable=True, no_check_priority=True)
+        )
         cls.partner1 = cls._create_partner("Unittest partner", "12344566777878")
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
         cls.location_out = cls.env.ref("stock.stock_location_output")
@@ -114,6 +116,7 @@ class TestGetDeviceToUseCommon(TransactionCase):
         cls.pick3 = cls._create_picking_pick_and_assign(
             cls.picking_type_1.id, priority="1", products=cls.p1 | cls.p2
         )
+        cls.picks = cls.pick1 | cls.pick2 | cls.pick3
 
     @classmethod
     def _set_quantity_in_stock(cls, location, product, qty=10):
