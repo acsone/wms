@@ -71,13 +71,3 @@ msgstr "Règle de stock minimum"
 #: model:ir.model,name:alc_stock_release_channel_assign_blocking_unavailable_product.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
-
-#. module: alc_stock_release_channel_assign_blocking_unavailable_product
-#. odoo-python
-#: code:addons/alc_stock_release_channel_assign_blocking_unavailable_product/models/stock_release_channel.py:0
-#, python-format
-msgid ""
-"Transfer %(picking_name)s could not be assigned to a channel because it's "
-"blocked. It requires either a new order to be unblocked or a manual action "
-"from the user."
-msgstr ""
