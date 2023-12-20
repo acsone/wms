@@ -247,7 +247,8 @@ msgid ""
 "There are some preparations that have not been completed.If you choose to proceed, these preparations need to be unreleased.\n"
 "Please handle them manually before proceeding with the delivery.\n"
 "\n"
-"%(name)s."
+"%(shipping)s\n"
+"%(pickings)s"
 msgstr ""
 
 #. module: alc_stock_release_channel_deliver
