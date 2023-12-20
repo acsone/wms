@@ -21,6 +21,7 @@
         "alc_sale_delay",
         "alc_sale_auto_confirm_max_delay",
         "alc_sale_product_qty_unavailable",
+        "alc_queue_job_background_channel",
         "queue_job",
         "web",
     ],

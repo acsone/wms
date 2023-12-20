@@ -3,7 +3,10 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
   <record model="queue.job.channel" id="channel_root_background_price">
-    <field name="name">root.background.price</field>
-    <field name="parent_id" ref="queue_job.channel_root" />
+    <field name="name">price</field>
+    <field
+      name="parent_id"
+      ref="alc_queue_job_background_channel.channel_root_background"
+    />
   </record>
 </odoo>

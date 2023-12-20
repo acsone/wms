@@ -17,6 +17,7 @@
         "mixin_past",
         "alc_pricelist_role_name",
         "alc_pricelist_discount",
+        "alc_queue_job_background_channel",
     ],
     "application": False,
     "data": [

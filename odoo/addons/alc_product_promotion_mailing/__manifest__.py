@@ -6,13 +6,14 @@
     "description": """
         Alcyon: Send mails to subcribers when a subscription on a produt read
         its end date""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
         "alc_pricelist_discount",
         "alc_product_promotion_subscription",
+        "alc_queue_job_background_channel",
         "fs_product_multi_image",
         "mail",
         "queue_job_cron",

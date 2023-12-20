@@ -9,7 +9,11 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["connector_elasticsearch", "alc_se_backend_notebook"],
+    "depends": [
+        "connector_elasticsearch",
+        "alc_se_backend_notebook",
+        "alc_queue_job_background_channel",
+    ],
     "application": False,
     "data": [
         "security/ir.model.access.csv",
