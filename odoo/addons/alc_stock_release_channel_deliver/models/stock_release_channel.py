@@ -97,21 +97,29 @@ class StockReleaseChannel(StockReleaseChannelBase):
                     )
                 )
             picking_moves_to_unrelease = self._picking_moves_to_unrelease()
-            # unset "printed" on all preparation moves not done
+            # unset "printed" on all preparation confirmed moves
             # otherwise the unrlease will not be allowed
-            picking_moves_to_unrelease.picking_id.printed = False
+            picking_moves_to_unrelease.filtered(
+                lambda p: p.state == "confirmed"
+            ).picking_id.printed = False
             shipping_moves_to_unrelease = self._shipping_moves_to_unrelease()
             shipping_unrelease_not_allowed = shipping_moves_to_unrelease.filtered(
                 lambda m: not m.unrelease_allowed
             ).picking_id
             if shipping_unrelease_not_allowed:
+                picking_moves_to_unrelease = picking_moves_to_unrelease.filtered(
+                    lambda p: p.state != "confirmed"
+                )
                 raise UserError(
                     _(
                         "There are some preparations that have not been completed."
                         "If you choose to proceed, these preparations need to be unreleased.\n"
                         "Please handle them manually before proceeding with the delivery."
-                        "\n\n%(name)s.",
-                        name=", ".join(shipping_unrelease_not_allowed.mapped("name")),
+                        "\n\n%(shipping)s\n%(pickings)s",
+                        shipping=", ".join(
+                            shipping_unrelease_not_allowed.mapped("name")
+                        ),
+                        pickings=", ".join(picking_moves_to_unrelease.mapped("name")),
                     )
                 )
             if not rec.is_action_delivering_allowed:
