@@ -14,6 +14,7 @@
         "partner_fax",
         "alc_external_fax",
         "alc_company_term_condition",
+        "alc_queue_job_background_channel",
     ],
     "assets": {
         "web.report_assets_common": [
