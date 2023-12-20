@@ -350,7 +350,7 @@ odoo-addon-stock-production-lot-expired-date==16.0.1.0.1.2
 odoo-addon-stock-putaway-hook==16.0.1.0.0.4
 odoo-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-logistics-workflow@0c4da03a60735cec82cf95b86748e2bb7ab6c7f9#subdirectory=setup/stock_quant_package_dimension
 odoo-addon-stock-quant-package-product-packaging==16.0.1.0.1.2
-odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@ede1d6f9aa16cae535d650da3191bb6a6d86f793#subdirectory=setup/stock_release_channel
+odoo-addon-stock-release-channel==16.0.2.6.5
 odoo-addon-stock-release-channel-auto-release==16.0.1.0.1
 odoo-addon-stock-release-channel-delivery @ git+https://github.com/acsone/wms.git@86d302bad07e29ffe2bfd966c9404d6980c52a02#subdirectory=setup/stock_release_channel_delivery
 odoo-addon-stock-release-channel-geoengine @ git+https://github.com/acsone/wms.git@5bf244f63bf8a4076407604ba7e0534a6b4a050b#subdirectory=setup/stock_release_channel_geoengine
@@ -425,6 +425,7 @@ requests-toolbelt==1.0.0
 rsa==4.9
 s3fs==2023.6.0
 sentry-sdk==1.9.0
+setuptools==69.0.2
 shapely==2.0.1
 simplejson==3.19.1
 six==1.16.0
