@@ -20,12 +20,11 @@ class StockReleaseChannel(StockReleaseChannelBase):
             not picking.ignore_release_channel_block
             and picking.delivery_requires_other_lines
         ):
-            message = _(
+            message_template = (
                 "Transfer %(picking_name)s could not be assigned to a channel because "
                 "it's blocked. It requires either a new order to be unblocked or a "
-                "manual action from the user.",
-                picking_name=picking.name,
+                "manual action from the user."
             )
-            _logger.warning(message)
-            return message
+            _logger.warning(message_template, {"picking_name": picking.name})
+            return _(message_template, picking_name=picking.name)
         return super().assign_release_channel(picking)
