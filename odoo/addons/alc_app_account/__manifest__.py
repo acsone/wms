@@ -30,6 +30,7 @@
         "mis_builder_budget",
         "partner_invoicing_mode",
         "partner_invoicing_mode_at_shipping",
+        "partner_invoicing_mode_at_shipping_fourteen_days",
         "partner_invoicing_mode_fourteen_days",
         "partner_invoicing_mode_monthly",
         "partner_invoicing_mode_ten_days",

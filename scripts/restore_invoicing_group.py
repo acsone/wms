@@ -3,6 +3,7 @@ import csv
 
 import click
 import click_odoo
+from openupgradelib import openupgrade
 
 # Call the script with -d <destination db name>
 
@@ -14,9 +15,14 @@ def main(env):
     invoice_frequency = []
     with open("./partners_delivery.csv") as partners_delivery_csv:
         csv_reader = csv.reader(partners_delivery_csv, delimiter=";")
+        i = 0
         for row in csv_reader:
+            if i == 0:
+                i += 1
+                continue
             id.append(row[0])
             invoice_frequency.append(row[1])
+            i += 1
 
     query = """
         WITH partners_delivery AS (
@@ -47,7 +53,9 @@ def main(env):
             WHERE so.partner_invoice_id = partners_delivery.id
             ;
     """
-    env.cr.execute(query, {"id": id, "invoice_frequency": invoice_frequency})
+    openupgrade.logged_query(
+        env.cr, query, {"id": id, "invoice_frequency": invoice_frequency}
+    )
 
 
 if __name__ == "__main__":

@@ -169,7 +169,8 @@ odoo-addon-mis-builder-budget==16.0.5.0.1.5
 odoo-addon-onchange-helper==16.0.1.0.0.3
 odoo-addon-partner-fax==16.0.1.0.0.3
 odoo-addon-partner-invoicing-mode @ git+https://github.com/acsone/account-invoicing.git@50247881d0e7c7547e1641a2c81bf43ef833628b#subdirectory=setup/partner_invoicing_mode
-odoo-addon-partner-invoicing-mode-at-shipping @ git+https://github.com/acsone/account-invoicing.git@7d36b946408922fe8e10f517e0b77ed717c8cd1d#subdirectory=setup/partner_invoicing_mode_at_shipping
+odoo-addon-partner-invoicing-mode-at-shipping @ git+https://github.com/acsone/account-invoicing.git@cfd6d9098daf1051b363085d0962f233628a0460#subdirectory=setup/partner_invoicing_mode_at_shipping
+odoo-addon-partner-invoicing-mode-at-shipping-fourteen-days @ git+https://github.com/acsone/account-invoicing.git@28c477b34c47cd3cb092957a221cdab52c22102f#subdirectory=setup/partner_invoicing_mode_at_shipping_fourteen_days
 odoo-addon-partner-invoicing-mode-fourteen-days @ git+https://github.com/acsone/account-invoicing.git@6281613eabb2754d30e0b713446658f280411487#subdirectory=setup/partner_invoicing_mode_fourteen_days
 odoo-addon-partner-invoicing-mode-monthly @ git+https://github.com/acsone/account-invoicing.git@36fc3e1afda7c425f4666d79818112ece517fd43#subdirectory=setup/partner_invoicing_mode_monthly
 odoo-addon-partner-invoicing-mode-ten-days @ git+https://github.com/acsone/account-invoicing.git@a3eb2c5e3e5db86698f38286f4e5c04c2fbacd62#subdirectory=setup/partner_invoicing_mode_ten_days
