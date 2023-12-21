@@ -49,7 +49,7 @@ class AlcStockMoveReport(models.Model):
 
     product_id = fields.Many2one[ProductProduct](string="Product", readonly=True)
     product_default_code = fields.Char()
-    product_name = fields.Char(readonly=True)
+    product_name = fields.Char(readonly=True, translate=True)
     product_price = fields.Float(readonly=True)
     product_qty = fields.Float("Product quantity", readonly=True)
     product_sale_price_2 = fields.Float(
