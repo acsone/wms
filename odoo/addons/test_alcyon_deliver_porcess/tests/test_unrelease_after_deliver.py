@@ -16,6 +16,9 @@ class TestPartialDeliver(TestDeliverProcessBase):
             {"name": "Test product", "tracking": "none", "type": "product"}
         )
         cls.env["stock.quant"]._update_available_quantity(cls.product, cls.loc_stock, 3)
+        cls.lot = cls.env["stock.lot"].create(
+            {"name": "lot", "product_id": cls.product.id}
+        )
 
     def test_00(self):
         """Test backorder unreleased after deliver an assigned to release channel at wakeup."""
@@ -118,6 +121,56 @@ class TestPartialDeliver(TestDeliverProcessBase):
         ):
             self.channel.action_delivering()
         pick2.action_cancel_start()
+        self.channel.unrelease_picking()
+        self.channel.action_delivering()
+        self.assertFalse(self.channel.delivering_error)
+        self.assertEqual(self.channel.state, "delivered")
+
+    def test_03(self):
+        """
+        Unrlease not allowed before delivering.
+
+        When a picking is released and picked on the shopfloor, it is marked as printed.
+        During delivery, the unrelease of this move is not allowed until the preparation
+        partially available loses the printed flag.
+        """
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.loc_stock, -1
+        )
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.loc_stock, 2, lot_id=self.lot
+        )
+        sale = self._confirm_sale_order(products=[self.product], qty=2)
+        sale2 = self._confirm_sale_order(
+            products=[self.product], qty=2, partner=self.partner2
+        )
+        # open the channel, pick must be generated
+        with trap_jobs() as trap:
+            self.channel.with_context(queue_job__no_delay=False).action_unlock()
+            trap.perform_enqueued_jobs()
+        picks = self._get_picking_pick(sale) | self._get_picking_pick(sale2)
+        pick_with_lot = picks.filtered("move_line_ids.lot_id")
+        pick_without_lot = picks - pick_with_lot
+
+        pick_with_lot.move_type = "one"
+        # do the pick_without_lot
+        pick_without_lot._put_in_pack(pick_without_lot.move_line_ids)
+        for move_line in pick_without_lot.move_ids.move_line_ids:
+            move_line.qty_done = 2
+        pick_without_lot._action_done()
+        self.assertEqual(pick_with_lot.state, "assigned")
+        self.assertEqual(pick_with_lot.move_line_ids.lot_id, self.lot)
+        pick_with_lot.action_start()
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.loc_stock, -1, lot_id=self.lot
+        )
+
+        pick_with_lot.do_unreserve()
+        pick_with_lot.action_assign()
+        self.assertEqual(pick_with_lot.move_ids.state, "partially_available")
+        # deliver the release channel
+        self.channel.action_lock()
+        self.channel.action_delivering()
         self.channel.unrelease_picking()
         self.channel.action_delivering()
         self.assertFalse(self.channel.delivering_error)

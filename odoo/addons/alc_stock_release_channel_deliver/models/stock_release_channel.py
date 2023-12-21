@@ -96,20 +96,15 @@ class StockReleaseChannel(StockReleaseChannelBase):
                         pickings=", ".join(started_pickings.mapped("name")),
                     )
                 )
-            picking_moves_to_unrelease = self._picking_moves_to_unrelease()
-            # unset "printed" on all preparation confirmed moves
-            # otherwise the unrlease will not be allowed
-            picking_moves_to_unrelease.filtered(
-                lambda p: p.state == "confirmed"
-            ).picking_id.printed = False
             shipping_moves_to_unrelease = self._shipping_moves_to_unrelease()
             shipping_unrelease_not_allowed = shipping_moves_to_unrelease.filtered(
                 lambda m: not m.unrelease_allowed
             ).picking_id
             if shipping_unrelease_not_allowed:
+                picking_moves_to_unrelease = self._picking_moves_to_unrelease()
                 picking_moves_to_unrelease = picking_moves_to_unrelease.filtered(
-                    lambda p: p.state != "confirmed"
-                )
+                    lambda p: p.state not in ("confirmed", "partially_available")
+                ).picking_id
                 raise UserError(
                     _(
                         "There are some preparations that have not been completed."
@@ -166,6 +161,12 @@ class StockReleaseChannel(StockReleaseChannelBase):
 
     def action_delivering(self):
         self.ensure_one()
+        picking_moves_to_unrelease = self._picking_moves_to_unrelease()
+        # unset "printed" on all preparation confirmed moves
+        # otherwise the unrlease will not be allowed
+        picking_moves_to_unrelease.filtered(
+            lambda p: p.state in ("confirmed", "partially_available")
+        ).picking_id.printed = False
         self._check_is_action_delivering_allowed()
         shipping_moves_to_unrelease = self._shipping_moves_to_unrelease()
         if shipping_moves_to_unrelease:
