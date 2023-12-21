@@ -109,7 +109,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
             if shipping_unrelease_not_allowed:
                 picking_moves_to_unrelease = picking_moves_to_unrelease.filtered(
                     lambda p: p.state != "confirmed"
-                )
+                ).picking_id
                 raise UserError(
                     _(
                         "There are some preparations that have not been completed."
