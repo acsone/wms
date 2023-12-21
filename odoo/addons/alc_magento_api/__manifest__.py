@@ -21,6 +21,7 @@
         "alc_sale_channel",
         "alc_sale_suite_name",
         "alc_sale_order_date_order_short",
+        "alc_partner_type",
     ],
     "demo": [],
     "external_dependencies": {"python": ["xmltodict", "dicttoxml"]},
