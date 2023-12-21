@@ -100,7 +100,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
             # unset "printed" on all preparation confirmed moves
             # otherwise the unrlease will not be allowed
             picking_moves_to_unrelease.filtered(
-                lambda p: p.state == "confirmed"
+                lambda p: p.state in ("confirmed", "partially_available")
             ).picking_id.printed = False
             shipping_moves_to_unrelease = self._shipping_moves_to_unrelease()
             shipping_unrelease_not_allowed = shipping_moves_to_unrelease.filtered(
@@ -108,7 +108,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
             ).picking_id
             if shipping_unrelease_not_allowed:
                 picking_moves_to_unrelease = picking_moves_to_unrelease.filtered(
-                    lambda p: p.state != "confirmed"
+                    lambda p: p.state not in ("confirmed", "partially_available")
                 ).picking_id
                 raise UserError(
                     _(
