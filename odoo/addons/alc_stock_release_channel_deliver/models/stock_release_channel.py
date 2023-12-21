@@ -159,14 +159,19 @@ class StockReleaseChannel(StockReleaseChannelBase):
         self.ensure_one()
         return self._picking_moves_to_unrelease().move_dest_ids
 
-    def action_delivering(self):
-        self.ensure_one()
-        picking_moves_to_unrelease = self._picking_moves_to_unrelease()
+    def _picking_to_unrelease_cancel_start(self):
         # unset "printed" on all preparation confirmed moves
         # otherwise the unrlease will not be allowed
-        picking_moves_to_unrelease.filtered(
-            lambda p: p.state in ("confirmed", "partially_available")
-        ).picking_id.printed = False
+        picking_moves_to_unrelease = self._picking_moves_to_unrelease()
+        picking_to_unrelease = picking_moves_to_unrelease.filtered(
+            lambda m: m.state in ("confirmed", "partially_available")
+            and m.picking_id.state != "assigned"
+        ).picking_id
+        picking_to_unrelease.printed = False
+
+    def action_delivering(self):
+        self.ensure_one()
+        self._picking_to_unrelease_cancel_start()
         self._check_is_action_delivering_allowed()
         shipping_moves_to_unrelease = self._shipping_moves_to_unrelease()
         if shipping_moves_to_unrelease:
