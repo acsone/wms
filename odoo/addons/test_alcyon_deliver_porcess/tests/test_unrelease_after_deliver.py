@@ -148,24 +148,26 @@ class TestPartialDeliver(TestDeliverProcessBase):
         with trap_jobs() as trap:
             self.channel.with_context(queue_job__no_delay=False).action_unlock()
             trap.perform_enqueued_jobs()
-        pick = self._get_picking_pick(sale)
-        pick2 = self._get_picking_pick(sale2)
-        pick2.move_type = "one"
-        # do the pick
-        pick._put_in_pack(pick.move_line_ids)
-        for move_line in pick.move_ids.move_line_ids:
+        picks = self._get_picking_pick(sale) | self._get_picking_pick(sale2)
+        pick_with_lot = picks.filtered("move_line_ids.lot_id")
+        pick_without_lot = picks - pick_with_lot
+
+        pick_with_lot.move_type = "one"
+        # do the pick_without_lot
+        pick_without_lot._put_in_pack(pick_without_lot.move_line_ids)
+        for move_line in pick_without_lot.move_ids.move_line_ids:
             move_line.qty_done = 2
-        pick._action_done()
-        self.assertEqual(pick2.state, "assigned")
-        self.assertEqual(pick2.move_line_ids.lot_id, self.lot)
-        pick2.action_start()
+        pick_without_lot._action_done()
+        self.assertEqual(pick_with_lot.state, "assigned")
+        self.assertEqual(pick_with_lot.move_line_ids.lot_id, self.lot)
+        pick_with_lot.action_start()
         self.env["stock.quant"]._update_available_quantity(
             self.product, self.loc_stock, -1, lot_id=self.lot
         )
 
-        pick2.do_unreserve()
-        pick2.action_assign()
-        self.assertEqual(pick2.move_ids.state, "partially_available")
+        pick_with_lot.do_unreserve()
+        pick_with_lot.action_assign()
+        self.assertEqual(pick_with_lot.move_ids.state, "partially_available")
         # deliver the release channel
         self.channel.action_lock()
         self.channel.action_delivering()
