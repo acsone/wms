@@ -14,9 +14,5 @@ class ProductPricelist(ProductPricelistBase):
         """Batch price re-computation that happen with consecutive writes."""
         self_no_update = self.with_context(no_update_price_cache=True)
         res = super(ProductPricelist, self_no_update).load(fields, data)
-        eids = None
-        if "item_ids/id" in fields:
-            index = fields.index("item_ids/id")
-            eids = [self.env.ref(d[index]).id for d in data]
-        self.browse(res["ids"])._delay_update_price_cache(eids=eids)
+        self.browse(res["ids"])._delay_update_price_cache()
         return res

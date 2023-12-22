@@ -23,13 +23,13 @@ class ProductPricelist(Pricelist):
         )
         self.with_delay(description=desc)._update_price_cache(**kwargs)
 
-    def _update_price_cache(self, domain_extend=None, dates=None, eids=None):
+    def _update_price_cache(self, domain_extend=None, dates=None):
         domain_extend = domain_extend or []
         product_model = self.env["product.product"]
         products = product_model._get_price_cache_products(domain_extend=domain_extend)
         dates = {k: list(dates[k]) for k in dates} if dates else None
         for product in products:
-            product._delay_update_price_cache(pricelists=self, dates=dates, eids=eids)
+            product._delay_update_price_cache(pricelists=self, dates=dates)
 
     def _remove_price_cache(self):
         products = self.env["product.product"]._get_price_cache_products()
@@ -125,21 +125,36 @@ class ProductPricelist(Pricelist):
         return {date} | set(starts + ends)
 
     def _get_cache_discounts(self, product, date=False):
-        self.ensure_one()
-        product.ensure_one()
-        date = date or fields.Date.context_today(self)
         res = []
-        for rule in self._get_applicable_rules(product, date):
+        rules = self._get_first_applicable_rules_for_quantity(product, date)
+        for rule in rules:
             cache = rule._cache_discount(product)
             if cache:
                 res.append(cache)
         return res
 
     def _get_cache_price(self, product, date=False):
-        self.ensure_one()
-        product.ensure_one()
-        date = date or fields.Date.context_today(self)
-        rules = self._get_applicable_rules(product, date)
+        rules = self._get_first_applicable_rules_for_quantity(product, date)
         if rules:
             return [rule._cache_price(product) for rule in rules]
         return [rules._cache_price(product)]
+
+    def _get_first_applicable_rules_for_quantity(self, product, date=False):
+        """Return the list of rules that apply to the given product and date.
+
+        This method ensures that if multiple rules apply to the same product,
+        and the same quantity, only the first one is returned.
+
+        :param product: product.product recordset
+        :param date: date
+        """
+        self.ensure_one()
+        product.ensure_one()
+        date = date or fields.Date.context_today(self)
+        found_quantities = set()
+        rules = self.env["product.pricelist.item"]
+        for rule in self._get_applicable_rules(product, date):
+            if rule.min_quantity not in found_quantities:
+                rules |= rule
+                found_quantities.add(rule.min_quantity)
+        return rules
