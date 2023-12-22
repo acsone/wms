@@ -59,9 +59,8 @@ class ProductPricelistItem(PricelistItem, MixinPast):
             result += item._get_product_domain()
         return result
 
-    def _update_price_cache(self, domain_extend=None, dates=None, eids=None):
+    def _update_price_cache(self, domain_extend=None, dates=None):
         domain_extend = domain_extend or []
-        eids = (eids or []) + [None]
         for items in self.partition("pricelist_id").values():
             pricelist = items.mapped("pricelist_id")
             pricelist.ensure_one()
@@ -71,7 +70,7 @@ class ProductPricelistItem(PricelistItem, MixinPast):
             dates_pl = pricelist._get_date_witnesses(items=items)
             dates[pricelist.role_name] = set(dates.get(pricelist, [])) | dates_pl
             pricelist._delay_update_price_cache(
-                domain_extend=extended_domain, dates=dates, eids=eids
+                domain_extend=extended_domain, dates=dates
             )
 
     @api.model_create_multi
@@ -104,7 +103,7 @@ class ProductPricelistItem(PricelistItem, MixinPast):
             dates_pl = pricelist._get_date_witnesses(pl_items)
             dates = {pricelist.role_name: dates_pl | dates_before[pricelist.role_name]}
             pl_items._update_price_cache(
-                domain_extend=extends_before[pricelist], dates=dates, eids=pl_items.ids
+                domain_extend=extends_before[pricelist], dates=dates
             )
         return res
 
@@ -113,7 +112,7 @@ class ProductPricelistItem(PricelistItem, MixinPast):
         # otherwise the id of the item will keep polluting the cache until a full reset.
         # pricelist unlink is the exception, since the parent key gets dropped.
         if not self.env.context.get("no_update_price_cache_items"):
-            self._update_price_cache(eids=self.ids)
+            self._update_price_cache()
         return super().unlink()
 
     def _get_price(self, product, date=None):

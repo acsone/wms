@@ -71,14 +71,12 @@ class ProductProduct(ProductProductBase):
     def _remove_from_cache(self, cache_list, element_ids):
         return [e for e in cache_list if e["id"] not in element_ids]
 
-    def _get_price_cache(self, pricelists, dates, eids, clean=False):
+    def _get_price_cache(self, pricelists, dates, clean=False):
         self.ensure_one()
         price_cache = {} if clean else (self.price_cache or {})
         for pricelist in pricelists:
             if not pricelist.is_discount:
-                pl_prices = price_cache.get(pricelist.role_name, [])
-                if eids:
-                    pl_prices = self._remove_from_cache(pl_prices, eids)
+                pl_prices = []
                 for date in dates[pricelist.role_name]:
                     cache_prices = pricelist._get_cache_price(self, date)
                     for cache_price in cache_prices:
@@ -89,9 +87,7 @@ class ProductProduct(ProductProductBase):
                 price_cache[pricelist.role_name] = pl_prices
             else:
                 discount_role = pricelist.discount_role_name
-                pl_discounts = price_cache.get(discount_role, [])
-                if eids:
-                    pl_discounts = self._remove_from_cache(pl_discounts, eids)
+                pl_discounts = []
                 for date in dates[pricelist.role_name]:
                     discounts = pricelist._get_cache_discounts(self, date)
                     for discount in discounts:
@@ -102,7 +98,7 @@ class ProductProduct(ProductProductBase):
                 price_cache[discount_role] = pl_discounts
         return price_cache
 
-    def _update_price_cache(self, pricelists=None, dates=None, eids=None):
+    def _update_price_cache(self, pricelists=None, dates=None):
         """If pricelists (or discount_pricelists) is not given,.
 
         it is assumed to mean all pricelists.
@@ -114,9 +110,7 @@ class ProductProduct(ProductProductBase):
             clean = True
         dates = dates or {pl.role_name: pl._get_date_witnesses() for pl in pricelists}
         for product in self:
-            product.price_cache = product._get_price_cache(
-                pricelists, dates, eids, clean
-            )
+            product.price_cache = product._get_price_cache(pricelists, dates, clean)
 
     def _update_pricelist_cache_min_quantities(self, pricelist, price_cache):
         # Simpler algorithm: we remove and start anew for all min_qty items

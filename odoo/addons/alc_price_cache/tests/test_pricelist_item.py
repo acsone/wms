@@ -35,7 +35,6 @@ class TestPricelistItemFlow(TestPrices):
                 kwargs={
                     "domain_extend": [(1, "=", 1)],
                     "dates": {"price-date-witness-1": [Date.from_string("2022-01-01")]},
-                    "eids": [item.id, None],
                 },
             )
         self.assertTrue(item.is_past)
@@ -70,7 +69,6 @@ class TestPricelistItemFlow(TestPrices):
                 kwargs={
                     "domain_extend": [(1, "=", 1)],
                     "dates": {"price-domain-change": [Date.from_string("2022-01-01")]},
-                    "eids": [item.id, None],
                 },
             )
 
@@ -92,7 +90,6 @@ class TestPricelistItemFlow(TestPrices):
                         ("id", "=", self.product_1.id),
                     ],
                     "dates": {"price-domain-change": [Date.from_string("2022-01-01")]},
-                    "eids": [item.id, None],
                 },
             )
 
@@ -499,3 +496,70 @@ class TestPricelistItemFlow(TestPrices):
         }
         expected_price_cache = [expected_cache_element_0, expected_cache_element_1]
         self.assertEqual(self._remove_extra_keys(price_cache), expected_price_cache)
+
+    @mute_logger("odoo.addons.queue_job.delay")
+    def test_multi_discount_same_qty_same_date_different_priority(self):
+        """You can specify multiple rules with the same min_quantity that will.
+
+        be valid at the same date. Nevertheless, for this date, you should keep
+        only the rule with the highest priority (fixed by the order by applied_on)
+        for each min_quantity.
+        """
+        vals = self._get_pricelist_vals("DPL", [], is_discount=True)
+        discount_pricelist = self.model_pl_nodelay.create(vals)
+        role = discount_pricelist.discount_role_name
+        tmpl = self.product_1.product_tmpl_id
+        # declare global rule that applies to all products a discount of 5%
+        vals_item_min_qty = self._get_item_vals(
+            discount_pricelist,
+            min_quantity=0,
+            percent_price=5,
+            applied_on="3_global",
+        )
+        item_min_qty = self.model_pl_item_nodelay.create(vals_item_min_qty)
+        price_cache = self.product_1.price_cache[role]
+        expected_cache_element = {
+            "discount": 5.0,
+            "date_start": None,
+            "id": item_min_qty.id,
+            "date_end": None,
+        }
+        self.assertEqual(self._remove_extra_keys(price_cache), [expected_cache_element])
+
+        # declare specific product rule to reset the discount for this product
+        vals_item_min_qty_0 = self._get_item_vals(
+            discount_pricelist,
+            min_quantity=0,
+            percent_price=0,
+            applied_on="1_product",
+            product_tmpl_id=tmpl.id,
+        )
+        self.model_pl_item_nodelay.create(vals_item_min_qty_0)
+        price_cache = self.product_1.price_cache[role]
+        self.assertEqual(self._remove_extra_keys(price_cache), [])
+
+        # introduce a specific rule for product_1 with a discount of 11% only
+        # for a min_quantity of 2
+        vals_item_min_qty_2 = self._get_item_vals(
+            discount_pricelist,
+            min_quantity=2,
+            percent_price=11,
+            applied_on="1_product",
+            product_tmpl_id=tmpl.id,
+        )
+        item_min_qty_2 = self.model_pl_item_nodelay.create(vals_item_min_qty_2)
+
+        # For product_1, we have 2 rules with min_quantity = 0 and 1 rule with min_quantity = 2
+        # into the cache we should have only 1 rule with min_quantity = 2
+        # Indeed the rule vals_item_min_qty_0 will disable the rule vals_item_min_qty
+        # since it has a higher priority. Therefore, this product we only have
+        # a discount of 11% for a min_quantity of 2
+        price_cache = self.product_1.price_cache[role]
+        expected_cache_element = {
+            "discount": 11.0,
+            "date_start": None,
+            "id": item_min_qty_2.id,
+            "date_end": None,
+            "min_quantity": 2.0,
+        }
+        self.assertEqual(self._remove_extra_keys(price_cache), [expected_cache_element])
