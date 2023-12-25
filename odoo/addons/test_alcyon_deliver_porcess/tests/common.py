@@ -30,6 +30,3 @@ class TestDeliverProcessBase(StockPickingTestCase):
         cls.warehouse_1.out_type_id.group_pickings_by_customer = True
         cls.warehouse_1.out_type_id.group_pickings = True
         cls.warehouse_1.pick_type_id.no_backorder_for_additional_product = True
-        cls.env.user.groups_id += cls.env.ref(
-            "alc_stock_picking_cancel_permission.group_picking_cancel"
-        )
