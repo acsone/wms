@@ -63,8 +63,8 @@ export class OdooMixin {
                 if (_.isUndefined(handler)) {
                     handler = this._handle_error;
                 }
-                return response.json().then((json) => {
-                    return {error: handler.call(this, response, json)};
+                return handler.call(this, response, {
+                    description: "Please try again or contact an Administrator.",
                 });
             }
             return response.json();
@@ -72,12 +72,13 @@ export class OdooMixin {
     }
     _error_info(response, json) {
         return _.extend({}, json, {
-            // Strip html
-            description: $(json.description).text(),
-            // TODO: this might be superfluous as we get error data wrapper by rest api
-            error: response.statusText,
-            status: response.status,
             response: response,
+            error: {
+                status: response.status,
+                name: response.statusText,
+                // Strip html
+                description: json.description,
+            },
         });
     }
     _handle_404(response, json) {
