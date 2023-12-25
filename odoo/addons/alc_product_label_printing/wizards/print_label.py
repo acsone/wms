@@ -25,9 +25,9 @@ class PrintLabel(Label):
         result = super().default_get(fields_list)
         active_model = self.env.context.get("active_model")
         active_ids = self.env.context.get("active_ids", [])
-        if active_model == "stock.picking":
+        if active_model == self.picking_ids._name:
             result["picking_ids"] = [fields.Command.set(active_ids)]
-        elif active_model == "stock.production.lot":
+        elif active_model == self.lot_ids._name:
             result["lot_ids"] = [fields.Command.set(active_ids)]
         return result
 
