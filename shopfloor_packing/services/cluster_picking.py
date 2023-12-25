@@ -157,10 +157,16 @@ class ClusterPicking(Component):
                 picking_batch_id,
                 message=self.msg_store.notable_to_put_in_pack(picking),
             )
+        self._postprocess_put_in_pack(picking, pack)
         return self._response_put_in_pack(
             picking_batch_id,
             message=self.msg_store.stock_picking_packed_successfully(picking),
         )
+
+    def _postprocess_put_in_pack(self, picking, pack):
+        """Override this method to include post-processing logic for the new package,
+        such as printing.."""
+        return
 
     def _put_in_pack(self, picking, number_of_parcels):
         move_lines_to_pack = picking.move_line_ids.filtered(
