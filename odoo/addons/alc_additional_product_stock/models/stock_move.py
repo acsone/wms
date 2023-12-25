@@ -116,7 +116,7 @@ class StockMove(StockMoveBase):
         res = super()._action_cancel()
         additional_moves = self.mapped("additional_move_ids")
         if additional_moves:
-            return additional_moves._action_cancel()
+            return additional_moves.with_context(force_cancel=True)._action_cancel()
         return res
 
     def _get_all_not_done_additional_moves(self) -> Self:
@@ -141,7 +141,7 @@ class StockMove(StockMoveBase):
                 continue
             moves_to_remove = move._get_all_not_done_additional_moves()
             if moves_to_remove:
-                moves_to_remove._action_cancel()
+                moves_to_remove.with_context(force_cancel=True)._action_cancel()
                 # TODO: Mark moves as 'to delete' instead. This is a workaround as
                 # a glue module should be done between this and stock_dynamic_routing
                 # (to confirm)
