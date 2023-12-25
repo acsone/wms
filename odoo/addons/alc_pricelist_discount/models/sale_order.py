@@ -87,9 +87,9 @@ class SaleOrder(SaleOrderBase):
             if order.discount_pricelist_ids != order.partner_id.discount_pricelist_ids:
                 order.write(
                     {
-                        "discount_pricelist_ids": Command.set(
-                            order.partner_id.discount_pricelist_ids.ids
-                        )
+                        "discount_pricelist_ids": [
+                            Command.set(order.partner_id.discount_pricelist_ids.ids)
+                        ]
                     }
                 )
             order.order_line.onchange_product_id_reset_discount()
