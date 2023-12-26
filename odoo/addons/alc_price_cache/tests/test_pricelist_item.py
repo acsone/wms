@@ -185,6 +185,16 @@ class TestPricelistItemFlow(TestPrices):
             "date_end": None,
         }
         self.assertEqual(price_cache, [expected_price_cache])
+        self.product_1.price_category_id = False
+        self.product_1._update_price_cache()
+        price_cache = self.product_1.price_cache[pricelist.role_name]
+        expected_price_cache = {
+            "price": 10,
+            "date_start": None,
+            "id": None,
+            "date_end": None,
+        }
+        self.assertEqual(price_cache, [expected_price_cache])
 
     @freeze_time("2022-01-01 12:00:00")
     @mute_logger("odoo.addons.queue_job.delay")
