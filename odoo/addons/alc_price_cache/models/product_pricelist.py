@@ -154,7 +154,9 @@ class ProductPricelist(Pricelist):
         found_quantities = set()
         rules = self.env["product.pricelist.item"]
         for rule in self._get_applicable_rules(product, date):
-            if rule.min_quantity not in found_quantities:
+            if rule.min_quantity not in found_quantities and rule._is_applicable_for(
+                product, rule.min_quantity
+            ):
                 rules |= rule
                 found_quantities.add(rule.min_quantity)
         return rules
