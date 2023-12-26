@@ -3,7 +3,7 @@
 from unittest import mock
 
 from odoo.fields import first
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import Form, TransactionCase
 
 
 class TestLabelPrinting(TransactionCase):
@@ -233,5 +233,25 @@ class TestLabelPrinting(TransactionCase):
             wizard.printer_id = self.zebra_printer
             wizard.lot_ids = self.lot
             wizard.label_type = "lot"
+            wizard.print_label()
+            patched_print_document.assert_called_once()
+
+    def test_print_wizard_lot(self):
+        """Test wizard form default values for lot label."""
+        PrintingPrinter = self.env["printing.printer"].__class__
+        wizard_form = Form(
+            self.env["print.label"].with_context(
+                active_model=self.lot._name,
+                active_ids=self.lot.ids,
+                default_label_type="lot",
+            )
+        )
+        wizard_form.printer_id = self.zebra_printer
+        wizard = wizard_form.save()
+        self.assertEqual(wizard.lot_ids, self.lot)
+        self.assertEqual(wizard.label_type, "lot")
+        with mock.patch.object(
+            PrintingPrinter, "print_document"
+        ) as patched_print_document:
             wizard.print_label()
             patched_print_document.assert_called_once()
