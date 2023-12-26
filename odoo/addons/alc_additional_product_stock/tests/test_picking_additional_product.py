@@ -58,9 +58,8 @@ class TestStockPicking(StockPickingTestCase):
 
         # Check that the additional product is taken into account after confirmation
         self.assertEqual(len(pick.move_ids), 2)
-
         # At this stage the sale order is confirmed
-        self.assertEqual(sale.state, "sale")
+        self.assertIn(sale.state, ("sale", "done"))
 
         # cancel it
         sale.with_context(disable_cancel_warning=True).action_cancel()

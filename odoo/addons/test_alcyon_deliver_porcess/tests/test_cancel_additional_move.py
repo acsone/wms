@@ -59,3 +59,13 @@ class TestCancelAdditionalMove(TestDeliverProcessBase):
         ships._put_in_pack(ships.move_line_ids)
         self.channel.action_delivering()
         self.assertFalse(self.channel.delivering_error)
+
+    def test_01(self):
+        sale = self._confirm_sale_order(products=[self.main_product], qty=2)
+        self._confirm_sale_order(products=[self.main_product], qty=2)
+        pick = self._get_picking_pick(sale)
+        # open the channel, pick must be generated
+        self.channel.action_unlock()
+        pick = self._get_picking_pick(sale)
+        pick.action_start()
+        pick.action_assign()
