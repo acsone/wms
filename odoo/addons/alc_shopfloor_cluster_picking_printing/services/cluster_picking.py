@@ -20,11 +20,11 @@ class ClusterPicking(Component):
             )
         return super().put_in_pack(picking_batch_id, picking_id, nbr_packages)
 
-    def _put_in_pack(self, picking, nbr_packages):
-        pack = super()._put_in_pack(picking, nbr_packages)
+    def _postprocess_put_in_pack(self, picking, pack):
+        res = super()._postprocess_put_in_pack(picking, pack)
         if pack and self.work.menu.print_on_pack_pickings:
             self._print_picking_med_products_labels(picking, pack)
-        return pack
+        return res
 
     def scan_destination_pack(self, picking_batch_id, move_line_id, barcode, quantity):
         result = super().scan_destination_pack(
