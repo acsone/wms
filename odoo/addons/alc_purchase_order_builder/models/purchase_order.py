@@ -210,14 +210,6 @@ class PurchaseOrder(PurchaseOrderBase):
         existing_line.write(vals)
 
     def _create_line(self, vals):
-        self.env["purchase.order.line"].create(
-            {
-                "product_id": vals.get("product_id"),
-                "partner_id": self.partner_id.id,
-                "order_id": vals.get("order_id"),
-            }
-        )
-
         po_line = self.env["purchase.order.line"]
         product_id = vals.pop("product_id")
         # TODO: not sure why we don't use all the values defined in `vals`
