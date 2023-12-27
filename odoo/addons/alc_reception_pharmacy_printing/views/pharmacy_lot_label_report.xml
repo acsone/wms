@@ -7,7 +7,7 @@
 ^PRC
 ^LH0,0^FS\r
 ^FO32,70^A0N,29,31^FDClient:^FS\r
-^FO120,68^A0N,34,28^FD<t t-esc="line.customer_id.name" />^FS\r
+^FO120,68^A0N,34,28^FD<t t-esc="line.customer_id.normalized_name" />^FS\r
 ^FO32,105^A0N,34,28^FDLot:^FS\r
 ^FO90,105^A0N,34,28^FD<t t-esc="line.lot_id.name" />^FS\r
 ^FO32,145^A0N,34,28^FDBac:^FS\r
