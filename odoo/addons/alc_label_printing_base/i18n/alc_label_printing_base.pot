@@ -108,6 +108,18 @@ msgid "No package in this picking"
 msgstr ""
 
 #. module: alc_label_printing_base
+#: model:ir.model.fields,field_description:alc_label_printing_base.field_res_partner__normalized_display_name
+#: model:ir.model.fields,field_description:alc_label_printing_base.field_res_users__normalized_display_name
+msgid "Normalized Display Name"
+msgstr ""
+
+#. module: alc_label_printing_base
+#: model:ir.model.fields,field_description:alc_label_printing_base.field_res_partner__normalized_name
+#: model:ir.model.fields,field_description:alc_label_printing_base.field_res_users__normalized_name
+msgid "Normalized Name"
+msgstr ""
+
+#. module: alc_label_printing_base
 #: model:ir.model.fields.selection,name:alc_label_printing_base.selection__print_label__label_type__package
 msgid "Package"
 msgstr ""
