@@ -97,10 +97,18 @@ class TestLabelPrinting(TransactionCase):
                 "label_type": "package",
             }
         )
-        with (
-            mock.patch.object(type(self.zebra_printer), "print_document") as mock_print
-        ):
+        with mock.patch.object(
+            self.zebra_printer.__class__, "print_document"
+        ) as mock_print:
             wizard.print_label()
             mock_print.assert_called_once()
             content = mock_print.call_args[0][1]
             self.assertIn(self.package.name, content.decode())
+
+    def test_partner_normalized_name(self):
+        special_char_name = "àÀâÂäÄæÆçÇéÉèÈêÊëËîÎïÏôÔœŒùÙûÛüÜ«»€"
+        normalized_name = "aAaAaAaeAEcCeEeEeEeEiIiIoOoeOEuUuUuU<<>>EUR"
+        self.partner.name = special_char_name
+        self.assertEqual(self.partner.name, special_char_name)
+        self.assertEqual(self.partner.normalized_name, normalized_name)
+        self.assertEqual(self.partner.normalized_display_name, normalized_name)

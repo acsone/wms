@@ -143,12 +143,12 @@ class StockMoveLine(MoveLine):
         if partner:
             res.update(
                 {
-                    "partner_name_first_line": partner.display_name[:38],
-                    "partner_name_second_line": partner.display_name[38:60],
+                    "partner_name_first_line": partner.normalized_display_name[:38],
+                    "partner_name_second_line": partner.normalized_display_name[38:60],
                     "partner_zip": partner.zip or "",
                     "partner_city": partner.city or "",
                 }
             )
         if customer and customer != partner:
-            res.update({"customer_name": customer.name[:29]})
+            res.update({"customer_name": customer.normalized_name[:29]})
         return res
