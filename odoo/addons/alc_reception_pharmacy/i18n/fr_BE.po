@@ -28,6 +28,11 @@ msgid "Bin"
 msgstr "Bac"
 
 #. module: alc_reception_pharmacy
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.receive_pharmacy_products_form_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: alc_reception_pharmacy
 #: model:product.template,name:alc_reception_pharmacy.product_colis_souverain_product_template
 msgid "Colis Souverain"
 msgstr "Colis Souverain"
@@ -205,7 +210,8 @@ msgstr "Nouveau"
 #, fuzzy, python-format
 #| msgid "Partner {} does not belong to any itinerary"
 msgid "Partner %(partner)s does not belong to any release channel"
-msgstr "Le client %(partner)s n'est pas livré par Alcyon (Aucune tournée associée)"
+msgstr ""
+"Le client %(partner)s n'est pas livré par Alcyon (Aucune tournée associée)"
 
 #. module: alc_reception_pharmacy
 #: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
@@ -356,9 +362,6 @@ msgstr "Réception Pharmacie"
 #~ msgstr ""
 #~ "All pickings at destination of a same shipping must be in the same "
 #~ "delivery round"
-
-#~ msgid "Cancel"
-#~ msgstr "Annuler"
 
 #~ msgid "Delivery Procurement"
 #~ msgstr "Livraison"
