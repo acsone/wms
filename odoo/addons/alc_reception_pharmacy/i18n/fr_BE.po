@@ -205,7 +205,7 @@ msgstr "Nouveau"
 #, fuzzy, python-format
 #| msgid "Partner {} does not belong to any itinerary"
 msgid "Partner %(partner)s does not belong to any release channel"
-msgstr "Le client {} n'est pas livré par Alcyon (Aucune tournée associée)"
+msgstr "Le client %(partner)s n'est pas livré par Alcyon (Aucune tournée associée)"
 
 #. module: alc_reception_pharmacy
 #: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
