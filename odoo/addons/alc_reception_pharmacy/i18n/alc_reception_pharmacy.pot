@@ -25,6 +25,11 @@ msgid "Bin"
 msgstr ""
 
 #. module: alc_reception_pharmacy
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.receive_pharmacy_products_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: alc_reception_pharmacy
 #: model:product.template,name:alc_reception_pharmacy.product_colis_souverain_product_template
 msgid "Colis Souverain"
 msgstr ""
