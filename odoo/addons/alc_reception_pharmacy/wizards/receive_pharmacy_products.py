@@ -50,7 +50,13 @@ class ReceivePharmacyProducts(models.TransientModel):
     def validate_reception(self):
         self._check_reception_state()
         self._add()
-        self._clean_wizard()
+        action = self.env["ir.actions.actions"]._for_xml_id(
+            "alc_reception_pharmacy.receive_pharmacy_products_act_window"
+        )
+        action["context"] = {
+            "default_reception_pharmacy_id": self.reception_pharmacy_id.id
+        }
+        return action
 
     def _add(self):
         return self._create_reception_pharmacy_line()
@@ -81,9 +87,3 @@ class ReceivePharmacyProducts(models.TransientModel):
         }
         lot_id = lot.with_context(default_expiration_date_allowed=True).create(lot_vals)
         return lot_id
-
-    def _clean_wizard(self):
-        self.bin_id = False
-        self.lot_name = ""
-        self.product_qty = 1
-        self.customer_id = False
