@@ -56,13 +56,15 @@ class ShipmentAdvice(ShipmentAdviceBase):
             self.arrival_date = fields.Date.context_today(self)
         self.in_release_channel_auto_process = True
         try:
-            self.planned_move_ids.move_line_ids._load_in_shipment(self)
-            self.action_in_progress()
-            self.action_done()
+            with self.env.cr.savepoint():
+                self.planned_move_ids.move_line_ids._load_in_shipment(self)
+                self.action_in_progress()
+                self.action_done()
         except UserError as error:
             _logger.error(error)
             self.action_cancel()
             self.planned_picking_ids.move_ids.write({"shipment_advice_id": False})
+            self.message_post(subject=_("Auto process error"), body=error)
             return self.release_channel_id._shipment_advice_auto_process_notify_error(
                 error, self
             )
