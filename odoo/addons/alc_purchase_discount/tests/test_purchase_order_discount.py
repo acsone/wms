@@ -137,6 +137,7 @@ class TestPurchaseOrderDiscount(TransactionCase):
                 {
                     "partner_id": self.supplier.id,
                     "price": 101,
+                    "discount": 5,
                     "product_tmpl_id": self.product.product_tmpl_id.id,
                     "date_start": "2023-01-01",
                     "date_end": "2023-12-31",
@@ -145,6 +146,7 @@ class TestPurchaseOrderDiscount(TransactionCase):
                 {
                     "partner_id": self.supplier.id,
                     "price": 151,
+                    "discount": 10,
                     "product_tmpl_id": self.product.product_tmpl_id.id,
                     "date_start": "2023-01-01",
                     "date_end": "2023-12-31",
@@ -152,6 +154,7 @@ class TestPurchaseOrderDiscount(TransactionCase):
                 {
                     "partner_id": self.supplier.id,
                     "price": 201,
+                    "discount": 15,
                     "product_tmpl_id": self.product.product_tmpl_id.id,
                     "date_start": "2024-01-01",
                     "date_end": "2024-12-31",
@@ -159,9 +162,13 @@ class TestPurchaseOrderDiscount(TransactionCase):
             ]
         )
         self.assertEqual(self.po_line.price_unit, 15)
+        self.assertEqual(self.po_line.discount, 0)
         self.po.date_order = "2023-06-01"
         self.assertEqual(self.po_line.price_unit, 151)
+        self.assertEqual(self.po_line.discount, 10)
         self.po_line.product_qty = 21
         self.assertEqual(self.po_line.price_unit, 101)
+        self.assertEqual(self.po_line.discount, 5)
         self.po.date_order = "2024-06-01"
         self.assertEqual(self.po_line.price_unit, 201)
+        self.assertEqual(self.po_line.discount, 15)
