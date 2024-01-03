@@ -130,3 +130,38 @@ class TestPurchaseOrderDiscount(TransactionCase):
         self.assertEqual(
             po_line.order_id.date_order, fields.Datetime.to_datetime("2023-04-03")
         )
+
+    def test_price_recompute_at_date_order_change(self):
+        self.env["product.supplierinfo"].create(
+            [
+                {
+                    "partner_id": self.supplier.id,
+                    "price": 101,
+                    "product_tmpl_id": self.product.product_tmpl_id.id,
+                    "date_start": "2023-01-01",
+                    "date_end": "2023-12-31",
+                    "min_qty": 20,
+                },
+                {
+                    "partner_id": self.supplier.id,
+                    "price": 151,
+                    "product_tmpl_id": self.product.product_tmpl_id.id,
+                    "date_start": "2023-01-01",
+                    "date_end": "2023-12-31",
+                },
+                {
+                    "partner_id": self.supplier.id,
+                    "price": 201,
+                    "product_tmpl_id": self.product.product_tmpl_id.id,
+                    "date_start": "2024-01-01",
+                    "date_end": "2024-12-31",
+                },
+            ]
+        )
+        self.assertEqual(self.po_line.price_unit, 15)
+        self.po.date_order = "2023-06-01"
+        self.assertEqual(self.po_line.price_unit, 151)
+        self.po_line.product_qty = 21
+        self.assertEqual(self.po_line.price_unit, 101)
+        self.po.date_order = "2024-06-01"
+        self.assertEqual(self.po_line.price_unit, 201)
