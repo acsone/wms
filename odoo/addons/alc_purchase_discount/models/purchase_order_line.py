@@ -56,3 +56,7 @@ class PurchaseOrderLine(PurchaseOrderLineBase):
         values = super()._prepare_purchase_order_line_from_seller(seller)
         values.update({"promotion_supplier": seller.discount})
         return values
+
+    @api.depends("date_order")
+    def _compute_price_unit_and_date_planned_and_name(self):
+        return super()._compute_price_unit_and_date_planned_and_name()
