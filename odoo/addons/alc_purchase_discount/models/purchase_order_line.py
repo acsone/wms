@@ -59,4 +59,19 @@ class PurchaseOrderLine(PurchaseOrderLineBase):
 
     @api.depends("date_order")
     def _compute_price_unit_and_date_planned_and_name(self):
-        return super()._compute_price_unit_and_date_planned_and_name()
+        res = super()._compute_price_unit_and_date_planned_and_name()
+        for rec in self:
+            if not rec.product_id or rec.invoice_lines or not rec.company_id:
+                continue
+            if rec.date_order:
+                date = rec.date_order.date()
+            params = {"order_id": rec.order_id}
+            seller = rec.product_id._select_seller(
+                partner_id=rec.partner_id,
+                quantity=rec.product_qty,
+                date=date,
+                uom_id=rec.product_uom,
+                params=params,
+            )
+            rec._apply_value_from_seller(seller)
+        return res
