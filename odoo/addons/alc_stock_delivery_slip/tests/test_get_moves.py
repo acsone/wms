@@ -141,7 +141,6 @@ class TestStockDeliveryNoteGetMoves(TransactionCase):
         # create a second so
         so2 = self._create_so(self.p2)
         picking2 = self._prepare_shipping(so2, "20190102")
-        picking2.button_validate()
         (picking1 | picking2).button_validate()
         # picking 1 and 2 are separated
         # thus only their own moves are shown
