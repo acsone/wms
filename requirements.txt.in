@@ -102,6 +102,7 @@ odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/p
 # https://github.com/OCA/product-attribute/pull/1275 - [ADD] stock_lot_is_archived
 odoo-addon-stock-lot-is-archived @ git+https://github.com/acsone/product-attribute.git@16.0-add-product_lot_archived-dro#subdirectory=setup/stock_lot_is_archived
 odoo-addon-product-stock-state @ git+https://github.com/OCA/product-attribute.git@refs/pull/1339/head#subdirectory=setup/product_stock_state
+odoo-addon-stock-production-lot-expired-date @ git+https://github.com/OCA/product-attribute.git@refs/pull/1488/head#subdirectory=setup/stock_production_lot_expired_date
 
 # purchase-workflow
 odoo-addon-purchase-cancel-reason @ git+https://github.com/OCA/purchase-workflow.git@refs/pull/1776/head#subdirectory=setup/purchase_cancel_reason
