@@ -19,6 +19,7 @@
         "stock_picking_group_by_partner_by_carrier_by_customer",
         "alc_stock_picking_cancel_permission",
         "stock_release_channel_delivery",
+        "stock_move_line_change_lot",
     ],
     "data": [],
     "demo": [],
