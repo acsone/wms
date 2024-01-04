@@ -6,6 +6,7 @@ odoo-addon-shopfloor-base @ git+https://github.com/OCA/wms.git@refs/pull/642/hea
 
 # OCA/stock-logistics-workflow
 odoo-addon-stock-picking-progress @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1330/head#subdirectory=setup/stock_picking_progress
+odoo-addon-stock-move-line-change-lot @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1469/head#subdirectory=setup/stock_move_line_change_lot
 
 # OCA/product-attribute
 odoo-addon-product-packaging-level @ git+https://github.com/OCA/product-attribute.git@refs/pull/1215/head#subdirectory=setup/product_packaging_level
