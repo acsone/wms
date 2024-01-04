@@ -219,7 +219,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
 
     def _action_deliver(self):
         self.ensure_one()
-        self._plan_shipments()
+        self.with_context(skip_backorder_reason=True)._plan_shipments()
 
     def _shipment_advice_auto_process_notify_success(self):
         self.ensure_one()

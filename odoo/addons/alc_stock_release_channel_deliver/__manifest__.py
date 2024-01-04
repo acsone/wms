@@ -20,6 +20,7 @@
         "stock_available_to_promise_release",
         "stock_release_channel_propagate_channel_picking",
         "alc_queue_job_background_channel",
+        "stock_picking_backorder_reason",
     ],
     "data": [
         "security/stock_release_channel_deliver_check_wizard.xml",
