@@ -8,8 +8,8 @@ from odoo.addons.stock_picking_backorder_reason.models.stock_picking import (
 
 class StockPicking(StockPickingBase):
     def button_validate(self):
-        if self.env.context.get("skip_backorder_reason"):
-            # even if we manually escaped backorder reason, we need to apply partner
+        if self.env.context.get("release_channel_deliver_skip_backorder_reason"):
+            # we manually escaped backorder reason, we need to apply partner
             # choice for backorder cancellation
             # the creation choice is the normal use case
             pickings_with_backorder = self._check_backorder()

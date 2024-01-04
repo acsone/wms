@@ -62,3 +62,53 @@ class TestCancelBackorder(TestDeliverProcessBase):
         self.assertEqual(self.channel.state, "delivered")
         self.assertEqual(ship.state, "done")
         self.assertTrue(ship.backorder_ids)
+
+    def test_02(self):
+        """Partner choice cancel.
+
+        test normal delivery we continue to get backorder reason wizard
+        """
+        self.partner1.sale_reason_backorder_strategy = "cancel"
+        sale = self._confirm_sale_order(products=[self.main_product], qty=2)
+        # open the channel, pick must be generated
+        self.channel.action_unlock()
+        pick = self._get_picking_pick(sale)
+        self._get_picking_ship(sale)
+        self.channel.action_lock()
+        # do the pick
+        pick._put_in_pack(pick.move_line_ids)
+        for move_line in pick.move_ids.move_line_ids:
+            move_line.qty_done -= 1
+        pick._action_done()
+        self.assertTrue(pick.backorder_ids)
+        ship = self._get_picking_ship(sale).filtered(lambda p: p.state == "assigned")
+        # deliver the release channel
+        ship.action_set_quantities_to_reservation()
+        action = ship.button_validate()
+        self.assertEqual(ship.state, "assigned")
+        self.assertEqual(action.get("res_model"), "stock.backorder.reason.choice")
+
+    def test_03(self):
+        """Partner choice cancel.
+
+        test normal delivery we continue to get backorder
+        """
+        self.partner1.sale_reason_backorder_strategy = "cancel"
+        sale = self._confirm_sale_order(products=[self.main_product], qty=2)
+        # open the channel, pick must be generated
+        self.channel.action_unlock()
+        pick = self._get_picking_pick(sale)
+        self._get_picking_ship(sale)
+        self.channel.action_lock()
+        # do the pick
+        pick._put_in_pack(pick.move_line_ids)
+        for move_line in pick.move_ids.move_line_ids:
+            move_line.qty_done -= 1
+        pick._action_done()
+        self.assertTrue(pick.backorder_ids)
+        ship = self._get_picking_ship(sale).filtered(lambda p: p.state == "assigned")
+        # deliver the release channel
+        ship.action_set_quantities_to_reservation()
+        ship._action_done()
+        self.assertEqual(ship.state, "done")
+        self.assertTrue(ship.backorder_ids)
