@@ -42,16 +42,18 @@ def format_use_date(use_date):
 
 
 class StockPicking(stock_picking.StockPicking):
-    def button_validate(self):
+    def _action_done(self):
         to_do = self.filtered(lambda p: p.state not in ("cancel", "done"))
-        if not to_do:
-            return True
-        result = super(StockPicking, to_do).button_validate()
+        result = super()._action_done()
         picking_type_out = self.env.ref("stock.picking_type_out")
         if self.env.context.get("skip_pdf_gen"):
             return result
         for r in to_do:
-            if r.picking_type_id == picking_type_out and r.date_done:
+            if (
+                r.picking_type_id == picking_type_out
+                and r.date_done
+                and r.state == "done"
+            ):
                 r._send_delivery_notes(
                     r.customer_id.send_csv_deliveryship,
                     r.customer_id.send_pdf_deliveryship,
