@@ -251,7 +251,7 @@ odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-trans
 odoo-addon-shipment-advice-planner @ git+https://github.com/acsone/stock-logistics-transport.git@46a04c95da9a9bef900eecb127a36d61505afcfc#subdirectory=setup/shipment_advice_planner
 odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/acsone/stock-logistics-transport.git@6d14d2f3eb25981150a5410f96492064fe630830#subdirectory=setup/shipment_advice_planner_toursolver
 odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com/acsone/stock-logistics-transport.git@b4f080b42a32026d7b28d255434584cc30c285db#subdirectory=setup/shipment_advice_planner_toursolver_queue_job
-odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@a5062fc6933b497a9a062fc5426a6833a993aa4b#subdirectory=setup/shopfloor
+odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@8cc7896ed98e49d2d796bab41ea2e801e5115136#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@22e70153a9845d9c9316170728ed0a435b39ffee#subdirectory=setup/shopfloor_base
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wms.git@3cdc58cf28547fc6ee3969b514c7e0c5b116f3bb#subdirectory=setup/shopfloor_batch_automatic_creation
 odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@c0a4ecc63777241c2cb966c82c58520524bd5633#subdirectory=setup/shopfloor_full_location_reservation
@@ -324,6 +324,7 @@ odoo-addon-stock-move-auto-assign==16.0.1.1.0
 odoo-addon-stock-move-auto-assign-auto-release==16.0.1.1.0.1
 odoo-addon-stock-move-common-dest==16.0.1.0.1.2
 odoo-addon-stock-move-free-reservation-reassign @ git+https://github.com/acsone/stock-logistics-workflow.git@696424c671576fa58763fdb49ebf485274773a31#subdirectory=setup/stock_move_free_reservation_reassign
+odoo-addon-stock-move-line-change-lot @ git+https://github.com/acsone/stock-logistics-workflow.git@d1ee834dbd795256ee6533ef2824c530b88a6a4f#subdirectory=setup/stock_move_line_change_lot
 odoo-addon-stock-move-line-reserved-quant==16.0.1.0.0.2
 odoo-addon-stock-move-location==16.0.1.2.0.1
 odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@c665cd29430f43b1d639001ca5c050adba1d9341#subdirectory=setup/stock_move_manage_priority

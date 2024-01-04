@@ -39,6 +39,9 @@ class TestPartialDeliver(TestDeliverProcessBase):
         with trap_jobs() as trap:
             self.channel.with_context(queue_job__no_delay=False).action_unlock()
             trap.perform_enqueued_jobs()
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.loc_stock, -1, lot_id=self.lot
+        )
         picks = self._get_picking_pick(sale) | self._get_picking_pick(sale2)
         pick1 = picks.filtered(lambda p: p.move_line_ids.lot_id == self.lot)
         pick2 = picks.filtered(lambda p: p.move_line_ids.lot_id == self.lot2)
@@ -46,20 +49,17 @@ class TestPartialDeliver(TestDeliverProcessBase):
         self.assertEqual(pick2.move_line_ids.reserved_uom_qty, 1)
         pick1.move_line_ids.lot_id = self.lot2
         pick1.move_line_ids.qty_done = 1
-        self.assertEqual(pick1.move_line_ids.reserved_uom_qty, 0)  # FIXME: should be 1
+        self.assertEqual(pick1.move_line_ids.reserved_uom_qty, 1)
         pick2.move_line_ids.qty_done = 1
         picks._action_done()
-        self.assertEqual(
-            pick1.state, "done"
-        )  # FIXME: shouldn't be done with a reserved qty 0
+        self.assertEqual(pick1.state, "done")
+        self.assertEqual(pick2.state, "confirmed")
         ships = self._get_picking_ship(sale) | self._get_picking_ship(sale2)
         self.assertEqual(sum(self.lot2.quant_ids.mapped("quantity")), 1)
-        self.assertEqual(
-            sum(self.lot2.quant_ids.mapped("reserved_quantity")), 2
-        )  # FIXME: can't be heigher than the lot quantity
+        self.assertEqual(sum(self.lot2.quant_ids.mapped("reserved_quantity")), 1)
         self.channel.action_lock()
+        self.channel.unrelease_picking()
         self.channel.action_delivering()
-        self.assertEqual(
-            ships.mapped("state"), ["done", "done"]
-        )  # FIXME: shouldn't both done
-        self.assertEqual(self.lot2.qty_available, -1)  # FIXME can't be negative
+        self.assertSetEqual(set(ships.mapped("state")), {"waiting", "done"})
+        self.assertEqual(pick2.state, "cancel")
+        self.assertEqual(self.lot2.qty_available, 0)

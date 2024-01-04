@@ -121,6 +121,7 @@
         "alc_stock_picking_responsible_portal",
         "alc_stock_release_channel_print_cash_on_delivery",
         "alc_stock_move_line_package_level_index",
+        "stock_move_line_change_lot",
     ],
     "data": [],
     "demo": [],
