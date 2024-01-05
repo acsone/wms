@@ -32,8 +32,3 @@ msgstr ""
 #: model:stock.backorder.reason,name:alc_stock_picking_backorder_reason.stock_backorder_reason_3
 msgid "Pause"
 msgstr ""
-
-#. module: alc_stock_picking_backorder_reason
-#: model:ir.model,name:alc_stock_picking_backorder_reason.model_stock_picking
-msgid "Transfer"
-msgstr ""
