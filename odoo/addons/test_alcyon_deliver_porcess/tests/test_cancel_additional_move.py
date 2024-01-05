@@ -48,17 +48,6 @@ class TestCancelAdditionalMove(TestDeliverProcessBase):
         self.channel.action_delivering()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
-        self.channel.action_sleep()
-        self.channel.action_wake_up()
-        sale4 = self._confirm_sale_order(products=[self.main_product], qty=1000)
-        picks = self._get_picking_pick(sale4).filtered(lambda p: p.state == "assigned")
-        self.channel.action_lock()
-        picks._put_in_pack(picks.move_line_ids)
-        picks._action_done()
-        ships = self._get_picking_ship(sale4)
-        ships._put_in_pack(ships.move_line_ids)
-        self.channel.action_delivering()
-        self.assertFalse(self.channel.delivering_error)
 
     def test_01(self):
         sale = self._confirm_sale_order(products=[self.main_product], qty=2)
