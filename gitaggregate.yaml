@@ -112,3 +112,13 @@
     - oca refs/pull/886/head # [16.0][MIG] account_invoice_ubl
     - oca refs/pull/898/head # [16.0][FIX + IMP] pdf helper: Fix multi-attachments + Add pdf_embed_xml
   target: origin 16.0-edi-base-ubl
+
+./src/shipment_advice:
+  remotes:
+    origin: git@github.com:acsone/stock-logistics-transport.git
+    oca: git@github.com:oca/stock-logistics-transport.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/111/head # [FIX] load in shipment advice: check only assigned move lines
+    - oca refs/pull/113/head # [FIX] don't allow done moves load in shipment advice
+  target: origin 16.0-alc_shipment_advice
