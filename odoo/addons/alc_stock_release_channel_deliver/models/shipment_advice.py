@@ -59,7 +59,10 @@ class ShipmentAdvice(ShipmentAdviceBase):
             with self.env.cr.savepoint():
                 self.planned_move_ids.move_line_ids._load_in_shipment(self)
                 self.action_in_progress()
-                self.action_done()
+                picking_not_to_backorder = self._get_picking_not_to_backorder()
+                self.with_context(
+                    picking_ids_not_to_backorder=picking_not_to_backorder.ids
+                ).action_done()
         except UserError as error:
             _logger.error(error)
             self.action_cancel()
@@ -69,3 +72,10 @@ class ShipmentAdvice(ShipmentAdviceBase):
                 error, self
             )
         return self.release_channel_id._shipment_advice_auto_process_notify_success()
+
+    def _get_picking_not_to_backorder(self):
+        pickings_with_backorder = self.planned_picking_ids._check_backorder()
+        picking_not_to_backorder = pickings_with_backorder.filtered(
+            lambda p: p.partner_id.sale_reason_backorder_strategy == "cancel"
+        )
+        return picking_not_to_backorder
