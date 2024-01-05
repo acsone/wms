@@ -122,6 +122,7 @@
         "alc_stock_release_channel_print_cash_on_delivery",
         "alc_stock_move_line_package_level_index",
         "stock_move_line_change_lot",
+        "stock_move_line_lock_qty_done",
     ],
     "data": [],
     "demo": [],
