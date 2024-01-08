@@ -95,3 +95,19 @@ class ClusterPicking(Component):
                 quantity_done=quantity,
                 lot_id=lot_id,
             )
+
+    def _put_in_pack(self, picking, number_of_parcels):
+        pack = super()._put_in_pack(picking, number_of_parcels)
+        if isinstance(pack, self.env["stock.quant.package"].__class__):
+            pack.package_type_id = self._get_suitable_package_type(number_of_parcels)
+            pack.number_of_parcels = number_of_parcels
+        return pack
+
+    def _get_suitable_package_type(self, number_of_parcels):
+        return self.env["stock.package.type"].search(
+            [
+                ("number_of_parcels", "=", number_of_parcels),
+                ("package_carrier_type", "=", "none"),
+            ],
+            limit=1,
+        )

@@ -314,9 +314,9 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             self.assertEqual("Bin bin1?? doesn't exist", message["body"])
             mocked_print_food_product_label.assert_not_called()
 
-    def test(self):
+    def test_put_in_pack_set_correct_package_type(self):
         pt_model = self.env["stock.package.type"].sudo()
-        pt_model.create({"name": "PT4", "number_of_parcels": 4})
+        package_type_4 = pt_model.create({"name": "PT4", "number_of_parcels": 4})
         package_type_7 = pt_model.create({"name": "PT7", "number_of_parcels": 7})
         self.product_a.package_type_id = package_type_7
         batch = self._create_picking_batch(
@@ -374,5 +374,9 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             mocked_print_product_label.assert_called_once()
             mocked_print_package_label.assert_called_once()
             self.assertEqual(move_line.result_package_id.number_of_parcels, 4)
+            self.assertEqual(
+                move_line.result_package_id.package_type_id, package_type_4
+            )
         move_line.picking_id._action_done()
         self.assertEqual(move_line.result_package_id.number_of_parcels, 4)
+        self.assertEqual(move_line.result_package_id.package_type_id, package_type_4)
