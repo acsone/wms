@@ -15,12 +15,12 @@ mdurl==0.1.2
 mock==5.1.0
 odoo-test-helper==2.1.0
 pluggy==1.2.0
-Pygments==2.15.1
+pygments==2.15.1
 pytest==7.4.0
 pytest-cov==4.1.0
 pytest-odoo==1.0.0
 pytest-subtests==0.11.0
-PyYAML==6.0
+pyyaml==6.0
 rich==13.4.2
 shellingham==1.5.0.post1
 textual==0.29.0
