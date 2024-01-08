@@ -442,5 +442,7 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             mocked_print_product_label.assert_called_once()
             mocked_print_package_label.assert_called_once()
             self.assertEqual(move_line.result_package_id.number_of_parcels, 4)
+            self.assertFalse(move_line.result_package_id.package_type_id)
         move_line.picking_id._action_done()
         self.assertEqual(move_line.result_package_id.number_of_parcels, 4)
+        self.assertFalse(move_line.result_package_id.package_type_id)
