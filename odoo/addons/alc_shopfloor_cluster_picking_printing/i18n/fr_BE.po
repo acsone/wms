@@ -36,6 +36,11 @@ msgid "No product label printer configured."
 msgstr "Pas d'imprimante pour les étiquettes produits configurée."
 
 #. module: alc_shopfloor_cluster_picking_printing
+#: model:ir.model,name:alc_shopfloor_cluster_picking_printing.model_stock_quant_package
+msgid "Packages"
+msgstr ""
+
+#. module: alc_shopfloor_cluster_picking_printing
 #: model:ir.model.fields,field_description:alc_shopfloor_cluster_picking_printing.field_shopfloor_menu__print_on_pack_pickings
 msgid "Print Labels on Pack Pickings"
 msgstr "Imprimer les étiquettes à l'emballage"
