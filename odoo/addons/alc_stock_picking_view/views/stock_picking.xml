@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_picking_form_view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                    <button
+          name="action_view_all_move"
+          type="object"
+          class="oe_stat_button"
+          icon="fa-list"
+        >
+                        <span>Moves</span>
+                    </button>
+                    <button
+          name="action_view_all_move_line"
+          type="object"
+          class="oe_stat_button"
+          icon="fa-list"
+        >
+                        <span>Move Lines</span>
+                    </button>
+
+                    <button
+          name="action_view_related_picking"
+          type="object"
+          class="oe_stat_button"
+          icon="fa-list"
+        >
+                        <span>Related Transfers</span>
+                    </button>
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>

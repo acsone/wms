@@ -123,6 +123,7 @@
         "alc_stock_move_line_package_level_index",
         "stock_move_line_change_lot",
         "stock_move_line_lock_qty_done",
+        "alc_stock_picking_view",
     ],
     "data": [],
     "demo": [],
