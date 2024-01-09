@@ -105,7 +105,7 @@ class StockMove(StockMoveBase):
     def _action_assign(self, force_qty=False):
         res = super()._action_assign(force_qty=force_qty)
         main_moves = self.filtered(lambda m: not m.is_additional_move)
-        main_moves._remove_all_additional_moves()
+        main_moves._remove_all_additional_moves_on_assign()
         main_moves._add_additional_products()
         additional_moves = main_moves.additional_move_ids
         if additional_moves:
@@ -135,11 +135,28 @@ class StockMove(StockMoveBase):
             )
         return self.browse()
 
-    def _remove_all_additional_moves(self):
+    def _remove_all_additional_moves_on_assign(self):
         for move in self:
             if not move.additional_product_on_reserved_qty_allowed:
                 continue
-            moves_to_remove = move._get_all_not_done_additional_moves()
+            # we can't cancel an additional move at assign if an origin move
+            # has been picked
+            first_move = self.first_move_id
+            first_additional_move = first_move.additional_move_ids
+            moves_to_remove = self.browse()
+            for additional_move in first_additional_move:
+                all_origin_moves = self.browse()
+                origin_move = additional_move.move_orig_ids
+                while origin_move:
+                    all_origin_moves |= origin_move
+                    origin_move = origin_move.move_orig_ids
+                if any(
+                    origin_move.state == "done" or origin_move.quantity_done > 0
+                    for origin_move in all_origin_moves
+                    if origin_move.state != "cancel"
+                ):
+                    continue
+                moves_to_remove |= additional_move
             if moves_to_remove:
                 moves_to_remove.with_context(force_cancel=True)._action_cancel()
                 # TODO: Mark moves as 'to delete' instead. This is a workaround as
