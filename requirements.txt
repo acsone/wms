@@ -71,7 +71,6 @@ odoo-addon-account-cutoff-accrual-order-stock-base @ git+https://github.com/acso
 odoo-addon-account-cutoff-accrual-purchase @ git+https://github.com/acsone/account-closing.git@faa312f197815f19223a9716d945c4c9d7255183#subdirectory=setup/account_cutoff_accrual_purchase
 odoo-addon-account-cutoff-accrual-purchase-stock @ git+https://github.com/acsone/account-closing.git@faa312f197815f19223a9716d945c4c9d7255183#subdirectory=setup/account_cutoff_accrual_purchase_stock
 odoo-addon-account-cutoff-accrual-sale @ git+https://github.com/acsone/account-closing.git@faa312f197815f19223a9716d945c4c9d7255183#subdirectory=setup/account_cutoff_accrual_sale
-odoo-addon-account-cutoff-accrual-sale-stock @ git+https://github.com/acsone/account-closing.git@faa312f197815f19223a9716d945c4c9d7255183#subdirectory=setup/account_cutoff_accrual_sale_stock
 odoo-addon-account-cutoff-base @ git+https://github.com/acsone/account-closing.git@8f4680b2544ed412b30ca48a1bb72bb1d21a3993#subdirectory=setup/account_cutoff_base
 odoo-addon-account-einvoice-generate @ git+https://github.com/acsone/edi.git@3349389850381b2f1dde99e510d7fb4491387bb7#subdirectory=setup/account_einvoice_generate
 odoo-addon-account-financial-report @ git+https://github.com/acsone/account-financial-reporting@441b82d953cce7bba049b0db777d516a0632424c#subdirectory=setup/account_financial_report
@@ -102,6 +101,7 @@ odoo-addon-account-tax-one-vat-purchase @ git+https://github.com/acsone/account-
 odoo-addon-account-tax-one-vat-sale @ git+https://github.com/acsone/account-invoicing.git@fb8c32abf76462d6f085bbd7c4f32305901d3f29#subdirectory=setup/account_tax_one_vat_sale
 odoo-addon-account-tax-unece==16.0.1.2.0.1
 odoo-addon-account-usability==16.0.1.0.3.7
+odoo-addon-account-cutoff-accrual-sale-stock @ git+https://github.com/acsone/account-closing.git@faa312f197815f19223a9716d945c4c9d7255183#subdirectory=setup/account_cutoff_accrual_sale_stock
 odoo-addon-attachment-unindex-content==16.0.1.0.0.3
 odoo-addon-attribute-set @ git+https://github.com/acsone/odoo-pim.git@3d67b80d4431c06f17831fb0ea72199039e7b047#subdirectory=setup/attribute_set
 odoo-addon-auth-api-key==16.0.1.0.0.4
@@ -140,7 +140,7 @@ odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-c
 odoo-addon-delivery-carrier-max-weight-constraint==16.0.1.0.1
 odoo-addon-delivery-carrier-partner @ git+https://github.com/acsone/delivery-carrier.git@3979cb4a874034236ca189edbe213e293f2befa2#subdirectory=setup/delivery_carrier_partner
 odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.com/acsone/delivery-carrier.git@628d15f465d02c468772d7f92fe7c3e3eebd3c18#subdirectory=setup/delivery_estimated_package_quantity_by_weight
-odoo-addon-delivery-package-type-number-parcels==16.0.1.0.1
+odoo-addon-delivery-package-type-number-parcels @ git+https://github.com/acsone/delivery-carrier.git@ed91b7cd0141b14a339e41b2cfb340f353d86388#subdirectory=setup/delivery_package_type_number_parcels
 odoo-addon-delivery-procurement-group-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@6b68fd3733bdbf9568814e80e0e80767d61ceef8#subdirectory=setup/delivery_procurement_group_carrier
 odoo-addon-endpoint-route-handler==16.0.1.0.0.3
 odoo-addon-extendable==16.0.1.0.1.1
@@ -256,13 +256,13 @@ odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@22e70153a9845d
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wms.git@3cdc58cf28547fc6ee3969b514c7e0c5b116f3bb#subdirectory=setup/shopfloor_batch_automatic_creation
 odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@c0a4ecc63777241c2cb966c82c58520524bd5633#subdirectory=setup/shopfloor_full_location_reservation
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@b93fd57395ca1d5515a55e209384046adeb48a4f#subdirectory=setup/shopfloor_mobile
-odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@ecde01fc6f4d4e7e730a30932e450a326d006ee3#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-mobile-base-auth-api-key @ git+https://github.com/acsone/wms.git@1de9f61eb2ad8757577b38bcf30c006fc0453ffc#subdirectory=setup/shopfloor_mobile_base_auth_api_key
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@846f970da36d16487f26a0f57691a5686d325a4a#subdirectory=setup/shopfloor_mobile_packing
-odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@9c8edba6894d38f1d90eb7ac7e447f20c4fc5a18#subdirectory=setup/shopfloor_packing
 odoo-addon-shopfloor-rest-log @ git+https://github.com/acsone/wms.git@dbe32e3decb51672ed0a5656ba4fed037bca7f4f#subdirectory=setup/shopfloor_rest_log
 odoo-addon-shopfloor-workstation @ git+https://github.com/acsone/wms.git@758b160304e097300932c358c7dd8bc915db0c45#subdirectory=setup/shopfloor_workstation
 odoo-addon-shopfloor-workstation-mobile @ git+https://github.com/acsone/wms.git@ebe2544d4bd88b0b1d5d7c43f782902873d6fa2c#subdirectory=setup/shopfloor_workstation_mobile
+odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@ecde01fc6f4d4e7e730a30932e450a326d006ee3#subdirectory=setup/shopfloor_mobile_base
+odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@9c8edba6894d38f1d90eb7ac7e447f20c4fc5a18#subdirectory=setup/shopfloor_packing
 odoo-addon-shopinvader-address==16.0.1.1.0
 odoo-addon-shopinvader-anonymous-partner==16.0.1.0.1
 odoo-addon-shopinvader-api-address==16.0.1.2.1

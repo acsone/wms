@@ -14,6 +14,8 @@
         "alc_shopfloor_product_print_label",
         "shopfloor_packing",
         "base_report_to_label_printer",
+        "delivery",
+        "stock_storage_type",
     ],
     "data": ["views/shopfloor_menu.xml"],
     "demo": [],
