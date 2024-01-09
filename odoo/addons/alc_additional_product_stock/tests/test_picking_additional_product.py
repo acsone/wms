@@ -42,6 +42,67 @@ class TestStockPicking(StockPickingTestCase):
             pick_addition_product_move.move_dest_ids, ship_addition_product_move
         )
 
+    def test_pick_and_main_becomes_unavailable(self):
+        """
+        Test case:
+
+                Create and confirm a SO with product_additional for the 2 main products
+                main_product and main_product2
+                Confirm the picking (required to get the additional product into the picking)
+                Pick the additional product
+                Unreserve main_product and make it unavailable
+                Confirm the picking
+
+        Expected result:
+            The additional product move must not be canceled into the pick and the ship
+        """
+        sale = self._confirm_sale_order(
+            products=[self.main_product, self.main_product2]
+        )
+
+        # check the pickings
+        pick = self._get_picking_pick(sale)
+        self.assertEqual(len(pick), 1)
+
+        ship = self._get_picking_ship(sale)
+        self.assertEqual(len(ship), 1)
+
+        pick.action_confirm()
+
+        # Pick the additional product
+        pick_move = pick.move_ids.filtered(
+            lambda m, product=self.additional_product: m.product_id == product
+        )
+        pick_move.quantity_done = pick_move.product_qty
+
+        # Pick the main_product2
+        pick_move = pick.move_ids.filtered(
+            lambda m, product=self.main_product2: m.product_id == product
+        )
+        pick_move.quantity_done = pick_move.product_qty
+
+        # Unreserve the main product and make it unavailable
+        self.env["stock.quant"].with_context(inventory_mode=True).create(
+            {
+                "product_id": self.main_product.id,
+                "inventory_quantity": 0.0,
+                "location_id": self.loc_stock.id,
+            }
+        )._apply_inventory()
+
+        # confirm the picking
+        pick._action_done()
+
+        # Check that the additional product is available into the ship
+        self.assertEqual(len(ship.move_ids), 4)
+        shop_addition_product_move = ship.move_ids.filtered(
+            lambda a, additional_product=self.additional_product: a.product_id
+            == additional_product
+        )
+        self.assertListEqual(
+            shop_addition_product_move.mapped("state"), ["assigned", "assigned"]
+        )
+
     def test_00(self):
         """
         Test case:
