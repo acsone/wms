@@ -14,7 +14,7 @@
           class="oe_stat_button"
           icon="fa-list"
         >
-                        <span>Moves</span>
+                        <span>All Moves</span>
                     </button>
                     <button
           name="action_view_all_move_line"
@@ -22,7 +22,7 @@
           class="oe_stat_button"
           icon="fa-list"
         >
-                        <span>Move Lines</span>
+                        <span>All Move Lines</span>
                     </button>
 
                     <button
