@@ -10,8 +10,8 @@ from odoo.addons.shopfloor_base.models.shopfloor_menu import (
 
 class ShopfloorMenu(ShopfloorMenuBase):
 
-    restrict_to_same_release_channel = fields.Boolean(
-        string="Restrict to the same release channel",
-        help="Only the pickings with the same release channel will be selected for this batch.",
+    release_channel_required = fields.Boolean(
+        string="Only pickings in a release channel",
+        help="Only the pickings assigned to a release channel will be selected for this batch.",
         default=False,
     )
