@@ -11,14 +11,33 @@ from odoo.addons.stock_picking_batch_creation.wizards.make_picking_batch import 
 
 class MakePickingBatch(MakePickingBatchBase):
 
-    restrict_to_same_release_channel = fields.Boolean(
-        string="Restrict to the same release channel",
-        help="Only the pickings with the same release channel will be selected for this batch.",
+    release_channel_required = fields.Boolean(
+        string="Only pickings in a release channel",
+        help="Only the pickings assigned to a release channel will be selected for this batch.",
+        default=False,
     )
 
     def _get_picking_domain_common(self):
         domain = super()._get_picking_domain_common()
-        if self.restrict_to_same_release_channel:
+        if (
+            self._previous_selected_picking
+            and self.user_id.only_one_release_channel_by_picking_batch
+        ):
+            domain = AND(
+                [
+                    domain,
+                    [
+                        (
+                            "release_channel_id",
+                            "=",
+                            self._previous_selected_picking.release_channel_id.id,
+                        )
+                    ],
+                ]
+            )
+            return domain
+
+        if self.release_channel_required:
             channels = self.env["stock.release.channel"]._get_channels_pick_allowed(
                 self.picking_type_ids
             )
@@ -40,21 +59,14 @@ class MakePickingBatch(MakePickingBatchBase):
                 )
         return domain
 
-    def _get_picking_domain_for_additional(self):
-        domain = super()._get_picking_domain_for_additional()
-        if self.restrict_to_same_release_channel:
-            previous_picking = self._previous_selected_picking
-            release_channel = previous_picking.release_channel_id
-            domain = AND([domain, [("release_channel_id", "=", release_channel.id)]])
-        return domain
-
     def _get_first_picking(self, no_nbr_lines_limit=False):
         """Try at first to get picking from release channels related to the selected user."""
         if not self.user_id:
             return super()._get_first_picking(no_nbr_lines_limit=no_nbr_lines_limit)
-        first_picking = super(
-            MakePickingBatch, self.with_context(restrict_to_user=True)
-        )._get_first_picking(no_nbr_lines_limit=no_nbr_lines_limit)
-        if first_picking:
-            return first_picking
+        if self.release_channel_required:
+            first_picking = super(
+                MakePickingBatch, self.with_context(restrict_to_user=True)
+            )._get_first_picking(no_nbr_lines_limit=no_nbr_lines_limit)
+            if first_picking:
+                return first_picking
         return super()._get_first_picking(no_nbr_lines_limit=no_nbr_lines_limit)

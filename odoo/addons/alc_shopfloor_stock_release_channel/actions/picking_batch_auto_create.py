@@ -28,7 +28,5 @@ class PickingBatchAutoCreateAction(Component):
         )
         shopfloor_menu = kwargs.get("shopfloor_menu")
         if shopfloor_menu:
-            values[
-                "restrict_to_same_release_channel"
-            ] = shopfloor_menu.restrict_to_same_release_channel
+            values["release_channel_required"] = shopfloor_menu.release_channel_required
         return values

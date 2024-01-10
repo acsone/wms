@@ -5,7 +5,7 @@
     "name": "Alc Shopfloor stock release channel",
     "description": """
         add delivery round on current picking""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.2.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
@@ -14,5 +14,5 @@
         "alc_stock_release_channel_user",
         "alc_stock_release_channel_pick_allowed",
     ],
-    "data": ["views/shopfloor_menu.xml"],
+    "data": ["views/res_users.xml", "views/shopfloor_menu.xml"],
 }

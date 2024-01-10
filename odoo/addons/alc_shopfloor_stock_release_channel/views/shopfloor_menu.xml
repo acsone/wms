@@ -12,7 +12,7 @@
         <field name="arch" type="xml">
             <field name="batch_create" position="after">
                   <field
-          name="restrict_to_same_release_channel"
+          name="release_channel_required"
           attrs="{'invisible': [('batch_create', '=', False)]}"
         />
              </field>

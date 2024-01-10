@@ -13,6 +13,8 @@ class StockPicking(Picking):
         compute="_compute_is_priority_editable",
     )
 
+    priority = fields.Selection(tracking=True)
+
     @api.depends("company_id.stock_move_manage_priority", "is_locked", "state")
     def _compute_is_priority_editable(self):
         user_has_group = self.env.user.has_group(

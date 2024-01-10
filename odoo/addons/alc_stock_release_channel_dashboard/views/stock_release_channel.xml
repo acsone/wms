@@ -10,6 +10,7 @@
         class="oe_background_grey o_kanban_dashboard o_release_channel_kanban"
         group_create="0"
         create="0"
+        js_class="alc_stock_release_channel_kanban"
       >
                 <field name="id" />
                 <field name="count_picking_release_ready" />
