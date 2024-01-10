@@ -27,6 +27,8 @@
     "assets": {
         "web.assets_backend": [
             "alc_stock_release_channel_dashboard/static/src/scss/channel_dashboard.scss",
+            "alc_stock_release_channel_dashboard/static/src/views/**/*.js",
+            "alc_stock_release_channel_dashboard/static/src/views/**/*.xml",
         ],
     },
 }

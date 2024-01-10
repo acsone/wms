@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t
+    t-name="alc_stock_release_channel_kanban.Buttons"
+    t-inherit="web.KanbanView.Buttons"
+    t-inherit-mode="primary"
+    owl="1"
+  >
+        <!-- after the create button -->
+        <xpath expr="//t[contains(@t-if, 'canCreate')]" position="after">
+            <button
+        type="button"
+        class="btn btn-primary"
+        t-on-click="onClickOpenPickingsToDo"
+      >Pickings To Do</button>
+        </xpath>
+    </t>
+</templates>
