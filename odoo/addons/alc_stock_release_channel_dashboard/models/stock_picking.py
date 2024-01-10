@@ -13,6 +13,7 @@ class StockPicking(stock_picking.Picking):
             {
                 "picking_type_ids": self.env["stock.picking.type"].browse(picking_ids),
                 "maximum_number_of_preparation_lines": 500,
+                "release_channel_required": True,
             }
         )
         return wizard._get_picking_domain_for_first(no_nbr_lines_limit=True)
