@@ -7,14 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-05 15:47+0000\n"
-"PO-Revision-Date: 2023-06-05 15:48+0000\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2024-01-10 15:36+0000\n"
+"Last-Translator: Laurent Mignon <laurent.mignon@acsone.eu>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: fr_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
@@ -135,14 +136,14 @@ msgstr "Transferts"
 #: code:addons/alc_stock_release_channel_dashboard/static/src/views/kanban/alc_stock_release_channel_kanban.xml:0
 #, python-format
 msgid "Pickings To Do"
-msgstr ""
+msgstr "Préparations à faire"
 
 #. module: alc_stock_release_channel_dashboard
 #. odoo-javascript
 #: code:addons/alc_stock_release_channel_dashboard/static/src/views/kanban/alc_stock_release_channel_kanban.js:0
 #, python-format
 msgid "Pickings to do"
-msgstr ""
+msgstr "Préparations à faire"
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
@@ -206,17 +207,17 @@ msgstr "Canaux de livraison des stocks"
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
 msgid "To Release"
-msgstr ""
+msgstr "A libérer"
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.view_picking_internal_search
 msgid "Today"
-msgstr ""
+msgstr "Aujourd'hui"
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
 msgid "Total Weight:"
-msgstr ""
+msgstr "Poids Total:"
 
 #. module: alc_stock_release_channel_dashboard
 #: model:ir.model,name:alc_stock_release_channel_dashboard.model_stock_picking
