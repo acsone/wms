@@ -41,6 +41,7 @@
         "stock_inventory",
         "stock_location_orderpoint",
         "stock_location_orderpoint_average_daily_sale",
+        "stock_location_orderpoint_dynamic_routing_merge",
         "stock_move_common_dest",
         "stock_move_location",
         "stock_move_manage_priority",
