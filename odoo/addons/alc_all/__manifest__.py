@@ -39,6 +39,7 @@
         "alc_edi_connector",
         "alc_fs_attachment",
         "alc_running_env",
+        "alc_search_by_vendor_product_code",
         # Configuration modules
         "alc_stock_available_immediately_loss",
         "stock_scrap_location_default",
