@@ -34,7 +34,10 @@ export class AlcStockReleaseChannelKanbanController extends KanbanController {
       type: "ir.actions.act_window",
       name: this.env._t("Pickings to do"),
       res_model: view.model,
-      views: [[view.id, view.type]],
+      views: [
+        [view.id, view.type],
+        [false, "form"],
+      ],
       view_mode: "list",
       target: "current",
       domain,
