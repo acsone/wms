@@ -131,6 +131,20 @@ msgid "Pickings"
 msgstr "Transferts"
 
 #. module: alc_stock_release_channel_dashboard
+#. odoo-javascript
+#: code:addons/alc_stock_release_channel_dashboard/static/src/views/kanban/alc_stock_release_channel_kanban.xml:0
+#, python-format
+msgid "Pickings To Do"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#. odoo-javascript
+#: code:addons/alc_stock_release_channel_dashboard/static/src/views/kanban/alc_stock_release_channel_kanban.js:0
+#, python-format
+msgid "Pickings to do"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
 msgid "Print DS"
 msgstr ""
@@ -202,6 +216,11 @@ msgstr ""
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
 msgid "Total Weight:"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#: model:ir.model,name:alc_stock_release_channel_dashboard.model_stock_picking
+msgid "Transfer"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
