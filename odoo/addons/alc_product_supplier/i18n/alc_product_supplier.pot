@@ -24,11 +24,6 @@ msgid "Product"
 msgstr ""
 
 #. module: alc_product_supplier
-#: model:ir.model,name:alc_product_supplier.model_product_product
-msgid "Product Variant"
-msgstr ""
-
-#. module: alc_product_supplier
 #: model:ir.model.fields,help:alc_product_supplier.field_product_product__vendor_product_code
 #: model:ir.model.fields,help:alc_product_supplier.field_product_template__vendor_product_code
 msgid ""
