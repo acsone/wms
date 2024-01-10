@@ -170,7 +170,7 @@ class AlcDocument(alc_document.AlcDocument):
         parser = self._get_lang_price_parser()
         for prices_data in prices_data_lines_iterator:
             prices = {
-                "TVA": f"{prices_data.vat}%%",
+                "TVA": f"{prices_data.vat}%",
                 "Prix_Brut_HTVA_EUR": prices_data.gross_price,
                 "Prix_Brut_TVAC_EUR": prices_data.gross_price_with_vat,
             }
@@ -207,7 +207,7 @@ class AlcDocument(alc_document.AlcDocument):
                     and prices_data.supplier_discount_discount_sale
                 ):
                     dtype = prices_data.supplier_discount_discount_sale or 0
-                    discount_type = f"{dtype}%% off" % ()
+                    discount_type = f"{dtype}% off"
                     date_end = prices_data.supplier_discount_date_end
                 elif (
                     discount_def == "supplier_promotion"
