@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_shopfloor_stock_release_channel
+#: model:ir.model.fields,field_description:alc_shopfloor_stock_release_channel.field_res_users__only_one_release_channel_by_picking_batch
+msgid "Create cluster pickings by release channel for this operator"
+msgstr ""
+
+#. module: alc_shopfloor_stock_release_channel
 #: model:ir.model,name:alc_shopfloor_stock_release_channel.model_make_picking_batch
 msgid "Make a batch picking wizard"
 msgstr ""
@@ -24,15 +29,25 @@ msgid "Menu displayed in the scanner application"
 msgstr ""
 
 #. module: alc_shopfloor_stock_release_channel
-#: model:ir.model.fields,help:alc_shopfloor_stock_release_channel.field_make_picking_batch__restrict_to_same_release_channel
-#: model:ir.model.fields,help:alc_shopfloor_stock_release_channel.field_shopfloor_menu__restrict_to_same_release_channel
+#: model:ir.model.fields,field_description:alc_shopfloor_stock_release_channel.field_make_picking_batch__release_channel_required
+#: model:ir.model.fields,field_description:alc_shopfloor_stock_release_channel.field_shopfloor_menu__release_channel_required
+msgid "Only pickings in a release channel"
+msgstr ""
+
+#. module: alc_shopfloor_stock_release_channel
+#: model:ir.model.fields,help:alc_shopfloor_stock_release_channel.field_make_picking_batch__release_channel_required
+#: model:ir.model.fields,help:alc_shopfloor_stock_release_channel.field_shopfloor_menu__release_channel_required
 msgid ""
-"Only the pickings with the same release channel will be selected for this "
+"Only the pickings assigned to a release channel will be selected for this "
 "batch."
 msgstr ""
 
 #. module: alc_shopfloor_stock_release_channel
-#: model:ir.model.fields,field_description:alc_shopfloor_stock_release_channel.field_make_picking_batch__restrict_to_same_release_channel
-#: model:ir.model.fields,field_description:alc_shopfloor_stock_release_channel.field_shopfloor_menu__restrict_to_same_release_channel
-msgid "Restrict to the same release channel"
+#: model_terms:ir.ui.view,arch_db:alc_shopfloor_stock_release_channel.res_users_form_view
+msgid "Picking Batch Preferences"
+msgstr ""
+
+#. module: alc_shopfloor_stock_release_channel
+#: model:ir.model,name:alc_shopfloor_stock_release_channel.model_res_users
+msgid "User"
 msgstr ""

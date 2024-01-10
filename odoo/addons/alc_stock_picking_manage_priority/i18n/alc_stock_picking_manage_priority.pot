@@ -19,6 +19,18 @@ msgid "Is Priority Editable"
 msgstr ""
 
 #. module: alc_stock_picking_manage_priority
+#: model:ir.model.fields,field_description:alc_stock_picking_manage_priority.field_stock_picking__priority
+msgid "Priority"
+msgstr ""
+
+#. module: alc_stock_picking_manage_priority
+#: model:ir.model.fields,help:alc_stock_picking_manage_priority.field_stock_picking__priority
+msgid ""
+"Products will be reserved first for the transfers with the highest "
+"priorities."
+msgstr ""
+
+#. module: alc_stock_picking_manage_priority
 #: model:ir.model,name:alc_stock_picking_manage_priority.model_stock_move
 msgid "Stock Move"
 msgstr ""
