@@ -1,4 +1,4 @@
-# © 2023 ACSONE SA/NV
+# Copyright 2024 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api
 
@@ -30,7 +30,8 @@ class ProductProduct(Product):
             limit_available = limit - len(result)
         existing_ids = [x[0] for x in result]
         products = self.search(
-            [("vendor_product_code", "=", name), ("id", "not in", existing_ids)] + args,
+            [("vendor_product_code", "ilike", name), ("id", "not in", existing_ids)]
+            + args,
             limit=limit_available,
         )
         result += products.name_get()
