@@ -241,7 +241,6 @@ class ProductProduct(ProductBase):
           AND sol.product_id = %s
           AND so.date_order::DATE >= (NOW() - INTERVAL '1 year')::DATE
           AND so.date_order::DATE < NOW()::DATE
-          AND so.state <> 'cancel'
         GROUP BY year_month
         ORDER BY year_month;
         """
@@ -275,10 +274,10 @@ class ProductProduct(ProductBase):
                     label_current_year = (
                         f"{today.day - 1}/{month}/{str(today.year)[2:]}"
                     )
-                    value_current_year = values.get(f"{today.year}-{month}", 0)
+                    value_current_year = values.get(f"{today.year}-{month:02}", 0)
 
                     label_last_year = f"{today.day}/{month}/{str(today.year - 1)[2:]}"
-                    value_last_year = values.get(f"{today.year - 1}-{month}", 0)
+                    value_last_year = values.get(f"{today.year - 1}-{month:02}", 0)
 
                     month_values = [
                         {"label": label_current_year, "value": value_current_year},
@@ -287,11 +286,15 @@ class ProductProduct(ProductBase):
             # Otherwise we take values in the last year
             else:
                 label = f"{month}/{str(today.year - 1)[2:]}"
-                value = values.get(f"{today.year - 1}-{month}", 0)
+                value = values.get(f"{today.year - 1}-{month:02}", 0)
                 month_values = [{"label": label, "value": value}]
 
             graph_values += month_values
 
-        result = graph_values
+        result = sorted(
+            graph_values,
+            key=lambda graph_value: int(graph_value["label"].split("/")[-1]) * 100
+            + int(graph_value["label"].split("/")[-2]),
+        )
 
         return result
