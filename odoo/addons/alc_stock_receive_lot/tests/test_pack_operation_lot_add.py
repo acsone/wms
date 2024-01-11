@@ -1,6 +1,7 @@
 # Copyright 2017 Jacques-Etienne Baudoux <je@bcim.be>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
+from odoo import Command
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 
@@ -86,7 +87,7 @@ class TestPackOperationLotAdd(PackOperationLotAddCommon, TransactionCase):
         # validate
         picking.with_context(test_mode=True).button_validate()
         self.assertEqual("done", picking.state)
-        self.assertEqual(len(self.products), len(picking.move_line_ids))
+        self.assertEqual(3, len(picking.move_line_ids))
 
     def test_receive_surplus_quantities(self):
         picking = self.picking
@@ -382,3 +383,48 @@ class TestPackOperationLotAdd(PackOperationLotAddCommon, TransactionCase):
         ).process_cancel_backorder()
         self.assertEqual(op1.move_id.quantity_done, 10)
         self.assertEqual(op1.move_id.lot_ids, self.created_lot)
+
+    def _test_receive_lot(self, op, loc_bin, lot_name, qty, remaining_qty):
+        wiz = self.stock_reception_wizard.with_context(
+            default_expiration_date_allowed=True
+        ).new({"picking_id": op.picking_id.id})
+        wiz.move_line_id = op
+        self.assertEqual(remaining_qty, wiz.remaining_qty)
+        # select destination
+        # receive first lot
+        wiz.lot_name = lot_name
+        wiz.expiration_date = "2030-01-01 10:00:00"
+        wiz.qty = qty
+        # go to next lot
+        wiz.location_dest_id = loc_bin
+        wiz.button_nextlot()
+
+    def test_receive_same_lot_different_location(self):
+        picking = self.stock_picking_model.create(
+            {
+                "picking_type_id": self.env.ref("stock.picking_type_in").id,
+                "location_id": self.supplier_location.id,
+                "location_dest_id": self.reception_location.id,
+                "move_ids": [
+                    Command.create(
+                        {
+                            "location_id": self.supplier_location.id,
+                            "location_dest_id": self.reception_location.id,
+                            "name": "TEST MOVE RECEPTION",
+                            "product_id": self.products[0].id,
+                            "product_uom": self.products[0].uom_id.id,
+                            "product_uom_qty": 5.0,
+                            "state": "waiting",
+                        }
+                    )
+                ],
+            }
+        )
+        picking.action_assign()
+        self.assertEqual(len(picking.move_line_ids), 1)
+        op = picking.move_line_ids
+        self._test_receive_lot(op, self.bin1, "L1", 2, 5)
+        self.assertEqual(len(picking.move_line_ids), 1)
+        self._test_receive_lot(op, self.bin2, "L1", 2, 3)
+        self.assertEqual(len(picking.move_line_ids), 2)
+        self._test_receive_lot(op, self.bin1, "L1", 1, 1)

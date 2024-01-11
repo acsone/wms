@@ -168,6 +168,7 @@ class StockPackOperationLotAdd(models.TransientModel):
     def _prepare_move_line_values(self) -> dict:
         self.ensure_one()
         return {
+            "picking_id": self.move_id.picking_id.id,
             "move_id": self.move_id.id,
             "location_id": self.move_line_id.location_id.id,
             "location_dest_id": self.location_dest_id.id,
@@ -225,6 +226,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         if self.lot_name:
             move_line = move.move_line_ids.filtered(
                 lambda ml, wiz=self: ml.lot_name == wiz.lot_name
+                and ml.location_dest_id == wiz.location_dest_id
             ).exists()
             if move_line:
                 move_line.qty_done += self.qty
