@@ -179,7 +179,8 @@ class ShopinvaderApiCartRouterHelper(ShopinvaderApiCartRouterHelperBase):
             cart_info,
             transactions,
         ) = self._get_cart_info_and_transactions(csv_file)
-        cart = self._sync_cart(self.partner, None, uuid, transactions)
+        cart = self.env["sale.order"]._find_open_cart(self.partner.id, uuid)
+        cart = self._sync_cart(self.partner, cart, uuid, transactions)
         if cart and cart_info:
             cart.write(cart_info)
         return _not_found_skus, cart
