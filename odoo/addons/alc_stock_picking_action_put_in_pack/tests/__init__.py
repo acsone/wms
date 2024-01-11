@@ -1,0 +1,1 @@
+from . import test_stock_picking_action_put_in_pack
