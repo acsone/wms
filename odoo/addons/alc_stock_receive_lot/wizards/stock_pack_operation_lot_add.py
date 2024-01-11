@@ -226,6 +226,7 @@ class StockPackOperationLotAdd(models.TransientModel):
         if self.lot_name:
             move_line = move.move_line_ids.filtered(
                 lambda ml, wiz=self: ml.lot_name == wiz.lot_name
+                and ml.location_dest_id == wiz.location_dest_id
             ).exists()
             if move_line:
                 move_line.qty_done += self.qty
