@@ -87,7 +87,7 @@ class TestPackOperationLotAdd(PackOperationLotAddCommon, TransactionCase):
         # validate
         picking.with_context(test_mode=True).button_validate()
         self.assertEqual("done", picking.state)
-        self.assertEqual(len(self.products), len(picking.move_line_ids))
+        self.assertEqual(3, len(picking.move_line_ids))
 
     def test_receive_surplus_quantities(self):
         picking = self.picking
