@@ -6,16 +6,18 @@ from odoo.tests.common import TransactionCase
 
 
 class TestStockPickingActionPutInPack(TransactionCase):
-    def test_0(self):
-        product = self.env["product.product"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        product = cls.env["product.product"].create(
             {"name": "Test product 2", "type": "product"}
         )
-        stock_location = self.env["stock.warehouse"].search([], limit=1).lot_stock_id
-        supplier_location = self.env.ref("stock.stock_location_suppliers")
-        picking_type_in = self.env.ref("stock.picking_type_in")
-        picking = self.env["stock.picking"].create(
+        stock_location = cls.env["stock.warehouse"].search([], limit=1).lot_stock_id
+        supplier_location = cls.env.ref("stock.stock_location_suppliers")
+        cls.picking_type_in = cls.env.ref("stock.picking_type_in")
+        cls.picking = cls.env["stock.picking"].create(
             {
-                "picking_type_id": picking_type_in.id,
+                "picking_type_id": cls.picking_type_in.id,
                 "location_id": supplier_location.id,
                 "location_dest_id": stock_location.id,
                 "move_ids": [
@@ -32,9 +34,20 @@ class TestStockPickingActionPutInPack(TransactionCase):
                 ],
             }
         )
-        picking.action_confirm()
-        picking.action_assign()
-        self.assertEqual(len(picking.move_line_ids), 1)
-        picking.action_set_quantities_to_reservation()
-        picking.action_put_in_pack()
-        self.assertFalse(picking.move_line_ids.result_package_id)
+        cls.picking.action_confirm()
+        cls.picking.action_assign()
+        cls.picking.action_set_quantities_to_reservation()
+
+    def test_0(self):
+        """Standard behavor if flag is not in picking type."""
+        self.assertEqual(len(self.picking.move_line_ids), 1)
+        self.picking.action_put_in_pack()
+        self.assertTrue(self.picking.move_line_ids.result_package_id)
+
+    def test_1(self):
+        """Make package type selection mandatory even for one move line."""
+        self.picking_type_in.package_type_required_on_put_in_pack = True
+        self.assertEqual(len(self.picking.move_line_ids), 1)
+        action = self.picking.action_put_in_pack()
+        self.assertFalse(self.picking.move_line_ids.result_package_id)
+        self.assertEqual(action.get("res_model"), "stock.package.destination")
