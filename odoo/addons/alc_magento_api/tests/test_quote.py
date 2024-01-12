@@ -29,7 +29,7 @@ class TestQuote(TestFacadeCart):
         self.assertEqual("<p>This is a test</p>", self.so.note)
 
     def test_quote_csv(self):
-        existing_cart = self.env["sale.order"].search([("typology", "=", "cart")])
+        self.env["sale.order"].search([("typology", "=", "cart")]).unlink()
         first_line = ["suite", "ref", "mail@alcyonbelux.be", "note"]
         # one column had a trailing ';', meaning an empty column
         csv_lines = [
@@ -43,7 +43,7 @@ class TestQuote(TestFacadeCart):
         csv_file = io.BytesIO(csv_content.encode("utf-8"))
         quote_csv_facade = self._get_service_facade("quote-csv")
         _result, error, _location = quote_csv_facade(file=csv_file)
-        so = self.env["sale.order"].search([("typology", "=", "cart")]) - existing_cart
+        so = self.env["sale.order"].search([("typology", "=", "cart")])
         self.assertEqual(error, "<error>The product missing is not available</error>")
         self.assertEqual("ref", so.client_order_ref)
         self.assertEqual("<p>note</p>", so.note)

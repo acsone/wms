@@ -89,6 +89,8 @@ class TestSaleCartRestApiInfo(TestEshopApiCartCase):
             self.assertEqual(200, response.status_code)
 
     def test_csv(self):
+        # remove existing cart
+        self.so.unlink()
         # we create a csv file with 2 lines
         # the first line is the cart info
         # the second line is the product line
@@ -121,6 +123,22 @@ class TestSaleCartRestApiInfo(TestEshopApiCartCase):
         self.assertIn("missing", so.import_warning_msg)
         self.assertIn("import_warning_msg", info)
         self.assertEqual(info["import_warning_msg"], so.import_warning_msg)
+
+        # if we import a csv file again, the cart is updated no new cart is created
+        cart_count = self.env["sale.order"].search_count(
+            [("partner_id", "=", self.default_fastapi_authenticated_partner.id)]
+        )
+        with self._create_test_client() as test_client:
+            response = test_client.post(
+                "carts/csv", files={"file": ("cart.csv", csv_file)}
+            )
+        self.assertEqual(200, response.status_code)
+        info = response.json()
+        self.assertEqual(so.id, info["id"])
+        new_cart_count = self.env["sale.order"].search_count(
+            [("partner_id", "=", self.default_fastapi_authenticated_partner.id)]
+        )
+        self.assertEqual(cart_count, new_cart_count)
 
     def test_get_next_suite_name(self):
         with self._create_test_client() as test_client:
