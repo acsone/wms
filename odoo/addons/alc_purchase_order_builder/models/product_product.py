@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from datetime import date, datetime
 
+import pytz
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
@@ -233,20 +234,28 @@ class ProductProduct(ProductBase):
         # Retrieve sales by year/month (eg: 2017-07)
         query = """
         SELECT
-          to_char(so.date_order, 'YYYY-MM') AS year_month,
+          to_char(so.date_order at time zone 'utc' at time zone %s, 'YYYY-MM') AS year_month,
           sum(sol.product_uom_qty)
         FROM sale_order_line AS sol
           INNER JOIN sale_order so ON sol.order_id = so.id
         WHERE so.state IN ('sale', 'done')
           AND sol.product_id = %s
-          AND so.date_order::DATE >= (NOW() - INTERVAL '1 year')::DATE
-          AND so.date_order::DATE < NOW()::DATE
+          AND so.date_order >= (%s - INTERVAL '1 year')
+          AND so.date_order < %s
         GROUP BY year_month
         ORDER BY year_month;
         """
 
+        today = fields.Date.context_today(self)
+        tz = pytz.timezone(self.env.user.tz or "UTC")
+        today_datetime = datetime(today.year, today.month, today.day, tzinfo=tz)
+        utc_today_datetime = today_datetime.astimezone(pytz.UTC)
+        utc_today_datetime = utc_today_datetime.replace(tzinfo=None)
+
         # Store values
-        self.env.cr.execute(query, (self.id,))
+        self.env.cr.execute(
+            query, (tz.zone, self.id, utc_today_datetime, utc_today_datetime)
+        )
         values = dict(self.env.cr.fetchall())
 
         # Loop on 12 months
@@ -266,7 +275,7 @@ class ProductProduct(ProductBase):
                 # day of month (there are no data for the current month)
                 if today.day == 1:
                     label = f"{month}/{str(today.year - 1)[2:]}"
-                    value = values.get(f"{today.year - 1}-{month}", 0)
+                    value = values.get(f"{today.year - 1}-{month:02}", 0)
                     month_values = [{"label": label, "value": value}]
                 # Otherwise we take values in the current year and in the last
                 # year
