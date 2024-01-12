@@ -14,31 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_picking_action_put_in_pack
-#: model:ir.model.fields,help:alc_stock_picking_action_put_in_pack.field_stock_picking_type__package_type_required_on_put_in_pack
-msgid ""
-"Check this if you need to force users to select the package type on put in "
-"pack even for a single product. If not checked, the put in pack will use the"
-" product default package type."
-msgstr ""
-
-#. module: alc_stock_picking_action_put_in_pack
-#. odoo-python
-#: code:addons/alc_stock_picking_action_put_in_pack/models/stock_picking.py:0
-#, python-format
-msgid "Choose destination location"
-msgstr ""
-
-#. module: alc_stock_picking_action_put_in_pack
-#: model:ir.model.fields,field_description:alc_stock_picking_action_put_in_pack.field_stock_picking_type__package_type_required_on_put_in_pack
-msgid "Package Type Required On Put In Pack"
-msgstr ""
-
-#. module: alc_stock_picking_action_put_in_pack
-#: model:ir.model,name:alc_stock_picking_action_put_in_pack.model_stock_picking_type
-msgid "Picking Type"
-msgstr ""
-
-#. module: alc_stock_picking_action_put_in_pack
 #: model:ir.model,name:alc_stock_picking_action_put_in_pack.model_stock_picking
 msgid "Transfer"
 msgstr ""
