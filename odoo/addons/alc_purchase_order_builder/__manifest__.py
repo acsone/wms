@@ -39,6 +39,7 @@
         ],
     },
     "data": ["views/purchase_order.xml", "views/templates.xml"],
+    "external_dependencies": {"python": ["freezegun", "pytz"]},
     "pre_init_hook": "pre_init_hook",
     "website": "http://www.camptocamp.com",
     "installable": True,
