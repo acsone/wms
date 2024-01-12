@@ -31,3 +31,11 @@ class TestSupplierPurchaseManager(TransactionCase):
         self.partner.purchase_manager_id = self.other_user
         po = self.env["purchase.order"].create({"partner_id": self.partner.id})
         self.assertEqual(po.user_id, self.other_user)
+
+    def test_03(self):
+        """Purchase_manager set, even when set to False on create."""
+        self.partner.purchase_manager_id = self.other_user
+        purchase = self.env["purchase.order"].create(
+            {"partner_id": self.partner.id, "user_id": False}
+        )
+        self.assertEqual(purchase.user_id, self.other_user)
