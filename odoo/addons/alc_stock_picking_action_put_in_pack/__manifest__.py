@@ -4,12 +4,12 @@
 {
     "name": "Alc Stock Picking Action Put In Pack",
     "description": """
-        This addon make package type selection mandatory even for one move line""",
+        This addon make package type selection mandatory even for one move line and no carrier""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["stock"],
-    "data": ["views/stock_picking_type.xml"],
+    "depends": ["stock_picking_delivery_link"],
+    "data": [],
     "demo": [],
 }

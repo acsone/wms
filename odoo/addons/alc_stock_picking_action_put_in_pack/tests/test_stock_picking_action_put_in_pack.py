@@ -37,17 +37,13 @@ class TestStockPickingActionPutInPack(TransactionCase):
         cls.picking.action_confirm()
         cls.picking.action_assign()
         cls.picking.action_set_quantities_to_reservation()
-
-    def test_0(self):
-        """Standard behavor if flag is not in picking type."""
-        self.assertEqual(len(self.picking.move_line_ids), 1)
-        self.picking.action_put_in_pack()
-        self.assertTrue(self.picking.move_line_ids.result_package_id)
+        cls.picking_type_in.set_delivery_package_type_on_put_in_pack = True
 
     def test_1(self):
-        """Make package type selection mandatory even for one move line."""
-        self.picking_type_in.package_type_required_on_put_in_pack = True
+        """Make package type selection mandatory even for one move line and no carrier."""
+        self.assertFalse(self.picking.carrier_id)
+        self.assertFalse(self.picking.ship_carrier_id)
         self.assertEqual(len(self.picking.move_line_ids), 1)
         action = self.picking.action_put_in_pack()
         self.assertFalse(self.picking.move_line_ids.result_package_id)
-        self.assertEqual(action.get("res_model"), "stock.package.destination")
+        self.assertEqual(action.get("res_model"), "choose.delivery.package")
