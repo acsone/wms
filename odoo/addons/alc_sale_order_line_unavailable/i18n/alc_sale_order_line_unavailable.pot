@@ -29,6 +29,17 @@ msgid "Product"
 msgstr ""
 
 #. module: alc_sale_order_line_unavailable
+#: model:ir.model,name:alc_sale_order_line_unavailable.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: alc_sale_order_line_unavailable
+#: model:ir.model,name:alc_sale_order_line_unavailable.model_mixin_sale_lines_unavailable_action
+msgid "Provides the action that returns the related SO Lines"
+msgstr ""
+
+#. module: alc_sale_order_line_unavailable
+#: model_terms:ir.ui.view,arch_db:alc_sale_order_line_unavailable.product_product_form_view_sale_order_button
 #: model_terms:ir.ui.view,arch_db:alc_sale_order_line_unavailable.product_template_form_view_sale_order_button
 msgid "Sales"
 msgstr ""
