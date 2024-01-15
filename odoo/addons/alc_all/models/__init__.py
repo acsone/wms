@@ -1,3 +1,8 @@
-from . import sale_order_line
-from . import stock_quant
-from . import stock_move
+from . import (
+    account_move_line,
+    ir_attachment,
+    queue_job,
+    sale_order_line,
+    stock_move,
+    stock_quant,
+)
