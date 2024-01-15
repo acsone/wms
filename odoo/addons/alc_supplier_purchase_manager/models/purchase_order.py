@@ -21,3 +21,10 @@ class PurchaseOrder(PurchaseOrderBase):
                 if rec.partner_id.purchase_manager_id
                 else self.env.user
             )
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get("partner_id") and not vals.get("user_id", True):
+                vals.pop("user_id")
+        return super().create(vals_list)
