@@ -10,6 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": ["alc_sales_count", "alc_sale_order_line_unavailable_list"],
-    "data": ["views/res_partner.xml", "views/product_template.xml"],
+    "data": [
+        "views/res_partner.xml",
+        "views/product_template.xml",
+        "views/product_product.xml",
+    ],
     "demo": [],
 }
