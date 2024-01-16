@@ -51,12 +51,12 @@ msgstr ""
 
 #. module: alc_report_sale
 #: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
-msgid "<strong>Customer:</strong>"
+msgid "<strong>Customer Reference:</strong>"
 msgstr ""
 
 #. module: alc_report_sale
 #: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
-msgid "<strong>Customer Reference:</strong>"
+msgid "<strong>Customer:</strong>"
 msgstr ""
 
 #. module: alc_report_sale
