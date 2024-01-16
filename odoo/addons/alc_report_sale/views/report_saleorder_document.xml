@@ -163,6 +163,10 @@
             <strong>Date Ordered:</strong>
             <p t-field="doc.date_order" />
           </div>
+          <div t-if="doc.client_order_ref">
+            <strong>Customer Reference:</strong>
+            <p t-field="doc.client_order_ref" />
+          </div>
         </div>
         <table class="table table-condensed">
           <thead>
