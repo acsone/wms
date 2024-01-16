@@ -47,8 +47,14 @@ def _cancel_invoices(env):
     )
     i = 1
     invoices_len = len(invoices)
+    attachment_obj = env["ir.attachment"]
     for invoice in invoices:
         invoice.button_draft()
+        # Remove attachments
+        attachments = attachment_obj.search(
+            [("res_id", "=", invoice.id), ("res_model", "=", "account.move")]
+        )
+        attachments.unlink()
         env.cr.commit()
         sys.stderr.write(
             f"=== Invoice {i}/{invoices_len} has been set to draft. === \n"
