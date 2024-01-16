@@ -67,6 +67,11 @@ msgstr "<span>Bestelling n° </span>"
 
 #. module: alc_report_sale
 #: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
+msgid "<strong>Customer Reference:</strong>"
+msgstr "<strong>Klantreferentie:</strong>"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
 msgid "<strong>Customer:</strong>"
 msgstr "<strong>Klant:</strong>"
 

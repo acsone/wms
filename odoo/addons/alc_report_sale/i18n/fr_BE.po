@@ -74,6 +74,11 @@ msgstr "<strong>Client:</strong>"
 
 #. module: alc_report_sale
 #: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
+msgid "<strong>Customer Reference:</strong>"
+msgstr "<strong>Référence client:</strong>"
+
+#. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
 msgid "<strong>Date Ordered:</strong>"
 msgstr "<strong>Date de commande:</strong>"
 
