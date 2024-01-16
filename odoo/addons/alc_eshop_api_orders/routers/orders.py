@@ -50,7 +50,8 @@ def search(
     model = env["sale.order"].sudo()
     total_count = model.search_count(domain)
     offset = per_page * (page - 1)
-    records = model.search(domain, limit=per_page, offset=offset)
+    order = "date_order desc, name desc"
+    records = model.search(domain, limit=per_page, offset=offset, order=order)
     return OrderList(
         data=[Order.from_sale_order(record) for record in records],
         size=total_count,
