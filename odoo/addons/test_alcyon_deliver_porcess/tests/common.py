@@ -10,6 +10,7 @@ class TestDeliverProcessBase(StockPickingTestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, queue_job__no_delay=True))
+        cls.env.user.company_id.shipment_advice_run_in_queue_job = True
         cls.env["stock.release.channel"].search([]).unlink()
         cls.dock = cls.env.ref("shipment_advice.stock_dock_demo")
         cls.partner2 = cls.env["res.partner"].create({"name": "partner 2"})

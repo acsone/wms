@@ -58,19 +58,33 @@ class ShipmentAdvice(ShipmentAdviceBase):
         try:
             with self.env.cr.savepoint():
                 self.planned_move_ids.move_line_ids._load_in_shipment(self)
-                self.action_in_progress()
+                if self.state == "confirmed":
+                    self.action_in_progress()
                 picking_not_to_backorder = self._get_picking_not_to_backorder()
                 self.with_context(
                     picking_ids_not_to_backorder=picking_not_to_backorder.ids
                 ).action_done()
         except UserError as error:
             _logger.error(error)
-            self.action_cancel()
-            self.planned_picking_ids.move_ids.write({"shipment_advice_id": False})
-            self.message_post(subject=_("Auto process error"), body=error)
-            return self.release_channel_id._shipment_advice_auto_process_notify_error(
-                error, self
+            self.write(
+                {
+                    "state": "error",
+                    "error_message": self._get_error_message(error, self),
+                }
             )
+            self.release_channel_id._shipment_advice_auto_process_notify_error(
+                self.error_message
+            )
+        return True
+
+    def _postprocess_action_done(self):
+        res = super()._postprocess_action_done()
+        if self.state == "error":
+            return self.release_channel_id._shipment_advice_auto_process_notify_error(
+                self.error_message
+            )
+        if self.state != "done":
+            return res
         return self.release_channel_id._shipment_advice_auto_process_notify_success()
 
     def _get_picking_not_to_backorder(self):

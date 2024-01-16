@@ -219,12 +219,23 @@ class StockReleaseChannel(StockReleaseChannelBase):
 
     def _action_deliver(self):
         self.ensure_one()
-        self._plan_shipments()
+        shipment_advice = self.in_process_shipment_advice_ids.filtered(
+            lambda s: s.state in ("in_progress", "error")
+        )
+        if shipment_advice and len(shipment_advice) == 1:
+            shipment_advice.with_delay(
+                description=_(
+                    "Automatically process the shipment advice %(name)s.",
+                    name=shipment_advice.name,
+                )
+            )._auto_process()
+        else:
+            self._plan_shipments()
 
     def _shipment_advice_auto_process_notify_success(self):
         self.ensure_one()
-        shipment_states = set(self.shipment_advice_ids.mapped("state"))
-        not_done_states = ["confirmed", "in_progress"]
+        shipment_states = set(self.in_process_shipment_advice_ids.mapped("state"))
+        not_done_states = ["confirmed", "in_progress", "in_process", "error"]
         if any(not_done_state in shipment_states for not_done_state in not_done_states):
             return
         self.action_delivered()
@@ -237,14 +248,12 @@ class StockReleaseChannel(StockReleaseChannelBase):
             error=str(error),
         )
 
-    def _shipment_advice_auto_process_notify_error(self, error, related_object):
+    def _shipment_advice_auto_process_notify_error(self, error_message):
         self.ensure_one()
         if self.state == "delivering_error":
             return
         self.action_delivering_error()
-        self.delivering_error = self._get_delivering_error_message(
-            error, related_object
-        )
+        self.delivering_error = error_message
 
     @api.depends("state")
     def _compute_is_action_lock_allowed(self):

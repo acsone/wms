@@ -26,7 +26,7 @@ class TestPartialDeliver(TestDeliverProcessBase):
         # open the channel, pick must be generated
         self.channel.action_unlock()
         pick = self._get_picking_pick(sale)
-        ships = self._get_picking_ship(sale)
+        self._get_picking_ship(sale)
         self.channel.action_lock()
         # do the pick
         pick._put_in_pack(pick.move_line_ids)
@@ -34,12 +34,14 @@ class TestPartialDeliver(TestDeliverProcessBase):
             move_line.qty_done -= 1
         pick._action_done()
         self.assertTrue(pick.backorder_ids)
-        ships = self._get_picking_ship(sale)
+        self._get_picking_ship(sale)
         # deliver the release channel
         self.channel.action_delivering()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
-        backorder = ships.filtered(lambda s: s.state == "done").backorder_ids
+        backorder = self._get_picking_ship(sale).filtered(
+            lambda s: s.state not in ("done", "cancel")
+        )
         self.assertTrue(backorder)
         self.assertFalse(backorder.release_channel_id)
         self.assertTrue(backorder.need_release)

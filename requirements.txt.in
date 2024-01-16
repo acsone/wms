@@ -218,7 +218,7 @@ odoo-addon-internal-stock-quant-package @ git+https://github.com/OCA/stock-logis
 # stock-logistics-transport
 # see gitaggregate.yaml
 odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-transport.git@16.0-alc_shipment_advice#subdirectory=setup/shipment_advice
-odoo-addon-shipment-advice-planner @ git+https://github.com/acsone/stock-logistics-transport.git@16.0-shipment_advice_planner-sbj#subdirectory=setup/shipment_advice_planner
+odoo-addon-shipment-advice-planner @ git+https://github.com/acsone/stock-logistics-transport.git@16.0-alc_shipment_advice#subdirectory=setup/shipment_advice_planner
 odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/OCA/stock-logistics-transport.git@refs/pull/91/head#subdirectory=setup/shipment_advice_planner_toursolver
 odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com/OCA/stock-logistics-transport.git@refs/pull/91/head#subdirectory=setup/shipment_advice_planner_toursolver_queue_job
 

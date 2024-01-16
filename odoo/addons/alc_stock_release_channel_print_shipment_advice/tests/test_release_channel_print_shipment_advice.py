@@ -12,6 +12,7 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env.user.company_id.shipment_advice_run_in_queue_job = True
         output_loc = cls.channel.picking_ids.move_ids.location_id
         cls._update_qty_in_location(output_loc, cls.product1, 100)
         cls._update_qty_in_location(output_loc, cls.product2, 100)
@@ -37,7 +38,9 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
                     lambda s: s.state not in ("cancel", "done")
                 )
                 trap_sa.assert_enqueued_job(advices._auto_process)
-                trap_sa.perform_enqueued_jobs()
+                with trap_jobs() as trap_sap:
+                    trap_sa.perform_enqueued_jobs()
+                    trap_sap.perform_enqueued_jobs()
                 shipment_advice = advices.filtered(lambda s: s.state == "done")
         self.assertTrue(shipment_advice)
         self.assertEqual(shipment_advice.planned_pickings_count, 3)
@@ -86,7 +89,7 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         self.assertEqual(self.channel.state, "delivering_error")
         self.assertEqual(
             self.channel.delivering_error,
-            f"An error occurred while processing the delivery automatically:\n"
+            f"An error occurred while processing:\n"
             f"- {shipment_advice.name}: Dock should be set on the shipment advice {shipment_advice.name}.",
         )
         self.assertEqual(self.channel.state, "delivering_error")
@@ -104,27 +107,20 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         self.assertEqual(self.channel.state, "delivered")
         # it should be two shipment_advices, one canceled and one done
         shipment_advices = self.channel.in_process_shipment_advice_ids
-        self.assertEqual(len(shipment_advices), 2)
-        done_shipment_advice = shipment_advices.filtered(lambda s: s.state == "done")
-        cancel_shipment_advice = shipment_advices.filtered(
-            lambda s: s.state == "cancel"
-        )
-        self.assertTrue(done_shipment_advice.in_release_channel_auto_process)
-        self.assertTrue(cancel_shipment_advice.in_release_channel_auto_process)
+        self.assertEqual(len(shipment_advices), 1)
+        self.assertTrue(shipment_advices.state, "done")
         action = self.channel.with_context(discard_logo_check=True).action_print()
         self.assertEqual(self.channel.state, "delivered")
-        self.assertTrue(done_shipment_advice.in_release_channel_auto_process)
-        self.assertTrue(cancel_shipment_advice.in_release_channel_auto_process)
+        self.assertTrue(shipment_advices.in_release_channel_auto_process)
+        self.assertTrue(shipment_advices.in_release_channel_auto_process)
         self.assertEqual(action.get("type"), "ir.actions.report")
         self.assertEqual(
             action.get("report_name"), "shipment_advice.report_shipment_advice"
         )
         self.assertEqual(action.get("report_type"), "qweb-pdf")
         # only the done shipment is printed
-        self.assertEqual(
-            action.get("context").get("active_ids"), done_shipment_advice.ids
-        )
+        self.assertEqual(action.get("context").get("active_ids"), shipment_advices.ids)
         self.channel.action_sleep()
         self.assertEqual(self.channel.state, "asleep")
-        self.assertFalse(done_shipment_advice.in_release_channel_auto_process)
-        self.assertFalse(cancel_shipment_advice.in_release_channel_auto_process)
+        self.assertFalse(shipment_advices.in_release_channel_auto_process)
+        self.assertFalse(shipment_advices.in_release_channel_auto_process)
