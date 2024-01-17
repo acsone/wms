@@ -24,11 +24,6 @@ class TestStockMoveDirection(TransactionCase):
         wh = cls.env["stock.warehouse"].search([], limit=1)
         cls.wh = wh
         cls.wh2 = wh.copy({"name": "wh2", "code": "wh2_code"})
-        cls.location = wh.view_location_id
-        cls.stock_location = wh.lot_stock_id
-        cls.loc_customer = cls.env.ref("stock.stock_location_customers")
-        cls.loc_supplier = cls.env.ref("stock.stock_location_suppliers")
-
         cls.pick_type_in = cls.env.ref("stock.picking_type_out")
         cls.pick_type_out = cls.env.ref("stock.picking_type_in")
 
@@ -39,10 +34,9 @@ class TestStockMoveDirection(TransactionCase):
         cls.customer = cls.ResPartner.create(
             {"name": "Unittest customer", "ref": "abc"}
         )
-
+        cls.stock_location = wh.view_location_id
         cls.supplier_location = cls.env.ref("stock.stock_location_suppliers")
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
-        cls.stock_location = cls.env.ref("stock.stock_location_stock")
         cls.StockLocation = cls.env["stock.location"]
         cls.reception_location = cls.StockLocation.create(
             {
@@ -176,7 +170,7 @@ class TestStockMoveDirection(TransactionCase):
         res = self.wh._get_stock_locations_boundaries()
         self.assertDictEqual(res, self._get_cached_stock_locations_boundaries())
         new_parent_location = self.stock_location.location_id.copy()
-        self.stock_location.location_id = new_parent_location
+        self.wh.view_location_id.location_id = new_parent_location
         self.assertFalse(self._get_cached_stock_locations_boundaries())
         self.wh._get_stock_locations_boundaries()
         cached_res = self._get_cached_stock_locations_boundaries()

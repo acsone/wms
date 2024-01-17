@@ -9,7 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_stock_move_direction", "shopinvader_search_engine_product_stock"],
-    "data": [],
+    "depends": [
+        "alc_eshop_product_domain",
+        "alc_stock_move_direction",
+        "queue_job_cron",
+        "shopinvader_search_engine_product_stock",
+    ],
+    "data": ["data/ir_cron.xml"],
     "development_status": "Alpha",
 }
