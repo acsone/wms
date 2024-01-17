@@ -14,6 +14,26 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_search_engine_product_stock
+#. odoo-python
+#: code:addons/alc_eshop_search_engine_product_stock/models/product_product.py:0
+#, python-format
+msgid ""
+"Batch synchronize stock level for products from %(_from)s to %(to)s on "
+"%(on)s"
+msgstr ""
+
+#. module: alc_eshop_search_engine_product_stock
+#: model:ir.model,name:alc_eshop_search_engine_product_stock.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: alc_eshop_search_engine_product_stock
+#: model:ir.actions.server,name:alc_eshop_search_engine_product_stock.ir_cron_sync_all_stock_level_ir_actions_server
+#: model:ir.cron,cron_name:alc_eshop_search_engine_product_stock.ir_cron_sync_all_stock_level
+msgid "Search engine: Generate Sync All Bindings Stock Level"
+msgstr ""
+
+#. module: alc_eshop_search_engine_product_stock
 #: model:ir.model,name:alc_eshop_search_engine_product_stock.model_stock_move
 msgid "Stock Move"
 msgstr ""
