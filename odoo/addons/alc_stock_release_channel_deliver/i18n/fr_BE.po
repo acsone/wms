@@ -61,13 +61,7 @@ msgstr ""
 #. module: alc_stock_release_channel_deliver
 #. odoo-python
 #: code:addons/alc_stock_release_channel_deliver/models/shipment_advice.py:0
-#, python-format
-msgid "Auto process error"
-msgstr ""
-
-#. module: alc_stock_release_channel_deliver
-#. odoo-python
-#: code:addons/alc_stock_release_channel_deliver/models/shipment_advice.py:0
+#: code:addons/alc_stock_release_channel_deliver/models/stock_release_channel.py:0
 #, python-format
 msgid "Automatically process the shipment advice %(name)s."
 msgstr "Traiter automatiquement l'avis d'expédition %(name)s."
