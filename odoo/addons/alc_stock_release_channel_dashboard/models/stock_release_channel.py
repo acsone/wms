@@ -138,14 +138,22 @@ class StockReleaseChannel(StockReleaseChannelBase):
         )
 
     def _count_picking_todo_by_type_id_by_release_id_domain(self):
+        """
+        Pickings to do:
+
+        - picking not done: date_done=False
+        - picking done in the current day
+        """
         picking_type_ids = self.env[
             "stock.picking.type"
         ]._get_ids_visible_in_dashboard()
         return [
             ("release_channel_id", "in", self.ids),
-            ("planned_shipment_advice_id", "=", False),
             ("picking_type_id", "in", picking_type_ids),
             ("state", "!=", "cancel"),
+            "|",
+            ("date_done", "=", False),
+            ("date_done", ">", fields.Datetime.now().replace(hour=0, minute=0)),
         ]
 
     def _count_picking_started_by_type_id_by_release_id_domain(self):
