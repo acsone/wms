@@ -169,6 +169,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/alc_stock_release_channel_dashboard/models/stock_release_channel.py:0
 #, python-format
+msgid "Shipment Advice"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
+#. odoo-python
+#: code:addons/alc_stock_release_channel_dashboard/models/stock_release_channel.py:0
+#, python-format
 msgid "Shipment Advices"
 msgstr ""
 
