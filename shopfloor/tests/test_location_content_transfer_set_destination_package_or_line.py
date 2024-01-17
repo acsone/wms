@@ -435,7 +435,6 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
         move_line_c = original_picking.move_line_ids.filtered(
             lambda m: m.product_id == self.product_c
         )
-        move = move_line_c.move_id
         self.assertEqual(move_line_c.reserved_uom_qty, 10)
         self.assertEqual(move_line_c.qty_done, 10)
         # Scan partial qty (6/10)
@@ -456,13 +455,16 @@ class LocationContentTransferSetDestinationXCase(LocationContentTransferCommonCa
         self.assertEqual(move_line_c.state, "done")
         self.assertEqual(original_picking.backorder_ids, done_picking)
         self.assertEqual(done_picking.state, "done")
-        # the move is split with the remaining
-        self.assertEqual(original_picking.state, "assigned")
+
+        # the remaining move is put in a backorder
+        move = done_picking.backorder_ids.move_ids
+        self.assertEqual(move.picking_id.state, "assigned")
+
         self.assertEqual(move.state, "assigned")
         self.assertEqual(move.product_id, self.product_c)
         self.assertEqual(move.product_uom_qty, 4)
         self.assertEqual(move.move_line_ids.reserved_uom_qty, 4)
-        self.assertEqual(move.move_line_ids.qty_done, 4)
+        self.assertEqual(move.move_line_ids.qty_done, 0)
         # Check the response
         move_lines = self.service._find_transfer_move_lines(self.content_loc)
         self.assert_response_start_single(
@@ -773,7 +775,6 @@ class LocationContentTransferSetDestinationChainSpecialCase(
         move_line_c = picking_b.move_line_ids.filtered(
             lambda m: m.product_id == self.product_c
         )
-        move = move_line_c.move_id
 
         self.assertEqual(move_line_c.reserved_uom_qty, 10)
         self.assertEqual(move_line_c.qty_done, 10)
@@ -787,14 +788,13 @@ class LocationContentTransferSetDestinationChainSpecialCase(
                 "barcode": self.dest_location.barcode,
             },
         )
-        done_picking = move_line_c.picking_id
         # Check move line data
-        self.assertEqual(picking_b.backorder_ids, done_picking)
         self.assertEqual(move_line_c.move_id.product_uom_qty, 6)
         self.assertEqual(move_line_c.reserved_uom_qty, 0)
         self.assertEqual(move_line_c.qty_done, 6)
         self.assertEqual(move_line_c.state, "done")
         # the move has been split
+        move = move_line_c.picking_id.backorder_ids.move_ids
         self.assertNotEqual(move_line_c.move_id, move)
 
         # Check the move handling the remaining qty
@@ -802,7 +802,7 @@ class LocationContentTransferSetDestinationChainSpecialCase(
         move_line = move.move_line_ids
         self.assertEqual(move_line.move_id.product_uom_qty, 4)
         self.assertEqual(move_line.reserved_uom_qty, 4)
-        self.assertEqual(move_line.qty_done, 4)
+        self.assertEqual(move_line.qty_done, 0)
 
     def test_set_destination_package_partial_qty_with_move_orig_ids(self):
         """Scanned destination location with partial qty, but related moves
