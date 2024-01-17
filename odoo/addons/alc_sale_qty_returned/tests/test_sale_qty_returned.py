@@ -14,14 +14,14 @@ class TestSaleCancelRemaining(TestSaleOrderLineCancelBase):
         )
         pick = ship.move_orig_ids
         pick._action_assign()
-        pick.quantity_done = 10
+        pick.quantity_done = 9
         pick._action_done()
         ship._action_assign()
-        ship.quantity_done = 10
+        ship.quantity_done = 9
         self.assertEqual(order_line.product_qty_remains_to_deliver, 10)
         ship._action_done()
-        self.assertEqual(order_line.qty_delivered, 10)
-        self.assertEqual(order_line.product_qty_remains_to_deliver, 0)
+        self.assertEqual(order_line.qty_delivered, 9)
+        self.assertEqual(order_line.product_qty_remains_to_deliver, 1)
 
         stock_return_picking_form = Form(
             self.env["stock.return.picking"].with_context(
@@ -39,11 +39,18 @@ class TestSaleCancelRemaining(TestSaleOrderLineCancelBase):
 
     def test_returned_qty(self):
         self.test_deliver_and_return_order()
-        self.assertEqual(self.sale.order_line.qty_delivered, 8)
+        self.assertEqual(self.sale.order_line.qty_delivered, 7)
         self.assertEqual(self.sale.order_line.product_qty_returned, 2)
+        self.assertEqual(self.sale.order_line.product_qty_remains_to_deliver, 1)
+        wiz = self.env["sale.order.line.cancel"].create({})
+        wiz.with_context(
+            active_id=self.sale.order_line.id, active_model=self.sale.order_line._name
+        ).cancel_remaining_qty()
+        self.assertEqual(self.sale.order_line.product_qty_canceled, 1)
+        self.assertEqual(self.sale.order_line.product_qty_remains_to_deliver, 0)
 
     def test_returned_qty_for_cost_expense_product(self):
         self.sale.order_line.product_id.expense_policy = "cost"
         self.test_deliver_and_return_order()
-        self.assertEqual(self.sale.order_line.qty_delivered, 8)
+        self.assertEqual(self.sale.order_line.qty_delivered, 7)
         self.assertEqual(self.sale.order_line.product_qty_returned, 0)
