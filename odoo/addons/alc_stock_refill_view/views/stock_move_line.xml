@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="stock_move_line_refill_tree_view" model="ir.ui.view">
+        <field name="name">stock.move.line.tree</field>
+        <field name="model">stock.move.line</field>
+        <field name="arch" type="xml">
+            <tree create="0" default_order="location_id" type="object">
+                <field name="picking_type_id" optional="show" />
+                <field name="date" optional="hide" />
+                <field name="location_id" string="From" />
+                <field name="location_dest_id" string="To" />
+                <field name="product_id" />
+                <field
+          name="lot_id"
+          optional="show"
+          groups="stock.group_production_lot"
+        />
+                <field
+          name="package_id"
+          optional="hide"
+          groups="stock.group_tracking_lot"
+        />
+                <field name="qty_done" string="Quantity Done" optional="hide" />
+                <field name="reserved_uom_qty" optional="show" />
+                <field name="origin" />
+                <field name="picking_id" optional="hide" />
+                <field
+          name="state"
+          widget='badge'
+          optional="show"
+          decoration-danger="state=='cancel'"
+          decoration-info="state== 'assigned'"
+          decoration-muted="state == 'draft'"
+          decoration-success="state == 'done'"
+          decoration-warning="state not in ('draft','cancel','done','assigned')"
+        />
+            </tree>
+        </field>
+    </record>
+
+    <record id="stock_move_line_refill_search_view" model="ir.ui.view">
+        <field name="name">stock.move.line.search</field>
+        <field name="model">stock.move.line</field>
+        <field name="arch" type="xml">
+            <search string="Stock Moves">
+                <field
+          name="location_id"
+          string="Location"
+          filter_domain="['|',('location_id', 'ilike', self),('location_dest_id', 'ilike', self)]"
+          groups="stock.group_stock_multi_locations"
+        />
+                <field name="product_id" />
+                <field name="picking_id" string="Transfer" />
+                <field name="picking_type_id" />
+                <field name="origin" />
+                <field
+          name="lot_id"
+          string="Lot/Serial Number"
+          groups="stock.group_production_lot"
+        />
+                <field
+          name="package_id"
+          string="Source Package"
+          groups="stock.group_tracking_lot"
+        />
+                <separator />
+                <filter
+          string="To Do"
+          name="todo"
+          domain="[('state', 'not in', ['done', 'draft', 'cancel'])]"
+        />
+                <filter string="Done" name="done" domain="[('state', '=', 'done')]" />
+                <separator />
+                <filter name="date" date="date" default_period="this_month" />
+                <filter
+          string="Last 30 Days"
+          name="filter_last_30_days"
+          domain="[('date','&gt;=', (context_today() - relativedelta(days=30)).strftime('%Y-%m-%d'))]"
+        />
+                <filter
+          string="Last 3 Months"
+          name="filter_last_3_months"
+          domain="[('date','&gt;=', (context_today() - relativedelta(months=3)).strftime('%Y-%m-%d'))]"
+        />
+                <filter
+          string="Last 12 Months"
+          name="filter_last_12_months"
+          domain="[('date','&gt;=', (context_today() - relativedelta(years=1)).strftime('%Y-%m-%d'))]"
+        />
+                <separator />
+                <group expand="0" string="Group By" name="groupby">
+                    <filter
+            string="Product"
+            name="group_by_product_id"
+            domain="[]"
+            context="{'group_by': 'product_id'}"
+          />
+                    <filter
+            string="Status"
+            name="group_by_state"
+            domain="[]"
+            context="{'group_by': 'state'}"
+          />
+                    <filter
+            string="Transfers"
+            name="group_by_picking"
+            domain="[]"
+            context="{'group_by': 'picking_id'}"
+          />
+                    <filter
+            string="Operations Types"
+            name="group_by_picking_type"
+            domain="[]"
+            context="{'group_by': 'picking_type_id'}"
+          />
+                    <filter
+            string="Location"
+            name="group_by_location"
+            domain="[]"
+            context="{'group_by': 'location_id'}"
+          />
+                    <filter
+            string="Origin"
+            name="group_by_origin"
+            domain="[]"
+            context="{'group_by': 'origin'}"
+          />
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="stock_move_line_refill_action" model="ir.actions.act_window">
+            <field name="name">Refills</field>
+            <field name="res_model">stock.move.line</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="stock_move_line_refill_tree_view" />
+            <field name="search_view_id" ref="stock_move_line_refill_search_view" />
+            <field name="context">{
+                'search_default_group_by_picking_type': 1
+                }
+            </field>
+            <field name="domain">[('picking_type_id', 'like', 'Reassort')]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_empty_folder">
+                    There's no refill to do.
+                </p>
+            </field>
+    </record>
+
+    <menuitem
+    action="stock_move_line_refill_action"
+    id="stock_move_line_refill_menu"
+    parent="stock.menu_stock_warehouse_mgmt"
+    sequence="200"
+  />
+</odoo>

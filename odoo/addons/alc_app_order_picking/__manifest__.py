@@ -25,6 +25,7 @@
         "alc_stock_picking_name",
         "alc_stock_picking_type_aliment",
         "alc_stock_picking_wave_display",
+        "alc_stock_refill_view",
         "alc_stock_warehouse_configuration",
         "base_delivery_carrier_label",
         "delivery_carrier_max_weight_constraint",
