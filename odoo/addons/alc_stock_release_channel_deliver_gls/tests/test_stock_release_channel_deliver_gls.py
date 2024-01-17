@@ -12,6 +12,7 @@ class TestStockReleaseChannelDeliverGls(TestStockReleaseChannelDeliverCommon, Te
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env.user.company_id.shipment_advice_run_in_queue_job = True
         vals_gls_product = {"type": "service", "name": "Name ship GLS"}
         cls.gls_product = cls.env["product.product"].create(vals_gls_product)
         carrier_vals = cls._get_gls_carrier_vals()

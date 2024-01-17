@@ -9,15 +9,11 @@ from odoo.addons.queue_job.tests.common import trap_jobs
 from .common import TestStockReleaseChannelDeliverCommon
 
 
-class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
-    def test_00(self):
-        """Test action_delivering allowed."""
-        self.channel.action_unlock()
-        self.assertEqual(self.channel.state, "open")
-        with self.assertRaises(
-            UserError, msg="Action 'Delivering' is not allowed for channel Default."
-        ):
-            self.channel.action_delivering()
+class TestStockReleaseChannelDeliverAsync(TestStockReleaseChannelDeliverCommon):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env.user.company_id.shipment_advice_run_in_queue_job = True
 
     def test_01(self):
         """Shipemnt advices are creared and automatically processed."""
@@ -32,10 +28,15 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
                     lambda s: s.state not in ("done", "cancel")
                 )
                 trap_sa.assert_enqueued_job(advices._auto_process)
-                with trap_jobs() as trap_ba:
-                    # this job should create a job to assign backorders to a release channel
+                with trap_jobs() as trap_sap:
+                    # picking jobs
                     trap_sa.perform_enqueued_jobs()
-                    trap_ba.perform_enqueued_jobs()
+                    trap_sap.assert_jobs_count(5)
+                    # 3 picking + 1 for unplan + 1 for postprocess
+                    with trap_jobs() as trap_ba:
+                        # this job should create a job to assign backorders to a release channel
+                        trap_sap.perform_enqueued_jobs()
+                        trap_ba.perform_enqueued_jobs()
                 shipment_advice = advices.filtered(lambda s: s.state == "done")
         self.assertTrue(shipment_advice)
         self.assertEqual(shipment_advice.planned_pickings_count, 3)
@@ -151,24 +152,19 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
             trap_rc.assert_enqueued_job(self.channel._action_deliver)
             with trap_jobs() as trap_sa:
                 trap_rc.perform_enqueued_jobs()
-                shipment_advice = self.channel.shipment_advice_ids
-                trap_sa.assert_enqueued_job(shipment_advice._auto_process)
-                trap_sa.perform_enqueued_jobs()
+                advices = self.channel.shipment_advice_ids.filtered(
+                    lambda s: s.state not in ("done", "cancel")
+                )
+                trap_sa.assert_enqueued_job(advices._auto_process)
+                with trap_jobs() as trap_sap:
+                    # picking jobs
+                    trap_sa.perform_enqueued_jobs()
+                    trap_sap.assert_jobs_count(4)
+                    # 2 picking + 1 for unplan + 1 for postprocess
+                    with trap_jobs() as trap_ba:
+                        # this job should create a job to assign backorders to a release channel
+                        trap_sap.perform_enqueued_jobs()
+                        trap_ba.perform_enqueued_jobs()
+                advices.filtered(lambda s: s.state == "done")
         self.assertEqual(self.channel.state, "delivered")
         self.assertEqual(not_done_picking.state, "cancel")
-
-    def test_09(self):
-        """Deliver is not allowed if one of the released picking is not done and the unrelease is not possible."""
-        self._do_picking(self.internal_pickings[0])
-        self._do_picking(self.internal_pickings[1])
-        not_done_picking = self.internal_pickings.filtered(
-            lambda p: p.state == "assigned"
-        )
-        not_done_picking.move_ids[0].product_uom_qty = 4
-        with self.assertRaises(
-            UserError,
-            msg="There are some preparations that have not been completed."
-            "If you choose to proceed, these preparations need to be unreleased."
-            " Please handle them manually before proceeding with the delivery.",
-        ):
-            self.channel.action_delivering()

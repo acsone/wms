@@ -12,6 +12,7 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env.user.company_id.shipment_advice_run_in_queue_job = True
         cls.resource_1 = cls.env.ref(
             "shipment_advice_planner_toursolver.toursolver_resource_r1_demo"
         )
@@ -67,7 +68,9 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
                     trap_tt.perform_enqueued_jobs()
                     shipment_advice = self.channel.shipment_advice_ids[-1]
                     trap_sa.assert_enqueued_job(shipment_advice._auto_process)
-                    trap_sa.perform_enqueued_jobs()
+                    with trap_jobs() as trap_sap:
+                        trap_sa.perform_enqueued_jobs()
+                        trap_sap.perform_enqueued_jobs()
         self.assertTrue(shipment_advice)
         self.assertEqual(shipment_advice.toursolver_resource_id, self.resource_2)
         self.assertEqual(shipment_advice, task.shipment_advice_ids)

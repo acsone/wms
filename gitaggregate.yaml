@@ -125,4 +125,5 @@
     - oca 16.0
     - oca refs/pull/111/head # [FIX] load in shipment advice: check only assigned move lines
     - oca refs/pull/113/head # [FIX] don't allow done moves load in shipment advice
+    - oca refs/pull/114/head # [IMP] Run shipment advice in queue job
   target: origin 16.0-alc_shipment_advice
