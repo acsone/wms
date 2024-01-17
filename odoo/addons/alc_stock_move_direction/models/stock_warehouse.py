@@ -12,7 +12,9 @@ class StockWarehouse(Warehouse):
     def _get_stock_locations_boundaries(self):
         """Return a dict by stock location parent."""
         warehouses = self.search([])
-        return {wh.lot_stock_id.id: wh.lot_stock_id.parent_path for wh in warehouses}
+        return {
+            wh.view_location_id.id: wh.view_location_id.parent_path for wh in warehouses
+        }
 
     def _get_stock_location(self, location):
         """Get the stock location for the given location."""
