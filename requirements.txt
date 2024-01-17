@@ -251,7 +251,7 @@ odoo-addon-shipment-advice @ git+https://github.com/acsone/stock-logistics-trans
 odoo-addon-shipment-advice-planner @ git+https://github.com/acsone/stock-logistics-transport.git@de807e7c4f37fa9db8022dccc132f601aacd9bba#subdirectory=setup/shipment_advice_planner
 odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/acsone/stock-logistics-transport.git@6d14d2f3eb25981150a5410f96492064fe630830#subdirectory=setup/shipment_advice_planner_toursolver
 odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com/acsone/stock-logistics-transport.git@b4f080b42a32026d7b28d255434584cc30c285db#subdirectory=setup/shipment_advice_planner_toursolver_queue_job
-odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@a5c06eba2f81541a68a751eed7e8e3c4964833fd#subdirectory=setup/shopfloor
+odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@dbab97dca13c8402b45275840363f8b54ec7ce06#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@22e70153a9845d9c9316170728ed0a435b39ffee#subdirectory=setup/shopfloor_base
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wms.git@3cdc58cf28547fc6ee3969b514c7e0c5b116f3bb#subdirectory=setup/shopfloor_batch_automatic_creation
 odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@c0a4ecc63777241c2cb966c82c58520524bd5633#subdirectory=setup/shopfloor_full_location_reservation
