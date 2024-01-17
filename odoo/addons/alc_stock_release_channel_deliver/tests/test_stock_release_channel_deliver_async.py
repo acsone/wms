@@ -168,3 +168,75 @@ class TestStockReleaseChannelDeliverAsync(TestStockReleaseChannelDeliverCommon):
                 advices.filtered(lambda s: s.state == "done")
         self.assertEqual(self.channel.state, "delivered")
         self.assertEqual(not_done_picking.state, "cancel")
+
+    def _process_deliver_jobs(self, expected_jobs_count):
+        with trap_jobs() as trap_rc:
+            self.channel.action_delivering()
+            self.assertEqual(self.channel.state, "delivering")
+            trap_rc.assert_enqueued_job(self.channel._action_deliver)
+            with trap_jobs() as trap_sa:
+                trap_rc.perform_enqueued_jobs()
+                advices = self.channel.shipment_advice_ids.filtered(
+                    lambda s: s.state not in ("done", "cancel")
+                )
+                trap_sa.assert_enqueued_job(advices._auto_process)
+                with trap_jobs() as trap_sap:
+                    # picking jobs
+                    trap_sa.perform_enqueued_jobs()
+                    # number pickings + 1 for unplan + 1 for postprocess
+                    trap_sap.assert_jobs_count(expected_jobs_count)
+
+                    with trap_jobs() as trap_ba:
+                        # this job should create a job to assign backorders to a release channel
+                        trap_sap.perform_enqueued_jobs()
+                        trap_ba.perform_enqueued_jobs()
+        return advices
+
+    def test_09(self):
+        """Retry deliver from rc after partial fail."""
+        self._do_internal_pickings()
+        picking = self.channel.picking_to_plan_ids[0]
+        package = self.env["stock.quant.package"].create({})
+        self.env["stock.quant"]._update_available_quantity(
+            self.product1, self.loc_stock, 2, package_id=package
+        )
+        picking.move_line_ids.result_package_id = package
+        shipment_advice = self._process_deliver_jobs(
+            expected_jobs_count=5
+        )  # 3 pickings to do
+        self.assertEqual(shipment_advice.state, "error")
+        self.assertEqual(self.channel.state, "delivering_error")
+        self.assertEqual(picking.state, "assigned")
+        picking.move_line_ids.result_package_id = False
+        self._process_deliver_jobs(expected_jobs_count=3)  # 1 picking remaining
+        self.assertEqual(self.channel.state, "delivered")
+        self.assertEqual(picking.state, "done")
+        self.assertEqual(shipment_advice.state, "done")
+
+    def test_10(self):
+        """Retry deliver from sa after partial fail."""
+        self._do_internal_pickings()
+        picking = self.channel.picking_to_plan_ids[0]
+        package = self.env["stock.quant.package"].create({})
+        self.env["stock.quant"]._update_available_quantity(
+            self.product1, self.loc_stock, 2, package_id=package
+        )
+        picking.move_line_ids.result_package_id = package
+        shipment_advice = self._process_deliver_jobs(
+            expected_jobs_count=5
+        )  # 3 pickings to do
+        self.assertEqual(shipment_advice.state, "error")
+        self.assertEqual(self.channel.state, "delivering_error")
+        self.assertEqual(picking.state, "assigned")
+        picking.move_line_ids.result_package_id = False
+        with trap_jobs() as trap_sap:
+            shipment_advice.action_done()
+            self.assertEqual(self.channel.state, "delivering")
+            self.assertEqual(shipment_advice.state, "in_process")
+            # picking jobs
+            # number pickings + 1 for unplan + 1 for postprocess
+            trap_sap.assert_jobs_count(3)
+            trap_sap.perform_enqueued_jobs()
+        self.assertEqual(self.channel.state, "delivered")
+        self.assertEqual(picking.state, "done")
+        self.assertEqual(shipment_advice.state, "done")
