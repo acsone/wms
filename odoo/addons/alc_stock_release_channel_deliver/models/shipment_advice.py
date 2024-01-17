@@ -57,7 +57,11 @@ class ShipmentAdvice(ShipmentAdviceBase):
         self.in_release_channel_auto_process = True
         try:
             with self.env.cr.savepoint():
-                self.planned_move_ids.move_line_ids._load_in_shipment(self)
+                move_lines = self.planned_move_ids.move_line_ids
+                move_lines_to_load = move_lines.filtered(
+                    lambda ml: ml.state not in ("done", "cancel")
+                )
+                move_lines_to_load._load_in_shipment(self)
                 if self.state == "confirmed":
                     self.action_in_progress()
                 picking_not_to_backorder = self._get_picking_not_to_backorder()
@@ -93,3 +97,14 @@ class ShipmentAdvice(ShipmentAdviceBase):
             lambda p: p.partner_id.sale_reason_backorder_strategy == "cancel"
         )
         return picking_not_to_backorder
+
+    def action_done(self):
+        """If the channel is in error and we try to validate its sa, we set the rc state to delivering."""
+        for rec in self:
+            if (
+                rec.state == "error"
+                and rec.release_channel_id
+                and rec.release_channel_id.state == "delivering_error"
+            ):
+                rec.release_channel_id.state = "delivering"
+        return super().action_done()
