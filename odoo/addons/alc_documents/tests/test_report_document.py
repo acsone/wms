@@ -21,7 +21,7 @@ class TestAlcDocumentsFlow(TestAlcDocuments):
         # when
         sale_order = self.so_model_no_delay.create(vals_sale_order)
         sale_order.action_confirm()
-        sale_order.env["ir.attachment"].create(
+        attachment = sale_order.env["ir.attachment"].create(
             {
                 "type": "binary",
                 "res_model": sale_order._name,
@@ -41,3 +41,6 @@ class TestAlcDocumentsFlow(TestAlcDocuments):
         self.assertEqual(document.document_date.date(), fields.Date.today())
 
         self.assertEqual(self.partner.alc_document_count, 1)
+
+        attachment.unlink()
+        self.assertFalse(self.partner.alc_document_count)

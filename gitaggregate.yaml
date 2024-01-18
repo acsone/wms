@@ -94,6 +94,7 @@
     - oca refs/pull/270/head # [IMP] account-closing: auto reverse
     - oca refs/pull/271/head # [IMP] account-closing: account cutoff accrual on order
     - oca refs/pull/283/head # [IMP] account-closing: configure different account for refunds
+    - oca refs/pull/289/head # [IMP] account_cutoff_base: Add index on cutoff line to move line
   target: origin 16.0-account-cutoff-base
 
 ./src/connector-search-engine:
