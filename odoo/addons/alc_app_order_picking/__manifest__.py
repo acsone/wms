@@ -46,6 +46,7 @@
         "stock_move_common_dest",
         "stock_move_location",
         "stock_move_manage_priority",
+        "stock_move_priority_picking_assign",
         "stock_move_propagate_first_move",
         "stock_move_propagate_first_move_cancel",
         "stock_picking_batch_creation",
