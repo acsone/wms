@@ -318,7 +318,7 @@
                           t-att-style="'width: ' + obj['done'] / obj['todo'] * 100 + '%;'"
                         >
                                            <span
-                            t-out="obj['progress']"
+                            t-out="obj['done']"
                             t-if="obj['done'] > 0"
                           />
                                        </div>
@@ -331,7 +331,7 @@
                           t-att-style="'width: ' + obj['waiting'] / obj['todo'] * 100 + '%;'"
                         >
                                            <span
-                            t-out="obj['waiting_progress']"
+                            t-out="obj['waiting']"
                             t-if="obj['waiting'] > 0"
                           />
                                        </div>
