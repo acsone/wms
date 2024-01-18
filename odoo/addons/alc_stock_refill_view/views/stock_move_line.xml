@@ -7,6 +7,7 @@
         <field name="model">stock.move.line</field>
         <field name="arch" type="xml">
             <tree create="0" default_order="location_id" type="object">
+                <field name="priority" string="Priority" optional="show" />
                 <field name="picking_type_id" optional="show" />
                 <field name="date" optional="hide" />
                 <field name="location_id" string="From" />
@@ -24,7 +25,7 @@
         />
                 <field name="qty_done" string="Quantity Done" optional="hide" />
                 <field name="reserved_uom_qty" optional="show" />
-                <field name="origin" />
+                <field name="origin" optional="hide" />
                 <field name="picking_id" optional="hide" />
                 <field
           name="state"
@@ -72,6 +73,17 @@
           domain="[('state', 'not in', ['done', 'draft', 'cancel'])]"
         />
                 <filter string="Done" name="done" domain="[('state', '=', 'done')]" />
+                <separator />
+                <filter
+          string="Urgent"
+          name="urgent"
+          domain="[('priority', '=', '1')]"
+        />
+                <filter
+          string="Not urgent"
+          name="not_urgent"
+          domain="[('priority', '=', '0')]"
+        />
                 <separator />
                 <filter name="date" date="date" default_period="this_month" />
                 <filter
@@ -141,6 +153,7 @@
             <field name="view_id" ref="stock_move_line_refill_tree_view" />
             <field name="search_view_id" ref="stock_move_line_refill_search_view" />
             <field name="context">{
+                'search_default_todo': 1,
                 'search_default_group_by_picking_type': 1
                 }
             </field>
