@@ -54,6 +54,11 @@ msgid "Lot/Serial Number"
 msgstr ""
 
 #. module: alc_stock_refill_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_refill_view.stock_move_line_refill_search_view
+msgid "Not urgent"
+msgstr ""
+
+#. module: alc_stock_refill_view
 #: model:ir.model.fields,field_description:alc_stock_refill_view.field_stock_move_line__picking_type_id
 msgid "Operation type"
 msgstr ""
@@ -66,6 +71,11 @@ msgstr ""
 #. module: alc_stock_refill_view
 #: model_terms:ir.ui.view,arch_db:alc_stock_refill_view.stock_move_line_refill_search_view
 msgid "Origin"
+msgstr ""
+
+#. module: alc_stock_refill_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_refill_view.stock_move_line_refill_tree_view
+msgid "Priority"
 msgstr ""
 
 #. module: alc_stock_refill_view
@@ -127,4 +137,9 @@ msgstr ""
 #. module: alc_stock_refill_view
 #: model_terms:ir.ui.view,arch_db:alc_stock_refill_view.stock_move_line_refill_search_view
 msgid "Transfers"
+msgstr ""
+
+#. module: alc_stock_refill_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_refill_view.stock_move_line_refill_search_view
+msgid "Urgent"
 msgstr ""
