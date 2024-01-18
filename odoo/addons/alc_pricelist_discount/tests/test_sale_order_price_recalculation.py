@@ -3,7 +3,7 @@
 
 from datetime import timedelta
 
-from odoo import fields
+from odoo import api, fields
 
 from .common import TestPricelistDiscountCommon
 
@@ -51,3 +51,38 @@ class TestSaleOrderPriceRecalculation(TestPricelistDiscountCommon):
 
         self.assertFalse(self.sol_p2.discount2)
         self.assertFalse(self.sol_p2.discount2)
+
+    def test_recalculation_is_not_triggered_at_creation_through_call_kw(self):
+
+        # Ensure that default behavior provides different discounts
+        self.assertEqual(10, self.sol_p1.discount2)
+        self.assertEqual(0, self.sol_p1.discount3)
+
+        args = [
+            {
+                "__last_update": False,
+                "partner_id": self.partner.id,
+                "order_line": [
+                    [
+                        0,
+                        "virtual_31",
+                        {
+                            "name": self.p1.name,
+                            "product_id": self.p1.id,
+                            "product_uom_qty": 1,
+                            "product_uom": self.env.ref("uom.product_uom_unit").id,
+                            "discount2": 5,
+                            "discount3": 4,
+                        },
+                    ]
+                ],
+            }
+        ]
+        kwargs = {"context": self.env.context}
+
+        SaleOrder = self.env["sale.order"]
+        sale3_id = api.call_kw(SaleOrder, "create", args, kwargs)
+        sale3 = SaleOrder.browse(sale3_id)
+
+        self.assertEqual(5, sale3.order_line.discount2)
+        self.assertEqual(4, sale3.order_line.discount3)
