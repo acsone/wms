@@ -2,20 +2,17 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Alc Stock Refill View",
+    "name": "Alc Stock Move Line Priority",
     "description": """
-        Alcyon: Add menu and specific views to display pending refills""",
+        Alcyon: Add priority field on stock.move.line""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": [
-        "alc_stock_move_line_priority",
-        "stock",
-    ],
+    "depends": ["stock"],
     "data": [
         "views/stock_move_line.xml",
     ],
-    "demo": [],
     "pre_init_hook": "pre_init_hook",
+    "installable": True,
 }
