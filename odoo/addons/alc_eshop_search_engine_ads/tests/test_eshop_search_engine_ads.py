@@ -105,7 +105,7 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
 
     def test_00(self):
         """Cron will export all new published ads."""
-        self.backend.cron_synchronize_ads()
+        self.backend.button_synchronize_ads()
         self.assertEqual(self.adv_top_left.se_binding_ids.state, "to_export")
         with self.se_adapter.mocked_calls() as calls:
             self.se_index.generate_batch_sync_per_index()
@@ -153,7 +153,7 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
         """The cron should export only the changed ads."""
         self.test_00()
         self.adv_top_left.name = "ads updated"
-        self.backend.cron_synchronize_ads()
+        self.backend.button_synchronize_ads()
         self.assertEqual(self.adv_top_left.se_binding_ids.state, "to_export")
         with self.se_adapter.mocked_calls() as calls:
             self.se_index.generate_batch_sync_per_index()
@@ -187,7 +187,7 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
                 "date_end": self._get_date(day_offset=15),
             }
         )
-        self.backend.cron_synchronize_ads()
+        self.backend.button_synchronize_ads()
         self.assertFalse(self.adv_top_left.is_published)
         self.assertEqual(self.adv_top_left.se_binding_ids.state, "to_delete")
 
@@ -201,7 +201,7 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
                 "date_end": self._get_date(day_offset=-10),
             }
         )
-        self.backend.cron_synchronize_ads()
+        self.backend.button_synchronize_ads()
         self.assertFalse(self.adv_top_left.is_published)
         self.assertEqual(self.adv_top_left.se_binding_ids.state, "to_delete")
 

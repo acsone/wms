@@ -16,4 +16,5 @@ class SeBackend(SeBackendBase):
 
     @api.model
     def cron_synchronize_ads(self):
-        self.button_synchronize_ads()
+        for backend in self.search([]):
+            backend.button_synchronize_ads()

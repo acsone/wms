@@ -105,6 +105,7 @@
     - oca 16.0
     - oca refs/pull/178/head # [FIX] connector_search_engine: avoid catching pg error in binding recompute json
     - oca refs/pull/179/head # [IMP] connector_search_engine: No prefetch for binding data
+    - oca refs/pull/187/head # [IMP] connector_search_engine: Remove from index on archive
   target: origin 16.0-connector-search-engine
 
 ./src/edi:
