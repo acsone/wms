@@ -79,7 +79,7 @@ msgstr "<span>Alcyon<br/>Korting</span>"
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Base<br/>discount</span>"
-msgstr "<span>Leverencier<br/>Korting</span>"
+msgstr "<span>Leverancier<br/>Korting</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
@@ -118,7 +118,7 @@ msgid ""
 "              <br/>\n"
 "              <span>Total discount:</span>"
 msgstr ""
-"<span>Résumé</span>\n"
+"<span>Samenvatting</span>\n"
 "                            <br/>\n"
 "                            <span>Totale korting:</span>"
 
@@ -145,7 +145,7 @@ msgstr "<span>Te betalen</span>"
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "<span>Total<br/>refund</span>"
-msgstr "<span>Af te<br/>trekken</span>"
+msgstr "<span>In vermindering<br/>brengen</span>"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
@@ -243,7 +243,7 @@ msgstr "Geannuleerde factuur"
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid "Canceled Refund"
-msgstr "Geannuleerde terugbetaling"
+msgstr "Geannuleerde kredietnota"
 
 #. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__contribution_ids
@@ -383,7 +383,7 @@ msgstr "Referentie te vermelden bij betaling"
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_alcyon
 msgid "Refund"
-msgstr "Terugbetaling"
+msgstr "kredietnota"
 
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
