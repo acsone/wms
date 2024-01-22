@@ -17,6 +17,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_scheduler_filter
+#: model:ir.model.fields,help:alc_stock_scheduler_filter.field_res_config_settings__apply_filter_on_orderpoint_scheduler
+msgid ""
+"Activate filter when running the scheduler to run the scheduler on "
+"specificsuppliers, days or configured day on the partner supplier form."
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_config_settings__apply_filter_on_orderpoint_scheduler
+msgid "Apply Filter On Orderpoint Scheduler"
+msgstr ""
+
+#. module: alc_stock_scheduler_filter
 #: model:ir.model.fields.selection,name:alc_stock_scheduler_filter.selection__stock_scheduler_compute__procure_type__by_days
 msgid "By days"
 msgstr "Par jours"
@@ -25,6 +37,11 @@ msgstr "Par jours"
 #: model:ir.model.fields.selection,name:alc_stock_scheduler_filter.selection__stock_scheduler_compute__procure_type__by_suppliers
 msgid "By suppliers"
 msgstr "Par fournisseurs"
+
+#. module: alc_stock_scheduler_filter
+#: model:ir.model,name:alc_stock_scheduler_filter.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
 
 #. module: alc_stock_scheduler_filter
 #: model:ir.model,name:alc_stock_scheduler_filter.model_res_partner
@@ -40,6 +57,15 @@ msgstr "Jours de gestion"
 #: model_terms:ir.ui.view,arch_db:alc_stock_scheduler_filter.stock_scheduler_compute_form_view
 msgid "Days to generate"
 msgstr "Jours à générer"
+
+#. module: alc_stock_scheduler_filter
+#: model_terms:ir.ui.view,arch_db:alc_stock_scheduler_filter.res_config_settings_view_form
+msgid ""
+"Enable this constraint to filter when running the scheduler to run the "
+"scheduler on specific\n"
+"                            suppliers, days or configured day on the partner "
+"supplier form."
+msgstr ""
 
 #. module: alc_stock_scheduler_filter
 #: model:ir.model.fields,field_description:alc_stock_scheduler_filter.field_res_partner__is_manage_day_5
@@ -78,6 +104,13 @@ msgstr "Veuillez sélectionner au moins un fournisseur"
 #: model:ir.model,name:alc_stock_scheduler_filter.model_procurement_group
 msgid "Procurement Group"
 msgstr "Groupe d'approvisionnement"
+
+#. module: alc_stock_scheduler_filter
+#: model_terms:ir.ui.view,arch_db:alc_stock_scheduler_filter.res_config_settings_view_form
+msgid ""
+"Restrict the scheduler to run only on days specified on the supplier partner "
+"form"
+msgstr ""
 
 #. module: alc_stock_scheduler_filter
 #: model:ir.model,name:alc_stock_scheduler_filter.model_stock_scheduler_compute
