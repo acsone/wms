@@ -35,6 +35,11 @@ msgid "Purchase manager"
 msgstr ""
 
 #. module: alc_supplier_purchase_manager
+#: model:ir.model,name:alc_supplier_purchase_manager.model_stock_rule
+msgid "Stock Rule"
+msgstr ""
+
+#. module: alc_supplier_purchase_manager
 #: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_res_partner__substitute_purchase_manager_id
 #: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_res_users__substitute_purchase_manager_id
 msgid "Substitute purchase manager"
