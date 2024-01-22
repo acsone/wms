@@ -323,6 +323,7 @@ odoo-addon-shopinvader-base-url @ git+https://github.com/shopinvader/odoo-shopin
 
 odoo-addon-shopinvader-product @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1480/head#subdirectory=setup/shopinvader_product
 odoo-addon-shopinvader-search-engine @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1480/head#subdirectory=setup/shopinvader_search_engine
+odoo-addon-shopinvader-search-engine-update @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1497/head#subdirectory=setup/shopinvader_search_engine_update
 odoo-addon-shopinvader-es-product-categ @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1481/head#subdirectory=setup/shopinvader_es_product_categ
 
 
