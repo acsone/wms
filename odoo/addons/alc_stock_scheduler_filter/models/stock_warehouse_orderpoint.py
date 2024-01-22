@@ -23,7 +23,10 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpointBase):
         # products with a negative stock have a procurement order
         if not company_id:
             company_id = self.env.company
-        to_process = self._filter_orderpoint_to_process()
+        if self._is_filter_on_orderpoint_scheduler_enabled():
+            to_process = self._filter_orderpoint_to_process()
+        else:
+            to_process = self
         _logger.info("Run the procurement")
         result = super(
             StockWarehouseOrderpoint, to_process
@@ -35,6 +38,15 @@ class StockWarehouseOrderpoint(StockWarehouseOrderpointBase):
         _logger.info("Procurement finished")
 
         return result
+
+    def _is_filter_on_orderpoint_scheduler_enabled(self):
+        return (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param(
+                "alc_stock_scheduler_filter.apply_filter_on_orderpoint_scheduler"
+            )
+        )
 
     def _filter_orderpoint_to_process(self):
         return self.filtered_domain(self._filter_orderpoint_to_process_domain())

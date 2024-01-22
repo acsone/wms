@@ -75,4 +75,9 @@
     name="set_param"
     eval="('alc_report_sale.on_confirm_generate_and_send_pharmacist_report', True)"
   />
+    <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('alc_stock_scheduler_filter.apply_filter_on_orderpoint_scheduler', True)"
+  />
 </odoo>
