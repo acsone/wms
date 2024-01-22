@@ -28,6 +28,10 @@ class TestStockSchedulerFilter(TransactionCase):
         cls.product_2_virtual_available = cls.product2.with_context(
             warehouse=cls.warehouse.id
         ).virtual_available
+        cls.env["ir.config_parameter"].set_param(
+            "alc_stock_scheduler_filter.apply_filter_on_orderpoint_scheduler",
+            True,
+        )
 
     def _create_delivery_move(self, product, qty):
         ship = self.env["stock.picking"].create(

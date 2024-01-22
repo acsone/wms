@@ -11,6 +11,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": ["purchase_stock", "alc_product_supplier"],
-    "data": ["views/res_partner.xml", "wizards/stock_scheduler_compute.xml"],
+    "data": [
+        "views/res_config_settings.xml",
+        "views/res_partner.xml",
+        "wizards/stock_scheduler_compute.xml",
+    ],
     "demo": [],
 }
