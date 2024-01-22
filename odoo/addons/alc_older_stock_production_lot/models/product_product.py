@@ -1,7 +1,7 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields
+from odoo import api, fields
 
 from odoo.addons.product_expiry.models.product_product import Product as ProductBase
 from odoo.addons.stock.models.stock_lot import StockLot
@@ -27,6 +27,8 @@ class ProductProduct(ProductBase):
         """
         tracked_product_ids = self.filtered(lambda p: p.tracking == "lot").ids
         lot_id_by_product_id = {}
+        self.env["stock.lot"].invalidate_model(flush=True)
+        self.env["stock.quant"].invalidate_model(flush=True)
         if tracked_product_ids:
             location_physical = self.env.ref(
                 "alc_stock_location_data.stock_location_vlb"
@@ -65,6 +67,7 @@ class ProductProduct(ProductBase):
         lots = self.env["stock.lot"].search([("name", operator, value)])
         return [("older_lot_id", "in", lots)]
 
+    @api.depends("older_lot_id", "older_lot_id.expiration_date")
     def _compute_best_before_date(self):
         for rec in self:
             expiration_date = rec.older_lot_id.expiration_date

@@ -22,8 +22,14 @@ class ProductProduct(ProductProductBase):
                 if (
                     not binding.data
                     or binding.state == "to_recompute"
-                    or binding.data.get("best_before_date") == product.best_before_date
+                    or binding.data.get("best_before_date")
+                    == (
+                        product.best_before_date.isoformat()
+                        if product.best_before_date
+                        else None
+                    )
                 ):
                     continue
+                # the stock data are the same but the best before date has changed
                 binding.state = "to_recompute"
         return res

@@ -54,7 +54,6 @@ class TestProductSchema(StockCommonCase):
                 "lot_id": lot.id,
             }
         ).action_apply_inventory()
-        self.product.invalidate_recordset()
 
     def assertBestBeforeDate(self, date):
         product = ProductProduct.from_product_product(self.product)
@@ -76,3 +75,15 @@ class TestProductSchema(StockCommonCase):
         self.assertBestBeforeDate(best_before_date)
         self._create_lot_at_date(best_before_date - relativedelta(days=1))
         self.assertBestBeforeDate(best_before_date - relativedelta(days=1))
+
+    def test_synchronize_with_same_best_before_date(self):
+        self.binding.recompute_json()
+        best_before_date = datetime.now() + relativedelta(days=30)
+        self._create_lot_at_date(best_before_date)
+        self.assertEqual(self.binding.state, "to_recompute")
+        self.binding.recompute_json()
+        self.assertEqual(self.binding.state, "to_export")
+        # If we launch the synchronization again, the binding should not be
+        # updated
+        self.product.synchronize_all_binding_stock_level()
+        self.assertEqual(self.binding.state, "to_export")
