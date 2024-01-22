@@ -9,7 +9,7 @@
     "license": "LGPL-3",  # MUST BE LGPL since will be mixed with helpdesk
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["purchase"],
+    "depends": ["purchase", "purchase_stock"],
     "data": ["views/res_partner_views.xml", "views/purchase_order.xml"],
     "demo": [],
     "installable": True,
