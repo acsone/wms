@@ -19,6 +19,11 @@ msgid "Best before"
 msgstr ""
 
 #. module: alc_older_stock_production_lot
+#: model:ir.model,name:alc_older_stock_production_lot.model_stock_lot
+msgid "Lot/Serial"
+msgstr ""
+
+#. module: alc_older_stock_production_lot
 #: model:ir.model.fields,field_description:alc_older_stock_production_lot.field_product_product__older_lot_id
 msgid "Older lot"
 msgstr ""
