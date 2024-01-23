@@ -26,6 +26,7 @@
         "alc_purchase_announced_delivery_date",
         "alc_purchase_order_cleaner",
         "alc_purchase_prepaid",
+        "alc_purchase_stock_orderpoint_destination",
         "alc_stock_move_list",
         "alc_supplier_purchase_manager",
         "alc_supplier_purchase_manager_account",
