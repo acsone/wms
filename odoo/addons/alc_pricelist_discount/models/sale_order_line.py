@@ -12,6 +12,21 @@ class SaleOrderLine(SaleOrderLineBase):
     discount_item_id = fields.Many2one[PricelistItem](
         compute="_compute_discount_item_id", store=True
     )
+    # This field purpose is only to prevent the computation of the supplier's and alcyon's
+    # promotions at record creation when promotion2 or promotion3 values are provided.
+    # `store` attribute is set to `False` in order to ensure that its effect is limited
+    # to the create call_kw call from the client.
+    skip_reset_discount = fields.Boolean(store=False)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        result = super().create(vals_list)
+        # As non stored fields are not populated at creation, passing it through the vals
+        # does not work, and we unfortunately need to set the value after the super() call.
+        result.filtered(
+            lambda sol: sol.discount2 or sol.discount3
+        ).skip_reset_discount = True
+        return result
 
     def compute_supplier_promotion(self):
         for line in self:
@@ -43,7 +58,10 @@ class SaleOrderLine(SaleOrderLineBase):
                 pricelists=line.order_id.discount_pricelist_ids._origin,
                 currency=line.currency_id,
             )
-        self.onchange_product_id_reset_discount()
+        records_to_skip = self.filtered("skip_reset_discount")
+        # We limit `skip_reset_discount` scope by setting it back directly to False.
+        records_to_skip.skip_reset_discount = False
+        (self - records_to_skip).onchange_product_id_reset_discount()
 
     def compute_alcyon_discount(self):
         for line in self:

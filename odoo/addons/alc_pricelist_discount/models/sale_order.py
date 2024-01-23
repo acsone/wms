@@ -55,7 +55,7 @@ class SaleOrder(SaleOrderBase):
     def write(self, vals):
         # same issue as with create
         order_lines = False
-        if vals.get("order_lines") and vals.get("discount_pricelist_ids"):
+        if vals.get("order_line") and vals.get("discount_pricelist_ids"):
             order_lines = vals.pop("order_line")
         res = super().write(vals)
         if order_lines:
