@@ -77,6 +77,11 @@ msgid "Sales Order Line"
 msgstr "Ligne de bons de commande"
 
 #. module: alc_pricelist_discount
+#: model:ir.model.fields,field_description:alc_pricelist_discount.field_sale_order_line__skip_reset_discount
+msgid "Skip Reset Discount"
+msgstr ""
+
+#. module: alc_pricelist_discount
 #. odoo-python
 #: code:addons/alc_pricelist_discount/models/res_partner.py:0
 #, python-format
