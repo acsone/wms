@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+
+    <record model="ir.ui.view" id="stock_release_channel_pick_allowed_log_search_view">
+        <field
+      name="name"
+    >stock.release.channel.pick.allowed.log.search (in alc_stock_release_channel_pick_allowed)</field>
+        <field name="model">stock.release.channel.pick.allowed.log</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="release_channel_id" />
+                <field name="create_uid" />
+                <field name="picking_type_id" />
+                <separator />
+                <filter
+          string="Today logs"
+          name="logs_today"
+          domain="[('create_date', '>=', context_today().strftime('%Y-%m-%d 00:00:00'))]"
+        />
+                <separator />
+                <group string="Group By" name="groupby">
+                    <filter
+            name="group_by_release_channel_id"
+            string="Release Channel"
+            context="{'group_by': 'release_channel_id'}"
+          />
+                    <filter
+            name="group_by_picking_type_id"
+            string="Picking Type"
+            context="{'group_by': 'picking_type_id'}"
+          />
+                    <filter
+            name="group_by_create_uid"
+            string="Created By"
+            context="{'group_by': 'create_uid'}"
+          />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_release_channel_pick_allowed_log_tree_view">
+        <field
+      name="name"
+    >stock.release.channel.pick.allowed.log.tree (in alc_stock_release_channel_pick_allowed)</field>
+        <field name="model">stock.release.channel.pick.allowed.log</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="release_channel_id" />
+                <field name="picking_type_id" />
+                <field name="allowed" />
+                <field name="create_uid" />
+                <field name="create_date" />
+            </tree>
+        </field>
+    </record>
+
+    <record
+    model="ir.actions.act_window"
+    id="stock_release_channel_pick_allowed_log_act_window"
+  >
+        <field name="name">Stock Release Channel Pick Allowed Log</field>
+        <field name="res_model">stock.release.channel.pick.allowed.log</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{"search_default_logs_today": 1}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="stock_release_channel_pick_allowed_log_menu">
+        <field name="name">Pick Allowed Log</field>
+        <field
+      name="parent_id"
+      ref="alc_stock_release_channel_menu.alc_stock_release_channel_root_menu"
+    />
+        <field name="action" ref="stock_release_channel_pick_allowed_log_act_window" />
+        <field name="sequence" eval="99" />
+    </record>
+
+</odoo>

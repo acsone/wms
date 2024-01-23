@@ -1,6 +1,6 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-
+from contextlib import contextmanager
 from datetime import datetime
 
 from freezegun import freeze_time
@@ -38,6 +38,14 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
             "shipment_advice_planner_toursolver.toursolver_backend_default"
         )
         cls.channel.loading_duration = 180
+
+    @contextmanager
+    def _audit_new_logs(self):
+        Logs = self.env["stock.release.channel.pick.allowed.log"]
+        logs = Logs.search([("release_channel_id", "=", self.channel.id)])
+        yield
+        new_logs = Logs.search([("release_channel_id", "=", self.channel.id)]) - logs
+        self.new_logs = new_logs
 
     def test_00(self):
         """
@@ -282,3 +290,50 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         channel.action_sleep()
         self.assertTrue(channel.pick_allowed)
         self.assertDictEqual(_states(), {pt1_id: True, pt2_id: True})
+
+    def test_12(self):
+        """Test log message when pick_allowed is changed."""
+
+        picking_types = self.env["stock.picking.type"].search([], limit=2)
+        pt1_id = picking_types[0].id
+        pt2_id = picking_types[1].id
+        picking_types.release_channel_can_allow_pick = True
+        channel = self.channel.with_context(queue_job__no_delay=True)
+        _states = self.channel._get_all_picking_type_ids_state
+        channel.write({"auto_allow_pick": False, "auto_disallow_pick": False})
+        with self._audit_new_logs():
+            channel._toggle_pick_allowed_channel()
+        self.assertEqual(len(self.new_logs), 2)
+        self.assertEqual(self.new_logs.mapped("picking_type_id"), picking_types[:2])
+        self.assertEqual(
+            self.new_logs.mapped("allowed"),
+            [channel.pick_allowed, channel.pick_allowed],
+        )
+        old_allowed = channel.pick_allowed
+        with self._audit_new_logs():
+            channel._toggle_pick_allowed_channel()
+        self.assertEqual(len(self.new_logs), 2)
+        self.assertEqual(
+            self.new_logs.mapped("allowed"), [not old_allowed, not old_allowed]
+        )
+        # change only one picking type
+        with self._audit_new_logs():
+            channel._toggle_pick_allowed_for_picking_type_id(pt1_id)
+        self.assertEqual(len(self.new_logs), 1)
+        self.assertEqual(self.new_logs.picking_type_id, picking_types[0])
+        self.assertEqual(self.new_logs.allowed, old_allowed)
+        # check we log the right user
+        with self.with_user("demo"), self._audit_new_logs():
+            self.env[channel._name].browse(channel.id).with_context(
+                queue_job__no_delay=True
+            )._toggle_pick_allowed_for_picking_type_id(pt2_id)
+        self.assertEqual(len(self.new_logs), 1)
+        self.assertEqual(self.new_logs.picking_type_id, picking_types[1])
+        self.assertEqual(self.new_logs.allowed, old_allowed)
+        self.assertEqual(self.new_logs.create_uid, self.env.ref("base.user_demo"))
+
+        # delete all logs
+        Logs = self.env["stock.release.channel.pick.allowed.log"]
+        Logs.cron_garbage_collector(nb_days=0)
+        existing = Logs.search_count([])
+        self.assertEqual(existing, 0)

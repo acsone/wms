@@ -1,6 +1,7 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import json
+from contextlib import contextmanager
 from datetime import date, datetime, time, timedelta
 
 import pytz
@@ -259,3 +260,34 @@ class StockReleaseChannel(StockReleaseChannelBase):
             ):
                 res += rec
         return res
+
+    def write(self, vals):
+        with self._log_pick_allowed_changes(vals):
+            res = super().write(vals)
+        return res
+
+    @contextmanager
+    def _log_pick_allowed_changes(self, vals):
+        log_changes = "pick_allowed_by_picking_type" in vals
+        log_values = []
+        if log_changes:
+            original_values = {r.id: r.pick_allowed_by_picking_type or {} for r in self}
+        yield
+        if log_changes:
+            for rec in self:
+                old_value = original_values[rec.id]
+                new_value = rec.pick_allowed_by_picking_type or {}
+                for picking_type_id, pick_allowed in new_value.items():
+                    if (
+                        picking_type_id not in old_value
+                        or pick_allowed != old_value[picking_type_id]
+                    ):
+                        log_values.append(
+                            {
+                                "release_channel_id": rec.id,
+                                "picking_type_id": int(picking_type_id),
+                                "allowed": pick_allowed,
+                            }
+                        )
+        if log_values:
+            self.env["stock.release.channel.pick.allowed.log"].sudo().create(log_values)
