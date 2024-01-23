@@ -54,7 +54,7 @@ if quant.lot_id:
             ("product_id", "in", quant.product_id.ids),
             ("quantity", ">", 0),
             ("location_id", "child_of", orderpoint_locations.ids),
-            ("location_id", "!=", quant.location_id.id),
+            ("location_id", "not in", quant.location_id.ids),
     ]):
         if reserve_quant.lot_id.removal_date > datetime.datetime.now() and any((reserve_quant.lot_id.removal_date < lot.removal_date) for lot in quant.lot_id):
             result = False
