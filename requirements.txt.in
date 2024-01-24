@@ -293,7 +293,6 @@ odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/OCA/bank-p
 # https://github.com/OCA/account-closing/pull/270 - auto reverse
 # https://github.com/OCA/account-closing/pull/271 - account cutoff accrual on order
 # https://github.com/OCA/account-closing/pull/283 - configure different account for refunds
-odoo-addon-account-cutoff-base @ git+https://github.com/acsone/account-closing.git@16.0-account-cutoff-base#subdirectory=setup/account_cutoff_base
 odoo-addon-account-cutoff-accrual-order-base @ git+https://github.com/OCA/account-closing.git@refs/pull/271/head#subdirectory=setup/account_cutoff_accrual_order_base
 odoo-addon-account-cutoff-accrual-order-product-category @ git+https://github.com/OCA/account-closing.git@refs/pull/273/head#subdirectory=setup/account_cutoff_accrual_order_product_category
 odoo-addon-account-cutoff-accrual-order-stock-base @ git+https://github.com/OCA/account-closing.git@refs/pull/271/head#subdirectory=setup/account_cutoff_accrual_order_stock_base
