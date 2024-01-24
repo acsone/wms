@@ -10,7 +10,9 @@ from odoo.addons.sale.models.sale_order import SaleOrder as SaleOrderBase
 class SaleOrder(SaleOrderBase):
     def action_cancel(self):
         for sale_order in self:
-            if sale_order.picking_ids.filtered(lambda picking: picking.printed):
+            if sale_order.picking_ids.filtered(
+                lambda picking: picking.printed or picking.state == "done"
+            ):
                 raise UserError(
                     _("You cannot cancel sale order {}, it's already prepared").format(
                         sale_order.name
