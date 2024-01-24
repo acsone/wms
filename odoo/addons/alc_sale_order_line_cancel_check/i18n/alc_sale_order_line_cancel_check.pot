@@ -22,5 +22,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/alc_sale_order_line_cancel_check/wizards/sale_order_line_cancel.py:0
 #, python-format
+msgid "The preparation is done for products: %(products)s"
+msgstr ""
+
+#. module: alc_sale_order_line_cancel_check
+#. odoo-python
+#: code:addons/alc_sale_order_line_cancel_check/wizards/sale_order_line_cancel.py:0
+#, python-format
 msgid "You cannot cancel a quantity that is part of a started picking"
 msgstr ""
