@@ -48,6 +48,37 @@
               <td class="text-end">
                 <span t-field="line.product_qty_unavailable" />
               </td>
+              <td name="td_priceunit" class="text-end">
+                  <span t-field="line.price_unit" />
+              </td>
+              <td t-if="display_discount" class="text-end">
+                  <span t-field="line.discount" />
+              </td>
+              <td name="td_taxes" class="text-end">
+                  <span
+                  t-out="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"
+                />
+              </td>
+              <td class="text-end">
+                <span t-field="line.discount2" />
+              </td>
+              <td class="text-end">
+                <span t-field="line.discount3" />
+              </td>
+              <td
+                t-if="not line.is_downpayment"
+                name="td_subtotal"
+                class="text-end o_price_total"
+              >
+                  <span
+                  t-field="line.price_subtotal"
+                  groups="account.group_show_line_subtotals_tax_excluded"
+                />
+                  <span
+                  t-field="line.price_total"
+                  groups="account.group_show_line_subtotals_tax_included"
+                />
+              </td>
             </t>
             <t t-elif="line.display_type == 'line_section'">
               <td name="td_section_line" colspan="99">

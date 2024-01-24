@@ -15,6 +15,7 @@
         "alc_product_category_data",
         "alc_partner_pharmacist",
         "alc_sale_product_qty_unavailable",
+        "sale_triple_discount",
     ],
     "data": ["reports/ir_actions_report_template.xml"],
 }
