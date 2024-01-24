@@ -27,14 +27,45 @@ msgid "Allow picking automatically at"
 msgstr "Autoriser automatiquement la préparation à"
 
 #. module: alc_stock_release_channel_pick_allowed
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel_pick_allowed_log__allowed
+msgid "Allowed"
+msgstr ""
+
+#. module: alc_stock_release_channel_pick_allowed
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_form_view
 msgid "Automatic picking settings"
 msgstr "Paramètres de préparation automatique"
 
 #. module: alc_stock_release_channel_pick_allowed
+#: model:ir.actions.server,name:alc_stock_release_channel_pick_allowed.ir_cron_release_channel_allowed_log_cleanup_ir_actions_server
+#: model:ir.cron,cron_name:alc_stock_release_channel_pick_allowed.ir_cron_release_channel_allowed_log_cleanup
+msgid "Clean stock release channel log allowed"
+msgstr ""
+
+#. module: alc_stock_release_channel_pick_allowed
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_pick_allowed_log_search_view
+msgid "Created By"
+msgstr ""
+
+#. module: alc_stock_release_channel_pick_allowed
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel_pick_allowed_log__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_stock_release_channel_pick_allowed
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel_pick_allowed_log__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_disallow_pick
 msgid "Disallow picking automatically"
 msgstr "Interdire automatiquement la préparation"
+
+#. module: alc_stock_release_channel_pick_allowed
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel_pick_allowed_log__display_name
+msgid "Display Name"
+msgstr ""
 
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__auto_allow_pick_time_before_leave
@@ -54,6 +85,16 @@ msgstr ""
 "cours effectués"
 
 #. module: alc_stock_release_channel_pick_allowed
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_pick_allowed_log_search_view
+msgid "Group By"
+msgstr ""
+
+#. module: alc_stock_release_channel_pick_allowed
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel_pick_allowed_log__id
+msgid "ID"
+msgstr ""
+
+#. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,help:alc_stock_release_channel_pick_allowed.field_stock_picking_type__release_channel_can_allow_pick
 msgid ""
 "If true, users can allow/disallow picking preparation for this type on "
@@ -61,6 +102,21 @@ msgid ""
 msgstr ""
 "Si vrai, les utilisateurs peuvent autoriser/interdire la préparation  pour "
 "ce type d'opération"
+
+#. module: alc_stock_release_channel_pick_allowed
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel_pick_allowed_log____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_stock_release_channel_pick_allowed
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel_pick_allowed_log__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_stock_release_channel_pick_allowed
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel_pick_allowed_log__write_date
+msgid "Last Updated on"
+msgstr ""
 
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel__pick_allowed
@@ -73,7 +129,14 @@ msgid "Pick Allowed By Picking Type"
 msgstr "Préparation permise par type d'opération"
 
 #. module: alc_stock_release_channel_pick_allowed
+#: model:ir.ui.menu,name:alc_stock_release_channel_pick_allowed.stock_release_channel_pick_allowed_log_menu
+msgid "Pick Allowed Log"
+msgstr ""
+
+#. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model,name:alc_stock_release_channel_pick_allowed.model_stock_picking_type
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel_pick_allowed_log__picking_type_id
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_pick_allowed_log_search_view
 msgid "Picking Type"
 msgstr "Type de picking"
 
@@ -86,9 +149,26 @@ msgstr ""
 "cours"
 
 #. module: alc_stock_release_channel_pick_allowed
+#: model:ir.model.fields,field_description:alc_stock_release_channel_pick_allowed.field_stock_release_channel_pick_allowed_log__release_channel_id
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_pick_allowed_log_search_view
+msgid "Release Channel"
+msgstr ""
+
+#. module: alc_stock_release_channel_pick_allowed
+#: model:ir.actions.act_window,name:alc_stock_release_channel_pick_allowed.stock_release_channel_pick_allowed_log_act_window
+#: model:ir.model,name:alc_stock_release_channel_pick_allowed.model_stock_release_channel_pick_allowed_log
+msgid "Stock Release Channel Pick Allowed Log"
+msgstr ""
+
+#. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model,name:alc_stock_release_channel_pick_allowed.model_stock_release_channel
 msgid "Stock Release Channels"
 msgstr "Canaux de livraison"
+
+#. module: alc_stock_release_channel_pick_allowed
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_pick_allowed.stock_release_channel_pick_allowed_log_search_view
+msgid "Today logs"
+msgstr ""
 
 #. module: alc_stock_release_channel_pick_allowed
 #: model:ir.model,name:alc_stock_release_channel_pick_allowed.model_stock_picking
