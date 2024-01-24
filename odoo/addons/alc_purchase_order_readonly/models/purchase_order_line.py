@@ -8,13 +8,13 @@ from odoo.addons.purchase.models.purchase import (
     PurchaseOrderLine as PurchaseOrderLineBase,
 )
 
-from .purchase_order import READONLY_STATES
+from .purchase_order import READONLY_LAX_STATES, READONLY_STATES
 
 
 class PurchaseOrderLine(PurchaseOrderLineBase):
 
     name = fields.Text(readonly=False, states=READONLY_STATES)
-    date_planned = fields.Datetime(readonly=False, states=READONLY_STATES)
+    date_planned = fields.Datetime(readonly=False, states=READONLY_LAX_STATES)
     product_qty = fields.Float(readonly=False, states=READONLY_STATES)
     taxes_id = fields.Many2many[AccountTax](readonly=False, states=READONLY_STATES)
     discount_global = fields.Float(readonly=False, states=READONLY_STATES)
