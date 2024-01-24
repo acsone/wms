@@ -11,6 +11,12 @@ READONLY_STATES = {
     "cancel": [("readonly", True)],
 }
 
+# Includes only done and cancel states
+READONLY_LAX_STATES = {
+    "done": [("readonly", True)],
+    "cancel": [("readonly", True)],
+}
+
 
 class PurchaseOrder(PurchaseOrderBase):
 
