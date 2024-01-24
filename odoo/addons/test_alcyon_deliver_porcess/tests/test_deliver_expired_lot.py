@@ -44,8 +44,22 @@ class TestDeliverExpiredLot(TestDeliverProcessBase):
                 trap_pick.perform_enqueued_jobs()
         return sale
 
+    def _deliver_channel(self):
+        with trap_jobs() as trap_rc:
+            self.channel.action_delivering()
+            self.assertEqual(self.channel.state, "delivering")
+            with trap_jobs() as trap_sa:
+                trap_rc.perform_enqueued_jobs()
+                advices = self.channel.shipment_advice_ids.filtered(
+                    lambda s: s.state not in ("done", "cancel")
+                )
+                with trap_jobs() as trap_sap:
+                    # picking jobs
+                    trap_sa.perform_enqueued_jobs()
+                    trap_sap.perform_enqueued_jobs()
+        return advices
+
     def test_00(self):
-        """Test backorder unreleased after deliver an assigned to release channel at wakeup."""
         self.channel.action_unlock()
         sale1 = self._create_and_release_so(
             products=[self.product1, self.product2], qty=2
@@ -72,19 +86,22 @@ class TestDeliverExpiredLot(TestDeliverProcessBase):
         self.assertEqual(pick2.state, "done")
         # deliver the release channel
         self.channel.action_lock()
-        with trap_jobs() as trap_rc:
-            self.channel.action_delivering()
-            self.assertEqual(self.channel.state, "delivering")
-            with trap_jobs() as trap_sa:
-                trap_rc.perform_enqueued_jobs()
-                advices = self.channel.shipment_advice_ids.filtered(
-                    lambda s: s.state not in ("done", "cancel")
-                )
-                with trap_jobs() as trap_sap:
-                    # picking jobs
-                    trap_sa.perform_enqueued_jobs()
-                    trap_sap.perform_enqueued_jobs()
+        advices = self._deliver_channel()
         self.assertEqual(ship1.state, "assigned")
         self.assertEqual(ship2.state, "done")
         self.assertEqual(advices.state, "error")
+        self.assertEqual(
+            advices.error_message, "One of the pickings to process failed to validate"
+        )
         self.assertEqual(self.channel.state, "delivering_error")
+        self.assertEqual(
+            self.channel.delivering_error,
+            "One of the pickings to process failed to validate",
+        )
+        ship1._action_done()
+        self.assertEqual(ship1.state, "done")
+        self._deliver_channel()
+        self.assertEqual(advices.state, "done")
+        self.assertFalse(advices.error_message)
+        self.assertEqual(self.channel.state, "delivered")
+        self.assertFalse(self.channel.delivering_error)
