@@ -181,6 +181,7 @@ odoo.define(
           with_promo: products[index].with_promo,
           without_promo: products[index].without_promo,
           is_in_bo: products[index].is_in_bo,
+          is_stored_in_fridge: products[index].is_stored_in_fridge,
         });
       });
 
@@ -197,6 +198,7 @@ odoo.define(
       var ordered_product = $("#products_to_order").is(":checked");
       var products_without_promo = $("#products_without_promo").is(":checked");
       var products_with_promo = $("#products_with_promo").is(":checked");
+      var products_stored_in_fridge = $("#products_stored_in_fridge").is(":checked");
       var product_name = $("#product_name").val();
 
       current_products_list = products_list.filter(function (product) {
@@ -207,6 +209,9 @@ odoo.define(
           return false;
         }
         if (products_with_promo && !product.with_promo) {
+          return false;
+        }
+        if (products_stored_in_fridge && !!product.is_stored_in_fridge) {
           return false;
         }
         if (product_name.trim()) {
@@ -356,6 +361,7 @@ odoo.define(
       var products_to_order = $("#products_to_order").is(":checked");
       var products_without_promo = $("#products_without_promo").is(":checked");
       var products_with_promo = $("#products_with_promo").is(":checked");
+      var products_stored_in_fridge = $("#products_stored_in_fridge").is(":checked");
       var product_name = $("#product_name").val();
 
       if (products_to_order) {
@@ -366,6 +372,9 @@ odoo.define(
       }
       if (products_with_promo) {
         params.products_with_promo = true;
+      }
+      if (products_stored_in_fridge) {
+        params.products_stored_in_fridge = true;
       }
       if (product_name.trim()) {
         params.product_name = product_name.trim();

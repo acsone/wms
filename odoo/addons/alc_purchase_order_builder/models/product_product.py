@@ -28,6 +28,8 @@ class ProductProduct(ProductBase):
         compute="_compute_average_consumption",
     )
 
+    is_stored_in_fridge = fields.Boolean(compute="_compute_is_stored_in_fridge")
+
     def _compute_advised_qty(self):
         """
         Compute an advised quantity.
@@ -183,6 +185,16 @@ class ProductProduct(ProductBase):
             else:
                 av_three_months_consumption = 0
             product.average_three_months_consumption = av_three_months_consumption
+
+    def _compute_is_stored_in_fridge(self):
+        ambient_storage = self.env.ref(
+            "alc_product_storage_temperature.product_storage_temperature_ambient"
+        )
+        for product in self:
+            product.is_stored_in_fridge = (
+                product.product_tmpl_id.storage_temperature_id
+                and product.product_tmpl_id.storage_temperature_id == ambient_storage
+            )
 
     def get_lots(self):
         self.ensure_one()

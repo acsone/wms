@@ -100,6 +100,7 @@ class PurchaseOrder(PurchaseOrderBase):
                     "name": product.name,
                     "display_name": product.display_name,
                     "ref": product.default_code,
+                    "is_stored_in_fridge": product.is_stored_in_fridge,
                     "ordered_product": product in ordered_products_with_qty,
                     "with_promo": is_with_promo,
                     "without_promo": is_without_promo,

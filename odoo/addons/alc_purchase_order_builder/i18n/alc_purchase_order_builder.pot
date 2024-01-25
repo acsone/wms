@@ -210,6 +210,11 @@ msgstr ""
 
 #. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
+msgid "Products stored in fridges<br/>"
+msgstr ""
+
+#. module: alc_purchase_order_builder
+#: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
 msgid "Products to order<br/>"
 msgstr ""
 
