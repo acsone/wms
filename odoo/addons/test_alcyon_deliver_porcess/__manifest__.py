@@ -20,6 +20,7 @@
         "alc_stock_picking_cancel_permission",
         "stock_release_channel_delivery",
         "stock_move_line_change_lot",
+        "product_expiry",
     ],
     "data": [],
     "demo": [],

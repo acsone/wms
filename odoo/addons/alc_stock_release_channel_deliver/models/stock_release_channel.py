@@ -65,7 +65,14 @@ class StockReleaseChannel(StockReleaseChannelBase):
                     "locked",
                     "delivering_error",
                 )
-                and bool(rec.picking_to_plan_ids)
+                and (
+                    bool(rec.picking_to_plan_ids)
+                    or bool(
+                        rec.in_process_shipment_advice_ids.filtered(
+                            lambda sa: sa.state == "error"
+                        )
+                    )
+                )
                 and rec.shipment_planning_method != "none"
             )
 
@@ -81,6 +88,12 @@ class StockReleaseChannel(StockReleaseChannelBase):
 
     def _check_is_action_delivering_allowed(self):
         for rec in self:
+            if rec.in_process_shipment_advice_ids.filtered(
+                lambda sa: sa.state == "error"
+            ):
+                # A shipment advice is already planned. The delivery will only retry validating it.
+                # No need to check picking to plan.
+                continue
             if not rec.picking_to_plan_ids:
                 raise UserError(
                     _("No picking to deliver for channel %(name)s.", name=rec.name)
