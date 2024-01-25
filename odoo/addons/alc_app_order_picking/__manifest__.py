@@ -128,6 +128,7 @@
         "stock_move_line_lock_qty_done",
         "alc_stock_picking_view",
         "alc_stock_picking_action_put_in_pack",
+        "alc_stock_move_line_lock_done",
     ],
     "data": [],
     "demo": [],
