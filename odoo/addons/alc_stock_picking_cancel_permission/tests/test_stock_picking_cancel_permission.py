@@ -179,3 +179,24 @@ class TestStockPickingName(TransactionCase):
         )
         wizard.process_cancel_backorder()
         self.assertFalse(self.picking_in.backorder_ids)
+
+    def test_stock_picking_backorder_never(self):
+        """
+        Data: 1 confirmed picking with 1 move.
+
+        case: - set printed of the picking
+              - Partially transfer the picking
+        result: - the backorder should be successfully created
+        """
+        # create an in
+        self._create_quantities(self.product_1)
+        self._create_quantities(self.product_2)
+        self.picking.picking_type_id.create_backorder = "never"
+        self.picking.action_assign()
+        self.picking.printed = True
+        self.picking.move_line_ids[0].qty_done = 4.0
+        self.picking.button_validate()
+        self.assertSetEqual(
+            {"done", "cancel"}, set(self.picking.move_ids.mapped("state"))
+        )
+        self.assertEqual(self.picking.state, "done")

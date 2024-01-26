@@ -16,6 +16,7 @@ class Move(StockMove):
                 "alc_stock_picking_cancel_permission.group_picking_cancel"
             )
             or self.env.context.get("force_cancel")
+            or self.env.context.get("cancel_backorder")
         )
 
     def _action_cancel(self):
