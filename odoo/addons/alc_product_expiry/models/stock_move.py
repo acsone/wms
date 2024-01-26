@@ -59,3 +59,31 @@ class StockMove(StockMoveBase):
             strict=strict,
             allow_negative=allow_negative,
         )
+
+    def _update_reserved_quantity(
+        self,
+        need,
+        available_quantity,
+        location_id,
+        lot_id=None,
+        package_id=None,
+        owner_id=None,
+        strict=True,
+    ):
+        self.ensure_one()
+        move = self
+        if (
+            self.picking_type_id.no_expired_reservation_allowed
+            and self.product_id.use_expiration_date
+            and not self.picking_id.to_process_quant_expired
+        ):
+            move = self.with_context(removal_date_limit=self.picking_id.scheduled_date)
+        return super(StockMove, move)._update_reserved_quantity(
+            need,
+            available_quantity,
+            location_id,
+            lot_id=lot_id,
+            package_id=package_id,
+            owner_id=owner_id,
+            strict=strict,
+        )
