@@ -1,6 +1,8 @@
 # Copyright 2024 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from datetime import datetime, timedelta
+
 from odoo import Command
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
@@ -225,4 +227,86 @@ class TestProductExpiry(TransactionCase):
         self.assertEqual(self.picking_customer.state, "assigned")
         self.picking_customer.to_process_quant_expired = True
         self.picking_customer.button_validate()
+        self.assertEqual(self.picking_customer.state, "done")
+
+    def test_9(self):
+        """Make sure not expired lots are picked."""
+        self.assertEqual(self.picking_customer.state, "waiting")
+        self.assertEqual(self.move.ordered_available_to_promise_qty, 3)
+        self.assertTrue(self.move.release_ready)
+        self.picking_customer.release_available_to_promise()
+        pick = self.move.move_orig_ids.picking_id
+        self.assertEqual(pick.state, "confirmed")
+        self.assertFalse(pick.move_line_ids)
+        lot = self.env["stock.lot"].create(
+            {
+                "name": "lot 2",
+                "product_id": self.product.id,
+                "removal_date": datetime.now() + timedelta(days=30),
+            }
+        )
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.loc_stock, 3, lot_id=lot
+        )
+        self.assertEqual(lot.quant_ids.available_quantity, 3)
+        pick.action_assign()
+        self.assertEqual(lot.quant_ids.available_quantity, 0)
+        self.assertEqual(pick.state, "assigned")
+        self.assertEqual(pick.move_line_ids.lot_id, lot)
+        self._do_transfer(pick)
+        self.assertEqual(pick.state, "done")
+        self.assertEqual(self.picking_customer.state, "assigned")
+        self._do_transfer(self.picking_customer)
+        self.assertEqual(self.picking_customer.state, "done")
+
+    def test_10(self):
+        """Make sure not expired lots are picked."""
+        lot = self.env["stock.lot"].create(
+            {
+                "name": "lot 2",
+                "product_id": self.product.id,
+                "removal_date": datetime.now() + timedelta(days=30),
+            }
+        )
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.loc_stock, 3, lot_id=lot
+        )
+        self.assertEqual(self.picking_customer.state, "waiting")
+        self.assertEqual(self.move.ordered_available_to_promise_qty, 3)
+        self.assertTrue(self.move.release_ready)
+        self.picking_customer.release_available_to_promise()
+        pick = self.move.move_orig_ids.picking_id
+        self.assertEqual(lot.quant_ids.available_quantity, 0)
+        self.assertEqual(pick.state, "assigned")
+        self.assertEqual(pick.move_line_ids.lot_id, lot)
+        self._do_transfer(pick)
+        self.assertEqual(pick.state, "done")
+        self.assertEqual(self.picking_customer.state, "assigned")
+        self._do_transfer(self.picking_customer)
+        self.assertEqual(self.picking_customer.state, "done")
+
+    def test_11(self):
+        """Make sure not expired lots are picked even for partial reservation."""
+        lot = self.env["stock.lot"].create(
+            {
+                "name": "lot 2",
+                "product_id": self.product.id,
+                "removal_date": datetime.now() + timedelta(days=30),
+            }
+        )
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.loc_stock, 2, lot_id=lot
+        )
+        self.assertEqual(self.picking_customer.state, "waiting")
+        self.assertEqual(self.move.ordered_available_to_promise_qty, 3)
+        self.assertTrue(self.move.release_ready)
+        self.picking_customer.release_available_to_promise()
+        pick = self.move.move_orig_ids.picking_id
+        self.assertEqual(lot.quant_ids.available_quantity, 0)
+        self.assertEqual(pick.state, "assigned")
+        self.assertEqual(pick.move_line_ids.lot_id, lot)
+        self._do_transfer(pick)
+        self.assertEqual(pick.state, "done")
+        self.assertEqual(self.picking_customer.state, "assigned")
+        self._do_transfer(self.picking_customer)
         self.assertEqual(self.picking_customer.state, "done")
