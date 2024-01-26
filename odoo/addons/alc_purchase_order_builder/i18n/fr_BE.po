@@ -139,6 +139,11 @@ msgid "Group"
 msgstr "Groupe"
 
 #. module: alc_purchase_order_builder
+#: model:ir.model.fields,field_description:alc_purchase_order_builder.field_product_product__is_stored_in_fridge
+msgid "Is Stored In Fridge"
+msgstr ""
+
+#. module: alc_purchase_order_builder
 #: model_terms:ir.ui.view,arch_db:alc_purchase_order_builder.main_page_body
 msgid "Kg"
 msgstr "Kg"
