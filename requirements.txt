@@ -376,7 +376,7 @@ odoo-addon-stock-restrict-lot==16.0.1.1.0.2
 odoo-addon-stock-route-mto==16.0.1.0.0.2
 odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@0c90dfb1a4597a2da3beeb5de9fb2495c44d7520#subdirectory=setup/stock_scrap_location_default
 odoo-addon-stock-storage-category-capacity-name==16.0.1.0.0.2
-odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@bb8062c0bed7d5904817833a2c0fdb8af8fd382a#subdirectory=setup/stock_storage_type
+odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@579734c977b00c8afc75431788cd6402b57a7b8e#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc==16.0.1.0.0.12
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-uom-unece==16.0.1.1.0.2
