@@ -26,3 +26,10 @@ class StockPicking(Picking):
                 lambda p, nv=new_value: p.to_process_quant_expired != nv
             )
             pickings.to_process_quant_expired = rec.to_process_quant_expired
+
+    def _pre_action_done_hook(self):
+        if all(self.mapped("to_process_quant_expired")):
+            return super(
+                StockPicking, self.with_context(skip_expired=True)
+            )._pre_action_done_hook()
+        return super()._pre_action_done_hook()

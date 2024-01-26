@@ -207,3 +207,22 @@ class TestProductExpiry(TransactionCase):
         self.assertEqual(self.picking_customer.state, "assigned")
         self._do_transfer(self.picking_customer)
         self.assertEqual(self.picking_customer.state, "done")
+
+    def test_8(self):
+        """If expired lot not allowed, but reservation is done, validation is blocked."""
+        self.picking_customer.release_available_to_promise()
+        pick = self.move.move_orig_ids.picking_id
+        self.assertEqual(pick.state, "confirmed")
+        self.assertFalse(pick.move_line_ids)
+        pick.to_process_quant_expired = True
+        pick.action_assign()
+        self._do_transfer(pick)
+        self.assertEqual(self.picking_customer.state, "assigned")
+        self.picking_customer.to_process_quant_expired = False
+        self.picking_customer.action_set_quantities_to_reservation()
+        res = self.picking_customer.button_validate()
+        self.assertEqual(res.get("res_model"), "expiry.picking.confirmation")
+        self.assertEqual(self.picking_customer.state, "assigned")
+        self.picking_customer.to_process_quant_expired = True
+        self.picking_customer.button_validate()
+        self.assertEqual(self.picking_customer.state, "done")
