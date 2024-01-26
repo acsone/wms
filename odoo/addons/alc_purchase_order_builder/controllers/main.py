@@ -16,6 +16,7 @@ FILTERS = [
     "products_to_order",
     "products_without_promo",
     "products_with_promo",
+    "products_stored_in_fridge",
     "product_name",
     "next_product_id",
     "reload_products",

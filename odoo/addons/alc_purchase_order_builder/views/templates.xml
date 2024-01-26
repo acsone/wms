@@ -683,6 +683,10 @@
                     type="checkbox"
                     id="products_with_promo"
                   /> Products with promotions<br />
+                                    <input
+                    type="checkbox"
+                    id="products_stored_in_fridge"
+                  /> Products stored in fridges<br />
                   <strong t-if="picking_zones">Picking Zones</strong><br />
                   <t t-foreach="picking_zones" t-as="picking_zone">
                       <input
