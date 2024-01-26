@@ -1,0 +1,62 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_product_expiry
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr_BE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+
+#. module: alc_product_expiry
+#: model:ir.model.fields,field_description:alc_product_expiry.field_stock_picking__to_process_quant_expired
+msgid "Bypass restriction on expired quants"
+msgstr ""
+
+#. module: alc_product_expiry
+#: model:ir.model.fields,help:alc_product_expiry.field_stock_picking_type__no_expired_reservation_allowed
+msgid ""
+"Check this box to enforce a policy that prevents reservations for lots that "
+"have already expired. When enabled, users won't be able to make reservations"
+" for lots whose expiration date has passed."
+msgstr ""
+
+#. module: alc_product_expiry
+#: model:ir.model.fields,field_description:alc_product_expiry.field_stock_picking_type__no_expired_reservation_allowed
+msgid "Disallow Expired Lot Reservations"
+msgstr ""
+
+#. module: alc_product_expiry
+#: model:ir.model,name:alc_product_expiry.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: alc_product_expiry
+#: model:ir.model,name:alc_product_expiry.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: alc_product_expiry
+#: model:ir.model,name:alc_product_expiry.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: alc_product_expiry
+#: model:ir.model,name:alc_product_expiry.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: alc_product_expiry
+#. odoo-python
+#: code:addons/alc_product_expiry/models/stock_move.py:0
+#, python-format
+msgid ""
+"You cannot transfer lots with a removal date:\n"
+"\t- %(lots)s"
+msgstr ""
