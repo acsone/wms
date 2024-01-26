@@ -2,6 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import csv
 
+from odoo import tools
+
 from odoo.addons.report_csv.report.report_csv import ReportCSVAbstract
 
 
@@ -14,10 +16,24 @@ class AlcProductConsolidatedPriceCsvReport(ReportCSVAbstract):
         file.writeheader()
         flattened_data = self._flattened_data(partner)
         for fdata in flattened_data:
-            final_discount = self._get_final_discount(
-                fdata.supplier_discount_discount_sale,
-            )
             product = self.env["product.product"].browse(fdata.product_id)
+            # get the list of keys to use to retrieve the alcyon discounts from
+            # the cache allowed to the partner
+            discount_keys = partner.discount_pricelist_ids.mapped("discount_role_name")
+            # get the resolved discount from the cache )
+            discount = (
+                product._resolve_discount_cache_get(fdata.price_cache, discount_keys)
+                or {}
+            )
+            alcyon_discount = discount.get("discount", 0)
+            # the final discount is the multiplication of the supplier discount
+            # and the alcyon discount
+            final_discount = self._get_final_discount(
+                fdata.supplier_discount_discount_sale, alcyon_discount
+            )
+            # the net price includes the supplier discount and the alcyon discount
+            net_price = fdata.gross_price * (1.0 - final_discount / 100.0)
+            net_price = tools.float_round(net_price, precision_rounding=0.01)
             file.writerow(
                 {
                     "REF": fdata.default_code,
@@ -29,9 +45,14 @@ class AlcProductConsolidatedPriceCsvReport(ReportCSVAbstract):
                             lambda t: t.amount_type == "percent"
                         ).mapped("description")
                     ),
+                    # the gross price is the price without any discount applied
+                    # to the partner. It's based on the pricelist of the partner
                     "LIST_PRICE": fdata.gross_price,
+                    # the supplier discount is the discount offered by the supplier
                     "DISCOUNT": fdata.supplier_discount_discount_sale,
-                    "NET_PRICE": fdata.gross_price * (1.0 - final_discount / 100.0),
+                    # the list price includes the discount offered by the supplier
+                    # and the discount offered by alcyon
+                    "NET_PRICE": net_price,
                     "SUPPLIER": fdata.supplier_name,
                     "CATEGORY": fdata.categ,
                 }
