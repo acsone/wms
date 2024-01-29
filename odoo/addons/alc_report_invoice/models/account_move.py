@@ -243,7 +243,11 @@ class AccountMove(Move, ReportAsync):
         ] = f"{tax_summary['contribution_total']:.2f} {self.currency_id.symbol}"
         # add some computed amounts needed for reporting
         amount_without_discount = (
-            sum(line.price_unit * line.quantity for line in self.invoice_line_ids)
+            sum(
+                line.price_unit * line.quantity
+                for line in self.invoice_line_ids
+                if line.display_type == "product"
+            )
             + tax_summary["contribution_total"]
         )
         tax_summary["amount_without_discount"] = (
