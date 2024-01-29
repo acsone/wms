@@ -130,6 +130,7 @@
         "alc_stock_picking_action_put_in_pack",
         "alc_stock_move_line_lock_done",
         "alc_product_expiry",
+        "alc_stock_move_line_audit",
     ],
     "data": [],
     "demo": [],

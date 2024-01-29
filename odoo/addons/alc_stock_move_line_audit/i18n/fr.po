@@ -1,0 +1,107 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_stock_move_line_audit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-29 16:41+0000\n"
+"PO-Revision-Date: 2024-01-29 16:41+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_stock_move_line_audit
+#: model:ir.model.fields,field_description:alc_stock_move_line_audit.field_alc_stock_move_line_audit__date
+msgid "Date"
+msgstr ""
+
+#. module: alc_stock_move_line_audit
+#: model:ir.model.fields,help:alc_stock_move_line_audit.field_stock_picking__date_done
+msgid "Date at which the transfer has been processed or cancelled."
+msgstr "Date à laquelle le transfert a été traité ou annulé."
+
+#. module: alc_stock_move_line_audit
+#: model:ir.model.fields,field_description:alc_stock_move_line_audit.field_stock_picking__date_done
+msgid "Date of Transfer"
+msgstr "Date du transfert"
+
+#. module: alc_stock_move_line_audit
+#: model:ir.model.fields,field_description:alc_stock_move_line_audit.field_alc_stock_move_line_audit__picking_destination_location_id
+msgid "Destination Location"
+msgstr "Emplacement de destination"
+
+#. module: alc_stock_move_line_audit
+#: model:ir.model.fields,field_description:alc_stock_move_line_audit.field_alc_stock_move_line_audit__display_name
+msgid "Display Name"
+msgstr "Intitulé"
+
+#. module: alc_stock_move_line_audit
+#: model:ir.model.fields,field_description:alc_stock_move_line_audit.field_alc_stock_move_line_audit__id
+msgid "ID"
+msgstr ""
+
+#. module: alc_stock_move_line_audit
+#: model:ir.model.fields,field_description:alc_stock_move_line_audit.field_alc_stock_move_line_audit____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: alc_stock_move_line_audit
+#: model_terms:ir.ui.view,arch_db:alc_stock_move_line_audit.alc_stock_move_line_audit_search_view
+msgid "Last month"
+msgstr "Mois dernier"
+
+#. module: alc_stock_move_line_audit
+#: model_terms:ir.ui.view,arch_db:alc_stock_move_line_audit.alc_stock_move_line_audit_search_view
+msgid "Nbr lignes Picking"
+msgstr "Nbr de lignes de transfert"
+
+#. module: alc_stock_move_line_audit
+#: model_terms:ir.ui.view,arch_db:alc_stock_move_line_audit.alc_stock_move_line_audit_search_view
+msgid "Nbr lignes Picking Last month"
+msgstr "Nbr de lignes de transfert le mois dernier"
+
+#. module: alc_stock_move_line_audit
+#: model_terms:ir.ui.view,arch_db:alc_stock_move_line_audit.alc_stock_move_line_audit_search_view
+msgid "Nbr lignes Picking Today"
+msgstr "Nbr de lignes de transfert aujourd'hui"
+
+#. module: alc_stock_move_line_audit
+#: model_terms:ir.ui.view,arch_db:alc_stock_move_line_audit.alc_stock_move_line_audit_pivot_view
+msgid "Operations"
+msgstr "Opérations"
+
+#. module: alc_stock_move_line_audit
+#: model:ir.actions.act_window,name:alc_stock_move_line_audit.alc_stock_move_line_audit_act_window
+#: model:ir.ui.menu,name:alc_stock_move_line_audit.alc_stock_move_line_audit_menu
+msgid "Operations Audit"
+msgstr "Audit des opérations"
+
+#. module: alc_stock_move_line_audit
+#: model:ir.model.fields,field_description:alc_stock_move_line_audit.field_alc_stock_move_line_audit__picking_id
+msgid "Picking"
+msgstr "Transfert"
+
+#. module: alc_stock_move_line_audit
+#: model:ir.model.fields,field_description:alc_stock_move_line_audit.field_alc_stock_move_line_audit__qty_done
+msgid "Qty Done"
+msgstr "Qté traitée"
+
+#. module: alc_stock_move_line_audit
+#: model:ir.model,name:alc_stock_move_line_audit.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
+
+#. module: alc_stock_move_line_audit
+#: model:ir.model.fields,field_description:alc_stock_move_line_audit.field_alc_stock_move_line_audit__user_id
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: alc_stock_move_line_audit
+#: model:ir.model,name:alc_stock_move_line_audit.model_alc_stock_move_line_audit
+msgid "User operations Audit"
+msgstr "Audit des opérations"

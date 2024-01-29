@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+  <record id="alc_stock_move_line_audit_pivot_view" model="ir.ui.view">
+    <field name="name">alc.stock.move.line.audit.pivot</field>
+    <field name="model">alc.stock.move.line.audit</field>
+    <field name="arch" type="xml">
+      <pivot string="Operations" disable_linking="True">
+        <field name="user_id" type="row" />
+        <field name="date" type="col" interval="day" />
+      </pivot>
+    </field>
+  </record>
+
+    <record model="ir.ui.view" id="alc_stock_move_line_audit_search_view">
+        <field
+      name="name"
+    >alc.stock.move.line.audit.search (in alc_stock_move_line_audit)</field>
+        <field name="model">alc.stock.move.line.audit</field>
+        <field name="arch" type="xml">
+            <search>
+                <group>
+                      <filter
+            string="Nbr lignes Picking Today"
+            name="filter_nbr_lines_picking_last_day"
+            domain="[
+                                  ('qty_done', '>', 0),
+                                  ('picking_destination_location_id', '=',%(stock.stock_location_output)d),
+                                  ('date', '&gt;=', context_today())
+                                ]"
+          />
+                  <separator />
+                      <filter
+            string="Nbr lignes Picking Last month"
+            name="filter_nbr_lines_picking_last_month"
+            domain="[
+                                  ('qty_done', '>', 0),
+                                  ('picking_destination_location_id', '=',%(stock.stock_location_output)d),
+                                  ('date', '&gt;=', (context_today()-relativedelta(months=1)).strftime('%Y-%m-01'))
+                                ]"
+          />
+                  <separator />
+                      <filter
+            string="Last month"
+            name="filter_last_month"
+            domain="[
+                                  ('date', '&gt;=', (context_today()-relativedelta(months=1)).strftime('%Y-%m-01'))
+                                ]"
+          />
+                  <separator />
+                      <filter
+            string="Nbr lignes Picking"
+            name="filter_nbr_lines_picking"
+            domain="[
+                                    ('qty_done', '>', 0),
+                                    ('picking_destination_location_id', '=', %(stock.stock_location_output)d),
+                                  ]"
+          />
+                    </group>
+              <separator />
+            </search>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="alc_stock_move_line_audit_act_window">
+        <field name="name">Operations Audit</field>
+        <field name="res_model">alc.stock.move.line.audit</field>
+        <field name="view_mode">pivot</field>
+        <field name="domain">[]</field>
+        <field
+      name="context"
+    >{'search_default_filter_nbr_lines_picking_last_month': 1}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="alc_stock_move_line_audit_menu">
+        <field name="name">Operations Audit</field>
+        <field name="parent_id" ref="stock.menu_warehouse_report" />
+        <field name="action" ref="alc_stock_move_line_audit_act_window" />
+        <field name="sequence" eval="140" />
+    </record>
+
+</odoo>
