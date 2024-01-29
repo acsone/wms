@@ -66,6 +66,7 @@
         "alc_sale_order_line_cancel_check",
         "alc_sale_order_line_unavailable_list",
         "alc_sale_product_qty_backorder",
+        "alc_sale_order_sort_by_date_order",
         "alc_sale_qty_returned",
         "alc_sale_qty_returned_product_additional",
         "alc_sale_product_qty_unavailable",
