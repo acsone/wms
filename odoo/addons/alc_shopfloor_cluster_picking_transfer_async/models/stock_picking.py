@@ -24,10 +24,11 @@ class StockPicking(Picking):
         if self.state in ("done", "cancel"):
             return _("Nothing to do. Picking is in %(state)s", state=self.state)
         picking_lines = self.move_line_ids
-        if all(line.shopfloor_unloaded for line in picking_lines):
-            self._action_done()
-        if unload_package_at_destination and lines:
+        all_lines_unloaded = all(line.shopfloor_unloaded for line in picking_lines)
+        if unload_package_at_destination and all_lines_unloaded:
             lines.result_package_id = False
+        if all_lines_unloaded:
+            self._action_done()
         if self.state != "done" and self.batch_id and self.batch_id.state == "done":
             # Unassign not validated pickings from the batch, they will be
             # processed in another batch automatically later on
