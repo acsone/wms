@@ -117,58 +117,98 @@
               </tr>
             </t>
             <t t-foreach="invoice_lines" t-as="line">
-              <tr>
-                <td>
-                  <span t-field="line.product_id.default_code" />
-                </td>
-                <td class="text-left">
-                  <span t-field="line.name" />
-                </td>
-                <td>
-                  <span t-esc="int(line.quantity)" />
-                </td>
-                <td>
-                  <span t-field="line.price_unit" />
-                </td>
-                <td>
-                  <span t-field="line.discount2" />
-                </td>
-                <td>
-                  <span t-field="line.discount3" />
-                </td>
-                <td>
-                  <span t-field="line.price_subtotal" />
-                </td>
-                <td>
-                  <span
-                    t-esc="', '.join(x.name or x.description for x in line.only_tax_ids)"
-                  />
-                </td>
-              </tr>
-              <tr t-foreach="line.contribution_ids" t-as="contribution">
-                <td />
-                <td>
-                  <t t-if="contribution.amount">
-                    <span t-esc="contribution.description or contribution.name" />
-                  </t>
-                </td>
-                <td>
-                  <span t-esc="int(line.quantity)" />
-                </td>
-                <td>
-                  <span t-field="contribution.amount" />
-                </td>
-                <td />
-                <td />
-                <td>
-                  <span t-field="line.amount_contribution" />
-                </td>
-                <td>
-                  <span
-                    t-esc="', '.join(map(lambda x: (x.description or x.name), line.only_tax_ids))"
-                  />
-                </td>
-              </tr>
+                <t t-if="line.display_type == 'product'">
+                    <tr>
+                        <td>
+                          <span t-field="line.product_id.default_code" />
+                        </td>
+                        <td class="text-left">
+                          <span t-field="line.name" />
+                        </td>
+                        <td>
+                          <span t-esc="int(line.quantity)" />
+                        </td>
+                        <td>
+                          <span t-field="line.price_unit" />
+                        </td>
+                        <td>
+                          <span t-field="line.discount2" />
+                        </td>
+                        <td>
+                          <span t-field="line.discount3" />
+                        </td>
+                        <td>
+                          <span t-field="line.price_subtotal" />
+                        </td>
+                        <td>
+                          <span
+                      t-esc="', '.join(x.name or x.description for x in line.only_tax_ids)"
+                    />
+                        </td>
+                      </tr>
+                      <tr t-foreach="line.contribution_ids" t-as="contribution">
+                        <td />
+                        <td>
+                          <t t-if="contribution.amount">
+                            <span
+                        t-esc="contribution.description or contribution.name"
+                      />
+                          </t>
+                        </td>
+                        <td>
+                          <span t-esc="int(line.quantity)" />
+                        </td>
+                        <td>
+                          <span t-field="contribution.amount" />
+                        </td>
+                        <td />
+                        <td />
+                        <td>
+                          <span t-field="line.amount_contribution" />
+                        </td>
+                        <td>
+                          <span
+                      t-esc="', '.join(map(lambda x: (x.description or x.name), line.only_tax_ids))"
+                    />
+                        </td>
+                      </tr>
+
+                </t>
+                <t t-if="line.display_type == 'line_note'">
+                    <tr>
+                        <td />
+                        <td>
+                            <small><span
+                        t-field="line.name"
+                        t-options="{'widget': 'text'}"
+                      /></small>
+                        </td>
+                        <td />
+                        <td />
+                        <td />
+                        <td />
+                        <td />
+                        <td />
+                    </tr>
+                </t>
+                <t t-if="line.display_type == 'line_section'">
+                    <tr>
+                        <td />
+                        <td>
+                            <span t-field="line.name" t-options="{'widget': 'text'}" />
+                        </td>
+                        <t t-set="current_section" t-value="line" />
+
+                        <t t-set="current_subtotal" t-value="0" />
+                        <td />
+                        <td />
+                        <td />
+                        <td />
+                        <td />
+                        <td />
+                    </tr>
+                </t>
+
             </t>
           </t>
           <tr>
