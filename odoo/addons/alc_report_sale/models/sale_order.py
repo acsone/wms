@@ -20,7 +20,7 @@ class SaleOrderLine(OrderLine):
 
     @api.depends("tax_id")
     def _compute_all_taxes(self):
-        tax_group_apb = self.env.ref("alc_accounting_data.tax_group_apb")
+        tax_group_apb = self.env.ref("l10n_be_apb_tax.tax_group_apb")
 
         for line in self:
             amount_contribution = 0
