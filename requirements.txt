@@ -364,7 +364,7 @@ odoo-addon-stock-quant-package-dimension @ git+https://github.com/acsone/stock-l
 odoo-addon-stock-quant-package-product-packaging==16.0.1.0.1.2
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@390f23e245a8cab34022cf4562f4ef9b856b9926#subdirectory=setup/stock_release_channel
 odoo-addon-stock-release-channel-auto-release==16.0.1.0.1
-odoo-addon-stock-release-channel-delivery @ git+https://github.com/acsone/wms.git@86d302bad07e29ffe2bfd966c9404d6980c52a02#subdirectory=setup/stock_release_channel_delivery
+odoo-addon-stock-release-channel-delivery @ git+https://github.com/acsone/wms.git@7fa560b001ee925d92574bc78f34a2287d8bb7db#subdirectory=setup/stock_release_channel_delivery
 odoo-addon-stock-release-channel-geoengine @ git+https://github.com/acsone/wms.git@5bf244f63bf8a4076407604ba7e0534a6b4a050b#subdirectory=setup/stock_release_channel_geoengine
 odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@2f55e21b95db74fda326b48313e3c874c0a391c6#subdirectory=setup/stock_release_channel_process_end_time
 odoo-addon-stock-release-channel-propagate-channel-picking @ git+https://github.com/acsone/wms.git@f3e26c855c969804ebeb21224a4084428e87a54e#subdirectory=setup/stock_release_channel_propagate_channel_picking
