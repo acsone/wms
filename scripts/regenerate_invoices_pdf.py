@@ -48,7 +48,7 @@ def _regenerate_invoices_pdf(env, date_from):
                     f"Regenerating invoices pdf from batch {batch_number} of {number_of_batches}"
                 )
                 env["ir.actions.report"].sudo()._render_qweb_pdf(
-                    env.ref("account.account_invoices"), ids_batch
+                    env.ref("account.account_invoices_without_payment"), ids_batch
                 )
                 env.cr.commit()
                 _logger.info(f"Committed batch {batch_number} of {number_of_batches}")
