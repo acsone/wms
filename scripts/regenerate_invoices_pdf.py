@@ -57,7 +57,7 @@ def _regenerate_invoices_pdf(env, date_from):
 @click.command()
 @click_odoo.env_options()
 def main(env):
-    _regenerate_invoices_pdf(env, "2024-01-01")
+    _regenerate_invoices_pdf(env, "2023-12-05")
 
 
 if __name__ == "__main__":
