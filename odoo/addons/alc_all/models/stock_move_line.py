@@ -17,6 +17,6 @@ class StockMoveLine(StockMoveLineBase):
         ):
             self._cr.execute(
                 """
-                create index concurrently stock_move_line_result_package_id_manidx ON stock_move_line(result_package_id);
+                create index stock_move_line_result_package_id_manidx ON stock_move_line(result_package_id);
                 """
             )
