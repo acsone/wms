@@ -23,17 +23,12 @@ class TestReportInvoice(AccountTestInvoicingCommon):
             limit=1,
         )
         cls.partner = cls.env["res.partner"].create({"name": "Partner Test"})
+        # As this module does not depends on stock, create products as service
         cls.product_1 = cls.product_obj.create(
-            {
-                "name": "Product 1 APB",
-            }
+            {"name": "Product 1 APB", "type": "service"}
         )
         cls.product_1.taxes_id |= taxes_apb
-        cls.product_2 = cls.product_obj.create(
-            {
-                "name": "Product 2",
-            }
-        )
+        cls.product_2 = cls.product_obj.create({"name": "Product 2", "type": "service"})
 
     @classmethod
     def _create_sale_order(cls):
