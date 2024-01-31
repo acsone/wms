@@ -96,7 +96,7 @@ class SaleOrder(SaleOrderBase):
             )
         else:
             body = _("Order  {name} cancelled from b2c api.").format(name=self.name)
-            self.with_context(disable_cancel_warning=True).action_cancel()
+            self.with_context(disable_cancel_warning=True).sudo().action_cancel()
 
         self.message_post(body=body)
         return self
