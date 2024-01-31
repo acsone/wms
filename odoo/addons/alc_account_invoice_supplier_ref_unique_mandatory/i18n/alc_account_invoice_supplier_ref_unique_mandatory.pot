@@ -58,8 +58,14 @@ msgid "Journal Entry"
 msgstr ""
 
 #. module: alc_account_invoice_supplier_ref_unique_mandatory
+#: model:ir.model.fields,field_description:alc_account_invoice_supplier_ref_unique_mandatory.field_account_bank_statement_line__supplier_invoice_number_required
+#: model:ir.model.fields,field_description:alc_account_invoice_supplier_ref_unique_mandatory.field_account_move__supplier_invoice_number_required
+#: model:ir.model.fields,field_description:alc_account_invoice_supplier_ref_unique_mandatory.field_account_payment__supplier_invoice_number_required
+msgid "Supplier Invoice Number Required"
+msgstr ""
+
+#. module: alc_account_invoice_supplier_ref_unique_mandatory
 #. odoo-python
-#: code:addons/alc_account_invoice_supplier_ref_unique_mandatory/models/account_move.py:0
 #: code:addons/alc_account_invoice_supplier_ref_unique_mandatory/models/account_move.py:0
 #, python-format
 msgid "The supplier invoice number is mandatory."
