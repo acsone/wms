@@ -1,9 +1,8 @@
 <odoo>
   <template id="report_invoice_document_alcyon">
     <div class="page">
-      <h1
-        style="font-size: 0; height: 0; width: 0; color: transparent"
-      >Required outline for pdf split</h1>
+        <!-- Under windows, sizes == 0 hangs some printings -->
+      <h1 style="font-size: 0.1; height: 0.1; width: 0.1; color: transparent" />
       <div id="left_header">
         <table id="document_reference" class="border_table round_table">
           <tr>
