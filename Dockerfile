@@ -4,7 +4,7 @@
 # base stage, with the non-python runtime dependencies
 #
 
-FROM ghcr.io/acsone/odoo-bedrock:16.0-py311-latest as base
+FROM ghcr.io/acsone/odoo-bedrock:16.0-py311-jammy-latest as base
 
 # Install apt runtime dependencies.
 # - postgresql-client for comfort in the shell container and for db dump to work
