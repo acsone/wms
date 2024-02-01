@@ -50,11 +50,8 @@ class AccountInvoicePrint(models.Model):
         if not invoices:
             return None
 
-        sorted_invoices = invoices.sorted(
-            lambda i: (i.partner_id.name and i.partner_id.name.lower(), i.name)
-        )
         content, _content_type = self.env["ir.actions.report"]._render_qweb_pdf(
-            "account.report_invoice", sorted_invoices.ids, False
+            "account.report_invoice", invoices.ids, False
         )
 
         self.document = base64.b64encode(content)
