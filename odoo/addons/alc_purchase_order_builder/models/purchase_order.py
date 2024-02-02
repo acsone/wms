@@ -199,8 +199,8 @@ class PurchaseOrder(PurchaseOrderBase):
             ):
                 product.sudo().write(
                     {
-                        "reordering_min_qty": orderpoint_min,
-                        "reordering_max_qty": orderpoint_max,
+                        "orderpoint_min": orderpoint_min,
+                        "orderpoint_max": orderpoint_max,
                         "orderpoint_qty_multiple": orderpoint_qty_multiple,
                     }
                 )
