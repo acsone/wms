@@ -11,6 +11,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "account",
+        "l10n_be_apb_tax",
         "sale",
         "account_payment_mode",
         "account_payment_partner",

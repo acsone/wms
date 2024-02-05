@@ -54,7 +54,7 @@ class AccountMove(Move, ReportAsync):
         "invoice_line_ids.tax_ids",
     )
     def _compute_total_amounts(self):
-        tax_group_apb = self.env.ref("alc_accounting_data.tax_group_apb")
+        tax_group_apb = self.env.ref("l10n_be_apb_tax.tax_group_apb")
         tax_group_antibiotics = self.env.ref("account.tax_group_taxes")
         for move in self:
             move.amount_supplier_discount = sum(
@@ -243,7 +243,11 @@ class AccountMove(Move, ReportAsync):
         ] = f"{tax_summary['contribution_total']:.2f} {self.currency_id.symbol}"
         # add some computed amounts needed for reporting
         amount_without_discount = (
-            sum(line.price_unit * line.quantity for line in self.invoice_line_ids)
+            sum(
+                line.price_unit * line.quantity
+                for line in self.invoice_line_ids
+                if line.display_type == "product"
+            )
             + tax_summary["contribution_total"]
         )
         tax_summary["amount_without_discount"] = (
@@ -303,7 +307,7 @@ class AccountMoveLine(MoveLine):
 
     @api.depends("tax_ids")
     def _compute_all_taxes(self):
-        tax_group_apb = self.env.ref("alc_accounting_data.tax_group_apb")
+        tax_group_apb = self.env.ref("l10n_be_apb_tax.tax_group_apb")
         for line in self:
             amount_contribution = 0
             only_tax_ids = self.env["account.tax"]
