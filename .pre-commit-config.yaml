@@ -28,7 +28,8 @@ exclude: |
   ^odoo/addons/test_product_additional_groupbypartner/|
   # END NOT INSTALLABLE ADDONS
   ^LICENCE$|
-  ^scripts/odoo-16-migration/upgrade.py
+  ^scripts/odoo-16-migration/upgrade.py|
+  ^scripts/svl-odoo
 default_language_version:
   python: python3
   node: "16.17.0"
