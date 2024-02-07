@@ -23,6 +23,7 @@ def _add_supplier_user(env):
             FROM
             res_partner rp
             WHERE rp.id = po.partner_id
+            AND po.state NOT IN ('done', 'cancel')
     """
     openupgrade.logged_query(env.cr, query)
 
