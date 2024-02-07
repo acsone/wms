@@ -1,3 +1,1 @@
-from . import res_partner
-from . import purchase_order
-from . import stock_rule
+from . import purchase_order, res_partner
