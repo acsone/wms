@@ -21,6 +21,8 @@
         "stock_release_channel_delivery",
         "stock_move_line_change_lot",
         "product_expiry",
+        "stock_picking_backorder_reason",
+        "alc_stock_lot_available",
     ],
     "data": [],
     "demo": [],
