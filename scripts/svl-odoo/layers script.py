@@ -74,7 +74,7 @@ product_reports = {}
 
 StockValuationLayer = env['stock.valuation.layer'].sudo().with_context(active_test=avoid_archived)
 StockMove = env['stock.move'].sudo().with_context(active_test=avoid_archived)
-ProductProduct = env['product.product'].sudo().with_context(active_test=avoid_archived)
+ProductProduct = env['product.product'].sudo().with_context(active_test=avoid_archived, no_update_price_cache=True)
 
 if specific_companies:
     specific_companies = env["res.company"].browse([int(company) for company in specific_companies])
