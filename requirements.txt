@@ -217,6 +217,7 @@ odoo-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purchase
 odoo-addon-purchase-discount==16.0.1.1.0
 odoo-addon-purchase-force-invoiced==16.0.1.0.1.2
 odoo-addon-purchase-order-approved==16.0.1.0.0.6
+odoo-addon-purchase-order-line-stock-move-cancel @ git+https://github.com/acsone/purchase-workflow.git@8f68c2c6d46afa9a9dc66452ff152e487fd04a05#subdirectory=setup/purchase_order_line_stock_move_cancel
 odoo-addon-purchase-order-ubl @ git+https://github.com/acsone/edi.git@c1a5f8e4eee5eb9cabfd283727717029f6b0b494#subdirectory=setup/purchase_order_ubl
 odoo-addon-purchase-stock-packaging==16.0.1.0.0.4
 odoo-addon-pydantic==16.0.1.0.0.3
