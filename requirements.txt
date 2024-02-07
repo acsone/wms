@@ -390,7 +390,7 @@ odoo-addon-web-remember-tree-column-width==16.0.1.0.0.2
 odoo-addon-web-search-with-and==16.0.1.0.0.3
 odoo-addon-web-sheet-full-width==16.0.1.0.0.3
 odoo-addon-web-tree-many2one-clickable==16.0.1.0.0.3
-odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@a4e1bc7490d6d73f220dfb3c8cdb2665f1ba6f8b
+odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@69a81914308ca4957102eeaad45ee2c3dd54f3b4
 ofxparse==0.21
 opensearch-py==2.3.2
 openupgradelib @ git+https://github.com/acsone/openupgradelib.git@dcb78a45e9e48c5c7c3c5bff5c41ff030f0c2ff8
