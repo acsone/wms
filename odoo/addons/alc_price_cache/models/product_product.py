@@ -162,7 +162,8 @@ class ProductProduct(ProductProductBase):
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)
-        records._delay_update_price_cache()
+        if not self.env.context.get("no_update_price_cache"):
+            records._delay_update_price_cache()
         return records
 
     def write(self, vals):
@@ -188,7 +189,7 @@ class ProductProduct(ProductProductBase):
             )
         )
         res = super().write(vals)
-        if to_update:
+        if to_update and not self.env.context.get("no_update_price_cache"):
             to_update._delay_update_price_cache()
         return res
 
