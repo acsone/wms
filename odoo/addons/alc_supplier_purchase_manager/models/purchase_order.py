@@ -12,6 +12,17 @@ class PurchaseOrder(PurchaseOrderBase):
     user_id = fields.Many2one[Users](
         compute="_compute_user_id", store=True, readonly=False, default=None
     )
+    purchase_manager_id = fields.Many2one[Users](
+        string="Purchase Manager",
+        compute="_compute_purchase_manager_id",
+        store=True,
+        index=True,
+    )
+
+    @api.depends("partner_id")
+    def _compute_purchase_manager_id(self):
+        for purchase in self:
+            purchase.purchase_manager_id = purchase.partner_id.purchase_manager_id
 
     @api.depends("partner_id")
     def _compute_user_id(self):
