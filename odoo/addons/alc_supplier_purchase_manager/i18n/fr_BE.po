@@ -7,19 +7,20 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-01 08:38+0000\n"
-"PO-Revision-Date: 2019-11-01 08:38+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2024-02-08 07:23+0000\n"
+"Last-Translator: Denis Roussel <denis.roussel@acsone.eu>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: fr_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #. module: alc_supplier_purchase_manager
 #: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_purchase_order__user_id
 msgid "Buyer"
-msgstr ""
+msgstr "Acheteur"
 
 #. module: alc_supplier_purchase_manager
 #: model:ir.model,name:alc_supplier_purchase_manager.model_res_partner
@@ -53,4 +54,4 @@ msgstr "Responsable d'achat remplaçant"
 #. module: alc_supplier_purchase_manager
 #: model_terms:ir.ui.view,arch_db:alc_supplier_purchase_manager.view_purchase_order_filter
 msgid "Without responsible"
-msgstr ""
+msgstr "Sans responsable"
