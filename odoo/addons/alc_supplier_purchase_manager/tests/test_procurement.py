@@ -106,7 +106,8 @@ class TestProcurement(TestStockCommon):
         )
         self.assertTrue(po_line)
         po = po_line.order_id
-        self.assertEqual(po.user_id, self.purchase_manager_user)
+        self.assertFalse(po_line.order_id.user_id)
+        self.assertEqual(po.purchase_manager_id, self.purchase_manager_user)
 
         # create a picking out for the product and customer 1
         picking_2 = self.env["stock.picking"].create(
