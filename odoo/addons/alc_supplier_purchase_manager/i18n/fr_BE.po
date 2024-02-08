@@ -23,15 +23,16 @@ msgid "Contact"
 msgstr ""
 
 #. module: alc_supplier_purchase_manager
-#: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_purchase_order__purchase_manager_id
-msgid "Purchase Manager"
-msgstr ""
-
-#. module: alc_supplier_purchase_manager
 #: model:ir.model,name:alc_supplier_purchase_manager.model_purchase_order
 #, fuzzy
-#| msgid "Purchase manager"
 msgid "Purchase Order"
+msgstr "Commande fournisseur"
+
+#. module: alc_supplier_purchase_manager
+#: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_purchase_order__purchase_manager_id
+#: model_terms:ir.ui.view,arch_db:alc_supplier_purchase_manager.purchase_order_view_search
+#: model_terms:ir.ui.view,arch_db:alc_supplier_purchase_manager.view_purchase_order_filter
+msgid "Purchase Manager"
 msgstr "Responsable d'achat"
 
 #. module: alc_supplier_purchase_manager
