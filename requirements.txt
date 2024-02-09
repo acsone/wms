@@ -84,7 +84,7 @@ odoo-addon-account-invoice-split-refund @ git+https://github.com/acsone/account-
 odoo-addon-account-invoice-supplier-ref-unique @ git+https://github.com/acsone/account-invoicing.git@2e8876cfb3305c6bebbbb187c1c96bef7ee1a645#subdirectory=setup/account_invoice_supplier_ref_unique
 odoo-addon-account-invoice-tax-required==16.0.1.0.0.9
 odoo-addon-account-invoice-transmit-method==16.0.1.0.1.8
-odoo-addon-account-invoice-triple-discount==16.0.1.0.1.3
+odoo-addon-account-invoice-triple-discount @ git+https://github.com/acsone/account-invoicing.git@890d0380fe2546fa18ee17a1cc3c09f61154057d#subdirectory=setup/account_invoice_triple_discount
 odoo-addon-account-invoice-ubl @ git+https://github.com/acsone/edi.git@ff7c22b7cdbc0c593df5216d42bc701e21f41131#subdirectory=setup/account_invoice_ubl
 odoo-addon-account-move-line-product-category @ git+https://github.com/acsone/account-financial-tools@1ada460b91a0a44cbeaea93bf91ade916377ac8f#subdirectory=setup/account_move_line_product_category
 odoo-addon-account-move-name-sequence==16.0.1.1.5.1

@@ -42,6 +42,7 @@ odoo-addon-partner-invoicing-mode-fourteen-days @ git+https://github.com/OCA/acc
 odoo-addon-partner-invoicing-mode-monthly @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1515/head#subdirectory=setup/partner_invoicing_mode_monthly
 odoo-addon-partner-invoicing-mode-ten-days @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1532/head#subdirectory=setup/partner_invoicing_mode_ten_days
 odoo-addon-account-invoice-split-refund @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1564/head#subdirectory=setup/account_invoice_split_refund
+odoo-addon-account-invoice-triple-discount @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1664/head#subdirectory=setup/account_invoice_triple_discount
 
 # account-reconcile
 odoo-addon-account-payment-mode-auto-reconcile @ git+https://github.com/OCA/account-reconcile.git@refs/pull/537/head#subdirectory=setup/account_payment_mode_auto_reconcile
