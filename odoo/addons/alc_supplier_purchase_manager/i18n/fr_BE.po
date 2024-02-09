@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-01 08:38+0000\n"
+"POT-Creation-Date: 2024-02-08 11:59+0000\n"
 "PO-Revision-Date: 2024-02-08 07:23+0000\n"
 "Last-Translator: Denis Roussel <denis.roussel@acsone.eu>\n"
 "Language-Team: \n"
@@ -23,17 +23,17 @@ msgid "Contact"
 msgstr ""
 
 #. module: alc_supplier_purchase_manager
-#: model:ir.model,name:alc_supplier_purchase_manager.model_purchase_order
-#, fuzzy
-msgid "Purchase Order"
-msgstr "Commande fournisseur"
-
-#. module: alc_supplier_purchase_manager
 #: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_purchase_order__purchase_manager_id
 #: model_terms:ir.ui.view,arch_db:alc_supplier_purchase_manager.purchase_order_view_search
 #: model_terms:ir.ui.view,arch_db:alc_supplier_purchase_manager.view_purchase_order_filter
 msgid "Purchase Manager"
 msgstr "Responsable d'achat"
+
+#. module: alc_supplier_purchase_manager
+#: model:ir.model,name:alc_supplier_purchase_manager.model_purchase_order
+#, fuzzy
+msgid "Purchase Order"
+msgstr "Commande fournisseur"
 
 #. module: alc_supplier_purchase_manager
 #: model:ir.model.fields,field_description:alc_supplier_purchase_manager.field_res_partner__purchase_manager_id
