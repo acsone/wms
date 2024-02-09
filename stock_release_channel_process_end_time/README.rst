@@ -28,10 +28,20 @@ Stock Release Channel Process End Date
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module allows to set an end time on a release channel that will be transmitted on
-related stock pickings (on scheduled date) when the channel awakes.
+When managing deliveries through a release channel two main issues are faced:
 
-That allows to use Odoo core sorting feature on stock pickings level.
+- You expect to view the stock pickings in the same order as the the one you
+  have set as process end date on the release channel. This way you can easily
+  manage the deliveries in the same order as the one expected by the planned
+  release channels.
+
+- You expect to set as deadline of your released move operations the process
+  end date of the release channel. This is useful to ensure that move created
+  when releasing deliveries get the same deadline as the one set on the
+  release channel. This is also required to allow the merge of move operations
+  generated for the same product, location in the same stock picking.
+
+This module solves these issues.
 
 **Table of contents**
 
@@ -40,6 +50,8 @@ That allows to use Odoo core sorting feature on stock pickings level.
 
 Usage
 =====
+
+Assign the release channel's process end date to the pickings as scheduled date:
 
 #. Assign a timezone on the Warehouse address if defined and if needed
    If you have a lot of warehouses in the same timezone, you can also define
@@ -53,6 +65,13 @@ Usage
 #. Set an end time
 #. Wake up the channel
 #. The assigned pickings have their scheduled date set at the next end time. (if enabled "Update Scheduled Date" config)
+
+Enable the use of the release channel's process end date as date deadline for
+released picking's moves:
+
+#. Go to Inventory > Configuration > Settings
+#. Enable "Propagate release channel's process end date as move date deadline"
+   on the definition of your delivery route.
 
 Known issues / Roadmap
 ======================

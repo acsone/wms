@@ -1,3 +1,5 @@
+Assign the release channel's process end date to the pickings as scheduled date:
+
 #. Assign a timezone on the Warehouse address if defined and if needed
    If you have a lot of warehouses in the same timezone, you can also define
    the timezone on the company partner.
@@ -10,3 +12,10 @@
 #. Set an end time
 #. Wake up the channel
 #. The assigned pickings have their scheduled date set at the next end time. (if enabled "Update Scheduled Date" config)
+
+Enable the use of the release channel's process end date as date deadline for
+released picking's moves:
+
+#. Go to Inventory > Configuration > Settings
+#. Enable "Propagate release channel's process end date as move date deadline"
+   on the definition of your delivery route.

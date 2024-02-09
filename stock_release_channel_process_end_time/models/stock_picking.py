@@ -1,5 +1,7 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from collections import defaultdict
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -81,3 +83,16 @@ class StockPicking(models.Model):
             ):
                 rec.scheduled_date = rec.release_channel_id.process_end_date
         return res
+
+    def release_available_to_promise(self):  # pylint: disable=missing-return
+        # override to put the process_end_date into the context to be
+        # used by the stock.rule to initialize the move date_deadline
+        pickings_by_process_end_date = defaultdict(self.browse)
+        for rec in self:
+            pickings_by_process_end_date[rec.release_channel_id.process_end_date] |= rec
+        # release pickings by process_end_date
+        for process_end_date, pickings in pickings_by_process_end_date.items():
+            pickings = pickings.with_context(
+                release_channel_process_end_date=process_end_date
+            )
+            super(StockPicking, pickings).release_available_to_promise()
