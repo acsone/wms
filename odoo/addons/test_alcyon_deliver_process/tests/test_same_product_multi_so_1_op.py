@@ -18,6 +18,12 @@ class TestSameProductMultiSoOnePrep(TestDeliverProcessBase):
         sal2 = self._confirm_sale_order(
             products=[self.main_product], qty=2, partner=self.partner2
         )
+        self.warehouse_1.delivery_route_id.write(
+            {
+                "propagate_process_end_date_as_move_date_deadline": True,
+                "propagate_original_group": False,
+            }
+        )
         out1 = self._get_picking_ship(sale)
         out2 = self._get_picking_ship(sal2)
         self.assertEqual(out1, out2)

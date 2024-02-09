@@ -15,6 +15,7 @@
         "stock_release_channel_auto_release",
         "stock_move_auto_assign_auto_release",
         "stock_release_channel_propagate_channel_picking",
+        "stock_release_channel_process_end_time",
         "stock_picking_group_by_partner_by_carrier",
         "stock_picking_group_by_partner_by_carrier_by_customer",
         "alc_stock_picking_cancel_permission",
