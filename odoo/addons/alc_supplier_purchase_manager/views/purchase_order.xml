@@ -23,8 +23,43 @@
           domain="[('purchase_manager_id', '=', False)]"
         />
             </xpath>
+            <field name="user_id" position="after">
+                <field name="purchase_manager_id" />
+            </field>
+            <field name="user_id" />
+            <filter name="representative" position="after">
+                <filter
+          string="Purchase Manager"
+          name="purchase_manager"
+          domain="[]"
+          context="{'group_by': 'purchase_manager_id'}"
+        />
+            </filter>
         </field>
+
     </record>
+
+    <record id="purchase_order_view_search" model="ir.ui.view">
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_search" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="purchase_manager_id" />
+            </field>
+            <field name="user_id" />
+            <filter name="representative" position="after">
+                <filter
+          string="Purchase Manager"
+          name="purchase_manager"
+          domain="[]"
+          context="{'group_by': 'purchase_manager_id'}"
+        />
+            </filter>
+        </field>
+
+    </record>
+
+
 
     <record id="purchase_order_view_tree" model="ir.ui.view">
         <field
