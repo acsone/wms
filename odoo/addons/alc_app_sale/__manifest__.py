@@ -13,6 +13,7 @@
     "depends": [
         # Odoo
         "sale",
+        "stock_dropshipping",
         # OCA
         "base_partner_sequence",
         # OCA/sale-workflow

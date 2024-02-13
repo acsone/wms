@@ -29,7 +29,7 @@
   <function model="stock.rule" name="write">
     <value
       model="stock.rule"
-      eval="obj().search([('action', '=', 'buy'), ('company_id', '=', ref('base.main_company'))]).ids"
+      eval="obj().search([('action', '=', 'buy'), ('company_id', '=', ref('base.main_company')),('route_id', '!=', ref('stock_dropshipping.route_drop_shipping'))]).ids"
     />
     <value eval="{'location_dest_id': ref('stock.stock_location_company')}" />
   </function>
