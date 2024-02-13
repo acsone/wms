@@ -131,6 +131,11 @@ msgstr ""
 
 #. module: alc_stock_refill_view
 #: model_terms:ir.ui.view,arch_db:alc_stock_refill_view.stock_move_line_refill_search_view
+msgid "Today's preparations"
+msgstr ""
+
+#. module: alc_stock_refill_view
+#: model_terms:ir.ui.view,arch_db:alc_stock_refill_view.stock_move_line_refill_search_view
 msgid "Transfer"
 msgstr ""
 
