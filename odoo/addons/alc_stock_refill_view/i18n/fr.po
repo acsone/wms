@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-01-18 07:48+0000\n"
-"Last-Translator: Laurent Mignon <laurent.mignon@acsone.eu>\n"
+"PO-Revision-Date: 2024-02-13 10:28+0000\n"
+"Last-Translator: Denis Roussel <denis.roussel@acsone.eu>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -59,7 +59,7 @@ msgstr "Lot/numéro de série\""
 #. module: alc_stock_refill_view
 #: model_terms:ir.ui.view,arch_db:alc_stock_refill_view.stock_move_line_refill_search_view
 msgid "Not urgent"
-msgstr ""
+msgstr "Non urgent"
 
 #. module: alc_stock_refill_view
 #: model:ir.model.fields,field_description:alc_stock_refill_view.field_stock_move_line__picking_type_id
@@ -79,7 +79,7 @@ msgstr "Source"
 #. module: alc_stock_refill_view
 #: model_terms:ir.ui.view,arch_db:alc_stock_refill_view.stock_move_line_refill_tree_view
 msgid "Priority"
-msgstr ""
+msgstr "Priorité"
 
 #. module: alc_stock_refill_view
 #: model_terms:ir.ui.view,arch_db:alc_stock_refill_view.stock_move_line_refill_search_view
@@ -135,7 +135,7 @@ msgstr "À faire"
 #. module: alc_stock_refill_view
 #: model_terms:ir.ui.view,arch_db:alc_stock_refill_view.stock_move_line_refill_search_view
 msgid "Today's preparations"
-msgstr ""
+msgstr "Préparations du jour"
 
 #. module: alc_stock_refill_view
 #: model_terms:ir.ui.view,arch_db:alc_stock_refill_view.stock_move_line_refill_search_view
