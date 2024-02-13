@@ -6,8 +6,17 @@
         <field name="name">stock.move.line.tree</field>
         <field name="model">stock.move.line</field>
         <field name="arch" type="xml">
-            <tree create="0" default_order="location_id" type="object">
+            <tree
+        create="0"
+        default_order="location_id"
+        type="object"
+        decoration-danger="current_release_channel"
+      >
                 <field name="priority" string="Priority" optional="show" />
+                <field
+          name="current_release_channel"
+          optional="hide"
+        /> <!-- The decoration on tree should be sufficent - don't show -->
                 <field name="picking_type_id" optional="show" />
                 <field name="date" optional="hide" />
                 <field name="location_id" string="From" />
@@ -73,6 +82,12 @@
           domain="[('state', 'not in', ['done', 'draft', 'cancel'])]"
         />
                 <filter string="Done" name="done" domain="[('state', '=', 'done')]" />
+                <separator />
+                <filter
+          string="Today's preparations"
+          name="current_release_channel"
+          domain="[('current_release_channel', '=', True)]"
+        />
                 <separator />
                 <filter
           string="Urgent"
