@@ -18,12 +18,6 @@ class TestSameProductMultiSoOnePrep(TestDeliverProcessBase):
         sal2 = self._confirm_sale_order(
             products=[self.main_product], qty=2, partner=self.partner2
         )
-        rule = self.env["procurement.group"]._get_rule(
-            self.main_product,
-            self.warehouse_1.pick_type_id.default_location_dest_id,
-            {"warehouse_id": self.warehouse_1},
-        )
-        rule.propagate_original_group = False
         out1 = self._get_picking_ship(sale)
         out2 = self._get_picking_ship(sal2)
         self.assertEqual(out1, out2)
