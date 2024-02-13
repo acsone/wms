@@ -10,12 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        "alc_stock_move_line_current_release_channel",
         "alc_stock_move_line_priority",
         "stock",
     ],
     "data": [
         "views/stock_move_line.xml",
     ],
-    "demo": [],
     "pre_init_hook": "pre_init_hook",
 }

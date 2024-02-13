@@ -152,6 +152,14 @@ class TestCurrentRelease(BaseCommon):
         self.assertTrue(
             self.move_out_2.move_orig_ids.move_line_ids.current_release_channel
         )
+        move_lines = self.env["stock.move.line"].search(
+            [
+                ("current_release_channel", "=", True),
+                ("id", "in", self.move_out_2.move_orig_ids.move_line_ids.ids),
+            ]
+        )
+        self.assertTrue(move_lines)
+        self.assertEqual(move_lines, self.move_out_2.move_orig_ids.move_line_ids)
         self.move_out_1.move_line_ids.invalidate_recordset()
         self.assertFalse(self.move_out_1.move_line_ids.current_release_channel)
 
