@@ -20,7 +20,7 @@
 import datetime
 import time
 from odoo.exceptions import UserError
-from odoo.tools import float_compare
+from odoo.tools import float_compare, profiler
 
 # -- CONFIGURATION -- #
 # Context
@@ -1469,8 +1469,9 @@ if restore_valuation:
         precs['vp'] = company.currency_id.decimal_places
 
         # Fix the products
-        for p in get_products():  # use 'p' as variable name to prevent "Shadows name from outer scope" in IDE
-            restore_product_valuation(p)
+        with profiler.Profiler(description=f'layers script', db=env.cr.dbname):
+            for p in get_products():  # use 'p' as variable name to prevent "Shadows name from outer scope" in IDE
+                restore_product_valuation(p)
 
     table_clean()
     raise_error(log_context_header + get_summary() + "\n".join(product_reports.values()), raise_log)
