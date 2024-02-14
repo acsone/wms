@@ -580,6 +580,10 @@ def get_stock_move_svl(stock_move, merge=True):
     return svl_master
 
 
+def _is_internal(location):
+    return location.usage in ("internal", "view")
+
+
 def clean_svl(product):
     """
     Removes some layers from the database.
@@ -612,11 +616,11 @@ def clean_svl(product):
             deletion_reason = "Landed Cost - {}".format(svl.description)
         elif svl.stock_move_id and svl.product_id.id != svl.stock_move_id.product_id.id:
             deletion_reason = "Wrong stock_move associated"
-        elif svl.stock_move_id and svl.stock_move_id.location_id._should_be_valued() and svl.stock_move_id.location_dest_id._should_be_valued():
+        elif svl.stock_move_id and _is_internal(svl.stock_move_id.location_id) and _is_internal(svl.stock_move_id.location_dest_id):
             deletion_reason = "Internal move: {} -> {}".format(svl.stock_move_id.location_id.name, svl.stock_move_id.location_dest_id.name)
         elif (
                 svl.stock_move_id and
-                not svl.stock_move_id.location_id._should_be_valued() and not svl.stock_move_id.location_dest_id._should_be_valued() and
+                not _is_internal(svl.stock_move_id.location_id) and not _is_internal(svl.stock_move_id.location_dest_id) and
                 not (svl.stock_move_id._is_dropshipped() or svl.stock_move_id._is_dropshipped_returned())
         ):
             deletion_reason = "External move: {} -> {}".format(svl.stock_move_id.location_id.name, svl.stock_move_id.location_dest_id.name)
