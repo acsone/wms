@@ -56,6 +56,20 @@ use_first_svl_uc = True         # Use first SVL UC as starting price. Useful if 
 
 # -- END CONFIGURATION -- #
 
+# select products with active quants
+env.cr.execute(
+    """
+    SELECT DISTINCT sq.product_id, pt.default_code
+    FROM stock_quant sq
+    LEFT JOIN stock_location sl on sl.id = sq.location_id
+    LEFT JOIN product_product pp on pp.id = sq.product_id
+    LEFT JOIN product_template pt on pt.id = pp.product_tmpl_id
+    WHERE sl.usage IN ('internal', 'view') AND pp.active AND pt.active
+    ORDER BY pt.default_code
+    """
+)
+specific_products = [row[0] for row in env.cr.fetchall()]
+
 # SEQUENCES AND LANG MODIFIERS
 custom_misc_desc   = 'Productwaarde handmatig gewijzigd'  # "Cost Manually change" in Dutch, you can update it with wanted language.
 # END SEQUENCES
@@ -72,8 +86,8 @@ odoo_version = float(env["ir.module.module"].search([('name', '=', 'base')]).ins
 
 product_reports = {}
 
-StockValuationLayer = env['stock.valuation.layer'].sudo().with_context(active_test=avoid_archived)
-StockMove = env['stock.move'].sudo().with_context(active_test=avoid_archived)
+StockValuationLayer = env['stock.valuation.layer'].sudo().with_context(active_test=avoid_archived, no_update_price_cache=True)
+StockMove = env['stock.move'].sudo().with_context(active_test=avoid_archived, no_update_price_cache=True)
 ProductProduct = env['product.product'].sudo().with_context(active_test=avoid_archived, no_update_price_cache=True)
 
 if specific_companies:
@@ -137,6 +151,7 @@ if update_start_date:
 
 def restore_product_valuation(product):
     """Main function, fix svls for a specific product, by recomputing the value for each stock move."""
+    print(f"restore_product_valuation {product.default_code}")
     precs["qp"] = rd_to_dgt(product.uom_id.rounding)  # Set UOM precision
 
     (
