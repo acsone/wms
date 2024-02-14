@@ -180,6 +180,7 @@ def restore_product_valuation(product):
     # Set Product valuation restoration as 'Done'
     write_product_to_db(product, STATE_DONE, product_reports[product.id], valuation_total, valuation_initial, [], None, None)
     commit()
+    product.env.clear()
 
 
 def _init_product_restoration(product):
