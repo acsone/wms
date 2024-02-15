@@ -21,7 +21,7 @@ class StockPackOperationLotAdd(models.TransientModel):
     _description = "Add a wizard that facilitates purchases reception."
 
     name = fields.Char(default="New")
-    picking_id = fields.Many2one[Picking](readonly="True")
+    picking_id = fields.Many2one[Picking](readonly="True", ondelete="cascade")
     picking_is_completed = fields.Boolean(related="picking_id.is_completed")
     partner_id = fields.Many2one[Partner](
         related="picking_id.partner_id", readonly=True
@@ -30,6 +30,7 @@ class StockPackOperationLotAdd(models.TransientModel):
     move_line_id = fields.Many2one[StockMoveLine](
         string="Operation",
         domain=[("state", "=", "assigned")],
+        index=True,  # Necessary for performance reasons on pickings unreservation (and move lines deletion)
     )
     move_id = fields.Many2one[StockMove](related="move_line_id.move_id")
     location_op_dest_id = fields.Many2one[Location](
