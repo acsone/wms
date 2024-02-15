@@ -11,6 +11,7 @@
     "depends": [
         "alce_helpdesk",
         # "alce_purchase_report",
+        "alce_account_followup_report",
         "alce_account_intrastat_category",
         "alce_account_intrastat_weight",
         "alce_account_reports_followup_data",
