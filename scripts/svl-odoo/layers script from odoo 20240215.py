@@ -21,14 +21,6 @@
 #################################################################
 #     Everybody gangsta until picking a Valuation Ticket !      #
 #################################################################
-
-# server action context
-import datetime
-import time
-import sys
-from odoo.exceptions import UserError
-from odoo.tools import float_compare, profiler
-
 # START -- conf.py --
 # !!! PLEASE READ COMMENTS AND CONFIGURE THE SCRIPT TO MATCH YOUR USE-CASE !!!
 # fmt: off
@@ -45,10 +37,10 @@ show_db_products_logs  = False  # Get logs from the temporary table (might be ve
 force_clean_table      = False  # Clean the custom table and index after you are done with the script
 
 # Run
-should_commit       = True      # Wherever the change should be applied to the database or not. Use False if you want to test the result.
+should_commit       = False     # Wherever the change should be applied to the database or not. Use False if you want to test the result.
 redo_done_products  = False     # If False, the script will ignore products already Done. Set to True to recompute Dones products (useful if combined with specific_products)
-specific_products   = False     # If you know your targets (list of product ids or refs).
-specific_companies  = [1]       # Choose which company you want the script to run on. Set it to `env.companies` to run on all companies. If False, defaults to the currently selected company
+specific_products   = []        # If you know your targets (list of product ids or refs).
+specific_companies  = False     # Choose which company you want the script to run on. Set it to `env.companies` to run on all companies. If False, defaults to the currently selected company
 clean_when_complete = False     # Should be true in production mode. When True, the script will drop the custom table & index on completion. (Do not use with schedule action)
 avoid_archived      = False     # Set to False if you want to also fix archived products. (recommended)
 raise_log           = True      # Used for unit tests. We do not want an error raised on completion.
@@ -56,7 +48,7 @@ log_report          = False     # Create an ir.logging for each product
 display_summary     = True      # Display a summary of the modifications done by the script at the start of the report.
 
 # Valuation
-init_start_date   = "2023-09-30 21:59:00"        # If set, the SVLS before this date will be merged in 1 initialisation layer (ex: "2023-12-31 00:00:00")
+init_start_date   = False        # If set, the SVLS before this date will be merged in 1 initialisation layer (ex: "2023-12-31 00:00:00")
 update_start_date = False        # If set, the IN unit_cost will only be updated after this date (ex: "2023-12-31 00:00:00")
 delete_before     = False        # Delete svls before fixing (not recommended)
 sync_dates        = False        # Sync dates between stock_moves and stock valuation layers (not recommended)
@@ -67,19 +59,6 @@ use_std_price    = True         # (AVCO & FIFO for IN moves): When no data is fo
 use_first_svl_uc = True         # Use first SVL UC as starting price. Useful if first move is an OUT and no account move is present.
 # fmt: on
 # -- END CONFIGURATION -- #
-
-
-specific_products = set()
-print("collecting products with svl", file=sys.stderr)
-env.cr.execute("select distinct product_id from stock_valuation_layer")
-specific_products.update(row[0] for row in env.cr.fetchall())
-print("collecting products with stock moves in FY 2024", file=sys.stderr)
-env.cr.execute("select distinct product_id from stock_move where date>='2023-10-01'")
-specific_products.update(row[0] for row in env.cr.fetchall())
-print("collecting products with internal stock quants", file=sys.stderr)
-env.cr.execute("select distinct product_id from stock_quant sq left join stock_location sl on sl.id = sq.location_id where sl.usage = 'internal'")
-specific_products.update(row[0] for row in env.cr.fetchall())
-specific_products = list(specific_products)
 
 # SEQUENCES AND LANG MODIFIERS
 custom_misc_desc = (
@@ -99,9 +78,9 @@ odoo_version = float(env["ir.module.module"].search([("name", "=", "base")]).ins
 
 product_reports = {}
 
-StockValuationLayer = env["stock.valuation.layer"].sudo().with_context(active_test=avoid_archived, no_update_price_cache=True)
-StockMove = env["stock.move"].sudo().with_context(active_test=avoid_archived, no_update_price_cache=True)
-ProductProduct = env["product.product"].sudo().with_context(active_test=avoid_archived, no_update_price_cache=True)
+StockValuationLayer = env["stock.valuation.layer"].sudo().with_context(active_test=avoid_archived)
+StockMove = env["stock.move"].sudo().with_context(active_test=avoid_archived)
+ProductProduct = env["product.product"].sudo().with_context(active_test=avoid_archived)
 
 if specific_companies:
     specific_companies = env["res.company"].browse([int(company) for company in specific_companies])
@@ -1372,7 +1351,6 @@ def get_products(company=None):
     if odoo_version < 14:
         return product_ids.with_context(force_company=company.id)
 
-    print(f"{len(product_ids)} products to process")
     return product_ids.with_company(company)
 
 
@@ -1483,9 +1461,7 @@ def get_valued_qty(sm):
     lines_out = sm._get_out_move_lines()
 
     if lines_in and lines_out:
-        with open("stock_valuation_layer.log", "a") as f:
-            f.write(f"Stock Move #{sm.id} has both incoming an outgoing move lines.\n")
-        print("Stock Move #{} has both incoming an outgoing move lines.".format(sm.id))
+        raise_error("Stock Move #{} has both incoming an outgoing move lines.".format(sm.id))
 
     for line in lines_in:
         valued_quantity += line.product_uom_id._compute_quantity(line.qty_done, move_uom, rounding_method="HALF-UP")
@@ -1731,9 +1707,7 @@ if restore_valuation:
 
         # Fix the products
         for p in get_products():  # use 'p' as variable name to prevent "Shadows name from outer scope" in IDE
-            print(f"processing {p.id}[{p.default_code}]", file=sys.stderr)
             restore_product_valuation(p)
-            env.clear()
 
     table_clean()
     raise_error(log_context_header + get_summary() + "\n".join(product_reports.values()), raise_log)
