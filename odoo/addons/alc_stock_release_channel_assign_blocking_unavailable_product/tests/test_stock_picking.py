@@ -49,6 +49,7 @@ class TestStockPicking(TransactionCase):
         self.assertTrue(self.backorder.move_ids.delivery_requires_other_lines)
         self.assertEqual(self.backorder.move_ids.product_qty_unavailable, 20)
         self.assertTrue(self.backorder.delivery_requires_other_lines)
+        self.assertTrue(self.backorder.blocked_for_channel_assignation)
 
     def test_01(self):
         """Check that a full backorder became a regular picking if new move is added."""
@@ -66,6 +67,7 @@ class TestStockPicking(TransactionCase):
             }
         )
         self.assertFalse(self.backorder.delivery_requires_other_lines)
+        self.assertFalse(self.backorder.blocked_for_channel_assignation)
 
     def test_02(self):
         """Check that a full back order can't be assigned to a release channel."""
@@ -87,6 +89,7 @@ class TestStockPicking(TransactionCase):
         self.test_00()
         self.backorder.button_ignore_release_channel_block()
         self.assertTrue(self.backorder.release_channel_id)
+        self.assertFalse(self.backorder.blocked_for_channel_assignation)
 
     def test_05(self):
         """Create backorder even if the product is available, the backorder should be.

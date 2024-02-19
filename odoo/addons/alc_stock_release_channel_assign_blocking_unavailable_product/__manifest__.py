@@ -6,7 +6,7 @@
     "description": """
         Block delivery of unavailable products when the unavailability
         has been announced on the SO""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
@@ -16,5 +16,4 @@
         "sale_stock",
     ],
     "data": ["views/sale_order.xml", "views/stock_picking.xml"],
-    "demo": [],
 }
