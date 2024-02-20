@@ -303,6 +303,7 @@ odoo-addon-account-cutoff-accrual-purchase @ git+https://github.com/OCA/account-
 odoo-addon-account-cutoff-accrual-purchase-stock @ git+https://github.com/OCA/account-closing.git@refs/pull/271/head#subdirectory=setup/account_cutoff_accrual_purchase_stock
 odoo-addon-account-cutoff-accrual-sale @ git+https://github.com/OCA/account-closing.git@refs/pull/271/head#subdirectory=setup/account_cutoff_accrual_sale
 odoo-addon-account-cutoff-accrual-sale-stock @ git+https://github.com/OCA/account-closing.git@refs/pull/271/head#subdirectory=setup/account_cutoff_accrual_sale_stock
+odoo-addon-account-cutoff-base @ git+https://github.com/acsone/account-closing.git@16.0-account-cutoff-base#subdirectory=setup/account_cutoff_base
 odoo-addon-account-invoice-accrual @ git+https://github.com/OCA/account-closing.git@refs/pull/264/head#subdirectory=setup/account_invoice_accrual
 
 # shopinvader
