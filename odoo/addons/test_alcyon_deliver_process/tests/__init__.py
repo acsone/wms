@@ -3,5 +3,6 @@ from . import test_cancel_backorder_after_deliver
 from . import test_deliver_expired_lot
 from . import test_group_picking_by_carrier
 from . import test_partial_delivery
+from . import test_same_product_multi_so_1_op
 from . import test_stock_reservation
 from . import test_unrelease_after_deliver
