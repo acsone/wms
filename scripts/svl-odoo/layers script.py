@@ -80,6 +80,7 @@ print("collecting products with internal stock quants", file=sys.stderr)
 env.cr.execute("select distinct product_id from stock_quant sq left join stock_location sl on sl.id = sq.location_id where sl.usage = 'internal'")
 specific_products.update(row[0] for row in env.cr.fetchall())
 specific_products = list(specific_products)
+# specific_products = []
 
 # SEQUENCES AND LANG MODIFIERS
 custom_misc_desc = (
@@ -684,11 +685,12 @@ def _compute_in_avco_uc_and_value(svl):  # IN average/fifo
         if not line or is_zero(line.price_unit) or line.product_id.id != stock_move.product_id.id:
             return None
 
+        # SBI: use price_subtotal instead of price_unit to take care of discounts
         price_unit = abs(
             line.currency_id._convert(
-                line.price_unit, env.company.currency_id, env.company, stock_move.date, round=False
+                line.price_subtotal, env.company.currency_id, env.company, stock_move.date, round=False
             )
-        )
+        ) / line.product_qty
         uc = line.product_uom._compute_price(price_unit, stock_move.product_id.uom_id)
         return uc, ["PO({})".format(price_unit)]
 
@@ -1189,6 +1191,35 @@ def get_moved_quantities(product, date):
     return quantity
 
 
+def get_last_purchase_price(product):
+    env.cr.execute(
+        """
+        select price_subtotal / product_qty
+        from purchase_order_line 
+        where product_qty > 0 and product_id=%s 
+        order by create_date desc 
+        limit 1
+        """
+    )
+    res = env.cr.fetchone()
+    if not res:
+        return 0
+    return res[0]
+
+
+def load_init_layer(product):
+    assert init_start_date
+    svls = StockValuationLayer.search([("product_id", "=", product.id), ("create_date", "<", str(init_start_date))])
+    if len(svls) == 1:
+        processed_svl_ids.append(svls.id)
+        update_standard_price(product, svls.unit_cost)
+    elif len(svls) == 0:
+        # update_standard_price(product, get_last_purchase_price(product))
+        pass
+    else:
+        raise_error(f"Multiple initial layers found for product {product.id}")
+
+
 def create_init_layer(product, valuation_total):
     if not init_start_date:
         return
@@ -1295,9 +1326,10 @@ def _init_product_restoration(product):
         )
         commit()
 
-        create_init_layer(product, valuation_total)
-
-        clean_svl(product)
+        # SBI - we have cleaned ourselves by loading the 30/9 data
+        # create_init_layer(product, valuation_total)
+        # clean_svl(product)
+        load_init_layer(product)
 
     elif product_db_data["state"] == STATE_IN_PROGRESS:
         processed_svl_ids.extend(product_db_data["processed_svls"])

@@ -49,7 +49,7 @@ def load_values_from_csv(year: int, month: int):
     last_day_of_month = date(year, month, 1) + relativedelta(months=1, days=-1)
     ldm = last_day_of_month
     filename = f"{ldm.year:04d}{ldm.month:02d}{ldm.day:02d} stock.quant.csv"
-    res = defaultdict(lambda: (0, None))
+    res = defaultdict(lambda: (0, 0))
     with open(filename, encoding="utf8") as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -80,23 +80,21 @@ def load_values_from_csv(year: int, month: int):
                 log(
                     f"Value mismatch for product {default_code}: {value} != {quantity} * {standard_price}"
                 )
-            prev_quantity, prev_standard_price = res[product_id]
-            if prev_standard_price is not None and prev_standard_price != standard_price:
-                log(
-                    f"Multiple different standard_price for product {default_code}"
-                )
-            res[product_id] = (prev_quantity + quantity, standard_price)
-    for product_id, (quantity, standard_price) in res.items():
-        yield product_id, quantity, standard_price
+            prev_quantity, prev_value = res[product_id]
+            res[product_id] = (prev_quantity + quantity, prev_value + value)
+    for product_id, (quantity, value) in res.items():
+        yield product_id, quantity, value
 
 
 def main():
+    # env.cr.execute("delete from stock_valuation_layer where product_id=%s", (product_id,))
     year, month = 2023, 9
-    init_start_date = datetime(year, month, 1, 21, 59) + relativedelta(month=1, days=-1)
-    for product_id, quantity, standard_price in load_values_from_csv(year, month):
-        if product_id != 1054:
+    init_start_date = datetime(year, month, 1, 21, 58) + relativedelta(months=1, days=-1)
+    for product_id, quantity, value in load_values_from_csv(year, month):
+        #if product_id != 40049:
+        #    continue
+        if not quantity:
             continue
-        value = quantity * standard_price
         env["stock.valuation.layer"].search([("product_id", "=", product_id)]).unlink()
         vals = {
             "create_date": init_start_date,
@@ -104,7 +102,7 @@ def main():
             "quantity": quantity,
             "remaining_value": max(0, value),
             "value": value,
-            "unit_cost": standard_price,
+            "unit_cost": round(value / quantity, 2),
             "product_id": product_id,
             "company_id": 1,
             "description": "Init valuation at 30/9/2023",
