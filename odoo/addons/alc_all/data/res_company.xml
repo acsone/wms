@@ -14,7 +14,8 @@
             'toursolver_backend_id': ref('shipment_advice_planner_toursolver.toursolver_backend_default'),
             'delivered_by_alcyon_constraint': True,
             'check_invoice_supplier_number_mandatory': True,
-            'no_user_on_backorder': True, }"
+            'no_user_on_backorder': True,
+             'stock_quant_no_inventory_if_being_picked': True,}"
     />
     </function>
 </odoo>

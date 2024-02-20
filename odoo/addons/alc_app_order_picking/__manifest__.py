@@ -131,6 +131,7 @@
         "alc_stock_move_line_lock_done",
         "alc_product_expiry",
         "alc_stock_move_line_audit",
+        "stock_quant_safe_inventory",
     ],
     "data": [],
     "demo": [],

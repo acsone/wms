@@ -125,6 +125,8 @@ odoo-addon-sale-order-line-cancel @ git+https://github.com/OCA/sale-workflow.git
 odoo-addon-sale-route-amendment @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2423/head#subdirectory=setup/sale_route_amendment
 odoo-addon-sale-shipping-info-helper @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2456/head#subdirectory=setup/sale_shipping_info_helper
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2693/head#subdirectory=setup/sale_stock_picking_blocking
+odoo-addon-sale-delivery-state @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2770/head#subdirectory=setup/sale_delivery_state
+
 
 # sale-channel
 odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@16.0-sale_channel-sbj#subdirectory=setup/sale_channel
@@ -153,7 +155,7 @@ odoo-addon-stock-picking-volume @ git+https://github.com/OCA/stock-logistics-war
 # https://github.com/OCA/stock-logistics-warehouse/pull/1794
 odoo-addon-stock-reserve-rule @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1794/head#subdirectory=setup/stock_reserve_rule
 odoo-addon-procurement-auto-create-group @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1819/head#subdirectory=setup/procurement_auto_create_group
-odoo-addon-sale-delivery-state @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2770/head#subdirectory=setup/sale_delivery_state
+odoo-addon-stock-quant-safe-inventory @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1947/head#subdirectory=setup/stock_quant_safe_inventory
 
 
 # stock-logistics-workflow
