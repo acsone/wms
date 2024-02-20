@@ -10,6 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        "alc_account_test_common",
         "account_followup",
     ],
 }

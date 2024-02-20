@@ -1,20 +1,18 @@
 # Copyright 2024 ACSONE SA/NV
 # License Other proprietary
+import logging
 
 from freezegun import freeze_time
 
 from odoo import Command
-from odoo.tests import tagged
 
 from odoo.addons.account_reports.tests.common import TestAccountReportsCommon
+from odoo.addons.alc_account_test_common.tests.common import AlcCommonTestAccount
+
+_logger = logging.getLogger(__name__)
 
 
-@tagged("post_install")
-class TestAlceAccountFollowupReports(TestAccountReportsCommon):
-    @classmethod
-    def setUpClass(cls, chart_template_ref=None):
-        super().setUpClass(chart_template_ref=chart_template_ref)
-
+class TestAlceAccountFollowupReports(AlcCommonTestAccount, TestAccountReportsCommon):
     def test_alce_followup_report(self):
         """Test report lines when printing the follow-up report."""
         # Init options.
@@ -83,7 +81,7 @@ class TestAlceAccountFollowupReports(TestAccountReportsCommon):
 
         with freeze_time("2016-01-01"):
             lines = report._get_followup_report_lines(options)
-            self.assertEqual("INV/2016/00001", lines[0].get("name"))
+            self.assertEqual("INV/2016/0001", lines[0].get("name"))
             self.assertEqual(lines[0]["columns"][0]["name"], "01/01/2016")
             self.assertEqual(lines[0]["columns"][1]["name"], "01/01/2016")
             self.assertEqual(lines[0]["columns"][2]["name"], "")
@@ -125,7 +123,7 @@ class TestAlceAccountFollowupReports(TestAccountReportsCommon):
 
         with freeze_time("2016-01-05"):
             lines = report._get_followup_report_lines(options)
-            self.assertEqual("RINV/2016/00001", lines[0].get("name"))
+            self.assertEqual("RINV/2016/0001", lines[0].get("name"))
             self.assertEqual(lines[0]["columns"][0]["name"], "01/05/2016")
             self.assertEqual(lines[0]["columns"][1]["name"], "01/10/2016")
             self.assertEqual(lines[0]["columns"][2]["name"], "")
@@ -133,7 +131,7 @@ class TestAlceAccountFollowupReports(TestAccountReportsCommon):
                 "-200.0",
                 lines[0]["columns"][3]["name"],
             )
-            self.assertEqual("INV/2016/00001", lines[1].get("name"))
+            self.assertEqual("INV/2016/0001", lines[1].get("name"))
             self.assertEqual(lines[1]["columns"][0]["name"], "01/01/2016")
             self.assertEqual(lines[1]["columns"][1]["name"], "01/01/2016")
             self.assertEqual(lines[1]["columns"][2]["name"], "")
