@@ -33,15 +33,20 @@ class ExportReportTurnover(models.TransientModel):
         if in_or_out_move == "out_move":
             self.env.cr.execute(
                 """
-                    SELECT
-                    date_trunc(%(groupby_type)s, sm.date) AS date,
-                    SUM((sol.price_subtotal/sol.product_uom_qty) * sm.product_qty) AS debit_from_sm,
-                    SUM(sm.price_unit * sm.product_qty) AS pp200_debit_from_sm FROM stock_move sm
+                SELECT date_trunc(%(groupby_type)s, sm.date) AS date,
+                    SUM(
+                        (sol.price_subtotal / sol.product_uom_qty) * sm.product_qty
+                    ) AS debit_from_sm,
+                    SUM(sm.price_unit * sm.product_qty) AS pp200_debit_from_sm
+                FROM stock_move sm
                     JOIN sale_order_line sol ON sol.id = sm.sale_line_id
                     JOIN stock_location from_loc ON from_loc.id = sm.location_id
-                    WHERE sm.state = 'done' AND from_loc.usage = 'customer' AND sol.product_uom_qty != 0  AND sm.product_id=sol.product_id
-                    GROUP BY date_trunc(%(groupby_type)s, sm.date)
-            """,
+                WHERE sm.state = 'done'
+                    AND from_loc.usage = 'customer'
+                    AND sol.product_uom_qty != 0
+                    AND sm.product_id = sol.product_id
+                GROUP BY date_trunc(%(groupby_type)s, sm.date)
+                """,
                 {"groupby_type": groupby_type},
             )
 
@@ -52,15 +57,20 @@ class ExportReportTurnover(models.TransientModel):
             # incorrect numbers.
             self.env.cr.execute(
                 """
-                    SELECT
-                    date_trunc(%(groupby_type)s, sm.date) AS date,
-                    SUM((sol.price_subtotal/sol.product_uom_qty) * sm.product_qty) AS credit_from_sm,
-                    SUM(abs(sm.price_unit)*sm.product_qty) AS pp200_credit_from_sm FROM stock_move sm
+                SELECT date_trunc(%(groupby_type)s, sm.date) AS date,
+                    SUM(
+                        (sol.price_subtotal / sol.product_uom_qty) * sm.product_qty
+                    ) AS credit_from_sm,
+                    SUM(abs(sm.price_unit) * sm.product_qty) AS pp200_credit_from_sm
+                FROM stock_move sm
                     JOIN sale_order_line sol ON sol.id = sm.sale_line_id
                     JOIN stock_location to_loc ON to_loc.id = sm.location_dest_id
-                    WHERE sm.state = 'done' AND to_loc.usage = 'customer' AND sol.product_uom_qty != 0 AND sm.product_id=sol.product_id
-                    GROUP BY date_trunc(%(groupby_type)s, sm.date)
-            """,
+                WHERE sm.state = 'done'
+                    AND to_loc.usage = 'customer'
+                    AND sol.product_uom_qty != 0
+                    AND sm.product_id = sol.product_id
+                GROUP BY date_trunc(%(groupby_type)s, sm.date)
+                """,
                 {"groupby_type": groupby_type},
             )
 
