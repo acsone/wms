@@ -27,11 +27,6 @@ msgid "Auto-finalized email"
 msgstr "Email de finalisation automatique"
 
 #. module: alc_sale_processing_finalizer
-#: model:ir.model,name:alc_sale_processing_finalizer.model_sale_order_line_cancel
-msgid "Cancel Remaining Wizard"
-msgstr "Assistant d'annulation du reste"
-
-#. module: alc_sale_processing_finalizer
 #: model:ir.actions.server,name:alc_sale_processing_finalizer.ir_cron_cancel_sales_bo_gt_3months_ir_actions_server
 #: model:ir.cron,cron_name:alc_sale_processing_finalizer.ir_cron_cancel_sales_bo_gt_3months
 msgid "Cancel Sales BO > 3months"
@@ -70,9 +65,16 @@ msgid "Sales Order - Annulation solde"
 msgstr "Bons de commande - Annulation solde"
 
 #. module: alc_sale_processing_finalizer
+#: model:ir.model,name:alc_sale_processing_finalizer.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: alc_sale_processing_finalizer
 #: model_terms:ir.ui.view,arch_db:alc_sale_processing_finalizer.res_config_settings_form_view
 msgid "Send an email for auto-finalized BO older than 3 months."
-msgstr "Envoyer un email pour la finalisation automatique des reliquats plus vieux que 3 mois."
+msgstr ""
+"Envoyer un email pour la finalisation automatique des reliquats plus vieux "
+"que 3 mois."
 
 #. module: alc_sale_processing_finalizer
 #: model:ir.model.fields,help:alc_sale_processing_finalizer.field_sale_order__auto_finalize_processing
@@ -83,3 +85,6 @@ msgstr "Finalisation automatique après 3 mois"
 #: model:ir.model,name:alc_sale_processing_finalizer.model_delivery_carrier
 msgid "Shipping Methods"
 msgstr "Modes de livraison"
+
+#~ msgid "Cancel Remaining Wizard"
+#~ msgstr "Assistant d'annulation du reste"
