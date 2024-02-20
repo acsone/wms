@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="base.lang_fr_BE" model="res.lang">
+    <!-- non-breaking space separator to allow the use of the . or , as decimal separator -->
+    <field name="thousands_sep"> </field>
+  </record>
+</odoo>
