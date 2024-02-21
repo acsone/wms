@@ -51,10 +51,28 @@ class TestCancelAdditionalMove(TestDeliverProcessBase):
 
     def test_01(self):
         sale = self._confirm_sale_order(products=[self.main_product], qty=2)
-        self._confirm_sale_order(products=[self.main_product], qty=2)
+        sale1 = self._confirm_sale_order(products=[self.main_product], qty=2)
         pick = self._get_picking_pick(sale)
+        self.assertFalse(pick)
         # open the channel, pick must be generated
         self.channel.action_unlock()
+        ship = self._get_picking_ship(sale) | self._get_picking_ship(sale1)
+        ship = ship.filtered(lambda p: p.state not in ("done", "cancel"))
+        self.assertEqual(len(ship), 1)
         pick = self._get_picking_pick(sale)
+        product_moves = pick.move_ids.filtered(
+            lambda m: m.product_id == self.main_product
+            and m.state not in ("done", "cancel")
+        )
+        additional_moves = pick.move_ids.filtered(
+            lambda m: m.product_id == self.additional_product
+            and m.state not in ("done", "cancel")
+        )
+        self.assertEqual(sum(product_moves.mapped("product_uom_qty")), 4)
+        self.assertEqual(sum(additional_moves.mapped("product_uom_qty")), 20)
+        self.assertEqual(len(product_moves), 1)
+        self.assertEqual(len(additional_moves), 1)
+        pick = product_moves.picking_id | additional_moves.picking_id
+        self.assertEqual(len(pick), 1)
         pick.action_start()
         pick.action_assign()

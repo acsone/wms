@@ -233,7 +233,7 @@ odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@e3920cb
 odoo-addon-sale-discount-display-amount==16.0.1.0.0.3
 odoo-addon-sale-exception==16.0.1.2.0.2
 odoo-addon-sale-force-invoiced==16.0.1.0.0.10
-odoo-addon-sale-order-line-cancel @ git+https://github.com/acsone/sale-workflow.git@7416524f7ea3d273fa246cb62402ade03aae4de4#subdirectory=setup/sale_order_line_cancel
+odoo-addon-sale-order-line-cancel @ git+https://github.com/acsone/sale-workflow.git@b5cd7f03b1ac6c5fe0c6e9ed582031709602443f#subdirectory=setup/sale_order_line_cancel
 odoo-addon-sale-procurement-customer==16.0.1.0.0.4
 odoo-addon-sale-product-set==16.0.1.1.0.6
 odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.git@f506b778476eacfc4a3f33d85c2f77f790a8ebc8#subdirectory=setup/sale_route_amendment
@@ -308,7 +308,7 @@ odoo-addon-stock-available-immediately==16.0.1.0.0.5
 odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com/acsone/stock-logistics-availability.git@7f105272b0941fd74ba05d7a98765d8ed3765e1e#subdirectory=setup/stock_available_immediately_exclude_location
 odoo-addon-stock-available-location-get-domain @ git+https://github.com/acsone/stock-logistics-availability.git@aed5cd18e4a944ca51eac2bf89d3bbe1be984260#subdirectory=setup/stock_available_location_get_domain
 odoo-addon-stock-available-location-orderpoint @ git+https://github.com/acsone/stock-logistics-availability.git@c83b9a714a077f512678021ff437b0914ed5ec7e#subdirectory=setup/stock_available_location_orderpoint
-odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@795482e0eb46b6aca76b522b368afbcb202c312c#subdirectory=setup/stock_available_to_promise_release
+odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@02824c4c8df6b657f99c4de062431bf41565df60#subdirectory=setup/stock_available_to_promise_release
 odoo-addon-stock-average-daily-sale @ git+https://github.com/acsone/stock-logistics-reporting.git@d46c24f3bfbbef5485331ebe628c2224e1bcb5d0#subdirectory=setup/stock_average_daily_sale
 odoo-addon-stock-dock==16.0.1.0.1
 odoo-addon-stock-dynamic-routing==16.0.1.0.1
@@ -349,7 +349,7 @@ odoo-addon-stock-picking-delivery-link @ git+https://github.com/acsone/delivery-
 odoo-addon-stock-picking-grn-mandatory==16.0.1.0.0.7
 odoo-addon-stock-picking-group-by-base @ git+https://github.com/acsone/stock-logistics-workflow.git@6037d72493b86c43d524445cf2492fd4987f88df#subdirectory=setup/stock_picking_group_by_base
 odoo-addon-stock-picking-group-by-max-weight @ git+https://github.com/acsone/stock-logistics-workflow.git@5a13075c617633fffbd9d734dba4c64432712d15#subdirectory=setup/stock_picking_group_by_max_weight
-odoo-addon-stock-picking-group-by-partner-by-carrier==16.0.1.1.0.3
+odoo-addon-stock-picking-group-by-partner-by-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@bce2fbe45158cfb1b96e2221557c241ec08ccb21#subdirectory=setup/stock_picking_group_by_partner_by_carrier
 odoo-addon-stock-picking-group-by-partner-by-carrier-by-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@8486bf88795420832c0588ccacf9840c3f9b9056#subdirectory=setup/stock_picking_group_by_partner_by_carrier_by_customer
 odoo-addon-stock-picking-is-completed @ git+https://github.com/acsone/stock-logistics-workflow.git@20e469fc9e4c0e9a3bbb0fb2b0c548735ab25eda#subdirectory=setup/stock_picking_is_completed
 odoo-addon-stock-picking-kind==16.0.1.0.0.4
@@ -369,7 +369,7 @@ odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@bb40f5c
 odoo-addon-stock-release-channel-auto-release==16.0.1.0.1
 odoo-addon-stock-release-channel-delivery @ git+https://github.com/acsone/wms.git@7fa560b001ee925d92574bc78f34a2287d8bb7db#subdirectory=setup/stock_release_channel_delivery
 odoo-addon-stock-release-channel-geoengine @ git+https://github.com/acsone/wms.git@5bf244f63bf8a4076407604ba7e0534a6b4a050b#subdirectory=setup/stock_release_channel_geoengine
-odoo-addon-stock-release-channel-process-end-time==16.0.1.1.0
+odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@e36b056cfe0da889cb1777976f82fa3a14af9ea4#subdirectory=setup/stock_release_channel_process_end_time
 odoo-addon-stock-release-channel-propagate-channel-picking==16.0.1.0.0.7
 odoo-addon-stock-release-channel-shipment-advice==16.0.1.0.0.18
 odoo-addon-stock-release-channel-shipment-advice-process-end-time @ git+https://github.com/acsone/wms.git@66051de0272a64ce7425861102843011d965fb7e#subdirectory=setup/stock_release_channel_shipment_advice_process_end_time
