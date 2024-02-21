@@ -201,7 +201,7 @@ odoo-addon-purchase-order-ubl @ git+https://github.com/OCA/edi.git@refs/pull/871
 
 # edido-eu/peppol
 odoo-addon-account-invoice-export-ubl @ git+https://github.com/edido-eu/peppol@16.0#subdirectory=setup/account_invoice_export_ubl
-odoo-addon-base-ubl-payment-mode-required @ git+https://github.com/edido-eu/peppol@16.0#subdirectory=setup/base_ubl_payment_mode_required
+odoo-addon-base-ubl-payment-mode-required @ git+https://github.com/edido-eu/peppol@refs/pull/2/head#subdirectory=setup/base_ubl_payment_mode_required
 odoo-addon-l10n-be-account-einvoice-generate @ git+https://github.com/edido-eu/peppol@16.0#subdirectory=setup/l10n_be_account_einvoice_generate
 
 # OCA/l10n-belgium
