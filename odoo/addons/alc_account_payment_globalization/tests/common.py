@@ -51,7 +51,7 @@ class TestAlcAccountPaymentGlobalizationCommon(common.TransactionCase):
         )
         cls.account_receivable_2 = cls.AccountAccount.create(
             {
-                "name": "Receive account",
+                "name": "Receive account 2",
                 "code": "440000demo2",
                 "account_type": "asset_receivable",
                 "reconcile": True,
@@ -112,6 +112,10 @@ class TestAlcAccountPaymentGlobalizationCommon(common.TransactionCase):
     def _create_invoice(cls, partner, product, price_unit=100, qty=5, account=None):
         account = account or cls.account_receivable_1
         partner.property_account_receivable_id = account
+        # the computation of the account_id on the invoice line is done
+        # via a SQL query, so we need to flush the cache to be sure
+        # that data are uptodate into the database
+        partner.flush()
         invoice = cls.invoice_model.create(
             {
                 "partner_id": partner.id,
@@ -123,7 +127,7 @@ class TestAlcAccountPaymentGlobalizationCommon(common.TransactionCase):
                             "quantity": qty,
                             "price_unit": price_unit,
                             "account_id": cls.account_revenue.id,
-                            "name": "product that cost 100",
+                            "name": f"product that cost {price_unit} each",
                             "tax_ids": [Command.set(cls.tax_fixed.ids)],
                         }
                     )
