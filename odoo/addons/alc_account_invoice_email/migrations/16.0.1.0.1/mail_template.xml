@@ -1,13 +1,7 @@
 <?xml version="1.0" ?>
-<!-- Copyright 2022 ACSONE SA/NV
+<!-- Copyright 2024 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-    <record id="account.email_template_edi_invoice" model="mail.template">
-        <field
-      name="email_to"
-    >{{ object.partner_id.email_invoice or object.partner_id.email }}</field>
-        <field name="partner_to" eval="False" />
-    </record>
     <record id="account.email_template_edi_credit_note" model="mail.template">
         <field name="report_template" ref="account.account_invoices_without_payment" />
     </record>
