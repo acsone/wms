@@ -25,24 +25,9 @@ class TestDeliverProcessBase(StockPickingTestCase):
                 "dock_id": cls.dock.id,
             }
         )
-        cls.warehouse_1.delivery_route_id.write(
-            {
-                "available_to_promise_defer_pull": True,
-                "no_backorder_at_release": True,
-            }
-        )
+        cls.warehouse_1.route_ids.available_to_promise_defer_pull = True
         cls.warehouse_1.out_type_id.propagate_to_pickings_chain = True
         cls.warehouse_1.out_type_id.no_backorder_for_additional_product = True
         cls.warehouse_1.out_type_id.group_pickings_by_customer = True
         cls.warehouse_1.out_type_id.group_pickings = True
         cls.warehouse_1.pick_type_id.no_backorder_for_additional_product = True
-        rule = cls.env["procurement.group"]._get_rule(
-            cls.main_product,
-            cls.warehouse_1.pick_type_id.default_location_dest_id,
-            {"warehouse_id": cls.warehouse_1},
-        )
-        rule.propagate_original_group = False
-        cls.env["ir.config_parameter"].sudo().set_param(
-            "stock_release_channel_process_end_time.stock_release_use_channel_end_date",
-            True,
-        )

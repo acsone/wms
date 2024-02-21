@@ -103,16 +103,8 @@ class StockMove(StockMoveBase):
         }
 
     def _action_assign(self, force_qty=False):
-        reserved_qty_by_move = {
-            move: move.reserved_availability
-            for move in self
-            if move.state not in ("done", "cancel")
-        }
         res = super()._action_assign(force_qty=force_qty)
-        updated_moves = self.filtered(
-            lambda m: m.reserved_availability != reserved_qty_by_move.get(m)
-        )
-        main_moves = updated_moves.filtered(lambda m: not m.is_additional_move)
+        main_moves = self.filtered(lambda m: not m.is_additional_move)
         main_moves._remove_all_additional_moves_on_assign()
         main_moves._add_additional_products()
         additional_moves = main_moves.additional_move_ids
@@ -220,20 +212,3 @@ class StockMove(StockMoveBase):
             # we force cancel to avoid blockage on cancel permission
             moves_to_cancel.with_context(force_cancel=True)._action_cancel()
             move.product_uom_qty = quantity_done
-
-    def _action_confirm(self, merge=True, merge_into=False):
-        # The confirmation could lead to the call _action_assign on the moves
-        # which could create additional moves. The creation of the additional
-        # move will run the stock rule which will call the _action_confirm
-        # on the additional move. We need to ensure that the merge mode is
-        # preserved for the additional moves. This is required to avoid that
-        # moves split when creating a backorder are merged in the original move.
-        # also for the additional moves.
-        original_env = self.env
-        merge = self.env.context.get("allow_merge", merge)
-        # we ensure that recursive calls are done with the same merge mode
-        self_merge_allowed = self.with_context(allow_merge=merge)
-        res = super(StockMove, self_merge_allowed)._action_confirm(merge, merge_into)
-        # by resetting the environment we ensure that the context is restored to
-        # the original value at the end of the recursive calls stack
-        return res.with_env(original_env)
