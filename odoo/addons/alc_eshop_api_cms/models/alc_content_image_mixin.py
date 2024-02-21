@@ -50,6 +50,6 @@ class AlcContentImageMixin(models.AlcContentImageMixin):
             if not attachment:
                 continue
             thumbnail = attachment.sudo()._get_or_create_thumbnail()
-            public_url = thumbnail.image.url
+            public_url = thumbnail.image.url or ""
             content = content.replace(url, public_url)
         return content
