@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.addons.base.models import ir_attachment
+from odoo.addons.fs_image.fields import FSImageValue
 
 
 class IrAttachment(ir_attachment.IrAttachment):
@@ -15,10 +16,7 @@ class IrAttachment(ir_attachment.IrAttachment):
                 {
                     "attachment_id": self.id,
                     "base_name": self.name,
-                    "image": {
-                        "filename": self.name,
-                        "content": self.datas,
-                    },
+                    "image": FSImageValue(name=self.name, value=self.raw),
                     "size_x": "999",
                     "size_y": "999",
                 }
