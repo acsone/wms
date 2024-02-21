@@ -19,7 +19,6 @@
   merges:
     - odoo 16.0
     - origin 16.0-type-annotations
-    - odoo refs/pull/106512/head # [IMP] Use importlib find_spec() instead of find_module()
     - odoo refs/pull/120538/head # [IMP] product_expiry: Don't trigger move lines expiration date recomputation
     - odoo refs/pull/128732/head # [IMP] stock: Improves product.action_open_quants performances
   shell_command_after:
@@ -32,7 +31,6 @@
     - git commit -m "Remove unused auto install addon test_mail_sms"
     - curl -sSL https://github.com/acsone/odoo/pull/79.patch | git am # [FIX] purchase_stock: AVCO computation - support line discount
     - curl -sSL https://github.com/odoo/odoo/pull/145494.patch | git am # [FIX] account: add missing depends
-    - curl -sSL https://github.com/odoo/odoo/pull/136943.patch | git am # missing python 3.11 opcodes
     - curl -sSL https://github.com/odoo/odoo/pull/141528.patch | git am # missing python 3.11 opcodes
   target: origin 16.0-alc_master
 
