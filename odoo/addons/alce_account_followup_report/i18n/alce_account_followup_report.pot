@@ -1,0 +1,26 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alce_account_followup_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alce_account_followup_report
+#: model:ir.model,name:alce_account_followup_report.model_account_followup_report
+msgid "Follow-up Report"
+msgstr ""
+
+#. module: alce_account_followup_report
+#. odoo-python
+#: code:addons/alce_account_followup_report/models/account_followup_report.py:0
+#, python-format
+msgid "Reference"
+msgstr ""

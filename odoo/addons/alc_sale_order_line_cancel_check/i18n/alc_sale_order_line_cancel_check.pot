@@ -14,20 +14,20 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_sale_order_line_cancel_check
-#: model:ir.model,name:alc_sale_order_line_cancel_check.model_sale_order_line
-msgid "Sales Order Line"
+#: model:ir.model,name:alc_sale_order_line_cancel_check.model_sale_order_line_cancel
+msgid "Cancel Remaining Wizard"
 msgstr ""
 
 #. module: alc_sale_order_line_cancel_check
 #. odoo-python
-#: code:addons/alc_sale_order_line_cancel_check/models/sale_order_line.py:0
+#: code:addons/alc_sale_order_line_cancel_check/wizards/sale_order_line_cancel.py:0
 #, python-format
 msgid "The preparation is done for products: %(products)s"
 msgstr ""
 
 #. module: alc_sale_order_line_cancel_check
 #. odoo-python
-#: code:addons/alc_sale_order_line_cancel_check/models/sale_order_line.py:0
+#: code:addons/alc_sale_order_line_cancel_check/wizards/sale_order_line_cancel.py:0
 #, python-format
 msgid "You cannot cancel a quantity that is part of a started picking"
 msgstr ""
