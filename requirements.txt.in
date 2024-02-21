@@ -45,8 +45,6 @@ odoo-addon-account-reconcile-restrict-partner-mismatch @ git+https://github.com/
 odoo-addon-base-delivery-carrier-label @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/643/head#subdirectory=setup/base_delivery_carrier_label
 # https://github.com/OCA/delivery-carrier/pull/599 - [16.0][MIG] delivery_carrier_label_gls
 odoo-addon-delivery-carrier-label-gls @ git+https://github.com/oca/delivery-carrier.git@refs/pull/599/head#subdirectory=setup/delivery_carrier_label_gls
-# https://github.com/OCA/delivery-carrier/pull/604 - [16.0][ADD] delivery_estimated_package_quantity_by_weight
-odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.com/oca/delivery-carrier.git@refs/pull/604/head#subdirectory=setup/delivery_estimated_package_quantity_by_weight
 # https://github.com/OCA/delivery-carrier/pull/640 - [16.0][MIG] delivery_carrier_partner
 odoo-addon-delivery-carrier-partner @ git+https://github.com/oca/delivery-carrier.git@refs/pull/640/head#subdirectory=setup/delivery_carrier_partner
 # https://github.com/OCA/delivery-carrier/pull/661
