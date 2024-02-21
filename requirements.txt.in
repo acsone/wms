@@ -9,8 +9,6 @@ dicttoxml @ git+https://github.com/acsone/dicttoxml.git@alc-master-perf
 # https://github.com/OCA/account-analytic/pull/576
 odoo-addon-product-analytic-purchase @ git+https://github.com/OCA/account-analytic@refs/pull/576/head#subdirectory=setup/product_analytic_purchase
 odoo-addon-product-analytic-sale @ git+https://github.com/OCA/account-analytic@refs/pull/621/head#subdirectory=setup/product_analytic_sale
-# https://github.com/OCA/account-analytic/pull/572
-odoo-addon-account-analytic-tag @ git+https://github.com/OCA/account-analytic@refs/pull/572/head#subdirectory=setup/account_analytic_tag
 # https://github.com/OCA/account-analytic/pull/585
 odoo-addon-account-analytic-account-tag @ git+https://github.com/OCA/account-analytic@refs/pull/585/head#subdirectory=setup/account_analytic_account_tag
 
