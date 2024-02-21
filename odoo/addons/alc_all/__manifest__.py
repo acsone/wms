@@ -73,6 +73,7 @@
         "data/stock_location_orderpoint.xml",
         "data/stock_warehouse.xml",
         "data/shopinvader_assortment.xml",
+        "data/res_lang.xml",
     ],
     "demo": [],
     "development_status": "Alpha",
