@@ -78,8 +78,6 @@ odoo-addon-shopfloor-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/head#subdirectory=setup/shopfloor_mobile_packing
 
 # product-attribute
-# https://github.com/OCA/product-attribute/pull/1386 - [IMP] product_packaging_dimension: Don't use max_weight anymore
-odoo-addon-product-packaging-dimension @ git+https://github.com/OCA/product-attribute.git@refs/pull/1386/head#subdirectory=setup/product_packaging_dimension
 # https://github.com/OCA/product-attribute/pull/1215 - MIG][16.0] product_packaging_type + renaming to product_packaging_level
 odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-packaging-level-dro#subdirectory=setup/product_packaging_level
 # https://github.com/OCA/product-attribute/pull/1216 - [MIG][16.0] product_packaging_type_pallet => product_packaging_level_pallet
