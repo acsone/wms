@@ -24,7 +24,7 @@ copy (
             WHEN (
                 coalesce(dpa.cost, 0) = 0
                 and coalesce(ir_property.value_float, 0) != 0
-            ) THEN 100
+            ) THEN 1
             WHEN (
                 coalesce(dpa.cost, 0) = 0
                 and coalesce(ir_property.value_float, 0) = 0
