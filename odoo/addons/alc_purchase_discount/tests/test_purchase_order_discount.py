@@ -128,7 +128,8 @@ class TestPurchaseOrderDiscount(TransactionCase):
         self.assertEqual(po_line.discount, 23.5)
         self.assertEqual(po_line.price_subtotal, 765)
         self.assertEqual(
-            po_line.order_id.date_order, fields.Datetime.to_datetime("2023-04-03")
+            po_line.order_id.date_order,
+            fields.Datetime.to_datetime("2023-04-03 12:00:00"),
         )
 
     def test_price_recompute_at_date_order_change(self):
