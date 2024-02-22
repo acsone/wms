@@ -134,8 +134,6 @@ odoo-addon-stock-move-zone-location-source @ git+https://github.com/OCA/stock-lo
 odoo-addon-stock-picking-backorder-reason @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1199/head#subdirectory=setup/stock_picking_backorder_reason
 # https://github.com/OCA/stock-logistics-workflow/pull/1200
 odoo-addon-stock-picking-backorder-reason-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-backorder-reason-grn-dro#subdirectory=setup/stock_picking_backorder_reason_grn
-# https://github.com/OCA/stock-logistics-workflow/pull/1256
-odoo-addon-stock-picking-grn-mandatory @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1256/head#subdirectory=setup/stock_picking_grn_mandatory
 # https://github.com/OCA/stock-logistics-workflow/pull/1328
 odoo-addon-stock-picking-group-by-base @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1328/head#subdirectory=setup/stock_picking_group_by_base
 # https://github.com/OCA/stock-logistics-workflow/pull/1186
