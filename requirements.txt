@@ -152,7 +152,7 @@ odoo-addon-fs-base-multi-image==16.0.1.0.0.2
 odoo-addon-fs-base-multi-media==16.0.1.0.1
 odoo-addon-fs-file==16.0.1.0.5
 odoo-addon-fs-image==16.0.1.0.2
-odoo-addon-fs-image-thumbnail @ git+https://github.com/acsone/storage.git@026dfc1db730061b7cab593ceaa1096bc4ad486e#subdirectory=setup/fs_image_thumbnail
+odoo-addon-fs-image-thumbnail==16.0.1.0.2
 odoo-addon-fs-product-brand-multi-image==16.0.1.0.0.2
 odoo-addon-fs-product-multi-image==16.0.1.0.1
 odoo-addon-fs-product-multi-media==16.0.1.0.1
