@@ -98,7 +98,6 @@ odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.
 odoo-addon-sale-order-line-cancel @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2357/head#subdirectory=setup/sale_order_line_cancel
 odoo-addon-sale-route-amendment @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2423/head#subdirectory=setup/sale_route_amendment
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2693/head#subdirectory=setup/sale_stock_picking_blocking
-odoo-addon-sale-delivery-state @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2770/head#subdirectory=setup/sale_delivery_state
 
 
 # sale-channel
