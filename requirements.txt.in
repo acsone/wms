@@ -199,9 +199,6 @@ odoo-addon-stock-available-location-orderpoint @ git+https://github.com/OCA/stoc
 # report-print-send
 odoo-addon-base-report-to-label-printer @ git+https://github.com/oca/report-print-send.git@refs/pull/329/head#subdirectory=setup/base_report_to_label_printer
 
-# odoo-pim
-odoo-addon-product-attribute-set @ git+https://github.com/OCA/odoo-pim.git@refs/pull/142/head#subdirectory=setup/product_attribute_set
-
 # OCA/geospatial
 odoo-addon-geoengine-partner @ git+https://github.com/OCA/geospatial.git@refs/pull/331/head#subdirectory=setup/geoengine_partner
 odoo-addon-geoengine-base-geolocalize @ git+https://github.com/OCA/geospatial.git@refs/pull/332/head#subdirectory=setup/geoengine_base_geolocalize
