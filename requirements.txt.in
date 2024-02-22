@@ -162,7 +162,6 @@ odoo-addon-stock-picking-progress @ git+https://github.com/oca/stock-logistics-w
 odoo-addon-stock-move-line-lock-qty-done @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1470/head#subdirectory=setup/stock_move_line_lock_qty_done
 
 # server-tools
-odoo-addon-base-exception @ git+https://github.com/OCA/server-tools.git@refs/pull/2670/head#subdirectory=setup/base_exception
 odoo-addon-jsonifier @ git+https://github.com/OCA/server-tools.git@refs/pull/2762/head#subdirectory=setup/jsonifier
 
 # OCA/server-auth
