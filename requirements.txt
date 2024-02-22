@@ -237,7 +237,7 @@ odoo-addon-sale-order-line-cancel @ git+https://github.com/acsone/sale-workflow.
 odoo-addon-sale-procurement-customer==16.0.1.0.0.4
 odoo-addon-sale-product-set==16.0.1.1.0.6
 odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.git@f506b778476eacfc4a3f33d85c2f77f790a8ebc8#subdirectory=setup/sale_route_amendment
-odoo-addon-sale-shipping-info-helper @ git+https://github.com/acsone/sale-workflow.git@64185c13f8c69cc7faf87cb5b2bc0db444b4c93c#subdirectory=setup/sale_shipping_info_helper
+odoo-addon-sale-shipping-info-helper==16.0.1.0.0.3
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@f1ea2c731d30580089b38a1b3b68b1df40afc680#subdirectory=setup/sale_stock_picking_blocking
 odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/stock-logistics-workflow.git@1fba8cf43ce18100099b7b3d1bd6f31a8ab1aa6d#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo-addon-sale-triple-discount==16.0.1.0.1.4
