@@ -114,7 +114,7 @@ odoo-addon-base-exception @ git+https://github.com/acsone/server-tools.git@31c07
 odoo-addon-base-geoengine==16.0.1.0.0.69
 odoo-addon-base-import-security-group @ git+https://github.com/acsone/server-ux.git@4fb20fd6a52b9ae5d349e41c8efdd116a47fdff7#subdirectory=setup/base_import_security_group
 odoo-addon-base-optional-quick-create==16.0.1.0.0.5
-odoo-addon-base-partition @ git+https://github.com/acsone/server-tools.git@e07142b956a496f65fc43796ff2ad50c2fd06f49#subdirectory=setup/base_partition
+odoo-addon-base-partition==16.0.1.0.0.7
 odoo-addon-base-partner-sequence==16.0.1.0.0.3
 odoo-addon-base-report-to-label-printer @ git+https://github.com/acsone/report-print-send.git@763b847a20a61448956df1e32231b56a7edd5189#subdirectory=setup/base_report_to_label_printer
 odoo-addon-base-report-to-printer==16.0.1.1.5
