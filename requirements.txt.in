@@ -200,7 +200,6 @@ odoo-addon-stock-available-location-orderpoint @ git+https://github.com/OCA/stoc
 odoo-addon-base-report-to-label-printer @ git+https://github.com/oca/report-print-send.git@refs/pull/329/head#subdirectory=setup/base_report_to_label_printer
 
 # odoo-pim
-odoo-addon-attribute-set @ git+https://github.com/OCA/odoo-pim.git@refs/pull/171/head#subdirectory=setup/attribute_set
 odoo-addon-product-attribute-set @ git+https://github.com/OCA/odoo-pim.git@refs/pull/142/head#subdirectory=setup/product_attribute_set
 
 # OCA/geospatial
