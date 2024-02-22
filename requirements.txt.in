@@ -264,8 +264,6 @@ odoo-addon-shopinvader-es-product-categ @ git+https://github.com/shopinvader/odo
 # OCA/search-engineer
 odoo-addon-search-engine-image-thumbnail @ git+https://github.com/OCA/search-engine.git@refs/pull/176/head#subdirectory=setup/search_engine_image_thumbnail
 
-# OCA/queue
-odoo-addon-queue-job-cron @ git+https://github.com/OCA/queue.git@refs/pull/612/head#subdirectory=setup/queue_job_cron
 
 # OCA/storage
 odoo-addon-fs-image-thumbnail @ git+https://github.com/OCA/storage.git@refs/pull/340/head#subdirectory=setup/fs_image_thumbnail

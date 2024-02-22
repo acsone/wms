@@ -222,7 +222,7 @@ odoo-addon-purchase-order-ubl @ git+https://github.com/acsone/edi.git@c1a5f8e4ee
 odoo-addon-purchase-stock-packaging==16.0.1.0.0.4
 odoo-addon-pydantic==16.0.1.0.0.3
 odoo-addon-queue-job==16.0.2.5.0
-odoo-addon-queue-job-cron @ git+https://github.com/acsone/queue.git@6d0550cb644e9907a726f8e4465bcf1957230289#subdirectory=setup/queue_job_cron
+odoo-addon-queue-job-cron==16.0.2.0.0.4
 odoo-addon-report-csv @ git+https://github.com/acsone/reporting-engine.git@05784e441507352ab913d1d9df7348657b8927ba#subdirectory=setup/report_csv
 odoo-addon-report-xlsx==16.0.1.0.2
 odoo-addon-report-xlsx-helper==16.0.1.0.0.3
