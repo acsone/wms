@@ -258,7 +258,6 @@ odoo-addon-shopinvader-schema-sale @ git+https://github.com/shopinvader/odoo-sho
 
 odoo-addon-shopinvader-search-engine-product-stock @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1473/head#subdirectory=setup/shopinvader_search_engine_product_stock
 
-odoo-addon-shopinvader-search-engine @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1480/head#subdirectory=setup/shopinvader_search_engine
 odoo-addon-shopinvader-search-engine-update @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1497/head#subdirectory=setup/shopinvader_search_engine_update
 odoo-addon-shopinvader-es-product-categ @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1481/head#subdirectory=setup/shopinvader_es_product_categ
 
