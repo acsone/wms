@@ -158,7 +158,7 @@ odoo-addon-fs-product-multi-image==16.0.1.0.1
 odoo-addon-fs-product-multi-media==16.0.1.0.1
 odoo-addon-fs-storage==16.0.1.0.3
 odoo-addon-geoengine-base-geolocalize @ git+https://github.com/acsone/geospatial.git@d977cbdc42825e5d241ebe91203e0d087d73b2e7#subdirectory=setup/geoengine_base_geolocalize
-odoo-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@ff4a76d86be5abd88dcb0f84c5def21a70e2262d#subdirectory=setup/geoengine_partner
+odoo-addon-geoengine-partner==16.0.1.0.1.4
 odoo-addon-hr-holidays-public==16.0.1.1.0
 odoo-addon-image-tag==16.0.1.0.1
 odoo-addon-internal-stock-quant-package @ git+https://github.com/acsone/stock-logistics-tracking.git@46777fba77919e3998bebc17ec3a60b35f11de62#subdirectory=setup/internal_stock_quant_package
