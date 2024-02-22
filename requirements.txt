@@ -276,7 +276,7 @@ odoo-addon-shopinvader-base-url @ git+https://github.com/acsone/odoo-shopinvader
 odoo-addon-shopinvader-es-product-categ @ git+https://github.com/acsone/odoo-shopinvader.git@64c7ba79d5d8e36913a1413f2336fbf09ab3c4eb#subdirectory=setup/shopinvader_es_product_categ
 odoo-addon-shopinvader-fastapi-auth-jwt==16.0.1.0.1
 odoo-addon-shopinvader-filtered-model==16.0.1.1.1
-odoo-addon-shopinvader-multi-category @ git+https://github.com/acsone/odoo-shopinvader.git@81922148c2e3cd26d6ff3363207b87c114685559#subdirectory=setup/shopinvader_multi_category
+odoo-addon-shopinvader-multi-category==16.0.1.0.1
 odoo-addon-shopinvader-product @ git+https://github.com/acsone/odoo-shopinvader.git@c0fd942b67a9951bb8582277a90a03de590d2bfe#subdirectory=setup/shopinvader_product
 odoo-addon-shopinvader-product-attribute-set==16.0.1.0.1
 odoo-addon-shopinvader-product-brand==16.0.1.0.1
