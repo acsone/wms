@@ -161,9 +161,6 @@ odoo-addon-stock-grn @ git+https://github.com/oca/stock-logistics-workflow.git@r
 odoo-addon-stock-picking-progress @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1330/head#subdirectory=setup/stock_picking_progress
 odoo-addon-stock-move-line-lock-qty-done @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1470/head#subdirectory=setup/stock_move_line_lock_qty_done
 
-# server-tools
-odoo-addon-jsonifier @ git+https://github.com/OCA/server-tools.git@refs/pull/2762/head#subdirectory=setup/jsonifier
-
 # OCA/server-auth
 odoo-addon-auth-api-key-group @ git+https://github.com/OCA/server-auth.git@refs/pull/544/head#subdirectory=setup/auth_api_key_group
 odoo-addon-auth-jwt-server-env @ git+https://github.com/OCA/server-auth.git@refs/pull/581/head#subdirectory=setup/auth_jwt_server_env

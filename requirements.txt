@@ -162,7 +162,7 @@ odoo-addon-geoengine-partner @ git+https://github.com/acsone/geospatial.git@ff4a
 odoo-addon-hr-holidays-public==16.0.1.1.0
 odoo-addon-image-tag==16.0.1.0.1
 odoo-addon-internal-stock-quant-package @ git+https://github.com/acsone/stock-logistics-tracking.git@46777fba77919e3998bebc17ec3a60b35f11de62#subdirectory=setup/internal_stock_quant_package
-odoo-addon-jsonifier @ git+https://github.com/acsone/server-tools.git@d5f4b14dc12736c0a0796ddf6b65b5998dfbee45#subdirectory=setup/jsonifier
+odoo-addon-jsonifier==16.0.0.0.1
 odoo-addon-l10n-be-account-einvoice-generate @ git+https://github.com/acsone/peppol@7292c3504a31718c603fe452b86f29c20e4094ee#subdirectory=setup/l10n_be_account_einvoice_generate
 odoo-addon-l10n-be-antibiotic-tax @ git+https://github.com/acsone/l10n-belgium.git@e51d1f2dfe6cedbda81afcaeb56c3b0ff09def9d#subdirectory=setup/l10n_be_antibiotic_tax
 odoo-addon-l10n-be-apb-tax @ git+https://github.com/acsone/l10n-belgium.git@220edb1ec64a66655954e5c574ab9598c4d27372#subdirectory=setup/l10n_be_apb_tax
