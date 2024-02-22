@@ -64,7 +64,7 @@ odoo-addon-account-analytic-tag==16.0.1.0.0.10
 odoo-addon-account-banking-mandate==16.0.1.0.2.8
 odoo-addon-account-banking-pain-base==16.0.1.0.0.7
 odoo-addon-account-banking-sepa-credit-transfer==16.0.1.0.0.6
-odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/acsone/bank-payment.git@bf2a4e166e9d2f6b45cc4818f8499b683dfe9abf#subdirectory=setup/account_banking_sepa_direct_debit
+odoo-addon-account-banking-sepa-direct-debit==16.0.1.1.0
 odoo-addon-account-cutoff-accrual-order-base @ git+https://github.com/acsone/account-closing.git@8ea69d08a4a9c2e5750a3dfc2562828bbc0dfe48#subdirectory=setup/account_cutoff_accrual_order_base
 odoo-addon-account-cutoff-accrual-order-product-category @ git+https://github.com/acsone/account-closing.git@0dbad8a080db8b47860b8c162f37ead596051534#subdirectory=setup/account_cutoff_accrual_order_product_category
 odoo-addon-account-cutoff-accrual-order-stock-base @ git+https://github.com/acsone/account-closing.git@8ea69d08a4a9c2e5750a3dfc2562828bbc0dfe48#subdirectory=setup/account_cutoff_accrual_order_stock_base

@@ -233,9 +233,6 @@ checklog-odoo @ git+https://github.com/acsone/checklog-odoo@master#subdirectory=
 
 openupgradelib @ git+https://github.com/acsone/openupgradelib.git@16.0-alc_master
 
-# OCA/payment
-odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/OCA/bank-payment.git@refs/pull/1126/head#subdirectory=setup/account_banking_sepa_direct_debit
-
 # OCA/account-closing
 # https://github.com/OCA/account-closing/pull/270 - auto reverse
 # https://github.com/OCA/account-closing/pull/271 - account cutoff accrual on order
