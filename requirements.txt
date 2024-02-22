@@ -340,7 +340,7 @@ odoo-addon-stock-orderpoint-default-location @ git+https://github.com/acsone/sto
 odoo-addon-stock-override-procurement @ git+https://github.com/acsone/stock-logistics-workflow.git@ac0568b760314fa721e8f167b8ffd61c16a14b36#subdirectory=setup/stock_override_procurement
 odoo-addon-stock-packaging-calculator==16.0.1.0.1
 odoo-addon-stock-picking-back2draft==16.0.1.0.0.7
-odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@d37b9d5bd30f2288f1fcd4e26173fd9a0a8808b8#subdirectory=setup/stock_picking_backorder_reason
+odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@a48a7dcfcc3da04b6fef9eac38ac220d50643135#subdirectory=setup/stock_picking_backorder_reason
 odoo-addon-stock-picking-backorder-reason-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@385cf7dc6eb9ce7c43ca7e0f697d513c4cd6891b#subdirectory=setup/stock_picking_backorder_reason_grn
 odoo-addon-stock-picking-batch-creation @ git+https://github.com/acsone/wms.git@f390ebcf5b1b126d506eb43b0a1ad9cb01355fa4#subdirectory=setup/stock_picking_batch_creation
 odoo-addon-stock-picking-batch-start @ git+https://github.com/acsone/stock-logistics-workflow.git@2c72016cdc9a0a15508dd3295218c3089b105523#subdirectory=setup/stock_picking_batch_start
