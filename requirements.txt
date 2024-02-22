@@ -112,7 +112,7 @@ odoo-addon-base-business-document-import @ git+https://github.com/acsone/edi.git
 odoo-addon-base-delivery-carrier-label @ git+https://github.com/acsone/delivery-carrier.git@0ed7e3be451d1a6ff62b1c395f56a7ca4f5b9910#subdirectory=setup/base_delivery_carrier_label
 odoo-addon-base-exception==16.0.2.0.0.3
 odoo-addon-base-geoengine==16.0.1.0.0.69
-odoo-addon-base-import-security-group @ git+https://github.com/acsone/server-ux.git@4fb20fd6a52b9ae5d349e41c8efdd116a47fdff7#subdirectory=setup/base_import_security_group
+odoo-addon-base-import-security-group==16.0.1.0.0.4
 odoo-addon-base-optional-quick-create==16.0.1.0.0.5
 odoo-addon-base-partition==16.0.1.0.0.7
 odoo-addon-base-partner-sequence==16.0.1.0.0.3
