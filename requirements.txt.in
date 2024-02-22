@@ -82,7 +82,6 @@ odoo-addon-shopfloor-mobile-packing @ git+https://github.com/OCA/wms.git@refs/pu
 odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-packaging-level-pallet-dro#subdirectory=setup/product_packaging_level_pallet
 # https://github.com/OCA/product-attribute/pull/1275 - [ADD] stock_lot_is_archived
 odoo-addon-stock-lot-is-archived @ git+https://github.com/acsone/product-attribute.git@16.0-add-product_lot_archived-dro#subdirectory=setup/stock_lot_is_archived
-odoo-addon-product-stock-state @ git+https://github.com/OCA/product-attribute.git@refs/pull/1339/head#subdirectory=setup/product_stock_state
 odoo-addon-stock-production-lot-expired-date @ git+https://github.com/OCA/product-attribute.git@refs/pull/1488/head#subdirectory=setup/stock_production_lot_expired_date
 
 # purchase-workflow

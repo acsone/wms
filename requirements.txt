@@ -207,7 +207,7 @@ odoo-addon-product-sale-description==16.0.1.0.1.1
 odoo-addon-product-sequence==16.0.2.0.0.5
 odoo-addon-product-set==16.0.1.0.0.7
 odoo-addon-product-state==16.0.1.0.0.6
-odoo-addon-product-stock-state @ git+https://github.com/acsone/product-attribute.git@155a28ad23e3d5547d79802e6335868e1ec5d4dc#subdirectory=setup/product_stock_state
+odoo-addon-product-stock-state==16.0.1.0.0.8
 odoo-addon-product-template-has-one-variant==16.0.1.0.1.2
 odoo-addon-product-template-multi-link @ git+https://github.com/acsone/e-commerce.git@147a3d352290a44419c0664a5a9fd438fc27ba26#subdirectory=setup/product_template_multi_link
 odoo-addon-product-total-weight-from-packaging==16.0.1.0.0.11
