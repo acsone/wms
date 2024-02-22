@@ -46,11 +46,15 @@ class StockPicking(Picking):
             or not self.carrier_id.use_specific_cost_calculation
         ):
             return
-        moves = (
-            self.mapped("release_channel_id.picking_ids")
-            .filtered(lambda ship: ship.partner_id == self.partner_id)
-            .mapped("move_ids")
-        )
+        # Don't use the picking_ids on release_channel_id field as this
+        # will retrieve the whole world pickings for that release channel
+        # Instead take all release channel to plan pickings (if not already shipped)
+        # in addition with those that are in shipment advice
+        pickings = self.release_channel_id.picking_to_plan_ids
+        pickings |= self.planned_shipment_advice_id.loaded_picking_ids
+        moves = pickings.filtered(
+            lambda ship: ship.partner_id == self.partner_id
+        ).mapped("move_ids")
         moves = moves.filtered(lambda m: m.state in ("assigned", "done"))
         round_saleorders = moves.mapped("sale_line_id.order_id")
         round_carriers = round_saleorders.mapped("carrier_id").filtered(
