@@ -131,7 +131,7 @@ odoo-addon-component==16.0.1.1.0
 odoo-addon-component-event==16.0.1.0.1.3
 odoo-addon-connector==16.0.1.0.0.5
 odoo-addon-connector-elasticsearch==16.0.0.0.3
-odoo-addon-connector-search-engine @ git+https://github.com/acsone/search-engine.git@445b024f3f2a723ec76e1580f0db58b5b9699592#subdirectory=setup/connector_search_engine
+odoo-addon-connector-search-engine==16.0.0.1.9
 odoo-addon-date-range==16.0.1.0.2
 odoo-addon-delivery-automatic-package==16.0.1.0.0.2
 odoo-addon-delivery-carrier-account==16.0.1.0.0.4
