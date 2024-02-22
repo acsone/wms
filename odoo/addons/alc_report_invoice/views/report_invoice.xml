@@ -503,11 +503,6 @@
       </t>
   </template>
   <template id="report_invoice" inherit_id="account.report_invoice" priority="100">
-    <xpath expr="//t[@t-foreach='docs']" position="attributes">
-      <attribute
-        name="t-foreach"
-      >docs.sorted(lambda i: (i.partner_id.display_name and i.partner_id.display_name.lower(),i.display_name,))</attribute>
-    </xpath>
     <xpath expr="//t[@t-call='account.report_invoice_document']" position="replace">
       <div
         class="article"
