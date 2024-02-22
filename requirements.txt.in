@@ -159,7 +159,6 @@ odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock
 odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1264/head#subdirectory=setup/stock_move_propagate_first_move_cancel
 odoo-addon-stock-grn @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1285/head#subdirectory=setup/stock_grn
 odoo-addon-stock-picking-progress @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1330/head#subdirectory=setup/stock_picking_progress
-odoo-addon-stock-move-free-reservation-reassign @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1361/head#subdirectory=setup/stock_move_free_reservation_reassign
 odoo-addon-stock-move-line-lock-qty-done @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1470/head#subdirectory=setup/stock_move_line_lock_qty_done
 
 # server-tools
