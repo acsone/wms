@@ -95,8 +95,6 @@ odoo-addon-report-csv @ git+https://github.com/OCA/reporting-engine.git@refs/pul
 # sale-workflow
 # https://github.com/OCA/sale-workflow/pull/2322
 odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@16.0-mig-product_price_category-sbj#subdirectory=setup/product_price_category
-# https://github.com/OCA/sale-workflow/pull/2329
-odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@16.0-add-sale_procurement_customer-dro#subdirectory=setup/sale_procurement_customer
 odoo-addon-sale-order-line-cancel @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2357/head#subdirectory=setup/sale_order_line_cancel
 odoo-addon-sale-route-amendment @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2423/head#subdirectory=setup/sale_route_amendment
 odoo-addon-sale-shipping-info-helper @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2456/head#subdirectory=setup/sale_shipping_info_helper
