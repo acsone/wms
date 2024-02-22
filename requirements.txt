@@ -107,7 +107,7 @@ odoo-addon-attribute-set @ git+https://github.com/acsone/odoo-pim.git@3d67b80d44
 odoo-addon-auth-api-key==16.0.1.0.0.4
 odoo-addon-auth-api-key-group @ git+https://github.com/acsone/server-auth.git@68309b60b530d23e6aee4ac40a1013e50d62fb86#subdirectory=setup/auth_api_key_group
 odoo-addon-auth-jwt==16.0.1.1.0.3
-odoo-addon-auth-jwt-server-env @ git+https://github.com/acsone/server-auth.git@b71db9b114591eb482a4a94aab879a7c20c2be87#subdirectory=setup/auth_jwt_server_env
+odoo-addon-auth-jwt-server-env==16.0.1.0.0.4
 odoo-addon-base-business-document-import @ git+https://github.com/acsone/edi.git@218282f08996953e22c161849fded00a39c2ceee#subdirectory=setup/base_business_document_import
 odoo-addon-base-delivery-carrier-label @ git+https://github.com/acsone/delivery-carrier.git@0ed7e3be451d1a6ff62b1c395f56a7ca4f5b9910#subdirectory=setup/base_delivery_carrier_label
 odoo-addon-base-exception==16.0.2.0.0.3

@@ -163,7 +163,6 @@ odoo-addon-stock-move-line-lock-qty-done @ git+https://github.com/oca/stock-logi
 
 # OCA/server-auth
 odoo-addon-auth-api-key-group @ git+https://github.com/OCA/server-auth.git@refs/pull/544/head#subdirectory=setup/auth_api_key_group
-odoo-addon-auth-jwt-server-env @ git+https://github.com/OCA/server-auth.git@refs/pull/581/head#subdirectory=setup/auth_jwt_server_env
 
 # OCA/server-ux
 odoo-addon-base-import-security-group @ git+https://github.com/OCA/server-ux.git@refs/pull/677/head#subdirectory=setup/base_import_security_group
