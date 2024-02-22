@@ -374,6 +374,11 @@ msgid "Refund"
 msgstr ""
 
 #. module: alc_report_invoice
+#: model:ir.model,name:alc_report_invoice.model_ir_actions_report
+msgid "Report Action"
+msgstr ""
+
+#. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "Subtotal<br/>price"
 msgstr ""
