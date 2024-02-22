@@ -221,7 +221,6 @@ odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@r
 
 # OCA/rest-framework
 odoo-addon-base-rest @ git+https://github.com/OCA/rest-framework.git@refs/pull/368/head#subdirectory=setup/base_rest
-odoo-addon-rest-log @ git+https://github.com/OCA/rest-framework.git@refs/pull/354/head#subdirectory=setup/rest_log
 odoo-addon-fastapi @ git+https://github.com/OCA/rest-framework.git@refs/pull/387/head#subdirectory=setup/fastapi
 
 # OCA/web-api
