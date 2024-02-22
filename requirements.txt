@@ -210,7 +210,7 @@ odoo-addon-product-state==16.0.1.0.0.6
 odoo-addon-product-stock-state @ git+https://github.com/acsone/product-attribute.git@155a28ad23e3d5547d79802e6335868e1ec5d4dc#subdirectory=setup/product_stock_state
 odoo-addon-product-template-has-one-variant==16.0.1.0.1.2
 odoo-addon-product-template-multi-link @ git+https://github.com/acsone/e-commerce.git@147a3d352290a44419c0664a5a9fd438fc27ba26#subdirectory=setup/product_template_multi_link
-odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@0ae6102ff01a7ea8622e20a5a47ecfbe68314a4d#subdirectory=setup/product_total_weight_from_packaging
+odoo-addon-product-total-weight-from-packaging==16.0.1.0.0.11
 odoo-addon-product-uom-updatable==16.0.1.0.0.4
 odoo-addon-purchase-cancel-reason @ git+https://github.com/acsone/purchase-workflow.git@4a4854e049e94815b1f83d1166e885c617bc8d7f#subdirectory=setup/purchase_cancel_reason
 odoo-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purchase-workflow.git@f95d28242293c5b5a040b8de8ce4e9f26db886b8#subdirectory=setup/purchase_delivery_split_date
