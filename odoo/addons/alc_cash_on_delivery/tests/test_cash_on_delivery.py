@@ -20,6 +20,15 @@ class TestCashOnDelivery(TransactionCase):
             }
         )
         cls.warehouse = cls.env.ref("stock.warehouse0")
+
+        cls.pay_terms_immediate = cls.env.ref("account.account_payment_term_immediate")
+        cls.pay_terms_cash_on_delivery = cls.env["account.payment.term"].create(
+            {
+                "name": "Cash on delivery",
+                "cash_on_delivery": True,
+                "line_ids": [Command.create({"value": "balance", "value_amount": 0})],
+            }
+        )
         cls.partner_a = cls.env["res.partner"].create({"name": "partner_a"})
         cls.partner_b = cls.env["res.partner"].create({"name": "partner_b"})
         cls.company = cls.env.user.company_id
@@ -32,6 +41,9 @@ class TestCashOnDelivery(TransactionCase):
                     "currency_id": cls.company.currency_id.id,
                 }
             )
+        )
+        cls.env["stock.quant"]._update_available_quantity(
+            cls.product, cls.warehouse.lot_stock_id, 3
         )
 
     def test01(self):
@@ -46,10 +58,6 @@ class TestCashOnDelivery(TransactionCase):
         partner_b
         """
         # set cash on delivery for partner a payment term
-        self.partner_a.property_payment_term_id.cash_on_delivery = True
-        self.env["stock.quant"]._update_available_quantity(
-            self.product, self.warehouse.lot_stock_id, 3
-        )
 
         so1 = self.env["sale.order"].create(
             {
@@ -69,6 +77,7 @@ class TestCashOnDelivery(TransactionCase):
                 ],
                 "pricelist_id": self.default_pricelist.id,
                 "picking_policy": "direct",
+                "payment_term_id": self.pay_terms_cash_on_delivery.id,
             }
         )
         so1.action_confirm()
@@ -94,6 +103,7 @@ class TestCashOnDelivery(TransactionCase):
                 ],
                 "pricelist_id": self.default_pricelist.id,
                 "picking_policy": "direct",
+                "payment_term_id": self.pay_terms_cash_on_delivery.id,
             }
         )
         so2.action_confirm()

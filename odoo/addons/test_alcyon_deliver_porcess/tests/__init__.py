@@ -5,3 +5,4 @@ from . import test_group_picking_by_carrier
 from . import test_partial_delivery
 from . import test_stock_reservation
 from . import test_unrelease_after_deliver
+from . import test_cash_on_deliver
