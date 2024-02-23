@@ -61,7 +61,7 @@ odoo @ git+https://github.com/acsone/odoo.git@43d1550ec51a2729cadf6c7d9c36c92973
 odoo-addon-account-analytic-account-tag==16.0.1.0.0.2
 odoo-addon-account-analytic-required==16.0.1.0.0.8
 odoo-addon-account-analytic-tag==16.0.1.0.0.10
-odoo-addon-account-banking-mandate==16.0.1.0.2.8
+odoo-addon-account-banking-mandate==16.0.1.2.1
 odoo-addon-account-banking-pain-base==16.0.1.1.0.5
 odoo-addon-account-banking-sepa-credit-transfer==16.0.1.0.0.6
 odoo-addon-account-banking-sepa-direct-debit==16.0.1.1.0
