@@ -53,7 +53,7 @@ class ExportReportTurnover(models.TransientModel):
                     AND from_loc.usage = 'customer'
                     AND sol.product_uom_qty != 0
                     AND sm.product_id = sol.product_id
-                    AND sm.date >= NOW() - INTERVAL '2 year'
+                    AND sm.date >= NOW() - INTERVAL '3 year'
                 GROUP BY date_trunc(%(groupby_type)s, sm.date)
                 """,
                 {"groupby_type": groupby_type},
@@ -86,7 +86,7 @@ class ExportReportTurnover(models.TransientModel):
                     AND to_loc.usage = 'customer'
                     AND sol.product_uom_qty != 0
                     AND sm.product_id = sol.product_id
-                    AND sm.date >= NOW() - INTERVAL '2 year'
+                    AND sm.date >= NOW() - INTERVAL '3 year'
                 GROUP BY date_trunc(%(groupby_type)s, sm.date)
                 """,
                 {"groupby_type": groupby_type},
