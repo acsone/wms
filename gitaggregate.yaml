@@ -74,16 +74,6 @@
     - origin refs/pull/355/head # [IMP] rename_fields: Be able to use a cursor instead of Environment
   target: acsone 16.0-alc_master
 
-./src/stock_picking_start:
-  remotes:
-    origin: git@github.com:acsone/stock-logistics-workflow.git
-    oca: git@github.com:oca/stock-logistics-workflow.git
-  merges:
-    - oca 16.0
-    - oca refs/pull/1303/head # [FIX] - don't overwrite arrival and departure dates if they have already been set by the user
-    - oca refs/pull/1390/head # [FIX] stock_picking_start: fix user_id vals in _prepare_start_values
-  target: origin 16.0-stock_picking_start
-
 ./src/account-closing:
   remotes:
     origin: git@github.com:acsone/account-closing.git
