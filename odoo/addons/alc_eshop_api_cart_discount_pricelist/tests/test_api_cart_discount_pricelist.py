@@ -1,6 +1,7 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import uuid
 
 from odoo.addons.extendable_fastapi.tests.common import FastAPITransactionCase
 from odoo.addons.shopinvader_api_cart.routers import cart_router
@@ -78,13 +79,14 @@ class TestSaleCartApi(FastAPITransactionCase):
         cls.default_fastapi_router = cart_router
 
     def test_discount_multiple_min_qty(self):
+        cart_uuid = str(uuid.uuid4())
         with self._create_test_client() as test_client:
             response = test_client.post(
                 "/sync",
                 json={
                     "transactions": [
                         {
-                            "uuid": "uuid1",
+                            "uuid": cart_uuid,
                             "product_id": self.product_1.id,
                             "qty": 5,
                         }
@@ -101,7 +103,7 @@ class TestSaleCartApi(FastAPITransactionCase):
                 json={
                     "transactions": [
                         {
-                            "uuid": "uuid1",
+                            "uuid": cart_uuid,
                             "product_id": self.product_1.id,
                             "qty": 5,
                         }
@@ -117,7 +119,7 @@ class TestSaleCartApi(FastAPITransactionCase):
                 json={
                     "transactions": [
                         {
-                            "uuid": "uuid1",
+                            "uuid": cart_uuid,
                             "product_id": self.product_1.id,
                             "qty": -5,
                         }

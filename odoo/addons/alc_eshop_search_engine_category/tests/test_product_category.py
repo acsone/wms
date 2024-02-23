@@ -15,7 +15,7 @@ class TestCategory(TestCategoryBindingBase):
         category._compute_binding_ids()
         self.assertTrue(category.se_binding_ids)
         binding = category.se_binding_ids.filtered(
-            lambda b, i=self.se_index: b.index_id == i
+            lambda b, i=self.se_categ_index: b.index_id == i
         )
         self.assertEqual(binding.state, "to_recompute")
         category.shopinvader_category_unbind()
