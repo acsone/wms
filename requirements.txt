@@ -168,7 +168,7 @@ odoo-addon-l10n-be-antibiotic-tax @ git+https://github.com/acsone/l10n-belgium.g
 odoo-addon-l10n-be-apb-tax @ git+https://github.com/acsone/l10n-belgium.git@220edb1ec64a66655954e5c574ab9598c4d27372#subdirectory=setup/l10n_be_apb_tax
 odoo-addon-l10n-be-bpost-address-autocomplete==16.0.1.0.0.3
 odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/acsone/l10n-belgium.git@3d1359a7e58a4ee9c53c5f16178a1428feadd368#subdirectory=setup/l10n_be_bpost_address_validation
-odoo-addon-l10n-be-eco-tax @ git+https://github.com/acsone/l10n-belgium.git@09e400df7b86b0cbbfeda8ba5ee64a64f651304d#subdirectory=setup/l10n_be_eco_tax
+odoo-addon-l10n-be-eco-tax==16.0.1.0.1
 odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/acsone/l10n-belgium.git@d2ebb70d10a0a99ad0cfcaa04cb860c75a3e85f2#subdirectory=setup/l10n_be_iso20022_pain
 odoo-addon-mail-environment==16.0.1.0.1.1
 odoo-addon-mis-builder==16.0.5.1.3

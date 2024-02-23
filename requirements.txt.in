@@ -208,7 +208,6 @@ odoo-addon-l10n-be-account-einvoice-generate @ git+https://github.com/edido-eu/p
 
 # OCA/l10n-belgium
 odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/186/head#subdirectory=setup/l10n_be_bpost_address_validation
-odoo-addon-l10n-be-eco-tax @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/199/head#subdirectory=setup/l10n_be_eco_tax
 odoo-addon-l10n-be-antibiotic-tax @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/202/head#subdirectory=setup/l10n_be_antibiotic_tax
 odoo-addon-l10n-be-apb-tax @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/201/head#subdirectory=setup/l10n_be_apb_tax
 odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/204/head#subdirectory=setup/l10n_be_iso20022_pain
