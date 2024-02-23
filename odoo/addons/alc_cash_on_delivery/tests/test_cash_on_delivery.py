@@ -1,20 +1,14 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests import tagged
+from odoo import Command
+from odoo.tests.common import TransactionCase
 
-from odoo.addons.sale.tests.common import TestSaleCommon
 
-
-@tagged("post_install", "-at_install")
-class TestCashOnDelivery(TestSaleCommon):
+class TestCashOnDelivery(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        pricelist = cls.env["product.pricelist"].search(
-            [("name", "=", "default_pricelist")], limit=1
-        )
-        pricelist.name = f"default_pricelist {pricelist.id}"
         cls.uom_kg = cls.env.ref("uom.product_uom_kgm")
         cls.product = cls.env["product.product"].create(
             {
@@ -25,9 +19,19 @@ class TestCashOnDelivery(TestSaleCommon):
                 "uom_po_id": cls.uom_kg.id,
             }
         )
-        cls.warehouse = cls.env["stock.warehouse"].search(
-            [("company_id", "=", cls.company_data["company"].id)],
-            limit=1,
+        cls.warehouse = cls.env.ref("stock.warehouse0")
+        cls.partner_a = cls.env["res.partner"].create({"name": "partner_a"})
+        cls.partner_b = cls.env["res.partner"].create({"name": "partner_b"})
+        cls.company = cls.env.user.company_id
+        cls.default_pricelist = (
+            cls.env["product.pricelist"]
+            .with_company(cls.company)
+            .create(
+                {
+                    "name": "default_pricelist",
+                    "currency_id": cls.company.currency_id.id,
+                }
+            )
         )
 
     def test01(self):
@@ -53,9 +57,7 @@ class TestCashOnDelivery(TestSaleCommon):
                 "partner_invoice_id": self.partner_a.id,
                 "partner_shipping_id": self.partner_a.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.product.name,
                             "product_id": self.product.id,
@@ -65,7 +67,7 @@ class TestCashOnDelivery(TestSaleCommon):
                         },
                     ),
                 ],
-                "pricelist_id": self.company_data["default_pricelist"].id,
+                "pricelist_id": self.default_pricelist.id,
                 "picking_policy": "direct",
             }
         )
@@ -80,9 +82,7 @@ class TestCashOnDelivery(TestSaleCommon):
                 "partner_invoice_id": self.partner_b.id,
                 "partner_shipping_id": self.partner_b.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": self.product.name,
                             "product_id": self.product.id,
@@ -92,7 +92,7 @@ class TestCashOnDelivery(TestSaleCommon):
                         },
                     ),
                 ],
-                "pricelist_id": self.company_data["default_pricelist"].id,
+                "pricelist_id": self.default_pricelist.id,
                 "picking_policy": "direct",
             }
         )
