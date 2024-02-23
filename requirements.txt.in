@@ -4,6 +4,7 @@ odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@16.0-alc
 werkzeug<2.1
 pypdf2<2
 dicttoxml @ git+https://github.com/acsone/dicttoxml.git@alc-master-perf
+odoo-addon-product-packaging-level<16.0.1.1.0 # see https://github.com/OCA/product-attribute/pull/1427/files#r1500463758
 
 # account-analytic
 # https://github.com/OCA/account-analytic/pull/576
