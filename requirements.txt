@@ -62,7 +62,7 @@ odoo-addon-account-analytic-account-tag==16.0.1.0.0.2
 odoo-addon-account-analytic-required==16.0.1.0.0.8
 odoo-addon-account-analytic-tag==16.0.1.0.0.10
 odoo-addon-account-banking-mandate==16.0.1.0.2.8
-odoo-addon-account-banking-pain-base==16.0.1.0.0.7
+odoo-addon-account-banking-pain-base==16.0.1.1.0.5
 odoo-addon-account-banking-sepa-credit-transfer==16.0.1.0.0.6
 odoo-addon-account-banking-sepa-direct-debit==16.0.1.1.0
 odoo-addon-account-cutoff-accrual-order-base @ git+https://github.com/acsone/account-closing.git@8ea69d08a4a9c2e5750a3dfc2562828bbc0dfe48#subdirectory=setup/account_cutoff_accrual_order_base
