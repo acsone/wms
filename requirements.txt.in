@@ -79,7 +79,7 @@ odoo-addon-stock-release-channel-shipment-advice-toursolver @ git+https://github
 odoo-addon-stock-release-channel-geoengine @ git+https://github.com/OCA/wms.git@refs/pull/599/head#subdirectory=setup/stock_release_channel_geoengine
 odoo-addon-stock-release-channel-delivery @ git+https://github.com/OCA/wms.git@refs/pull/636/head#subdirectory=setup/stock_release_channel_delivery
 odoo-addon-stock-release-channel @ git+https://github.com/OCA/wms.git@refs/pull/833/head#subdirectory=setup/stock_release_channel
-odoo-addon-shopfloor-base @ git+https://github.com/OCA/wms.git@refs/pull/642/head#subdirectory=setup/shopfloor_base
+odoo-addon-shopfloor-base @ git+https://github.com/OCA/wms.git@refs/pull/845/head#subdirectory=setup/shopfloor_base
 odoo-addon-shopfloor @ git+https://github.com/OCA/wms.git@refs/pull/679/head#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/OCA/wms.git@refs/pull/798/head#subdirectory=setup/shopfloor_full_location_reservation
 odoo-addon-shopfloor-workstation @ git+https://github.com/OCA/wms.git@refs/pull/693/head#subdirectory=setup/shopfloor_workstation
