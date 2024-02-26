@@ -9,3 +9,4 @@ from odoo.addons.stock.models.stock_location import Location
 class StockLocation(Location):
 
     show_in_shipment_advice_report = fields.Boolean()
+    sequence_in_shipment_advice_report = fields.Integer()
