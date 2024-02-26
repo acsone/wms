@@ -18,11 +18,6 @@ msgstr ""
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
-msgid "<span>Other</span>"
-msgstr "<span>Autre</span>"
-
-#. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Arriving time"
 msgstr "Heure d'arrivée"
 
@@ -68,6 +63,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__id
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__id
 msgid "ID"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model,name:alc_report_shipment_advice.model_stock_location
+msgid "Inventory Locations"
 msgstr ""
 
 #. module: alc_report_shipment_advice
@@ -157,6 +157,11 @@ msgid "Shipment Advice Report for Alc"
 msgstr ""
 
 #. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_stock_location__show_in_shipment_advice_report
+msgid "Show In Shipment Advice Report"
+msgstr ""
+
+#. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Start mileage"
 msgstr "Kilométrage de départ"
@@ -208,3 +213,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "unit(s)"
 msgstr "unité(s)"
+
+#~ msgid "<span>Other</span>"
+#~ msgstr "<span>Autre</span>"
