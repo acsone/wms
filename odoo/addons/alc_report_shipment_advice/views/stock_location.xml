@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_location_form_view">
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='additional_info']" position="inside">
+                <field name="show_in_shipment_advice_report" />
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>
