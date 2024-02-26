@@ -81,7 +81,7 @@
                                 <th>Phone</th>
                                 <t t-set="max_zones" t-value="0" />
                                 <t
-                  t-foreach="report.location_ids._ids"
+                  t-foreach="report.location_ids.sorted('sequence_in_shipment_advice_report')._ids"
                   t-as="zone_location_id"
                 >
                                     <th>

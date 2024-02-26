@@ -38,14 +38,14 @@ class AlcReportShipmentAdvice(models.TransientModel):
     def _compute_location_ids(self):
         # Gather all the locations from details as we need it to build
         # the locations table header.
-        default_location = self.env["stock.location"].search(
+        default_locations = self.env["stock.location"].search(
             [("show_in_shipment_advice_report", "=", True)]
         )
         for report in self:
             line_ids = set()
             for line in report.line_ids:
                 ids = line.parcels_and_items_per_source["locations"]
-                line_ids.update(ids + default_location.ids)
+                line_ids.update(ids + default_locations.ids)
             report.location_ids = [Command.set(line_ids)]
 
     @api.depends("line_ids.picking_ids.parcels_and_items_per_source")
