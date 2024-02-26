@@ -1,11 +1,8 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo.tests import tagged
-
 from .common import AccountInvoicePrintCommon
 
 
-@tagged("post_install", "-at_install")
 class TestAccountInvoicePrint(AccountInvoicePrintCommon):
     def test_00(self):
         """

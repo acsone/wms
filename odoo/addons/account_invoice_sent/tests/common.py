@@ -3,13 +3,16 @@
 
 from odoo.fields import Command
 from odoo.tests import tagged
+from odoo.tests.common import HttpCase
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 from odoo.addons.alc_account_test_common.tests.common import AlcCommonTestAccount
 
 
 @tagged("post_install", "-at_install")
-class AccountInvoicePrintCommon(AlcCommonTestAccount, AccountTestInvoicingCommon):
+class AccountInvoicePrintCommon(
+    HttpCase, AccountTestInvoicingCommon, AlcCommonTestAccount
+):
     @classmethod
     def setUpClass(cls):
         """

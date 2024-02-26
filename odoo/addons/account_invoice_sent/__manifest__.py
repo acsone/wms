@@ -8,6 +8,7 @@
     "license": "AGPL-3",
     "category": "Accounting & Finance",
     "depends": [
+        "alc_account_test_common",
         "account_move_sent_usability",
         "account_invoice_transmit_method",
         "web_notify",
