@@ -1,0 +1,204 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_report_shipment_advice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr_BE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "<span>Other</span>"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Arriving time"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__create_uid
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__create_date
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Customer"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Departure time"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__display_name
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "End mileage"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Exp:"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__id
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__id
+msgid "ID"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice____last_update
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__write_uid
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__write_date
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__line_ids
+msgid "Line"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__location_ids
+msgid "Location"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__note
+msgid "Note"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Notes"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__parcels_and_items_per_source
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__parcels_and_items_per_source
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_shipment_advice__parcels_and_items_per_source
+msgid "Parcels And Items Per Source"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Phone"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__picking_ids
+msgid "Picking"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__report_id
+msgid "Report"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Seq."
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model,name:alc_report_shipment_advice.model_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__shipment_advice_id
+msgid "Shipment Advice"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model,name:alc_report_shipment_advice.model_alc_report_shipment_advice_line
+msgid "Shipment Advice Report Line for Alc"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model,name:alc_report_shipment_advice.model_alc_report_shipment_advice
+msgid "Shipment Advice Report for Alc"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Start mileage"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Stops"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Tot."
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Total number of box(es)"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Total number of unit(s)"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Total of parcel(s)"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid ""
+"box(es)\n"
+"                                                <br/>"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid ""
+"box(es)\n"
+"                                        <br/>"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "unit(s)"
+msgstr ""
