@@ -141,6 +141,11 @@ msgid "Seq."
 msgstr ""
 
 #. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_stock_location__sequence_in_shipment_advice_report
+msgid "Sequence In Shipment Advice Report"
+msgstr ""
+
+#. module: alc_report_shipment_advice
 #: model:ir.model,name:alc_report_shipment_advice.model_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__shipment_advice_id
 msgid "Shipment Advice"
