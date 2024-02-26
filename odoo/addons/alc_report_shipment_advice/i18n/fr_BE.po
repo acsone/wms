@@ -6,23 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-02-26 08:07+0000\n"
+"Last-Translator: Souheil Bejaoui <souheil.bejaoui@acsone.eu>\n"
 "Language-Team: none\n"
 "Language: fr_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "<span>Other</span>"
-msgstr ""
+msgstr "<span>Autre</span>"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Arriving time"
-msgstr ""
+msgstr "Heure d'arrivée"
 
 #. module: alc_report_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__create_uid
@@ -39,12 +41,12 @@ msgstr ""
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Customer"
-msgstr ""
+msgstr "Client"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Departure time"
-msgstr ""
+msgstr "Heure de départ"
 
 #. module: alc_report_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__display_name
@@ -55,7 +57,7 @@ msgstr ""
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "End mileage"
-msgstr ""
+msgstr "kilométrage final"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
@@ -89,12 +91,12 @@ msgstr ""
 #. module: alc_report_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__line_ids
 msgid "Line"
-msgstr ""
+msgstr "Ligne"
 
 #. module: alc_report_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__location_ids
 msgid "Location"
-msgstr ""
+msgstr "Emplacement"
 
 #. module: alc_report_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__note
@@ -121,7 +123,7 @@ msgstr ""
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Phone"
-msgstr ""
+msgstr "Téléphone"
 
 #. module: alc_report_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__picking_ids
@@ -142,7 +144,7 @@ msgstr ""
 #: model:ir.model,name:alc_report_shipment_advice.model_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__shipment_advice_id
 msgid "Shipment Advice"
-msgstr ""
+msgstr "Note d'envoi"
 
 #. module: alc_report_shipment_advice
 #: model:ir.model,name:alc_report_shipment_advice.model_alc_report_shipment_advice_line
@@ -157,12 +159,12 @@ msgstr ""
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Start mileage"
-msgstr ""
+msgstr "Kilométrage de départ"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Stops"
-msgstr ""
+msgstr "Arrêts"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
@@ -172,17 +174,17 @@ msgstr ""
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Total number of box(es)"
-msgstr ""
+msgstr "Nombre total de boîte(s)"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Total number of unit(s)"
-msgstr ""
+msgstr "Nombre total d'unité(s)"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Total of parcel(s)"
-msgstr ""
+msgstr "Total des colis"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
@@ -190,6 +192,8 @@ msgid ""
 "box(es)\n"
 "                                                <br/>"
 msgstr ""
+"boîte(s)\n"
+"                                                <br/>"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
@@ -197,8 +201,10 @@ msgid ""
 "box(es)\n"
 "                                        <br/>"
 msgstr ""
+"boîte(s)\n"
+"                                        <br/>"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "unit(s)"
-msgstr ""
+msgstr "unité(s)"
