@@ -4,15 +4,12 @@ odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@16.0-alc
 werkzeug<2.1
 pypdf2<2
 dicttoxml @ git+https://github.com/acsone/dicttoxml.git@alc-master-perf
+odoo-addon-product-packaging-level<16.0.1.1.0 # see https://github.com/OCA/product-attribute/pull/1427/files#r1500463758
 
 # account-analytic
 # https://github.com/OCA/account-analytic/pull/576
 odoo-addon-product-analytic-purchase @ git+https://github.com/OCA/account-analytic@refs/pull/576/head#subdirectory=setup/product_analytic_purchase
 odoo-addon-product-analytic-sale @ git+https://github.com/OCA/account-analytic@refs/pull/621/head#subdirectory=setup/product_analytic_sale
-# https://github.com/OCA/account-analytic/pull/572
-odoo-addon-account-analytic-tag @ git+https://github.com/OCA/account-analytic@refs/pull/572/head#subdirectory=setup/account_analytic_tag
-# https://github.com/OCA/account-analytic/pull/585
-odoo-addon-account-analytic-account-tag @ git+https://github.com/OCA/account-analytic@refs/pull/585/head#subdirectory=setup/account_analytic_account_tag
 
 # account-financial-reporting
 odoo-addon-account-financial-report @ git+https://github.com/OCA/account-financial-reporting@refs/pull/1081/head#subdirectory=setup/account_financial_report
@@ -26,11 +23,7 @@ odoo-addon-account-reversal @ git+https://github.com/OCA/account-financial-tools
 # account-invoicing
 odoo-addon-account-invoice-line-default-account @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1545/head#subdirectory=setup/account_invoice_line_default_account
 odoo-addon-account-invoice-purchase-quantity @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1562/head#subdirectory=setup/account_invoice_purchase_quantity
-# https://github.com/OCA/account-invoicing/pull/1542
-odoo-addon-account-invoice-supplier-ref-unique @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1542/head#subdirectory=setup/account_invoice_supplier_ref_unique
 odoo-addon-account-move-sent-usability @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1538/head#subdirectory=setup/account_move_sent_usability
-# https://github.com/OCA/account-invoicing/pull/1364 - [16.0][ADD] account_tax_one_vat
-odoo-addon-account-tax-one-vat @ git+https://github.com/oca/account-invoicing.git@refs/pull/1364/head#subdirectory=setup/account_tax_one_vat
 # https://github.com/OCA/account-invoicing/pull/1367 - [16.0][ADD] account_tax_one_vat_purchase
 odoo-addon-account-tax-one-vat-purchase @ git+https://github.com/oca/account-invoicing.git@refs/pull/1367/head#subdirectory=setup/account_tax_one_vat_purchase
 # https://github.com/OCA/account-invoicing/pull/1368 - [16.0][ADD] account_tax_one_vat_sale
@@ -53,10 +46,6 @@ odoo-addon-account-reconcile-restrict-partner-mismatch @ git+https://github.com/
 odoo-addon-base-delivery-carrier-label @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/643/head#subdirectory=setup/base_delivery_carrier_label
 # https://github.com/OCA/delivery-carrier/pull/599 - [16.0][MIG] delivery_carrier_label_gls
 odoo-addon-delivery-carrier-label-gls @ git+https://github.com/oca/delivery-carrier.git@refs/pull/599/head#subdirectory=setup/delivery_carrier_label_gls
-# https://github.com/OCA/delivery-carrier/pull/604 - [16.0][ADD] delivery_estimated_package_quantity_by_weight
-odoo-addon-delivery-estimated-package-quantity-by-weight @ git+https://github.com/oca/delivery-carrier.git@refs/pull/604/head#subdirectory=setup/delivery_estimated_package_quantity_by_weight
-# https://github.com/OCA/delivery-carrier/pull/640 - [16.0][MIG] delivery_carrier_partner
-odoo-addon-delivery-carrier-partner @ git+https://github.com/oca/delivery-carrier.git@refs/pull/640/head#subdirectory=setup/delivery_carrier_partner
 # https://github.com/OCA/delivery-carrier/pull/661
 odoo-addon-stock-picking-delivery-link @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/661/head#subdirectory=setup/stock_picking_delivery_link
 odoo-addon-delivery-package-type-number-parcels @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/761/head#subdirectory=setup/delivery_package_type_number_parcels
@@ -64,15 +53,10 @@ odoo-addon-delivery-package-type-number-parcels @ git+https://github.com/OCA/del
 # wms
 odoo-addon-stock-full-location-reservation @ git+https://github.com/mt-software-de/wms.git@refs/pull/5/head#subdirectory=setup/stock_full_location_reservation
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@16.0-alc_stock_available_to_promise_release#subdirectory=setup/stock_available_to_promise_release
-odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/OCA/wms.git@refs/pull/799/head=setup/stock_release_channel_process_end_time
 # https://github.com/OCA/wms/pull/497 - [ADD] stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@16.0-add-stock_storage_type_abc_classification-dro#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-stock-storage-type @ git+https://github.com/OCA/wms.git@refs/pull/831/head#subdirectory=setup/stock_storage_type
 odoo-addon-stock-picking-batch-creation @ git+https://github.com/oca/wms.git@refs/pull/534/head#subdirectory=setup/stock_picking_batch_creation
-# https://github.com/OCA/wms/pull/560 [16.0][ADD] - stock_release_channel_shipment_advice #560
-odoo-addon-stock-release-channel-shipment-advice @ git+https://github.com/acsone/wms.git@16.0-stock_release_channel_shipment_advice-sbj#subdirectory=setup/stock_release_channel_shipment_advice
-# https://github.com/OCA/wms/pull/634 - [16.0][ADD] stock_release_channel_propagate_channel_picking
-odoo-addon-stock-release-channel-propagate-channel-picking @ git+https://github.com/OCA/wms.git@refs/pull/634/head#subdirectory=setup/stock_release_channel_propagate_channel_picking
 # https://github.com/OCA/wms/pull/572 [ADD] - add stock_release_channel_shipment_advice_process_end_time #572
 odoo-addon-stock-release-channel-shipment-advice-process-end-time @ git+https://github.com/acsone/wms.git@16.0-stock_release_channel_shipment_advice_process_end_time-sbj#subdirectory=setup/stock_release_channel_shipment_advice_process_end_time
 odoo-addon-stock-release-channel-shipment-advice-toursolver @ git+https://github.com/OCA/wms.git@refs/pull/577/head#subdirectory=setup/stock_release_channel_shipment_advice_toursolver
@@ -86,8 +70,6 @@ odoo-addon-shopfloor-workstation @ git+https://github.com/OCA/wms.git@refs/pull/
 odoo-addon-shopfloor-mobile-base @ git+https://github.com/OCA/wms.git@refs/pull/694/head#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-mobile @ git+https://github.com/OCA/wms.git@refs/pull/698/head#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-workstation-mobile @ git+https://github.com/OCA/wms.git@refs/pull/697/head#subdirectory=setup/shopfloor_workstation_mobile
-odoo-addon-shopfloor @ git+https://github.com/OCA/wms.git@refs/pull/679/head#subdirectory=setup/shopfloor
-odoo-addon-shopfloor-workstation @ git+https://github.com/OCA/wms.git@refs/pull/693/head#subdirectory=setup/shopfloor_workstation
 odoo-addon-shopfloor-mobile-base-auth-api-key @ git+https://github.com/OCA/wms.git@refs/pull/701/head#subdirectory=setup/shopfloor_mobile_base_auth_api_key
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/OCA/wms.git@refs/pull/703/head#subdirectory=setup/shopfloor_batch_automatic_creation
 odoo-addon-shopfloor-rest-log @ git+https://github.com/OCA/wms.git@refs/pull/713/head#subdirectory=setup/shopfloor_rest_log
@@ -95,17 +77,10 @@ odoo-addon-shopfloor-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/head#subdirectory=setup/shopfloor_mobile_packing
 
 # product-attribute
-# https://github.com/OCA/product-attribute/pull/1386 - [IMP] product_packaging_dimension: Don't use max_weight anymore
-odoo-addon-product-packaging-dimension @ git+https://github.com/OCA/product-attribute.git@refs/pull/1386/head#subdirectory=setup/product_packaging_dimension
-# https://github.com/OCA/product-attribute/pull/1215 - MIG][16.0] product_packaging_type + renaming to product_packaging_level
-odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-packaging-level-dro#subdirectory=setup/product_packaging_level
 # https://github.com/OCA/product-attribute/pull/1216 - [MIG][16.0] product_packaging_type_pallet => product_packaging_level_pallet
 odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-packaging-level-pallet-dro#subdirectory=setup/product_packaging_level_pallet
-# https://github.com/OCA/product-attribute/pull/1221 - [MIG][16.0] product total weight from packaging
-odoo-addon-product-total-weight-from-packaging @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product_total_weight_from_packaging#subdirectory=setup/product_total_weight_from_packaging
 # https://github.com/OCA/product-attribute/pull/1275 - [ADD] stock_lot_is_archived
 odoo-addon-stock-lot-is-archived @ git+https://github.com/acsone/product-attribute.git@16.0-add-product_lot_archived-dro#subdirectory=setup/stock_lot_is_archived
-odoo-addon-product-stock-state @ git+https://github.com/OCA/product-attribute.git@refs/pull/1339/head#subdirectory=setup/product_stock_state
 odoo-addon-stock-production-lot-expired-date @ git+https://github.com/OCA/product-attribute.git@refs/pull/1488/head#subdirectory=setup/stock_production_lot_expired_date
 
 # purchase-workflow
@@ -119,13 +94,9 @@ odoo-addon-report-csv @ git+https://github.com/OCA/reporting-engine.git@refs/pul
 # sale-workflow
 # https://github.com/OCA/sale-workflow/pull/2322
 odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@16.0-mig-product_price_category-sbj#subdirectory=setup/product_price_category
-# https://github.com/OCA/sale-workflow/pull/2329
-odoo-addon-sale-procurement-customer @ git+https://github.com/acsone/sale-workflow.git@16.0-add-sale_procurement_customer-dro#subdirectory=setup/sale_procurement_customer
 odoo-addon-sale-order-line-cancel @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2357/head#subdirectory=setup/sale_order_line_cancel
 odoo-addon-sale-route-amendment @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2423/head#subdirectory=setup/sale_route_amendment
-odoo-addon-sale-shipping-info-helper @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2456/head#subdirectory=setup/sale_shipping_info_helper
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2693/head#subdirectory=setup/sale_stock_picking_blocking
-odoo-addon-sale-delivery-state @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2770/head#subdirectory=setup/sale_delivery_state
 
 
 # sale-channel
@@ -150,11 +121,9 @@ odoo-addon-stock-average-daily-sale @ git+https://github.com/OCA/stock-logistics
 odoo-addon-stock-location-product-restriction @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1803/head#subdirectory=setup/stock_location_product_restriction
 # https://github.com/OCA/stock-logistics-warehouse/pull/1646
 odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock-default-scrap-location-dro#subdirectory=setup/stock_scrap_location_default
-odoo-addon-stock-inventory @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1861/head#subdirectory=setup/stock_inventory
 odoo-addon-stock-picking-volume @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1680/head#subdirectory=setup/stock_picking_volume
 # https://github.com/OCA/stock-logistics-warehouse/pull/1794
 odoo-addon-stock-reserve-rule @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1794/head#subdirectory=setup/stock_reserve_rule
-odoo-addon-procurement-auto-create-group @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1819/head#subdirectory=setup/procurement_auto_create_group
 odoo-addon-stock-quant-safe-inventory @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1947/head#subdirectory=setup/stock_quant_safe_inventory
 
 
@@ -164,8 +133,6 @@ odoo-addon-stock-move-zone-location-source @ git+https://github.com/OCA/stock-lo
 odoo-addon-stock-picking-backorder-reason @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1199/head#subdirectory=setup/stock_picking_backorder_reason
 # https://github.com/OCA/stock-logistics-workflow/pull/1200
 odoo-addon-stock-picking-backorder-reason-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-backorder-reason-grn-dro#subdirectory=setup/stock_picking_backorder_reason_grn
-# https://github.com/OCA/stock-logistics-workflow/pull/1256
-odoo-addon-stock-picking-grn-mandatory @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1256/head#subdirectory=setup/stock_picking_grn_mandatory
 # https://github.com/OCA/stock-logistics-workflow/pull/1328
 odoo-addon-stock-picking-group-by-base @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1328/head#subdirectory=setup/stock_picking_group_by_base
 # https://github.com/OCA/stock-logistics-workflow/pull/1186
@@ -179,35 +146,20 @@ odoo-addon-stock-picking-operation-loss-quantity @ git+https://github.com/OCA/st
 odoo-addon-stock-picking-group-by-max-weight @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1451/head#subdirectory=setup/stock_picking_group_by_max_weight
 odoo-addon-delivery-procurement-group-carrier @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1452/head#subdirectory=setup/delivery_procurement_group_carrier
 odoo-addon-stock-move-line-change-lot @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1469/head#subdirectory=setup/stock_move_line_change_lot
-odoo-addon-stock-picking-group-by-partner-by-carrier @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1476/head#subdirectory=setup/stock_picking_group_by_partner_by_carrier
+
 # see gitagregate
-odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-stock_picking_start#subdirectory=setup/stock_picking_start
 odoo-addon-stock-picking-batch-start @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1389/head#subdirectory=setup/stock_picking_batch_start
-odoo-addon-stock-quant-package-dimension @ git+https://github.com/OCA/stock-logistics-workflow@refs/pull/1329/head#subdirectory=setup/stock_quant_package_dimension
 odoo-addon-stock-move-priority-picking-assign @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1483/head#subdirectory=setup/stock_move_priority_picking_assign
-# https://github.com/OCA/stock-logistics-workflow/pull/1214
-odoo-addon-stock-override-procurement @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-stock_override_procurement-sbj#subdirectory=setup/stock_override_procurement
 odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1251/head#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-alc_stock_move_propagate_first_move#subdirectory=setup/stock_move_propagate_first_move
 odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1264/head#subdirectory=setup/stock_move_propagate_first_move_cancel
-odoo-addon-stock-grn @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1285/head#subdirectory=setup/stock_grn
 odoo-addon-stock-picking-progress @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1330/head#subdirectory=setup/stock_picking_progress
-odoo-addon-stock-move-free-reservation-reassign @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1361/head#subdirectory=setup/stock_move_free_reservation_reassign
 odoo-addon-stock-move-line-lock-qty-done @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1470/head#subdirectory=setup/stock_move_line_lock_qty_done
-
-# server-tools
-# https://github.com/OCA/server-tools/pull/2533 - [16.0][MIG] base_sparse_field_list_support
-odoo-addon-base-sparse-field-list-support @ git+https://github.com/acsone/server-tools.git@16.0-mig-base_sparse_field_list_support-hda#subdirectory=setup/base_sparse_field_list_support
-odoo-addon-base-partition @ git+https://github.com/OCA/server-tools.git@refs/pull/2615/head#subdirectory=setup/base_partition
-odoo-addon-base-exception @ git+https://github.com/OCA/server-tools.git@refs/pull/2670/head#subdirectory=setup/base_exception
-odoo-addon-jsonifier @ git+https://github.com/OCA/server-tools.git@refs/pull/2762/head#subdirectory=setup/jsonifier
 
 # OCA/server-auth
 odoo-addon-auth-api-key-group @ git+https://github.com/OCA/server-auth.git@refs/pull/544/head#subdirectory=setup/auth_api_key_group
-odoo-addon-auth-jwt-server-env @ git+https://github.com/OCA/server-auth.git@refs/pull/581/head#subdirectory=setup/auth_jwt_server_env
 
 # OCA/server-ux
-odoo-addon-base-import-security-group @ git+https://github.com/OCA/server-ux.git@refs/pull/677/head#subdirectory=setup/base_import_security_group
 
 # OCA/web
 odoo-addon-web-notify @ git+https://github.com/OCA/web.git@refs/pull/2598/head#subdirectory=setup/web_notify
@@ -237,30 +189,14 @@ odoo-addon-stock-available-location-get-domain @ git+https://github.com/OCA/stoc
 # https://github.com/OCA/stock-logistics-availability/pull/10 - [ADD] stock_available_location_orderpoint
 odoo-addon-stock-available-location-orderpoint @ git+https://github.com/OCA/stock-logistics-availability.git@refs/pull/10/head#subdirectory=setup/stock_available_location_orderpoint
 
-# partner-contact
-
 # report-print-send
 odoo-addon-base-report-to-label-printer @ git+https://github.com/oca/report-print-send.git@refs/pull/329/head#subdirectory=setup/base_report_to_label_printer
-
-# odoo-pim
-odoo-addon-attribute-set @ git+https://github.com/OCA/odoo-pim.git@refs/pull/171/head#subdirectory=setup/attribute_set
-odoo-addon-product-attribute-set @ git+https://github.com/OCA/odoo-pim.git@refs/pull/142/head#subdirectory=setup/product_attribute_set
-
-# OCA/geospatial
-odoo-addon-geoengine-partner @ git+https://github.com/OCA/geospatial.git@refs/pull/331/head#subdirectory=setup/geoengine_partner
-odoo-addon-geoengine-base-geolocalize @ git+https://github.com/OCA/geospatial.git@refs/pull/332/head#subdirectory=setup/geoengine_base_geolocalize
-
-# OCA/e-commerce
-odoo-addon-product-template-multi-link @ git+https://github.com/OCA/e-commerce.git@refs/pull/774/head#subdirectory=setup/product_template_multi_link
-
-# OCA/hr-holidays
 
 # OCA/edi
 odoo-addon-account-einvoice-generate @ git+https://github.com/OCA/edi.git@refs/pull/893/head#subdirectory=setup/account_einvoice_generate
 odoo-addon-base-ubl-payment @ git+https://github.com/OCA/edi.git@refs/pull/893/head#subdirectory=setup/base_ubl_payment
 odoo-addon-base-ubl @ git+https://github.com/acsone/edi.git@16.0-edi-base-ubl#subdirectory=setup/base_ubl
 odoo-addon-account-invoice-ubl @ git+https://github.com/OCA/edi.git@refs/pull/886/head#subdirectory=setup/account_invoice_ubl
-odoo-addon-pdf-helper @ git+https://github.com/OCA/edi.git@refs/pull/898/head#subdirectory=setup/pdf_helper
 odoo-addon-purchase-order-ubl @ git+https://github.com/OCA/edi.git@refs/pull/871/head#subdirectory=setup/purchase_order_ubl
 
 # edido-eu/peppol
@@ -270,15 +206,10 @@ odoo-addon-l10n-be-account-einvoice-generate @ git+https://github.com/edido-eu/p
 
 # OCA/l10n-belgium
 odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/186/head#subdirectory=setup/l10n_be_bpost_address_validation
-odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/188/head#subdirectory=setup/l10n_be_bpost_address_autocomplete
-odoo-addon-l10n-be-eco-tax @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/199/head#subdirectory=setup/l10n_be_eco_tax
-odoo-addon-l10n-be-antibiotic-tax @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/202/head#subdirectory=setup/l10n_be_antibiotic_tax
-odoo-addon-l10n-be-apb-tax @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/201/head#subdirectory=setup/l10n_be_apb_tax
 odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/204/head#subdirectory=setup/l10n_be_iso20022_pain
 
 # OCA/rest-framework
 odoo-addon-base-rest @ git+https://github.com/OCA/rest-framework.git@refs/pull/368/head#subdirectory=setup/base_rest
-odoo-addon-rest-log @ git+https://github.com/OCA/rest-framework.git@refs/pull/354/head#subdirectory=setup/rest_log
 odoo-addon-fastapi @ git+https://github.com/OCA/rest-framework.git@refs/pull/387/head#subdirectory=setup/fastapi
 
 # OCA/web-api
@@ -290,9 +221,6 @@ fastapi @ git+https://github.com/tiangolo/fastapi@refs/pull/5452/head
 checklog-odoo @ git+https://github.com/acsone/checklog-odoo@master#subdirectory=checklog-odoo
 
 openupgradelib @ git+https://github.com/acsone/openupgradelib.git@16.0-alc_master
-
-# OCA/payment
-odoo-addon-account-banking-sepa-direct-debit @ git+https://github.com/OCA/bank-payment.git@refs/pull/1126/head#subdirectory=setup/account_banking_sepa_direct_debit
 
 # OCA/account-closing
 # https://github.com/OCA/account-closing/pull/270 - auto reverse
@@ -311,33 +239,10 @@ odoo-addon-account-invoice-accrual @ git+https://github.com/OCA/account-closing.
 # shopinvader
 odoo-addon-shopinvader-search-engine-product-template-multi-link @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1429/head#subdirectory=setup/shopinvader_search_engine_product_template_multi_link
 odoo-addon-shopinvader-search-engine-update-product-template-multi-link @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1429/head#subdirectory=setup/shopinvader_search_engine_update_product_template_multi_link
-odoo-addon-shopinvader-api-sale @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1466/head#subdirectory=setup/shopinvader_api_sale
-odoo-addon-shopinvader-filtered-model @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1465/head#subdirectory=setup/shopinvader_filtered_model
-odoo-addon-shopinvader-product-attribute-set @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1450/head#subdirectory=setup/shopinvader_product_attribute_set
 
-odoo-addon-shopinvader-sale-state @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1448/head#subdirectory=setup/shopinvader_sale_state
-odoo-addon-shopinvader-delivery-state @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1448/head#subdirectory=setup/shopinvader_delivery_state
-odoo-addon-shopinvader-schema-sale @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1448/head#subdirectory=setup/shopinvader_schema_sale
-
-odoo-addon-shopinvader-api-cart @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1488/head#subdirectory=setup/shopinvader_api_cart
-odoo-addon-shopinvader-api-wishlist @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1485/head#subdirectory=setup/shopinvader_api_wishlist
-odoo-addon-shopinvader-multi-category @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1469/head#subdirectory=setup/shopinvader_multi_category
-odoo-addon-shopinvader-search-engine-assortment @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1468/head#subdirectory=setup/shopinvader_search_engine_assortment
 odoo-addon-shopinvader-search-engine-product-stock @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1473/head#subdirectory=setup/shopinvader_search_engine_product_stock
-odoo-addon-shopinvader-base-url @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1475/head#subdirectory=setup/shopinvader_base_url
-
-odoo-addon-shopinvader-product @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1480/head#subdirectory=setup/shopinvader_product
-odoo-addon-shopinvader-search-engine @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1480/head#subdirectory=setup/shopinvader_search_engine
-odoo-addon-shopinvader-search-engine-update @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1497/head#subdirectory=setup/shopinvader_search_engine_update
 odoo-addon-shopinvader-es-product-categ @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1481/head#subdirectory=setup/shopinvader_es_product_categ
 
 
 # OCA/search-engineer
-odoo-addon-connector-search-engine @ git+https://github.com/OCA/search-engine.git@refs/pull/187/head#subdirectory=setup/connector_search_engine
 odoo-addon-search-engine-image-thumbnail @ git+https://github.com/OCA/search-engine.git@refs/pull/176/head#subdirectory=setup/search_engine_image_thumbnail
-
-# OCA/queue
-odoo-addon-queue-job-cron @ git+https://github.com/OCA/queue.git@refs/pull/612/head#subdirectory=setup/queue_job_cron
-
-# OCA/storage
-odoo-addon-fs-image-thumbnail @ git+https://github.com/OCA/storage.git@refs/pull/340/head#subdirectory=setup/fs_image_thumbnail

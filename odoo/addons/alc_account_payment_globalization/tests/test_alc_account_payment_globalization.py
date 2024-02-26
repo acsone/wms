@@ -29,6 +29,7 @@ class TestAlcAccountPaymentGlobalization(TestAlcAccountPaymentGlobalizationCommo
         self.assertEqual(self.invoice_partner_1_1_receivable_1.state, "posted")
         self.assertEqual(self.invoice_partner_1_2_receivable_1.state, "posted")
         self.assertEqual(self.invoice_partner_2_1_receivable_1.state, "posted")
+        self.assertEqual(self.invoice_partner_2_2_receivable_1.state, "draft")
         self.assertEqual(self.invoice_partner_2_1_receivable_2.state, "posted")
         account_globalization = self._do_globalization(
             self.partner_3, self.account_receivable_1

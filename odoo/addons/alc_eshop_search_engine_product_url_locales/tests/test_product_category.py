@@ -36,6 +36,6 @@ class TestProductCategorySchema(TestCategoryBindingBase, TestURLLocalesCommon):
 
     def test_2(self):
         """No lang set for the index."""
-        self.se_index.lang_id = False
+        self.se_categ_index.lang_id = False
         category = ProductCategory.from_product_category(self.category)
         self.assertEqual(category.url_key_locales, {"fr_FR": "url_key_fr"})

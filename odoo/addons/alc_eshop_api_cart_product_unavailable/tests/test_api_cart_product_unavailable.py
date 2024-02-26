@@ -84,7 +84,7 @@ class TestSaleCartApi(FastAPITransactionCase):
 
     def test_qty_unavailable(self):
         with self._create_test_client() as test_client:
-            response = test_client.get("/carts/sync")
+            response = test_client.get("/carts")
             self.assertEqual(200, response.status_code)
 
             # not product in stock
