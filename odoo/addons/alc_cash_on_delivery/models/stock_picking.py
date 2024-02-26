@@ -13,8 +13,8 @@ class StockPicking(Picking):
         string="Invoice", copy=False, readonly=True
     )
 
-    def button_validate(self):
-        res = super().button_validate()
+    def _action_done(self):
+        res = super()._action_done()
         for rec in self:
             sales = rec.move_ids.filtered(
                 lambda move: move.state == "done"
@@ -25,10 +25,9 @@ class StockPicking(Picking):
                 lambda sale: sale.payment_term_id.cash_on_delivery
             )
             if cash_on_delivery_sales:
-                invoice_ids = cash_on_delivery_sales._create_invoices(final=True)
-                if invoice_ids:
-                    # invoices = self.env["account.move"].browse(invoice_ids)
+                invoices = cash_on_delivery_sales._create_invoices(final=True)
+                if invoices:
                     # Validate invoices
-                    invoice_ids.action_post()
-                    rec.cash_on_delivery_invoice_ids = [(6, 0, invoice_ids.ids)]
+                    invoices.action_post()
+                    rec.cash_on_delivery_invoice_ids = invoices
         return res
