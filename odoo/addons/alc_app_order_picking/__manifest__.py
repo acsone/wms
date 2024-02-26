@@ -132,6 +132,7 @@
         "alc_product_expiry",
         "alc_stock_move_line_audit",
         "stock_quant_safe_inventory",
+        "alc_empty_package_at_picking_return",
     ],
     "data": [],
     "demo": [],
