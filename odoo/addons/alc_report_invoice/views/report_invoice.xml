@@ -347,19 +347,19 @@
         <table id="bank_table" class="round_table table-condensed">
           <t
             t-set="bank_cbc"
-            t-value="o.env['account.journal'].search([('code', '=', 'BNK1')])"
+            t-value="o.env['account.journal'].search([('code', '=', 'BNK1'), ('company_id', '=', company.id)], limit=1)"
           />
           <t
             t-set="bank_ing"
-            t-value="o.env['account.journal'].search([('code', '=', 'BNK2')])"
+            t-value="o.env['account.journal'].search([('code', '=', 'BNK2'), ('company_id', '=', company.id)], limit=1)"
           />
           <t
             t-set="bank_dexia"
-            t-value="o.env['account.journal'].search([('code', '=', 'BNK3')])"
+            t-value="o.env['account.journal'].search([('code', '=', 'BNK3'), ('company_id', '=', company.id)], limit=1)"
           />
           <t
             t-set="bank_bnp"
-            t-value="o.env['account.journal'].search([('code', '=', 'BNK4')])"
+            t-value="o.env['account.journal'].search([('code', '=', 'BNK4'), ('company_id', '=', company.id)], limit=1)"
           />
           <t t-if="o.payment_mode_description">
             <tr>
