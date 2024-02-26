@@ -2,7 +2,6 @@
 <!-- Copyright 2023 ACSONE SA/NV
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="stock_move_line_tree_view">
         <field
       name="name"
@@ -14,9 +13,8 @@
     />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='qty_done']" position="after">
-                <field name="reserved_uom_qty" />
+                <field name="reserved_uom_qty" readonly="1" />
             </xpath>
         </field>
     </record>
-
 </odoo>
