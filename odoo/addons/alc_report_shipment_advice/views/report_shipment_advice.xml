@@ -50,21 +50,13 @@
                                 <tr>
                                     <td>Departure time</td>
                                     <td>
-                                        <t t-if="o.departure_date">
-                                            <span
-                        t-esc="o.departure_date.strftime('%H:%M')"
-                      />
-                                        </t>
+
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Arriving time</td>
                                     <td>
-                                        <t t-if="o.arrival_date">
-                                            <span
-                        t-esc="o.arrival_date.strftime('%H:%M')"
-                      />
-                                        </t>
+
                                     </td>
                                 </tr>
                             </tbody>
@@ -99,7 +91,9 @@
                       />
                                         </t>
                                         <t t-else="">
-                                            <span>Other</span>
+                                            <span
+                        t-esc="o.env['stock.location'].browse(zone_location_id).name"
+                      />
                                         </t>
                                         <t t-set="max_zones" t-value="max_zones + 1" />
                                     </th>

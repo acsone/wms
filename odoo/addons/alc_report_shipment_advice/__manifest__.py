@@ -18,6 +18,7 @@
         "alc_stock_picking_parcels_and_items_per_source",
     ],
     "data": [
+        "views/stock_location.xml",
         "security/security.xml",
         "data/paperformat.xml",
         "views/report_shipment_advice.xml",
