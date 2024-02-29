@@ -27,8 +27,10 @@ class StockMoveLine(StockMoveLineBase):
         """
         self.ensure_one()
         raise_exception = self.company_id.restrict_move_line_quantity
+        from_action_done_ids = self.env.context.get("from_action_done", [])
         invalid_value = bool(
-            self.state != "done"
+            self.id not in from_action_done_ids
+            and self.state != "done"
             and not float_compare(
                 self._origin.reserved_uom_qty,
                 0.0,
@@ -47,6 +49,10 @@ class StockMoveLine(StockMoveLineBase):
             _logger.error(message + "\n".join(traceback.format_stack()))
             if raise_exception:
                 raise UserError(message)
+
+    def _action_done(self):
+        new_self = self.with_context(from_action_done=self.ids)
+        return super(StockMoveLine, new_self)._action_done()
 
     def write(self, vals):
         # Check field modification first
