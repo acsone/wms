@@ -4,7 +4,7 @@
 import logging
 import traceback
 
-from odoo import _
+from odoo import _, api
 from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_compare
 
@@ -14,6 +14,10 @@ _logger = logging.getLogger("restrict-zero-quantity-error")
 
 
 class StockMoveLine(StockMoveLineBase):
+    @api.model
+    def _check_alc_stock_move_line_reserved_uom_qty(self, vals):
+        return bool("reserved_uom_qty" in vals and vals.get("reserved_uom_qty") <= 0.0)
+
     def _check_alc_stock_move_line_restrict_quantity(self, vals) -> None:
         """
         This method checks if the feature to log error when updating the.
@@ -25,8 +29,6 @@ class StockMoveLine(StockMoveLineBase):
         raise_exception = self.company_id.restrict_move_line_quantity
         invalid_value = bool(
             self.state != "done"
-            and "reserved_uom_qty" in vals
-            and vals.get("reserved_uom_qty") <= 0.0
             and not float_compare(
                 self._origin.reserved_uom_qty,
                 0.0,
@@ -47,6 +49,8 @@ class StockMoveLine(StockMoveLineBase):
                 raise UserError(message)
 
     def write(self, vals):
-        for rec in self:
-            rec._check_alc_stock_move_line_restrict_quantity(vals)
+        # Check field modification first
+        if self._check_alc_stock_move_line_reserved_uom_qty(vals):
+            for rec in self:
+                rec._check_alc_stock_move_line_restrict_quantity(vals)
         return super().write(vals)
