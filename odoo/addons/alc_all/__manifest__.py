@@ -22,6 +22,7 @@
         "web_sheet_full_width",
         "web_tree_many2one_clickable",
         "web_remember_tree_column_width",
+        "web_dialog_size",
         # ALC
         "alc_app_analytic",
         "alc_app_framework",
