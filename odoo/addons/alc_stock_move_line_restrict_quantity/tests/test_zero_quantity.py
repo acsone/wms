@@ -81,6 +81,8 @@ class TestZeroQuantity(TransactionCase):
             log_catcher.output[0],
         )
 
+        self.picking._action_done()
+
     def test_zero_just_log(self):
         # Just log
         self._create_quantity(self.product, 10.0)
