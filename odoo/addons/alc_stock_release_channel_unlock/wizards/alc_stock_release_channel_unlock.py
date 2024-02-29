@@ -52,19 +52,8 @@ class AlcStockReleaseChannelUnlock(models.TransientModel):
             self._get_channels_to_unlock_domain()
         )
 
-    def _get_channels_to_lock_domain(self):
-        self.ensure_one()
-        return [("state", "=", "open")]
-
-    def _get_channels_to_lock(self):
-        return self.env["stock.release.channel"].search(
-            self._get_channels_to_lock_domain()
-        )
-
     def action_unlock(self):
         self.ensure_one()
-        channels_to_lock = self._get_channels_to_lock()
-        channels_to_lock.action_lock()
         channels_to_unlock = self._get_channels_to_unlock()
         channels_to_unlock.filtered("is_action_unlock_allowed").action_unlock()
         channels_to_unlock.filtered("is_action_wake_up_allowed").action_wake_up()
