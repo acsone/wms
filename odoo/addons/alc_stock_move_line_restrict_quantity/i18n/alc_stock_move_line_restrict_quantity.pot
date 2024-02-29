@@ -1,0 +1,59 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_stock_move_line_restrict_quantity
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_stock_move_line_restrict_quantity
+#: model:ir.model.fields,help:alc_stock_move_line_restrict_quantity.field_res_company__restrict_move_line_quantity
+#: model:ir.model.fields,help:alc_stock_move_line_restrict_quantity.field_res_config_settings__restrict_move_line_quantity
+msgid ""
+"Check this box if you want to restrict a zero or a negative quantity in a "
+"stock move line (reserved_uom_qty)"
+msgstr ""
+
+#. module: alc_stock_move_line_restrict_quantity
+#: model_terms:ir.ui.view,arch_db:alc_stock_move_line_restrict_quantity.res_config_settings_view_form
+msgid ""
+"Check this box if you want to restrict a zero quantity or a negative in a "
+"stock move line (reserved_uom_qty)"
+msgstr ""
+
+#. module: alc_stock_move_line_restrict_quantity
+#: model:ir.model,name:alc_stock_move_line_restrict_quantity.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: alc_stock_move_line_restrict_quantity
+#: model:ir.model,name:alc_stock_move_line_restrict_quantity.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: alc_stock_move_line_restrict_quantity
+#: model:ir.model,name:alc_stock_move_line_restrict_quantity.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: alc_stock_move_line_restrict_quantity
+#: model:ir.model.fields,field_description:alc_stock_move_line_restrict_quantity.field_res_company__restrict_move_line_quantity
+#: model:ir.model.fields,field_description:alc_stock_move_line_restrict_quantity.field_res_config_settings__restrict_move_line_quantity
+msgid "Restrict Move Line Quantity"
+msgstr ""
+
+#. module: alc_stock_move_line_restrict_quantity
+#. odoo-python
+#: code:addons/alc_stock_move_line_restrict_quantity/models/stock_move_line.py:0
+#, python-format
+msgid ""
+"The demand quantity should not be set to 0 or negative in the picking "
+"%(picking_name)s for product %(product_name)s"
+msgstr ""
