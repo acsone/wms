@@ -5,7 +5,7 @@
     "name": "Alc Order Picking App",
     "description": """
         Gather all order picking related modules for Alcyon""",
-    "version": "16.0.1.0.1",
+    "version": "16.0.1.0.2",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
@@ -40,7 +40,6 @@
         "stock_available_location_orderpoint",
         "stock_dynamic_routing",
         "stock_full_location_reservation",
-        "stock_inventory",
         "stock_location_orderpoint",
         "stock_location_orderpoint_average_daily_sale",
         "stock_location_orderpoint_dynamic_routing_merge",
