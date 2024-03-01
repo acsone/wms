@@ -8,7 +8,7 @@ from odoo.addons.queue_job.tests.common import trap_jobs
 from .common import TestDeliverProcessBase
 
 
-class TestPartialDeliver(TestDeliverProcessBase):
+class TestUnreleaseAfterDeliver(TestDeliverProcessBase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

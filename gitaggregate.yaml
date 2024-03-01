@@ -40,10 +40,9 @@
   merges:
     - oca 16.0
     - oca refs/pull/660/head # [FIX] stock_available_to_promise_release: Fix unrelease on backorder
-    - oca refs/pull/807/head # [16.0][FIX] stock_available_to_promise_release: unrelease
-    - oca refs/pull/808/head # [16.0][PORT] stock_available_to_promise_release : fw-port changes from 14.0
     - oca refs/pull/832/head # [16.0][FIX] stock_available_to_promise_release: Fix priority
-    - origin 16.0-port-stock_available_to_promise_release
+    - oca refs/pull/834/head # [16.0][IMP] stock_available_to_promise_release: Unrelease when merging moves
+    #- origin 16.0-port-stock_available_to_promise_release
   target: origin 16.0-alc_stock_available_to_promise_release
 
 ./src/stock_move_propagate_first_move:
