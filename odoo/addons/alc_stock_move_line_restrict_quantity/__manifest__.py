@@ -11,6 +11,8 @@
     "website": "https://acsone.eu",
     "depends": [
         "stock",
+        # Dependencies for modules not to restrict
+        "stock_picking_operation_loss_quantity",
     ],
     "data": ["views/res_config_settings.xml"],
 }

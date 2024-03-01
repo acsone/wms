@@ -27,9 +27,11 @@ class StockMoveLine(StockMoveLineBase):
         """
         self.ensure_one()
         raise_exception = self.company_id.restrict_move_line_quantity
-        from_action_done_ids = self.env.context.get("from_action_done", [])
+        no_restriction_quantity_ids = self.env.context.get(
+            "no_restriction_quantity_ids", []
+        )
         invalid_value = bool(
-            self.id not in from_action_done_ids
+            self.id not in no_restriction_quantity_ids
             and self.state != "done"
             and not float_compare(
                 self._origin.reserved_uom_qty,
@@ -51,7 +53,7 @@ class StockMoveLine(StockMoveLineBase):
                 raise UserError(message)
 
     def _action_done(self):
-        new_self = self.with_context(from_action_done=self.ids)
+        new_self = self.with_context(no_restriction_quantity_ids=self.ids)
         return super(StockMoveLine, new_self)._action_done()
 
     def write(self, vals):
@@ -60,3 +62,16 @@ class StockMoveLine(StockMoveLineBase):
             for rec in self:
                 rec._check_alc_stock_move_line_restrict_quantity(vals)
         return super().write(vals)
+
+    # Functions that will be allowed
+    def _create_loss_picking(self, group_key):
+        # TODO: Check if there is a better way to do the loss operation
+        # without writing to reserved_uom_qty
+        new_self = self.with_context(no_restriction_quantity_ids=self.ids)
+        return super(StockMoveLine, new_self)._create_loss_picking(group_key=group_key)
+
+    def _split_for_loss(self) -> dict:
+        # TODO: Check if there is a better way to do the loss operation
+        # without writing to reserved_uom_qty
+        new_self = self.with_context(no_restriction_quantity_ids=self.ids)
+        return super(StockMoveLine, new_self)._split_for_loss()
