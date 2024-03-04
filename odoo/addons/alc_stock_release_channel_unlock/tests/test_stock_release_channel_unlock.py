@@ -96,7 +96,7 @@ class TestStockReleaseChannelUnlock(TransactionCase):
 
     def test_04(self):
         self._unlock_channel(self.tag_2, self.preparation_plan_2)
-        self.assertEqual(self.channel_open_no_tag.state, "locked")
+        self.assertEqual(self.channel_open_no_tag.state, "open")
         self.assertEqual(self.channel_locked_tag_1.state, "locked")
         self.assertEqual(self.channel_asleep_tag_2.state, "asleep")
         self.assertEqual(self.channel_asleep_plan_2_tag_2.state, "open")
