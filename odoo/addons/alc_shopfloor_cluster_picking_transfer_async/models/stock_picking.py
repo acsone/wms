@@ -25,7 +25,7 @@ class StockPicking(Picking):
             return _("Nothing to do. Picking is in %(state)s", state=self.state)
         picking_lines = self.move_line_ids
         all_lines_unloaded = all(line.shopfloor_unloaded for line in picking_lines)
-        if unload_package_at_destination and all_lines_unloaded:
+        if lines and unload_package_at_destination and all_lines_unloaded:
             lines.result_package_id = False
         if all_lines_unloaded:
             self._action_done()

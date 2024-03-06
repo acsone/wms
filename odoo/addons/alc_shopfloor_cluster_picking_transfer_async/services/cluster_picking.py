@@ -38,7 +38,7 @@ class ClusterPicking(Component):
         for picking in batch.picking_ids.filtered(
             lambda p: p.state not in ("assigned", "done")
         ):
-            self._unload_set_picking_to_done(picking, None)
+            self._unload_set_picking_to_done(picking, picking.move_line_ids)
         return self._response_for_start(
             message=self.msg_store.batch_transfer_complete(),
             popup=completion_info_popup,
