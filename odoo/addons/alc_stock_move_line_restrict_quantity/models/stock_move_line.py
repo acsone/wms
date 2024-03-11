@@ -4,7 +4,7 @@
 import logging
 import traceback
 
-from odoo import _, api
+from odoo import api
 from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_compare
 
@@ -41,16 +41,17 @@ class StockMoveLine(StockMoveLineBase):
             <= 0
         )
         if invalid_value:
+            stack = traceback.format_stack()
+            message_template = "The demand quantity should not be set to 0 or negative in the picking %s for product %s\n\n%s"
             # Log the error
-            message = _(
-                "The demand quantity should not be set to 0 or negative in the picking %(picking_name)s for product %(product_name)s",
-                picking_name=self.picking_id.name,
-                product_name=self.product_id.name,
+            _logger.error(
+                message_template, self.picking_id.name, self.product_id.name, stack
             )
-            # pylint: disable=logging-not-lazy
-            _logger.error(message + "\n".join(traceback.format_stack()))
             if raise_exception:
-                raise UserError(message)
+                raise UserError(
+                    message_template
+                    % (self.picking_id.name, self.product_id.name, stack)
+                )
 
     def _action_done(self):
         new_self = self.with_context(no_restriction_quantity_ids=self.ids)
