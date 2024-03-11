@@ -14,6 +14,7 @@
         "stock",
         "sale_stock",
         "stock_release_channel",
+        "stock_release_channel_shipment_advice",
     ],
     "website": "https://www.acsone.eu",
     "data": [
