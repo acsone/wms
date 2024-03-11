@@ -357,7 +357,7 @@ odoo-addon-stock-picking-operation-loss-quantity @ git+https://github.com/acsone
 odoo-addon-stock-picking-progress @ git+https://github.com/acsone/stock-logistics-workflow.git@3e3dd455a05643eaf116ce5d082d8b7ceba5bbed#subdirectory=setup/stock_picking_progress
 odoo-addon-stock-picking-start==16.0.1.1.1
 odoo-addon-stock-picking-type-shipping-policy==16.0.1.0.0.3
-odoo-addon-stock-picking-volume @ git+https://github.com/acsone/stock-logistics-warehouse.git@75261dd8d3105a81011992a3e9f8cac34c9144a1#subdirectory=setup/stock_picking_volume
+odoo-addon-stock-picking-volume==16.0.1.0.3.2
 odoo-addon-stock-procurement-customer==16.0.1.0.1
 odoo-addon-stock-production-lot-expired-date @ git+https://github.com/acsone/product-attribute.git@45ecae078dd37b2580a3aaf7c2de31fc3ff7b4d2#subdirectory=setup/stock_production_lot_expired_date
 odoo-addon-stock-putaway-hook==16.0.1.0.0.4
