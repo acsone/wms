@@ -65,7 +65,7 @@ def confirm(
     upd_vals["date_order"] = fields.Datetime.now()
     upd_vals.update(cart.play_onchanges(upd_vals, upd_vals.keys()))
     if upd_vals:
-        cart.update(upd_vals)
+        cart.write(upd_vals)
     cart.action_confirm_cart()
     cart._notify_note()
     cart.action_confirm()
