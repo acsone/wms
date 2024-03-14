@@ -196,8 +196,10 @@ odoo-addon-base-report-to-label-printer @ git+https://github.com/oca/report-prin
 odoo-addon-account-einvoice-generate @ git+https://github.com/OCA/edi.git@refs/pull/893/head#subdirectory=setup/account_einvoice_generate
 odoo-addon-base-ubl-payment @ git+https://github.com/OCA/edi.git@refs/pull/893/head#subdirectory=setup/base_ubl_payment
 odoo-addon-base-ubl @ git+https://github.com/acsone/edi.git@16.0-edi-base-ubl#subdirectory=setup/base_ubl
-odoo-addon-account-invoice-ubl @ git+https://github.com/OCA/edi.git@refs/pull/886/head#subdirectory=setup/account_invoice_ubl
+#odoo-addon-account-invoice-ubl @ git+https://github.com/OCA/edi.git@refs/pull/886/head#subdirectory=setup/account_invoice_ubl
+odoo-addon-account-invoice-ubl @ git+https://github.com/jbaudoux/edi.git@refs/pull/2/head#subdirectory=setup/account_invoice_ubl
 odoo-addon-purchase-order-ubl @ git+https://github.com/OCA/edi.git@refs/pull/871/head#subdirectory=setup/purchase_order_ubl
+
 
 # edido-eu/peppol
 odoo-addon-account-invoice-export-ubl @ git+https://github.com/edido-eu/peppol@16.0#subdirectory=setup/account_invoice_export_ubl
