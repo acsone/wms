@@ -128,6 +128,7 @@ odoo-addon-stock-quant-safe-inventory @ git+https://github.com/OCA/stock-logisti
 
 
 # stock-logistics-workflow
+odoo-addon-stock-grn @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1539/head#subdirectory=setup/stock_grn
 odoo-addon-stock-move-zone-location-source @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1377/head#subdirectory=setup/stock_move_zone_location_source
 # https://github.com/OCA/stock-logistics-workflow/pull/1199
 odoo-addon-stock-picking-backorder-reason @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1199/head#subdirectory=setup/stock_picking_backorder_reason
