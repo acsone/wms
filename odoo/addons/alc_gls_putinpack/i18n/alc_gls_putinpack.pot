@@ -80,6 +80,13 @@ msgid "ID"
 msgstr ""
 
 #. module: alc_gls_putinpack
+#: model:ir.model.fields,help:alc_gls_putinpack.field_stock_picking_type__show_gls_put_in_pack_wizard
+msgid ""
+"If you check this and if the picking delivery carrier is GLS,the specific "
+"wizard will be launched"
+msgstr ""
+
+#. module: alc_gls_putinpack
 #: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__is_sent
 msgid "Is sent"
 msgstr ""
@@ -148,6 +155,11 @@ msgid "Picking"
 msgstr ""
 
 #. module: alc_gls_putinpack
+#: model:ir.model,name:alc_gls_putinpack.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: alc_gls_putinpack
 #: model_terms:ir.ui.view,arch_db:alc_gls_putinpack.delivery_package_gls_wizard_form_view
 msgid "Put in Pack"
 msgstr ""
@@ -165,6 +177,11 @@ msgstr ""
 #. module: alc_gls_putinpack
 #: model:ir.model.fields,field_description:alc_gls_putinpack.field_delivery_package_gls_wizard__shipping_weight
 msgid "Shipping Weight"
+msgstr ""
+
+#. module: alc_gls_putinpack
+#: model:ir.model.fields,field_description:alc_gls_putinpack.field_stock_picking_type__show_gls_put_in_pack_wizard
+msgid "Show Gls Put In Pack Wizard"
 msgstr ""
 
 #. module: alc_gls_putinpack
