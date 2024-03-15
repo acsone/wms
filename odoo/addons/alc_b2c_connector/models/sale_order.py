@@ -199,8 +199,9 @@ class SaleOrder(SaleOrderBase):
         product_by_sku = {p.default_code: p for p in products}
         unknown_skus = set(skus).difference(set(product_by_sku.keys()))
         if unknown_skus:
-            msg = _("Unknowns SKU(s): %s " ", ".join(unknown_skus))
-            _logger.error(msg)
+            unknown_skus_str = ", ".join(unknown_skus)
+            _logger.error("Unknowns SKU(s): %s ", unknown_skus_str)
+            msg = _("Unknowns SKU(s): %(skus)s", skus=unknown_skus_str)
             raise ValidationError(msg)
         result = []
         for line_data in lines_data:
@@ -264,8 +265,8 @@ class SaleOrder(SaleOrderBase):
             domain = expression.AND([domain, extended_domain])
         res = self.search(domain)
         if not res:
+            _logger.error("Sale order not found for id %s", b2c_ref)
             msg = _("Sale order not found for id {b2c_ref}").format(b2c_ref=b2c_ref)
-            _logger.error(msg)
             raise MissingError(msg)
         return res
 

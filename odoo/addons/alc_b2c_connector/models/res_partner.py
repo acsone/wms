@@ -46,12 +46,18 @@ class ResPartner(ResPartnerBase):
             for key in data:
                 value = self[key].id if key in {"title", "country_id"} else self[key]
                 if key not in keys and data[key] != value and (data[key] or value):
+                    _logger.error(
+                        "You cannot update this address since there are already"
+                        " closed Sale Orders for this partner. "
+                        "Incoherent field: %s, current value: %s",
+                        key,
+                        value,
+                    )
                     msg = _(
                         "You cannot update this address since there are already"
                         " closed Sale Orders for this partner. "
                         "Incoherent field: {key}, current value: {value}"
                     ).format(key=key, value=value)
-                    _logger.error(msg)
                     raise ValidationError(msg)
         return data
 
