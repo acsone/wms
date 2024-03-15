@@ -17,7 +17,11 @@ class MagentoApi(Controller):
         basic = headers["HTTP_AUTHORIZATION"]
         encoded = basic.replace("Basic ", "")
         decoded = base64.b64decode(encoded).decode("utf-8")
-        username, password = decoded.split(":")
+        # username and password are separated by a colon but the password can contain colons
+        values = decoded.split(":")
+        if len(values) < 2:
+            raise ValueError(f"Invalid Basic Auth {decoded}")
+        username, password = values[0], ":".join(values[1:])
         backend = sudo_env.ref("connector_keycloak.keycloak_backend")
         token = backend._get_token_from_user_info(username, password)
         assert token["token_type"] == "Bearer"
