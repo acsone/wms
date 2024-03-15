@@ -386,8 +386,8 @@ msgstr "Unknown country code {code}"
 #. odoo-python
 #: code:addons/alc_b2c_connector/models/sale_order.py:0
 #, python-format
-msgid "Unknowns SKU(s): %s , "
-msgstr "SKU(s) inconnu(s): %s , "
+msgid "Unknowns SKU(s): %(skus)s"
+msgstr ""
 
 #. module: alc_b2c_connector
 #. odoo-python
@@ -416,6 +416,9 @@ msgstr ""
 #, python-format
 msgid "You cannot use this sale channel for manuel order"
 msgstr "You cannot use this sale channel for manuel order"
+
+#~ msgid "Unknowns SKU(s): %s , "
+#~ msgstr "SKU(s) inconnu(s): %s , "
 
 #~ msgid "Auth api key can only be used by 1 backend at same time"
 #~ msgstr "Auth api key can only be used by 1 backend at same time"
