@@ -22,6 +22,7 @@
         "web_sheet_full_width",
         "web_tree_many2one_clickable",
         "web_remember_tree_column_width",
+        "web_dialog_size",
         # ALC
         "alc_app_analytic",
         "alc_app_framework",
@@ -40,6 +41,7 @@
         "alc_fs_attachment",
         "alc_running_env",
         "alc_search_by_vendor_product_code",
+        "alc_product_search_more_tree_view",
         # Configuration modules
         "alc_stock_available_immediately_loss",
         "stock_scrap_location_default",
