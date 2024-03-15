@@ -17,7 +17,7 @@ class ResCountry(Country):
     def _get_by_code(self, code):
         country = self.search([("code", "=", code)], limit=1)
         if not country:
+            _logger.error("Unknown country code %s", code)
             msg = _("Unknown country code {code}").format(code=code)
-            _logger.error(msg)
             raise ValidationError(msg)
         return country
