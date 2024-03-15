@@ -17,6 +17,7 @@
         "security/delivery_package_gls_wizard.xml",
         "wizards/delivery_package_gls_wizard.xml",
         "views/stock_picking.xml",
+        "views/stock_picking_type.xml",
         "views/stock_package_level_views.xml",
     ],
     "demo": [],
