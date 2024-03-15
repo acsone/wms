@@ -365,7 +365,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/alc_b2c_connector/models/sale_order.py:0
 #, python-format
-msgid "Unknowns SKU(s): %s , "
+msgid "Unknowns SKU(s): %(skus)s"
 msgstr ""
 
 #. module: alc_b2c_connector
