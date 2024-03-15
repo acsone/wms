@@ -14,6 +14,8 @@ class TestGlsFlow(TestGLSWizard):
         wizard_model = self.env["delivery.package.gls.wizard"]
         self.sale_order.action_confirm()
         picking = self.sale_order.picking_ids
+        # Activate the GLS wizard
+        picking.picking_type_id.show_gls_put_in_pack_wizard = True
         picking.action_assign()
 
         move_line_1 = picking.move_line_ids[0]
@@ -21,6 +23,11 @@ class TestGlsFlow(TestGLSWizard):
 
         move_line_1.qty_done = move_line_1.reserved_uom_qty
         gls_wizard_action_1 = picking.action_put_in_pack()
+
+        # Check if the returned wizard is GLS one
+        self.assertEqual(
+            gls_wizard_action_1.get("res_model"), "delivery.package.gls.wizard"
+        )
         # This simulates the action return and the wizard creation
         # triggering computes and onchanges
         wizard_1 = Form(wizard_model.with_context(**gls_wizard_action_1["context"]))

@@ -68,7 +68,10 @@ class StockPicking(PickingBase):
 
     def _pre_put_in_pack_hook(self, move_line_ids):
         """Override the standard hook called at put in pack action."""
-        if self.delivery_type == "gls":
+        if (
+            self.delivery_type == "gls"
+            and self.picking_type_id.show_gls_put_in_pack_wizard
+        ):
             return self._get_gls_put_in_pack_wizard_action(False)
         return super()._pre_put_in_pack_hook(move_line_ids)
 
