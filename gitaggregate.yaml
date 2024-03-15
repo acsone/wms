@@ -42,6 +42,7 @@
     - oca refs/pull/660/head # [FIX] stock_available_to_promise_release: Fix unrelease on backorder
     - oca refs/pull/832/head # [16.0][FIX] stock_available_to_promise_release: Fix priority
     - oca refs/pull/834/head # [16.0][IMP] stock_available_to_promise_release: Unrelease when merging moves
+    - oca refs/pull/864/head # [IMP] stock_available_to_promise_release: set move to need release after pick cancel
     #- origin 16.0-port-stock_available_to_promise_release
   target: origin 16.0-alc_stock_available_to_promise_release
 
