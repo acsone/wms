@@ -59,3 +59,18 @@ class StockMove(StockMoveBase):
             if not origin_stock_location and dest_stock_location:
                 return True
         return False
+
+    def _is_stock_replenishment(self) -> bool:
+        """
+        In some configuration of stock locations, we maybe want to know.
+
+        if the move goes into stock (e.g.: We have a parking location that
+        is not considered as real Stock)
+        """
+        self.ensure_one()
+        for dest_location in self._get_dest_locations():
+            if dest_location.filtered_domain(
+                [("id", "child_of", dest_location.warehouse_id.lot_stock_id.id)]
+            ):
+                return True
+        return False
