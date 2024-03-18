@@ -16,6 +16,7 @@ class StockMove(StockMoveBase):
             lambda m: m.is_inventory
             or m._is_outgoing()
             or m._is_incoming()
+            or m._is_stock_replenishment()
             or m._is_scrap()
         )
         return super(StockMove, moves)._get_product_to_update()

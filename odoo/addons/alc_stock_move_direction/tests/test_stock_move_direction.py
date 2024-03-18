@@ -4,6 +4,8 @@
 from odoo import Command
 from odoo.tests.common import TransactionCase
 
+from odoo.addons.stock.models.stock_picking import Picking
+
 
 class TestStockMoveDirection(TransactionCase):
     @classmethod
@@ -26,6 +28,7 @@ class TestStockMoveDirection(TransactionCase):
         cls.wh2 = wh.copy({"name": "wh2", "code": "wh2_code"})
         cls.pick_type_in = cls.env.ref("stock.picking_type_out")
         cls.pick_type_out = cls.env.ref("stock.picking_type_in")
+        cls.pick_type_int = cls.env.ref("stock.picking_type_internal")
 
         cls.ResPartner = cls.env["res.partner"]
         cls.supplier = cls.ResPartner.create(
@@ -35,6 +38,7 @@ class TestStockMoveDirection(TransactionCase):
             {"name": "Unittest customer", "ref": "abc"}
         )
         cls.stock_location = wh.view_location_id
+        cls.lot_stock_id = wh.lot_stock_id
         cls.supplier_location = cls.env.ref("stock.stock_location_suppliers")
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
         cls.StockLocation = cls.env["stock.location"]
@@ -99,6 +103,28 @@ class TestStockMoveDirection(TransactionCase):
         )
         cls.outgoing_picking = picking.with_context(test_mode=1)
 
+        picking: Picking = cls.StockPicking.create(
+            {
+                "picking_type_id": cls.pick_type_int.id,
+                "location_id": cls.reception_location.id,
+                "location_dest_id": cls.lot_stock_id.id,
+                "move_ids": [
+                    Command.create(
+                        {
+                            "name": "move 1",
+                            "product_id": product.id,
+                            "product_uom_qty": 2,
+                            "product_uom": product.uom_id.id,
+                            "location_id": cls.reception_location.id,
+                            "location_dest_id": cls.lot_stock_id.id,
+                        },
+                    )
+                    for product in cls.product
+                ],
+            }
+        )
+        cls.replenishment_picking = picking.with_context(test_mode=1)
+
     @classmethod
     def _change_product_qty(cls, product, location, qty):
         cls.env["stock.quant"].with_context(inventory_mode=True).create(
@@ -125,6 +151,21 @@ class TestStockMoveDirection(TransactionCase):
         # if the picking is incoming
         self.incoming_picking.move_ids.move_line_ids.unlink()
         self.assertTrue(self.incoming_picking.move_ids._is_incoming())
+
+    def test_stock_replenish_move(self):
+        # here we have a move from seller to reception under stock
+        self.assertTrue(self.replenishment_picking.move_ids._is_stock_replenishment())
+        self.replenishment_picking.action_assign()
+        # if I set a location dest into the pack not under stock
+        # this one us used into the compute
+        self.replenishment_picking.move_ids.move_line_ids.location_dest_id = (
+            self.customer_location
+        )
+        self.assertFalse(self.replenishment_picking.move_ids._is_stock_replenishment())
+        # if we have no pack operation, the destination on move is used to know
+        # if the picking is incoming
+        self.replenishment_picking.move_ids.move_line_ids.unlink()
+        self.assertTrue(self.replenishment_picking.move_ids._is_stock_replenishment())
 
     def test_outgoing_move(self):
         # here we have a move from stock to customer
