@@ -1,0 +1,24 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_stock_move_need_release
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_stock_move_need_release
+#: model:ir.actions.server,name:alc_stock_move_need_release.stock_move_set_need_release_to_true
+msgid "Set need_release to True"
+msgstr ""
+
+#. module: alc_stock_move_need_release
+#: model:res.groups,name:alc_stock_move_need_release.group_can_see_need_release_field
+msgid "Stock Move: can see need release field"
+msgstr ""
