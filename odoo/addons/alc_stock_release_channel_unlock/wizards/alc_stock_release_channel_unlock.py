@@ -67,5 +67,9 @@ class AlcStockReleaseChannelUnlock(models.TransientModel):
         action = self.env["ir.actions.actions"]._for_xml_id(
             "stock_release_channel.stock_release_channel_act_window"
         )
-        action["context"] = {"search_default_filter_open": True}
+        action["context"] = {
+            "search_default_filter_open": True,
+            "search_default_filter_locked": True,
+            "search_default_filter_delivering": True,
+        }
         return action
