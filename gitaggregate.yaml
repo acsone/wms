@@ -116,3 +116,13 @@
     - oca refs/pull/9/head # [IMP] stock_location_orderpoint: Improves performances
     - oca refs/pull/11/head # [FIX] stock_location_orderpoint: Use correct method in job function
   target: origin 16.0-alc_stock_location_orderpoint
+
+./src/odoo-fastapi:
+  remotes:
+    origin: git@github.com:acsone/rest-framework.git
+    oca: git@github.com:oca/rest-framework.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/422/head # Transactions handling refactoring
+    - oca refs/pull/387/head # optionally authenticated partner
+  target: origin 16.0-alc-fastapi
