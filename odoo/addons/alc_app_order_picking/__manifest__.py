@@ -133,6 +133,7 @@
         "alc_stock_move_line_audit",
         "stock_quant_safe_inventory",
         "alc_empty_package_at_picking_return",
+        "alc_stock_move_need_release",
     ],
     "data": [],
     "demo": [],
