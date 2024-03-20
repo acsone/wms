@@ -14,11 +14,11 @@
     />
   </function>
 
-  <!-- Set not group propagation on delivery -->
+  <!-- Set not group propagation on zone picking rules -->
   <function model="stock.rule" name="write">
     <value
       model="stock.rule"
-      eval="obj().search([('action', '=', 'pull'), ('company_id', '=', ref('base.main_company')), ('picking_type_id', '=', ref('stock.picking_type_out')), ('location_src_id', '=', ref('stock.stock_location_output')), ('location_dest_id', '=', ref('stock.stock_location_customers'))]).ids"
+      eval="obj().search([('action', '=', 'pull'), ('route_id', 'in', (20, 14, 13, 11, 8, 12, 10)), ('location_dest_id', '=', ref('stock.stock_location_output'))]).ids"
     />
     <value eval="{'propagate_original_group': False}" />
   </function>
