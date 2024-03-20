@@ -24,6 +24,7 @@
         "alc_stock_picking_backorder_reason",
         "alc_stock_picking_batch_assignment",
         "alc_stock_picking_name",
+        "alc_stock_picking_put_in_pack_type_none",
         "alc_stock_picking_type_aliment",
         "alc_stock_picking_wave_display",
         "alc_stock_refill_view",
