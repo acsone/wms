@@ -56,6 +56,7 @@ class TestProductFlattenedData(TransactionCase):
             '{"date_end": null, "date_start": null, "id": null, "price": 94.09}]}',
             "supplier_discount_date_end": False,
             "supplier_discount_discount_sale": 0.0,
+            "supplier_discount_only_for_veterinaries": False,
             "supplier_name": "KRUUSE *",
             "supplier_promotion_date_end": False,
             "supplier_promotion_only_for_veterinaries": False,

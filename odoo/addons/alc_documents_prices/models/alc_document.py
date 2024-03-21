@@ -205,6 +205,10 @@ class AlcDocument(alc_document.AlcDocument):
                 if (
                     discount_def == "supplier_discount"
                     and prices_data.supplier_discount_discount_sale
+                    and (
+                        not prices_data.supplier_discount_only_for_veterinaries
+                        or self.partner_id.partner_type == "veterinary"
+                    )
                 ):
                     dtype = prices_data.supplier_discount_discount_sale or 0
                     discount_type = f"{dtype}% off"
