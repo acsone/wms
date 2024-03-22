@@ -69,6 +69,53 @@ class TestAutoCancelUnavailableQty(TransactionCase):
         )
         self.assertEqual(move_ids.product_uom_qty, 6)
 
+    def test_option_enabled_qty_unavailable_change(self):
+        """Auto-cancel unavailable qty feature enabled with unavailable qty.
+
+        The ordered qty is then shrunk to the available qty in stock to avoid
+        a shipping backorder, the undelivered qty is stored as canceled qty.
+
+        Then, change the ordered quantity. No return should be generated.
+        """
+        self.partner.auto_cancel_unavailable_qty_sold = True
+        self.update_product_stock_qty(self.product, 6)
+        line = self.order.order_line.create(
+            {
+                "order_id": self.order.id,
+                "sequence": 1,
+                "name": self.product.name,
+                "product_id": self.product.id,
+                "product_uom_qty": 20,
+            }
+        )
+        self.assertEqual(line.product_id.immediately_usable_qty, 6)
+        self.assertEqual(line.product_qty_canceled, 0)
+        self.assertEqual(line.product_qty_unavailable, 14)
+        self.order.action_confirm()
+        # the uom qty should not be change cause (it should include the
+        # cancel qty) ALCYN-2359
+        self.assertEqual(line.product_uom_qty, 20)
+        # self.assertEqual(line.product_qty_canceled, 14)
+        # ALCYN-2359 the backorders must keep their value
+        self.assertEqual(line.product_qty_unavailable, 14)
+
+        proc = line._get_procurement_group()
+        move_ids = proc.stock_move_ids.filtered(
+            lambda move, product_id=self.product: move.product_id == product_id
+        )
+        self.assertEqual(move_ids.product_uom_qty, 6)
+
+        moves_before = self.env["stock.move"].search(
+            [("product_id", "=", line.product_id.id)]
+        )
+        line.product_uom_qty = 0.0
+        moves = (
+            self.env["stock.move"].search([("product_id", "=", line.product_id.id)])
+            - moves_before
+        )
+
+        self.assertFalse(moves)
+
     def test_option_enabled_qty_available(self):
         """Auto-cancel unavailable qty feature enabled with enough qty in stock.
 
