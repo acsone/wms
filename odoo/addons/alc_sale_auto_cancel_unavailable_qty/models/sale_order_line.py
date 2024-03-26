@@ -15,6 +15,8 @@ class SaleOrderLine(SaleOrderLineBase):
             and self.product_id.type != "service"
             and self.product_qty_unavailable
         ):
-            qty += self.product_qty_unavailable
+            # To avoid further new moves if original quantity was already cancelled
+            # we don't take into account that cancelled one.
+            qty += self.product_qty_unavailable - self.product_qty_canceled
             self.product_qty_canceled = self.product_qty_unavailable
         return qty
