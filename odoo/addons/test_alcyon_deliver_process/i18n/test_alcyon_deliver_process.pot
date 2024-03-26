@@ -1,5 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
+# 	* test_alcyon_deliver_process
 #
 msgid ""
 msgstr ""
@@ -11,3 +12,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: test_alcyon_deliver_process
+#: model:ir.model,name:test_alcyon_deliver_process.model_stock_move
+msgid "Stock Move"
+msgstr ""
