@@ -41,9 +41,15 @@ class SaleOrderLine(SaleOrderLineBase):
                     uom_id=line.product_uom,
                 )
 
-                if seller:
+                if seller and self._is_supplier_promotion_suiteable(seller):
                     discount2 = seller.discount_sale
             line.discount2 = discount2
+
+    def _is_supplier_promotion_suiteable(self, seller):
+        return (
+            not seller.only_for_veterinaries
+            or self.order_id.partner_id.partner_type == "veterinary"
+        )
 
     @api.depends("order_id.discount_pricelist_ids", "product_id", "product_uom_qty")
     def _compute_discount_item_id(self):
