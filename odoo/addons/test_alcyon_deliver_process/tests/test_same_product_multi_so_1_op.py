@@ -62,9 +62,26 @@ class TestSameProductMultiSoOnePrep(TestDeliverProcessBase):
         self.assertEqual(sum(additional_moves.mapped("product_uom_qty")), 20)
 
         # if we've a new SO for the same product, we keep the same pick
-        self._confirm_sale_order(
+        sal3 = self._confirm_sale_order(
             products=[self.main_product], qty=2, partner=self.partner2
         )
+        ship3 = self._get_picking_ship(sal3)
+        pick3 = self._get_picking_pick(sal3)
+        self.assertEqual(ship, ship3)
+        self.assertEqual(pick, pick3)
+        for picking, nbr_main_move, nbr_addition_move in [(pick, 1, 1), (ship, 3, 1)]:
+            main_moves = picking.move_ids.filtered(
+                lambda m: m.product_id == self.main_product
+                and m.state not in ("done", "cancel")
+            )
+            self.assertEqual(len(main_moves), nbr_main_move)
+            self.assertEqual(sum(main_moves.mapped("product_uom_qty")), 6)
+            additional_moves = picking.move_ids.filtered(
+                lambda m: m.product_id == self.additional_product
+                and m.state not in ("done", "cancel")
+            )
+            self.assertEqual(len(additional_moves), nbr_addition_move)
+            self.assertEqual(sum(additional_moves.mapped("product_uom_qty")), 30)
 
     def test_auto_release_with_additional(self):
         """
@@ -110,6 +127,20 @@ class TestSameProductMultiSoOnePrep(TestDeliverProcessBase):
         # pick and ship must be grouped with the first sale
         self.assertEqual(ship, ship2)
         self.assertEqual(pick, pick2)
+
+        for picking, nbr_main_move, nbr_addition_move in [(pick, 1, 1), (ship, 2, 1)]:
+            main_moves = picking.move_ids.filtered(
+                lambda m: m.product_id == self.main_product
+                and m.state not in ("done", "cancel")
+            )
+            self.assertEqual(len(main_moves), nbr_main_move)
+            self.assertEqual(sum(main_moves.mapped("product_uom_qty")), 4)
+            additional_moves = picking.move_ids.filtered(
+                lambda m: m.product_id == self.additional_product
+                and m.state not in ("done", "cancel")
+            )
+            self.assertEqual(len(additional_moves), nbr_addition_move)
+            self.assertEqual(sum(additional_moves.mapped("product_uom_qty")), 20)
 
     def test_simple_product(self):
         sale = self._confirm_sale_order(
