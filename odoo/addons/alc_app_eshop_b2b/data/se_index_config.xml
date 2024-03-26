@@ -186,6 +186,15 @@
           }
         }
       },
+      "supplier_discount_veterinary":{
+        "type":"nested",
+        "properties":{
+          "time_frame":{
+            "type":"date_range",
+            "format":"yyyy-MM-dd"
+          }
+        }
+      },
       "packaging_ids":{
         "type":"keyword"
       },
@@ -594,6 +603,15 @@
           }
         }
       },
+      "supplier_discount_veterinary":{
+        "type":"nested",
+        "properties":{
+          "time_frame":{
+            "type":"date_range",
+            "format":"yyyy-MM-dd"
+          }
+        }
+      },
       "packaging_ids":{
         "type":"keyword"
       },
@@ -984,6 +1002,15 @@
         "type":"keyword"
       },
       "supplier_promotion_veterinary":{
+        "type":"nested",
+        "properties":{
+          "time_frame":{
+            "type":"date_range",
+            "format":"yyyy-MM-dd"
+          }
+        }
+      },
+      "supplier_discount_veterinary":{
         "type":"nested",
         "properties":{
           "time_frame":{
