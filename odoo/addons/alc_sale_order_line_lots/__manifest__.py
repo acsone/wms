@@ -12,6 +12,7 @@
     "depends": ["sale", "alc_stock_lot_available", "alc_older_stock_production_lot"],
     "data": [
         "views/sale_order.xml",
+        "views/stock_lot.xml",
     ],
     "demo": [],
 }

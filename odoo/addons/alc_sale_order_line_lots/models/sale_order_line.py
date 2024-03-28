@@ -37,3 +37,11 @@ class SaleOrderLine(SaleOrderlineBase):
                 line.lot_ids = [fields.Command.set(lot_ids)]
             else:
                 line.lot_ids = False
+
+    def action_view_lots(self):
+        self.ensure_one()
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "alc_sale_order_line_lots.action_sale_line_lots"
+        )
+        action["domain"] = [("id", "in", self.lot_ids.ids)]
+        return action
