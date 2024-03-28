@@ -5,6 +5,7 @@ from odoo import _, api, fields
 from odoo.exceptions import ValidationError
 from odoo.tools.float_utils import float_compare
 
+from odoo.addons.stock.models.stock_move_line import StockMoveLine
 from odoo.addons.stock.models.stock_picking import Picking as PickingBase
 
 
@@ -27,6 +28,21 @@ class StockPicking(PickingBase):
             picking.quant_reserved_exist = any(
                 picking.move_line_ids.mapped("reserved_uom_qty")
             )
+
+    def _package_move_lines(self) -> StockMoveLine:
+        move_line_ids = super()._package_move_lines()
+        # Add here the packages already marked as done (qty_done > 0) and that have
+        # the package carrier type as gls.
+        if self.carrier_id.delivery_type == "gls":
+            gls_pack_lines = self.move_line_ids.filtered(
+                lambda line: float_compare(
+                    line.qty_done, 0.0, line.product_uom_id.rounding
+                )
+                > 0
+                and line.result_package_id.package_type_id.package_carrier_type == "gls"
+            )
+            move_line_ids |= gls_pack_lines
+        return move_line_ids
 
     def _filter_can_put_in_pack(self, move_line):
         qty = move_line.qty_done

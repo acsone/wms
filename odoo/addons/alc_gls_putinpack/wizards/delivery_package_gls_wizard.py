@@ -4,6 +4,7 @@ import threading
 
 from odoo import _, api, fields, models, registry
 from odoo.exceptions import ValidationError
+from odoo.tools.float_utils import float_is_zero
 
 from odoo.addons.stock.models.stock_package_type import PackageType
 from odoo.addons.stock.models.stock_picking import Picking
@@ -82,10 +83,15 @@ class DeliveryPackageGlsWizard(models.TransientModel):
             rec.package_type_id = packaging
 
     def _set_shipping_weight(self):
+        precision = self.env["decimal.precision"].precision_get(
+            "Product Unit of Measure"
+        )
         for record in self:
             if record.package_id:
                 self.shipping_weight = self.package_id.shipping_weight
-            else:
+            if not record.package_id or float_is_zero(
+                self.shipping_weight, precision_digits=precision
+            ):
                 ops = self.picking_id.move_line_ids.filtered(
                     lambda o: o.qty_done > 0 and not o.result_package_id
                 )
@@ -111,8 +117,7 @@ class DeliveryPackageGlsWizard(models.TransientModel):
 
     def put_in_pack(self):
         self._validate_parameters(put_in_pack=True)
-        ml_filter = self.picking_id._filter_can_put_in_pack
-        move_line_ids = self.picking_id.move_line_ids.filtered(ml_filter)
+        move_line_ids = self.picking_id._package_move_lines()
         package = self.picking_id._put_in_pack(move_line_ids)
         if not package:
             raise ValidationError(_("No package to process."))
@@ -142,6 +147,16 @@ class DeliveryPackageGlsWizard(models.TransientModel):
         trackings = filter(None, self.mapped("allowed_package_ids.parcel_tracking"))
         self.picking_id.carrier_tracking_ref = ",".join(trackings)
 
+    def _set_package_done(self):
+        """
+        As in Odoo, the _put_in_pack() method will fill in the package related.
+
+        move lines if qty_done == 0, we do the same for the concerned package
+        """
+        for level in self.picking_id.package_level_ids:
+            if not level.is_done:
+                level.is_done = True
+
     def _send(self, put_in_pack=False):
         # we want to keep the package information details in case sending fails
         # however the package does not already exist if we put_in_pack; in that case,
@@ -152,6 +167,7 @@ class DeliveryPackageGlsWizard(models.TransientModel):
         }
         package_id = self.package_id
         self.package_id.write(vals)
+        self._set_package_done()
         if not put_in_pack and not (
             getattr(threading.current_thread(), "testing", False)
             or self.env.registry.in_test_mode()
