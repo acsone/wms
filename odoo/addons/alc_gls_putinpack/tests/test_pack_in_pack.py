@@ -71,3 +71,41 @@ class TestStockPicking(GLSCommonFeatures):
         package = gls_wizard_1.package_id
         self.assertEqual(package.shipping_weight, 89)
         self.assertEqual(package.package_type_id.package_carrier_type, "gls")
+
+    def test_package_done(self):
+        """
+        Data: One SO with 2 medoc and 2 ali.
+
+        Test Case: Process the pickings then the shipping
+        Expected Result:
+           Only one pack with the pack medoc and the alliments in it
+        """
+        type_out = self.env.ref("stock.picking_type_out")
+        type_out.show_entire_packs = True
+        _sale, _picks, ship = self._create_pick_ship()
+
+        # process all the lines without packages - As this is the case in deliveries
+        move_lines_without_pack = ship.mapped("move_line_ids").filtered(
+            lambda line: not line.package_id
+        )
+        for move_line in move_lines_without_pack:
+            move_line.qty_done = move_line.reserved_uom_qty
+
+        # process the picking
+        gls_wizard_action_1 = ship.action_put_in_pack()
+        # This simulates the action return and the wizard creation
+        # triggering computes and onchanges
+        wizard_model = self.env["delivery.package.gls.wizard"]
+        wizard_1 = Form(wizard_model.with_context(**gls_wizard_action_1["context"]))
+        gls_wizard_1 = wizard_1.save()
+        gls_wizard_1.shipping_weight = 89
+        with mock_gls_client():
+            gls_wizard_1.put_in_pack()
+        package = gls_wizard_1.package_id
+        self.assertEqual(package.shipping_weight, 89)
+        self.assertEqual(package.package_type_id.package_carrier_type, "gls")
+        for line in ship.move_line_ids:
+            self.assertEqual(line.qty_done, line.reserved_uom_qty)
+
+        result = ship.button_validate()
+        self.assertTrue(result)
