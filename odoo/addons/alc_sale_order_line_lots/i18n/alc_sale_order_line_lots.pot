@@ -14,13 +14,24 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_sale_order_line_lots
+#: model_terms:ir.ui.view,arch_db:alc_sale_order_line_lots.sale_order_form_view
+msgid "<span>View Lots</span>"
+msgstr ""
+
+#. module: alc_sale_order_line_lots
 #: model:ir.model.fields,field_description:alc_sale_order_line_lots.field_sale_order_line__older_lot_expiration_date
 msgid "Expiration date"
 msgstr ""
 
 #. module: alc_sale_order_line_lots
+#: model:ir.actions.act_window,name:alc_sale_order_line_lots.action_sale_line_lots
 #: model:ir.model.fields,field_description:alc_sale_order_line_lots.field_sale_order_line__lot_ids
 msgid "Lots/Serial Numbers"
+msgstr ""
+
+#. module: alc_sale_order_line_lots
+#: model_terms:ir.ui.view,arch_db:alc_sale_order_line_lots.sale_order_form_view
+msgid "Lots:"
 msgstr ""
 
 #. module: alc_sale_order_line_lots
