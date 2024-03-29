@@ -1,6 +1,5 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-
 from odoo.addons.queue_job.tests.common import JobMixin, trap_jobs
 
 from .common import AccountInvoicePrintCommon

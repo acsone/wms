@@ -12,4 +12,9 @@ class AlcCommonTestAccount:
             # pull it on every submodule) but necessary as account module
             # does not load generic chart if another l10n_ is 'to install'
             chart_template_ref = "l10n_be.l10nbe_chart_template"
-        super().setUpClass(chart_template_ref=chart_template_ref)
+        try:
+            super().setUpClass(chart_template_ref=chart_template_ref)
+        except ValueError:
+            super().setUpClass(
+                chart_template_ref="l10n_generic_coa.configurable_chart_template"
+            )

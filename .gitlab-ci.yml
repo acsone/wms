@@ -50,6 +50,11 @@ dev_status_check:
 
 test:
   extends: .test_common
+  services:
+    - name: ghcr.io/acsone/kwkhtmltopdf:0.12.5-latest
+      alias: kwkhtmltopdf
+  variables:
+    KWKHTMLTOPDF_SERVER_URL: http://kwkhtmltopdf:8080
   tags:
     - postgres
     - speedy
@@ -63,7 +68,7 @@ test:
     - echo Installing ${ADDONS_TEST}
     - unbuffer odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init -i ${ADDONS_TEST} | checklog-odoo
     - echo Testing ${PYTEST_ADDONS_TEST}
-    - unbuffer coverage run -m pytest --color=yes -v --odoo-config=odoo-ci.cfg --odoo-database=${DB_NAME} ${PYTEST_ADDONS_TEST}
+    - unbuffer coverage run -m pytest --odoo-http --color=yes -v --odoo-config=odoo-ci.cfg --odoo-database=${DB_NAME} ${PYTEST_ADDONS_TEST}
     - if [ "${CI_COMMIT_REF_NAME}" = "master" ] ; then click-odoo-makepot -c odoo-ci.cfg -d ${DB_NAME} --addons-dir=odoo/addons ; fi
   after_script:
     - dropdb --if-exists ${DB_NAME}
