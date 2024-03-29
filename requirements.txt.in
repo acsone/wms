@@ -212,7 +212,9 @@ odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/OCA/l10n-be
 odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/204/head#subdirectory=setup/l10n_be_iso20022_pain
 
 # OCA/rest-framework
-odoo-addon-fastapi @ git+https://github.com/OCA/rest-framework.git@refs/pull/387/head#subdirectory=setup/fastapi
+# https://github.com/OCA/rest-framework.git@refs/pull/387
+# https://github.com/OCA/rest-framework.git@refs/pull/422
+odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@16.0-alc-fastapi#subdirectory=setup/fastapi
 
 # OCA/web-api
 
