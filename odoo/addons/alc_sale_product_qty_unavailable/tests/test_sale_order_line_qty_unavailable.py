@@ -79,6 +79,12 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
         )
 
     def _define_product_qty(self, product, quantity):
+        self.env["stock.quant"].search(
+            [
+                ("product_id", "=", product.id),
+                ("location_id", "=", self.stock_location.id),
+            ]
+        ).unlink()
         inventory_quant = self.env["stock.quant"].create(
             {
                 "location_id": self.stock_location.id,
@@ -296,5 +302,12 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
         self.sale_1.action_confirm()
         self.assertEqual(self.sale_1.order_line[0].product_qty_unavailable, 10)
         self._define_product_qty(self.p1.product_variant_ids[0], 100)
+        # the product is now available
         sale_copy = self.sale_1.copy({})
         self.assertEqual(sale_copy.order_line[0].product_qty_unavailable, 0)
+        self._define_product_qty(self.p1.product_variant_ids[0], 0)
+        # the product is now unavailable
+        sale_copy = self.sale_1.copy({})
+        self.assertEqual(sale_copy.order_line[0].product_qty_unavailable, 10)
+        sale_copy = self.sale_1.copy({})
+        self.assertEqual(sale_copy.order_line[0].product_qty_unavailable, 10)

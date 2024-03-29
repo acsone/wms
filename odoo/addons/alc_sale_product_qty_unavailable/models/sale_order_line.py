@@ -21,6 +21,7 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
         string="Quantity unavailable",
         digits="Product Unit of Measure",
         readonly=True,
+        copy=False,
     )
 
     @api.model
@@ -122,7 +123,7 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
                 # available qty with the date
                 line.product_id.with_context(date=line.order_id.date_order),
                 line.product_uom_qty,
-                line.state == "sale",
+                line.state in ("sale", "done"),
                 None,
             )
 
