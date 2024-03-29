@@ -205,7 +205,7 @@ odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.
 odoo-addon-product-route-mto==16.0.1.0.0.6
 odoo-addon-product-sale-description==16.0.1.0.1.1
 odoo-addon-product-sequence==16.0.2.0.0.5
-odoo-addon-product-set==16.0.1.0.0.7
+odoo-addon-product-set==16.0.3.0.0.2
 odoo-addon-product-state==16.0.1.0.0.6
 odoo-addon-product-stock-state==16.0.1.0.0.8
 odoo-addon-product-template-has-one-variant==16.0.1.0.1.2
@@ -235,13 +235,13 @@ odoo-addon-sale-exception==16.0.1.2.0.2
 odoo-addon-sale-force-invoiced==16.0.1.0.0.10
 odoo-addon-sale-order-line-cancel @ git+https://github.com/acsone/sale-workflow.git@b5cd7f03b1ac6c5fe0c6e9ed582031709602443f#subdirectory=setup/sale_order_line_cancel
 odoo-addon-sale-procurement-customer==16.0.1.0.0.4
-odoo-addon-sale-product-set==16.0.1.1.0.6
+odoo-addon-sale-product-set==16.0.3.0.0.1
 odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.git@f506b778476eacfc4a3f33d85c2f77f790a8ebc8#subdirectory=setup/sale_route_amendment
 odoo-addon-sale-shipping-info-helper==16.0.1.0.0.3
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@f1ea2c731d30580089b38a1b3b68b1df40afc680#subdirectory=setup/sale_stock_picking_blocking
 odoo-addon-sale-stock-restocking-fee-invoicing @ git+https://github.com/acsone/stock-logistics-workflow.git@1fba8cf43ce18100099b7b3d1bd6f31a8ab1aa6d#subdirectory=setup/sale_stock_restocking_fee_invoicing
 odoo-addon-sale-triple-discount==16.0.1.0.1.4
-odoo-addon-sale-wishlist==16.0.1.0.0.2
+odoo-addon-sale-wishlist==16.0.1.0.0.5
 odoo-addon-search-engine-image-thumbnail @ git+https://github.com/acsone/search-engine.git@60aef39bfcfb419a400e29ed79b17eed8162b7c8#subdirectory=setup/search_engine_image_thumbnail
 odoo-addon-search-engine-serializer-pydantic==16.0.1.0.0.2
 odoo-addon-sentry==16.0.3.0.1.1
@@ -271,7 +271,7 @@ odoo-addon-shopinvader-api-address==16.0.1.2.1
 odoo-addon-shopinvader-api-cart==16.0.1.3.3
 odoo-addon-shopinvader-api-sale==16.0.1.1.3
 odoo-addon-shopinvader-api-security-sale==16.0.1.1.1
-odoo-addon-shopinvader-api-wishlist==16.0.1.0.1
+odoo-addon-shopinvader-api-wishlist==16.0.1.0.2
 odoo-addon-shopinvader-base-url==16.0.1.0.3
 odoo-addon-shopinvader-es-product-categ @ git+https://github.com/acsone/odoo-shopinvader.git@64c7ba79d5d8e36913a1413f2336fbf09ab3c4eb#subdirectory=setup/shopinvader_es_product_categ
 odoo-addon-shopinvader-fastapi-auth-jwt==16.0.1.0.1
