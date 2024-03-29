@@ -5,6 +5,7 @@
   merges:
     - odoo 16.0
     - origin refs/pull/12/head # [IMP] base: add pyproject.toml
+    - origin refs/pull/15/head # [FIX] move line intrastat transaction depends on intrastat country #15
   shell_command_after:
     # add pyproject.toml so pip wheel works
     #- gh --repo acsone/enterprise pr diff 12 --patch | git am
