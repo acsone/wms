@@ -3,35 +3,37 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
 
-  <record model="ir.ui.view" id="sale_order_form_view">
-    <field name="name">sale.order.form (in alc_sale_order_line_lots)</field>
-    <field name="model">sale.order</field>
-    <field name="inherit_id" ref="sale.view_order_form" />
-    <field name="arch" type="xml">
-       <xpath
+    <record model="ir.ui.view" id="sale_order_form_view">
+        <field name="name">sale.order.form (in alc_sale_order_line_lots)</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath
         expr="//field[@name='order_line']/tree//field[@name='name']"
         position="before"
       >
-        <field name="older_lot_expiration_date" widget="date" />
-      </xpath>
-      <xpath
+                <field name="older_lot_expiration_date" widget="date" />
+            </xpath>
+            <xpath
         expr="//field[@name='order_line']/form//div[@name='invoice_lines']"
         position="after"
       >
-        <label for="lot_ids" colspan="2" />
-        <div colspan="2">
-          <field name="lot_ids">
-            <tree>
-              <field name="name" />
-              <field name="qty_available" />
-              <field name="product_uom_id" />
-              <field name="use_date" />
-              <field name="expiration_date" />
-            </tree>
-          </field>
-        </div>
-      </xpath>
-    </field>
-  </record>
+                <label
+          for="action_view_lots"
+          string="Lots:"
+          style="font-weight: bold;"
+        />
+                <button
+          name="action_view_lots"
+          id="button_view_lots"
+          type="object"
+          class="oe_stat_button"
+          icon="fa-bars"
+        >
+                    <span>View Lots</span>
+                </button>
+            </xpath>
+        </field>
+    </record>
 
 </odoo>
