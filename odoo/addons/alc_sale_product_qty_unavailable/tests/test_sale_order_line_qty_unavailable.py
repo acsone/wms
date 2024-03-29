@@ -290,3 +290,11 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
         res = self.sale_1.refresh_product_qties_unavailable()
         self.assertDictEqual({self.sale_1.order_line[0].id: -10.0}, res)
         self.assertEqual(self.sale_1.order_line[0].product_qty_unavailable, 0)
+
+    def test_06(self):
+        """Make sure product_qty_unavailable is correctly set at order copy."""
+        self.sale_1.action_confirm()
+        self.assertEqual(self.sale_1.order_line[0].product_qty_unavailable, 10)
+        self._define_product_qty(self.p1.product_variant_ids[0], 100)
+        sale_copy = self.sale_1.copy({})
+        self.assertEqual(sale_copy.order_line[0].product_qty_unavailable, 0)
