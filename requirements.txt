@@ -377,6 +377,7 @@ odoo-addon-stock-reserve-rule @ git+https://github.com/acsone/stock-logistics-wa
 odoo-addon-stock-restrict-lot==16.0.1.1.0.2
 odoo-addon-stock-route-mto==16.0.1.0.0.2
 odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@0c90dfb1a4597a2da3beeb5de9fb2495c44d7520#subdirectory=setup/stock_scrap_location_default
+odoo-addon-stock-split-picking==16.0.1.0.4.1
 odoo-addon-stock-storage-category-capacity-name==16.0.1.0.0.2
 odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@579734c977b00c8afc75431788cd6402b57a7b8e#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc==16.0.1.0.0.12

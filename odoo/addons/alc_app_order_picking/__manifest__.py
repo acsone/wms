@@ -73,6 +73,7 @@
         "stock_release_channel_propagate_channel_picking",
         "stock_reserve_rule",
         "stock_restrict_lot",
+        "stock_split_picking",
         "shipment_advice_planner",
         "shipment_advice_planner_toursolver",
         "shipment_advice_planner_toursolver_queue_job",
