@@ -16,13 +16,6 @@ msgstr ""
 #. module: alc_supplier_promotion
 #. odoo-python
 #: code:addons/alc_supplier_promotion/models/product_supplierinfo.py:0
-#, python-format
-msgid " (only for veterinaries)"
-msgstr ""
-
-#. module: alc_supplier_promotion
-#. odoo-python
-#: code:addons/alc_supplier_promotion/models/product_supplierinfo.py:0
 #: model:ir.model.constraint,message:alc_supplier_promotion.constraint_product_supplierinfo_valid_promotion_buyx_gety
 #, python-format
 msgid ""
@@ -118,6 +111,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product__supplier_discount_json
 #: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template__supplier_discount_json
 msgid "Supplier Discount Json"
+msgstr ""
+
+#. module: alc_supplier_promotion
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_product__supplier_discount_json_for_veterinaries
+#: model:ir.model.fields,field_description:alc_supplier_promotion.field_product_template__supplier_discount_json_for_veterinaries
+msgid "Supplier Discount Json For Veterinaries"
 msgstr ""
 
 #. module: alc_supplier_promotion

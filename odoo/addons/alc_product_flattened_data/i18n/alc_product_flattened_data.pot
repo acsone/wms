@@ -155,6 +155,11 @@ msgid "Supplier Discount Date End"
 msgstr ""
 
 #. module: alc_product_flattened_data
+#: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__supplier_discount_only_for_veterinaries
+msgid "Supplier Discount Only For Veterinaries"
+msgstr ""
+
+#. module: alc_product_flattened_data
 #: model:ir.model.fields,field_description:alc_product_flattened_data.field_alc_product_flattened_data__supplier_name
 msgid "Supplier Name"
 msgstr ""
