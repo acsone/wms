@@ -1,0 +1,16 @@
+# Copyright 2023 ACSONE SA/NV
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+{
+    "name": "Alc Stock Release Channel Plan",
+    "summary": """
+        Add tags to preparation plan""",
+    "version": "16.0.1.0.0",
+    "license": "AGPL-3",
+    "author": "ACSONE SA/NV",
+    "website": "https://acsone.eu",
+    "depends": [
+        "stock_release_channel_plan",
+        "alc_stock_release_channel_menu",
+    ],
+    "data": ["wizards/launch_plan.xml"],
+}
