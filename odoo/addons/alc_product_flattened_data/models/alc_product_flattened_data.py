@@ -47,6 +47,7 @@ class AlcProductFlattenedData(Model):
     supplier_discount_discount_sale = fields.Float(
         "Sale discount (%)", digits="Discount", default=0.0, readonly=True
     )
+    supplier_discount_only_for_veterinaries = fields.Boolean(readonly=True)
     supplier_discount_date_end = fields.Date(readonly=True)
     has_supplier_promotion = fields.Boolean(readonly=True)
     supplier_promotion_date_end = fields.Date(readonly=True)
@@ -129,6 +130,7 @@ SELECT
     supplier_promotion.only_for_veterinaries as supplier_promotion_only_for_veterinaries,
     supplier_discount.discount_sale as supplier_discount_discount_sale,
     supplier_discount.date_end as supplier_discount_date_end,
+    supplier_promotion.only_for_veterinaries as supplier_discount_only_for_veterinaries,
     discount_special.id is not null as has_discount_special,
     discount_special.date_end as discount_special_date_end,
     tax.amount as tax_amount,

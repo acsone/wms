@@ -138,7 +138,10 @@ class FacadeProduct(Facade):
 
         if self.partner.supplier_promotion_sale_allowed:
             promotions = []
-            if data.supplier_discount_discount_sale:
+            if data.supplier_discount_discount_sale and (
+                not data.supplier_discount_only_for_veterinaries
+                or self.partner.partner_type == "veterinary"
+            ):
                 discount = {
                     "promotion": data.supplier_discount_discount_sale,
                     "promotion_valid_until": data.supplier_discount_date_end,

@@ -34,6 +34,7 @@ class ProductProduct(BaseProductProduct, extends=True):
     supplier_promotion: list[SupplierPromotion] = []
     supplier_promotion_veterinary: list[SupplierPromotion] = []
     supplier_discount: list[SupplierDiscount] = []
+    supplier_discount_veterinary: list[SupplierDiscount] = []
 
     @classmethod
     def from_product_product(cls, odoo_rec):
@@ -48,5 +49,10 @@ class ProductProduct(BaseProductProduct, extends=True):
         )
         obj.supplier_discount = (
             odoo_rec.supplier_discount_json if odoo_rec.supplier_discount_json else []
+        )
+        obj.supplier_discount_veterinary = (
+            odoo_rec.supplier_discount_json_for_veterinaries
+            if odoo_rec.supplier_discount_json_for_veterinaries
+            else []
         )
         return obj

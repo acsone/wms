@@ -100,3 +100,29 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
         self.assertDictEqual(
             promotion.time_frame.model_dump(), {"gte": date_start, "lte": date_end}
         )
+
+    def test_03(self):
+        date_start = date.today()
+        date_end = date.today() + timedelta(days=30)
+        product = ProductProduct.from_product_product(self.product)
+        self.assertEqual(product.supplier_discount, [])
+        self.env["product.supplierinfo"].create(
+            {
+                "partner_id": self.supplier.id,
+                "product_code": "product_code",
+                "product_tmpl_id": self.product.product_tmpl_id.id,
+                "date_start": date_start,
+                "date_end": date_end,
+                "discount_sale": 10,
+                "only_for_veterinaries": True,
+            }
+        )
+        product = ProductProduct.from_product_product(self.product)
+        self.assertEqual(len(product.supplier_discount_veterinary), 1)
+        promotion = product.supplier_discount_veterinary[0]
+        self.assertEqual(promotion.date_start, date_start)
+        self.assertEqual(promotion.date_end, date_end)
+        self.assertEqual(promotion.discount_sale, 10.0)
+        self.assertDictEqual(
+            promotion.time_frame.model_dump(), {"gte": date_start, "lte": date_end}
+        )

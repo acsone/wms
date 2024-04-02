@@ -55,3 +55,25 @@ class TestCatalog(TestFacadeWithProductFlattenedData):
         with self.mock_product_data(return_value=return_value):
             result, _, _ = product_facade(language="FR")
             self.assertIn("FREE products", result)
+
+    def test_catalog_supplier_discount(self):
+        product_facade = self._get_service_facade("catalog")
+        self.partner.partner_type = "guest"
+        self.partner.supplier_promotion_sale_allowed = True
+        flattened_data = self._example_product_flattened_data()
+        flattened_data["supplier_discount_only_for_veterinaries"] = False
+        flattened_data["supplier_discount_discount_sale"] = "10%"
+        return_value = (r for r in [self._wrap_flattened_data(flattened_data)])
+        with self.mock_product_data(return_value=return_value):
+            result, _, _ = product_facade(language="FR")
+            self.assertIn("10%", result)
+        flattened_data["supplier_discount_only_for_veterinaries"] = True
+        return_value = (r for r in [self._wrap_flattened_data(flattened_data)])
+        with self.mock_product_data(return_value=return_value):
+            result, _, _ = product_facade(language="FR")
+            self.assertNotIn("10%", result)
+        self.partner.partner_type = "veterinary"
+        return_value = (r for r in [self._wrap_flattened_data(flattened_data)])
+        with self.mock_product_data(return_value=return_value):
+            result, _, _ = product_facade(language="FR")
+            self.assertIn("10%", result)

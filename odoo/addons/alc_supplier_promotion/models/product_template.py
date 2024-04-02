@@ -28,6 +28,9 @@ class ProductTemplate(ProductTemplateBase):
         compute="_compute_seller_ids_jsons"
     )
     supplier_discount_json = Serialized(compute="_compute_seller_ids_jsons")
+    supplier_discount_json_for_veterinaries = fields.Serialized(
+        compute="_compute_seller_ids_jsons"
+    )
 
     @api.depends(
         "seller_ids",
@@ -42,6 +45,9 @@ class ProductTemplate(ProductTemplateBase):
                 supplier_promotion_json_for_veterinaries
             ) = []
             product.supplier_discount_json = supplier_discount_json = []
+            product.supplier_discount_json_for_veterinaries = (
+                supplier_discount_json_for_veterinaries
+            ) = []
             current_info = product.seller_ids.filtered(lambda si: not si.is_past)
             for info in current_info:
                 date_start = info.date_start.isoformat() if info.date_start else None
@@ -62,12 +68,18 @@ class ProductTemplate(ProductTemplateBase):
                         supplier_promotion_json.append(info_json)
                 elif info.is_sale_discount:
                     info_json["discount_sale"] = info.discount_sale
-                    supplier_discount_json.append(info_json)
+                    if info.only_for_veterinaries:
+                        supplier_discount_json_for_veterinaries.append(info_json)
+                    else:
+                        supplier_discount_json.append(info_json)
                 product.supplier_promotion_json = supplier_promotion_json
                 product.supplier_promotion_json_for_veterinaries = (
                     supplier_promotion_json_for_veterinaries
                 )
                 product.supplier_discount_json = supplier_discount_json
+                product.supplier_discount_json_for_veterinaries = (
+                    supplier_discount_json_for_veterinaries
+                )
 
     @api.depends("seller_ids")
     def _compute_seller_ids_subfields(self):

@@ -42,8 +42,12 @@
           discount = doc[discount_field].value;
         }
       }
-      if (!discount_exclusive && params.supplier_promotion != null && params.supplier_promotion && doc.containsKey('current_supplier_discount') && doc['current_supplier_discount'].size()==1) {
-        supplier_discount = doc.current_supplier_discount.value;
+      if (!discount_exclusive && params.supplier_promotion != null && params.supplier_promotion)
+       if (doc.containsKey('current_supplier_discount') && doc['current_supplier_discount'].size()==1) {
+            supplier_discount = doc.current_supplier_discount.value;
+       } else if (doc.containsKey('current_supplier_discount_veterinary') && doc['current_supplier_discount_veterinary'].size()==1) {
+            supplier_discount = doc.current_supplier_discount_veterinary.value;
+       }
       }
       double price = gross_price - (gross_price * discount / 100);
       price = price - (price * supplier_discount / 100);
@@ -112,6 +116,15 @@
             Map price_data = get_price_data(prices, today);
             if (price_data != null){
               ctx.current_supplier_discount = price_data['discount_sale'];
+            }
+          }
+          double current_supplier_discount_veterinary = 0;
+          String supplier_discount_veterinary_path = 'supplier_discount_veterinary';
+          if (ctx.containsKey(supplier_discount_veterinary_path)) {
+            List prices = ctx.supplier_discount_veterinary;
+            Map price_data = get_price_data(prices, today);
+            if (price_data != null){
+              ctx.current_supplier_discount_veterinary = price_data['discount_sale'];
             }
           }
           if (ctx.containsKey('price')){

@@ -1,8 +1,16 @@
 # Copyright 2022 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import enum
 from unittest import mock
 
 from .common import TestAlcDocumentsPrices
+
+
+class SupplierDiscountType(enum.Enum):
+    """Enum for the type of supplier discount."""
+
+    PROMOTION = "promotion"
+    DISCOUNT = "discount"
 
 
 class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
@@ -54,17 +62,24 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
 
     def _get_discount_data(
         self,
-        has_supplier_promotion,
-        supplier_promotion_only_for_veterinaries,
+        supplier_discount_type: SupplierDiscountType,
+        only_for_veterinaries,
         partner=None,
     ):
         if not partner:
             partner = self.partner
         flattened_data = self._example_product_flattened_data()
-        flattened_data["has_supplier_promotion"] = has_supplier_promotion
-        flattened_data[
-            "supplier_promotion_only_for_veterinaries"
-        ] = supplier_promotion_only_for_veterinaries
+        if supplier_discount_type == SupplierDiscountType.PROMOTION:
+            flattened_data["has_supplier_promotion"] = True
+            flattened_data[
+                "supplier_promotion_only_for_veterinaries"
+            ] = only_for_veterinaries
+        elif supplier_discount_type == SupplierDiscountType.DISCOUNT:
+            flattened_data["supplier_discount_discount_sale"] = 10
+            flattened_data[
+                "supplier_discount_only_for_veterinaries"
+            ] = only_for_veterinaries
+
         return_value = (r for r in [self._wrap_flattened_data(flattened_data)])
         domain_base = [("format", "=", "csv"), ("partner_id", "=", partner.id)]
         domain_discount = domain_base + [("compute", "=", "discount")]
@@ -76,7 +91,8 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
         self.partner.partner_type = "guest"
         self.partner.supplier_promotion_sale_allowed = True
         csv = self._get_discount_data(
-            has_supplier_promotion=True, supplier_promotion_only_for_veterinaries=False
+            supplier_discount_type=SupplierDiscountType.PROMOTION,
+            only_for_veterinaries=False,
         )
         self.assertIn("Produits GRATUITS", csv)
 
@@ -84,7 +100,8 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
         self.partner.partner_type = "guest"
         self.partner.supplier_promotion_sale_allowed = True
         csv = self._get_discount_data(
-            has_supplier_promotion=True, supplier_promotion_only_for_veterinaries=True
+            supplier_discount_type=SupplierDiscountType.PROMOTION,
+            only_for_veterinaries=True,
         )
         self.assertNotIn("Produits GRATUITS", csv)
 
@@ -92,7 +109,8 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
         self.partner.partner_type = "veterinary"
         self.partner.supplier_promotion_sale_allowed = True
         csv = self._get_discount_data(
-            has_supplier_promotion=True, supplier_promotion_only_for_veterinaries=True
+            supplier_discount_type=SupplierDiscountType.PROMOTION,
+            only_for_veterinaries=True,
         )
         self.assertIn("Produits GRATUITS", csv)
 
@@ -100,15 +118,53 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
         self.partner.partner_type = "veterinary"
         self.partner.supplier_promotion_sale_allowed = True
         csv = self._get_discount_data(
-            has_supplier_promotion=True, supplier_promotion_only_for_veterinaries=False
+            supplier_discount_type=SupplierDiscountType.PROMOTION,
+            only_for_veterinaries=False,
         )
         self.assertIn("Produits GRATUITS", csv)
+
+    def test_supplier_discount_guest(self):
+        self.partner.partner_type = "guest"
+        self.partner.supplier_promotion_sale_allowed = True
+        csv = self._get_discount_data(
+            supplier_discount_type=SupplierDiscountType.DISCOUNT,
+            only_for_veterinaries=False,
+        )
+        self.assertIn("10% off", csv)
+
+    def test_supplier_discount_only_veterinary_guest(self):
+        self.partner.partner_type = "guest"
+        self.partner.supplier_promotion_sale_allowed = True
+        csv = self._get_discount_data(
+            supplier_discount_type=SupplierDiscountType.DISCOUNT,
+            only_for_veterinaries=True,
+        )
+        self.assertNotIn("10% off", csv)
+
+    def test_supplier_discount_only_veterinary_veterinary(self):
+        self.partner.partner_type = "veterinary"
+        self.partner.supplier_promotion_sale_allowed = True
+        csv = self._get_discount_data(
+            supplier_discount_type=SupplierDiscountType.DISCOUNT,
+            only_for_veterinaries=True,
+        )
+        self.assertIn("10% off", csv)
+
+    def test_supplier_discount_veterinary(self):
+        self.partner.partner_type = "veterinary"
+        self.partner.supplier_promotion_sale_allowed = True
+        csv = self._get_discount_data(
+            supplier_discount_type=SupplierDiscountType.DISCOUNT,
+            only_for_veterinaries=False,
+        )
+        self.assertIn("10% off", csv)
 
     def test_no_recompute_same_day(self):
         self.partner.partner_type = "veterinary"
         self.partner.supplier_promotion_sale_allowed = True
         csv = self._get_discount_data(
-            has_supplier_promotion=True, supplier_promotion_only_for_veterinaries=False
+            supplier_discount_type=SupplierDiscountType.PROMOTION,
+            only_for_veterinaries=False,
         )
         self.assertIn("Produits GRATUITS", csv)
         # A second call the same dy should not regenerate the document.
@@ -117,8 +173,8 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
             type(self.env["alc.document"]), "_generate_attachment_file"
         ) as mocked_generate:
             csv = self._get_discount_data(
-                has_supplier_promotion=True,
-                supplier_promotion_only_for_veterinaries=False,
+                supplier_discount_type=SupplierDiscountType.PROMOTION,
+                only_for_veterinaries=False,
             )
             self.assertIn("Produits GRATUITS", csv)
             mocked_generate.assert_not_called()

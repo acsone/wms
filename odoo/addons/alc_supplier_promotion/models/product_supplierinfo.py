@@ -76,8 +76,6 @@ class ProductSupplierInfo(SupplierInfo, MixinPast):
                 ratio_main_product=rec.ratio_main_product,
                 ratio_promotional_product=rec.ratio_promotional_product,
             )
-            if rec.only_for_veterinaries:
-                display_name += _(" (only for veterinaries)")
             rec.ratio_display_name = display_name
 
     @api.depends("discount_sale", "ratio_main_product", "ratio_promotional_product")

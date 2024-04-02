@@ -22,10 +22,7 @@
               class="oe_inline"
               attrs="{'readonly': [('date_start', '=', False), ('date_end', '=', False)]}"
             /> free.</p>
-          <field
-            name="only_for_veterinaries"
-            attrs="{'invisible': [('ratio_main_product', '&lt;', 1)]}"
-          />
+          <field name="only_for_veterinaries" />
         </group>
       </xpath>
       <xpath expr="//field[@name='min_qty']" position="attributes">
@@ -48,6 +45,7 @@
       </xpath>
       <xpath expr="//tree" position="inside">
         <field name="ratio_display_name" />
+        <field name="only_for_veterinaries" />
       </xpath>
       <xpath expr="//field[@name='sequence']" position="attributes">
         <attribute name="widget" />

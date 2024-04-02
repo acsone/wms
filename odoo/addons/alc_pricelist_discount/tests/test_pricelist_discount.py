@@ -496,3 +496,25 @@ class TestPricelistDiscount(TestPricelistDiscountCommon):
             date=fields.Date.to_date("2018-05-01"),
         )
         self.assertEqual(promo, promo_2_min_sale_25)
+
+    def test_supplier_promotion_only_for_veterinaries(self):
+        self.sale.supplier_promotion_allowed = True
+        self.supplierinfo1.only_for_veterinaries = True
+        self.partner.partner_type = False
+
+        for line in self.sale.order_line:
+
+            line.onchange_product_id_reset_discount()
+
+        self.assertAlmostEqual(100, self.sol_p1.price_unit)
+        self.assertAlmostEqual(0, self.sol_p1.discount2)
+        self.assertAlmostEqual(0, self.sol_p1.discount3)
+
+        self.partner.partner_type = "veterinary"
+        for line in self.sale.order_line:
+
+            line.onchange_product_id_reset_discount()
+
+        self.assertAlmostEqual(100, self.sol_p1.price_unit)
+        self.assertAlmostEqual(10, self.sol_p1.discount2)
+        self.assertAlmostEqual(0, self.sol_p1.discount3)
