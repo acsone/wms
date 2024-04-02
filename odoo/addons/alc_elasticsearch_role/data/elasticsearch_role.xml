@@ -93,7 +93,7 @@
     {
       "index_patterns":["alc_shopinvader_variant_*"],
       "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"veterinary\"}}}}",
-      "fls": ["stock.*", "supplier_promotion_veterinary.*", "supplier_discount_veterinary.*"]
+      "fls": ["stock.*", "supplier_promotion_veterinary.*", "supplier_discount_veterinary.*", "current_supplier_discount_veterinary]
     }
   ]
 }
