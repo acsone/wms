@@ -212,11 +212,6 @@ msgid "Stock Release Channels"
 msgstr "Canaux de livraison des stocks"
 
 #. module: alc_stock_release_channel_dashboard
-#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
-msgid "To Release"
-msgstr "A libérer"
-
-#. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.view_picking_internal_search
 msgid "Today"
 msgstr "Aujourd'hui"
@@ -235,6 +230,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
 msgid "Unlock"
 msgstr "Ouvrir"
+
+#~ msgid "To Release"
+#~ msgstr "A libérer"
 
 #~ msgid "Wake Up"
 #~ msgstr "Réveiller"
