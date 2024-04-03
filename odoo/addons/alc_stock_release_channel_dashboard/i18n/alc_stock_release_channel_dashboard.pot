@@ -202,11 +202,6 @@ msgid "Stock Release Channels"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
-#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
-msgid "To Release"
-msgstr ""
-
-#. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.view_picking_internal_search
 msgid "Today"
 msgstr ""
