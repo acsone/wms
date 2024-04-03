@@ -123,7 +123,7 @@ build-test-image:
   variables:
     ACIT_IMAGE_FLAVOR: /test16
   only:
-    - /^\d+\.\d+\.\d+$/
+    - /2\.9\.\d+/
   needs:
     - job: build-dependencies-image
 
@@ -132,7 +132,7 @@ build-uat-image:
   variables:
     ACIT_IMAGE_FLAVOR: /uat16
   only:
-    - /^\d+\.\d+\.\d+$/
+    - /2\.8\.\d+/
   needs:
     - job: build-dependencies-image
   when: manual
@@ -200,7 +200,7 @@ deploy-uat-trigger:
   needs:
     - job: build-uat-image
   only:
-    - /2\.9\.\d+/
+    - /2\.8\.\d+/
 
 deploy-prod-trigger:
   extends: .deploy-trigger
