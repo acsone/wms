@@ -144,5 +144,6 @@
         "alc_product_consolidated_price_newpharma",
         "alc_sale_order_partner_delivery_carrier",
         "alc_partner_salesperson_portal",
+        "alc_partner_invoicing_mode_split_refund",
     ],
 }
