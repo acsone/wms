@@ -13,8 +13,6 @@
         js_class="alc_stock_release_channel_kanban"
       >
                 <field name="id" />
-                <field name="count_picking_release_ready" />
-                <field name="count_move_release_ready" />
                 <field name="name" />
                 <field name="color" />
                 <field name="pick_allowed" />
@@ -241,27 +239,6 @@
                                 </div>
                                 <div class="col-6">
                                 <!-- stats-->
-                                    <div class="row">
-                                        <div class="col-7">
-                                            <a
-                        name="action_picking_release_ready"
-                        type="object"
-                      >
-                                                To Release
-                                            </a>
-                                        </div>
-                                        <div class="col-5" style="padding-left: 0;">
-                                            <field name="count_picking_release_ready" />
-                                            <a
-                        name="action_move_release_ready"
-                        type="object"
-                      >
-                                                [~<field
-                          name="count_move_release_ready"
-                        />]
-                                            </a>
-                                        </div>
-                                    </div>
                                     <div class="row">
                                         <div class="col-12">
                                             Total Weight:
