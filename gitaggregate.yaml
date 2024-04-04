@@ -55,6 +55,7 @@
     - oca 16.0
     - oca refs/pull/833/head
     - oca refs/pull/853/head
+    - oca refs/pull/884/head
   target: origin 16.0-stock_release_channel
 
 ./src/stock_move_propagate_first_move:
