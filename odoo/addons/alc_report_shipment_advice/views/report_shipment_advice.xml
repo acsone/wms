@@ -75,16 +75,16 @@
           >
                         <thead>
                             <tr class="active bg-grey">
-                                <th>Seq.</th>
-                                <th>Customer</th>
+                                <th width="3%">Seq.</th>
+                                <th width="20%">Customer</th>
                                 <th>Notes</th>
-                                <th>Phone</th>
+                                <th width="10%">Phone</th>
                                 <t t-set="max_zones" t-value="0" />
                                 <t
                   t-foreach="report.location_ids.sorted('sequence_in_shipment_advice_report')._ids"
                   t-as="zone_location_id"
                 >
-                                    <th>
+                                    <th width="7%">
                                         <t t-if="zone_location_id">
                                             <t
                         t-esc="zone_mapping.get(o.env['stock.location'].browse(zone_location_id).name, '???')"
@@ -98,7 +98,7 @@
                                         <t t-set="max_zones" t-value="max_zones + 1" />
                                     </th>
                                 </t>
-                                <th>Tot.</th>
+                                <th width="7%">Tot.</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -115,7 +115,7 @@
                     />
                                         <span t-field="partner.ref" />
                                     </td>
-                                    <td style="width: 40%;">
+                                    <td>
                                         <strong>
                                             <span t-esc="line['note']" />
                                         </strong>
