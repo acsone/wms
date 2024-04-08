@@ -88,6 +88,18 @@ class StockPickingTestCase(TransactionCase):
         cls.env["stock.quant"]._update_available_quantity(
             cls.product_2, cls.loc_stock, 100.0
         )
+        cls.product_3 = cls.env["product.product"].create(
+            {
+                "name": "Product 3",
+                "default_code": "984928375",
+                "tracking": "lot",
+                "list_price": 100,
+                "type": "product",
+            }
+        )
+        cls.env["stock.quant"]._update_available_quantity(
+            cls.product_3, cls.loc_stock, 100.0
+        )
         cls.pick_type = cls.warehouse_1.out_type_id
         cls.pick_type.search([]).write(
             {"allow_additional_product_on_reserved_qty": True}

@@ -335,7 +335,12 @@ class StockPicking(stock_picking.StockPicking):
 
         # We don't need to display backorder for the entry register
         if not is_entry_register:
-            proc_groups = self.move_ids.mapped("group_id")
+            backorders = self.backorder_ids.filtered(
+                lambda rec: rec.state not in ("cancel", "done")
+            )
+            proc_groups = self.move_ids.mapped("group_id") | backorders.mapped(
+                "group_id"
+            )
             moves = proc_groups.mapped("stock_move_ids")
             moves = moves.filtered(
                 lambda rec: (

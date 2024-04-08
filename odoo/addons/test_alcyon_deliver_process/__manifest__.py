@@ -12,6 +12,7 @@
         "alc_additional_product_stock",
         "alc_stock_picking_cancel_permission",
         "alc_stock_release_channel_deliver",
+        "alc_stock_delivery_slip",
         "stock_release_channel_auto_release",
         "stock_move_auto_assign_auto_release",
         "stock_release_channel_propagate_channel_picking",
