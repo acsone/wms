@@ -187,7 +187,6 @@ odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/OCA/stock
 odoo-addon-shipment-advice-planner-toursolver-queue-job @ git+https://github.com/OCA/stock-logistics-transport.git@refs/pull/91/head#subdirectory=setup/shipment_advice_planner_toursolver_queue_job
 
 # stock-logistics-availability
-odoo-addon-stock-available-base-exclude-location @ git+https://github.com/OCA/stock-logistics-availability.git@refs/pull/15/head#subdirectory=setup/stock_available_base_exclude_location
 # https://github.com/OCA/stock-logistics-availability/pull/6 - [16.0][ADD] stock_available_immediately_exclude_location
 odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com/acsone/stock-logistics-availability.git@16.0-mig-stock_available_immediately_exclude_location-hda#subdirectory=setup/stock_available_immediately_exclude_location
 # https://github.com/OCA/stock-logistics-availability/pull/11 - [16.0][ADD] stock_available_locaiton_get_domain
