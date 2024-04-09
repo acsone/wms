@@ -208,32 +208,68 @@ class AccountMove(Move, ReportAsync):
             )
             if taxes:
                 all_taxes += taxes[1]
-        # summarize taxes for each tax type
-        tax_types = {
-            "invoice": self.invoice_only_tax_ids,
-            "apb": self.invoice_apb_ids,
-            "antibiotics": self.invoice_antibiotics_ids,
+
+        tax_group_apb = self.env.ref("l10n_be_apb_tax.tax_group_apb")
+        tax_group_antibiotics = self.env.ref("account.tax_group_taxes")
+        tax_groups = {
+            "apb": tax_group_apb,
+            "antibiotics": tax_group_antibiotics,
         }
-        tax_summary = {}
-        for name, tax_ids in tax_types.items():
-            tax_summary[name] = []
-            tax_total = 0
-            for tax in tax_ids:
-                taxes = [t for t in all_taxes if t["id"] == tax.id]
-                tax_amount = sum(t["tax_amount"] for t in taxes)
-                tax_summary[name].append(
-                    {
-                        "rate": f"{tax.amount:.2f}",
-                        "base_amount": f"{sum(t['base_amount'] for t in taxes):.2f} "
-                        f"{self.currency_id.symbol}",
-                        "tax_amount": f"{tax_amount:.2f} {self.currency_id.symbol}",
-                    }
+        # Use the standard tax_totals field on invoices
+        tax_summary = defaultdict(list, {k: [] for k in tax_groups})
+        tax_total = defaultdict(list, {k: 0 for k in tax_groups})
+        for _subtotal, tax_details in self.tax_totals.get("groups_by_subtotal").items():
+            # TODO: This is a shortcut as preceding_subtotal field is not taken into
+            # account as there is no tax configured like that.
+            for detail in tax_details:
+                tax_group_id = detail.get("tax_group_id")
+                tax_group = list(
+                    filter(
+                        lambda group, tax_group_id=tax_group_id: int(tax_group_id)
+                        in group[1].ids,
+                        tax_groups.items(),
+                    )
                 )
-                tax_total += tax_amount
+                if tax_group:
+                    tax_summary[tax_group[0][0]].append(
+                        {
+                            "rate": str(detail.get("tax_group_amount")),
+                            "base_amount": detail.get(
+                                "formatted_tax_group_base_amount"
+                            ),
+                            "tax_amount": detail.get("formatted_tax_group_amount"),
+                        }
+                    )
+                    tax_total[tax_group[0][0]] += detail.get("tax_group_amount")
+
+        for name, total in tax_total.items():
+            # Compute the totals per tax group name (vat taxes are grouped)
             tax_summary[f"{name}_total_tax_amount"] = (
-                f"{tax_total:.2f} " f"{self.currency_id.symbol}"
+                f"{total:.2f} " f"{self.currency_id.symbol}"
             )
-            tax_summary[f"{name}_total"] = tax_total  # needed for amounts below
+            tax_summary[f"{name}_total"] = total  # needed for amounts below
+
+        # HACK: This is intended as tax groups are not used at Alcyon
+        # TODO: Reintroduce tax groups in order to use 'tax_totals' field instead
+        tax_total = 0
+        invoice_taxes = self.invoice_only_tax_ids
+        for tax in invoice_taxes:
+            taxes = [t for t in all_taxes if t["id"] == tax.id]
+            tax_amount = sum(t["tax_amount"] for t in taxes)
+            tax_summary["invoice"].append(
+                {
+                    "rate": f"{tax.amount:.2f}",
+                    "base_amount": f"{sum(t['base_amount'] for t in taxes):.2f} "
+                    f"{self.currency_id.symbol}",
+                    "tax_amount": f"{tax_amount:.2f} {self.currency_id.symbol}",
+                }
+            )
+            tax_total += tax_amount
+        tax_summary["invoice_total_tax_amount"] = (
+            f"{tax_total:.2f} " f"{self.currency_id.symbol}"
+        )
+        tax_summary["invoice_total"] = tax_total
+
         # The job is already done in lines for contribution_ids
         tax_summary["contribution_total"] = sum(
             line.amount_contribution for line in self.invoice_line_ids
