@@ -13,6 +13,7 @@
         "account",
         "l10n_be_apb_tax",
         "sale",
+        "sale_triple_discount",
         "account_payment_mode",
         "account_payment_partner",
         "account_invoice_triple_discount",
