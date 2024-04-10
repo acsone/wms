@@ -293,7 +293,7 @@ odoo-addon-shopinvader-search-engine-image==16.0.1.0.3
 odoo-addon-shopinvader-search-engine-product-brand==16.0.1.0.0.2
 odoo-addon-shopinvader-search-engine-product-brand-image==16.0.1.0.0.2
 odoo-addon-shopinvader-search-engine-product-media==16.0.1.0.4
-odoo-addon-shopinvader-search-engine-product-stock @ git+https://github.com/acsone/odoo-shopinvader.git@935d563d8bc6ec580cf601a41e4e558cf576e1ff#subdirectory=setup/shopinvader_search_engine_product_stock
+odoo-addon-shopinvader-search-engine-product-stock==16.0.1.0.4
 odoo-addon-shopinvader-search-engine-product-stock-state==16.0.1.0.0.4
 odoo-addon-shopinvader-search-engine-product-template-multi-link @ git+https://github.com/acsone/odoo-shopinvader.git@eef81ac5ddc01484564c8472c009711147261535#subdirectory=setup/shopinvader_search_engine_product_template_multi_link
 odoo-addon-shopinvader-search-engine-update==16.0.1.0.1
