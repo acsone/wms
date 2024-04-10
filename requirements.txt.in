@@ -250,7 +250,3 @@ odoo-addon-shopinvader-search-engine-update-product-template-multi-link @ git+ht
 
 odoo-addon-shopinvader-search-engine-product-stock @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1473/head#subdirectory=setup/shopinvader_search_engine_product_stock
 odoo-addon-shopinvader-es-product-categ @ git+https://github.com/shopinvader/odoo-shopinvader.git@refs/pull/1481/head#subdirectory=setup/shopinvader_es_product_categ
-
-
-# OCA/search-engineer
-odoo-addon-search-engine-image-thumbnail @ git+https://github.com/OCA/search-engine.git@refs/pull/176/head#subdirectory=setup/search_engine_image_thumbnail
