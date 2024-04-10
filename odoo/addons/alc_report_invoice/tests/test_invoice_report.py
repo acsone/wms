@@ -394,7 +394,7 @@ class TestReportInvoice(AccountTestInvoicingCommon, BaseCommon):
                     {"rate": "21.00", "base_amount": "2.00 €", "tax_amount": "0.42 €"},
                 ],
                 "invoice_total_tax_amount": "14.51 €",
-                "invoice_total": 14.511600000000003,
+                "invoice_total": 14.51,
                 "contribution_total": 0.0,
                 "contribution_total_tax_amount": "0.00 €",
                 "amount_without_discount": "273.15 €",

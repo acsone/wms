@@ -191,6 +191,19 @@ class AccountMove(Move, ReportAsync):
         existing.unlink()
         return res
 
+    def _get_alc_invoice_total_tax(self) -> float:
+        """Returns the tax total for vat ones."""
+        self.ensure_one()
+        invoice_groups = self.invoice_only_tax_ids.tax_group_id
+        tax_total = 0.00
+        for _subtotal, tax_details in self.tax_totals.get("groups_by_subtotal").items():
+            for detail in tax_details:
+                tax_group_id = detail.get("tax_group_id")
+                for group in invoice_groups:
+                    if group.id == tax_group_id:
+                        tax_total += detail.get("tax_group_amount")
+        return tax_total
+
     def _get_taxes_summary(self):
         """
         Compute and format taxes and amounts infos needed for reporting.
@@ -251,7 +264,6 @@ class AccountMove(Move, ReportAsync):
 
         # HACK: This is intended as tax groups are not used at Alcyon
         # TODO: Reintroduce tax groups in order to use 'tax_totals' field instead
-        tax_total = 0
         invoice_taxes = self.invoice_only_tax_ids
         for tax in invoice_taxes:
             taxes = [t for t in all_taxes if t["id"] == tax.id]
@@ -264,7 +276,9 @@ class AccountMove(Move, ReportAsync):
                     "tax_amount": f"{tax_amount:.2f} {self.currency_id.symbol}",
                 }
             )
-            tax_total += tax_amount
+        # Compute the invoice tax total from Odoo core field
+        # TODO: Change this when we migrate to several tax groups
+        tax_total = self._get_alc_invoice_total_tax()
         tax_summary["invoice_total_tax_amount"] = (
             f"{tax_total:.2f} " f"{self.currency_id.symbol}"
         )
