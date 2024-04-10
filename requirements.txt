@@ -273,7 +273,7 @@ odoo-addon-shopinvader-api-sale==16.0.1.1.3
 odoo-addon-shopinvader-api-security-sale==16.0.1.1.1
 odoo-addon-shopinvader-api-wishlist==16.0.1.0.2
 odoo-addon-shopinvader-base-url==16.0.1.0.3
-odoo-addon-shopinvader-es-product-categ @ git+https://github.com/acsone/odoo-shopinvader.git@64c7ba79d5d8e36913a1413f2336fbf09ab3c4eb#subdirectory=setup/shopinvader_es_product_categ
+odoo-addon-shopinvader-es-product-categ==16.0.1.0.0.1
 odoo-addon-shopinvader-fastapi-auth-jwt==16.0.1.0.1
 odoo-addon-shopinvader-filtered-model==16.0.1.1.1
 odoo-addon-shopinvader-multi-category==16.0.1.0.1
