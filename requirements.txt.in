@@ -54,7 +54,6 @@ odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wm
 odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/OCA/wms.git@refs/pull/836/head#subdirectory=setup/stock_release_channel_process_end_time
 # https://github.com/OCA/wms/pull/497 - [ADD] stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@16.0-add-stock_storage_type_abc_classification-dro#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
-odoo-addon-stock-storage-type @ git+https://github.com/OCA/wms.git@refs/pull/831/head#subdirectory=setup/stock_storage_type
 odoo-addon-stock-picking-batch-creation @ git+https://github.com/oca/wms.git@refs/pull/534/head#subdirectory=setup/stock_picking_batch_creation
 # https://github.com/OCA/wms/pull/572 [ADD] - add stock_release_channel_shipment_advice_process_end_time #572
 odoo-addon-stock-release-channel-shipment-advice-process-end-time @ git+https://github.com/acsone/wms.git@16.0-stock_release_channel_shipment_advice_process_end_time-sbj#subdirectory=setup/stock_release_channel_shipment_advice_process_end_time
