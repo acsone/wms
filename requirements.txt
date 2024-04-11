@@ -93,7 +93,7 @@ odoo-addon-account-payment-mode==16.0.1.2.0.1
 odoo-addon-account-payment-mode-auto-reconcile @ git+https://github.com/acsone/account-reconcile.git@e97a4aa614ec654ce52d4f735ce14a56e14af93c#subdirectory=setup/account_payment_mode_auto_reconcile
 odoo-addon-account-payment-order==16.0.1.2.0
 odoo-addon-account-payment-partner==16.0.1.2.1.1
-odoo-addon-account-payment-sale @ git+https://github.com/acsone/bank-payment.git@15acca47e9ae1bb370a1a79b80930abd56828869#subdirectory=setup/account_payment_sale
+odoo-addon-account-payment-sale==16.0.1.0.1
 odoo-addon-account-payment-unece==16.0.1.0.0.9
 odoo-addon-account-reconcile-restrict-partner-mismatch @ git+https://github.com/acsone/account-reconcile.git@d79fd0dd12388d2fa22c8ffb3c704f0af570988c#subdirectory=setup/account_reconcile_restrict_partner_mismatch
 odoo-addon-account-reversal @ git+https://github.com/acsone/account-financial-tools@668e9a4f0f8ae15e32b0777d3a474edaf051ba77#subdirectory=setup/account_reversal
