@@ -52,6 +52,7 @@
         "alc_app_b2c",
         "alc_turnover_reporting",
         "alc_magento_api",
+        "alc_report_qweb_pdf_batch",
         # TO BE REMOVED
         "base_report_to_printer",
     ],

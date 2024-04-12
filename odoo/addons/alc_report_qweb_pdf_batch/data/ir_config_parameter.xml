@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2024 - ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+  <record
+    model="ir.config_parameter"
+    id="render_qweb_pdf_batch_size"
+    forcecreate="True"
+  >
+    <field name="key">alc_report_qweb_pdf_batch.render_qweb_pdf_batch_size</field>
+    <field name="value" type="int">30</field>
+  </record>
+</odoo>
