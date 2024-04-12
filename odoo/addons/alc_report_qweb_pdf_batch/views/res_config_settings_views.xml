@@ -1,0 +1,27 @@
+<!-- Copyright 2024 - ACSONE SA/NV
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='companies']" position="after">
+                <h2>Reports</h2>
+                <div class="row mt16 o_settings_container" id="reports_settings">
+                    <div
+            class="col-xs-12 col-md-6 o_setting_box"
+            id="render_qweb_pdf_batch_size"
+          >
+                        <div class="o_setting_left_pane">
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="render_qweb_pdf_batch_size" />
+                            <field name="render_qweb_pdf_batch_size" />
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
