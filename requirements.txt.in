@@ -165,13 +165,9 @@ odoo-addon-account-invoice-export-ubl @ git+https://github.com/edido-eu/peppol@1
 odoo-addon-base-ubl-payment-mode-required @ git+https://github.com/edido-eu/peppol@16.0#subdirectory=setup/base_ubl_payment_mode_required
 odoo-addon-l10n-be-account-einvoice-generate @ git+https://github.com/edido-eu/peppol@16.0#subdirectory=setup/l10n_be_account_einvoice_generate
 
-# OCA/l10n-belgium
-odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/186/head#subdirectory=setup/l10n_be_bpost_address_validation
-odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/204/head#subdirectory=setup/l10n_be_iso20022_pain
-
 # OCA/rest-framework
-# https://github.com/OCA/rest-framework.git@refs/pull/387
-# https://github.com/OCA/rest-framework.git@refs/pull/422
+# https://github.com/OCA/rest-framework/pull/387
+# https://github.com/OCA/rest-framework/pull/422
 odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@16.0-alc-fastapi#subdirectory=setup/fastapi
 
 # OCA/web-api
@@ -197,3 +193,7 @@ odoo-addon-account-cutoff-accrual-sale @ git+https://github.com/OCA/account-clos
 odoo-addon-account-cutoff-accrual-sale-stock @ git+https://github.com/OCA/account-closing.git@refs/pull/271/head#subdirectory=setup/account_cutoff_accrual_sale_stock
 odoo-addon-account-cutoff-base @ git+https://github.com/acsone/account-closing.git@16.0-account-cutoff-base#subdirectory=setup/account_cutoff_base
 odoo-addon-account-invoice-accrual @ git+https://github.com/OCA/account-closing.git@refs/pull/264/head#subdirectory=setup/account_invoice_accrual
+
+# OCA/l10n-belgium
+odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/186/head#subdirectory=setup/l10n_be_bpost_address_validation
+odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/204/head#subdirectory=setup/l10n_be_iso20022_pain
