@@ -147,8 +147,6 @@ odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@16.
 odoo-addon-internal-stock-quant-package @ git+https://github.com/OCA/stock-logistics-tracking.git@refs/pull/34/head#subdirectory=setup/internal_stock_quant_package
 
 # stock-logistics-availability
-# https://github.com/OCA/stock-logistics-availability/pull/6 - [16.0][ADD] stock_available_immediately_exclude_location
-odoo-addon-stock-available-immediately-exclude-location @ git+https://github.com/acsone/stock-logistics-availability.git@16.0-mig-stock_available_immediately_exclude_location-hda#subdirectory=setup/stock_available_immediately_exclude_location
 # https://github.com/OCA/stock-logistics-availability/pull/11 - [16.0][ADD] stock_available_locaiton_get_domain
 odoo-addon-stock-available-location-get-domain @ git+https://github.com/OCA/stock-logistics-availability.git@refs/pull/11/head#subdirectory=setup/stock_available_location_get_domain
 # https://github.com/OCA/stock-logistics-availability/pull/10 - [ADD] stock_available_location_orderpoint
