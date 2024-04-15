@@ -105,7 +105,7 @@ odoo-addon-account-usability==16.0.1.0.3.7
 odoo-addon-attachment-unindex-content==16.0.1.0.0.3
 odoo-addon-attribute-set==16.0.1.1.0.7
 odoo-addon-auth-api-key==16.0.1.0.0.4
-odoo-addon-auth-api-key-group @ git+https://github.com/acsone/server-auth.git@68309b60b530d23e6aee4ac40a1013e50d62fb86#subdirectory=setup/auth_api_key_group
+odoo-addon-auth-api-key-group==16.0.1.0.0.4
 odoo-addon-auth-jwt==16.0.1.1.0.3
 odoo-addon-auth-jwt-server-env==16.0.1.0.0.4
 odoo-addon-base-business-document-import @ git+https://github.com/acsone/edi.git@218282f08996953e22c161849fded00a39c2ceee#subdirectory=setup/base_business_document_import
