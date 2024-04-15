@@ -12,6 +12,6 @@ def migrate(cr, version):
     openupgrade.load_data(
         cr,
         "alc_account_invoice_email",
-        "migrations/16.0.1.0.1/mail_template.xml",
+        "migrations/16.0.1.0.2/mail_template.xml",
         mode="init",
     )

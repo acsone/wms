@@ -4,7 +4,7 @@
 {
     "name": "Account Invoice Email",
     "description": "Account Invoice Email",
-    "version": "16.0.1.0.1",
+    "version": "16.0.1.0.2",
     "author": "ACSONE SA/NV",
     "license": "AGPL-3",
     "category": "Accounting & Finance",
