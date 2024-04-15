@@ -137,9 +137,6 @@ odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock
 odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1264/head#subdirectory=setup/stock_move_propagate_first_move_cancel
 odoo-addon-stock-move-line-lock-qty-done @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1470/head#subdirectory=setup/stock_move_line_lock_qty_done
 
-# OCA/web
-odoo-addon-web-notify @ git+https://github.com/OCA/web.git@refs/pull/2598/head#subdirectory=setup/web_notify
-
 # camptocamp/odoo-cloud-platform
 odoo-addon-base-attachment-object-storage @ git+https://github.com/acsone/odoo-cloud-platform@16.0-base_attachment_storage-no-register-lmi#subdirectory=setup/base_attachment_object_storage
 # https://github.com/camptocamp/odoo-cloud-platform/pull/401

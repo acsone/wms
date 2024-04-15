@@ -388,7 +388,7 @@ odoo-addon-uom-unece==16.0.1.1.0.2
 odoo-addon-web-chatter-position==16.0.1.0.0.8
 odoo-addon-web-dialog-size==16.0.1.0.0.5
 odoo-addon-web-environment-ribbon==16.0.1.0.0.3
-odoo-addon-web-notify @ git+https://github.com/acsone/web.git@d8d9e0e9b3e61549e2512b0d94c6b0ee017b9f35#subdirectory=setup/web_notify
+odoo-addon-web-notify==16.0.2.0.0.2
 odoo-addon-web-refresher==16.0.2.0.0.3
 odoo-addon-web-remember-tree-column-width==16.0.1.0.0.2
 odoo-addon-web-search-with-and==16.0.1.0.0.3
