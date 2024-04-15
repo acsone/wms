@@ -38,7 +38,7 @@ class ResPartner(Partner):
             )
             rec.is_delivered_by_alcyon = (
                 partner_alcyon
-                in result_stock_release_channel_ids.mapped("carrier_id").mapped(
+                in result_stock_release_channel_ids.mapped("carrier_ids").mapped(
                     "partner_id"
                 )
             )
