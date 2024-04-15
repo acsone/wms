@@ -27,8 +27,8 @@ class TestGroupPickingByCarrier(TestDeliverProcessBase):
         )
         cls.carrier1 = cls.env.ref("delivery.delivery_carrier")
         cls.carrier2 = cls.env.ref("delivery.delivery_local_delivery")
-        cls.channel1.carrier_id = cls.carrier1
-        cls.channel2.carrier_id = cls.carrier2
+        cls.channel1.carrier_ids = cls.carrier1
+        cls.channel2.carrier_ids = cls.carrier2
         cls.product = cls.env["product.product"].create(
             {"name": "Test product", "tracking": "none", "type": "product"}
         )

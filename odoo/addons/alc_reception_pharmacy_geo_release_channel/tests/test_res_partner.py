@@ -61,7 +61,7 @@ class TestResPartner(TransactionCase):
         self.assertFalse(self.partner.is_delivered_by_alcyon)  # not delivered by Alc
         # assign Alcyon carrier to release channel
         self.partner.invalidate_recordset()
-        self.default_channel.carrier_id = self.delivery_alcyon
+        self.default_channel.carrier_ids = self.delivery_alcyon
         self.assertTrue(self.partner.is_delivered_by_alcyon)  # delivered by Alcyon
 
     def test_is_delivered_by_alcyon_manual(self):
@@ -73,7 +73,7 @@ class TestResPartner(TransactionCase):
         self.assertFalse(self.partner.is_delivered_by_alcyon)  # not delivered by Alc
         # assign Alcyon carrier to release channel
         self.partner.invalidate_recordset()
-        self.default_channel.carrier_id = self.delivery_alcyon
+        self.default_channel.carrier_ids = self.delivery_alcyon
         self.assertFalse(
             self.partner.is_delivered_by_alcyon
         )  # not delivered by Alcyon as not in manual release channels
