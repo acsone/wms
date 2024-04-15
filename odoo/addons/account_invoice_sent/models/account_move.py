@@ -45,7 +45,15 @@ class AccountMove(AccountMoveBase):
         if not invoices:
             return
         invoices.write({"is_move_sent": True})
-        template = self.env.ref("account.email_template_edi_invoice")
-        for invoice in invoices:
-            invoice.message_post(body=_("Invoice sent"))
-            template.send_mail(invoice.id)
+        template_invoice = self.env.ref("account.email_template_edi_invoice")
+        template_refund = self.env.ref("account.email_template_edi_credit_note")
+        for move_type, invoices_per_type in invoices.partition(
+            lambda move: move.move_type
+        ).items():
+            if move_type == "out_invoice":
+                template = template_invoice
+            elif move_type == "out_refund":
+                template = template_refund
+            for invoice in invoices_per_type:
+                invoice.message_post(body=_("Invoice sent"))
+                template.send_mail(invoice.id)
