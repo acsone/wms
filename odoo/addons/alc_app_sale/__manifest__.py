@@ -145,5 +145,6 @@
         "alc_sale_order_partner_delivery_carrier",
         "alc_partner_salesperson_portal",
         "alc_partner_invoicing_mode_split_refund",
+        "alc_sale_auto_subscribe",
     ],
 }

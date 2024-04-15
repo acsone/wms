@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <record
+    model="res.users"
+    id="alc_user_callcenter"
+    context="{'no_reset_password': True}"
+  >
+      <field name="name">CallCenter Alcyon</field>
+      <field name="login">callcenter</field>
+      <field name="company_id" ref="base.main_company" />
+      <field name="groups_id" eval="[Command.set([])]" />
+      <field name="active" eval="1" />
+      <field name="email">callcenter@alcyonbelux.be</field>
+      <field name="notification_type">email</field>
+    </record>
+</odoo>
