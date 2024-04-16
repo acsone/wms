@@ -14,6 +14,8 @@ class TestPickingTotal(PickingParcelsItemsCommon, TransactionCase):
         cls.advice_obj = cls.env["shipment.advice"]
         # Set Stock location as no source to have a 'false' value
         cls.warehouse.lot_stock_id.is_considered_as_source = False
+        cls.pharma_location.sequence_in_shipment_advice_report = 1
+        cls.food_location.sequence_in_shipment_advice_report = 2
 
     def test_flow(self):
         self._create_customer_need()
@@ -100,6 +102,9 @@ class TestPickingTotal(PickingParcelsItemsCommon, TransactionCase):
         )
 
         report = advice.get_alc_report_shipment_advice()
+        # Locations are sorted
+        self.assertEqual(report.location_ids[1], self.pharma_location)
+        self.assertEqual(report.location_ids[2], self.food_location)
 
         self.assertEqual(report.shipment_advice_id, advice)
         self.assertIn(self.food_location.id, report.location_ids._ids)
