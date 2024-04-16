@@ -38,7 +38,8 @@ class AlcReportShipmentAdvice(models.TransientModel):
     def _compute_location_ids(self):
         # Gather all the locations from details as we need it to build
         # the locations table header.
-        default_locations = self.env["stock.location"].search(
+        location_obj = self.env["stock.location"]
+        default_locations = location_obj.search(
             [("show_in_shipment_advice_report", "=", True)]
         )
         for report in self:
@@ -46,7 +47,14 @@ class AlcReportShipmentAdvice(models.TransientModel):
             for line in report.line_ids:
                 ids = line.parcels_and_items_per_source["locations"]
                 line_ids.update(ids + default_locations.ids)
-            report.location_ids = [Command.set(line_ids)]
+            sorted_location_ids = (
+                location_obj.browse(line_ids)
+                .sorted("sequence_in_shipment_advice_report")
+                .ids
+            )
+            if False in line_ids:
+                sorted_location_ids = [False] + sorted_location_ids
+            report.location_ids = [Command.set(sorted_location_ids)]
 
     @api.depends("line_ids.picking_ids.parcels_and_items_per_source")
     def _compute_parcels_and_items_per_source(self):
