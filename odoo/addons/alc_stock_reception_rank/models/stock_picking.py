@@ -259,9 +259,7 @@ class StockPicking(StockPickingBase):
         """Compute the rank of the given receptions."""
         for record in self:
             rank = (
-                record.count_planned_partners_waiting_for_reception * 1000000000
-                + record.count_planned_products_waiting_for_reception * 1000000
-                + record.count_partners_waiting_for_reception * 1000
+                record.count_partners_waiting_for_reception * 1000
                 + record.count_products_waiting_for_reception
             )
             if record.rank != rank:

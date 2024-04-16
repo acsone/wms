@@ -10,11 +10,15 @@ Compute the priority (rank) used to sort the incoming shipments.
 
 The rank is computed based on customer deliveries waiting for goods.
 
-Formula: Rank = count_planned_partners_waiting_for_reception * 1 000 000 000 +
-count_planned_products_waiting_for_reception 1 000 000 + count_partners_for_product * 1 000 +
-count miggin products.
+Formula: Rank = count_partners_for_product * 1 000 +
+count missing products.
 
-Where:
+
+The rank is computed when the GRN is associated to the incoming shipment. A
+cron job recomputes the rank regularly.
+
+
+This addon also adds 2 fields previoulsy used into the rank computation:
 
 - count_planned_partners_waiting_for_reception = Quantity of deliveries waiting for
   availability. For each product of the reception order, we count the customers
@@ -25,8 +29,11 @@ Where:
   availability. For each product of the reception order, we count the number
   of products waiting for the goods.(deliveries into a release_channel)
 
-The rank is computed when the GRN is associated to the incoming shipment. A
-cron job recomputes the rank regularly.
+The previous rank computation was based on the following formula:
+
+Rank = ccount_planned_partners_waiting_for_reception * 1 000 000 000 +
+count_planned_products_waiting_for_reception 1 000 000 + count_partners_for_product * 1 000 +
+count_missing_products
 
 
 Installation
