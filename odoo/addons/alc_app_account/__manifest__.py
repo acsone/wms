@@ -44,6 +44,7 @@
         "alc_partner_invoicing_mode_default",
         "alc_account_invoice_accrual",
         "alc_account_invoice_product_no_reference",
+        "alc_account_move_maturity_date",
         "alc_account_payment_globalization",
         "alc_placedesvetos_payment_globalization",
         "alc_chronovet_payment_globalization",
