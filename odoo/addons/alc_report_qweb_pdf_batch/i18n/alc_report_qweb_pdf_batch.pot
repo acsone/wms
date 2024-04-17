@@ -19,6 +19,18 @@ msgid "Config Settings"
 msgstr ""
 
 #. module: alc_report_qweb_pdf_batch
+#: model:ir.model.fields,field_description:alc_report_qweb_pdf_batch.field_res_config_settings__enable_render_qweb_pdf_batch
+msgid "Enable Render QWeb PDF Batch"
+msgstr ""
+
+#. module: alc_report_qweb_pdf_batch
+#: model:ir.model.fields,help:alc_report_qweb_pdf_batch.field_res_config_settings__enable_render_qweb_pdf_batch
+msgid ""
+"Enable Render QWeb PDF Batch. This field will allow the rendering of QWeb "
+"PDF in batch mode"
+msgstr ""
+
+#. module: alc_report_qweb_pdf_batch
 #: model:ir.model.fields,field_description:alc_report_qweb_pdf_batch.field_res_config_settings__render_qweb_pdf_batch_size
 msgid "Number of records per batch for rendering QWeb PDF"
 msgstr ""
