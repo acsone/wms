@@ -9,7 +9,11 @@ class IrActionsReport(ir_actions_report.IrActionsReport):
     def _render_qweb_pdf_prepare_streams(self, report_ref, data, res_ids=None):
         batch_size = self._render_qweb_pdf_batch_size
         len_res_ids = len(res_ids) if res_ids else 0
-        if not res_ids or len_res_ids <= batch_size:
+        if (
+            not res_ids
+            or len_res_ids <= batch_size
+            or not self._render_qweb_pdf_batch_enabled
+        ):
             return super()._render_qweb_pdf_prepare_streams(report_ref, data, res_ids)
         collected_streams = OrderedDict()
         collected_false_streams = []
@@ -61,4 +65,12 @@ class IrActionsReport(ir_actions_report.IrActionsReport):
             self.env["ir.config_parameter"]
             .sudo()
             .get_param("alc_report_qweb_pdf_batch.render_qweb_pdf_batch_size")
+        )
+
+    @property
+    def _render_qweb_pdf_batch_enabled(self):
+        return (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("alc_report_qweb_pdf_batch.enable_render_qweb_pdf_batch")
         )

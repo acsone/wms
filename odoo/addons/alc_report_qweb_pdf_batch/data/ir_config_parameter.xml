@@ -10,4 +10,12 @@
     <field name="key">alc_report_qweb_pdf_batch.render_qweb_pdf_batch_size</field>
     <field name="value" type="int">30</field>
   </record>
+  <record
+    model="ir.config_parameter"
+    id="enable_render_qweb_pdf_batch"
+    forcecreate="True"
+  >
+    <field name="key">alc_report_qweb_pdf_batch.enable_render_qweb_pdf_batch</field>
+    <field name="value" eval="0" />
+  </record>
 </odoo>

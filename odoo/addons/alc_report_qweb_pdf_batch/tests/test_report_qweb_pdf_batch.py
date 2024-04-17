@@ -55,6 +55,9 @@ class TestReportQWebPdfBatch(common.TransactionCase):
         cls.partners = cls.env["res.partner"]
         for n in range(5):
             cls.partners += cls.env["res.partner"].create({"name": f"Test {n}"})
+        cls.env["ir.config_parameter"].sudo().set_param(
+            "alc_report_qweb_pdf_batch.enable_render_qweb_pdf_batch", True
+        )
 
     @classmethod
     def _set_pdf_batch_size(cls, size):

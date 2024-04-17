@@ -8,6 +8,14 @@ class ResConfigSettings(models.TransientModel):
 
     _inherit = "res.config.settings"
 
+    enable_render_qweb_pdf_batch = fields.Boolean(
+        "Enable Render QWeb PDF Batch",
+        default=False,
+        config_parameter="alc_report_qweb_pdf_batch.enable_render_qweb_pdf_batch",
+        help="Enable Render QWeb PDF Batch. "
+        "This field will allow the rendering of QWeb PDF in batch mode",
+    )
+
     render_qweb_pdf_batch_size = fields.Integer(
         "Number of records per batch for rendering QWeb PDF",
         default=30,
