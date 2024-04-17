@@ -1,5 +1,6 @@
 from unittest import mock
 
+from odoo.modules.module import get_module_resource
 from odoo.tests import common
 
 
@@ -58,6 +59,21 @@ class TestReportQWebPdfBatch(common.TransactionCase):
         cls.env["ir.config_parameter"].sudo().set_param(
             "alc_report_qweb_pdf_batch.enable_render_qweb_pdf_batch", True
         )
+
+        # We mock the wkhtmltopdf command to avoid calling it in the tests
+        cls.wkhtmltopdf_patcher = mock.patch.object(
+            type(cls.report), "_run_wkhtmltopdf"
+        )
+
+        dummy_pdf = get_module_resource(
+            "alc_report_qweb_pdf_batch", "tests", "dummy.pdf"
+        )
+        with open(dummy_pdf, "rb") as f:
+            cls.dummy_pdf_content = f.read()
+        patched = cls.wkhtmltopdf_patcher.start()
+        patched.return_value = cls.dummy_pdf_content
+        # at cleanup, we stop the patcher
+        cls.addClassCleanup(cls.wkhtmltopdf_patcher.stop)
 
     @classmethod
     def _set_pdf_batch_size(cls, size):
