@@ -11,7 +11,19 @@
                 <div class="row mt16 o_settings_container" id="reports_settings">
                     <div
             class="col-xs-12 col-md-6 o_setting_box"
+            id="enable_render_qweb_pdf_batch"
+          >
+                        <div class="o_setting_left_pane">
+                            <field name="enable_render_qweb_pdf_batch" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="enable_render_qweb_pdf_batch" />
+                        </div>
+                    </div>
+                    <div
+            class="col-xs-12 col-md-6 o_setting_box"
             id="render_qweb_pdf_batch_size"
+            attrs="{'invisible':[('enable_render_qweb_pdf_batch', '=', False)]}"
           >
                         <div class="o_setting_left_pane">
                         </div>
