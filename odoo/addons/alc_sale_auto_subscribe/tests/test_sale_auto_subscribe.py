@@ -1,9 +1,12 @@
 # Copyright 2024 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import unittest
+
 from odoo.tests.common import TransactionCase
 
 
+@unittest.skip("This test is not working since functionality is disabled")
 class TestSaleAutoSubscribe(TransactionCase):
     @classmethod
     def setUpClass(cls):

@@ -5,7 +5,7 @@ from odoo.addons.sale.models import sale_order
 
 
 class SaleOrder(sale_order.SaleOrder):
-    def _message_auto_subscribe_followers(self, updated_values, default_subtype_ids):
+    def _x_message_auto_subscribe_followers(self, updated_values, default_subtype_ids):
         # We want to auto subscribe the callcenter to the SO by default
         followers = super()._message_auto_subscribe_followers(
             updated_values, default_subtype_ids
