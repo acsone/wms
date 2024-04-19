@@ -56,9 +56,9 @@ def confirm(
     uuid = uuid or params.get("uuid")
     cart = env["sale.order"]._find_open_cart(partner.id, uuid)
     if not cart:
-        return HTTPException(status_code=404, detail="Not cart found")
+        raise HTTPException(status_code=404, detail="No cart found")
     if uuid and cart.uuid != uuid:
-        return HTTPException(status_code=404, detail="Not cart found")
+        raise HTTPException(status_code=404, detail="No cart found")
     if not cart.partner_id.eshop_ordering_allowed:
         raise ValidationError(_("You are no allowed to pass an order on the EShop"))
     upd_vals = cart_info.to_sale_order_vals()

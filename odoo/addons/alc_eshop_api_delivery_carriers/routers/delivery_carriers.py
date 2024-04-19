@@ -29,6 +29,6 @@ def search(
     """Get all delivery carriers."""
     cart = env["sale.order"]._find_open_cart(partner.id, cart_uuid)
     if not cart:
-        return HTTPException(status_code=404, detail="Cart not found")
+        raise HTTPException(status_code=404, detail="Car not found")
     carriers = cart._get_available_carriers()
     return DeliveryMethodList.from_delivery_carrier(carriers)

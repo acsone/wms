@@ -34,8 +34,8 @@ def refresh_qty_unavailable(
     """
     cart = env["sale.order"]._find_open_cart(partner.id, uuid)
     if not cart:
-        return HTTPException(status_code=404, detail="Not cart found")
+        raise HTTPException(status_code=404, detail="No cart found")
     if uuid and cart.uuid != uuid:
-        return HTTPException(status_code=404, detail="Not cart found")
+        raise HTTPException(status_code=404, detail="No cart found")
     updated_lines = cart.refresh_product_qties_unavailable()
     return SaleWithQtyUnavailableDiff.from_sale_order(cart, updated_lines)

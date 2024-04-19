@@ -33,14 +33,14 @@ def set_delivery_method(
     """
     cart = env["sale.order"]._find_open_cart(partner.id, uuid)
     if not cart:
-        return HTTPException(status_code=404, detail="Not cart found")
+        raise HTTPException(status_code=404, detail="No cart found")
     if uuid and cart.uuid != uuid:
-        return HTTPException(status_code=404, detail="Not cart found")
+        raise HTTPException(status_code=404, detail="No cart found")
     carrier_id = env["delivery.carrier"].search(
         [("id", "=", rqst.method_id), ("available_in_website", "=", True)]
     )
     if not carrier_id:
-        return HTTPException(status_code=404, detail="Not delivery method found")
+        raise HTTPException(status_code=404, detail="Not delivery method found")
     if not cart._is_delivery_method_available(rqst.method_id):
         raise UserError(_("This delivery method is not available for your order"))
 
