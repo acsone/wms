@@ -1,5 +1,5 @@
 <odoo>
-  <record id="paperformat_labels_medoc_A4_4x2" model="report.paperformat">
+  <record id="paperformat_labels_A4_4x2" model="report.paperformat">
     <field name="name">Labels A4 4x2</field>
     <field name="format">A4</field>
     <field name="orientation">Portrait</field>
@@ -11,11 +11,11 @@
     <field name="header_spacing">0</field>
     <field
       name="report_ids"
-      eval="[(4, ref('stock_location_report.action_report_location_barcode_medoc_4x2'))]"
+      eval="[(4, ref('alc_report_stock_location.action_report_location_barcode_4x2'))]"
     />
     <field name="dpi">96</field>
   </record>
-  <record id="paperformat_labels_medoc_A4_8x2" model="report.paperformat">
+  <record id="paperformat_labels_A4_8x2" model="report.paperformat">
     <field name="name">Labels A4 8x2</field>
     <field name="format">A4</field>
     <field name="orientation">Portrait</field>
@@ -28,7 +28,7 @@
     <field name="dpi">96</field>
     <field
       name="report_ids"
-      eval="[(4, ref('stock_location_report.action_report_location_barcode_medoc_8x2'))]"
+      eval="[(4, ref('alc_report_stock_location.action_report_location_barcode_8x2'))]"
     />
   </record>
 </odoo>
