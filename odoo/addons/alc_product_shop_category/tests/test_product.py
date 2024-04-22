@@ -1,6 +1,7 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
 
@@ -10,6 +11,7 @@ class TestProduct(TransactionCase):
         super().setUpClass()
         cls.cat_web = cls.env.ref("alc_product_shop_category.master")
         cls.model_cat = cls.env["product.category"]
+        cls.product = cls.env["product.template"].create({"name": "Product"})
 
     def test_flow(self):
         vals_cat_1 = {"name": "1", "parent_id": self.cat_web.id}
@@ -35,3 +37,12 @@ class TestProduct(TransactionCase):
         cat_2.parent_id = self.cat_web
         self.assertTrue(cat_2.is_web)
         self.assertTrue(cat_2_child.is_web)
+
+    def test_constrains(self):
+        with self.assertRaisesRegex(ValidationError, "A web category is required"):
+            self.product.web_published = True
+        self.product.categ_ids = self.cat_web
+        self.product.web_published = True
+        with self.assertRaisesRegex(ValidationError, "A web category is required"):
+            self.product.categ_ids = False
+            self.product.web_published = True

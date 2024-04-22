@@ -17,6 +17,9 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
         cls.product = cls.env["product.product"].create(
             {"name": "test product", "tracking": "lot", "type": "product"}
         )
+        if "is_web" in cls.env["product.category"]._fields:
+            cls.category = cls.env.ref("alc_product_shop_category.master")
+            cls.product.categ_ids = cls.category
 
     def test_00(self):
         product = ProductProduct.from_product_product(self.product)

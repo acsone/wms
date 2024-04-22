@@ -11,6 +11,7 @@
     "depends": [
         "product_multi_category",
         "sale",  # because of the view menu
+        "alc_product_web_publish",
     ],
     "application": False,
     "data": ["data/product_category.xml", "views/product_category_views.xml"],
