@@ -32,7 +32,11 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
 
     @api.depends("product_id", "order_id.partner_id", "price_subtotal")
     def _compute_exception_ids(self):
-        self.detect_exceptions()
+        __all_exception_ids, rules_to_remove, rules_to_add = self._get_exceptions()
+        for rule_id, records in rules_to_remove.items():
+            records.exception_ids = [(3, rule_id)]
+        for rule_id, records in rules_to_add.items():
+            records.exception_ids = [(4, rule_id)]
 
     @api.depends("exception_ids")
     def _compute_warning_text(self):
