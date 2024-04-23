@@ -12,5 +12,8 @@ class TestAlcDocumentsPrices(TestAlcDocuments, TestProductFlattenedData):
     @mute_logger("odoo.addons.queue_job.utils")
     def setUpClass(cls):
         super().setUpClass()
-        cls.env["product.product"].search([]).write({"web_published": True})
+        cat_web = cls.env.ref("alc_product_shop_category.master")
+        all_products = cls.env["product.product"].search([])
+        all_products.categ_ids = cat_web
+        all_products.web_published = True
         cls.env["alc.product.flattened.data"].refresh_view()

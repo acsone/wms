@@ -257,3 +257,6 @@ class ProductCharacteristicsCommonFeatures(TransactionCase):
             }
         )
         cls.po.button_confirm()
+        if "is_web" in cls.env["product.category"]._fields:
+            cls.category = cls.env.ref("alc_product_shop_category.master")
+            cls.env["product.template"].search([]).categ_ids |= cls.category
