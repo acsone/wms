@@ -14,6 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_product_shop_category
+#. odoo-python
+#: code:addons/alc_product_shop_category/models/product_template.py:0
+#, python-format
+msgid "A web category is required to publish a product on the website."
+msgstr ""
+
+#. module: alc_product_shop_category
 #: model:product.category,name:alc_product_shop_category.master
 msgid "Alcyon Catalog"
 msgstr ""
