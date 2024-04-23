@@ -36,7 +36,7 @@ class ReceptionPharmacyLine(models.Model):
         required=True,
     )
     reception_move_id = fields.Many2one[StockMove](
-        string="Reception Move", readonly=True
+        string="Reception Move", readonly=True, index=True
     )
     partner_shipping_id = fields.Many2one[ResPartner](
         string="Delivery Address",
