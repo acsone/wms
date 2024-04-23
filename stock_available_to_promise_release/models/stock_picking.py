@@ -77,6 +77,7 @@ class StockPicking(models.Model):
         "move_ids.state",
     )
     def _compute_release_ready(self):
+        self.move_ids.invalidate_recordset(["ordered_available_to_promise_qty"])
         for picking in self:
             moves = picking.move_ids.filtered(lambda move: move._is_release_needed())
             release_ready = False
