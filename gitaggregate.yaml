@@ -45,6 +45,7 @@
     - oca refs/pull/834/head # [16.0][IMP] stock_available_to_promise_release: Unrelease when merging moves
     - oca refs/pull/864/head # [IMP] stock_available_to_promise_release: set move to need release after pick cancel
     - oca refs/pull/890/head # [FIX] stock_available_to_promise_release: Don't post message if no picking on unrelease
+    - oca refs/pull/894/head # [FIX] stock_available_to_promise_release: Improves perfs
     #- origin 16.0-port-stock_available_to_promise_release
   target: origin 16.0-alc_stock_available_to_promise_release
 
