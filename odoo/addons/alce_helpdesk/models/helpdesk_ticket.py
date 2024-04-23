@@ -40,7 +40,7 @@ class HelpdeskTicket(Ticket):
     )
     helpdesk_ticket_reason_id = fields.Many2one[HelpdeskTicketReason](string="Reason")
     stock_picking_id = fields.Many2one[Picking](string="Stock picking")
-    stock_move_id = fields.Many2one[MoveStock](string="Stock move")
+    stock_move_id = fields.Many2one[MoveStock](string="Stock move", index=True)
     lots = fields.Many2one[Lot](
         related="stock_move_id.move_line_ids.lot_id", readonly=True
     )
