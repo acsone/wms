@@ -11,6 +11,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_older_stock_production_lot",
+        "alc_stock_available_product_expiry",
         "shopinvader_search_engine_product_stock",
     ],
     "data": [],
