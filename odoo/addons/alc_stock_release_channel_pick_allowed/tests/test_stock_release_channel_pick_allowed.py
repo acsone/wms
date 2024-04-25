@@ -51,10 +51,12 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         """
         The picking type of the started picking is not set to be managed individually.
 
-        -> test that the channel disallow pick after picking started
+        -> test that the channel disallow pick after all picking started
         """
         self.assertTrue(self.channel.pick_allowed)
         self.picking.action_start()
+        self.assertTrue(self.channel.pick_allowed)
+        self.picking2.action_start()
         self.assertFalse(self.channel.pick_allowed)
 
     def test_01(self):
@@ -68,7 +70,7 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         picking_type.release_channel_can_allow_pick = True
         self.assertTrue(self.channel.pick_allowed)
         self.assertTrue(self.channel._get_picking_type_pick_allowed(picking_type.id))
-        self.picking.action_start()
+        self.pickings.action_start()
         self.assertTrue(self.channel.pick_allowed)
         self.assertFalse(self.channel._get_picking_type_pick_allowed(picking_type.id))
 
