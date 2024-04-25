@@ -80,4 +80,9 @@
     name="set_param"
     eval="('alc_stock_scheduler_filter.apply_filter_on_orderpoint_scheduler', True)"
   />
+  <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('alc_stock_available_product_expiry.excludes_expired_lot_from_qty_available', True)"
+  />
 </odoo>

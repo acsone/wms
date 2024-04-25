@@ -26,6 +26,7 @@ class TestProductSchema(StockCommonCase):
         cls.location_physical = cls.env.ref(
             "alc_stock_location_data.stock_location_vlb"
         )
+        cls.location_physical.location_id = cls.warehouse_1.lot_stock_id
         cls.location = cls.env["stock.location"].create(
             {
                 "name": "Test physical",
@@ -35,6 +36,10 @@ class TestProductSchema(StockCommonCase):
         )
         cls.binding = cls.product._add_to_index(cls.index)
         cls.product._compute_binding_ids()
+        cls.env["ir.config_parameter"].set_param(
+            "alc_stock_available_product_expiry.excludes_expired_lot_from_qty_available",
+            True,
+        )
 
     def _create_lot_at_date(self, date):
         lot = self.env["stock.lot"].create(
@@ -54,6 +59,7 @@ class TestProductSchema(StockCommonCase):
                 "lot_id": lot.id,
             }
         ).action_apply_inventory()
+        return lot
 
     def assertBestBeforeDate(self, date):
         product = ProductProduct.from_product_product(self.product)
@@ -80,10 +86,20 @@ class TestProductSchema(StockCommonCase):
         self.binding.recompute_json()
         best_before_date = datetime.now() + relativedelta(days=30)
         self._create_lot_at_date(best_before_date)
+        self.product.invalidate_recordset(["stock_data"])
         self.assertEqual(self.binding.state, "to_recompute")
         self.binding.recompute_json()
+        self.assertDictEqual(self.binding.data.get("stock"), {"global": {"qty": 10}})
         self.assertEqual(self.binding.state, "to_export")
         # If we launch the synchronization again, the binding should not be
         # updated
         self.product.synchronize_all_binding_stock_level()
         self.assertEqual(self.binding.state, "to_export")
+
+    def test_exclude_expired(self):
+        best_before_date = datetime.now() - relativedelta(days=30)
+        lot = self._create_lot_at_date(best_before_date)
+        self.product.invalidate_recordset(["stock_data"])
+        self.assertNotEqual(self.product.older_lot_id, lot)
+        self.assertFalse(self.product.best_before_date)
+        self.assertDictEqual(self.product.stock_data, {"global": {"qty": 0}})
