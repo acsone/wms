@@ -21,12 +21,12 @@
         "alc_report_base",
         "alc_accounting_data",
         "alc_company_term_condition",
-        "account_invoice_sent",
         "alc_report_intrastat_infos",
     ],
     "data": [
         "views/account_payment_mode_views.xml",
         "views/report_invoice.xml",
+        "views/res_partner.xml",
     ],
     "demo": [],
     "installable": True,
