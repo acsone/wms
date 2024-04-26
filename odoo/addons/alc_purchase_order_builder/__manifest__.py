@@ -27,6 +27,7 @@
         "purchase",
         "stock_account",
         "stock_available",
+        "stock_lot_is_archived",
         "stock_storage_type_putaway_abc",
         "alc_product_storage_temperature",
         "web",

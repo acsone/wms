@@ -90,3 +90,32 @@ class TestPurchaseOrderBuilder(BaseCommon):
 
         self.assertEqual(11.0, self.product.orderpoint_ids.product_min_qty)
         self.assertEqual(21.0, self.product.orderpoint_ids.product_max_qty)
+
+    def test_lots(self):
+        """
+        Check that the get_lots() function is retrieving lots.
+
+        in good order and not archived ones.
+        """
+        self.lot_a = self.env["stock.lot"].create(
+            {
+                "product_id": self.product.id,
+                "name": "A",
+                "expiration_date": "2024-02-14",
+            }
+        )
+        self.lot_b = self.env["stock.lot"].create(
+            {
+                "product_id": self.product.id,
+                "name": "B",
+                "expiration_date": "2024-03-15",
+            }
+        )
+        lots = self.product.get_lots()
+
+        self.assertEqual([self.lot_a.id, self.lot_b.id], lots.ids)
+
+        self.lot_b.is_archived = True
+        lots = self.product.get_lots()
+
+        self.assertEqual([self.lot_a.id], lots.ids)
