@@ -31,7 +31,7 @@ class ProductProduct(product.Product):
             .get_param(
                 "alc_stock_available_product_expiry.excludes_expired_lot_from_qty_available"
             )
-        )
+        ) and not self.env.context.get("disable_excludes_expired_lots", False)
 
     def _get_domain_quant_lots(self):
         max_expiration_date = fields.Datetime.now()
@@ -68,3 +68,15 @@ class ProductProduct(product.Product):
                 ]
             )
         return quants_lot_domain
+
+    def _get_domain_location_excluded_from_immediately_usable_qty(self):
+        # glue method for stock_available_immediately_exclude_location
+        return super(
+            ProductProduct, self.with_context(disable_excludes_expired_lots=True)
+        )._get_domain_location_excluded_from_immediately_usable_qty()
+
+    def _get_domain_location_for_locations(self):
+        # glue method for stock_available_location_get_domain
+        return super(
+            ProductProduct, self.with_context(disable_excludes_expired_lots=True)
+        )._get_domain_location_for_locations()
