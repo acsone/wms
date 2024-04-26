@@ -9,7 +9,11 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://www.acsone.eu",
-    "depends": ["stock"],
+    "depends": [
+        "stock",
+        "stock_available_immediately_exclude_location",  # to avoid a glue module
+        "stock_available_location_get_domain",  # to avoid a glue module
+    ],
     "data": [
         "views/res_config_settings.xml",
     ],
