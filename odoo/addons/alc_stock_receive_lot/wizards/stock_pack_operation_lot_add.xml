@@ -7,6 +7,7 @@
       <form>
         <header>
           <field name="picking_is_completed" invisible="1" />
+          <field name="product_id" invisible="1" />
           <button
             name="button_nextlot"
             type="object"
