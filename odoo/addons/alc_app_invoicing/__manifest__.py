@@ -24,6 +24,7 @@
         "account_tax_one_vat_sale",
         "account_invoice_tax_required",
         "account_invoice_split_refund",
+        "purchase_invoicing_no_zero_line",
         # OCA/reporting-engine
         "report_xml",
         # OCA/community-data-files
