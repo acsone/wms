@@ -29,6 +29,15 @@ class TestPurchaseOrderBuilder(BaseCommon):
                         {
                             "partner_id": cls.supplier.id,
                             "price": 10.0,
+                            "discount": 10.0,
+                            "date_start": "2023-01-01",
+                            "date_end": "2023-01-05",
+                        }
+                    ),
+                    Command.create(
+                        {
+                            "partner_id": cls.supplier.id,
+                            "price": 10.0,
                         }
                     ),
                     Command.create(
@@ -36,15 +45,6 @@ class TestPurchaseOrderBuilder(BaseCommon):
                             "partner_id": cls.supplier.id,
                             "price": 10.0,
                             "discount": 5.0,
-                        }
-                    ),
-                    Command.create(
-                        {
-                            "partner_id": cls.supplier.id,
-                            "price": 10.0,
-                            "discount": 10.0,
-                            "date_start": "2023-01-01",
-                            "date_end": "2023-01-05",
                         }
                     ),
                 ],

@@ -211,11 +211,12 @@ class ProductProduct(ProductBase):
         sellers_with_discount = sellers.filtered(
             lambda s: s.discount or s.ratio_promotional_product
         )
-        sellers_with_discount.sorted(
-            lambda seller: (seller.is_null_date_start, seller.date_start)
+        # As python sorted will return first False values, we pass as first
+        # parameter the inverse of 'is_null_date_start'.
+        sorted_sellers = sellers_with_discount.sorted(
+            lambda seller: (not seller.is_null_date_start, seller.date_start)
         )
-
-        return list(sellers_with_discount)
+        return list(sorted_sellers)
 
     def get_graph_values(self):
         """
