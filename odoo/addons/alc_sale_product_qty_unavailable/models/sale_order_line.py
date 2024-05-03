@@ -109,7 +109,7 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
     def _compute_product_qty_unavailable(self):
         for line in self:
             # Don't recompute the quantity if sale has changed state from 'draft' one
-            if line.state != "draft":
+            if line.state and line.state != "draft":
                 continue
             if (
                 not line.product_id
