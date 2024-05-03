@@ -22,8 +22,7 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
         digits="Product Unit of Measure",
         compute="_compute_product_qty_unavailable",
         store=True,
-        readonly=True,
-        copy=False,
+        precompute=True,
     )
 
     @api.model
@@ -109,12 +108,15 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
     )
     def _compute_product_qty_unavailable(self):
         for line in self:
+            # Don't recompute the quantity if sale has changed state from 'draft' one
+            if line.state != "draft":
+                continue
             if (
                 not line.product_id
                 or not line.product_uom_qty
                 or not line.order_id.date_order
             ):
-                line.product_qty_unavailable = None
+                line.product_qty_unavailable = 0.0
                 continue
             line.product_qty_unavailable = line.get_product_qty_unavailable(
                 # context change to get the corrections of immediately
