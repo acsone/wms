@@ -6,7 +6,6 @@ import pytz
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
-from odoo.osv import expression
 from odoo.tools import float_compare, float_round
 
 from odoo.addons.product.models.product_product import ProductProduct as ProductBase
@@ -197,14 +196,13 @@ class ProductProduct(ProductBase):
             )
 
     def get_lots(self):
+        """Retrieve the existing lots (not archived) for a given product."""
         self.ensure_one()
-        quant_domain, _move_in_domain, _move_out_domain = self.env[
-            "product.product"
-        ]._get_domain_locations()
-        quant_domain = expression.AND(
-            [quant_domain, [("product_id", "=", self.id), ("quantity", ">", 0.0)]]
+        lots = self.env["stock.lot"].search(
+            [("product_id", "=", self.id), ("is_archived", "=", False)],
+            order="expiration_date",
         )
-        return self.env["stock.quant"].search(quant_domain).mapped("lot_id")
+        return lots
 
     def get_promotions(self):
         self.ensure_one()
@@ -213,11 +211,12 @@ class ProductProduct(ProductBase):
         sellers_with_discount = sellers.filtered(
             lambda s: s.discount or s.ratio_promotional_product
         )
-        sellers_with_discount.sorted(
-            lambda seller: (seller.is_null_date_start, seller.date_start)
+        # As python sorted will return first False values, we pass as first
+        # parameter the inverse of 'is_null_date_start'.
+        sorted_sellers = sellers_with_discount.sorted(
+            lambda seller: (not seller.is_null_date_start, seller.date_start)
         )
-
-        return list(sellers_with_discount)
+        return list(sorted_sellers)
 
     def get_graph_values(self):
         """
