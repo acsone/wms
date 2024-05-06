@@ -5,7 +5,7 @@
     "name": "Alc Invoicing App",
     "description": """
         Gather all Invoicing related modules for Alcyon""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
@@ -24,6 +24,7 @@
         "account_tax_one_vat_sale",
         "account_invoice_tax_required",
         "account_invoice_split_refund",
+        "purchase_invoicing_no_zero_line",
         # OCA/reporting-engine
         "report_xml",
         # OCA/community-data-files
