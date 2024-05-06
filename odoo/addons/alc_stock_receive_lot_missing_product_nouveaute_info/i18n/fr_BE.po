@@ -50,6 +50,11 @@ msgstr ""
 "d'un produit sans code barre pour procéder à la réception"
 
 #. module: alc_stock_receive_lot_missing_product_nouveaute_info
+#: model:ir.model.fields,help:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_pack_operation_lot_add__product_packaging_ids
+msgid "Gives the different ways to package the same product."
+msgstr ""
+
+#. module: alc_stock_receive_lot_missing_product_nouveaute_info
 #: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_move__has_missing_info
 #: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_move_line__has_missing_info
 #: model:ir.model.fields,field_description:alc_stock_receive_lot_missing_product_nouveaute_info.field_stock_picking__has_missing_info
