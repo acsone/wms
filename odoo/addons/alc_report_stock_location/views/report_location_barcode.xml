@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- MEDOC -->
+    <template id="alc_report_stock_location.report_location_barcode_medoc_8x2">
+        <t t-set="page_class" t-value="'stock_location_barcode_medoc_8x2'" />
+        <t t-set="symbology" t-value="'qrcode'" />
+        <t t-set="barcode_type" t-value="'medoc'" />
+        <t t-set="container_class" t-value="'container_medoc'" />
+        <t t-call="alc_report_stock_location.report_location_labels" />
+    </template>
+    <template id="alc_report_stock_location.report_location_barcode_medoc_4x2">
+        <t t-set="page_class" t-value="'stock_location_barcode_medoc_4x2'" />
+        <t t-set="symbology" t-value="'barcode'" />
+        <t t-set="barcode_type" t-value="'medoc'" />
+        <t t-set="container_class" t-value="'container_medoc'" />
+        <t t-call="alc_report_stock_location.report_location_labels" />
+    </template>
+    <!-- NORMAL ONES -->
+    <template id="alc_report_stock_location.report_location_barcode_8x2">
+        <t t-set="page_class" t-value="'stock_location_barcode_8x2'" />
+        <t t-set="symbology" t-value="'qrcode'" />
+        <t t-set="barcode_type" t-value="'normal'" />
+        <t t-set="container_class" t-value="'container'" />
+        <t t-call="alc_report_stock_location.report_location_labels" />
+    </template>
+    <template id="alc_report_stock_location.report_location_barcode_4x2">
+        <t t-set="page_class" t-value="'stock_location_barcode_4x2'" />
+        <t t-set="symbology" t-value="'barcode'" />
+        <t t-set="barcode_type" t-value="'normal'" />
+        <t t-set="container_class" t-value="'container'" />
+        <t t-call="alc_report_stock_location.report_location_labels" />
+    </template>
+
+    <template id="report_location_style">
+        <link
+      t-att-href="'/alc_report_stock_location/static/src/css/%s.css' % (page_class)"
+      rel="stylesheet"
+    />
+
+    </template>
+
+    <template id="report_location_labels">
+        <!-- Template designed for locations - We iterate on each location -->
+
+        <t t-call="web.basic_layout">
+            <t t-call="alc_report_stock_location.report_location_style" />
+            <div t-att-class="'page %s' % (page_class)">
+                <div
+          t-foreach="docs"
+          t-as="o"
+          t-att-class="'%s container_%s %s' % (container_class, o.height, o.location_kind)"
+        >
+
+                    <t t-call="alc_report_stock_location.report_location_label" />
+
+                </div>
+            </div>
+        </t>
+
+    </template>
+
+    <template id="report_location_label">
+        <!-- Template designed for locations - Each case is set through variables -->
+
+        <!-- Set barcode content -->
+        <t t-if="o.barcode">
+            <t t-set="content" t-value="o.barcode" />
+        </t>
+        <t t-if="not o.barcode">
+            <t t-set="content" t-value="'L#%s' % o.name" />
+        </t>
+
+        <t t-if="symbology == 'barcode'">
+            <div
+        t-att-class="'barcode_name_medoc' if barcode_type == 'medoc' else 'barcode_name'"
+      >
+                <t t-if="barcode_type == 'medoc'">
+                    <t t-esc="o.name" />
+                </t>
+                <t t-else="">
+                    <t t-esc="o.name[0:2]" />
+                    <t t-esc="o.name[2:4]" />
+                    <t t-esc="o.name[4:]" />
+                </t>
+            </div>
+            <div
+        t-att-class="'barcode_medoc' if barcode_type == 'medoc' else 'barcode'"
+      >
+                <t
+          t-esc="content"
+          t-options="{'widget': 'barcode', 'symbology': 'Code128', 'width': 425, 'height': 73}"
+        />
+            </div>
+        </t>
+        <t t-elif="symbology == 'qrcode'">
+
+            <t
+        t-if="(barcode_type == 'medoc' and o.name[7] != 'A') or o.name[4] != 'A'"
+      >
+                <div
+          t-att-class="'barcode_right_medoc' if barcode_type == 'medoc' else 'barcode_right'"
+        >
+                    <t
+            t-esc="content"
+            t-options="{'widget': 'barcode', 'symbology': 'QR', 'width': 100, 'height': 100}"
+          />
+                </div>
+                <div
+          t-att-class="'barcode_name_left_medoc' if barcode_type == 'medoc' else 'barcode_name_left'"
+        >
+                    <t t-if="barcode_type == 'medoc'">
+                        <t t-esc="o.name" />
+                    </t>
+                    <t t-else="">
+                        <t t-esc="o.name[0:2]" />
+                        <t t-esc="o.name[2:4]" />
+                        <t t-esc="o.name[4:]" />
+                    </t>
+
+                </div>
+            </t>
+            <t
+        t-if="(barcode_type == 'medoc' and o.name[7] == 'A') or o.name[4] == 'A'"
+      >
+                <div
+          t-att-class="'barcode_name_right_medoc' if barcode_type == 'medoc' else 'barcode_name_right'"
+        >
+                    <t t-if="barcode_type == 'medoc'">
+                        <t t-esc="o.name" />
+                    </t>
+                    <t t-else="">
+                        <t t-esc="o.name[0:2]" />
+                        <t t-esc="o.name[2:4]" />
+                        <t t-esc="o.name[4:]" />
+                    </t>
+                </div>
+                <div
+          t-att-class="'barcode_left_medoc' if barcode_type == 'medoc' else 'barcode_left'"
+        >
+                    <t
+            t-esc="content"
+            t-options="{'widget': 'barcode', 'symbology': 'QR', 'width': 100, 'height': 100}"
+          />
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_location_barcode_medoc_4x2" model="ir.actions.report">
+        <field name="name">Location Barcode 4x2 Medicaments</field>
+        <field name="model">stock.location</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+      name="report_name"
+    >alc_report_stock_location.report_location_barcode_medoc_4x2</field>
+        <field
+      name="report_file"
+    >alc_report_stock_location.report_location_barcode_medoc_4x2</field>
+        <field name="binding_model_id" ref="stock.model_stock_location" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_report_location_barcode_medoc_8x2" model="ir.actions.report">
+        <field name="name">Location Barcode 8x2 Medicaments</field>
+        <field name="model">stock.location</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+      name="report_name"
+    >alc_report_stock_location.report_location_barcode_medoc_8x2</field>
+        <field
+      name="report_file"
+    >alc_report_stock_location.report_location_barcode_medoc_8x2</field>
+        <field name="binding_model_id" ref="stock.model_stock_location" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_report_location_barcode_4x2" model="ir.actions.report">
+        <field name="name">Location Barcode 4x2</field>
+        <field name="model">stock.location</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+      name="report_name"
+    >alc_report_stock_location.report_location_barcode_4x2</field>
+        <field
+      name="report_file"
+    >alc_report_stock_location.report_location_barcode_4x2</field>
+        <field name="binding_model_id" ref="stock.model_stock_location" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_report_location_barcode_8x2" model="ir.actions.report">
+        <field name="name">Location Barcode 8x2</field>
+        <field name="model">stock.location</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+      name="report_name"
+    >alc_report_stock_location.report_location_barcode_8x2</field>
+        <field
+      name="report_file"
+    >alc_report_stock_location.report_location_barcode_8x2</field>
+        <field name="binding_model_id" ref="stock.model_stock_location" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
