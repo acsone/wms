@@ -20,8 +20,9 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
     product_qty_unavailable = fields.Float(
         string="Quantity unavailable",
         digits="Product Unit of Measure",
-        readonly=True,
-        copy=False,
+        compute="_compute_product_qty_unavailable",
+        store=True,
+        precompute=True,
     )
 
     @api.model
@@ -102,21 +103,20 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
             return max(product_uom_qty - immediately_usable_qty, 0)
         return None
 
-    @api.onchange(
-        "product_id",
-        "product_uom_qty",
-        "route_id",
-        "order_id",
-        "date_order",
+    @api.depends(
+        "product_id", "product_uom_qty", "route_id", "order_id", "date_order", "state"
     )
-    def onchange_for_product_qty_unavailable(self):
+    def _compute_product_qty_unavailable(self):
         for line in self:
+            # Don't recompute the quantity if sale has changed state from 'draft' one
+            if line.state and line.state != "draft":
+                continue
             if (
                 not line.product_id
                 or not line.product_uom_qty
                 or not line.order_id.date_order
             ):
-                line.product_qty_unavailable = None
+                line.product_qty_unavailable = 0.0
                 continue
             line.product_qty_unavailable = line.get_product_qty_unavailable(
                 # context change to get the corrections of immediately
@@ -127,34 +127,10 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
                 None,
             )
 
-    def _init_product_qty_unavailable(self, vals):
-        """
-        This method is used as a kind of trick to avoid undesirable recompute of.
-
-        the product_qty_unavailable
-        """
-        # don't trigger product_qty_unavalable computation if the value is provided.
-        if vals.get("product_uom_qty") and "product_qty_unavailable" not in vals:
-            # Because product_qty_unavailable is readonly and not computed, we need
-            # to apply the onchange on create / save to save the correct values.
-            self.onchange_for_product_qty_unavailable()
-        return self
-
-    @api.model_create_multi
-    def create(self, vals_list):
-        res = super().create(vals_list)
-        for record, vals in zip(res, vals_list, strict=False):
-            record._init_product_qty_unavailable(vals)
-        return res
-
-    def write(self, values):
-        result = super().write(values)
-        self._init_product_qty_unavailable(values)
-        return result
-
     def _compute_current_product_qty_unavailable(self):
         for line in self:
             if not line.product_qty_remains_to_deliver:
+                line.current_product_qty_unavailable = 0.0
                 continue
             line.current_product_qty_unavailable = min(
                 self.get_product_qty_unavailable(

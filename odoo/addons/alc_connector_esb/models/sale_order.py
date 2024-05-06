@@ -93,22 +93,19 @@ class SaleOrder(sale_order.SaleOrder):
                 line, ["product_id"]
             )
             line.update(updated_line_data)
-            line_rec = self.env["sale.order.line"].create(line)
 
-            # Check if the line contains an exception.
-            # In this case, change the qty to 0
-            if line_rec.main_exception_id:
+            # Don't create immediately the record as we want to evaluate if
+            # an exception is not present.
+            # This will avoid to modify the ordered value after creation and
+            # wrong values in computed methods.
+            line_rec = self.env["sale.order.line"].new(line)
+
+            if line_rec._ws_manage_newpharma_exceptions(partner_ref):
                 is_sale_in_exception = True
-                initial_exception = line_rec.main_exception_id.description
-                # FIXME: add boolean on res_partner to filter web service users
-                vals = {
-                    "ignore_exception": True,
-                    "initial_exception": initial_exception,
-                }
-                if partner_ref in self.env["res.partner"].newpharma_refs:
-                    vals["product_uom_qty"] = 0
-                    # NewPharma
-                line_rec.write(vals)
+
+            line_rec = self.env["sale.order.line"].create(
+                line_rec._convert_to_write(line_rec._cache)
+            )
 
         # If there is at least one line in exception, we need to set
         # the flag "ignore_exception" to True on the sale.order.

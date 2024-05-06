@@ -311,3 +311,17 @@ class TestSaleOrderLineQtyUnavailable(TransactionCase):
         self.assertEqual(sale_copy.order_line[0].product_qty_unavailable, 10)
         sale_copy = self.sale_1.copy({})
         self.assertEqual(sale_copy.order_line[0].product_qty_unavailable, 10)
+
+    def test_change_product_quantity(self):
+        """
+        Check the product_qty_unavailable is == 10.
+
+        Confirm the sale order
+        Force the stock -> 5
+        Check the product_qty_unavailable is still 10
+        """
+        self.assertEqual(self.sale_1.order_line[0].product_qty_unavailable, 10)
+        self.sale_1.action_confirm()
+        self._define_product_qty(self.p1.product_variant_ids[0], 5)
+        self.assertEqual(self.sale_1.order_line[0].product_qty_unavailable, 10)
+        self.assertEqual(self.sale_1.order_line[0].current_product_qty_unavailable, 5.0)
