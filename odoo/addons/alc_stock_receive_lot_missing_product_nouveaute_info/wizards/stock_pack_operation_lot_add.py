@@ -48,8 +48,8 @@ class StockPackOperationLotAdd(StockPackOperationLotAddBase):
     product_is_new = fields.Boolean(related="product_id.is_new")
     product_packaging_ids = fields.One2many[ProductPackagingBase](
         string="Logistical Units",
-        compute="_compute_product_packaging_ids",
-        inverse="_inverse_product_packaging_ids",
+        related="product_id.packaging_ids",
+        readonly=False,
     )
     edit_dimensions_barcode_fields = fields.Boolean(
         default=False, compute="_compute_edit_dimensions_barcode_fields"
@@ -164,29 +164,6 @@ class StockPackOperationLotAdd(StockPackOperationLotAddBase):
                 product.sudo().write(
                     {"no_barcode_authorized": rec.no_barcode_authorized}
                 )
-
-    @api.depends(
-        "product_id", "edit_dimensions_barcode_fields", "product_id.packaging_ids"
-    )
-    def _compute_product_packaging_ids(self):
-        for rec in self:
-            product = rec.product_id
-            if rec.edit_dimensions_barcode_fields and product.packaging_ids:
-                rec.product_packaging_ids = product.packaging_ids.ids
-
-    def _inverse_product_packaging_ids(self):
-        for rec in self:
-            product = rec.product_id
-            if rec.edit_dimensions_barcode_fields:
-                self._check_packaging_creation(product, rec.product_packaging_ids)
-                product.sudo().write(
-                    {"packaging_ids": [(6, 0, rec.product_packaging_ids.ids)]}
-                )
-
-    def _check_packaging_creation(self, product, product_packagings):
-        for product_packaging in product_packagings:
-            if product_packaging not in product.packaging_ids:
-                product_packaging.product_id = product
 
     def _check_barcode_new_product(self):
         if (

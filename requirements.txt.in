@@ -70,6 +70,7 @@ odoo-addon-shopfloor-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/head#subdirectory=setup/shopfloor_mobile_packing
 
 # product-attribute
+odoo-addon-product-packaging-level @ git+https://github.com/OCA/product-attribute.git@refs/pull/1595/head#subdirectory=setup/product_packaging_level
 # https://github.com/OCA/product-attribute/pull/1216 - [MIG][16.0] product_packaging_type_pallet => product_packaging_level_pallet
 odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-packaging-level-pallet-dro#subdirectory=setup/product_packaging_level_pallet
 odoo-addon-stock-production-lot-expired-date @ git+https://github.com/OCA/product-attribute.git@refs/pull/1488/head#subdirectory=setup/stock_production_lot_expired_date
