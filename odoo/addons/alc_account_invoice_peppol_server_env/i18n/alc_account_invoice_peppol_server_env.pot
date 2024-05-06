@@ -1,0 +1,24 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_account_invoice_peppol_server_env
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_account_invoice_peppol_server_env
+#: model:ir.model,name:alc_account_invoice_peppol_server_env.model_peppol_server
+msgid "Peppol Server"
+msgstr ""
+
+#. module: alc_account_invoice_peppol_server_env
+#: model:ir.model.constraint,message:alc_account_invoice_peppol_server_env.constraint_peppol_server_name_uniq
+msgid "Peppol server name must be unique."
+msgstr ""

@@ -199,6 +199,12 @@ msgid "Amount Untaxed With Contribution"
 msgstr ""
 
 #. module: alc_report_invoice
+#: model:ir.model.fields,field_description:alc_report_invoice.field_res_partner__invoice_amount_copy
+#: model:ir.model.fields,field_description:alc_report_invoice.field_res_users__invoice_amount_copy
+msgid "Amount of invoice copies to generate"
+msgstr ""
+
+#. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__apb_ids
 msgid "Apb"
 msgstr ""
@@ -234,6 +240,11 @@ msgid "Canceled Refund"
 msgstr ""
 
 #. module: alc_report_invoice
+#: model:ir.model,name:alc_report_invoice.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_report_invoice
 #: model:ir.model.fields,field_description:alc_report_invoice.field_account_move_line__contribution_ids
 msgid "Contribution"
 msgstr ""
@@ -256,6 +267,14 @@ msgstr ""
 #. module: alc_report_invoice
 #: model_terms:ir.ui.view,arch_db:alc_report_invoice.report_invoice_document_alcyon
 msgid "ING:"
+msgstr ""
+
+#. module: alc_report_invoice
+#: model:ir.model.fields,help:alc_report_invoice.field_res_partner__invoice_amount_copy
+#: model:ir.model.fields,help:alc_report_invoice.field_res_users__invoice_amount_copy
+msgid ""
+"If amount = 1, then 2 invoices will be generated in the pdf (original + "
+"copy)"
 msgstr ""
 
 #. module: alc_report_invoice
