@@ -20,8 +20,8 @@ class PeppolServer(models.Model):
         _gls_env_fields = [
             "url",
             "url_feedback",
-            "user",
-            "password",
+            "account_user",
+            "account_password",
         ]
         res = super(PeppolServer, self)._server_env_fields
         res.update({k: {} for k in _gls_env_fields})
