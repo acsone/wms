@@ -177,8 +177,6 @@ odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@16.0-alc-f
 # https://github.com/tiangolo/fastapi/pull/5452
 fastapi @ git+https://github.com/tiangolo/fastapi@refs/pull/5452/head
 
-checklog-odoo @ git+https://github.com/acsone/checklog-odoo@master#subdirectory=checklog-odoo
-
 openupgradelib @ git+https://github.com/acsone/openupgradelib.git@16.0-alc_master
 
 # OCA/account-closing
