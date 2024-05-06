@@ -4,7 +4,7 @@
 {
     "name": "Alc App Account",
     "description": """Gather all account related modules for Alcyon""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
@@ -19,6 +19,8 @@
         "account_invoice_line_default_account",
         "account_invoice_check_total",
         "account_invoice_supplier_ref_unique",
+        "account_invoice_transmit",
+        "account_invoice_transmit_peppol",
         "account_move_line_product_category",
         "account_move_sent_usability",
         "account_reversal",
