@@ -23,7 +23,6 @@ omit =
     *_parser.py
     # NOT INSTALLABLE ADDONS
     odoo/addons/account_payment_order_background/*
-    odoo/addons/alc_account_invoice_peppol_server_env/*
     odoo/addons/alc_country/*
     odoo/addons/alc_db_cleaner/*
     odoo/addons/alc_delivery_rounds_geooptimize/*

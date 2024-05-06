@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo.addons.account_invoice_export_ubl.models.peppol_server import (
+    PeppolServer as PeppolServerBase,
+)
 
 
-class PeppolServer(models.Model):
-
-    _name = "peppol.server"
+class PeppolServer(PeppolServerBase):
 
     _inherit = ["peppol.server", "server.env.mixin"]
 
@@ -23,6 +22,6 @@ class PeppolServer(models.Model):
             "account_user",
             "account_password",
         ]
-        res = super(PeppolServer, self)._server_env_fields
+        res = super()._server_env_fields
         res.update({k: {} for k in _gls_env_fields})
         return res
