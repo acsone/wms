@@ -22,3 +22,8 @@ msgstr ""
 #: model:ir.model.constraint,message:alc_account_invoice_peppol_server_env.constraint_peppol_server_name_uniq
 msgid "Peppol server name must be unique."
 msgstr ""
+
+#. module: alc_account_invoice_peppol_server_env
+#: model:ir.model.fields,field_description:alc_account_invoice_peppol_server_env.field_peppol_server__server_env_defaults
+msgid "Server Env Defaults"
+msgstr ""
