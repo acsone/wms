@@ -24,7 +24,6 @@ pyyaml==6.0
 rich==13.4.2
 shellingham==1.5.0.post1
 textual==0.29.0
-tomli==2.0.1
 typer==0.9.0
 uc-micro-py==1.0.2
 vcrpy==5.0.0
