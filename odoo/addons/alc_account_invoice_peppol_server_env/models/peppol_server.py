@@ -1,14 +1,14 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-
 from odoo.addons.account_invoice_export_ubl.models.peppol_server import (
     PeppolServer as PeppolServerBase,
 )
+from odoo.addons.server_environment.models.server_env_mixin import ServerEnvMixin
 
 
-class PeppolServer(PeppolServerBase):
+class PeppolServer(PeppolServerBase, ServerEnvMixin):
 
-    _inherit = ["peppol.server", "server.env.mixin"]
+    _name = "peppol.server"
 
     _sql_constraints = [  # we cannot really put the constraint on the name...
         ("name_uniq", "unique(name)", "Peppol server name must be unique."),
