@@ -718,7 +718,7 @@ class StockMove(models.Model):
                 )
                 != 0
             )
-            to_unrelease.unrelease()
+            to_unrelease.unrelease(safe_unrelease=True)
         return super().write(vals)
 
     def _merge_moves(self, merge_into=False):
