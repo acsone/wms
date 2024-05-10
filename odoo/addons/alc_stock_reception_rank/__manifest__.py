@@ -4,7 +4,7 @@
 
 {
     "name": "Stock Reception Priority",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "author": "BCIM, ACSONE SA/NV",
     "maintainer": "ACSONE SA/NV",
     "category": "Stock Management",

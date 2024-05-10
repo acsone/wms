@@ -16,6 +16,7 @@ class StockPicking(Picking):
         "Rank",
         digits=(12, 0),
         states={"done": [("readonly", True)], "cancel": [("readonly", True)]},
+        copy=False,
     )
 
     def init(self):  # pylint: disable=missing-return
