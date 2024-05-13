@@ -52,6 +52,7 @@
         "alc_shopfloor_cluster_picking_transfer_async",
         "alc_shopfloor_cluster_picking_by_partners",
         "alc_shopfloor_location_content_transfer_sorter",
+        "alc_shopfloor_cluster_picking_cancel_on_unassign",
     ],
     "data": [],
     "demo": [],

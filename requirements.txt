@@ -256,18 +256,18 @@ odoo-addon-shipment-advice==16.0.1.4.1.3
 odoo-addon-shipment-advice-planner==16.0.1.1.0
 odoo-addon-shipment-advice-planner-toursolver==16.0.1.0.0.7
 odoo-addon-shipment-advice-planner-toursolver-queue-job==16.0.1.0.0.5
-odoo-addon-shopfloor==16.0.1.0.0.24
-odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@a03d987a7b53642923d3800807c1227700fdc6db#subdirectory=setup/shopfloor_base
+odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@a035dc8428a2423ffac24154fca9e5f666125c78#subdirectory=setup/shopfloor
+odoo-addon-shopfloor-base==16.0.1.0.2
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wms.git@3cdc58cf28547fc6ee3969b514c7e0c5b116f3bb#subdirectory=setup/shopfloor_batch_automatic_creation
 odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@c0a4ecc63777241c2cb966c82c58520524bd5633#subdirectory=setup/shopfloor_full_location_reservation
-odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@b93fd57395ca1d5515a55e209384046adeb48a4f#subdirectory=setup/shopfloor_mobile
+odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@a035dc8428a2423ffac24154fca9e5f666125c78#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-mobile-base==16.0.1.0.0.3
 odoo-addon-shopfloor-mobile-base-auth-api-key @ git+https://github.com/acsone/wms.git@1de9f61eb2ad8757577b38bcf30c006fc0453ffc#subdirectory=setup/shopfloor_mobile_base_auth_api_key
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@846f970da36d16487f26a0f57691a5686d325a4a#subdirectory=setup/shopfloor_mobile_packing
 odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@9c8edba6894d38f1d90eb7ac7e447f20c4fc5a18#subdirectory=setup/shopfloor_packing
-odoo-addon-shopfloor-rest-log @ git+https://github.com/acsone/wms.git@dbe32e3decb51672ed0a5656ba4fed037bca7f4f#subdirectory=setup/shopfloor_rest_log
+odoo-addon-shopfloor-rest-log==16.0.1.0.0.2
 odoo-addon-shopfloor-workstation==16.0.1.0.0.1
-odoo-addon-shopfloor-workstation-mobile @ git+https://github.com/acsone/wms.git@ebe2544d4bd88b0b1d5d7c43f782902873d6fa2c#subdirectory=setup/shopfloor_workstation_mobile
+odoo-addon-shopfloor-workstation-mobile==16.0.1.0.0.3
 odoo-addon-shopinvader-address==16.0.1.1.0
 odoo-addon-shopinvader-anonymous-partner==16.0.1.0.1
 odoo-addon-shopinvader-api-address==16.0.1.2.1
