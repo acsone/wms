@@ -24,6 +24,12 @@ class TestZeroQuantity(TransactionCase):
                 "product_id": cls.product.id,
             }
         )
+        cls.product_2 = cls.env["product.product"].create(
+            {
+                "name": "Product 2",
+                "type": "product",
+            }
+        )
         cls.partner = cls.env["res.partner"].create(
             {
                 "name": "Partner 1",
@@ -117,5 +123,29 @@ class TestZeroQuantity(TransactionCase):
         )
         self.assertIn(
             f"The demand quantity should not be set to 0 or negative in the picking {self.picking.name} for product {self.product.name}",
+            log_catcher.output[0],
+        )
+
+    def test_negative_move_line_log(self):
+        # Enable the feature and check negative
+        self.env.company.restrict_move_line_quantity = True
+        self._create_quantity(self.product, 10.0)
+        self.picking.action_confirm()
+        self.picking.action_assign()
+        line_values = {
+            "product_id": self.product_2.id,
+            "reserved_uom_qty": -2.0,
+            "location_id": self.warehouse.lot_stock_id.id,
+            "location_dest_id": self.customers.id,
+            "product_uom_id": self.product_2.uom_id.id,
+        }
+        with self.assertLogs(level="ERROR") as log_catcher:
+            self.picking.move_line_ids = [Command.create(line_values)]
+
+        self.assertEqual(
+            len(log_catcher.output), 1, "Exactly one error should be logged"
+        )
+        self.assertIn(
+            f"A Stock Move Line is created with a negative quantity -2.0 for product {self.product_2.name} in Picking {self.picking.display_name}",
             log_catcher.output[0],
         )
