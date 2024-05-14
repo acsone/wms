@@ -53,6 +53,27 @@ class StockMoveLine(StockMoveLineBase):
                     % (self.picking_id.name, self.product_id.name, stack)
                 )
 
+    @api.model
+    def _log_alc_stock_move_line_restrict_quantity_create(self, vals) -> None:
+        """
+        This will log the call stack when stock move line is created.
+
+        with a negative value.
+        """
+        if "reserved_uom_qty" in vals and vals.get("reserved_uom_qty") < 0:
+            stack = traceback.format_stack()
+            picking = self.env["stock.picking"].browse(vals.get("picking_id"))
+            product = self.env["product.product"].browse(vals.get("product_id"))
+            message_template = "A Stock Move Line is created with a negative quantity %s for product %s in Picking %s\n\n%s"
+            # Log the error
+            _logger.error(
+                message_template,
+                vals.get("reserved_uom_qty"),
+                product.name,
+                picking.display_name,
+                stack,
+            )
+
     def _action_done(self):
         new_self = self.with_context(no_restriction_quantity_ids=self.ids)
         return super(StockMoveLine, new_self)._action_done()
@@ -76,3 +97,9 @@ class StockMoveLine(StockMoveLineBase):
         # without writing to reserved_uom_qty
         new_self = self.with_context(no_restriction_quantity_ids=self.ids)
         return super(StockMoveLine, new_self)._split_for_loss()
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            self._log_alc_stock_move_line_restrict_quantity_create(vals)
+        return super().create(vals_list)
