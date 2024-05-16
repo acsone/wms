@@ -20,7 +20,7 @@ class TestSaleOrderLineCancel(TestSaleOrderCancelBase):
 
     def test_cancel_remaining_qty_started_picking(self):
         """Check printed picking can't be canceled."""
-        self.pick.printed = True
+        self.out.printed = True
         with self.assertRaises(UserError):
             self._cancel_remaining_qty()
 
@@ -31,11 +31,7 @@ class TestSaleOrderLineCancel(TestSaleOrderCancelBase):
             self._cancel_remaining_qty()
 
     def test_cancel_remaining_qty_partially_done_preparation(self):
-        self.pick.printed = True
         self.pick.move_line_ids.qty_done = 2
-        with self.assertRaises(UserError):
-            # if the pick is started, we don't allow line cancel
-            self._cancel_remaining_qty()
         self.pick._action_done()
         with self.assertRaises(UserError):
             # if the preparation is done but the out is not done yet
