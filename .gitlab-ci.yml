@@ -205,7 +205,7 @@ deploy-uat-trigger:
 deploy-prod-trigger:
   extends: .deploy-trigger
   variables:
-    DEPLOY_BRANCH: deploy-test
+    DEPLOY_BRANCH: deploy-prod
     IMAGE_FLAVOR: /prod16
   environment:
     name: prod16
