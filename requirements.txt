@@ -256,12 +256,12 @@ odoo-addon-shipment-advice==16.0.1.4.1.3
 odoo-addon-shipment-advice-planner==16.0.1.1.0
 odoo-addon-shipment-advice-planner-toursolver==16.0.1.0.0.7
 odoo-addon-shipment-advice-planner-toursolver-queue-job==16.0.1.0.0.5
-odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@314994c834679f43df51cf3ba0b7d92784f34760#subdirectory=setup/shopfloor
-odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@563c608cfe779baeac49deca3827bb06c5e6de52#subdirectory=setup/shopfloor_base
+odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@4426c018446bd0a256519d7e041233f71a5054b8#subdirectory=setup/shopfloor
+odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@912047f945a08c4f1d923f22009e96874084e758#subdirectory=setup/shopfloor_base
 odoo-addon-shopfloor-batch-automatic-creation==16.0.1.0.0.3
-odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@8a706de5e426bed960f0a7214d3c5844954d5390#subdirectory=setup/shopfloor_full_location_reservation
-odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@314994c834679f43df51cf3ba0b7d92784f34760#subdirectory=setup/shopfloor_mobile
-odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@563c608cfe779baeac49deca3827bb06c5e6de52#subdirectory=setup/shopfloor_mobile_base
+odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@6982d5082f637221abf24d70c8c4a81219304045#subdirectory=setup/shopfloor_full_location_reservation
+odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@7b55516cfc0677cc5c319eca9d427ec5e27d8fe5#subdirectory=setup/shopfloor_mobile
+odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@912047f945a08c4f1d923f22009e96874084e758#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-mobile-base-auth-api-key==16.0.1.0.0.1
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@846f970da36d16487f26a0f57691a5686d325a4a#subdirectory=setup/shopfloor_mobile_packing
 odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@9c8edba6894d38f1d90eb7ac7e447f20c4fc5a18#subdirectory=setup/shopfloor_packing
