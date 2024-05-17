@@ -227,6 +227,15 @@ class ShopfloorMenu(models.Model):
         compute="_compute_allow_alternative_destination_package_is_possible"
     )
 
+    no_packing = fields.Boolean(
+        string="No packing",
+        default=False,
+        help="If set, the user will have to scan only the source location "
+        "and the destination location to process a line. The unload step will be skipped.",
+    )
+
+    no_packing_is_possible = fields.Boolean(compute="_compute_no_packing_is_possible")
+
     @api.onchange("unload_package_at_destination")
     def _onchange_unload_package_at_destination(self):
         # Uncheck pick_pack_same_time when unload_package_at_destination is set to True
@@ -243,6 +252,16 @@ class ShopfloorMenu(models.Model):
                 record.unload_package_at_destination = False
                 record.multiple_move_single_pack = False
 
+    @api.onchange("no_packing")
+    def _onchange_no_packing(self):
+        # no_packing is incompatible with pick_pack_same_time and unload_package_at_destination
+        # and multiple_move_single_pack
+        for record in self:
+            if record.no_packing:
+                record.pick_pack_same_time = False
+                record.unload_package_at_destination = False
+                record.multiple_move_single_pack = False
+
     @api.onchange("multiple_move_single_pack")
     def _onchange_multiple_move_single_pack(self):
         # multiple_move_single_pack is incompatible with pick_pack_same_time,
@@ -254,6 +273,7 @@ class ShopfloorMenu(models.Model):
         "unload_package_at_destination",
         "pick_pack_same_time",
         "multiple_move_single_pack",
+        "no_packing",
     )
     def _check_options(self):
         if self.pick_pack_same_time and self.unload_package_at_destination:
@@ -268,6 +288,18 @@ class ShopfloorMenu(models.Model):
                 _(
                     "'Pick and pack at the same time' is incompatible with "
                     "'Multiple moves same destination package'."
+                )
+            )
+        elif self.no_packing and (
+            self.pick_pack_same_time
+            or self.unload_package_at_destination
+            or self.multiple_move_single_pack
+        ):
+            raise exceptions.UserError(
+                _(
+                    "'No Packing' is incompatible with 'Pick and pack at the same "
+                    "time', 'Unload package at destination' and 'Multiple moves "
+                    "same destination package'."
                 )
             )
 
@@ -458,3 +490,8 @@ class ShopfloorMenu(models.Model):
             menu.allow_alternative_destination_package_is_possible = (
                 menu.scenario_id.has_option("allow_alternative_destination_package")
             )
+
+    @api.depends("scenario_id")
+    def _compute_no_packing_is_possible(self):
+        for menu in self:
+            menu.no_packing_is_possible = menu.scenario_id.has_option("no_packing")
