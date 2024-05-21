@@ -9,7 +9,7 @@
         <field name="model">product.product</field>
         <field name="priority">9999</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree default_order="name, default_code">
                 <field name="default_code" />
                 <field name="name" />
                 <field name="lst_price" />
