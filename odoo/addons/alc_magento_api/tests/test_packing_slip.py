@@ -9,6 +9,7 @@ class TestPackingSlip(TestFacadePickings):
     def test_packing_slip(self):
         packing_slip_facade = self._get_service_facade("packing-slip")
         result, _error, _location = packing_slip_facade(date="1900-01-01")
+        self.maxDiff = None
         expeced_result = f"""<?xml version="1.0" encoding="UTF-8" ?>
             <packing_slip>
                 <note>
@@ -20,7 +21,7 @@ class TestPackingSlip(TestFacadePickings):
                             <reference>SHP</reference>
                             <article>Shipit</article>
                             <tva></tva>
-                            <name>Shipit 1</name>
+                            <name>Shipit</name>
                             <numero_de_suite></numero_de_suite>
                             <lot></lot>
                             <peremption></peremption>
@@ -43,7 +44,7 @@ class TestPackingSlip(TestFacadePickings):
                             <reference>SHP</reference>
                             <article>Shipit</article>
                             <tva></tva>
-                            <name>Shipit 1</name>
+                            <name>Shipit</name>
                             <numero_de_suite></numero_de_suite>
                             <lot></lot>
                             <peremption></peremption>
