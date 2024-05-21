@@ -360,7 +360,7 @@ class FacadePackingSlip(Facade):
             (
                 "move_id",
                 [
-                    "name",
+                    "description_picking:name",
                     "suite_name:numero_de_suite",
                     ("prix_net_htva", self._get_price_from_move),
                     ("prix_brut_htva", self._get_price_from_move),
