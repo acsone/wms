@@ -130,3 +130,13 @@
     - oca refs/pull/422/head # Transactions handling refactoring
     - oca refs/pull/387/head # optionally authenticated partner
   target: origin 16.0-alc-fastapi
+
+./src/shopfloor:
+  remotes:
+    origin: git@github.com:acsone/wms.git
+    oca: git@github.com:oca/wms.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/899/head # shopfloor: Extended details service for products and locations
+    - oca refs/pull/902/head # shopfloor: Zone picking no packing
+  target: origin 16.0-alc-shopfloor

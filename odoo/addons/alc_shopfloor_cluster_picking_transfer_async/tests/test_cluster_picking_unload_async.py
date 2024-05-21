@@ -297,15 +297,17 @@ class TestClusterPickingUnloadAsync(ClusterPickingUnloadingCommonCase):
         self._set_dest_package_and_done(move_lines, self.bin1)
         move_lines.write({"location_dest_id": self.packing_a_location.id})
 
+        barcode = self.packing_b_location.barcode
         response = self.service.dispatch(
             "set_destination_all",
             params={
                 "picking_batch_id": self.batch.id,
-                "barcode": self.packing_b_location.barcode,
+                "barcode": barcode,
             },
         )
         location = move_lines[0].location_dest_id
         data = self._data_for_batch(self.batch, location)
+        data["confirmation"] = barcode
         self.assert_response(
             response,
             next_state="confirm_unload_all",
@@ -323,7 +325,7 @@ class TestClusterPickingUnloadAsync(ClusterPickingUnloadingCommonCase):
             params={
                 "picking_batch_id": self.batch.id,
                 "barcode": self.packing_b_location.barcode,
-                "confirmation": True,
+                "confirmation": self.packing_b_location.barcode,
             },
         )
         self.assertRecordValues(
