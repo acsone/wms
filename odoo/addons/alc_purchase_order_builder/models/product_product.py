@@ -214,7 +214,8 @@ class ProductProduct(ProductBase):
         # As python sorted will return first False values, we pass as first
         # parameter the inverse of 'is_null_date_start'.
         sorted_sellers = sellers_with_discount.sorted(
-            lambda seller: (not seller.is_null_date_start, seller.date_start)
+            lambda seller: (not seller.is_null_date_start, seller.date_start),
+            reverse=True,
         )
         return list(sorted_sellers)
 
