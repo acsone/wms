@@ -140,3 +140,14 @@
     - oca refs/pull/899/head # shopfloor: Extended details service for products and locations
     - oca refs/pull/902/head # shopfloor: Zone picking no packing
   target: origin 16.0-alc-shopfloor
+
+./src/stock_full_location_reservation:
+  remotes:
+    origin: git@github.com:acsone/wms.git
+    mt-software-de: git@github.com:mt-software-de/wms.git
+    oca: git@github.com:oca/wms.git
+  merges:
+    - oca 16.0
+    - mt-software-de refs/pull/5/head # [FIX] stock_full_location_reservation: Don't return unmerged moves
+    - mt-software-de refs/pull/6/head # [FIX] stock_full_location_reservation: Don't unlink moves if a cancel is called
+  target: origin 16.0-stock_full_location_reservation
