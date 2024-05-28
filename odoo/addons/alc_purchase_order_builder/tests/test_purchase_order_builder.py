@@ -1,6 +1,6 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo.fields import Command
+from odoo.fields import Command, Date
 from odoo.tests import Form
 
 from odoo.addons.base.tests.common import BaseCommon
@@ -74,10 +74,8 @@ class TestPurchaseOrderBuilder(BaseCommon):
         # Test we retrieve the promotion lines
         promotions = self.product.get_promotions()
         self.assertEqual(len(promotions), 2)
-        self.assertFalse(
-            promotions[0].date_start,
-        )
-        self.assertEqual(promotions[1].discount, 10.0)
+        self.assertEqual(Date.from_string("2023-01-01"), promotions[0].date_start)
+        self.assertEqual(promotions[1].discount, 5.0)
 
     def test_update_orderpoint(self):
         self._create_purchase()
