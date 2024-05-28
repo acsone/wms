@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        "alc_sale_order_line_cancel_check",
         "sale_order_line_cancel",
         "stock_available_to_promise_release",
     ],
