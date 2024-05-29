@@ -39,6 +39,7 @@
         "account_invoice_accrual",
         "l10n_be_iso20022_pain",
         "account_reconcile_restrict_partner_mismatch",
+        "report_async",
         # ALC
         "alc_account_security",
         "alc_account_tax_precision",
@@ -54,5 +55,8 @@
         "alc_account_invoice_supplier_ref_unique_mandatory",
         "alc_account_invoice_vendor_bill_autocomplete",
         "alc_account_invoice_email",
+    ],
+    "data": [
+        "data/report_async.xml",
     ],
 }
