@@ -85,4 +85,9 @@
     name="set_param"
     eval="('alc_stock_available_product_expiry.excludes_expired_lot_from_qty_available', True)"
   />
+  <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('stock.no_default_immediate_tranfer', True)"
+  />
 </odoo>
