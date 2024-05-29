@@ -8,10 +8,12 @@ from odoo.tools import config
 from odoo.addons.account.models.account_move import AccountMove as Move
 from odoo.addons.account.models.account_move_line import AccountMoveLine as MoveLine
 from odoo.addons.account.models.account_tax import AccountTax
-from odoo.addons.alc_report_base.models.report_async import ReportAsync
+from odoo.addons.alc_report_base.models.alc_report_print_async import (
+    AlcReportPrintAsync,
+)
 
 
-class AccountMove(Move, ReportAsync):
+class AccountMove(Move, AlcReportPrintAsync):
     _name = "account.move"
 
     amount_supplier_discount = fields.Monetary(compute="_compute_total_amounts")

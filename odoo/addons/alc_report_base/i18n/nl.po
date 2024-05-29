@@ -64,7 +64,7 @@ msgid "Sending fax for %(obj)s with id %(objid)s"
 msgstr ""
 
 #. module: alc_report_base
-#: model:ir.model,name:alc_report_base.model_report_async
+#: model:ir.model,name:alc_report_base.model_alc_report_print_async
 msgid "job queued report"
 msgstr ""
 
