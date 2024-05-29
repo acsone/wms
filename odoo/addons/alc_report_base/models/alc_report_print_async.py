@@ -6,8 +6,8 @@ from base64 import b64encode
 from odoo import _, models
 
 
-class ReportAsync(models.AbstractModel):
-    _name = "report.async"
+class AlcReportPrintAsync(models.AbstractModel):
+    _name = "alc.report.print.async"
     _description = "job queued report"
 
     def get_report_name(self):

@@ -7,7 +7,7 @@
     id="job_function_report_async_print_and_attach_report"
     model="queue.job.function"
   >
-        <field name="model_id" ref="alc_report_base.model_report_async" />
+        <field name="model_id" ref="alc_report_base.model_alc_report_print_async" />
         <field name="method">print_and_attach_report</field>
         <field name="channel_id" ref="alc_report_base.channel_root_background_report" />
       </record>

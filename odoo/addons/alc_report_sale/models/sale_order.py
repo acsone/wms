@@ -4,7 +4,9 @@ from odoo import _, api, fields
 from odoo.exceptions import UserError
 
 from odoo.addons.account.models.account_tax import AccountTax
-from odoo.addons.alc_report_base.models.report_async import ReportAsync
+from odoo.addons.alc_report_base.models.alc_report_print_async import (
+    AlcReportPrintAsync,
+)
 from odoo.addons.alc_sale_consignment.models.sale_order import SaleOrder as Order
 from odoo.addons.alc_sale_consignment.models.sale_order_line import (
     SaleOrderLine as OrderLine,
@@ -49,7 +51,7 @@ class SaleOrderLine(OrderLine):
         return res
 
 
-class SaleOrder(Order, ReportAsync):
+class SaleOrder(Order, AlcReportPrintAsync):
     _name = "sale.order"
 
     def has_human_drug(self):
