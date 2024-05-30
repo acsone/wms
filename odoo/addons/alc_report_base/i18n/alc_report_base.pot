@@ -49,7 +49,7 @@ msgstr ""
 
 #. module: alc_report_base
 #. odoo-python
-#: code:addons/alc_report_base/models/report_async.py:0
+#: code:addons/alc_report_base/models/alc_report_print_async.py:0
 #, python-format
 msgid "Sending fax for %(obj)s with id %(objid)s"
 msgstr ""
