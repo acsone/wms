@@ -1,11 +1,68 @@
 # Copyright 2023 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo.addons.queue_job.tests.common import trap_jobs
 from odoo.addons.stock_full_location_reservation.tests.common import (
     TestStockFullLocationReservationCommon,
 )
 
 
 class TestFullLocationReservation(TestStockFullLocationReservationCommon):
+    def test_cron(self):
+        """
+        - Create a picking and confirm it
+        - Try to do the full reservation - no picking added
+        - Create quantities on source location
+        - Do the full reservation again - no picking added
+        - Assign the picking (move lines will be created)
+        - Do the full reservation
+        - Full reservation moves are created
+        - Unreserve picking
+        - Full reservation moves should be canceled
+        - Launch the cron
+        - Full reservation moves should have been deleted
+        """
+        picking = self._create_picking(
+            self.location_rack,
+            self.customer_location,
+            self.picking_type,
+            [[self.productA, 5]],
+        )
+
+        picking.action_confirm()
+        self._check_move_line_len(picking, 1)
+
+        picking.do_full_location_reservation()
+        self._check_move_line_len(picking, 1)
+
+        self._create_quants(
+            [
+                (self.productA, self.location_rack_child, 10.0),
+                (self.productB, self.location_rack_child, 10.0),
+            ]
+        )
+
+        original_moves = picking.move_ids
+
+        picking.do_full_location_reservation()
+        self._check_move_line_len(picking, 1)
+
+        picking.action_assign()
+
+        picking.do_full_location_reservation()
+
+        full_moves = picking.move_ids - original_moves
+
+        self._check_move_line_len(picking, 3)
+        self._check_move_line_len(picking, 2, self._filter_func)
+
+        picking.do_unreserve()
+
+        for move in full_moves:
+            self.assertEqual("cancel", move.state)
+
+        self.env["stock.move"].cron_delete_canceled_full_reservation()
+        self.assertFalse(full_moves.exists())
+
     def test_full_location_reservation(self):
         picking = self._create_picking(
             self.location_rack,
@@ -27,6 +84,8 @@ class TestFullLocationReservation(TestStockFullLocationReservationCommon):
             ]
         )
 
+        original_moves = picking.move_ids
+
         picking.do_full_location_reservation()
         self._check_move_line_len(picking, 1)
 
@@ -43,13 +102,70 @@ class TestFullLocationReservation(TestStockFullLocationReservationCommon):
         self._check_move_line_len(picking, 3)
         self._check_move_line_len(picking, 2, self._filter_func)
 
+        full_moves = picking.move_ids - original_moves
+
         moves = picking.move_ids.filtered(self._filter_func)
         self.assertEqual(moves.location_id, self.location_rack_child)
 
-        picking.undo_full_location_reservation()
+        with trap_jobs() as trap:
+            picking.undo_full_location_reservation()
+            trap.assert_enqueued_job(
+                full_moves.unlink,
+                args=(),
+            )
+            trap.perform_enqueued_jobs()
 
         self._check_move_line_len(picking, 1)
         self._check_move_line_len(picking, 0, self._filter_func)
+
+    def test_full_location_reservation_and_cancel(self):
+        picking = self._create_picking(
+            self.location_rack,
+            self.customer_location,
+            self.picking_type,
+            [[self.productA, 5]],
+        )
+
+        picking.action_confirm()
+        self._check_move_line_len(picking, 1)
+
+        picking.do_full_location_reservation()
+        self._check_move_line_len(picking, 1)
+
+        self._create_quants(
+            [
+                (self.productA, self.location_rack_child, 10.0),
+                (self.productB, self.location_rack_child, 10.0),
+            ]
+        )
+
+        original_moves = picking.move_ids
+
+        picking.do_full_location_reservation()
+        self._check_move_line_len(picking, 1)
+
+        picking.action_assign()
+
+        picking.do_full_location_reservation()
+
+        full_moves = picking.move_ids - original_moves
+
+        self._check_move_line_len(picking, 3)
+        self._check_move_line_len(picking, 2, self._filter_func)
+
+        # repeat test to check undo in do
+        picking.do_full_location_reservation()
+
+        self._check_move_line_len(picking, 3)
+        self._check_move_line_len(picking, 2, self._filter_func)
+
+        moves = picking.move_ids.filtered(self._filter_func)
+        self.assertEqual(moves.location_id, self.location_rack_child)
+
+        picking.move_ids._action_cancel()
+
+        for move in full_moves:
+            self.assertEqual("cancel", move.state)
 
     def test_multiple_pickings(self):
         picking = self._create_picking(
