@@ -46,6 +46,7 @@
         "stock_full_location_reservation",
         "stock_location_orderpoint",
         "stock_location_orderpoint_average_daily_sale",
+        "stock_location_orderpoint_change_priority",
         "stock_location_orderpoint_cleanup",
         "stock_location_orderpoint_dynamic_routing_merge",
         "stock_move_common_dest",

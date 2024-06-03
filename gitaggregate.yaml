@@ -111,16 +111,6 @@
     - oca refs/pull/898/head # [16.0][FIX + IMP] pdf helper: Fix multi-attachments + Add pdf_embed_xml
   target: origin 16.0-edi-base-ubl
 
-./src/stock_location_orderpoint:
-  remotes:
-    origin: git@github.com:acsone/stock-logistics-orderpoint.git
-    oca: git@github.com:oca/stock-logistics-orderpoint.git
-  merges:
-    - oca 16.0
-    - oca refs/pull/9/head # [IMP] stock_location_orderpoint: Improves performances
-    - oca refs/pull/11/head # [FIX] stock_location_orderpoint: Use correct method in job function
-  target: origin 16.0-alc_stock_location_orderpoint
-
 ./src/odoo-fastapi:
   remotes:
     origin: git@github.com:acsone/rest-framework.git
