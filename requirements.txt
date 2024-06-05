@@ -378,7 +378,7 @@ odoo-addon-stock-release-channel-geoengine==16.0.1.0.0.4
 odoo-addon-stock-release-channel-plan==16.0.1.3.0
 odoo-addon-stock-release-channel-plan-process-end-time==16.0.1.1.0.2
 odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@e36b056cfe0da889cb1777976f82fa3a14af9ea4#subdirectory=setup/stock_release_channel_process_end_time
-odoo-addon-stock-release-channel-propagate-channel-picking==16.0.1.0.0.7
+odoo-addon-stock-release-channel-propagate-channel-picking @ git+https://github.com/acsone/wms.git@74638be5af663659c55412ee4ac32df1da8ce926#subdirectory=setup/stock_release_channel_propagate_channel_picking
 odoo-addon-stock-release-channel-shipment-advice==16.0.1.0.0.18
 odoo-addon-stock-release-channel-shipment-advice-process-end-time==16.0.1.0.0.3
 odoo-addon-stock-release-channel-shipment-advice-toursolver==16.0.1.0.0.4
