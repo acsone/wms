@@ -260,7 +260,7 @@ odoo-addon-shipment-advice-planner-toursolver-queue-job==16.0.1.0.0.5
 odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@4426c018446bd0a256519d7e041233f71a5054b8#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@912047f945a08c4f1d923f22009e96874084e758#subdirectory=setup/shopfloor_base
 odoo-addon-shopfloor-batch-automatic-creation==16.0.1.0.0.3
-odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@6982d5082f637221abf24d70c8c4a81219304045#subdirectory=setup/shopfloor_full_location_reservation
+odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@b4cffd415e5fe67bddd6d62d32ba0e4cbeb8a1f2#subdirectory=setup/shopfloor_full_location_reservation
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@7b55516cfc0677cc5c319eca9d427ec5e27d8fe5#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@912047f945a08c4f1d923f22009e96874084e758#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-mobile-base-auth-api-key==16.0.1.0.0.1
