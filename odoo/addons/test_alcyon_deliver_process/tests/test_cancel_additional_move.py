@@ -51,8 +51,8 @@ class TestCancelAdditionalMove(TestDeliverProcessBase):
             self.channel.action_delivering()
         message = (
             "There are some preparations that have not been completed.If "
-            "You choose to proceed, these preparations need to be unreleased.\nPlease."
-            "Handle them manually before proceeding with the delivery.\n\n{ships.name}\n{pick.backorder_ids.name}."
+            "you choose to proceed, these preparations need to be unreleased.\nPlease "
+            f"handle them manually before proceeding with the delivery.\n\n{ships.name}\n{pick.backorder_ids.name}"
         )
         self.assertEqual(except_catch.exception.name, message)
 
