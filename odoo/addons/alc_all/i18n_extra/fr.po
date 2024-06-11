@@ -27,3 +27,68 @@ msgstr "Localisation géographique"
 #: model_terms:ir.ui.view,arch_db:purchase.view_purchase_order_search
 msgid "Purchase Representative"
 msgstr "Acheteur"
+
+#. module: sale_margin_delivered
+#: model:ir.model.fields,help:sale_margin_delivered.field_sale_order_line__purchase_price_delivery
+msgid ""
+"Average Unit Cost of delivered products.\n"
+"\n"
+"Formula: Value Delivered / Quantity Delivered"
+msgstr "Coût unitaire moyen des produits livrés"
+
+#. module: sale_margin_delivered
+#: model_terms:ir.ui.view,arch_db:sale_margin_delivered.view_order_form
+msgid "Cost Price dlvd."
+msgstr "Coût unitaire (livraison)"
+
+#. module: sale_margin_delivered
+#: model:ir.model.fields,field_description:sale_margin_delivered.field_sale_order_line__margin_delivered
+#: model:ir.model.fields,field_description:sale_margin_delivered.field_sale_report__margin_delivered
+msgid "Margin Delivered"
+msgstr "Marge (à la livraison)"
+
+#. module: sale_margin_delivered
+#: model:ir.model.fields,field_description:sale_margin_delivered.field_sale_order_line__margin_delivered_percent
+msgid "Margin Delivered Percent"
+msgstr "Marge % (à la livraison)"
+
+#. module: sale_margin_delivered
+#: model_terms:ir.ui.view,arch_db:sale_margin_delivered.view_order_form
+msgid "Margin dlvd."
+msgstr "Marge (livraison)"
+
+#. module: sale_margin_delivered
+#: model_terms:ir.ui.view,arch_db:sale_margin_delivered.view_order_form
+msgid "Margin dlvd. (%)"
+msgstr "Marge % (livraison)"
+
+#. module: sale_margin_delivered
+#: model:ir.model.fields,help:sale_margin_delivered.field_sale_order_line__margin_delivered_percent
+msgid ""
+"Margin percent between the Unit Price with discounts and Delivered Unit Cost.\n"
+"\n"
+"Formula: (Margin Dlvd. / Unit Price with Discounts) * 100.0"
+msgstr ""
+
+#. module: sale_margin_delivered
+#: model:ir.model.fields,field_description:sale_margin_delivered.field_sale_order_line__purchase_price_delivery
+msgid "Purchase Price Delivery"
+msgstr "Prix d'achat à la livraison"
+
+#. module: sale_margin_delivered
+#: model:ir.model,name:sale_margin_delivered.model_sale_report
+msgid "Sales Analysis Report"
+msgstr "Rapport d'analyse des ventes"
+
+#. module: sale_margin_delivered
+#: model:ir.model,name:sale_margin_delivered.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de bons de commande"
+
+#. module: sale_margin_delivered
+#: model:ir.model.fields,help:sale_margin_delivered.field_sale_order_line__margin_delivered
+msgid ""
+"Total Margin of all delivered products.\n"
+"\n"
+"Formula: Delivered Quantities * (Unit Price with Discounts - Average Unit Cost of Delivered Products)"
+msgstr ""

@@ -199,3 +199,6 @@ odoo-addon-account-invoice-accrual @ git+https://github.com/OCA/account-closing.
 # OCA/l10n-belgium
 odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/186/head#subdirectory=setup/l10n_be_bpost_address_validation
 odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/204/head#subdirectory=setup/l10n_be_iso20022_pain
+
+# OCA/margin-Analysis
+odoo-addon-sale-margin-delivered-security @ git+https://github.com/OCA/margin-Analysis.git@refs/pull/208/head#subdirectory=setup/sale_margin_delivered_security

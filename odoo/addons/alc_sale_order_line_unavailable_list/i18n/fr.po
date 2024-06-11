@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-11 06:56+0000\n"
+"PO-Revision-Date: 2024-06-11 06:56+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,10 +18,10 @@ msgstr ""
 #. module: alc_sale_order_line_unavailable_list
 #: model_terms:ir.ui.view,arch_db:alc_sale_order_line_unavailable_list.sale_order_line_search_view
 msgid "Remains to deliver"
-msgstr ""
+msgstr "Restant à livrer"
 
 #. module: alc_sale_order_line_unavailable_list
 #: model:ir.actions.act_window,name:alc_sale_order_line_unavailable_list.action_sale_order_line_unavailable_list
 #: model:ir.ui.menu,name:alc_sale_order_line_unavailable_list.menu_sale_lines_unavailable_list
 msgid "Sale Order Lines unavailable"
-msgstr ""
+msgstr "Lignes de ventes non disponibles"

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="sale_order_line_tree_view">
+        <field name="name">sale.order.line.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_order_line_tree" />
+        <field name="arch" type="xml">
+            <field name="price_subtotal" position="before">
+                <field
+          name="purchase_price_delivery"
+          string="Cost Price dlvd."
+          optional="hide"
+        />
+                <field
+          name="margin_delivered_percent"
+          string="Margin dlvd. (%)"
+          optional="hide"
+        />
+                <field name="margin_delivered" string="Margin dlvd." optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <!--
+        Add new filters to search view
+    -->
+    <record model="ir.ui.view" id="sale_order_line_search_view">
+        <field name="name">sale.order.line.search</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_sales_order_line_filter" />
+        <field name="arch" type="xml">
+            <filter name="my_sales_order_lines" position="after">
+                <filter
+          string="Negative margin"
+          name="negative_margin_delivered_percent"
+          domain="[('margin_delivered_percent', '&lt;', 0)]"
+        />
+                <filter
+          string="Negative margin without promotion"
+          name="negative_margin_delivered_percent_without_promotion"
+          domain="[('margin_delivered_percent', '&lt;', 0), ('discount2', '=', 0)]"
+        />
+            </filter>
+        </field>
+    </record>
+
+    <record
+    id="action_sale_order_line_negative_margine_list"
+    model="ir.actions.act_window"
+  >
+        <field name="name">Sale Order Lines with negative margin</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="view_id" ref="sale.view_order_line_tree" />
+        <field name="search_view_id" ref="sale.view_sales_order_line_filter" />
+        <field name="domain">[('state', 'not in', ['draft', 'cancel'])]</field>
+        <field
+      name="context"
+    >{'search_default_negative_margin_delivered_percent_without_promotion': 1}</field>
+      </record>
+      <menuitem
+    id="menu_sale_lines_negative_margin_list"
+    action="action_sale_order_line_negative_margine_list"
+    parent="sale.menu_sale_report"
+    sequence="200"
+  />
+</odoo>
