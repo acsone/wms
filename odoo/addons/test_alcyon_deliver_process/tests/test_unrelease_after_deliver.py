@@ -36,6 +36,7 @@ class TestUnreleaseAfterDeliver(TestDeliverProcessBase):
         self.assertTrue(pick.backorder_ids)
         self._get_picking_ship(sale)
         # deliver the release channel
+        pick.backorder_ids.with_user(self.stock_admin).action_cancel()
         self.channel.action_delivering()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
@@ -44,10 +45,11 @@ class TestUnreleaseAfterDeliver(TestDeliverProcessBase):
         )
         self.assertTrue(backorder)
         self.assertFalse(backorder.release_channel_id)
-        self.assertTrue(backorder.need_release)
+        self.assertFalse(backorder.need_release)
         self.channel.action_sleep()
         self.channel.action_wake_up()
-        self.assertEqual(backorder.release_channel_id, self.channel)
+        # Backorder is canceled, so release channel is not set on it
+        self.assertFalse(backorder.release_channel_id)
 
     def test_01(self):
         """
@@ -177,3 +179,50 @@ class TestUnreleaseAfterDeliver(TestDeliverProcessBase):
         self.channel.action_delivering()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
+
+    def test_backorder_released(self):
+        """Test backorder release after."""
+        sale = self._confirm_sale_order(products=[self.main_product], qty=2)
+        # open the channel, pick must be generated
+        self.channel.action_unlock()
+        pick = self._get_picking_pick(sale)
+        ship = self._get_picking_ship(sale)
+        self.channel.action_lock()
+        # do the pick
+        pick._put_in_pack(pick.move_line_ids)
+        for move_line in pick.move_ids.move_line_ids:
+            move_line.qty_done -= 1
+        pick._action_done()
+        self.assertTrue(pick.backorder_ids)
+        self._get_picking_ship(sale)
+        # deliver the release channel
+        with self.assertRaises(UserError) as except_catch:
+            self.channel.action_delivering()
+        message = (
+            "There are some preparations that have not been completed.If "
+            "you choose to proceed, these preparations need to be unreleased.\nPlease "
+            f"handle them manually before proceeding with the delivery.\n\n{ship.name}\n{pick.backorder_ids.name}"
+        )
+        self.assertEqual(except_catch.exception.name, message)
+        backorder_pick = pick.backorder_ids
+        # Backorder has the release channel assigned
+        self.assertEqual(self.channel, backorder_pick.release_channel_id)
+        # Don't pick the backorder as unreleases is blocked if backorders have channel assigned
+        self.env.user.groups_id |= self.env.ref(
+            "alc_stock_picking_cancel_permission.group_picking_cancel"
+        )
+
+        backorder_pick.action_cancel()
+        self.channel.action_delivering()
+        self.assertFalse(self.channel.delivering_error)
+        self.assertEqual(self.channel.state, "delivered")
+        backorder_ship = self._get_picking_ship(sale).filtered(
+            lambda s: s.state not in ("done", "cancel")
+        )
+        self.assertTrue(backorder_ship)
+        self.assertFalse(backorder_ship.release_channel_id)
+        self.assertFalse(backorder_ship.need_release)
+        self.channel.action_sleep()
+        self.channel.action_wake_up()
+        # Backorder is canceled, so release channel is not set on it
+        self.assertFalse(backorder_ship.release_channel_id)
