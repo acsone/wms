@@ -1,6 +1,6 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
+from odoo.exceptions import UserError
 
 from odoo.addons.queue_job.tests.common import trap_jobs
 
@@ -35,9 +35,22 @@ class TestCancelBackorder(TestDeliverProcessBase):
         self.assertTrue(pick.backorder_ids)
         ship = self._get_picking_ship(sale).filtered(lambda p: p.state == "assigned")
         # deliver the release channel
-        self.channel.action_delivering()
+        # This should raise an error as we should pick the backorder to ensure
+        # customer delivery
+        with self.assertRaises(UserError) as except_catch:
+            self.channel.action_delivering()
+        message = (
+            "There are some preparations that have not been completed.If "
+            "you choose to proceed, these preparations need to be unreleased.\nPlease "
+            f"handle them manually before proceeding with the delivery.\n\n{ship.name}\n{pick.backorder_ids.name}"
+        )
+        self.assertEqual(except_catch.exception.name, message)
         self.assertFalse(self.channel.delivering_error)
-        self.assertEqual(self.channel.state, "delivered")
+        self.assertEqual(self.channel.state, "locked")
+
+        pick.backorder_ids.with_user(self.stock_admin).action_cancel()
+        self.channel.action_delivering()
+
         self.assertEqual(ship.state, "done")
         self.assertFalse(ship.backorder_ids)
 
@@ -59,7 +72,20 @@ class TestCancelBackorder(TestDeliverProcessBase):
         pick._action_done()
         self.assertTrue(pick.backorder_ids)
         ship = self._get_picking_ship(sale).filtered(lambda p: p.state == "assigned")
+
+        with self.assertRaises(UserError) as except_catch:
+            self.channel.action_delivering()
+        message = (
+            "There are some preparations that have not been completed.If "
+            "you choose to proceed, these preparations need to be unreleased.\nPlease "
+            f"handle them manually before proceeding with the delivery.\n\n{ship.name}\n{pick.backorder_ids.name}"
+        )
+        self.assertEqual(except_catch.exception.name, message)
+        self.assertFalse(self.channel.delivering_error)
+        self.assertEqual(self.channel.state, "locked")
+
         # deliver the release channel
+        pick.backorder_ids.with_user(self.stock_admin).action_cancel()
         self.channel.action_delivering()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
