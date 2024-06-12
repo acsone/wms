@@ -8,7 +8,7 @@ env = env  # noqa
 # first rename materialized view if exists
 env.cr.execute(
     """
-    DROP MATERIALIZED VIEW IF EXISTS sale_line_product_cost_history;
+    DROP MATERIALIZED VIEW IF EXISTS sale_line_product_cost_history CASCADE;
 """
 )
 
