@@ -21,7 +21,7 @@ class StockWarehouse(Warehouse):
             return super().write(vals)
         if any(val in PROTECTED_FIELDS for val in vals):
             raise UserError(_("You cannot modify the Warehouse configuration!"))
-        return False
+        return super().write(vals)
 
     def _get_input_output_locations(self, reception_steps, delivery_steps):
         # As current configuration is quite touchy to change using Odoo's warehouse

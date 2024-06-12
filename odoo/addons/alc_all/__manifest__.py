@@ -32,6 +32,7 @@
         "alc_app_putaway",
         "alc_app_receipt",
         "alc_app_return",
+        "alc_app_rma",
         "alc_app_sale",
         "alc_app_eshop_b2b",
         "alc_app_account",
