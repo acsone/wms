@@ -331,7 +331,7 @@ odoo-addon-stock-location-orderpoint-change-priority @ git+https://github.com/ac
 odoo-addon-stock-location-orderpoint-cleanup @ git+https://github.com/acsone/stock-logistics-orderpoint.git@a8da2600dc64d692e17254521b141416b3395579#subdirectory=setup/stock_location_orderpoint_cleanup
 odoo-addon-stock-location-orderpoint-dynamic-routing-merge @ git+https://github.com/acsone/stock-logistics-orderpoint.git@58ad680c2affdbaeccc872b8450638cd0b86bab5#subdirectory=setup/stock_location_orderpoint_dynamic_routing_merge
 odoo-addon-stock-location-position==16.0.1.0.0.2
-odoo-addon-stock-location-product-restriction @ git+https://github.com/acsone/stock-logistics-warehouse.git@ae96436a067247ee934991e2620b3cb176f2ce74#subdirectory=setup/stock_location_product_restriction
+odoo-addon-stock-location-product-restriction @ git+https://github.com/acsone/stock-logistics-warehouse.git@beddaeaf420639325435e99b8bae3598897f6b6a#subdirectory=setup/stock_location_product_restriction
 odoo-addon-stock-location-zone==16.0.1.0.1
 odoo-addon-stock-lot-is-archived==16.0.1.0.0.3
 odoo-addon-stock-move-auto-assign==16.0.1.1.0
