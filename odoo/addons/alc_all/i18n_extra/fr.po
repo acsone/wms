@@ -92,3 +92,9 @@ msgid ""
 "\n"
 "Formula: Delivered Quantities * (Unit Price with Discounts - Average Unit Cost of Delivered Products)"
 msgstr ""
+
+#. module: partner_invoicing_mode_cash_on_delivery
+#: model:account.payment.mode,name:partner_invoicing_mode_cash_on_delivery.payment_mode_cash_on_delivery
+#: model:ir.model.fields,field_description:partner_invoicing_mode_cash_on_delivery.field_account_payment_mode__cash_on_delivery
+msgid "Cash On Delivery"
+msgstr "Contre Remboursement"

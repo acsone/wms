@@ -11,7 +11,7 @@
     "website": "https://acsone.eu",
     "depends": [
         "alc_stock_release_channel_deliver",
-        "alc_cash_on_delivery",
+        "partner_invoicing_mode_cash_on_delivery",
     ],
     "data": ["views/stock_release_channel.xml"],
     "demo": [],
