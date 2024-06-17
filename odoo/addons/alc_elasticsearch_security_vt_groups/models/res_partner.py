@@ -17,14 +17,12 @@ class ResPartner(Partner):
         "date_end_contract_alcyonnaire",
     )
     def _compute_elasticsearch_role(self):
-        partner_vt_roles = {
-            p: ",".join(p.veterinary_group_ids.mapped(lambda v: v._get_role_name()))
-            for p in self.with_context(lang=False)
-        }
         res = super()._compute_elasticsearch_role()
         for partner in self:
             roles = partner.elasticsearch_role
-            vt_roles = partner_vt_roles[partner]
+            vt_roles = ",".join(
+                partner.veterinary_group_ids.mapped(lambda v: v._get_role_name())
+            )
             if vt_roles:
                 roles = ",".join((partner.elasticsearch_role, vt_roles))
             role_a = "non_alcyonnaire"

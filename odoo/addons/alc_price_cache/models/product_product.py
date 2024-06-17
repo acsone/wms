@@ -150,7 +150,8 @@ class ProductProduct(ProductProductBase):
             price_cache = record.price_cache or {}
             for pricelist_role_name in pricelist_role_names:
                 price_cache.pop(pricelist_role_name, None)
-                price_cache.pop(f"discount_{pricelist_role_name}", None)
+                discount_role_name = pricelist_role_name.replace("p", "d")
+                price_cache.pop(discount_role_name, None)
             record.price_cache = price_cache
 
     def _delay_update_price_cache(self, **kwargs):

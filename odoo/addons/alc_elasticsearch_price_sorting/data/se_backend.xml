@@ -14,9 +14,18 @@
       double discount = 0;
       double supplier_discount = 0;
       if (params.pricelist_gross != null) {
-        String gross_price_field = 'current_'+ params.pricelist_gross;
-        if(doc.containsKey(gross_price_field) && doc[gross_price_field].size()==1) {
-          gross_price = doc[gross_price_field].value;
+        List list_gross_price_fields = new ArrayList();
+        if (params.pricelist_gross.contains(',')) {
+          for (String price_gross: params.pricelist_gross.split(',')) {
+            list_gross_price_fields.add('current_'+ price_gross);
+          }
+        } else {
+           list_gross_price_fields.add('current_'+ params.pricelist_gross);
+        }
+        for(String gross_price_field: list_gross_price_fields){
+          if(doc.containsKey(gross_price_field) && doc[gross_price_field].size()==1) {
+            gross_price = doc[gross_price_field].value;
+          }
         }
       }
       boolean discount_exclusive = false;
@@ -131,7 +140,7 @@
             for (String i : ctx.price.keySet()) {
               Map price_data = get_price_data(ctx.price[i], today);
               if (price_data != null){
-                String price_field = i.startsWith('discount') ? 'discount': 'price';
+                String price_field = i.startsWith('d') ? 'discount': 'price';
                 String current_value_field = 'current_' + i;
                 ctx[current_value_field] = price_data[price_field];
                 if (price_data.containsKey('min_quantity') && price_data['min_quantity'] > 1) {

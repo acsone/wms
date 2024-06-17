@@ -5,7 +5,7 @@
 {
     "name": "Alcyon Elasticsearch Security: VT Groups",
     "description": """Compute Alcyon-specific Veterinary Groups ElasticSearch roles.""",
-    "version": "16.0.1.0.1",
+    "version": "16.0.2.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",

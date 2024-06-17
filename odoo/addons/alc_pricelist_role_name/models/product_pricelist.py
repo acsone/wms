@@ -1,7 +1,6 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from slugify import slugify
 
 from odoo import _, api, fields
 
@@ -19,8 +18,6 @@ class ProductPricelist(Pricelist):
 
     @api.depends("name")
     def _compute_role_name(self):
-        names = {pl: pl.name for pl in self.with_context(lang=False)}
         for pl in self:
-            role_name = slugify("price_" + names[pl])
-            pl.role_name = role_name
-            pl.discount_role_name = f"discount_{role_name}"
+            pl.role_name = f"p{pl.id}"
+            pl.discount_role_name = f"d{pl.id}"
