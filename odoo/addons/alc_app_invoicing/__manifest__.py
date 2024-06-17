@@ -42,7 +42,6 @@
         "base_ubl_payment_mode_required",
         "l10n_be_account_einvoice_generate",
         # ALC
-        "alc_cash_on_delivery",
         "alc_account_invoice_cancel_permissions",
         "alc_sale_invoicing_on_transfer",
         "alc_invoices_audit",

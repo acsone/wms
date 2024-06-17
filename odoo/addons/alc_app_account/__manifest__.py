@@ -4,7 +4,7 @@
 {
     "name": "Alc App Account",
     "description": """Gather all account related modules for Alcyon""",
-    "version": "16.0.1.0.1",
+    "version": "16.0.1.0.2",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
@@ -33,6 +33,7 @@
         "partner_invoicing_mode",
         "partner_invoicing_mode_at_shipping",
         "partner_invoicing_mode_at_shipping_fourteen_days",
+        "partner_invoicing_mode_cash_on_delivery",
         "partner_invoicing_mode_fourteen_days",
         "partner_invoicing_mode_monthly",
         "partner_invoicing_mode_ten_days",
