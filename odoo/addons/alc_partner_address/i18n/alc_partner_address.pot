@@ -42,3 +42,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_partner_address.field_res_users__type_delivery
 msgid "Is Also Delivery"
 msgstr ""
+
+#. module: alc_partner_address
+#: model_terms:ir.ui.view,arch_db:alc_partner_address.view_partner_form
+msgid "Is also delivery"
+msgstr ""
