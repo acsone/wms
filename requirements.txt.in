@@ -37,7 +37,7 @@ odoo-addon-account-invoice-transmit @ git+https://github.com/OCA/account-invoici
 odoo-addon-account-invoice-triple-discount @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1664/head#subdirectory=setup/account_invoice_triple_discount
 
 # account-reconcile
-odoo-addon-account-payment-mode-auto-reconcile @ git+https://github.com/OCA/account-reconcile.git@refs/pull/537/head#subdirectory=setup/account_payment_mode_auto_reconcile
+odoo-addon-account-payment-mode-auto-reconcile @ git+https://github.com/acsone/account-reconcile.git@16.0-alc_account_payment_mode_auto_reconcile#subdirectory=setup/account_payment_mode_auto_reconcile
 odoo-addon-account-reconcile-restrict-partner-mismatch @ git+https://github.com/OCA/account-reconcile.git@refs/pull/596/head#subdirectory=setup/account_reconcile_restrict_partner_mismatch
 
 # bank-payment
