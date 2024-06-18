@@ -30,10 +30,5 @@ class ResPartner(Partner):
         "discount_pricelist_ids",
     )
     def _compute_elasticsearch_role(self):
-        # depends on property_product_pricelist.name, but this isn't stored
-        roles = {
-            p: ",".join(p._get_elasticearch_roles())
-            for p in self.with_context(lang=False)
-        }
         for partner in self:
-            partner.elasticsearch_role = roles[partner]
+            partner.elasticsearch_role = ",".join(partner._get_elasticearch_roles())

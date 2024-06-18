@@ -17,8 +17,7 @@ class VeterinaryGroup(Model):
         return "vt_group_id"
 
     def _get_role_name(self):
-        name = self.with_context(lang=False).name
-        return slugify(f"vtgroup_{name}_{self.id}")
+        return slugify(f"g{self.id}")
 
     def _get_role_body(self):
         body = """{

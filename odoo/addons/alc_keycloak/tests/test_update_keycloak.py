@@ -30,7 +30,7 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         expected_roles = {
             "shareholder",
             "guest",
-            "price-public-pricelist",
+            self.partner.property_product_pricelist.role_name,
             "non_alcyonnaire",
         }
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
@@ -50,7 +50,7 @@ class TestKeycloakUpdateFlow(TestKeycloak):
 
     def test_update_pricelist(self):
         pricelist = self.env["product.pricelist"].create({"name": "pridamis"})
-        expected_roles = {"misc", "guest", "price-pridamis", "non_alcyonnaire"}
+        expected_roles = {"misc", "guest", pricelist.role_name, "non_alcyonnaire"}
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
 
         with trap_jobs() as trap:
@@ -195,7 +195,12 @@ class TestKeycloakUpdateFlow(TestKeycloak):
             "can_order": False,
             "help_with_fee": True,
         }
-        expected_roles = {"shareholder", "guest", "price-pridamis", "non_alcyonnaire"}
+        expected_roles = {
+            "shareholder",
+            "guest",
+            pricelist.role_name,
+            "non_alcyonnaire",
+        }
         keycloak_user = self.env["keycloak.user"].create(self.vals_user)
 
         # when

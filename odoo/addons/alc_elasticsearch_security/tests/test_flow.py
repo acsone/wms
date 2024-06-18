@@ -29,9 +29,12 @@ class TestESRolesFlow(TestESRoles):
         # when
         partner.property_product_pricelist = self.pricelist
         # then
+        expected = set(partner.elasticsearch_role.split(","))
+        # remove potential role from alc_elasticsearch_security_vt_groups
+        expected.discard("non_alcyonnaire")
         self.assertSetEqual(
-            set(partner.elasticsearch_role.split(",")),
-            {"price-bons-prixs", "guest", "non_alcyonnaire"},
+            expected,
+            {self.pricelist.role_name, "guest"},
         )
 
     def test_unique_pricelist_role(self):
@@ -48,7 +51,7 @@ class TestESRolesFlow(TestESRoles):
         pricelist_role = self.backend.role_ids.filtered(
             lambda r: r.pricelist_id == self.pricelist
         )
-        self.assertEqual(pricelist_role.name, "price-bons-prixs")
+        self.assertEqual(pricelist_role.name, self.pricelist.role_name)
         self.assertDictEqual(
             json.loads(pricelist_role.body),
             {
@@ -57,11 +60,11 @@ class TestESRolesFlow(TestESRoles):
                         "index_patterns": ["alc_shopinvader_variant_*"],
                         "fls": [
                             "indicated_price",
-                            "price.price-bons-prixs.*",
-                            "price.discount_price-bons-prixs.*",
-                            "current_price-bons-prixs",
-                            "current_discount_price-bons-prixs",
-                            "current_discount_price-bons-prixs_exclusive",
+                            f"price.{self.pricelist.role_name}.*",
+                            f"price.{self.pricelist.discount_role_name}.*",
+                            f"current_{self.pricelist.role_name}",
+                            f"current_{self.pricelist.discount_role_name}",
+                            f"current_{self.pricelist.discount_role_name}_exclusive",
                         ],
                     }
                 ]

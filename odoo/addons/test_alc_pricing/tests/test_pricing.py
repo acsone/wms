@@ -154,4 +154,6 @@ class TestPricingFlow(TestPricing):
         line_1 = self._new_sale_line(self.so_1, self.product_3)
 
         self.assertEqual(line_1.price_unit, 5.2)
-        self.assertEqual(self.product_3.price_cache["price-plbase"][0]["price"], 5.2)
+        self.assertEqual(
+            self.product_3.price_cache[self.pricelist_base.role_name][0]["price"], 5.2
+        )

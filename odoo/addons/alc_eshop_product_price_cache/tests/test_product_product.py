@@ -5,6 +5,7 @@ from datetime import date, timedelta
 
 from odoo import Command
 from odoo.tests.common import TransactionCase
+from odoo.tools import mute_logger
 
 from odoo.addons.extendable.tests.common import ExtendableMixin
 from odoo.addons.shopinvader_product.schemas.product import ProductProduct
@@ -24,6 +25,7 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
             queue_job__no_delay=True, ignore_es_update_role=True
         )
 
+    @mute_logger("odoo.addons.queue_job.utils")
     def test_00(self):
         date_start = date.today()
         date_end = date.today() + timedelta(days=30)
@@ -46,7 +48,7 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
             }
         )
         product = ProductProduct.from_product_product(self.product)
-        prices = product.price.get("price-pl")
+        prices = product.price.get(pl.role_name)
         self.assertEqual(len(prices), 2)
         price = list(filter(lambda p, i=pl.item_ids: p.id == i.id, prices))[0]
         self.assertEqual(price.date_start, date_start)

@@ -90,4 +90,9 @@
     name="set_param"
     eval="('stock.no_default_immediate_tranfer', True)"
   />
+  <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('alc_elasticsearch_security_legacy_support.enable', True)"
+  />
 </odoo>

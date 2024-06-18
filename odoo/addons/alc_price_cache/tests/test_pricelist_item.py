@@ -34,18 +34,14 @@ class TestPricelistItemFlow(TestPrices):
                 item.pricelist_id._update_price_cache,
                 kwargs={
                     "domain_extend": [(1, "=", 1)],
-                    "dates": {"price-date-witness-1": [Date.from_string("2022-01-01")]},
+                    "dates": {pricelist.role_name: [Date.from_string("2022-01-01")]},
                 },
             )
         self.assertTrue(item.is_past)
         with trap_jobs() as trap:
             item.date_end = "2022-12-12"
             self.assertSetEqual(
-                set(
-                    trap.enqueued_jobs[0]
-                    .kwargs.get("dates")
-                    .get("price-date-witness-1")
-                ),
+                set(trap.enqueued_jobs[0].kwargs.get("dates").get(pricelist.role_name)),
                 {Date.from_string("2022-12-13"), Date.from_string("2022-01-01")},
             )
 
@@ -68,7 +64,7 @@ class TestPricelistItemFlow(TestPrices):
                 item.pricelist_id._update_price_cache,
                 kwargs={
                     "domain_extend": [(1, "=", 1)],
-                    "dates": {"price-domain-change": [Date.from_string("2022-01-01")]},
+                    "dates": {pricelist.role_name: [Date.from_string("2022-01-01")]},
                 },
             )
 
@@ -89,7 +85,7 @@ class TestPricelistItemFlow(TestPrices):
                         ("id", "=", self.product_1.id),
                         ("id", "=", self.product_1.id),
                     ],
-                    "dates": {"price-domain-change": [Date.from_string("2022-01-01")]},
+                    "dates": {pricelist.role_name: [Date.from_string("2022-01-01")]},
                 },
             )
 
