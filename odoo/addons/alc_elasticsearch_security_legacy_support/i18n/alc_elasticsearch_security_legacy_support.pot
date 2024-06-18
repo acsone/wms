@@ -1,0 +1,44 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_elasticsearch_security_legacy_support
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_elasticsearch_security_legacy_support
+#: model:ir.model,name:alc_elasticsearch_security_legacy_support.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_elasticsearch_security_legacy_support
+#: model:ir.model,name:alc_elasticsearch_security_legacy_support.model_keycloak_backend
+msgid "Keycloak Backend"
+msgstr ""
+
+#. module: alc_elasticsearch_security_legacy_support
+#: model:ir.model.fields,field_description:alc_elasticsearch_security_legacy_support.field_product_pricelist__old_discount_role_name
+msgid "Old Discount Role Name"
+msgstr ""
+
+#. module: alc_elasticsearch_security_legacy_support
+#: model:ir.model.fields,field_description:alc_elasticsearch_security_legacy_support.field_product_pricelist__old_role_name
+msgid "Old Role Name"
+msgstr ""
+
+#. module: alc_elasticsearch_security_legacy_support
+#: model:ir.model,name:alc_elasticsearch_security_legacy_support.model_product_pricelist
+msgid "Pricelist"
+msgstr ""
+
+#. module: alc_elasticsearch_security_legacy_support
+#: model:ir.model,name:alc_elasticsearch_security_legacy_support.model_veterinary_group
+msgid "Veterinary Group"
+msgstr ""
