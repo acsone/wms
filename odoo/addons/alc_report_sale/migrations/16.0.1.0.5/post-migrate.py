@@ -13,11 +13,12 @@ def migrate(env, version):
         '<div style="margin: 0px; padding: 0px;">\n    '
         '<p style="margin: 0px; padding: 0px; font-size: 13px;">'
         "\n        Cher Client,\n        <br>\n        "
-        'Nous vous remercions pour votre commande <t t-out="object.name'
+        "Nous vous remercions pour votre <t t-if=\"object.state in ('draft', 'sent')\">votre demande de prix</t>"
+        '<t t-else="">commande</t> <t t-out="object.name'
         '">SO123456</t>.\n        <br>\n        Veuillez trouver ci-joint'
         "\n        <t t-if=\"ctx.get('proforma')\">\n            la "
         "facture proforma au format PDF.\n        </t>\n        <t t-else"
-        '="">\n            le devis au format PDF.\n        </t>'
+        '="">\n            <t t-if="object.state in (\'draft\', \'sent\')">le devis</t><t t-else="">la commande</t> au format PDF.\n        </t>'
         "\n        <br><br>\n        Avec nos meilleures salutations.\n"
         "        <br>\n        Alcyon Belux SA\n    </p>\n</div>"
         "\n            "
