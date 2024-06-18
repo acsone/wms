@@ -9,6 +9,7 @@ from odoo.addons.base.models.res_partner import Partner as BasePartner
 class ResPartner(BasePartner):
     type_delivery = fields.Boolean(
         "Is Also Delivery",
+        copy=False,
         help="Allow to mark an invoice address and also delivery address",
     )
     type_name = fields.Char("Address Type Name", compute="_compute_type_name")
