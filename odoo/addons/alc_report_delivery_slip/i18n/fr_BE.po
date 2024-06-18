@@ -124,7 +124,7 @@ msgstr "Registre d'entrée"
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.deliveryslip_without_price
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_deliveryslip_entry_register_body
 msgid "Expiration date"
-msgstr "Date de péremption"
+msgstr "Péremption"
 
 #. module: alc_report_delivery_slip
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.deliveryslip_b2c_customer

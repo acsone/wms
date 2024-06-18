@@ -36,7 +36,7 @@ msgstr "Contact"
 #: model_terms:ir.ui.view,arch_db:alc_pricelist_discount.invoice_triple_discount_form_view
 #: model_terms:ir.ui.view,arch_db:alc_pricelist_discount.view_order_form
 msgid "Discount (%)"
-msgstr "Remise (%)"
+msgstr "Remise"
 
 #. module: alc_pricelist_discount
 #: model:ir.model.fields,field_description:alc_pricelist_discount.field_sale_order_line__discount_item_id
@@ -64,7 +64,7 @@ msgstr "Variante de produit"
 #: model_terms:ir.ui.view,arch_db:alc_pricelist_discount.invoice_triple_discount_form_view
 #: model_terms:ir.ui.view,arch_db:alc_pricelist_discount.view_order_form
 msgid "Promotion (%)"
-msgstr ""
+msgstr "Promo"
 
 #. module: alc_pricelist_discount
 #: model:ir.model,name:alc_pricelist_discount.model_sale_order

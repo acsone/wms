@@ -19,7 +19,7 @@ msgstr ""
 #. module: alc_sale_order_line_forecast_expected_date
 #: model_terms:ir.ui.view,arch_db:alc_sale_order_line_forecast_expected_date.sale_order_form_view
 msgid "Expected Receipt Date"
-msgstr "Date de réception prévue"
+msgstr "Prévision"
 
 #. module: alc_sale_order_line_forecast_expected_date
 #: model:ir.model,name:alc_sale_order_line_forecast_expected_date.model_sale_order_line

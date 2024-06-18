@@ -24,7 +24,7 @@ msgstr ""
 #. module: alc_purchase_discount
 #: model:ir.model.fields,field_description:alc_purchase_discount.field_purchase_order_line__discount
 msgid "Discount (%)"
-msgstr "Remise (%)"
+msgstr "Remise"
 
 #. module: alc_purchase_discount
 #: model:ir.model.fields,field_description:alc_purchase_discount.field_purchase_order_line__discount_global

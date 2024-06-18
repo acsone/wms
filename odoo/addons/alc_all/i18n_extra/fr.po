@@ -98,3 +98,20 @@ msgstr ""
 #: model:ir.model.fields,field_description:partner_invoicing_mode_cash_on_delivery.field_account_payment_mode__cash_on_delivery
 msgid "Cash On Delivery"
 msgstr "Contre Remboursement"
+
+#. module: sale_order_line_cancel
+#: model_terms:ir.ui.view,arch_db:sale_order_line_cancel.sale_order_form_view
+#: model_terms:ir.ui.view,arch_db:sale_order_line_cancel.sale_order_line_tree_view
+msgid "Canceled"
+msgstr "Annulé"
+
+#. module: sale_order_line_cancel
+#: model:ir.model.fields,field_description:sale_order_line_cancel.field_sale_order_line__product_qty_remains_to_deliver
+msgid "Remains to deliver"
+msgstr "À livrer"
+
+#. module: sale_order_line_cancel
+#: model_terms:ir.ui.view,arch_db:sale_order_line_cancel.sale_order_form_view
+#: model_terms:ir.ui.view,arch_db:sale_order_line_cancel.sale_order_line_tree_view
+msgid "To Deliver"
+msgstr "À livrer"
