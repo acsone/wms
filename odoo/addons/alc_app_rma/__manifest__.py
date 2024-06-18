@@ -13,5 +13,7 @@
     "depends": [
         # OCA
         "rma",
+        "rma_sale",
+        "product_warranty",
     ],
 }
