@@ -19,4 +19,4 @@ class ResPartner(res_partner.ResPartner):
             # add old vt group old role names
             for vt_group in self.veterinary_group_ids:
                 roles.add(vt_group._get_old_role_name())
-        return roles
+        return {r for r in roles if r}
