@@ -16,7 +16,7 @@
       if (params.pricelist_gross != null) {
         List list_gross_price_fields = new ArrayList();
         if (params.pricelist_gross.contains(',')) {
-          for (String price_gross: params.pricelist_gross.split(',')) {
+          for (String price_gross: /,/.split(params.pricelist_gross)) {
             list_gross_price_fields.add('current_'+ price_gross);
           }
         } else {
@@ -51,7 +51,7 @@
           discount = doc[discount_field].value;
         }
       }
-      if (!discount_exclusive && params.supplier_promotion != null && params.supplier_promotion)
+      if (!discount_exclusive && params.supplier_promotion != null && params.supplier_promotion) {
        if (doc.containsKey('current_supplier_discount') && doc['current_supplier_discount'].size()==1) {
             supplier_discount = doc.current_supplier_discount.value;
        } else if (doc.containsKey('current_supplier_discount_veterinary') && doc['current_supplier_discount_veterinary'].size()==1) {
