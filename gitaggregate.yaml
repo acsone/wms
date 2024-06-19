@@ -34,6 +34,16 @@
     - curl -sSL https://github.com/odoo/odoo/pull/141528.patch | git am # missing python 3.11 opcodes
   target: origin 16.0-alc_master
 
+./src/account_payment_mode_auto_reconcile:
+  remotes:
+    origin: git@github.com:acsone/account-reconcile.git
+    oca: git@github.com:oca/account-reconcile.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/537/head # [16.0][MIG] account_payment_mode_auto_reconcile: Migrate to version 16.0
+    - origin 16.0-fix-same-mode-dro # [IMP] account_payment_mode_auto_reconcile: Allows to reconcile same payment mode
+  target: origin 16.0-alc_account_payment_mode_auto_reconcile
+
 ./src/stock_available_to_promise_release:
   remotes:
     origin: git@github.com:acsone/wms.git

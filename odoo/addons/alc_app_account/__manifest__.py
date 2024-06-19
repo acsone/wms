@@ -4,7 +4,7 @@
 {
     "name": "Alc App Account",
     "description": """Gather all account related modules for Alcyon""",
-    "version": "16.0.1.0.2",
+    "version": "16.0.1.0.3",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
