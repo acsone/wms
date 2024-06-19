@@ -2,11 +2,16 @@
 <odoo>
   <record id="sale_order_line_tree_view" model="ir.ui.view">
     <field name="model">sale.order.line</field>
-    <field name="inherit_id" ref="sale.view_order_line_tree" />
+    <field name="inherit_id" ref="sale_order_line_cancel.sale_order_line_tree_view" />
     <field name="arch" type="xml">
-
+      <field name="product_qty_canceled" position="attributes">
+          <attribute name="optional">show</attribute>
+      </field>
+      <field name="product_qty_remains_to_deliver" position="attributes">
+          <attribute name="optional">show</attribute>
+      </field>
       <xpath expr="//field[@name='product_qty_canceled']" position="after">
-        <field name="product_qty_returned" />
+        <field name="product_qty_returned" optional="show" />
       </xpath>
     </field>
   </record>
