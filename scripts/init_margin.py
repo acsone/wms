@@ -108,10 +108,10 @@ env.cr.execute(
     UPDATE sale_order_line sol
     SET
         margin = sol.price_subtotal - (cost.unit_cost * sol.product_uom_qty),
-        margin_percent = (sol.price_subtotal - (cost.unit_cost * sol.product_uom_qty) * 100) / NULLIF(sol.price_subtotal, 0),
+        margin_percent = (sol.price_subtotal - (cost.unit_cost * sol.product_uom_qty) / NULLIF(sol.price_subtotal, 0),
         purchase_price = cost.unit_cost,
         margin_delivered = sol.price_subtotal - (cost.unit_cost * sol.qty_delivered),
-        margin_delivered_percent = (sol.price_subtotal - (cost.unit_cost * sol.qty_delivered)) * 100 / NULLIF(sol.price_subtotal,0),
+        margin_delivered_percent = (sol.price_subtotal - (cost.unit_cost * sol.qty_delivered)) / NULLIF(sol.price_subtotal,0),
         purchase_price_delivery = cost.unit_cost
     FROM sale_line_product_cost cost
     WHERE

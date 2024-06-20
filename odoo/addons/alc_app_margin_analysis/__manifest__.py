@@ -9,10 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://www.acsone.eu",
+    "development_status": "Alpha",
     "depends": [
         "alc_sale_margin",
         # OCA
         "sale_margin_delivered_security",
+        "sale_margin_delivered_dropshipping",
     ],
     "data": [],
     "demo": [],

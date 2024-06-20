@@ -202,5 +202,4 @@ odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/OCA/l10n-be
 odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/204/head#subdirectory=setup/l10n_be_iso20022_pain
 
 # OCA/margin-Analysis
-odoo-addon-sale-margin-delivered-security @ git+https://github.com/OCA/margin-Analysis.git@refs/pull/208/head#subdirectory=setup/sale_margin_delivered_security
-odoo-addon-sale-margin-delivered @ git+https://github.com/OCA/margin-Analysis.git@refs/pull/214/head#subdirectory=setup/sale_margin_delivered
+odoo-addon-sale-margin-delivered @ git+https://github.com/OCA/margin-Analysis.git@refs/pull/215/head#subdirectory=setup/sale_margin_delivered
