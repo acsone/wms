@@ -86,7 +86,6 @@ class TestDeliverExpiredLot(TestDeliverProcessBase):
         self.assertEqual(pick2.state, "done")
         # deliver the release channel
         self.channel.action_lock()
-        pick1.backorder_ids.with_user(self.stock_admin).action_cancel()
         advices = self._deliver_channel()
         self.assertEqual(ship1.state, "assigned")
         self.assertEqual(ship2.state, "done")

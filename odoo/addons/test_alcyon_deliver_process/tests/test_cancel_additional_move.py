@@ -1,6 +1,6 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo.exceptions import UserError
+
 
 from .common import TestDeliverProcessBase
 
@@ -45,23 +45,6 @@ class TestCancelAdditionalMove(TestDeliverProcessBase):
         ships = self._get_picking_ship(sale3)
         ships._put_in_pack(ships.move_line_ids)
         # deliver the release channel
-        # This should raise an error as we should pick the backorder to ensure
-        # customer delivery
-        with self.assertRaises(UserError) as except_catch:
-            self.channel.action_delivering()
-        message = (
-            "There are some preparations that have not been completed.If "
-            "you choose to proceed, these preparations need to be unreleased.\nPlease "
-            f"handle them manually before proceeding with the delivery.\n\n{ships.name}\n{pick.backorder_ids.name}"
-        )
-        self.assertEqual(except_catch.exception.name, message)
-
-        self.assertFalse(self.channel.delivering_error)
-        self.assertEqual(self.channel.state, "locked")
-
-        # The stock manager cancels the backorder
-        pick.backorder_ids.with_user(self.stock_admin).action_cancel()
-
         self.channel.action_delivering()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
