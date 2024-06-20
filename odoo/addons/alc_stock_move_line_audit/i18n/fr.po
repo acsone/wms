@@ -17,6 +17,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_move_line_audit
+#: model:res.groups,name:alc_stock_move_line_audit.group_stock_move_line_audit_manager
+msgid "Can see operation audit report"
+msgstr "Peut voir le rapport d'audit des opérations"
+
+#. module: alc_stock_move_line_audit
 #: model:ir.model.fields,field_description:alc_stock_move_line_audit.field_alc_stock_move_line_audit__date
 msgid "Date"
 msgstr ""
@@ -72,15 +77,37 @@ msgid "Nbr lignes Picking Today"
 msgstr "Nbr de lignes de transfert aujourd'hui"
 
 #. module: alc_stock_move_line_audit
+#: model_terms:ir.ui.view,arch_db:alc_stock_move_line_audit.alc_stock_move_line_audit_search_view
+msgid "Non-picking operations"
+msgstr "Opérations hors pick"
+
+#. module: alc_stock_move_line_audit
+#: model:ir.model.fields,field_description:alc_stock_move_line_audit.field_alc_stock_move_line_audit__picking_type_id
+msgid "Operation"
+msgstr "Opération"
+
+#. module: alc_stock_move_line_audit
+#: model:ir.ui.menu,name:alc_stock_move_line_audit.alc_stock_move_line_audit_menu
+#: model_terms:ir.ui.view,arch_db:alc_stock_move_line_audit.alc_stock_move_line_audit_pivot_non_picking_view
 #: model_terms:ir.ui.view,arch_db:alc_stock_move_line_audit.alc_stock_move_line_audit_pivot_view
 msgid "Operations"
 msgstr "Audit des opérations"
 
 #. module: alc_stock_move_line_audit
+#: model:ir.ui.menu,name:alc_stock_move_line_audit.alc_stock_operation_analysis_menu
+msgid "Operations Analysis"
+msgstr "Analyse des opérations"
+
+#. module: alc_stock_move_line_audit
 #: model:ir.actions.act_window,name:alc_stock_move_line_audit.alc_stock_move_line_audit_act_window
-#: model:ir.ui.menu,name:alc_stock_move_line_audit.alc_stock_move_line_audit_menu
 msgid "Operations Audit"
 msgstr "Audit des opérations"
+
+#. module: alc_stock_move_line_audit
+#: model:ir.actions.act_window,name:alc_stock_move_line_audit.alc_stock_move_line_audit_non_picking_act_window
+#: model:ir.ui.menu,name:alc_stock_move_line_audit.alc_stock_move_line_audit_non_picking_menu
+msgid "Operator Rates"
+msgstr "Cadences Opérateurs"
 
 #. module: alc_stock_move_line_audit
 #: model:ir.model.fields,field_description:alc_stock_move_line_audit.field_alc_stock_move_line_audit__picking_id
@@ -106,18 +133,3 @@ msgstr "Utilisateur"
 #: model:ir.model,name:alc_stock_move_line_audit.model_alc_stock_move_line_audit
 msgid "User operations Audit"
 msgstr "Audit des opérations"
-
-#~ msgid "Can see operation audit report"
-#~ msgstr "Peut voir le rapport d'audit des opérations"
-
-#~ msgid "Non-picking operations"
-#~ msgstr "Opérations hors pick"
-
-#~ msgid "Operation"
-#~ msgstr "Opération"
-
-#~ msgid "Operations Analysis"
-#~ msgstr "Analyse des opérations"
-
-#~ msgid "Operator Rates"
-#~ msgstr "Cadences Opérateurs"
