@@ -49,6 +49,7 @@ class TestProductExpiry(TransactionCase):
                             "location_id": cls.warehouse.wh_output_stock_loc_id.id,
                             "location_dest_id": cls.customer_location.id,
                             "procure_method": "make_to_order",
+                            "warehouse_id": cls.warehouse.id,
                         }
                     )
                 ],
