@@ -17,20 +17,30 @@ class SaleOrder(Order):
     )
 
     @api.model
+    def _get_sales_bo_gt_3months_lines_domain(self):
+        return [
+            ("product_qty_remains_to_deliver", ">", 0),
+            ("product_type", "in", ["consu", "product"]),
+            ("is_consignment", "=", False),
+            (
+                "date_order",
+                "<",
+                (datetime.datetime.today() - relativedelta(months=3)).date(),
+            ),
+        ]
+
+    def _get_sales_bo_gt_3months_lines(self):
+        self.ensure_one()
+        return self.order_line.filtered_domain(
+            self._get_sales_bo_gt_3months_lines_domain()
+        ).filtered(lambda line: line._is_cancel_sales_bo_gt_3months_allowed())
+
+    @api.model
     def cancel_sales_bo_gt_3months(self):
         wizard = self.env["sale.order.line.cancel"].new()
         mail_template = self.env.ref("alc_sale_processing_finalizer.mail_template_30")
         lines = self.env["sale.order.line"].search(
-            [
-                ("product_qty_remains_to_deliver", ">", 0),
-                ("product_type", "in", ["consu", "product"]),
-                ("is_consignment", "=", False),
-                (
-                    "date_order",
-                    "<",
-                    (datetime.datetime.today() - relativedelta(months=3)).date(),
-                ),
-            ]
+            self._get_sales_bo_gt_3months_lines_domain()
         )
         canceled_orders = self.env["sale.order"]
         lines = self._filter_sale_order_lines_to_cancel(lines)
@@ -43,17 +53,7 @@ class SaleOrder(Order):
                 line.write(
                     {"product_qty_canceled": line.product_qty_remains_to_deliver}
                 )
-                continue
-            if True in remaining_moves.mapped("picking_id.printed"):
-                continue
-
-            internal_moves = remaining_moves.move_orig_ids
-            if "done" in internal_moves.mapped("state"):
-                continue
-            if True in internal_moves.mapped("picking_id.printed"):
-                continue
-
-            if internal_moves and line.order_id.auto_finalize_processing:
+            if line._is_cancel_sales_bo_gt_3months_allowed():
                 canceled_orders |= line.order_id
                 wiz = wizard.with_context(active_id=line.id, active_model=line._name)
                 wiz.cancel_remaining_qty()
