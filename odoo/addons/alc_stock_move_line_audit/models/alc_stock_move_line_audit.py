@@ -6,7 +6,7 @@ from odoo import fields, models, tools
 
 from odoo.addons.base.models.res_users import Users
 from odoo.addons.stock.models.stock_location import Location
-from odoo.addons.stock.models.stock_picking import Picking
+from odoo.addons.stock.models.stock_picking import Picking, PickingType
 
 
 class AlcStockMoveLineAudit(models.Model):
@@ -23,6 +23,7 @@ class AlcStockMoveLineAudit(models.Model):
     )
     picking_id = fields.Many2one[Picking](readonly=True)
     user_id = fields.Many2one[Users](readonly=True)
+    picking_type_id = fields.Many2one[PickingType](string="Operation")
 
     def init(self):
         tools.drop_view_if_exists(self.env.cr, self._table)
@@ -33,7 +34,8 @@ class AlcStockMoveLineAudit(models.Model):
                   sml.qty_done,
                   sp.location_dest_id as picking_destination_location_id,
                   sp.id as picking_id,
-                  sp.user_id
+                  sp.user_id,
+                  sp.picking_type_id
                 FROM
                     stock_move_line sml
                 JOIN

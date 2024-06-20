@@ -3,10 +3,14 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
 
+    <record id="group_stock_move_line_audit_manager" model="res.groups">
+        <field name="name">Can see operation audit report</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+    </record>
     <record model="ir.model.access" id="alc_stock_move_line_audit_view">
         <field name="name">alc.stock.move.line.audit view</field>
         <field name="model_id" ref="model_alc_stock_move_line_audit" />
-        <field name="group_id" ref="stock.group_stock_manager" />
+        <field name="group_id" ref="group_stock_move_line_audit_manager" />
         <field name="perm_read" eval="1" />
         <field name="perm_create" eval="0" />
         <field name="perm_write" eval="0" />
