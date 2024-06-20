@@ -15,3 +15,20 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
             lambda m: m.state not in ("done", "cancel")
         )
         return moves_to_cancel
+
+    def _is_cancel_sales_bo_gt_3months_allowed(self):
+        self.ensure_one()
+        moves = self.move_ids
+        remaining_moves = moves.filtered(lambda m: m.state not in ("cancel", "done"))
+        if not remaining_moves:
+            return False
+        if True in remaining_moves.mapped("picking_id.printed"):
+            return False
+        internal_moves = remaining_moves.move_orig_ids
+        if "done" in internal_moves.mapped("state"):
+            return False
+        if True in internal_moves.mapped("picking_id.printed"):
+            return False
+        if internal_moves and self.order_id.auto_finalize_processing:
+            return True
+        return False
