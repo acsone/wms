@@ -186,7 +186,9 @@ class TestShippingFeeCommon(TransactionCase):
             }
         )
         # Create a release_channel
-        cls.rc1 = cls.env["stock.release.channel"].create({"name": "release channel 1"})
+        cls.rc1 = cls.env["stock.release.channel"].create(
+            {"name": "release channel 1", "state": "open"}
+        )
 
     @classmethod
     def _create_inventory(cls, product, qty):
