@@ -431,8 +431,8 @@ pyasn1-modules==0.3.0
 pycparser==2.21
 pycryptodome==3.18.0
 pycups==2.0.1
-pydantic==2.5.1
-pydantic-core==2.14.3
+pydantic==2.7.4
+pydantic-core==2.18.4
 pydot==1.4.2
 pyjwt==2.7.0
 pynacl==1.5.0
