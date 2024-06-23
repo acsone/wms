@@ -29,6 +29,4 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
             return False
         if True in internal_moves.mapped("picking_id.printed"):
             return False
-        if internal_moves and self.order_id.auto_finalize_processing:
-            return True
-        return False
+        return self.order_id.auto_finalize_processing
