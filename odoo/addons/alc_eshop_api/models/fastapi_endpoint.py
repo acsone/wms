@@ -4,11 +4,11 @@
 from functools import partial
 from typing import Any
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter
 from fastapi.security import OAuth2AuthorizationCodeBearer
+from starlette.datastructures import URL
 from starlette.middleware import Middleware
-from starlette.middleware.base import BaseHTTPMiddleware, DispatchFunction
-from starlette.types import ASGIApp
+from starlette.types import ASGIApp, Receive, Scope, Send
 
 from odoo import api, fields
 
@@ -260,47 +260,35 @@ class FastapiEndpoint(FastapiEndpointBase):
         if self.app == "alc_eshop_app":
             middlewares.extend(
                 [
-                    Middleware(RedirectV2CartMiddleware, root_path=self.root_path),
-                    Middleware(RedirectWishlistMiddleware, root_path=self.root_path),
+                    Middleware(
+                        RedirectMiddleware,
+                        root_path=self.root_path,
+                        old_path="/v2/cart",
+                        new_path="/carts",
+                    ),
+                    Middleware(
+                        RedirectMiddleware,
+                        root_path=self.root_path,
+                        old_path="/wishlist",
+                        new_path="/wishlists",
+                    ),
                 ]
             )
         return middlewares
 
 
-class RedirectV2CartMiddleware(BaseHTTPMiddleware):
-    def __init__(
-        self,
-        app: ASGIApp,
-        dispatch: DispatchFunction | None = None,
-        root_path: str = "",
-    ) -> None:
-        super().__init__(app, dispatch)
+class RedirectMiddleware:
+    def __init__(self, app: ASGIApp, root_path: str, old_path: str, new_path) -> None:
+        self.app = app
         self.root_path = root_path
+        self.old_path = old_path
+        self.new_path = new_path
 
-    async def dispatch(self, request: Request, call_next):
-        if request.url.path.startswith(f"{self.root_path}/v2/cart"):
-            request.scope["path"] = request.scope["path"].replace("/v2/cart", "/carts")
-        return await call_next(request)
-
-
-class RedirectWishlistMiddleware(BaseHTTPMiddleware):
-    def __init__(
-        self,
-        app: ASGIApp,
-        dispatch: DispatchFunction | None = None,
-        root_path: str = "",
-    ) -> None:
-        super().__init__(app, dispatch)
-        self.root_path = root_path
-
-    async def dispatch(self, request: Request, call_next):
-        path = request.url.path
-        # replace into the path wishlist by wishlists to be compliant with the new
-        # wishlist endpoint route only if the path is not already wishlists
-        if path.startswith(f"{self.root_path}/wishlist") and not path.startswith(
-            f"{self.root_path}/wishlists"
-        ):
-            request.scope["path"] = request.scope["path"].replace(
-                "/wishlist", "/wishlists"
-            )
-        return await call_next(request)
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] in ("http"):
+            url = URL(scope=scope)
+            if url.path.startswith(
+                f"{self.root_path}{self.old_path}"
+            ) and not url.path.startswith(f"{self.root_path}{self.new_path}"):
+                scope["path"] = scope["path"].replace(self.old_path, self.new_path)
+        await self.app(scope, receive, send)
