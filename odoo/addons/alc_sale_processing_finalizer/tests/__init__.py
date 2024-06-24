@@ -1,1 +1,2 @@
 from . import test_sale_processing_finalizer
+from . import test_cancel_sales_bo_gt_3months_allowed
