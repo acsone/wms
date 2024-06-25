@@ -17,8 +17,8 @@ class SaleOrder(Order):
     )
 
     @api.model
-    def _get_sales_bo_gt_3months_lines_domain(self):
-        return [
+    def _get_sales_bo_gt_3months_lines_domain(self, sale_order=None):
+        domain = [
             ("product_qty_remains_to_deliver", ">", 0),
             ("product_type", "in", ["consu", "product"]),
             ("is_consignment", "=", False),
@@ -28,22 +28,19 @@ class SaleOrder(Order):
                 (datetime.datetime.today() - relativedelta(months=3)).date(),
             ),
         ]
-
-    def _get_sales_bo_gt_3months_lines(self):
-        self.ensure_one()
-        return self.order_line.filtered_domain(
-            self._get_sales_bo_gt_3months_lines_domain()
-        ).filtered(lambda line: line._is_cancel_sales_bo_gt_3months_allowed())
+        if sale_order:
+            domain.append(("order_id", "=", sale_order.id))
+        return domain
 
     @api.model
     def cancel_sales_bo_gt_3months(self):
+        lines = self._get_sales_bo_gt_3months_lines()
+        self._cancel_sales_bo_gt_3months_send_mail(lines)
+        self._cancel_sales_bo_gt_3months(lines)
+
+    @api.model
+    def _cancel_sales_bo_gt_3months(self, lines):
         wizard = self.env["sale.order.line.cancel"].new()
-        mail_template = self.env.ref("alc_sale_processing_finalizer.mail_template_30")
-        lines = self.env["sale.order.line"].search(
-            self._get_sales_bo_gt_3months_lines_domain()
-        )
-        canceled_orders = self.env["sale.order"]
-        lines = self._filter_sale_order_lines_to_cancel(lines)
         for line in lines:
             moves = line.move_ids
             remaining_moves = moves.filtered(
@@ -53,11 +50,11 @@ class SaleOrder(Order):
                 line.write(
                     {"product_qty_canceled": line.product_qty_remains_to_deliver}
                 )
-            if line._is_cancel_sales_bo_gt_3months_allowed():
-                canceled_orders |= line.order_id
-                wiz = wizard.with_context(active_id=line.id, active_model=line._name)
-                wiz.cancel_remaining_qty()
+            wiz = wizard.with_context(active_id=line.id, active_model=line._name)
+            wiz.cancel_remaining_qty()
 
+    @api.model
+    def _cancel_sales_bo_gt_3months_send_mail(self, lines):
         send_processing_finalizer_email = (
             self.env["ir.config_parameter"]
             .sudo()
@@ -65,13 +62,18 @@ class SaleOrder(Order):
         )
         if not send_processing_finalizer_email:
             return
-
+        mail_template = self.env.ref("alc_sale_processing_finalizer.mail_template_30")
         mail_template.model = self._name
-        for canceled_order in canceled_orders:
+        for canceled_order in lines.order_id:
             mail_template.send_mail(canceled_order.id, force_send=True)
 
-    def _filter_sale_order_lines_to_cancel(self, lines):
+    @api.model
+    def _get_sales_bo_gt_3months_lines(self, sale_order=None):
+        lines = self.env["sale.order.line"].search(
+            self._get_sales_bo_gt_3months_lines_domain(sale_order=sale_order)
+        )
         return lines.filtered(
             lambda line: not line.order_id.carrier_id.is_long_term_delivery
-            and line.state not in ("draft", "sent")  # filter quotations
+            and line.state not in ("draft", "sent")
+            and line._is_cancel_sales_bo_gt_3months_allowed()
         )

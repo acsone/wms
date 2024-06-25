@@ -5,7 +5,7 @@
     "name": "Alc Sale Processing Finalizer",
     "description": """
         Allow to automatically close a Sale older than 3 months. """,
-    "version": "16.0.1.0.2",
+    "version": "16.0.1.0.3",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
