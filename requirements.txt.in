@@ -202,5 +202,3 @@ odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@r
 
 # OCA/margin-Analysis
 odoo-addon-sale-margin-delivered @ git+https://github.com/OCA/margin-Analysis.git@refs/pull/215/head#subdirectory=setup/sale_margin_delivered
-
-a2wsgi @ git+https://github.com/abersheeran/a2wsgi@master
