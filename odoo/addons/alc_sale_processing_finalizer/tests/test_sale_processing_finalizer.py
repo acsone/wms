@@ -1,9 +1,6 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import datetime
-
-from dateutil.relativedelta import relativedelta
 
 from .common import TestSaleProcessingFinalizerComon
 
@@ -58,19 +55,7 @@ class TestCron(TestSaleProcessingFinalizerComon):
         )
 
         # Check that that already canceled BOs don't rise again
-        lines = self.env["sale.order.line"].search(
-            [
-                ("product_qty_remains_to_deliver", ">", 0),
-                ("product_type", "in", ["consu", "product"]),
-                ("is_consignment", "=", False),
-                (
-                    "date_order",
-                    "<",
-                    (datetime.datetime.today() - relativedelta(months=3)).date(),
-                ),
-            ]
-        )
-        lines = self.env["sale.order"]._filter_sale_order_lines_to_cancel(lines)
+        lines = self.env["sale.order"]._get_sales_bo_gt_3months_lines()
         self.assertNotIn(lines, self.so_after_3months_to_purge.order_line)
 
     def test_long_term_carrier(self):

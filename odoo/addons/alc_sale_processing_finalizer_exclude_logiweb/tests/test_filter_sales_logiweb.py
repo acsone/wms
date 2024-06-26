@@ -89,9 +89,7 @@ class TestFilterSalesLogiweb(TransactionCase):
         all_partners = all_lines.mapped("order_id.partner_invoice_id")
         self.assertIn(self.logiweb_partner, all_partners)
         self.assertIn(self.logiweb_be_partner, all_partners)
-        lines_to_cancel = self.env["sale.order"]._filter_sale_order_lines_to_cancel(
-            all_lines
-        )
+        lines_to_cancel = self.env["sale.order"]._get_sales_bo_gt_3months_lines()
         to_cancel_partners = lines_to_cancel.mapped("order_id.partner_invoice_id")
         self.assertNotIn(self.logiweb_partner, to_cancel_partners)
         self.assertNotIn(self.logiweb_be_partner, to_cancel_partners)
