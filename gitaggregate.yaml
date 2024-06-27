@@ -121,16 +121,6 @@
     - oca refs/pull/898/head # [16.0][FIX + IMP] pdf helper: Fix multi-attachments + Add pdf_embed_xml
   target: origin 16.0-edi-base-ubl
 
-./src/odoo-fastapi:
-  remotes:
-    origin: git@github.com:acsone/rest-framework.git
-    oca: git@github.com:oca/rest-framework.git
-  merges:
-    - oca 16.0
-    - oca refs/pull/422/head # Transactions handling refactoring
-    - oca refs/pull/387/head # optionally authenticated partner
-  target: origin 16.0-alc-fastapi
-
 ./src/shopfloor:
   remotes:
     origin: git@github.com:acsone/wms.git
