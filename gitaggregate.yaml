@@ -129,6 +129,7 @@
     - oca 16.0
     - oca refs/pull/899/head # shopfloor: Extended details service for products and locations
     - oca refs/pull/902/head # shopfloor: Zone picking no packing
+    - oca refs/pull/911/head # [16.0][FIX] shopfloor: Don't embed postponed line quantity
   target: origin 16.0-alc-shopfloor
 
 ./src/stock_full_location_reservation:
