@@ -34,6 +34,7 @@ class TestDeliverProcessBase(StockPickingTestCase):
                 "partner_ids": [Command.set((cls.partner1 | cls.partner2).ids)],
                 "warehouse_id": cls.warehouse_1.id,
                 "dock_id": cls.dock.id,
+                "process_end_time": 10.0,
             }
         )
         cls.warehouse_1.delivery_route_id.write(

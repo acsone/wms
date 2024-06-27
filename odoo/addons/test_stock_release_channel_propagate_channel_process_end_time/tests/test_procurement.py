@@ -16,6 +16,7 @@ class TestReleaseChannelPropagation(ReleaseChannelCase):
             "stock_release_channel_process_end_time.stock_release_use_channel_end_date",
             True,
         )
+        self.default_channel.process_end_time = 10.0
         self.product = self.product1
         pickings_before = self.env["stock.picking"].search(
             [("product_id", "=", self.product.id)]
