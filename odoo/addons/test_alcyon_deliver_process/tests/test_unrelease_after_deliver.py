@@ -40,16 +40,15 @@ class TestUnreleaseAfterDeliver(TestDeliverProcessBase):
         self.channel.action_delivering()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
-        backorder = self._get_picking_ship(sale).filtered(
+        ship_backorder = self._get_picking_ship(sale).filtered(
             lambda s: s.state not in ("done", "cancel")
         )
-        self.assertTrue(backorder)
-        self.assertFalse(backorder.release_channel_id)
-        self.assertFalse(backorder.need_release)
+        self.assertTrue(ship_backorder)
+        self.assertFalse(ship_backorder.release_channel_id)
+        self.assertTrue(ship_backorder.need_release)
         self.channel.action_sleep()
         self.channel.action_wake_up()
-        # Backorder is canceled, so release channel is not set on it
-        self.assertFalse(backorder.release_channel_id)
+        self.assertTrue(ship_backorder.release_channel_id)
 
     def test_01(self):
         """
@@ -221,8 +220,7 @@ class TestUnreleaseAfterDeliver(TestDeliverProcessBase):
         )
         self.assertTrue(backorder_ship)
         self.assertFalse(backorder_ship.release_channel_id)
-        self.assertFalse(backorder_ship.need_release)
+        self.assertTrue(backorder_ship.need_release)
         self.channel.action_sleep()
         self.channel.action_wake_up()
-        # Backorder is canceled, so release channel is not set on it
-        self.assertFalse(backorder_ship.release_channel_id)
+        self.assertTrue(backorder_ship.release_channel_id)
