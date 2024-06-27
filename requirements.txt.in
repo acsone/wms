@@ -170,11 +170,7 @@ odoo-addon-l10n-be-account-einvoice-generate @ git+https://github.com/edido-eu/p
 odoo-addon-account-invoice-transmit-peppol @ git+https://github.com/edido-eu/peppol@refs/pull/9/head#subdirectory=setup/account_invoice_transmit_peppol
 
 # OCA/rest-framework
-# https://github.com/OCA/rest-framework/pull/387
-# https://github.com/OCA/rest-framework/pull/422
-odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@16.0-alc-fastapi#subdirectory=setup/fastapi
-
-# OCA/web-api
+odoo-addon-fastapi @ git+https://github.com/OCA/rest-framework.git@refs/pull/440/head#subdirectory=setup/fastapi
 
 #fastapi
 # https://github.com/tiangolo/fastapi/pull/5452
