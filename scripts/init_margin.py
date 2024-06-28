@@ -110,9 +110,10 @@ env.cr.execute(
         margin = sol.price_subtotal - (cost.unit_cost * sol.product_uom_qty),
         margin_percent = (sol.price_subtotal - (cost.unit_cost * sol.product_uom_qty)) / NULLIF(sol.price_subtotal, 0),
         purchase_price = cost.unit_cost,
-        margin_delivered = sol.price_subtotal - (cost.unit_cost * sol.qty_delivered),
-        margin_delivered_percent = (sol.price_subtotal - (cost.unit_cost * sol.qty_delivered)) / NULLIF(sol.price_subtotal,0),
-        purchase_price_delivery = cost.unit_cost
+        -- if we have delivered qty we compute the margin delivered else we set it to 0
+        margin_delivered = case when sol.qty_delivered > 0 then sol.price_subtotal - (cost.unit_cost * sol.qty_delivered) else 0 end,
+        margin_delivered_percent = case when sol.qty_delivered > 0 then (sol.price_subtotal - (cost.unit_cost * sol.qty_delivered)) / NULLIF(sol.price_subtotal,0) else 0 end,
+        purchase_price_delivery = case when sol.qty_delivered > 0 then cost.unit_cost else 0 end
     FROM sale_line_product_cost cost
     WHERE
         sol.id = cost.sale_line_id
