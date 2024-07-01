@@ -63,12 +63,15 @@ odoo-addon-stock-release-channel-propagate-channel-picking @ git+https://github.
 odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/OCA/wms.git@refs/pull/798/head#subdirectory=setup/shopfloor_full_location_reservation
 odoo-addon-shopfloor-base @ git+https://github.com/OCA/wms.git@refs/pull/900/head#subdirectory=setup/shopfloor_base
 # https://github.com/OCA/wms/pull/899
-# https://github.com/OCA/wms/pull/802
+# https://github.com/OCA/wms/pull/902
+# https://github.com/OCA/wms/pull/911
+# https://github.com/OCA/wms/pull/912
 odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@16.0-alc-shopfloor#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-mobile-base @ git+https://github.com/OCA/wms.git@refs/pull/900/head#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-mobile @ git+https://github.com/OCA/wms.git@refs/pull/899/head#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/head#subdirectory=setup/shopfloor_packing
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/head#subdirectory=setup/shopfloor_mobile_packing
+odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/OCA/wms.git@refs/pull/912/head#subdirectory=setup/shopfloor_batch_automatic_creation
 
 # product-attribute
 odoo-addon-product-packaging-level @ git+https://github.com/OCA/product-attribute.git@refs/pull/1595/head#subdirectory=setup/product_packaging_level
