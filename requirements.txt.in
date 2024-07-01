@@ -172,9 +172,6 @@ odoo-addon-account-invoice-transmit-peppol @ git+https://github.com/edido-eu/pep
 # OCA/rest-framework
 odoo-addon-fastapi @ git+https://github.com/OCA/rest-framework.git@refs/pull/440/head#subdirectory=setup/fastapi
 
-# OCA/storage
-odoo-addon-fs-product-multi-image @ git+https://github.com/OCA/storage.git@refs/pull/380/head#subdirectory=setup/fs_product_multi_image
-
 #fastapi
 # https://github.com/tiangolo/fastapi/pull/5452
 fastapi @ git+https://github.com/tiangolo/fastapi@refs/pull/5452/head
