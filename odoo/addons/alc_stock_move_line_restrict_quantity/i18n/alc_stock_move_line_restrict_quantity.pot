@@ -48,3 +48,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_stock_move_line_restrict_quantity.field_res_config_settings__restrict_move_line_quantity
 msgid "Restrict Move Line Quantity"
 msgstr ""
+
+#. module: alc_stock_move_line_restrict_quantity
+#: model:ir.model,name:alc_stock_move_line_restrict_quantity.model_stock_move
+msgid "Stock Move"
+msgstr ""
