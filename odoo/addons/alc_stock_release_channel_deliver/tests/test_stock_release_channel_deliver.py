@@ -110,7 +110,7 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
         - the backorder should be assigned to the available channel
         - the backorder should not be assigned to the shipment advice
         """
-        channel = self.channel.copy({"name": "channel 2"})
+        channel = self.channel.copy({"name": "channel 2", "state": "open"})
         self._do_internal_pickings()
         self._update_qty_in_location(self.output_loc, self.product2, 10)
         self.pickings.do_unreserve()
@@ -165,6 +165,7 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
             lambda p: p.state == "assigned"
         )
         not_done_picking.move_ids[0].product_uom_qty = 4
+        not_done_picking.move_ids[0].quantity_done = 2
         with self.assertRaises(
             UserError,
             msg="There are some preparations that have not been completed."

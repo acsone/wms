@@ -321,7 +321,7 @@ odoo-addon-stock-available-immediately==16.0.1.0.0.5
 odoo-addon-stock-available-immediately-exclude-location==16.0.1.0.0.4
 odoo-addon-stock-available-location-get-domain @ git+https://github.com/acsone/stock-logistics-availability.git@aed5cd18e4a944ca51eac2bf89d3bbe1be984260#subdirectory=setup/stock_available_location_get_domain
 odoo-addon-stock-available-location-orderpoint @ git+https://github.com/acsone/stock-logistics-availability.git@c83b9a714a077f512678021ff437b0914ed5ec7e#subdirectory=setup/stock_available_location_orderpoint
-odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@5d5a91d7df144fe38d543b9de9b0a02a0ddf4c17#subdirectory=setup/stock_available_to_promise_release
+odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@c504a22ee14e07ca143255a3b2ddc0e33382437c#subdirectory=setup/stock_available_to_promise_release
 odoo-addon-stock-available-to-promise-release-exclude-location==16.0.1.0.0.4
 odoo-addon-stock-average-daily-sale==16.0.1.0.0.16
 odoo-addon-stock-dock==16.0.1.0.1
@@ -380,15 +380,15 @@ odoo-addon-stock-putaway-hook==16.0.1.0.0.4
 odoo-addon-stock-quant-package-dimension==16.0.1.0.1.8
 odoo-addon-stock-quant-package-product-packaging==16.0.1.0.1.2
 odoo-addon-stock-quant-safe-inventory==16.0.1.0.0.2
-odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@d25ba75521b3d88f544bb364ace02a4d6d1f447b#subdirectory=setup/stock_release_channel
+odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@f0f0674837bee08caba15ebc76ed445f13b6c404#subdirectory=setup/stock_release_channel
 odoo-addon-stock-release-channel-auto-release==16.0.1.0.1
 odoo-addon-stock-release-channel-delivery==16.0.2.0.0.5
 odoo-addon-stock-release-channel-geoengine==16.0.1.0.0.4
 odoo-addon-stock-release-channel-plan==16.0.1.3.0
 odoo-addon-stock-release-channel-plan-process-end-time==16.0.1.1.0.2
-odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/acsone/wms.git@e36b056cfe0da889cb1777976f82fa3a14af9ea4#subdirectory=setup/stock_release_channel_process_end_time
-odoo-addon-stock-release-channel-propagate-channel-picking==16.0.1.0.0.7
-odoo-addon-stock-release-channel-shipment-advice==16.0.1.0.0.18
+odoo-addon-stock-release-channel-process-end-time==16.0.1.7.0.2
+odoo-addon-stock-release-channel-propagate-channel-picking @ git+https://github.com/acsone/wms.git@2bf1f12e78f6ce25380b50a24722f780df6f25cf#subdirectory=setup/stock_release_channel_propagate_channel_picking
+odoo-addon-stock-release-channel-shipment-advice==16.0.1.1.0.2
 odoo-addon-stock-release-channel-shipment-advice-process-end-time==16.0.1.0.0.3
 odoo-addon-stock-release-channel-shipment-advice-toursolver==16.0.1.0.0.4
 odoo-addon-stock-reserve-rule @ git+https://github.com/acsone/stock-logistics-warehouse.git@edc0a66d07e686f68b5ac898818e158636e4a067#subdirectory=setup/stock_reserve_rule

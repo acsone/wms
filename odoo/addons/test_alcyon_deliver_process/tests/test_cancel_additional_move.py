@@ -1,7 +1,6 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-
 from .common import TestDeliverProcessBase
 
 
@@ -45,6 +44,19 @@ class TestCancelAdditionalMove(TestDeliverProcessBase):
         ships = self._get_picking_ship(sale3)
         ships._put_in_pack(ships.move_line_ids)
         # deliver the release channel
+        # This should raise an error as we should pick the backorder to ensure
+        # customer delivery
+        res = self.channel.action_delivering()
+        self.assertEqual(
+            "stock.release.channel.deliver.check.wizard", res.get("res_model", False)
+        )
+
+        self.assertFalse(self.channel.delivering_error)
+        self.assertEqual(self.channel.state, "locked")
+
+        # The stock manager cancels the backorder
+        pick.backorder_ids.with_user(self.stock_admin).action_cancel()
+
         self.channel.action_delivering()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")

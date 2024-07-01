@@ -161,7 +161,11 @@ class TestBatchCreate(CommonCase):
         the channel with user selected is picked first
         """
         user_channel = self.channel.sudo().copy(
-            {"name": "channel 2", "user_ids": [Command.set(self.shopfloor_user.ids)]}
+            {
+                "name": "channel 2",
+                "user_ids": [Command.set(self.shopfloor_user.ids)],
+                "state": "open",
+            }
         )
         self.shopfloor_user.only_one_release_channel_by_picking_batch = True
         self.menu.sudo().release_channel_required = True

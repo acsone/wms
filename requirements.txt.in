@@ -55,11 +55,11 @@ odoo-addon-delivery-package-type-number-parcels @ git+https://github.com/OCA/del
 # wms
 odoo-addon-stock-full-location-reservation @ git+https://github.com/acsone/wms.git@16.0-stock_full_location_reservation#subdirectory=setup/stock_full_location_reservation
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@16.0-alc_stock_available_to_promise_release#subdirectory=setup/stock_available_to_promise_release
-odoo-addon-stock-release-channel-process-end-time @ git+https://github.com/OCA/wms.git@refs/pull/836/head#subdirectory=setup/stock_release_channel_process_end_time
 # https://github.com/OCA/wms/pull/497 - [ADD] stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@16.0-add-stock_storage_type_abc_classification-dro#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-stock-picking-batch-creation @ git+https://github.com/oca/wms.git@refs/pull/534/head#subdirectory=setup/stock_picking_batch_creation
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@16.0-stock_release_channel#subdirectory=setup/stock_release_channel
+odoo-addon-stock-release-channel-propagate-channel-picking @ git+https://github.com/OCA/wms.git@refs/pull/908/head#subdirectory=setup/stock_release_channel_propagate_channel_picking
 odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/OCA/wms.git@refs/pull/798/head#subdirectory=setup/shopfloor_full_location_reservation
 odoo-addon-shopfloor-base @ git+https://github.com/OCA/wms.git@refs/pull/900/head#subdirectory=setup/shopfloor_base
 # https://github.com/OCA/wms/pull/899

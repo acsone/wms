@@ -9,6 +9,17 @@ class TestDeliverProcessBase(StockPickingTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.stock_admin = cls.env["res.users"].create(
+            {
+                "name": "Stock Admin",
+                "login": "test_stock_admin",
+                "email": "test.stock.admin.mail",
+            }
+        )
+        cls.stock_admin.groups_id |= cls.env.ref("stock.group_stock_manager")
+        cls.stock_admin.groups_id |= cls.env.ref(
+            "alc_stock_picking_cancel_permission.group_picking_cancel"
+        )
         cls.env = cls.env(context=dict(cls.env.context, queue_job__no_delay=True))
         cls.env.user.company_id.shipment_advice_run_in_queue_job = True
         cls.env["stock.release.channel"].search([]).unlink()
@@ -23,6 +34,7 @@ class TestDeliverProcessBase(StockPickingTestCase):
                 "partner_ids": [Command.set((cls.partner1 | cls.partner2).ids)],
                 "warehouse_id": cls.warehouse_1.id,
                 "dock_id": cls.dock.id,
+                "process_end_time": 10.0,
             }
         )
         cls.warehouse_1.delivery_route_id.write(
