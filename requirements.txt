@@ -150,13 +150,13 @@ odoo-addon-extendable-fastapi==16.0.2.1.0
 odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@749ab3f6a3f5ca288bdc3c0af8a484c439d05b83#subdirectory=setup/fastapi
 odoo-addon-fastapi-auth-jwt==16.0.1.0.1.1
 odoo-addon-fs-attachment==16.0.1.0.7
-odoo-addon-fs-base-multi-image==16.0.1.0.0.2
+odoo-addon-fs-base-multi-image==16.0.1.1.1
 odoo-addon-fs-base-multi-media==16.0.1.0.1
 odoo-addon-fs-file==16.0.1.0.6
 odoo-addon-fs-image==16.0.1.0.2
 odoo-addon-fs-image-thumbnail==16.0.1.0.2
 odoo-addon-fs-product-brand-multi-image==16.0.1.0.0.2
-odoo-addon-fs-product-multi-image==16.0.1.0.1
+odoo-addon-fs-product-multi-image @ git+https://github.com/acsone/storage.git@953d3d02d7e8f1b022c872e7eaf372eec413df96#subdirectory=setup/fs_product_multi_image
 odoo-addon-fs-product-multi-media==16.0.1.0.1
 odoo-addon-fs-storage==16.0.1.0.3
 odoo-addon-geoengine-base-geolocalize==16.0.1.0.1.3
