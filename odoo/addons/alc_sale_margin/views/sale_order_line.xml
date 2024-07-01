@@ -52,6 +52,7 @@
                 <field
           name="margin_delivered_percent"
           string="Margin dlvd. (%)"
+          widget="percentage"
           optional="hide"
         />
                 <field name="margin_delivered" string="Margin dlvd." optional="hide" />
