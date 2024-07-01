@@ -117,6 +117,8 @@
         "stock_move_priority_picking_assign",
         "stock_move_propagate_first_move",
         "stock_move_propagate_first_move_cancel",
+        "stock_package_type_category",
+        "stock_picking_batch_creation",
         "stock_picking_backorder_reason",
         "stock_picking_backorder_reason_grn",
         "stock_picking_batch_creation",

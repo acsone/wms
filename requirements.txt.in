@@ -119,6 +119,7 @@ odoo-addon-stock-orderpoint-default-location @ git+https://github.com/OCA/stock-
 odoo-addon-stock-location-orderpoint-dynamic-routing-merge @ git+https://github.com/OCA/stock-logistics-orderpoint.git@refs/pull/10/head#subdirectory=setup/stock_location_orderpoint_dynamic_routing_merge
 
 # stock-logistics-warehouse
+odoo-addon-stock-package-type-category @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2091/head#subdirectory=setup/stock_package_type_category
 # https://github.com/OCA/stock-logistics-warehouse/pull/1646
 odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock-default-scrap-location-dro#subdirectory=setup/stock_scrap_location_default
 # https://github.com/OCA/stock-logistics-warehouse/pull/1794
