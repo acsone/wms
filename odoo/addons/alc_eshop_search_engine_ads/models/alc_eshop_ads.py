@@ -83,8 +83,6 @@ class AlcEshopAds(Model):
         now = fields.Datetime.now()
         return [
             ("is_published", "=", True),
-            "|",
-            ("date_start", ">", now),
             ("date_end", "<", now),
         ]
 
