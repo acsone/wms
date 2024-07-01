@@ -178,7 +178,7 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
         self.assertEqual(self.adv_top_left.se_binding_ids.state, "to_delete")
 
     def test_05(self):
-        """Future ads should be deleted."""
+        """Future ads should be kept."""
         self.test_00()
         self.assertEqual(self.adv_top_left.se_binding_ids.state, "done")
         self.adv_top_left.write(
@@ -188,8 +188,8 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
             }
         )
         self.backend.button_synchronize_ads()
-        self.assertFalse(self.adv_top_left.is_published)
-        self.assertEqual(self.adv_top_left.se_binding_ids.state, "to_delete")
+        self.assertTrue(self.adv_top_left.is_published)
+        self.assertEqual(self.adv_top_left.se_binding_ids.state, "to_recompute")
 
     def test_06(self):
         """Past ads should be deleted."""
