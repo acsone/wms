@@ -189,7 +189,7 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
         )
         self.backend.button_synchronize_ads()
         self.assertTrue(self.adv_top_left.is_published)
-        self.assertEqual(self.adv_top_left.se_binding_ids.state, "to_recompute")
+        self.assertEqual(self.adv_top_left.se_binding_ids.state, "to_export")
 
     def test_06(self):
         """Past ads should be deleted."""

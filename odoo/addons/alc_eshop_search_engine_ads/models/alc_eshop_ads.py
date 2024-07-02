@@ -73,7 +73,6 @@ class AlcEshopAds(Model):
     def _get_ads_to_export_domain(self):
         now = fields.Datetime.now()
         return [
-            ("date_start", "<=", now),
             ("date_end", ">=", now),
             ("is_published", "=", True),
         ]
