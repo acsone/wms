@@ -5,7 +5,7 @@ import datetime
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields
+from odoo import _, api, fields
 
 from odoo.addons.alc_sale_consignment.models.sale_order import SaleOrder as Order
 
@@ -35,12 +35,17 @@ class SaleOrder(Order):
     @api.model
     def cancel_sales_bo_gt_3months(self):
         lines = self._get_sales_bo_gt_3months_lines()
-        self._cancel_sales_bo_gt_3months_send_mail(lines)
-        self._cancel_sales_bo_gt_3months(lines)
+        for order in lines.order_id:
+            order_lines = lines.filtered(lambda line, o=order: line.order_id == o)
+            order.with_delay(
+                description=_(
+                    "%(order)s: Cancel BO greater than 3 months", order=order.name
+                )
+            )._cancel_sales_bo_gt_3months(order_lines)
 
-    @api.model
     def _cancel_sales_bo_gt_3months(self, lines):
         wizard = self.env["sale.order.line.cancel"].new()
+        canceled_lines = False
         for line in lines:
             moves = line.move_ids
             remaining_moves = moves.filtered(
@@ -52,9 +57,9 @@ class SaleOrder(Order):
                 )
             wiz = wizard.with_context(active_id=line.id, active_model=line._name)
             wiz.cancel_remaining_qty()
-
-    @api.model
-    def _cancel_sales_bo_gt_3months_send_mail(self, lines):
+            canceled_lines = True
+        if not canceled_lines:
+            return
         send_processing_finalizer_email = (
             self.env["ir.config_parameter"]
             .sudo()
@@ -63,9 +68,9 @@ class SaleOrder(Order):
         if not send_processing_finalizer_email:
             return
         mail_template = self.env.ref("alc_sale_processing_finalizer.mail_template_30")
-        mail_template.model = self._name
-        for canceled_order in lines.order_id:
-            mail_template.send_mail(canceled_order.id, force_send=True)
+        mail_template.with_context(
+            sales_bo_gt_3months_canceled_lines=lines.ids
+        ).send_mail(self.id, force_send=False)
 
     @api.model
     def _get_sales_bo_gt_3months_lines(self, sale_order=None):

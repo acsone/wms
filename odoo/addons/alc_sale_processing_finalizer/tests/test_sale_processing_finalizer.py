@@ -2,6 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
+from odoo.addons.queue_job.tests.common import trap_jobs
+
 from .common import TestSaleProcessingFinalizerComon
 
 
@@ -19,8 +21,18 @@ class TestCron(TestSaleProcessingFinalizerComon):
                 product_qty_canceled is = 0 and product_qty_remains_to_deliver > 0 for
                 the so's to_keep
         """
-        self.env["sale.order"].cancel_sales_bo_gt_3months()
-
+        lines = self.env["sale.order"]._get_sales_bo_gt_3months_lines()
+        with trap_jobs() as trap:
+            self.env["sale.order"].cancel_sales_bo_gt_3months()
+            trap.assert_jobs_count(1)
+            trap.assert_enqueued_job(
+                self.so_after_3months_to_purge._cancel_sales_bo_gt_3months,
+                args=(lines,),
+            )
+            self.assertEqual(
+                trap.enqueued_jobs[0].method_name, "_cancel_sales_bo_gt_3months"
+            )
+            trap.perform_enqueued_jobs()
         # Check that quantities for SO to purge have indeed been purged
         self.assertEqual(
             self.so_after_3months_to_purge.order_line.product_qty_canceled, 2
