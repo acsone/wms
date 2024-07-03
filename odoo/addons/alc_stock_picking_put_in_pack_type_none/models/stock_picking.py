@@ -8,7 +8,7 @@ from odoo.addons.stock_picking_delivery_link.models.stock_picking import (
 
 
 class StockPicking(Picking):
-    def _set_delivery_package_type(self):
+    def _set_delivery_package_type(self, batch_pack=False):
         """
         As we want to filter package types on carrier even on internal.
 
@@ -16,7 +16,7 @@ class StockPicking(Picking):
         the related carrier taken from the delivery picking.
         """
         self.ensure_one()
-        res = super()._set_delivery_package_type()
+        res = super()._set_delivery_package_type(batch_pack=batch_pack)
         context = res.get("context", {})
         if self.picking_type_id.delivery_package_type_none_on_put_in_pack:
             context = dict(context, current_package_carrier_type="none")

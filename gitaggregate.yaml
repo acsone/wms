@@ -21,6 +21,7 @@
     - origin 16.0-type-annotations
     - odoo refs/pull/120538/head # [IMP] product_expiry: Don't trigger move lines expiration date recomputation
     - odoo refs/pull/128732/head # [IMP] stock: Improves product.action_open_quants performances
+    - odoo refs/pull/171545/head # [FIX] purchase_stock: AVCO computation - support line discount
   shell_command_after:
     # pyproject.toml
     - curl -sSL https://github.com/odoo/odoo/pull/44001.patch | git am
@@ -29,9 +30,7 @@
     # remove broken/useless stuff
     - git rm -r addons/test_mail_sms
     - git commit -m "Remove unused auto install addon test_mail_sms"
-    - curl -sSL https://github.com/acsone/odoo/pull/79.patch | git am # [FIX] purchase_stock: AVCO computation - support line discount
     - curl -sSL https://github.com/odoo/odoo/pull/145494.patch | git am # [FIX] account: add missing depends
-    - curl -sSL https://github.com/odoo/odoo/pull/141528.patch | git am # missing python 3.11 opcodes
   target: origin 16.0-alc_master
 
 ./src/account_payment_mode_auto_reconcile:

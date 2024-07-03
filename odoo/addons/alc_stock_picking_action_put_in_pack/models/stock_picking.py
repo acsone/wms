@@ -12,9 +12,9 @@ class StockPicking(Picking):
             return self._set_delivery_package_type()
         return res
 
-    def _set_delivery_package_type(self):
+    def _set_delivery_package_type(self, batch_pack=False):
         self.ensure_one()
-        res = super()._set_delivery_package_type()
+        res = super()._set_delivery_package_type(batch_pack=batch_pack)
         context = res.get("context", self.env.context)
         if (
             not context.get("current_package_carrier_type")
