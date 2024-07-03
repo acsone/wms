@@ -360,7 +360,7 @@ odoo-addon-stock-picking-backorder-reason-grn @ git+https://github.com/acsone/st
 odoo-addon-stock-picking-batch-creation @ git+https://github.com/acsone/wms.git@f390ebcf5b1b126d506eb43b0a1ad9cb01355fa4#subdirectory=setup/stock_picking_batch_creation
 odoo-addon-stock-picking-batch-start @ git+https://github.com/acsone/stock-logistics-workflow.git@2c72016cdc9a0a15508dd3295218c3089b105523#subdirectory=setup/stock_picking_batch_start
 odoo-addon-stock-picking-completion-info==16.0.1.0.1.2
-odoo-addon-stock-picking-delivery-link @ git+https://github.com/acsone/delivery-carrier.git@76bb9868926ed4178aba6dbaa324f144b71c8d4c#subdirectory=setup/stock_picking_delivery_link
+odoo-addon-stock-picking-delivery-link @ git+https://github.com/acsone/delivery-carrier.git@9924c781c7035b928671e29b53a16cd7b5940124#subdirectory=setup/stock_picking_delivery_link
 odoo-addon-stock-picking-grn-mandatory==16.0.1.0.0.7
 odoo-addon-stock-picking-group-by-base @ git+https://github.com/acsone/stock-logistics-workflow.git@6037d72493b86c43d524445cf2492fd4987f88df#subdirectory=setup/stock_picking_group_by_base
 odoo-addon-stock-picking-group-by-max-weight @ git+https://github.com/acsone/stock-logistics-workflow.git@5a13075c617633fffbd9d734dba4c64432712d15#subdirectory=setup/stock_picking_group_by_max_weight
