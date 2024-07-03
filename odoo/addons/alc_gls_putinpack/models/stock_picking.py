@@ -29,8 +29,8 @@ class StockPicking(PickingBase):
                 picking.move_line_ids.mapped("reserved_uom_qty")
             )
 
-    def _package_move_lines(self) -> StockMoveLine:
-        move_line_ids = super()._package_move_lines()
+    def _package_move_lines(self, batch_pack=False) -> StockMoveLine:
+        move_line_ids = super()._package_move_lines(batch_pack=batch_pack)
         # Add here the packages already marked as done (qty_done > 0) and that have
         # the package carrier type as gls.
         if self.carrier_id.delivery_type == "gls":
