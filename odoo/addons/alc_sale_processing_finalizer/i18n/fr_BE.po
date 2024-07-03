@@ -17,6 +17,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_sale_processing_finalizer
+#. odoo-python
+#: code:addons/alc_sale_processing_finalizer/models/sale_order.py:0
+#, python-format
+msgid "%(order)s: Cancel BO greater than 3 months"
+msgstr ""
+
+#. module: alc_sale_processing_finalizer
 #: model:ir.model.fields,field_description:alc_sale_processing_finalizer.field_sale_order__auto_finalize_processing
 msgid "Auto Finalize Processing"
 msgstr "Finalisation automatique"
