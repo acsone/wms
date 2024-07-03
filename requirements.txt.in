@@ -112,6 +112,10 @@ odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-lo
 # https://github.com/OCA/stock-logistics-warehouse/pull/1794
 odoo-addon-stock-reserve-rule @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1794/head#subdirectory=setup/stock_reserve_rule
 odoo-addon-stock-location-product-restriction @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2075/head#subdirectory=setup/stock_location_product_restriction
+odoo-addon-procurement-auto-create-group @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2096/head#subdirectory=setup/procurement_auto_create_group
+odoo-addon-procurement-auto-create-group-by-product @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2096/head#subdirectory=setup/procurement_auto_create_group_by_product
+
+
 
 
 # stock-logistics-workflow
