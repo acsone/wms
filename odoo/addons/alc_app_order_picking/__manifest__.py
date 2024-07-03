@@ -126,6 +126,7 @@
         "stock_picking_completion_info",
         "stock_picking_delivery_link",
         "stock_picking_group_by_max_weight",
+        "stock_picking_delivery_package_type_domain",
         "stock_picking_group_by_partner_by_carrier",
         "stock_picking_group_by_partner_by_carrier_by_customer",
         "stock_picking_low_priority",
