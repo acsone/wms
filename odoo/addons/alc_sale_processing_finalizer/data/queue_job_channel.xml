@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="channel_cancel_sales_bo_gt_3months" model="queue.job.channel">
+        <field name="name">Cancel BO line Gt 3 months</field>
+        <field
+      name="parent_id"
+      ref="alc_queue_job_background_channel.channel_root_background"
+    />
+    </record>
+</odoo>

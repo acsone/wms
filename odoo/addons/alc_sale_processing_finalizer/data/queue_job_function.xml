@@ -7,4 +7,12 @@
     <field name="method">cancel_sales_bo_gt_3months</field>
     <field name="channel_id" ref="queue_job_cron.channel_root_ir_cron" />
   </record>
+  <record id="job_function_cancel_sales_bo_gt_3months" model="queue.job.function">
+    <field name="model_id" ref="sale.model_sale_order" />
+    <field name="method">_cancel_sales_bo_gt_3months</field>
+    <field
+      name="channel_id"
+      ref="alc_sale_processing_finalizer.channel_cancel_sales_bo_gt_3months"
+    />
+  </record>
 </odoo>

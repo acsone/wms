@@ -13,7 +13,7 @@ def migrate(env, version):
     # update email template translation
     json_fr = Json(
         """
-<t t-set="lines" t-value="object._get_sales_bo_gt_3months_lines(object)" />
+<t t-set="lines" t-value="object.env['sale.order.line'].browse(object.env.context.get('sales_bo_gt_3months_canceled_lines', []))" />
 <p>Bonjour,<br/></p>
 <p>Les articles non disponibles de votre commande <t t-out="object.name">SO123456</t> ont été annulés car la commande a plus de 3 mois.<br/></p>
 <p t-if="lines">
@@ -37,7 +37,7 @@ Si vous le souhaitez, vous pouvez recommander ces articles via le site, ou en pr
     env.cr.execute(query)
     json_nl = Json(
         """
-<t t-set="lines" t-value="object._get_sales_bo_gt_3months_lines(object)" />
+<t t-set="lines" t-value="object.env['sale.order.line'].browse(object.env.context.get('sales_bo_gt_3months_canceled_lines', []))" />
 <p>Beste,<br/></p>
 <p>De niet beschikbare artikelen in uw bestelling <t t-out="object.name">SO123456</t> zijn geannuleerd omdat de bestelling meer dan 3 maanden oud is.<br/></p>
 <p t-if="lines">
@@ -62,7 +62,7 @@ Als u wenst kan u deze artikelen opnieuw bestellen via de site, of door contact 
 
     json_en = Json(
         """
-<t t-set="lines" t-value="object._get_sales_bo_gt_3months_lines(object)" />
+<t t-set="lines" t-value="object.env['sale.order.line'].browse(object.env.context.get('sales_bo_gt_3months_canceled_lines', []))" />
 <p>Hello,<br/></p>
 <p>Unavailable items from your order <t t-out="object.name">SO123456</t> have been canceled because the order is more than 3 months old.<br/></p>
 <p t-if="lines">
