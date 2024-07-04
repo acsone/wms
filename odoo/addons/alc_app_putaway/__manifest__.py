@@ -48,5 +48,6 @@
         "alc_stock_storage_type_sequence_condition",
         "stock_move_free_reservation_reassign",
         "procurement_auto_create_group",
+        "procurement_auto_create_group_by_product",
     ],
 }
