@@ -57,7 +57,7 @@ markupsafe==2.1.3
 multidict==6.0.4
 num2words==0.5.12
 numpy==1.25.1
-odoo @ git+https://github.com/acsone/odoo.git@43d1550ec51a2729cadf6c7d9c36c929733d3067
+odoo @ git+https://github.com/acsone/odoo.git@146c83b50f0037444f4abd87efa536339cc4e749
 odoo-addon-account-analytic-account-tag==16.0.1.0.0.2
 odoo-addon-account-analytic-required==16.0.1.0.0.8
 odoo-addon-account-analytic-tag==16.0.1.0.0.10
@@ -235,7 +235,7 @@ odoo-addon-report-xlsx==16.0.1.0.2
 odoo-addon-report-xlsx-helper==16.0.1.0.0.3
 odoo-addon-report-xml==16.0.1.1.0.1
 odoo-addon-rest-log==16.0.1.0.1.3
-odoo-addon-rma @ git+https://github.com/acsone/rma.git@f018f60cd581c484de4aab0e2919c74b2c331fb0#subdirectory=setup/rma
+odoo-addon-rma @ git+https://github.com/acsone/rma.git@3842abd17d4562e37c65911eea502401ed9505ef#subdirectory=setup/rma
 odoo-addon-rma-sale==16.0.2.0.0.2
 odoo-addon-sale-cart==16.0.1.0.0.2
 odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@e3920cb6276556e98afed18a828d5a7c5103bf67#subdirectory=setup/sale_channel
