@@ -87,6 +87,9 @@ odoo-addon-purchase-order-line-stock-move-cancel @ git+https://github.com/OCA/pu
 # reporting-engine
 odoo-addon-report-csv @ git+https://github.com/OCA/reporting-engine.git@refs/pull/793/head#subdirectory=setup/report_csv
 
+# rma
+odoo-addon-rma @ git+https://github.com/OCA/rma.git@refs/pull/403/head#subdirectory=setup/rma
+
 # sale-workflow
 # https://github.com/OCA/sale-workflow/pull/2322
 odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@16.0-mig-product_price_category-sbj#subdirectory=setup/product_price_category

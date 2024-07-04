@@ -15,5 +15,8 @@
         "rma",
         "rma_sale",
         "product_warranty",
+        # ACSONE
+        "alc_rma_sale_quantity_default_value",
+        "alc_rma_sale_operation_required",
     ],
 }
