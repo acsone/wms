@@ -1,0 +1,36 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_stock_location_putaway_rule_out
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-04 18:33+0000\n"
+"PO-Revision-Date: 2024-07-04 18:33+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_stock_location_putaway_rule_out
+#: model:ir.model,name:alc_stock_location_putaway_rule_out.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: alc_stock_location_putaway_rule_out
+#: model_terms:ir.ui.view,arch_db:alc_stock_location_putaway_rule_out.stock_location_search_view
+msgid "No Putaway Rule"
+msgstr "Sans stratégie de rangement."
+
+#. module: alc_stock_location_putaway_rule_out
+#: model:ir.model.fields,field_description:alc_stock_location_putaway_rule_out.field_stock_location__putaway_rule_out_ids
+msgid "Putaway Out Rules"
+msgstr "Stratégie de rangement vers cet emplacement"
+
+#. module: alc_stock_location_putaway_rule_out
+#: model:ir.model.fields,help:alc_stock_location_putaway_rule_out.field_stock_location__putaway_rule_out_ids
+msgid "putaway rules having this location as destination"
+msgstr "Stratégies de rangement ayant cet emplacement comme destination"
