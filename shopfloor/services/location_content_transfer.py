@@ -1,8 +1,11 @@
 # Copyright 2020-2021 Camptocamp SA (http://www.camptocamp.com)
 # Copyright 2020-2022 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # Copyright 2023 Michael Tietz (MT Software) <mtietz@mt-software.de>
+# Copyright 2023 ACSONE SA/NV (http://www.acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import _, fields
+from odoo.osv import expression
+from odoo.tools import safe_eval
 
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
@@ -250,14 +253,37 @@ class LocationContentTransfer(Component):
             )
         return self.env["stock.move"].create(move_vals_list)
 
+    def _get_additional_domain_eval_context(self):
+        """Prepare the context used when evaluating the additional domain
+        :returns: dict -- evaluation context given to safe_eval
+        """
+        return {
+            "datetime": safe_eval.datetime,
+            "dateutil": safe_eval.dateutil,
+            "time": safe_eval.time,
+            "uid": self.env.uid,
+            "user": self.env.user,
+        }
+
+    def _get_location_to_work_from_domain(self):
+        domain = [
+            ("picking_type_id", "in", self.picking_types.ids),
+            ("state", "=", "assigned"),
+            ("user_id", "in", (False, self.env.user.id)),
+        ]
+        if self.work.menu.additional_domain_get_work:
+            additional_domain = safe_eval.safe_eval(
+                self.work.menu.additional_domain_get_work,
+                self._get_additional_domain_eval_context(),
+            )
+            domain = expression.AND([domain, additional_domain])
+        return domain
+
     def _find_location_to_work_from(self):
         location = self.env["stock.location"]
+        domain = self._get_location_to_work_from_domain()
         pickings = self.env["stock.picking"].search(
-            [
-                ("picking_type_id", "in", self.picking_types.ids),
-                ("state", "=", "assigned"),
-                ("user_id", "in", (False, self.env.user.id)),
-            ],
+            domain,
             order="user_id, priority desc, scheduled_date asc, id desc",
         )
 

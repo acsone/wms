@@ -105,6 +105,22 @@ class TestLocationContentTransferGetWork(LocationContentTransferCommonCase):
         )
         self.assertEqual(response["next_state"], "scan_destination_all")
 
+    def test_find_work_additional_domain(self):
+        next_location = self.service._find_location_to_work_from()
+        self.assertTrue(next_location)
+        self.menu.sudo().additional_domain_get_work = [
+            ("id", "not in", self.pickings.ids)
+        ]
+        next_location = self.service._find_location_to_work_from()
+        self.assertFalse(next_location)
+        response = self.service.dispatch("find_work", params={})
+        self.assert_response(
+            response,
+            next_state="get_work",
+            data={},
+            message=self.service.msg_store.no_work_found(),
+        )
+
     def test_cancel_work(self):
         next_location = self.service._find_location_to_work_from()
         stock = self.service._actions_for("stock")

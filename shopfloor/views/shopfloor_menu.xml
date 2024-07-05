@@ -89,7 +89,14 @@
                     attrs="{'invisible': [('allow_get_work_is_possible', '=', False)]}"
                 >
                   <field name="allow_get_work_is_possible" invisible="1" />
+                  <field name="model_additional_domain_get_work" invisible="1" />
                   <field name="allow_get_work" />
+                  <field
+                        name="additional_domain_get_work"
+                        widget="domain"
+                        options="{'model': 'model_additional_domain_get_work'}"
+                        attrs="{'invisible': ['|', ('allow_get_work', '=', False), ('model_additional_domain_get_work', '=', False)]}"
+                    />
               </group>
               <group
                     name="no_prefill_qty"

@@ -68,7 +68,8 @@
     "allow_unreserve_other_moves": true,
     "allow_ignore_no_putaway_available": true,
     "allow_get_work": true,
-    "no_prefill_qty": true
+    "no_prefill_qty": true,
+    "model_additional_domain_get_work": "stock.picking"
 }
         </field>
     </record>

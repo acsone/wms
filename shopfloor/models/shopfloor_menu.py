@@ -162,6 +162,16 @@ class ShopfloorMenu(models.Model):
     allow_get_work_is_possible = fields.Boolean(
         compute="_compute_allow_get_work_is_possible"
     )
+    additional_domain_get_work = fields.Char(
+        string="Get Work additional domain",
+        help=(
+            "Additional domain to filter the tasks that can be proposed to the user."
+        ),
+    )
+    model_additional_domain_get_work = fields.Char(
+        compute="_compute_model_additional_domain_get_work",
+    )
+
     no_prefill_qty = fields.Boolean(
         string="Do not pre-fill quantity to pick",
         help=NO_PREFILL_QTY_HELP,
@@ -410,6 +420,13 @@ class ShopfloorMenu(models.Model):
         for menu in self:
             menu.allow_get_work_is_possible = menu.scenario_id.has_option(
                 "allow_get_work"
+            )
+
+    @api.depends("scenario_id")
+    def _compute_model_additional_domain_get_work(self):
+        for menu in self:
+            menu.model_additional_domain_get_work = menu.scenario_id.options.get(
+                "model_additional_domain_get_work", False
             )
 
     @api.depends("scenario_id")
