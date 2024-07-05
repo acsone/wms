@@ -97,6 +97,33 @@
                         options="{'model': 'model_additional_domain_get_work'}"
                         attrs="{'invisible': ['|', ('allow_get_work', '=', False), ('model_additional_domain_get_work', '=', False)]}"
                     />
+                  <field name="custom_sort_key_get_work_is_possible" invisible="1" />
+                  <div
+                        class="o_cell o_wrap_label"
+                        style="margin-top: 4px;"
+                        colspan="2"
+                        attrs="{'invisible': [('custom_sort_key_get_work_is_possible', '=', False)]}"
+                    >
+                    <label
+                            class="text-900"
+                            for="custom_sort_key_get_work"
+                        >Custom code to construct the key to sort tasks</label>
+                    <p>Two variables are available:</p>
+                    <ul>
+                        <li><code
+                                >item</code>: The record for with the key must be computed.</li>
+                        <li><code>super</code>: The initial method to compute the key.
+                        </li>
+                        <li>To assign the key value: <code
+                                >key = (item.x, ) + super(line)</code></li>
+                    </ul>
+                    <p>Leave blank to use the default method.</p>
+                    <field
+                            name="custom_sort_key_get_work"
+                            attrs="{'invisible': [('custom_sort_key_get_work_is_possible', '=', False)]}"
+                            nolabel="1"
+                        />
+                  </div>
               </group>
               <group
                     name="no_prefill_qty"

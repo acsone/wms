@@ -1,6 +1,7 @@
 # Copyright 2020 Camptocamp SA (http://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import _, api, exceptions, fields, models
+from odoo.tools.safe_eval import test_python_expr
 
 PICK_PACK_SAME_TIME_HELP = """
 If you tick this box, while picking goods from a location
@@ -168,6 +169,23 @@ class ShopfloorMenu(models.Model):
             "Additional domain to filter the tasks that can be proposed to the user."
         ),
     )
+    custom_sort_key_get_work = fields.Text(
+        string="Get Work custom sort key",
+        help=(
+            """Python code to sort the tasks that can be proposed to the user.
+
+            It allows to sort the tasks in a custom way to propose the most
+            relevant tasks first. The code must assign a value to the variable
+            'key'. The variable 'item' is the task to sort. Its type depends on
+            the scenario. For example, in the 'location_content_transfer' scenario,
+            it is a 'stock.move.line' record.
+            """
+        ),
+    )
+    custom_sort_key_get_work_is_possible = fields.Boolean(
+        compute="_compute_custom_sort_key_get_work_is_possible"
+    )
+
     model_additional_domain_get_work = fields.Char(
         compute="_compute_model_additional_domain_get_work",
     )
@@ -422,6 +440,15 @@ class ShopfloorMenu(models.Model):
                 "allow_get_work"
             )
 
+    @api.depends("scenario_id", "allow_get_work")
+    def _compute_custom_sort_key_get_work_is_possible(self):
+        for menu in self:
+            menu.custom_sort_key_get_work_is_possible = (
+                menu.scenario_id.has_option("allow_custom_sort_key_get_work")
+                and menu.allow_get_work_is_possible
+                and menu.allow_get_work
+            )
+
     @api.depends("scenario_id")
     def _compute_model_additional_domain_get_work(self):
         for menu in self:
@@ -475,3 +502,14 @@ class ShopfloorMenu(models.Model):
             menu.allow_alternative_destination_package_is_possible = (
                 menu.scenario_id.has_option("allow_alternative_destination_package")
             )
+
+    @api.constrains("custom_sort_key_get_work")
+    def _check_custom_sort_key_get_work(self):
+        for menu in self:
+            code = (
+                menu.custom_sort_key_get_work and menu.custom_sort_key_get_work.strip()
+            )
+            if code:
+                msg = test_python_expr(menu.custom_sort_key_get_work, mode="exec")
+                if msg:
+                    raise exceptions.ValidationError(msg)

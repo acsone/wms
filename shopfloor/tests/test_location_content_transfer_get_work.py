@@ -1,5 +1,8 @@
 # Copyright 2022 Camptocamp SA
+# Copyright 2024 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+
+from odoo import exceptions
 
 from .test_location_content_transfer_base import LocationContentTransferCommonCase
 
@@ -120,6 +123,29 @@ class TestLocationContentTransferGetWork(LocationContentTransferCommonCase):
             data={},
             message=self.service.msg_store.no_work_found(),
         )
+
+    def test_find_work_custom_sort_key(self):
+        self.menu.sudo().custom_sort_key_get_work = (
+            f"key = (-1 if item.location_id.id == {self.content_loc.id} else 10, )"
+        )
+        next_location = self.service._find_location_to_work_from()
+        self.assertEqual(next_location, self.content_loc)
+        self.menu.sudo().custom_sort_key_get_work = (
+            f"key = (-1 if item.location_id.id == {self.content_loc2.id} else 10, )"
+        )
+        next_location = self.service._find_location_to_work_from()
+        self.assertEqual(next_location, self.content_loc2)
+        self.menu.sudo().custom_sort_key_get_work = f"""
+key = (-1 if item.location_id.id == {self.content_loc2.id} else 10, ) + super(item)
+        """
+        next_location = self.service._find_location_to_work_from()
+        self.assertEqual(next_location, self.content_loc2)
+
+    def test_find_work_custom_sort_key_error(self):
+        with self.assertRaises(exceptions.ValidationError):
+            # wrong indentation in python code
+            self.menu.sudo().custom_sort_key_get_work = "  key = 1"
+        self.menu.sudo().custom_sort_key_get_work = "key = 1"
 
     def test_cancel_work(self):
         next_location = self.service._find_location_to_work_from()

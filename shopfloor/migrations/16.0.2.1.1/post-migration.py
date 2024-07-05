@@ -20,6 +20,7 @@ def migrate(cr, version):
 def _update_scenario_options(scenario):
     options = scenario.options
     options["model_additional_domain_get_work"] = "stock.picking"
+    options["allow_custom_sort_key_get_work"] = True
     options_edit = json.dumps(options or {}, indent=4, sort_keys=True)
     scenario.write({"options_edit": options_edit})
     _logger.info(
