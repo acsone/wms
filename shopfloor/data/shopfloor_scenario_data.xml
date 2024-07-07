@@ -21,7 +21,8 @@
     "multiple_move_single_pack": true,
     "no_prefill_qty": true,
     "scan_location_or_pack_first": true,
-    "allow_alternative_destination_package": true
+    "allow_alternative_destination_package": true,
+    "require_destination_package": true
 }
         </field>
     </record>
