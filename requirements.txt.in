@@ -179,9 +179,6 @@ odoo-addon-base-ubl-payment-mode-required @ git+https://github.com/edido-eu/pepp
 odoo-addon-l10n-be-account-einvoice-generate @ git+https://github.com/edido-eu/peppol@16.0#subdirectory=setup/l10n_be_account_einvoice_generate
 odoo-addon-account-invoice-transmit-peppol @ git+https://github.com/edido-eu/peppol@refs/pull/9/head#subdirectory=setup/account_invoice_transmit_peppol
 
-# OCA/rest-framework
-odoo-addon-fastapi @ git+https://github.com/OCA/rest-framework.git@refs/pull/440/head#subdirectory=setup/fastapi
-
 #fastapi
 # https://github.com/tiangolo/fastapi/pull/5452
 fastapi @ git+https://github.com/tiangolo/fastapi@refs/pull/5452/head
