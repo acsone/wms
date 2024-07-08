@@ -3,6 +3,8 @@
 # Copyright 2023 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import _, fields
+from odoo.osv import expression
+from odoo.tools import safe_eval
 
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
@@ -250,25 +252,85 @@ class LocationContentTransfer(Component):
             )
         return self.env["stock.move"].create(move_vals_list)
 
-    def _find_location_to_work_from(self):
-        location = self.env["stock.location"]
-        pickings = self.env["stock.picking"].search(
-            [
-                ("picking_type_id", "in", self.picking_types.ids),
-                ("state", "=", "assigned"),
-                ("user_id", "in", (False, self.env.user.id)),
-            ],
-            order="user_id, priority desc, scheduled_date asc, id desc",
-        )
+    def _get_additional_domain_eval_context(self):
+        """Prepare the context used when evaluating the additional domain
+        :returns: dict -- evaluation context given to safe_eval
+        """
+        return {
+            "datetime": safe_eval.datetime,
+            "dateutil": safe_eval.dateutil,
+            "time": safe_eval.time,
+            "uid": self.env.uid,
+            "user": self.env.user,
+        }
 
-        for next_picking in pickings:
-            move_lines = next_picking.move_line_ids.filtered(
-                lambda line: line.qty_done < line.reserved_uom_qty
+    def _get_location_to_work_from_domain(self):
+        domain = [
+            ("picking_type_id", "in", self.picking_types.ids),
+            ("state", "=", "assigned"),
+            ("user_id", "in", (False, self.env.user.id)),
+        ]
+        if self.work.menu.additional_domain_get_work:
+            additional_domain = safe_eval.safe_eval(
+                self.work.menu.additional_domain_get_work,
+                self._get_additional_domain_eval_context(),
             )
-            location = fields.first(move_lines).location_id
-            if location:
-                break
-        return location
+            domain = expression.AND([domain, additional_domain])
+        return domain
+
+    def _get_location_to_work_apply_order(self, query: expression.Query):
+        """Apply order to the query to find the location to work from
+
+        In order to allow to define an ordering on complex criteria involving
+        for example fields from related models, this method gets the query
+        object as input and returns the query object with the order applied.
+
+        :param query: the query object
+        """
+        if False:
+            query.order = "user_id, priority desc, scheduled_date asc, id desc"
+        else:
+            # we want to order on the source location of the linked move lines
+            # so we need to join the move lines table
+            stock_picking = self.env["stock.picking"]
+            stock_move_line = self.env["stock.move.line"]
+            stock_location = self.env["stock.location"]
+            join_operation = query.join(
+                stock_picking._table,
+                "id",
+                stock_move_line._table,
+                "picking_id",
+                "operation",
+            )
+            join_location = query.join(
+                join_operation, "location_id", stock_location._table, "id", "location"
+            )
+            query.order = (
+                f"user_id, {join_location}.shopfloor_picking_sequence, "
+                f"{join_location}.name, priority desc, scheduled_date asc, id desc"
+            )
+
+    def _find_location_to_work_from(self):
+        domain = self._get_location_to_work_from_domain()
+        stock_picking = self.env["stock.picking"]
+        stock_picking.check_access_rights("read")
+        stock_picking._flush_search(domain)
+        query: expression.Query = stock_picking._where_calc(domain)
+        stock_picking._apply_ir_rules(query, "read")
+        # add condition on stock.move.line
+        stock_move_line = self.env["stock.move.line"]
+        query.join(
+            stock_picking._table,
+            "id",
+            stock_move_line._table,
+            "picking_id",
+            "operation_to_do",
+            '{rhs}."qty_done" < {rhs}."reserved_uom_qty"',
+        )
+        self._get_location_to_work_apply_order(query)
+        query.limit = 1
+        pickings = stock_picking.browse(query)
+        return fields.first(pickings.mapped("move_line_ids.location_id"))
 
     def find_work(self):
         """Find the next location to work from, for a user.
