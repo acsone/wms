@@ -126,6 +126,7 @@
     - oca refs/pull/902/head # shopfloor: Zone picking no packing
     - oca refs/pull/911/head # [16.0][FIX] shopfloor: Don't embed postponed line quantity
     - oca refs/pull/912/head # [16.0] shopfloor cluster_picking: Custom sorting by device
+    - oca refs/pull/919/head # [FIX] shopfloor: fix location content transfer complete message
   target: origin 16.0-alc-shopfloor
 
 ./src/stock_full_location_reservation:
