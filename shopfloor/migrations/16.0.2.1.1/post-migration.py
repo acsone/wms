@@ -15,12 +15,28 @@ def migrate(cr, version):
         return
     env = api.Environment(cr, SUPERUSER_ID, {})
     zone_picking_scenario = env.ref("shopfloor.scenario_zone_picking")
-    _update_scenario_options(zone_picking_scenario)
+    _update_zone_scenario_options(zone_picking_scenario)
+    scenario = env["shopfloor.scenario"].search(
+        [("key", "=", "location_content_transfer")]
+    )
+    _update_location_scenario_options(scenario)
 
 
-def _update_scenario_options(scenario):
+def _update_zone_scenario_options(scenario):
     options = scenario.options
     options["require_destination_package"] = True
     options_edit = json.dumps(options or {}, indent=4, sort_keys=True)
     scenario.write({"options_edit": options_edit})
     _logger.info("Option require_destination_package added to scenario Zone Picking")
+
+
+def _update_location_scenario_options(scenario):
+    options = scenario.options
+    options["model_additional_domain_get_work"] = "stock.picking"
+    options["allow_custom_sort_key_get_work"] = True
+    options_edit = json.dumps(options or {}, indent=4, sort_keys=True)
+    scenario.write({"options_edit": options_edit})
+    _logger.info(
+        "Option 'model_additional_domain_get_work' added to scenario Zone Picking"
+    )
+

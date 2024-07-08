@@ -1,8 +1,11 @@
 # Copyright 2020-2021 Camptocamp SA (http://www.camptocamp.com)
 # Copyright 2020-2022 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # Copyright 2023 Michael Tietz (MT Software) <mtietz@mt-software.de>
+# Copyright 2023 ACSONE SA/NV (http://www.acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import _, fields
+from odoo import _
+from odoo.osv import expression
+from odoo.tools import safe_eval
 
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
@@ -250,24 +253,89 @@ class LocationContentTransfer(Component):
             )
         return self.env["stock.move"].create(move_vals_list)
 
-    def _find_location_to_work_from(self):
-        location = self.env["stock.location"]
-        pickings = self.env["stock.picking"].search(
-            [
-                ("picking_type_id", "in", self.picking_types.ids),
-                ("state", "=", "assigned"),
-                ("user_id", "in", (False, self.env.user.id)),
-            ],
-            order="user_id, priority desc, scheduled_date asc, id desc",
+    def _get_additional_domain_eval_context(self):
+        """Prepare the context used when evaluating the additional domain
+        :returns: dict -- evaluation context given to safe_eval
+        """
+        return {
+            "datetime": safe_eval.datetime,
+            "dateutil": safe_eval.dateutil,
+            "time": safe_eval.time,
+            "uid": self.env.uid,
+            "user": self.env.user,
+        }
+
+    def _get_location_to_work_from_domain(self):
+        domain = [
+            ("picking_type_id", "in", self.picking_types.ids),
+            ("state", "=", "assigned"),
+            ("user_id", "in", (False, self.env.user.id)),
+        ]
+        if self.work.menu.additional_domain_get_work:
+            additional_domain = safe_eval.safe_eval(
+                self.work.menu.additional_domain_get_work,
+                self._get_additional_domain_eval_context(),
+            )
+            domain = expression.AND([domain, additional_domain])
+        return domain
+
+    def _find_location_lines_sort_key_default(self, line):
+        """Default sort key for move lines to find the next location to work from"""
+        picking = line.picking_id
+        return (
+            # False is smaller than True,
+            # We want to have operation assigned to the current user first
+            picking.user_id.id is None,
+            line.shopfloor_priority or 10,
+            -int(line.move_id.priority or 0),
+            line.move_id.date,
+            line.move_id.sequence,
+            line.move_id.id,
+            line.id,
         )
 
-        for next_picking in pickings:
-            move_lines = next_picking.move_line_ids.filtered(
-                lambda line: line.qty_done < line.reserved_uom_qty
-            )
-            location = fields.first(move_lines).location_id
-            if location:
-                break
+    def _get_find_location_lines_sort_key_eval_context(self, line):
+        """Prepare the context used when evaluating the custom sort key
+        used to order the move lines to find the next location to work from
+        """
+        return {
+            "item": line,
+            "super": self._find_location_lines_sort_key_default,
+            "key": None,
+        }
+
+    def _find_location_lines_sort_key(self, line):
+        """Sort key for move lines to find the next location to work from"""
+        custom_sort_key = (
+            self.work.menu.custom_sort_key_get_work
+            and self.work.menu.custom_sort_key_get_work.strip()
+        )
+        if custom_sort_key:
+            context = self._get_find_location_lines_sort_key_eval_context(line)
+            safe_eval.safe_eval(custom_sort_key, context, mode="exec", nocopy=True)
+            return context["key"]
+        return self._find_location_lines_sort_key_default(line)
+
+    def _find_location_to_work_from(self):
+        """Find the next location to work from, for a user.
+
+        We return the location for the first move line found in pickings
+        of the specified picking types that can be worked on.
+
+        The move line are sorted by default to get first the ones with a user
+        and then the ones with the highest priority ...
+        see _find_location_lines_sort_key_default
+        """
+        location = self.env["stock.location"]
+        domain = self._get_location_to_work_from_domain()
+        pickings = self.env["stock.picking"].search(domain)
+        move_lines = pickings.move_line_ids.filtered(
+            lambda line: line.qty_done < line.reserved_uom_qty
+        )
+        move_lines = move_lines.sorted(key=self._find_location_lines_sort_key)
+        for move_line in move_lines:
+            if move_line.location_id:
+                return move_line.location_id
         return location
 
     def find_work(self):
