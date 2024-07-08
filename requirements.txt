@@ -351,7 +351,7 @@ odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logi
 odoo-addon-stock-move-priority-picking-assign==16.0.1.0.0.5
 odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@989dcfe2f6d4c56cfa96e98b1d5378f8fdc37e02#subdirectory=setup/stock_move_propagate_first_move
 odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/acsone/stock-logistics-workflow.git@d859321231027547efb15f67d1427e24693a5c1b#subdirectory=setup/stock_move_propagate_first_move_cancel
-odoo-addon-stock-move-zone-location-source @ git+https://github.com/acsone/stock-logistics-workflow.git@d23e0ac841983a468089462beb110ec6d962aca5#subdirectory=setup/stock_move_zone_location_source
+odoo-addon-stock-move-zone-location-source @ git+https://github.com/acsone/stock-logistics-workflow.git@88cedcf5c6e9e49a2663ac89e73a6d372d2e43f6#subdirectory=setup/stock_move_zone_location_source
 odoo-addon-stock-orderpoint-default-location @ git+https://github.com/acsone/stock-logistics-orderpoint.git@707cd165594a55dd588b326473cc7dd9694657fb#subdirectory=setup/stock_orderpoint_default_location
 odoo-addon-stock-override-procurement==16.0.1.0.0.5
 odoo-addon-stock-packaging-calculator==16.0.1.0.1
