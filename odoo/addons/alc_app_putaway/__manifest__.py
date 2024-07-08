@@ -49,5 +49,6 @@
         "stock_move_free_reservation_reassign",
         "procurement_auto_create_group",
         "procurement_auto_create_group_by_product",
+        "alc_stock_location_putaway_rule_out",
     ],
 }
