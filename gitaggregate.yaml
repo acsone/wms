@@ -129,6 +129,16 @@
     - oca refs/pull/919/head # [FIX] shopfloor: fix location content transfer complete message
   target: origin 16.0-alc-shopfloor
 
+./src/shopfloor_mobile:
+  remotes:
+    origin: git@github.com:acsone/wms.git
+    oca: git@github.com:oca/wms.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/899/head # shopfloor: Extended details service for products and locations
+    - oca refs/pull/918/head # [IMP] shopfloor: search product by default code if barcode is null #918
+  target: origin 16.0-alc-shopfloor_mobile
+
 ./src/stock_full_location_reservation:
   remotes:
     origin: git@github.com:acsone/wms.git
