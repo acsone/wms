@@ -1,1 +1,1 @@
-from . import test_picking_parcels_and_items
+from . import test_picking_parcels_and_items, test_picking_parcels_items_category

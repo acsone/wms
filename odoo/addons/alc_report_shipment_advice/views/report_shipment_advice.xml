@@ -219,7 +219,7 @@
                   colspan="5"
                   class="active bg-grey"
                 >Total number of unit(s)</td>
-                                 <t
+                                <t
                   t-foreach="report.location_ids._ids"
                   t-as="zone_location_id"
                 >
@@ -240,6 +240,7 @@
                   colspan="5"
                   class="active bg-grey"
                 >Total of parcel(s)</td>
+
                                 <t
                   t-foreach="report.location_ids._ids"
                   t-as="zone_location_id"

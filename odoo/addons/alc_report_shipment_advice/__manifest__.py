@@ -11,6 +11,9 @@
     "website": "https://acsone.eu/",
     "depends": [
         # Custom
+        "stock_package_type_category",
+        "stock_release_channel_shipment_advice",
+        "shipment_advice_planner_toursolver",
         "alc_report_base",
         "alc_rma_shipment_advice",
         "alc_stock_picking_parcels_and_items_per_source",

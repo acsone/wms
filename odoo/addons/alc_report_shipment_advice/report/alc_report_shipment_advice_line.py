@@ -27,6 +27,10 @@ class AlcReportShipmentAdviceLine(models.TransientModel):
         compute="_compute_parcels_and_items_per_source",
     )
 
+    parcels_and_items_per_category = fields.Json(
+        compute="_compute_parcels_and_items_per_category",
+    )
+
     @api.depends("picking_ids.parcels_and_items_per_source")
     def _compute_parcels_and_items_per_source(self):
         for line in self:
@@ -58,4 +62,43 @@ class AlcReportShipmentAdviceLine(models.TransientModel):
                 "parcels_total": total_parcels,
                 "items_total": total_quantity,
                 "locations": list(locations),
+            }
+
+    @api.depends("picking_ids.package_level_ids_details")
+    def _compute_parcels_and_items_per_category(self):
+        for line in self:
+            total_location_parcels = defaultdict(int)
+            total_quantities = defaultdict(int)  # Total of products without package
+            total_parcels = 0
+            total_quantity = 0.0
+            categories = set()
+
+            for picking in line.picking_ids:
+                for category_id, levels in picking.package_level_ids_details.filtered(
+                    lambda level: not level.package_id.is_internal
+                ).partition(lambda level: level.package_id.category_id):
+                    value = sum(
+                        [level.package_id.number_of_parcels for level in levels]
+                    )
+                    total_location_parcels[category_id] += sum(
+                        [level.package_id.number_of_parcels for level in levels]
+                    )
+                    total_parcels += value
+                    categories.update([category_id])
+                for category_id, levels in picking.package_level_ids_details.filtered(
+                    "package_id.is_internal"
+                ).partition(lambda level: level.package_id.category_id):
+                    value = sum(
+                        [quant.quantity for quant in levels.package_id.quant_ids]
+                    )
+                    total_quantities[category_id] += value
+                    total_quantity += value
+                    categories.update([category_id])
+
+            line.parcels_and_items_per_category = {
+                "parcels": total_location_parcels,
+                "items": total_quantities,
+                "parcels_total": total_parcels,
+                "items_total": total_quantity,
+                "locations": list(categories),
             }

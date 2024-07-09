@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record
+    id="alc_package_type_category_medicament"
+    model="stock.package.type.category"
+  >
+        <field name="name">Médicaments</field>
+        <field name="code">MED</field>
+    </record>
+    <record id="alc_package_type_category_aliment" model="stock.package.type.category">
+        <field name="name">Aliments</field>
+        <field name="code">ALI</field>
+    </record>
+    <record id="alc_package_type_category_frigo" model="stock.package.type.category">
+        <field name="name">Frigo</field>
+        <field name="code">FRI</field>
+    </record>
+    <record id="alc_package_type_category_materiel" model="stock.package.type.category">
+        <field name="name">Matériel</field>
+        <field name="code">MAT</field>
+    </record>
+</odoo>

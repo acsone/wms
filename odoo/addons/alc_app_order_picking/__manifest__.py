@@ -46,6 +46,7 @@
         "alc_stock_move_location_by_supplier",
         "alc_stock_move_need_release",
         "alc_stock_picking_action_put_in_pack",
+        "alc_stock_package_type_category_data",
         "alc_stock_picking_backorder_no_user",
         "alc_stock_picking_backorder_reason",
         "alc_stock_picking_batch_assignment",
