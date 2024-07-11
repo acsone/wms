@@ -16,7 +16,7 @@
         "stock_release_channel_process_end_time",
         "alc_stock_release_channel_pick_allowed",
         "alc_stock_release_channel_tag",
-        "alc_stock_release_channel_deliver",
+        "stock_release_channel_shipment_advice_deliver",
         "alc_stock_release_channel_print_shipment_advice",
         "alc_stock_release_channel_weight",
         "alc_report_delivery_slip",

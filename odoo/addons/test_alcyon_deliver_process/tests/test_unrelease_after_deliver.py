@@ -37,7 +37,7 @@ class TestUnreleaseAfterDeliver(TestDeliverProcessBase):
         self._get_picking_ship(sale)
         # deliver the release channel
         pick.backorder_ids.with_user(self.stock_admin).action_cancel()
-        self.channel.action_delivering()
+        self.channel.action_deliver()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
         ship_backorder = self._get_picking_ship(sale).filtered(
@@ -86,9 +86,9 @@ class TestUnreleaseAfterDeliver(TestDeliverProcessBase):
         self.assertEqual(pick2.state, "confirmed")
         # deliver the release channel
         self.channel.action_lock()
-        self.channel.action_delivering()
+        self.channel.action_deliver()
         self.channel.unrelease_picking()
-        self.channel.action_delivering()
+        self.channel.action_deliver()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
 
@@ -119,13 +119,20 @@ class TestUnreleaseAfterDeliver(TestDeliverProcessBase):
         pick2.action_start()
         # deliver the release channel
         self.channel.action_lock()
-        with self.assertRaises(
-            UserError, msg="One of the pickings to deliver for channel is started"
-        ):
-            self.channel.action_delivering()
+
+        # Try to deliver
+        channel_name = self.channel.name
+        pickings_name = pick2.name
+        message = (
+            f"One of the delivery for channel {channel_name} is waiting on another transfer. "
+            f"\nPlease finish it manually or cancel its start and done quantities to be able to deliver.\n{pickings_name}"
+        )
+        with self.assertRaises(UserError) as trap_exception:
+            self.channel.action_deliver()
+        self.assertEqual(message, trap_exception.exception.args[0])
         pick2.action_cancel_start()
         self.channel.unrelease_picking()
-        self.channel.action_delivering()
+        self.channel.action_deliver()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
 
@@ -173,9 +180,9 @@ class TestUnreleaseAfterDeliver(TestDeliverProcessBase):
         self.assertEqual(pick_with_lot.move_ids.state, "partially_available")
         # deliver the release channel
         self.channel.action_lock()
-        self.channel.action_delivering()
+        self.channel.action_deliver()
         self.channel.unrelease_picking()
-        self.channel.action_delivering()
+        self.channel.action_deliver()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
 
@@ -185,7 +192,7 @@ class TestUnreleaseAfterDeliver(TestDeliverProcessBase):
         # open the channel, pick must be generated
         self.channel.action_unlock()
         pick = self._get_picking_pick(sale)
-        ship = self._get_picking_ship(sale)
+        self._get_picking_ship(sale)
         self.channel.action_lock()
         # do the pick
         pick._put_in_pack(pick.move_line_ids)
@@ -195,14 +202,10 @@ class TestUnreleaseAfterDeliver(TestDeliverProcessBase):
         self.assertTrue(pick.backorder_ids)
         self._get_picking_ship(sale)
         # deliver the release channel
-        with self.assertRaises(UserError) as except_catch:
-            self.channel.action_delivering()
-        message = (
-            "There are some preparations that have not been completed.If "
-            "you choose to proceed, these preparations need to be unreleased.\nPlease "
-            f"handle them manually before proceeding with the delivery.\n\n{ship.name}\n{pick.backorder_ids.name}"
+        res = self.channel.action_deliver()
+        self.assertEqual(
+            "stock.release.channel.deliver.check.wizard", res.get("res_model", False)
         )
-        self.assertEqual(except_catch.exception.name, message)
         backorder_pick = pick.backorder_ids
         # Backorder has the release channel assigned
         self.assertEqual(self.channel, backorder_pick.release_channel_id)
@@ -212,7 +215,7 @@ class TestUnreleaseAfterDeliver(TestDeliverProcessBase):
         )
 
         backorder_pick.action_cancel()
-        self.channel.action_delivering()
+        self.channel.action_deliver()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
         backorder_ship = self._get_picking_ship(sale).filtered(

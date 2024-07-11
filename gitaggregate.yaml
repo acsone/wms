@@ -67,6 +67,17 @@
     - oca refs/pull/853/head
   target: origin 16.0-stock_release_channel
 
+./src/stock_release_channel_shipment_advice_deliver:
+  remotes:
+    origin: git@github.com:acsone/wms.git
+    jbaudoux: git@github.com:jbaudoux/wms.git
+    oca: git@github.com:oca/wms.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/819/head # [16.0][ADD] stock_release_channel_shipment_advice_deliver
+    - jbaudoux refs/pull/10/head # [IMP] stock_release_channel_shipment_advice_deliver: Be more lax on backorder pickings
+  target: origin 16.0-alc_stock_release_channel_shipment_advice_deliver
+
 ./src/stock_move_propagate_first_move:
   remotes:
     origin: git@github.com:acsone/stock-logistics-workflow.git

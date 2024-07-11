@@ -13,7 +13,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         "alc_shipping_fee",
-        "alc_stock_release_channel_deliver",
+        "stock_release_channel_shipment_advice_deliver",
     ],
     "application": False,
     "data": [],

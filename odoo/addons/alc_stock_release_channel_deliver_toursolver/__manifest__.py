@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        "alc_stock_release_channel_deliver",
+        "stock_release_channel_shipment_advice_deliver",
         "stock_release_channel_shipment_advice_toursolver",
         "shipment_advice_planner_toursolver_queue_job",
     ],

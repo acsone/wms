@@ -2,10 +2,10 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 
-from odoo.addons.alc_stock_release_channel_deliver.tests.common import (
+from odoo.addons.delivery_carrier_label_gls.tests.common import TestGLS
+from odoo.addons.stock_release_channel_shipment_advice_deliver.tests.common import (
     TestStockReleaseChannelDeliverCommon,
 )
-from odoo.addons.delivery_carrier_label_gls.tests.common import TestGLS
 
 
 class TestStockReleaseChannelDeliverGls(TestStockReleaseChannelDeliverCommon, TestGLS):
@@ -26,7 +26,7 @@ class TestStockReleaseChannelDeliverGls(TestStockReleaseChannelDeliverCommon, Te
         the picking list
         """
         self._do_internal_pickings()
-        action = self.channel.action_delivering()
+        action = self.channel.action_deliver()
         self.assertEqual(action.get("xml_id"), "stock.action_picking_tree_all")
         self.assertEqual(set(action.get("domain")[0][2]), set(self.pickings.ids))
         self.assertEqual(action.get("res_model"), "stock.picking")

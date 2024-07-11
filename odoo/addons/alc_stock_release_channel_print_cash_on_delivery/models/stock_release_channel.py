@@ -4,7 +4,7 @@
 from odoo import _, api, fields
 from odoo.exceptions import UserError
 
-from odoo.addons.alc_stock_release_channel_deliver.models.stock_release_channel import (
+from odoo.addons.stock_release_channel_shipment_advice_deliver.models.stock_release_channel import (
     StockReleaseChannel as StockReleaseChannelBase,
 )
 

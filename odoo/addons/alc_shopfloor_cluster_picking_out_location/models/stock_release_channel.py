@@ -1,7 +1,7 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.addons.alc_stock_release_channel_deliver.models.stock_release_channel import (
+from odoo.addons.stock_release_channel_shipment_advice_deliver.models.stock_release_channel import (
     StockReleaseChannel as StockReleaseChannelBase,
 )
 

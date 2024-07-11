@@ -35,6 +35,7 @@ class TestDeliverProcessBase(StockPickingTestCase):
                 "warehouse_id": cls.warehouse_1.id,
                 "dock_id": cls.dock.id,
                 "process_end_time": 10.0,
+                "auto_deliver": True,
             }
         )
         cls.warehouse_1.delivery_route_id.write(

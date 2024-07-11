@@ -52,7 +52,7 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         """
         pickings = self.channel.picking_to_plan_ids
         with trap_jobs() as trap_rc:
-            self.channel.action_delivering()
+            self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
             trap_rc.assert_enqueued_job(self.channel._action_deliver)
             with trap_jobs() as trap_tt:
@@ -81,8 +81,12 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         self.assertSetEqual(set(self.pickings.mapped("state")), {"done"})
         self.assertEqual(self.channel.state, "delivered")
 
-    @mute_logger("odoo.addons.alc_stock_release_channel_deliver.models.shipment_advice")
-    @mute_logger("odoo.addons.alc_stock_release_channel_deliver.models.toursolver_task")
+    @mute_logger(
+        "odoo.addons.stock_release_channel_shipment_advice_deliver.models.shipment_advice"
+    )
+    @mute_logger(
+        "odoo.addons.stock_release_channel_shipment_advice_deliver.models.toursolver_task"
+    )
     @mute_logger("TourSolver Connexion")
     def test_01(self):
         """Connexion lost with toursolver, the toursolver task should notify the release.
@@ -91,7 +95,7 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         """
         pickings = self.channel.picking_to_plan_ids
         with trap_jobs() as trap_rc:
-            self.channel.action_delivering()
+            self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
             trap_rc.assert_enqueued_job(self.channel._action_deliver)
             with trap_jobs() as trap_tt:
@@ -127,7 +131,7 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         """
         pickings = self.channel.picking_to_plan_ids
         with trap_jobs() as trap_rc:
-            self.channel.action_delivering()
+            self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
             trap_rc.assert_enqueued_job(self.channel._action_deliver)
             with trap_jobs() as trap_tt:

@@ -48,7 +48,7 @@ class TestCashOndeliver(TestDeliverProcessBase):
         pick._action_done()
         self.channel.action_lock()
         with trap_jobs() as trap_rc:
-            self.channel.action_delivering()
+            self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
             with trap_jobs() as trap_sa:
                 trap_rc.perform_enqueued_jobs()

@@ -37,7 +37,7 @@ class TestRCDeliverShipFee(TestShippingFeeCommon):
         so3.picking_ids.assign_release_channel()
         channel = so3.picking_ids.release_channel_id
         channel.action_lock()
-        channel.action_delivering()
+        channel.action_deliver()
         self.assertEqual(channel.state, "delivering")
         channel._action_deliver()
         advices = channel.shipment_advice_ids.filtered(
@@ -71,7 +71,7 @@ class TestRCDeliverShipFee(TestShippingFeeCommon):
         so3.picking_ids.assign_release_channel()
         channel = so3.picking_ids.release_channel_id
         channel.action_lock()
-        channel.action_delivering()
+        channel.action_deliver()
         self.assertEqual(channel.state, "delivering")
         channel._action_deliver()
         advices = channel.shipment_advice_ids.filtered(

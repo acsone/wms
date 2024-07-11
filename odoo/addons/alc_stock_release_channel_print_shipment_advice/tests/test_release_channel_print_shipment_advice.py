@@ -29,7 +29,7 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
     def test_00(self):
         """Shipment advices are created and automatically processed."""
         with trap_jobs() as trap_rc:
-            self.channel.action_delivering()
+            self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
             trap_rc.assert_enqueued_job(self.channel._action_deliver)
             with trap_jobs() as trap_sa:
@@ -70,7 +70,9 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         self.assertEqual(self.channel.state, "asleep")
         self.assertFalse(shipment_advice.in_release_channel_auto_process)
 
-    @mute_logger("odoo.addons.alc_stock_release_channel_deliver.models.shipment_advice")
+    @mute_logger(
+        "odoo.addons.stock_release_channel_shipment_advice_deliver.models.shipment_advice"
+    )
     def test_02(self):
         """An error occurred while processing the shipment advices,.
 
@@ -78,7 +80,7 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         """
         self.channel.dock_id = False
         with trap_jobs() as trap_rc:
-            self.channel.action_delivering()
+            self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
             trap_rc.assert_enqueued_job(self.channel._action_deliver)
             with trap_jobs() as trap_sa:

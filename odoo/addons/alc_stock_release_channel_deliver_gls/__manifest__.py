@@ -10,7 +10,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["alc_stock_release_channel_deliver", "delivery_carrier_label_gls"],
+    "depends": [
+        "stock_release_channel_shipment_advice_deliver",
+        "delivery_carrier_label_gls",
+    ],
     "data": [],
     "demo": [],
 }

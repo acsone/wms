@@ -46,7 +46,7 @@ class TestDeliverExpiredLot(TestDeliverProcessBase):
 
     def _deliver_channel(self):
         with trap_jobs() as trap_rc:
-            self.channel.action_delivering()
+            self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
             with trap_jobs() as trap_sa:
                 trap_rc.perform_enqueued_jobs()
@@ -99,10 +99,20 @@ class TestDeliverExpiredLot(TestDeliverProcessBase):
             self.channel.delivering_error,
             "One of the pickings to process failed to validate",
         )
-        ship1._action_done()
-        self.assertEqual(ship1.state, "done")
+        # Enable Lot expiration restriction
+        ship1.picking_type_id.no_expired_reservation_allowed = True
+
         self._deliver_channel()
+        self.assertEqual(ship1.state, "assigned")
+        self.assertEqual(advices.state, "error")
+        self.assertEqual(
+            "One of the pickings to process failed to validate", advices.error_message
+        )
+        self.assertEqual(self.channel.state, "delivering_error")
+
+        # Bypass lot expiration protection
+        ship1.to_process_quant_expired = True
+        self._deliver_channel()
+        self.assertEqual(ship1.state, "done")
         self.assertEqual(advices.state, "done")
-        self.assertFalse(advices.error_message)
         self.assertEqual(self.channel.state, "delivered")
-        self.assertFalse(self.channel.delivering_error)
