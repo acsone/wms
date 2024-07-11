@@ -166,6 +166,26 @@ class StockReleaseChannel(models.Model):
         ).picking_id
         pickings.printed = False
 
+    def _deliver_check_moves_in_progress(self, moves_to_unrelease) -> None:
+        """
+        This checks that the moves chain is not in progress (printed or quantity_done)
+        """
+        iterator = moves_to_unrelease._get_chained_moves_iterator("move_orig_ids")
+        next(iterator)  # skip the current move
+        for origin_moves in iterator:
+            in_progress_moves = origin_moves._in_progress_for_unrelease()
+            if in_progress_moves:
+                raise UserError(
+                    _(
+                        "One of the delivery for channel %(name)s is waiting on "
+                        "another transfer. \nPlease finish it manually or "
+                        "cancel its start and done quantities to be able to deliver.\n"
+                        "%(pickings)s",
+                        name=self.name,
+                        pickings=", ".join(in_progress_moves.mapped("picking_id.name")),
+                    )
+                )
+
     def action_deliver(self):
         self.ensure_one()
         if not self.is_action_deliver_allowed:
@@ -179,8 +199,9 @@ class StockReleaseChannel(models.Model):
         self._deliver_cleanup_printed()
         moves_to_unrelease = self._shipping_moves_to_unrelease()
         if moves_to_unrelease:
-            if any(not m.unrelease_allowed for m in moves_to_unrelease):
-                self._deliver_check_no_picking_printed()
+            self._deliver_check_moves_in_progress(moves_to_unrelease)
+            self._deliver_check_no_picking_printed()
+            if any(not m._is_unreleaseable() for m in moves_to_unrelease):
                 raise UserError(
                     _(
                         "Some deliveries have not been prepared but cannot be unreleased."
