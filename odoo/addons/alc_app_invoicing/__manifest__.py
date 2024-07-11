@@ -46,5 +46,6 @@
         "alc_sale_invoicing_on_transfer",
         "alc_invoices_audit",
         "alc_ir_sequence_period",
+        "alc_account_move_default_reference_type",
     ],
 }

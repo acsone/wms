@@ -42,6 +42,7 @@ odoo-addon-account-reconcile-restrict-partner-mismatch @ git+https://github.com/
 
 # bank-payment
 odoo-addon-account-payment-partner @ git+https://github.com/OCA/bank-payment.git@refs/pull/1260/head#subdirectory=setup/account_payment_partner
+odoo-addon-account-payment-order @ git+https://github.com/OCA/bank-payment.git@refs/pull/1314/head#subdirectory=setup/account_payment_order
 
 # delivery-carrier
 # https://github.com/OCA/delivery-carrier/pull/643 - [IMP] base_delivery_carrier_label: Externalize automatic package creation
