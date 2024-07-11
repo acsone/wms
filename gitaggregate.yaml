@@ -54,6 +54,7 @@
     - oca refs/pull/890/head # [FIX] stock_available_to_promise_release: Don't post message if no picking on unrelease
     - oca refs/pull/913/head # [IMP] stock_available_to_promise_release: Improve migration script
     - oca refs/pull/920/head # [FIX] stock_available_to_promise_release: avoid infinite loop when at chained moves iterator
+    - oca refs/pull/921/head # [IMP] stock_available_to_promise_release: Extract method to check pickings in progress
   target: origin 16.0-alc_stock_available_to_promise_release
 
 ./src/stock_release_channel:
