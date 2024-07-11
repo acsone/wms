@@ -171,13 +171,10 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
             lambda p: p.state == "assigned"
         )
         not_done_picking.move_ids[0].product_uom_qty = 4
-        with self.assertRaises(
-            UserError,
-            msg="There are some preparations that have not been completed."
-            "If you choose to proceed, these preparations need to be unreleased."
-            " Please handle them manually before proceeding with the delivery.",
-        ):
-            self.channel.action_deliver()
+        res = self.channel.action_deliver()
+        self.assertEqual(
+            "stock.release.channel.deliver.check.wizard", res.get("res_model", False)
+        )
 
     def test_deliver_partial_pick_without_bo(self):
         """Partial picking without backorder creation.
