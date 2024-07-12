@@ -90,7 +90,7 @@ odoo-addon-purchase-order-line-stock-move-cancel @ git+https://github.com/OCA/pu
 odoo-addon-report-csv @ git+https://github.com/OCA/reporting-engine.git@refs/pull/793/head#subdirectory=setup/report_csv
 
 # rma
-odoo-addon-rma @ git+https://github.com/OCA/rma.git@refs/pull/403/head#subdirectory=setup/rma
+odoo-addon-rma-sale @ git+https://github.com/OCA/rma.git@refs/pull/407/head#subdirectory=setup/rma_sale
 
 # sale-workflow
 # https://github.com/OCA/sale-workflow/pull/2322
