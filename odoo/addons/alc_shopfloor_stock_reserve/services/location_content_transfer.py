@@ -24,7 +24,9 @@ class LocationContentTransfer(LocationContentTransferBase):
             return self._response_for_start(message=self.msg_store.record_not_found())
         move_line = self.env["stock.move.line"].browse(move_line_id)
         if not move_line.exists():
-            move_lines = super()._find_location_move_lines(location)
+            move_lines = self.search_move_line.search_move_lines(
+                locations=location, match_user=True
+            )
             return self._response_for_start_single(
                 move_lines.picking_id,
                 message=self.msg_store.record_not_found(),
