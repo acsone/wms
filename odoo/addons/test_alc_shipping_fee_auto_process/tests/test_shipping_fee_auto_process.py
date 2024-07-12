@@ -36,10 +36,11 @@ class TestRCDeliverShipFee(TestShippingFeeCommon):
         so3.action_confirm()
         so3.picking_ids.assign_release_channel()
         channel = so3.picking_ids.release_channel_id
+        channel.auto_deliver = True
         channel.action_lock()
         channel.action_deliver()
         self.assertEqual(channel.state, "delivering")
-        channel._action_deliver()
+        channel._process_shipments()
         advices = channel.shipment_advice_ids.filtered(
             lambda s: s.state not in ("done", "cancel")
         )
@@ -70,10 +71,11 @@ class TestRCDeliverShipFee(TestShippingFeeCommon):
         so3.action_confirm()
         so3.picking_ids.assign_release_channel()
         channel = so3.picking_ids.release_channel_id
+        channel.auto_deliver = True
         channel.action_lock()
         channel.action_deliver()
         self.assertEqual(channel.state, "delivering")
-        channel._action_deliver()
+        channel._process_shipments()
         advices = channel.shipment_advice_ids.filtered(
             lambda s: s.state not in ("done", "cancel")
         )

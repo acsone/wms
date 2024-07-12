@@ -31,6 +31,7 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         cls._update_qty_in_location(output_loc, cls.product2, 100)
         cls.pickings.move_ids.write({"procure_method": "make_to_stock"})
         cls.pickings.action_assign()
+        cls.channel.auto_deliver = True
         cls.channel.picking_ids = cls.pickings
         cls.pickings.move_ids.write({"procure_method": "make_to_stock"})
         cls.pickings.action_assign()
@@ -54,7 +55,7 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         with trap_jobs() as trap_rc:
             self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(self.channel._action_deliver)
+            trap_rc.assert_enqueued_job(self.channel._process_shipments)
             with trap_jobs() as trap_tt:
                 trap_rc.perform_enqueued_jobs()
                 self.assertFalse(self.channel.shipment_advice_ids)
@@ -97,7 +98,7 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         with trap_jobs() as trap_rc:
             self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(self.channel._action_deliver)
+            trap_rc.assert_enqueued_job(self.channel._process_shipments)
             with trap_jobs() as trap_tt:
                 trap_rc.perform_enqueued_jobs()
                 self.assertFalse(self.channel.shipment_advice_ids)
@@ -133,7 +134,7 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         with trap_jobs() as trap_rc:
             self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(self.channel._action_deliver)
+            trap_rc.assert_enqueued_job(self.channel._process_shipments)
             with trap_jobs() as trap_tt:
                 trap_rc.perform_enqueued_jobs()
                 self.assertFalse(self.channel.shipment_advice_ids)

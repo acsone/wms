@@ -21,6 +21,7 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         cls.dock = cls.env.ref("shipment_advice.stock_dock_demo")
         cls.dock.warehouse_id = cls.wh
         cls.warehouse2 = cls.env.ref("stock.stock_warehouse_shop0")
+        cls.channel.auto_deliver = True
         cls.channel.dock_id = cls.dock
         cls.channel.action_lock()
         cls.channel.shipment_planning_method = "simple"
@@ -31,7 +32,7 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         with trap_jobs() as trap_rc:
             self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(self.channel._action_deliver)
+            trap_rc.assert_enqueued_job(self.channel._process_shipments)
             with trap_jobs() as trap_sa:
                 trap_rc.perform_enqueued_jobs()
                 advices = self.channel.shipment_advice_ids.filtered(
@@ -82,7 +83,7 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         with trap_jobs() as trap_rc:
             self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(self.channel._action_deliver)
+            trap_rc.assert_enqueued_job(self.channel._process_shipments)
             with trap_jobs() as trap_sa:
                 trap_rc.perform_enqueued_jobs()
                 shipment_advice = self.channel.shipment_advice_ids
