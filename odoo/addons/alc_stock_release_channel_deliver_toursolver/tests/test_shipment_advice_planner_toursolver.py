@@ -31,6 +31,7 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         cls._update_qty_in_location(output_loc, cls.product2, 100)
         cls.pickings.move_ids.write({"procure_method": "make_to_stock"})
         cls.pickings.action_assign()
+        cls.channel.auto_deliver = True
         cls.channel.picking_ids = cls.pickings
         cls.pickings.move_ids.write({"procure_method": "make_to_stock"})
         cls.pickings.action_assign()
@@ -52,9 +53,9 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         """
         pickings = self.channel.picking_to_plan_ids
         with trap_jobs() as trap_rc:
-            self.channel.action_delivering()
+            self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(self.channel._action_deliver)
+            trap_rc.assert_enqueued_job(self.channel._process_shipments)
             with trap_jobs() as trap_tt:
                 trap_rc.perform_enqueued_jobs()
                 self.assertFalse(self.channel.shipment_advice_ids)
@@ -81,8 +82,12 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         self.assertSetEqual(set(self.pickings.mapped("state")), {"done"})
         self.assertEqual(self.channel.state, "delivered")
 
-    @mute_logger("odoo.addons.alc_stock_release_channel_deliver.models.shipment_advice")
-    @mute_logger("odoo.addons.alc_stock_release_channel_deliver.models.toursolver_task")
+    @mute_logger(
+        "odoo.addons.stock_release_channel_shipment_advice_deliver.models.shipment_advice"
+    )
+    @mute_logger(
+        "odoo.addons.stock_release_channel_shipment_advice_deliver.models.toursolver_task"
+    )
     @mute_logger("TourSolver Connexion")
     def test_01(self):
         """Connexion lost with toursolver, the toursolver task should notify the release.
@@ -91,9 +96,9 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         """
         pickings = self.channel.picking_to_plan_ids
         with trap_jobs() as trap_rc:
-            self.channel.action_delivering()
+            self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(self.channel._action_deliver)
+            trap_rc.assert_enqueued_job(self.channel._process_shipments)
             with trap_jobs() as trap_tt:
                 trap_rc.perform_enqueued_jobs()
                 self.assertFalse(self.channel.shipment_advice_ids)
@@ -127,9 +132,9 @@ class TestShipmentAdvicePlannerToursolver(VCRTestCase, ChannelReleaseCase):
         """
         pickings = self.channel.picking_to_plan_ids
         with trap_jobs() as trap_rc:
-            self.channel.action_delivering()
+            self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(self.channel._action_deliver)
+            trap_rc.assert_enqueued_job(self.channel._process_shipments)
             with trap_jobs() as trap_tt:
                 trap_rc.perform_enqueued_jobs()
                 self.assertFalse(self.channel.shipment_advice_ids)

@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        "alc_stock_release_channel_deliver",
+        "stock_release_channel_shipment_advice_deliver",
         "partner_invoicing_mode_cash_on_delivery",
     ],
     "data": ["views/stock_release_channel.xml"],

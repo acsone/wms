@@ -22,7 +22,7 @@
                 <field name="is_action_sleep_allowed" />
                 <field name="is_action_unlock_allowed" />
                 <field name="is_action_lock_allowed" />
-                <field name="is_action_delivering_allowed" />
+                <field name="is_action_deliver_allowed" />
                 <field name="is_action_print_allowed" />
                 <field name="is_action_print_cash_invoices_allowed" />
                 <field name="is_mobile_export_allowed" />
@@ -204,7 +204,7 @@
                     type="object"
                     icon="fa-lock"
                   >Unlock</a><br t-if="record.is_action_unlock_allowed.raw_value" /><a
-                    t-if="record.is_action_delivering_allowed.raw_value"
+                    t-if="record.is_action_deliver_allowed.raw_value"
                     name="action_delivering"
                     type="object"
                     icon="fa-truck"

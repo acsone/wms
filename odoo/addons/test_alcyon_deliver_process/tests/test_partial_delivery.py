@@ -33,7 +33,7 @@ class TestPartialDelivery(TestDeliverProcessBase):
         ships._put_in_pack(ships.move_line_ids)
         ship1.release_channel_id = False
         # deliver the release channel
-        self.channel.action_delivering()
+        self.channel.action_deliver()
         self.assertIn(
             "You cannot load this move line alone, you have to move the whole package content",
             self.channel.delivering_error,
@@ -42,7 +42,7 @@ class TestPartialDelivery(TestDeliverProcessBase):
         #
         ship1.do_unreserve()
         #
-        self.channel.action_delivering()
+        self.channel.action_deliver()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
 
@@ -70,7 +70,7 @@ class TestPartialDelivery(TestDeliverProcessBase):
         ships._put_in_pack(ships.move_line_ids)
         ship2.release_channel_id = False
         # deliver the release channel
-        self.channel.action_delivering()
+        self.channel.action_deliver()
         self.assertIn(
             "You cannot load this move line alone, you have to move the whole package content",
             self.channel.delivering_error,
@@ -79,7 +79,7 @@ class TestPartialDelivery(TestDeliverProcessBase):
         #
         ship2.do_unreserve()
         #
-        self.channel.action_delivering()
+        self.channel.action_deliver()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
 
@@ -104,7 +104,7 @@ class TestPartialDelivery(TestDeliverProcessBase):
         ships._put_in_pack(ships.move_line_ids)
         ship2._action_done()
         # deliver the release channel
-        self.channel.action_delivering()
+        self.channel.action_deliver()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
 

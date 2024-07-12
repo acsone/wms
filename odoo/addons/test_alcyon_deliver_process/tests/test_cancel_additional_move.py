@@ -46,7 +46,7 @@ class TestCancelAdditionalMove(TestDeliverProcessBase):
         # deliver the release channel
         # This should raise an error as we should pick the backorder to ensure
         # customer delivery
-        res = self.channel.action_delivering()
+        res = self.channel.action_deliver()
         self.assertEqual(
             "stock.release.channel.deliver.check.wizard", res.get("res_model", False)
         )
@@ -57,7 +57,7 @@ class TestCancelAdditionalMove(TestDeliverProcessBase):
         # The stock manager cancels the backorder
         pick.backorder_ids.with_user(self.stock_admin).action_cancel()
 
-        self.channel.action_delivering()
+        self.channel.action_deliver()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
 

@@ -21,6 +21,7 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         cls.dock = cls.env.ref("shipment_advice.stock_dock_demo")
         cls.dock.warehouse_id = cls.wh
         cls.warehouse2 = cls.env.ref("stock.stock_warehouse_shop0")
+        cls.channel.auto_deliver = True
         cls.channel.dock_id = cls.dock
         cls.channel.action_lock()
         cls.channel.shipment_planning_method = "simple"
@@ -29,9 +30,9 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
     def test_00(self):
         """Shipment advices are created and automatically processed."""
         with trap_jobs() as trap_rc:
-            self.channel.action_delivering()
+            self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(self.channel._action_deliver)
+            trap_rc.assert_enqueued_job(self.channel._process_shipments)
             with trap_jobs() as trap_sa:
                 trap_rc.perform_enqueued_jobs()
                 advices = self.channel.shipment_advice_ids.filtered(
@@ -70,7 +71,9 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         self.assertEqual(self.channel.state, "asleep")
         self.assertFalse(shipment_advice.in_release_channel_auto_process)
 
-    @mute_logger("odoo.addons.alc_stock_release_channel_deliver.models.shipment_advice")
+    @mute_logger(
+        "odoo.addons.stock_release_channel_shipment_advice_deliver.models.shipment_advice"
+    )
     def test_02(self):
         """An error occurred while processing the shipment advices,.
 
@@ -78,9 +81,9 @@ class TestStockReleaseChannelDeliver(ChannelReleaseCase):
         """
         self.channel.dock_id = False
         with trap_jobs() as trap_rc:
-            self.channel.action_delivering()
+            self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(self.channel._action_deliver)
+            trap_rc.assert_enqueued_job(self.channel._process_shipments)
             with trap_jobs() as trap_sa:
                 trap_rc.perform_enqueued_jobs()
                 shipment_advice = self.channel.shipment_advice_ids
