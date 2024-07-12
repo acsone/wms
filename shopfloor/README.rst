@@ -96,6 +96,7 @@ Authors
 * Camptocamp
 * BCIM
 * Akretion
+* ACSONE SA/NV
 
 Contributors
 ~~~~~~~~~~~~
@@ -127,6 +128,7 @@ Other credits
 * Cosanum
 * Camptocamp R&D
 * Akretion R&D
+* Alcyon BELUX
 
 Maintainers
 ~~~~~~~~~~~
