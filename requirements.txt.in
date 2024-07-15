@@ -91,6 +91,7 @@ odoo-addon-report-csv @ git+https://github.com/OCA/reporting-engine.git@refs/pul
 
 # rma
 odoo-addon-rma @ git+https://github.com/OCA/rma.git@refs/pull/403/head#subdirectory=setup/rma
+odoo-addon-rma-reason @ git+https://github.com/OCA/rma.git@refs/pull/409/head#subdirectory=setup/rma_reason
 
 # sale-workflow
 # https://github.com/OCA/sale-workflow/pull/2322
