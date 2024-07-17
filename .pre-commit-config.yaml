@@ -24,7 +24,6 @@ exclude: |
   ^odoo/addons/partner_archive_new_partner/|
   ^odoo/addons/stock_inventory_constrains/|
   ^odoo/addons/test_alc_shopfloor_stock_issue_product_additional/|
-  ^odoo/addons/test_product_additional_groupbypartner/|
   # END NOT INSTALLABLE ADDONS
   ^LICENCE$|
   ^scripts/odoo-16-migration/upgrade.py|
