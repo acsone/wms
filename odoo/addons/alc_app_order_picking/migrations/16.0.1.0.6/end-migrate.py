@@ -47,7 +47,69 @@ def _create_new_package_types(env):
             )
 
 
+def _update_existing_package_types_other(env):
+    # Setting existing package types (PAL, etc...)
+    _logger.info("Updating Médicaments package types")
+    category = env.ref(
+        "alc_stock_package_type_category.alc_package_type_category_medicament"
+    )
+    package_types = env["stock.package.type"].search(
+        [
+            "|",
+            ("name", "like", "M %"),
+            ("name", "like", "Inflammable %"),
+            ("package_carrier_type", "=", False),
+            ("category_id", "=", False),
+        ]
+    )
+    package_types.write({"category_id": category.id})
+
+    category = env.ref(
+        "alc_stock_package_type_category.alc_package_type_category_aliment"
+    )
+    _logger.info("Updating Aliments package types")
+    package_types = env["stock.package.type"].search(
+        [
+            "|",
+            ("name", "like", "A %"),
+            ("name", "like", "AG %"),
+            ("package_carrier_type", "=", False),
+            ("category_id", "=", False),
+        ]
+    )
+    package_types.write({"category_id": category.id})
+
+    category = env.ref(
+        "alc_stock_package_type_category.alc_package_type_category_frigo"
+    )
+    _logger.info("Updating Frigo package types")
+    package_types = env["stock.package.type"].search(
+        [
+            "|",
+            ("name", "like", "Frigo %"),
+            ("name", "like", "Q %"),
+            ("package_carrier_type", "=", False),
+            ("category_id", "=", False),
+        ]
+    )
+    package_types.write({"category_id": category.id})
+
+    category = env.ref(
+        "alc_stock_package_type_category.alc_package_type_category_materiel"
+    )
+    _logger.info("Updating Materiel package types")
+    package_types = env["stock.package.type"].search(
+        [
+            ("name", "like", "E %"),
+            ("package_carrier_type", "=", False),
+            ("category_id", "=", False),
+        ]
+    )
+    package_types.write({"category_id": category.id})
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     _update_existing_package_types(env)
     _create_new_package_types(env)
+    _update_existing_package_types_other(env)
