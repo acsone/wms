@@ -10,6 +10,9 @@ from odoo.fields import Command
 
 from odoo.addons.shipment_advice.models.shipment_advice import ShipmentAdvice
 from odoo.addons.stock.models.stock_location import Location
+from odoo.addons.stock_package_type_category.models.stock_package_type_category import (
+    StockPackageTypeCategory,
+)
 
 if TYPE_CHECKING:
     pass
@@ -37,8 +40,8 @@ class AlcReportShipmentAdvice(models.TransientModel):
     location_ids = fields.Many2many[Location](
         compute="_compute_location_ids",
     )
-    category_ids = fields.Many2many[Location](
-        compute="_compute_location_ids",
+    category_ids = fields.Many2many[StockPackageTypeCategory](
+        compute="_compute_category_ids",
     )
 
     @api.depends("line_ids.parcels_and_items_per_source")
@@ -93,32 +96,50 @@ class AlcReportShipmentAdvice(models.TransientModel):
                 "total_zone": dict(total_zone),
             }
 
-    @api.depends("line_ids.parcels_and_items_per_category")
+    @api.depends("line_ids")
     def _compute_category_ids(self):
-        # Gather all the locations from details as we need it to build
-        # the locations table header.
-        pass
-        # category_obj = self.env["stock.package.type.category"]
-        # default_locations = location_obj.search(
-        #     [("show_in_shipment_advice_report", "=", True)]
-        # )
-        # for report in self:
-        #     line_ids = set()
-        #     for line in report.line_ids:
-        #         ids = line.parcels_and_items_per_source["locations"]
-        #         line_ids.update(ids + default_locations.ids)
-        #     sorted_location_ids = (
-        #         location_obj.browse(line_ids)
-        #         .sorted("sequence_in_shipment_advice_report")
-        #         .ids
-        #     )
-        #     if False in line_ids:
-        #         sorted_location_ids = [False] + sorted_location_ids
-        #     report.location_ids = [Command.set(sorted_location_ids)]
+        """This will compute the categories to display as headers."""
+        category_obj = self.env["stock.package.type.category"]
+        categories = category_obj.search([]).sorted(
+            "sequence_in_shipment_advice_report"
+        )
+        for report in self:
+            report.category_ids = categories
 
     @api.depends_context("company")
     @api.depends("line_ids.parcels_and_items_per_category")
     def _compute_parcels_and_items_per_category(self):
         for report in self:
+            total_parcels = 0
+            total_items = 0
+            total = 0
+            total_category_parcels = defaultdict(lambda: 0)
+            total_category_items = defaultdict(lambda: 0)
+            total_category = defaultdict(lambda: 0)
             for line in report.line_ids:
-                line.parcels_and_items_per_source["locations"]
+                category_lines = line.parcels_and_items_per_category
+                for category in category_lines.get("categories"):
+                    one_category = str(category).lower()
+                    total_parcels += category_lines["parcels"].get(one_category, 0)
+                    total_items += category_lines["items"].get(one_category, 0)
+                    total_category_parcels[one_category] += category_lines[
+                        "parcels"
+                    ].get(one_category, 0)
+                    total_category[one_category] += category_lines["parcels"].get(
+                        one_category, 0
+                    )
+                    total_category_items[one_category] += category_lines["items"].get(
+                        one_category, 0
+                    )
+                    total_category[one_category] += category_lines["items"].get(
+                        one_category, 0
+                    )
+
+            report.parcels_and_items_per_category = {
+                "total_parcels": total_parcels,
+                "total_items": total_items,
+                "total": total,
+                "total_category_parcels": dict(total_category_parcels),
+                "total_category_items": dict(total_category_items),
+                "total_category": dict(total_category),
+            }

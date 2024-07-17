@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_package_type_category_form_view">
+        <field
+      name="name"
+    >stock.package.type.category.form (in stock_package_type_category)</field>
+        <field name="model">stock.package.type.category</field>
+        <field
+      name="inherit_id"
+      ref="stock_package_type_category.stock_package_type_category_form_view"
+    />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name]/parent::group" position="after">
+                <group string="Shipment Advice Report" id="alc_report_shipment_advice">
+                    <field name="show_in_shipment_advice_report" />
+                    <field name="sequence_in_shipment_advice_report" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

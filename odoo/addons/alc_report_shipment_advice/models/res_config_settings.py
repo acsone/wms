@@ -13,4 +13,5 @@ class ResConfigSettings(SettingsBase):
     # migrated (data)
     shipment_advice_packages_display_mode = fields.Selection(
         related="company_id.shipment_advice_packages_display_mode",
+        readonly=False,
     )
