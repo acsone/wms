@@ -62,12 +62,15 @@ odoo-addon-stock-picking-batch-creation @ git+https://github.com/oca/wms.git@ref
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@16.0-stock_release_channel#subdirectory=setup/stock_release_channel
 odoo-addon-stock-release-channel-propagate-channel-picking @ git+https://github.com/OCA/wms.git@refs/pull/908/head#subdirectory=setup/stock_release_channel_propagate_channel_picking
 odoo-addon-stock-release-channel-shipment-advice-deliver @ git+https://github.com/acsone/wms@16.0-alc_stock_release_channel_shipment_advice_deliver#subdirectory=setup/stock_release_channel_shipment_advice_deliver
-odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/OCA/wms.git@refs/pull/798/head#subdirectory=setup/shopfloor_full_location_reservation
+# https://github.com/OCA/wms/pull/798/
+odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@refs/pull/24/head#subdirectory=setup/shopfloor_full_location_reservation
 odoo-addon-shopfloor-base @ git+https://github.com/OCA/wms.git@refs/pull/900/head#subdirectory=setup/shopfloor_base
 # https://github.com/OCA/wms/pull/899
 # https://github.com/OCA/wms/pull/902
 # https://github.com/OCA/wms/pull/911
 # https://github.com/OCA/wms/pull/912
+# https://github.com/OCA/wms/pull/917
+# https://github.com/OCA/wms/pull/919
 odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@16.0-alc-shopfloor#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-mobile-base @ git+https://github.com/OCA/wms.git@refs/pull/900/head#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@16.0-alc-shopfloor_mobile#subdirectory=setup/shopfloor_mobile
@@ -92,6 +95,7 @@ odoo-addon-report-csv @ git+https://github.com/OCA/reporting-engine.git@refs/pul
 # rma
 odoo-addon-rma @ git+https://github.com/OCA/rma.git@refs/pull/403/head#subdirectory=setup/rma
 odoo-addon-rma-reason @ git+https://github.com/OCA/rma.git@refs/pull/409/head#subdirectory=setup/rma_reason
+odoo-addon-rma-sale @ git+https://github.com/OCA/rma.git@refs/pull/407/head#subdirectory=setup/rma_sale
 
 # sale-workflow
 # https://github.com/OCA/sale-workflow/pull/2322

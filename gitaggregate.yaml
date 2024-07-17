@@ -31,6 +31,7 @@
     - git rm -r addons/test_mail_sms
     - git commit -m "Remove unused auto install addon test_mail_sms"
     - curl -sSL https://github.com/odoo/odoo/pull/145494.patch | git am # [FIX] account: add missing depends
+    - git revert ebb5939ec316b86925c973d9937438f5a5dd3ef6 # revert [FIX] core: remove ?session_id= way to provide sid
   target: origin 16.0-alc_master
 
 ./src/account_payment_mode_auto_reconcile:
@@ -140,6 +141,7 @@
     - oca refs/pull/911/head # [16.0][FIX] shopfloor: Don't embed postponed line quantity
     - oca refs/pull/912/head # [16.0] shopfloor cluster_picking: Custom sorting by device
     - oca refs/pull/919/head # [FIX] shopfloor: fix location content transfer complete message
+    - oca refs/pull/917/head # [16.0] shopfloor: location_content_transfer: get_work additional domain and sort key.
   target: origin 16.0-alc-shopfloor
 
 ./src/shopfloor_mobile:
