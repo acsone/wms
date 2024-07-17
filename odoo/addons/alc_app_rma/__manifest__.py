@@ -5,7 +5,7 @@
     "name": "Alc RMA App",
     "description": """
         Gather all rma related modules for Alcyon""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
@@ -16,7 +16,6 @@
         "rma_sale",
         "product_warranty",
         # ACSONE
-        "alc_rma_sale_quantity_default_value",
         "alc_rma_sale_operation_required",
     ],
 }

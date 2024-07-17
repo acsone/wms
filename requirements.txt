@@ -235,8 +235,8 @@ odoo-addon-report-xlsx==16.0.1.0.2
 odoo-addon-report-xlsx-helper==16.0.1.0.0.3
 odoo-addon-report-xml==16.0.1.1.0.1
 odoo-addon-rest-log==16.0.1.0.1.3
-odoo-addon-rma @ git+https://github.com/acsone/rma.git@3842abd17d4562e37c65911eea502401ed9505ef#subdirectory=setup/rma
-odoo-addon-rma-sale==16.0.2.0.0.2
+odoo-addon-rma==16.0.2.0.3
+odoo-addon-rma-sale @ git+https://github.com/acsone/rma.git@3d98a44504a126781772682782d156d67fa09ed5#subdirectory=setup/rma_sale
 odoo-addon-sale-cart==16.0.1.0.0.2
 odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@e3920cb6276556e98afed18a828d5a7c5103bf67#subdirectory=setup/sale_channel
 odoo-addon-sale-discount-display-amount==16.0.1.0.0.3
