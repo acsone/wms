@@ -29,6 +29,7 @@ test = [
   "vcrpy-unittest",
   "checklog-odoo",
   "mock",
+  "websocket-client",
 ]
 dev = [
   "ipython",

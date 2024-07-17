@@ -16,6 +16,7 @@
         "rma_sale",
         "product_warranty",
         "rma_reason",
+        "rma_sale_reason",
         # ACSONE
         "alc_rma_sale_operation_required",
     ],
