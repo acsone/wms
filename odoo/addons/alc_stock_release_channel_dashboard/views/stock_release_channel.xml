@@ -205,7 +205,7 @@
                     icon="fa-lock"
                   >Unlock</a><br t-if="record.is_action_unlock_allowed.raw_value" /><a
                     t-if="record.is_action_deliver_allowed.raw_value"
-                    name="action_delivering"
+                    name="action_deliver"
                     type="object"
                     icon="fa-truck"
                   >Deliver</a>
