@@ -23,6 +23,7 @@
         "account_invoice_transmit_peppol",
         "account_move_line_product_category",
         "account_move_sent_usability",
+        "account_journal_lock_date",
         "account_reversal",
         "l10n_be_antibiotic_tax",
         "l10n_be_apb_tax",
