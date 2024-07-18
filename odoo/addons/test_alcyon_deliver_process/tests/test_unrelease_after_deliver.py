@@ -86,9 +86,17 @@ class TestUnreleaseAfterDeliver(TestDeliverProcessBase):
         self.assertEqual(pick2.state, "confirmed")
         # deliver the release channel
         self.channel.action_lock()
-        self.channel.action_deliver()
-        self.channel.unrelease_picking()
-        self.channel.action_deliver()
+        res = self.channel.action_deliver()
+        self.assertEqual(
+            "stock.release.channel.deliver.check.wizard", res.get("res_model", False)
+        )
+        wizard = (
+            self.env["stock.release.channel.deliver.check.wizard"]
+            .with_context(**res.get("context"))
+            .create({})
+        )
+        self.assertTrue(wizard)
+        wizard.action_deliver()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
 
