@@ -26,7 +26,7 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
         with trap_jobs() as trap_rc:
             self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(self.channel._action_deliver)
+            trap_rc.assert_enqueued_job(self.channel._process_shipments)
             with trap_jobs() as trap_sa:
                 trap_rc.perform_enqueued_jobs()
                 advices = self.channel.shipment_advice_ids.filtered(
@@ -62,7 +62,7 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
         with trap_jobs() as trap_rc:
             self.channel.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(self.channel._action_deliver)
+            trap_rc.assert_enqueued_job(self.channel._process_shipments)
             with trap_jobs() as trap_sa:
                 trap_rc.perform_enqueued_jobs()
                 shipment_advice = self.channel.shipment_advice_ids
@@ -151,7 +151,7 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
         with trap_jobs() as trap_rc:
             wizard.action_deliver()
             self.assertEqual(self.channel.state, "delivering")
-            trap_rc.assert_enqueued_job(self.channel._action_deliver)
+            trap_rc.assert_enqueued_job(self.channel._process_shipments)
             with trap_jobs() as trap_sa:
                 trap_rc.perform_enqueued_jobs()
                 shipment_advice = self.channel.shipment_advice_ids
@@ -170,14 +170,17 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
         not_done_picking = self.internal_pickings.filtered(
             lambda p: p.state == "assigned"
         )
-        not_done_picking.move_ids[0].product_uom_qty = 4
-        with self.assertRaises(
-            UserError,
-            msg="There are some preparations that have not been completed."
-            "If you choose to proceed, these preparations need to be unreleased."
-            " Please handle them manually before proceeding with the delivery.",
-        ):
+        not_done_picking.printed = True
+        names = ", ".join(not_done_picking.mapped("name"))
+        channel_name = self.channel.name
+        message = (
+            f"One of the delivery for channel {channel_name} is waiting on another transfer."
+            f" \nPlease finish it manually or cancel its start and done quantities to be able "
+            f"to deliver.\n{names}"
+        )
+        with self.assertRaises(UserError) as exc:
             self.channel.action_deliver()
+        self.assertEqual(message, exc.exception.args[0])
 
     def test_deliver_partial_pick_without_bo(self):
         """Partial picking without backorder creation.
@@ -212,3 +215,20 @@ class TestStockReleaseChannelDeliver(TestStockReleaseChannelDeliverCommon):
         shipment_advice.action_confirm()
         shipment_advice.action_in_progress()
         self.assertEqual(self.channel.state, "delivering")
+
+    def test_deliver_partial_pick_with_bo(self):
+        """Partial picking with backorder creation.
+
+        Deliver must be allowed"""
+        # Process 2 out of 5
+        self.internal_pickings.picking_type_id.create_backorder = "always"
+        for move in self.internal_pickings[0].move_ids:
+            move.quantity_done = 2
+        self.internal_pickings[0].button_validate()
+        res = self.channel.action_deliver()
+        self.assertIsInstance(res, dict)
+        wizard = (
+            self.env[res.get("res_model")].with_context(**res.get("context")).create({})
+        )
+        wizard.with_context(test_queue_job_no_delay=True).action_deliver()
+        self.assertEqual(self.channel.state, "delivered")
