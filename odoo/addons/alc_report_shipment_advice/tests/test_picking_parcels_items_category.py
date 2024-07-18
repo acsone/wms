@@ -91,13 +91,13 @@ class TestPickingTotal(BaseCommon):
         cls.medocs = cls.env["stock.package.type.category"].create(
             {
                 "name": "Médicaments",
-                "code": "MED",
+                "code": "MEDTEST",
             }
         )
         cls.aliments = cls.env["stock.package.type.category"].create(
             {
                 "name": "Aliments",
-                "code": "ALI",
+                "code": "ALITEST",
             }
         )
         cls.boite_medocs_1 = cls.env["stock.package.type"].create(
