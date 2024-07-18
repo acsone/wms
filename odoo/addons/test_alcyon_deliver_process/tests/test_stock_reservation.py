@@ -58,8 +58,17 @@ class TestPartialDeliver(TestDeliverProcessBase):
         self.assertEqual(sum(self.lot2.quant_ids.mapped("quantity")), 1)
         self.assertEqual(sum(self.lot2.quant_ids.mapped("reserved_quantity")), 1)
         self.channel.action_lock()
-        self.channel.unrelease_picking()
-        self.channel.action_deliver()
+        res = self.channel.action_deliver()
+        self.assertEqual(
+            "stock.release.channel.deliver.check.wizard", res.get("res_model", False)
+        )
+        wizard = (
+            self.env["stock.release.channel.deliver.check.wizard"]
+            .with_context(**res.get("context"))
+            .create({})
+        )
+        self.assertTrue(wizard)
+        wizard.action_deliver()
         self.assertSetEqual(set(ships.mapped("state")), {"waiting", "done"})
         self.assertEqual(pick2.state, "cancel")
         self.assertEqual(self.lot2.qty_available, 0)
