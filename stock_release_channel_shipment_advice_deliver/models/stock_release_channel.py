@@ -41,6 +41,11 @@ class StockReleaseChannel(models.Model):
         "shipment.advice", compute="_compute_in_process_shipment_advice_ids"
     )
     auto_deliver = fields.Boolean()
+    at_deliver_to_unrelease_shipping_move_ids = fields.One2many(
+        comodel_name="stock.move",
+        compute="_compute_at_deliver_to_unrelease_shipping_move_ids",
+        help="These are the shipping stock moves we need to unrelease.",
+    )
 
     @api.depends("shipment_advice_ids")
     def _compute_in_process_shipment_advice_ids(self):
@@ -136,23 +141,41 @@ class StockReleaseChannel(models.Model):
             ]
         )
 
-    def _shipping_moves_to_unrelease(self):
-        moves = self.picking_ids.move_ids.filtered(
-            lambda m: m.picking_type_id.code == "outgoing"
-            and not m.need_release
-            and m.state in ("waiting", "partially_available")
+    def _get_at_deliver_to_unrelease_shipping_moves_domain(self) -> list:
+        """
+        Return the domain to search moves to unrelease at deliver.
+        """
+        return [
+            ("picking_id.release_channel_id", "in", self.ids),
+            ("picking_type_id.code", "=", "outgoing"),
+            ("need_release", "=", False),
+            ("state", "in", ("waiting", "partially_available")),
+        ]
+
+    @api.depends()
+    def _compute_at_deliver_to_unrelease_shipping_move_ids(self):
+        """
+        Compute the moves to unrelease at these channels delivering
+        """
+        # Get moves for all channels in self
+        moves = self.env["stock.move"].search(
+            self._get_at_deliver_to_unrelease_shipping_moves_domain()
         )
-        # The internal operation could have been processed without backorder.
-        # In this case, we don't have something to unrelease
-        for move in moves:
-            for internal_moves in move.move_orig_ids._get_chained_moves_iterator(
-                "move_orig_ids"
-            ):
-                if any(im.state not in ("cancel", "done") for im in internal_moves):
-                    break
-            else:
-                moves -= move
-        return moves
+        for channel in self:
+            channel_moves = moves.filtered(
+                lambda move, channel=channel: move.picking_id.release_channel_id.id
+                == channel.id
+            )
+            to_unrelease_moves = channel_moves
+            for move in channel_moves:
+                for internal_moves in move.move_orig_ids._get_chained_moves_iterator(
+                    "move_orig_ids"
+                ):
+                    if any(im.state not in ("cancel", "done") for im in internal_moves):
+                        break
+                else:
+                    to_unrelease_moves -= move
+            channel.at_deliver_to_unrelease_shipping_move_ids = to_unrelease_moves
 
     def _deliver_cleanup_printed(self):
         """Unset "printed" on non ready transfer
@@ -197,7 +220,7 @@ class StockReleaseChannel(models.Model):
             )
         self._deliver_check_has_picking_planned()
         self._deliver_cleanup_printed()
-        moves_to_unrelease = self._shipping_moves_to_unrelease()
+        moves_to_unrelease = self.at_deliver_to_unrelease_shipping_move_ids
         if moves_to_unrelease:
             self._deliver_check_moves_in_progress(moves_to_unrelease)
             self._deliver_check_no_picking_printed()
@@ -320,7 +343,7 @@ class StockReleaseChannel(models.Model):
         return res
 
     def unrelease_picking(self):
-        shipping_moves_to_unrelease = self._shipping_moves_to_unrelease()
+        shipping_moves_to_unrelease = self.at_deliver_to_unrelease_shipping_move_ids
         shipping_moves_to_unrelease.unrelease(safe_unrelease=True)
 
     def unrelease_backorders(self):
