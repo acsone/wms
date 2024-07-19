@@ -164,3 +164,13 @@
     - mt-software-de refs/pull/5/head # [FIX] stock_full_location_reservation: Don't return unmerged moves
     - mt-software-de refs/pull/6/head # [FIX] stock_full_location_reservation: Don't unlink moves if a cancel is called
   target: origin 16.0-stock_full_location_reservation
+
+./src/rma_sale:
+  remotes:
+    origin: git@github.com:acsone/rma.git
+    oca: git@github.com:oca/rma.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/407/head
+    - oca refs/pull/409/head
+  target: origin 16.0-alc-rma_sale
