@@ -334,6 +334,7 @@ class LocationContentTransfer(Component):
         move_lines = self.search_move_line.search_move_lines(
             locations=location, match_user=True, enforce_picking_types=False
         )
+        move_lines = self._select_move_lines_first_location(move_lines)
 
         savepoint = self._actions_for("savepoint").new()
         unreserve = self._actions_for("stock.unreserve")
