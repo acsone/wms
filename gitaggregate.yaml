@@ -173,4 +173,5 @@
     - oca 16.0
     - oca refs/pull/407/head
     - oca refs/pull/409/head
+    - oca refs/pull/410/head
   target: origin 16.0-alc-rma_sale
