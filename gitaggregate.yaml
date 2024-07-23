@@ -165,6 +165,16 @@
     - mt-software-de refs/pull/6/head # [FIX] stock_full_location_reservation: Don't unlink moves if a cancel is called
   target: origin 16.0-stock_full_location_reservation
 
+./src/rma:
+  remotes:
+    origin: git@github.com:acsone/rma.git
+    oca: git@github.com:oca/rma.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/410/head # [16.0][IMP] rma_sale: operation required #410
+    - oca refs/pull/412/head # [16.0][IMP] create a replacement order upon confirmation #412
+  target: origin 16.0-alc-rma
+
 ./src/rma_sale:
   remotes:
     origin: git@github.com:acsone/rma.git
@@ -173,4 +183,5 @@
     - oca 16.0
     - oca refs/pull/407/head
     - oca refs/pull/409/head
+    - oca refs/pull/410/head
   target: origin 16.0-alc-rma_sale
