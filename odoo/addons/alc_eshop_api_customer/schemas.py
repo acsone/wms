@@ -29,3 +29,10 @@ class SalesPerson(StrictExtendableBaseModel):
             name=partner.name,
             address=Address.from_res_partner(partner),
         )
+
+
+class CustomerUpdate(StrictExtendableBaseModel):
+    opt_out: bool
+
+    def to_res_partner(self):
+        return {"opt_out": self.opt_out}

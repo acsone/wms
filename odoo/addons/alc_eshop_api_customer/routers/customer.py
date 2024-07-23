@@ -12,7 +12,7 @@ from odoo.addons.fastapi.dependencies import (
     authenticated_partner_env,
 )
 
-from ..schemas import CustomerData, SalesPerson
+from ..schemas import CustomerData, CustomerUpdate, SalesPerson
 
 customer_router = APIRouter(tags=["customer"])
 
@@ -33,3 +33,13 @@ def get_sales_person(
     """Get the customer sales person."""
     partner = partner.user_id.partner_id or env.company.partner_id
     return SalesPerson.from_res_partner(partner)
+
+
+@customer_router.put("/customer")
+def update_info(
+    data: CustomerUpdate,
+    partner: Annotated[Partner, Depends(authenticated_partner)],
+) -> CustomerData:
+    """Update the customer info."""
+    partner.write(data.to_res_partner())
+    return CustomerData.from_res_partner(partner)
