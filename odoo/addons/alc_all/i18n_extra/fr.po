@@ -1,6 +1,10 @@
 # Translation of Odoo Server.
 # This file contains the translation overrides of the following modules:
 #   * base_geolocalize
+#   * purchase
+#   * sale_margin_delivered
+#   * partner_invoicing_mode_cash_on_delivery
+#   * sale_order_line_cancel
 #
 msgid ""
 msgstr ""
