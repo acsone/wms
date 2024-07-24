@@ -141,6 +141,7 @@
         "stock_quant_safe_inventory",
         "alc_empty_package_at_picking_return",
         "alc_stock_move_need_release",
+        "alc_stock_move_location_by_supplier",
     ],
     "data": [],
     "demo": [],
