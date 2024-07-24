@@ -57,6 +57,7 @@ dependencies = [
   # addons we want in the package but not installed
   "odoo-addon-sentry",
   "odoo-addon-session_db",
+  "odoo-addon-database-cleanup",
   # xlrd >= 2 removes xlsx support for anything other than .xls files
   # https://xlrd.readthedocs.io/en/latest/changes.html#id1
   "xlrd<2",
