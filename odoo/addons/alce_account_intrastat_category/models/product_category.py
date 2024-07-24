@@ -28,14 +28,25 @@ class ProductCategory(Category):
     def _compute_intrastat_code_id(self):
         for category in self:
             if (
-                category.specific_intrastat_code_id
-                and category.specific_intrastat_code_id != category.intrastat_code_id
-            ):
-                category.intrastat_code_id = category.specific_intrastat_code_id
-            elif (
-                category.parent_id.intrastat_code_id
-                and category.parent_id.intrastat_code_id != category.intrastat_code_id
+                not category.specific_intrastat_code_id
+                and category.parent_id.intrastat_code_id
             ):
                 category.intrastat_code_id = category.parent_id.intrastat_code_id
             else:
-                category.intrastat_code_id = False
+                category.intrastat_code_id = category.specific_intrastat_code_id
+
+    def _compute_all_category_intrastat_code(self):
+        def _compute_intrastat_code(categ):
+            categ._compute_intrastat_code_id()
+            for child_catge in categ.child_id:
+                _compute_intrastat_code(child_catge)
+
+        for parent_categ in self.with_context(active_test=False).search(
+            [("parent_id", "=", False)]
+        ):
+            _compute_intrastat_code(parent_categ)
+
+        products = (
+            self.env["product.product"].with_context(active_test=False).search([])
+        )
+        products._compute_intrastat_code_id()
