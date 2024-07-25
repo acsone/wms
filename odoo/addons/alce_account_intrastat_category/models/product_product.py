@@ -24,16 +24,10 @@ class ProductProduct(Product):
     @api.depends("categ_id.intrastat_code_id", "specific_intrastat_code_id")
     def _compute_intrastat_code_id(self):
         for product in self:
-            categ_intrastat_code = product.categ_id.intrastat_code_id
             if (
-                product.specific_intrastat_code_id
-                and product.specific_intrastat_code_id != product.intrastat_code_id
+                not product.specific_intrastat_code_id
+                and product.categ_id.intrastat_code_id
             ):
-                product.intrastat_code_id = product.specific_intrastat_code_id
-            elif (
-                categ_intrastat_code
-                and categ_intrastat_code != product.intrastat_code_id
-            ):
-                product.intrastat_code_id = categ_intrastat_code
+                product.intrastat_code_id = product.categ_id.intrastat_code_id
             else:
-                product.intrastat_code_id = False
+                product.intrastat_code_id = product.specific_intrastat_code_id

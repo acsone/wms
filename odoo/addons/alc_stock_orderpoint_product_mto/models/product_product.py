@@ -17,7 +17,7 @@ class ProductProduct(Product):
             product.is_missing_default_orderpoint_for_mto = (
                 product.is_mto
                 and product.type == "product"
-                and not product.orderpoint_ids
+                and not product.with_context(active_test=False).orderpoint_ids
             )
 
     def _create_default_orderpoint_for_mto(self):
