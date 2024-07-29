@@ -25,6 +25,7 @@ class StockPicking(Picking):
         ]
         context = safe_eval(action_data.get("context", "{}"))
         context["default_team_id"] = self.env.ref("alce_helpdesk.supplier_team").id
+        context["default_ref"] = f"stock.picking,{self.id}"
         action_data["context"] = str(context)
         action_data["domain"] = [("stock_picking_id", "=", self.id)]
         return action_data
