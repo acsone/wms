@@ -9,7 +9,15 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_purchase_order_cleaner", "purchase_order_ubl", "report_xml"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_purchase_order_cleaner",
+        # OCA
+        "purchase_order_ubl",
+        "report_xml",
+        # fmt: on
+    ],
     "data": ["report/report_xml_purchase_order_ubl.xml"],
     "demo": [],
     "installable": True,

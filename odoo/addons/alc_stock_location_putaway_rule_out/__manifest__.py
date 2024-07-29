@@ -12,7 +12,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["stock"],
+    "depends": [
+        # fmt: off
+        # Others
+        "stock",
+        # fmt: on
+    ],
     "data": [
         "views/stock_location.xml",
     ],

@@ -8,7 +8,14 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["stock_grn", "alc_partner_carrier"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_partner_carrier",
+        # OCA
+        "stock_grn",
+        # fmt: on
+    ],
     "data": ["views/stock_grn_views.xml"],
     "installable": True,
 }

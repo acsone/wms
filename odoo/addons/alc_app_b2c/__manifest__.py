@@ -11,13 +11,15 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
-        # ALC
+        # fmt: off
+        # Custom
+        "alc_address_data",
+        "alc_address_data",
         "alc_b2c_connector",
         "alc_chronovet",
         "alc_clubvetshop",
-        "alc_placedesvetos",
-        "alc_address_data",
         "alc_logiweb",
-        "alc_address_data",
+        "alc_placedesvetos",
+        # fmt: on
     ],
 }

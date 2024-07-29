@@ -9,7 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["stock_picking_operation_loss_quantity"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "stock_picking_operation_loss_quantity",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
 }

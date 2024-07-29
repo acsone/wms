@@ -9,7 +9,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["base", "base_setup"],
+    "depends": [
+        # fmt: off
+        # Others
+        "base",
+        "base_setup",
+        # fmt: on
+    ],
     "data": ["data/ir_config_parameter.xml", "views/res_config_settings_views.xml"],
     "demo": [],
     "installable": True,

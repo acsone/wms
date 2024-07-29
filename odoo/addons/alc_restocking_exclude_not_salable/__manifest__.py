@@ -11,7 +11,13 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["sale", "stock"],
+    "depends": [
+        # fmt: off
+        # Others
+        "sale",
+        "stock",
+        # fmt: on
+    ],
     "data": ["wizards/stock_return_picking.xml", "views/product_archived_report.xml"],
     "demo": [],
     "installable": True,

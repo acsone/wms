@@ -13,36 +13,37 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Odoo
-        "sale_stock",
-        "delivery",
-        "snailmail",  # necessary dependency due to auto-install. This module override
-        # partner write and perform search write on snailmail.letter
+        # fmt: off
+        # Custom
+        "alc_b2c_partner",
+        "alc_partner_pricelist",
+        "alc_partner_suite",
+        "alc_partner_type",
+        "alc_pricelist_discount",
+        "alc_product_pharmacy",
+        "alc_product_pricelist_data",
+        "alc_sale_channel",
+        "alc_sale_product_qty_backorder",
+        "alc_sale_qty_returned",
         # OCA
-        "fastapi",
+        "account_payment_mode",
+        "account_payment_sale",
         "extendable_fastapi",
+        "fastapi",
+        "onchange_helper",
         "product_assortment",
         "sale_channel",
-        "account_payment_mode",
-        "stock_available",
-        "account_payment_sale",
-        "stock_picking_backorder_reason",
-        "onchange_helper",
         "sale_exception",
+        "sale_order_line_cancel",
         "sale_procurement_customer",
         "server_environment",
-        # ALC
-        "alc_product_pharmacy",
-        "alc_partner_type",
-        "alc_b2c_partner",
-        "sale_order_line_cancel",
-        "alc_sale_qty_returned",
-        "alc_sale_product_qty_backorder",
-        "alc_product_pricelist_data",
-        "alc_partner_suite",
-        "alc_pricelist_discount",
-        "alc_partner_pricelist",
-        "alc_sale_channel",
+        "stock_available",
+        "stock_picking_backorder_reason",
+        # Others
+        "delivery",
+        "sale_stock",
+        "snailmail",
+        # fmt: on
     ],
     "data": [
         "data/res_users.xml",

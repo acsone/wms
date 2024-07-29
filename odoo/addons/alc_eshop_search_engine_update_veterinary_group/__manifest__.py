@@ -8,7 +8,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["shopinvader_search_engine_update", "alc_veterinary_group"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_veterinary_group",
+        # OCA
+        "shopinvader_search_engine_update",
+        # fmt: on
+    ],
     "application": False,
     "data": [],
     "development_status": "Alpha",

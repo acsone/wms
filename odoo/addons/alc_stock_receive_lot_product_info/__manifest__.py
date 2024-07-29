@@ -14,10 +14,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "alc_product_lot_info",  # AGPL
-        "alc_stock_receive_lot_backorder_quantity",  # AGPL
-        "alc_stock_receive_lot",  # LGPL
+        # fmt: off
+        # Custom
+        "alc_product_lot_info",
+        "alc_stock_receive_lot",
+        "alc_stock_receive_lot_backorder_quantity",
+        # OCA
         "stock_lot_is_archived",
+        # fmt: on
     ],
     "data": ["wizards/stock_pack_operation_lot_add.xml"],
     "demo": [],

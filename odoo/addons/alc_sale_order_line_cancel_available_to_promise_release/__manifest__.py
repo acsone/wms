@@ -10,7 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        # fmt: off
+        # OCA
         "sale_order_line_cancel",
         "stock_available_to_promise_release",
+        # fmt: on
     ],
 }

@@ -120,6 +120,16 @@ repos:
         pass_filenames: false
         always_run: true
         args: ["--addons-dir=odoo/addons"]
+  - repo: local
+    hooks:
+      - id: sort-dependencies
+        name: Sort dependencies
+        entry: ./scripts/sort_dependencies.py
+        language: system
+        types: [python]
+        pass_filenames: false
+        always_run: true
+        args: ["--addons-dir=odoo/addons", "--requirements-file=requirements.txt"]
   # disabled because it's difficult to make it work with the current
   # structure of the repo and odoo
   #- repo: https://github.com/pre-commit/mirrors-mypy

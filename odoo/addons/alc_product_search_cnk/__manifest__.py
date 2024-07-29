@@ -8,7 +8,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_product_pharmacy"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_product_pharmacy",
+        # fmt: on
+    ],
     "application": False,
     "data": [],
     "demo": [],

@@ -9,11 +9,16 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "fastapi",
+        # fmt: off
+        # Custom
         "alc_cerberus_utils",
-        "stock",
         "alc_stock_delivery_slip",
+        # OCA
+        "fastapi",
         "stock_procurement_customer",
+        # Others
+        "stock",
+        # fmt: on
     ],
     "demo": [],
     "installable": True,

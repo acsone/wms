@@ -10,8 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_product_label_printer",
+        # OCA
         "shopfloor_workstation",
+        # fmt: on
     ],
     "data": ["views/shopfloor_workstation.xml"],
 }

@@ -9,7 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # fmt: off
+        # Others
         "delivery",
+        # fmt: on
     ],
     "data": [
         "views/delivery_carrier.xml",

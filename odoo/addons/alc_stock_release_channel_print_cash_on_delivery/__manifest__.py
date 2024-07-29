@@ -10,8 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        "stock_release_channel_shipment_advice_deliver",
+        # fmt: off
+        # OCA
         "partner_invoicing_mode_cash_on_delivery",
+        "stock_release_channel_shipment_advice_deliver",
+        # fmt: on
     ],
     "data": ["views/stock_release_channel.xml"],
     "demo": [],

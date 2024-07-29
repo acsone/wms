@@ -8,7 +8,13 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["shopfloor", "fs_product_multi_image"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "fs_product_multi_image",
+        "shopfloor",
+        # fmt: on
+    ],
     "data": [],
     "development_status": "Alpha",
 }

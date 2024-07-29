@@ -9,6 +9,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["hr_holidays_public", "purchase"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "hr_holidays_public",
+        # Others
+        "purchase",
+        # fmt: on
+    ],
     "data": ["views/res_partner.xml"],
 }

@@ -10,8 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://www.acsone.eu",
     "depends": [
+        # fmt: off
+        # Custom
+        "alc_partner_type",
+        # Others
         "sale",
-        "alc_partner_type",  # dependency required to ensure that the default value is set for the partner_type field
+        # fmt: on
     ],
     "data": [
         "data/res_users.xml",

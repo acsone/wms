@@ -9,17 +9,18 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "alce_helpdesk",
-        # "alce_purchase_report",
+        # fmt: off
+        # Custom
         "alce_account_followup_report",
         "alce_account_intrastat_category",
         "alce_account_intrastat_weight",
         "alce_account_reports_followup_data",
-        # "alce_l10n_be_reports",
+        "alce_helpdesk",
+        "alce_report_intrastat_infos",
         "alce_split_coda",
         "alce_stock_barcode",
         "alce_stock_picking_backorder_helpdesk",
-        "alce_report_intrastat_infos",
+        # fmt: on
     ],
     "data": [],
     "demo": [],

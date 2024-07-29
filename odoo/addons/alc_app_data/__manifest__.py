@@ -11,12 +11,15 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
+        # fmt: off
+        # Custom
         "alc_report_base",
-        "alc_report_sale",
-        "alc_report_purchase",
-        "alc_report_invoice",
-        "alc_report_stock_picking_operations",
-        "alc_report_shipment_advice",
         "alc_report_delivery_slip",
+        "alc_report_invoice",
+        "alc_report_purchase",
+        "alc_report_sale",
+        "alc_report_shipment_advice",
+        "alc_report_stock_picking_operations",
+        # fmt: on
     ],
 }

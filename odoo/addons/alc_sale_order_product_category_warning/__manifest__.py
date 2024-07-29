@@ -10,12 +10,17 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        "sale",
-        "alc_product_category_warning_info",
-        "alc_product_category_data",
+        # fmt: off
+        # Custom
         "alc_partner_pharmacist",
+        "alc_product_category_data",
+        "alc_product_category_warning_info",
         "alc_sale_product_qty_unavailable",
+        # OCA
         "sale_triple_discount",
+        # Others
+        "sale",
+        # fmt: on
     ],
     "data": ["reports/ir_actions_report_template.xml"],
 }

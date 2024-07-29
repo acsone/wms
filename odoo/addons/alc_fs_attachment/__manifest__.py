@@ -10,7 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # fmt: off
+        # OCA
         "fs_attachment",
+        # fmt: on
     ],
     "data": [
         "data/fs_storage.xml",

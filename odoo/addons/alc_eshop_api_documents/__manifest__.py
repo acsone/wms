@@ -9,11 +9,15 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "fastapi",
+        # fmt: off
+        # Custom
+        "alc_cerberus_utils",
         "alc_documents",
         "alc_sale_channel",
-        "alc_cerberus_utils",
+        # OCA
+        "fastapi",
         "fs_attachment",
+        # fmt: on
     ],
     "demo": [],
     "installable": True,

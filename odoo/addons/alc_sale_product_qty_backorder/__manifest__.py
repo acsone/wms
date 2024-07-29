@@ -9,6 +9,11 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_sale_product_qty_unavailable"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_sale_product_qty_unavailable",
+        # fmt: on
+    ],
     "installable": True,
 }

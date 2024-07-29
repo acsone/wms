@@ -11,11 +11,16 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_shopfloor_product_print_label",
-        "shopfloor_packing",
+        # OCA
         "base_report_to_label_printer",
-        "delivery",
+        "shopfloor_packing",
         "stock_storage_type",
+        # Others
+        "delivery",
+        # fmt: on
     ],
     "data": ["views/shopfloor_menu.xml"],
     "demo": [],

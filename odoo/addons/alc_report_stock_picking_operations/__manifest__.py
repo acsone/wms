@@ -10,8 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "stock",
+        # fmt: off
+        # Custom
         "alc_report_base",
+        # Others
+        "stock",
+        # fmt: on
     ],
     "data": [
         "views/report_stock_picking_operations.xml",

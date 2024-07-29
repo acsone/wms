@@ -8,7 +8,14 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["stock", "alc_product_supplier"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_product_supplier",
+        # Others
+        "stock",
+        # fmt: on
+    ],
     "data": ["views/stock_move_views.xml"],
     "demo": [],
     "installable": True,

@@ -9,8 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_pricelist_discount",
+        # OCA
         "shopinvader_api_cart",
+        # fmt: on
     ],
     "data": [],
     "demo": [],

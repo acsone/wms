@@ -8,22 +8,27 @@
     "license": "AGPL-3",
     "category": "Connector",
     "depends": [
+        # fmt: off
+        # Custom
+        "alc_pricelist_discount",
         "alc_product_cnk",
         "alc_product_sku",
-        "stock_available",
-        "alc_sale_channel",
-        "onchange_helper",
-        "alc_pricelist_discount",
-        "alc_supplier_promotion",
-        "alc_sale_exception",
-        "alc_sale_suite_name",
-        "delivery",
-        "alc_sale_delay",
-        "alc_sale_auto_confirm_max_delay",
-        "alc_sale_product_qty_unavailable",
         "alc_queue_job_background_channel",
+        "alc_sale_auto_confirm_max_delay",
+        "alc_sale_channel",
+        "alc_sale_delay",
+        "alc_sale_exception",
+        "alc_sale_product_qty_unavailable",
+        "alc_sale_suite_name",
+        "alc_supplier_promotion",
+        # OCA
+        "onchange_helper",
         "queue_job",
+        "stock_available",
+        # Others
+        "delivery",
         "web",
+        # fmt: on
     ],
     "data": [
         "data/sale_channel.xml",

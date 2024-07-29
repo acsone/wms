@@ -9,5 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["sale"],
+    "depends": [
+        # fmt: off
+        # Others
+        "sale",
+        # fmt: on
+    ],
 }

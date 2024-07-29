@@ -9,7 +9,13 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["alc_delivery_carrier_gls", "alc_gls_putinpack"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_delivery_carrier_gls",
+        "alc_gls_putinpack",
+        # fmt: on
+    ],
     "data": ["views/stock_picking.xml"],
     "demo": [],
     "installable": True,

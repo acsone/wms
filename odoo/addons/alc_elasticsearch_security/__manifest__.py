@@ -10,10 +10,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "elasticsearch_security_mixin",
+        # fmt: off
+        # Custom
+        "alc_partner_pricelist",
         "alc_partner_type",
         "alc_pricelist_role_name",
-        "alc_partner_pricelist",
+        "elasticsearch_security_mixin",
+        # fmt: on
     ],
     "application": False,
     "data": ["views/se_backend.xml"],

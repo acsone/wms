@@ -9,17 +9,22 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        "product",
-        "purchase_stock",
-        "stock",
+        # fmt: off
+        # Custom
+        "alc_product_dimensions_missing",
+        "alc_product_pharmacy",
+        "alc_product_supplier",
+        "alc_product_web_publish",
+        "alc_stock_orderpoint_product",
+        # OCA
         "product_route_mto",
         "sale_order_line_cancel",
         "stock_location_zone",
-        "alc_stock_orderpoint_product",
-        "alc_product_supplier",
-        "alc_product_web_publish",
-        "alc_product_dimensions_missing",
-        "alc_product_pharmacy",
+        # Others
+        "product",
+        "purchase_stock",
+        "stock",
+        # fmt: on
     ],
     "data": ["views/product_template.xml"],
     "demo": [],

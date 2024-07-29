@@ -7,7 +7,14 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["shopfloor_mobile", "alc_shopfloor_cluster_picking_workstation"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_shopfloor_cluster_picking_workstation",
+        # OCA
+        "shopfloor_mobile",
+        # fmt: on
+    ],
     "data": ["templates/assets.xml"],
     "demo": [],
 }

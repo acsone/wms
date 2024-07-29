@@ -11,9 +11,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # fmt: off
+        # Custom
+        "alc_connector_search_engine_put_script_mixin",
         "alc_se_backend_notebook",
         "alc_search_engine_backend",
-        "alc_connector_search_engine_put_script_mixin",
+        # fmt: on
     ],
     "data": [
         "views/se_backend.xml",

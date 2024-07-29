@@ -7,7 +7,12 @@
     "author": "BCIM, ACSONE SA/NV",
     "maintainer": "ACSONE SA/NV",
     "category": "Stock Management",
-    "depends": ["stock_barcode"],
+    "depends": [
+        # fmt: off
+        # Others
+        "stock_barcode",
+        # fmt: on
+    ],
     "data": [],
     "installable": True,
     "license": "Other proprietary",

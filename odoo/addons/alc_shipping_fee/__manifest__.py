@@ -9,12 +9,16 @@
     "license": "AGPL-3",
     "category": "Delivery",
     "depends": [
-        "delivery",
-        "sale",
-        "stock",
-        "sale_stock",
+        # fmt: off
+        # OCA
         "stock_release_channel",
         "stock_release_channel_shipment_advice",
+        # Others
+        "delivery",
+        "sale",
+        "sale_stock",
+        "stock",
+        # fmt: on
     ],
     "website": "https://www.acsone.eu",
     "data": [

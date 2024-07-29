@@ -11,10 +11,13 @@
     "website": "https://www.acsone.eu",
     "development_status": "Alpha",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_sale_margin",
         # OCA
-        "sale_margin_delivered_security",
         "sale_margin_delivered_dropshipping",
+        "sale_margin_delivered_security",
+        # fmt: on
     ],
     "data": [],
     "demo": [],

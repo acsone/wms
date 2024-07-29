@@ -9,9 +9,14 @@
     "license": "LGPL-3",  # MUST BE LGPL since will be mixed with helpdesk OEEL
     "category": "Stock Management",
     "depends": [
-        "product_expiry",
-        "stock_picking_is_completed",
+        # fmt: off
+        # Custom
         "alc_stock_lot_track_food",
+        # OCA
+        "stock_picking_is_completed",
+        # Others
+        "product_expiry",
+        # fmt: on
     ],  # LGPL
     "data": [
         "security/alc_stock_receive_lot.xml",

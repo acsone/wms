@@ -10,8 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        "stock_release_channel_shipment_advice_toursolver",
+        # fmt: off
+        # OCA
         "stock_release_channel_shipment_advice_process_end_time",
+        "stock_release_channel_shipment_advice_toursolver",
+        # fmt: on
     ],
     "data": ["views/stock_release_channel.xml"],
     "demo": [],

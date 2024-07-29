@@ -9,11 +9,16 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_b2c_partner",
         "alc_label_printing_base",
         "alc_partner_veterinary",
+        # OCA
         "stock_procurement_customer",
+        # Others
         "product_expiry",
+        # fmt: on
     ],
     "data": [
         "views/res_partner_views.xml",

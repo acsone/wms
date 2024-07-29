@@ -14,12 +14,16 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_price_cache_exclusive",
         "alc_price_triple_discount_exclusive",
         "alc_pricelist_discount",
-        "alc_supplier_promotion",
         "alc_pricing_constraints",
-        "onchange_helper",  # for the test
+        "alc_supplier_promotion",
+        # OCA
+        "onchange_helper",
+        # fmt: on
     ],
     "application": False,
     "data": [],

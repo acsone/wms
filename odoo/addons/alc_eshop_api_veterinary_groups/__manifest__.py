@@ -9,7 +9,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["fastapi", "alc_veterinary_group"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_veterinary_group",
+        # OCA
+        "fastapi",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
     "installable": True,

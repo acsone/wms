@@ -9,5 +9,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["partner_manual_rank", "alc_product_food", "alc_product_category_data"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_product_category_data",
+        "alc_product_food",
+        # OCA
+        "partner_manual_rank",
+        # fmt: on
+    ],
 }

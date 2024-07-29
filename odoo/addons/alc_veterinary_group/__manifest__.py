@@ -9,7 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["sale"],
+    "depends": [
+        # fmt: off
+        # Others
+        "sale",
+        # fmt: on
+    ],
     "data": [
         "security/veterinary_group.xml",
         "views/product_template.xml",

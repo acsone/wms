@@ -10,7 +10,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["alc_product_average_sale", "sale_stock"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_product_average_sale",
+        # Others
+        "sale_stock",
+        # fmt: on
+    ],
     "data": ["views/product_template.xml"],
     "demo": [],
 }

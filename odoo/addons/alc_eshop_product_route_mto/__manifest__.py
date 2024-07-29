@@ -9,7 +9,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["product_route_mto", "shopinvader_product"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "product_route_mto",
+        "shopinvader_product",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
     "development_status": "Alpha",

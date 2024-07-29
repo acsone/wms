@@ -9,9 +9,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "product_multi_category",
-        "sale",  # because of the view menu
+        # fmt: off
+        # Custom
         "alc_product_web_publish",
+        # OCA
+        "product_multi_category",
+        # Others
+        "sale",
+        # fmt: on
     ],
     "application": False,
     "data": ["data/product_category.xml", "views/product_category_views.xml"],

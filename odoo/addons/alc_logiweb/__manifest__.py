@@ -10,14 +10,18 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "partner_manual_rank",
+        # fmt: off
+        # Custom
         "alc_b2c_connector",
         "alc_b2c_connector_pricelist_discount",
         "alc_delivery_carrier_gls",
+        "alc_partner_address",
         "alc_product_category_data",
         "alc_product_food",
         "alc_product_pricelist_data",
-        "alc_partner_address",
+        # OCA
+        "partner_manual_rank",
+        # fmt: on
     ],
     "data": [
         "security/ir.model.access.csv",

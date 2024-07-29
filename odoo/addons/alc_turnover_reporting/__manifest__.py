@@ -8,7 +8,15 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["account", "stock", "sale", "sale_stock"],
+    "depends": [
+        # fmt: off
+        # Others
+        "account",
+        "sale",
+        "sale_stock",
+        "stock",
+        # fmt: on
+    ],
     "data": [
         "wizards/export_report_turnover.xml",
         "security/export_report_turnover.xml",

@@ -9,17 +9,19 @@
     "website": "https://acsone.eu/",
     "description": """Data for product categories, attributes and brands""",
     "depends": [
-        # OCA
-        "product_brand",
-        # ALC
-        "alc_pim_product",
+        # fmt: off
+        # Custom
         "alc_pim_attribute_group",
-        "alc_product_category_translatable",
-        "alc_product_shop_category",
-        "alc_product_link_notice",
+        "alc_pim_attribute_group",
+        "alc_pim_product",
         "alc_product_animal_species",
         "alc_product_audit",
-        "alc_pim_attribute_group",
+        "alc_product_category_translatable",
+        "alc_product_link_notice",
+        "alc_product_shop_category",
+        # OCA
+        "product_brand",
+        # fmt: on
     ],
     "application": False,
     "data": [

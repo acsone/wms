@@ -8,7 +8,12 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["account"],
+    "depends": [
+        # fmt: off
+        # Others
+        "account",
+        # fmt: on
+    ],
     "data": ["security/res_groups.xml", "views/account_move.xml"],
     "demo": [],
 }

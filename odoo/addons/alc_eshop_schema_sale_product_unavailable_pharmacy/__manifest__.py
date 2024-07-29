@@ -16,7 +16,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_product_pharmacy", "alc_eshop_schema_sale_product_unavailable"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_eshop_schema_sale_product_unavailable",
+        "alc_product_pharmacy",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
     "installable": True,

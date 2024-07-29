@@ -10,11 +10,16 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_partner_type",
-        "base_sparse_field_list_support",
-        "product",
-        "mixin_past",
         "alc_product_supplier",
+        "mixin_past",
+        # OCA
+        "base_sparse_field_list_support",
+        # Others
+        "product",
+        # fmt: on
     ],
     "application": False,
     "data": ["views/product_supplierinfo.xml"],

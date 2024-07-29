@@ -9,15 +9,20 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "mail",
-        "partner_fax",
+        # fmt: off
+        # Custom
         "alc_partner_apb_authorization",
         "alc_partner_category",
-        "alc_partner_veterinary",
         "alc_partner_opt_out",
         "alc_partner_suite",
-        "sales_team",  # for the menu
-        "contacts",  # for the window action
+        "alc_partner_veterinary",
+        # OCA
+        "partner_fax",
+        # Others
+        "contacts",
+        "mail",
+        "sales_team",
+        # fmt: on
     ],
     "data": [
         "security/res_groups.xml",

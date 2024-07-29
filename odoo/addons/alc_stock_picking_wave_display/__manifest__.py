@@ -8,7 +8,12 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["stock_picking_batch"],
+    "depends": [
+        # fmt: off
+        # Others
+        "stock_picking_batch",
+        # fmt: on
+    ],
     "data": ["views/stock_picking.xml"],
     "installable": True,
 }

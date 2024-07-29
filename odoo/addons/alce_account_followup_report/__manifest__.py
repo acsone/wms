@@ -10,7 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_account_test_common",
+        # Others
         "account_followup",
+        # fmt: on
     ],
 }

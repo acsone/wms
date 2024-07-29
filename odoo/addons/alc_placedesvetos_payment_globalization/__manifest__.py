@@ -13,7 +13,15 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_account_payment_globalization", "alc_placedesvetos", "report_csv"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_account_payment_globalization",
+        "alc_placedesvetos",
+        # OCA
+        "report_csv",
+        # fmt: on
+    ],
     "data": [
         "security/alc_placedesvetos_payment_globalization.xml",
         "wizards/alc_placedesvetos_payment_globalization.xml",

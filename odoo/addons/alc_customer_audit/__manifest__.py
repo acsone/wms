@@ -8,11 +8,16 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        "delivery",
-        "stock_release_channel_geoengine",
+        # fmt: off
+        # Custom
         "alc_partner_manual_rank",
-        "alc_partner_type",
         "alc_partner_pharmacist",
+        "alc_partner_type",
+        # OCA
+        "stock_release_channel_geoengine",
+        # Others
+        "delivery",
+        # fmt: on
     ],
     "data": ["views/res_partner.xml"],
     "demo": [],

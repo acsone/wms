@@ -20,14 +20,16 @@ This addon provides:
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # ODOO
-        "base_import",
-        "purchase",
-        # OCA
-        "report_xlsx_helper",
-        # ALCYON
+        # fmt: off
+        # Custom
         "alc_product_additional_price",
         "alc_product_pricelist_data",
+        # OCA
+        "report_xlsx_helper",
+        # Others
+        "base_import",
+        "purchase",
+        # fmt: on
     ],
     "data": [
         "security/ir.model.access.csv",

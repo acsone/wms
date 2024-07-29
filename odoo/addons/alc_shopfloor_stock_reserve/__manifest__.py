@@ -7,7 +7,12 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["shopfloor"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "shopfloor",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
 }

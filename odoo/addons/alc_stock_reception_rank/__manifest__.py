@@ -9,13 +9,18 @@
     "maintainer": "ACSONE SA/NV",
     "category": "Stock Management",
     "depends": [
-        "stock",
-        "stock_grn",
+        # fmt: off
+        # Custom
         "alc_stock_picking_rank",
+        # OCA
         "stock_available_immediately",
-        "stock_release_channel",
-        "stock_move_propagate_first_move",
         "stock_available_to_promise_release",
+        "stock_grn",
+        "stock_move_propagate_first_move",
+        "stock_release_channel",
+        # Others
+        "stock",
+        # fmt: on
     ],
     "data": [
         "views/stock_picking.xml",

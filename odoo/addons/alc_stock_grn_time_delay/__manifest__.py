@@ -8,7 +8,14 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["stock", "stock_grn"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "stock_grn",
+        # Others
+        "stock",
+        # fmt: on
+    ],
     "data": ["views/res_config_settings_views.xml", "views/stock_picking_views.xml"],
     "external_dependencies": {"python": ["numpy"]},
     "demo": [],

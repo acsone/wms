@@ -10,11 +10,16 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "jsonifier",
-        "sales_team",
+        # fmt: off
+        # Custom
         "mixin_past",
+        # OCA
         "fs_file",
         "fs_image",
+        "jsonifier",
+        # Others
+        "sales_team",
+        # fmt: on
     ],
     "data": [
         "data/ir_attachment.xml",

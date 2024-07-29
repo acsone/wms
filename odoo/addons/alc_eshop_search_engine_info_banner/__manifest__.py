@@ -9,7 +9,15 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_eshop_info_banner", "connector_search_engine", "queue_job_cron"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_eshop_info_banner",
+        # OCA
+        "connector_search_engine",
+        "queue_job_cron",
+        # fmt: on
+    ],
     "data": [
         "views/se_backend.xml",
         "views/alc_eshop_info_banner.xml",

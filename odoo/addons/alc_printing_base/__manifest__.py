@@ -9,7 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["base_report_to_printer"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "base_report_to_printer",
+        # fmt: on
+    ],
     "data": ["views/printing_printer_views.xml"],
     "demo": [],
     "installable": True,

@@ -10,6 +10,11 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["sale"],
+    "depends": [
+        # fmt: off
+        # Others
+        "sale",
+        # fmt: on
+    ],
     "data": ["views/res_partner.xml"],
 }

@@ -8,7 +8,14 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["product", "product_price_category"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "product_price_category",
+        # Others
+        "product",
+        # fmt: on
+    ],
     "data": ["views/product_pricelist.xml"],
     "demo": [],
 }

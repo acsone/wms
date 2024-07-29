@@ -9,10 +9,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
+        # fmt: off
+        # Custom
+        "alc_stock_release_channel_pick_allowed",
+        "alc_stock_release_channel_user",
+        # OCA
         "shopfloor_batch_automatic_creation",
         "stock_release_channel",
-        "alc_stock_release_channel_user",
-        "alc_stock_release_channel_pick_allowed",
+        # fmt: on
     ],
     "data": ["views/res_users.xml", "views/shopfloor_menu.xml"],
 }

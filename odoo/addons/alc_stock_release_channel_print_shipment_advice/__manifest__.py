@@ -9,7 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["stock_release_channel_shipment_advice_deliver"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "stock_release_channel_shipment_advice_deliver",
+        # fmt: on
+    ],
     "data": ["views/stock_release_channel.xml"],
     "demo": [],
 }

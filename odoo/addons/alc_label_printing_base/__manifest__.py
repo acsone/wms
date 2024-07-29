@@ -10,10 +10,15 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_printing_base",
         "alc_stock_release_channel_code",
+        # OCA
         "delivery_package_type_number_parcels",
+        # Others
         "stock",
+        # fmt: on
     ],
     "data": [
         "security/ir.model.access.csv",

@@ -6,7 +6,14 @@
     "version": "16.0.1.0.0",
     "author": "BCIM, ACSONE SA/NV",
     "category": "Accounting & Finance",
-    "depends": ["alc_base_auto_join", "account_invoice_accrual"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_base_auto_join",
+        # OCA
+        "account_invoice_accrual",
+        # fmt: on
+    ],
     "data": ["data/ir_cron.xml"],
     "license": "AGPL-3",
     "application": False,

@@ -10,9 +10,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_older_stock_production_lot",
         "alc_stock_available_product_expiry",
+        # OCA
         "shopinvader_search_engine_product_stock",
+        # fmt: on
     ],
     "data": [],
     "demo": [],

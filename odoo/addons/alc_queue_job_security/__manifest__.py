@@ -8,7 +8,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["queue_job"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "queue_job",
+        # fmt: on
+    ],
     "data": ["security/ir.model.access.csv"],
     "demo": [],
 }

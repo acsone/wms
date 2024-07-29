@@ -10,7 +10,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["partner_invoicing_mode"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "partner_invoicing_mode",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
 }

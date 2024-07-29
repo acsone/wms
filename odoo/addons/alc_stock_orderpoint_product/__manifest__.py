@@ -8,7 +8,12 @@
     "maintainer": "QANSEE",
     "category": "Stock Management",
     "website": "http://www.bcim.be",
-    "depends": ["stock"],
+    "depends": [
+        # fmt: off
+        # Others
+        "stock",
+        # fmt: on
+    ],
     "data": ["views/product.xml", "views/stock.xml"],
     "installable": True,
     "auto_install": False,

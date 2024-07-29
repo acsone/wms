@@ -10,7 +10,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "category": "Product",
-    "depends": ["purchase", "alc_additional_product_base"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_additional_product_base",
+        # Others
+        "purchase",
+        # fmt: on
+    ],
     "data": ["views/purchase_order.xml"],
     "installable": True,
     "pre_init_hook": "pre_init_hook",

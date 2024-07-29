@@ -9,7 +9,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["server_environment", "queue_job"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "queue_job",
+        "server_environment",
+        # fmt: on
+    ],
     "application": False,
     "data": [
         "security/groups.xml",

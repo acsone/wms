@@ -10,23 +10,25 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "base_sparse_field",
-        # OCA
-        "product_multi_category",
-        "account_tax_one_vat",
-        "queue_job_cron",
-        # shopinvader
-        "shopinvader_base_url",
-        # ALC
+        # fmt: off
+        # Custom
+        "alc_materialized_view_mixin",
+        "alc_pg_trgm",
         "alc_price_cache",
         "alc_product_additional_price",
         "alc_product_category_translatable",
+        "alc_product_discount_special",
         "alc_product_shop_category",
         "alc_product_web_publish",
         "alc_supplier_promotion",
-        "alc_materialized_view_mixin",
-        "alc_product_discount_special",
-        "alc_pg_trgm",
+        # OCA
+        "account_tax_one_vat",
+        "product_multi_category",
+        "queue_job_cron",
+        "shopinvader_base_url",
+        # Others
+        "base_sparse_field",
+        # fmt: on
     ],
     "data": ["data/ir_cron.xml", "security/alc_product_flattened_data.xml"],
     "demo": [],

@@ -8,7 +8,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["account"],
+    "depends": [
+        # fmt: off
+        # Others
+        "account",
+        # fmt: on
+    ],
     "data": ["views/account_move_line_views.xml"],
     "demo": [],
     "installable": True,

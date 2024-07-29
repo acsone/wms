@@ -10,14 +10,19 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        # fmt: off
+        # Custom
+        "account_move_line_single_analytic_account",
+        "alc_analytic_category_report",
+        # OCA
+        "account_analytic_account_tag",
         "account_analytic_required",
-        "analytic",
+        "account_analytic_tag",
         "product_analytic",
         "product_analytic_purchase",
         "product_analytic_sale",
-        "account_analytic_tag",
-        "account_move_line_single_analytic_account",
-        "account_analytic_account_tag",
-        "alc_analytic_category_report",
+        # Others
+        "analytic",
+        # fmt: on
     ],
 }

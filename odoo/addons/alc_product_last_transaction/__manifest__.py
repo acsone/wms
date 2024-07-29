@@ -6,7 +6,13 @@
     "version": "16.0.1.0.0",
     "category": "Product",
     "author": "CamptoCamp, ACSONE SA/NV",
-    "depends": ["purchase", "sale"],
+    "depends": [
+        # fmt: off
+        # Others
+        "purchase",
+        "sale",
+        # fmt: on
+    ],
     "installable": True,
     "license": "AGPL-3",
     "pre_init_hook": "pre_init_hook",

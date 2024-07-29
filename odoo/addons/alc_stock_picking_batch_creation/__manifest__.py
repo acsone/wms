@@ -8,7 +8,12 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["stock_picking_batch_creation"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "stock_picking_batch_creation",
+        # fmt: on
+    ],
     "data": [
         "data/devices.xml",
         "views/res_partner.xml",

@@ -9,10 +9,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "fastapi",
-        "shopinvader_sale_cart",
+        # fmt: off
+        # Custom
         "alc_eshop_delivery_method",
         "alc_eshop_schema_sale_delivery",
+        # OCA
+        "fastapi",
+        "shopinvader_sale_cart",
+        # fmt: on
     ],
     "data": [],
     "installable": True,

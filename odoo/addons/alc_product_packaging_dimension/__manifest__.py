@@ -8,7 +8,15 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["product_packaging_dimension", "uom", "product"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "product_packaging_dimension",
+        # Others
+        "product",
+        "uom",
+        # fmt: on
+    ],
     "data": ["views/product_packaging.xml", "views/res_config_settings.xml"],
     "installable": True,
 }
