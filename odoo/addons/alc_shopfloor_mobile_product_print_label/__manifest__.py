@@ -7,7 +7,14 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["shopfloor_mobile", "alc_shopfloor_product_print_label"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_shopfloor_product_print_label",
+        # OCA
+        "shopfloor_mobile",
+        # fmt: on
+    ],
     "data": ["templates/assets.xml"],
     "demo": [],
 }

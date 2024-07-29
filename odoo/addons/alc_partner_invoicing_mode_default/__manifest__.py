@@ -10,6 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        # fmt: off
+        # OCA
         "partner_invoicing_mode_ten_days",
+        # fmt: on
     ],
 }

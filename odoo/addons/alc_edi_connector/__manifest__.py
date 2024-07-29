@@ -10,17 +10,18 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_purchase_order_ubl",
-        #        "alc_purchase_order_import_ubl",
-        "stock",
+        # OCA
         "connector",
         "purchase_order_approved",
         "purchase_order_ubl",
-        #        "purchase_order_import_ubl",
-        #        "despatch_advice_import_ubl",
-        #        "despatch_advice_import",
         "queue_job",
         "queue_job_cron",
+        # Others
+        "stock",
+        # fmt: on
     ],
     "data": [
         "security/edi_backend.xml",

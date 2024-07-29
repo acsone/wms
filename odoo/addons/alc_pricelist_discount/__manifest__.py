@@ -9,18 +9,20 @@
     "license": "AGPL-3",
     "category": "Sales Management",
     "depends": [
-        # Odoo
-        "sale",
-        "sale_stock",
-        # OCA
-        "account_invoice_triple_discount",
-        "sale_triple_discount",
-        "product_price_category",
-        # ALC
-        "alc_product_override_price",
+        # fmt: off
+        # Custom
         "alc_partner_pricelist",
+        "alc_product_override_price",
         "alc_product_supplierinfo_default_price",
         "alc_supplier_promotion",
+        # OCA
+        "account_invoice_triple_discount",
+        "product_price_category",
+        "sale_triple_discount",
+        # Others
+        "sale",
+        "sale_stock",
+        # fmt: on
     ],
     "website": "http://www.camptocamp.com",
     "data": [

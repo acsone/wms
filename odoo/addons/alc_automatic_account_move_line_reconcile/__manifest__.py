@@ -8,7 +8,14 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["account", "account_payment_partner"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "account_payment_partner",
+        # Others
+        "account",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
 }

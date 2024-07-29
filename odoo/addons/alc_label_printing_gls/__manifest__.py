@@ -8,7 +8,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["base_report_to_printer", "delivery_carrier_label_gls", "queue_job"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "base_report_to_printer",
+        "delivery_carrier_label_gls",
+        "queue_job",
+        # fmt: on
+    ],
     "data": ["views/res_users.xml"],
     "demo": [],
     "installable": True,

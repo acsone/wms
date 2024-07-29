@@ -11,11 +11,13 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
+        # fmt: off
         # OCA
-        "rma",
-        "rma_sale",
         "product_warranty",
+        "rma",
         "rma_reason",
+        "rma_sale",
         "rma_sale_reason",
+        # fmt: on
     ],
 }

@@ -10,12 +10,17 @@
     "author": "ACSONE SA/NV",
     "website": "https://github.com/shopinvader/odoo-shopinvader",
     "depends": [
-        "fastapi",
-        "delivery",
-        "shopinvader_sale_cart",
-        "onchange_helper",
+        # fmt: off
+        # Custom
         "alc_eshop_delivery_method",
         "alc_eshop_schema_sale_delivery",
+        # OCA
+        "fastapi",
+        "onchange_helper",
+        "shopinvader_sale_cart",
+        # Others
+        "delivery",
+        # fmt: on
     ],
     "data": [],
     "demo": [],

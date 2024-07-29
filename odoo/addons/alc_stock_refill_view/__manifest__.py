@@ -10,9 +10,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_stock_move_line_current_release_channel",
         "alc_stock_move_line_priority",
+        # Others
         "stock",
+        # fmt: on
     ],
     "data": [
         "views/stock_move_line.xml",

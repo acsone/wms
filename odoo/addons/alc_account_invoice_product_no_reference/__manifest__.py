@@ -10,6 +10,9 @@
     "author": "BCIM, ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        # fmt: off
+        # Others
         "account",
+        # fmt: on
     ],
 }

@@ -8,7 +8,14 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["shopfloor", "shopfloor_packing", "shopfloor_workstation"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "shopfloor",
+        "shopfloor_packing",
+        "shopfloor_workstation",
+        # fmt: on
+    ],
     "data": ["views/shopfloor_menu.xml", "views/stock_picking_batch.xml"],
     "demo": [],
 }

@@ -9,8 +9,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        "stock_release_channel_plan",
+        # fmt: off
+        # Custom
         "alc_stock_release_channel_menu",
+        # OCA
+        "stock_release_channel_plan",
+        # fmt: on
     ],
     "data": ["wizards/launch_plan.xml"],
 }

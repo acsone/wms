@@ -8,5 +8,10 @@
     "license": "AGPL-3",
     "category": "Tools",
     "website": "https://www.acsone.eu",
-    "depends": ["base"],
+    "depends": [
+        # fmt: off
+        # Others
+        "base",
+        # fmt: on
+    ],
 }

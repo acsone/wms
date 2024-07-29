@@ -10,9 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_product_pharmacy",
-        "alc_product_supplierinfo_default_price",
         "alc_product_supplier",
+        "alc_product_supplierinfo_default_price",
+        # fmt: on
     ],
     "data": ["views/product_supplierinfo.xml"],
     "demo": [],

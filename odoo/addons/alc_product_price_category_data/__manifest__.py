@@ -9,7 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["product_price_category"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "product_price_category",
+        # fmt: on
+    ],
     "data": ["data/product_price_category.xml"],
     "pre_init_hook": "pre_init_hook",
 }

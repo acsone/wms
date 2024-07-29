@@ -11,7 +11,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["stock_restrict_lot"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "stock_restrict_lot",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
 }

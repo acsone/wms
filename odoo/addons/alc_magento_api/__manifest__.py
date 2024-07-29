@@ -9,19 +9,22 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "connector_keycloak",
-        "alc_product_flattened_data",
-        "alc_eshop_api_sale_statistic",
-        "alc_eshop_api_pickings",
+        # fmt: off
+        # Custom
         "alc_eshop_api_cart",
-        "jsonifier",
-        # for order façade
-        "sale_order_line_cancel",
-        "sale_cart",
-        "alc_sale_channel",
-        "alc_sale_suite_name",
-        "alc_sale_order_date_order_short",
+        "alc_eshop_api_pickings",
+        "alc_eshop_api_sale_statistic",
         "alc_partner_type",
+        "alc_product_flattened_data",
+        "alc_sale_channel",
+        "alc_sale_order_date_order_short",
+        "alc_sale_suite_name",
+        "connector_keycloak",
+        # OCA
+        "jsonifier",
+        "sale_cart",
+        "sale_order_line_cancel",
+        # fmt: on
     ],
     "demo": [],
     "external_dependencies": {"python": ["xmltodict", "dicttoxml"]},

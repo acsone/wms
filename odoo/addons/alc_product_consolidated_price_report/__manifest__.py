@@ -9,7 +9,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_product_flattened_data", "report_csv"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_product_flattened_data",
+        # OCA
+        "report_csv",
+        # fmt: on
+    ],
     "data": ["reports/alc_product_consolidated_price_csv_report.xml"],
     "demo": [],
     "installable": True,

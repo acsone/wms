@@ -8,7 +8,15 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["shopfloor", "alc_product_label_printer", "alc_product_label_printing"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_product_label_printer",
+        "alc_product_label_printing",
+        # OCA
+        "shopfloor",
+        # fmt: on
+    ],
     "data": ["views/shopfloor_menu.xml"],
     "demo": [],
 }

@@ -8,7 +8,12 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["purchase_stock"],
+    "depends": [
+        # fmt: off
+        # Others
+        "purchase_stock",
+        # fmt: on
+    ],
     "data": ["views/purchase_order_views.xml"],
     "demo": [],
     "installable": True,

@@ -8,7 +8,12 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["product_template_has_one_variant"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "product_template_has_one_variant",
+        # fmt: on
+    ],
     "data": ["views/product_template.xml", "views/product_category.xml"],
     "demo": [],
     "installable": True,

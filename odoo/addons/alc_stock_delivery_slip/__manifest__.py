@@ -7,17 +7,19 @@
     "license": "AGPL-3",
     "category": "Stock",
     "depends": [
-        # ODOO
-        "delivery",
-        "product_expiry",
+        # fmt: off
+        # Custom
+        "alc_partner_veterinary",
+        "alc_product_pharmacy",
+        "alc_sale_suite_name",
         # OCA
         "account_tax_one_vat",
         "account_tax_one_vat_sale",
         "stock_procurement_customer",
-        # ALCYON
-        "alc_partner_veterinary",
-        "alc_product_pharmacy",
-        "alc_sale_suite_name",
+        # Others
+        "delivery",
+        "product_expiry",
+        # fmt: on
     ],
     "data": [
         "views/res_partner_views.xml",

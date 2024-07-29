@@ -9,6 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["account_invoice_export_ubl", "server_environment"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "account_invoice_export_ubl",
+        "server_environment",
+        # fmt: on
+    ],
     "data": ["data/peppol_server.xml"],
 }

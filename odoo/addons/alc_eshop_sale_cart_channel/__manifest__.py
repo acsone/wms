@@ -9,7 +9,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_sale_channel", "shopinvader_sale_cart"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_sale_channel",
+        # OCA
+        "shopinvader_sale_cart",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
     "installable": True,

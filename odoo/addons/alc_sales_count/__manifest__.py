@@ -9,7 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["sale_order_line_cancel"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "sale_order_line_cancel",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
 }

@@ -9,7 +9,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["alc_pim_product", "shopinvader_product"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_pim_product",
+        # OCA
+        "shopinvader_product",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
     "development_status": "Alpha",

@@ -9,7 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["connector_search_engine"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "connector_search_engine",
+        # fmt: on
+    ],
     "data": ["views/se_backend.xml"],
     "demo": [],
 }

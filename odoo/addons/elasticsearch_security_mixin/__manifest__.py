@@ -9,7 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["elasticsearch_security"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "elasticsearch_security",
+        # fmt: on
+    ],
     "application": False,
     "data": ["data/queue_job_function.xml"],
     "demo": [],

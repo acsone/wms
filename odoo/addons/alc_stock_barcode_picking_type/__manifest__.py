@@ -13,7 +13,12 @@
     "license": "LGPL-3",  # MUST BE LGPL since will be mixed with barcode OEEL
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["stock"],
+    "depends": [
+        # fmt: off
+        # Others
+        "stock",
+        # fmt: on
+    ],
     "data": ["views/stock_location.xml"],
     "demo": [],
     "installable": True,

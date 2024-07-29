@@ -9,7 +9,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["sale", "alc_stock_scheduler_filter"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_stock_scheduler_filter",
+        # Others
+        "sale",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
 }

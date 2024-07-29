@@ -7,7 +7,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["sale_channel"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "sale_channel",
+        # fmt: on
+    ],
     "data": [
         "data/sale_channel.xml",
         "data/crm_lead.xml",

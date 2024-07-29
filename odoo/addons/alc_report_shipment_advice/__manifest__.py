@@ -10,12 +10,16 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "stock_release_channel_shipment_advice",
-        "shipment_advice_planner_toursolver",
+        # fmt: off
+        # Custom
         "alc_report_base",
+        "alc_stock_picking_parcels_and_items_per_source",
+        # OCA
+        "shipment_advice_planner_toursolver",
         "shopfloor",
         "stock_move_zone_location_source",
-        "alc_stock_picking_parcels_and_items_per_source",
+        "stock_release_channel_shipment_advice",
+        # fmt: on
     ],
     "data": [
         "views/stock_location.xml",

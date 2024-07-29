@@ -12,8 +12,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_shipping_fee",
+        # OCA
         "stock_release_channel_shipment_advice_deliver",
+        # fmt: on
     ],
     "application": False,
     "data": [],

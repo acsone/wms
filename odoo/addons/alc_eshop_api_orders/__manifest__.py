@@ -9,13 +9,17 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "fastapi",
-        "sale_order_line_cancel",
-        "sale_cart",
+        # fmt: off
+        # Custom
+        "alc_cerberus_utils",
         "alc_sale_channel",
         "alc_sale_suite_name",
-        "alc_cerberus_utils",
+        # OCA
+        "fastapi",
+        "sale_cart",
+        "sale_order_line_cancel",
         "shopinvader_sale_state",
+        # fmt: on
     ],
     "demo": [],
     "installable": True,

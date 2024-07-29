@@ -8,7 +8,13 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["shopfloor", "stock_release_channel_shipment_advice_deliver"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "shopfloor",
+        "stock_release_channel_shipment_advice_deliver",
+        # fmt: on
+    ],
     "data": ["views/stock_location.xml", "views/shopfloor_menu.xml"],
     "demo": [],
 }

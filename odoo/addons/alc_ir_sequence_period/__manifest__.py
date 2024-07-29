@@ -9,7 +9,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["date_range", "account_move_name_sequence"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "account_move_name_sequence",
+        "date_range",
+        # fmt: on
+    ],
     "data": ["views/ir_sequence.xml"],
     "demo": [],
 }

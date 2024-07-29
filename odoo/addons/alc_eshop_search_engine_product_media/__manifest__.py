@@ -10,9 +10,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        "shopinvader_search_engine_product_media",
+        # fmt: off
+        # Custom
         "alc_base_multi_media_lang",
         "alc_fs_attachment",
+        # OCA
+        "shopinvader_search_engine_product_media",
+        # fmt: on
     ],
     "data": [],
     "demo": [],

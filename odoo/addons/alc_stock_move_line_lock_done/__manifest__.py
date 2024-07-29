@@ -8,7 +8,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["stock_move_line_lock_qty_done"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "stock_move_line_lock_qty_done",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
 }

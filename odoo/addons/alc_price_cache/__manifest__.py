@@ -10,14 +10,16 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # fmt: off
+        # Custom
+        "alc_pricelist_discount",
+        "alc_pricelist_role_name",
+        "alc_queue_job_background_channel",
+        "mixin_past",
         # OCA
         "base_partition",
         "queue_job",
-        # ALC
-        "mixin_past",
-        "alc_pricelist_role_name",
-        "alc_pricelist_discount",
-        "alc_queue_job_background_channel",
+        # fmt: on
     ],
     "application": False,
     "data": [

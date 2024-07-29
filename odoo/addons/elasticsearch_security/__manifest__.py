@@ -10,9 +10,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "connector_elasticsearch",
-        "alc_se_backend_notebook",
+        # fmt: off
+        # Custom
         "alc_queue_job_background_channel",
+        "alc_se_backend_notebook",
+        # OCA
+        "connector_elasticsearch",
+        # fmt: on
     ],
     "application": False,
     "data": [

@@ -9,7 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["product"],
+    "depends": [
+        # fmt: off
+        # Others
+        "product",
+        # fmt: on
+    ],
     "data": [
         "data/product_storage_temperature.xml",
         "security/product_storage_temperature.xml",

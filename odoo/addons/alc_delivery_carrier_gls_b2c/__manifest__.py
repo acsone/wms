@@ -8,7 +8,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["delivery_carrier_label_gls", "alc_b2c_connector"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_b2c_connector",
+        # OCA
+        "delivery_carrier_label_gls",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
     "installable": True,

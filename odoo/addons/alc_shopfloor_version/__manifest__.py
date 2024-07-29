@@ -7,7 +7,13 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["shopfloor_base", "shopfloor_mobile"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "shopfloor_base",
+        "shopfloor_mobile",
+        # fmt: on
+    ],
     "data": ["templates/assets.xml"],
     "demo": [],
 }

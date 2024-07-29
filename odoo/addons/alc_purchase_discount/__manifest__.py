@@ -9,7 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["purchase_discount"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "purchase_discount",
+        # fmt: on
+    ],
     "data": [
         "views/res_partner.xml",
         "views/purchase_order_line.xml",

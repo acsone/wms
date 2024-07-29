@@ -8,7 +8,12 @@
     "author": "BCIM, ACSONE SA/NV",
     "maintainer": "ACSONE SA/NV",
     "category": "Stock Management",
-    "depends": ["stock"],
+    "depends": [
+        # fmt: off
+        # Others
+        "stock",
+        # fmt: on
+    ],
     "data": ["views/stock_picking.xml"],
     "installable": True,
     "license": "AGPL-3",

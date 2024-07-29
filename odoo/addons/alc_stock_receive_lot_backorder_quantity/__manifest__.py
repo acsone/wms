@@ -10,8 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_stock_receive_lot",
+        # OCA
         "stock_available_immediately",
+        # fmt: on
     ],
     "data": ["wizards/stock_receive_lot.xml"],
 }

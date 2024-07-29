@@ -9,12 +9,16 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_eshop_ordering_allowed",
         "alc_partner_type",
-        "alc_sale_suite_name",
         "alc_product_pharmacy",
-        "shopinvader_schema_sale",
+        "alc_sale_suite_name",
+        # OCA
         "shopinvader_api_cart",
+        "shopinvader_schema_sale",
+        # fmt: on
     ],
     "data": [
         "data/mail_template.xml",

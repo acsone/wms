@@ -9,14 +9,19 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        "delivery",
-        "sale",
-        "queue_job_cron",
-        "sale_order_line_cancel",
+        # fmt: off
+        # Custom
+        "alc_queue_job_background_channel",
+        "alc_sale_consignment",
         "alc_sale_order_line_product_type",
         "alc_sale_product_qty_unavailable",
-        "alc_sale_consignment",
-        "alc_queue_job_background_channel",
+        # OCA
+        "queue_job_cron",
+        "sale_order_line_cancel",
+        # Others
+        "delivery",
+        "sale",
+        # fmt: on
     ],
     "data": [
         "views/sale_order_views.xml",

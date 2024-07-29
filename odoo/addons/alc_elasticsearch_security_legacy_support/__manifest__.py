@@ -12,9 +12,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://www.acsone.eu",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_elasticsearch_security",
         "alc_elasticsearch_security_vt_groups",
-        "alc_pricelist_role_name",
         "alc_keycloak",
+        "alc_pricelist_role_name",
+        # fmt: on
     ],
 }

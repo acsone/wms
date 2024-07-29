@@ -8,7 +8,12 @@
     "author": "ACSONE SA/NV",
     "license": "AGPL-3",
     "category": "Accounting & Finance",
-    "depends": ["account"],
+    "depends": [
+        # fmt: off
+        # Others
+        "account",
+        # fmt: on
+    ],
     "data": ["data/mail_template.xml", "views/res_partner.xml"],
     "installable": True,
 }

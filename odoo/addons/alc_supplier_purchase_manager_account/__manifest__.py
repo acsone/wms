@@ -10,7 +10,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_supplier_purchase_manager", "account"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_supplier_purchase_manager",
+        # Others
+        "account",
+        # fmt: on
+    ],
     "data": ["views/res_partner_views.xml"],
     "demo": [],
     "installable": True,

@@ -11,8 +11,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        "stock_release_channel_shipment_advice_deliver",
+        # fmt: off
+        # OCA
         "delivery_carrier_label_gls",
+        "stock_release_channel_shipment_advice_deliver",
+        # fmt: on
     ],
     "data": [],
     "demo": [],

@@ -10,18 +10,23 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "delivery",
-        "shipment_advice",
-        "alc_report_base",
+        # fmt: off
+        # Custom
         "alc_b2c_partner",
-        "alc_sale_consignment",
-        "alc_sale_suite_name",
         "alc_partner_suite",
         "alc_partner_veterinary",
+        "alc_report_base",
+        "alc_sale_consignment",
+        "alc_sale_suite_name",
         "alc_stock_delivery_slip",
-        "alc_stock_picking_parcels_and_items_per_source",
         "alc_stock_move_serial_number",
+        "alc_stock_picking_parcels_and_items_per_source",
         "alc_stock_release_channel_print_shipment_advice",
+        # OCA
+        "shipment_advice",
+        # Others
+        "delivery",
+        # fmt: on
     ],
     "data": [
         "views/stock_release_channel.xml",

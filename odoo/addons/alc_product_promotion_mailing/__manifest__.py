@@ -11,14 +11,19 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_pricelist_discount",
         "alc_product_promotion_subscription",
         "alc_queue_job_background_channel",
+        # OCA
         "fs_product_multi_image",
-        "mail",
         "queue_job_cron",
-        "sale",
         "shopinvader_product_url",
+        # Others
+        "mail",
+        "sale",
+        # fmt: on
     ],
     "data": [
         "data/ir_cron.xml",

@@ -8,7 +8,15 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_documents", "alc_product_flattened_data", "fs_attachment"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_documents",
+        "alc_product_flattened_data",
+        # OCA
+        "fs_attachment",
+        # fmt: on
+    ],
     "data": ["data/ir_config_parameter.xml", "data/queue_job_function.xml"],
     "demo": [],
     "external_dependencies": {"python": ["unicodecsv"]},

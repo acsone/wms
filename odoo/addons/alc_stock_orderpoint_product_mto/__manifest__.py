@@ -9,7 +9,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["product_route_mto", "base_partition"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "base_partition",
+        "product_route_mto",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
     "post_init_hook": "post_init_hook",

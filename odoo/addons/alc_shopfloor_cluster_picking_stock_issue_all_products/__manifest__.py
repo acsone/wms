@@ -8,8 +8,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        "shopfloor",
+        # fmt: off
+        # Custom
         "alc_shopfloor_cluster_picking_workstation",
         "alc_shopfloor_loss_quantity",
+        # OCA
+        "shopfloor",
+        # fmt: on
     ],
 }

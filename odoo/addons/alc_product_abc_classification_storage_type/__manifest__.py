@@ -10,9 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "product_route_mto",
+        # fmt: off
+        # OCA
         "product_abc_classification_sale_stock",
+        "product_route_mto",
         "stock_storage_type",
+        # fmt: on
     ],
     "data": ["views/stock_package_type.xml", "views/abc_classification_profile.xml"],
 }

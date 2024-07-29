@@ -8,7 +8,14 @@
     "author": "Camptocamp,ACSONE SA/NV",
     "license": "AGPL-3",
     "category": "Communication",
-    "depends": ["mail", "queue_job"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "queue_job",
+        # Others
+        "mail",
+        # fmt: on
+    ],
     "website": "https://acsone.eu",
     "data": [
         "data/queue_job_channel.xml",

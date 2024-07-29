@@ -9,7 +9,12 @@
     "description": """
     Stock lot track
     """,
-    "depends": ["product_expiry"],
+    "depends": [
+        # fmt: off
+        # Others
+        "product_expiry",
+        # fmt: on
+    ],
     "data": [],
     "installable": True,
     "license": "AGPL-3",

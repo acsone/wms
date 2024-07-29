@@ -11,12 +11,15 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        "sale_stock",
+        # fmt: off
+        # Custom
+        "alc_additional_product_base",
         # OCA
         "stock_move_propagate_first_move",
         "stock_move_propagate_first_move_cancel",
-        # ALC
-        "alc_additional_product_base",
+        # Others
+        "sale_stock",
+        # fmt: on
     ],
     "data": [
         "views/stock_picking_type.xml",

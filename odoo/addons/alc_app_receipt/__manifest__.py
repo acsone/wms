@@ -11,9 +11,13 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
+        # fmt: off
+        # Custom
         "alc_stock_grn_partner_carrier",
         "alc_stock_grn_time_delay",
         "alc_stock_reception_rank",
+        # OCA
         "stock_picking_grn_mandatory",
+        # fmt: on
     ],
 }

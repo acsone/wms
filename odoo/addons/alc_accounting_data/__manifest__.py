@@ -10,6 +10,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["account", "l10n_be_apb_tax"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "l10n_be_apb_tax",
+        # Others
+        "account",
+        # fmt: on
+    ],
     "installable": True,
 }

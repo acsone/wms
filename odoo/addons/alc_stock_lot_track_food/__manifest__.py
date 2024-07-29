@@ -9,7 +9,12 @@
     "license": "LGPL-3",  # MUST BE LGPL so alc_stock_receive_lot can depend on it
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["alc_product_food"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_product_food",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
 }

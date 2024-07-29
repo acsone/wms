@@ -10,8 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_sale_exception_settings",
         "alc_supplier_promotion",
+        # fmt: on
     ],
     "data": ["data/exception_rule.xml"],
     "pre_init_hook": "pre_init_hook",

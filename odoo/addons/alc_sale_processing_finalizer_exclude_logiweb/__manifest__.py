@@ -8,7 +8,12 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["alc_sale_processing_finalizer"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_sale_processing_finalizer",
+        # fmt: on
+    ],
     "demo": [],
     "installable": True,
 }

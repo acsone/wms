@@ -9,13 +9,18 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        "stock",
-        "sale_channel",
+        # fmt: off
+        # Custom
+        "alc_partner_type",
+        "alc_partner_veterinary",
         "alc_product_additional_price",
         "alc_product_supplier",
-        "alc_partner_veterinary",
-        "alc_partner_type",
         "alc_sale_channel",
+        # OCA
+        "sale_channel",
+        # Others
+        "stock",
+        # fmt: on
     ],
     "data": [
         "views/res_partner.xml",

@@ -9,7 +9,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["fastapi", "alc_product_promotion_subscription"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_product_promotion_subscription",
+        # OCA
+        "fastapi",
+        # fmt: on
+    ],
     "demo": [],
     "installable": True,
 }

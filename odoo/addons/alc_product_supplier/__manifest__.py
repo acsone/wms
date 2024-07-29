@@ -8,7 +8,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["purchase", "partner_manual_rank"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "partner_manual_rank",
+        # Others
+        "purchase",
+        # fmt: on
+    ],
     "data": ["views/product_template_views.xml"],
     "demo": [],
     "installable": True,

@@ -8,7 +8,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["mixin_user_id", "alc_registration"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_registration",
+        "mixin_user_id",
+        # fmt: on
+    ],
     "data": ["views/alc_registration.xml", "data/mail_templates.xml"],
     "demo": [],
     "installable": True,

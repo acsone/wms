@@ -10,10 +10,15 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_pricelist_discount",
+        # OCA
+        "partner_manual_rank",
+        # Others
         "product",
         "sales_team",
-        "partner_manual_rank",
+        # fmt: on
     ],
     "data": [
         "security/alc_product_promotion_subscription.xml",

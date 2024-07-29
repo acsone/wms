@@ -10,9 +10,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "fs_image",
+        # fmt: off
+        # Custom
         "mixin_past",
+        # OCA
+        "fs_image",
+        # Others
         "sales_team",
+        # fmt: on
     ],
     "data": [
         "security/res_groups.xml",

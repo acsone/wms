@@ -23,7 +23,12 @@
     "version": "16.0.1.0.0",
     "category": "Stock Management",
     "author": "BCIM, ACSONE SA/NV",
-    "depends": ["stock"],
+    "depends": [
+        # fmt: off
+        # Others
+        "stock",
+        # fmt: on
+    ],
     "data": [
         "security/stock_lot_update_groups.xml",
         "security/stock_lot_update_access.xml",

@@ -9,6 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["alc_partner_legal_form", "alc_partner_suite"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_partner_legal_form",
+        "alc_partner_suite",
+        # fmt: on
+    ],
     "demo": [],
 }

@@ -9,7 +9,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["fastapi", "shopinvader_schema_address"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "fastapi",
+        "shopinvader_schema_address",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
     "installable": True,

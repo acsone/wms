@@ -9,10 +9,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "fastapi",
+        # fmt: off
+        # Custom
+        "alc_partner_pricelist",
         "alc_partner_type",
         "alc_supplier_promotion",
-        "alc_partner_pricelist",
+        # OCA
+        "fastapi",
+        # fmt: on
     ],
     "demo": [],
     "installable": True,

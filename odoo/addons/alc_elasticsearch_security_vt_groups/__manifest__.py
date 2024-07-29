@@ -9,7 +9,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_veterinary_group", "alc_elasticsearch_security"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_elasticsearch_security",
+        "alc_veterinary_group",
+        # fmt: on
+    ],
     "application": False,
     "data": [],
     "demo": [],

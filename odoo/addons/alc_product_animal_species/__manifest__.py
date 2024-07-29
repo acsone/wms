@@ -8,7 +8,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["product_attribute_set"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "product_attribute_set",
+        # fmt: on
+    ],
     "application": False,
     "data": [
         "security/ir.model.access.csv",

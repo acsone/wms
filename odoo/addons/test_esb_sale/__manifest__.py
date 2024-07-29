@@ -11,9 +11,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        # fmt: off
+        # Custom
         "alc_connector_esb",
         "alc_sale_auto_cancel_unavailable_qty",
         "alc_sale_exception_product_availability",
+        # OCA
         "stock_picking_backorder_reason",
+        # fmt: on
     ],
 }

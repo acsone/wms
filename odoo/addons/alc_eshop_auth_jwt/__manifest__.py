@@ -9,7 +9,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["auth_jwt", "connector_keycloak"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "connector_keycloak",
+        # OCA
+        "auth_jwt",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
     "installable": True,

@@ -9,7 +9,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["sale_triple_discount", "alc_pricelist_discount"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_pricelist_discount",
+        # OCA
+        "sale_triple_discount",
+        # fmt: on
+    ],
     "application": False,
     "data": ["views/product_pricelist_item.xml"],
     "demo": [],

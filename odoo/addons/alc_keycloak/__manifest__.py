@@ -10,11 +10,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "connector_keycloak",
-        "alc_eshop_ordering_allowed",
+        # fmt: off
+        # Custom
         "alc_elasticsearch_security_vt_groups",
-        "alc_shipping_fee",
+        "alc_eshop_ordering_allowed",
         "alc_partner_pricelist",
+        "alc_shipping_fee",
+        "connector_keycloak",
+        # fmt: on
     ],
     "application": False,
     "data": [],

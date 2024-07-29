@@ -8,6 +8,12 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
-    "depends": ["alc_sale_qty_returned", "alc_additional_product_stock"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_additional_product_stock",
+        "alc_sale_qty_returned",
+        # fmt: on
+    ],
     "data": [],
 }

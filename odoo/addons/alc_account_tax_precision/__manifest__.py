@@ -9,6 +9,11 @@
     "license": "AGPL-3",
     "author": "Camptocamp,ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["account"],
+    "depends": [
+        # fmt: off
+        # Others
+        "account",
+        # fmt: on
+    ],
     "data": ["data/decimal_precision.xml"],
 }

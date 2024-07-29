@@ -10,9 +10,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://www.acsone.eu",
     "depends": [
+        # fmt: off
+        # OCA
+        "stock_available_immediately_exclude_location",
+        "stock_available_location_get_domain",
+        # Others
         "stock",
-        "stock_available_immediately_exclude_location",  # to avoid a glue module
-        "stock_available_location_get_domain",  # to avoid a glue module
+        # fmt: on
     ],
     "data": [
         "views/res_config_settings.xml",

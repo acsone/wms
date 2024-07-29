@@ -9,7 +9,15 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["shopfloor", "queue_job", "alc_queue_job_background_channel"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_queue_job_background_channel",
+        # OCA
+        "queue_job",
+        "shopfloor",
+        # fmt: on
+    ],
     "data": [
         "views/shopfloor_menu.xml",
         "data/queue_job_channel.xml",

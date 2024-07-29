@@ -9,7 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["product_assortment"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "product_assortment",
+        # fmt: on
+    ],
     "data": [
         "security/res_groups.xml",
         "views/product_assortment.xml",

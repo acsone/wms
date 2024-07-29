@@ -15,11 +15,15 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        "delivery_carrier_partner",
-        "stock_release_channel_geoengine",
-        "stock_release_channel_delivery",
+        # fmt: off
+        # Custom
         "alc_partner_delivered_by_alcyon",
         "alc_reception_pharmacy",
+        # OCA
+        "delivery_carrier_partner",
+        "stock_release_channel_delivery",
+        "stock_release_channel_geoengine",
+        # fmt: on
     ],
     "data": [],
     "demo": [],

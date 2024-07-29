@@ -11,7 +11,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["stock_available_to_promise_release"],
+    "depends": [
+        # fmt: off
+        # OCA
+        "stock_available_to_promise_release",
+        # fmt: on
+    ],
     "data": ["security/groups.xml", "views/stock_move.xml"],
     "demo": [],
 }

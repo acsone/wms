@@ -8,6 +8,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_partner_type", "product_assortment"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_partner_type",
+        # OCA
+        "product_assortment",
+        # fmt: on
+    ],
     "data": ["data/shopinvader_assortment.xml"],
 }

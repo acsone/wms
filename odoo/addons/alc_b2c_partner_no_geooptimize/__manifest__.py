@@ -9,7 +9,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_b2c_partner", "stock_release_channel_geoengine"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_b2c_partner",
+        # OCA
+        "stock_release_channel_geoengine",
+        # fmt: on
+    ],
     "data": [],
     "demo": [],
 }

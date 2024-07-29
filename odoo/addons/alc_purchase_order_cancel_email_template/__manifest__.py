@@ -7,7 +7,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
-    "depends": ["purchase"],
+    "depends": [
+        # fmt: off
+        # Others
+        "purchase",
+        # fmt: on
+    ],
     "data": ["data/email_template.xml"],
     "demo": [],
 }

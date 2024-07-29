@@ -13,7 +13,15 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
-    "depends": ["alc_account_payment_globalization", "alc_chronovet", "report_csv"],
+    "depends": [
+        # fmt: off
+        # Custom
+        "alc_account_payment_globalization",
+        "alc_chronovet",
+        # OCA
+        "report_csv",
+        # fmt: on
+    ],
     "data": [
         "security/alc_chronovet_payment_globalization.xml",
         "wizards/alc_chronovet_payment_globalization.xml",
