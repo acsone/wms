@@ -10,20 +10,21 @@ msgstr ""
 "PO-Revision-Date: 2024-07-24 15:49+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: alc_stock_move_location_by_supplier
-#: model:ir.model.fields,field_description:alc_stock_move_location_by_supplier.field_wiz_stock_move_location__supplier_ids
-msgid "Suppliers"
-msgstr "Fournisseurs"
-
-#. module: alc_stock_move_location_by_supplier
 #: model:ir.model.fields,field_description:alc_stock_move_location_by_supplier.field_wiz_stock_move_location__supplier_ids_domain
 msgid "Supplier Ids Domain"
 msgstr "Domaine sur les fournisseurs"
+
+#. module: alc_stock_move_location_by_supplier
+#: model:ir.model.fields,field_description:alc_stock_move_location_by_supplier.field_wiz_stock_move_location__supplier_ids
+msgid "Suppliers"
+msgstr "Fournisseurs"
 
 #. module: alc_stock_move_location_by_supplier
 #: model:ir.model,name:alc_stock_move_location_by_supplier.model_wiz_stock_move_location
