@@ -13,7 +13,7 @@
           name="action_view_helpdesk_tickets"
           type="object"
           icon="fa-life-ring"
-          context="{'default_ref': 'stock.picking,' + active_id.toString(10), 'default_partner_id': partner_id, 'default_sale_order_id': sale_id, 'default_purchase_order_id': purchase_id}"
+          context="{'default_partner_id': partner_id, 'default_sale_order_id': sale_id, 'default_purchase_order_id': purchase_id}"
         >
           <field string="Tickets" name="helpdesk_tickets_count" widget="statinfo" />
         </button>
