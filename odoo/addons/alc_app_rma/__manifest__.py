@@ -12,9 +12,10 @@
     "application": True,
     "depends": [
         # fmt: off
+        # Custom
+        "rma",
         # OCA
         "product_warranty",
-        "rma",
         "rma_reason",
         "rma_sale",
         "rma_sale_reason",
