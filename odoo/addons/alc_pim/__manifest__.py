@@ -9,7 +9,6 @@
     "website": "https://acsone.eu/",
     "description": """Data for product categories, attributes and brands""",
     "depends": [
-        # fmt: off
         # Custom
         "alc_pim_attribute_group",
         "alc_pim_attribute_group",
@@ -21,7 +20,6 @@
         "alc_product_shop_category",
         # OCA
         "product_brand",
-        # fmt: on
     ],
     "application": False,
     "data": [

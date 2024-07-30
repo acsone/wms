@@ -10,10 +10,8 @@
     Stock lot track
     """,
     "depends": [
-        # fmt: off
         # Others
         "product_expiry",
-        # fmt: on
     ],
     "data": [],
     "installable": True,

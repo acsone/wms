@@ -9,7 +9,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_b2c_partner",
         "alc_partner_type",
@@ -20,7 +19,6 @@
         # Others
         "sale",
         "stock",
-        # fmt: on
     ],
     "data": [
         "security/groups.xml",

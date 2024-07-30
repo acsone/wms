@@ -9,10 +9,8 @@
     "maintainer": "ACSONE SA/NV",
     "category": "Stock Management",
     "depends": [
-        # fmt: off
         # Others
         "stock",
-        # fmt: on
     ],
     "data": ["views/stock_picking.xml"],
     "installable": True,

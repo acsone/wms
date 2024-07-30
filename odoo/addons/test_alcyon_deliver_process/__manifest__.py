@@ -9,7 +9,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_additional_product_stock",
         "alc_cash_on_delivery",
@@ -35,7 +34,6 @@
         "stock_release_channel_shipment_advice_deliver",
         # Others
         "product_expiry",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

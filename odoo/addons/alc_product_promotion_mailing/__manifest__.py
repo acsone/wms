@@ -11,7 +11,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_pricelist_discount",
         "alc_product_promotion_subscription",
@@ -23,7 +22,6 @@
         # Others
         "mail",
         "sale",
-        # fmt: on
     ],
     "data": [
         "data/ir_cron.xml",

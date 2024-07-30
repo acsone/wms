@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_partner_legal_form",
         "alc_partner_suite",
-        # fmt: on
     ],
     "demo": [],
 }

@@ -7,11 +7,9 @@
     "category": "Product",
     "author": "CamptoCamp, ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Others
         "purchase",
         "sale",
-        # fmt: on
     ],
     "installable": True,
     "license": "AGPL-3",

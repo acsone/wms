@@ -11,11 +11,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "stock_picking_backorder_reason",
         "stock_picking_backorder_reason_grn",
-        # fmt: on
     ],
     "data": [
         "data/stock_backorder_reason.xml",

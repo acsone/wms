@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "account_tax_one_vat",
         "shopinvader_product",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

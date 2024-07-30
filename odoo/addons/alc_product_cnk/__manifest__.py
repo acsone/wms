@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_newpharma",
         "alc_product_pharmacy",
-        # fmt: on
     ],
 }

@@ -10,13 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_category_business_unit",
         "alc_product_food",
         # Others
         "stock_account",
-        # fmt: on
     ],
     "data": ["data/product_category.xml"],
     "pre_init_hook": "pre_init_hook",

@@ -11,7 +11,6 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
-        # fmt: off
         # Custom
         "alc_account_invoice_cancel_permissions",
         "alc_account_move_default_reference_type",
@@ -43,6 +42,5 @@
         "pdf_helper",
         "purchase_invoicing_no_zero_line",
         "report_xml",
-        # fmt: on
     ],
 }

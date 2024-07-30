@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_connector_search_engine_put_script_mixin",
         "alc_se_backend_notebook",
@@ -18,7 +17,6 @@
         # OCA
         "queue_job_cron",
         "shopinvader_search_engine",
-        # fmt: on
     ],
     "data": [
         "views/se_backend.xml",

@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_state",
         "alc_sale_exception",
@@ -22,7 +21,6 @@
         # Others
         "sale_stock",
         "stock",
-        # fmt: on
     ],
     "data": ["data/exception_rule.xml"],
     "pre_init_hook": "pre_init_hook",

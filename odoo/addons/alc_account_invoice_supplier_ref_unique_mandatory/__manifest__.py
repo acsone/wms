@@ -9,10 +9,8 @@
     "license": "AGPL-3",
     "category": "Accounting & Finance",
     "depends": [
-        # fmt: off
         # OCA
         "account_invoice_supplier_ref_unique",
-        # fmt: on
     ],
     "data": ["views/res_config_settings.xml"],
     "installable": True,

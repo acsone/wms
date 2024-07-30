@@ -10,13 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_eshop_cms",
         # OCA
         "fastapi",
         "fs_image_thumbnail",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

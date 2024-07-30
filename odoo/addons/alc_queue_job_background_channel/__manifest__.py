@@ -9,10 +9,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "queue_job",
-        # fmt: on
     ],
     "data": ["data/queue_job_channel.xml"],
 }

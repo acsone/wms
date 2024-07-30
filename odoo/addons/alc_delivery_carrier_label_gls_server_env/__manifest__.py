@@ -9,11 +9,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "delivery_carrier_label_gls",
         "server_environment",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

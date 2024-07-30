@@ -9,12 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # OCA
         "product_price_category",
         # Others
         "product",
-        # fmt: on
     ],
     "data": ["views/product_pricelist.xml"],
     "demo": [],

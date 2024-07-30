@@ -9,10 +9,8 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # OCA
         "base_report_to_printer",
-        # fmt: on
     ],
     "data": ["views/res_users.xml"],
     "demo": [],

@@ -9,12 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "partner_manual_rank",
         # Others
         "purchase",
-        # fmt: on
     ],
     "data": ["views/product_template_views.xml"],
     "demo": [],

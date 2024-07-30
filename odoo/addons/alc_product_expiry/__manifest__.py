@@ -10,12 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "stock_available_to_promise_release",
         # Others
         "product_expiry",
-        # fmt: on
     ],
     "data": [
         "views/stock_picking.xml",

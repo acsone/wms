@@ -9,7 +9,6 @@
     "license": "AGPL-3",
     "category": "Sales Management",
     "depends": [
-        # fmt: off
         # Custom
         "alc_partner_pricelist",
         "alc_product_override_price",
@@ -22,7 +21,6 @@
         # Others
         "sale",
         "sale_stock",
-        # fmt: on
     ],
     "website": "http://www.camptocamp.com",
     "data": [

@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "product_assortment",
-        # fmt: on
     ],
     "data": [
         "security/res_groups.xml",

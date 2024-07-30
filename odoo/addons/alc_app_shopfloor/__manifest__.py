@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_shopfloor_cluster_picking_by_partners",
         "alc_shopfloor_cluster_picking_cancel_on_unassign",
@@ -54,7 +53,6 @@
         "shopfloor_rest_log",
         "shopfloor_workstation",
         "shopfloor_workstation_mobile",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

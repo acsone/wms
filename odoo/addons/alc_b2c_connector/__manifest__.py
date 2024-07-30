@@ -13,7 +13,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_b2c_partner",
         "alc_partner_pricelist",
@@ -43,7 +42,6 @@
         "delivery",
         "sale_stock",
         "snailmail",
-        # fmt: on
     ],
     "data": [
         "data/res_users.xml",

@@ -11,7 +11,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_additional_product_base",
         # OCA
@@ -19,7 +18,6 @@
         "stock_move_propagate_first_move_cancel",
         # Others
         "sale_stock",
-        # fmt: on
     ],
     "data": [
         "views/stock_picking_type.xml",

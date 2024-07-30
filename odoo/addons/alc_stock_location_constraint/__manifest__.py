@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "stock_location_position",
         "stock_location_zone",
-        # fmt: on
     ],
     "data": [
         "views/res_config_settings.xml",

@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Others
         "stock",
-        # fmt: on
     ],
     "data": [
         "security/alc_stock_move_line_audit.xml",

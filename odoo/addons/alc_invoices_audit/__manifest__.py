@@ -9,14 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Custom
         "alc_partner_call_name",
         # OCA
         "partner_invoicing_mode_fourteen_days",
         "partner_invoicing_mode_monthly",
         "partner_invoicing_mode_ten_days",
-        # fmt: on
     ],
     "data": ["views/account_move_views.xml"],
     "demo": [],

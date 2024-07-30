@@ -9,7 +9,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_address_data",
         "mixin_past",
@@ -18,7 +17,6 @@
         # Others
         "mail",
         "sale",
-        # fmt: on
     ],
     "data": [
         "security/alc_classified.xml",

@@ -11,7 +11,6 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
-        # fmt: off
         # Custom
         "alc_company_term_condition",
         "alc_customer_audit",
@@ -142,6 +141,5 @@
         # Others
         "sale",
         "stock_dropshipping",
-        # fmt: on
     ],
 }

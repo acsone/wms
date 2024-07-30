@@ -10,12 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_sale_channel",
         # OCA
         "shopinvader_sale_cart",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

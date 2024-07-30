@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_materialized_view_mixin",
         "alc_pg_trgm",
@@ -28,7 +27,6 @@
         "shopinvader_base_url",
         # Others
         "base_sparse_field",
-        # fmt: on
     ],
     "data": ["data/ir_cron.xml", "security/alc_product_flattened_data.xml"],
     "demo": [],

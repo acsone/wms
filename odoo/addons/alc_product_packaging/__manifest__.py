@@ -10,14 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_template_packaging_search",
         # OCA
         "product_packaging_level",
         "product_packaging_level_pallet",
         "stock_storage_type",
-        # fmt: on
     ],
     "data": [
         "data/product_packaging_type.xml",

@@ -10,14 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_elasticsearch_security_vt_groups",
         "alc_eshop_ordering_allowed",
         "alc_partner_pricelist",
         "alc_shipping_fee",
         "connector_keycloak",
-        # fmt: on
     ],
     "application": False,
     "data": [],

@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "fs_base_multi_media",
         "fs_product_multi_media",
-        # fmt: on
     ],  # fs_product_multi_media is required due to a bug into odoo when loading the registry
     # see https://www.odoo.com/fr_FR/my/tasks/3497266?search_in=content&search=
     "data": ["views/fs_media.xml", "views/fs_media_relation_mixin.xml"],

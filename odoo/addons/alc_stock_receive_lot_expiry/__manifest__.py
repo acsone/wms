@@ -12,12 +12,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_stock_receive_lot",
         # Others
         "product_expiry",
-        # fmt: on
     ],
     "data": [
         "wizards/stock_pack_operation_lot_add.xml",

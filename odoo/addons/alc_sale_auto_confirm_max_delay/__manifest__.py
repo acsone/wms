@@ -12,10 +12,8 @@
     "author": "Camptocamp SA,ACSONE SA/NV",
     "website": "https://www.camptocamp.com",
     "depends": [
-        # fmt: off
         # Others
         "sale",
-        # fmt: on
     ],
     "data": ["views/res_partner.xml"],
     "pre_init_hook": "pre_init_hook",

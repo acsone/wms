@@ -10,13 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_printing_base",
         "alc_reception_pharmacy",
         # Others
         "product_expiry",
-        # fmt: on
     ],
     "data": [
         "security/select_pharmacy_printing_printer.xml",

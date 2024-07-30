@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_partner_type",
         "alc_product_supplier",
@@ -19,7 +18,6 @@
         "base_sparse_field_list_support",
         # Others
         "product",
-        # fmt: on
     ],
     "application": False,
     "data": ["views/product_supplierinfo.xml"],

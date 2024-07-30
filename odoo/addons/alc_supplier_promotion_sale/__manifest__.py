@@ -11,14 +11,12 @@
     "category": "Product",
     "version": "16.0.1.0.0",
     "depends": [
-        # fmt: off
         # Custom
         "alc_partner_pricelist",
         "alc_pricelist_discount",
         "alc_supplier_promotion",
         # Others
         "sale",
-        # fmt: on
     ],
     "data": [],
     "installable": True,

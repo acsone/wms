@@ -7,11 +7,9 @@
     "author": "ACSONE SA/NV, Odoo Community Association (OCA)",
     "category": "stock",
     "depends": [
-        # fmt: off
         # OCA
         "stock_available_to_promise_release",
         "stock_move_manage_priority",
-        # fmt: on
     ],
     "website": "https://github.com/OCA/stock-logistics-workflow",
     "data": [

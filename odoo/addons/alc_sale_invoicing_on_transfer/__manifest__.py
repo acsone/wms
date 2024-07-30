@@ -14,10 +14,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "partner_invoicing_mode_at_shipping",
-        # fmt: on
     ],
     "data": ["views/stock_picking_type.xml"],
     "demo": [],

@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "acl_product_supplierinfo_import",
         "alc_additional_product_purchase",
@@ -62,6 +61,5 @@
         "stock_orderpoint_default_location",
         # Others
         "purchase",
-        # fmt: on
     ],
 }

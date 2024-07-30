@@ -8,11 +8,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_stock_picking_backorder_reason",
         "alce_helpdesk",
-        # fmt: on
     ],
     "data": [
         "wizards/stock_backorder_choice.xml",

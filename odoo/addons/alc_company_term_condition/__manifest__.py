@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Others
         "base",
-        # fmt: on
     ],
     "data": ["views/res_company.xml"],
     "pre_init_hook": "pre_init_hook",

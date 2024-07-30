@@ -7,7 +7,6 @@
     "license": "AGPL-3",
     "category": "Stock",
     "depends": [
-        # fmt: off
         # Custom
         "alc_partner_veterinary",
         "alc_product_pharmacy",
@@ -19,7 +18,6 @@
         # Others
         "delivery",
         "product_expiry",
-        # fmt: on
     ],
     "data": [
         "views/res_partner_views.xml",

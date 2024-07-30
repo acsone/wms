@@ -10,11 +10,9 @@
     # BE CAREFUL ALL the dependencies must BE LGPL or OEEL!!!
     # account_reports_followup is an Odoo enterprise module
     "depends": [
-        # fmt: off
         # Others
         "account_followup",
         "snailmail_account_followup",
-        # fmt: on
     ],
     "data": ["data/followup_line.xml"],
     "installable": True,

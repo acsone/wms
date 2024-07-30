@@ -9,12 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # OCA
         "product_dimension",
         # Others
         "product",
-        # fmt: on
     ],
     "data": ["views/product_template.xml"],
     "installable": True,

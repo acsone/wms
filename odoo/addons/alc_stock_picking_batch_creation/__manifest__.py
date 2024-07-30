@@ -9,10 +9,8 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # OCA
         "stock_picking_batch_creation",
-        # fmt: on
     ],
     "data": [
         "data/devices.xml",

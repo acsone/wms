@@ -10,12 +10,10 @@
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/wms",
     "depends": [
-        # fmt: off
         # OCA
         "stock_available_to_promise_release",
         "stock_release_channel_process_end_time",
         "stock_release_channel_propagate_channel_picking",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

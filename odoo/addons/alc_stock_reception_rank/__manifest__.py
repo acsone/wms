@@ -9,7 +9,6 @@
     "maintainer": "ACSONE SA/NV",
     "category": "Stock Management",
     "depends": [
-        # fmt: off
         # Custom
         "alc_stock_picking_rank",
         # OCA
@@ -20,7 +19,6 @@
         "stock_release_channel",
         # Others
         "stock",
-        # fmt: on
     ],
     "data": [
         "views/stock_picking.xml",

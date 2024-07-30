@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_partner_holidays",
         # OCA
         "stock_release_channel_process_end_time",
-        # fmt: on
     ],
 }

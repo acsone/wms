@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_report_base",
         "alc_stock_picking_parcels_and_items_per_source",
@@ -19,7 +18,6 @@
         "shopfloor",
         "stock_move_zone_location_source",
         "stock_release_channel_shipment_advice",
-        # fmt: on
     ],
     "data": [
         "views/stock_location.xml",

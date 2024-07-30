@@ -9,10 +9,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "product_attribute_set",
-        # fmt: on
     ],
     "application": False,
     "data": [

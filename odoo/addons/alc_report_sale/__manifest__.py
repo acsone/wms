@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_accounting_data",
         "alc_partner_pharmacist",
@@ -23,7 +22,6 @@
         "sale_triple_discount",
         # Others
         "sale",
-        # fmt: on
     ],
     "data": [
         "views/report_saleorder_document.xml",

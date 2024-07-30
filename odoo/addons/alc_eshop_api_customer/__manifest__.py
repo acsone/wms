@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "fastapi",
         "shopinvader_schema_address",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

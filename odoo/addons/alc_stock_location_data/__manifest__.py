@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Others
         "stock",
-        # fmt: on
     ],
     "data": ["data/stock_location.xml"],
     "pre_init_hook": "pre_init_hook",

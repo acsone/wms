@@ -24,10 +24,8 @@
     "category": "Stock Management",
     "author": "BCIM, ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Others
         "stock",
-        # fmt: on
     ],
     "data": [
         "security/stock_lot_update_groups.xml",

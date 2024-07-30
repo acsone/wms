@@ -9,13 +9,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_delivery_carrier_gls",
         "alc_weighing_widget",
         # OCA
         "delivery_carrier_label_gls",
-        # fmt: on
     ],
     "data": [
         "security/delivery_package_gls_wizard.xml",

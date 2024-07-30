@@ -10,13 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_stock_release_channel_pick_allowed",
         "alc_stock_release_channel_user",
         # OCA
         "stock_picking_batch_creation",
-        # fmt: on
     ],
     "data": ["views/stock_picking_batch.xml", "wizards/make_picking_batch.xml"],
 }

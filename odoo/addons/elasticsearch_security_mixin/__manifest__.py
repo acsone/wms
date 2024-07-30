@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "elasticsearch_security",
-        # fmt: on
     ],
     "application": False,
     "data": ["data/queue_job_function.xml"],

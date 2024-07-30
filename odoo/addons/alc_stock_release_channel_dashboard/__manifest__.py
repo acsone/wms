@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_report_delivery_slip",
         "alc_stock_release_channel_deliver_toursolver",
@@ -25,7 +24,6 @@
         "stock_release_channel_process_end_time",
         "stock_release_channel_shipment_advice",
         "stock_release_channel_shipment_advice_deliver",
-        # fmt: on
     ],
     "data": ["views/stock_picking.xml", "views/stock_release_channel.xml"],
     "assets": {

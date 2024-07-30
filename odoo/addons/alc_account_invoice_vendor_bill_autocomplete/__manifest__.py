@@ -10,10 +10,8 @@
     "license": "AGPL-3",
     "category": "Accounting & Finance",
     "depends": [
-        # fmt: off
         # Others
         "purchase",
-        # fmt: on
     ],
     "data": ["views/account_move_views.xml"],
     "installable": True,

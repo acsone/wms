@@ -10,9 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "stock_lot_is_archived",
-        # fmt: on
     ],
 }

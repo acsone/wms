@@ -10,7 +10,6 @@
     # BE CAREFUL ALL the dependencies must BE LGPL or OEEL!!!
     # helpdesk is an Odoo enterprise module
     "depends": [
-        # fmt: off
         # Custom
         "alc_stock_receive_lot",
         "alc_supplier_purchase_manager",
@@ -20,7 +19,6 @@
         "purchase",
         "sale",
         "stock",
-        # fmt: on
     ],
     "website": "http://www.camptocamp.com",
     "data": [

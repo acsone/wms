@@ -7,10 +7,8 @@
     "author": "BCIM, ACSONE SA/NV",
     "category": "Purchases",
     "depends": [
-        # fmt: off
         # Others
         "purchase",
-        # fmt: on
     ],
     "data": ["views/purchase_order_views.xml"],
     "installable": True,

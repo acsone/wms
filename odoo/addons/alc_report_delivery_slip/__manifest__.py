@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_b2c_partner",
         "alc_partner_suite",
@@ -26,7 +25,6 @@
         "shipment_advice",
         # Others
         "delivery",
-        # fmt: on
     ],
     "data": [
         "views/stock_release_channel.xml",

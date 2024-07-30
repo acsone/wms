@@ -9,11 +9,9 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # OCA
         "shopfloor_batch_automatic_creation",
         "shopfloor_packing",
-        # fmt: on
     ],
     "data": ["views/shopfloor_menu.xml"],
     "demo": [],

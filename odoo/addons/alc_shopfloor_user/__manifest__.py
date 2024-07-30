@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "shopfloor_base",
         "shopfloor_mobile_base_auth_api_key",
-        # fmt: on
     ],
     "data": ["views/auth_api_key.xml"],
     "demo": [],

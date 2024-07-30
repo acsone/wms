@@ -8,7 +8,6 @@
     "license": "AGPL-3",
     "category": "Connector",
     "depends": [
-        # fmt: off
         # Custom
         "alc_pricelist_discount",
         "alc_product_cnk",
@@ -28,7 +27,6 @@
         # Others
         "delivery",
         "web",
-        # fmt: on
     ],
     "data": [
         "data/sale_channel.xml",

@@ -9,10 +9,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Others
         "account",
-        # fmt: on
     ],
     "data": ["views/account_move_line_views.xml"],
     "demo": [],

@@ -10,12 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "http://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "account_move_line_single_analytic_account",
         # OCA
         "account_analytic_account_tag",
-        # fmt: on
     ],
     "data": [
         "views/account_analytic_account_views.xml",

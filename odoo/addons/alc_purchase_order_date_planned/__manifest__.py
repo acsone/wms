@@ -10,12 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "hr_holidays_public",
         # Others
         "purchase",
-        # fmt: on
     ],
     "data": ["views/res_partner.xml"],
 }

@@ -9,7 +9,6 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_barcode_required",
         "alc_product_category_data",
@@ -18,7 +17,6 @@
         "alc_stock_receive_lot",
         # OCA
         "product_route_mto",
-        # fmt: on
     ],
     "data": [
         "security/res_groups.xml",

@@ -8,10 +8,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "sale_channel",
-        # fmt: on
     ],
     "data": [
         "data/sale_channel.xml",

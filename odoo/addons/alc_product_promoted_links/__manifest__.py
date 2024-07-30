@@ -9,11 +9,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "base_sparse_field_list_support",
         "product_template_multi_link",
-        # fmt: on
     ],
     "data": [
         "data/product_template_link_type.xml",

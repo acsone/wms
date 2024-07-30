@@ -9,11 +9,9 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # OCA
         "fs_product_multi_image",
         "shopfloor",
-        # fmt: on
     ],
     "data": [],
     "development_status": "Alpha",

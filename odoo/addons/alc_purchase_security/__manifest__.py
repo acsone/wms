@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Others
         "purchase",
-        # fmt: on
     ],
     "data": ["security/ir.model.access.csv", "views/ir_ui_menu.xml"],
     "demo": [],

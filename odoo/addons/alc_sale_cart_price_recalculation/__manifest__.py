@@ -10,14 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_queue_job_background_channel",
         # OCA
         "queue_job",
         "queue_job_cron",
         "sale_cart",
-        # fmt: on
     ],
     "data": ["data/ir_cron.xml"],
     "demo": [],

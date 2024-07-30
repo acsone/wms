@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "sale_order_line_cancel",
-        # fmt: on
     ],
     "data": ["views/sale_order.xml", "views/sale_order_line.xml"],
     "pre_init_hook": "pre_init_hook",

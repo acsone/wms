@@ -9,7 +9,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_cerberus_utils",
         "alc_documents",
@@ -17,7 +16,6 @@
         # OCA
         "fastapi",
         "fs_attachment",
-        # fmt: on
     ],
     "demo": [],
     "installable": True,

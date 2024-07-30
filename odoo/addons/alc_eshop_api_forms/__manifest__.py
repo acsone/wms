@@ -10,13 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "fastapi",
         # Others
         "sales_team",
         "web",
-        # fmt: on
     ],
     "data": [
         "security/res_groups.xml",

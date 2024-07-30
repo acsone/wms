@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_shopfloor_stock_release_channel",
         "alc_stock_release_channel_code",
@@ -18,7 +17,6 @@
         # OCA
         "shopfloor_batch_automatic_creation",
         "shopfloor_mobile",
-        # fmt: on
     ],
     "data": ["templates/assets.xml"],
     "demo": [],

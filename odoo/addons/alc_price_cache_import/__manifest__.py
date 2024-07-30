@@ -10,12 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_price_cache",
         # Others
         "base_import",
-        # fmt: on
     ],
     "application": False,
     "data": [],

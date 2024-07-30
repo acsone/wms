@@ -9,10 +9,8 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # OCA
         "stock_storage_type",
-        # fmt: on
     ],
     "data": [
         "data/stock_package_type.xml",

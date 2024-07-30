@@ -9,10 +9,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "account_banking_sepa_credit_transfer",
         "account_payment_order",
-        # fmt: on
     ],
 }

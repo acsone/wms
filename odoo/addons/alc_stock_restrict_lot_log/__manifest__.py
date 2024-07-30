@@ -12,10 +12,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "stock_restrict_lot",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

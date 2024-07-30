@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "account_move_line_single_analytic_account",
         "alc_analytic_category_report",
@@ -23,6 +22,5 @@
         "product_analytic_sale",
         # Others
         "analytic",
-        # fmt: on
     ],
 }

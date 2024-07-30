@@ -10,12 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_pywebdriver",
         # OCA
         "web_notify",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

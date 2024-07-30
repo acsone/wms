@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "product_price_category",
-        # fmt: on
     ],
     "data": ["data/product_price_category.xml"],
     "pre_init_hook": "pre_init_hook",

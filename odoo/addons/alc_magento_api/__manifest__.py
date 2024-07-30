@@ -9,7 +9,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_eshop_api_cart",
         "alc_eshop_api_pickings",
@@ -24,7 +23,6 @@
         "jsonifier",
         "sale_cart",
         "sale_order_line_cancel",
-        # fmt: on
     ],
     "demo": [],
     "external_dependencies": {"python": ["xmltodict", "dicttoxml"]},

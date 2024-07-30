@@ -9,12 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_category_data",
         # Others
         "stock",
-        # fmt: on
     ],
     "data": [
         "security/res_groups.xml",

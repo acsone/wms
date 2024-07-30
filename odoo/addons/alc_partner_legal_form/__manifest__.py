@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Others
         "sale",
-        # fmt: on
     ],
     "data": [
         "security/alc_partner_legal_form.xml",

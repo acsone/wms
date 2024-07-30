@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "base_partition",
         "product_route_mto",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

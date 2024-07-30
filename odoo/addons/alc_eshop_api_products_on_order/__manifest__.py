@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_cerberus_utils",
         "alc_product_food",
@@ -25,7 +24,6 @@
         "sale_order_line_cancel",
         # Others
         "sale",
-        # fmt: on
     ],
     "data": ["data/mail_template.xml", "security/alc_eshop_product_on_order.xml"],
     "demo": [],

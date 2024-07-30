@@ -9,10 +9,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Others
         "base",
-        # fmt: on
     ],
     "data": ["security/ir.model.access.csv"],
     "demo": [],

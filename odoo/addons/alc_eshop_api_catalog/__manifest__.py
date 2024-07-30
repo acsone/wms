@@ -9,7 +9,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_partner_type",
         "alc_product_flattened_data",
@@ -18,7 +17,6 @@
         "product_brand",
         # Others
         "sale",
-        # fmt: on
     ],
     "demo": [],
     "installable": True,

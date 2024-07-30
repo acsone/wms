@@ -11,7 +11,6 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
-        # fmt: off
         # Custom
         "alc_address_data",
         "alc_address_data",
@@ -20,6 +19,5 @@
         "alc_clubvetshop",
         "alc_logiweb",
         "alc_placedesvetos",
-        # fmt: on
     ],
 }

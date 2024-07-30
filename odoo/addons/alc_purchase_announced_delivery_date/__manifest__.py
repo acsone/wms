@@ -9,10 +9,8 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Others
         "purchase_stock",
-        # fmt: on
     ],
     "data": ["views/purchase_order_views.xml"],
     "demo": [],

@@ -9,7 +9,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_partner_apb_authorization",
         "alc_partner_category",
@@ -22,7 +21,6 @@
         "contacts",
         "mail",
         "sales_team",
-        # fmt: on
     ],
     "data": [
         "security/res_groups.xml",

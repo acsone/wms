@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "mixin_past",
         # OCA
@@ -19,7 +18,6 @@
         "jsonifier",
         # Others
         "sales_team",
-        # fmt: on
     ],
     "data": [
         "data/ir_attachment.xml",

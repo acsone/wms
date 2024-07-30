@@ -10,12 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_pricelist_discount",
         # OCA
         "sale_triple_discount",
-        # fmt: on
     ],
     "application": False,
     "data": ["views/product_pricelist_item.xml"],

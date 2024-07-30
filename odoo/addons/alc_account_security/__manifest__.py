@@ -9,12 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "account_cutoff_base",
         # Others
         "account",
-        # fmt: on
     ],
     "data": ["security/ir.model.access.csv"],
     "demo": [],

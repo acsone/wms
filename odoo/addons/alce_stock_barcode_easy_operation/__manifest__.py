@@ -8,10 +8,8 @@
     "maintainer": "ACSONE SA/NV",
     "category": "Stock Management",
     "depends": [
-        # fmt: off
         # Others
         "stock_barcode",
-        # fmt: on
     ],
     "data": [],
     "installable": True,

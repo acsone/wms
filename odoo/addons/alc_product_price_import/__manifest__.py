@@ -20,7 +20,6 @@ This addon provides:
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_additional_price",
         "alc_product_pricelist_data",
@@ -29,7 +28,6 @@ This addon provides:
         # Others
         "base_import",
         "purchase",
-        # fmt: on
     ],
     "data": [
         "security/ir.model.access.csv",

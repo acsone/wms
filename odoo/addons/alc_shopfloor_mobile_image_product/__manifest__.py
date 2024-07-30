@@ -9,12 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Custom
         "alc_shopfloor_image_product",
         # OCA
         "shopfloor_mobile",
-        # fmt: on
     ],
     "data": ["templates/assets.xml"],
     "demo": [],

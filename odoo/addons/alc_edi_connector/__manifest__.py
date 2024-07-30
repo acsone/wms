@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_purchase_order_ubl",
         # OCA
@@ -21,7 +20,6 @@
         "queue_job_cron",
         # Others
         "stock",
-        # fmt: on
     ],
     "data": [
         "security/edi_backend.xml",

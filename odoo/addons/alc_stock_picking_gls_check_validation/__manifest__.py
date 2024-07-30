@@ -10,11 +10,9 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Custom
         "alc_delivery_carrier_gls",
         "alc_gls_putinpack",
-        # fmt: on
     ],
     "data": ["views/stock_picking.xml"],
     "demo": [],

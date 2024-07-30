@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_accounting_data",
         "alc_company_term_condition",
@@ -26,7 +25,6 @@
         # Others
         "account",
         "sale",
-        # fmt: on
     ],
     "data": [
         "views/account_payment_mode_views.xml",

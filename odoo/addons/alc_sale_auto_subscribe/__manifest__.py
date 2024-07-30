@@ -10,12 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://www.acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_partner_type",
         # Others
         "sale",
-        # fmt: on
     ],
     "data": [
         "data/res_users.xml",

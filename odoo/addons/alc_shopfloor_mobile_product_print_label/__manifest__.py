@@ -8,12 +8,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Custom
         "alc_shopfloor_product_print_label",
         # OCA
         "shopfloor_mobile",
-        # fmt: on
     ],
     "data": ["templates/assets.xml"],
     "demo": [],

@@ -8,10 +8,8 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # OCA
         "shopfloor",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

@@ -9,7 +9,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alce_account_followup_report",
         "alce_account_intrastat_category",
@@ -20,7 +19,6 @@
         "alce_split_coda",
         "alce_stock_barcode",
         "alce_stock_picking_backorder_helpdesk",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

@@ -8,10 +8,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Others
         "stock",
-        # fmt: on
     ],
     "data": ["views/stock_lot_views.xml"],
     "demo": [],

@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "partner_manual_rank",
-        # fmt: on
     ],
     "data": [
         "views/res_partner.xml",

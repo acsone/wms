@@ -9,10 +9,8 @@
     "license": "AGPL-3",
     "category": "Accounting & Finance",
     "depends": [
-        # fmt: off
         # Others
         "account",
-        # fmt: on
     ],
     "data": ["data/mail_template.xml", "views/res_partner.xml"],
     "installable": True,

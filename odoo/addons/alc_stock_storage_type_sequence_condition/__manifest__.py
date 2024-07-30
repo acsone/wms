@@ -10,14 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "stock_available_location_orderpoint",
         "stock_location_orderpoint",
         "stock_storage_type",
         # Others
         "product_expiry",
-        # fmt: on
     ],
     "data": [
         "data/stock_storage_location_sequence_condition.xml",

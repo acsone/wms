@@ -10,14 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_shopfloor_user",
         # OCA
         "shopfloor_base",
         # Others
         "stock",
-        # fmt: on
     ],
     "data": ["security/groups.xml", "security/ir.model.access.csv"],
     "demo": [],

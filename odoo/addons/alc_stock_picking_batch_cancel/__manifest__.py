@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Others
         "stock_picking_batch",
-        # fmt: on
     ],
     "data": ["views/stock_picking_batch.xml"],
     "demo": [],

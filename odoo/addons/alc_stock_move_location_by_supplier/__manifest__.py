@@ -10,12 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://www.acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_supplier",
         # OCA
         "stock_move_location",
-        # fmt: on
     ],
     "data": [
         "wizards/wiz_stock_move_location.xml",

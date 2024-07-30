@@ -11,10 +11,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "partner_invoicing_mode",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_additional_product_stock",
         "alc_delivery_carrier_gls",
@@ -145,7 +144,6 @@
         "stock_reserve_rule",
         "stock_restrict_lot",
         "stock_split_picking",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

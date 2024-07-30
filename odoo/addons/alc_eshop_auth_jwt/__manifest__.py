@@ -10,12 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "connector_keycloak",
         # OCA
         "auth_jwt",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

@@ -10,12 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_report_base",
         # Others
         "purchase",
-        # fmt: on
     ],
     "data": [
         "views/report_purchase_order.xml",

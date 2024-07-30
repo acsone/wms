@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_sale_order_line_unavailable_list",
         "alc_sales_count",
-        # fmt: on
     ],
     "data": [
         "views/res_partner.xml",

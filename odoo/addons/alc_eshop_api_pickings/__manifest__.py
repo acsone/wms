@@ -9,7 +9,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_cerberus_utils",
         "alc_stock_delivery_slip",
@@ -18,7 +17,6 @@
         "stock_procurement_customer",
         # Others
         "stock",
-        # fmt: on
     ],
     "demo": [],
     "installable": True,

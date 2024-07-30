@@ -11,9 +11,7 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
-        # fmt: off
         # Custom
         "alc_sale_stock_restocking_fee_invoicing_additional_product",
-        # fmt: on
     ],
 }

@@ -10,12 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "queue_job_cron",
         "stock_location_orderpoint_average_daily_sale",
         "stock_location_orderpoint_cleanup",
-        # fmt: on
     ],
     "data": [
         "data/res_users.xml",

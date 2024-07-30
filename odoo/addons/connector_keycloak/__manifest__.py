@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "queue_job",
         "server_environment",
-        # fmt: on
     ],
     "application": False,
     "data": [

@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://www.acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "sale_margin_delivered",
         "sale_triple_discount",
-        # fmt: on
     ],
     "data": [
         "views/sale_order_line.xml",

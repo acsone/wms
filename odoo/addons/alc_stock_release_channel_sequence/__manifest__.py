@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_stock_release_channel_tree",
-        # fmt: on
     ],
     "data": ["views/stock_release_channel_views.xml"],
 }

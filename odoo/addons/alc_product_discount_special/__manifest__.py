@@ -9,12 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "mixin_past",
         # Others
         "sale",
-        # fmt: on
     ],  # security_group above product
     "application": False,
     "data": [

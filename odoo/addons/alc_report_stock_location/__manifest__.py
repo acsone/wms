@@ -8,12 +8,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "stock_location_zone",
         # Others
         "stock",
-        # fmt: on
     ],
     "data": [
         "views/report_location_barcode.xml",

@@ -11,7 +11,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_shopfloor_product_print_label",
         # OCA
@@ -20,7 +19,6 @@
         "stock_storage_type",
         # Others
         "delivery",
-        # fmt: on
     ],
     "data": ["views/shopfloor_menu.xml"],
     "demo": [],

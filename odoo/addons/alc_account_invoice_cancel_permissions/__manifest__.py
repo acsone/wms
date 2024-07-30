@@ -9,10 +9,8 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Others
         "account",
-        # fmt: on
     ],
     "data": ["security/res_groups.xml", "views/account_move.xml"],
     "demo": [],

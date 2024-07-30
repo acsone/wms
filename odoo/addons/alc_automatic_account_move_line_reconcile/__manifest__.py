@@ -9,12 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # OCA
         "account_payment_partner",
         # Others
         "account",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

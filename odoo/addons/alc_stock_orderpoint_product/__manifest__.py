@@ -9,10 +9,8 @@
     "category": "Stock Management",
     "website": "http://www.bcim.be",
     "depends": [
-        # fmt: off
         # Others
         "stock",
-        # fmt: on
     ],
     "data": ["views/product.xml", "views/stock.xml"],
     "installable": True,

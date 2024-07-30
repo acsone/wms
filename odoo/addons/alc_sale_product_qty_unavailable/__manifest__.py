@@ -9,7 +9,6 @@
                    on SO line""",
     "author": "BCIM, ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Custom
         "alc_base_auto_join",
         # OCA
@@ -17,7 +16,6 @@
         "stock_available",
         # Others
         "sale_stock",
-        # fmt: on
     ],
     "data": ["views/sale_order_views.xml"],
     "installable": True,

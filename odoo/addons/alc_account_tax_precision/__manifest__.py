@@ -10,10 +10,8 @@
     "author": "Camptocamp,ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Others
         "account",
-        # fmt: on
     ],
     "data": ["data/decimal_precision.xml"],
 }

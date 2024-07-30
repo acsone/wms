@@ -8,12 +8,10 @@
     "license": "AGPL-3",
     "category": "Stock Management",
     "depends": [
-        # fmt: off
         # OCA
         "stock_override_procurement",
         # Others
         "sale_stock",
-        # fmt: on
     ],
     "data": ["views/res_partner.xml", "views/sale_order.xml", "data/data.xml"],
     "pre_init_hook": "pre_init_hook",

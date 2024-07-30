@@ -11,7 +11,6 @@
     Alc purchase order build
     """,
     "depends": [
-        # fmt: off
         # Custom
         "alc_additional_product_base",
         "alc_product_average_sale",
@@ -35,7 +34,6 @@
         "purchase",
         "stock_account",
         "web",
-        # fmt: on
     ],
     "assets": {
         "alc_purchase_order_builder.assets_purchase_order_builder": [

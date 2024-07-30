@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_company_term_condition",
         "alc_external_fax",
@@ -18,7 +17,6 @@
         # OCA
         "partner_fax",
         "queue_job",
-        # fmt: on
     ],
     "assets": {
         "web.report_assets_common": [

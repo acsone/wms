@@ -11,10 +11,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "base_partner_sequence",
-        # fmt: on
     ],
     "data": ["views/res_partner.xml"],
     "demo": [],

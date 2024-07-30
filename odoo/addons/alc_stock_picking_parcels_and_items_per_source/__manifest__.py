@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "base_partition",
         "delivery_package_type_number_parcels",
@@ -20,6 +19,5 @@
         # Others
         "delivery",
         "stock",
-        # fmt: on
     ],
 }

@@ -11,7 +11,6 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
-        # fmt: off
         # Custom
         "alc_base_multi_media_lang",
         "alc_connector_esb",
@@ -99,7 +98,6 @@
         "shopinvader_search_engine_update_product_brand_image",
         "shopinvader_search_engine_update_product_media",
         "shopinvader_search_engine_update_product_template_multi_link",
-        # fmt: on
     ],
     "data": [
         "security/res_groups.xml",

@@ -11,7 +11,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_stock_release_channel_menu",
         "alc_stock_release_channel_shipment_advice_toursolver",
@@ -20,7 +19,6 @@
         "queue_job_cron",
         "stock_picking_start",
         "stock_release_channel",
-        # fmt: on
     ],
     "data": [
         "security/stock_release_channel_pick_allowed_log.xml",

@@ -9,7 +9,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_account_invoice_accrual",
         "alc_account_invoice_email",
@@ -58,7 +57,6 @@
         "report_async",
         # Others
         "account",
-        # fmt: on
     ],
     "data": [
         "data/report_async.xml",

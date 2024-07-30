@@ -11,12 +11,10 @@
     "website": "https://acsone.eu",
     "category": "Product",
     "depends": [
-        # fmt: off
         # Custom
         "alc_additional_product_base",
         # Others
         "purchase",
-        # fmt: on
     ],
     "data": ["views/purchase_order.xml"],
     "installable": True,

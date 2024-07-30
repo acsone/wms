@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_sale_order_line_cancel_available_to_promise_release",
         # OCA
         "sale_order_line_cancel",
-        # fmt: on
     ],
 }

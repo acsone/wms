@@ -9,12 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_eshop_classifieds",
         # OCA
         "fastapi",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

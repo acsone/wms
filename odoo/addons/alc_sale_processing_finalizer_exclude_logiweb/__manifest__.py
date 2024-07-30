@@ -9,10 +9,8 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Custom
         "alc_sale_processing_finalizer",
-        # fmt: on
     ],
     "demo": [],
     "installable": True,

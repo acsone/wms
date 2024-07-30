@@ -9,12 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_b2c_connector",
         # OCA
         "delivery_carrier_label_gls",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

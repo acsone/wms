@@ -6,10 +6,8 @@
     "version": "16.0.1.0.0",
     "category": "Other",
     "depends": [
-        # fmt: off
         # Others
         "sales_team",
-        # fmt: on
     ],
     "author": "Camptocamp SA, ACSONE SA/NV",
     "data": ["views/res_partner.xml", "security/ir.model.access.csv"],

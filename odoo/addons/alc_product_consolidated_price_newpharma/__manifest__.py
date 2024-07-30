@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_consolidated_price_report",
         "alc_product_newpharma",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

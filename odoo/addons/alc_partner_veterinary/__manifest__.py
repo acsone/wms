@@ -9,10 +9,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_partner_type",
-        # fmt: on
     ],
     "application": False,
     "data": ["views/res_partner.xml"],

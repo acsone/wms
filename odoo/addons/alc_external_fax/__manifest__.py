@@ -9,12 +9,10 @@
     "license": "AGPL-3",
     "category": "Communication",
     "depends": [
-        # fmt: off
         # OCA
         "queue_job",
         # Others
         "mail",
-        # fmt: on
     ],
     "website": "https://acsone.eu",
     "data": [

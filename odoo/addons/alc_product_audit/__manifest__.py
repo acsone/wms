@@ -9,7 +9,6 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_dimensions_missing",
         "alc_product_pharmacy",
@@ -24,7 +23,6 @@
         "product",
         "purchase_stock",
         "stock",
-        # fmt: on
     ],
     "data": ["views/product_template.xml"],
     "demo": [],

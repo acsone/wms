@@ -9,7 +9,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_cerberus_utils",
         "alc_sale_channel",
@@ -19,7 +18,6 @@
         "sale_cart",
         "sale_order_line_cancel",
         "shopinvader_sale_state",
-        # fmt: on
     ],
     "demo": [],
     "installable": True,

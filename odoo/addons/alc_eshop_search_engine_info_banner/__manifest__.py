@@ -10,13 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_eshop_info_banner",
         # OCA
         "connector_search_engine",
         "queue_job_cron",
-        # fmt: on
     ],
     "data": [
         "views/se_backend.xml",

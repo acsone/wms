@@ -12,10 +12,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "stock_available_immediately_exclude_location",
-        # fmt: on
     ],
     "installable": True,
 }

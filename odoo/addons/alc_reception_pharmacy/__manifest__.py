@@ -11,7 +11,6 @@
     "website": "https://acsone.eu/",
     # TODO split delivery_rounds...
     "depends": [
-        # fmt: off
         # Custom
         "alc_partner_delivered_by_alcyon",
         "alc_product_category_data",
@@ -26,7 +25,6 @@
         "web_notify",
         # Others
         "stock",
-        # fmt: on
     ],
     "data": [
         "security/ir.model.access.csv",

@@ -11,7 +11,6 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_barcode_required",
         "alc_product_dimensions",
@@ -53,6 +52,5 @@
         "stock_route_mto",
         "stock_storage_type",
         "stock_storage_type_putaway_abc_classification_sale_stock",
-        # fmt: on
     ],
 }

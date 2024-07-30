@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_eshop_api_cart",
         "alc_eshop_api_cart_delivery",
@@ -51,7 +50,6 @@
         "shopinvader_api_sale",
         "shopinvader_api_wishlist",
         "shopinvader_fastapi_auth_jwt",
-        # fmt: on
     ],
     "data": [
         "views/fastapi_endpoint.xml",

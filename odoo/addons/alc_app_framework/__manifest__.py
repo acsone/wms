@@ -11,7 +11,6 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
-        # fmt: off
         # Custom
         "alc_base_auto_join",
         "alc_cerberus_utils",
@@ -24,6 +23,5 @@
         "report_csv",
         "rest_log",
         "server_action_mass_edit",
-        # fmt: on
     ],
 }

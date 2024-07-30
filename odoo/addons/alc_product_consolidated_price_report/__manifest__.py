@@ -10,12 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_flattened_data",
         # OCA
         "report_csv",
-        # fmt: on
     ],
     "data": ["reports/alc_product_consolidated_price_csv_report.xml"],
     "demo": [],

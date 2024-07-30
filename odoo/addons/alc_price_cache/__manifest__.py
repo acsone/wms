@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_pricelist_discount",
         "alc_pricelist_role_name",
@@ -19,7 +18,6 @@
         # OCA
         "base_partition",
         "queue_job",
-        # fmt: on
     ],
     "application": False,
     "data": [

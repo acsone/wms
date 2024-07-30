@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "shopinvader_search_engine_image",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

@@ -87,6 +87,8 @@ def main(addons_dir, requirements_file):  # noqa: C901
         custom = sorted(custom)
         oca = sorted(oca)
         other = sorted(other)
+        if not custom and not oca and not other:
+            continue
         dependencies = custom + oca + other
         dependencies_excluded = ",\n".join([f"        '{dep}'" for dep in dependencies])
         if dependencies_excluded:
@@ -98,7 +100,6 @@ def main(addons_dir, requirements_file):  # noqa: C901
         # with "depends": [\n"add1",\n"add2",\n"add3",\n]
         pattern = r'"depends":\s*\[([^]]*)\]'
         new_content = '"depends": ['
-        new_content += "\n        # fmt: off"
         if custom:
             new_content += (
                 "\n        # Custom\n        "
@@ -117,7 +118,6 @@ def main(addons_dir, requirements_file):  # noqa: C901
                 + ",\n        ".join(f'"{dep}"' for dep in other)
                 + ","
             )
-        new_content += "\n        # fmt: on"
         new_content += "\n    ]"
         content = re.sub(pattern, new_content, content, flags=re.DOTALL)
         with open(manifest_path, "w") as f:

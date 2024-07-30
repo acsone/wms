@@ -9,13 +9,11 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Others
         "account",
         "sale",
         "sale_stock",
         "stock",
-        # fmt: on
     ],
     "data": [
         "wizards/export_report_turnover.xml",

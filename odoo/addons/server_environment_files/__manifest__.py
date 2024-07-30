@@ -9,9 +9,7 @@
     "category": "Tools",
     "website": "https://www.acsone.eu",
     "depends": [
-        # fmt: off
         # Others
         "base",
-        # fmt: on
     ],
 }

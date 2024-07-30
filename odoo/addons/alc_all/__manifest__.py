@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_app_account",
         "alc_app_account_payment",
@@ -56,7 +55,6 @@
         "web_search_with_and",
         "web_sheet_full_width",
         "web_tree_many2one_clickable",
-        # fmt: on
     ],
     "application": True,
     "data": [

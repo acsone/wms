@@ -11,13 +11,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_supplier",
         # Others
         "product",
         "stock",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

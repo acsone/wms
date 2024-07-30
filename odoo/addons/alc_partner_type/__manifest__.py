@@ -9,13 +9,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_food",
         "alc_product_pharmacy",
         # OCA
         "base_sparse_field_list_support",
-        # fmt: on
     ],
     "application": False,
     "data": ["views/res_partner.xml"],

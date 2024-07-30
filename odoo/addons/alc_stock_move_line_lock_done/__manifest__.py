@@ -9,10 +9,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "stock_move_line_lock_qty_done",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

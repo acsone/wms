@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_elasticsearch_security",
         "alc_veterinary_group",
-        # fmt: on
     ],
     "application": False,
     "data": [],

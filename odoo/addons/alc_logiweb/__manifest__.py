@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_b2c_connector",
         "alc_b2c_connector_pricelist_discount",
@@ -21,7 +20,6 @@
         "alc_product_pricelist_data",
         # OCA
         "partner_manual_rank",
-        # fmt: on
     ],
     "data": [
         "security/ir.model.access.csv",

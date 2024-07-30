@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "base_report_to_printer",
-        # fmt: on
     ],
     "data": ["views/printing_printer_views.xml"],
     "demo": [],

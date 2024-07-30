@@ -11,10 +11,8 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Others
         "sale",
-        # fmt: on
     ],
     "data": ["views/res_partner.xml"],
 }

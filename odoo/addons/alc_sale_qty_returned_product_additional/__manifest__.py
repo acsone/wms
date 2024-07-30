@@ -9,11 +9,9 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Custom
         "alc_additional_product_stock",
         "alc_sale_qty_returned",
-        # fmt: on
     ],
     "data": [],
 }

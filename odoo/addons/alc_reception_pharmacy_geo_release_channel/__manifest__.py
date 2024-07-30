@@ -15,7 +15,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_partner_delivered_by_alcyon",
         "alc_reception_pharmacy",
@@ -23,7 +22,6 @@
         "delivery_carrier_partner",
         "stock_release_channel_delivery",
         "stock_release_channel_geoengine",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

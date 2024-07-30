@@ -9,13 +9,11 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_label_printer",
         "alc_product_label_printing",
         # OCA
         "shopfloor",
-        # fmt: on
     ],
     "data": ["views/shopfloor_menu.xml"],
     "demo": [],

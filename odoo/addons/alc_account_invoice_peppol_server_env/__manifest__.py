@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "account_invoice_export_ubl",
         "server_environment",
-        # fmt: on
     ],
     "data": ["data/peppol_server.xml"],
 }

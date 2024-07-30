@@ -9,14 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Custom
         "alc_product_label_printer",
         "alc_product_label_printing",
         "alc_stock_receive_lot",
         # OCA
         "base_report_to_printer",
-        # fmt: on
     ],
     "data": [
         "security/res_groups.xml",

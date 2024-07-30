@@ -10,7 +10,6 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_cerberus_utils",
         "alc_materialized_view_mixin",
@@ -21,7 +20,6 @@
         # OCA
         "fastapi",
         "sale_order_line_cancel",
-        # fmt: on
     ],
     "data": [
         "security/alc_eshop_product_ordered_qty.xml",

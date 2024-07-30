@@ -11,12 +11,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Custom
         "alc_supplier_purchase_manager",
         # Others
         "account",
-        # fmt: on
     ],
     "data": ["views/res_partner_views.xml"],
     "demo": [],

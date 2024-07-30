@@ -10,13 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # Custom
         "alc_stock_release_channel_menu",
         "alc_stock_release_channel_tag",
         # OCA
         "stock_release_channel_geoengine",
-        # fmt: on
     ],
     "data": [
         "data/alc_delivery_plan.xml",

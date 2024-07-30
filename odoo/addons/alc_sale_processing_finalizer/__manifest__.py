@@ -9,7 +9,6 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # fmt: off
         # Custom
         "alc_queue_job_background_channel",
         "alc_sale_consignment",
@@ -21,7 +20,6 @@
         # Others
         "delivery",
         "sale",
-        # fmt: on
     ],
     "data": [
         "views/sale_order_views.xml",

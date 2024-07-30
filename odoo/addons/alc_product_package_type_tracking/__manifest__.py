@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "stock_storage_type",
-        # fmt: on
     ],
     "installable": True,
 }

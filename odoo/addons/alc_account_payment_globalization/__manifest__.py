@@ -18,14 +18,12 @@ Translated with www.DeepL.com/Translator (free version)""",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # OCA
         "account_banking_mandate",
         "account_payment_mode",
         "account_payment_partner",
         # Others
         "account",
-        # fmt: on
     ],
     "data": [
         "security/alc_account_payment_globalization.xml",

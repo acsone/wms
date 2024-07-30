@@ -10,10 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "stock_picking_operation_loss_quantity",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

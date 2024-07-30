@@ -9,10 +9,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # fmt: off
         # OCA
         "connector_search_engine",
-        # fmt: on
     ],
     "data": [],
     "demo": [],

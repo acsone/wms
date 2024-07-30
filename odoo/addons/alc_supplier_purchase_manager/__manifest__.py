@@ -10,11 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # fmt: off
         # Others
         "purchase",
         "purchase_stock",
-        # fmt: on
     ],
     "data": ["views/res_partner_views.xml", "views/purchase_order.xml"],
     "demo": [],
