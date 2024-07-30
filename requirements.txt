@@ -60,10 +60,10 @@ odoo @ git+https://github.com/acsone/odoo.git@982f7678c891308eee1e37c01a665cd51f
 odoo-addon-account-analytic-account-tag==16.0.1.0.0.2
 odoo-addon-account-analytic-required==16.0.1.0.0.8
 odoo-addon-account-analytic-tag==16.0.1.0.0.10
-odoo-addon-account-banking-mandate==16.0.1.2.1
-odoo-addon-account-banking-pain-base==16.0.1.1.0.5
-odoo-addon-account-banking-sepa-credit-transfer==16.0.1.0.0.6
-odoo-addon-account-banking-sepa-direct-debit==16.0.1.1.0
+odoo-addon-account-banking-mandate==16.0.1.3.2.1
+odoo-addon-account-banking-pain-base==16.0.1.2.1
+odoo-addon-account-banking-sepa-credit-transfer==16.0.1.1.3
+odoo-addon-account-banking-sepa-direct-debit==16.0.1.4.3
 odoo-addon-account-cutoff-accrual-order-base @ git+https://github.com/acsone/account-closing.git@cbc778739c212e4bbc4657e9e9016430f2014ff2#subdirectory=setup/account_cutoff_accrual_order_base
 odoo-addon-account-cutoff-accrual-order-product-category @ git+https://github.com/acsone/account-closing.git@0dbad8a080db8b47860b8c162f37ead596051534#subdirectory=setup/account_cutoff_accrual_order_product_category
 odoo-addon-account-cutoff-accrual-order-stock-base @ git+https://github.com/acsone/account-closing.git@8ea69d08a4a9c2e5750a3dfc2562828bbc0dfe48#subdirectory=setup/account_cutoff_accrual_order_stock_base
@@ -93,7 +93,7 @@ odoo-addon-account-move-name-sequence==16.0.1.1.5.1
 odoo-addon-account-move-sent-usability @ git+https://github.com/acsone/account-invoicing.git@fe074d9d137e82442e8e4cd74196f10a537107f8#subdirectory=setup/account_move_sent_usability
 odoo-addon-account-payment-mode==16.0.1.2.0.1
 odoo-addon-account-payment-mode-auto-reconcile @ git+https://github.com/acsone/account-reconcile.git@3c4f0916b3e6a9f614c3539b13e2ed03f3bbcb5f#subdirectory=setup/account_payment_mode_auto_reconcile
-odoo-addon-account-payment-order @ git+https://github.com/acsone/bank-payment.git@d248615f33f6c9542430bcc55dba5c51c3d5844a#subdirectory=setup/account_payment_order
+odoo-addon-account-payment-order==16.0.1.11.3.1
 odoo-addon-account-payment-partner @ git+https://github.com/acsone/bank-payment.git@83093493530fc3646146ac704ae8c7667a30215b#subdirectory=setup/account_payment_partner
 odoo-addon-account-payment-sale==16.0.1.0.1
 odoo-addon-account-payment-unece==16.0.1.0.0.9
