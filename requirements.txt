@@ -207,6 +207,7 @@ odoo-addon-product-multi-category==16.0.1.0.0.3
 odoo-addon-product-packaging-dimension==16.0.1.1.1.5
 odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attribute.git@4669a7771d246a2cfaed28d9abadf7cec08dd4d1#subdirectory=setup/product_packaging_level
 odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@14fada9a163b6ab385d4f65b9915c4e6a0b0211e#subdirectory=setup/product_packaging_level_pallet
+odoo-addon-product-packaging-level-purchasable==16.0.1.1.0.4
 odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@60f4c4b2877997ef89edfffdc7330fa0b3c7a0af#subdirectory=setup/product_price_category
 odoo-addon-product-route-mto==16.0.1.0.0.6
 odoo-addon-product-sale-description==16.0.1.0.1.1
@@ -214,6 +215,7 @@ odoo-addon-product-sequence==16.0.2.0.0.5
 odoo-addon-product-set==16.0.3.0.0.2
 odoo-addon-product-state==16.0.1.0.0.6
 odoo-addon-product-stock-state==16.0.1.0.0.8
+odoo-addon-product-supplierinfo-packaging @ git+https://github.com/acsone/product-attribute.git@a715a1d3c3a493726c5bcf34884bfa42369eb681#subdirectory=setup/product_supplierinfo_packaging
 odoo-addon-product-template-has-one-variant==16.0.1.0.1.2
 odoo-addon-product-template-multi-link==16.0.1.0.0.4
 odoo-addon-product-total-weight-from-packaging==16.0.1.0.0.11
@@ -224,6 +226,7 @@ odoo-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purchase
 odoo-addon-purchase-discount==16.0.1.1.0
 odoo-addon-purchase-force-invoiced==16.0.1.0.1.2
 odoo-addon-purchase-invoicing-no-zero-line==16.0.1.0.0.5
+odoo-addon-purchase-only-by-packaging==16.0.1.0.1
 odoo-addon-purchase-order-approved==16.0.1.0.0.6
 odoo-addon-purchase-order-line-stock-move-cancel @ git+https://github.com/acsone/purchase-workflow.git@8f68c2c6d46afa9a9dc66452ff152e487fd04a05#subdirectory=setup/purchase_order_line_stock_move_cancel
 odoo-addon-purchase-order-ubl @ git+https://github.com/acsone/edi.git@c1a5f8e4eee5eb9cabfd283727717029f6b0b494#subdirectory=setup/purchase_order_ubl
