@@ -406,6 +406,7 @@ odoo-addon-stock-storage-type==16.0.1.0.7
 odoo-addon-stock-storage-type-putaway-abc==16.0.1.0.0.12
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-uom-unece==16.0.1.1.0.2
+odoo-addon-web-advanced-search==16.0.1.0.4.3
 odoo-addon-web-chatter-position==16.0.1.0.0.8
 odoo-addon-web-dialog-size==16.0.1.0.0.5
 odoo-addon-web-environment-ribbon==16.0.1.0.0.3

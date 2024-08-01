@@ -48,6 +48,7 @@
         "server_environment",
         "server_environment_ir_config_parameter",
         "stock_scrap_location_default",
+        "web_advanced_search",
         "web_chatter_position",
         "web_dialog_size",
         "web_environment_ribbon",
