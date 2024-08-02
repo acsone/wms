@@ -14,7 +14,11 @@ class StockLot(StockLotBase):
     @api.depends("quant_ids")
     def _compute_is_empty(self):
         for rec in self:
-            if not rec.quant_ids:
+            internal_quants = rec.quant_ids.filtered(
+                lambda q: q.location_id.usage == "internal"
+            )
+
+            if not internal_quants:
                 rec.is_empty = True
             else:
-                rec.is_empty = all(quant.quantity == 0 for quant in rec.quant_ids)
+                rec.is_empty = all(quant.quantity == 0 for quant in internal_quants)

@@ -5,7 +5,7 @@
     "name": "Alc Stock Lot Is Empty",
     "description": """
         This addon introduces a computed field, is_empty, to the stock lot model. This enhancement enables users to efficiently search for and identify empty stock lots.""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
