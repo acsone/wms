@@ -16,12 +16,12 @@ class TestAccountMoveDefaultReferenceType(TransactionCase):
         )
 
     @classmethod
-    def _create_invoice(cls, partner=None):
+    def _create_invoice(cls, partner=None, move_type="out_invoice"):
         if not partner:
             partner = cls.partner
-        cls.out_invoice = cls.env["account.move"].create(
+        return cls.env["account.move"].create(
             {
-                "move_type": "out_invoice",
+                "move_type": move_type,
                 "partner_id": partner.id,
                 "invoice_date": "2020-10-17",
                 "invoice_line_ids": [
@@ -38,21 +38,21 @@ class TestAccountMoveDefaultReferenceType(TransactionCase):
 
     def test_1(self):
         """Invoice created with the default value structured."""
-        self._create_invoice()
+        out_invoice = out_invoice = self._create_invoice()
         self.assertEqual(self.partner.out_inv_comm_type, "structured")
-        self.assertEqual(self.out_invoice.reference_type, "structured")
+        self.assertEqual(out_invoice.reference_type, "structured")
 
     def test_2(self):
         """If no default value, reference type is set to free comm."""
         self.partner.out_inv_comm_type = False
-        self._create_invoice()
-        self.assertEqual(self.out_invoice.reference_type, "none")
+        out_invoice = self._create_invoice()
+        self.assertEqual(out_invoice.reference_type, "none")
 
     def test_3(self):
         """Invoice created with the default value none."""
         self.partner.out_inv_comm_type = "none"
-        self._create_invoice()
-        self.assertEqual(self.out_invoice.reference_type, "none")
+        out_invoice = self._create_invoice()
+        self.assertEqual(out_invoice.reference_type, "none")
 
     def test_4(self):
         """The value set on the commercial partner level is the one used."""
@@ -60,7 +60,18 @@ class TestAccountMoveDefaultReferenceType(TransactionCase):
         child_partner = self.env["res.partner"].create(
             {"name": "child partner", "parent_id": self.partner.id}
         )
-        self._create_invoice(child_partner)
-        self.assertEqual(self.out_invoice.partner_id, child_partner)
+        out_invoice = self._create_invoice(child_partner)
+        self.assertEqual(out_invoice.partner_id, child_partner)
         self.assertEqual(child_partner.out_inv_comm_type, "structured")
-        self.assertEqual(self.out_invoice.reference_type, "none")
+        self.assertEqual(out_invoice.reference_type, "none")
+
+    def test_5(self):
+        """Move_type other than out_invoice and out_refund must have the default value.
+
+        none for reference_type
+        """
+        self.assertEqual(self.partner.out_inv_comm_type, "structured")
+        in_invoice = self._create_invoice(move_type="in_invoice")
+        self.assertEqual(in_invoice.reference_type, "none")
+        out_refund = self._create_invoice(move_type="out_refund")
+        self.assertEqual(out_refund.reference_type, "structured")
