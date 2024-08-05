@@ -12,11 +12,12 @@ class AccountMove(AccountMoveBase):
 
     reference_type = fields.Selection(compute="_compute_reference_type", store=True)
 
-    @api.depends("commercial_partner_id")
+    @api.depends("commercial_partner_id", "move_type")
     def _compute_reference_type(self):
         for rec in self:
             if (
-                rec.commercial_partner_id
+                rec.move_type in ("out_invoice", "out_refund")
+                and rec.commercial_partner_id
                 and rec.commercial_partner_id.out_inv_comm_type
             ):
                 rec.reference_type = rec.commercial_partner_id.out_inv_comm_type
