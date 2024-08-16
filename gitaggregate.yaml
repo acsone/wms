@@ -172,7 +172,7 @@
   merges:
     - oca 16.0
     - oca refs/pull/410/head # [16.0][IMP] rma_sale: operation required #410
-    - oca refs/pull/412/head # [16.0][IMP] create a replacement order upon confirmation #412
+    - oca refs/pull/417/head # [IMP] rma: configurable workflow #417
   target: origin 16.0-alc-rma
 
 ./src/rma_sale:
@@ -184,4 +184,5 @@
     - oca refs/pull/407/head
     - oca refs/pull/409/head
     - oca refs/pull/410/head
+    - oca refs/pull/417/head # [IMP] rma: configurable workflow #417
   target: origin 16.0-alc-rma_sale
