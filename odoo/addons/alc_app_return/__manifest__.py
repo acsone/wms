@@ -13,5 +13,7 @@
     "depends": [
         # Custom
         "alc_sale_stock_restocking_fee_invoicing_additional_product",
+        # OCA
+        "stock_picking_return_lot",
     ],
 }
