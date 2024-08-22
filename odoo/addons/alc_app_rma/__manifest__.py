@@ -14,6 +14,7 @@
         # OCA
         "product_warranty",
         "rma",
+        "rma_lot",
         "rma_reason",
         "rma_sale",
         "rma_sale_reason",
