@@ -28,7 +28,8 @@ class StockReleaseChannel(StockReleaseChannelBase):
 
     def _get_picking_ids_per_channel(self, field):
         domains = self._field_picking_domains()
-        domain = domains.get(field)
+        field = field.replace("count_picking_", "")
+        domain = domains.get(field, [])
         data = self.env["stock.picking"].read_group(
             domain + [("release_channel_id", "in", self.ids)],
             ["release_channel_id", "picking_ids:array_agg(id)"],
