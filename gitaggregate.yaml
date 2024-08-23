@@ -140,8 +140,8 @@
     - oca refs/pull/902/head # shopfloor: Zone picking no packing
     - oca refs/pull/911/head # [16.0][FIX] shopfloor: Don't embed postponed line quantity
     - oca refs/pull/912/head # [16.0] shopfloor cluster_picking: Custom sorting by device
-    - oca refs/pull/919/head # [FIX] shopfloor: fix location content transfer complete message
     - oca refs/pull/917/head # [16.0] shopfloor: location_content_transfer: get_work additional domain and sort key.
+    - oca refs/pull/925/head # [IMP] shopfloor: Improve message for location content transfer items
   target: origin 16.0-alc-shopfloor
 
 ./src/shopfloor_mobile:
