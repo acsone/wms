@@ -150,6 +150,7 @@ class StockReleaseChannel(models.Model):
             ("picking_type_id.code", "=", "outgoing"),
             ("need_release", "=", False),
             ("state", "in", ("waiting", "partially_available")),
+            ("rule_id.available_to_promise_defer_pull", "=", True),
         ]
 
     @api.depends("picking_ids")
