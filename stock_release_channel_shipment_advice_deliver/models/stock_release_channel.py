@@ -89,28 +89,6 @@ class StockReleaseChannel(models.Model):
                 _("No picking to deliver for channel %(name)s.", name=self.name)
             )
 
-    def _deliver_check_no_picking_printed(self):
-        """We check no pulled moves is printed
-
-        We check the complete chain of pulled moves. This could include
-        inter-warehouse resupply moves that also contain an ongoing move in the
-        chain of moves that may have another release channel and carrier.
-        """
-        printed_pickings = self.picking_chain_ids.filtered(
-            lambda p: p.state not in ("cancel", "done") and p.printed
-        )
-        if printed_pickings:
-            raise UserError(
-                _(
-                    "One of the delivery for channel %(name)s is waiting on "
-                    "another printed transfer. \nPlease finish it manually or "
-                    "cancel its start to be able to deliver.\n"
-                    "%(pickings)s",
-                    name=self.name,
-                    pickings=", ".join(printed_pickings.mapped("name")),
-                )
-            )
-
     def _check_is_action_delivering_error_allowed(self):
         for rec in self:
             if not rec.is_action_delivering_error_allowed:
@@ -224,7 +202,6 @@ class StockReleaseChannel(models.Model):
         moves_to_unrelease = self.at_deliver_to_unrelease_shipping_move_ids
         if moves_to_unrelease:
             self._deliver_check_moves_in_progress(moves_to_unrelease)
-            self._deliver_check_no_picking_printed()
             if any(not m._is_unreleaseable() for m in moves_to_unrelease):
                 raise UserError(
                     _(
