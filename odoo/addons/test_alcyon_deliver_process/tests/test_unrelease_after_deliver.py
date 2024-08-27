@@ -96,6 +96,11 @@ class TestUnreleaseAfterDeliver(TestDeliverProcessBase):
             .create({})
         )
         self.assertTrue(wizard)
+
+        # Remaining picking for Sale 2
+        ships_to_unrelease = self._get_picking_ship(sale2)
+        self.assertEqual(ships_to_unrelease, wizard.allowed_to_unrelease_picking_ids)
+
         wizard.action_deliver()
         self.assertFalse(self.channel.delivering_error)
         self.assertEqual(self.channel.state, "delivered")
