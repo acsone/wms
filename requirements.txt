@@ -378,7 +378,7 @@ odoo-addon-stock-picking-kind==16.0.1.0.0.4
 odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@ffaa42ce3e44c5748d81921a4e8574147abad5b5#subdirectory=setup/stock_picking_low_priority
 odoo-addon-stock-picking-operation-loss-quantity @ git+https://github.com/acsone/stock-logistics-workflow.git@56858c353f49ae90f71754599eb9968e606a23a7#subdirectory=setup/stock_picking_operation_loss_quantity
 odoo-addon-stock-picking-progress==16.0.1.0.0.9
-odoo-addon-stock-picking-return-lot @ git+https://github.com/acsone/stock-logistics-workflow.git@1cf5108d4f50e1e77f7efb4f8b23c84ddb21d273#subdirectory=setup/stock_picking_return_lot
+odoo-addon-stock-picking-return-lot @ git+https://github.com/acsone/stock-logistics-workflow.git@97c2b7c512b0c9866e34969281a5ff48cf8aed5f#subdirectory=setup/stock_picking_return_lot
 odoo-addon-stock-picking-start==16.0.1.1.1
 odoo-addon-stock-picking-type-shipping-policy==16.0.1.0.0.3
 odoo-addon-stock-picking-volume==16.0.1.0.3.2
