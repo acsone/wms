@@ -17,6 +17,7 @@
         "rma_lot",
         "rma_reason",
         "rma_sale",
+        "rma_sale_lot",
         "rma_sale_reason",
     ],
 }
