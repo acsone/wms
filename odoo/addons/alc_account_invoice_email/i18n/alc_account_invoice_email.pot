@@ -29,3 +29,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_account_invoice_email.field_res_users__email_invoice
 msgid "Invoice Email"
 msgstr ""
+
+#. module: alc_account_invoice_email
+#: model_terms:ir.ui.view,arch_db:alc_account_invoice_email.res_partner_form_view
+msgid "This email is blacklisted for mass mailings. Click to unblacklist."
+msgstr ""
