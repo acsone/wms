@@ -183,8 +183,7 @@
     oca: git@github.com:oca/rma.git
   merges:
     - oca 16.0
-    - oca refs/pull/407/head
-    - oca refs/pull/409/head
-    - oca refs/pull/410/head
+    - oca refs/pull/407/head # [IMP] rma_sale: Display the allowed quantity to return in the RMA wizard #407
+    - oca refs/pull/409/head # [ADD] add rma_reason & sale_rma_reason #409
     - oca refs/pull/417/head # [IMP] rma: configurable workflow #417
   target: origin 16.0-alc-rma_sale
