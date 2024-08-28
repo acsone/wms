@@ -2,15 +2,34 @@
 <!-- Copyright 2022 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-  <record model="ir.ui.view" id="res_partner_form_view">
-      <field name="name">res.partner.form.alc_documents</field>
-      <field name="model">res.partner</field>
-      <field name="inherit_id" ref="base.view_partner_form" />
-      <field name="priority" eval="20" />
-      <field name="arch" type="xml">
-          <field name="email" position="after">
-            <field name="email_invoice" />
-          </field>
-      </field>
+    <record model="ir.ui.view" id="res_partner_form_view">
+        <field name="name">res.partner.form.alc_documents</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="mail.res_partner_view_form_inherit_mail" />
+        <field name="arch" type="xml">
+            <xpath
+        expr="//div[hasclass('o_row')]/field[@name='email']/parent::div"
+        position="after"
+      >
+                <label for="email_invoice" class="oe_inline" />
+                <div class="o_row o_row_readonly">
+                    <button
+            name="mail_action_blacklist_remove"
+            class="fa fa-ban text-danger"
+            title="This email is blacklisted for mass mailings. Click to unblacklist."
+            type="object"
+            context="{'default_email': email_invoice}"
+            groups="base.group_user"
+            attrs="{'invisible': [('is_blacklisted', '=', False)]}"
+          />
+                    <field
+            name="email_invoice"
+            widget="email"
+            context="{'gravatar_image': True}"
+            attrs="{'required': [('user_ids','!=', [])]}"
+          />
+                </div>
+            </xpath>
+        </field>
     </record>
 </odoo>

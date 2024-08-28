@@ -8,9 +8,11 @@
     "author": "ACSONE SA/NV",
     "license": "AGPL-3",
     "category": "Accounting & Finance",
+    # mail dependency is needed as mail module replaces the email field...
     "depends": [
         # Others
         "account",
+        "mail",
     ],
     "data": ["data/mail_template.xml", "views/res_partner.xml"],
     "installable": True,
