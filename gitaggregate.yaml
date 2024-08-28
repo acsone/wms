@@ -155,17 +155,6 @@
     - oca refs/pull/918/head # [IMP] shopfloor: search product by default code if barcode is null #918
   target: origin 16.0-alc-shopfloor_mobile
 
-./src/stock_full_location_reservation:
-  remotes:
-    origin: git@github.com:acsone/wms.git
-    mt-software-de: git@github.com:mt-software-de/wms.git
-    oca: git@github.com:oca/wms.git
-  merges:
-    - oca 16.0
-    - mt-software-de refs/pull/5/head # [FIX] stock_full_location_reservation: Don't return unmerged moves
-    - mt-software-de refs/pull/6/head # [FIX] stock_full_location_reservation: Don't unlink moves if a cancel is called
-  target: origin 16.0-stock_full_location_reservation
-
 ./src/rma:
   remotes:
     origin: git@github.com:acsone/rma.git
