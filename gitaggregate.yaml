@@ -164,6 +164,8 @@
     - oca refs/pull/417/head # [IMP] rma: configurable workflow #417
     - oca refs/pull/419/head # [IMP] rma: rma_lot
     - oca refs/pull/420/head # [16.0][FIX] rma: fix returned quantity in picking return wizard
+    - oca refs/pull/421/head # [16.0][FIX] rma: same procurement group for reception and delivery #421
+    - oca refs/pull/423/head # [16.0][FIX] rma: same procurement group for reception and delivery #421
   target: origin 16.0-alc-rma
 
 ./src/rma_sale:
@@ -175,4 +177,5 @@
     - oca refs/pull/407/head # [IMP] rma_sale: Display the allowed quantity to return in the RMA wizard #407
     - oca refs/pull/409/head # [ADD] add rma_reason & sale_rma_reason #409
     - oca refs/pull/417/head # [IMP] rma: configurable workflow #417
+    - oca refs/pull/421/head # [16.0][FIX] rma: same procurement group for reception and delivery #421
   target: origin 16.0-alc-rma_sale
