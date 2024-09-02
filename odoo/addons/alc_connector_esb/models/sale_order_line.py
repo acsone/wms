@@ -14,7 +14,7 @@ class SaleOrder(sale_order_line.SaleOrderLine):
 
     initial_exception = fields.Char(
         help="keep track of the exception on the line. This field preserve the "
-        "original exception even when ignore exception is set.",
+        "original blocking exception even when ignore exception is set.",
     )
 
     def _ws_manage_newpharma_exceptions(self: NewId, partner_ref) -> bool:
@@ -27,7 +27,7 @@ class SaleOrder(sale_order_line.SaleOrderLine):
 
         Returns boolean if an exception is present
         """
-        if self.main_exception_id:
+        if self.main_exception_id.is_blocking:
             initial_exception = self.main_exception_id.description
             # FIXME: add boolean on res_partner to filter web service users
             vals = {
