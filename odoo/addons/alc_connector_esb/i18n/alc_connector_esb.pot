@@ -144,5 +144,5 @@ msgstr ""
 #: model:ir.model.fields,help:alc_connector_esb.field_sale_order_line__initial_exception
 msgid ""
 "keep track of the exception on the line. This field preserve the original "
-"exception even when ignore exception is set."
+"blocking exception even when ignore exception is set."
 msgstr ""
