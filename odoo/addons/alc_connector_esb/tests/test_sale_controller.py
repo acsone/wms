@@ -89,6 +89,41 @@ class TestSaleController(TransactionCase):
         self.assertEqual(result["price_total"], 27.5)
         self.assertEqual(len(result["lines"]), 2)
 
+    def test_saleorder_line_ignore_non_blocking_exception(self):
+        """Test that a non-blocking exception on a line will not.
+
+        set the quantity to 0 for newpharma.
+        """
+        self.env["exception.rule"].search([]).unlink()
+        rule = self.env["exception.rule"].create(
+            {
+                "name": "Test if can be sold",
+                "description": "This product cannot be sold",
+                "model": "sale.order.line",
+                "code": "failed = not object.product_id.sale_ok",
+                "active": True,
+                "is_blocking": False,
+            }
+        )
+
+        self.prod2.sale_ok = False
+
+        data = deepcopy(self.order_data)
+        data["customer_id"] = "8114"
+        self.partner.ref = "8114"
+        so = self.env["sale.order"]._ws_create_new(data, datetime.now())
+        non_saleable_line = so.order_line.filtered(lambda l: l.product_id == self.prod2)
+        self.assertTrue(non_saleable_line.product_uom_qty == 5)
+
+        rule.is_blocking = True
+        data = deepcopy(self.order_data)
+        data["customer_id"] = "8114"
+        self.partner.ref = "8114"
+        data["increment_id"] = "INC-ID-2"
+        so = self.env["sale.order"]._ws_create_new(data, datetime.now())
+        non_saleable_line = so.order_line.filtered(lambda l: l.product_id == self.prod2)
+        self.assertTrue(non_saleable_line.product_uom_qty == 0)
+
     def test_saleorder_status_newpharam(self):
         """Test the method sale order status with a standard SO for newpharma."""
 
@@ -133,6 +168,7 @@ class TestSaleController(TransactionCase):
                 "model": "sale.order.line",
                 "code": "failed = not object.product_id.sale_ok",
                 "active": True,
+                "is_blocking": True,
             }
         )
 
@@ -197,6 +233,7 @@ class TestSaleController(TransactionCase):
                 "model": "sale.order.line",
                 "code": "failed = not object.product_id.sale_ok",
                 "active": True,
+                "is_blocking": True,
             }
         )
 
