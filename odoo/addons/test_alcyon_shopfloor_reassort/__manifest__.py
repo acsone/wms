@@ -9,6 +9,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        # Custom
+        "alc_stock_move_line_restrict_quantity",
         # OCA
         "shopfloor_full_location_reservation",
         "stock_full_location_reservation",
