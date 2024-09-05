@@ -278,7 +278,7 @@ odoo-addon-shipment-advice-planner-toursolver-queue-job==16.0.1.0.0.5
 odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@16b3c663ade08f22d12d5fbaefa210741212e406#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@912047f945a08c4f1d923f22009e96874084e758#subdirectory=setup/shopfloor_base
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wms.git@39bb156ae4781bf0d9c58290d3f73be66befdd3b#subdirectory=setup/shopfloor_batch_automatic_creation
-odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@9c140b8ed078fe2cfeca07bfbc723f0456bb5950#subdirectory=setup/shopfloor_full_location_reservation
+odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@d477836c5ebd4b4039d6159fae05c941bc6874dc#subdirectory=setup/shopfloor_full_location_reservation
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@a69e08f6ab44eca784913c059a29d0ff6bf27c3a#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@912047f945a08c4f1d923f22009e96874084e758#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-mobile-base-auth-api-key==16.0.1.0.0.1
@@ -335,7 +335,7 @@ odoo-addon-stock-available-to-promise-release-exclude-location==16.0.1.0.0.4
 odoo-addon-stock-average-daily-sale==16.0.1.0.0.16
 odoo-addon-stock-dock==16.0.1.0.1
 odoo-addon-stock-dynamic-routing==16.0.1.0.2.14
-odoo-addon-stock-full-location-reservation @ git+https://github.com/acsone/wms.git@37214143387cbc5acb990201996e10b1229eb391#subdirectory=setup/stock_full_location_reservation
+odoo-addon-stock-full-location-reservation @ git+https://github.com/acsone/wms.git@0efbeb835b1d083c7e65f03f985c677bf606b024#subdirectory=setup/stock_full_location_reservation
 odoo-addon-stock-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@29b45d48b705636f87cd589524a552b56dec9a97#subdirectory=setup/stock_grn
 odoo-addon-stock-helper==16.0.1.1.0
 odoo-addon-stock-location-orderpoint @ git+https://github.com/acsone/stock-logistics-orderpoint.git@55f5ecaf84c95027032a039cdb4745be163a622b#subdirectory=setup/stock_location_orderpoint
