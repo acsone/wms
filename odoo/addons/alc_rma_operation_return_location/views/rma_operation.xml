@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="rma_operation_form_view">
+        <field name="model">rma.operation</field>
+        <field name="inherit_id" ref="rma.rma_operation_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='different_return_product']" position="before">
+                <field
+          name="return_location_id"
+          attrs="{'invisible': [('action_create_receipt', '=', False)]}"
+        />
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>
