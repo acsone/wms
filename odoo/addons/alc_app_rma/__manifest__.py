@@ -11,6 +11,8 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
+        # Custom
+        "alc_rma_operation_return_location",
         # OCA
         "product_warranty",
         "rma",
