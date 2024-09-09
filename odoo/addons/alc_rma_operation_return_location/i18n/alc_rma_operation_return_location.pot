@@ -1,0 +1,34 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_rma_operation_return_location
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_rma_operation_return_location
+#: model:ir.model,name:alc_rma_operation_return_location.model_rma_operation
+msgid "RMA requested operation"
+msgstr ""
+
+#. module: alc_rma_operation_return_location
+#: model:ir.model.fields,field_description:alc_rma_operation_return_location.field_rma_operation__return_location_id
+msgid "Return Location"
+msgstr ""
+
+#. module: alc_rma_operation_return_location
+#: model:ir.model,name:alc_rma_operation_return_location.model_stock_return_picking_line
+msgid "Return Picking Line"
+msgstr ""
+
+#. module: alc_rma_operation_return_location
+#: model:ir.model,name:alc_rma_operation_return_location.model_sale_order_line_rma_wizard
+msgid "Sale Order Line Rma Wizard"
+msgstr ""
