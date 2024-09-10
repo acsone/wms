@@ -25,7 +25,6 @@ omit =
     odoo/addons/account_payment_order_background/*
     odoo/addons/alc_country/*
     odoo/addons/alc_db_cleaner/*
-    odoo/addons/alc_delivery_rounds_geooptimize/*
     odoo/addons/alc_eshop_auth_api_key/*
     odoo/addons/alc_mrp_repair/*
     odoo/addons/alc_partner_delivery_person/*
