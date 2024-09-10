@@ -83,36 +83,6 @@ exclude = '''
 | /__manifest__.py
 '''
 
-
-[tool.mypy]
-ignore_missing_imports = true
-exclude = [
-  'post-migrate',
-  'pre-migrate',
-  'pre-migration',
-  # MYPY NOT INSTALLABLE ADDONS
-  'odoo/addons/account_payment_order_background/*',
-  'odoo/addons/alc_country/*',
-  'odoo/addons/alc_db_cleaner/*',
-  'odoo/addons/alc_eshop_auth_api_key/*',
-  'odoo/addons/alc_mrp_repair/*',
-  'odoo/addons/alc_partner_delivery_person/*',
-  'odoo/addons/alc_partner_delivery_window_import/*',
-  'odoo/addons/alc_print_all_deliveryslip/*',
-  'odoo/addons/alc_purchase_order_import_ubl/*',
-  'odoo/addons/alc_shopfloor_mobile_workstation/*',
-  'odoo/addons/alc_standby_delivery/*',
-  'odoo/addons/alc_stock_picking_number_package/*',
-  'odoo/addons/alc_stock_picking_wave_type/*',
-  'odoo/addons/alc_stock_storage_type/*',
-  'odoo/addons/alce_purchase_report/*',
-  'odoo/addons/base_cached_xmlid/*',
-  'odoo/addons/l10n_be_vat/*',
-  'odoo/addons/partner_archive_new_partner/*',
-  'odoo/addons/stock_inventory_constrains/*',
-  'odoo/addons/test_alc_shopfloor_stock_issue_product_additional/*'
-  # MYPY END NOT INSTALLABLE ADDONS
-]
 [tool.ruff]
 target-version = "py310"
 fix = true
