@@ -84,7 +84,7 @@ msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_form_view
-msgid "Internal pickings"
+msgid "Internal (Ready)"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
@@ -106,7 +106,7 @@ msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_form_view
-msgid "Outgoing pickings"
+msgid "Deliveries (Ready)"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard

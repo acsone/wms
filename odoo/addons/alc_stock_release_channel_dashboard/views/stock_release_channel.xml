@@ -395,7 +395,7 @@
           type="object"
           name="button_show_picking_int"
           icon="fa-cubes"
-          string="Internal pickings"
+          string="Internal (Ready)"
           context="{'default_release_channel_id':active_id}"
         />
                 <button
@@ -403,7 +403,7 @@
           type="object"
           name="button_show_picking_out"
           icon="fa-truck"
-          string="Outgoing pickings"
+          string="Deliveries (Ready)"
           context="{'default_release_channel_id':active_id}"
         />
             </xpath>
