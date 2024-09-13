@@ -23,7 +23,7 @@
             <field name="view_mode">tree,form</field>
             <field
       name="domain"
-    >[('picking_type_id.code','=','incoming'), ('location_id.usage','!=','internal'), ('location_dest_id.usage', '=', 'internal')]</field>
+    >[('picking_type_id.code','=','incoming'), ('location_id.usage','!=','internal'), ('location_dest_id.usage', 'in', ('internal', 'view'))]</field>
             <field name="view_id" ref="view_move_tree_receipt_picking" />
             <field
       name="context"
