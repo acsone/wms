@@ -51,6 +51,11 @@ msgid "Delivered"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_form_view
+msgid "Deliveries (Ready)"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_dashboard_kanban_view
 msgid "Delivering"
 msgstr ""
@@ -76,15 +81,15 @@ msgid "Forbidden"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
+#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_form_view
+msgid "Internal (Ready)"
+msgstr ""
+
+#. module: alc_stock_release_channel_dashboard
 #. odoo-python
 #: code:addons/alc_stock_release_channel_dashboard/models/stock_release_channel.py:0
 #, python-format
 msgid "Internal Pickings"
-msgstr ""
-
-#. module: alc_stock_release_channel_dashboard
-#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_form_view
-msgid "Internal (Ready)"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
@@ -102,11 +107,6 @@ msgstr ""
 #: code:addons/alc_stock_release_channel_dashboard/models/stock_release_channel.py:0
 #, python-format
 msgid "Outgoing Pickings"
-msgstr ""
-
-#. module: alc_stock_release_channel_dashboard
-#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_dashboard.stock_release_channel_form_view
-msgid "Deliveries (Ready)"
 msgstr ""
 
 #. module: alc_stock_release_channel_dashboard
