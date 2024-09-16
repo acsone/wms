@@ -39,7 +39,7 @@ def _create_new_package_types(env):
     )
     categories = ali | frigo | materiel
     for category in categories:
-        for i in range(10):
+        for i in range(1, 11):
             str_i = str(i)
             package_type_obj.create(
                 {
@@ -47,6 +47,7 @@ def _create_new_package_types(env):
                     "category_id": category.id,
                     "package_carrier_type": "none",
                     "number_of_parcels": i,
+                    "barcode": f"T#BOITE{str_i}{category.code}",
                 }
             )
 
@@ -66,7 +67,9 @@ def _update_existing_package_types_other(env):
             ("category_id", "=", False),
         ]
     )
-    package_types.write({"category_id": category.id})
+    for package_type in package_types:
+        nbr = str(package_type.number_of_parcels)
+        package_type.write({"barcode": f"T#BOITE{nbr}MED", "category_id": category.id})
 
     category = env.ref(
         "alc_stock_package_type_category_data.alc_package_type_category_aliment"
@@ -81,7 +84,9 @@ def _update_existing_package_types_other(env):
             ("category_id", "=", False),
         ]
     )
-    package_types.write({"category_id": category.id})
+    for package_type in package_types:
+        nbr = str(package_type.number_of_parcels)
+        package_type.write({"barcode": f"T#BOITE{nbr}ALI", "category_id": category.id})
 
     category = env.ref(
         "alc_stock_package_type_category_data.alc_package_type_category_frigo"
@@ -96,7 +101,9 @@ def _update_existing_package_types_other(env):
             ("category_id", "=", False),
         ]
     )
-    package_types.write({"category_id": category.id})
+    for package_type in package_types:
+        nbr = str(package_type.number_of_parcels)
+        package_type.write({"barcode": f"T#BOITE{nbr}ALI", "category_id": category.id})
 
     category = env.ref(
         "alc_stock_package_type_category_data.alc_package_type_category_materiel"
@@ -109,7 +116,9 @@ def _update_existing_package_types_other(env):
             ("category_id", "=", False),
         ]
     )
-    package_types.write({"category_id": category.id})
+    for package_type in package_types:
+        nbr = str(package_type.number_of_parcels)
+        package_type.write({"barcode": f"T#BOITE{nbr}MAT", "category_id": category.id})
 
 
 def _create_and_update_package_types_for_internal_packages(env):
