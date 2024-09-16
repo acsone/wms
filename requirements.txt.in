@@ -149,6 +149,7 @@ odoo-addon-delivery-procurement-group-carrier @ git+https://github.com/OCA/stock
 odoo-addon-stock-picking-group-by-partner-by-carrier @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1498/head#subdirectory=setup/stock_picking_group_by_partner_by_carrier
 # see gitagregate
 odoo-addon-stock-picking-batch-start @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1389/head#subdirectory=setup/stock_picking_batch_start
+odoo-addon-stock-move-manage-priority @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1707/head#subdirectory=setup/stock_move_manage_priority
 odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-alc_stock_move_propagate_first_move#subdirectory=setup/stock_move_propagate_first_move
 odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1264/head#subdirectory=setup/stock_move_propagate_first_move_cancel
 odoo-addon-stock-move-line-lock-qty-done @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1470/head#subdirectory=setup/stock_move_line_lock_qty_done
