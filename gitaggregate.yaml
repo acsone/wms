@@ -166,6 +166,7 @@
     - oca refs/pull/420/head # [16.0][FIX] rma: fix returned quantity in picking return wizard
     - oca refs/pull/421/head # [16.0][FIX] rma: same procurement group for reception and delivery #421
     - oca refs/pull/423/head # [FIX] rma: group rma receptions #423
+    - origin 16.0-418-configurable_workflow-sbj # [FIX] don't link moves if the operation required different return product
   target: origin 16.0-alc-rma
 
 ./src/rma_sale:
@@ -180,3 +181,13 @@
     - oca refs/pull/421/head # [16.0][FIX] rma: same procurement group for reception and delivery #421
     - oca refs/pull/423/head # [FIX] rma: group rma receptions #423
   target: origin 16.0-alc-rma_sale
+
+./src/rma_lot:
+  remotes:
+    origin: git@github.com:acsone/rma.git
+    oca: git@github.com:oca/rma.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/419/head # [IMP] rma_lot
+    - origin 16.0-rma_lot-configurable_workflow-sbj # [FIX] don't restrict lot if return product is different
+  target: origin 16.0-alc-rma_lot
