@@ -1,0 +1,89 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_rma_shipment_advice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-17 22:51+0000\n"
+"PO-Revision-Date: 2024-09-17 22:51+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_rma_shipment_advice
+#: model:ir.model.fields,help:alc_rma_shipment_advice.field_stock_picking__is_rma
+#: model:ir.model.fields,help:alc_rma_shipment_advice.field_stock_picking_type__is_rma
+msgid ""
+"Indicates if this picking type is used for RMA (Return Merchandise "
+"Authorization) operations."
+msgstr ""
+"Indique si ce type de transfert est utilisé pour les opérations de RMA (Autorisation de Retour de Marchandises)."
+
+
+#. module: alc_rma_shipment_advice
+#: model:ir.model.fields,help:alc_rma_shipment_advice.field_stock_picking__rma_shipment_advice_id
+msgid ""
+"Links this picking to a Shipment Advice, allowing the transporter tocollect "
+"returned products when delivering to the customer."
+msgstr ""
+"Lie ce transfert à une note d'envoi, permettant au transporteur de récupérer les produits retournés lors de la livraison au client."
+
+
+#. module: alc_rma_shipment_advice
+#: model:ir.model.fields,help:alc_rma_shipment_advice.field_shipment_advice__rma_picking_ids
+msgid "List of RMA pickings linked to this shipment advice."
+msgstr ""
+"Liste des transferts RMA liés à cette note d'envoi."
+
+#. module: alc_rma_shipment_advice
+#: model:ir.model.fields,help:alc_rma_shipment_advice.field_shipment_advice__rma_pickings_count
+msgid "Number of RMA pickings linked to this shipment advice."
+msgstr ""
+"Nombre de transferts RMA liés à cette note d'envoi."
+
+#. module: alc_rma_shipment_advice
+#: model:ir.model,name:alc_rma_shipment_advice.model_stock_picking_type
+msgid "Picking Type"
+msgstr "Type de transfert"
+
+#. module: alc_rma_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_rma_shipment_advice.shipment_advice_form_view
+#: model_terms:ir.ui.view,arch_db:alc_rma_shipment_advice.stock_picking_type_form_view
+msgid "RMA"
+msgstr ""
+
+#. module: alc_rma_shipment_advice
+#: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_stock_picking__is_rma
+#: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_stock_picking_type__is_rma
+msgid "RMA Operation"
+msgstr "Opération RMA"
+
+#. module: alc_rma_shipment_advice
+#: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_shipment_advice__rma_picking_ids
+msgid "RMA Pickings"
+msgstr "Transferts RMA"
+
+#. module: alc_rma_shipment_advice
+#: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_shipment_advice__rma_pickings_count
+msgid "RMA Pickings Count"
+msgstr "Nombre de transferts RMA"
+
+#. module: alc_rma_shipment_advice
+#: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_stock_picking__rma_shipment_advice_id
+msgid "RMA Shipment Advice"
+msgstr "Note d'envoi RMA"
+
+#. module: alc_rma_shipment_advice
+#: model:ir.model,name:alc_rma_shipment_advice.model_shipment_advice
+msgid "Shipment Advice"
+msgstr "Note d'envoi"
+
+#. module: alc_rma_shipment_advice
+#: model:ir.model,name:alc_rma_shipment_advice.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
