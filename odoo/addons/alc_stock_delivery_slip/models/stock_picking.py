@@ -324,6 +324,8 @@ class StockPicking(stock_picking.StockPicking):
 
         if is_entry_register:
             lines_done = self.get_entry_register_lines()
+        elif self.picking_type_code == "incoming":
+            lines_done = self.move_ids
         else:
             lines_done = self.move_ids.filtered(lambda line: line.state == "done")
 
@@ -377,12 +379,12 @@ class StockPicking(stock_picking.StockPicking):
         all_products = self.mapped("move_ids.product_id")
 
         lines = self.mapped("move_ids").filtered(
-            lambda line: line.state == "done"
-            and line.product_id.id in all_products.ids
+            lambda line: line.product_id.id in all_products.ids
             and (
                 line.product_id.categ_id.has_for_parent(categ_vet)
                 or line.product_id.categ_id.has_for_parent(categ_import)
             )
         )
-
+        if self.picking_type_code != "incoming":
+            lines = lines.filtered(lambda line: line.state == "done")
         return lines

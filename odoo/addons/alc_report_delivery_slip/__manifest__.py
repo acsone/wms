@@ -11,6 +11,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         # Custom
+        "alc_additional_product_stock",
         "alc_b2c_partner",
         "alc_partner_suite",
         "alc_partner_veterinary",
