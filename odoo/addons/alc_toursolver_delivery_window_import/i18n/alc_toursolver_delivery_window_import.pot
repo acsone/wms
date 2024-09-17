@@ -1,0 +1,117 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_toursolver_delivery_window_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_toursolver_delivery_window_import
+#. odoo-python
+#: code:addons/alc_toursolver_delivery_window_import/wizards/alc_delivery_window_importer.py:0
+#, python-format
+msgid ""
+"\n"
+"<p>The XLSX file must contains the following columns: {headers}</p>\n"
+"<p>The hours values must be datetime columns</p>\n"
+"<p><b>Lines with an unknow partner reference (code) will be ignored</b></p>\n"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#: model_terms:ir.ui.view,arch_db:alc_toursolver_delivery_window_import.alc_delivery_window_importer_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#: model:ir.model.fields,field_description:alc_toursolver_delivery_window_import.field_alc_delivery_window_importer__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#: model:ir.model.fields,field_description:alc_toursolver_delivery_window_import.field_alc_delivery_window_importer__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#: model:ir.actions.act_window,name:alc_toursolver_delivery_window_import.alc_delivery_window_importer_act_window
+#: model:ir.ui.menu,name:alc_toursolver_delivery_window_import.alc_delivery_window_importer_menu
+msgid "Delivery Window Importer"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#: model_terms:ir.ui.view,arch_db:alc_toursolver_delivery_window_import.alc_delivery_window_importer_form_view
+msgid "Delivery Windows Importer"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#: model:ir.model.fields,field_description:alc_toursolver_delivery_window_import.field_alc_delivery_window_importer__description
+msgid "Description"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#: model:ir.model.fields,field_description:alc_toursolver_delivery_window_import.field_alc_delivery_window_importer__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#. odoo-python
+#: code:addons/alc_toursolver_delivery_window_import/wizards/alc_delivery_window_importer.py:0
+#, python-format
+msgid "Error cell found while reading XLS/XLSX file: %(error)s"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#: model:ir.model.fields,field_description:alc_toursolver_delivery_window_import.field_alc_delivery_window_importer__id
+msgid "ID"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#: model_terms:ir.ui.view,arch_db:alc_toursolver_delivery_window_import.alc_delivery_window_importer_form_view
+msgid "Import"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#: model:ir.model,name:alc_toursolver_delivery_window_import.model_alc_delivery_window_importer
+msgid "Import delivery window from XLSX file"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#: model:ir.model.fields,field_description:alc_toursolver_delivery_window_import.field_alc_delivery_window_importer____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#: model:ir.model.fields,field_description:alc_toursolver_delivery_window_import.field_alc_delivery_window_importer__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#: model:ir.model.fields,field_description:alc_toursolver_delivery_window_import.field_alc_delivery_window_importer__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#. odoo-python
+#: code:addons/alc_toursolver_delivery_window_import/wizards/alc_delivery_window_importer.py:0
+#, python-format
+msgid "The xlsx file doesn't contains columns %(missing_headers)s"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#. odoo-python
+#: code:addons/alc_toursolver_delivery_window_import/wizards/alc_delivery_window_importer.py:0
+#, python-format
+msgid "Updated partners"
+msgstr ""
+
+#. module: alc_toursolver_delivery_window_import
+#: model:ir.model.fields,field_description:alc_toursolver_delivery_window_import.field_alc_delivery_window_importer__document
+msgid "XLSX file"
+msgstr ""
