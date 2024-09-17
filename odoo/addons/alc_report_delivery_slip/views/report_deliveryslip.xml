@@ -789,7 +789,11 @@
                   </span>
                 </td>
                 <td>
-                  <span t-esc="int(line.product_qty)" />
+                  <span
+                    t-if="line.picking_type_id.code=='incoming'"
+                    t-esc="-int(line.product_qty)"
+                  />
+                  <span t-else="" t-esc="int(line.product_qty)" />
                 </td>
                 <td>
                   <t t-esc="first_quant and first_quant[0] or ''" />

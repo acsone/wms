@@ -161,3 +161,23 @@ class TestStockDeliveryNoteGetMoves(TransactionCase):
         self.assertEqual(len(moves), 1)
         self.assertEqual(len(bo_moves), 0)
         self.assertEqual(moves[0].product_qty, 10.0)
+
+    def test_(self):
+        picking = self._prepare_shipping(self.so, "20190101")
+        res = picking.get_moves_by_order()
+        self.assertEqual(len(res), 0)
+        picking.button_validate()
+        self.assertEqual(picking.state, "done")
+        res = picking.get_moves_by_order()
+        self.assertEqual(len(res), 1)
+        return_wizard = (
+            self.env["stock.return.picking"]
+            .with_context(active_id=picking.id, active_model="stock.picking")
+            .create({})
+        )
+        return_wizard._onchange_picking_id()
+        picking_action = return_wizard.create_returns()
+        reception = self.env["stock.picking"].browse(picking_action["res_id"])
+        self.assertEqual(reception.state, "assigned")
+        res = reception.get_moves_by_order()
+        self.assertEqual(len(res), 1)
