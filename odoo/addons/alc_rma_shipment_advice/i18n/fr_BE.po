@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2024-09-17 22:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -22,8 +23,8 @@ msgid ""
 "Indicates if this picking type is used for RMA (Return Merchandise "
 "Authorization) operations."
 msgstr ""
-"Indique si ce type de transfert est utilisé pour les opérations de RMA (Autorisation de Retour de Marchandises)."
-
+"Indique si ce type de transfert est utilisé pour les opérations de RMA "
+"(Autorisation de Retour de Marchandises)."
 
 #. module: alc_rma_shipment_advice
 #: model:ir.model.fields,help:alc_rma_shipment_advice.field_stock_picking__rma_shipment_advice_id
@@ -31,20 +32,18 @@ msgid ""
 "Links this picking to a Shipment Advice, allowing the transporter tocollect "
 "returned products when delivering to the customer."
 msgstr ""
-"Lie ce transfert à une note d'envoi, permettant au transporteur de récupérer les produits retournés lors de la livraison au client."
-
+"Lie ce transfert à une note d'envoi, permettant au transporteur de récupérer "
+"les produits retournés lors de la livraison au client."
 
 #. module: alc_rma_shipment_advice
 #: model:ir.model.fields,help:alc_rma_shipment_advice.field_shipment_advice__rma_picking_ids
 msgid "List of RMA pickings linked to this shipment advice."
-msgstr ""
-"Liste des transferts RMA liés à cette note d'envoi."
+msgstr "Liste des transferts RMA liés à cette note d'envoi."
 
 #. module: alc_rma_shipment_advice
 #: model:ir.model.fields,help:alc_rma_shipment_advice.field_shipment_advice__rma_pickings_count
 msgid "Number of RMA pickings linked to this shipment advice."
-msgstr ""
-"Nombre de transferts RMA liés à cette note d'envoi."
+msgstr "Nombre de transferts RMA liés à cette note d'envoi."
 
 #. module: alc_rma_shipment_advice
 #: model:ir.model,name:alc_rma_shipment_advice.model_stock_picking_type
