@@ -12,6 +12,7 @@
         # OCA
         "rma_sale",
         "shipment_advice",
+        "shipment_advice_planner_toursolver",
     ],
     "data": [
         "views/stock_picking.xml",
