@@ -134,6 +134,21 @@ msgstr ""
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Ret."
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Return slip:"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Return slips:"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Seq."
 msgstr ""
 
