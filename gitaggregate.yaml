@@ -78,6 +78,7 @@
     - oca refs/pull/819/head # [16.0][ADD] stock_release_channel_shipment_advice_deliver
     - jbaudoux refs/pull/10/head # [IMP] stock_release_channel_shipment_advice_deliver: Be more lax on backorder pickings
     - jbaudoux refs/pull/11/head # [IMP] stock_release_channel_shipment_advice_deliver: Allows to display pickings in confirm wizard
+    - jbaudoux refs/pull/12/head # [FIX] allow sa process without release channel #12
   target: origin 16.0-alc_stock_release_channel_shipment_advice_deliver
 
 ./src/stock_move_propagate_first_move:

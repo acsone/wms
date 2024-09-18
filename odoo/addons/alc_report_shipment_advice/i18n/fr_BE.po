@@ -68,7 +68,7 @@ msgstr ""
 #. module: alc_report_shipment_advice
 #: model:ir.model,name:alc_report_shipment_advice.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Emplacements de stock"
 
 #. module: alc_report_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice____last_update
@@ -134,6 +134,21 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__report_id
 msgid "Report"
 msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Ret."
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Return slip:"
+msgstr "Bon de retour"
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+msgid "Return slips:"
+msgstr "Bons de retour"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document

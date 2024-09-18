@@ -13,6 +13,7 @@
     "depends": [
         # Custom
         "alc_rma_operation_return_location",
+        "alc_rma_shipment_advice",
         # OCA
         "product_warranty",
         "rma",

@@ -77,6 +77,7 @@
                             <tr class="active bg-grey">
                                 <th width="3%">Seq.</th>
                                 <th width="20%">Customer</th>
+                                <th width="3%">Ret.</th>
                                 <th>Notes</th>
                                 <th width="10%">Phone</th>
                                 <t t-set="max_zones" t-value="0" />
@@ -116,9 +117,30 @@
                                         <span t-field="partner.ref" />
                                     </td>
                                     <td>
+                                        <span
+                      t-if="partner in o.rma_picking_ids.partner_id"
+                    >X</span>
+                                    </td>
+                                    <td>
                                         <strong>
                                             <span t-esc="line['note']" />
                                         </strong>
+                                        <t
+                      t-set="rma_pickings"
+                      t-value="o.rma_picking_ids.filtered(lambda p: p.partner_id == partner)"
+                    />
+                                        <p
+                      t-if="partner in o.rma_picking_ids.partner_id"
+                    >
+                                            <br />
+                                            <span
+                        t-if="len(rma_pickings)>1"
+                      >Return slips:</span>
+                                            <span t-else="">Return slip:</span>
+                                            <t
+                        t-esc="','.join(rma_pickings.mapped('name'))"
+                      />
+                                        </p>
                                     </td>
                                     <td>
                                         <span t-field="partner.mobile" />
@@ -173,7 +195,7 @@
                             </tr>
                             <tr>
                                 <td
-                  colspan="4"
+                  colspan="5"
                   class="active bg-grey"
                 >Total number of box(es)</td>
                                 <t
@@ -194,7 +216,7 @@
                             </tr>
                             <tr>
                                 <td
-                  colspan="4"
+                  colspan="5"
                   class="active bg-grey"
                 >Total number of unit(s)</td>
                                  <t
@@ -215,7 +237,7 @@
                            </tr>
                             <tr>
                                 <td
-                  colspan="4"
+                  colspan="5"
                   class="active bg-grey"
                 >Total of parcel(s)</td>
                                 <t
