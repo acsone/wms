@@ -212,4 +212,7 @@ odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/OCA/l10n-be
 odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/204/head#subdirectory=setup/l10n_be_iso20022_pain
 
 # OCA/stock-logistics-transport
-odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/OCA/stock-logistics-transport.git@refs/pull/141/head#subdirectory=setup/shipment_advice_planner_toursolver
+# https://github.com/OCA/stock-logistics-transport/pull/141
+# https://github.com/OCA/stock-logistics-transport/pull/142
+# https://github.com/OCA/stock-logistics-transport/pull/143
+odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/OCA/stock-logistics-transport.git@refs/pull/143/head#subdirectory=setup/shipment_advice_planner_toursolver
