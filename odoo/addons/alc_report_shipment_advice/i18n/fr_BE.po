@@ -137,21 +137,6 @@ msgstr ""
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
-msgid "Ret."
-msgstr ""
-
-#. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
-msgid "Return slip:"
-msgstr "Bon de retour"
-
-#. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
-msgid "Return slips:"
-msgstr "Bons de retour"
-
-#. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Seq."
 msgstr ""
 
@@ -233,6 +218,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "unit(s)"
 msgstr "unité(s)"
+
+#~ msgid "Return slip:"
+#~ msgstr "Bon de retour"
+
+#~ msgid "Return slips:"
+#~ msgstr "Bons de retour"
 
 #~ msgid "<span>Other</span>"
 #~ msgstr "<span>Autre</span>"
