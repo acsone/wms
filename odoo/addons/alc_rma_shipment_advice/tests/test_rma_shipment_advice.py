@@ -54,6 +54,7 @@ class TestRmaShipmentAdvice(TestRmaSaleBase):
         self.assertFalse(self.shipment_advice.rma_picking_ids)
 
     def test_2(self):
+        self.order_out_picking.toursolver_shipment_advice_rank = 9
         self.rma_picking.picking_type_id.is_rma = True
         self.shipment_advice.action_in_progress()
         self.shipment_advice.action_done()
@@ -62,6 +63,7 @@ class TestRmaShipmentAdvice(TestRmaSaleBase):
         self.assertEqual(self.shipment_advice.rma_pickings_count, 1)
         action = self.shipment_advice.button_open_rma_pickings()
         self.assertEqual(action.get("domain"), [("id", "in", self.rma_picking.ids)])
+        self.assertEqual(self.rma_picking.toursolver_shipment_advice_rank, 9)
 
     def test_3(self):
         self.rma_picking.partner_id = self.env["res.partner"].create(
