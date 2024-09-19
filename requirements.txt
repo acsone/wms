@@ -282,8 +282,8 @@ odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/w
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@a69e08f6ab44eca784913c059a29d0ff6bf27c3a#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@912047f945a08c4f1d923f22009e96874084e758#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-mobile-base-auth-api-key==16.0.1.0.0.1
-odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@846f970da36d16487f26a0f57691a5686d325a4a#subdirectory=setup/shopfloor_mobile_packing
-odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@34946ea43a6e6b2dfbf57764b58befd35b152b6c#subdirectory=setup/shopfloor_packing
+odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@9342929c7236e8077d1337cdb90b6256b5b05ae2#subdirectory=setup/shopfloor_mobile_packing
+odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@9342929c7236e8077d1337cdb90b6256b5b05ae2#subdirectory=setup/shopfloor_packing
 odoo-addon-shopfloor-rest-log==16.0.1.0.0.2
 odoo-addon-shopfloor-workstation==16.0.1.0.0.1
 odoo-addon-shopfloor-workstation-mobile==16.0.1.0.0.3
