@@ -47,7 +47,9 @@ class ShipmentAdvice(ShipmentAdviceBase):
         pickings = self.env["stock.picking"].search(self._link_rma_picking_domain())
         pickings.rma_shipment_advice_id = self
         for partner in pickings.partner_id:
-            partner_loaded_pickings = self.loaded_picking_ids
+            partner_loaded_pickings = self.loaded_picking_ids.filtered(
+                lambda pick, p=partner: pick.partner_id == p
+            )
             if partner_loaded_pickings:
                 rank = partner_loaded_pickings[0].toursolver_shipment_advice_rank
                 pickings.filtered(
