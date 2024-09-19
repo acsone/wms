@@ -150,8 +150,8 @@
                                 </td>
                                 <td>
                                     <span
-                  t-if="partner in o.rma_picking_ids.partner_id"
-                >X</span>
+                      t-if="partner in o.rma_picking_ids.partner_id"
+                    >X</span>
                                 </td>
 
                                 <td>
@@ -160,21 +160,17 @@
                                     </strong>
                                 </td>
                                 <t
-                      t-set="rma_pickings"
-                      t-value="o.rma_picking_ids.filtered(lambda p: p.partner_id == partner)"
-                    />
-                                        <p
-                      t-if="partner in o.rma_picking_ids.partner_id"
-                    >
-                                            <br />
-                                            <span
-                        t-if="len(rma_pickings)>1"
-                      >Return slips:</span>
-                                            <span t-else="">Return slip:</span>
-                                            <t
-                        t-esc="','.join(rma_pickings.mapped('name'))"
-                      />
-                                        </p>
+                    t-set="rma_pickings"
+                    t-value="o.rma_picking_ids.filtered(lambda p: p.partner_id == partner)"
+                  />
+                                <p t-if="partner in o.rma_picking_ids.partner_id">
+                                    <br />
+                                    <span
+                      t-if="len(rma_pickings)>1"
+                    >Return slips:</span>
+                                    <span t-else="">Return slip:</span>
+                                    <t t-esc="','.join(rma_pickings.mapped('name'))" />
+                                </p>
 
                                 <td>
                                     <span t-field="partner.mobile" />
