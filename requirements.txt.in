@@ -101,8 +101,6 @@ odoo-addon-rma-lot @ git+https://github.com/acsone/rma.git@16.0-alc-rma_lot#subd
 odoo-addon-rma-sale-lot @ git+https://github.com/acsone/rma.git@16.0-alc-rma_lot#subdirectory=setup/rma_sale_lot
 
 # sale-workflow
-# https://github.com/OCA/sale-workflow/pull/2322
-odoo-addon-product-price-category @ git+https://github.com/acsone/sale-workflow.git@16.0-mig-product_price_category-sbj#subdirectory=setup/product_price_category
 odoo-addon-sale-order-line-cancel @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2357/head#subdirectory=setup/sale_order_line_cancel
 odoo-addon-sale-route-amendment @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2423/head#subdirectory=setup/sale_route_amendment
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2693/head#subdirectory=setup/sale_stock_picking_blocking
