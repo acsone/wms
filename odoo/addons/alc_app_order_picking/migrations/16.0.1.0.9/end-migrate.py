@@ -68,7 +68,6 @@ def _update_existing_package_types_other(env):
         ]
     )
     for package_type in package_types:
-        nbr = str(package_type.number_of_parcels)
         package_type.write({"category_id": category.id})
 
     category = env.ref(
@@ -85,8 +84,7 @@ def _update_existing_package_types_other(env):
         ]
     )
     for package_type in package_types:
-        nbr = str(package_type.number_of_parcels)
-        package_type.write({"barcode": f"T#BOITE{nbr}ALI", "category_id": category.id})
+        package_type.write({"category_id": category.id})
 
     category = env.ref(
         "alc_stock_package_type_category_data.alc_package_type_category_frigo"
@@ -102,7 +100,6 @@ def _update_existing_package_types_other(env):
         ]
     )
     for package_type in package_types:
-        nbr = str(package_type.number_of_parcels)
         package_type.write({"category_id": category.id})
 
     category = env.ref(
@@ -117,7 +114,6 @@ def _update_existing_package_types_other(env):
         ]
     )
     for package_type in package_types:
-        nbr = str(package_type.number_of_parcels)
         package_type.write({"category_id": category.id})
 
 
