@@ -82,185 +82,312 @@
                                 <th width="10%">Phone</th>
                                 <t t-set="max_zones" t-value="0" />
                                 <t
-                  t-foreach="report.location_ids._ids"
-                  t-as="zone_location_id"
+                  t-if="report.env.company.shipment_advice_packages_display_mode == 'source'"
                 >
-                                    <th width="7%">
-                                        <t t-if="zone_location_id">
+                                    <t
+                    t-foreach="report.location_ids._ids"
+                    t-as="zone_location_id"
+                  >
+                                        <th width="7%">
+                                            <t t-if="zone_location_id">
+                                                <t
+                          t-esc="zone_mapping.get(o.env['stock.location'].browse(zone_location_id).name, '???')"
+                        />
+                                            </t>
+                                            <t t-else="">
+                                                <span
+                          t-esc="o.env['stock.location'].browse(zone_location_id).name"
+                        />
+                                            </t>
                                             <t
-                        t-esc="zone_mapping.get(o.env['stock.location'].browse(zone_location_id).name, '???')"
+                        t-set="max_zones"
+                        t-value="max_zones + 1"
                       />
-                                        </t>
-                                        <t t-else="">
-                                            <span
-                        t-esc="o.env['stock.location'].browse(zone_location_id).name"
-                      />
-                                        </t>
-                                        <t t-set="max_zones" t-value="max_zones + 1" />
-                                    </th>
+                                        </th>
+                                    </t>
+
                                 </t>
+                                <t t-else="">
+                                    <t
+                    t-foreach="report.category_ids._ids"
+                    t-as="category_id"
+                  >
+                                        <th width="7%">
+                                            <t t-if="category_id">
+                                                <t
+                          t-esc="zone_mapping.get(o.env['stock.package.type.category'].browse(category_id).name, '???')"
+                        />
+                                            </t>
+                                            <t t-else="">
+                                                <span
+                          t-esc="o.env['stock.package.type.category'].browse(category_id).name"
+                        />
+                                            </t>
+                                            <t
+                        t-set="max_zones"
+                        t-value="max_zones + 1"
+                      />
+                                        </th>
+                                    </t>
+                                </t>
+
                                 <th width="7%">Tot.</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr t-foreach="lines" t-as="line">
                                 <t t-set="partner" t-value="line['partner_id']" />
-                                <tr>
-                                    <td>
-                                        <span t-esc="index" />
-                                    </td>
-                                    <td>
-                                        <div
+                            <tr>
+                                <td>
+                                    <span t-esc="index" />
+                                </td>
+                                <td>
+                                    <div
                       t-esc="partner"
                       t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": True}'
                     />
-                                        <span t-field="partner.ref" />
-                                    </td>
-                                    <td>
-                                        <span
+                                    <span t-field="partner.ref" />
+                                </td>
+                                <td>
+                                    <span
                       t-if="partner in o.rma_picking_ids.partner_id"
                     >X</span>
-                                    </td>
-                                    <td>
-                                        <strong>
-                                            <span t-esc="line['note']" />
-                                        </strong>
-                                        <t
-                      t-set="rma_pickings"
-                      t-value="o.rma_picking_ids.filtered(lambda p: p.partner_id == partner)"
-                    />
-                                        <p
-                      t-if="partner in o.rma_picking_ids.partner_id"
-                    >
-                                            <br />
-                                            <span
-                        t-if="len(rma_pickings)>1"
-                      >Return slips:</span>
-                                            <span t-else="">Return slip:</span>
-                                            <t
-                        t-esc="','.join(rma_pickings.mapped('name'))"
-                      />
-                                        </p>
-                                    </td>
-                                    <td>
-                                        <span t-field="partner.mobile" />
-                                        <br />
-                                        <span t-field="partner.phone" />
-                                    </td>
-                                    <t t-set="nb_zones" t-value="0" />
-                                    <t
-                    t-foreach="report.location_ids._ids"
-                    t-as="location_key"
-                  >
-                                        <td>
-                                            <t
-                        t-if="line.parcels_and_items_per_source['parcels'].get(str(location_key) if location_key else 'false')"
-                      >
-                                                <t
-                          t-esc="int(line.parcels_and_items_per_source['parcels'][str(location_key) if location_key else 'false'])"
-                        />
-                                                box(es)
-                                                <br />
-                                            </t>
-                                            <t
-                        t-if="line.parcels_and_items_per_source['items'].get(str(location_key) if location_key else 'false')"
-                      >
-                                                <t
-                          t-esc="int(line.parcels_and_items_per_source['items'][str(location_key) if location_key else 'false'])"
-                        />
-                                                unit(s)
-                                            </t>
-                                            <t
-                        t-set="nb_zones"
-                        t-value="nb_zones + 1"
-                      />
-                                        </td>
-                                    </t>
-                                    <t t-foreach="max_zones - nb_zones" t-as="idx">
-                                        <td />
-                                    </t>
-                                    <td>
-                                        <t
-                      t-esc="int(line.parcels_and_items_per_source['parcels_total'])"
-                    />
-                                        box(es)
-                                        <br />
-                                        <t
-                      t-esc="int(line.parcels_and_items_per_source['items_total'])"
-                    />
-                                        unit(s)
-                                    </td>
-                                </tr>
-                                <t t-set="index" t-value="index + 1" />
-                            </tr>
-                            <tr>
-                                <td
-                  colspan="5"
-                  class="active bg-grey"
-                >Total number of box(es)</td>
+                                </td>
+
+                                <td>
+                                    <strong>
+                                        <span t-esc="line['note']" />
+                                    </strong>
+                                </td>
                                 <t
-                  t-foreach="report.location_ids._ids"
-                  t-as="zone_location_id"
-                >
-                                    <td class="text-end">
-                                        <t
-                      t-esc="int(report.parcels_and_items_per_source['total_zone_parcels'].get(str(zone_location_id), 0))"
-                    />
-                                    </td>
-                                </t>
-                                <td class="text-end">
-                                    <t
-                    t-esc="int(sum(x for x in report.parcels_and_items_per_source['total_zone_parcels'].values()))"
+                    t-set="rma_pickings"
+                    t-value="o.rma_picking_ids.filtered(lambda p: p.partner_id == partner)"
                   />
+                                <p t-if="partner in o.rma_picking_ids.partner_id">
+                                    <br />
+                                    <span
+                      t-if="len(rma_pickings)>1"
+                    >Return slips:</span>
+                                    <span t-else="">Return slip:</span>
+                                    <t t-esc="','.join(rma_pickings.mapped('name'))" />
+                                </p>
+
+                                <td>
+                                    <span t-field="partner.mobile" />
+                                    <br />
+                                    <span t-field="partner.phone" />
                                 </td>
-                            </tr>
-                            <tr>
-                                <td
-                  colspan="5"
-                  class="active bg-grey"
-                >Total number of unit(s)</td>
-                                 <t
-                  t-foreach="report.location_ids._ids"
-                  t-as="zone_location_id"
-                >
-                                    <td class="text-end">
-                                        <t
-                      t-esc="int(report.parcels_and_items_per_source['total_zone_items'].get(str(zone_location_id), 0))"
-                    />
-                                    </td>
-                                </t>
-                                <td class="text-end">
-                                    <t
-                    t-esc="int(sum(x for x in report.parcels_and_items_per_source['total_zone_items'].values()))"
-                  />
-                                </td>
-                           </tr>
-                            <tr>
-                                <td
-                  colspan="5"
-                  class="active bg-grey"
-                >Total of parcel(s)</td>
+                                <!-- This will display the different columns for packages -->
                                 <t
-                  t-foreach="report.location_ids._ids"
-                  t-as="zone_location_id"
-                >
-                                    <td class="text-end">
-                                        <t
-                      t-esc="int(report.parcels_and_items_per_source['total_zone'].get(str(zone_location_id), 0))"
-                    />
-                                    </td>
-                                </t>
-                                <td class="text-end">
-                                    <t
-                    t-esc="int(sum(x for x in report.parcels_and_items_per_source['total_zone'].values()))"
+                    t-call="alc_report_shipment_advice.report_shipment_advice_packages"
                   />
-                                </td>
                             </tr>
+                            <t t-set="index" t-value="index + 1" />
+                            </tr>
+                            <!-- Displays the total items pre column of the report -->
+                            <t
+                t-call="alc_report_shipment_advice.report_shipment_advice_total_per_column_row_footer"
+              />
+                            <!-- Displays the total items of the report -->
+                            <t
+                t-call="alc_report_shipment_advice.report_shipment_advice_total_row_footer"
+              />
+
                         </tbody>
                     </table>
                 </div>
             </div>
         </t>
+    </template>
+
+    <template id="report_shipment_advice_packages">
+        <!-- This will display the different columns for packages -->
+        <t t-set="nb_zones" t-value="0" />
+        <t t-if="report.env.company.shipment_advice_packages_display_mode == 'source'">
+            <t t-foreach="report.location_ids._ids" t-as="location_key">
+                <td>
+                    <t
+            t-if="line.parcels_and_items_per_source['parcels'].get(str(location_key) if location_key else 'false')"
+          >
+                        <t
+              t-esc="int(line.parcels_and_items_per_source['parcels'][str(location_key) if location_key else 'false'])"
+            />
+                        box(es)
+                        <br />
+                    </t>
+                    <t
+            t-if="line.parcels_and_items_per_source['items'].get(str(location_key) if location_key else 'false')"
+          >
+                        <t
+              t-esc="int(line.parcels_and_items_per_source['items'][str(location_key) if location_key else 'false'])"
+            />
+                        unit(s)
+                    </t>
+                    <t t-set="nb_zones" t-value="nb_zones + 1" />
+                </td>
+            </t>
+            <t t-foreach="max_zones - nb_zones" t-as="idx">
+                <td />
+            </t>
+            <td>
+                <t t-esc="int(line.parcels_and_items_per_source['parcels_total'])" />
+                box(es)
+                <br />
+                <t t-esc="int(line.parcels_and_items_per_source['items_total'])" />
+                unit(s)
+            </td>
+        </t>
+        <t t-else="">
+            <t t-foreach="report.category_ids._ids" t-as="category_key">
+                <td>
+                    <t
+            t-if="line.parcels_and_items_per_category['parcels'].get(str(category_key) if category_key else 'false')"
+          >
+                        <t
+              t-esc="int(line.parcels_and_items_per_category['parcels'][str(category_key) if category_key else 'false'])"
+            />
+                        box(es)
+                        <br />
+                    </t>
+                    <t
+            t-if="line.parcels_and_items_per_category['items'].get(str(category_key) if category_key else 'false')"
+          >
+                        <t
+              t-esc="int(line.parcels_and_items_per_category['items'][str(category_key) if category_key else 'false'])"
+            />
+                        unit(s)
+                    </t>
+                    <t t-set="nb_zones" t-value="nb_zones + 1" />
+                </td>
+            </t>
+            <t t-foreach="max_zones - nb_zones" t-as="idx">
+                <td />
+            </t>
+            <td>
+                <t t-esc="int(line.parcels_and_items_per_category['parcels_total'])" />
+                box(es)
+                <br />
+                <t t-esc="int(line.parcels_and_items_per_category['items_total'])" />
+                unit(s)
+            </td>
+        </t>
+
+
+
+
+    </template>
+
+    <template id="report_shipment_advice_total_per_column_row_footer">
+        <!-- Displays the total items per column of the report -->
+        <t t-if="report.env.company.shipment_advice_packages_display_mode == 'source'">
+            <tr>
+                <td colspan="5" class="active bg-grey">Total number of box(es)</td>
+                <t t-foreach="report.location_ids._ids" t-as="zone_location_id">
+                    <td class="text-end">
+                        <t
+              t-esc="int(report.parcels_and_items_per_source['total_zone_parcels'].get(str(zone_location_id), 0))"
+            />
+                    </td>
+                </t>
+                <td class="text-end">
+                    <t
+            t-esc="int(sum(x for x in report.parcels_and_items_per_source['total_zone_parcels'].values()))"
+          />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="active bg-grey">Total number of unit(s)</td>
+                <t t-foreach="report.location_ids._ids" t-as="zone_location_id">
+                    <td class="text-end">
+                        <t
+              t-esc="int(report.parcels_and_items_per_source['total_zone_items'].get(str(zone_location_id), 0))"
+            />
+                    </td>
+                </t>
+                <td class="text-end">
+                    <t
+            t-esc="int(sum(x for x in report.parcels_and_items_per_source['total_zone_items'].values()))"
+          />
+                </td>
+            </tr>
+        </t>
+        <t t-else="">
+            <tr>
+                <td colspan="5" class="active bg-grey">Total number of box(es)</td>
+                <t t-foreach="report.category_ids._ids" t-as="category_id">
+                    <td class="text-end">
+                        <t
+              t-esc="int(report.parcels_and_items_per_category['total_category_parcels'].get(str(category_id), 0))"
+            />
+                    </td>
+                </t>
+                <td class="text-end">
+                    <t
+            t-esc="int(sum(x for x in report.parcels_and_items_per_category['total_category_parcels'].values()))"
+          />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="active bg-grey">Total number of unit(s)</td>
+                <t t-foreach="report.category_ids._ids" t-as="category_id">
+                    <td class="text-end">
+                        <t
+              t-esc="int(report.parcels_and_items_per_category['total_category_items'].get(str(category_id), 0))"
+            />
+                    </td>
+                </t>
+                <td class="text-end">
+                    <t
+            t-esc="int(sum(x for x in report.parcels_and_items_per_category['total_category_items'].values()))"
+          />
+                </td>
+            </tr>
+
+        </t>
+    </template>
+
+    <template id="report_shipment_advice_total_row_footer">
+        <!-- Displays the total items of the report -->
+        <t t-if="report.env.company.shipment_advice_packages_display_mode == 'source'">
+            <tr>
+                <td colspan="5" class="active bg-grey">Total of parcel(s)</td>
+
+                <t t-foreach="report.location_ids._ids" t-as="zone_location_id">
+                    <td class="text-end">
+                        <t
+              t-esc="int(report.parcels_and_items_per_source['total_zone'].get(str(zone_location_id), 0))"
+            />
+                    </td>
+                </t>
+                <td class="text-end">
+                    <t
+            t-esc="int(sum(x for x in report.parcels_and_items_per_source['total_zone'].values()))"
+          />
+                </td>
+            </tr>
+        </t>
+        <t t-else="">
+            <tr>
+                <td colspan="5" class="active bg-grey">Total of parcel(s)</td>
+
+                <t t-foreach="report.category_ids._ids" t-as="category_id">
+                    <td class="text-end">
+                        <t
+              t-esc="int(report.parcels_and_items_per_category['total_category'].get(str(category_id), 0))"
+            />
+                    </td>
+                </t>
+                <td class="text-end">
+                    <t
+            t-esc="int(sum(x for x in report.parcels_and_items_per_category['total_category'].values()))"
+          />
+                </td>
+            </tr>
+
+        </t>
+
+
+
     </template>
 
     <template

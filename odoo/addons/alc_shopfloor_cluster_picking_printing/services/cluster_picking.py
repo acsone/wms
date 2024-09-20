@@ -7,7 +7,9 @@ from odoo.addons.component.core import Component
 class ClusterPicking(Component):
     _inherit = "shopfloor.cluster.picking"
 
-    def put_in_pack(self, picking_batch_id, picking_id, nbr_packages):
+    def put_in_pack(
+        self, picking_batch_id, picking_id, nbr_packages=None, package_type_id=None
+    ):
         if not self.env.user.printing_product_label_printer_id:
             return self._response_put_in_pack(
                 picking_batch_id,
@@ -18,7 +20,12 @@ class ClusterPicking(Component):
                 picking_batch_id,
                 message=self.msg_store.no_package_label_printer_found(),
             )
-        return super().put_in_pack(picking_batch_id, picking_id, nbr_packages)
+        return super().put_in_pack(
+            picking_batch_id,
+            picking_id,
+            nbr_packages=nbr_packages,
+            package_type_id=package_type_id,
+        )
 
     def _postprocess_put_in_pack(self, picking, pack):
         res = super()._postprocess_put_in_pack(picking, pack)
@@ -96,9 +103,13 @@ class ClusterPicking(Component):
                 lot_id=lot_id,
             )
 
-    def _put_in_pack(self, picking, number_of_parcels):
-        pack = super()._put_in_pack(picking, number_of_parcels)
+    def _put_in_pack(self, picking, number_of_parcels, package_type_id):
+        pack = super()._put_in_pack(picking, number_of_parcels, package_type_id)
         if isinstance(pack, self.env["stock.quant.package"].__class__):
+            if package_type_id is not None:
+                # Package type has been chosen by user, so don't override it as
+                # it contains already the number of parcels
+                return pack
             pack.package_type_id = self._get_suitable_package_type(number_of_parcels)
             pack.number_of_parcels = number_of_parcels
         return pack

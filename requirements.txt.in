@@ -48,8 +48,9 @@ odoo-addon-account-payment-partner @ git+https://github.com/OCA/bank-payment.git
 odoo-addon-base-delivery-carrier-label @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/643/head#subdirectory=setup/base_delivery_carrier_label
 # https://github.com/OCA/delivery-carrier/pull/599 - [16.0][MIG] delivery_carrier_label_gls
 odoo-addon-delivery-carrier-label-gls @ git+https://github.com/oca/delivery-carrier.git@refs/pull/599/head#subdirectory=setup/delivery_carrier_label_gls
-# https://github.com/OCA/delivery-carrier/pull/661
-odoo-addon-stock-picking-delivery-link @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/661/head#subdirectory=setup/stock_picking_delivery_link
+odoo-addon-stock-picking-delivery-package-type-category @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/848/head#subdirectory=setup/stock_picking_delivery_package_type_category
+odoo-addon-stock-picking-delivery-package-type-domain @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/846/head#subdirectory=setup/stock_picking_delivery_package_type_domain
+odoo-addon-stock-picking-delivery-link @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/847/head#subdirectory=setup/stock_picking_delivery_link
 odoo-addon-delivery-package-type-number-parcels @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/761/head#subdirectory=setup/delivery_package_type_number_parcels
 
 # wms
@@ -73,8 +74,8 @@ odoo-addon-shopfloor-base @ git+https://github.com/OCA/wms.git@refs/pull/900/hea
 odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@16.0-alc-shopfloor#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-mobile-base @ git+https://github.com/OCA/wms.git@refs/pull/900/head#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@16.0-alc-shopfloor_mobile#subdirectory=setup/shopfloor_mobile
-odoo-addon-shopfloor-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/head#subdirectory=setup/shopfloor_packing
-odoo-addon-shopfloor-mobile-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/head#subdirectory=setup/shopfloor_mobile_packing
+odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@refs/pull/25/head#subdirectory=setup/shopfloor_packing
+odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@refs/pull/25/head#subdirectory=setup/shopfloor_mobile_packing
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/OCA/wms.git@refs/pull/912/head#subdirectory=setup/shopfloor_batch_automatic_creation
 
 # product-attribute
@@ -119,6 +120,7 @@ odoo-addon-stock-orderpoint-default-location @ git+https://github.com/OCA/stock-
 odoo-addon-stock-location-orderpoint-dynamic-routing-merge @ git+https://github.com/OCA/stock-logistics-orderpoint.git@refs/pull/10/head#subdirectory=setup/stock_location_orderpoint_dynamic_routing_merge
 
 # stock-logistics-warehouse
+odoo-addon-stock-package-type-category @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2091/head#subdirectory=setup/stock_package_type_category
 # https://github.com/OCA/stock-logistics-warehouse/pull/1646
 odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock-default-scrap-location-dro#subdirectory=setup/stock_scrap_location_default
 # https://github.com/OCA/stock-logistics-warehouse/pull/1794

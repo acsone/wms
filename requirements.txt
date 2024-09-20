@@ -282,8 +282,8 @@ odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/w
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@a69e08f6ab44eca784913c059a29d0ff6bf27c3a#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@912047f945a08c4f1d923f22009e96874084e758#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-mobile-base-auth-api-key==16.0.1.0.0.1
-odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@846f970da36d16487f26a0f57691a5686d325a4a#subdirectory=setup/shopfloor_mobile_packing
-odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@34946ea43a6e6b2dfbf57764b58befd35b152b6c#subdirectory=setup/shopfloor_packing
+odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@9342929c7236e8077d1337cdb90b6256b5b05ae2#subdirectory=setup/shopfloor_mobile_packing
+odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@9342929c7236e8077d1337cdb90b6256b5b05ae2#subdirectory=setup/shopfloor_packing
 odoo-addon-shopfloor-rest-log==16.0.1.0.0.2
 odoo-addon-shopfloor-workstation==16.0.1.0.0.1
 odoo-addon-shopfloor-workstation-mobile==16.0.1.0.0.3
@@ -362,6 +362,7 @@ odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/acson
 odoo-addon-stock-move-zone-location-source @ git+https://github.com/acsone/stock-logistics-workflow.git@88cedcf5c6e9e49a2663ac89e73a6d372d2e43f6#subdirectory=setup/stock_move_zone_location_source
 odoo-addon-stock-orderpoint-default-location @ git+https://github.com/acsone/stock-logistics-orderpoint.git@707cd165594a55dd588b326473cc7dd9694657fb#subdirectory=setup/stock_orderpoint_default_location
 odoo-addon-stock-override-procurement==16.0.1.0.0.5
+odoo-addon-stock-package-type-category @ git+https://github.com/acsone/stock-logistics-warehouse.git@1d019731a502c2027aa740784e4c4b42868fb1c9#subdirectory=setup/stock_package_type_category
 odoo-addon-stock-packaging-calculator==16.0.1.0.1
 odoo-addon-stock-picking-back2draft==16.0.1.0.0.7
 odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@0c98b39292f2fedb1acc417741f2c6f305946b54#subdirectory=setup/stock_picking_backorder_reason
@@ -369,7 +370,9 @@ odoo-addon-stock-picking-backorder-reason-grn @ git+https://github.com/acsone/st
 odoo-addon-stock-picking-batch-creation @ git+https://github.com/acsone/wms.git@f390ebcf5b1b126d506eb43b0a1ad9cb01355fa4#subdirectory=setup/stock_picking_batch_creation
 odoo-addon-stock-picking-batch-start @ git+https://github.com/acsone/stock-logistics-workflow.git@2c72016cdc9a0a15508dd3295218c3089b105523#subdirectory=setup/stock_picking_batch_start
 odoo-addon-stock-picking-completion-info==16.0.1.0.1.2
-odoo-addon-stock-picking-delivery-link @ git+https://github.com/acsone/delivery-carrier.git@9924c781c7035b928671e29b53a16cd7b5940124#subdirectory=setup/stock_picking_delivery_link
+odoo-addon-stock-picking-delivery-link @ git+https://github.com/acsone/delivery-carrier.git@2477f9f20fbd4b54a1171050bb84f2bfd6715546#subdirectory=setup/stock_picking_delivery_link
+odoo-addon-stock-picking-delivery-package-type-category @ git+https://github.com/acsone/delivery-carrier.git@8557f2bbbd7cf9693fb0f4bb28f33dff5245966c#subdirectory=setup/stock_picking_delivery_package_type_category
+odoo-addon-stock-picking-delivery-package-type-domain @ git+https://github.com/acsone/delivery-carrier.git@0b7e62de0b8fd5430a52dcc424444fb74bfd8826#subdirectory=setup/stock_picking_delivery_package_type_domain
 odoo-addon-stock-picking-grn-mandatory==16.0.1.0.0.7
 odoo-addon-stock-picking-group-by-base @ git+https://github.com/acsone/stock-logistics-workflow.git@6037d72493b86c43d524445cf2492fd4987f88df#subdirectory=setup/stock_picking_group_by_base
 odoo-addon-stock-picking-group-by-max-weight @ git+https://github.com/acsone/stock-logistics-workflow.git@5a13075c617633fffbd9d734dba4c64432712d15#subdirectory=setup/stock_picking_group_by_max_weight

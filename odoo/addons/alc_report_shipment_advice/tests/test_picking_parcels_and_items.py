@@ -243,3 +243,21 @@ class TestPickingTotal(PickingParcelsItemsCommon, TransactionCase):
         _content, _content_type = self.env["ir.actions.report"]._render_qweb_pdf(
             "shipment_advice.report_shipment_advice", advice.ids, False
         )
+
+    def test_flow_package_category(self):
+        """Create."""
+        self._create_customer_need()
+        self.picking_out = self.Picking.search(
+            [
+                ("move_ids.product_id", "in", self.products.ids),
+                ("picking_type_id", "=", self.warehouse.out_type_id.id),
+            ]
+        )
+        self.picking_out.carrier_id = self.test_carrier
+        # Transfer Pharma Picking
+        self.Picking.search(
+            [
+                ("product_id", "=", self.pharma_product.id),
+                ("location_dest_id", "=", self.warehouse.wh_pack_stock_loc_id.id),
+            ]
+        )

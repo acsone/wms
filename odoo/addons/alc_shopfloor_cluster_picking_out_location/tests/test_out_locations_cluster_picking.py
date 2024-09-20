@@ -2,9 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import Command
 
-from odoo.addons.shopfloor_packing.tests.test_cluster_picking_pack_picking import (
-    ClusterPickingUnloadingCommonCase,
-)
+from odoo.addons.shopfloor_packing.tests.common import ClusterPickingUnloadingCommonCase
 
 
 class TestOutLocationsClusterPicking(ClusterPickingUnloadingCommonCase):

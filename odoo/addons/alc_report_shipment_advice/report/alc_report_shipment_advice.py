@@ -10,6 +10,9 @@ from odoo.fields import Command
 
 from odoo.addons.shipment_advice.models.shipment_advice import ShipmentAdvice
 from odoo.addons.stock.models.stock_location import Location
+from odoo.addons.stock_package_type_category.models.stock_package_type_category import (
+    StockPackageTypeCategory,
+)
 
 if TYPE_CHECKING:
     pass
@@ -24,14 +27,21 @@ class AlcReportShipmentAdvice(models.TransientModel):
         ondelete="cascade",
         required=True,
     )
+    # TODO: Remove this
     parcels_and_items_per_source = fields.Json(
         compute="_compute_parcels_and_items_per_source",
+    )
+    parcels_and_items_per_category = fields.Json(
+        compute="_compute_parcels_and_items_per_category",
     )
     line_ids = fields.One2many["AlcReportShipmentAdviceLine"](
         inverse_name="report_id",
     )
     location_ids = fields.Many2many[Location](
         compute="_compute_location_ids",
+    )
+    category_ids = fields.Many2many[StockPackageTypeCategory](
+        compute="_compute_category_ids",
     )
 
     @api.depends("line_ids.parcels_and_items_per_source")
@@ -84,4 +94,52 @@ class AlcReportShipmentAdvice(models.TransientModel):
                 "total_zone_parcels": dict(total_zone_parcels),
                 "total_zone_items": dict(total_zone_items),
                 "total_zone": dict(total_zone),
+            }
+
+    @api.depends("line_ids")
+    def _compute_category_ids(self):
+        """This will compute the categories to display as headers."""
+        category_obj = self.env["stock.package.type.category"]
+        categories = category_obj.search([]).sorted(
+            "sequence_in_shipment_advice_report"
+        )
+        for report in self:
+            report.category_ids = categories
+
+    @api.depends_context("company")
+    @api.depends("line_ids.parcels_and_items_per_category")
+    def _compute_parcels_and_items_per_category(self):
+        for report in self:
+            total_parcels = 0
+            total_items = 0
+            total = 0
+            total_category_parcels = defaultdict(lambda: 0)
+            total_category_items = defaultdict(lambda: 0)
+            total_category = defaultdict(lambda: 0)
+            for line in report.line_ids:
+                category_lines = line.parcels_and_items_per_category
+                for category in category_lines.get("categories"):
+                    one_category = str(category).lower()
+                    total_parcels += category_lines["parcels"].get(one_category, 0)
+                    total_items += category_lines["items"].get(one_category, 0)
+                    total_category_parcels[one_category] += category_lines[
+                        "parcels"
+                    ].get(one_category, 0)
+                    total_category[one_category] += category_lines["parcels"].get(
+                        one_category, 0
+                    )
+                    total_category_items[one_category] += category_lines["items"].get(
+                        one_category, 0
+                    )
+                    total_category[one_category] += category_lines["items"].get(
+                        one_category, 0
+                    )
+
+            report.parcels_and_items_per_category = {
+                "total_parcels": total_parcels,
+                "total_items": total_items,
+                "total": total,
+                "total_category_parcels": dict(total_category_parcels),
+                "total_category_items": dict(total_category_items),
+                "total_category": dict(total_category),
             }

@@ -1,2 +1,7 @@
-from . import shipment_advice
-from . import stock_location
+from . import (
+    res_company,
+    res_config_settings,
+    shipment_advice,
+    stock_location,
+    stock_package_type_category,
+)
