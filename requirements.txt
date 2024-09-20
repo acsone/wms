@@ -36,7 +36,7 @@ ecdsa==0.18.0
 elasticsearch==7.13.4
 extendable==1.2.2
 extendable-pydantic==1.3.2
-fastapi @ git+https://github.com/acsone/fastapi@9ae3c2eff44273375bacb784f7c3bd184d6272b4
+fastapi @ git+https://github.com/acsone/fastapi@8413c755a26b9a9b3dd3f293b3204bfa9d91c831
 freezegun==1.2.2
 frozenlist==1.3.3
 fsspec==2024.6.1
@@ -461,7 +461,7 @@ pyshp==2.3.1
 python-dateutil==2.8.2
 python-jose==3.3.0
 python-keycloak==3.3.0
-python-multipart==0.0.6
+python-multipart==0.0.9
 python-slugify==8.0.1
 python-stdnum==1.18
 pytz==2023.3
@@ -481,7 +481,7 @@ six==1.16.0
 slugify==0.0.1
 sniffio==1.3.1
 soupsieve==2.4.1
-starlette==0.36.3
+starlette==0.38.5
 text-unidecode==1.3
 typing-extensions==4.8.0
 typodoo==0.3
