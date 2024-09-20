@@ -22,6 +22,33 @@ msgid "Arriving time"
 msgstr "Heure d'arrivée"
 
 #. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__category_ids
+msgid "Category"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.res_config_settings_view_form_stock
+msgid ""
+"Check this to enable automatic package creation behaviour for all new "
+"delivery carriers."
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model,name:alc_report_shipment_advice.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model,name:alc_report_shipment_advice.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.res_config_settings_view_form_stock
+msgid "Configure the default behaviour for new delivery carriers."
+msgstr ""
+
+#. module: alc_report_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__create_uid
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__create_uid
 msgid "Created by"
@@ -109,6 +136,12 @@ msgid "Notes"
 msgstr ""
 
 #. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__parcels_and_items_per_category
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__parcels_and_items_per_category
+msgid "Parcels And Items Per Category"
+msgstr ""
+
+#. module: alc_report_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__parcels_and_items_per_source
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__parcels_and_items_per_source
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_shipment_advice__parcels_and_items_per_source
@@ -118,6 +151,16 @@ msgstr ""
 #. module: alc_report_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice_line__partner_id
 msgid "Partner"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields.selection,name:alc_report_shipment_advice.selection__res_company__shipment_advice_packages_display_mode__package
+msgid "Per Package Category"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields.selection,name:alc_report_shipment_advice.selection__res_company__shipment_advice_packages_display_mode__source
+msgid "Per Source Zone"
 msgstr ""
 
 #. module: alc_report_shipment_advice
@@ -157,6 +200,7 @@ msgstr ""
 
 #. module: alc_report_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_stock_location__sequence_in_shipment_advice_report
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_stock_package_type_category__sequence_in_shipment_advice_report
 msgid "Sequence In Shipment Advice Report"
 msgstr ""
 
@@ -165,6 +209,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__shipment_advice_id
 msgid "Shipment Advice"
 msgstr "Note d'envoi"
+
+#. module: alc_report_shipment_advice
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_res_company__shipment_advice_packages_display_mode
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_res_config_settings__shipment_advice_packages_display_mode
+msgid "Shipment Advice Packages Display Mode"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.stock_package_type_category_form_view
+msgid "Shipment Advice Report"
+msgstr ""
 
 #. module: alc_report_shipment_advice
 #: model:ir.model,name:alc_report_shipment_advice.model_alc_report_shipment_advice_line
@@ -178,6 +233,7 @@ msgstr ""
 
 #. module: alc_report_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_stock_location__show_in_shipment_advice_report
+#: model:ir.model.fields,field_description:alc_report_shipment_advice.field_stock_package_type_category__show_in_shipment_advice_report
 msgid "Show In Shipment Advice Report"
 msgstr ""
 
@@ -185,6 +241,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Start mileage"
 msgstr "Kilométrage de départ"
+
+#. module: alc_report_shipment_advice
+#: model:ir.model,name:alc_report_shipment_advice.model_stock_package_type_category
+msgid "Stock Package Type Category"
+msgstr ""
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
@@ -197,42 +258,52 @@ msgid "Tot."
 msgstr ""
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_total_per_column_row_footer
 msgid "Total number of box(es)"
 msgstr "Nombre total de boîte(s)"
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_total_per_column_row_footer
 msgid "Total number of unit(s)"
 msgstr "Nombre total d'unité(s)"
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_total_row_footer
 msgid "Total of parcel(s)"
 msgstr "Total des colis"
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_packages
 msgid ""
 "box(es)\n"
-"                                                <br/>"
+"                        <br/>"
 msgstr ""
-"boîte(s)\n"
-"                                                <br/>"
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_packages
 msgid ""
 "box(es)\n"
-"                                        <br/>"
+"                <br/>"
 msgstr ""
-"boîte(s)\n"
-"                                        <br/>"
 
 #. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_packages
 msgid "unit(s)"
 msgstr "unité(s)"
+
+#~ msgid ""
+#~ "box(es)\n"
+#~ "                                                <br/>"
+#~ msgstr ""
+#~ "boîte(s)\n"
+#~ "                                                <br/>"
+
+#~ msgid ""
+#~ "box(es)\n"
+#~ "                                        <br/>"
+#~ msgstr ""
+#~ "boîte(s)\n"
+#~ "                                        <br/>"
 
 #~ msgid "<span>Other</span>"
 #~ msgstr "<span>Autre</span>"
