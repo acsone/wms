@@ -6,15 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-02-26 08:07+0000\n"
-"Last-Translator: Souheil Bejaoui <souheil.bejaoui@acsone.eu>\n"
-"Language-Team: none\n"
-"Language: fr_BE\n"
+"POT-Creation-Date: 2024-09-23 17:59+0000\n"
+"PO-Revision-Date: 2024-09-23 17:59+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.6.1\n"
+"Plural-Forms: \n"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
@@ -36,12 +35,12 @@ msgstr ""
 #. module: alc_report_shipment_advice
 #: model:ir.model,name:alc_report_shipment_advice.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Sociétés"
 
 #. module: alc_report_shipment_advice
 #: model:ir.model,name:alc_report_shipment_advice.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Configuration"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.res_config_settings_view_form_stock
@@ -208,7 +207,7 @@ msgstr ""
 #: model:ir.model,name:alc_report_shipment_advice.model_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__shipment_advice_id
 msgid "Shipment Advice"
-msgstr "Note d'envoi"
+msgstr "Avis d'expédition"
 
 #. module: alc_report_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_res_company__shipment_advice_packages_display_mode
@@ -245,7 +244,7 @@ msgstr "Kilométrage de départ"
 #. module: alc_report_shipment_advice
 #: model:ir.model,name:alc_report_shipment_advice.model_stock_package_type_category
 msgid "Stock Package Type Category"
-msgstr ""
+msgstr "Catégorie de colis"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
@@ -278,6 +277,8 @@ msgid ""
 "box(es)\n"
 "                        <br/>"
 msgstr ""
+"boît(es)\n"
+"                        <br/>"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_packages
@@ -285,25 +286,10 @@ msgid ""
 "box(es)\n"
 "                <br/>"
 msgstr ""
+"boît(es)\n"
+"                <br/>"
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_packages
 msgid "unit(s)"
 msgstr "unité(s)"
-
-#~ msgid ""
-#~ "box(es)\n"
-#~ "                                                <br/>"
-#~ msgstr ""
-#~ "boîte(s)\n"
-#~ "                                                <br/>"
-
-#~ msgid ""
-#~ "box(es)\n"
-#~ "                                        <br/>"
-#~ msgstr ""
-#~ "boîte(s)\n"
-#~ "                                        <br/>"
-
-#~ msgid "<span>Other</span>"
-#~ msgstr "<span>Autre</span>"
