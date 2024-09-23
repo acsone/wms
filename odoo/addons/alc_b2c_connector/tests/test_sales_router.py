@@ -2,6 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from fastapi import status
 from freezegun import freeze_time
+from pydantic._internal._generate_schema import GenerateSchema
+from pydantic_core import core_schema
 from requests import Response
 
 from odoo import fields
@@ -12,6 +14,23 @@ from ..routers.sales import router as sales_router
 from .common import CommonB2CSaleServiceCase
 
 ISO_DT_WITH_TZ = "2020-05-28T13:45:47+02:00"
+
+# HACK to ensure pydantic generates the correct schema for datetime
+# when used with freezegun
+
+
+initial_match_type = GenerateSchema.match_type
+
+
+def match_type(self, obj):
+    if getattr(obj, "__name__", None) == "datetime":
+        return core_schema.datetime_schema()
+    return initial_match_type(self, obj)
+
+
+GenerateSchema.match_type = match_type
+
+# END OF HACK
 
 
 class TestSalesService(CommonB2CSaleServiceCase):
