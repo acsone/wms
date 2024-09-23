@@ -240,7 +240,6 @@ class TestPickingTotal(BaseCommon):
             sorted(result.get("categories")),
             sorted([False, self.medocs.id, self.aliments.id]),
         )
-
         _content, _content_type = self.env["ir.actions.report"]._render_qweb_pdf(
             "stock.action_report_delivery", ship_move.picking_id.ids, False
         )

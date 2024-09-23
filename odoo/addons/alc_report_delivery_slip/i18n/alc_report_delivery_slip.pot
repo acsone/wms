@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-23 14:06+0000\n"
+"PO-Revision-Date: 2024-09-23 14:06+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -60,14 +62,16 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.deliveryslip_b2c_customer
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.deliveryslip_with_price
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.deliveryslip_without_price
-msgid "Balance to be delivered"
+msgid ""
+"Balance to be\n"
+"                                        delivered on order"
 msgstr ""
 
 #. module: alc_report_delivery_slip
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.deliveryslip_b2c_customer
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.deliveryslip_with_price
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.deliveryslip_without_price
-msgid "Balance to be delivered on order"
+msgid "Balance to be delivered"
 msgstr ""
 
 #. module: alc_report_delivery_slip
@@ -89,6 +93,21 @@ msgid "Check if the picking type implies fridge location"
 msgstr ""
 
 #. module: alc_report_delivery_slip
+#: model:ir.model,name:alc_report_delivery_slip.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: alc_report_delivery_slip
+#: model:ir.model,name:alc_report_delivery_slip.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: alc_report_delivery_slip
+#: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.res_config_settings_view_form_stock
+msgid "Configure the default behaviour for new delivery carriers."
+msgstr ""
+
+#. module: alc_report_delivery_slip
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.deliveryslip_orderref
 msgid "Consignement"
 msgstr ""
@@ -101,6 +120,17 @@ msgstr ""
 #. module: alc_report_delivery_slip
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_deliveryslip_alcyon
 msgid "DON'T FORGET TO BRING BACK COOLPACK IF ANY"
+msgstr ""
+
+#. module: alc_report_delivery_slip
+#: model:ir.model.fields,field_description:alc_report_delivery_slip.field_res_company__delivery_slip_packages_display_mode
+#: model:ir.model.fields,field_description:alc_report_delivery_slip.field_res_config_settings__delivery_slip_packages_display_mode
+msgid "Delivery Slip Packages Display Mode"
+msgstr ""
+
+#. module: alc_report_delivery_slip
+#: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.stock_package_type_category_form_view
+msgid "Delivery Slip Report"
 msgstr ""
 
 #. module: alc_report_delivery_slip
@@ -201,6 +231,26 @@ msgid "Other"
 msgstr ""
 
 #. module: alc_report_delivery_slip
+#: model:ir.model.fields,field_description:alc_report_delivery_slip.field_stock_picking__parcels_and_items_category_ids
+msgid "Parcels And Items Category"
+msgstr ""
+
+#. module: alc_report_delivery_slip
+#: model:ir.model.fields,field_description:alc_report_delivery_slip.field_stock_picking__parcels_and_items_per_category
+msgid "Parcels And Items Per Category"
+msgstr ""
+
+#. module: alc_report_delivery_slip
+#: model:ir.model.fields.selection,name:alc_report_delivery_slip.selection__res_company__delivery_slip_packages_display_mode__package
+msgid "Per Package Category"
+msgstr ""
+
+#. module: alc_report_delivery_slip
+#: model:ir.model.fields.selection,name:alc_report_delivery_slip.selection__res_company__delivery_slip_packages_display_mode__source
+msgid "Per Source Zone"
+msgstr ""
+
+#. module: alc_report_delivery_slip
 #: model:ir.model,name:alc_report_delivery_slip.model_stock_picking_type
 msgid "Picking Type"
 msgstr ""
@@ -231,7 +281,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_deliveryslip_alcyon
 msgid ""
 "Received the:<br/>\n"
-"              Signature:"
+"                            Signature:"
+msgstr ""
+
+#. module: alc_report_delivery_slip
+#: model:ir.model.fields,field_description:alc_report_delivery_slip.field_stock_package_type_category__sequence_in_delivery_slip_report
+msgid "Sequence In Delivery Slip Report"
 msgstr ""
 
 #. module: alc_report_delivery_slip
@@ -240,7 +295,7 @@ msgid "Shipment Advice"
 msgstr ""
 
 #. module: alc_report_delivery_slip
-#: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_per_category
 msgid "Shipment advice:"
 msgstr ""
 
@@ -251,6 +306,16 @@ msgid "Show CNK on delivery slip"
 msgstr ""
 
 #. module: alc_report_delivery_slip
+#: model:ir.model.fields,field_description:alc_report_delivery_slip.field_stock_package_type_category__show_in_delivery_slip_report
+msgid "Show In Delivery Slip Report"
+msgstr ""
+
+#. module: alc_report_delivery_slip
+#: model:ir.model,name:alc_report_delivery_slip.model_stock_package_type_category
+msgid "Stock Package Type Category"
+msgstr ""
+
+#. module: alc_report_delivery_slip
 #: model:ir.model,name:alc_report_delivery_slip.model_stock_release_channel
 msgid "Stock Release Channels"
 msgstr ""
@@ -258,6 +323,13 @@ msgstr ""
 #. module: alc_report_delivery_slip
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.deliveryslip_with_price
 msgid "Subtotal"
+msgstr ""
+
+#. module: alc_report_delivery_slip
+#: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.res_config_settings_view_form_stock
+msgid ""
+"This is the configuration on how to compute boxes and units on Delivery "
+"Slip."
 msgstr ""
 
 #. module: alc_report_delivery_slip
@@ -276,11 +348,21 @@ msgid "Weight:<br/>"
 msgstr ""
 
 #. module: alc_report_delivery_slip
-#: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_per_category
+msgid "box(es)"
+msgstr ""
+
+#. module: alc_report_delivery_slip
+#: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_per_category
 msgid "boxes"
 msgstr ""
 
 #. module: alc_report_delivery_slip
-#: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_deliveryslip_alcyon
+#: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_per_category
 msgid "items"
+msgstr ""
+
+#. module: alc_report_delivery_slip
+#: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_per_category
+msgid "unit(s)"
 msgstr ""
