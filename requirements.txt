@@ -118,7 +118,7 @@ odoo-addon-base-import-security-group==16.0.1.0.0.4
 odoo-addon-base-optional-quick-create==16.0.1.0.0.5
 odoo-addon-base-partition==16.0.1.0.0.7
 odoo-addon-base-partner-sequence==16.0.1.0.0.3
-odoo-addon-base-report-to-label-printer @ git+https://github.com/acsone/report-print-send.git@763b847a20a61448956df1e32231b56a7edd5189#subdirectory=setup/base_report_to_label_printer
+odoo-addon-base-report-to-label-printer==16.0.1.0.0.5
 odoo-addon-base-report-to-printer==16.0.1.1.5
 odoo-addon-base-rest==16.0.1.0.2.2
 odoo-addon-base-sparse-field-list-support==16.0.1.0.0.4

@@ -153,7 +153,6 @@ odoo-addon-stock-available-location-get-domain @ git+https://github.com/OCA/stoc
 odoo-addon-stock-available-location-orderpoint @ git+https://github.com/OCA/stock-logistics-availability.git@refs/pull/10/head#subdirectory=setup/stock_available_location_orderpoint
 
 # report-print-send
-odoo-addon-base-report-to-label-printer @ git+https://github.com/oca/report-print-send.git@refs/pull/329/head#subdirectory=setup/base_report_to_label_printer
 
 # OCA/edi
 odoo-addon-account-einvoice-generate @ git+https://github.com/OCA/edi.git@refs/pull/893/head#subdirectory=setup/account_einvoice_generate
