@@ -235,7 +235,7 @@ odoo-addon-pydantic==16.0.1.0.0.3
 odoo-addon-queue-job==16.0.2.5.0
 odoo-addon-queue-job-cron==16.0.2.0.0.4
 odoo-addon-report-async==16.0.1.0.1
-odoo-addon-report-csv @ git+https://github.com/acsone/reporting-engine.git@05784e441507352ab913d1d9df7348657b8927ba#subdirectory=setup/report_csv
+odoo-addon-report-csv==16.0.2.1.0
 odoo-addon-report-xlsx==16.0.1.0.2
 odoo-addon-report-xlsx-helper==16.0.1.0.0.3
 odoo-addon-report-xml==16.0.1.1.0.1

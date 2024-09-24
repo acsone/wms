@@ -77,7 +77,6 @@ odoo-addon-purchase-delivery-split-date @ git+https://github.com/OCA/purchase-wo
 odoo-addon-purchase-order-line-stock-move-cancel @ git+https://github.com/OCA/purchase-workflow.git@refs/pull/2167/head#subdirectory=setup/purchase_order_line_stock_move_cancel
 
 # reporting-engine
-odoo-addon-report-csv @ git+https://github.com/OCA/reporting-engine.git@refs/pull/793/head#subdirectory=setup/report_csv
 
 # rma
 odoo-addon-rma @ git+https://github.com/acsone/rma.git@16.0-alc-rma#subdirectory=setup/rma
