@@ -23,7 +23,9 @@
         "alc_stock_picking_parcels_and_items_per_source",
         "alc_stock_release_channel_print_shipment_advice",
         # OCA
+        "internal_stock_quant_package",
         "shipment_advice",
+        "stock_package_type_category",
         # Others
         "delivery",
     ],
@@ -34,6 +36,8 @@
         "views/report_deliveryslip.xml",
         "views/shipment_advice_views.xml",
         "views/stock_picking_type_views.xml",
+        "views/stock_package_type_category.xml",
+        "views/res_config_settings.xml",
     ],
     "demo": [],
     "installable": True,

@@ -1,11 +1,13 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from freezegun import freeze_time
 
 from .common import TestFacadePickings
 
 
 class TestCancelledBackorder(TestFacadePickings):
+    @freeze_time("1900-01-01")
     def test_backorders_cancelled(self):
         cancelled_backoder_facade = self._get_service_facade("cancelled_backorder")
         result, _error, _location = cancelled_backoder_facade(date="1900-01-01")
