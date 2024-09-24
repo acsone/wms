@@ -143,7 +143,7 @@ odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-c
 odoo-addon-delivery-carrier-max-weight-constraint==16.0.1.0.1
 odoo-addon-delivery-carrier-partner==16.0.1.0.0.5
 odoo-addon-delivery-estimated-package-quantity-by-weight==16.0.1.0.0.7
-odoo-addon-delivery-package-type-number-parcels @ git+https://github.com/acsone/delivery-carrier.git@ed91b7cd0141b14a339e41b2cfb340f353d86388#subdirectory=setup/delivery_package_type_number_parcels
+odoo-addon-delivery-package-type-number-parcels==16.0.1.0.2.2
 odoo-addon-delivery-procurement-group-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@6b68fd3733bdbf9568814e80e0e80767d61ceef8#subdirectory=setup/delivery_procurement_group_carrier
 odoo-addon-endpoint-route-handler==16.0.1.0.0.3
 odoo-addon-extendable==16.0.1.0.1.1
