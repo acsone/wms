@@ -925,25 +925,34 @@
                 t-foreach="deliveryslip.parcels_and_items_category_ids._ids"
                 t-as="category_key"
               >
-                                <t
-                  t-if="deliveryslip.parcels_and_items_per_category['parcels'].get(str(category_key) if category_key else 'false')"
-                >
-                                    <td><t
-                      t-esc="int(deliveryslip.parcels_and_items_per_category['parcels'][str(category_key) if category_key else 'false'])"
-                    />
-                                    box(es)
+                                    <t
+                  t-set="box_value"
+                  t-value="int(deliveryslip.parcels_and_items_per_category['parcels'].get(str(category_key) if category_key else 'false', 0))"
+                />
+                                    <td>
+                                        <t t-if="box_value > 0">
+                                            <t t-esc="box_value" /> box(es)
+                                        </t>
                                     </td>
-                                </t>
-                                <t
-                  t-if="deliveryslip.parcels_and_items_per_category['items'].get(str(category_key) if category_key else 'false')"
-                >
-                                    <td><t
-                      t-esc="int(deliveryslip.parcels_and_items_per_category['items'][str(category_key) if category_key else 'false'])"
-                    />
-                                    unit(s)
-                                    </td>
-                                </t>
                             </t>
+                        </tr>
+                        <tr>
+                            <t
+                t-foreach="deliveryslip.parcels_and_items_category_ids._ids"
+                t-as="category_key"
+              >
+                <t
+                  t-set="unit_value"
+                  t-value="int(deliveryslip.parcels_and_items_per_category['items'].get(str(category_key) if category_key else 'false', 0))"
+                />
+                <td>
+                    <t t-if="unit_value > 0">
+                        <t t-esc="unit_value" /> unit(s)
+                    </t>
+                </td>
+
+                            </t>
+
                         </tr>
                     </table>
                 </t>
