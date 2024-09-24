@@ -24,6 +24,11 @@ msgid "Picking Type"
 msgstr ""
 
 #. module: alc_empty_package_at_picking_return
+#: model:ir.model,name:alc_empty_package_at_picking_return.model_rma
+msgid "RMA"
+msgstr ""
+
+#. module: alc_empty_package_at_picking_return
 #: model:ir.model,name:alc_empty_package_at_picking_return.model_stock_return_picking
 msgid "Return Picking"
 msgstr ""
