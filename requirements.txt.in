@@ -21,7 +21,6 @@ odoo-addon-account-reversal @ git+https://github.com/OCA/account-financial-tools
 odoo-addon-account-invoice-purchase-quantity @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1562/head#subdirectory=setup/account_invoice_purchase_quantity
 odoo-addon-account-move-sent-usability @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1538/head#subdirectory=setup/account_move_sent_usability
 # https://github.com/OCA/account-invoicing/pull/1368 - [16.0][ADD] account_tax_one_vat_sale
-odoo-addon-partner-invoicing-mode @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1515/head#subdirectory=setup/partner_invoicing_mode
 odoo-addon-partner-invoicing-mode-cash-on-delivery @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1736/head#subdirectory=setup/partner_invoicing_mode_cash_on_delivery
 odoo-addon-partner-invoicing-mode-at-shipping @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1628/head#subdirectory=setup/partner_invoicing_mode_at_shipping
 odoo-addon-partner-invoicing-mode-at-shipping-fourteen-days @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1631/head#subdirectory=setup/partner_invoicing_mode_at_shipping_fourteen_days
