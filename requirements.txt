@@ -101,7 +101,7 @@ odoo-addon-account-reconcile-restrict-partner-mismatch @ git+https://github.com/
 odoo-addon-account-reversal @ git+https://github.com/acsone/account-financial-tools@668e9a4f0f8ae15e32b0777d3a474edaf051ba77#subdirectory=setup/account_reversal
 odoo-addon-account-tax-one-vat==16.0.1.0.0.4
 odoo-addon-account-tax-one-vat-purchase==16.0.1.0.0.4
-odoo-addon-account-tax-one-vat-sale @ git+https://github.com/acsone/account-invoicing.git@fb8c32abf76462d6f085bbd7c4f32305901d3f29#subdirectory=setup/account_tax_one_vat_sale
+odoo-addon-account-tax-one-vat-sale==16.0.1.0.0.5
 odoo-addon-account-tax-unece==16.0.1.2.0.1
 odoo-addon-account-usability==16.0.1.0.3.7
 odoo-addon-attachment-unindex-content==16.0.1.0.0.3
