@@ -59,6 +59,7 @@ class TestEmptyPackageAtPickingReturn(TransactionCase):
         return cls.env["stock.picking"].browse(res["res_id"])
 
     def test_00(self):
+        self.pick_type.empty_package_at_return = False
         return_picking = self._return_picking(self.picking, 10)
         self.assertTrue(return_picking.move_line_ids.result_package_id)
         return_picking.action_set_quantities_to_reservation()

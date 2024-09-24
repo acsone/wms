@@ -11,6 +11,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        # OCA
+        "rma",
         # Others
         "stock",
     ],
