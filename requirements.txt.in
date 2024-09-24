@@ -18,7 +18,6 @@ odoo-addon-account-move-line-product-category @ git+https://github.com/OCA/accou
 odoo-addon-account-reversal @ git+https://github.com/OCA/account-financial-tools@refs/pull/1725/head#subdirectory=setup/account_reversal
 
 # account-invoicing
-odoo-addon-account-invoice-line-default-account @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1545/head#subdirectory=setup/account_invoice_line_default_account
 odoo-addon-account-invoice-purchase-quantity @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1562/head#subdirectory=setup/account_invoice_purchase_quantity
 odoo-addon-account-move-sent-usability @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1538/head#subdirectory=setup/account_move_sent_usability
 # https://github.com/OCA/account-invoicing/pull/1367 - [16.0][ADD] account_tax_one_vat_purchase
