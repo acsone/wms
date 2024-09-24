@@ -60,7 +60,6 @@ odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/w
 # https://github.com/OCA/wms/pull/917
 # https://github.com/OCA/wms/pull/919
 odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@16.0-alc-shopfloor#subdirectory=setup/shopfloor
-odoo-addon-shopfloor-mobile-base @ git+https://github.com/OCA/wms.git@refs/pull/900/head#subdirectory=setup/shopfloor_mobile_base
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@16.0-alc-shopfloor_mobile#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@refs/pull/25/head#subdirectory=setup/shopfloor_packing
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@refs/pull/25/head#subdirectory=setup/shopfloor_mobile_packing

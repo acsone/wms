@@ -280,7 +280,7 @@ odoo-addon-shopfloor-base==16.0.1.1.0.3
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wms.git@39bb156ae4781bf0d9c58290d3f73be66befdd3b#subdirectory=setup/shopfloor_batch_automatic_creation
 odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@d477836c5ebd4b4039d6159fae05c941bc6874dc#subdirectory=setup/shopfloor_full_location_reservation
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@a69e08f6ab44eca784913c059a29d0ff6bf27c3a#subdirectory=setup/shopfloor_mobile
-odoo-addon-shopfloor-mobile-base @ git+https://github.com/acsone/wms.git@912047f945a08c4f1d923f22009e96874084e758#subdirectory=setup/shopfloor_mobile_base
+odoo-addon-shopfloor-mobile-base==16.0.1.1.0
 odoo-addon-shopfloor-mobile-base-auth-api-key==16.0.1.0.0.1
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@9342929c7236e8077d1337cdb90b6256b5b05ae2#subdirectory=setup/shopfloor_mobile_packing
 odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@9342929c7236e8077d1337cdb90b6256b5b05ae2#subdirectory=setup/shopfloor_packing
