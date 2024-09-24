@@ -279,6 +279,8 @@ class StockReleaseChannel(models.Model):
         return super().action_sleep()
 
     def _shipment_advice_auto_process_notify_success(self):
+        if not self:
+            return
         self.ensure_one()
         shipment_states = set(self.in_process_shipment_advice_ids.mapped("state"))
         not_done_states = ["confirmed", "in_progress", "in_process", "error"]
@@ -296,6 +298,8 @@ class StockReleaseChannel(models.Model):
         )
 
     def _shipment_advice_auto_process_notify_error(self, error_message):
+        if not self:
+            return
         self.ensure_one()
         if self.state == "delivering_error":
             return
