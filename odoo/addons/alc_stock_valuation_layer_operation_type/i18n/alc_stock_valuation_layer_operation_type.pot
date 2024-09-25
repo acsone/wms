@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 08:37+0000\n"
-"PO-Revision-Date: 2024-09-25 08:37+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -28,7 +26,6 @@ msgstr ""
 
 #. module: alc_stock_valuation_layer_operation_type
 #: model:ir.model.fields,field_description:alc_stock_valuation_layer_operation_type.field_stock_valuation_layer__picking_type_code
-#: model:ir.model.fields,field_description:alc_stock_valuation_layer_operation_type.field_stock_valuation_layer__picking_type_id
 #: model_terms:ir.ui.view,arch_db:alc_stock_valuation_layer_operation_type.stock_valuation_layer_search_view
 msgid "Operation Type"
 msgstr ""
@@ -36,6 +33,11 @@ msgstr ""
 #. module: alc_stock_valuation_layer_operation_type
 #: model:ir.model.fields.selection,name:alc_stock_valuation_layer_operation_type.selection__stock_valuation_layer__operation_direction__out
 msgid "Out"
+msgstr ""
+
+#. module: alc_stock_valuation_layer_operation_type
+#: model:ir.model.fields,field_description:alc_stock_valuation_layer_operation_type.field_stock_valuation_layer__picking_type_id
+msgid "Picking Type"
 msgstr ""
 
 #. module: alc_stock_valuation_layer_operation_type
