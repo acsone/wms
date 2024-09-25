@@ -29,7 +29,6 @@ msgstr "Direction de l'opération"
 
 #. module: alc_stock_valuation_layer_operation_type
 #: model:ir.model.fields,field_description:alc_stock_valuation_layer_operation_type.field_stock_valuation_layer__picking_type_code
-#: model:ir.model.fields,field_description:alc_stock_valuation_layer_operation_type.field_stock_valuation_layer__picking_type_id
 #: model_terms:ir.ui.view,arch_db:alc_stock_valuation_layer_operation_type.stock_valuation_layer_search_view
 msgid "Operation Type"
 msgstr "Type d'opération"
@@ -38,6 +37,11 @@ msgstr "Type d'opération"
 #: model:ir.model.fields.selection,name:alc_stock_valuation_layer_operation_type.selection__stock_valuation_layer__operation_direction__out
 msgid "Out"
 msgstr "Sortie"
+
+#. module: alc_stock_valuation_layer_operation_type
+#: model:ir.model.fields,field_description:alc_stock_valuation_layer_operation_type.field_stock_valuation_layer__picking_type_id
+msgid "Picking Type"
+msgstr ""
 
 #. module: alc_stock_valuation_layer_operation_type
 #: model:ir.model,name:alc_stock_valuation_layer_operation_type.model_stock_valuation_layer
