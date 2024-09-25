@@ -89,7 +89,7 @@ odoo-addon-account-invoice-triple-discount==16.0.1.0.3.1
 odoo-addon-account-invoice-ubl @ git+https://github.com/acsone/edi.git@847ded027bd60d5829331b7eeaa4ae197d742204#subdirectory=setup/account_invoice_ubl
 odoo-addon-account-journal-lock-date==16.0.1.0.0.14
 odoo-addon-account-move-line-product-category @ git+https://github.com/acsone/account-financial-tools@1ada460b91a0a44cbeaea93bf91ade916377ac8f#subdirectory=setup/account_move_line_product_category
-odoo-addon-account-move-name-sequence==16.0.1.1.5.1
+odoo-addon-account-move-name-sequence==16.0.1.1.12
 odoo-addon-account-move-sent-usability @ git+https://github.com/acsone/account-invoicing.git@fe074d9d137e82442e8e4cd74196f10a537107f8#subdirectory=setup/account_move_sent_usability
 odoo-addon-account-payment-mode==16.0.1.2.0.1
 odoo-addon-account-payment-mode-auto-reconcile @ git+https://github.com/acsone/account-reconcile.git@3c4f0916b3e6a9f614c3539b13e2ed03f3bbcb5f#subdirectory=setup/account_payment_mode_auto_reconcile
