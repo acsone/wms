@@ -324,7 +324,7 @@ odoo-addon-shopinvader-search-engine-update-product-brand==16.0.1.0.0.2
 odoo-addon-shopinvader-search-engine-update-product-brand-image==16.0.1.0.0.2
 odoo-addon-shopinvader-search-engine-update-product-media==16.0.1.0.0.2
 odoo-addon-shopinvader-search-engine-update-product-template-multi-link==16.0.1.0.0.2
-odoo-addon-stock-available==16.0.1.1.0
+odoo-addon-stock-available==16.0.1.1.0.2
 odoo-addon-stock-available-base-exclude-location==16.0.1.0.0.5
 odoo-addon-stock-available-immediately==16.0.1.0.0.5
 odoo-addon-stock-available-immediately-exclude-location==16.0.1.0.0.4
