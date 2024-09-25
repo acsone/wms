@@ -235,7 +235,7 @@ odoo-addon-queue-job==16.0.2.6.7.2
 odoo-addon-queue-job-cron==16.0.2.0.0.4
 odoo-addon-report-async==16.0.1.0.1
 odoo-addon-report-csv==16.0.2.1.0
-odoo-addon-report-xlsx==16.0.1.0.2
+odoo-addon-report-xlsx==16.0.2.0.2
 odoo-addon-report-xlsx-helper==16.0.1.0.0.3
 odoo-addon-report-xml==16.0.1.1.0.1
 odoo-addon-rest-log==16.0.1.0.1.3
