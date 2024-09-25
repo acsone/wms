@@ -305,7 +305,7 @@ odoo-addon-shopinvader-product-brand==16.0.1.0.1
 odoo-addon-shopinvader-product-description==16.0.1.0.0.3
 odoo-addon-shopinvader-product-seo==16.0.1.0.0.3
 odoo-addon-shopinvader-product-url==16.0.1.0.1
-odoo-addon-shopinvader-sale-cart==16.0.1.0.2
+odoo-addon-shopinvader-sale-cart==16.0.1.1.0
 odoo-addon-shopinvader-sale-state==16.0.1.0.1
 odoo-addon-shopinvader-schema-address==16.0.1.2.1
 odoo-addon-shopinvader-schema-sale==16.0.1.1.2
