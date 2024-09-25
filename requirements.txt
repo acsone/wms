@@ -118,7 +118,7 @@ odoo-addon-base-optional-quick-create==16.0.1.0.0.9
 odoo-addon-base-partition==16.0.1.0.0.7
 odoo-addon-base-partner-sequence==16.0.1.1.0.3
 odoo-addon-base-report-to-label-printer==16.0.1.0.0.5
-odoo-addon-base-report-to-printer==16.0.1.1.5
+odoo-addon-base-report-to-printer==16.0.1.1.7.1
 odoo-addon-base-rest==16.0.1.0.2.2
 odoo-addon-base-sparse-field-list-support==16.0.1.0.0.4
 odoo-addon-base-technical-features==16.0.1.0.0.5
