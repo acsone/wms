@@ -75,7 +75,7 @@ odoo-addon-account-cutoff-base @ git+https://github.com/acsone/account-closing.g
 odoo-addon-account-einvoice-generate @ git+https://github.com/acsone/edi.git@3349389850381b2f1dde99e510d7fb4491387bb7#subdirectory=setup/account_einvoice_generate
 odoo-addon-account-financial-report @ git+https://github.com/acsone/account-financial-reporting@c6c4dac24762cf5721d58d9147ef29b7de5e610c#subdirectory=setup/account_financial_report
 odoo-addon-account-invoice-accrual @ git+https://github.com/acsone/account-closing.git@42710267a8ed7351ba1f70a58491ce04beac04a2#subdirectory=setup/account_invoice_accrual
-odoo-addon-account-invoice-check-total==16.0.1.0.0.6
+odoo-addon-account-invoice-check-total==16.0.1.0.0.15
 odoo-addon-account-invoice-export-ubl @ git+https://github.com/acsone/peppol@b024b5662fe12db63cb1e79584f476b99df4e0bf#subdirectory=setup/account_invoice_export_ubl
 odoo-addon-account-invoice-line-default-account==16.0.1.0.0.3
 odoo-addon-account-invoice-purchase-quantity @ git+https://github.com/acsone/account-invoicing.git@4e60e911b1e5bb8c0a98d8d3dc6a7185710693e2#subdirectory=setup/account_invoice_purchase_quantity
