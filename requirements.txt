@@ -185,7 +185,7 @@ odoo-addon-partner-invoicing-mode-fourteen-days @ git+https://github.com/acsone/
 odoo-addon-partner-invoicing-mode-monthly==16.0.2.0.0.5
 odoo-addon-partner-invoicing-mode-ten-days @ git+https://github.com/acsone/account-invoicing.git@848af9320579833027aa05bc919adc36fa39d0a3#subdirectory=setup/partner_invoicing_mode_ten_days
 odoo-addon-partner-manual-rank==16.0.1.1.2.3
-odoo-addon-partner-tz==16.0.1.0.0.3
+odoo-addon-partner-tz==16.0.1.0.0.5
 odoo-addon-pdf-helper==16.0.1.1.0
 odoo-addon-procurement-auto-create-group @ git+https://github.com/acsone/stock-logistics-warehouse.git@64aa67fb6b22b10448b663b59487fb25fe729a42#subdirectory=setup/procurement_auto_create_group
 odoo-addon-procurement-auto-create-group-by-product @ git+https://github.com/acsone/stock-logistics-warehouse.git@64aa67fb6b22b10448b663b59487fb25fe729a42#subdirectory=setup/procurement_auto_create_group_by_product
