@@ -203,7 +203,7 @@ odoo-addon-product-expiry-configurable==16.0.1.0.0.13
 odoo-addon-product-logistics-uom==16.0.3.1.0
 odoo-addon-product-manufacturer==16.0.1.0.1.1
 odoo-addon-product-multi-category==16.0.1.0.0.7
-odoo-addon-product-packaging-dimension==16.0.1.1.1.5
+odoo-addon-product-packaging-dimension==16.0.1.1.1.6
 odoo-addon-product-packaging-level @ git+https://github.com/acsone/product-attribute.git@4669a7771d246a2cfaed28d9abadf7cec08dd4d1#subdirectory=setup/product_packaging_level
 odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@14fada9a163b6ab385d4f65b9915c4e6a0b0211e#subdirectory=setup/product_packaging_level_pallet
 odoo-addon-product-packaging-level-purchasable==16.0.1.1.0.4
