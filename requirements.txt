@@ -83,7 +83,7 @@ odoo-addon-account-invoice-split-refund @ git+https://github.com/acsone/account-
 odoo-addon-account-invoice-supplier-ref-unique==16.0.1.0.0.14
 odoo-addon-account-invoice-tax-required==16.0.1.1.0.3
 odoo-addon-account-invoice-transmit @ git+https://github.com/acsone/account-invoicing.git@5e91029adc51350d021197b531bccd1acc5689f0#subdirectory=setup/account_invoice_transmit
-odoo-addon-account-invoice-transmit-method==16.0.1.0.1.8
+odoo-addon-account-invoice-transmit-method==16.0.1.0.2.3
 odoo-addon-account-invoice-transmit-peppol @ git+https://github.com/acsone/peppol@d60a63c91191a42f8599694efc93df6ceb56ab45#subdirectory=setup/account_invoice_transmit_peppol
 odoo-addon-account-invoice-triple-discount==16.0.1.0.3.1
 odoo-addon-account-invoice-ubl @ git+https://github.com/acsone/edi.git@847ded027bd60d5829331b7eeaa4ae197d742204#subdirectory=setup/account_invoice_ubl
