@@ -423,7 +423,7 @@ odoo-addon-web-notify==16.0.2.0.0.3
 odoo-addon-web-refresher==16.0.3.1.3
 odoo-addon-web-remember-tree-column-width==16.0.1.0.2
 odoo-addon-web-search-with-and==16.0.1.0.0.4
-odoo-addon-web-sheet-full-width==16.0.1.0.0.3
+odoo-addon-web-sheet-full-width==16.0.1.0.0.5
 odoo-addon-web-tree-many2one-clickable==16.0.1.0.0.3
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@5f3b949a78592d668964e4d79d19688f86d3c4e2
 ofxparse==0.21
