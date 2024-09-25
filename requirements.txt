@@ -172,7 +172,7 @@ odoo-addon-l10n-be-bpost-address-autocomplete==16.0.1.0.0.3
 odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/acsone/l10n-belgium.git@3d1359a7e58a4ee9c53c5f16178a1428feadd368#subdirectory=setup/l10n_be_bpost_address_validation
 odoo-addon-l10n-be-eco-tax==16.0.1.0.1.1
 odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/acsone/l10n-belgium.git@ec5fae3144a3a38c4b84a59ac806f7955109fbac#subdirectory=setup/l10n_be_iso20022_pain
-odoo-addon-mail-environment==16.0.1.0.1.1
+odoo-addon-mail-environment==16.0.1.0.1.7
 odoo-addon-mis-builder==16.0.5.1.3
 odoo-addon-mis-builder-budget==16.0.5.0.1.5
 odoo-addon-onchange-helper==16.0.1.0.0.3
