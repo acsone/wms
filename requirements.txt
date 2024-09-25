@@ -406,7 +406,7 @@ odoo-addon-stock-release-channel-shipment-advice-deliver @ git+https://github.co
 odoo-addon-stock-release-channel-shipment-advice-process-end-time==16.0.1.0.0.3
 odoo-addon-stock-release-channel-shipment-advice-toursolver==16.0.1.0.1
 odoo-addon-stock-reserve-rule @ git+https://github.com/acsone/stock-logistics-warehouse.git@edc0a66d07e686f68b5ac898818e158636e4a067#subdirectory=setup/stock_reserve_rule
-odoo-addon-stock-restrict-lot==16.0.1.1.0.2
+odoo-addon-stock-restrict-lot==16.0.1.2.0.2
 odoo-addon-stock-route-mto==16.0.1.0.0.2
 odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@0c90dfb1a4597a2da3beeb5de9fb2495c44d7520#subdirectory=setup/stock_scrap_location_default
 odoo-addon-stock-split-picking==16.0.1.0.4.1
