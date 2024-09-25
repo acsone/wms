@@ -346,7 +346,7 @@ odoo-addon-stock-location-orderpoint-dynamic-routing-merge @ git+https://github.
 odoo-addon-stock-location-position==16.0.1.0.0.10
 odoo-addon-stock-location-product-restriction @ git+https://github.com/acsone/stock-logistics-warehouse.git@beddaeaf420639325435e99b8bae3598897f6b6a#subdirectory=setup/stock_location_product_restriction
 odoo-addon-stock-location-zone==16.0.1.0.1.5
-odoo-addon-stock-lot-is-archived==16.0.1.0.0.3
+odoo-addon-stock-lot-is-archived==16.0.1.0.0.5
 odoo-addon-stock-move-auto-assign==16.0.1.1.0
 odoo-addon-stock-move-auto-assign-auto-release==16.0.1.1.0.1
 odoo-addon-stock-move-common-dest==16.0.1.0.1.2
