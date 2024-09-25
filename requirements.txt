@@ -209,7 +209,7 @@ odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/produc
 odoo-addon-product-packaging-level-purchasable==16.0.1.1.0.4
 odoo-addon-product-price-category==16.0.1.0.0.2
 odoo-addon-product-route-mto==16.0.1.0.0.10
-odoo-addon-product-sale-description==16.0.1.0.1.1
+odoo-addon-product-sale-description==16.0.1.0.1.5
 odoo-addon-product-sequence==16.0.2.0.0.5
 odoo-addon-product-set==16.0.3.0.0.2
 odoo-addon-product-state==16.0.1.0.0.6
