@@ -84,6 +84,7 @@
         "alc_stock_release_channel_user",
         "alc_stock_release_channel_user_gls",
         "alc_stock_security",
+        "alc_stock_valuation_layer_operation_type",
         "alc_stock_warehouse_configuration",
         "alc_toursolver_delivery_window_import",
         # OCA

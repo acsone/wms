@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+
+    <record model="ir.ui.view" id="stock_valuation_layer_search_view">
+        <field name="model">stock.valuation.layer</field>
+        <field name="inherit_id" ref="stock_account.view_inventory_valuation_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <filter
+          string="Operation Type"
+          name="group_by_picking_type_code"
+          context="{'group_by': 'picking_type_code'}"
+        />
+                <filter
+          string="Operation Direction"
+          name="group_by_operation_direction"
+          context="{'group_by': 'operation_direction'}"
+        />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_valuation_layer_tree_view">
+        <field name="model">stock.valuation.layer</field>
+        <field name="inherit_id" ref="stock_account.stock_valuation_layer_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='reference']" position="after">
+                <field name="picking_type_code" />
+                <field name="operation_direction" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
