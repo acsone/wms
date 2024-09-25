@@ -137,7 +137,7 @@ odoo-addon-database-cleanup==16.0.1.2.1.1
 odoo-addon-date-range==16.0.1.0.9.7
 odoo-addon-delivery-automatic-package==16.0.1.0.0.7
 odoo-addon-delivery-carrier-account==16.0.1.0.1.4
-odoo-addon-delivery-carrier-info==16.0.1.0.0.2
+odoo-addon-delivery-carrier-info==16.0.1.0.0.7
 odoo-addon-delivery-carrier-label-gls @ git+https://github.com/acsone/delivery-carrier.git@eee5dd2bac67c3b2ac9b29286a0f93361ca87a46#subdirectory=setup/delivery_carrier_label_gls
 odoo-addon-delivery-carrier-max-weight-constraint==16.0.1.0.1
 odoo-addon-delivery-carrier-partner==16.0.1.0.0.5
