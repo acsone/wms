@@ -369,7 +369,7 @@ odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-
 odoo-addon-stock-picking-backorder-reason-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@385cf7dc6eb9ce7c43ca7e0f697d513c4cd6891b#subdirectory=setup/stock_picking_backorder_reason_grn
 odoo-addon-stock-picking-batch-creation==16.0.1.0.0.15
 odoo-addon-stock-picking-batch-start @ git+https://github.com/acsone/stock-logistics-workflow.git@2c72016cdc9a0a15508dd3295218c3089b105523#subdirectory=setup/stock_picking_batch_start
-odoo-addon-stock-picking-completion-info==16.0.1.0.1.2
+odoo-addon-stock-picking-completion-info==16.0.1.0.1.6
 odoo-addon-stock-picking-delivery-link==16.0.1.1.4.1
 odoo-addon-stock-picking-delivery-package-type-category @ git+https://github.com/acsone/delivery-carrier.git@8557f2bbbd7cf9693fb0f4bb28f33dff5245966c#subdirectory=setup/stock_picking_delivery_package_type_category
 odoo-addon-stock-picking-delivery-package-type-domain @ git+https://github.com/acsone/delivery-carrier.git@0b7e62de0b8fd5430a52dcc424444fb74bfd8826#subdirectory=setup/stock_picking_delivery_package_type_domain
