@@ -224,7 +224,7 @@ odoo-addon-purchase-cancel-reason==16.0.1.0.0.14
 odoo-addon-purchase-delivery-split-date @ git+https://github.com/acsone/purchase-workflow.git@f95d28242293c5b5a040b8de8ce4e9f26db886b8#subdirectory=setup/purchase_delivery_split_date
 odoo-addon-purchase-discount==16.0.2.0.0.1
 odoo-addon-purchase-force-invoiced==16.0.1.0.1.6
-odoo-addon-purchase-invoicing-no-zero-line==16.0.1.0.0.5
+odoo-addon-purchase-invoicing-no-zero-line==16.0.1.0.0.8
 odoo-addon-purchase-only-by-packaging==16.0.1.0.1
 odoo-addon-purchase-order-approved==16.0.1.0.0.6
 odoo-addon-purchase-order-line-stock-move-cancel @ git+https://github.com/acsone/purchase-workflow.git@8f68c2c6d46afa9a9dc66452ff152e487fd04a05#subdirectory=setup/purchase_order_line_stock_move_cancel
