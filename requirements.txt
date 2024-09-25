@@ -264,7 +264,7 @@ odoo-addon-sale-stock-restocking-fee-invoicing==16.0.1.0.0.5
 odoo-addon-sale-triple-discount==16.0.1.0.2.1
 odoo-addon-sale-wishlist==16.0.1.0.0.5
 odoo-addon-search-engine-image-thumbnail==16.0.1.0.6.1
-odoo-addon-search-engine-serializer-pydantic==16.0.1.0.0.2
+odoo-addon-search-engine-serializer-pydantic==16.0.1.0.0.4
 odoo-addon-sentry==16.0.3.0.1.1
 odoo-addon-server-action-mass-edit==16.0.2.0.1.5
 odoo-addon-server-environment==16.0.1.0.3.1
