@@ -237,7 +237,7 @@ odoo-addon-report-async==16.0.1.0.1
 odoo-addon-report-csv==16.0.2.1.0
 odoo-addon-report-xlsx==16.0.2.0.2
 odoo-addon-report-xlsx-helper==16.0.1.0.0.11
-odoo-addon-report-xml==16.0.1.1.0.1
+odoo-addon-report-xml==16.0.1.1.2.2
 odoo-addon-rest-log==16.0.1.0.1.3
 odoo-addon-rma @ git+https://github.com/acsone/rma.git@0fe32498494bf6b7bce1be2843782d9a4bf9fa51#subdirectory=setup/rma
 odoo-addon-rma-lot @ git+https://github.com/acsone/rma.git@1eb10ae3893610e9bbeddcc9e2409698fa8b1a49#subdirectory=setup/rma_lot
