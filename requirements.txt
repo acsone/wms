@@ -356,7 +356,7 @@ odoo-addon-stock-move-line-lock-qty-done @ git+https://github.com/acsone/stock-l
 odoo-addon-stock-move-line-reserved-quant==16.0.1.0.0.7
 odoo-addon-stock-move-location==16.0.1.4.0.2
 odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@9f30e65953ebf7f532b23711613b34d43e49c54f#subdirectory=setup/stock_move_manage_priority
-odoo-addon-stock-move-priority-picking-assign==16.0.1.0.0.5
+odoo-addon-stock-move-priority-picking-assign==16.0.1.0.0.6
 odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@989dcfe2f6d4c56cfa96e98b1d5378f8fdc37e02#subdirectory=setup/stock_move_propagate_first_move
 odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/acsone/stock-logistics-workflow.git@d859321231027547efb15f67d1427e24693a5c1b#subdirectory=setup/stock_move_propagate_first_move_cancel
 odoo-addon-stock-move-zone-location-source @ git+https://github.com/acsone/stock-logistics-workflow.git@88cedcf5c6e9e49a2663ac89e73a6d372d2e43f6#subdirectory=setup/stock_move_zone_location_source
