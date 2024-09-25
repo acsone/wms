@@ -175,7 +175,7 @@ odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/acsone/l10n-belgium.gi
 odoo-addon-mail-environment==16.0.1.0.1.7
 odoo-addon-mis-builder==16.0.5.1.11.6
 odoo-addon-mis-builder-budget==16.0.5.0.3.2
-odoo-addon-onchange-helper==16.0.1.0.0.3
+odoo-addon-onchange-helper==16.0.1.0.0.7
 odoo-addon-partner-fax==16.0.1.0.0.3
 odoo-addon-partner-invoicing-mode==16.0.2.0.0.4
 odoo-addon-partner-invoicing-mode-at-shipping==16.0.1.2.0.3
