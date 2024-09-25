@@ -151,7 +151,7 @@ odoo-addon-fastapi==16.0.1.4.2.1
 odoo-addon-fastapi-auth-jwt==16.0.1.0.4
 odoo-addon-fs-attachment==16.0.1.0.14
 odoo-addon-fs-base-multi-image==16.0.1.1.1.1
-odoo-addon-fs-base-multi-media==16.0.1.0.1
+odoo-addon-fs-base-multi-media==16.0.1.0.1.4
 odoo-addon-fs-file==16.0.1.0.6.1
 odoo-addon-fs-image==16.0.1.0.2
 odoo-addon-fs-image-thumbnail==16.0.1.0.2
