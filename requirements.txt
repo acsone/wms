@@ -132,7 +132,7 @@ odoo-addon-component==16.0.1.1.1.2
 odoo-addon-component-event==16.0.1.0.1.5
 odoo-addon-connector==16.0.1.0.0.7
 odoo-addon-connector-elasticsearch==16.0.0.1.1
-odoo-addon-connector-search-engine==16.0.0.1.9
+odoo-addon-connector-search-engine==16.0.0.1.12.2
 odoo-addon-database-cleanup==16.0.1.2.1
 odoo-addon-date-range==16.0.1.0.2
 odoo-addon-delivery-automatic-package==16.0.1.0.0.2
