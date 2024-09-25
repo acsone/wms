@@ -212,7 +212,7 @@ odoo-addon-product-route-mto==16.0.1.0.0.10
 odoo-addon-product-sale-description==16.0.1.0.1.5
 odoo-addon-product-sequence==16.0.2.0.1.5
 odoo-addon-product-set==16.0.3.0.0.5
-odoo-addon-product-state==16.0.1.0.0.6
+odoo-addon-product-state==16.0.1.2.0
 odoo-addon-product-stock-state==16.0.1.0.0.8
 odoo-addon-product-supplierinfo-packaging @ git+https://github.com/acsone/product-attribute.git@a715a1d3c3a493726c5bcf34884bfa42369eb681#subdirectory=setup/product_supplierinfo_packaging
 odoo-addon-product-template-has-one-variant==16.0.1.0.1.2
