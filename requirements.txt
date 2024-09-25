@@ -285,7 +285,7 @@ odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@9342
 odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@9342929c7236e8077d1337cdb90b6256b5b05ae2#subdirectory=setup/shopfloor_packing
 odoo-addon-shopfloor-rest-log==16.0.1.0.0.5
 odoo-addon-shopfloor-workstation==16.0.1.0.0.3
-odoo-addon-shopfloor-workstation-mobile==16.0.1.0.0.3
+odoo-addon-shopfloor-workstation-mobile==16.0.1.0.0.4
 odoo-addon-shopinvader-address==16.0.1.1.0
 odoo-addon-shopinvader-anonymous-partner==16.0.1.0.1
 odoo-addon-shopinvader-api-address==16.0.1.2.1
