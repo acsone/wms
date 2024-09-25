@@ -299,7 +299,7 @@ odoo-addon-shopinvader-es-product-categ==16.0.1.0.0.1
 odoo-addon-shopinvader-fastapi-auth-jwt==16.0.1.0.2
 odoo-addon-shopinvader-filtered-model==16.0.1.1.1
 odoo-addon-shopinvader-multi-category==16.0.1.0.1
-odoo-addon-shopinvader-product==16.0.1.0.2
+odoo-addon-shopinvader-product==16.0.1.0.4
 odoo-addon-shopinvader-product-attribute-set==16.0.1.0.1
 odoo-addon-shopinvader-product-brand==16.0.1.0.1
 odoo-addon-shopinvader-product-description==16.0.1.0.0.2
