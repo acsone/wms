@@ -198,7 +198,7 @@ odoo-addon-product-assortment==16.0.2.0.0.2
 odoo-addon-product-attribute-set==16.0.1.2.0.3
 odoo-addon-product-brand==16.0.1.0.2.5
 odoo-addon-product-cost-security==16.0.2.2.0.3
-odoo-addon-product-dimension==16.0.1.1.0.3
+odoo-addon-product-dimension==16.0.1.2.0
 odoo-addon-product-expiry-configurable==16.0.1.0.0.6
 odoo-addon-product-logistics-uom==16.0.3.0.0.3
 odoo-addon-product-manufacturer==16.0.1.0.0.7
