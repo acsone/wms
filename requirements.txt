@@ -102,7 +102,7 @@ odoo-addon-account-reversal @ git+https://github.com/acsone/account-financial-to
 odoo-addon-account-tax-one-vat==16.0.1.0.0.6
 odoo-addon-account-tax-one-vat-purchase==16.0.1.0.0.4
 odoo-addon-account-tax-one-vat-sale==16.0.1.0.0.5
-odoo-addon-account-tax-unece==16.0.1.2.0.1
+odoo-addon-account-tax-unece==16.0.1.3.0.2
 odoo-addon-attachment-unindex-content==16.0.1.0.0.3
 odoo-addon-attribute-set==16.0.1.1.0.7
 odoo-addon-auth-api-key==16.0.1.0.0.4
