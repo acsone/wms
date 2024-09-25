@@ -390,7 +390,7 @@ odoo-addon-stock-picking-volume==16.0.1.0.3.2
 odoo-addon-stock-procurement-customer==16.0.1.0.1.6
 odoo-addon-stock-production-lot-expired-date @ git+https://github.com/acsone/product-attribute.git@45ecae078dd37b2580a3aaf7c2de31fc3ff7b4d2#subdirectory=setup/stock_production_lot_expired_date
 odoo-addon-stock-putaway-hook==16.0.1.0.1.2
-odoo-addon-stock-quant-package-dimension==16.0.1.0.1.8
+odoo-addon-stock-quant-package-dimension==16.0.1.0.1.9
 odoo-addon-stock-quant-package-product-packaging==16.0.1.0.1.2
 odoo-addon-stock-quant-safe-inventory==16.0.1.0.0.2
 odoo-addon-stock-release-channel @ git+https://github.com/acsone/wms.git@f0f0674837bee08caba15ebc76ed445f13b6c404#subdirectory=setup/stock_release_channel
