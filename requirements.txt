@@ -114,7 +114,7 @@ odoo-addon-base-delivery-carrier-label @ git+https://github.com/acsone/delivery-
 odoo-addon-base-exception @ git+https://github.com/acsone/server-tools.git@f458ddcded1d18380b280690c8bccf06330e7544#subdirectory=setup/base_exception
 odoo-addon-base-geoengine==16.0.1.1.0
 odoo-addon-base-import-security-group==16.0.1.0.0.4
-odoo-addon-base-optional-quick-create==16.0.1.0.0.5
+odoo-addon-base-optional-quick-create==16.0.1.0.0.9
 odoo-addon-base-partition==16.0.1.0.0.7
 odoo-addon-base-partner-sequence==16.0.1.0.0.3
 odoo-addon-base-report-to-label-printer==16.0.1.0.0.5
