@@ -362,7 +362,7 @@ odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/acson
 odoo-addon-stock-move-zone-location-source @ git+https://github.com/acsone/stock-logistics-workflow.git@88cedcf5c6e9e49a2663ac89e73a6d372d2e43f6#subdirectory=setup/stock_move_zone_location_source
 odoo-addon-stock-orderpoint-default-location @ git+https://github.com/acsone/stock-logistics-orderpoint.git@707cd165594a55dd588b326473cc7dd9694657fb#subdirectory=setup/stock_orderpoint_default_location
 odoo-addon-stock-override-procurement==16.0.1.0.0.5
-odoo-addon-stock-package-type-category @ git+https://github.com/acsone/stock-logistics-warehouse.git@1d019731a502c2027aa740784e4c4b42868fb1c9#subdirectory=setup/stock_package_type_category
+odoo-addon-stock-package-type-category @ git+https://github.com/acsone/stock-logistics-warehouse.git@a8a889fb3bb7e7ba3bcbf84cfa2f39e389012cf6#subdirectory=setup/stock_package_type_category
 odoo-addon-stock-packaging-calculator==16.0.1.0.1
 odoo-addon-stock-picking-back2draft==16.0.1.0.0.7
 odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@0c98b39292f2fedb1acc417741f2c6f305946b54#subdirectory=setup/stock_picking_backorder_reason
