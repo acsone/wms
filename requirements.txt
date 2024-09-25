@@ -58,7 +58,7 @@ num2words==0.5.12
 numpy==1.25.1
 odoo @ git+https://github.com/acsone/odoo.git@982f7678c891308eee1e37c01a665cd51f0eb0ac
 odoo-addon-account-analytic-account-tag==16.0.1.0.0.4
-odoo-addon-account-analytic-required==16.0.1.0.0.8
+odoo-addon-account-analytic-required==16.0.1.0.1.1
 odoo-addon-account-analytic-tag==16.0.1.0.0.10
 odoo-addon-account-banking-mandate==16.0.1.3.2.1
 odoo-addon-account-banking-pain-base==16.0.1.2.1
@@ -103,7 +103,6 @@ odoo-addon-account-tax-one-vat==16.0.1.0.0.4
 odoo-addon-account-tax-one-vat-purchase==16.0.1.0.0.4
 odoo-addon-account-tax-one-vat-sale==16.0.1.0.0.5
 odoo-addon-account-tax-unece==16.0.1.2.0.1
-odoo-addon-account-usability==16.0.1.0.3.7
 odoo-addon-attachment-unindex-content==16.0.1.0.0.3
 odoo-addon-attribute-set==16.0.1.1.0.7
 odoo-addon-auth-api-key==16.0.1.0.0.4
