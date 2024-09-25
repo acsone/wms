@@ -167,7 +167,7 @@ odoo-addon-internal-stock-quant-package @ git+https://github.com/acsone/stock-lo
 odoo-addon-jsonifier==16.0.0.0.1
 odoo-addon-l10n-be-account-einvoice-generate @ git+https://github.com/acsone/peppol@7292c3504a31718c603fe452b86f29c20e4094ee#subdirectory=setup/l10n_be_account_einvoice_generate
 odoo-addon-l10n-be-antibiotic-tax==16.0.1.0.1.1
-odoo-addon-l10n-be-apb-tax==16.0.1.0.1
+odoo-addon-l10n-be-apb-tax==16.0.1.0.1.1
 odoo-addon-l10n-be-bpost-address-autocomplete==16.0.1.0.0.3
 odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/acsone/l10n-belgium.git@3d1359a7e58a4ee9c53c5f16178a1428feadd368#subdirectory=setup/l10n_be_bpost_address_validation
 odoo-addon-l10n-be-eco-tax==16.0.1.0.1
