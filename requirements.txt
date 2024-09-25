@@ -348,7 +348,7 @@ odoo-addon-stock-location-product-restriction @ git+https://github.com/acsone/st
 odoo-addon-stock-location-zone==16.0.1.0.1.5
 odoo-addon-stock-lot-is-archived==16.0.1.0.0.5
 odoo-addon-stock-move-auto-assign==16.0.1.1.1.4
-odoo-addon-stock-move-auto-assign-auto-release==16.0.1.1.0.1
+odoo-addon-stock-move-auto-assign-auto-release==16.0.1.1.2.2
 odoo-addon-stock-move-common-dest==16.0.1.0.1.2
 odoo-addon-stock-move-free-reservation-reassign==16.0.1.0.1.4
 odoo-addon-stock-move-line-change-lot==16.0.1.0.0.4
