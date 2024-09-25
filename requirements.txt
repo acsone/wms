@@ -325,7 +325,7 @@ odoo-addon-shopinvader-search-engine-update-product-brand-image==16.0.1.0.0.2
 odoo-addon-shopinvader-search-engine-update-product-media==16.0.1.0.0.2
 odoo-addon-shopinvader-search-engine-update-product-template-multi-link==16.0.1.0.0.2
 odoo-addon-stock-available==16.0.1.1.0.2
-odoo-addon-stock-available-base-exclude-location==16.0.1.0.0.5
+odoo-addon-stock-available-base-exclude-location==16.0.1.0.0.7
 odoo-addon-stock-available-immediately==16.0.1.0.0.5
 odoo-addon-stock-available-immediately-exclude-location==16.0.1.0.0.4
 odoo-addon-stock-available-location-get-domain @ git+https://github.com/acsone/stock-logistics-availability.git@aed5cd18e4a944ca51eac2bf89d3bbe1be984260#subdirectory=setup/stock_available_location_get_domain
