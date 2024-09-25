@@ -247,7 +247,7 @@ odoo-addon-rma-sale-lot @ git+https://github.com/acsone/rma.git@1eb10ae3893610e9
 odoo-addon-rma-sale-reason @ git+https://github.com/acsone/rma.git@618c595e733e239ef649162a737967f033d8dd36#subdirectory=setup/rma_sale_reason
 odoo-addon-sale-cart==16.0.1.0.0.4
 odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@e3920cb6276556e98afed18a828d5a7c5103bf67#subdirectory=setup/sale_channel
-odoo-addon-sale-discount-display-amount==16.0.1.0.0.3
+odoo-addon-sale-discount-display-amount==16.0.1.1.0.7
 odoo-addon-sale-exception==16.0.1.2.0.2
 odoo-addon-sale-force-invoiced==16.0.1.0.0.10
 odoo-addon-sale-margin-delivered==16.0.2.0.0.5
