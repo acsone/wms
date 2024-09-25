@@ -261,7 +261,7 @@ odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.gi
 odoo-addon-sale-shipping-info-helper==16.0.1.0.0.5
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@f1ea2c731d30580089b38a1b3b68b1df40afc680#subdirectory=setup/sale_stock_picking_blocking
 odoo-addon-sale-stock-restocking-fee-invoicing==16.0.1.0.0.5
-odoo-addon-sale-triple-discount==16.0.1.0.1.4
+odoo-addon-sale-triple-discount==16.0.1.0.2.1
 odoo-addon-sale-wishlist==16.0.1.0.0.5
 odoo-addon-search-engine-image-thumbnail==16.0.1.0.6
 odoo-addon-search-engine-serializer-pydantic==16.0.1.0.0.2
