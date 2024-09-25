@@ -122,7 +122,7 @@ odoo-addon-base-report-to-printer==16.0.1.1.7.1
 odoo-addon-base-rest==16.0.1.0.2.2
 odoo-addon-base-sparse-field-list-support==16.0.1.0.0.4
 odoo-addon-base-technical-features==16.0.1.0.0.10
-odoo-addon-base-time-window==16.0.1.0.0.6
+odoo-addon-base-time-window==16.0.1.0.0.11
 odoo-addon-base-ubl @ git+https://github.com/acsone/edi.git@4c09db9910f8d679e4d0cd932dcb4fbf61307e62#subdirectory=setup/base_ubl
 odoo-addon-base-ubl-payment @ git+https://github.com/acsone/edi.git@3349389850381b2f1dde99e510d7fb4491387bb7#subdirectory=setup/base_ubl_payment
 odoo-addon-base-ubl-payment-mode-required @ git+https://github.com/acsone/peppol@2f94772beaee68b7dd54524fb17f4ad032204791#subdirectory=setup/base_ubl_payment_mode_required
