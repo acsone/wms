@@ -129,7 +129,7 @@ odoo-addon-base-ubl-payment-mode-required @ git+https://github.com/acsone/peppol
 odoo-addon-base-unece==16.0.1.1.0.2
 odoo-addon-base-view-inheritance-extension==16.0.1.2.1
 odoo-addon-component==16.0.1.1.1.2
-odoo-addon-component-event==16.0.1.0.1.3
+odoo-addon-component-event==16.0.1.0.1.5
 odoo-addon-connector==16.0.1.0.0.5
 odoo-addon-connector-elasticsearch==16.0.0.0.3
 odoo-addon-connector-search-engine==16.0.0.1.9
