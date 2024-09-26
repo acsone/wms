@@ -195,3 +195,6 @@ odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@r
 # OCA/stock-logistics-transport
 # https://github.com/OCA/stock-logistics-transport/pull/144
 odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/OCA/stock-logistics-transport.git@refs/pull/144/head#subdirectory=setup/shipment_advice_planner_toursolver
+
+# OCA/partner-contact
+odoo-addon-partner-manual-rank @ git+https://github.com/OCA/partner-contact.git@refs/pull/1849/head#subdirectory=setup/partner_manual_rank
