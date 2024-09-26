@@ -10,6 +10,7 @@
     "website": "https://acsone.eu",
     "depends": [
         # Custom
+        "alc_account_compute_payment_reference",
         "alc_account_invoice_accrual",
         "alc_account_invoice_email",
         "alc_account_invoice_peppol_server_env",
