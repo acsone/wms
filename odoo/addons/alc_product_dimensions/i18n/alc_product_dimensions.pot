@@ -20,6 +20,16 @@ msgid "Dimensional UoM"
 msgstr ""
 
 #. module: alc_product_dimensions
+#: model:ir.model.fields,field_description:alc_product_dimensions.field_product_product__product_height
+msgid "Height"
+msgstr ""
+
+#. module: alc_product_dimensions
+#: model:ir.model.fields,field_description:alc_product_dimensions.field_product_product__product_length
+msgid "Length"
+msgstr ""
+
+#. module: alc_product_dimensions
 #: model:ir.model,name:alc_product_dimensions.model_product_template
 msgid "Product"
 msgstr ""
@@ -63,16 +73,6 @@ msgid "Weight in product UOM"
 msgstr ""
 
 #. module: alc_product_dimensions
-#: model:ir.model.fields,field_description:alc_product_dimensions.field_product_product__product_height
-msgid "height"
-msgstr ""
-
-#. module: alc_product_dimensions
-#: model:ir.model.fields,field_description:alc_product_dimensions.field_product_product__product_length
-msgid "length"
-msgstr ""
-
-#. module: alc_product_dimensions
 #: model:ir.model.fields,field_description:alc_product_dimensions.field_product_product__product_width
-msgid "width"
+msgid "Width"
 msgstr ""
