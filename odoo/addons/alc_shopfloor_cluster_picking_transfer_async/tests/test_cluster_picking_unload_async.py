@@ -172,7 +172,7 @@ class TestClusterPickingUnloadAsync(ClusterPickingUnloadingCommonCase):
                 next_state="start",
                 message={"message_type": "success", "body": "Batch Transfer complete"},
             )
-            self.assertEqual(trap.jobs_count(), 3)
+            self.assertEqual(trap.jobs_count(), 2)
             self.assertRecordValues(self.one_line_picking, [{"state": "assigned"}])
             self.assertRecordValues(self.two_lines_picking, [{"state": "confirmed"}])
             trap.assert_enqueued_job(
