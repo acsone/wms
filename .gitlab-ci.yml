@@ -68,8 +68,11 @@ test:
     - echo Installing ${ADDONS_TEST}
     - unbuffer odoo -c odoo-ci.cfg -d ${DB_NAME} --stop-after-init -i ${ADDONS_TEST} | checklog-odoo
     - echo Testing ${PYTEST_ADDONS_TEST}
-    - unbuffer coverage run -m pytest --junitxml=junit.xml --odoo-http --color=yes -v --durations=0 --durations-min=2 --odoo-config=odoo-ci.cfg --odoo-database=${DB_NAME} ${PYTEST_ADDONS_TEST}
+    - unbuffer pytest --cov=odoo -n ${PYTEST_WORKERS} --dist=loadfile --junitxml=junit.xml --odoo-http --color=yes -v --durations=0 --durations-min=2 --odoo-config=odoo-ci.cfg
+      --odoo-database=${DB_NAME} ${PYTEST_ADDONS_TEST}
     - if [ "${CI_COMMIT_REF_NAME}" = "master" ] ; then click-odoo-makepot -c odoo-ci.cfg -d ${DB_NAME} --addons-dir=odoo/addons ; fi
+    # we need to rename the coverage file to ensure compatibility with the coverage report that expects a .coverage.x file to combine them
+    - mv .coverage .coverage.1
   after_script:
     - dropdb --if-exists ${DB_NAME}
   artifacts:
