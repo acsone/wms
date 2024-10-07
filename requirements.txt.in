@@ -14,6 +14,7 @@ odoo-addon-account-financial-report @ git+https://github.com/OCA/account-financi
 # account-financial-tools
 # https://github.com/OCA/account-financial-tools/pull/1726
 odoo-addon-account-move-line-product-category @ git+https://github.com/OCA/account-financial-tools@refs/pull/1726/head#subdirectory=setup/account_move_line_product_category
+odoo-addon-stock-account-move-show-draft-button @ git+https://github.com/OCA/account-financial-tools@refs/pull/1946/head#subdirectory=setup/stock_account_move_show_draft_button
 # https://github.com/OCA/account-financial-tools/pull/1725
 odoo-addon-account-reversal @ git+https://github.com/OCA/account-financial-tools@refs/pull/1725/head#subdirectory=setup/account_reversal
 

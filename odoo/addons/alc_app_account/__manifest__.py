@@ -56,6 +56,7 @@
         "partner_invoicing_mode_monthly",
         "partner_invoicing_mode_ten_days",
         "report_async",
+        "stock_account_move_show_draft_button",
         # Others
         "account",
     ],
