@@ -18,3 +18,6 @@ class StockPicking(Picking):
         help="Links this picking to a Shipment Advice, allowing the transporter to"
         "collect returned products when delivering to the customer.",
     )
+    exclude_from_rma_shipment_advice = fields.Boolean(
+        string="Don't Link to RMA shipment advice", readonly=True, index=True
+    )

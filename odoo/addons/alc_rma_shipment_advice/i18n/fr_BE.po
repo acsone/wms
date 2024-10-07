@@ -17,6 +17,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_rma_shipment_advice
+#: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_rma_operation__exclude_from_rma_shipment_advice
+#: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_stock_picking__exclude_from_rma_shipment_advice
+msgid "Don't Link to RMA shipment advice"
+msgstr "Ne pas lier au note d'envoi RMA"
+
+#. module: alc_rma_shipment_advice
 #: model:ir.model.fields,help:alc_rma_shipment_advice.field_stock_picking__is_rma
 #: model:ir.model.fields,help:alc_rma_shipment_advice.field_stock_picking_type__is_rma
 msgid ""
@@ -32,8 +38,8 @@ msgid ""
 "Links this picking to a Shipment Advice, allowing the transporter tocollect "
 "returned products when delivering to the customer."
 msgstr ""
-"Lie ce transfert à une note d'envoi, permettant au transporteur de récupérer "
-"les produits retournés lors de la livraison au client."
+"Lie ce transfert à une note d'envoi, permettant au transporteur de récupérer"
+" les produits retournés lors de la livraison au client."
 
 #. module: alc_rma_shipment_advice
 #: model:ir.model.fields,help:alc_rma_shipment_advice.field_shipment_advice__rma_picking_ids
@@ -51,6 +57,7 @@ msgid "Picking Type"
 msgstr "Type de transfert"
 
 #. module: alc_rma_shipment_advice
+#: model:ir.model,name:alc_rma_shipment_advice.model_rma
 #: model_terms:ir.ui.view,arch_db:alc_rma_shipment_advice.shipment_advice_form_view
 #: model_terms:ir.ui.view,arch_db:alc_rma_shipment_advice.stock_picking_type_form_view
 msgid "RMA"
@@ -76,6 +83,11 @@ msgstr "Nombre de transferts RMA"
 #: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_stock_picking__rma_shipment_advice_id
 msgid "RMA Shipment Advice"
 msgstr "Note d'envoi RMA"
+
+#. module: alc_rma_shipment_advice
+#: model:ir.model,name:alc_rma_shipment_advice.model_rma_operation
+msgid "RMA requested operation"
+msgstr "Opération RMA demandée"
 
 #. module: alc_rma_shipment_advice
 #: model:ir.model,name:alc_rma_shipment_advice.model_shipment_advice

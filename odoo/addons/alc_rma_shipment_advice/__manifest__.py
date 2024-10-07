@@ -15,6 +15,7 @@
         "shipment_advice_planner_toursolver",
     ],
     "data": [
+        "views/rma_operation.xml",
         "views/stock_picking.xml",
         "views/shipment_advice.xml",
         "views/stock_picking_type.xml",

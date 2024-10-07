@@ -11,4 +11,11 @@ receptions related to the customers in the shipment advice.
 
 If applicable, these receptions will be linked to the shipment advice and can
 be printed along with other deliveries.
-Additionally, this addon extends the shipment advice report to indicate customers with returns.
+
+Additionally, the addon introduces a new boolean field to RMA operation,
+"Exclude from Shipment Advice", which allows users to exclude specific RMA
+receptions from being linked to shipment advice.
+If this field is checked, the corresponding RMA reception will not be included
+in the shipment advice.
+
+Finally, this addon extends the shipment advice report to indicate customers with returns.
