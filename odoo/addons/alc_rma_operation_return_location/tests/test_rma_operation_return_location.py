@@ -1,6 +1,8 @@
 # Copyright 2024 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from odoo import Command
+from odoo.exceptions import UserError
 from odoo.tests.common import Form
 
 from odoo.addons.rma_sale.tests.test_rma_sale import TestRmaSaleBase
@@ -69,3 +71,51 @@ class TestRmaOperationReturnLocation(TestRmaSaleBase):
         rma = self.order_out_picking.move_ids.rma_ids
         self.assertEqual(rma.location_id, self.stock_location)
         self.assertEqual(rma.reception_move_id.location_dest_id, self.stock_location)
+
+    def test_5(self):
+        """Return product to inventory location.
+
+        the operation is not allowed without a
+        route
+        """
+        customer_location = self.env.ref("stock.stock_location_customers")
+        warehouse = self.env["stock.warehouse"].search([], limit=1)
+        inventory_location = self.env["stock.location"].search(
+            [("usage", "=", "inventory")], limit=1
+        )
+        self.operation.return_location_id = inventory_location
+        stock_return_picking_form = Form(
+            self.env["stock.return.picking"].with_context(
+                active_ids=self.order_out_picking.ids,
+                active_id=self.order_out_picking.id,
+                active_model="stock.picking",
+            )
+        )
+        stock_return_picking_form.create_rma = True
+        stock_return_picking_form.rma_operation_id = self.operation
+        return_wizard = stock_return_picking_form.save()
+        self.product_1.route_ids = self.env["stock.route"].search([])
+        with self.assertRaises(UserError):
+            return_wizard.create_returns()
+        self.env["stock.route"].create(
+            {
+                "name": "RMA return to inventory loss",
+                "product_selectable": True,
+                "rule_ids": [
+                    Command.create(
+                        {
+                            "name": "RMA return to inventory loss",
+                            "action": "pull",
+                            "picking_type_id": warehouse.rma_in_type_id.id,
+                            "location_src_id": customer_location.id,
+                            "location_dest_id": inventory_location.id,
+                            "procure_method": "make_to_stock",
+                        }
+                    ),
+                ],
+            }
+        )
+        return_wizard.create_returns()
+        rma = self.order_out_picking.move_ids.rma_ids
+        self.assertEqual(rma.location_id, inventory_location)
+        self.assertEqual(rma.reception_move_id.location_dest_id, inventory_location)
