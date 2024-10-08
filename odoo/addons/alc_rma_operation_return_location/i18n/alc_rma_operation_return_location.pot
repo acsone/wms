@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_rma_operation_return_location
+#: model:ir.model,name:alc_rma_operation_return_location.model_rma
+msgid "RMA"
+msgstr ""
+
+#. module: alc_rma_operation_return_location
 #: model:ir.model,name:alc_rma_operation_return_location.model_rma_operation
 msgid "RMA requested operation"
 msgstr ""
