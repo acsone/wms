@@ -73,3 +73,29 @@ class TestRmaShipmentAdvice(TestRmaSaleBase):
         self.shipment_advice.action_done()
         self.assertEqual(self.shipment_advice.state, "done")
         self.assertFalse(self.shipment_advice.rma_picking_ids)
+
+    def test_4(self):
+        """If the RMA operation is meant to be excluded from the shipment advice, the.
+
+        RMA picking is flagged accordingly
+        """
+        self.operation.exclude_from_rma_shipment_advice = True
+        sale_order = self._create_sale_order([[self.product_1, 5]])
+        sale_order.action_confirm()
+        order_out_picking = sale_order.picking_ids
+        order_out_picking.move_ids.quantity_done = 5
+        order_out_picking.button_validate()
+        wizard_id = sale_order.action_create_rma()["res_id"]
+        wizard = self.env["sale.order.rma.wizard"].browse(wizard_id)
+        wizard.operation_id = self.operation
+        rma = self.env["rma"].browse(wizard.create_and_open_rma()["res_id"])
+        rma_picking = rma.reception_move_id.picking_id
+        self.assertTrue(rma_picking.exclude_from_rma_shipment_advice)
+
+    def test_5(self):
+        """Exclude rma reception."""
+        self.rma_picking.exclude_from_rma_shipment_advice = True
+        self.shipment_advice.action_in_progress()
+        self.shipment_advice.action_done()
+        self.assertEqual(self.shipment_advice.state, "done")
+        self.assertFalse(self.shipment_advice.rma_picking_ids)

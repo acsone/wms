@@ -37,6 +37,7 @@ class ShipmentAdvice(ShipmentAdviceBase):
     def _link_rma_picking_domain(self):
         self.ensure_one()
         return [
+            ("exclude_from_rma_shipment_advice", "=", False),
             ("picking_type_id.is_rma", "=", True),
             ("rma_shipment_advice_id", "=", False),
             ("partner_id", "in", self.loaded_picking_ids.partner_id.ids),
