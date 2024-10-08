@@ -84,6 +84,7 @@ odoo-addon-rma-sale @ git+https://github.com/acsone/rma.git@16.0-alc-rma_sale#su
 odoo-addon-rma-sale-reason @ git+https://github.com/OCA/rma.git@refs/pull/409/head#subdirectory=setup/rma_sale_reason
 odoo-addon-rma-lot @ git+https://github.com/acsone/rma.git@16.0-alc-rma_lot#subdirectory=setup/rma_lot
 odoo-addon-rma-sale-lot @ git+https://github.com/acsone/rma.git@16.0-alc-rma_lot#subdirectory=setup/rma_sale_lot
+odoo-addon-rma-delivery @ git+https://github.com/OCA/rma.git@refs/pull/424/head#subdirectory=setup/rma_delivery
 
 # sale-workflow
 odoo-addon-sale-order-line-cancel @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2357/head#subdirectory=setup/sale_order_line_cancel
