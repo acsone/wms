@@ -14,6 +14,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_rma_shipment_advice
+#: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_rma_operation__exclude_from_rma_shipment_advice
+#: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_stock_picking__exclude_from_rma_shipment_advice
+msgid "Don't Link to RMA shipment advice"
+msgstr ""
+
+#. module: alc_rma_shipment_advice
 #: model:ir.model.fields,help:alc_rma_shipment_advice.field_stock_picking__is_rma
 #: model:ir.model.fields,help:alc_rma_shipment_advice.field_stock_picking_type__is_rma
 msgid ""
@@ -44,6 +50,7 @@ msgid "Picking Type"
 msgstr ""
 
 #. module: alc_rma_shipment_advice
+#: model:ir.model,name:alc_rma_shipment_advice.model_rma
 #: model_terms:ir.ui.view,arch_db:alc_rma_shipment_advice.shipment_advice_form_view
 #: model_terms:ir.ui.view,arch_db:alc_rma_shipment_advice.stock_picking_type_form_view
 msgid "RMA"
@@ -68,6 +75,11 @@ msgstr ""
 #. module: alc_rma_shipment_advice
 #: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_stock_picking__rma_shipment_advice_id
 msgid "RMA Shipment Advice"
+msgstr ""
+
+#. module: alc_rma_shipment_advice
+#: model:ir.model,name:alc_rma_shipment_advice.model_rma_operation
+msgid "RMA requested operation"
 msgstr ""
 
 #. module: alc_rma_shipment_advice
