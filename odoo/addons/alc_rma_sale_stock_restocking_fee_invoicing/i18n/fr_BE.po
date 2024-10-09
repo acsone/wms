@@ -1,0 +1,40 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_rma_sale_stock_restocking_fee_invoicing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-09 12:24+0000\n"
+"PO-Revision-Date: 2024-10-09 12:24+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_rma_sale_stock_restocking_fee_invoicing
+#: model:ir.model.fields,field_description:alc_rma_sale_stock_restocking_fee_invoicing.field_rma_reason__charge_restocking_fee
+msgid "Charge Restocking Fee"
+msgstr "Appliquer des frais de retour"
+
+#. module: alc_rma_sale_stock_restocking_fee_invoicing
+#: model:ir.model,name:alc_rma_sale_stock_restocking_fee_invoicing.model_rma
+msgid "RMA"
+msgstr "RMA"
+
+#. module: alc_rma_sale_stock_restocking_fee_invoicing
+#: model:ir.model,name:alc_rma_sale_stock_restocking_fee_invoicing.model_rma_reason
+msgid "Rma Reason"
+msgstr ""
+
+#. module: alc_rma_sale_stock_restocking_fee_invoicing
+#: model:ir.model.fields,help:alc_rma_sale_stock_restocking_fee_invoicing.field_rma_reason__charge_restocking_fee
+msgid ""
+"Tick this box if you wish to charge your customer a fee in case of return of"
+" goods"
+msgstr ""
+"Cocher si vous voulez facturer des frais de retour à votre client pour le "
+"traitement de ce retour de marchandise."
