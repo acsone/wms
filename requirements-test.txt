@@ -2,6 +2,7 @@
 checklog-odoo==1.0
 colorama==0.4.6
 coverage==7.2.7
+execnet==2.1.1
 h11==0.14.0
 httpcore==0.17.3
 httpx==0.24.1
@@ -14,12 +15,13 @@ mdit-py-plugins==0.4.0
 mdurl==0.1.2
 mock==5.1.0
 odoo-test-helper==2.1.0
-pluggy==1.2.0
+pluggy==1.5.0
 pygments==2.15.1
-pytest==7.4.0
-pytest-cov==4.1.0
-pytest-odoo==1.0.0
-pytest-subtests==0.11.0
+pytest==8.3.3
+pytest-cov==5.0.0
+pytest-odoo==2.1.1
+pytest-subtests==0.13.1
+pytest-xdist==3.6.1
 pyyaml==6.0
 rich==13.4.2
 shellingham==1.5.0.post1
