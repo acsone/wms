@@ -59,14 +59,14 @@ class MakePickingBatch(MakePickingBatchBase):
                 )
         return domain
 
-    def _get_first_picking(self, no_nbr_lines_limit=False):
+    def _get_first_picking(self, no_limit=False):
         """Try at first to get picking from release channels related to the selected user."""
         if not self.user_id:
-            return super()._get_first_picking(no_nbr_lines_limit=no_nbr_lines_limit)
+            return super()._get_first_picking(no_limit=no_limit)
         if self.release_channel_required:
             first_picking = super(
                 MakePickingBatch, self.with_context(restrict_to_user=True)
-            )._get_first_picking(no_nbr_lines_limit=no_nbr_lines_limit)
+            )._get_first_picking(no_limit=no_limit)
             if first_picking:
                 return first_picking
-        return super()._get_first_picking(no_nbr_lines_limit=no_nbr_lines_limit)
+        return super()._get_first_picking(no_limit=no_limit)
