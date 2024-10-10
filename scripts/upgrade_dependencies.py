@@ -252,7 +252,7 @@ def main(only_merged, only_released, odoo_version):
         addon = info.addon.strip()
         file = info.file.strip()
         requirement_line = info.requirement_line.strip()
-        current_version = info.version.strip()
+        current_version = info.version.strip() if info.version else None
         click.echo(f"Try to upgrade addon {info.addon} found in {file}")
         ret = do_upgrade_process(
             addon, requirement_line, file, current_version, odoo_version
