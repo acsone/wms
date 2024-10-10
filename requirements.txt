@@ -278,7 +278,7 @@ odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/acsone/st
 odoo-addon-shipment-advice-planner-toursolver-queue-job==16.0.1.0.0.5
 odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@16b3c663ade08f22d12d5fbaefa210741212e406#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-base==16.0.1.1.0.3
-odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wms.git@39bb156ae4781bf0d9c58290d3f73be66befdd3b#subdirectory=setup/shopfloor_batch_automatic_creation
+odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wms.git@bb539fc077ec8f6d6be20e900381dfb03c8ed9e2#subdirectory=setup/shopfloor_batch_automatic_creation
 odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@d477836c5ebd4b4039d6159fae05c941bc6874dc#subdirectory=setup/shopfloor_full_location_reservation
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@a69e08f6ab44eca784913c059a29d0ff6bf27c3a#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-mobile-base==16.0.1.1.0
@@ -370,7 +370,7 @@ odoo-addon-stock-packaging-calculator==16.0.1.0.1.4
 odoo-addon-stock-picking-back2draft==16.0.1.0.0.11
 odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@0c98b39292f2fedb1acc417741f2c6f305946b54#subdirectory=setup/stock_picking_backorder_reason
 odoo-addon-stock-picking-backorder-reason-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@385cf7dc6eb9ce7c43ca7e0f697d513c4cd6891b#subdirectory=setup/stock_picking_backorder_reason_grn
-odoo-addon-stock-picking-batch-creation==16.0.1.0.0.15
+odoo-addon-stock-picking-batch-creation @ git+https://github.com/acsone/wms.git@c1d64ed251c368f1bbef9042362c79dc613222d8#subdirectory=setup/stock_picking_batch_creation
 odoo-addon-stock-picking-batch-start @ git+https://github.com/acsone/stock-logistics-workflow.git@2c72016cdc9a0a15508dd3295218c3089b105523#subdirectory=setup/stock_picking_batch_start
 odoo-addon-stock-picking-completion-info==16.0.1.0.1.6
 odoo-addon-stock-picking-delivery-link==16.0.1.1.4.1
@@ -413,6 +413,7 @@ odoo-addon-stock-restrict-lot==16.0.1.2.0.2
 odoo-addon-stock-route-mto==16.0.1.0.0.5
 odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@0c90dfb1a4597a2da3beeb5de9fb2495c44d7520#subdirectory=setup/stock_scrap_location_default
 odoo-addon-stock-split-picking==16.0.1.0.4.2
+odoo-addon-stock-split-picking-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@d22c15713032586fa391cb1fce13a542b23cd736#subdirectory=setup/stock_split_picking_dimension
 odoo-addon-stock-storage-category-capacity-name==16.0.1.0.0.5
 odoo-addon-stock-storage-type==16.0.1.1.0.1
 odoo-addon-stock-storage-type-putaway-abc==16.0.1.0.0.12
