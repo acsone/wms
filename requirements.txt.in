@@ -66,6 +66,7 @@ odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@refs/pull/2
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@refs/pull/25/head#subdirectory=setup/shopfloor_mobile_packing
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/OCA/wms.git@refs/pull/933/head#subdirectory=setup/shopfloor_batch_automatic_creation
 odoo-addon-stock-picking-batch-creation @ git+https://github.com/OCA/wms.git@refs/pull/932/head#subdirectory=setup/stock_picking_batch_creation
+odoo-addon-shopfloor-putaway-recompute @ git+https://github.com/OCA/wms@refs/pull/934/head#subdirectory=setup/shopfloor_putaway_recompute
 
 # product-attribute
 odoo-addon-product-packaging-level @ git+https://github.com/OCA/product-attribute.git@refs/pull/1595/head#subdirectory=setup/product_packaging_level

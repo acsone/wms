@@ -50,6 +50,7 @@
         "shopfloor_mobile_base_auth_api_key",
         "shopfloor_mobile_packing",
         "shopfloor_packing",
+        "shopfloor_putaway_recompute",
         "shopfloor_rest_log",
         "shopfloor_workstation",
         "shopfloor_workstation_mobile",
