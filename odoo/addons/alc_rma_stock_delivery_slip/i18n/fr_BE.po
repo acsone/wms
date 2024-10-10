@@ -1,0 +1,62 @@
+# Traduction du serveur Odoo.
+# Ce fichier contient la traduction des modules suivants :
+# 	* alc_rma_stock_delivery_slip
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-10 23:13+0000\n"
+"PO-Revision-Date: 2024-10-10 23:13+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_rma_stock_delivery_slip
+#: model:ir.model.fields,help:alc_rma_stock_delivery_slip.field_rma_operation__no_csv_delivery_slip
+msgid "If checked, the CSV delivery slip will not be sent for this operation."
+msgstr ""
+"Si coché, le bordereau de livraison CSV ne sera pas envoyé pour cette "
+"opération."
+
+#. module: alc_rma_stock_delivery_slip
+#: model:ir.model.fields,help:alc_rma_stock_delivery_slip.field_rma_operation__no_entry_register_at_delivery
+msgid ""
+"If checked, the entry register will not be add to the delivery document."
+msgstr ""
+"Si coché, le registre d'entrée ne sera pas ajouté au document de livraison."
+
+#. module: alc_rma_stock_delivery_slip
+#: model:ir.model.fields,help:alc_rma_stock_delivery_slip.field_rma_operation__no_entry_register_at_reception
+msgid ""
+"If checked, the entry register will not be add to the reception document."
+msgstr ""
+"Si coché, le registre d'entrée ne sera pas ajouté au document de réception."
+
+#. module: alc_rma_stock_delivery_slip
+#: model:ir.model.fields,field_description:alc_rma_stock_delivery_slip.field_rma_operation__no_csv_delivery_slip
+msgid "No CSV Delivery Slip"
+msgstr "Pas de bordereau de livraison CSV"
+
+#. module: alc_rma_stock_delivery_slip
+#: model:ir.model.fields,field_description:alc_rma_stock_delivery_slip.field_rma_operation__no_entry_register_at_delivery
+msgid "No Entry Register At Delivery"
+msgstr "Pas de registre d'entrée à la livraison"
+
+#. module: alc_rma_stock_delivery_slip
+#: model:ir.model.fields,field_description:alc_rma_stock_delivery_slip.field_rma_operation__no_entry_register_at_reception
+msgid "No Entry Register At Reception"
+msgstr "Pas de registre d'entrée à la réception"
+
+#. module: alc_rma_stock_delivery_slip
+#: model:ir.model,name:alc_rma_stock_delivery_slip.model_rma_operation
+msgid "RMA requested operation"
+msgstr "Opération RMA demandée"
+
+#. module: alc_rma_stock_delivery_slip
+#: model:ir.model,name:alc_rma_stock_delivery_slip.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
