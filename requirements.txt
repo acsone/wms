@@ -411,7 +411,7 @@ odoo-addon-stock-release-channel-shipment-advice-deliver @ git+https://github.co
 odoo-addon-stock-release-channel-shipment-advice-process-end-time==16.0.1.0.0.3
 odoo-addon-stock-release-channel-shipment-advice-toursolver==16.0.1.0.1
 odoo-addon-stock-reserve-rule==16.0.1.0.0.8
-odoo-addon-stock-restrict-lot==16.0.2.0.0.1
+odoo-addon-stock-restrict-lot==16.0.2.0.0.2
 odoo-addon-stock-route-mto==16.0.1.0.0.5
 odoo-addon-stock-scrap-location-default==16.0.1.0.0.2
 odoo-addon-stock-split-picking==16.0.1.0.4.2
