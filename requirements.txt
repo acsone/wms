@@ -327,8 +327,7 @@ odoo-addon-shopinvader-search-engine-update-product-brand==16.0.1.0.0.2
 odoo-addon-shopinvader-search-engine-update-product-brand-image==16.0.1.0.0.2
 odoo-addon-shopinvader-search-engine-update-product-media==16.0.1.0.0.2
 odoo-addon-shopinvader-search-engine-update-product-template-multi-link==16.0.1.0.0.2
-odoo-addon-stock-account-move-line-valuation-restrict-price-change @ git+https://github.com/acsone/account-financial-tools@5f4f9997dfae0d87aff9800df625bea2a2f6e741#subdirectory=setup/stock_account_move_line_valuation_restrict_price_change
-odoo-addon-stock-account-move-show-draft-button @ git+https://github.com/acsone/account-financial-tools@b5244bb2f51facaa8db23cdd705874bdd409bf6a#subdirectory=setup/stock_account_move_show_draft_button
+odoo-addon-stock-account-move-multi-reset-to-draft @ git+https://github.com/acsone/account-invoicing.git@ddbfdb6d95146cc43602d875d9bc8c2e03452b93#subdirectory=setup/stock_account_move_multi_reset_to_draft
 odoo-addon-stock-available==16.0.1.1.0.2
 odoo-addon-stock-available-base-exclude-location==16.0.1.0.0.7
 odoo-addon-stock-available-immediately==16.0.1.0.0.8
