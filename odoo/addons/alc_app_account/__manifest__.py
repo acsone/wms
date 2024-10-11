@@ -4,7 +4,7 @@
 {
     "name": "Alc App Account",
     "description": """Gather all account related modules for Alcyon""",
-    "version": "16.0.1.0.3",
+    "version": "16.0.1.0.4",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
@@ -56,8 +56,7 @@
         "partner_invoicing_mode_monthly",
         "partner_invoicing_mode_ten_days",
         "report_async",
-        "stock_account_move_line_valuation_restrict_price_change",
-        "stock_account_move_show_draft_button",
+        "stock_account_move_multi_reset_to_draft",
         # Others
         "account",
     ],
