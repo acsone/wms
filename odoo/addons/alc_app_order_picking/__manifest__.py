@@ -136,6 +136,7 @@
         "stock_picking_low_priority",
         "stock_picking_operation_loss_quantity",
         "stock_picking_progress",
+        "stock_picking_putaway_recompute",
         "stock_picking_start",
         "stock_picking_type_shipping_policy",
         "stock_production_lot_expired_date",

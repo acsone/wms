@@ -66,6 +66,7 @@ odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@refs/pull/2
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@refs/pull/25/head#subdirectory=setup/shopfloor_mobile_packing
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/OCA/wms.git@refs/pull/933/head#subdirectory=setup/shopfloor_batch_automatic_creation
 odoo-addon-stock-picking-batch-creation @ git+https://github.com/OCA/wms.git@refs/pull/932/head#subdirectory=setup/stock_picking_batch_creation
+odoo-addon-shopfloor-putaway-recompute @ git+https://github.com/OCA/wms@refs/pull/934/head#subdirectory=setup/shopfloor_putaway_recompute
 
 # product-attribute
 odoo-addon-product-packaging-level @ git+https://github.com/OCA/product-attribute.git@refs/pull/1595/head#subdirectory=setup/product_packaging_level
@@ -126,6 +127,7 @@ odoo-addon-stock-picking-is-completed @ git+https://github.com/OCA/stock-logisti
 odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-add-stock_picking_low_priority-hda#subdirectory=setup/stock_picking_low_priority
 # https://github.com/OCA/stock-logistics-workflow/pull/1394 - [16.0][ADD] stock_picking_operation_loss_quantity
 odoo-addon-stock-picking-operation-loss-quantity @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1394/head#subdirectory=setup/stock_picking_operation_loss_quantity
+odoo-addon-stock-picking-putaway-recompute @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1740/head#subdirectory=setup/stock_picking_putaway_recompute
 odoo-addon-stock-picking-group-by-max-weight @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1451/head#subdirectory=setup/stock_picking_group_by_max_weight
 odoo-addon-stock-picking-group-by-partner-by-carrier @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1498/head#subdirectory=setup/stock_picking_group_by_partner_by_carrier
 # see gitagregate
