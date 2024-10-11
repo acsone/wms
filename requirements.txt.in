@@ -51,7 +51,7 @@ odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wm
 # https://github.com/OCA/wms/pull/497 - [ADD] stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@16.0-add-stock_storage_type_abc_classification-dro#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-stock-release-channel-propagate-channel-picking @ git+https://github.com/OCA/wms.git@refs/pull/908/head#subdirectory=setup/stock_release_channel_propagate_channel_picking
-odoo-addon-stock-release-channel-shipment-advice-deliver @ git+https://github.com/acsone/wms@16.0-alc_stock_release_channel_shipment_advice_deliver#subdirectory=setup/stock_release_channel_shipment_advice_deliver
+odoo-addon-stock-release-channel-shipment-advice-deliver @ git+https://github.com/OCA/wms@refs/pull/935/head#subdirectory=setup/stock_release_channel_shipment_advice_deliver
 # https://github.com/OCA/wms/pull/798/
 odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@refs/pull/24/head#subdirectory=setup/shopfloor_full_location_reservation
 # https://github.com/OCA/wms/pull/899
@@ -61,7 +61,7 @@ odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/w
 # https://github.com/OCA/wms/pull/917
 # https://github.com/OCA/wms/pull/919
 odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@16.0-alc-shopfloor#subdirectory=setup/shopfloor
-odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@16.0-alc-shopfloor_mobile#subdirectory=setup/shopfloor_mobile
+odoo-addon-shopfloor-mobile @ git+https://github.com/OCA/wms.git@refs/pull/899/head#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@refs/pull/25/head#subdirectory=setup/shopfloor_packing
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@refs/pull/25/head#subdirectory=setup/shopfloor_mobile_packing
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/OCA/wms.git@refs/pull/933/head#subdirectory=setup/shopfloor_batch_automatic_creation
@@ -108,12 +108,6 @@ odoo-addon-stock-location-orderpoint-cleanup @ git+https://github.com/OCA/stock-
 odoo-addon-stock-location-orderpoint-dynamic-routing-merge @ git+https://github.com/OCA/stock-logistics-orderpoint.git@refs/pull/10/head#subdirectory=setup/stock_location_orderpoint_dynamic_routing_merge
 
 # stock-logistics-warehouse
-odoo-addon-stock-package-type-category @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2091/head#subdirectory=setup/stock_package_type_category
-# https://github.com/OCA/stock-logistics-warehouse/pull/1646
-odoo-addon-stock-scrap-location-default @ git+https://github.com/acsone/stock-logistics-warehouse.git@16.0-add-stock-default-scrap-location-dro#subdirectory=setup/stock_scrap_location_default
-# https://github.com/OCA/stock-logistics-warehouse/pull/1794
-odoo-addon-stock-reserve-rule @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1794/head#subdirectory=setup/stock_reserve_rule
-odoo-addon-stock-location-product-restriction @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2075/head#subdirectory=setup/stock_location_product_restriction
 odoo-addon-procurement-auto-create-group @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2096/head#subdirectory=setup/procurement_auto_create_group
 odoo-addon-procurement-auto-create-group-by-product @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2096/head#subdirectory=setup/procurement_auto_create_group_by_product
 
@@ -140,7 +134,6 @@ odoo-addon-stock-move-manage-priority @ git+https://github.com/OCA/stock-logisti
 odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-alc_stock_move_propagate_first_move#subdirectory=setup/stock_move_propagate_first_move
 odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1264/head#subdirectory=setup/stock_move_propagate_first_move_cancel
 odoo-addon-stock-move-line-lock-qty-done @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1470/head#subdirectory=setup/stock_move_line_lock_qty_done
-odoo-addon-stock-picking-return-lot @ git+https://github.com/oca/stock-logistics-workflow.git@refs/pull/1721/head#subdirectory=setup/stock_picking_return_lot
 odoo-addon-stock-split-picking-dimension @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1741/head#subdirectory=setup/stock_split_picking_dimension
 
 # camptocamp/odoo-cloud-platform
@@ -200,7 +193,6 @@ odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@r
 
 # OCA/stock-logistics-transport
 # https://github.com/OCA/stock-logistics-transport/pull/144
-odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/OCA/stock-logistics-transport.git@refs/pull/144/head#subdirectory=setup/shipment_advice_planner_toursolver
 
 # OCA/partner-contact
 odoo-addon-partner-manual-rank @ git+https://github.com/OCA/partner-contact.git@refs/pull/1849/head#subdirectory=setup/partner_manual_rank

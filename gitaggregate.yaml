@@ -50,24 +50,7 @@
     - oca 16.0
     - oca refs/pull/834/head # [16.0][IMP] stock_available_to_promise_release: Unrelease when merging moves
     - oca refs/pull/864/head # [IMP] stock_available_to_promise_release: set move to need release after pick cancel
-    - oca refs/pull/890/head # [FIX] stock_available_to_promise_release: Don't post message if no picking on unrelease
-    - oca refs/pull/913/head # [IMP] stock_available_to_promise_release: Improve migration script
-    - oca refs/pull/920/head # [FIX] stock_available_to_promise_release: avoid infinite loop when at chained moves iterator
-    - oca refs/pull/921/head # [IMP] stock_available_to_promise_release: Extract method to check pickings in progress
   target: origin 16.0-alc_stock_available_to_promise_release
-
-./src/stock_release_channel_shipment_advice_deliver:
-  remotes:
-    origin: git@github.com:acsone/wms.git
-    jbaudoux: git@github.com:jbaudoux/wms.git
-    oca: git@github.com:oca/wms.git
-  merges:
-    - oca 16.0
-    - oca refs/pull/819/head # [16.0][ADD] stock_release_channel_shipment_advice_deliver
-    - jbaudoux refs/pull/10/head # [IMP] stock_release_channel_shipment_advice_deliver: Be more lax on backorder pickings
-    - jbaudoux refs/pull/11/head # [IMP] stock_release_channel_shipment_advice_deliver: Allows to display pickings in confirm wizard
-    - jbaudoux refs/pull/12/head # [FIX] allow sa process without release channel #12
-  target: origin 16.0-alc_stock_release_channel_shipment_advice_deliver
 
 ./src/stock_move_propagate_first_move:
   remotes:
@@ -106,7 +89,6 @@
     - oca refs/pull/270/head # [IMP] account-closing: auto reverse
     - oca refs/pull/271/head # [IMP] account-closing: account cutoff accrual on order
     - oca refs/pull/283/head # [IMP] account-closing: configure different account for refunds
-    - oca refs/pull/289/head # [IMP] account_cutoff_base: Add index on cutoff line to move line
   target: origin 16.0-account-cutoff-base
 
 ./src/edi:
@@ -133,16 +115,6 @@
     - oca refs/pull/917/head # [16.0] shopfloor: location_content_transfer: get_work additional domain and sort key.
     - oca refs/pull/925/head # [IMP] shopfloor: Improve message for location content transfer items
   target: origin 16.0-alc-shopfloor
-
-./src/shopfloor_mobile:
-  remotes:
-    origin: git@github.com:acsone/wms.git
-    oca: git@github.com:oca/wms.git
-  merges:
-    - oca 16.0
-    - oca refs/pull/899/head # shopfloor: Extended details service for products and locations
-    - oca refs/pull/918/head # [IMP] shopfloor: search product by default code if barcode is null #918
-  target: origin 16.0-alc-shopfloor_mobile
 
 ./src/rma:
   remotes:
