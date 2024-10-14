@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-23 14:06+0000\n"
+"POT-Creation-Date: 2024-10-14 13:10+0000\n"
 "PO-Revision-Date: 2023-12-03 13:52+0000\n"
 "Last-Translator: Denis Roussel <denis.roussel@acsone.eu>\n"
 "Language-Team: none\n"
@@ -21,6 +21,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.deliveryslip_with_price
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_deliveryslip_entry_register_body
 msgid "(AMM:"
+msgstr ""
+
+#. module: alc_report_delivery_slip
+#: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.alcyon_report_deliveryslip
+msgid "(DUPLICATA)"
 msgstr ""
 
 #. module: alc_report_delivery_slip
@@ -95,6 +100,13 @@ msgid "Check if the picking type implies fridge location"
 msgstr ""
 
 #. module: alc_report_delivery_slip
+#: model:ir.model.fields,help:alc_report_delivery_slip.field_rma_operation__duplicate_delivery_slip_at_reception
+msgid ""
+"Check this box to print the delivery slip as a 'DUPLICATA' (duplicate copy) "
+"at reception."
+msgstr ""
+
+#. module: alc_report_delivery_slip
 #: model:ir.model,name:alc_report_delivery_slip.model_res_company
 msgid "Companies"
 msgstr ""
@@ -141,6 +153,16 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.alcyon_report_deliveryslip
 msgid "Delivery slip"
 msgstr "Afleverbon"
+
+#. module: alc_report_delivery_slip
+#: model:ir.model.fields,field_description:alc_report_delivery_slip.field_stock_picking__duplicate_delivery_slip
+msgid "Duplicate Delivery Slip"
+msgstr ""
+
+#. module: alc_report_delivery_slip
+#: model:ir.model.fields,field_description:alc_report_delivery_slip.field_rma_operation__duplicate_delivery_slip_at_reception
+msgid "Duplicate Delivery Slip at reception"
+msgstr ""
 
 #. module: alc_report_delivery_slip
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_deliveryslip_entry_register
@@ -282,6 +304,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_deliveryslip_entry_register_body
 msgid "Quantity"
 msgstr "Hoeveelheid"
+
+#. module: alc_report_delivery_slip
+#: model:ir.model,name:alc_report_delivery_slip.model_rma_operation
+msgid "RMA requested operation"
+msgstr ""
 
 #. module: alc_report_delivery_slip
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_deliveryslip_alcyon
