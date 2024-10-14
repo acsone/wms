@@ -21,6 +21,21 @@ class StockPicking(Picking):
     parcels_and_items_per_category = fields.Json(
         compute="_compute_parcels_and_items_per_category",
     )
+    duplicate_delivery_slip = fields.Boolean(compute="_compute_duplicate_delivery_slip")
+
+    @api.depends(
+        "move_ids.rma_receiver_ids.operation_id.duplicate_delivery_slip_at_reception"
+    )
+    def _compute_duplicate_delivery_slip(self):
+        for rec in self:
+            duplicate_delivery_slip = False
+            if rec.move_ids.rma_receiver_ids.operation_id:
+                duplicate_delivery_slip = any(
+                    rec.move_ids.rma_receiver_ids.operation_id.mapped(
+                        "duplicate_delivery_slip_at_reception"
+                    )
+                )
+            rec.duplicate_delivery_slip = duplicate_delivery_slip
 
     @api.depends("move_ids")
     def _compute_parcels_and_items_category_ids(self):

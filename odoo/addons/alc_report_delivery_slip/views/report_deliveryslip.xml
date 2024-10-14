@@ -979,7 +979,7 @@
           >Delivery slip</t>
                     <t
             t-if="deliveryslip.picking_type_code=='incoming'"
-          >Goods return note</t>
+          >Goods return note <strong t-if="duplicata">(DUPLICATA)</strong></t>
                 </div>
             </div>
             <t
@@ -1015,6 +1015,31 @@
             <t t-call="alc_report_base.page_number_footer" t-lang="partner.lang" />
         </t>
     </template>
+    <template id="alc_report_deliveryslip_report">
+        <t t-set="deliveryslip" t-value="doc" />
+
+                <t
+      t-call="alc_report_delivery_slip.alcyon_report_deliveryslip"
+      t-lang="deliveryslip.partner_id.lang"
+    />
+                <t
+      t-set="depot_number"
+      t-value="deliveryslip.partner_id.vet_depot_number or deliveryslip.partner_id.parent_id.vet_depot_number"
+    />
+                <t
+      t-set="register_lines"
+      t-value="deliveryslip.get_entry_register_lines()"
+    />
+                <div
+      t-if="not deliveryslip.partner_id.is_hide_entry_register and depot_number and register_lines"
+      style="page-break-before:always;"
+    />
+                <t
+      t-if="not deliveryslip.partner_id.is_hide_entry_register and depot_number and register_lines"
+      t-call="alc_report_delivery_slip.report_deliveryslip_entry_register"
+      t-lang="deliveryslip.partner_id.lang"
+    />
+    </template>
     <template
     id="report_deliveryslip"
     inherit_id="stock.report_deliveryslip"
@@ -1022,28 +1047,12 @@
   >
         <xpath expr="//t[@t-foreach='docs']" position="replace">
             <t t-foreach="docs" t-as="doc">
-                <t t-set="deliveryslip" t-value="doc" />
-
+                <t t-set="duplicata" t-value="False" />
+                <t t-call="alc_report_delivery_slip.alc_report_deliveryslip_report" />
+                <t t-set="duplicata" t-value="True" />
                 <t
-          t-call="alc_report_delivery_slip.alcyon_report_deliveryslip"
-          t-lang="deliveryslip.partner_id.lang"
-        />
-                <t
-          t-set="depot_number"
-          t-value="deliveryslip.partner_id.vet_depot_number or deliveryslip.partner_id.parent_id.vet_depot_number"
-        />
-                <t
-          t-set="register_lines"
-          t-value="deliveryslip.get_entry_register_lines()"
-        />
-                <div
-          t-if="not deliveryslip.partner_id.is_hide_entry_register and depot_number and register_lines"
-          style="page-break-before:always;"
-        />
-                <t
-          t-if="not deliveryslip.partner_id.is_hide_entry_register and depot_number and register_lines"
-          t-call="alc_report_delivery_slip.report_deliveryslip_entry_register"
-          t-lang="deliveryslip.partner_id.lang"
+          t-if="doc.duplicate_delivery_slip"
+          t-call="alc_report_delivery_slip.alc_report_deliveryslip_report"
         />
             </t>
 

@@ -8,3 +8,4 @@ from . import (
     stock_picking_type,
     stock_release_channel,
 )
+from . import rma_operation
