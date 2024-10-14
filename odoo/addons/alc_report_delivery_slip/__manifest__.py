@@ -32,6 +32,7 @@
         "delivery",
     ],
     "data": [
+        "views/rma_operation.xml",
         "views/stock_release_channel.xml",
         "views/base_contact_views.xml",
         "views/res_partner_views.xml",
