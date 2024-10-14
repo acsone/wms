@@ -277,7 +277,7 @@ odoo-addon-shipment-advice==16.0.1.5.0
 odoo-addon-shipment-advice-planner==16.0.1.1.0
 odoo-addon-shipment-advice-planner-toursolver==16.0.3.0.1.4
 odoo-addon-shipment-advice-planner-toursolver-queue-job==16.0.1.0.0.5
-odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@4e92b4d9cf376091af1179ba309662b95c9beb4b#subdirectory=setup/shopfloor
+odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@aa08fda57b37a1a327c22677b37b99d6c3fd673b#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-base==16.0.1.1.0.3
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wms.git@bb539fc077ec8f6d6be20e900381dfb03c8ed9e2#subdirectory=setup/shopfloor_batch_automatic_creation
 odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@d477836c5ebd4b4039d6159fae05c941bc6874dc#subdirectory=setup/shopfloor_full_location_reservation
