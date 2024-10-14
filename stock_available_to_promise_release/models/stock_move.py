@@ -787,7 +787,9 @@ class StockMove(models.Model):
     def _is_mergeable(self):
         self.ensure_one()
         return self.state not in ("done", "cancel") and (
-            self.picking_type_id.code != "outgoing" or self.unrelease_allowed
+            self.picking_type_id.code != "outgoing"
+            or not self._is_unreleaseable()
+            or self.unrelease_allowed
         )
 
     def _update_candidate_moves_list(self, candidate_moves):
