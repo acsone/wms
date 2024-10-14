@@ -3,13 +3,15 @@
 
 from odoo import Command
 from odoo.fields import Date, Datetime
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests.common import Form
+
+from odoo.addons.base.tests.common import BaseCommon
 
 to_date = Date.to_date
 to_datetime = Datetime.to_datetime
 
 
-class TestPurchaseOrderDatePlanned(TransactionCase):
+class TestPurchaseOrderDatePlanned(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -93,5 +95,27 @@ class TestPurchaseOrderDatePlanned(TransactionCase):
         self.supplier.delivery_lead_time = 6
         self.assertEqual(seller.delay, 6)
 
+        self.supplier.delivery_lead_time = False
+        self.assertEqual(seller.delay, 6)
+
+    def test_seller_delay_default(self):
+        self.supplier.delivery_lead_time = 5
+        seller_form = Form(
+            self.supplierinfo_model.with_context(default_partner_id=self.supplier.id)
+        )
+        # seller_form.partner_id = self.supplier
+        self.assertEqual(seller_form.delay, 5)
+        seller = seller_form.save()
+        self.supplier.delivery_lead_time = 6
+        self.assertEqual(seller.delay, 6)
+
     def test_po_date_planned(self):
+        """Test changing date planned on purchase order level."""
         self.assertEqual(self.po.date_planned, to_datetime("2017-01-05"))
+        self.assertEqual(self.po.order_line.date_planned, to_datetime("2017-01-05"))
+        self.po.order_line.date_planned = "2017-01-06"
+
+        self.assertEqual(self.po.order_line.date_planned, to_datetime("2017-01-06"))
+
+        self.po.date_planned = "2017-01-07"
+        self.assertEqual(self.po.order_line.date_planned, to_datetime("2017-01-07"))
