@@ -80,6 +80,7 @@
         "alc_sale_internal_confirmation_mail",
         "alc_sale_mto_check_procurements",
         "alc_sale_order_cancel",
+        "alc_sale_order_date_editable",
         "alc_sale_order_date_order_short",
         "alc_sale_order_line_cancel_available_to_promise_release",
         "alc_sale_order_line_cancel_check",
