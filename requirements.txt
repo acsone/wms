@@ -286,7 +286,7 @@ odoo-addon-shopfloor-mobile-base==16.0.1.1.0
 odoo-addon-shopfloor-mobile-base-auth-api-key==16.0.1.0.0.5
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@9342929c7236e8077d1337cdb90b6256b5b05ae2#subdirectory=setup/shopfloor_mobile_packing
 odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@9342929c7236e8077d1337cdb90b6256b5b05ae2#subdirectory=setup/shopfloor_packing
-odoo-addon-shopfloor-putaway-recompute @ git+https://github.com/acsone/wms@6c9bf8df32e0ecc9c645eba8a68da31a094146d8#subdirectory=setup/shopfloor_putaway_recompute
+odoo-addon-shopfloor-putaway-recompute @ git+https://github.com/acsone/wms@b136dbd468916d9dfa782bc7307213e2004b04f5#subdirectory=setup/shopfloor_putaway_recompute
 odoo-addon-shopfloor-rest-log==16.0.1.0.0.5
 odoo-addon-shopfloor-workstation==16.0.1.0.0.3
 odoo-addon-shopfloor-workstation-mobile==16.0.1.0.0.4
