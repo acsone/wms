@@ -197,4 +197,5 @@ odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@r
 # https://github.com/OCA/stock-logistics-transport/pull/144
 
 # OCA/partner-contact
+odoo-addon-base-partner-sequence @ git+https://github.com/OCA/partner-contact.git@refs/pull/1875/head#subdirectory=setup/base_partner_sequence
 odoo-addon-partner-manual-rank @ git+https://github.com/OCA/partner-contact.git@refs/pull/1849/head#subdirectory=setup/partner_manual_rank

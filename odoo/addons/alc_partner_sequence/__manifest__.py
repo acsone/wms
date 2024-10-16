@@ -15,5 +15,4 @@
         "base_partner_sequence",
     ],
     "data": ["views/res_partner.xml"],
-    "demo": [],
 }
