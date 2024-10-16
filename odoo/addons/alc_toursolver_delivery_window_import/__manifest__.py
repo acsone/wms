@@ -10,12 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_b2c_partner",
-        # OCA
-        "shipment_advice_planner_toursolver",
-        # Others
+        # Odoo Community
         "contacts",
+        # Third-party
+        "shipment_advice_planner_toursolver",
+        # Alcyon
+        "alc_b2c_partner",
     ],
     "data": [
         "wizards/alc_delivery_window_importer.xml",

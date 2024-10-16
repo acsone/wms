@@ -12,7 +12,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
+        # Third-party
         "stock_available_to_promise_release",
     ],
     "data": ["security/groups.xml", "views/stock_move.xml"],

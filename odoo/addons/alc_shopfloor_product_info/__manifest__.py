@@ -12,7 +12,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
+        # Third-party
         "shopfloor",
     ],
     "data": ["views/stock_location.xml"],

@@ -32,10 +32,11 @@ class TestStockController(TransactionCase):
 
     def test_cnk(self):
         product_product = self.env["product.product"]
-        with mock.patch.object(
-            product_product.__class__, "get_cnk_products_domain"
-        ) as mock_get_cnk_products_domain, MockRequest(
-            self.env, session_info={"db": self.env.cr.dbname}
+        with (
+            mock.patch.object(
+                product_product.__class__, "get_cnk_products_domain"
+            ) as mock_get_cnk_products_domain,
+            MockRequest(self.env, session_info={"db": self.env.cr.dbname}),
         ):
             mock_get_cnk_products_domain.return_value = [
                 ("id", "in", self.all_records.ids)
@@ -54,10 +55,11 @@ class TestStockController(TransactionCase):
 
     def test_sku(self):
         product_product = self.env["product.product"]
-        with mock.patch.object(
-            product_product.__class__, "get_sku_products_domain"
-        ) as mock_get_sku_products_domain, MockRequest(
-            self.env, session_info={"db": self.env.cr.dbname}
+        with (
+            mock.patch.object(
+                product_product.__class__, "get_sku_products_domain"
+            ) as mock_get_sku_products_domain,
+            MockRequest(self.env, session_info={"db": self.env.cr.dbname}),
         ):
             mock_get_sku_products_domain.return_value = [
                 ("id", "in", self.all_records.ids)

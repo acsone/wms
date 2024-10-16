@@ -11,11 +11,7 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
-        # Custom
-        "alc_base_auto_join",
-        "alc_cerberus_utils",
-        "alc_queue_job_security",
-        # OCA
+        # Third-party
         "base_import_security_group",
         "base_optional_quick_create",
         "mail_environment",
@@ -23,5 +19,9 @@
         "report_csv",
         "rest_log",
         "server_action_mass_edit",
+        # Alcyon
+        "alc_base_auto_join",
+        "alc_cerberus_utils",
+        "alc_queue_job_security",
     ],
 }

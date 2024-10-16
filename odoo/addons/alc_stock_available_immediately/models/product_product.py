@@ -7,7 +7,6 @@ from odoo.addons.stock_available_immediately_exclude_location.models.product_pro
 
 
 class ProductProduct(ProductProductBase):
-
     _inherit = "product.product"
 
     def _compute_available_quantities_dict(self):
@@ -27,7 +26,8 @@ class ProductProduct(ProductProductBase):
                 _dom_move_in_loc,
                 dom_move_out_loc,
             ) = self._get_domain_locations()
-            domain = dom_move_out_loc + [
+            domain = [
+                *dom_move_out_loc,
                 # We never want to overwrite a move,
                 # which ends in the loss location. The quantity isn't usable
                 # and would have to be deducted in the end anyway.

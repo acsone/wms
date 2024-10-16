@@ -10,9 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_account_test_common",
-        # Others
+        # Odoo Enterprise
         "account_followup",
+        # Alcyon
+        "alc_account_test_common",
     ],
 }

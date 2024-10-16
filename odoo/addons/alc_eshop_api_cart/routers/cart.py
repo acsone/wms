@@ -128,11 +128,9 @@ class ByteReader(Protocol):
     """Protocol for a file-like object that can be read as bytes."""
 
     # pylint: disable=method-required-super
-    def read(self, n: int | None = None) -> bytes:
-        ...
+    def read(self, n: int | None = None) -> bytes: ...
 
-    def seek(self, n: int) -> None:
-        ...
+    def seek(self, n: int) -> None: ...
 
 
 class ShopinvaderApiCartRouterHelper(ShopinvaderApiCartRouterHelperBase):

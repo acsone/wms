@@ -9,7 +9,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
+        # Third-party
         "base_report_to_printer",
         "delivery_carrier_label_gls",
         "queue_job",

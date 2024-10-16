@@ -22,9 +22,9 @@ class Lot(BaseModel):
     ) -> self:  # noqa: F821  pylint: disable=undefined-variable
         return cls(
             name=record.name,
-            peremption=record.expiration_date.date()
-            if record.expiration_date
-            else None,
+            peremption=(
+                record.expiration_date.date() if record.expiration_date else None
+            ),
         )
 
 

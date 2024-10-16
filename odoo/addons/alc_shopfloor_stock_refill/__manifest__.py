@@ -8,7 +8,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # OCA
+        # Third-party
         "shopfloor",
     ],
     "post_init_hook": "post_init_hook",

@@ -9,10 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_registration",
-        # OCA
+        # Third-party
         "fastapi",
+        # Alcyon
+        "alc_registration",
     ],
     "data": [],
     "demo": [],

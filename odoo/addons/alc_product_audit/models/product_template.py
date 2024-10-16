@@ -401,14 +401,16 @@ class ProductTemplate(Product):
                     %(ids)s
             """,
             {
-                "no_product_dimensions": AsIs("AND pt.has_no_dimensions = True")
-                if no_dimensions
-                else AsIs("AND pt.has_no_dimensions = False"),
-                "no_packaging_dimensions": AsIs(
-                    "OR pt.packaging_has_no_dimensions = True"
-                )
-                if no_dimensions
-                else AsIs("AND pt.packaging_has_no_dimensions = False"),
+                "no_product_dimensions": (
+                    AsIs("AND pt.has_no_dimensions = True")
+                    if no_dimensions
+                    else AsIs("AND pt.has_no_dimensions = False")
+                ),
+                "no_packaging_dimensions": (
+                    AsIs("OR pt.packaging_has_no_dimensions = True")
+                    if no_dimensions
+                    else AsIs("AND pt.packaging_has_no_dimensions = False")
+                ),
                 "ids": current_ids,
             },
         )

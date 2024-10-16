@@ -11,7 +11,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Others
+        # Odoo Community
         "sale",
     ],
     "data": ["views/res_partner.xml", "views/sale_order.xml"],

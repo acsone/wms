@@ -10,11 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_purchase_order_cleaner",
-        # OCA
+        # Third-party
         "purchase_order_ubl",
         "report_xml",
+        # Alcyon
+        "alc_purchase_order_cleaner",
     ],
     "data": ["report/report_xml_purchase_order_ubl.xml"],
     "demo": [],

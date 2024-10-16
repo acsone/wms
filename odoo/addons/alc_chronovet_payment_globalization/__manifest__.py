@@ -14,11 +14,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Third-party
+        "report_csv",
+        # Alcyon
         "alc_account_payment_globalization",
         "alc_chronovet",
-        # OCA
-        "report_csv",
     ],
     "data": [
         "security/alc_chronovet_payment_globalization.xml",

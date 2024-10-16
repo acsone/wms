@@ -10,11 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_product_state",
-        # OCA
+        # Third-party
         "product_stock_state",
         "stock_available",
+        # Alcyon
+        "alc_product_state",
     ],
     "data": [],
     "demo": [],

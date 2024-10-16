@@ -9,7 +9,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
+        # Third-party
         "rma_sale",
         "shipment_advice",
         "shipment_advice_planner_toursolver",

@@ -175,12 +175,16 @@ class AbcClassificationProfile(ABCProfile):
                     "profile_col": AsIs(product_profiles_profile_col),
                     "profile_id": rec.id,
                     "package_type_ids": tuple(rec.package_type_ids.ids),
-                    "exclude_product_mto": AsIs("AND pt.is_mto = False")
-                    if rec.exclude_product_mto
-                    else AsIs(""),
-                    "exclude_non_sellable": AsIs("AND pt.sale_ok = True")
-                    if rec.exclude_non_sellable
-                    else AsIs(""),
+                    "exclude_product_mto": (
+                        AsIs("AND pt.is_mto = False")
+                        if rec.exclude_product_mto
+                        else AsIs("")
+                    ),
+                    "exclude_non_sellable": (
+                        AsIs("AND pt.sale_ok = True")
+                        if rec.exclude_non_sellable
+                        else AsIs("")
+                    ),
                 },
             )
             self.env.cr.execute(
@@ -201,12 +205,16 @@ class AbcClassificationProfile(ABCProfile):
                     "profile_col": AsIs(template_profiles_profile_col),
                     "profile_id": rec.id,
                     "package_type_ids": tuple(rec.package_type_ids.ids),
-                    "exclude_product_mto": AsIs("AND pt.is_mto = False")
-                    if rec.exclude_product_mto
-                    else AsIs(""),
-                    "exclude_non_sellable": AsIs("AND pt.sale_ok = True")
-                    if rec.exclude_non_sellable
-                    else AsIs(""),
+                    "exclude_product_mto": (
+                        AsIs("AND pt.is_mto = False")
+                        if rec.exclude_product_mto
+                        else AsIs("")
+                    ),
+                    "exclude_non_sellable": (
+                        AsIs("AND pt.sale_ok = True")
+                        if rec.exclude_non_sellable
+                        else AsIs("")
+                    ),
                 },
             )
         self.env["product.template"].invalidate_model(

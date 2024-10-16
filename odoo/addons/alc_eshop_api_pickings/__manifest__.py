@@ -9,14 +9,15 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_cerberus_utils",
-        "alc_stock_delivery_slip",
-        # OCA
+        # Odoo Community
+        "stock",
+        # Third-party
         "fastapi",
         "stock_procurement_customer",
-        # Others
-        "stock",
+        # Alcyon
+        "alc_cerberus_utils",
+        # Alcyon/Stock
+        "alc_stock_delivery_slip",
     ],
     "demo": [],
     "installable": True,

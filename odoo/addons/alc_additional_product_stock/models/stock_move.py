@@ -174,7 +174,8 @@ class StockMove(StockMoveBase):
 
     @api.model
     def _prepare_merge_moves_distinct_fields(self):
-        return super()._prepare_merge_moves_distinct_fields() + [
+        return [
+            *super()._prepare_merge_moves_distinct_fields(),
             "main_move_id",
             "is_additional_move",
         ]

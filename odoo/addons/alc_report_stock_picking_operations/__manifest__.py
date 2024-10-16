@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_report_base",
-        # Others
+        # Odoo Community
         "stock",
+        # Alcyon
+        "alc_report_base",
     ],
     "data": [
         "views/report_stock_picking_operations.xml",

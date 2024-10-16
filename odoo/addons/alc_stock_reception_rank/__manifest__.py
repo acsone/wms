@@ -9,16 +9,16 @@
     "maintainer": "ACSONE SA/NV",
     "category": "Stock Management",
     "depends": [
-        # Custom
-        "alc_stock_picking_rank",
-        # OCA
+        # Odoo Community
+        "stock",
+        # Third-party
         "stock_available_immediately",
         "stock_available_to_promise_release",
         "stock_grn",
         "stock_move_propagate_first_move",
         "stock_release_channel",
-        # Others
-        "stock",
+        # Alcyon/Stock Management
+        "alc_stock_picking_rank",
     ],
     "data": [
         "views/stock_picking.xml",

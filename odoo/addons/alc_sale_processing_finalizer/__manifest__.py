@@ -9,17 +9,18 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
-        "alc_queue_job_background_channel",
-        "alc_sale_consignment",
-        "alc_sale_order_line_product_type",
-        "alc_sale_product_qty_unavailable",
-        # OCA
-        "queue_job_cron",
-        "sale_order_line_cancel",
-        # Others
+        # Odoo Community
         "delivery",
         "sale",
+        # Third-party
+        "queue_job_cron",
+        "sale_order_line_cancel",
+        # Alcyon
+        "alc_queue_job_background_channel",
+        "alc_sale_order_line_product_type",
+        "alc_sale_product_qty_unavailable",
+        # Alcyon/Stock Management
+        "alc_sale_consignment",
     ],
     "data": [
         "views/sale_order_views.xml",

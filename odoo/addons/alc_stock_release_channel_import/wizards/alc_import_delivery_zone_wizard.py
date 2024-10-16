@@ -61,7 +61,7 @@ class AlcImportDeliveryZoneWizard(models.TransientModel):
         """
         self.ensure_one()
         if not content:
-            raise Exception(_("No file sent."))
+            raise UserError(_("No file sent."))
         if not zipfile.is_zipfile(content):
             raise UserError(_("File is not a zip file!"))
         with zipfile.ZipFile(content, "r") as zf:
@@ -73,8 +73,7 @@ class AlcImportDeliveryZoneWizard(models.TransientModel):
                     path_to_shape_file = os.path.join(root, filename)
                     # Read shapefile
                     with shapefile.Reader(path_to_shape_file) as shp:
-                        for shape_record in shp:
-                            yield shape_record
+                        yield from shp
             except Exception as error:
                 _logger.error(error)
                 raise UserError(_("Unable to import the shape file")) from error

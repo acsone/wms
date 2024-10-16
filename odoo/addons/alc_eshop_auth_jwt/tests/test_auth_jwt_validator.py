@@ -26,7 +26,6 @@ class DotDict(dict):
         return DotDict(val) if isinstance(val, dict) else val
 
 
-# pylint: disable=not-context-manager
 class TestAuthJwtValidator(TransactionCase):
     @contextlib.contextmanager
     def _mock_request(self, authorization):

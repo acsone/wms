@@ -9,13 +9,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Third-party
+        "fastapi",
+        "fs_attachment",
+        # Alcyon
         "alc_cerberus_utils",
         "alc_documents",
         "alc_sale_channel",
-        # OCA
-        "fastapi",
-        "fs_attachment",
     ],
     "demo": [],
     "installable": True,

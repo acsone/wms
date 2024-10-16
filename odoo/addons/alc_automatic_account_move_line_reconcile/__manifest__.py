@@ -9,10 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # OCA
-        "account_payment_partner",
-        # Others
+        # Odoo Community
         "account",
+        # Third-party
+        "account_payment_partner",
     ],
     "data": [],
     "demo": [],

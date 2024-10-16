@@ -9,12 +9,12 @@
     "license": "LGPL-3",  # MUST BE LGPL since will be mixed with helpdesk OEEL
     "category": "Stock Management",
     "depends": [
-        # Custom
-        "alc_stock_lot_track_food",
-        # OCA
-        "stock_picking_is_completed",
-        # Others
+        # Odoo Community
         "product_expiry",
+        # Third-party
+        "stock_picking_is_completed",
+        # Alcyon
+        "alc_stock_lot_track_food",
     ],  # LGPL
     "data": [
         "security/alc_stock_receive_lot.xml",

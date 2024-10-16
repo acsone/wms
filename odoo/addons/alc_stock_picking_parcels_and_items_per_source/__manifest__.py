@@ -10,14 +10,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
+        # Odoo Community
+        "delivery",
+        "stock",
+        # Third-party
         "base_partition",
         "delivery_package_type_number_parcels",
         "delivery_procurement_group_carrier",
         "stock_move_zone_location_source",
         "stock_picking_delivery_link",
-        # Others
-        "delivery",
-        "stock",
     ],
 }

@@ -5,7 +5,6 @@
 from odoo.addons.shopfloor.tests.common import CommonCase
 
 
-# pylint: disable=missing-return
 class TestLocationContentTransferSorter(CommonCase):
     @classmethod
     def setUpClass(cls):

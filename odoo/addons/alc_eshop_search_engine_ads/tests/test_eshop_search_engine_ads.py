@@ -113,12 +113,14 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
             self.assertEqual(len(index_calls), 1)
             index_call = index_calls[0]
             self.assertEqual(len(index_call.get("args")), 2)
-            msg1_args = list(
-                filter(
-                    lambda c: c.get("id") == self.adv_top_left.id,
-                    index_call.get("args"),
+            msg1_args = next(
+                iter(
+                    filter(
+                        lambda c: c.get("id") == self.adv_top_left.id,
+                        index_call.get("args"),
+                    )
                 )
-            )[0]
+            )
             self.assertDictEqual(msg1_args, self._expected_result(self.adv_top_left))
         self.assertEqual(self.adv_top_left.se_binding_ids.state, "done")
 
@@ -140,12 +142,14 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
             self.assertEqual(len(index_calls), 1)
             index_call = index_calls[0]
             self.assertEqual(len(index_call.get("args")), 1)
-            msg1_args = list(
-                filter(
-                    lambda c: c.get("id") == self.adv_top_left.id,
-                    index_call.get("args"),
+            msg1_args = next(
+                iter(
+                    filter(
+                        lambda c: c.get("id") == self.adv_top_left.id,
+                        index_call.get("args"),
+                    )
                 )
-            )[0]
+            )
             self.assertDictEqual(msg1_args, self._expected_result(self.adv_top_left))
         self.assertEqual(self.adv_top_left.se_binding_ids.state, "done")
 
@@ -161,12 +165,14 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
             self.assertEqual(len(index_calls), 1)
             index_call = index_calls[0]
             self.assertEqual(len(index_call.get("args")), 1)
-            msg1_args = list(
-                filter(
-                    lambda c: c.get("id") == self.adv_top_left.id,
-                    index_call.get("args"),
+            msg1_args = next(
+                iter(
+                    filter(
+                        lambda c: c.get("id") == self.adv_top_left.id,
+                        index_call.get("args"),
+                    )
                 )
-            )[0]
+            )
             self.assertDictEqual(msg1_args, self._expected_result(self.adv_top_left))
         self.assertEqual(self.adv_top_left.se_binding_ids.state, "done")
 

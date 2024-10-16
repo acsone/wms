@@ -8,7 +8,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
+        # Third-party
         "rma_sale",
         "rma_sale_reason",
         "sale_stock_restocking_fee_invoicing",

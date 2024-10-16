@@ -9,10 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
-        "alc_product_supplier",
-        # Others
+        # Odoo Community
         "stock",
+        # Alcyon
+        "alc_product_supplier",
     ],
     "data": ["views/stock_move_views.xml"],
     "demo": [],

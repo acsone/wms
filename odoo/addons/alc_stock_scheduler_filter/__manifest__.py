@@ -11,10 +11,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_product_supplier",
-        # Others
+        # Odoo Community
         "purchase_stock",
+        # Alcyon
+        "alc_product_supplier",
     ],
     "data": [
         "views/res_config_settings.xml",

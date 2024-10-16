@@ -10,16 +10,16 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_purchase_order_ubl",
-        # OCA
+        # Odoo Community
+        "stock",
+        # Third-party
         "connector",
         "purchase_order_approved",
         "purchase_order_ubl",
         "queue_job",
         "queue_job_cron",
-        # Others
-        "stock",
+        # Alcyon
+        "alc_purchase_order_ubl",
     ],
     "data": [
         "security/edi_backend.xml",

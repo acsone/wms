@@ -11,12 +11,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_sale_product_qty_unavailable",
-        # OCA
-        "stock_release_channel",
-        # Others
+        # Odoo Community
         "sale_stock",
+        # Third-party
+        "stock_release_channel",
+        # Alcyon
+        "alc_sale_product_qty_unavailable",
     ],
     "data": ["views/sale_order.xml", "views/stock_picking.xml"],
 }

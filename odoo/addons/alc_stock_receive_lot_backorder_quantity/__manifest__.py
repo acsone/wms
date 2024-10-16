@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_stock_receive_lot",
-        # OCA
+        # Third-party
         "stock_available_immediately",
+        # Alcyon/Stock Management
+        "alc_stock_receive_lot",
     ],
     "data": ["wizards/stock_receive_lot.xml"],
 }

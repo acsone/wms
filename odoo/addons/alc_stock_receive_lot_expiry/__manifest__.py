@@ -12,10 +12,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_stock_receive_lot",
-        # Others
+        # Odoo Community
         "product_expiry",
+        # Alcyon/Stock Management
+        "alc_stock_receive_lot",
     ],
     "data": [
         "wizards/stock_pack_operation_lot_add.xml",

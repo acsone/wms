@@ -10,7 +10,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
+        # Third-party
+        "stock_release_channel_auto_release",
+        "stock_release_channel_geoengine",
+        "stock_release_channel_process_end_time",
+        "stock_release_channel_shipment_advice",
+        "stock_release_channel_shipment_advice_deliver",
+        # Alcyon
         "alc_report_delivery_slip",
         "alc_stock_release_channel_deliver_toursolver",
         "alc_stock_release_channel_pick_allowed",
@@ -18,12 +24,6 @@
         "alc_stock_release_channel_print_shipment_advice",
         "alc_stock_release_channel_tag",
         "alc_stock_release_channel_weight",
-        # OCA
-        "stock_release_channel_auto_release",
-        "stock_release_channel_geoengine",
-        "stock_release_channel_process_end_time",
-        "stock_release_channel_shipment_advice",
-        "stock_release_channel_shipment_advice_deliver",
     ],
     "data": ["views/stock_picking.xml", "views/stock_release_channel.xml"],
     "assets": {

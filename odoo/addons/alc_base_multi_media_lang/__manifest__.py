@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
+        # Third-party
         "fs_base_multi_media",
         "fs_product_multi_media",
     ],  # fs_product_multi_media is required due to a bug into odoo when loading the registry

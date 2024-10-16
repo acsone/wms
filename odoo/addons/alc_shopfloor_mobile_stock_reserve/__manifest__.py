@@ -9,10 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
-        "alc_shopfloor_stock_reserve",
-        # OCA
+        # Third-party
         "shopfloor_mobile",
+        # Alcyon
+        "alc_shopfloor_stock_reserve",
     ],
     "data": ["templates/assets.xml"],
     "demo": [],

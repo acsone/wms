@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # OCA
+        # Third-party
         "product_template_has_one_variant",
     ],
     "data": ["views/product_template.xml", "views/product_category.xml"],

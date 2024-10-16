@@ -2,7 +2,7 @@
 from tasks import venv
 
 
-def main():  # noqa: C901
+def main():
     venv.mkvenv(
         "venv-16",
         "python3.10",

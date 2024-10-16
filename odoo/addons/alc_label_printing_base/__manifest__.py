@@ -10,13 +10,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
+        # Odoo Community
+        "stock",
+        # Third-party
+        "delivery_package_type_number_parcels",
+        # Alcyon
         "alc_printing_base",
         "alc_stock_release_channel_code",
-        # OCA
-        "delivery_package_type_number_parcels",
-        # Others
-        "stock",
     ],
     "data": [
         "security/ir.model.access.csv",

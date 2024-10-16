@@ -10,7 +10,16 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Third-party
+        "auth_jwt_server_env",
+        "extendable_fastapi",
+        "fastapi",
+        "shopinvader_api_address",
+        "shopinvader_api_cart",
+        "shopinvader_api_sale",
+        "shopinvader_api_wishlist",
+        "shopinvader_fastapi_auth_jwt",
+        # Alcyon
         "alc_eshop_api_cart",
         "alc_eshop_api_cart_delivery",
         "alc_eshop_api_cart_discount_pricelist",
@@ -41,15 +50,6 @@
         "alc_eshop_schema_sale_qty_canceled",
         "alc_eshop_schema_sale_suite_name",
         "alc_eshop_schema_sale_triple_discount",
-        # OCA
-        "auth_jwt_server_env",
-        "extendable_fastapi",
-        "fastapi",
-        "shopinvader_api_address",
-        "shopinvader_api_cart",
-        "shopinvader_api_sale",
-        "shopinvader_api_wishlist",
-        "shopinvader_fastapi_auth_jwt",
     ],
     "data": [
         "views/fastapi_endpoint.xml",

@@ -8,6 +8,8 @@ from odoo.exceptions import UserError
 from odoo.addons.account.models.account_move import AccountMove as MoveAccount
 from odoo.addons.helpdesk.models.helpdesk_ticket import (
     HelpdeskTicket as Ticket,
+)
+from odoo.addons.helpdesk.models.helpdesk_ticket import (
     HelpdeskTicketType as TicketType,
 )
 from odoo.addons.product.models.product_product import ProductProduct as Product

@@ -9,10 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_pim_attribute_group",
-        # OCA
+        # Third-party
         "product_attribute_set",
+        # Alcyon
+        "alc_pim_attribute_group",
     ],
     "application": False,
     "data": ["data/attribute_attribute.xml", "views/product_template.xml"],

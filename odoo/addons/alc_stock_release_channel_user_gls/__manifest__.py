@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_stock_release_channel_user",
-        # OCA
+        # Third-party
         "delivery_carrier_label_gls",
+        # Alcyon
+        "alc_stock_release_channel_user",
     ],
     "data": [],
     "demo": [],

@@ -28,7 +28,7 @@ class PickingBatchAutoCreateAction(Component):
         )
         shopfloor_menu = kwargs.get("shopfloor_menu")
         if shopfloor_menu:
-            values[
-                "group_pickings_by_partner"
-            ] = shopfloor_menu.group_pickings_by_partner
+            values["group_pickings_by_partner"] = (
+                shopfloor_menu.group_pickings_by_partner
+            )
         return values

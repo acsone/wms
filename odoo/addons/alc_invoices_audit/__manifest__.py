@@ -9,12 +9,12 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
-        "alc_partner_call_name",
-        # OCA
+        # Third-party
         "partner_invoicing_mode_fourteen_days",
         "partner_invoicing_mode_monthly",
         "partner_invoicing_mode_ten_days",
+        # Alcyon
+        "alc_partner_call_name",
     ],
     "data": ["views/account_move_views.xml"],
     "demo": [],

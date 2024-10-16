@@ -10,11 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Odoo Community
+        "stock",
+        # Alcyon
         "alc_stock_move_line_current_release_channel",
         "alc_stock_move_line_priority",
-        # Others
-        "stock",
     ],
     "data": [
         "views/stock_move_line.xml",

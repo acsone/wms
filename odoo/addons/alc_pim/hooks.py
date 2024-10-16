@@ -63,5 +63,5 @@ def _load_categories_translations(cr):
                 _logger.info("%s not found", r["fr_BE"])
                 continue
             records = env["product.category"].browse(ids)
-            for lang in ["en_US"] + list(langs_alcyon):
+            for lang in ["en_US", *list(langs_alcyon)]:
                 records.with_context(lang=lang).write({"name": r[lang]})

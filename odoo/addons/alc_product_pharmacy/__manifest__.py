@@ -9,11 +9,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Third-party
+        "product_manufacturer",
+        # Alcyon
         "alc_product_category_data",
         "alc_product_category_property",
-        # OCA
-        "product_manufacturer",
     ],
     "application": False,
     "data": ["views/product_template.xml", "views/product_product.xml"],

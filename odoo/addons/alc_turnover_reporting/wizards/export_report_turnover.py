@@ -178,9 +178,9 @@ class ExportReportTurnover(models.TransientModel):
             data_by_years["Turnover (stock moves)"]
             - data_by_years["Turnover (prev. Year)"]
         ) / data_by_years["Turnover (prev. Year)"]
-        data_by_years.loc[
-            ~np.isfinite(data_by_years["Global grow"]), "Global grow"
-        ] = np.nan
+        data_by_years.loc[~np.isfinite(data_by_years["Global grow"]), "Global grow"] = (
+            np.nan
+        )
         if data_by_months["Month+1"].iloc[-1].split("-")[1] == today.split("-")[1]:
 
             # If unfinished month : get the info from the month in the previous year
@@ -562,9 +562,9 @@ class ExportReportTurnover(models.TransientModel):
                 "date:day": "date",
             }
         )
-        credit_debit_from_invoicing_day_df[
-            "balance_from_invoicing"
-        ] = -credit_debit_from_invoicing_day_df["balance_from_invoicing"]
+        credit_debit_from_invoicing_day_df["balance_from_invoicing"] = (
+            -credit_debit_from_invoicing_day_df["balance_from_invoicing"]
+        )
         dates_formated = credit_debit_from_invoicing_day_df.apply(
             lambda row: datetime.strptime(row["date"], "%d %b %Y"), axis=1
         )
@@ -664,9 +664,9 @@ class ExportReportTurnover(models.TransientModel):
             columns={"balance": "pp200_balance_from_invoicing", "date:month": "date"}
         )
 
-        credit_debit_from_invoicing_df[
-            "balance_from_invoicing"
-        ] = -credit_debit_from_invoicing_df["balance_from_invoicing"]
+        credit_debit_from_invoicing_df["balance_from_invoicing"] = (
+            -credit_debit_from_invoicing_df["balance_from_invoicing"]
+        )
         dates_formated = credit_debit_from_invoicing_df.apply(
             lambda row: datetime.strptime(row["date"], "%B %Y"), axis=1
         )

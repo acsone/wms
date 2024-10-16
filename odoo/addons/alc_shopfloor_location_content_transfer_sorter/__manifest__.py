@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://www.acsone.eu",
     "depends": [
-        # OCA
+        # Third-party
         "shopfloor",
     ],
     "data": [],

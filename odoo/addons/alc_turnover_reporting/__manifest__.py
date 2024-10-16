@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Others
+        # Odoo Community
         "account",
         "sale",
         "sale_stock",

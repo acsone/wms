@@ -94,9 +94,11 @@ class TestSalesService(CommonB2CSaleServiceCase):
         country = kwargs["recipient"].get("country_code")
         params = {
             "id": 2,
-            "customer_ref": self.logiweb_be_partner.ref
-            if country == "BE"
-            else self.logiweb_partner.ref,
+            "customer_ref": (
+                self.logiweb_be_partner.ref
+                if country == "BE"
+                else self.logiweb_partner.ref
+            ),
             "date": ISO_DT_WITH_TZ,
             "lines": [
                 {

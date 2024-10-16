@@ -12,7 +12,7 @@ class ResPartner(Partner):
 
     def _get_pricelist_roles(self):
         roles = self.discount_pricelist_ids.mapped("role_name")
-        return roles + [self.property_product_pricelist.role_name]
+        return [*roles, self.property_product_pricelist.role_name]
 
     def _get_elasticearch_roles(self):
         self.ensure_one()

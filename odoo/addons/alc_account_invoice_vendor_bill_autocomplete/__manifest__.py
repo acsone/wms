@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "category": "Accounting & Finance",
     "depends": [
-        # Others
+        # Odoo Community
         "purchase",
     ],
     "data": ["views/account_move_views.xml"],

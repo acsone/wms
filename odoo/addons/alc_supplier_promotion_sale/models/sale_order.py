@@ -53,6 +53,6 @@ class SaleOrder(SaleOrderBase):
         # Skip promotional lines on duplicate
         if "order_line" in res[0]:
             for i, line in reversed(list(enumerate(res[0]["order_line"]))):
-                if line[0] == 0 and line[2].get("is_promotional_product"):
+                if not line[0] and line[2].get("is_promotional_product"):
                     del res[0]["order_line"][i]
         return res

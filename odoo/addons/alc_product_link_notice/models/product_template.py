@@ -39,7 +39,7 @@ class ProductTemplate(ProductTemplateBase):
             ("link_video", "!=", False),
         ]
         if not force:
-            domain_to_check = ["&", ("links_offline", "=", False)] + domain_to_check
+            domain_to_check = ["&", ("links_offline", "=", False), *domain_to_check]
         to_check = self.search(domain_to_check)
         for product in to_check:
             description = _("Check online links for product {product_name}.").format(

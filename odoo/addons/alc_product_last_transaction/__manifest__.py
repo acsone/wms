@@ -7,7 +7,7 @@
     "category": "Product",
     "author": "CamptoCamp, ACSONE SA/NV",
     "depends": [
-        # Others
+        # Odoo Community
         "purchase",
         "sale",
     ],

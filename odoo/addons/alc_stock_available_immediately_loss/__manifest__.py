@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_stock_available_immediately",
-        # OCA
+        # Third-party
         "stock_picking_operation_loss_quantity",
+        # Alcyon
+        "alc_stock_available_immediately",
     ],
     "data": ["data/stock_location.xml"],
     "installable": True,

@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_product_pharmacy",
-        # Others
+        # Odoo Community
         "sale",
+        # Alcyon
+        "alc_product_pharmacy",
     ],
     "data": ["views/product.xml"],
     "demo": [],

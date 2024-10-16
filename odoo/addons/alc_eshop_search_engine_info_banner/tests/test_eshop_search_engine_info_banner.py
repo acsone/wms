@@ -75,9 +75,13 @@ class TestEshopSearchEngineInfoBanner(TestBindingIndexBaseFake):
             self.assertEqual(len(index_calls), 1)
             index_call = index_calls[0]
             self.assertEqual(len(index_call.get("args")), 2)
-            msg1_args = list(
-                filter(lambda c: c.get("id") == self.msg_1.id, index_call.get("args"))
-            )[0]
+            msg1_args = next(
+                iter(
+                    filter(
+                        lambda c: c.get("id") == self.msg_1.id, index_call.get("args")
+                    )
+                )
+            )
             self.assertDictEqual(msg1_args, self._expected_result(self.msg_1))
         self.assertEqual(self.msg_1.se_binding_ids.state, "done")
 
@@ -99,9 +103,13 @@ class TestEshopSearchEngineInfoBanner(TestBindingIndexBaseFake):
             self.assertEqual(len(index_calls), 1)
             index_call = index_calls[0]
             self.assertEqual(len(index_call.get("args")), 1)
-            msg1_args = list(
-                filter(lambda c: c.get("id") == self.msg_1.id, index_call.get("args"))
-            )[0]
+            msg1_args = next(
+                iter(
+                    filter(
+                        lambda c: c.get("id") == self.msg_1.id, index_call.get("args")
+                    )
+                )
+            )
             self.assertDictEqual(msg1_args, self._expected_result(self.msg_1))
         self.assertEqual(self.msg_1.se_binding_ids.state, "done")
 
@@ -117,9 +125,13 @@ class TestEshopSearchEngineInfoBanner(TestBindingIndexBaseFake):
             self.assertEqual(len(index_calls), 1)
             index_call = index_calls[0]
             self.assertEqual(len(index_call.get("args")), 1)
-            msg1_args = list(
-                filter(lambda c: c.get("id") == self.msg_1.id, index_call.get("args"))
-            )[0]
+            msg1_args = next(
+                iter(
+                    filter(
+                        lambda c: c.get("id") == self.msg_1.id, index_call.get("args")
+                    )
+                )
+            )
             self.assertDictEqual(msg1_args, self._expected_result(self.msg_1))
         self.assertEqual(self.msg_1.se_binding_ids.state, "done")
 

@@ -4,7 +4,8 @@
 
 from odoo.addons.base.models.res_partner import Partner
 
-from . import country_code as country, partner_title
+from . import country_code as country
+from . import partner_title
 from .base_model import BaseModel
 
 

@@ -11,11 +11,9 @@
     "website": "https://acsone.eu/",
     # TODO split delivery_rounds...
     "depends": [
-        # Custom
-        "alc_partner_delivered_by_alcyon",
-        "alc_product_category_data",
-        "alc_queue_job_background_channel",
-        # OCA
+        # Odoo Community
+        "stock",
+        # Third-party
         "base_partition",
         "delivery_procurement_group_carrier",
         "queue_job",
@@ -23,8 +21,10 @@
         "stock_procurement_customer",
         "stock_restrict_lot",
         "web_notify",
-        # Others
-        "stock",
+        # Alcyon
+        "alc_partner_delivered_by_alcyon",
+        "alc_product_category_data",
+        "alc_queue_job_background_channel",
     ],
     "data": [
         "security/ir.model.access.csv",

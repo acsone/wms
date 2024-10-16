@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Others
+        # Odoo Community
         "account",
     ],
     "data": ["security/res_groups.xml", "views/account_move.xml"],

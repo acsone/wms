@@ -173,11 +173,11 @@ class TestIntrastatReport(TestAccountReportsCommon):
                             {
                                 "name": "line_1",
                                 "product_id": cls.product_1.id,
-                                "intrastat_transaction_id": cls.intrastat_codes[
-                                    code_type
-                                ].id
-                                if code_type
-                                else None,
+                                "intrastat_transaction_id": (
+                                    cls.intrastat_codes[code_type].id
+                                    if code_type
+                                    else None
+                                ),
                                 "product_uom_id": cls.env.ref(
                                     "uom.product_uom_unit"
                                 ).id,
@@ -193,11 +193,11 @@ class TestIntrastatReport(TestAccountReportsCommon):
                             {
                                 "name": "line_2",
                                 "product_id": cls.product_2.id,
-                                "intrastat_transaction_id": cls.intrastat_codes[
-                                    code_type
-                                ].id
-                                if code_type
-                                else None,
+                                "intrastat_transaction_id": (
+                                    cls.intrastat_codes[code_type].id
+                                    if code_type
+                                    else None
+                                ),
                                 "product_uom_id": cls.env.ref(
                                     "uom.product_uom_unit"
                                 ).id,
@@ -221,11 +221,11 @@ class TestIntrastatReport(TestAccountReportsCommon):
                             {
                                 "name": "line_3",
                                 "product_id": cls.product_3.id,
-                                "intrastat_transaction_id": cls.intrastat_codes[
-                                    code_type
-                                ].id
-                                if code_type
-                                else None,
+                                "intrastat_transaction_id": (
+                                    cls.intrastat_codes[code_type].id
+                                    if code_type
+                                    else None
+                                ),
                                 "product_uom_id": cls.env.ref(
                                     "uom.product_uom_unit"
                                 ).id,

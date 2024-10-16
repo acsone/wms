@@ -9,10 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # OCA
-        "product_dimension",
-        # Others
+        # Odoo Community
         "product",
+        # Third-party
+        "product_dimension",
     ],
     "data": ["views/product_template.xml"],
     "installable": True,

@@ -9,10 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
-        "alc_partner_carrier",
-        # OCA
+        # Third-party
         "stock_grn",
+        # Alcyon
+        "alc_partner_carrier",
     ],
     "data": ["views/stock_grn_views.xml"],
     "installable": True,

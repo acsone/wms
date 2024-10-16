@@ -10,12 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_shopfloor_user",
-        # OCA
-        "shopfloor_base",
-        # Others
+        # Odoo Community
         "stock",
+        # Third-party
+        "shopfloor_base",
+        # Alcyon
+        "alc_shopfloor_user",
     ],
     "data": ["security/groups.xml", "security/ir.model.access.csv"],
     "demo": [],

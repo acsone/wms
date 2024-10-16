@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_veterinary_group",
-        # OCA
+        # Third-party
         "fastapi",
+        # Alcyon
+        "alc_veterinary_group",
     ],
     "data": [],
     "demo": [],

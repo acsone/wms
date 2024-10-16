@@ -11,9 +11,9 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
-        # Custom
-        "alc_sale_stock_restocking_fee_invoicing_additional_product",
-        # OCA
+        # Third-party
         "stock_picking_return_lot",
+        # Alcyon
+        "alc_sale_stock_restocking_fee_invoicing_additional_product",
     ],
 }

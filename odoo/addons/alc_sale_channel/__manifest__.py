@@ -8,7 +8,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
+        # Third-party
         "sale_channel",
     ],
     "data": [

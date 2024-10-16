@@ -12,10 +12,10 @@ def is_useless_item_vals(item_vals):
     useless = False
     compute_price = item_vals.get("compute_price", "fixed")
     if compute_price == "percentage":
-        useless = item_vals.get("percent_price", 0) == 0
+        useless = not item_vals.get("percent_price", 0)
     elif compute_price == "formula":
-        no_surcharge = item_vals.get("price_surcharge", 0) == 0
-        useless = no_surcharge and item_vals.get("price_discount", 0) == 0
+        no_surcharge = not item_vals.get("price_surcharge", 0)
+        useless = no_surcharge and not item_vals.get("price_discount", 0)
     return useless
 
 
@@ -31,6 +31,7 @@ class ProductPricelist(ProductPricelistBase):
                 [
                     item
                     for item in vals["item_ids"]
+                    # pylint: disable=use-implicit-booleaness-not-comparison-to-zero
                     if item[0] != 0  # in a create, one2many create command
                     or not is_useless_item_vals(item[2])
                 ]

@@ -19,6 +19,11 @@ def mkvenv(dirname, python, pip_installs=None):
     if pip_installs:
         for pip_install in pip_installs:
             check_call(
-                [os.path.join(dirname, "bin", "python"), "-m", "pip", "install"]
-                + pip_install
+                [
+                    os.path.join(dirname, "bin", "python"),
+                    "-m",
+                    "pip",
+                    "install",
+                    *pip_install,
+                ]
             )

@@ -11,7 +11,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Others
+        # Odoo Community
         "sale",
     ],
     "data": ["views/res_partner.xml"],

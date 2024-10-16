@@ -64,9 +64,10 @@ class TestAlceCodaFile(AccountTestInvoicingCommon):
         """Set only two bank accounts for the company."""
         account_numbers = ["BE44340030749745", "BE36363158366381"]
         self._create_account_journals(account_numbers)
-        with mock.patch.object(
-            self.env.cr.__class__, "commit"
-        ) as commit_mock, mock.patch.object(self.env.cr.__class__, "savepoint"):
+        with (
+            mock.patch.object(self.env.cr.__class__, "commit") as commit_mock,
+            mock.patch.object(self.env.cr.__class__, "savepoint"),
+        ):
             commit_mock.side_effect = mock.Mock
             with self.assertRaises(RedirectWarning):
                 self.company_data[

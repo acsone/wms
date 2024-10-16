@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
-        "stock_available_to_promise_release",
-        # Others
+        # Odoo Community
         "product_expiry",
+        # Third-party
+        "stock_available_to_promise_release",
     ],
     "data": [
         "views/stock_picking.xml",

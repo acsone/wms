@@ -9,13 +9,13 @@
                    on SO line""",
     "author": "BCIM, ACSONE SA/NV",
     "depends": [
-        # Custom
-        "alc_base_auto_join",
-        # OCA
+        # Odoo Community
+        "sale_stock",
+        # Third-party
         "sale_order_line_cancel",
         "stock_available",
-        # Others
-        "sale_stock",
+        # Alcyon
+        "alc_base_auto_join",
     ],
     "data": ["views/sale_order_views.xml"],
     "installable": True,

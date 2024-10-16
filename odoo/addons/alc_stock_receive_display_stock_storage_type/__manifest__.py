@@ -9,10 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
-        "alc_stock_receive_lot",
-        # OCA
+        # Third-party
         "stock_storage_type",
+        # Alcyon/Stock Management
+        "alc_stock_receive_lot",
     ],
     "data": ["wizards/stock_pack_operation_lot_add.xml"],
     "installable": True,

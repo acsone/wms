@@ -11,10 +11,10 @@
     "website": "https://acsone.eu",
     "category": "Product",
     "depends": [
-        # Custom
-        "alc_additional_product_base",
-        # Others
+        # Odoo Community
         "purchase",
+        # Alcyon
+        "alc_additional_product_base",
     ],
     "data": ["views/purchase_order.xml"],
     "installable": True,

@@ -9,10 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_sale_channel",
-        # OCA
+        # Third-party
         "queue_job",
+        # Alcyon
+        "alc_sale_channel",
     ],
     "data": ["wizards/res_config_settings.xml", "data/queue_job_function.xml"],
     "demo": [],

@@ -7,7 +7,7 @@
     "author": "ACSONE SA/NV, Odoo Community Association (OCA)",
     "category": "stock",
     "depends": [
-        # OCA
+        # Third-party
         "stock_available_to_promise_release",
         "stock_move_manage_priority",
     ],

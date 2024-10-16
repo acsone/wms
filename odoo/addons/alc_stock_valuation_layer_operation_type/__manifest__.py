@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Others
+        # Odoo Community
         "stock_account",
     ],
     "data": ["views/stock_valuation_layer.xml"],

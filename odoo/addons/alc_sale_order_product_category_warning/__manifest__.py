@@ -10,15 +10,15 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
+        # Odoo Community
+        "sale",
+        # Third-party
+        "sale_triple_discount",
+        # Alcyon
         "alc_partner_pharmacist",
         "alc_product_category_data",
         "alc_product_category_warning_info",
         "alc_sale_product_qty_unavailable",
-        # OCA
-        "sale_triple_discount",
-        # Others
-        "sale",
     ],
     "data": ["reports/ir_actions_report_template.xml"],
 }

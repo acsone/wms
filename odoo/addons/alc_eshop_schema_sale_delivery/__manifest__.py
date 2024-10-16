@@ -10,11 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
+        # Odoo Community
+        "delivery",
+        # Third-party
         "sale_shipping_info_helper",
         "shopinvader_schema_sale",
-        # Others
-        "delivery",
     ],
     "data": [],
     "demo": [],

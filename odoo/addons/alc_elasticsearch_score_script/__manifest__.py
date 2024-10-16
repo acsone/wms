@@ -11,7 +11,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Alcyon
         "alc_connector_search_engine_put_script_mixin",
         "alc_se_backend_notebook",
         "alc_search_engine_backend",

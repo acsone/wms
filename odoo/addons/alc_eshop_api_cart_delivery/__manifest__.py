@@ -10,15 +10,15 @@
     "author": "ACSONE SA/NV",
     "website": "https://github.com/shopinvader/odoo-shopinvader",
     "depends": [
-        # Custom
-        "alc_eshop_delivery_method",
-        "alc_eshop_schema_sale_delivery",
-        # OCA
+        # Odoo Community
+        "delivery",
+        # Third-party
         "fastapi",
         "onchange_helper",
         "shopinvader_sale_cart",
-        # Others
-        "delivery",
+        # Alcyon
+        "alc_eshop_delivery_method",
+        "alc_eshop_schema_sale_delivery",
     ],
     "data": [],
     "demo": [],

@@ -9,14 +9,14 @@
     "license": "AGPL-3",
     "category": "Delivery",
     "depends": [
-        # OCA
-        "stock_release_channel",
-        "stock_release_channel_shipment_advice",
-        # Others
+        # Odoo Community
         "delivery",
         "sale",
         "sale_stock",
         "stock",
+        # Third-party
+        "stock_release_channel",
+        "stock_release_channel_shipment_advice",
     ],
     "website": "https://www.acsone.eu",
     "data": [

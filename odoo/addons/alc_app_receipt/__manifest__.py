@@ -11,11 +11,12 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
-        # Custom
+        # Third-party
+        "stock_picking_grn_mandatory",
+        # Alcyon
         "alc_stock_grn_partner_carrier",
         "alc_stock_grn_time_delay",
+        # Alcyon/Stock Management
         "alc_stock_reception_rank",
-        # OCA
-        "stock_picking_grn_mandatory",
     ],
 }

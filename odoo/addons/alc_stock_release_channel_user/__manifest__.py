@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
+        # Third-party
         "stock_release_channel",
     ],
     "data": ["views/stock_release_channel.xml"],

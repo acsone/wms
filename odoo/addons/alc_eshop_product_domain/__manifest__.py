@@ -9,10 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_partner_type",
-        # OCA
+        # Third-party
         "product_assortment",
+        # Alcyon
+        "alc_partner_type",
     ],
     "data": ["data/shopinvader_assortment.xml"],
 }

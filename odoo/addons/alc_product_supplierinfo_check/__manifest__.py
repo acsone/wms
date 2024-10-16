@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
+        # Alcyon
         "alc_supplier_promotion",
     ],
     "data": ["views/res_config_settings.xml"],

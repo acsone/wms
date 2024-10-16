@@ -5,6 +5,8 @@ from datetime import date
 
 from odoo.addons.shopinvader_product.schemas.product import (
     ProductProduct as BaseProductProduct,
+)
+from odoo.addons.shopinvader_product.schemas.product import (
     ProductTemplate as BaseProductTemplate,
 )
 

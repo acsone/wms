@@ -7,7 +7,7 @@
     "author": "BCIM, ACSONE SA/NV",
     "category": "Purchases",
     "depends": [
-        # Others
+        # Odoo Community
         "purchase",
     ],
     "data": ["views/purchase_order_views.xml"],

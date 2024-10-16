@@ -9,16 +9,16 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Odoo Community
+        "sale",
+        "stock",
+        # Third-party
+        "queue_job",
+        "sale_channel",
+        # Alcyon
         "alc_b2c_partner",
         "alc_partner_type",
         "alc_queue_job_background_channel",
-        # OCA
-        "queue_job",
-        "sale_channel",
-        # Others
-        "sale",
-        "stock",
     ],
     "data": [
         "security/groups.xml",

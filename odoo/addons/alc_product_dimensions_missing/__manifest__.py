@@ -10,11 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_product_template_packaging_search",
-        # OCA
+        # Third-party
         "product_dimension",
         "product_packaging_dimension",
+        # Alcyon
+        "alc_product_template_packaging_search",
     ],
     "data": [
         "views/product_template.xml",

@@ -12,7 +12,7 @@
     "author": "Camptocamp SA,ACSONE SA/NV",
     "website": "https://www.camptocamp.com",
     "depends": [
-        # Others
+        # Odoo Community
         "sale",
     ],
     "data": ["views/res_partner.xml"],

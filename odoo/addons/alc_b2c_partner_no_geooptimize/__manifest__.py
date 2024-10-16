@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_b2c_partner",
-        # OCA
+        # Third-party
         "stock_release_channel_geoengine",
+        # Alcyon
+        "alc_b2c_partner",
     ],
     "data": [],
     "demo": [],

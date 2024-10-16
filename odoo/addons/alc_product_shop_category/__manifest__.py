@@ -9,12 +9,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_product_web_publish",
-        # OCA
-        "product_multi_category",
-        # Others
+        # Odoo Community
         "sale",
+        # Third-party
+        "product_multi_category",
+        # Alcyon
+        "alc_product_web_publish",
     ],
     "application": False,
     "data": ["data/product_category.xml", "views/product_category_views.xml"],

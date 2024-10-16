@@ -18,17 +18,16 @@ def _batched(lst, n):
 
 def _regenerate_invoices_pdf(env, date_from):
     env.cr.execute(
-        """
+        f"""
             SELECT array_agg(am.id)
               FROM account_move AS am
          LEFT JOIN ir_attachment ON ir_attachment.res_id = am.id
                    AND ir_attachment.res_model = 'account.move'
-             WHERE am.create_date >= '%s'
+             WHERE am.create_date >= '{date_from}'
                    AND am.move_type IN ('out_invoice', 'out_refund')
                    AND am.state = 'posted'
                    AND ir_attachment.id IS NULL
          """
-        % date_from
     )
     ids = env.cr.fetchone()
     if ids:

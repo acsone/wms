@@ -9,10 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "mixin_past",
-        # Others
+        # Odoo Community
         "sale",
+        # Alcyon
+        "mixin_past",
     ],  # security_group above product
     "application": False,
     "data": [

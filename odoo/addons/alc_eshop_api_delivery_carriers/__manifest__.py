@@ -9,12 +9,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_eshop_delivery_method",
-        "alc_eshop_schema_sale_delivery",
-        # OCA
+        # Third-party
         "fastapi",
         "shopinvader_sale_cart",
+        # Alcyon
+        "alc_eshop_delivery_method",
+        "alc_eshop_schema_sale_delivery",
     ],
     "data": [],
     "installable": True,

@@ -10,7 +10,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Odoo Community
+        "delivery",
+        # Third-party
+        "internal_stock_quant_package",
+        "shipment_advice",
+        "stock_package_type_category",
+        # Alcyon
         "alc_additional_product_stock",
         "alc_b2c_partner",
         "alc_partner_suite",
@@ -18,18 +24,14 @@
         "alc_report_base",
         "alc_rma_shipment_advice",
         "alc_rma_stock_delivery_slip",
-        "alc_sale_consignment",
         "alc_sale_suite_name",
-        "alc_stock_delivery_slip",
         "alc_stock_move_serial_number",
         "alc_stock_picking_parcels_and_items_per_source",
         "alc_stock_release_channel_print_shipment_advice",
-        # OCA
-        "internal_stock_quant_package",
-        "shipment_advice",
-        "stock_package_type_category",
-        # Others
-        "delivery",
+        # Alcyon/Stock
+        "alc_stock_delivery_slip",
+        # Alcyon/Stock Management
+        "alc_sale_consignment",
     ],
     "data": [
         "views/rma_operation.xml",

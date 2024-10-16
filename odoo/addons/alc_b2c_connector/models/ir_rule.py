@@ -17,4 +17,4 @@ class IrRule(IrRuleBase):
         return ctx
 
     def _compute_domain_keys(self):
-        return super()._compute_domain_keys() + ["alc_b2c_client_id"]
+        return [*super()._compute_domain_keys(), "alc_b2c_client_id"]

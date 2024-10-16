@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "connector_keycloak",
-        # OCA
+        # Third-party
         "auth_jwt",
+        # Alcyon
+        "connector_keycloak",
     ],
     "data": [],
     "demo": [],

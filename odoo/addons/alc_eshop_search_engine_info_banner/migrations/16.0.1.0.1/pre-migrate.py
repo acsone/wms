@@ -1,6 +1,5 @@
 from odoo import SUPERUSER_ID, api
 
-# pylint: disable=odoo-addons-relative-import
 from odoo.addons.alc_eshop_search_engine_info_banner.hooks import pre_init_hook
 
 

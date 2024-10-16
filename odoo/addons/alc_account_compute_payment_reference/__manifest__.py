@@ -9,7 +9,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://www.acsone.eu",
     "depends": [
-        # Others
+        # Odoo Community
         "account",
     ],
     "data": [],

@@ -77,7 +77,7 @@ class SaleOrder(sale_order.SaleOrder):
 
         is_sale_in_exception = False
         for line in self._ws_create_order_line_data(data)[:]:
-            if line["product_id"] == "":
+            if not line["product_id"]:
                 # Unknown product just log the error in the chatter
                 order.message_post(
                     body=_(

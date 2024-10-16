@@ -10,16 +10,17 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Third-party
+        "fastapi",
+        "sale_order_line_cancel",
+        # Alcyon
         "alc_cerberus_utils",
         "alc_materialized_view_mixin",
-        "alc_pricelist_discount",
         "alc_product_category_data",
         "alc_product_pharmacy",
         "alc_sale_channel",
-        # OCA
-        "fastapi",
-        "sale_order_line_cancel",
+        # Alcyon/Sales Management
+        "alc_pricelist_discount",
     ],
     "data": [
         "security/alc_eshop_product_ordered_qty.xml",

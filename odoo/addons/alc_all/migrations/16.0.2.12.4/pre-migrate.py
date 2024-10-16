@@ -9,6 +9,7 @@ def migrate(cr, version):
     # get the number of rows affected
     row_count = cr.rowcount
     if not row_count:
+        # pylint: disable=broad-exception-raised
         raise Exception(
             "Module alc_elasticsearch_security_legacy_support not found. "
             "PLZ update module list before"

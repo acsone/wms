@@ -87,9 +87,11 @@ class ClassifiedAdsCreate(ClassifiedAdsCommonData, extra="ignore"):
             "phone": self.phone,
             "contact": self.contact,
             "email": self.email,
-            "state_id": state_code_to_state[self.country_state_code.value]
-            if self.country_state_code
-            else None,
+            "state_id": (
+                state_code_to_state[self.country_state_code.value]
+                if self.country_state_code
+                else None
+            ),
         }
 
 

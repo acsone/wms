@@ -98,7 +98,7 @@ def _search(
     partner: Partner,
     page: int | None = None,
     per_page: int | None = None,
-    states: list[str] = None,
+    states: list[str] | None = None,
     from_date: datetime | None = None,
     canceled: bool = False,
     include_total_count: bool = True,

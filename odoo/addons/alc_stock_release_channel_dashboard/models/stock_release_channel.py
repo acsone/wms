@@ -31,7 +31,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
         field = field.replace("count_picking_", "")
         domain = domains.get(field, [])
         data = self.env["stock.picking"].read_group(
-            domain + [("release_channel_id", "in", self.ids)],
+            [*domain, ("release_channel_id", "in", self.ids)],
             ["release_channel_id", "picking_ids:array_agg(id)"],
             ["release_channel_id"],
         )
@@ -159,18 +159,19 @@ class StockReleaseChannel(StockReleaseChannelBase):
 
     def _count_picking_started_by_type_id_by_release_id_domain(self):
         todo_domain = self._count_picking_todo_by_type_id_by_release_id_domain()
-        return todo_domain + [
+        return [
+            *todo_domain,
             ("started", "=", True),
             ("state", "not in", DONE_PICKING_STATES),
         ]
 
     def _count_picking_done_by_type_id_by_release_id_domain(self):
         todo_domain = self._count_picking_todo_by_type_id_by_release_id_domain()
-        return todo_domain + [("state", "in", DONE_PICKING_STATES)]
+        return [*todo_domain, ("state", "in", DONE_PICKING_STATES)]
 
     def _count_picking_waiting_by_type_id_by_release_id_domain(self):
         todo_domain = self._count_picking_todo_by_type_id_by_release_id_domain()
-        return todo_domain + [("state", "in", WAITING_PICKING_STATES)]
+        return [*todo_domain, ("state", "in", WAITING_PICKING_STATES)]
 
     def _count_pickings_by_type_id_by_release_id(self, domain):
         """Count pickings by picking type and release channel."""

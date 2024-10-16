@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://www.acsone.eu",
     "depends": [
-        # OCA
+        # Third-party
         "product_supplierinfo_packaging",
         "purchase_only_by_packaging",
         "purchase_stock_packaging",

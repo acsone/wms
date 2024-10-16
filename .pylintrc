@@ -53,6 +53,7 @@ disable=
   attribute-string-redundant,
   fixme,
   locally-disabled,
+  wrong-import-order,
 
 extension-pkg-whitelist=lxml
 

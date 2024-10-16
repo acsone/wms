@@ -9,10 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
-        "alc_pricelist_discount",
-        # OCA
+        # Third-party
         "shopinvader_api_cart",
+        # Alcyon/Sales Management
+        "alc_pricelist_discount",
     ],
     "data": [],
     "demo": [],

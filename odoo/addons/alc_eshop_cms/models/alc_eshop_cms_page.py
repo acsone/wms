@@ -25,7 +25,7 @@ class AlcEshopCmsPage(models.Model):
     cms_page_slot_ids = fields.Many2many[AlcEshopCmsPageSlot](string="Slots")
 
     def _get_url_parts(self):
-        return [self.cms_page_group_id.name] + super()._get_url_parts()
+        return [self.cms_page_group_id.name, *super()._get_url_parts()]
 
     @api.model
     def _get_contents_published(self):

@@ -53,8 +53,7 @@ class CartUpdateRequest(StrictExtendableBaseModel, extra="ignore"):
         return vals
 
 
-class CartConfirmRequest(CartUpdateRequest):
-    ...
+class CartConfirmRequest(CartUpdateRequest): ...  # pylint: disable=multiple-statements
 
 
 class CartSuiteNameValue(StrictExtendableBaseModel):

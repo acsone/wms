@@ -11,11 +11,11 @@
     "website": "https://www.acsone.eu",
     "development_status": "Alpha",
     "depends": [
-        # Custom
-        "alc_sale_margin",
-        # OCA
+        # Third-party
         "sale_margin_delivered_dropshipping",
         "sale_margin_delivered_security",
+        # Alcyon
+        "alc_sale_margin",
     ],
     "data": [],
     "demo": [],

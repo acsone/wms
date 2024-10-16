@@ -8,10 +8,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
-        "stock_location_zone",
-        # Others
+        # Odoo Community
         "stock",
+        # Third-party
+        "stock_location_zone",
     ],
     "data": [
         "views/report_location_barcode.xml",

@@ -11,7 +11,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
+        # Third-party
         "delivery_carrier_label_gls",
         "stock_release_channel_shipment_advice_deliver",
     ],

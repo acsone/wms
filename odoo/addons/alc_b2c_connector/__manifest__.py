@@ -13,18 +13,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_b2c_partner",
-        "alc_partner_pricelist",
-        "alc_partner_suite",
-        "alc_partner_type",
-        "alc_pricelist_discount",
-        "alc_product_pharmacy",
-        "alc_product_pricelist_data",
-        "alc_sale_channel",
-        "alc_sale_product_qty_backorder",
-        "alc_sale_qty_returned",
-        # OCA
+        # Odoo Community
+        "delivery",
+        "sale_stock",
+        "snailmail",
+        # Third-party
         "account_payment_mode",
         "account_payment_sale",
         "extendable_fastapi",
@@ -38,10 +31,18 @@
         "server_environment",
         "stock_available",
         "stock_picking_backorder_reason",
-        # Others
-        "delivery",
-        "sale_stock",
-        "snailmail",
+        # Alcyon
+        "alc_b2c_partner",
+        "alc_partner_pricelist",
+        "alc_partner_suite",
+        "alc_partner_type",
+        "alc_product_pharmacy",
+        "alc_product_pricelist_data",
+        "alc_sale_channel",
+        "alc_sale_product_qty_backorder",
+        "alc_sale_qty_returned",
+        # Alcyon/Sales Management
+        "alc_pricelist_discount",
     ],
     "data": [
         "data/res_users.xml",

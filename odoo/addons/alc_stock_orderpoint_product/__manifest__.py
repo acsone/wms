@@ -9,7 +9,7 @@
     "category": "Stock Management",
     "website": "http://www.bcim.be",
     "depends": [
-        # Others
+        # Odoo Community
         "stock",
     ],
     "data": ["views/product.xml", "views/stock.xml"],

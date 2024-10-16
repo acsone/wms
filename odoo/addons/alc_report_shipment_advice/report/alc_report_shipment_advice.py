@@ -63,7 +63,7 @@ class AlcReportShipmentAdvice(models.TransientModel):
                 .ids
             )
             if False in line_ids:
-                sorted_location_ids = [False] + sorted_location_ids
+                sorted_location_ids = [False, *sorted_location_ids]
             report.location_ids = [Command.set(sorted_location_ids)]
 
     @api.depends("line_ids.picking_ids.parcels_and_items_per_source")

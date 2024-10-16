@@ -9,14 +9,14 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
+        # Odoo Community
+        "product_expiry",
+        # Third-party
+        "stock_procurement_customer",
+        # Alcyon
         "alc_b2c_partner",
         "alc_label_printing_base",
         "alc_partner_veterinary",
-        # OCA
-        "stock_procurement_customer",
-        # Others
-        "product_expiry",
     ],
     "data": [
         "views/res_partner_views.xml",

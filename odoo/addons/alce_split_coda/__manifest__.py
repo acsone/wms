@@ -9,7 +9,7 @@
     # BE CAREFUL ALL the dependencies must BE LGPL or OEEL!!!
     # l10n_be_coda is an Odoo enterprise module
     "depends": [
-        # Others
+        # Odoo Enterprise
         "l10n_be_coda",
     ],
     "data": [],

@@ -9,12 +9,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Third-party
+        "fastapi",
+        # Alcyon
         "alc_partner_pricelist",
         "alc_partner_type",
         "alc_supplier_promotion",
-        # OCA
-        "fastapi",
     ],
     "demo": [],
     "installable": True,

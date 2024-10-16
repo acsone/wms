@@ -10,14 +10,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Odoo Community
+        "product",
+        # Third-party
+        "base_sparse_field_list_support",
+        # Alcyon
         "alc_partner_type",
         "alc_product_supplier",
         "mixin_past",
-        # OCA
-        "base_sparse_field_list_support",
-        # Others
-        "product",
     ],
     "application": False,
     "data": ["views/product_supplierinfo.xml"],

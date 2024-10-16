@@ -9,16 +9,16 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
+        # Odoo Community
+        "stock",
+        # Third-party
+        "sale_channel",
+        # Alcyon
         "alc_partner_type",
         "alc_partner_veterinary",
         "alc_product_additional_price",
         "alc_product_supplier",
         "alc_sale_channel",
-        # OCA
-        "sale_channel",
-        # Others
-        "stock",
     ],
     "data": [
         "views/res_partner.xml",

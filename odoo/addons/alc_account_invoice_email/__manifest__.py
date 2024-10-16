@@ -10,7 +10,7 @@
     "category": "Accounting & Finance",
     # mail dependency is needed as mail module replaces the email field...
     "depends": [
-        # Others
+        # Odoo Community
         "account",
         "mail",
     ],

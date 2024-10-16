@@ -11,11 +11,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_connector_esb",
+        # Third-party
+        "stock_picking_backorder_reason",
+        # Alcyon
         "alc_sale_auto_cancel_unavailable_qty",
         "alc_sale_exception_product_availability",
-        # OCA
-        "stock_picking_backorder_reason",
+        # Alcyon/Connector
+        "alc_connector_esb",
     ],
 }

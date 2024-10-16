@@ -45,7 +45,7 @@ class ResPartner(BasePartner):
                     percent=unaccent("%s"),
                 )
             )
-            res._where_params = res._where_params + [name, order_name]
+            res._where_params = [*res._where_params, name, order_name]
             partner_ids = res._result
             if partner_ids:
                 return self.browse(partner_ids).name_get()

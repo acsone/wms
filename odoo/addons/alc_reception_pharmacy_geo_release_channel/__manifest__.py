@@ -15,13 +15,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_partner_delivered_by_alcyon",
-        "alc_reception_pharmacy",
-        # OCA
+        # Third-party
         "delivery_carrier_partner",
         "stock_release_channel_delivery",
         "stock_release_channel_geoengine",
+        # Alcyon
+        "alc_partner_delivered_by_alcyon",
+        "alc_reception_pharmacy",
     ],
     "data": [],
     "demo": [],

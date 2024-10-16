@@ -290,9 +290,9 @@ class AccountMove(Move, AlcReportPrintAsync):
         tax_summary["contribution_total"] = sum(
             line.amount_contribution for line in self.invoice_line_ids
         )
-        tax_summary[
-            "contribution_total_tax_amount"
-        ] = f"{tax_summary['contribution_total']:.2f} {self.currency_id.symbol}"
+        tax_summary["contribution_total_tax_amount"] = (
+            f"{tax_summary['contribution_total']:.2f} {self.currency_id.symbol}"
+        )
         # add some computed amounts needed for reporting
         amount_without_discount = (
             sum(
@@ -308,9 +308,9 @@ class AccountMove(Move, AlcReportPrintAsync):
         amount_untaxed_with_contribution = (
             self.amount_untaxed + tax_summary["contribution_total"]
         )
-        tax_summary[
-            "amount_untaxed_with_contribution"
-        ] = f"{amount_untaxed_with_contribution:.2f} {self.currency_id.symbol}"
+        tax_summary["amount_untaxed_with_contribution"] = (
+            f"{amount_untaxed_with_contribution:.2f} {self.currency_id.symbol}"
+        )
         return tax_summary
 
 
@@ -370,7 +370,7 @@ class AccountMoveLine(MoveLine):
                     taxes = self.env["account.tax"]._compute_taxes_for_single_line(
                         line._convert_to_tax_base_line_dict()
                     )[1]
-                    mytax = [t for t in taxes if t["id"] == tax.id][0]
+                    mytax = next(t for t in taxes if t["id"] == tax.id)
                     amount_contribution += mytax["tax_amount"]
                     contribution_ids |= tax
                 elif tax.tax_group_id == tax_group_apb:

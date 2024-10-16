@@ -6,7 +6,8 @@ from fastapi import APIRouter, Depends, Query
 
 from odoo import api, models
 from odoo.osv import expression
-from odoo.tools.query import Query as SQLQuery, _generate_table_alias
+from odoo.tools.query import Query as SQLQuery
+from odoo.tools.query import _generate_table_alias
 
 from odoo.addons.alc_supplier_promotion.models.product_supplierinfo import (
     ProductSupplierInfo,

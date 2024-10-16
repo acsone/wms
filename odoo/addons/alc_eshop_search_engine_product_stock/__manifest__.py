@@ -10,12 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_eshop_product_domain",
-        "alc_stock_move_direction",
-        # OCA
+        # Third-party
         "queue_job_cron",
         "shopinvader_search_engine_product_stock",
+        # Alcyon
+        "alc_eshop_product_domain",
+        "alc_stock_move_direction",
     ],
     "data": ["data/ir_cron.xml"],
     "development_status": "Alpha",

@@ -14,14 +14,15 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Third-party
+        "onchange_helper",
+        # Alcyon
         "alc_price_cache_exclusive",
         "alc_price_triple_discount_exclusive",
-        "alc_pricelist_discount",
         "alc_pricing_constraints",
         "alc_supplier_promotion",
-        # OCA
-        "onchange_helper",
+        # Alcyon/Sales Management
+        "alc_pricelist_discount",
     ],
     "application": False,
     "data": [],

@@ -9,11 +9,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_stock_move_line_restrict_quantity",
-        # OCA
+        # Third-party
         "shopfloor_full_location_reservation",
         "stock_full_location_reservation",
         "stock_location_orderpoint",
+        # Alcyon
+        "alc_stock_move_line_restrict_quantity",
     ],
 }

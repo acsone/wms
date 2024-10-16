@@ -43,9 +43,9 @@ class SaleOrder(SaleOrderBase):
                 if pricelists:
                     vals["discount_pricelist_ids"] = [(6, 0, pricelists.ids)]
             if "supplier_promotion_allowed" not in vals:
-                vals[
-                    "supplier_promotion_allowed"
-                ] = partner.supplier_promotion_sale_allowed
+                vals["supplier_promotion_allowed"] = (
+                    partner.supplier_promotion_sale_allowed
+                )
         order_lines = vals.pop("order_line", [])
         res = super().create(vals)
         if order_lines:

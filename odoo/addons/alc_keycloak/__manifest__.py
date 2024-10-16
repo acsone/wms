@@ -10,12 +10,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Alcyon
         "alc_elasticsearch_security_vt_groups",
         "alc_eshop_ordering_allowed",
         "alc_partner_pricelist",
-        "alc_shipping_fee",
         "connector_keycloak",
+        # Alcyon/Delivery
+        "alc_shipping_fee",
     ],
     "application": False,
     "data": [],

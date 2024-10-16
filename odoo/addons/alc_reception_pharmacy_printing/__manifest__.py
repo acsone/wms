@@ -10,11 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Odoo Community
+        "product_expiry",
+        # Alcyon
         "alc_printing_base",
         "alc_reception_pharmacy",
-        # Others
-        "product_expiry",
     ],
     "data": [
         "security/select_pharmacy_printing_printer.xml",

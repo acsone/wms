@@ -9,10 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
-        "alc_additional_product_stock",
-        # OCA
+        # Third-party
         "sale_stock_restocking_fee_invoicing",
+        # Alcyon
+        "alc_additional_product_stock",
     ],
     "data": [],
     "demo": [],

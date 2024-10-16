@@ -9,7 +9,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
+        # Third-party
         "shopinvader_sale_cart",
     ],
     "data": ["data/res_users.xml"],

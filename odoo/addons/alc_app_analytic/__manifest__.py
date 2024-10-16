@@ -10,17 +10,17 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "account_move_line_single_analytic_account",
-        "alc_analytic_category_report",
-        # OCA
+        # Odoo Community
+        "analytic",
+        # Third-party
         "account_analytic_account_tag",
         "account_analytic_required",
         "account_analytic_tag",
         "product_analytic",
         "product_analytic_purchase",
         "product_analytic_sale",
-        # Others
-        "analytic",
+        # Alcyon
+        "account_move_line_single_analytic_account",
+        "alc_analytic_category_report",
     ],
 }
