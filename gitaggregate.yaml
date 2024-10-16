@@ -128,6 +128,7 @@
     - oca refs/pull/421/head # [16.0][FIX] rma: same procurement group for reception and delivery #421
     - oca refs/pull/423/head # [FIX] rma: group rma receptions #423
     - oca refs/pull/426/head # [IMP] rma: search by rma origin and add state filters #426
+    - oca refs/pull/429/head # [IMP] rma: add dashboard #429
   target: origin 16.0-alc-rma
 
 ./src/rma_sale:
