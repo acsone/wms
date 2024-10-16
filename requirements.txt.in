@@ -95,7 +95,6 @@ odoo-addon-rma-delivery @ git+https://github.com/OCA/rma.git@refs/pull/424/head#
 odoo-addon-sale-order-line-cancel @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2357/head#subdirectory=setup/sale_order_line_cancel
 odoo-addon-sale-route-amendment @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2423/head#subdirectory=setup/sale_route_amendment
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2693/head#subdirectory=setup/sale_stock_picking_blocking
-odoo-addon-sale-triple-discount @ git+https://github.com/OCA/sale-workflow.git@refs/pull/3329/head#subdirectory=setup/sale_triple_discount
 
 
 # sale-channel
