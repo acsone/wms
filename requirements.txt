@@ -387,7 +387,7 @@ odoo-addon-stock-picking-kind==16.0.1.0.0.10
 odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@ffaa42ce3e44c5748d81921a4e8574147abad5b5#subdirectory=setup/stock_picking_low_priority
 odoo-addon-stock-picking-operation-loss-quantity @ git+https://github.com/acsone/stock-logistics-workflow.git@56858c353f49ae90f71754599eb9968e606a23a7#subdirectory=setup/stock_picking_operation_loss_quantity
 odoo-addon-stock-picking-progress==16.0.1.0.0.9
-odoo-addon-stock-picking-putaway-recompute @ git+https://github.com/acsone/stock-logistics-workflow.git@e42d350bb505e45fbdd5adf546dafd55e0c4d8f7#subdirectory=setup/stock_picking_putaway_recompute
+odoo-addon-stock-picking-putaway-recompute @ git+https://github.com/acsone/stock-logistics-workflow.git@ff1b4bfdface0594bff573eccac9a423ed40ee08#subdirectory=setup/stock_picking_putaway_recompute
 odoo-addon-stock-picking-return-lot==16.0.1.1.0
 odoo-addon-stock-picking-start==16.0.1.1.1
 odoo-addon-stock-picking-type-shipping-policy==16.0.1.0.0.7
@@ -417,7 +417,7 @@ odoo-addon-stock-scrap-location-default==16.0.1.0.0.4
 odoo-addon-stock-split-picking==16.0.1.0.4.2
 odoo-addon-stock-split-picking-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@d22c15713032586fa391cb1fce13a542b23cd736#subdirectory=setup/stock_split_picking_dimension
 odoo-addon-stock-storage-category-capacity-name==16.0.1.0.0.5
-odoo-addon-stock-storage-type==16.0.1.1.0.1
+odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@b734827018ec3700fb9a8d258d6ea688648ff04d#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc==16.0.1.0.0.12
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-uom-unece==16.0.1.3.0.3
