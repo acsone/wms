@@ -21,7 +21,7 @@ def MockRequest(
     cookies=None,
     remote_addr=HOST,
     environ_base=None,
-    session_info: dict = None,
+    session_info: dict | None = None,
     json=None,
     params=None,
 ):

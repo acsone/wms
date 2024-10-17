@@ -218,7 +218,7 @@ class AlcEshopSaleStatisticsRouterHelper(models.AbstractModel):
         size = 0
         for row in self.env.cr.dictfetchall():
             size = row["count"]
-            if size == 0:
+            if not size:
                 # always return a row for the size but with no data if 0...
                 break
             product_family = ""

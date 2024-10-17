@@ -57,7 +57,7 @@ class TestAlcReportBase(TransactionCase):
                 ("res_model", "=", obj._name),
             ]
         )
-        self.assertTrue(len(attachments) == 0)
+        self.assertTrue(not attachments)
         obj.print_and_attach_report(report_action, "012 0234 23")
         attachments = self.env["ir.attachment"].search(
             [
@@ -65,4 +65,4 @@ class TestAlcReportBase(TransactionCase):
                 ("res_model", "=", obj._name),
             ]
         )
-        self.assertFalse(len(attachments) == 0)
+        self.assertFalse(not attachments)

@@ -9,11 +9,11 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # OCA
-        "product_packaging_dimension",
-        # Others
+        # Odoo Community
         "product",
         "uom",
+        # Third-party
+        "product_packaging_dimension",
     ],
     "data": ["views/product_packaging.xml", "views/res_config_settings.xml"],
     "installable": True,

@@ -9,12 +9,13 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
+        # Third-party
+        "base_report_to_printer",
+        # Alcyon
         "alc_product_label_printer",
         "alc_product_label_printing",
+        # Alcyon/Stock Management
         "alc_stock_receive_lot",
-        # OCA
-        "base_report_to_printer",
     ],
     "data": [
         "security/res_groups.xml",

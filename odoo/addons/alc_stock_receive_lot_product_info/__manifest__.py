@@ -14,12 +14,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_product_lot_info",
-        "alc_stock_receive_lot",
-        "alc_stock_receive_lot_backorder_quantity",
-        # OCA
+        # Third-party
         "stock_lot_is_archived",
+        # Alcyon
+        "alc_product_lot_info",
+        "alc_stock_receive_lot_backorder_quantity",
+        # Alcyon/Stock Management
+        "alc_stock_receive_lot",
     ],
     "data": ["wizards/stock_pack_operation_lot_add.xml"],
     "demo": [],

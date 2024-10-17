@@ -30,7 +30,7 @@ class ElasticSearchRole(models.Model):
     def get_backend_roles(self):
         self.ensure_one()
         if self.extra_backend_roles:
-            backend_roles = list(set(self.extra_backend_roles.split(",") + [self.name]))
+            backend_roles = list({*self.extra_backend_roles.split(","), self.name})
         else:
             backend_roles = [self.name]
         return backend_roles

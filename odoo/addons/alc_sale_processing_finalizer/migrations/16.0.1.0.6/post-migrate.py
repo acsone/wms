@@ -22,7 +22,7 @@ Le(s) article(s) concerné(s) sont :
     <li t-foreach="lines" t-as="line"><t t-esc="line.product_id.display_name" /></li>
 </ul>
 </p>
-<p>Vous n’avez rien à faire, l’annulation est automatique.</p>
+<p>Vous n'avez rien à faire, l'annulation est automatique.</p>
 
 Si vous le souhaitez, vous pouvez recommander ces articles via le site, ou en prenant contact avec le Service Client : customerservice@alcyonbelux.be
         """

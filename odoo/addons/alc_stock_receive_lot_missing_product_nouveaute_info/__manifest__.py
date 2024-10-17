@@ -9,14 +9,15 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
+        # Third-party
+        "product_route_mto",
+        # Alcyon
         "alc_product_barcode_required",
         "alc_product_category_data",
         "alc_product_dimensions_missing",
         "alc_product_pharmacy",
+        # Alcyon/Stock Management
         "alc_stock_receive_lot",
-        # OCA
-        "product_route_mto",
     ],
     "data": [
         "security/res_groups.xml",

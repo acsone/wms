@@ -10,9 +10,12 @@ class TestPriceList(TestFacadeWithProductFlattenedData):
     def test_price_list(self):
         router_helper = self.env["alc.eshop.sale_statistics_router.helper"]
         exemple = self._example_product_flattened_data()
-        with self.mock_product_data(), mock.patch.object(
-            router_helper.__class__, "_get_top_ordered"
-        ) as mocked_get_top_ordered:
+        with (
+            self.mock_product_data(),
+            mock.patch.object(
+                router_helper.__class__, "_get_top_ordered"
+            ) as mocked_get_top_ordered,
+        ):
             mocked_get_top_ordered.side_effect = lambda *args, **kwargs: {
                 "data": [{"product_id": exemple["id"], "qty": 1}]
             }

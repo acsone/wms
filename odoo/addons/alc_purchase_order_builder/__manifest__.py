@@ -11,7 +11,18 @@
     Alc purchase order build
     """,
     "depends": [
-        # Custom
+        # Odoo Community
+        "delivery",
+        "product_expiry",
+        "purchase",
+        "stock_account",
+        "web",
+        # Third-party
+        "product_route_mto",
+        "stock_available",
+        "stock_lot_is_archived",
+        "stock_storage_type_putaway_abc",
+        # Alcyon
         "alc_additional_product_base",
         "alc_product_average_sale",
         "alc_product_packaging",
@@ -21,19 +32,9 @@
         "alc_purchase_discount",
         "alc_purchase_order_total_weight",
         "alc_stock_lot_available",
-        "alc_stock_orderpoint_product",
         "alc_supplier_promotion",
-        # OCA
-        "product_route_mto",
-        "stock_available",
-        "stock_lot_is_archived",
-        "stock_storage_type_putaway_abc",
-        # Others
-        "delivery",
-        "product_expiry",
-        "purchase",
-        "stock_account",
-        "web",
+        # Alcyon/Stock Management
+        "alc_stock_orderpoint_product",
     ],
     "assets": {
         "alc_purchase_order_builder.assets_purchase_order_builder": [

@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # OCA
+        # Third-party
         "base_report_to_printer",
     ],
     "data": ["views/res_users.xml"],

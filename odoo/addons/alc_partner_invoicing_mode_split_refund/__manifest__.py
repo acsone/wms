@@ -11,7 +11,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
+        # Third-party
         "partner_invoicing_mode",
     ],
     "data": [],

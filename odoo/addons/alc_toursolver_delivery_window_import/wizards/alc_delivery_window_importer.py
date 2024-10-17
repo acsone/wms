@@ -117,7 +117,7 @@ class _DeliveryWindowImporter:
     def _reset_all(self):
         self.env["toursolver.delivery.window"].search([]).unlink()
 
-    def _iter_read_file(self):  # noqa: c901
+    def _iter_read_file(self):  # noqa: C901
         book = xlrd.open_workbook(file_contents=self.xlsx_content, on_demand=True)
         try:
             iterator = self._read_xls_book(book)
@@ -218,7 +218,7 @@ class _DeliveryWindowImporter:
             values = []
             for cell in row:
                 if cell.ctype is xlrd.XL_CELL_NUMBER:
-                    is_float = cell.value % 1 != 0.0
+                    is_float = cell.value % 1
                     values.append(str(cell.value) if is_float else str(int(cell.value)))
                 elif cell.ctype is xlrd.XL_CELL_DATE:
                     dt = xlrd.xldate.xldate_as_datetime(cell.value, book.datemode)

@@ -9,7 +9,7 @@
     "maintainer": "ACSONE SA/NV",
     "category": "Stock Management",
     "depends": [
-        # Others
+        # Odoo Community
         "stock",
     ],
     "data": ["views/stock_picking.xml"],

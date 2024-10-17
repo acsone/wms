@@ -9,7 +9,9 @@
     "website": "https://acsone.eu/",
     "description": """Data for product categories, attributes and brands""",
     "depends": [
-        # Custom
+        # Third-party
+        "product_brand",
+        # Alcyon
         "alc_pim_attribute_group",
         "alc_pim_attribute_group",
         "alc_pim_product",
@@ -18,8 +20,6 @@
         "alc_product_category_translatable",
         "alc_product_link_notice",
         "alc_product_shop_category",
-        # OCA
-        "product_brand",
     ],
     "application": False,
     "data": [

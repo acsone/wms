@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_stock_scheduler_filter",
-        # Others
+        # Odoo Community
         "sale",
+        # Alcyon
+        "alc_stock_scheduler_filter",
     ],
     "data": [],
     "demo": [],

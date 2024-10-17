@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
+        # Third-party
         "account_payment_sale",
         "shopinvader_schema_sale",
     ],

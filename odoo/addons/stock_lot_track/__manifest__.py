@@ -10,7 +10,7 @@
     Stock lot track
     """,
     "depends": [
-        # Others
+        # Odoo Community
         "product_expiry",
     ],
     "data": [],

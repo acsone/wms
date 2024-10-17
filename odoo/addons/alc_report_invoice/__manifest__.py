@@ -10,21 +10,21 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_accounting_data",
-        "alc_company_term_condition",
-        "alc_report_base",
-        "alc_report_intrastat_infos",
-        # OCA
+        # Odoo Community
+        "account",
+        "sale",
+        # Third-party
         "account_invoice_triple_discount",
         "account_payment_mode",
         "account_payment_partner",
         "l10n_be_apb_tax",
         "partner_fax",
         "sale_triple_discount",
-        # Others
-        "account",
-        "sale",
+        # Alcyon
+        "alc_accounting_data",
+        "alc_company_term_condition",
+        "alc_report_base",
+        "alc_report_intrastat_infos",
     ],
     "data": [
         "views/account_payment_mode_views.xml",

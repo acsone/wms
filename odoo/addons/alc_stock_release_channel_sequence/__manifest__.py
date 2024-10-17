@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
+        # Alcyon
         "alc_stock_release_channel_tree",
     ],
     "data": ["views/stock_release_channel_views.xml"],

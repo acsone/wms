@@ -9,18 +9,18 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Odoo Community
+        "contacts",
+        "mail",
+        "sales_team",
+        # Third-party
+        "partner_fax",
+        # Alcyon
         "alc_partner_apb_authorization",
         "alc_partner_category",
         "alc_partner_opt_out",
         "alc_partner_suite",
         "alc_partner_veterinary",
-        # OCA
-        "partner_fax",
-        # Others
-        "contacts",
-        "mail",
-        "sales_team",
     ],
     "data": [
         "security/res_groups.xml",

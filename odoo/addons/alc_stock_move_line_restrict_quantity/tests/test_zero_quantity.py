@@ -75,8 +75,9 @@ class TestZeroQuantity(TransactionCase):
         self.picking.action_assign()
         self.picking.move_line_ids.qty_done = 10.0
 
-        with self.assertLogs(level="ERROR") as log_catcher, self.assertRaises(
-            UserError
+        with (
+            self.assertLogs(level="ERROR") as log_catcher,
+            self.assertRaises(UserError),
         ):
             self._create_quantity(self.product, 0.0)
         self.assertEqual(
@@ -114,8 +115,9 @@ class TestZeroQuantity(TransactionCase):
         self.picking.action_assign()
         self.picking.move_line_ids.qty_done = 10.0
 
-        with self.assertLogs(level="ERROR") as log_catcher, self.assertRaises(
-            UserError
+        with (
+            self.assertLogs(level="ERROR") as log_catcher,
+            self.assertRaises(UserError),
         ):
             self._create_quantity(self.product, -1.0)
         self.assertEqual(

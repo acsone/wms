@@ -10,11 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_eshop_info_banner",
-        # OCA
+        # Third-party
         "connector_search_engine",
         "queue_job_cron",
+        # Alcyon
+        "alc_eshop_info_banner",
     ],
     "data": [
         "views/se_backend.xml",

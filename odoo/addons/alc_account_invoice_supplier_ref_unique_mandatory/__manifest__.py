@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "category": "Accounting & Finance",
     "depends": [
-        # OCA
+        # Third-party
         "account_invoice_supplier_ref_unique",
     ],
     "data": ["views/res_config_settings.xml"],

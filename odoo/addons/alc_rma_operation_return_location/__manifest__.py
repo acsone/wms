@@ -11,7 +11,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
+        # Third-party
         "rma_sale",
     ],
     "data": ["views/rma_operation.xml"],

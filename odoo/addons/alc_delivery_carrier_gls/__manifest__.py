@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
+        # Third-party
         "delivery_carrier_label_gls",
     ],
     "data": ["data/product_product.xml", "data/delivery_carrier.xml"],

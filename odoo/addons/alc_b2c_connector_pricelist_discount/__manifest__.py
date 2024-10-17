@@ -10,8 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Alcyon
         "alc_b2c_connector",
+        # Alcyon/Sales Management
         "alc_pricelist_discount",
     ],
     "data": ["views/alc_b2c_client.xml"],

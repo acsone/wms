@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
+        # Third-party
         "product_template_has_one_variant",
     ],
 }

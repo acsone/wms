@@ -81,11 +81,12 @@ class TestEShopForm(FastAPITransactionCase):
         self.assertEqual(self.form_authenticated.id, res["data"][0]["id"])
 
     def test_submit(self):
-        with self._create_test_client(
-            partner=self.partner
-        ) as test_client, mock.patch.object(
-            self.EShopForm.__class__, "_send_collected_info"
-        ) as mocked_send_info:
+        with (
+            self._create_test_client(partner=self.partner) as test_client,
+            mock.patch.object(
+                self.EShopForm.__class__, "_send_collected_info"
+            ) as mocked_send_info,
+        ):
             response = test_client.post(
                 f"/forms/{self.form_authenticated.id}",
                 json={"data": {"a": "a", "b": "b"}},

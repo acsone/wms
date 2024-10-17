@@ -42,7 +42,7 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
         domain_base = [("format", "=", "csv"), ("partner_id", "=", partner.id)]
 
         # given
-        domain_pricelist = domain_base + [("compute", "=", "pricelist")]
+        domain_pricelist = [*domain_base, ("compute", "=", "pricelist")]
         document_pricelist = self.alc_document_model.search(domain_pricelist)
         # when
         document_pricelist._get_data()
@@ -50,7 +50,7 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
         self.assertTrue(document_pricelist.attachment_id)
 
         # given
-        domain_discount = domain_base + [("compute", "=", "discount")]
+        domain_discount = [*domain_base, ("compute", "=", "discount")]
         document_discount = self.alc_document_model.search(domain_discount)
         # when
         document_discount._get_data()
@@ -71,18 +71,18 @@ class TestAlcDocumentsPricesFlow(TestAlcDocumentsPrices):
         flattened_data = self._example_product_flattened_data()
         if supplier_discount_type == SupplierDiscountType.PROMOTION:
             flattened_data["has_supplier_promotion"] = True
-            flattened_data[
-                "supplier_promotion_only_for_veterinaries"
-            ] = only_for_veterinaries
+            flattened_data["supplier_promotion_only_for_veterinaries"] = (
+                only_for_veterinaries
+            )
         elif supplier_discount_type == SupplierDiscountType.DISCOUNT:
             flattened_data["supplier_discount_discount_sale"] = 10
-            flattened_data[
-                "supplier_discount_only_for_veterinaries"
-            ] = only_for_veterinaries
+            flattened_data["supplier_discount_only_for_veterinaries"] = (
+                only_for_veterinaries
+            )
 
         return_value = (r for r in [self._wrap_flattened_data(flattened_data)])
         domain_base = [("format", "=", "csv"), ("partner_id", "=", partner.id)]
-        domain_discount = domain_base + [("compute", "=", "discount")]
+        domain_discount = [*domain_base, ("compute", "=", "discount")]
         document_discount = self.alc_document_model.search(domain_discount)
         with self.mock_product_data(return_value=return_value):
             return document_discount._get_data().decode("utf-8")

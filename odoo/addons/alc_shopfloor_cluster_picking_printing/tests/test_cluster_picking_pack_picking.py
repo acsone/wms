@@ -114,11 +114,14 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
         self.env.user.sudo().default_label_printer_id = self.package_label_printer
 
         # we process to the put in pack
-        with mock.patch.object(
-            picking.__class__, "print_products_label"
-        ) as mocked_print_product_label, mock.patch.object(
-            picking.__class__, "print_packages_label"
-        ) as mocked_print_package_label:
+        with (
+            mock.patch.object(
+                picking.__class__, "print_products_label"
+            ) as mocked_print_product_label,
+            mock.patch.object(
+                picking.__class__, "print_packages_label"
+            ) as mocked_print_package_label,
+        ):
             self.service.dispatch(
                 "put_in_pack",
                 params={
@@ -354,11 +357,14 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
         self.env.user.sudo().default_label_printer_id = self.package_label_printer
 
         # we process to the put in pack
-        with mock.patch.object(
-            picking.__class__, "print_products_label"
-        ) as mocked_print_product_label, mock.patch.object(
-            picking.__class__, "print_packages_label"
-        ) as mocked_print_package_label:
+        with (
+            mock.patch.object(
+                picking.__class__, "print_products_label"
+            ) as mocked_print_product_label,
+            mock.patch.object(
+                picking.__class__, "print_packages_label"
+            ) as mocked_print_package_label,
+        ):
             self.service.dispatch(
                 "put_in_pack",
                 params={

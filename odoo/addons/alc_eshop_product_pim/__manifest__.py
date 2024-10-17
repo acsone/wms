@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_pim_product",
-        # OCA
+        # Third-party
         "shopinvader_product",
+        # Alcyon
+        "alc_pim_product",
     ],
     "data": [],
     "demo": [],

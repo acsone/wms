@@ -8,11 +8,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_stock_delivery_slip",
-        # OCA
+        # Third-party
         "rma",
         "rma_procurement_customer",
+        # Alcyon/Stock
+        "alc_stock_delivery_slip",
     ],
     "data": ["views/rma_operation.xml"],
     "demo": [],

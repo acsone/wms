@@ -10,14 +10,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "mixin_past",
-        # OCA
+        # Odoo Community
+        "sales_team",
+        # Third-party
         "fs_file",
         "fs_image",
         "jsonifier",
-        # Others
-        "sales_team",
+        # Alcyon
+        "mixin_past",
     ],
     "data": [
         "data/ir_attachment.xml",

@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_price_cache",
-        # Others
+        # Odoo Community
         "base_import",
+        # Alcyon
+        "alc_price_cache",
     ],
     "application": False,
     "data": [],

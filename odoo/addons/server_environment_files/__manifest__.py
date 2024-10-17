@@ -9,7 +9,7 @@
     "category": "Tools",
     "website": "https://www.acsone.eu",
     "depends": [
-        # Others
+        # Odoo Community
         "base",
     ],
 }

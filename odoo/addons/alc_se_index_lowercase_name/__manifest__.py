@@ -13,7 +13,7 @@
     "website": "https://acsone.eu",
     "application": False,
     "depends": [
-        # OCA
+        # Third-party
         "connector_search_engine",
     ],
 }

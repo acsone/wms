@@ -8,10 +8,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
+        # Third-party
+        "shopfloor",
+        # Alcyon
         "alc_shopfloor_cluster_picking_workstation",
         "alc_shopfloor_loss_quantity",
-        # OCA
-        "shopfloor",
     ],
 }

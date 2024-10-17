@@ -9,7 +9,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Alcyon
         "alc_partner_manual_sale_order",
     ],
     "data": [

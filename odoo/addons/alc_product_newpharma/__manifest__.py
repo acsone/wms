@@ -10,9 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_product_category_data",
-        # OCA
+        # Third-party
         "partner_manual_rank",
+        # Alcyon
+        "alc_product_category_data",
     ],
 }

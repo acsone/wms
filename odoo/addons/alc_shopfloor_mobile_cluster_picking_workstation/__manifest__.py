@@ -8,10 +8,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
-        "alc_shopfloor_cluster_picking_workstation",
-        # OCA
+        # Third-party
         "shopfloor_mobile",
+        # Alcyon
+        "alc_shopfloor_cluster_picking_workstation",
     ],
     "data": ["templates/assets.xml"],
     "demo": [],

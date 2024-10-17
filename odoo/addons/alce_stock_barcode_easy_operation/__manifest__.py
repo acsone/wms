@@ -8,7 +8,7 @@
     "maintainer": "ACSONE SA/NV",
     "category": "Stock Management",
     "depends": [
-        # Others
+        # Odoo Enterprise
         "stock_barcode",
     ],
     "data": [],

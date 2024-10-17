@@ -10,8 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
+        # Alcyon
         "alc_sale_product_qty_unavailable",
+        # Alcyon/Product
         "alc_supplier_promotion_sale",
     ],
     "data": [],

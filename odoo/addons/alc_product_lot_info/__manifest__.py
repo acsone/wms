@@ -10,11 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_stock_lot_available",
-        # Others
+        # Odoo Community
         "product_expiry",
         "stock",
+        # Alcyon
+        "alc_stock_lot_available",
     ],
     "data": ["views/product_template_views.xml"],
     "demo": [],

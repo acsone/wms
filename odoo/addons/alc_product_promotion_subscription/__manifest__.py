@@ -10,13 +10,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_pricelist_discount",
-        # OCA
-        "partner_manual_rank",
-        # Others
+        # Odoo Community
         "product",
         "sales_team",
+        # Third-party
+        "partner_manual_rank",
+        # Alcyon/Sales Management
+        "alc_pricelist_discount",
     ],
     "data": [
         "security/alc_product_promotion_subscription.xml",

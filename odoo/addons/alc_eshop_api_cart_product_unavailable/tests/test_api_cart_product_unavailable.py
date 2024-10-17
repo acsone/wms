@@ -54,7 +54,9 @@ class TestSaleCartApi(FastAPITransactionCase):
         user: Users | None = None,
         partner: Partner | None = None,
         env: Environment = None,
-        dependency_overrides: dict[Callable[..., Any], Callable[..., Any]] = None,
+        dependency_overrides: (
+            dict[Callable[..., Any], Callable[..., Any]] | None
+        ) = None,
         raise_server_exceptions: bool = True,
     ):
         if not app:

@@ -10,12 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_queue_job_background_channel",
-        # OCA
+        # Third-party
         "queue_job",
         "queue_job_cron",
         "sale_cart",
+        # Alcyon
+        "alc_queue_job_background_channel",
     ],
     "data": ["data/ir_cron.xml"],
     "demo": [],

@@ -11,13 +11,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_additional_product_base",
-        # OCA
+        # Odoo Community
+        "sale_stock",
+        # Third-party
         "stock_move_propagate_first_move",
         "stock_move_propagate_first_move_cancel",
-        # Others
-        "sale_stock",
+        # Alcyon
+        "alc_additional_product_base",
     ],
     "data": [
         "views/stock_picking_type.xml",

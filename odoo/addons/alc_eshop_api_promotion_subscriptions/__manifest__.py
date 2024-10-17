@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_product_promotion_subscription",
-        # OCA
+        # Third-party
         "fastapi",
+        # Alcyon
+        "alc_product_promotion_subscription",
     ],
     "demo": [],
     "installable": True,

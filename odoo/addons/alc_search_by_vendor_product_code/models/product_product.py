@@ -30,8 +30,11 @@ class ProductProduct(Product):
             limit_available = limit - len(result)
         existing_ids = [x[0] for x in result]
         products = self.search(
-            [("vendor_product_code", "ilike", name), ("id", "not in", existing_ids)]
-            + args,
+            [
+                ("vendor_product_code", "ilike", name),
+                ("id", "not in", existing_ids),
+                *args,
+            ],
             limit=limit_available,
         )
         result += products.name_get()

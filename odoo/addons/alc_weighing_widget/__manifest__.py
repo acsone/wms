@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_pywebdriver",
-        # OCA
+        # Third-party
         "web_notify",
+        # Alcyon
+        "alc_pywebdriver",
     ],
     "data": [],
     "demo": [],

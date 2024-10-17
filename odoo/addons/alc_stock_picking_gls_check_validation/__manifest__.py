@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
+        # Alcyon
         "alc_delivery_carrier_gls",
         "alc_gls_putinpack",
     ],

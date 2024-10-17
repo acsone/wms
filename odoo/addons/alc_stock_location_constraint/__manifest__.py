@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
+        # Third-party
         "stock_location_position",
         "stock_location_zone",
     ],

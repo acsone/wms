@@ -10,13 +10,13 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Third-party
+        "queue_job_cron",
+        "shopinvader_search_engine",
+        # Alcyon
         "alc_connector_search_engine_put_script_mixin",
         "alc_se_backend_notebook",
         "alc_search_engine_backend",
-        # OCA
-        "queue_job_cron",
-        "shopinvader_search_engine",
     ],
     "data": [
         "views/se_backend.xml",

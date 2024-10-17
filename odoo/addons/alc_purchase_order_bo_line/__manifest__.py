@@ -8,10 +8,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
-        "stock_available",
-        # Others
+        # Odoo Community
         "purchase",
+        # Third-party
+        "stock_available",
     ],
     "data": ["views/purchase_order.xml"],
     "demo": [],

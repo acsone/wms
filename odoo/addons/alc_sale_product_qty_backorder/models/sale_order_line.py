@@ -31,7 +31,7 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
         quantity. Otherwise it is the quantity remaining to be delivered.
         """
         for record in self:
-            if record.qty_delivered == 0 and record.product_qty_canceled == 0:
+            if not record.qty_delivered and not record.product_qty_canceled:
                 record.product_qty_backorder = record.product_qty_unavailable
             else:
                 record.product_qty_backorder = record.product_qty_remains_to_deliver

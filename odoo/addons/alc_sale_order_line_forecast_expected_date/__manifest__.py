@@ -8,7 +8,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Others
+        # Odoo Community
         "sale_stock",
     ],
     "data": ["views/sale_order.xml"],

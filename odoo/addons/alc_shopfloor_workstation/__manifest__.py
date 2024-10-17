@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_product_label_printer",
-        # OCA
+        # Third-party
         "shopfloor_workstation",
+        # Alcyon
+        "alc_product_label_printer",
     ],
     "data": ["views/shopfloor_workstation.xml"],
 }

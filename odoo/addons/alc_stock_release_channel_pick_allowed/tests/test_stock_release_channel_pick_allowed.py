@@ -301,7 +301,7 @@ class TestStockReleaseChannelPickAllowed(ChannelReleaseCase):
         pt2_id = picking_types[1].id
         picking_types.release_channel_can_allow_pick = True
         channel = self.channel.with_context(queue_job__no_delay=True)
-        _states = self.channel._get_all_picking_type_ids_state
+        self.channel._get_all_picking_type_ids_state  # noqa: B018 pylint: disable=pointless-statement
         channel.write({"auto_allow_pick": False, "auto_disallow_pick": False})
         with self._audit_new_logs():
             channel._toggle_pick_allowed_channel()

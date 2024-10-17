@@ -20,14 +20,14 @@ This addon provides:
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_product_additional_price",
-        "alc_product_pricelist_data",
-        # OCA
-        "report_xlsx_helper",
-        # Others
+        # Odoo Community
         "base_import",
         "purchase",
+        # Third-party
+        "report_xlsx_helper",
+        # Alcyon
+        "alc_product_additional_price",
+        "alc_product_pricelist_data",
     ],
     "data": [
         "security/ir.model.access.csv",

@@ -8,8 +8,14 @@
     "license": "AGPL-3",
     "category": "Connector",
     "depends": [
-        # Custom
-        "alc_pricelist_discount",
+        # Odoo Community
+        "delivery",
+        "web",
+        # Third-party
+        "onchange_helper",
+        "queue_job",
+        "stock_available",
+        # Alcyon
         "alc_product_cnk",
         "alc_product_sku",
         "alc_queue_job_background_channel",
@@ -20,13 +26,8 @@
         "alc_sale_product_qty_unavailable",
         "alc_sale_suite_name",
         "alc_supplier_promotion",
-        # OCA
-        "onchange_helper",
-        "queue_job",
-        "stock_available",
-        # Others
-        "delivery",
-        "web",
+        # Alcyon/Sales Management
+        "alc_pricelist_discount",
     ],
     "data": [
         "data/sale_channel.xml",

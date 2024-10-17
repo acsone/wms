@@ -11,7 +11,7 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
         """Block backorder for customer that specifically do not want them."""
         if not self.product_qty_unavailable:
             return False
-        if self.product_uom_qty == 0:
+        if not self.product_uom_qty:
             return False
         return not self.order_id.partner_id.sale_reason_backorder_strategy == "create"
 
@@ -30,6 +30,6 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
             # Although it is out of stock at the supplier, there is still
             # enough stock in Alcyon warehouse
             return False
-        if self.product_uom_qty == 0:
+        if not self.product_uom_qty:
             return False
         return True

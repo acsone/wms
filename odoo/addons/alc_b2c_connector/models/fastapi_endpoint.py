@@ -46,9 +46,9 @@ class FastapiEndpoint(FastapiEndpointBase):
     def _get_app(self):
         app = super()._get_app()
         if self.app == "b2c":
-            app.dependency_overrides[
-                authenticated_partner_impl_base
-            ] = authenticated_partner_impl
+            app.dependency_overrides[authenticated_partner_impl_base] = (
+                authenticated_partner_impl
+            )
         return app
 
     def _get_app_exception_handlers(

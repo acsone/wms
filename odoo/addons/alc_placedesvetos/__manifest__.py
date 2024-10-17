@@ -10,15 +10,15 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_b2c_connector",
-        "alc_b2c_connector_pricelist_discount",
-        "alc_product_pricelist_data",
-        # OCA
+        # Third-party
         "account_banking_sepa_direct_debit",
         "account_payment_mode",
         "account_payment_order",
         "account_payment_partner",
+        # Alcyon
+        "alc_b2c_connector",
+        "alc_b2c_connector_pricelist_discount",
+        "alc_product_pricelist_data",
     ],
     "data": [
         "data/account_payment_mode.xml",

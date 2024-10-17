@@ -50,14 +50,14 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
         product = ProductProduct.from_product_product(self.product)
         prices = product.price.get(pl.role_name)
         self.assertEqual(len(prices), 2)
-        price = list(filter(lambda p, i=pl.item_ids: p.id == i.id, prices))[0]
+        price = next(iter(filter(lambda p, i=pl.item_ids: p.id == i.id, prices)))
         self.assertEqual(price.date_start, date_start)
         self.assertEqual(price.date_end, date_end)
         self.assertEqual(price.id, pl.item_ids.id)
         self.assertEqual(price.price, 90)
         self.assertEqual(price.exclusive, False)
 
-        price = list(filter(lambda p, i=pl.item_ids: p.id != i.id, prices))[0]
+        price = next(iter(filter(lambda p, i=pl.item_ids: p.id != i.id, prices)))
         self.assertIsNone(price.date_start)
         self.assertIsNone(price.date_end)
         self.assertIsNone(price.id)

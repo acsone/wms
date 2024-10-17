@@ -7,10 +7,10 @@
     "author": "BCIM, ACSONE SA/NV",
     "category": "Accounting & Finance",
     "depends": [
-        # Custom
-        "alc_base_auto_join",
-        # OCA
+        # Third-party
         "account_invoice_accrual",
+        # Alcyon
+        "alc_base_auto_join",
     ],
     "data": ["data/ir_cron.xml"],
     "license": "AGPL-3",

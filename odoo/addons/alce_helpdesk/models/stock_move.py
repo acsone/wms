@@ -20,7 +20,7 @@ class StockMove(Move):
     def helpdesk_ticket_clicked(self):
         """Show existing ticket or offer to create a new one."""
         self.ensure_one()
-        if self.helpdesk_tickets_count == 0:
+        if not self.helpdesk_tickets_count:
             r = self.env["create.helpdesk.ticket"].create()
             return self.env["helpdesk.ticket"].new_one(r)
         return self.env["helpdesk.ticket"].show_existing(

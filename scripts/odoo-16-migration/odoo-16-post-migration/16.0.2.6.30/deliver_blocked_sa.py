@@ -14,7 +14,6 @@ def migrate(env, version):
     """
     s_id = 49389
     s = env["shipment.advice"].browse(s_id)
-    s.name
     assert (
         s.release_channel_id.state == "delivering_error"
     ), "this script is only for delivering error channels"

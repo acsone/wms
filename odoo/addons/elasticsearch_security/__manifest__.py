@@ -10,11 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Third-party
+        "connector_elasticsearch",
+        # Alcyon
         "alc_queue_job_background_channel",
         "alc_se_backend_notebook",
-        # OCA
-        "connector_elasticsearch",
     ],
     "application": False,
     "data": [

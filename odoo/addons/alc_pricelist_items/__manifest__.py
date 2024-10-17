@@ -9,10 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # OCA
-        "product_price_category",
-        # Others
+        # Odoo Community
         "product",
+        # Third-party
+        "product_price_category",
     ],
     "data": ["views/product_pricelist.xml"],
     "demo": [],

@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_pricelist_discount",
-        # OCA
+        # Third-party
         "sale_triple_discount",
+        # Alcyon/Sales Management
+        "alc_pricelist_discount",
     ],
     "application": False,
     "data": ["views/product_pricelist_item.xml"],

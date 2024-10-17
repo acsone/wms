@@ -10,9 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_pricelist_discount",
+        # Alcyon
         "alc_sale_product_qty_unavailable",
+        # Alcyon/Sales Management
+        "alc_pricelist_discount",
     ],
     "data": ["reports/sale_order.xml"],
     "demo": [],

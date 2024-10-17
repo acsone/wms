@@ -90,7 +90,7 @@ def recover_columns(db_10, db_16, table, columns_to_recover=None):
             SELECT column_name, data_type
             FROM information_schema.columns
             WHERE table_name = '{table}'
-                """  # noqa E501
+                """  # E501
         cr.execute(query)
         columns = cr.fetchall()
         columns = {column[0]: column[1] for column in columns}
@@ -98,7 +98,7 @@ def recover_columns(db_10, db_16, table, columns_to_recover=None):
             SELECT column_name, data_type
             FROM information_schema.columns
             WHERE table_name = '{table}_copy'
-                """  # noqa E501
+                """  # E501
         cr.execute(query)
         columns_copy = cr.fetchall()
         columns_copy = {

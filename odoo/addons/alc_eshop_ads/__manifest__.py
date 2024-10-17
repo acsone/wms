@@ -10,12 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "mixin_past",
-        # OCA
-        "fs_image",
-        # Others
+        # Odoo Community
         "sales_team",
+        # Third-party
+        "fs_image",
+        # Alcyon
+        "mixin_past",
     ],
     "data": [
         "security/res_groups.xml",

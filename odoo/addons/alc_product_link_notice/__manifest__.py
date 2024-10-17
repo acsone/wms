@@ -9,12 +9,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_queue_job_background_channel",
-        # OCA
-        "queue_job_cron",
-        # Others
+        # Odoo Community
         "product",
+        # Third-party
+        "queue_job_cron",
+        # Alcyon
+        "alc_queue_job_background_channel",
     ],
     "data": [
         "data/ir_cron.xml",  # weekly check: create jobs

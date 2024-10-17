@@ -113,7 +113,7 @@ class TestSaleController(TransactionCase):
         self.partner.ref = "8114"
         so = self.env["sale.order"]._ws_create_new(data, datetime.now())
         non_saleable_line = so.order_line.filtered(lambda l: l.product_id == self.prod2)
-        self.assertTrue(non_saleable_line.product_uom_qty == 5)
+        self.assertAlmostEqual(non_saleable_line.product_uom_qty, 5)
 
         rule.is_blocking = True
         data = deepcopy(self.order_data)
@@ -122,7 +122,7 @@ class TestSaleController(TransactionCase):
         data["increment_id"] = "INC-ID-2"
         so = self.env["sale.order"]._ws_create_new(data, datetime.now())
         non_saleable_line = so.order_line.filtered(lambda l: l.product_id == self.prod2)
-        self.assertTrue(non_saleable_line.product_uom_qty == 0)
+        self.assertAlmostEqual(non_saleable_line.product_uom_qty, 0)
 
     def test_saleorder_status_newpharam(self):
         """Test the method sale order status with a standard SO for newpharma."""

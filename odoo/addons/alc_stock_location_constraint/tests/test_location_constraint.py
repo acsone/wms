@@ -45,9 +45,12 @@ class TestStockLocationConstraint(TransactionCase):
                 "alc_stock_location_constraint": True,
             }
         ).execute()
-        with self.assertRaisesRegex(
-            UniqueViolation, "Duplicate entry for location coordinates"
-        ), self.env.cr.savepoint():
+        with (
+            self.assertRaisesRegex(
+                UniqueViolation, "Duplicate entry for location coordinates"
+            ),
+            self.env.cr.savepoint(),
+        ):
             self.location_obj.create(
                 {
                     "name": "Test A",

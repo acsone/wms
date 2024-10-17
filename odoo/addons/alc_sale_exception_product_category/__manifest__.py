@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
+        # Alcyon
         "alc_partner_type",
         "alc_product_pharmacy",
         "alc_sale_channel",

@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
+        # Third-party
         "queue_job_cron",
         "stock_location_orderpoint_average_daily_sale",
         "stock_location_orderpoint_cleanup",

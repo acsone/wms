@@ -9,11 +9,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Third-party
+        "delivery_carrier_label_gls",
+        # Alcyon
         "alc_delivery_carrier_gls",
         "alc_weighing_widget",
-        # OCA
-        "delivery_carrier_label_gls",
     ],
     "data": [
         "security/delivery_package_gls_wizard.xml",

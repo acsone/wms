@@ -9,14 +9,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_address_data",
-        "mixin_past",
-        # OCA
-        "fs_file",
-        # Others
+        # Odoo Community
         "mail",
         "sale",
+        # Third-party
+        "fs_file",
+        # Alcyon
+        "alc_address_data",
+        "mixin_past",
     ],
     "data": [
         "security/alc_classified.xml",

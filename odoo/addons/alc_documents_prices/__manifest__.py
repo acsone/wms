@@ -9,11 +9,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Third-party
+        "fs_attachment",
+        # Alcyon
         "alc_documents",
         "alc_product_flattened_data",
-        # OCA
-        "fs_attachment",
     ],
     "data": ["data/ir_config_parameter.xml", "data/queue_job_function.xml"],
     "demo": [],

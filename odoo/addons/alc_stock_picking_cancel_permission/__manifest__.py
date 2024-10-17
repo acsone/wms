@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # OCA
+        # Third-party
         "stock_picking_back2draft",
     ],
     "data": ["security/res_groups.xml", "views/stock_picking_views.xml"],

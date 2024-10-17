@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
-        "attribute_set",
-        # Others
+        # Odoo Community
         "product",
+        # Third-party
+        "attribute_set",
     ],
     "data": ["data/attribute_group.xml", "data/attribute_set.xml"],
 }

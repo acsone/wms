@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
+        # Third-party
         "stock_location_orderpoint",
         "stock_move_manage_priority",
         "stock_move_priority_picking_assign",

@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_product_last_transaction",
-        # Others
+        # Odoo Community
         "stock",
+        # Alcyon/Product
+        "alc_product_last_transaction",
     ],
     "data": [],
     "demo": [],

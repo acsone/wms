@@ -6,7 +6,7 @@
     "version": "16.0.1.0.0",
     "category": "Other",
     "depends": [
-        # Others
+        # Odoo Community
         "sales_team",
     ],
     "author": "Camptocamp SA, ACSONE SA/NV",

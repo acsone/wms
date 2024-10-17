@@ -12,10 +12,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_product_pricelist_data",
-        # Others
+        # Odoo Community
         "product",
+        # Alcyon
+        "alc_product_pricelist_data",
     ],
     "application": False,
     "data": ["views/product_template_views.xml"],

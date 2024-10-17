@@ -9,10 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
-        "account_cutoff_base",
-        # Others
+        # Odoo Community
         "account",
+        # Third-party
+        "account_cutoff_base",
     ],
     "data": ["security/ir.model.access.csv"],
     "demo": [],

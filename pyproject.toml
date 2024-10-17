@@ -88,23 +88,38 @@ exclude = '''
 target-version = "py310"
 fix = true
 # https://beta.ruff.rs/docs/rules/
+
 select = [
-  "F", # Pyflakes
-  "E", # pycodestyle errors
-  "W", # pycodestyle warnings
   "B", # flake8-bugbear
+  "C4", # flake8-comprehensions
   "C90", # mccabe
-  "C",  # flake8-comprehensions
+  "E", # pycodestyle errors
+  "F", # Pyflakes
+  "I", # isort
+  "RUF", # ruff specific rules
+  "T10", # flake8-debugger
   "UP", # pyupgrade
+  "UP", # pyupgrade
+  "W", # pycodestyle warnings
 ]
 ignore = [
   "E501", # line too long (covered by B950)
   "E741", # Ambiguous variable name 'l'
+  "RUF012", # Odoo commonly uses list class variables (_inherit, _sql_constraints,...)
 ]
 ignore-init-module-imports = true
 
 [tool.ruff.per-file-ignores]
-"__init__.py" = ["F401"]  # ignore unused imports in __init__.py
+"__init__.py" = ["F401", "I001"]  # ignore unused and unsorted imports in __init__.py
+"__manifest__.py" = ["B018"]  # useless expression
+
+[tool.ruff.isort]
+section-order = ["future", "standard-library", "third-party", "odoo", "odoo-addons", "first-party", "local-folder"]
+
+[tool.ruff.isort.sections]
+"odoo" = ["odoo"]
+"odoo-addons" = ["odoo.addons"]
+
 
 [tool.pip-deepfreeze.sync]
 installer = "uvpip"

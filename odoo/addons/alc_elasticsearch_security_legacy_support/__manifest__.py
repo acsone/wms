@@ -12,7 +12,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://www.acsone.eu",
     "depends": [
-        # Custom
+        # Alcyon
         "alc_elasticsearch_security",
         "alc_elasticsearch_security_vt_groups",
         "alc_keycloak",

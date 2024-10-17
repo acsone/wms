@@ -10,15 +10,17 @@
     # BE CAREFUL ALL the dependencies must BE LGPL or OEEL!!!
     # helpdesk is an Odoo enterprise module
     "depends": [
-        # Custom
-        "alc_stock_receive_lot",
-        "alc_supplier_purchase_manager",
-        # Others
+        # Odoo Community
         "account",
-        "helpdesk",
         "purchase",
         "sale",
         "stock",
+        # Odoo Enterprise
+        "helpdesk",
+        # Alcyon
+        "alc_supplier_purchase_manager",
+        # Alcyon/Stock Management
+        "alc_stock_receive_lot",
     ],
     "website": "http://www.camptocamp.com",
     "data": [

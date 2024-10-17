@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
+        # Third-party
         "sale_order_line_cancel",
     ],
     "data": ["views/sale_order.xml", "views/sale_order_line.xml"],

@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Others
+        # Odoo Community
         "stock",
     ],
     "data": ["views/stock_move.xml"],

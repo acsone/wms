@@ -8,8 +8,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Alcyon
         "alc_stock_picking_backorder_reason",
+        # Alcyon/Helpdesk
         "alce_helpdesk",
     ],
     "data": [

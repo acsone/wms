@@ -10,12 +10,12 @@
     # BE CAREFUL ALL the dependencies must BE LGPL or OEEL!!!
     # stock_barcode is an Odoo enterprise module
     "depends": [
-        # Custom
-        "alce_stock_barcode_easy_operation",
-        # OCA
-        "stock_picking_start",
-        # Others
+        # Odoo Enterprise
         "stock_barcode",
+        # Third-party
+        "stock_picking_start",
+        # Alcyon/Stock Management
+        "alce_stock_barcode_easy_operation",
     ],
     "data": ["views/stock_picking_views.xml"],
     "installable": True,

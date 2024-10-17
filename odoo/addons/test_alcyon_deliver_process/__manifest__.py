@@ -9,16 +9,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_additional_product_stock",
-        "alc_cash_on_delivery",
-        "alc_product_expiry",
-        "alc_stock_delivery_slip",
-        "alc_stock_lot_available",
-        "alc_stock_picking_cancel_permission",
-        "alc_stock_picking_cancel_permission",
-        "alc_stock_release_channel_print_cash_on_delivery",
-        # OCA
+        # Odoo Community
+        "product_expiry",
+        # Third-party
         "shipment_advice",
         "stock_move_auto_assign_auto_release",
         "stock_move_line_change_lot",
@@ -32,8 +25,17 @@
         "stock_release_channel_propagate_channel_picking",
         "stock_release_channel_propagate_channel_picking",
         "stock_release_channel_shipment_advice_deliver",
-        # Others
-        "product_expiry",
+        # Alcyon
+        "alc_additional_product_stock",
+        "alc_product_expiry",
+        "alc_stock_lot_available",
+        "alc_stock_picking_cancel_permission",
+        "alc_stock_picking_cancel_permission",
+        "alc_stock_release_channel_print_cash_on_delivery",
+        # Alcyon/Stock
+        "alc_stock_delivery_slip",
+        # Alcyon/Stock Management
+        "alc_cash_on_delivery",
     ],
     "data": [],
     "demo": [],

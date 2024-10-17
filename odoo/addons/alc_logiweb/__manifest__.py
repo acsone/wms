@@ -10,7 +10,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Third-party
+        "partner_manual_rank",
+        # Alcyon
         "alc_b2c_connector",
         "alc_b2c_connector_pricelist_discount",
         "alc_delivery_carrier_gls",
@@ -18,8 +20,6 @@
         "alc_product_category_data",
         "alc_product_food",
         "alc_product_pricelist_data",
-        # OCA
-        "partner_manual_rank",
     ],
     "data": [
         "security/ir.model.access.csv",

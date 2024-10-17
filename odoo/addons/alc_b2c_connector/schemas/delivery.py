@@ -38,7 +38,9 @@ class Delivery(BaseModel):
         return cls.model_construct(
             tracking_reference=stock_picking.carrier_tracking_ref or None,
             delivery_date=stock_picking._get_delivery_date(),
-            carrier=Carrier.from_delivery_carrier(stock_picking.carrier_id)
-            if stock_picking.carrier_id
-            else None,
+            carrier=(
+                Carrier.from_delivery_carrier(stock_picking.carrier_id)
+                if stock_picking.carrier_id
+                else None
+            ),
         )

@@ -6,7 +6,8 @@ from odoo.addons.stock.models.stock_rule import StockRule as StockRuleBase
 
 class StockRule(StockRuleBase):
     def _get_custom_move_fields(self):
-        return super()._get_custom_move_fields() + [
+        return [
+            *super()._get_custom_move_fields(),
             "main_move_id",
             "is_additional_move",
         ]

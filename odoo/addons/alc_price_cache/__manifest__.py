@@ -10,14 +10,15 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_pricelist_discount",
+        # Third-party
+        "base_partition",
+        "queue_job",
+        # Alcyon
         "alc_pricelist_role_name",
         "alc_queue_job_background_channel",
         "mixin_past",
-        # OCA
-        "base_partition",
-        "queue_job",
+        # Alcyon/Sales Management
+        "alc_pricelist_discount",
     ],
     "application": False,
     "data": [

@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_sale_consignment",
-        # OCA
+        # Third-party
         "sale_order_line_cancel",
+        # Alcyon/Stock Management
+        "alc_sale_consignment",
     ],
     "data": ["views/sale_order_line.xml"],
     "demo": [],

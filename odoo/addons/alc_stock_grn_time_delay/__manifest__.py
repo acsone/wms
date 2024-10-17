@@ -9,10 +9,10 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # OCA
-        "stock_grn",
-        # Others
+        # Odoo Community
         "stock",
+        # Third-party
+        "stock_grn",
     ],
     "data": ["views/res_config_settings_views.xml", "views/stock_picking_views.xml"],
     "external_dependencies": {"python": ["numpy"]},

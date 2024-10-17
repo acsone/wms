@@ -9,15 +9,15 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_cerberus_utils",
-        "alc_sale_channel",
-        "alc_sale_suite_name",
-        # OCA
+        # Third-party
         "fastapi",
         "sale_cart",
         "sale_order_line_cancel",
         "shopinvader_sale_state",
+        # Alcyon
+        "alc_cerberus_utils",
+        "alc_sale_channel",
+        "alc_sale_suite_name",
     ],
     "demo": [],
     "installable": True,

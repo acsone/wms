@@ -9,10 +9,10 @@
     "license": "AGPL-3",
     "category": "Communication",
     "depends": [
-        # OCA
-        "queue_job",
-        # Others
+        # Odoo Community
         "mail",
+        # Third-party
+        "queue_job",
     ],
     "website": "https://acsone.eu",
     "data": [

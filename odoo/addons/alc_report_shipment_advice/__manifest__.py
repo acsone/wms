@@ -10,11 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_report_base",
-        "alc_rma_shipment_advice",
-        "alc_stock_picking_parcels_and_items_per_source",
-        # OCA
+        # Third-party
         "internal_stock_quant_package",
         "shipment_advice_planner_toursolver",
         "shipment_advice_planner_toursolver",
@@ -23,6 +19,10 @@
         "stock_package_type_category",
         "stock_release_channel_shipment_advice",
         "stock_release_channel_shipment_advice",
+        # Alcyon
+        "alc_report_base",
+        "alc_rma_shipment_advice",
+        "alc_stock_picking_parcels_and_items_per_source",
     ],
     "data": [
         "views/stock_location.xml",

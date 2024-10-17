@@ -29,9 +29,11 @@ class AlcChronovetReportCsvFaclign(models.AbstractModel):
             "GTIN14": invoice_line.product_id.barcode,
             "LABORATOIRE": invoice_line.product_id.supplier_id.name,
             "TVA": amount_tax,
-            "CATEG": invoice_line.product_id.categ_id.parent_id.name
-            if invoice_line.product_id.categ_id.parent_id
-            else invoice_line.product_id.categ_id.name,
+            "CATEG": (
+                invoice_line.product_id.categ_id.parent_id.name
+                if invoice_line.product_id.categ_id.parent_id
+                else invoice_line.product_id.categ_id.name
+            ),
             "TOTALHT": sign * invoice_line.price_subtotal,
             "MONTTVA": sign * amount_tax,
             "TOTALTTC": sign * invoice_line.price_total,
@@ -42,13 +44,17 @@ class AlcChronovetReportCsvFaclign(models.AbstractModel):
             "COMMANDE": sale_order.order_id.name,
             "NCOMM": sale_order.order_id.b2c_ref,
             "DATCDE": sale_order.date_order,
-            "NLIVR": sale_order.order_id.picking_ids[0].name
-            if sale_order.order_id.picking_ids
-            else "",
+            "NLIVR": (
+                sale_order.order_id.picking_ids[0].name
+                if sale_order.order_id.picking_ids
+                else ""
+            ),
             "PROPRIETAIRE": sale_order.order_id.partner_id.name,
-            "DATLIV": sale_order.order_id.picking_ids[0].date_done
-            if sale_order.order_id.picking_ids
-            else "",
+            "DATLIV": (
+                sale_order.order_id.picking_ids[0].date_done
+                if sale_order.order_id.picking_ids
+                else ""
+            ),
         }
         common_data.update(sale_order_data)
         return common_data

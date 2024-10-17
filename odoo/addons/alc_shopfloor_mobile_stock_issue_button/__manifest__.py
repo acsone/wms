@@ -8,7 +8,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # OCA
+        # Third-party
         "shopfloor_mobile",
     ],
     "data": ["templates/assets.xml"],

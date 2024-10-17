@@ -9,10 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_stock_release_channel_menu",
-        # OCA
+        # Third-party
         "stock_release_channel_plan",
+        # Alcyon
+        "alc_stock_release_channel_menu",
     ],
     "data": ["wizards/launch_plan.xml"],
 }

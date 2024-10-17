@@ -24,7 +24,7 @@ FILTERS = [
 
 
 class PurchaseOrderBuilder(Home):
-    @http.route(  # noqa: C901
+    @http.route(
         [
             "/purchase_order_builder/<model('purchase.order'):po>",
             "/purchase_order_builder/<model('purchase.order'):po>/"

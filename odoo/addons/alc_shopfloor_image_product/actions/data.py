@@ -11,4 +11,4 @@ class DataAction(Component):
 
     @property
     def _product_parser(self):
-        return super()._product_parser + [("image", self._product_image_url)]
+        return [*super()._product_parser, ("image", self._product_image_url)]

@@ -9,7 +9,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
+        # Third-party
         "base_sparse_field_list_support",
         "product_template_multi_link",
     ],

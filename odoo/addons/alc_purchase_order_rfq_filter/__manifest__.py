@@ -11,7 +11,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Others
+        # Odoo Community
         "purchase",
     ],
     "data": ["views/purchase_order_views.xml"],

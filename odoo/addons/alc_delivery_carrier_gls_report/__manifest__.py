@@ -9,7 +9,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Alcyon
         "alc_delivery_carrier_gls_b2c",
     ],
     "data": ["reports/report_delivery_report_gls.xml"],

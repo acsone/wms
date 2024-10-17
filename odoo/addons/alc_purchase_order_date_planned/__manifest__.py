@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
-        "hr_holidays_public",
-        # Others
+        # Odoo Community
         "purchase",
+        # Third-party
+        "hr_holidays_public",
     ],
     "data": ["views/res_partner.xml"],
 }

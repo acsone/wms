@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
-        "stock_picking_completion_info",
-        # Others
+        # Odoo Community
         "stock",
+        # Third-party
+        "stock_picking_completion_info",
     ],
     "data": [
         "data/stock_picking_type.xml",

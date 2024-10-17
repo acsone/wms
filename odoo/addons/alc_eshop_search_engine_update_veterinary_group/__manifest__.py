@@ -9,10 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_veterinary_group",
-        # OCA
+        # Third-party
         "shopinvader_search_engine_update",
+        # Alcyon
+        "alc_veterinary_group",
     ],
     "application": False,
     "data": [],

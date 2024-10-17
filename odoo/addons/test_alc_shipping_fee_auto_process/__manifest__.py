@@ -12,10 +12,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_shipping_fee",
-        # OCA
+        # Third-party
         "stock_release_channel_shipment_advice_deliver",
+        # Alcyon/Delivery
+        "alc_shipping_fee",
     ],
     "application": False,
     "data": [],

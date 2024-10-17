@@ -9,11 +9,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Third-party
+        "base_sparse_field_list_support",
+        # Alcyon
         "alc_product_food",
         "alc_product_pharmacy",
-        # OCA
-        "base_sparse_field_list_support",
     ],
     "application": False,
     "data": ["views/res_partner.xml"],

@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_product_flattened_data",
-        # OCA
+        # Third-party
         "report_csv",
+        # Alcyon
+        "alc_product_flattened_data",
     ],
     "data": ["reports/alc_product_consolidated_price_csv_report.xml"],
     "demo": [],

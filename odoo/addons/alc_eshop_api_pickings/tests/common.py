@@ -31,6 +31,7 @@ class TestPickingsServiceBase(FastAPITransactionCase):
         cls.picking_done = cls.create_picking(moves_picking_done)
 
         cls.picking_cancel.with_context(force_cancel=True).action_cancel()
+
         # picking_half: cancel half of it, deliver the rest
         def filter_move(m):
             return m.product_id == cls.product_cancel

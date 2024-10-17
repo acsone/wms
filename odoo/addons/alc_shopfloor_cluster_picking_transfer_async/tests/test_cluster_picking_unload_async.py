@@ -347,7 +347,7 @@ class TestClusterPickingUnloadAsync(ClusterPickingUnloadingCommonCase):
         move_line,
         expected_batch_state: str,
         expected_next_step: str,
-        expected_next_line_id: int = None,
+        expected_next_line_id: int | None = None,
     ):
         self._set_dest_package_and_done(move_line, self.bin1)
         move_line.write({"location_dest_id": self.packing_location.id})

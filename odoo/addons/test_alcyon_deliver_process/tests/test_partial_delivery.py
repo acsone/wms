@@ -157,22 +157,22 @@ class TestPartialDeliveryReport(TestDeliverProcessBase):
 
         moves_by_orders = ship1.get_moves_by_order()
         self.assertEqual(len(moves_by_orders), 2)
-        sale1_moves = [
+        sale1_moves = next(
             moves_by_order[1]
             for moves_by_order in moves_by_orders
             if moves_by_order[0] == sale1
-        ][0]
+        )
         move_lines = sale1_moves[0]
         # only product_2 is done
         self.assertEqual(len(move_lines), 1)
         self.assertEqual(move_lines[0].product_id, self.product_2)
         backorder_lines = sale1_moves[1]
         self.assertEqual(len(backorder_lines), 0)
-        sale2_moves = [
+        sale2_moves = next(
             moves_by_order[1]
             for moves_by_order in moves_by_orders
             if moves_by_order[0] == sale2
-        ][0]
+        )
         move_lines = sale2_moves[0]
         # only product_2 is done
         self.assertEqual(len(move_lines), 1)
@@ -214,22 +214,22 @@ class TestPartialDeliveryReport(TestDeliverProcessBase):
 
         moves_by_orders = ship3.get_moves_by_order()
         self.assertEqual(len(moves_by_orders), 2)
-        sale3_moves = [
+        sale3_moves = next(
             moves_by_order[1]
             for moves_by_order in moves_by_orders
             if moves_by_order[0] == sale3
-        ][0]
+        )
         move_lines = sale3_moves[0]
         # only product_2 is done
         self.assertEqual(len(move_lines), 1)
         self.assertEqual(move_lines[0].product_id, self.product_2)
         backorder_lines = sale3_moves[1]
         self.assertEqual(len(backorder_lines), 0)
-        sale2_moves = [
+        sale2_moves = next(
             moves_by_order[1]
             for moves_by_order in moves_by_orders
             if moves_by_order[0] == sale2
-        ][0]
+        )
         move_lines = sale2_moves[0]
         # product_3 is partially done
         self.assertEqual(len(move_lines), 1)

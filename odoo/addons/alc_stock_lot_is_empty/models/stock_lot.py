@@ -21,4 +21,4 @@ class StockLot(StockLotBase):
             if not internal_quants:
                 rec.is_empty = True
             else:
-                rec.is_empty = all(quant.quantity == 0 for quant in internal_quants)
+                rec.is_empty = all(not quant.quantity for quant in internal_quants)

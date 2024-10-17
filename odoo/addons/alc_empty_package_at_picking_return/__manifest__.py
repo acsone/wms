@@ -11,10 +11,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
-        "rma",
-        # Others
+        # Odoo Community
         "stock",
+        # Third-party
+        "rma",
     ],
     "data": [
         "views/stock_picking_type.xml",

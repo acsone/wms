@@ -10,11 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
-        "product_stock_state",
-        # Others
+        # Odoo Community
         "purchase",
         "sale",
+        # Third-party
+        "product_stock_state",
     ],
     "data": [
         "views/purchase_order.xml",

@@ -3,7 +3,11 @@
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.shopfloor.services.location_content_transfer import (
     LocationContentTransfer as LocationContentTransferBase,
+)
+from odoo.addons.shopfloor.services.location_content_transfer import (
     ShopfloorLocationContentTransferValidator as LocationContentTransferValidator,
+)
+from odoo.addons.shopfloor.services.location_content_transfer import (
     ShopfloorLocationContentTransferValidatorResponse as LocationContentTransferValidatorResponse,
 )
 

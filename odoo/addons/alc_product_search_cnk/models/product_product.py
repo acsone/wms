@@ -16,7 +16,7 @@ class ProductProduct(product_product.ProductProduct):
         if limit and len(result) < limit:
             limit_available = limit - len(result)
             eids = [x[0] for x in result]
-            domain = [("cnk_code", "ilike", name), ("id", "not in", eids)] + args
+            domain = [("cnk_code", "ilike", name), ("id", "not in", eids), *args]
             products = self.search(domain, limit=limit_available)
             result += products.name_get()
         return result

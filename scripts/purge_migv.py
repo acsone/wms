@@ -2,6 +2,7 @@
 
 They correspond to invoices that had no corresponding account moves in v10.
 """
+
 env = env  # noqa
 
 moves = env["account.move"].search([("journal_id", "=", "MIGV")])

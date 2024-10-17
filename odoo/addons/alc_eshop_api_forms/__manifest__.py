@@ -10,11 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
-        "fastapi",
-        # Others
+        # Odoo Community
         "sales_team",
         "web",
+        # Third-party
+        "fastapi",
     ],
     "data": [
         "security/res_groups.xml",

@@ -12,7 +12,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
+        # Third-party
         "stock_available_immediately_exclude_location",
     ],
     "installable": True,

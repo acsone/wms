@@ -10,11 +10,11 @@
     "license": "AGPL-3",
     "category": "alc",
     "depends": [
-        # Custom
-        "alc_product_shop_category",
-        # OCA
+        # Third-party
         "shopinvader_multi_category",
         "shopinvader_search_engine",
+        # Alcyon
+        "alc_product_shop_category",
     ],
     "data": ["views/product_category.xml"],
     "development_status": "Alpha",

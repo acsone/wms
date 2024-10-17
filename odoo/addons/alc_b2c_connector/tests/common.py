@@ -9,6 +9,8 @@ from odoo import Command
 from odoo.addons.extendable_fastapi.tests.common import FastAPITransactionCase
 from odoo.addons.fastapi.dependencies import (
     authenticated_partner_impl as base_authenticated_partner_impl,
+)
+from odoo.addons.fastapi.dependencies import (
     fastapi_endpoint_id,
 )
 

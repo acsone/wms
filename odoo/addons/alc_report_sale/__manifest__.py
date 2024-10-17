@@ -10,18 +10,19 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Odoo Community
+        "sale",
+        # Third-party
+        "sale_triple_discount",
+        # Alcyon
         "alc_accounting_data",
         "alc_partner_pharmacist",
         "alc_partner_veterinary",
         "alc_product_pharmacy",
         "alc_report_base",
-        "alc_sale_consignment",
         "alc_sale_suite_name",
-        # OCA
-        "sale_triple_discount",
-        # Others
-        "sale",
+        # Alcyon/Stock Management
+        "alc_sale_consignment",
     ],
     "data": [
         "views/report_saleorder_document.xml",

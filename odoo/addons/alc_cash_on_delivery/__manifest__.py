@@ -8,7 +8,7 @@
     "author": "BCIM,ACSONE SA/NV",
     "category": "Stock Management",
     "depends": [
-        # Others
+        # Odoo Community
         "account",
         "sale_stock",
     ],

@@ -10,11 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_queue_job_background_channel",
-        # OCA
+        # Third-party
         "queue_job",
         "shopfloor",
+        # Alcyon
+        "alc_queue_job_background_channel",
     ],
     "data": [
         "views/shopfloor_menu.xml",

@@ -10,17 +10,17 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
+        # Odoo Community
+        "sale_stock",
+        "stock",
+        # Third-party
+        "stock_available",
+        "stock_picking_backorder_reason",
+        # Alcyon
         "alc_product_state",
         "alc_sale_exception",
         "alc_sale_exception_settings",
         "alc_sale_product_qty_unavailable",
-        # OCA
-        "stock_available",
-        "stock_picking_backorder_reason",
-        # Others
-        "sale_stock",
-        "stock",
     ],
     "data": ["data/exception_rule.xml"],
     "pre_init_hook": "pre_init_hook",

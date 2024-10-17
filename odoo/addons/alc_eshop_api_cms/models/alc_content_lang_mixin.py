@@ -36,8 +36,7 @@ class AlcContentLangMixin(models.AlcContentLangMixin):
         for lang_id, records in self._get_records_by_lang().items():
             if lang_ids and lang_id not in lang_ids:
                 continue
-            for record in records.with_context(lang=lang_id.code):
-                yield record
+            yield from records.with_context(lang=lang_id.code)
 
     def _get_records_by_lang(self):
         """Return a dict of records by lang."""

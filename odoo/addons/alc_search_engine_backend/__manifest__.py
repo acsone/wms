@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_se_index_lowercase_name",
-        # OCA
+        # Third-party
         "connector_elasticsearch",
+        # Alcyon
+        "alc_se_index_lowercase_name",
     ],
     "data": ["data/se_backend.xml"],
     "pre_init_hook": "pre_init_hook",

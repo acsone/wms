@@ -9,14 +9,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_partner_type",
-        "alc_product_flattened_data",
-        # OCA
+        # Odoo Community
+        "sale",
+        # Third-party
         "fastapi",
         "product_brand",
-        # Others
-        "sale",
+        # Alcyon
+        "alc_partner_type",
+        "alc_product_flattened_data",
     ],
     "demo": [],
     "installable": True,

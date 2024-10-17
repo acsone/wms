@@ -9,10 +9,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
-        "partner_manual_rank",
-        # Others
+        # Odoo Community
         "purchase",
+        # Third-party
+        "partner_manual_rank",
     ],
     "data": ["views/product_template_views.xml"],
     "demo": [],

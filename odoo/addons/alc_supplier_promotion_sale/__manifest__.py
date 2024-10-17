@@ -11,12 +11,13 @@
     "category": "Product",
     "version": "16.0.1.0.0",
     "depends": [
-        # Custom
-        "alc_partner_pricelist",
-        "alc_pricelist_discount",
-        "alc_supplier_promotion",
-        # Others
+        # Odoo Community
         "sale",
+        # Alcyon
+        "alc_partner_pricelist",
+        "alc_supplier_promotion",
+        # Alcyon/Sales Management
+        "alc_pricelist_discount",
     ],
     "data": [],
     "installable": True,

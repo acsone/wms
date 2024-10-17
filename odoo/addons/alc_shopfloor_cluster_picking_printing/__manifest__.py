@@ -11,14 +11,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_shopfloor_product_print_label",
-        # OCA
+        # Odoo Community
+        "delivery",
+        # Third-party
         "base_report_to_label_printer",
         "shopfloor_packing",
         "stock_storage_type",
-        # Others
-        "delivery",
+        # Alcyon
+        "alc_shopfloor_product_print_label",
     ],
     "data": ["views/shopfloor_menu.xml"],
     "demo": [],

@@ -9,14 +9,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Third-party
+        "shopinvader_api_cart",
+        "shopinvader_schema_sale",
+        # Alcyon
         "alc_eshop_ordering_allowed",
         "alc_partner_type",
         "alc_product_pharmacy",
         "alc_sale_suite_name",
-        # OCA
-        "shopinvader_api_cart",
-        "shopinvader_schema_sale",
     ],
     "data": [
         "data/mail_template.xml",

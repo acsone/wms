@@ -10,7 +10,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
+        # Odoo Community
+        "base_sparse_field",
+        # Third-party
+        "account_tax_one_vat",
+        "product_multi_category",
+        "queue_job_cron",
+        "shopinvader_base_url",
+        # Alcyon
         "alc_materialized_view_mixin",
         "alc_pg_trgm",
         "alc_price_cache",
@@ -20,13 +27,6 @@
         "alc_product_shop_category",
         "alc_product_web_publish",
         "alc_supplier_promotion",
-        # OCA
-        "account_tax_one_vat",
-        "product_multi_category",
-        "queue_job_cron",
-        "shopinvader_base_url",
-        # Others
-        "base_sparse_field",
     ],
     "data": ["data/ir_cron.xml", "security/alc_product_flattened_data.xml"],
     "demo": [],

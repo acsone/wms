@@ -68,9 +68,10 @@ class TestSaleCartRestApiInfo(TestEshopApiCartCase):
         self.assertEqual(confirm_date, self.so.date_order)
 
     def test_confirm_without_note_sent_mail(self):
-        with self._record_new_note_template(
-            self.so
-        ) as result, self._create_test_client() as test_client:
+        with (
+            self._record_new_note_template(self.so) as result,
+            self._create_test_client() as test_client,
+        ):
             test_client.post(
                 "carts/confirm",
                 json={"uuid": self.so.uuid, "customer_ref": "my_ref", "note": ""},

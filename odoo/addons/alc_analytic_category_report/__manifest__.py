@@ -10,10 +10,10 @@
     "author": "ACSONE SA/NV",
     "website": "http://acsone.eu",
     "depends": [
-        # Custom
-        "account_move_line_single_analytic_account",
-        # OCA
+        # Third-party
         "account_analytic_account_tag",
+        # Alcyon
+        "account_move_line_single_analytic_account",
     ],
     "data": [
         "views/account_analytic_account_views.xml",

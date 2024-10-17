@@ -11,17 +11,18 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_pricelist_discount",
-        "alc_product_promotion_subscription",
-        "alc_queue_job_background_channel",
-        # OCA
+        # Odoo Community
+        "mail",
+        "sale",
+        # Third-party
         "fs_product_multi_image",
         "queue_job_cron",
         "shopinvader_product_url",
-        # Others
-        "mail",
-        "sale",
+        # Alcyon
+        "alc_product_promotion_subscription",
+        "alc_queue_job_background_channel",
+        # Alcyon/Sales Management
+        "alc_pricelist_discount",
     ],
     "data": [
         "data/ir_cron.xml",

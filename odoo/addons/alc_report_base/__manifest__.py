@@ -10,13 +10,14 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Custom
-        "alc_company_term_condition",
-        "alc_external_fax",
-        "alc_queue_job_background_channel",
-        # OCA
+        # Third-party
         "partner_fax",
         "queue_job",
+        # Alcyon
+        "alc_company_term_condition",
+        "alc_queue_job_background_channel",
+        # Alcyon/Communication
+        "alc_external_fax",
     ],
     "assets": {
         "web.report_assets_common": [

@@ -10,11 +10,11 @@
     "author": "ACSONE SA/NV",
     "website": "https://www.acsone.eu",
     "depends": [
-        # OCA
+        # Odoo Community
+        "stock",
+        # Third-party
         "stock_available_immediately_exclude_location",
         "stock_available_location_get_domain",
-        # Others
-        "stock",
     ],
     "data": [
         "views/res_config_settings.xml",

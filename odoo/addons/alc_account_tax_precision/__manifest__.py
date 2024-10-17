@@ -10,7 +10,7 @@
     "author": "Camptocamp,ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Others
+        # Odoo Community
         "account",
     ],
     "data": ["data/decimal_precision.xml"],

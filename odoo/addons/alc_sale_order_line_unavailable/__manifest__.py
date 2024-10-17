@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
+        # Alcyon
         "alc_sale_order_line_unavailable_list",
         "alc_sales_count",
     ],

@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
+        # Third-party
         "product_abc_classification_sale_stock",
         "product_route_mto",
         "stock_storage_type",

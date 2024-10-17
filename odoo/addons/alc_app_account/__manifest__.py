@@ -9,23 +9,9 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # Custom
-        "alc_account_compute_payment_reference",
-        "alc_account_invoice_accrual",
-        "alc_account_invoice_email",
-        "alc_account_invoice_peppol_server_env",
-        "alc_account_invoice_product_no_reference",
-        "alc_account_invoice_supplier_ref_unique_mandatory",
-        "alc_account_invoice_vendor_bill_autocomplete",
-        "alc_account_move_maturity_date",
-        "alc_account_payment_globalization",
-        "alc_account_security",
-        "alc_account_tax_precision",
-        "alc_automatic_account_move_line_reconcile",
-        "alc_chronovet_payment_globalization",
-        "alc_partner_invoicing_mode_default",
-        "alc_placedesvetos_payment_globalization",
-        # OCA
+        # Odoo Community
+        "account",
+        # Third-party
         "account_cutoff_accrual_order_product_category",
         "account_cutoff_accrual_purchase_stock",
         "account_cutoff_accrual_sale_stock",
@@ -57,8 +43,23 @@
         "partner_invoicing_mode_ten_days",
         "report_async",
         "stock_account_move_multi_reset_to_draft",
-        # Others
-        "account",
+        # Alcyon
+        "alc_account_compute_payment_reference",
+        "alc_account_invoice_peppol_server_env",
+        "alc_account_invoice_product_no_reference",
+        "alc_account_move_maturity_date",
+        "alc_account_payment_globalization",
+        "alc_account_security",
+        "alc_account_tax_precision",
+        "alc_automatic_account_move_line_reconcile",
+        "alc_chronovet_payment_globalization",
+        "alc_partner_invoicing_mode_default",
+        "alc_placedesvetos_payment_globalization",
+        # Alcyon/Accounting & Finance
+        "alc_account_invoice_accrual",
+        "alc_account_invoice_email",
+        "alc_account_invoice_supplier_ref_unique_mandatory",
+        "alc_account_invoice_vendor_bill_autocomplete",
     ],
     "data": [
         "data/report_async.xml",

@@ -184,7 +184,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
         return res
 
     def _delay_set_pick_allowed(
-        self, pick_allowed: bool, picking_type=None, eta: datetime = None
+        self, pick_allowed: bool, picking_type=None, eta: datetime | None = None
     ):
         self.ensure_one()
         self.with_delay(eta=eta)._set_pick_allowed(

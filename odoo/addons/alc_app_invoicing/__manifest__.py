@@ -11,13 +11,7 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
-        # Custom
-        "alc_account_invoice_cancel_permissions",
-        "alc_account_move_default_reference_type",
-        "alc_invoices_audit",
-        "alc_ir_sequence_period",
-        "alc_sale_invoicing_on_transfer",
-        # OCA
+        # Third-party
         "account_banking_mandate",
         "account_banking_pain_base",
         "account_banking_sepa_direct_debit",
@@ -42,5 +36,11 @@
         "pdf_helper",
         "purchase_invoicing_no_zero_line",
         "report_xml",
+        # Alcyon
+        "alc_account_invoice_cancel_permissions",
+        "alc_account_move_default_reference_type",
+        "alc_invoices_audit",
+        "alc_ir_sequence_period",
+        "alc_sale_invoicing_on_transfer",
     ],
 }

@@ -9,20 +9,21 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
+        # Odoo Community
+        "product",
+        "purchase_stock",
+        "stock",
+        # Third-party
+        "product_route_mto",
+        "sale_order_line_cancel",
+        "stock_location_zone",
+        # Alcyon
         "alc_product_dimensions_missing",
         "alc_product_pharmacy",
         "alc_product_supplier",
         "alc_product_web_publish",
+        # Alcyon/Stock Management
         "alc_stock_orderpoint_product",
-        # OCA
-        "product_route_mto",
-        "sale_order_line_cancel",
-        "stock_location_zone",
-        # Others
-        "product",
-        "purchase_stock",
-        "stock",
     ],
     "data": ["views/product_template.xml"],
     "demo": [],

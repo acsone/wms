@@ -10,12 +10,12 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
+        # Odoo Community
+        "product_expiry",
+        # Third-party
         "stock_available_location_orderpoint",
         "stock_location_orderpoint",
         "stock_storage_type",
-        # Others
-        "product_expiry",
     ],
     "data": [
         "data/stock_storage_location_sequence_condition.xml",

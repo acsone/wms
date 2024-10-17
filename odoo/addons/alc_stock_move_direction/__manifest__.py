@@ -11,10 +11,10 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
-        "stock_helper",
-        # Others
+        # Odoo Community
         "stock",
+        # Third-party
+        "stock_helper",
     ],
     "data": [],
     "demo": [],

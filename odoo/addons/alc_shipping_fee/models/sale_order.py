@@ -53,9 +53,9 @@ class SaleOrder(sale_order.SaleOrder):
 
     def _check_charge_fee(self, carrier, sum_ordered, used_to_charge_delivery_fee):
         if used_to_charge_delivery_fee == "used_for_fixed_fee":
-            do_not_charge_fee = sum_ordered == 0
+            do_not_charge_fee = not sum_ordered
         if used_to_charge_delivery_fee == "used_for_delivery_fee":
-            do_not_charge_fee = sum_ordered == 0 or sum_ordered >= carrier.amount
+            do_not_charge_fee = not sum_ordered or sum_ordered >= carrier.amount
         return do_not_charge_fee
 
     def charge_extra_fees_on_customer(

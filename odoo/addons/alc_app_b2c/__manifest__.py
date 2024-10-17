@@ -11,7 +11,7 @@
     "website": "https://acsone.eu",
     "application": True,
     "depends": [
-        # Custom
+        # Alcyon
         "alc_address_data",
         "alc_address_data",
         "alc_b2c_connector",

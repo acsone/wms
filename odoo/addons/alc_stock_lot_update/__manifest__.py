@@ -24,7 +24,7 @@
     "category": "Stock Management",
     "author": "BCIM, ACSONE SA/NV",
     "depends": [
-        # Others
+        # Odoo Community
         "stock",
     ],
     "data": [

@@ -60,7 +60,7 @@ class StockPicking(Picking):
         round_carriers = round_saleorders.mapped("carrier_id").filtered(
             lambda r: r.use_specific_cost_calculation
         )
-        if len(round_carriers) == 0:
+        if not round_carriers:
             # No delivery carrier that use specific shipping cost so out.
             return
         round_customers = round_saleorders.mapped("partner_id").filtered(

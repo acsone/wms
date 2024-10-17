@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
-        # OCA
+        # Third-party
         "partner_invoicing_mode_cash_on_delivery",
         "stock_release_channel_shipment_advice_deliver",
     ],

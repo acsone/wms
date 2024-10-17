@@ -59,9 +59,9 @@ class ProductTemplate(ProductTemplateBase):
                 }
                 if info.is_promotion:
                     info_json["ratio_main_product"] = info.ratio_main_product
-                    info_json[
-                        "ratio_promotional_product"
-                    ] = info.ratio_promotional_product
+                    info_json["ratio_promotional_product"] = (
+                        info.ratio_promotional_product
+                    )
                     if info.only_for_veterinaries:
                         supplier_promotion_json_for_veterinaries.append(info_json)
                     else:
@@ -106,7 +106,8 @@ class ProductTemplate(ProductTemplateBase):
         domain = []
         if partner_id.partner_type != "veterinary":
             domain.append(("only_for_veterinaries", "=", False))
-        domain = domain + [
+        domain = [
+            *domain,
             ("ratio_promotional_product", ">", 0),
             ("ratio_main_product", ">", 0),
             "|",

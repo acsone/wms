@@ -26,7 +26,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
             ("state", "not in", ("done", "cancel")),
         ]
         for rec in self:
-            domain = common_domain + [("release_channel_id", "=", rec.id)]
+            domain = [*common_domain, ("release_channel_id", "=", rec.id)]
             pickings = picking_model.search(domain)
             if not pickings:
                 rec.total_weight = 0

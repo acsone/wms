@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # Others
+        # Odoo Enterprise
         "account_intrastat",
     ],
     "data": [],

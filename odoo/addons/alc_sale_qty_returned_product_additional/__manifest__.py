@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [
-        # Custom
+        # Alcyon
         "alc_additional_product_stock",
         "alc_sale_qty_returned",
     ],

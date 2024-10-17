@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu/",
     "depends": [
-        # OCA
+        # Third-party
         "base_report_to_printer",
     ],
     "data": ["views/printing_printer_views.xml"],
