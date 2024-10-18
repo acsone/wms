@@ -84,6 +84,7 @@
         "alc_eshop_search_engine_product_stock",
         "alc_eshop_search_engine_product_stock",
         "alc_eshop_search_engine_product_url_locales",
+        "alc_eshop_search_engine_sanitizer",
         "alc_eshop_search_engine_update_product_discount_special",
         "alc_eshop_search_engine_update_veterinary_group",
         "alc_keycloak",

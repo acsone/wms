@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record forcecreate="True" id="ir_cron_se_binding_sanitizer" model="ir.cron">
+        <field name="name">Search engine: - Sanitize bindings</field>
+        <field eval="True" name="active" />
+        <field name="model_id" ref="connector_search_engine.model_se_binding" />
+        <field name="state">code</field>
+        <field name="code">model._cron_sanitizer()</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+        <field eval="1" name="run_as_queue_job" />
+        <field ref="queue_job_cron.channel_root_ir_cron" name="channel_id" />
+        <field
+            name="nextcall"
+            eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 17:00:00')"
+        />
+    </record>
+</odoo>
