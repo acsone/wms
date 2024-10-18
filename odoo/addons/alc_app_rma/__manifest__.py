@@ -15,6 +15,7 @@
         "product_warranty",
         "rma",
         "rma_delivery",
+        "rma_delivery_procurement_group_carrier",
         "rma_lot",
         "rma_reason",
         "rma_sale",
