@@ -127,6 +127,7 @@
     - oca refs/pull/421/head # [16.0][FIX] rma: same procurement group for reception and delivery #421
     - oca refs/pull/423/head # [FIX] rma: group rma receptions #423
     - oca refs/pull/429/head # [IMP] rma: add dashboard #429
+    - oca refs/pull/434/head # [IMP] rma: custom route for replace action #434
   target: origin 16.0-alc-rma
 
 ./src/rma_sale:

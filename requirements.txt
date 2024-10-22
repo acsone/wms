@@ -240,7 +240,7 @@ odoo-addon-report-xlsx==16.0.2.0.2
 odoo-addon-report-xlsx-helper==16.0.1.0.0.11
 odoo-addon-report-xml==16.0.1.1.2.2
 odoo-addon-rest-log==16.0.1.0.1.3
-odoo-addon-rma @ git+https://github.com/acsone/rma.git@db012ed9010609199903489ed922acdf247742f0#subdirectory=setup/rma
+odoo-addon-rma @ git+https://github.com/acsone/rma.git@39fed3e6273fdf80e43f17d534a9d016bff9088c#subdirectory=setup/rma
 odoo-addon-rma-delivery @ git+https://github.com/acsone/rma.git@bbf680fb7ca4351ba236b18d5cf094f18e2ba870#subdirectory=setup/rma_delivery
 odoo-addon-rma-delivery-procurement-group-carrier @ git+https://github.com/acsone/rma.git@6bcf02fa51529539f050f86df999283ad2ad4fa7#subdirectory=setup/rma_delivery_procurement_group_carrier
 odoo-addon-rma-lot @ git+https://github.com/acsone/rma.git@c01af5dfaf4d772bb19f6151cee567863df10fb4#subdirectory=setup/rma_lot
