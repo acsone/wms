@@ -14,7 +14,9 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
             iterator = move._get_chained_moves_iterator("move_orig_ids")
             next(iterator)  # skip the current move
             for pick_moves in iterator:
-                printed_pickings = pick_moves.picking_id.filtered("printed")
+                printed_pickings = pick_moves.filtered(
+                    lambda move: move.state not in ("done", "cancel")
+                ).picking_id.filtered("printed")
                 picking_names = ",".join(printed_pickings.mapped("name"))
                 if printed_pickings:
                     raise UserError(
