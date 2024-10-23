@@ -107,3 +107,16 @@ class TestSaleOrderLineCancel(BaseCommon):
         self._cancel_remaining_qty()
         self.assertEqual(self.sol.product_qty_canceled, 3)
         self.assertEqual(self.sol.product_qty_remains_to_deliver, 0)
+
+    def test_cancel_qty_backorder_printed(self):
+        """Test a flow where pickings are set as printed."""
+        self.pick.move_line_ids.qty_done = 2
+        # Set the picking as started
+        self.pick.printed = True
+        self.pick._action_done()
+        self.out.printed = True
+        self.out.move_line_ids.qty_done = 2
+        self.out._action_done()
+        self.wiz.with_context(
+            active_id=self.sol.id, active_model=self.sol._name
+        ).cancel_remaining_qty()
