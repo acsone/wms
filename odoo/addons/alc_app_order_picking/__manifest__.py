@@ -75,6 +75,7 @@
         "stock_release_channel_shipment_advice_toursolver",
         "stock_reserve_rule",
         "stock_restrict_lot",
+        "stock_safe_scrap",
         "stock_split_picking",
         # Alcyon
         "alc_additional_product_stock",
