@@ -13,7 +13,7 @@ class VeterinaryGroup(models.Model):
     _description = "Veterinary Group"
     _order = "sequence"
 
-    name = fields.Char(string="Name")
+    name = fields.Char(string="Name", translate=True, required=True)
     is_alcyonnaire = fields.Boolean()
     display_color = fields.Char("Color")
     sequence = fields.Integer(default=-1, required=True)
