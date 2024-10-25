@@ -3,18 +3,21 @@
 
 from odoo.tools import drop_index, index_exists
 
-from odoo.addons.stock.models.stock_move_line import StockMoveLine as StockMoveLineBase
+from odoo.addons.stock_account.models import stock_valuation_layer
 
 
-class StockMoveLine(StockMoveLineBase):
+class StockValuationLayer(stock_valuation_layer.StockValuationLayer):
 
     def init(self):  # pylint: disable=missing-return
         super().init()
+
         if index_exists(
             self._cr,
-            "stock_move_line_result_package_id_index",
+            "stock_valuation_layer_index",
         ):
             # covered by the previous index
             drop_index(
-                self._cr, "stock_move_line_result_package_id_manidx", "stock_move_line"
+                self._cr,
+                "stock_valuation_layer_product_id_manidx",
+                "stock_valuation_layer",
             )

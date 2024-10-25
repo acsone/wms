@@ -18,3 +18,11 @@ class StockLot(LotBase):
                     stock_lot(expiration_date)
                 """
             )
+        if not index_exists(self._cr, "stock_lot_expiration_date_null_manidx"):
+            self._cr.execute(
+                """
+                CREATE INDEX stock_lot_expiration_date_null_manidx
+                ON
+                    stock_lot(id) WHERE expiration_date IS NULL
+                """
+            )

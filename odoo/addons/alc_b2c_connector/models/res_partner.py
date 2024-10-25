@@ -20,7 +20,7 @@ TITLE_XML_ID_BY_B2C_KEY = {
 
 
 class ResPartner(ResPartnerBase):
-    alc_b2c_client_id = fields.Many2one[AlcB2cClient](readonly=True)
+    alc_b2c_client_id = fields.Many2one[AlcB2cClient](readonly=True, index=True)
 
     @api.depends("partner_type", "is_b2c_customer")
     def _compute_is_student(self):

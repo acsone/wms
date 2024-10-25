@@ -3,18 +3,16 @@
 
 from odoo.tools import drop_index, index_exists
 
-from odoo.addons.stock.models.stock_move_line import StockMoveLine as StockMoveLineBase
+from odoo.addons.shopfloor.models import shopfloor_app
 
 
-class StockMoveLine(StockMoveLineBase):
+class ShopfloorApp(shopfloor_app.ShopfloorApp):
 
     def init(self):  # pylint: disable=missing-return
         super().init()
         if index_exists(
             self._cr,
-            "stock_move_line_result_package_id_index",
+            "shopfloor_app_tech_name",
         ):
             # covered by the previous index
-            drop_index(
-                self._cr, "stock_move_line_result_package_id_manidx", "stock_move_line"
-            )
+            drop_index(self._cr, "shopfloor_app_tech_name_index", "shopfloor_app")

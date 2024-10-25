@@ -7,3 +7,4 @@ class IrAttachment(IrAttachmentBase):
 
     # Gain 1.2 second on record deletion with attachment
     original_id = fields.Many2one[IrAttachmentBase](index=True)
+    name = fields.Char(index=True)
