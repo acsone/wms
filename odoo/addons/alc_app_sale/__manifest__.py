@@ -32,6 +32,7 @@
         "sale_channel",
         "sale_discount_display_amount",
         "sale_exception",
+        "sale_invoice_policy",
         "sale_order_line_cancel",
         "sale_product_set",
         "sale_route_amendment",
