@@ -12,6 +12,9 @@ class TestStockPicking(TransactionCase):
         cls.product = cls.env["product.product"].create(
             {"name": "product", "type": "product"}
         )
+        cls.product_2 = cls.env["product.product"].create(
+            {"name": "product 2", "type": "product"}
+        )
         cls.wh = cls.env.ref("stock.warehouse0")
         cls.loc_stock = cls.wh.lot_stock_id
         cls.loc_customer = cls.env.ref("stock.stock_location_customers")
@@ -121,3 +124,66 @@ class TestStockPicking(TransactionCase):
         self.assertTrue(self.picking.delivery_requires_other_lines)
         self.picking.assign_release_channel()
         self.assertFalse(self.picking.release_channel_id)
+
+    def test_several_orders_with_backorder(self):
+        """
+        The use case is the following:
+
+        - Create a sale order with two products, one available, one unavailable
+        - Deliver the available product and create a backorder for the other
+        - Replenish product 2
+        - Modify the sale order to add the available product again
+        - Assign the release channel
+        - The release channel should be assigned to the backorder
+        """
+        # Use a part of first product avialability
+        self.sale.order_line.write({"product_uom_qty": 50.0})
+        # Create a line for the second product
+        self.sale.write(
+            {
+                "order_line": [
+                    Command.create(
+                        {
+                            "name": self.product.name,
+                            "product_id": self.product_2.id,
+                            "product_uom_qty": 120,
+                        },
+                    )
+                ],
+            }
+        )
+        # Necessary to recompute
+        self.sale.order_line.flush_recordset()
+        self.sale.action_confirm()
+        line1 = self.sale.order_line.filtered(
+            lambda line: line.product_id == self.product
+        )
+        line2 = self.sale.order_line.filtered(
+            lambda line: line.product_id == self.product_2
+        )
+        self.assertEqual(0.0, line1.product_qty_unavailable)
+        self.assertEqual(120.0, line2.product_qty_unavailable)
+
+        picking = self.sale.picking_ids
+
+        self.assertEqual("assigned", picking.state)
+
+        picking.move_line_ids.filtered(
+            lambda line: line.product_id == self.product
+        ).qty_done = 50.0
+        picking._action_done()
+
+        self.assertEqual(picking.state, "done")
+        backorder = picking.backorder_ids
+        self.assertTrue(backorder)
+
+        # Replenish product 2
+        self.env["stock.quant"]._update_available_quantity(
+            self.product_2, self.loc_stock, 120.0
+        )
+
+        # relaunch a procurement
+        line1.product_uom_qty = 100.0
+
+        backorder.assign_release_channel()
+        self.assertTrue(backorder.release_channel_id)
