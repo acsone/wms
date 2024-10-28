@@ -11,7 +11,6 @@ pickleshare==0.7.5
 prompt-toolkit==3.0.39
 ptyprocess==0.7.0
 pure-eval==0.2.2
-pygments==2.15.1
 stack-data==0.6.2
 traitlets==5.9.0
 wcwidth==0.2.6

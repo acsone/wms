@@ -203,3 +203,6 @@ odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/OCA/stock
 # OCA/partner-contact
 odoo-addon-base-partner-sequence @ git+https://github.com/OCA/partner-contact.git@refs/pull/1875/head#subdirectory=setup/base_partner_sequence
 odoo-addon-partner-manual-rank @ git+https://github.com/OCA/partner-contact.git@refs/pull/1849/head#subdirectory=setup/partner_manual_rank
+
+# akretion/ak-odoo-incubator
+odoo-addon-module-analysis-price @ git+https://github.com/akretion/ak-odoo-incubator@16.0#subdirectory=setup/module_analysis_price
