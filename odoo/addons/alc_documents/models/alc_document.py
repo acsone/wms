@@ -21,9 +21,7 @@ class AlcDocument(models.Model):
     _description = "Alcyon Document"
     _order = "is_null_document_date_start desc, document_date desc, type, name"
 
-    attachment_id = fields.Many2one[IrAttachment](
-        readonly=True, ondelete="cascade", index=True
-    )
+    attachment_id = fields.Many2one[IrAttachment](readonly=True, ondelete="cascade")
     compute = fields.Selection([], readonly=True)  # to extend
     res_model = fields.Char(related="attachment_id.res_model", readonly=True)
     document_date = fields.Datetime(
