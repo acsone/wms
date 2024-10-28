@@ -44,7 +44,7 @@ msgstr "Leeftijdscategorie"
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_product__animal_size_option_ids
 #: model:ir.model.fields,field_description:alc_pim_product.field_product_template__animal_size_option_ids
 msgid "Animal Sizes"
-msgstr "Grote dier"
+msgstr "Grootte dier"
 
 #. module: alc_pim_product
 #: model:ir.model,name:alc_pim_product.model_attribute_attribute
