@@ -73,6 +73,7 @@
         "stock_release_channel_shipment_advice_deliver",
         "stock_release_channel_shipment_advice_process_end_time",
         "stock_release_channel_shipment_advice_toursolver",
+        "stock_release_channel_split_picking",
         "stock_reserve_rule",
         "stock_restrict_lot",
         "stock_safe_scrap",
