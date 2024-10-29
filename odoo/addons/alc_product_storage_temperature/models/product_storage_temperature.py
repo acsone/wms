@@ -9,5 +9,5 @@ class ProductStorageTemperature(models.Model):
     _name = "product.storage.temperature"
     _description = "Storage Temperature"
 
-    name = fields.Char(required=True)
+    name = fields.Char(required=True, translate=True)
     temperature = fields.Float("Temperature (°C)")

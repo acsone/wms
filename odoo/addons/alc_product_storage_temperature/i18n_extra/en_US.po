@@ -1,0 +1,36 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_product_storage_temperature
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-29 13:45+0000\n"
+"PO-Revision-Date: 2024-10-29 13:45+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_product_storage_temperature
+#: model:product.storage.temperature,name:alc_product_storage_temperature.product_storage_temperature_ambient
+msgid "Température ambiante"
+msgstr "Room temperature"
+
+#. module: alc_product_storage_temperature
+#: model:product.storage.temperature,name:alc_product_storage_temperature.product_storage_temperature_minus_12
+msgid "Température -12°C"
+msgstr "Temperature -12°C"
+
+#. module: alc_product_storage_temperature
+#: model:product.storage.temperature,name:alc_product_storage_temperature.product_storage_temperature_15
+msgid "Température 15°C"
+msgstr "Temperature 15°C"
+
+#. module: alc_product_storage_temperature
+#: model:product.storage.temperature,name:alc_product_storage_temperature.product_storage_temperature_6
+msgid "Température 6°C"
+msgstr "Temperature 6°C"
