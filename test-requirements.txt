@@ -3,3 +3,7 @@ odoo_test_helper
 
 # stock-logistics-tracking
 odoo-addon-internal-stock-quant-package @ git+https://github.com/OCA/stock-logistics-tracking.git@refs/pull/34/head#subdirectory=setup/internal_stock_quant_package
+
+odoo-addon-stock-picking-delivery-package-type-domain @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/846/head#subdirectory=setup/stock_picking_delivery_package_type_domain
+
+odoo-addon-shopfloor @ git+https://github.com/OCA/wms.git@refs/pull/942/head#subdirectory=setup/shopfloor
