@@ -5,7 +5,7 @@
     "name": "Alc Eshop Product PIM",
     "description": """
         This addon add product pim fields to the product schema""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
