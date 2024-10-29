@@ -149,6 +149,8 @@ def delete_round_instance_mail_message(connection_info):
 def delete_round_instance_ir_attachment(connection_info):
     conn = psycopg2.connect(**connection_info)
     conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+    ir_attachment_ids = []
+    fnames = []
     with closing(conn.cursor()) as cr:
         cr.execute(
             """
@@ -156,8 +158,9 @@ def delete_round_instance_ir_attachment(connection_info):
             WHERE res_model = 'round.instance'
             """
         )
-        ir_attachment_ids = [i[0] for i in cr.fetchall()]
-        fnames = [i[1] for i in cr.fetchall()]
+        for i in cr.fetchall():
+            ir_attachment_ids.append(i[0])
+            fnames.append(i[1])
     logger.info("Deleting %d records from ir_attachment", len(ir_attachment_ids))
     parallel_delete(
         "ir_attachment",
@@ -272,7 +275,7 @@ if __name__ == "__main__":
     connection_info = _connection_info_for(dbname)
     create_fk_index_ir_attachment(connection_info)
     delete_round_instance_mail_message(connection_info)
-    # delete_round_instance_ir_attachment(connection_info)
+    delete_round_instance_ir_attachment(connection_info)
     with OdooEnvironment(dbname) as env:
         cleanup_modules(env)
         cleanup_models(env)
