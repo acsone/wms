@@ -1,0 +1,78 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_product_storage_temperature
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-29 13:45+0000\n"
+"PO-Revision-Date: 2024-10-29 13:45+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_product_storage_temperature
+#: model:ir.model.fields,field_description:alc_product_storage_temperature.field_product_storage_temperature__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_product_storage_temperature
+#: model:ir.model.fields,field_description:alc_product_storage_temperature.field_product_storage_temperature__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_product_storage_temperature
+#: model:ir.model.fields,field_description:alc_product_storage_temperature.field_product_storage_temperature__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: alc_product_storage_temperature
+#: model:ir.model.fields,field_description:alc_product_storage_temperature.field_product_storage_temperature__id
+msgid "ID"
+msgstr ""
+
+#. module: alc_product_storage_temperature
+#: model:ir.model.fields,field_description:alc_product_storage_temperature.field_product_storage_temperature____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_product_storage_temperature
+#: model:ir.model.fields,field_description:alc_product_storage_temperature.field_product_storage_temperature__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_product_storage_temperature
+#: model:ir.model.fields,field_description:alc_product_storage_temperature.field_product_storage_temperature__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: alc_product_storage_temperature
+#: model:ir.model.fields,field_description:alc_product_storage_temperature.field_product_storage_temperature__name
+msgid "Name"
+msgstr ""
+
+#. module: alc_product_storage_temperature
+#: model:ir.model,name:alc_product_storage_temperature.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: alc_product_storage_temperature
+#: model:ir.model,name:alc_product_storage_temperature.model_product_storage_temperature
+#: model_terms:ir.ui.view,arch_db:alc_product_storage_temperature.storage_temperature_product_template_form_view
+msgid "Storage Temperature"
+msgstr ""
+
+#. module: alc_product_storage_temperature
+#: model:ir.model.fields,field_description:alc_product_storage_temperature.field_product_product__storage_temperature_id
+#: model:ir.model.fields,field_description:alc_product_storage_temperature.field_product_template__storage_temperature_id
+msgid "Storage temperature"
+msgstr ""
+
+#. module: alc_product_storage_temperature
+#: model:ir.model.fields,field_description:alc_product_storage_temperature.field_product_storage_temperature__temperature
+msgid "Temperature (°C)"
+msgstr "Temperatuur (°C)"
