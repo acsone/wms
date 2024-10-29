@@ -77,3 +77,23 @@ msgstr "Température de stockage"
 #: model:ir.model.fields,field_description:alc_product_storage_temperature.field_product_storage_temperature__temperature
 msgid "Temperature (°C)"
 msgstr "Température (°C)"
+
+#. module: alc_product_storage_temperature
+#: model:product.storage.temperature,name:alc_product_storage_temperature.product_storage_temperature_minus_12
+msgid "Température -12°C"
+msgstr ""
+
+#. module: alc_product_storage_temperature
+#: model:product.storage.temperature,name:alc_product_storage_temperature.product_storage_temperature_15
+msgid "Température 15°C"
+msgstr ""
+
+#. module: alc_product_storage_temperature
+#: model:product.storage.temperature,name:alc_product_storage_temperature.product_storage_temperature_6
+msgid "Température 6°C"
+msgstr ""
+
+#. module: alc_product_storage_temperature
+#: model:product.storage.temperature,name:alc_product_storage_temperature.product_storage_temperature_ambient
+msgid "Température ambiante"
+msgstr ""
