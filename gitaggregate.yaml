@@ -114,6 +114,7 @@
     - oca refs/pull/912/head # [16.0] shopfloor cluster_picking: Custom sorting by device
     - oca refs/pull/917/head # [16.0] shopfloor: location_content_transfer: get_work additional domain and sort key.
     - oca refs/pull/925/head # [IMP] shopfloor: Improve message for location content transfer items
+    - oca refs/pull/942/head # [IMP] shopfloor: Give user better information about the problematic line
   target: origin 16.0-alc-shopfloor
 
 ./src/rma:
