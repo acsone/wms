@@ -18,4 +18,4 @@ class SeBackend(SeBackendBase):
 
     @api.model
     def cron_synchronize_info_banners(self):
-        self.button_synchronize_info_banners()
+        self.search([]).button_synchronize_info_banners()
