@@ -182,7 +182,7 @@ def cleanup_modules(env):
 
     # avoid to delete records from the model_record_to_keep modelscreated by the modules to uninstall
     logger.info(
-        "Delete records from ir_model_data for models %s and modules %s",
+        "Delete records from ir_model_data for models not in %s and modules %s",
         model_record_to_keep,
         modules_to_uninstall,
     )
