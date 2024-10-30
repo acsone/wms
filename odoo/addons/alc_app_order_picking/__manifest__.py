@@ -26,6 +26,7 @@
         "stock_available_base_exclude_location",
         "stock_available_location_orderpoint",
         "stock_available_to_promise_release_exclude_location",
+        "stock_available_to_promise_release_restrict_lot",
         "stock_dynamic_routing",
         "stock_full_location_reservation",
         "stock_location_orderpoint",
