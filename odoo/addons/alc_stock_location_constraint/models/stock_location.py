@@ -84,7 +84,9 @@ class StockLocation(Location):
              -- Create the trigger on stock_location
             DROP TRIGGER IF EXISTS alc_unique_location_coordinates_trigger ON stock_location;
             CREATE TRIGGER alc_unique_location_coordinates_trigger
-            BEFORE INSERT OR UPDATE ON stock_location
+            BEFORE INSERT OR UPDATE
+            OF zone_location_id, area_location_id, corridor, rack, level, posx, posy, posz
+            ON stock_location
             FOR EACH ROW
             EXECUTE FUNCTION alc_unique_location_coordinates_check();
             """
