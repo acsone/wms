@@ -113,6 +113,7 @@ odoo-addon-stock-location-orderpoint-cleanup @ git+https://github.com/OCA/stock-
 odoo-addon-stock-location-orderpoint-dynamic-routing-merge @ git+https://github.com/OCA/stock-logistics-orderpoint.git@refs/pull/10/head#subdirectory=setup/stock_location_orderpoint_dynamic_routing_merge
 
 # stock-logistics-warehouse
+odoo-addon-stock-location-child-location @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2183/head#subdirectory=setup/stock_location_child_location
 odoo-addon-stock-safe-scrap @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2181/head#subdirectory=setup/stock_safe_scrap
 odoo-addon-procurement-auto-create-group @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2096/head#subdirectory=setup/procurement_auto_create_group
 odoo-addon-procurement-auto-create-group-by-product @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2096/head#subdirectory=setup/procurement_auto_create_group_by_product
