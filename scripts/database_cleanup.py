@@ -1,5 +1,6 @@
 import logging
 import os
+from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from contextlib import closing, contextmanager
 
@@ -73,13 +74,15 @@ def parallel_delete(
             future.result()  # Raise exception if any
 
 
-def create_fk_index_ir_attachment(connection_info):
-    # create the missing index for FK to ir_attachment
-    # to speed up the delete operation
+def create_fk_index(connection_info, referenced_table, excluded_tables=None):
+    # create the missing index for FK to referenced_table_name
+    # to speed up the delete operation.
+    if excluded_tables is None:
+        excluded_tables = []
     conn = psycopg2.connect(**connection_info)
     conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
     with closing(conn.cursor()) as cr:
-        query = """
+        query = f"""
             WITH fk_columns AS (
                 SELECT
                     tc.table_schema,
@@ -98,7 +101,7 @@ def create_fk_index_ir_attachment(connection_info):
                         AND ccu.table_schema = tc.table_schema
                 WHERE
                     tc.constraint_type = 'FOREIGN KEY'
-                    AND ccu.table_name = 'ir_attachment'
+                    AND ccu.table_name = '{referenced_table}'
             )
             SELECT
                 fk.referencing_table,
@@ -116,7 +119,7 @@ def create_fk_index_ir_attachment(connection_info):
 
         for fk in foreign_keys:
             referencing_table, referencing_column, constraint_name, has_index = fk
-            if not has_index:
+            if not has_index and referencing_table not in excluded_tables:
                 index_name = f"{referencing_table}_{referencing_column}_manidx"
                 create_index_query = f"CREATE INDEX {index_name} ON {referencing_table} ({referencing_column});"
                 logger.info(
@@ -142,7 +145,7 @@ def delete_round_instance_mail_message(connection_info):
         mail_message_ids,
         connection_info,
         chunk_size=1000,
-        max_workers=10,
+        max_workers=5,
     )
 
 
@@ -175,6 +178,71 @@ def delete_round_instance_ir_attachment(connection_info):
             env["ir.attachment"]._file_delete(fname)
 
 
+def cleanup_ir_model_data(connection_info):
+    logger.info("Cleanup ir_model_data")
+    conn = psycopg2.connect(**connection_info)
+    conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+    # into ir_model_data we must find all the records defined for the
+    # same model and res_id. If one of the record refers to a module
+    # still installed we must delete the other records. If all the records
+    # refers to a module installed we must keep them. If all the records
+    # refers to a module not installed we must keep them too.
+    # The goal is to avoid to remove records that are still used by the
+    # installed modules when obsolete modules are uninstalled.
+    sql = r"""
+        with duplicates as (
+            SELECT
+                model, res_id
+            FROM
+                ir_model_data
+            GROUP BY
+                model, res_id
+            HAVING
+                COUNT(id) > 1
+        )
+        SELECT
+            imd.id, imd.model, imd.res_id, imd.module, imd.name,
+            (m.name is not null or imd.module like '\_\_%') as module_installed
+        FROM
+            ir_model_data imd
+            join duplicates d on imd.model = d.model and imd.res_id = d.res_id
+            left join ir_module_module m on imd.module = m.name and state = 'installed'
+        ORDER BY
+            imd.model, imd.res_id, module_installed;
+    """
+    with closing(conn.cursor()) as cr:
+        cr.execute(sql)
+        info_by_model_res_id = defaultdict(list)
+        for id, model, res_id, module, name, module_installed in cr.fetchall():
+            info_by_model_res_id[(model, res_id)].append(
+                (id, module, name, module_installed)
+            )
+        for (model, res_id), info in info_by_model_res_id.items():
+            if all(module_installed for _, _, _, module_installed in info):
+                continue
+            if all(not module_installed for _, _, _, module_installed in info):
+                continue
+            for id, module, name, module_installed in info:
+                if module_installed:
+                    continue
+                logger.info(
+                    "Delete ir_model_data %s.%s (%s - %s)", module, name, model, res_id
+                )
+                cr.execute("DELETE FROM ir_model_data WHERE id = %s", (id,))
+
+
+def _do_purge_lines(purger):
+    total = len(purger.purge_line_ids)
+    actual = 0
+    for line in purger.purge_line_ids:
+        actual += 1
+        logger.info("Purge %s: %d/%d %s", purger._name, actual, total, line.name)
+        line.purge()
+        line.env.cr.commit()
+    purger.unlink()
+    env.cr.commit()
+
+
 def cleanup_modules(env):
     modules_to_uninstall = [
         i[2]["name"] for i in env["cleanup.purge.wizard.module"].find()
@@ -194,25 +262,19 @@ def cleanup_modules(env):
 
     # cleanup modules
     purger = env["cleanup.purge.wizard.module"].create({})
-    purger.purge_all()
-    purger.unlink()
-    env.cr.commit()
+    _do_purge_lines(purger)
 
 
 def cleanup_models(env):
     logger.info("Cleanup models")
     purger = env["cleanup.purge.wizard.model"].create({})
-    purger.purge_all()
-    purger.unlink()
-    env.cr.commit()
+    _do_purge_lines(purger)
 
 
 def cleanup_fields(env):
     logger.info("Cleanup fields")
     purger = env["cleanup.purge.wizard.field"].create({})
-    purger.purge_all()
-    purger.unlink()
-    env.cr.commit()
+    _do_purge_lines(purger)
 
 
 def clenaup_columns(env):
@@ -223,13 +285,94 @@ def clenaup_columns(env):
         model = env[line.model_id.model]
         if model._table in tables_to_keep:
             line.unlink()
-    purger.purge_all()
-    purger.unlink()
-    env.cr.commit()
+    _do_purge_lines(purger)
 
 
 def cleanup_tables(env):
-    logger.info("Cleanup fields")
+    logger.info("Cleanup tables")
+    to_drop = [
+        "account_mass_reconcile_method",
+        "mass_reconcile_history",
+        "aged_partner_balance_wizard_res_partner_rel",
+        "alc_delivery_resource_round_template_rel",
+        "alc_delivery_resource_round_instance_rel",
+        "alc_eshop_news_res_lang_rel",
+        "alc_eshop_snippet_res_lang_rel",
+        "attribute_set_completeness_product_template_rel",
+        "bi_sql_view_field",
+        "bi_sql_view_res_groups_rel",
+        "bi_sql_view_res_users_rel",
+        "change_lot_line",
+        "connector_checkpoint_review_rel",
+        "credit_control_communication_credit_control_line_rel",
+        "credit_control_emailer_credit_control_line_rel",
+        "credit_control_policy_changer",
+        "credit_control_policy_level",
+        "credit_control_line_credit_control_printer_rel",
+        "credit_control_line_credit_control_marker_rel",
+        "credit_control_policy_credit_control_run_rel",
+        "cron_delivery_plan_round_tag_rel",
+        "esb_backend_timestamp",
+        "generate_voice_identifier_stock_production_lot_rel",
+        "mass_reconcile_advanced_partner_res_partner_rel",
+        "mass_reconcile_advanced_ref_res_partner_rel",
+        "mass_reconcile_simple_name_res_partner_rel",
+        "mass_reconcile_simple_partner_res_partner_rel",
+        "mass_reconcile_simple_reference_res_partner_rel",
+        "partner_archive_new_partner_wizard_sale_order_rel",
+        "partner_archive_new_partner_wizard_stock_picking_rel",
+        "product_filter_shopinvader_backend_rel",
+        "product_image_relation_product_product_rel",
+        "product_media_relation_product_product_rel",
+        "product_set_add_product_set_line_rel",
+        "round_template",
+        "shape_file_import_wizard",
+        "report_aged_partner_balance_qweb_account",
+        "report_general_ledger_qweb_account",
+        "report_journal_qweb_journal",
+        "report_journal_qweb_journal_tax_line",
+        "report_journal_qweb_move_line",
+        "report_journal_qweb_move",
+        "report_journal_qweb_report_tax_line",
+        "report_open_items_qweb_account",
+        "report_trial_balance_qweb_account",
+        "report_aged_partner_balance_qweb_res_partner_rel",
+        "report_general_ledger_qweb_res_partner_rel",
+        "report_open_items_qweb_res_partner_rel",
+        "report_trial_balance_qweb_res_partner_rel",
+        "round_instance_customer",
+        "round_instance_round_itinerary_rel",
+        "round_instance_round_tag_rel",
+        "round_instance_stock_picking_wave_rel",
+        "round_instance_picking_state",
+        "round_itinerary_position",
+        "round_itinerary_import",
+        "round_wizard_makeplan",
+        "round_itinerary_round_template_rel",
+        "round_itinerary_position_round_tag_rel",
+        "round_template_round_template_version_rel",
+        "shopinvader_category",
+        "shopinvader_category_binding_wizard",
+        "shopinvader_notification",
+        "shopinvader_partner",
+        "shopinvader_partner_binding",
+        "shopinvader_product",
+        "shopinvader_variant_binding_wizard",
+        "shopinvader_backend_stock_warehouse_rel",
+        "shopinvader_category_shopinvader_category_unbinding_wizard_rel",
+        "shopinvader_partner_binding_line",
+        "shopinvader_variant_unbind_wizard_rel",
+        "stock_pack_operation_skip_lot",
+        "storage_file",
+        "wizard_update_charts_accounts_tax",
+        "wizard_update_charts_accounts_account",
+        "wizard_update_charts_accounts_fiscal_position",
+        "wizard_update_charts_fp_fields_rel",
+        "wizard_update_charts_tax_fields_rel",
+    ]
+    logger.info("Drop %d tables", len(to_drop))
+    for table in to_drop:
+        env.cr.execute(f"DROP TABLE IF EXISTS {table} CASCADE")
     purger = env["cleanup.purge.wizard.table"].create({})
     tables_to_keep = {
         "endpoint_route",
@@ -243,17 +386,13 @@ def cleanup_tables(env):
     for line in purger.purge_line_ids:
         if line.name in tables_to_keep:
             line.unlink()
-    purger.purge_all()
-    purger.unlink()
-    env.cr.commit()
+    _do_purge_lines(purger)
 
 
 def cleanup_data(env):
     logger.info("Cleanup data")
     purger = env["cleanup.purge.wizard.data"].create({})
-    purger.purge_all()
-    purger.unlink()
-    env.cr.commit()
+    _do_purge_lines(purger)
 
 
 @contextmanager
@@ -273,14 +412,37 @@ if __name__ == "__main__":
     from click_odoo import OdooEnvironment
 
     connection_info = _connection_info_for(dbname)
-    create_fk_index_ir_attachment(connection_info)
-    delete_round_instance_mail_message(connection_info)
-    delete_round_instance_ir_attachment(connection_info)
-    with OdooEnvironment(dbname) as env:
-        cleanup_modules(env)
-        cleanup_models(env)
-        cleanup_fields(env)
-        with _view_stock_average_daily_sale_disabled(env):
-            clenaup_columns(env)
-        cleanup_tables(env)
-        cleanup_data(env)
+    # cleanup_ir_model_data(connection_info)
+    create_fk_index(connection_info, "ir_attachment")
+    create_fk_index(
+        connection_info,
+        "mail_message",
+        [
+            "mail_compose_message",
+            "rating_rating",
+            "mail_channel_member",
+            "mail_group_message",
+            "mail_link_preview",
+            "mail_message_reaction",
+            "mail_message_res_partner_starred_rel",
+            "mail_message_schedule",
+            "mail_resend_message",
+            "rating_rating",
+            "sms_sms",
+            "sms_resend",
+            "snailmail_letter",
+            "snailmail_letter_format_error",
+        ],
+    )
+    if True:
+        delete_round_instance_mail_message(connection_info)
+        delete_round_instance_ir_attachment(connection_info)
+    if True:
+        with OdooEnvironment(dbname) as env:
+            cleanup_modules(env)
+            cleanup_models(env)
+            cleanup_fields(env)
+            with _view_stock_average_daily_sale_disabled(env):
+                clenaup_columns(env)
+            cleanup_tables(env)
+            cleanup_data(env)
