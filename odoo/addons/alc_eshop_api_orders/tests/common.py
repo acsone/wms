@@ -41,3 +41,10 @@ class TestOrdersCase(FastAPITransactionCase):
         cls.sale_order.sale_channel_id = cls.env.ref(
             "alc_sale_channel.sale_channel_phone"
         ).id
+        cls.sale_order.order_line |= cls.env["sale.order.line"].create(
+            {
+                "display_type": "line_section",
+                "order_id": cls.sale_order.id,
+                "name": "Section",
+            }
+        )

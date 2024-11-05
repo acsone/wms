@@ -19,7 +19,7 @@ class SaleChannel(Enum):
 
 class OrderLine(BaseModel):
     qty_delivered: float
-    reference: str
+    reference: str | None
     price: float
     line_id: int
     qty_canceled: float
@@ -29,7 +29,7 @@ class OrderLine(BaseModel):
     def from_sale_order_line(cls, record):
         return cls(
             qty_delivered=record.qty_delivered,
-            reference=record.product_id.default_code,
+            reference=record.product_id.default_code or None,
             price=record.price_reduce_taxexcl,
             line_id=record.id,
             qty_canceled=record.product_qty_canceled,
