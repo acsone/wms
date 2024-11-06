@@ -197,6 +197,7 @@ odoo-addon-account-invoice-accrual @ git+https://github.com/OCA/account-closing.
 # OCA/l10n-belgium
 odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/186/head#subdirectory=setup/l10n_be_bpost_address_validation
 odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/204/head#subdirectory=setup/l10n_be_iso20022_pain
+odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/227/head#subdirectory=setup/l10n_be_bpost_address_autocomplete
 
 # OCA/stock-logistics-transport
 odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/OCA/stock-logistics-transport.git@refs/pull/150/head#subdirectory=setup/shipment_advice_planner_toursolver
@@ -208,7 +209,6 @@ odoo-addon-partner-manual-rank @ git+https://github.com/OCA/partner-contact.git@
 
 # akretion/ak-odoo-incubator
 odoo-addon-module-analysis-price @ git+https://github.com/akretion/ak-odoo-incubator@16.0#subdirectory=setup/module_analysis_price
-
 
 
 typodoo @ git+https://github.com/sbidoul/typodoo.git@refs/pull/5/head
