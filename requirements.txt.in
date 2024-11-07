@@ -195,7 +195,7 @@ odoo-addon-account-cutoff-base @ git+https://github.com/acsone/account-closing.g
 odoo-addon-account-invoice-accrual @ git+https://github.com/OCA/account-closing.git@refs/pull/264/head#subdirectory=setup/account_invoice_accrual
 
 # OCA/l10n-belgium
-odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/186/head#subdirectory=setup/l10n_be_bpost_address_validation
+odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/228/head#subdirectory=setup/l10n_be_bpost_address_validation
 odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/204/head#subdirectory=setup/l10n_be_iso20022_pain
 odoo-addon-l10n-be-bpost-address-autocomplete @ git+https://github.com/OCA/l10n-belgium.git@refs/pull/227/head#subdirectory=setup/l10n_be_bpost_address_autocomplete
 
