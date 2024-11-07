@@ -281,7 +281,7 @@ def clenaup_columns(env):
     logger.info("Cleanup columns")
     purger = env["cleanup.purge.wizard.column"].create({})
     tables_to_keep = {"fetchmail_server", "ir_mail_server" "peppol_server"}
-    columns_to_keep = {"is_delivered_by_alcyon"}
+    columns_to_keep = {"is_delivered_by_alcyon", "elasticsearch_role"}
     for line in purger.purge_line_ids:
         model = env[line.model_id.model]
         if model._table in tables_to_keep or line.name in columns_to_keep:
