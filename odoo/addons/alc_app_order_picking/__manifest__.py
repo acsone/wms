@@ -30,6 +30,7 @@
         "stock_dynamic_routing",
         "stock_full_location_reservation",
         "stock_location_child_location",
+        "stock_location_occupancy",
         "stock_location_orderpoint",
         "stock_location_orderpoint_average_daily_sale",
         "stock_location_orderpoint_change_priority",
