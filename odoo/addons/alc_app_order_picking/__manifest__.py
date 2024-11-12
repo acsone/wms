@@ -29,7 +29,7 @@
         "stock_available_to_promise_release_restrict_lot",
         "stock_dynamic_routing",
         "stock_full_location_reservation",
-        "stock_location_child_location",
+        "stock_location_children",
         "stock_location_occupancy",
         "stock_location_orderpoint",
         "stock_location_orderpoint_average_daily_sale",
