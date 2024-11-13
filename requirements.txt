@@ -430,6 +430,7 @@ odoo-addon-stock-scrap-location-default==16.0.1.0.0.4
 odoo-addon-stock-split-picking==16.0.1.0.4.2
 odoo-addon-stock-split-picking-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@d22c15713032586fa391cb1fce13a542b23cd736#subdirectory=setup/stock_split_picking_dimension
 odoo-addon-stock-storage-category-capacity-name==16.0.1.0.0.5
+odoo-addon-stock-storage-category-usage-report @ git+https://github.com/acsone/stock-logistics-reporting.git@dd30f32c27946ee825ff0a6a61751ad4f9888ce2#subdirectory=setup/stock_storage_category_usage_report
 odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@b734827018ec3700fb9a8d258d6ea688648ff04d#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc==16.0.1.0.0.12
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
@@ -444,6 +445,7 @@ odoo-addon-web-remember-tree-column-width==16.0.1.0.2
 odoo-addon-web-search-with-and==16.0.1.0.0.4
 odoo-addon-web-sheet-full-width==16.0.1.0.0.5
 odoo-addon-web-tree-many2one-clickable==16.0.1.0.0.5
+odoo-addon-web-widget-progressbar-color @ git+https://github.com/acsone/web.git@9289bc8776221e7480af53fbe787c78ac12e20db#subdirectory=setup/web_widget_progressbar_color
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@9cd4de23ae685b2ae721a1422e91e69a7b16302c
 ofxparse==0.21
 opensearch-py==2.3.2

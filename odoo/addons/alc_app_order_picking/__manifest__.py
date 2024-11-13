@@ -81,6 +81,7 @@
         "stock_restrict_lot",
         "stock_safe_scrap",
         "stock_split_picking",
+        "stock_storage_category_usage_report",
         # Alcyon
         "alc_additional_product_stock",
         "alc_delivery_carrier_gls",
