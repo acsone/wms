@@ -13,7 +13,7 @@
         "alce_account_followup_report",
         "alce_account_intrastat_category",
         "alce_account_intrastat_weight",
-        "alce_account_move_reconcile_search",
+        "alce_account_move_line_search",
         "alce_report_intrastat_infos",
         "alce_stock_picking_backorder_helpdesk",
         # Alcyon/Accounting
