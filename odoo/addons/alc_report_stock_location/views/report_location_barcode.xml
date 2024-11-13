@@ -95,7 +95,7 @@
         <t t-elif="symbology == 'qrcode'">
 
             <t
-        t-if="(barcode_type == 'medoc' and o.name[7] != 'A') or o.name[4] != 'A'"
+        t-if="(barcode_type == 'medoc' and (len(o.name) > 7 and o.name[7] != 'A')) or (len(o.name) > 4 and o.name[4] != 'A')"
       >
                 <div
           t-att-class="'barcode_right_medoc' if barcode_type == 'medoc' else 'barcode_right'"
@@ -120,7 +120,7 @@
                 </div>
             </t>
             <t
-        t-if="(barcode_type == 'medoc' and o.name[7] == 'A') or o.name[4] == 'A'"
+        t-if="(barcode_type == 'medoc' and (len(o.name) > 7 and o.name[7] == 'A')) or (len(o.name) > 4 and o.name[4] == 'A')"
       >
                 <div
           t-att-class="'barcode_name_right_medoc' if barcode_type == 'medoc' else 'barcode_name_right'"
