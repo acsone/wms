@@ -112,7 +112,12 @@ odoo-addon-stock-location-orderpoint-change-priority @ git+https://github.com/OC
 odoo-addon-stock-location-orderpoint-cleanup @ git+https://github.com/OCA/stock-logistics-orderpoint.git@refs/pull/17/head#subdirectory=setup/stock_location_orderpoint_cleanup
 odoo-addon-stock-location-orderpoint-dynamic-routing-merge @ git+https://github.com/OCA/stock-logistics-orderpoint.git@refs/pull/10/head#subdirectory=setup/stock_location_orderpoint_dynamic_routing_merge
 
+# stock-logistics-reporting
+odoo-addon-stock-storage-category-usage-report @ git+https://github.com/OCA/stock-logistics-reporting.git@refs/pull/352/head#subdirectory=setup/stock_storage_category_usage_report
+
 # stock-logistics-warehouse
+odoo-addon-stock-location-children @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2190/head#subdirectory=setup/stock_location_children
+odoo-addon-stock-location-occupancy @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2188/head#subdirectory=setup/stock_location_occupancy
 odoo-addon-stock-safe-scrap @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2181/head#subdirectory=setup/stock_safe_scrap
 odoo-addon-procurement-auto-create-group @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2096/head#subdirectory=setup/procurement_auto_create_group
 odoo-addon-procurement-auto-create-group-by-product @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2096/head#subdirectory=setup/procurement_auto_create_group_by_product
@@ -206,6 +211,9 @@ odoo-addon-shipment-advice-planner @ git+https://github.com/OCA/stock-logistics-
 # OCA/partner-contact
 odoo-addon-base-partner-sequence @ git+https://github.com/OCA/partner-contact.git@refs/pull/1875/head#subdirectory=setup/base_partner_sequence
 odoo-addon-partner-manual-rank @ git+https://github.com/OCA/partner-contact.git@refs/pull/1849/head#subdirectory=setup/partner_manual_rank
+
+# OCA/web
+odoo-addon-web-widget-progressbar-color @ git+https://github.com/OCA/web.git@refs/pull/2989/head#subdirectory=setup/web_widget_progressbar_color
 
 # akretion/ak-odoo-incubator
 odoo-addon-module-analysis-price @ git+https://github.com/akretion/ak-odoo-incubator@16.0#subdirectory=setup/module_analysis_price

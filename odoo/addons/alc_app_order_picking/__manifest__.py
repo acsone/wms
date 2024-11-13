@@ -29,6 +29,8 @@
         "stock_available_to_promise_release_restrict_lot",
         "stock_dynamic_routing",
         "stock_full_location_reservation",
+        "stock_location_children",
+        "stock_location_occupancy",
         "stock_location_orderpoint",
         "stock_location_orderpoint_average_daily_sale",
         "stock_location_orderpoint_change_priority",
@@ -79,6 +81,7 @@
         "stock_restrict_lot",
         "stock_safe_scrap",
         "stock_split_picking",
+        "stock_storage_category_usage_report",
         # Alcyon
         "alc_additional_product_stock",
         "alc_delivery_carrier_gls",
