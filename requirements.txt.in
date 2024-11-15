@@ -213,7 +213,7 @@ odoo-addon-base-partner-sequence @ git+https://github.com/OCA/partner-contact.gi
 odoo-addon-partner-manual-rank @ git+https://github.com/OCA/partner-contact.git@refs/pull/1849/head#subdirectory=setup/partner_manual_rank
 
 # OCA/web
-odoo-addon-web-widget-progressbar-color @ git+https://github.com/OCA/web.git@refs/pull/2989/head#subdirectory=setup/web_widget_progressbar_color
+odoo-addon-web-widget-progressbar-gradient @ git+https://github.com/OCA/web.git@refs/pull/2989/head#subdirectory=setup/web_widget_progressbar_gradient
 
 # akretion/ak-odoo-incubator
 odoo-addon-module-analysis-price @ git+https://github.com/akretion/ak-odoo-incubator@16.0#subdirectory=setup/module_analysis_price
