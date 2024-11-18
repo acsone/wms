@@ -29,6 +29,11 @@ msgid "Account codes first 2 digits"
 msgstr ""
 
 #. module: alce_account_move_line_search
+#: model:ir.model,name:alce_account_move_line_search.model_bank_rec_widget
+msgid "Bank reconciliation widget for a single statement line"
+msgstr ""
+
+#. module: alce_account_move_line_search
 #: model:ir.model,name:alce_account_move_line_search.model_account_move_line
 msgid "Journal Item"
 msgstr ""
