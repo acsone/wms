@@ -303,6 +303,13 @@ class StockPicking(stock_picking.StockPicking):
                     )
         return lines
 
+    def _delivery_slip_moves(self, is_entry_register):
+        if is_entry_register:
+            return self.get_entry_register_lines()
+        if self.picking_type_code == "incoming":
+            return self.move_ids
+        return self.move_ids.filtered(lambda line: line.state == "done")
+
     def get_moves_by_order(self, is_entry_register=False):
         """
         Return lines for the delivery slip report.
@@ -322,12 +329,7 @@ class StockPicking(stock_picking.StockPicking):
         moves_without_order = []
         backorder_moves_without_order = []
 
-        if is_entry_register:
-            lines_done = self.get_entry_register_lines()
-        elif self.picking_type_code == "incoming":
-            lines_done = self.move_ids
-        else:
-            lines_done = self.move_ids.filtered(lambda line: line.state == "done")
+        lines_done = self._delivery_slip_moves(is_entry_register)
 
         for line in lines_done:
             if not line.order_id:

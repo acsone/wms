@@ -7,11 +7,13 @@ from odoo.addons.alc_stock_delivery_slip.models.stock_picking import (
 
 
 class StockPicking(StockPickingBase):
-    def _send_delivery_notes(self, send_csv, send_pdf):
-        self.ensure_one()
-        if any(self.move_ids.rma_id.operation_id.mapped("no_csv_delivery_slip")):
-            send_csv = False
-        return super()._send_delivery_notes(send_csv, send_pdf)
+
+    def _delivery_slip_moves(self, is_entry_register):
+        moves = super()._delivery_slip_moves(is_entry_register)
+        moves = moves - moves.filtered(
+            lambda m: m.rma_id.operation_id.no_csv_delivery_slip
+        )
+        return moves
 
     def get_entry_register_lines(self):
         if any(
@@ -20,9 +22,8 @@ class StockPicking(StockPickingBase):
             )
         ):
             return self.env["stock.move"]
-        if any(
-            self.move_ids.rma_id.operation_id.mapped("no_entry_register_at_delivery")
-        ):
-            return self.env["stock.move"]
-
-        return super().get_entry_register_lines()
+        moves = super().get_entry_register_lines()
+        moves = moves - moves.filtered(
+            lambda m: m.rma_id.operation_id.no_entry_register_at_delivery
+        )
+        return moves
