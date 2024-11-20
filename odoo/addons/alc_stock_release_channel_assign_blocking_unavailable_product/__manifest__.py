@@ -15,6 +15,7 @@
         "sale_stock",
         # Third-party
         "stock_release_channel",
+        "stock_route_mto",
         # Alcyon
         "alc_sale_product_qty_unavailable",
     ],

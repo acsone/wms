@@ -54,7 +54,9 @@ class StockPicking(StockPickingBase):
     def _create_backorder(self):
         backorders = super()._create_backorder()
         for move in backorders.move_ids:
-            move.delivery_requires_other_lines = move.product_qty_unavailable > 0
+            move.delivery_requires_other_lines = (
+                move._get_stock_release_channel_block_on_backorder()
+            )
         return backorders
 
     def button_ignore_release_channel_block(self):
