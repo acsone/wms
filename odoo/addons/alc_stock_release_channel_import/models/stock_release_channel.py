@@ -11,4 +11,6 @@ from .alc_delivery_plan import AlcDeliveryPlan
 class StockReleaseChannel(stock_release_channel.StockReleaseChannel):
 
     delivery_plan_id = fields.Many2one[AlcDeliveryPlan](readonly=True)
-    shape_name = fields.Char(help="Shape resource name into the imported shape file")
+    shape_name = fields.Char(
+        help="Shape resource name into the imported shape file", readonly=True
+    )

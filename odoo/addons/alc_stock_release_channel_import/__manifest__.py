@@ -14,7 +14,6 @@
         "stock_release_channel_geoengine",
         # Alcyon
         "alc_stock_release_channel_menu",
-        "alc_stock_release_channel_tag",
     ],
     "data": [
         "data/alc_delivery_plan.xml",
@@ -22,6 +21,7 @@
         "security/alc_import_delivery_zone_wizard.xml",
         "wizards/alc_import_delivery_zone_wizard.xml",
         "views/alc_delivery_plan.xml",
+        "views/stock_release_channel.xml",
     ],
     "demo": [],
     "external_dependencies": {"python": ["pyshp", "shapely"]},

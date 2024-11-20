@@ -13,13 +13,9 @@ from shapely.geometry.multipolygon import MultiPolygon
 from shapely.geometry.polygon import Polygon
 from shapely.wkb import loads as wkbloads
 
-from odoo import Command, _, api, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.osv.expression import AND, OR
-
-from odoo.addons.alc_stock_release_channel_tag.models.alc_stock_release_channel_tag import (
-    AlcStockReleaseChannelTag,
-)
 
 from ..models.alc_delivery_plan import AlcDeliveryPlan
 
@@ -38,10 +34,6 @@ class AlcImportDeliveryZoneWizard(models.TransientModel):
     )
     filename = fields.Char()
     file = fields.Binary(string="Import shape file", required=True)
-    stock_release_channel_tag_ids = fields.Many2many[AlcStockReleaseChannelTag](
-        string="Release channel tags",
-        relation="alc_import_channel_tag_rel",
-    )
 
     def _get_zip_file(self):
         zip_data = base64.decodebytes(self.file)
@@ -136,29 +128,28 @@ class AlcImportDeliveryZoneWizard(models.TransientModel):
         if existing_channel:
             existing_channel.write(
                 self._get_channel_values(
-                    name=existing_channel.name,
-                    shape_name=shape_name,
-                    delivery_zone=delivery_zone,
+                    shape_name=shape_name, delivery_zone=delivery_zone
                 )
             )
             return existing_channel
         return channel_model.create(
             self._get_channel_values(
-                name=shape_name, shape_name=shape_name, delivery_zone=delivery_zone
+                shape_name=shape_name,
+                delivery_zone=delivery_zone,
+                channel_name=shape_name,
             )
         )
 
-    def _get_channel_values(self, name, shape_name, delivery_zone):
-        return {
-            "name": name,
+    def _get_channel_values(self, shape_name, delivery_zone, channel_name=None):
+        vals = {
             "shape_name": shape_name,
             "delivery_plan_id": self.delivery_plan_id.id,
             "restrict_to_delivery_zone": True,
             "delivery_zone": delivery_zone,
-            "stock_release_channel_tag_ids": [
-                Command.set(self.stock_release_channel_tag_ids.ids)
-            ],
         }
+        if channel_name:
+            vals["name"] = channel_name
+        return vals
 
     @api.model
     def _default_delivery_plan(self):
