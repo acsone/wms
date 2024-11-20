@@ -6,7 +6,6 @@ import base64
 from shapely.geometry.multipolygon import MultiPolygon
 from shapely.geometry.polygon import Polygon
 
-from odoo import Command
 from odoo.modules.module import get_resource_path
 from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
@@ -28,24 +27,17 @@ class TestShapeFileImportWizard(TransactionCase):
             ]
         )
         cls.multipolygon = MultiPolygon([cls.polygon])
-        cls.tags = cls.env.ref(
-            "alc_stock_release_channel_tag.alc_stock_release_channel_tag_demo_1"
-        ) | cls.env.ref(
-            "alc_stock_release_channel_tag.alc_stock_release_channel_tag_demo_2"
-        )
         cls.delivery_plan = cls.env.ref(
             "alc_stock_release_channel_import.alc_delivery_plan_default"
         )
 
-    def _do_import(self, shape_filename, tags=None):
+    def _do_import(self, shape_filename):
         shape_file_path = get_resource_path(
             "alc_stock_release_channel_import", "tests", "resources", shape_filename
         )
         with open(shape_file_path, "rb") as f:
             content = base64.encodebytes(f.read())
             values = {"file": content, "delivery_plan_id": self.delivery_plan.id}
-            if tags:
-                values["stock_release_channel_tag_ids"] = [Command.set(tags.ids)]
             wizard = self.wizard_model.create(values)
             wizard.button_import()
 
@@ -111,8 +103,3 @@ class TestShapeFileImportWizard(TransactionCase):
             set(channels.mapped("name")),
             {"D13", "D1", "D4", "D20", "D16", "D2", "D7", "D12"},
         )
-
-    def test_import_with_tags(self):
-        self._do_import("shape_test_4.zip", self.tags)
-        channel = self.channel_model.search([("name", "=", "D13")])
-        self.assertEqual(channel.stock_release_channel_tag_ids, self.tags)
