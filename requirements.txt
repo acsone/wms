@@ -353,12 +353,13 @@ odoo-addon-stock-full-location-reservation @ git+https://github.com/acsone/wms.g
 odoo-addon-stock-grn==16.0.1.1.0.2
 odoo-addon-stock-helper==16.0.1.1.0.3
 odoo-addon-stock-location-children @ git+https://github.com/acsone/stock-logistics-warehouse.git@1f54573249c9808151b703f5f0e63acbbdb5b5b9#subdirectory=setup/stock_location_children
-odoo-addon-stock-location-occupancy @ git+https://github.com/acsone/stock-logistics-warehouse.git@8cb51712d30c17379ce4a8ab43c92d183d0fc034#subdirectory=setup/stock_location_occupancy
+odoo-addon-stock-location-fill-state @ git+https://github.com/acsone/stock-logistics-warehouse.git@dd55713d3f39d51b2cb722ede11b04bb9ce7ddc8#subdirectory=setup/stock_location_fill_state
 odoo-addon-stock-location-orderpoint @ git+https://github.com/acsone/stock-logistics-orderpoint.git@55f5ecaf84c95027032a039cdb4745be163a622b#subdirectory=setup/stock_location_orderpoint
 odoo-addon-stock-location-orderpoint-average-daily-sale @ git+https://github.com/acsone/stock-logistics-orderpoint.git@94ffef243c5ffd3845cfc535fe459d7f70e29a2e#subdirectory=setup/stock_location_orderpoint_average_daily_sale
 odoo-addon-stock-location-orderpoint-change-priority @ git+https://github.com/acsone/stock-logistics-orderpoint.git@55f5ecaf84c95027032a039cdb4745be163a622b#subdirectory=setup/stock_location_orderpoint_change_priority
 odoo-addon-stock-location-orderpoint-cleanup @ git+https://github.com/acsone/stock-logistics-orderpoint.git@a8da2600dc64d692e17254521b141416b3395579#subdirectory=setup/stock_location_orderpoint_cleanup
 odoo-addon-stock-location-orderpoint-dynamic-routing-merge @ git+https://github.com/acsone/stock-logistics-orderpoint.git@58ad680c2affdbaeccc872b8450638cd0b86bab5#subdirectory=setup/stock_location_orderpoint_dynamic_routing_merge
+odoo-addon-stock-location-pending-move @ git+https://github.com/acsone/stock-logistics-warehouse.git@acada3b25c58b4c49f066a200f79552dd1bb7f71#subdirectory=setup/stock_location_pending_move
 odoo-addon-stock-location-position==16.0.1.0.0.10
 odoo-addon-stock-location-product-restriction==16.0.1.1.0.2
 odoo-addon-stock-location-zone==16.0.1.0.1.5
@@ -431,7 +432,7 @@ odoo-addon-stock-scrap-location-default==16.0.1.0.0.4
 odoo-addon-stock-split-picking==16.0.1.0.4.2
 odoo-addon-stock-split-picking-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@d22c15713032586fa391cb1fce13a542b23cd736#subdirectory=setup/stock_split_picking_dimension
 odoo-addon-stock-storage-category-capacity-name==16.0.1.0.0.5
-odoo-addon-stock-storage-category-usage-report @ git+https://github.com/acsone/stock-logistics-reporting.git@dd30f32c27946ee825ff0a6a61751ad4f9888ce2#subdirectory=setup/stock_storage_category_usage_report
+odoo-addon-stock-storage-category-usage-report @ git+https://github.com/acsone/stock-logistics-reporting.git@7041bd19c5bb976bac41d781e4b39f2c2656a697#subdirectory=setup/stock_storage_category_usage_report
 odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@b734827018ec3700fb9a8d258d6ea688648ff04d#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc==16.0.1.0.0.12
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
@@ -447,7 +448,7 @@ odoo-addon-web-remember-tree-column-width==16.0.1.0.2
 odoo-addon-web-search-with-and==16.0.1.0.0.4
 odoo-addon-web-sheet-full-width==16.0.1.0.0.5
 odoo-addon-web-tree-many2one-clickable==16.0.1.0.0.5
-odoo-addon-web-widget-progressbar-color @ git+https://github.com/acsone/web.git@9289bc8776221e7480af53fbe787c78ac12e20db#subdirectory=setup/web_widget_progressbar_color
+odoo-addon-web-widget-progressbar-gradient @ git+https://github.com/acsone/web.git@57b3b5751fff0b262719aa3d73abca7854dbaf22#subdirectory=setup/web_widget_progressbar_gradient
 odoo-addons-enterprise @ git+ssh://git@github.com/acsone/enterprise.git@9cd4de23ae685b2ae721a1422e91e69a7b16302c
 ofxparse==0.21
 opensearch-py==2.3.2
