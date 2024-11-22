@@ -214,6 +214,3 @@ odoo-addon-web-widget-progressbar-gradient @ git+https://github.com/OCA/web.git@
 
 # akretion/ak-odoo-incubator
 odoo-addon-module-analysis-price @ git+https://github.com/akretion/ak-odoo-incubator@16.0#subdirectory=setup/module_analysis_price
-
-
-typodoo @ git+https://github.com/sbidoul/typodoo.git@refs/pull/5/head

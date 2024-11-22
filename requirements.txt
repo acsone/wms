@@ -157,7 +157,7 @@ odoo-addon-fs-attachment==16.0.1.3.0
 odoo-addon-fs-base-multi-image==16.0.1.1.1.1
 odoo-addon-fs-base-multi-media==16.0.1.0.1.4
 odoo-addon-fs-file==16.0.1.0.6.1
-odoo-addon-fs-image==16.0.1.0.3.2
+odoo-addon-fs-image==16.0.1.0.4
 odoo-addon-fs-image-thumbnail==16.0.1.0.2
 odoo-addon-fs-product-brand-multi-image==16.0.1.0.0.10
 odoo-addon-fs-product-multi-image==16.0.1.1.5
@@ -512,7 +512,7 @@ soupsieve==2.4.1
 starlette==0.38.5
 text-unidecode==1.3
 typing-extensions==4.8.0
-typodoo @ git+https://github.com/acsone/typodoo.git@09819386d5c39f64444543a1fd4946866b6e4f8c
+typodoo==0.4.1
 tzdata==2023.3
 ujson==5.8.0
 unicodecsv==0.14.1
