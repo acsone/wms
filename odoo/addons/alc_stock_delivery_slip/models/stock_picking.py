@@ -332,7 +332,9 @@ class StockPicking(stock_picking.StockPicking):
         lines_done = self._delivery_slip_moves(is_entry_register)
 
         for line in lines_done:
-            if not line.order_id:
+            if line.rma_id:
+                moves_by_order[line.rma_id].append(line)
+            elif not line.order_id:
                 moves_without_order.append(line)
             else:
                 moves_by_order[line.order_id].append(line)
@@ -364,12 +366,14 @@ class StockPicking(stock_picking.StockPicking):
         if moves_without_order:
             result.append((None, (moves_without_order, backorder_moves_without_order)))
 
-        result.extend(
-            sorted(
-                result_dict.items(),
-                key=lambda picking: (picking[0][0].date_order, picking[0][0].id),
+        def _sort_result(item):
+            _order = item[0][0]
+            date_order = (
+                _order.date_order if _order._name == "sale.order" else _order.date
             )
-        )
+            return date_order, _order.id
+
+        result.extend(sorted(result_dict.items(), key=_sort_result))
         return result
 
     def get_entry_register_lines(self):
