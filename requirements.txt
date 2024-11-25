@@ -286,7 +286,7 @@ odoo-addon-shipment-advice==16.0.1.5.0
 odoo-addon-shipment-advice-planner==16.0.1.1.1
 odoo-addon-shipment-advice-planner-toursolver==16.0.3.1.0.2
 odoo-addon-shipment-advice-planner-toursolver-queue-job==16.0.1.0.0.5
-odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@39600c47048164ad5104363dca9f01773cda6419#subdirectory=setup/shopfloor
+odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@ec63d264ffd23e653d6f82f5efb0835dfeb71070#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-base==16.0.1.1.0.3
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wms.git@bb539fc077ec8f6d6be20e900381dfb03c8ed9e2#subdirectory=setup/shopfloor_batch_automatic_creation
 odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@d477836c5ebd4b4039d6159fae05c941bc6874dc#subdirectory=setup/shopfloor_full_location_reservation
@@ -296,7 +296,8 @@ odoo-addon-shopfloor-mobile-base-auth-api-key==16.0.1.0.0.5
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@9342929c7236e8077d1337cdb90b6256b5b05ae2#subdirectory=setup/shopfloor_mobile_packing
 odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@11fc8dc0de3999ffb31f0465417b92593813d985#subdirectory=setup/shopfloor_packing
 odoo-addon-shopfloor-putaway-recompute @ git+https://github.com/acsone/wms@b136dbd468916d9dfa782bc7307213e2004b04f5#subdirectory=setup/shopfloor_putaway_recompute
-odoo-addon-shopfloor-reception @ git+https://github.com/acsone/wms.git@218e34946c26e22942c82e728f288d0540bffb52#subdirectory=setup/shopfloor_reception
+odoo-addon-shopfloor-reception @ git+https://github.com/acsone/wms.git@5b3ae519d249c7f9878e4bc97c9be2b89aa76ce8#subdirectory=setup/shopfloor_reception
+odoo-addon-shopfloor-reception-mobile @ git+https://github.com/acsone/wms.git@921aaefcb87b344ad46a209c75858ac5ec63d5d1#subdirectory=setup/shopfloor_reception_mobile
 odoo-addon-shopfloor-rest-log==16.0.1.0.0.5
 odoo-addon-shopfloor-workstation==16.0.1.0.0.3
 odoo-addon-shopfloor-workstation-mobile==16.0.1.0.0.4

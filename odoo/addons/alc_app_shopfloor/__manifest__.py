@@ -20,6 +20,7 @@
         "shopfloor_packing",
         "shopfloor_putaway_recompute",
         "shopfloor_reception",
+        "shopfloor_reception_mobile",
         "shopfloor_rest_log",
         "shopfloor_workstation",
         "shopfloor_workstation_mobile",
