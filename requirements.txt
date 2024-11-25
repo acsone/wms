@@ -255,23 +255,27 @@ odoo-addon-rma-reason @ git+https://github.com/acsone/rma.git@618c595e733e239ef6
 odoo-addon-rma-sale @ git+https://github.com/acsone/rma.git@9b9d6eddf8358347617791c6e82ebb3013204777#subdirectory=setup/rma_sale
 odoo-addon-rma-sale-lot @ git+https://github.com/acsone/rma.git@c01af5dfaf4d772bb19f6151cee567863df10fb4#subdirectory=setup/rma_sale_lot
 odoo-addon-rma-sale-reason @ git+https://github.com/acsone/rma.git@618c595e733e239ef649162a737967f033d8dd36#subdirectory=setup/rma_sale_reason
-odoo-addon-sale-blanket-order==16.0.1.2.0
 odoo-addon-sale-cart==16.0.1.0.0.4
 odoo-addon-sale-channel @ git+https://github.com/acsone/sale-channel.git@e3920cb6276556e98afed18a828d5a7c5103bf67#subdirectory=setup/sale_channel
 odoo-addon-sale-discount-display-amount==16.0.1.1.0.7
 odoo-addon-sale-exception==16.0.1.3.0.1
 odoo-addon-sale-force-invoiced==16.0.2.1.1.5
 odoo-addon-sale-invoice-policy @ git+https://github.com/acsone/sale-workflow.git@dd6f488a42a3ed90692a9cab9a4f78bce07a4cfe#subdirectory=setup/sale_invoice_policy
+odoo-addon-sale-manual-delivery==16.0.1.0.1.1
 odoo-addon-sale-margin-delivered==16.0.2.0.0.5
 odoo-addon-sale-margin-delivered-dropshipping==16.0.1.0.1.3
 odoo-addon-sale-margin-delivered-security==16.0.1.2.1.6
 odoo-addon-sale-margin-security==16.0.3.1.0.2
+odoo-addon-sale-order-blanket-order @ git+https://github.com/acsone/sale-workflow.git@be10c8d75f2e579abcd704fae6f3731b693af051#subdirectory=setup/sale_order_blanket_order
+odoo-addon-sale-order-blanket-order-stock-prebook @ git+https://github.com/acsone/sale-workflow.git@be10c8d75f2e579abcd704fae6f3731b693af051#subdirectory=setup/sale_order_blanket_order_stock_prebook
 odoo-addon-sale-order-line-cancel @ git+https://github.com/acsone/sale-workflow.git@f2b61945e2ffb62d7ee9df245aac8e6e3fdbcfec#subdirectory=setup/sale_order_line_cancel
 odoo-addon-sale-procurement-customer==16.0.1.0.0.6
 odoo-addon-sale-product-set==16.0.3.0.0.3
 odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.git@f506b778476eacfc4a3f33d85c2f77f790a8ebc8#subdirectory=setup/sale_route_amendment
 odoo-addon-sale-shipping-info-helper==16.0.1.0.0.5
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@f1ea2c731d30580089b38a1b3b68b1df40afc680#subdirectory=setup/sale_stock_picking_blocking
+odoo-addon-sale-stock-prebook @ git+https://github.com/acsone/sale-workflow.git@90fbe3811d9a851afcfe03188ba270fac5fa1a2c#subdirectory=setup/sale_stock_prebook
+odoo-addon-sale-stock-prebook-stock-available-to-promise-release @ git+https://github.com/acsone/sale-workflow.git@f82e234493105ddf1aff73e99f879695f8891484#subdirectory=setup/sale_stock_prebook_stock_available_to_promise_release
 odoo-addon-sale-stock-restocking-fee-invoicing==16.0.1.0.0.5
 odoo-addon-sale-triple-discount==16.0.1.0.4
 odoo-addon-sale-wishlist==16.0.1.0.0.5
@@ -440,7 +444,6 @@ odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@b734827018
 odoo-addon-stock-storage-type-putaway-abc==16.0.1.0.0.12
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-uom-unece==16.0.1.3.0.3
-odoo-addon-web-action-conditionable==16.0.1.0.0.5
 odoo-addon-web-advanced-search==16.0.1.0.4.3
 odoo-addon-web-chatter-position==16.0.1.0.2.7
 odoo-addon-web-dialog-size==16.0.1.0.1

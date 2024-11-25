@@ -60,7 +60,6 @@ dependencies = [
   "odoo-addon-session_db",
   "odoo-addon-database-cleanup",
   "odoo-addon-module-analysis-price",
-  "odoo-addon-sale-blanket-order",
   # xlrd >= 2 removes xlsx support for anything other than .xls files
   # https://xlrd.readthedocs.io/en/latest/changes.html#id1
   "xlrd<2",

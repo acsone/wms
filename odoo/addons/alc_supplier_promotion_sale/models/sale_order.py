@@ -51,7 +51,7 @@ class SaleOrder(SaleOrderBase):
     def copy_data(self, default=None):
         res = super().copy_data(default=default)
         # Skip promotional lines on duplicate
-        if "order_line" in res[0]:
+        if "order_line" in res[0] and res[0]["order_line"]:
             for i, line in reversed(list(enumerate(res[0]["order_line"]))):
                 if not line[0] and line[2].get("is_promotional_product"):
                     del res[0]["order_line"][i]
