@@ -67,6 +67,7 @@ odoo-addon-shopfloor-mobile @ git+https://github.com/OCA/wms.git@refs/pull/899/h
 odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@refs/pull/25/head#subdirectory=setup/shopfloor_packing
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@refs/pull/25/head#subdirectory=setup/shopfloor_mobile_packing
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/OCA/wms.git@refs/pull/933/head#subdirectory=setup/shopfloor_batch_automatic_creation
+odoo-addon-shopfloor-reception @ git+https://github.com/OCA/wms.git@refs/pull/951/head#subdirectory=setup/shopfloor_reception
 odoo-addon-stock-picking-batch-creation @ git+https://github.com/OCA/wms.git@refs/pull/932/head#subdirectory=setup/stock_picking_batch_creation
 odoo-addon-shopfloor-putaway-recompute @ git+https://github.com/OCA/wms@refs/pull/934/head#subdirectory=setup/shopfloor_putaway_recompute
 odoo-addon-stock-release-channel-split-picking @ git+https://github.com/OCA/wms.git@refs/pull/941/head#subdirectory=setup/stock_release_channel_split_picking
