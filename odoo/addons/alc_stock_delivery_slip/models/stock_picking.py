@@ -303,6 +303,13 @@ class StockPicking(stock_picking.StockPicking):
                     )
         return lines
 
+    def _delivery_slip_moves(self, is_entry_register):
+        if is_entry_register:
+            return self.get_entry_register_lines()
+        if self.picking_type_code == "incoming":
+            return self.move_ids
+        return self.move_ids.filtered(lambda line: line.state == "done")
+
     def get_moves_by_order(self, is_entry_register=False):
         """
         Return lines for the delivery slip report.
@@ -322,15 +329,12 @@ class StockPicking(stock_picking.StockPicking):
         moves_without_order = []
         backorder_moves_without_order = []
 
-        if is_entry_register:
-            lines_done = self.get_entry_register_lines()
-        elif self.picking_type_code == "incoming":
-            lines_done = self.move_ids
-        else:
-            lines_done = self.move_ids.filtered(lambda line: line.state == "done")
+        lines_done = self._delivery_slip_moves(is_entry_register)
 
         for line in lines_done:
-            if not line.order_id:
+            if line.rma_id:
+                moves_by_order[line.rma_id].append(line)
+            elif not line.order_id:
                 moves_without_order.append(line)
             else:
                 moves_by_order[line.order_id].append(line)
@@ -362,12 +366,14 @@ class StockPicking(stock_picking.StockPicking):
         if moves_without_order:
             result.append((None, (moves_without_order, backorder_moves_without_order)))
 
-        result.extend(
-            sorted(
-                result_dict.items(),
-                key=lambda picking: (picking[0][0].date_order, picking[0][0].id),
+        def _sort_result(item):
+            _order = item[0][0]
+            date_order = (
+                _order.date_order if _order._name == "sale.order" else _order.date
             )
-        )
+            return date_order, _order.id
+
+        result.extend(sorted(result_dict.items(), key=_sort_result))
         return result
 
     def get_entry_register_lines(self):

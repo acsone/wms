@@ -95,14 +95,15 @@
     </template>
 
     <template id="alc_report_delivery_slip.deliveryslip_orderref">
-        <div>
-            <span t-if="not order.is_consignment">Order</span>
-            <span t-if="order.is_consignment">Consignement</span>
-            <span t-field="order.name" />
-            <t
+        <t
         t-set="depot_number"
         t-value="order.partner_id.vet_depot_number or order.partner_id.parent_id.vet_depot_number"
       />
+        <div t-if="order._name == 'sale.order'">
+            <span t-if="not order.is_consignment">Order</span>
+            <span t-if="order.is_consignment">Consignement</span>
+            <span t-field="order.name" />
+
             <t t-if="depot_number and deliveryslip.date_done">
                 (
                 <t t-esc="deliveryslip.date_done.strftime('%y')" />/
@@ -114,6 +115,16 @@
             <t t-if="order.client_order_ref">
                 (<span t-esc="order.client_order_ref" />)
             </t>
+        </div>
+        <div t-if="order._name == 'rma'">
+            <span t-field="order.name" />
+            <t t-if="depot_number and deliveryslip.date_done">
+                (
+                <t t-esc="deliveryslip.date_done.strftime('%y')" />/
+                <t t-esc="depot_number" />)
+            </t>
+            <span>of</span>
+            <span t-esc="order.date.date()" />
         </div>
     </template>
     <template id="alc_report_delivery_slip.deliveryslip_with_price">

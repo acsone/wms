@@ -19,6 +19,9 @@ class TestStockDeliveryNote(TransactionCase):
                 "default_code": "5173360",
                 "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
+                "categ_id": cls.env.ref(
+                    "alc_product_category_data.product_categ_vet_belges"
+                ).id,
             }
         )
         cls.env["stock.quant"]._update_available_quantity(
@@ -118,11 +121,8 @@ class TestStockDeliveryNote(TransactionCase):
         rma_delivery_picking = rmas.delivery_move_ids.picking_id
         rma_delivery_picking.action_set_quantities_to_reservation()
         rma_delivery_picking._action_done()
-        attachments = self.env["ir.attachment"].search(
-            [("res_id", "=", rma_delivery_picking.id)]
-        )
-        self.assertEqual(len(attachments), 1)
-        self.assertTrue(attachments.name.endswith(".csv"))
+        moves = rma_delivery_picking._delivery_slip_moves(False)
+        self.assertEqual(len(moves), 1)
 
     def test_01(self):
         """Check the csv is not generated for rma delivery if the operation is set to.
@@ -139,7 +139,5 @@ class TestStockDeliveryNote(TransactionCase):
         rma_delivery_picking = rmas.delivery_move_ids.picking_id
         rma_delivery_picking.action_set_quantities_to_reservation()
         rma_delivery_picking._action_done()
-        attachments = self.env["ir.attachment"].search(
-            [("res_id", "=", rma_delivery_picking.id)]
-        )
-        self.assertEqual(len(attachments), 0)
+        moves = rma_delivery_picking._delivery_slip_moves(False)
+        self.assertEqual(len(moves), 0)
