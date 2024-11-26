@@ -7,7 +7,7 @@ from odoo.addons.sale_order_line_cancel.tests.common import TestSaleOrderLineCan
 
 
 class TestSaleCancelRemaining(TestSaleOrderLineCancelBase):
-    def test_deliver_and_return_order(self):
+    def _deliver(self):
         order_line = self.sale.order_line
         ship = order_line.move_ids.filtered(
             lambda p: p.picking_type_id.code == "outgoing"
@@ -22,7 +22,9 @@ class TestSaleCancelRemaining(TestSaleOrderLineCancelBase):
         ship._action_done()
         self.assertEqual(order_line.qty_delivered, 9)
         self.assertEqual(order_line.product_qty_remains_to_deliver, 1)
+        return ship
 
+    def _create_return(self, ship):
         stock_return_picking_form = Form(
             self.env["stock.return.picking"].with_context(
                 active_ids=ship.picking_id.ids,
@@ -33,7 +35,11 @@ class TestSaleCancelRemaining(TestSaleOrderLineCancelBase):
         stock_return_picking = stock_return_picking_form.save()
         stock_return_picking.product_return_moves.quantity = 2.0  # Return only 2
         action = stock_return_picking.create_returns()
-        return_pick = self.env["stock.picking"].browse(action["res_id"])
+        return self.env["stock.picking"].browse(action["res_id"])
+
+    def test_deliver_and_return_order(self):
+        ship = self._deliver()
+        return_pick = self._create_return(ship)
         return_pick.move_ids.quantity_done = 2.0
         return_pick._action_done()
 
@@ -53,4 +59,16 @@ class TestSaleCancelRemaining(TestSaleOrderLineCancelBase):
         self.sale.order_line.product_id.expense_policy = "cost"
         self.test_deliver_and_return_order()
         self.assertEqual(self.sale.order_line.qty_delivered, 7)
+        self.assertEqual(self.sale.order_line.product_qty_returned, 0)
+
+    def test_returned_to_scrap_location(self):
+        ship = self._deliver()
+        return_pick = self._create_return(ship)
+        scrap_location = self.env["stock.location"].search(
+            [("scrap_location", "=", True)], limit=1
+        )
+        return_pick.location_dest_id = scrap_location
+        return_pick.move_ids.quantity_done = 2.0
+        return_pick._action_done()
+        self.assertEqual(self.sale.order_line.qty_delivered, 9)
         self.assertEqual(self.sale.order_line.product_qty_returned, 0)
