@@ -13,7 +13,7 @@ class StockMove(StockMoveBase):
             if not move.origin_returned_move_id:
                 continue
             line = move.sale_line_id
-            if not move._include_move_into_return_quantity():
+            if not move._include_move_into_return_quantity() or move.scrapped:
                 continue
             if move.location_dest_id.usage != "customer":
                 line.product_qty_returned += move.product_uom_qty
