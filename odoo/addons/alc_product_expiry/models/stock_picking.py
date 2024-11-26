@@ -1,7 +1,7 @@
 # Copyright 2024 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-
-from odoo import fields
+from odoo import _, fields
+from odoo.exceptions import UserError
 
 from odoo.addons.stock.models.stock_picking import Picking
 
@@ -12,10 +12,15 @@ class StockPicking(Picking):
         "Bypass restriction on expired quants",
         inverse="_inverse_to_process_quant_expired",
         tracking=True,
+        copy=False,
     )
 
     def _inverse_to_process_quant_expired(self):
         """Make sure the bypass is propagated between related picking."""
+        if not self.env.user.has_group("stock.group_stock_manager"):
+            raise UserError(
+                _("You cannot change the 'Bypass restriction' field on stock pickings!")
+            )
         for rec in self:
             new_value = rec.to_process_quant_expired
             pickings = (
