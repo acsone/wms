@@ -116,6 +116,7 @@
     - oca refs/pull/917/head # [16.0] shopfloor: location_content_transfer: get_work additional domain and sort key.
     - oca refs/pull/925/head # [IMP] shopfloor: Improve message for location content transfer items
     - oca refs/pull/942/head # [IMP] shopfloor: Give user better information about the problematic line
+    - oca refs/pull/953/head # [16.0][FIX] shopfloor: fix create return move and move lines sort
   target: origin 16.0-alc-shopfloor
 
 ./src/rma:
