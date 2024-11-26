@@ -139,5 +139,7 @@ class TestStockDeliveryNote(TransactionCase):
         rma_delivery_picking = rmas.delivery_move_ids.picking_id
         rma_delivery_picking.action_set_quantities_to_reservation()
         rma_delivery_picking._action_done()
-        moves = rma_delivery_picking._delivery_slip_moves(False)
+        moves = rma_delivery_picking.with_context(csv_note=True)._delivery_slip_moves(
+            False
+        )
         self.assertEqual(len(moves), 0)

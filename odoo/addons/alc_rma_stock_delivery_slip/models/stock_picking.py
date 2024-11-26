@@ -10,9 +10,10 @@ class StockPicking(StockPickingBase):
 
     def _delivery_slip_moves(self, is_entry_register):
         moves = super()._delivery_slip_moves(is_entry_register)
-        moves = moves - moves.filtered(
-            lambda m: m.rma_id.operation_id.no_csv_delivery_slip
-        )
+        if self.env.context.get("csv_note"):
+            moves = moves - moves.filtered(
+                lambda m: m.rma_id.operation_id.no_csv_delivery_slip
+            )
         return moves
 
     def get_entry_register_lines(self):

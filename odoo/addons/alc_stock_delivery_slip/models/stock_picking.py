@@ -164,7 +164,7 @@ class StockPicking(stock_picking.StockPicking):
 
         attachements = []
         if send_csv:
-            csv_note = self._generate_delivery_note_csv()
+            csv_note = self.with_context(csv_note=True)._generate_delivery_note_csv()
             attachements.append(csv_note.id)
 
         if send_pdf:
