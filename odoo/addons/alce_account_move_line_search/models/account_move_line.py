@@ -53,3 +53,27 @@ class AccountMoveLine(AccountMoveLineBase):
             count=count,
             access_rights_uid=access_rights_uid,
         )
+
+    def _search_panel_domain_image(
+        self, field_name, domain, set_count=False, limit=False
+    ):
+        """
+        FIXME: disable account root filter on account move lines.
+
+        When any filter or search is applied, the widget attempts to dynamically filter
+        and display only the root accounts that are linked to the search results.
+        This filtering process slows down the search, especially when dealing with a
+        large dataset or complex queries.
+
+        A ticket has been opened with Odoo #4364037.
+
+        In the meantime, we disable this filter and always display all root accounts.
+        This means that, regardless of the search performed, the user will see all root
+        accounts, even if no results are found for some of them.
+
+        This approach would provide a significant performance improvement.
+        """
+        return {
+            root.id: {"id": root.id, "display_name": root.display_name}
+            for root in self.env["account.root"].search([])
+        }
