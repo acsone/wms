@@ -22,7 +22,6 @@
         "alc_partner_suite",
         "alc_partner_veterinary",
         "alc_report_base",
-        "alc_rma_shipment_advice",
         "alc_rma_stock_delivery_slip",
         "alc_sale_suite_name",
         "alc_stock_move_serial_number",
