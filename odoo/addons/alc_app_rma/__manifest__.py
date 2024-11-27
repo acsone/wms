@@ -5,7 +5,7 @@
     "name": "Alc RMA App",
     "description": """
         Gather all rma related modules for Alcyon""",
-    "version": "16.0.1.0.2",
+    "version": "16.0.1.0.3",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
@@ -24,7 +24,6 @@
         # Alcyon
         "alc_rma_operation_return_location",
         "alc_rma_sale_stock_restocking_fee_invoicing",
-        "alc_rma_shipment_advice",
         "alc_rma_stock_delivery_slip",
         "alc_stock_picking_return_security",
     ],
