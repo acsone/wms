@@ -124,6 +124,7 @@ odoo-addon-stock-location-pending-move @ git+https://github.com/OCA/stock-logist
 odoo-addon-stock-safe-scrap @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2181/head#subdirectory=setup/stock_safe_scrap
 odoo-addon-procurement-auto-create-group @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2096/head#subdirectory=setup/procurement_auto_create_group
 odoo-addon-procurement-auto-create-group-by-product @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2096/head#subdirectory=setup/procurement_auto_create_group_by_product
+g @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2078/head#subdirectory=setup/stock_location_zone
 
 # stock-logistics-workflow
 odoo-addon-stock-move-zone-location-source @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1377/head#subdirectory=setup/stock_move_zone_location_source
