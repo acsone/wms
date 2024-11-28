@@ -25,8 +25,8 @@ msgstr "Ignorer les restrictions sur les lots expirés"
 #: model:ir.model.fields,help:alc_product_expiry.field_stock_picking_type__no_expired_reservation_allowed
 msgid ""
 "Check this box to enforce a policy that prevents reservations for lots that "
-"have already expired. When enabled, users won't be able to make reservations"
-" for lots whose expiration date has passed."
+"have already expired. When enabled, users won't be able to make reservations "
+"for lots whose expiration date has passed."
 msgstr ""
 "Cochez cette case pour appliquer une politique qui empêche les réservations "
 "pour les lots déjà expirés. Lorsque activée, les utilisateurs ne pourront "
@@ -56,6 +56,13 @@ msgstr ""
 #. module: alc_product_expiry
 #: model:ir.model,name:alc_product_expiry.model_stock_picking
 msgid "Transfer"
+msgstr ""
+
+#. module: alc_product_expiry
+#. odoo-python
+#: code:addons/alc_product_expiry/models/stock_picking.py:0
+#, python-format
+msgid "You cannot change the 'Bypass restriction' field on stock pickings!"
 msgstr ""
 
 #. module: alc_product_expiry
