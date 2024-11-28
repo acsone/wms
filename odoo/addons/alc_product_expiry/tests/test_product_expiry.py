@@ -311,3 +311,18 @@ class TestProductExpiry(TransactionCase):
         self.assertEqual(self.picking_customer.state, "assigned")
         self._do_transfer(self.picking_customer)
         self.assertEqual(self.picking_customer.state, "done")
+
+    def test_user_not_allowed(self):
+        """Check the lot expiration bypass access right."""
+        self.demo = self.env.ref("base.user_demo")
+        self.demo.groups_id -= self.env.ref("stock.group_stock_manager")
+        self.assertEqual(self.picking_customer.state, "waiting")
+        self.assertEqual(self.move.ordered_available_to_promise_qty, 3)
+        self.assertTrue(self.move.release_ready)
+        self.picking_customer.release_available_to_promise()
+        pick = self.move.move_orig_ids.picking_id
+        self.assertEqual(pick.state, "confirmed")
+        self.assertFalse(pick.move_line_ids)
+        pick = pick.with_user(self.demo)
+        with self.assertRaises(UserError):
+            pick.to_process_quant_expired = True
