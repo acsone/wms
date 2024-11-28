@@ -67,6 +67,7 @@
         "stock_picking_type_shipping_policy",
         "stock_production_lot_expired_date",
         "stock_quant_safe_inventory",
+        "stock_quant_task_deferred",
         "stock_release_channel",
         "stock_release_channel_auto_release",
         "stock_release_channel_geoengine",
