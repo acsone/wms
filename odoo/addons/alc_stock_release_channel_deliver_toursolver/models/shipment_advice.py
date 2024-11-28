@@ -21,4 +21,5 @@ class ShipmentAdvice(ShipmentAdviceBase):
             "force": True,  # override if exists
             "startDate": self.departure_date.strftime("%Y-%m-%d"),
             "dayNums": [1],
+            "zoneId": "Europe/Brussels",
         }
