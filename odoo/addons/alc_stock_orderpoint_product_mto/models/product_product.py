@@ -42,7 +42,6 @@ class ProductProduct(Product):
             "company_id": warehouse.company_id.id,
             "product_min_qty": 0,
             "product_max_qty": 0,
-            "location_id": warehouse.view_location_id.id,
             "product_uom": self.uom_id.id,
         }
 

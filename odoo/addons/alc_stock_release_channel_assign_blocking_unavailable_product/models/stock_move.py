@@ -10,3 +10,8 @@ class StockMove(StockMoveBase):
 
     delivery_requires_other_lines = fields.Boolean(readonly=True)
     product_qty_unavailable = fields.Float()
+
+    def _get_stock_release_channel_block_on_backorder(self):
+        """Get the condition to block further delivery on backorder."""
+        self.ensure_one()
+        return bool(self.product_qty_unavailable > 0)

@@ -136,6 +136,7 @@
         "alc_stock_receive_lot_expiry",
         "alc_stock_refill_view",
         "alc_stock_release_channel_assign_blocking_unavailable_product",
+        "alc_stock_release_channel_assign_blocking_unavailable_product_mto",
         "alc_stock_release_channel_code",
         "alc_stock_release_channel_dashboard",
         "alc_stock_release_channel_deliver_gls",
