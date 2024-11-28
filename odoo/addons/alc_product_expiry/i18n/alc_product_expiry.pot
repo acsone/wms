@@ -53,6 +53,13 @@ msgstr ""
 
 #. module: alc_product_expiry
 #. odoo-python
+#: code:addons/alc_product_expiry/models/stock_picking.py:0
+#, python-format
+msgid "You cannot change the 'Bypass restriction' field on stock pickings!"
+msgstr ""
+
+#. module: alc_product_expiry
+#. odoo-python
 #: code:addons/alc_product_expiry/models/stock_move.py:0
 #, python-format
 msgid ""
