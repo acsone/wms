@@ -21,6 +21,7 @@
     - origin 16.0-type-annotations
     - odoo refs/pull/128732/head # [IMP] stock: Improves product.action_open_quants performances
     - odoo refs/pull/171545/head # [FIX] purchase_stock: AVCO computation - support line discount
+    - odoo refs/pull/189116/head # [IMP] stock: Use quant recordset to delete it if zero
   shell_command_after:
     # pyproject.toml
     - curl -sSL https://github.com/odoo/odoo/pull/44001.patch | git am
