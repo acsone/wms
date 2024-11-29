@@ -60,12 +60,19 @@ class TestEmptyPackageAtPickingReturn(TransactionCase):
 
     def test_00(self):
         self.pick_type.empty_package_at_return = False
+        # Quants in stock before
+        quant_before = self.product.stock_quant_ids.filtered(
+            lambda q, l=self.loc_stock: q.location_id == l
+        )
         return_picking = self._return_picking(self.picking, 10)
         self.assertTrue(return_picking.move_line_ids.result_package_id)
         return_picking.action_set_quantities_to_reservation()
         return_picking._action_done()
-        quant = self.product.stock_quant_ids.filtered(
-            lambda q, l=self.loc_stock: q.location_id == l
+        quant = (
+            self.product.stock_quant_ids.filtered(
+                lambda q, l=self.loc_stock: q.location_id == l
+            )
+            - quant_before
         )
         self.assertEqual(len(quant), 1)
         self.assertTrue(quant.package_id)
