@@ -3,6 +3,7 @@
 
 from odoo import _
 from odoo.exceptions import UserError
+from odoo.tools.misc import format_datetime
 
 from odoo.addons.stock.models.stock_move import StockMove as StockMoveBase
 
@@ -21,7 +22,9 @@ class StockMove(StockMoveBase):
                     and rec.picking_id.scheduled_date
                     and lot.removal_date < rec.picking_id.scheduled_date
                 ):
-                    bad_lots.append(f"{lot.name} {lot.removal_date}")
+                    bad_lots.append(
+                        f"{lot.name} {format_datetime(self.env, lot.removal_date)}"
+                    )
             if bad_lots:
                 raise UserError(
                     _(
