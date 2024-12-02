@@ -60,7 +60,7 @@ mdurl==0.1.2
 multidict==6.0.4
 num2words==0.5.12
 numpy==1.25.1
-odoo @ git+https://github.com/acsone/odoo.git@667bcadec1b1548846b02ed97244c72fc165a847
+odoo @ git+https://github.com/acsone/odoo.git@9064f4e9bffe5efbd31627e1f8aaf97ed53dcc96
 odoo-addon-account-analytic-account-tag==16.0.1.0.0.4
 odoo-addon-account-analytic-required==16.0.1.0.1.1
 odoo-addon-account-analytic-tag==16.0.1.0.1
