@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="shipment_advice_form_view">
+        <field name="model">shipment.advice</field>
+        <field name="inherit_id" ref="shipment_advice.shipment_advice_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+          name="button_open_rma_pickings"
+          type="object"
+          class="oe_stat_button"
+          icon="fa-truck"
+          states="done"
+          attrs="{'invisible': [('rma_pickings_count', '=', 0)]}"
+        >
+                            <field
+            string="RMA"
+            name="rma_pickings_count"
+            widget="statinfo"
+          />
+                        </button>
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>

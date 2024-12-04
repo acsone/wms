@@ -21,6 +21,7 @@
         "stock_release_channel_shipment_advice",
         # Alcyon
         "alc_report_base",
+        "alc_rma_shipment_advice",
         "alc_stock_picking_parcels_and_items_per_source",
     ],
     "data": [
