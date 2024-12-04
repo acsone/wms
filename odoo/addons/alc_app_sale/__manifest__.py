@@ -77,6 +77,7 @@
         "alc_product_cnk",
         "alc_product_consolidated_price_newpharma",
         "alc_product_consolidated_price_report",
+        "alc_product_hide_expense_policy",
         "alc_product_link_notice",
         "alc_product_lot_info",
         "alc_product_medical_device",
