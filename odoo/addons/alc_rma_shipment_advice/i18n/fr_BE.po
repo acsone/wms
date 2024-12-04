@@ -20,7 +20,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_rma_operation__exclude_from_rma_shipment_advice
 #: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_stock_picking__exclude_from_rma_shipment_advice
 msgid "Don't Link to RMA shipment advice"
-msgstr "Ne pas lier au note d'envoi RMA"
+msgstr "Ne pas lier aux notes d'envoi"
 
 #. module: alc_rma_shipment_advice
 #: model:ir.model.fields,help:alc_rma_shipment_advice.field_stock_picking__is_rma
