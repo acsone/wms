@@ -22,6 +22,7 @@
         "rma_sale_lot",
         "rma_sale_reason",
         # Alcyon
+        "alc_rma_activity",
         "alc_rma_operation_return_location",
         "alc_rma_sale_stock_restocking_fee_invoicing",
         "alc_rma_shipment_advice",
