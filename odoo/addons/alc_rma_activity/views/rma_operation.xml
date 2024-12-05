@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="rma_operation_form_view">
+        <field name="model">rma.operation</field>
+        <field name="inherit_id" ref="rma.rma_operation_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='settings']" position="after">
+                <group name="activities" string="Activities">
+                    <field name="create_inventory_activity_reception" attrs="{'invisible': [('action_create_receipt', '=', False)]}"/>
+                    <field name="create_inventory_activity_delivery" attrs="{'invisible': [('action_create_delivery', '=', False)]}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
