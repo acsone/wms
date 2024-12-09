@@ -23,6 +23,6 @@ class SaleSearch(sale.SaleSearch, extends=True):
     def to_odoo_domain(self, env: api.Environment) -> list:
         domain = super().to_odoo_domain(env)
         domain.append(
-            ("sale_channel_id", "in", env["sale.channel"]._get_internal_ids())
+            ("sale_channel_id", "in", env["sale.channel"].sudo()._get_internal_ids())
         )
         return domain

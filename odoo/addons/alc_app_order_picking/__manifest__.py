@@ -19,6 +19,7 @@
         "internal_stock_quant_package",
         "product_expiry_configurable",
         "product_total_weight_from_packaging",
+        "sale_stock_prebook_stock_available_to_promise_release",
         "shipment_advice",
         "shipment_advice_planner",
         "shipment_advice_planner_toursolver",
