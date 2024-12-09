@@ -1,6 +1,5 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 from .common import StockPickingTestCase
 
 
@@ -334,3 +333,35 @@ class TestStockPicking(StockPickingTestCase):
         self.assertEqual(len(ship.move_ids), 3)
         self.assertEqual(ship.move_ids[2].state, "cancel")
         self.assertEqual(backorder_additional_move.state, "cancel")
+
+    def test_partial_cancel_with_package(self):
+        """
+        A sale order with:
+
+            - 3 main products
+
+        A partial picking transfer of the main product
+        A complete picking transfer of the additional product
+
+        Those operations have been put in pack
+        """
+        sale = self._confirm_sale_order(products=[self.main_product], qty=3.0)
+
+        pick = self._get_picking_pick(sale)
+
+        # Transfer partial quantity with backorder
+        main = pick.move_line_ids.filtered(
+            lambda line: line.product_id == self.main_product
+        )
+        main.qty_done = 2.0
+        additional = pick.move_line_ids - main
+        additional.qty_done = 15.0
+        pick._put_in_pack(pick.move_line_ids)
+
+        pick._action_done()
+
+        # Try to validate the delivery picking
+        ship = self._get_picking_ship(sale)
+        ship.picking_type_id.no_backorder_for_additional_product = True
+        ship.package_level_ids.is_done = True
+        ship._action_done()

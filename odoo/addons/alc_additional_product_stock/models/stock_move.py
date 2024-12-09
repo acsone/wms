@@ -140,6 +140,15 @@ class StockMove(StockMoveBase):
                 ]
             ) | first_additional_move.filtered(
                 lambda move: move.state not in ("cancel", "done")
+                # We should not cancel moves that have already done quantities
+                and not (
+                    float_compare(
+                        move.quantity_done,
+                        0.0,
+                        precision_rounding=move.product_id.uom_id.rounding,
+                    )
+                    >= 0
+                )
             )
         return self.browse()
 
