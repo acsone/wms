@@ -42,6 +42,9 @@ class TestProductsService(CommonB2CServiceCase):
                 "sku": "12345",
                 "cnk": "CNK123",
                 "taxes": [{"amount": 6.0, "amount_type": "percent", "name": "Tax 6%"}],
+                "code_cti": "CTI123",
+                "code_amm": "AMM123",
+                "manufacturer": "Manufacturer",
             },
         )
         result = res["data"][1]
@@ -62,6 +65,9 @@ class TestProductsService(CommonB2CServiceCase):
                         "name": "Tax 10.0 (Fixed)",
                     }
                 ],
+                "code_cti": None,
+                "code_amm": None,
+                "manufacturer": None,
             },
         )
 
@@ -95,6 +101,9 @@ class TestProductsService(CommonB2CServiceCase):
                 "sku": "12345",
                 "cnk": None,
                 "taxes": [{"amount": 6.0, "amount_type": "percent", "name": "Tax 6%"}],
+                "code_cti": "CTI123",
+                "code_amm": "AMM123",
+                "manufacturer": "Manufacturer",
             },
         )
         result = res["data"][1]
@@ -115,6 +124,9 @@ class TestProductsService(CommonB2CServiceCase):
                         "name": "Tax 10.0 (Fixed)",
                     }
                 ],
+                "code_cti": None,
+                "code_amm": None,
+                "manufacturer": None,
             },
         )
 

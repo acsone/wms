@@ -14,6 +14,7 @@
         # Alcyon
         "alc_address_data",
         "alc_address_data",
+        "alc_arsia",
         "alc_b2c_connector",
         "alc_chronovet",
         "alc_clubvetshop",

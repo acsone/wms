@@ -44,6 +44,9 @@ class TestStocksService(CommonB2CServiceCase):
                 "quantity": 5.0,
                 "sku": "12345",
                 "taxes": [{"amount": 6.0, "amount_type": "percent", "name": "Tax 6%"}],
+                "code_cti": "CTI123",
+                "code_amm": "AMM123",
+                "manufacturer": "Manufacturer",
             },
         )
         result = res["data"][1]
@@ -60,6 +63,9 @@ class TestStocksService(CommonB2CServiceCase):
                 "taxes": [
                     {"amount": 10.0, "amount_type": "fixed", "name": "Tax 10.0 (Fixed)"}
                 ],
+                "code_cti": None,
+                "code_amm": None,
+                "manufacturer": None,
             },
         )
 
@@ -95,6 +101,9 @@ class TestStocksService(CommonB2CServiceCase):
                 "quantity": 5.0,
                 "sku": "12345",
                 "taxes": [{"amount": 6.0, "amount_type": "percent", "name": "Tax 6%"}],
+                "code_cti": "CTI123",
+                "code_amm": "AMM123",
+                "manufacturer": "Manufacturer",
             },
         )
         with self._create_test_client() as client:
