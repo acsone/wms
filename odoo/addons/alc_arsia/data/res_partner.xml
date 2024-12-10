@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+  <record id="res_partner_arsia" model="res.partner">
+    <field name="name">ARSIA ASBL Webservices</field>
+    <field name="is_company">True</field>
+    <field name="customer_rank">1</field>
+  </record>
+</odoo>

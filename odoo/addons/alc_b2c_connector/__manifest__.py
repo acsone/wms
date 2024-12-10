@@ -24,6 +24,7 @@
         "fastapi",
         "onchange_helper",
         "product_assortment",
+        "product_manufacturer",
         "sale_channel",
         "sale_exception",
         "sale_order_line_cancel",

@@ -37,6 +37,8 @@ class CommonB2CServiceCase(FastAPITransactionCase):
         cls.env["stock.location"]._parent_store_compute()
         cls.env["product.category"]._parent_store_compute()
 
+        cls.manufacturer = cls.env["res.partner"].create({"name": "Manufacturer"})
+
         # create specific taxes
         cls.tax_fixed = cls.env["account.tax"].create(
             {
@@ -66,6 +68,9 @@ class CommonB2CServiceCase(FastAPITransactionCase):
                 "default_code": "12345",
                 "cnk_code": "CNK123",
                 "taxes_id": [(6, False, [cls.tax_6_percent.id])],
+                "code_cti": "CTI123",
+                "code_amm": "AMM123",
+                "manufacturer_id": cls.manufacturer.id,
             }
         )
         cls.change_product_qty(cls.saleable_product, 5)

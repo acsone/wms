@@ -1,0 +1,23 @@
+# Copyright 2024 ACSONE SA/NV
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+{
+    "name": "Alc Arsia",
+    "summary": """Arsia connection to b2c connector""",
+    "version": "16.0.1.0.0",
+    "license": "AGPL-3",
+    "author": "ACSONE SA/NV",
+    "website": "https://acsone.eu",
+    "depends": [
+        # Alcyon
+        "alc_b2c_connector",
+        "alc_b2c_connector_pricelist_discount",
+        "alc_product_category_data",
+    ],
+    "data": [
+        "data/ir_filters.xml",
+        "data/res_partner.xml",
+        "data/alc_b2c_client.xml",
+    ],
+    "demo": [],
+}
