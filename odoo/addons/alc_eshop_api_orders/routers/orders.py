@@ -47,6 +47,7 @@ def search(
         domain.append(
             ("sale_channel_id", "in", env["sale.channel"].sudo()._get_internal_ids())
         )
+    domain.append(("order_type", "=", "order"))
     model = env["sale.order"].sudo()
     total_count = model.search_count(domain)
     offset = per_page * (page - 1)
