@@ -90,7 +90,7 @@ odoo-addon-account-invoice-transmit @ git+https://github.com/acsone/account-invo
 odoo-addon-account-invoice-transmit-method==16.0.1.0.2.3
 odoo-addon-account-invoice-transmit-peppol @ git+https://github.com/acsone/peppol@d60a63c91191a42f8599694efc93df6ceb56ab45#subdirectory=setup/account_invoice_transmit_peppol
 odoo-addon-account-invoice-triple-discount==16.0.1.0.3.1
-odoo-addon-account-invoice-ubl @ git+https://github.com/acsone/edi.git@847ded027bd60d5829331b7eeaa4ae197d742204#subdirectory=setup/account_invoice_ubl
+odoo-addon-account-invoice-ubl @ git+https://github.com/acsone/edi.git@75e583328fa30454a853f1f1fc65f77c893c45e6#subdirectory=setup/account_invoice_ubl
 odoo-addon-account-journal-lock-date==16.0.1.0.0.14
 odoo-addon-account-move-line-product-category @ git+https://github.com/acsone/account-financial-tools@1ada460b91a0a44cbeaea93bf91ade916377ac8f#subdirectory=setup/account_move_line_product_category
 odoo-addon-account-move-name-sequence==16.0.1.1.12
