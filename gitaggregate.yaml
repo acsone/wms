@@ -157,3 +157,13 @@
     - oca refs/pull/419/head # [IMP] rma_lot
     - origin 16.0-rma_lot-configurable_workflow-sbj # [FIX] don't restrict lot if return product is different
   target: origin 16.0-alc-rma_lot
+
+./src/stock_picking_group_by_partner_by_carrier:
+  remotes:
+    origin: git@github.com:acsone/stock-logistics-workflow.git
+    oca: git@github.com:oca/stock-logistics-workflow.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/1751/head # [16.0][IMP] stock_picking_group_by_partner_by_carrier: Control the original_group_id propagation. #1751
+    - oca refs/pull/1789/head # [16.0][FIX] stock_picking_group_by_partner_by_carrier: merged procurement group should not be linked to the original sales order #1789
+  target: origin 16.0-alc-stock_picking_group_by_partner_by_carrier
