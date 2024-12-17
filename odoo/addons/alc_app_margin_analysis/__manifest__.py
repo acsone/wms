@@ -14,6 +14,7 @@
         # Third-party
         "sale_margin_delivered_dropshipping",
         "sale_margin_delivered_security",
+        "sale_order_blanket_order_sale_margin",
         # Alcyon
         "alc_sale_margin",
     ],
