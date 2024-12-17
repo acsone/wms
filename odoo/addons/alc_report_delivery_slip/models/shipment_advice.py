@@ -9,7 +9,12 @@ class ShipmentAdvice(Advice):
         ship_type = self.env.ref("stock.picking_type_out")
         shippings = (
             (self.loaded_picking_ids | self.rma_picking_ids)
-            .sorted("toursolver_shipment_advice_rank")
+            .sorted(
+                lambda p: (
+                    p.toursolver_shipment_advice_rank,
+                    p.picking_type_id.code != "incoming",
+                )
+            )
             .filtered(
                 lambda ship: ship.picking_type_id == ship_type
                 or ship.picking_type_id.is_rma
