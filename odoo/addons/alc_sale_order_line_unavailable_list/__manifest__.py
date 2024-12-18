@@ -11,11 +11,9 @@
     "website": "https://acsone.eu",
     "depends": [
         # Third-party
-        "sale_exception",
         "sale_order_line_cancel",
         # Alcyon/Stock Management
         "alc_sale_consignment",
     ],
     "data": ["views/sale_order_line.xml"],
-    "demo": [],
 }

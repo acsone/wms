@@ -20,7 +20,7 @@
     <field name="view_id" ref="sale.view_order_line_tree"/>
     <field name="search_view_id" ref="sale.view_sales_order_line_filter" />
     <field name="domain">[('state', 'in', ['sale'])]</field>
-    <field name="context">{'search_default_remains_to_deliver': 1,'unavailable_list': True}</field>
+    <field name="context">{'search_default_remains_to_deliver': 1}</field>
   </record>
   <menuitem
     id="menu_sale_lines_unavailable_list"
