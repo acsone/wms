@@ -269,7 +269,7 @@ odoo-addon-sale-margin-security==16.0.3.1.0.2
 odoo-addon-sale-order-blanket-order @ git+https://github.com/acsone/sale-workflow.git@62b6d5e8ac3713ce47540b7d63664e371bfa55de#subdirectory=setup/sale_order_blanket_order
 odoo-addon-sale-order-blanket-order-sale-margin @ git+https://github.com/acsone/sale-workflow.git@4b3f384f727c63aee3d632442fd85f4266735025#subdirectory=setup/sale_order_blanket_order_sale_margin
 odoo-addon-sale-order-blanket-order-stock-prebook @ git+https://github.com/acsone/sale-workflow.git@62b6d5e8ac3713ce47540b7d63664e371bfa55de#subdirectory=setup/sale_order_blanket_order_stock_prebook
-odoo-addon-sale-order-line-cancel @ git+https://github.com/acsone/sale-workflow.git@f2b61945e2ffb62d7ee9df245aac8e6e3fdbcfec#subdirectory=setup/sale_order_line_cancel
+odoo-addon-sale-order-line-cancel @ git+https://github.com/acsone/sale-workflow.git@544e9463f87c374a9a591504df5f1dba93b9db35#subdirectory=setup/sale_order_line_cancel
 odoo-addon-sale-procurement-customer==16.0.1.0.0.6
 odoo-addon-sale-product-set==16.0.3.0.0.3
 odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.git@f506b778476eacfc4a3f33d85c2f77f790a8ebc8#subdirectory=setup/sale_route_amendment

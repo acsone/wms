@@ -20,3 +20,11 @@ class SaleOrderLine(SaleOrderLineBase):
         for rec in self:
             rec.product_qty_remains_to_deliver -= rec.product_qty_returned
         return res
+
+    def _update_qty_canceled(self):
+        res = super()._update_qty_canceled()
+        for line in self:
+            if line._get_moves_to_cancel():
+                continue
+            line.product_qty_canceled -= line.product_qty_returned
+        return res

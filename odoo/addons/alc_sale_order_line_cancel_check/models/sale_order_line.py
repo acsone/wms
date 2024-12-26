@@ -13,8 +13,14 @@ class SaleOrderLine(sale_order_line.SaleOrderLine):
         if not moves:
             return
         if any(moves.picking_id.mapped("printed")):
+            picking_names = ",".join(
+                moves.picking_id.filtered("printed").mapped("name")
+            )
             raise UserError(
-                _("You cannot cancel a quantity that is part of a started picking")
+                _(
+                    "You cannot cancel a quantity that is part of a started picking (%(picking_names)s)",
+                    picking_names=picking_names,
+                )
             )
         done_preparation = moves.move_orig_ids.filtered(lambda m: m.state == "done")
         prepared_qty = sum(done_preparation.mapped("quantity_done"))
