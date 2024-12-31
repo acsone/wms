@@ -399,7 +399,7 @@ odoo-addon-stock-picking-delivery-package-type-domain @ git+https://github.com/a
 odoo-addon-stock-picking-grn-mandatory==16.0.1.0.0.8
 odoo-addon-stock-picking-group-by-base==16.0.1.0.1
 odoo-addon-stock-picking-group-by-max-weight @ git+https://github.com/acsone/stock-logistics-workflow.git@2661c42104e02094058de35a2d87b642ea7bcdfd#subdirectory=setup/stock_picking_group_by_max_weight
-odoo-addon-stock-picking-group-by-partner-by-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@a34943d0b5f26fde75dd20ad47c653d5d6f45899#subdirectory=setup/stock_picking_group_by_partner_by_carrier
+odoo-addon-stock-picking-group-by-partner-by-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@9f2db9d3da07b472ce07b9e18d914f244a32b642#subdirectory=setup/stock_picking_group_by_partner_by_carrier
 odoo-addon-stock-picking-group-by-partner-by-carrier-by-customer @ git+https://github.com/acsone/stock-logistics-workflow.git@8486bf88795420832c0588ccacf9840c3f9b9056#subdirectory=setup/stock_picking_group_by_partner_by_carrier_by_customer
 odoo-addon-stock-picking-is-completed @ git+https://github.com/acsone/stock-logistics-workflow.git@20e469fc9e4c0e9a3bbb0fb2b0c548735ab25eda#subdirectory=setup/stock_picking_is_completed
 odoo-addon-stock-picking-kind==16.0.1.0.0.10
