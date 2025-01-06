@@ -16,5 +16,4 @@
         "alc_sale_consignment",
     ],
     "data": ["views/sale_order_line.xml"],
-    "demo": [],
 }
