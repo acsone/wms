@@ -12,6 +12,7 @@
         # Third-party
         "fastapi",
         "sale_cart",
+        "sale_order_blanket_order",
         "sale_order_line_cancel",
         "shopinvader_sale_state",
         # Alcyon
