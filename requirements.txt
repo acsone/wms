@@ -237,7 +237,7 @@ odoo-addon-purchase-order-line-stock-move-cancel @ git+https://github.com/acsone
 odoo-addon-purchase-order-ubl @ git+https://github.com/acsone/edi.git@c1a5f8e4eee5eb9cabfd283727717029f6b0b494#subdirectory=setup/purchase_order_ubl
 odoo-addon-purchase-stock-packaging==16.0.1.0.0.7
 odoo-addon-pydantic==16.0.1.0.0.4
-odoo-addon-queue-job==16.0.2.6.8
+odoo-addon-queue-job @ git+https://github.com/acsone/queue@ffb27a4efa910a7f2aa3f194682926e1abf002bf#subdirectory=setup/queue_job
 odoo-addon-queue-job-cron==16.0.2.0.0.4
 odoo-addon-report-async==16.0.1.0.1
 odoo-addon-report-csv==16.0.2.1.0
