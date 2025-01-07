@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="rma_view_tree" model="ir.ui.view">
+        <field name="model">rma</field>
+        <field name="inherit_id" ref="rma.rma_view_tree"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//tree" position="inside">
+                <field name="activity_ids" widget="list_activity" optional="show"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

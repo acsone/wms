@@ -3,7 +3,6 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 
 <odoo>
-
     <record model="ir.ui.view" id="rma_operation_form_view">
         <field name="model">rma.operation</field>
         <field name="inherit_id" ref="rma.rma_operation_form_view"/>
