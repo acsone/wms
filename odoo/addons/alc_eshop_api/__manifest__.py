@@ -35,6 +35,7 @@
         "alc_eshop_api_orders",
         "alc_eshop_api_pickings",
         "alc_eshop_api_products_on_order",
+        "alc_eshop_api_products_on_order_blanket_order",
         "alc_eshop_api_promotion_subscriptions",
         "alc_eshop_api_registration",
         "alc_eshop_api_sale_order_blanket_order",

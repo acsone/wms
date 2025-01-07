@@ -125,7 +125,9 @@ WHERE
     def request_backorder_cancellation(self, quantity):
         for record in self:
             if not record.qty_unavailable:
-                raise NoBackOrderError(record.product_id.name, record.order_ref)
+                raise NoBackOrderError(
+                    record.product_id.name, record.order_ref, env=self.env
+                )
         template = self.env.ref(
             "alc_eshop_api_products_on_order.sale_order_request_backorder_cancellation"
         )
