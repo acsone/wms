@@ -1,1 +1,1 @@
-from . import alc_eshop_product_on_order
+from .alc_eshop_product_on_order import AlcEshopProductOnOrder

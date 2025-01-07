@@ -14,7 +14,7 @@ from odoo.addons.fastapi.dependencies import (
     authenticated_partner_env,
 )
 
-from ..exceptions import NoBackOrderError
+from ..exceptions import CancelOrderLineError
 from ..models.alc_eshop_product_on_order import AlcEshopProductOnOrder
 from ..schemas import (
     CancelProductOnOrderRequest,
@@ -144,6 +144,6 @@ def cancel_order_line_id(
         }
     try:
         record.request_backorder_cancellation(quantity=rqst.quantity)
-    except NoBackOrderError as error:
+    except CancelOrderLineError as error:
         return {"status": False, "error_msg": str(error)}
     return {"status": True}
