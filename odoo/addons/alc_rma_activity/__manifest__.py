@@ -12,6 +12,7 @@
         "rma",
     ],
     "data": [
+        "views/rma.xml",
         "views/rma_operation.xml",
     ],
     "demo": [],
