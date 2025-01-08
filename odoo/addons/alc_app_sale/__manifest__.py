@@ -107,6 +107,7 @@
         "alc_sale_exception_promotion",
         "alc_sale_internal_confirmation_mail",
         "alc_sale_mto_check_procurements",
+        "alc_sale_order_blanket_order_sale_channel",
         "alc_sale_order_cancel",
         "alc_sale_order_date_editable",
         "alc_sale_order_date_order_short",
