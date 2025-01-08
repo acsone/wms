@@ -12,6 +12,6 @@ class Shopinvader_api_saleSales_routerHelper(ShopinvaderApiSaleSalesRouterHelper
 
     def _get_domain_adapter(self):
         domain = super()._get_domain_adapter()
-        # only return normal sale orders (no blanket orders nor call-offs)
-        domain.append(("order_type", "=", "order"))
+        # only return normal and call-off sale orders
+        domain.append(("order_type", "in", ("order", "call_off")))
         return domain
