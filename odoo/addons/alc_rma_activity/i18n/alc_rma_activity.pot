@@ -19,41 +19,22 @@ msgid "Activities"
 msgstr ""
 
 #. module: alc_rma_activity
-#: model:ir.model.fields,field_description:alc_rma_activity.field_rma_operation__create_inventory_activity_delivery
-msgid "Create Inventory Activity After Delivery"
+#: model:ir.model.fields,field_description:alc_rma_activity.field_rma_operation__create_inventory_activity
+msgid "Create Inventory Activity"
 msgstr ""
 
 #. module: alc_rma_activity
-#: model:ir.model.fields,field_description:alc_rma_activity.field_rma_operation__create_inventory_activity_reception
-msgid "Create Inventory Activity After Reception"
-msgstr ""
-
-#. module: alc_rma_activity
-#: model:ir.model.fields,help:alc_rma_activity.field_rma_operation__create_inventory_activity_delivery
+#: model:ir.model.fields,help:alc_rma_activity.field_rma_operation__create_inventory_activity
 msgid ""
 "Enable this option to automatically create an activity for inventory actions"
-" required after the delivery is processed in an RMA."
-msgstr ""
-
-#. module: alc_rma_activity
-#: model:ir.model.fields,help:alc_rma_activity.field_rma_operation__create_inventory_activity_reception
-msgid ""
-"Enable this option to automatically create an activity for inventory actions"
-" required after the reception is processed in an RMA."
+" required after the RMA confirmation."
 msgstr ""
 
 #. module: alc_rma_activity
 #. odoo-python
 #: code:addons/alc_rma_activity/models/rma.py:0
 #, python-format
-msgid "Inventory actions required after delivery"
-msgstr ""
-
-#. module: alc_rma_activity
-#. odoo-python
-#: code:addons/alc_rma_activity/models/rma.py:0
-#, python-format
-msgid "Inventory actions required after reception"
+msgid "Inventory actions required"
 msgstr ""
 
 #. module: alc_rma_activity
@@ -64,9 +45,4 @@ msgstr ""
 #. module: alc_rma_activity
 #: model:ir.model,name:alc_rma_activity.model_rma_operation
 msgid "RMA requested operation"
-msgstr ""
-
-#. module: alc_rma_activity
-#: model:ir.model,name:alc_rma_activity.model_stock_move
-msgid "Stock Move"
 msgstr ""

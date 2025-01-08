@@ -9,8 +9,7 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@name='settings']" position="after">
                 <group name="activities" string="Activities">
-                    <field name="create_inventory_activity_reception" attrs="{'invisible': [('action_create_receipt', '=', False)]}"/>
-                    <field name="create_inventory_activity_delivery" attrs="{'invisible': [('action_create_delivery', '=', False)]}"/>
+                    <field name="create_inventory_activity" />
                 </group>
             </xpath>
         </field>
