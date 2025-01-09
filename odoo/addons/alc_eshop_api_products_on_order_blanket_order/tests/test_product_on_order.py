@@ -3,9 +3,8 @@
 
 import freezegun
 
+from odoo.addons.alc_eshop_api_products_on_order.schemas import ProductOnOrder
 from odoo.addons.alc_eshop_api_products_on_order.tests.common import ProductOnOrderCase
-
-from ..schemas import ProductOnOrder
 
 
 class TestProductOnOrder(ProductOnOrderCase):

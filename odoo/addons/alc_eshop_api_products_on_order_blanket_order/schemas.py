@@ -7,7 +7,7 @@ from odoo.addons.alc_eshop_api_products_on_order import schemas
 from .models.alc_eshop_product_on_order import AlcEshopProductOnOrder
 
 
-class ProductOnOrder(schemas.ProductOnOrder):
+class ProductOnOrder(schemas.ProductOnOrder, extends=True):
 
     @classmethod
     def from_alc_eshop_product_on_order(

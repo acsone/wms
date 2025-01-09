@@ -3,7 +3,7 @@
 
 from freezegun import freeze_time
 
-from odoo.addons.fastapi.tests.common import FastAPITransactionCase
+from odoo.addons.extendable_fastapi.tests.common import FastAPITransactionCase
 
 from ..routers import products_on_order_router
 

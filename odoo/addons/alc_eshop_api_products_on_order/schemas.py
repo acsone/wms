@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import datetime
 from enum import Enum
 
+from extendable_pydantic import ExtendableBaseModel
 from pydantic import BaseModel, Field
 
 from odoo.addons.alc_cerberus_utils import utils
@@ -29,7 +30,7 @@ class ProductFamily(Enum):
     equipment = "equipment"
 
 
-class ProductOnOrder(BaseModel):
+class ProductOnOrder(ExtendableBaseModel):
     has_backorder: bool
     description: str
     qty_to_deliver: float

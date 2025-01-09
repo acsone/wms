@@ -13,6 +13,7 @@
         # Odoo Community
         "sale",
         # Third-party
+        "extendable_fastapi",
         "fastapi",
         "product_route_mto",
         "sale_order_line_cancel",
