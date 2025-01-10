@@ -19,6 +19,7 @@
         "internal_stock_quant_package",
         "product_expiry_configurable",
         "product_total_weight_from_packaging",
+        "sale_order_blanket_order_stock_prebook_release",
         "sale_stock_prebook_cancel_line",
         "sale_stock_prebook_stock_available_to_promise_release",
         "shipment_advice",

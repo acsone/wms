@@ -16,6 +16,16 @@
         </field>
     </record>
 
+    <record id="stock_move_tree_view" model="ir.ui.view">
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree" />
+        <field name="arch" type="xml">
+            <field name="product_uom_qty" position="after">
+                <field name="date_priority" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
     <record id="stock_move_set_need_release_to_true" model="ir.actions.server">
         <field name="name">Set need_release to True</field>
         <field name="model_id" ref="stock.model_stock_move" />

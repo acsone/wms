@@ -111,6 +111,7 @@ odoo-addon-sale-order-blanket-order @ git+https://github.com/OCA/sale-workflow.g
 odoo-addon-sale-order-blanket-order-stock-prebook @ git+https://github.com/OCA/sale-workflow.git@refs/pull/3436/head#subdirectory=setup/sale_order_blanket_order_stock_prebook
 odoo-addon-sale-order-blanket-order-sale-margin @ git+https://github.com/OCA/sale-workflow.git@refs/pull/3499/head#subdirectory=setup/sale_order_blanket_order_sale_margin
 odoo-addon-sale-stock-prebook-cancel-line @ git+https://github.com/OCA/sale-workflow.git@refs/pull/3507/head#subdirectory=setup/sale_stock_prebook_cancel_line
+odoo-addon-sale-order-blanket-order-stock-prebook-release @ git+https://github.com/OCA/sale-workflow.git@refs/pull/3532/head#subdirectory=setup/sale_order_blanket_order_stock_prebook_release
 
 
 # sale-channel
