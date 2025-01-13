@@ -167,3 +167,13 @@
     - oca refs/pull/1751/head # [16.0][IMP] stock_picking_group_by_partner_by_carrier: Control the original_group_id propagation. #1751
     - oca refs/pull/1789/head # [16.0][FIX] stock_picking_group_by_partner_by_carrier: merged procurement group should not be linked to the original sales order #1789
   target: origin 16.0-alc-stock_picking_group_by_partner_by_carrier
+
+./src/queue:
+  remotes:
+    origin: git@github.com:acsone/queue.git
+    oca: git@github.com:OCA/queue.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/716/head # [16.0][IMP] queue_job: remove dead jobs requeuer cron and automatically requeue dead jobs
+    - oca refs/pull/668/head # [16.0][IMP] queue_job: HA job runner using session level advisory lock
+  target: origin 16.0-alc-queue
