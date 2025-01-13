@@ -231,4 +231,4 @@ odoo-addon-module-analysis-price @ git+https://github.com/akretion/ak-odoo-incub
 odoo-addon-fs-attachment @ git+https://github.com/OCA/storage.git@refs/pull/433/head#subdirectory=setup/fs_attachment
 
 # OCA/queue
-odoo-addon-queue_job @ git+https://github.com/OCA/queue@refs/pull/668/head#subdirectory=setup/queue_job
+odoo-addon-queue_job @ git+https://github.com/acsone/queue@16.0-alc-queue#subdirectory=setup/queue_job
