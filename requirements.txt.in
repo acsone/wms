@@ -232,3 +232,9 @@ odoo-addon-fs-attachment @ git+https://github.com/OCA/storage.git@refs/pull/433/
 
 # OCA/queue
 odoo-addon-queue_job @ git+https://github.com/acsone/queue@16.0-alc-queue#subdirectory=setup/queue_job
+
+# OCA/rest-framework
+odoo-addon-fastapi @ git+https://github.com/OCA/rest-framework.git@refs/pull/486/head#subdirectory=setup/fastapi
+
+# lmignon/extendable-pydantic
+extendable-pydantic @ git+https://github.com/lmignon/extendable-pydantic.git@refs/pull/22/head
