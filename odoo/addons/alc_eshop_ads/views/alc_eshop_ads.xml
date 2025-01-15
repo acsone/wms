@@ -6,65 +6,35 @@
     <record model="ir.ui.view" id="alc_eshop_ads_form_view">
         <field name="name">alc.eshop.ads.form (in alc_eshop_ads)</field>
         <field name="model">alc.eshop.ads</field>
+        <field name="inherit_id" ref="alc_eshop_temporal_info_mixin.alc_eshop_temporal_info_mixin_form_view" />
+        <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <form>
-                <header>
-                </header>
-                <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <field name="is_published" invisible="1" />
-                        <button
-              name="action_toggle_is_published"
-              attrs="{'invisible': [('is_published', '=', False)]}"
-              class="oe_stat_button"
-              type="object"
-              icon="fa-globe"
-            >
-                            <div class="o_stat_info o_field_widget">
-                                <span class="text-success">Published</span>
-                            </div>
-                        </button>
-                        <button
-              name="action_toggle_is_published"
-              attrs="{'invisible': [('is_published', '=', True)]}"
-              class="oe_stat_button"
-              type="object"
-              icon="fa-eye-slash"
-            >
-                            <div class="o_stat_info o_field_widget">
-                                <span class="text-danger">Unpublished</span>
-                            </div>
-                        </button>
-                    </div>
-
-                     <field name="image_medium" />
-                    <div class="oe_title">
-                        <label class="oe_edit_only" for="name" string="Name" />
-                        <h1><field name="name" placeholder="name" /></h1>
-                    </div>
-                    <group>
-                        <group id="access">
-                            <field name="visibility" placeholder="name" />
-                        </group>
-                        <group>
-                            <field
-                name="image"
-                class="oe_avatar"
-                options="{'preview_image': 'image_medium', 'zoom': true}"
-              />
-                            <field name="file" />
-                            <field name="site_url" />
-                            <field name="lang_id" />
-                        </group>
-                        <group>
-                            <field name="date_start" />
-                            <field name="date_end" />
-                            <field name="display_slot" />
-                            <field name="display_time" />
-                        </group>
+            <xpath expr="//div[@name='button_box']" position="after">
+                <field name="image_medium" />
+                <div class="oe_title">
+                    <label class="oe_edit_only" for="name" string="Name" />
+                    <h1><field name="name" placeholder="name" /></h1>
+                </div>
+                <group>
+                    <group id="access">
+                        <field name="visibility" placeholder="name" />
                     </group>
-                </sheet>
-            </form>
+                    <group>
+                        <field
+            name="image"
+            class="oe_avatar"
+            options="{'preview_image': 'image_medium', 'zoom': true}"
+            />
+                        <field name="file" />
+                        <field name="site_url" />
+                        <field name="lang_id" />
+                    </group>
+                </group>
+            </xpath>
+            <field name="date_end" position="after">
+                <field name="display_slot" />
+                <field name="display_time" />
+            </field>
         </field>
     </record>
 
@@ -111,27 +81,12 @@
     <record model="ir.ui.view" id="alc_eshop_ads_search_view">
         <field name="name">alc.eshop.ads.search (in alc_eshop_ads)</field>
         <field name="model">alc.eshop.ads</field>
+        <field name="inherit_id" ref="alc_eshop_temporal_info_mixin.alc_eshop_temporal_info_mixin_search_view" />
+        <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <search>
-                <filter
-          string="Past"
-          name="past"
-          domain="[('date_end','&lt;', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
-          help="Past ads from today"
-        />
-                <filter
-          string="Current"
-          name="current"
-          domain="['&amp;', ('date_start','&lt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))), ('date_end','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
-          help="Current ads"
-        />
-                <filter
-          string="Upcoming"
-          name="upcoming"
-          domain="[('date_start','&gt;', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
-          help="Upcoming ads from today"
-        />
-            </search>
+            <xpath expr="//filter[@name='current']" position="attributes">
+                <attribute name="help">"Valid today</attribute>
+            </xpath>
         </field>
     </record>
 
@@ -140,14 +95,16 @@
             alc_eshop_ads)
         </field>
         <field name="model">alc.eshop.ads</field>
+        <field name="inherit_id" ref="alc_eshop_temporal_info_mixin.alc_eshop_temporal_info_mixin_tree_view" />
+        <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <tree>
+            <field name="date_start" position="before">
                 <field name="name" />
-                <field name="date_start" />
-                <field name="date_end" />
+            </field>
+            <field name="date_end" position="after">
                 <field name="display_slot" />
                 <field name="lang_id" />
-            </tree>
+            </field>
         </field>
     </record>
 

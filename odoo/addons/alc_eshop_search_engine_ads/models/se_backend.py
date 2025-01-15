@@ -12,7 +12,7 @@ class SeBackend(SeBackendBase):
     def button_synchronize_ads(self):
         self.ensure_one()
         ads_model = self.env["alc.eshop.ads"]
-        ads_model.search([("is_published", "=", True)]).action_synchronize_ads()
+        ads_model.search([("is_published", "=", True)]).action_synchronize_records()
 
     @api.model
     def cron_synchronize_ads(self):

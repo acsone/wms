@@ -12,6 +12,8 @@
     "depends": [
         # Odoo Community
         "sales_team",
+        # Alcyon
+        "alc_eshop_temporal_info_mixin",
     ],
     "data": [
         "security/res_groups.xml",

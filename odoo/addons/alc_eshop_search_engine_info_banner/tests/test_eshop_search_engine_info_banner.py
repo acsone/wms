@@ -88,14 +88,14 @@ class TestEshopSearchEngineInfoBanner(TestBindingIndexBaseFake):
     def test_01(self):
         """Banner unchanged shouldn't be exported."""
         self.test_00()
-        self.msg_1.action_synchronize_info_banners()
+        self.msg_1.action_synchronize_records()
         self.assertEqual(self.msg_1.se_binding_ids.state, "done")
 
     def test_02(self):
         """Banner changed should be exported."""
         self.test_00()
         self.msg_1.html = "<h1>ok<h1/>"
-        self.msg_1.action_synchronize_info_banners()
+        self.msg_1.action_synchronize_records()
         self.assertEqual(self.msg_1.se_binding_ids.state, "to_export")
         with self.se_adapter.mocked_calls() as calls:
             self.se_index.generate_batch_sync_per_index()
@@ -143,7 +143,7 @@ class TestEshopSearchEngineInfoBanner(TestBindingIndexBaseFake):
         self.assertEqual(self.msg_1.se_binding_ids.state, "to_delete")
 
     def test_05(self):
-        """Future banner should be deleted."""
+        """Future banner should be published."""
         self.test_00()
         self.assertEqual(self.msg_1.se_binding_ids.state, "done")
         self.msg_1.write(
@@ -153,8 +153,8 @@ class TestEshopSearchEngineInfoBanner(TestBindingIndexBaseFake):
             }
         )
         self.backend.cron_synchronize_info_banners()
-        self.assertFalse(self.msg_1.is_published)
-        self.assertEqual(self.msg_1.se_binding_ids.state, "to_delete")
+        self.assertTrue(self.msg_1.is_published)
+        self.assertEqual(self.msg_1.se_binding_ids.state, "to_export")
 
     def test_06(self):
         """Past banner should be deleted."""

@@ -12,9 +12,7 @@ class SeBackend(SeBackendBase):
     def button_synchronize_info_banners(self):
         self.ensure_one()
         banner_model = self.env["alc.eshop.info.banner"]
-        banner_model.search(
-            [("is_published", "=", True)]
-        ).action_synchronize_info_banners()
+        banner_model.search([("is_published", "=", True)]).action_synchronize_records()
 
     @api.model
     def cron_synchronize_info_banners(self):

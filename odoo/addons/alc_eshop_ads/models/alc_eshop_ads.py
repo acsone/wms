@@ -11,10 +11,17 @@ from odoo.addons.fs_file.fields import FSFile
 class AlcEshopAds(models.Model):
 
     _name = "alc.eshop.ads"
-    _inherit = ["fs.image.mixin", "mixin.past"]  # nosemgrep: is-old-style-inheritance
+    # nosemgrep: is-old-style-inheritance
+    _inherit = [
+        "alc.eshop.temporal.info.mixin",
+        "fs.image.mixin",
+        "mixin.past",
+    ]
     _description = "Eshop Ads"
 
     name = fields.Char(required=True)
+    date_start = fields.Date(required=True)
+    date_end = fields.Date(required=True)
     visibility = fields.Selection(
         required=True,
         selection=[
@@ -35,8 +42,6 @@ class AlcEshopAds(models.Model):
         help="If specified, the customer will be redirected to this url upon click "
         "on the ads banner into the website.",
     )
-    date_start = fields.Date(required=True)
-    date_end = fields.Date(required=True)
     display_slot = fields.Selection(
         selection=[
             ("top_left", "Top left"),
@@ -52,11 +57,6 @@ class AlcEshopAds(models.Model):
         "lang on the website",
     )
     display_time = fields.Integer(required=True, default=-1)
-    is_published = fields.Boolean(string="Published?", readonly=True)
-
-    def action_toggle_is_published(self):
-        for record in self:
-            record.is_published = not record.is_published
 
     @api.constrains("site_url", "file")
     def _check_site_url_or_file(self):
@@ -66,22 +66,6 @@ class AlcEshopAds(models.Model):
                     _(
                         "You must choose between the download of a file OR the "
                         "redirect to a website on click on the banner"
-                    )
-                )
-
-    @api.constrains("date_start", "date_end")
-    def _validate_dates(self):
-        for this in self:
-            start = fields.Date.from_string(this.date_start)
-            end = fields.Date.from_string(this.date_end)
-            if start > end:
-                raise ValidationError(
-                    _(
-                        "The defined period on %(name)s is not a valid (%(start)s > "
-                        "%(end)s)",
-                        name=this.name,
-                        start=this.date_start,
-                        end=this.date_end,
                     )
                 )
 

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="alc_eshop_temporal_info_mixin_form_view">
+        <field name="model">alc.eshop.temporal.info.mixin</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <field name="is_published" invisible="1" />
+                        <button
+              name="action_toggle_is_published"
+              attrs="{'invisible': [('is_published', '=', False)]}"
+              class="oe_stat_button"
+              type="object"
+              icon="fa-globe"
+            >
+                            <div class="o_stat_info o_field_widget">
+                                <span class="text-success">Published</span>
+                            </div>
+                        </button>
+                        <button
+              name="action_toggle_is_published"
+              attrs="{'invisible': [('is_published', '=', True)]}"
+              class="oe_stat_button"
+              type="object"
+              icon="fa-eye-slash"
+            >
+                            <div class="o_stat_info o_field_widget">
+                                <span class="text-danger">Unpublished</span>
+                            </div>
+                        </button>
+                    </div>
+                    <group name="base_info">
+                        <field name="date_start" />
+                        <field name="date_end" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="alc_eshop_temporal_info_mixin_search_view">
+        <field name="model">alc.eshop.temporal.info.mixin</field>
+        <field name="arch" type="xml">
+            <search>
+               <filter
+          string="Past"
+          name="past"
+          domain="[('date_end','&lt;', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
+          help="Past from today"
+        />
+                <filter
+          string="Current"
+          name="current"
+          domain="['&amp;', ('date_start','&lt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))), ('date_end','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
+          help="Valid today"
+        />
+                <filter
+          string="Upcoming"
+          name="upcoming"
+          domain="[('date_start','&gt;', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"
+          help="Upcoming from today"
+        />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="alc_eshop_temporal_info_mixin_tree_view">
+        <field name="model">alc.eshop.temporal.info.mixin</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date_start" />
+                <field name="date_end" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

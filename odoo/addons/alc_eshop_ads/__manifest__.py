@@ -15,6 +15,7 @@
         # Third-party
         "fs_image",
         # Alcyon
+        "alc_eshop_temporal_info_mixin",
         "mixin_past",
     ],
     "data": [

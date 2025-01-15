@@ -1,13 +1,13 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo import fields, models
 
 
 class AlcEshopInfoBanner(models.Model):
 
     _name = "alc.eshop.info.banner"
+    _inherit = "alc.eshop.temporal.info.mixin"  # nosemgrep: is-old-style-inheritance
     _description = "Eshop Info Banner"
 
     html = fields.Html(required=True, translate=True)
@@ -25,22 +25,7 @@ class AlcEshopInfoBanner(models.Model):
         required=True,
         default="auth_only",
     )
-    date_start = fields.Datetime(required=True)
-    date_end = fields.Datetime(required=True)
-    is_published = fields.Boolean(string="Published?", readonly=True)
 
-    def action_toggle_is_published(self):
+    def _compute_display_name(self):
         for record in self:
-            record.is_published = not record.is_published
-
-    @api.constrains("date_start", "date_end")
-    def _validate_dates(self):
-        for this in self:
-            if this.date_start > this.date_end:
-                raise ValidationError(
-                    _(
-                        "The defined period is not valid (%(start)s > %(end)s)",
-                        start=this.date_start,
-                        end=this.date_end,
-                    )
-                )
+            record.display_name = record.html[:50]
