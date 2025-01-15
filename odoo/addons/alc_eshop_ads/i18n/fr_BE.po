@@ -17,13 +17,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_ads
-#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_form_view
-msgid "<span class=\"text-danger\">Unpublished</span>"
-msgstr ""
-
-#. module: alc_eshop_ads
-#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_form_view
-msgid "<span class=\"text-success\">Published</span>"
+#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
+msgid "\"Valid today"
 msgstr ""
 
 #. module: alc_eshop_ads
@@ -37,6 +32,26 @@ msgid "Bottom right"
 msgstr "En bas à droite"
 
 #. module: alc_eshop_ads
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__count_se_binding_done
+msgid "Count Se Binding Done"
+msgstr ""
+
+#. module: alc_eshop_ads
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__count_se_binding_error
+msgid "Count Se Binding Error"
+msgstr ""
+
+#. module: alc_eshop_ads
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__count_se_binding_pending
+msgid "Count Se Binding Pending"
+msgstr ""
+
+#. module: alc_eshop_ads
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__count_se_binding_total
+msgid "Count Se Binding Total"
+msgstr ""
+
+#. module: alc_eshop_ads
 #: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__create_uid
 msgid "Created by"
 msgstr "Créé par"
@@ -45,16 +60,6 @@ msgstr "Créé par"
 #: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__create_date
 msgid "Created on"
 msgstr "Créé le"
-
-#. module: alc_eshop_ads
-#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
-msgid "Current"
-msgstr "Non-échu"
-
-#. module: alc_eshop_ads
-#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
-msgid "Current ads"
-msgstr "Annonces en cours"
 
 #. module: alc_eshop_ads
 #: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__date_end
@@ -215,18 +220,18 @@ msgid "Non Shareholder"
 msgstr "Non alcyonnaire"
 
 #. module: alc_eshop_ads
-#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
-msgid "Past"
-msgstr "Echues"
-
-#. module: alc_eshop_ads
-#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
-msgid "Past ads from today"
-msgstr "Annonces échues au jour d'aujourd'hui"
-
-#. module: alc_eshop_ads
 #: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__is_published
 msgid "Published?"
+msgstr ""
+
+#. module: alc_eshop_ads
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__se_index_ids
+msgid "Se Index"
+msgstr ""
+
+#. module: alc_eshop_ads
+#: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__se_binding_ids
+msgid "Seacrh Engine Bindings"
 msgstr ""
 
 #. module: alc_eshop_ads
@@ -250,15 +255,6 @@ msgid "Slot:"
 msgstr "Emplacement dans le bandeau:"
 
 #. module: alc_eshop_ads
-#. odoo-python
-#: code:addons/alc_eshop_ads/models/alc_eshop_ads.py:0
-#, fuzzy, python-format
-#| msgid "The defined period on %s is not a valid (%s > %s)"
-msgid "The defined period on %(name)s is not a valid (%(start)s > %(end)s)"
-msgstr ""
-"La période définie pour %(name)s n'est pas valide (%(start)s > %(end)s)"
-
-#. module: alc_eshop_ads
 #: model:ir.model.fields.selection,name:alc_eshop_ads.selection__alc_eshop_ads__display_slot__top_left
 msgid "Top left"
 msgstr "En haut à gauche"
@@ -267,16 +263,6 @@ msgstr "En haut à gauche"
 #: model:ir.model.fields.selection,name:alc_eshop_ads.selection__alc_eshop_ads__display_slot__top_right
 msgid "Top right"
 msgstr "En haut à droite"
-
-#. module: alc_eshop_ads
-#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
-msgid "Upcoming"
-msgstr "A venir"
-
-#. module: alc_eshop_ads
-#: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_search_view
-msgid "Upcoming ads from today"
-msgstr "Annonces futures"
 
 #. module: alc_eshop_ads
 #: model:ir.model.fields,field_description:alc_eshop_ads.field_alc_eshop_ads__visibility
@@ -315,6 +301,30 @@ msgstr "Intitulé"
 #: model_terms:ir.ui.view,arch_db:alc_eshop_ads.alc_eshop_ads_kanban_view
 msgid "to"
 msgstr "au"
+
+#~ msgid "Current"
+#~ msgstr "Non-échu"
+
+#~ msgid "Current ads"
+#~ msgstr "Annonces en cours"
+
+#~ msgid "Past"
+#~ msgstr "Echues"
+
+#~ msgid "Past ads from today"
+#~ msgstr "Annonces échues au jour d'aujourd'hui"
+
+#, fuzzy
+#~| msgid "The defined period on %s is not a valid (%s > %s)"
+#~ msgid "The defined period on %(name)s is not a valid (%(start)s > %(end)s)"
+#~ msgstr ""
+#~ "La période définie pour %(name)s n'est pas valide (%(start)s > %(end)s)"
+
+#~ msgid "Upcoming"
+#~ msgstr "A venir"
+
+#~ msgid "Upcoming ads from today"
+#~ msgstr "Annonces futures"
 
 #~ msgid "Filename"
 #~ msgstr "Nom du fichier"
