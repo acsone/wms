@@ -17,13 +17,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_form_view
-msgid "<span class=\"text-danger\">Unpublished</span>"
-msgstr ""
-
-#. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_form_view
-msgid "<span class=\"text-success\">Published</span>"
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
+msgid "\"Valid today"
 msgstr ""
 
 #. module: alc_eshop_info_banner
@@ -45,16 +40,6 @@ msgstr "Créé par"
 #: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__create_date
 msgid "Created on"
 msgstr "Créé le"
-
-#. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
-msgid "Current"
-msgstr "Non-échu"
-
-#. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
-msgid "Current banners"
-msgstr "Bannières en cours"
 
 #. module: alc_eshop_info_banner
 #: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__date_end
@@ -108,16 +93,6 @@ msgid "Last Updated on"
 msgstr "Dernière mis à jour le"
 
 #. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
-msgid "Past"
-msgstr "Echues"
-
-#. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
-msgid "Past banners from today"
-msgstr "Bannières échues au jour d'aujourd'hui"
-
-#. module: alc_eshop_info_banner
 #: model:ir.model.fields.selection,name:alc_eshop_info_banner.selection__alc_eshop_info_banner__visibility__public_only
 msgid "Public Only"
 msgstr "Publique uniquement"
@@ -128,27 +103,9 @@ msgid "Published?"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#. odoo-python
-#: code:addons/alc_eshop_info_banner/models/alc_eshop_info_banner.py:0
-#, fuzzy, python-format
-#| msgid "The defined period is not a valid (%s > %s)"
-msgid "The defined period is not valid (%(start)s > %(end)s)"
-msgstr "La période définie n'est pas valide (%(start)s > %(end)s)"
-
-#. module: alc_eshop_info_banner
 #: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__type
 msgid "Type"
 msgstr "Type"
-
-#. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
-msgid "Upcoming"
-msgstr "A venir"
-
-#. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
-msgid "Upcoming banners from today"
-msgstr "Bannières futures"
 
 #. module: alc_eshop_info_banner
 #: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__visibility
@@ -169,3 +126,26 @@ msgstr "Info"
 #: model:ir.model.fields.selection,name:alc_eshop_info_banner.selection__alc_eshop_info_banner__type__warning
 msgid "warning"
 msgstr "Avertissement"
+
+#~ msgid "Current"
+#~ msgstr "Non-échu"
+
+#~ msgid "Current banners"
+#~ msgstr "Bannières en cours"
+
+#~ msgid "Past"
+#~ msgstr "Echues"
+
+#~ msgid "Past banners from today"
+#~ msgstr "Bannières échues au jour d'aujourd'hui"
+
+#, fuzzy
+#~| msgid "The defined period is not a valid (%s > %s)"
+#~ msgid "The defined period is not valid (%(start)s > %(end)s)"
+#~ msgstr "La période définie n'est pas valide (%(start)s > %(end)s)"
+
+#~ msgid "Upcoming"
+#~ msgstr "A venir"
+
+#~ msgid "Upcoming banners from today"
+#~ msgstr "Bannières futures"
