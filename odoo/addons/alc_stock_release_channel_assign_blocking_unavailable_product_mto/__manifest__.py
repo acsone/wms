@@ -10,6 +10,7 @@
     "website": "https://acsone.eu",
     "depends": [
         # Third-party
+        "product_route_mto",
         "stock_route_mto",
         # Alcyon
         "alc_stock_release_channel_assign_blocking_unavailable_product",
