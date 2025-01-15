@@ -266,7 +266,7 @@ odoo-addon-sale-margin-delivered==16.0.2.0.0.5
 odoo-addon-sale-margin-delivered-dropshipping==16.0.1.0.1.3
 odoo-addon-sale-margin-delivered-security==16.0.1.2.1.6
 odoo-addon-sale-margin-security==16.0.3.1.0.2
-odoo-addon-sale-order-blanket-order @ git+https://github.com/acsone/sale-workflow.git@2b88552e5fb620fc35f281ce1e0c3ff9d585e8e9#subdirectory=setup/sale_order_blanket_order
+odoo-addon-sale-order-blanket-order @ git+https://github.com/acsone/sale-workflow.git@c5d0e1ba3d7a63efe1c5ff83c1177074f4edd0f9#subdirectory=setup/sale_order_blanket_order
 odoo-addon-sale-order-blanket-order-sale-margin @ git+https://github.com/acsone/sale-workflow.git@4b3f384f727c63aee3d632442fd85f4266735025#subdirectory=setup/sale_order_blanket_order_sale_margin
 odoo-addon-sale-order-blanket-order-stock-prebook @ git+https://github.com/acsone/sale-workflow.git@62b6d5e8ac3713ce47540b7d63664e371bfa55de#subdirectory=setup/sale_order_blanket_order_stock_prebook
 odoo-addon-sale-order-blanket-order-stock-prebook-release @ git+https://github.com/acsone/sale-workflow.git@54bfbaa0cb39771ddaa3ff04dc0d0b4669e1c3b3#subdirectory=setup/sale_order_blanket_order_stock_prebook_release
