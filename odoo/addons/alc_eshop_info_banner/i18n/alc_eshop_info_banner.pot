@@ -14,13 +14,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_form_view
-msgid "<span class=\"text-danger\">Unpublished</span>"
-msgstr ""
-
-#. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_form_view
-msgid "<span class=\"text-success\">Published</span>"
+#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
+msgid "\"Valid today"
 msgstr ""
 
 #. module: alc_eshop_info_banner
@@ -41,16 +36,6 @@ msgstr ""
 #. module: alc_eshop_info_banner
 #: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__create_date
 msgid "Created on"
-msgstr ""
-
-#. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
-msgid "Current"
-msgstr ""
-
-#. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
-msgid "Current banners"
 msgstr ""
 
 #. module: alc_eshop_info_banner
@@ -101,16 +86,6 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
-msgid "Past"
-msgstr ""
-
-#. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
-msgid "Past banners from today"
-msgstr ""
-
-#. module: alc_eshop_info_banner
 #: model:ir.model.fields.selection,name:alc_eshop_info_banner.selection__alc_eshop_info_banner__visibility__public_only
 msgid "Public Only"
 msgstr ""
@@ -121,25 +96,8 @@ msgid "Published?"
 msgstr ""
 
 #. module: alc_eshop_info_banner
-#. odoo-python
-#: code:addons/alc_eshop_info_banner/models/alc_eshop_info_banner.py:0
-#, python-format
-msgid "The defined period is not valid (%(start)s > %(end)s)"
-msgstr ""
-
-#. module: alc_eshop_info_banner
 #: model:ir.model.fields,field_description:alc_eshop_info_banner.field_alc_eshop_info_banner__type
 msgid "Type"
-msgstr ""
-
-#. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
-msgid "Upcoming"
-msgstr ""
-
-#. module: alc_eshop_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_info_banner.alc_eshop_info_banner_search_view
-msgid "Upcoming banners from today"
 msgstr ""
 
 #. module: alc_eshop_info_banner

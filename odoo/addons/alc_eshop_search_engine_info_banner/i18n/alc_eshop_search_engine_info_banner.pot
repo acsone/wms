@@ -21,26 +21,6 @@ msgid "'Serializer Type' must match 'Model'"
 msgstr ""
 
 #. module: alc_eshop_search_engine_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_search_engine_info_banner.field_alc_eshop_info_banner__count_se_binding_done
-msgid "Count Se Binding Done"
-msgstr ""
-
-#. module: alc_eshop_search_engine_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_search_engine_info_banner.field_alc_eshop_info_banner__count_se_binding_error
-msgid "Count Se Binding Error"
-msgstr ""
-
-#. module: alc_eshop_search_engine_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_search_engine_info_banner.field_alc_eshop_info_banner__count_se_binding_pending
-msgid "Count Se Binding Pending"
-msgstr ""
-
-#. module: alc_eshop_search_engine_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_search_engine_info_banner.field_alc_eshop_info_banner__count_se_binding_total
-msgid "Count Se Binding Total"
-msgstr ""
-
-#. module: alc_eshop_search_engine_info_banner
 #: model:ir.actions.server,name:alc_eshop_search_engine_info_banner.ir_cron_export_eshop_info_banners_ir_actions_server
 #: model:ir.cron,cron_name:alc_eshop_search_engine_info_banner.ir_cron_export_eshop_info_banners
 msgid "EShop: Export Info banners"
@@ -59,23 +39,12 @@ msgstr ""
 
 #. module: alc_eshop_search_engine_info_banner
 #: model:ir.model,name:alc_eshop_search_engine_info_banner.model_se_index
-#: model:ir.model.fields,field_description:alc_eshop_search_engine_info_banner.field_alc_eshop_info_banner__se_index_ids
 msgid "Se Index"
-msgstr ""
-
-#. module: alc_eshop_search_engine_info_banner
-#: model:ir.model.fields,field_description:alc_eshop_search_engine_info_banner.field_alc_eshop_info_banner__se_binding_ids
-msgid "Seacrh Engine Bindings"
 msgstr ""
 
 #. module: alc_eshop_search_engine_info_banner
 #: model:ir.model.fields,field_description:alc_eshop_search_engine_info_banner.field_se_index__serializer_type
 msgid "Serializer Type"
-msgstr ""
-
-#. module: alc_eshop_search_engine_info_banner
-#: model_terms:ir.ui.view,arch_db:alc_eshop_search_engine_info_banner.alc_eshop_info_banner_form_view
-msgid "Synchronize"
 msgstr ""
 
 #. module: alc_eshop_search_engine_info_banner
