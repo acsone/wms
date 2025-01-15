@@ -1,0 +1,83 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_eshop_temporal_info_mixin
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-15 12:18+0000\n"
+"PO-Revision-Date: 2025-01-15 12:18+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_eshop_temporal_info_mixin
+#: model_terms:ir.ui.view,arch_db:alc_eshop_temporal_info_mixin.alc_eshop_temporal_info_mixin_form_view
+msgid "<span class=\"text-danger\">Unpublished</span>"
+msgstr "<span class=\"text-danger\">Non publié</span>"
+
+#. module: alc_eshop_temporal_info_mixin
+#: model_terms:ir.ui.view,arch_db:alc_eshop_temporal_info_mixin.alc_eshop_temporal_info_mixin_form_view
+msgid "<span class=\"text-success\">Published</span>"
+msgstr "<span class=\"text-success\">Publié</span>"
+
+#. module: alc_eshop_temporal_info_mixin
+#: model:ir.model,name:alc_eshop_temporal_info_mixin.model_alc_eshop_temporal_info_mixin
+msgid "Alc Eshop Temporal Info"
+msgstr "Alcyon information temporelle"
+
+#. module: alc_eshop_temporal_info_mixin
+#: model_terms:ir.ui.view,arch_db:alc_eshop_temporal_info_mixin.alc_eshop_temporal_info_mixin_search_view
+msgid "Current"
+msgstr "Actuel"
+
+#. module: alc_eshop_temporal_info_mixin
+#: model:ir.model.fields,field_description:alc_eshop_temporal_info_mixin.field_alc_eshop_temporal_info_mixin__date_end
+msgid "Date End"
+msgstr "Date de fin"
+
+#. module: alc_eshop_temporal_info_mixin
+#: model:ir.model.fields,field_description:alc_eshop_temporal_info_mixin.field_alc_eshop_temporal_info_mixin__date_start
+msgid "Date Start"
+msgstr "Date de début"
+
+#. module: alc_eshop_temporal_info_mixin
+#: model_terms:ir.ui.view,arch_db:alc_eshop_temporal_info_mixin.alc_eshop_temporal_info_mixin_search_view
+msgid "Past"
+msgstr "Passé"
+
+#. module: alc_eshop_temporal_info_mixin
+#: model_terms:ir.ui.view,arch_db:alc_eshop_temporal_info_mixin.alc_eshop_temporal_info_mixin_search_view
+msgid "Past from today"
+msgstr "Passé à partir d'aujourd'hui"
+
+#. module: alc_eshop_temporal_info_mixin
+#: model:ir.model.fields,field_description:alc_eshop_temporal_info_mixin.field_alc_eshop_temporal_info_mixin__is_published
+msgid "Published?"
+msgstr "Publié?"
+
+#. module: alc_eshop_temporal_info_mixin
+#. odoo-python
+#: code:addons/alc_eshop_temporal_info_mixin/models/alc_eshop_temporal_info_mixin.py:0
+#, python-format
+msgid "The defined period is not valid (%(start)s > %(end)s)"
+msgstr "La période définie n'est pas valide (%(start)s > %(end)s)"
+
+#. module: alc_eshop_temporal_info_mixin
+#: model_terms:ir.ui.view,arch_db:alc_eshop_temporal_info_mixin.alc_eshop_temporal_info_mixin_search_view
+msgid "Upcoming"
+msgstr "À venir"
+
+#. module: alc_eshop_temporal_info_mixin
+#: model_terms:ir.ui.view,arch_db:alc_eshop_temporal_info_mixin.alc_eshop_temporal_info_mixin_search_view
+msgid "Upcoming from today"
+msgstr "À venir à partir d'aujourd'hui"
+
+#. module: alc_eshop_temporal_info_mixin
+#: model_terms:ir.ui.view,arch_db:alc_eshop_temporal_info_mixin.alc_eshop_temporal_info_mixin_search_view
+msgid "Valid today"
+msgstr "Valide aujourd'hui"
