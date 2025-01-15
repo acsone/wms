@@ -20,6 +20,8 @@ class AlcEshopAds(models.Model):
     _description = "Eshop Ads"
 
     name = fields.Char(required=True)
+    date_start = fields.Date(required=True)
+    date_end = fields.Date(required=True)
     visibility = fields.Selection(
         required=True,
         selection=[

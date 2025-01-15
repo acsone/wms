@@ -15,9 +15,9 @@
         "queue_job_cron",
         # Alcyon
         "alc_eshop_ads",
+        "alc_eshop_search_engine_temporal_info_mixin",
     ],
     "data": [
-        "views/alc_eshop_ads.xml",
         "views/se_backend.xml",
         "data/ir_cron.xml",
         "data/se_index.xml",

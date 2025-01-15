@@ -21,8 +21,8 @@ class AlcEshopTemporalInfoMixin(models.AbstractModel):
     @api.constrains("date_start", "date_end")
     def _validate_dates(self):
         for this in self:
-            start = fields.Date.from_string(this.date_start)
-            end = fields.Date.from_string(this.date_end)
+            start = fields.Datetime.to_datetime(this.date_start)
+            end = fields.Datetime.to_datetime(this.date_end)
             if start > end:
                 raise ValidationError(
                     _(

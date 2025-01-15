@@ -127,14 +127,14 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
     def test_01(self):
         """Ads unchanged shouldn't be exported."""
         self.test_00()
-        self.adv_top_left.action_synchronize_ads()
+        self.adv_top_left.action_synchronize_records()
         self.assertEqual(self.adv_top_left.se_binding_ids.state, "done")
 
     def test_02(self):
         """Ads changed should be exported."""
         self.test_00()
         self.adv_top_left.name = "ads updated"
-        self.adv_top_left.action_synchronize_ads()
+        self.adv_top_left.action_synchronize_records()
         self.assertEqual(self.adv_top_left.se_binding_ids.state, "to_export")
         with self.se_adapter.mocked_calls() as calls:
             self.se_index.generate_batch_sync_per_index()
@@ -221,7 +221,7 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
         # ads are exported into the right index according to their lang if
         # specified
         self.adv_top_left.lang_id = self.env.ref("base.lang_fr")
-        self.adv_top_left.action_synchronize_ads()
+        self.adv_top_left.action_synchronize_records()
         self.assertFalse(
             self.adv_top_left.se_binding_ids.filtered(lambda b: b.state != "to_delete")
         )
@@ -233,7 +233,7 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
         # we must recompute the se_index_ids field manually since we created
         # a new index
         self.adv_top_left._compute_se_index()
-        self.adv_top_left.action_synchronize_ads()
+        self.adv_top_left.action_synchronize_records()
         self.assertEqual(
             1,
             len(
@@ -243,7 +243,7 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
             ),
         )
         self.adv_top_left.lang_id = None
-        self.adv_top_left.action_synchronize_ads()
+        self.adv_top_left.action_synchronize_records()
         self.assertEqual(
             2,
             len(
@@ -253,7 +253,7 @@ class TestEshopSearchEngineAds(TestBindingIndexBaseFake):
             ),
         )
         self.adv_top_left.lang_id = self.env.ref("base.lang_fr")
-        self.adv_top_left.action_synchronize_ads()
+        self.adv_top_left.action_synchronize_records()
         self.assertEqual(
             1,
             len(

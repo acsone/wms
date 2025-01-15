@@ -25,3 +25,7 @@ class AlcEshopInfoBanner(models.Model):
         required=True,
         default="auth_only",
     )
+
+    def _compute_display_name(self):
+        for record in self:
+            record.display_name = record.html[:50]
