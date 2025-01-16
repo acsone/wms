@@ -18,6 +18,8 @@ class TestStockPicking(StockReleaseChannelBlockingCommon, BaseCommon):
 
         cls.route.active = True
         cls.warehouse = cls.env.ref("stock.warehouse0")
+        # Set picking in two steps
+        cls.warehouse.delivery_steps = "pick_ship"
         # Workaround to get an input movement
         cls.env["stock.rule"].create(
             {

@@ -12,6 +12,6 @@ class StockMove(StockMoveBase):
         Here, don't block if generated move has used an MTO route
         """
         self.ensure_one()
-        if self.rule_id.route_id.is_mto:
+        if self.rule_id.route_id.is_mto or self.product_id.is_mto:
             return False
         return super()._get_stock_release_channel_block_on_backorder()
