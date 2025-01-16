@@ -25,6 +25,7 @@ odoo-addon-account-move-sent-usability @ git+https://github.com/OCA/account-invo
 # https://github.com/OCA/account-invoicing/pull/1368 - [16.0][ADD] account_tax_one_vat_sale
 odoo-addon-partner-invoicing-mode-cash-on-delivery @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1736/head#subdirectory=setup/partner_invoicing_mode_cash_on_delivery
 odoo-addon-partner-invoicing-mode-at-shipping-fourteen-days @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1631/head#subdirectory=setup/partner_invoicing_mode_at_shipping_fourteen_days
+odoo-addon-partner-invoicing-mode-at-shipping-group-by-partner-by-carrier @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1881/head#subdirectory=setup/partner_invoicing_mode_at_shipping_group_by_partner_by_carrier
 odoo-addon-partner-invoicing-mode-fourteen-days @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1534/head#subdirectory=setup/partner_invoicing_mode_fourteen_days
 odoo-addon-partner-invoicing-mode-ten-days @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1532/head#subdirectory=setup/partner_invoicing_mode_ten_days
 odoo-addon-account-invoice-split-refund @ git+https://github.com/OCA/account-invoicing.git@refs/pull/1564/head#subdirectory=setup/account_invoice_split_refund
