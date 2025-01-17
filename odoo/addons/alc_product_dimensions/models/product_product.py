@@ -22,11 +22,6 @@ class ProductProduct(ProductBase):
         string="Volume (liter)",
         help="Volume in liter",
     )
-    volume = fields.Float(
-        digits=(8, 4),
-        readonly=True,
-        store=False,
-    )
 
     # Default unit for Alcyon is cm
     dimensional_uom_id = fields.Many2one[UoM](
