@@ -37,6 +37,7 @@
         "partner_invoicing_mode",
         "partner_invoicing_mode_at_shipping",
         "partner_invoicing_mode_at_shipping_fourteen_days",
+        "partner_invoicing_mode_at_shipping_group_by_partner_by_carrier",
         "partner_invoicing_mode_cash_on_delivery",
         "partner_invoicing_mode_fourteen_days",
         "partner_invoicing_mode_monthly",
