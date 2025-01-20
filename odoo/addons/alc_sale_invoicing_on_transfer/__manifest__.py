@@ -16,6 +16,7 @@
     "depends": [
         # Third-party
         "partner_invoicing_mode_at_shipping",
+        "partner_invoicing_mode_at_shipping_group_by_partner_by_carrier",
     ],
     "data": ["views/stock_picking_type.xml"],
     "demo": [],
