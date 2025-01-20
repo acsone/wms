@@ -51,11 +51,6 @@ msgid "UoM for length, height, width"
 msgstr ""
 
 #. module: alc_product_dimensions
-#: model:ir.model.fields,field_description:alc_product_dimensions.field_product_product__volume
-msgid "Volume"
-msgstr ""
-
-#. module: alc_product_dimensions
 #: model:ir.model.fields,field_description:alc_product_dimensions.field_product_product__volume_liter
 #: model:ir.model.fields,field_description:alc_product_dimensions.field_product_template__volume_liter
 msgid "Volume (liter)"
