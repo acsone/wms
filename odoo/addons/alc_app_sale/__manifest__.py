@@ -33,6 +33,7 @@
         "sale_discount_display_amount",
         "sale_exception",
         "sale_invoice_policy",
+        "sale_loyalty_initial_date_validity",
         "sale_order_blanket_order_stock_prebook",
         "sale_order_line_cancel",
         "sale_product_set",

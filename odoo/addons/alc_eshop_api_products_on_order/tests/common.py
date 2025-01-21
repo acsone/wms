@@ -14,6 +14,8 @@ class ProductOnOrderCase(FastAPITransactionCase):
         super().setUpClass()
         cls.default_fastapi_router = products_on_order_router
         # disable others products
+        if "loyalty.program" in cls.env:
+            cls.env["loyalty.program"].search([]).toggle_active()
         cls.env["product.product"].search([]).write({"active": False})
         cls.env["stock.location"].search([])._parent_store_compute()
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
