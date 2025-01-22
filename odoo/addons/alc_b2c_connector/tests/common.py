@@ -32,6 +32,8 @@ class CommonB2CServiceCase(FastAPITransactionCase):
         cls.ProductProduct = cls.env["product.product"]
         # disable all products
         cls.ProductProduct.search([]).mapped("orderpoint_ids").write({"active": False})
+        if "loyalty.program" in cls.env:
+            cls.env["loyalty.program"].search([]).toggle_active()
         cls.ProductProduct.search([]).write({"active": False})
         cls.env.ref("alc_b2c_connector.alc_b2c_rest_api_user").email = "test@test.be"
         cls.env["stock.location"]._parent_store_compute()

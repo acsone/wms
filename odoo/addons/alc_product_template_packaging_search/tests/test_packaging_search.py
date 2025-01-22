@@ -33,6 +33,8 @@ class TestPackagingSearch(TransactionCase):
                 "product_id": cls.product.product_variant_ids.id,
             }
         )
+        if "loyalty.program" in cls.env:
+            cls.env["loyalty.program"].search([]).toggle_active()
 
     def test_packaging_search(self):
         # Deactivate existing products but the one just created
