@@ -11,7 +11,7 @@
     />
     <field
       name="channel_id"
-      ref="alc_queue_job_background_channel.channel_root_background_process"
+      ref="alc_reception_pharmacy.channel_root_background_process_pharmacy"
     />
   </record>
 </odoo>

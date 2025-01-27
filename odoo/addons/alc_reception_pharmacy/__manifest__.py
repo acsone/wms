@@ -30,6 +30,7 @@
         "security/ir.model.access.csv",
         "data/ir_sequence.xml",
         "data/product_product.xml",
+        "data/queue_job_channel.xml",
         "data/queue_job_function.xml",
         "wizards/receive_pharmacy_products.xml",
         "views/reception_pharmacy_views.xml",
