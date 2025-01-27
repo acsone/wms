@@ -239,3 +239,7 @@ odoo-addon-fastapi @ git+https://github.com/OCA/rest-framework.git@refs/pull/486
 
 # lmignon/extendable-pydantic
 extendable-pydantic @ git+https://github.com/lmignon/extendable-pydantic.git@refs/pull/22/head
+
+# OCA/sale-promotion
+odoo-addon-loyalty-partner-applicability @ git+https://github.com/OCA/sale-promotion.git@refs/pull/265/head#subdirectory=setup/loyalty_partner_applicability
+odoo-addon-sale-loyalty-partner-applicability @ git+https://github.com/OCA/sale-promotion.git@refs/pull/265/head#subdirectory=setup/sale_loyalty_partner_applicability
