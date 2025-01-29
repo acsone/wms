@@ -82,17 +82,6 @@
     - origin refs/pull/355/head # [IMP] rename_fields: Be able to use a cursor instead of Environment
   target: acsone 16.0-alc_master
 
-./src/account-closing:
-  remotes:
-    origin: git@github.com:acsone/account-closing.git
-    oca: git@github.com:oca/account-closing.git
-  merges:
-    - oca 16.0
-    - oca refs/pull/270/head # [IMP] account-closing: auto reverse
-    - oca refs/pull/271/head # [IMP] account-closing: account cutoff accrual on order
-    - oca refs/pull/283/head # [IMP] account-closing: configure different account for refunds
-  target: origin 16.0-account-cutoff-base
-
 ./src/edi:
   remotes:
     origin: git@github.com:acsone/edi.git
