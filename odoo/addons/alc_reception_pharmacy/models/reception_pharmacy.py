@@ -32,8 +32,24 @@ class ReceptionPharmacy(models.Model):
         states={"done": [("readonly", True)]},
     )
     state = fields.Selection(
-        [("draft", "New"), ("done", "Done")], copy=False, readonly=True, default="draft"
+        [("draft", "New"), ("done", "Done")],
+        compute="_compute_state",
+        store=True,
+        copy=False,
+        readonly=True,
+        default="draft",
     )
+
+    @api.depends("line_ids.state")
+    def _compute_state(self):
+        for reception in self:
+            # If no lines have been added yet or if one of them is 'draft'
+            if not (reception.line_ids) or any(
+                line.state == "draft" for line in reception.line_ids
+            ):
+                reception.state = "draft"
+            else:
+                reception.state = "done"
 
     @api.model
     def _domain_product_id(self):
@@ -62,7 +78,6 @@ class ReceptionPharmacy(models.Model):
             lines.with_delay(
                 description=job_description, identity_key=identity_exact
             ).validate()
-        self.state = "done"
         self.env.user.notify_info(
             _("Reception pharmacy : lines are validated in background")
         )
