@@ -17,6 +17,7 @@ class ProductProduct(ProductBase):
         copied from SO line description.
         """
         if self.env.context.get("default_move_type") in ("out_invoice", "out_refund"):
-            self.partner_ref = self.name
+            for record in self:
+                record.partner_ref = record.name
             return None
         return super()._compute_partner_ref()
