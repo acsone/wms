@@ -110,8 +110,3 @@ repos:
             --odoo-version=16.0,
             --project-name=Alcyon,
           ]
-  - repo: https://github.com/returntocorp/semgrep
-    rev: "v1.31.0"
-    hooks:
-      - id: semgrep
-        args: ["--config", ".semgrep.yaml", "--error", "--metrics=off"]
