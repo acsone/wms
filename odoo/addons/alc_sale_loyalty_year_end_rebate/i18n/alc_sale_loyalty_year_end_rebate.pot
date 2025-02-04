@@ -14,6 +14,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_sale_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_sale_order_coupon_points__coupon_id
+#: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_sale_order_line__coupon_id
+msgid "Coupon"
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model,name:alc_sale_loyalty_year_end_rebate.model_loyalty_program
 msgid "Loyalty Program"
 msgstr ""
@@ -21,6 +27,11 @@ msgstr ""
 #. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model,name:alc_sale_loyalty_year_end_rebate.model_loyalty_reward
 msgid "Loyalty Reward"
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_sale_order_coupon_points__order_id
+msgid "Order"
 msgstr ""
 
 #. module: alc_sale_loyalty_year_end_rebate
@@ -41,13 +52,29 @@ msgid "Rebate of cumulated amount"
 msgstr ""
 
 #. module: alc_sale_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_sale_order_line__reward_id
+msgid "Reward"
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_loyalty_reward__reward_type
 msgid "Reward Type"
 msgstr ""
 
 #. module: alc_sale_loyalty_year_end_rebate
+#: model:ir.model,name:alc_sale_loyalty_year_end_rebate.model_sale_order_coupon_points
+msgid ""
+"Sale Order Coupon Points - Keeps track of how a sale order impacts a coupon"
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model,name:alc_sale_loyalty_year_end_rebate.model_sale_order
 msgid "Sales Order"
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
+#: model:ir.model,name:alc_sale_loyalty_year_end_rebate.model_sale_order_line
+msgid "Sales Order Line"
 msgstr ""
 
 #. module: alc_sale_loyalty_year_end_rebate
