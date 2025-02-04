@@ -135,6 +135,7 @@
     - oca refs/pull/417/head # [IMP] rma: configurable workflow #417
     - oca refs/pull/421/head # [16.0][FIX] rma: same procurement group for reception and delivery #421
     - oca refs/pull/423/head # [FIX] rma: group rma receptions #423
+    - oca refs/pull/441/head # [IMP] rma_sale: Avoid computing RMA move unnecessarily #441
   target: origin 16.0-alc-rma_sale
 
 ./src/rma_lot:
@@ -143,8 +144,8 @@
     oca: git@github.com:oca/rma.git
   merges:
     - oca 16.0
-    - oca refs/pull/419/head # [IMP] rma_lot
-    - origin 16.0-rma_lot-configurable_workflow-sbj # [FIX] don't restrict lot if return product is different
+    - oca refs/pull/441/head # [IMP] rma_sale: Avoid computing RMA move unnecessarily
+    - oca refs/pull/442/head # [FIX] don't restrict lot if return product is different
   target: origin 16.0-alc-rma_lot
 
 ./src/stock_picking_group_by_partner_by_carrier:
