@@ -6,6 +6,28 @@ from .common import TestSaleLoyaltyYearEndRebateCommon
 
 class TestSaleLoyaltyYearEndRebate(TestSaleLoyaltyYearEndRebateCommon):
 
+    def test_program_is_nominative(self):
+        self.assertTrue(self.year_end_rebate_program.is_nominative)
+        order = self.env["sale.order"].create(
+            {
+                "partner_id": self.steve.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product_A.id,
+                            "product_uom_qty": 1,
+                        },
+                    )
+                ],
+            }
+        )
+        order.action_confirm()
+        self.assertEqual(1, len(self.year_end_rebate_program.coupon_ids))
+        loyalty_cart = self.year_end_rebate_program.coupon_ids[0]
+        self.assertEqual(loyalty_cart.partner_id, self.steve)
+
     def test_rebate_uses_subtotal_price(self):
         self.assertFalse(self.year_end_rebate_program.coupon_ids)
         order = self.env["sale.order"].create(
