@@ -41,6 +41,7 @@ def _init_rfa(env):
                 "applies_on": "future",
                 "date_from": "2025-01-01",
                 "date_to": "2025-12-31",
+                "beneficiary_partner_type": "invoiced_partner",
                 "sale_ok": True,
                 "rule_ids": [],
                 "reward_ids": [

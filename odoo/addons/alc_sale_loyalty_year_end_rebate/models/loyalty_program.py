@@ -51,3 +51,10 @@ class LoyaltyProgram(models.Model):
         }
 
         return res
+
+    def _compute_is_nominative(self):
+        res = super()._compute_is_nominative()
+        for program in self:
+            if program.program_type == "year_end_rebate":
+                program.is_nominative = True
+        return res
