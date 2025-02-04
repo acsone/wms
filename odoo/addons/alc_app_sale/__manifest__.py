@@ -33,6 +33,7 @@
         "sale_discount_display_amount",
         "sale_exception",
         "sale_invoice_policy",
+        "sale_loyalty_beneficiary",
         "sale_loyalty_initial_date_validity",
         "sale_loyalty_partner_applicability",
         "sale_order_blanket_order_stock_prebook",
