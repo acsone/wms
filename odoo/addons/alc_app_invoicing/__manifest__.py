@@ -17,6 +17,7 @@
         "account_banking_sepa_direct_debit",
         "account_einvoice_generate",
         "account_invoice_export_ubl",
+        "account_invoice_refund_line_selection",
         "account_invoice_split_refund",
         "account_invoice_tax_required",
         "account_invoice_ubl",
@@ -36,6 +37,7 @@
         "pdf_helper",
         "purchase_invoicing_no_zero_line",
         "report_xml",
+        "sale_line_refund_to_invoice_qty",
         # Alcyon
         "alc_account_invoice_cancel_permissions",
         "alc_account_move_default_reference_type",
