@@ -1,5 +1,4 @@
 from odoo import Command
-from odoo.exceptions import ValidationError
 from odoo.tests import tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
@@ -66,23 +65,22 @@ class TestAccountAnalyticAccount(AccountTestInvoicingCommon):
         self.assertEqual(
             move_line.analytic_distribution, {f"{self.analytic_account_a.id}": 100}
         )
-        # set an invalid distribution: 2 analytic accounts for a total of 100%
-        with self.assertRaises(ValidationError):
-            move_line.analytic_distribution = {
-                self.analytic_account_a.id: 50,
-                self.analytic_account_b.id: 50,
-            }
+        # We can do partial distributions
+        move_line.analytic_distribution = {
+            self.analytic_account_a.id: 50,
+            self.analytic_account_b.id: 50,
+        }
         self.assertEqual(
-            move_line.analytic_distribution, {f"{self.analytic_account_a.id}": 100}
-        )  # no change
-        # set another invalid distribution: 1 analytic account at 50%
-        with self.assertRaises(ValidationError):
-            move_line.analytic_distribution = {
-                self.analytic_account_a.id: 50,
-            }
+            move_line.analytic_distribution,
+            {f"{self.analytic_account_a.id}": 50, f"{self.analytic_account_b.id}": 50},
+        )
+        # Another valid distribution
+        move_line.analytic_distribution = {
+            self.analytic_account_a.id: 50,
+        }
         self.assertEqual(
-            move_line.analytic_distribution, {f"{self.analytic_account_a.id}": 100}
-        )  # no change
+            move_line.analytic_distribution, {f"{self.analytic_account_a.id}": 50}
+        )
 
     def test_single_analytic_account_false(self):
         """
