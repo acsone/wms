@@ -1,5 +1,6 @@
 # Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from collections import defaultdict
 
 from odoo import models
 
@@ -29,3 +30,13 @@ class SaleOrder(models.Model):
             )._program_check_compute_points(rebate_programs)
             result.update(rebate_result)
         return result
+
+    def _get_claimable_rewards(self, forced_coupons=None):
+        # rebate rewards are not claimable
+        result = super()._get_claimable_rewards(forced_coupons=forced_coupons)
+        filtered_result = defaultdict(lambda: self.env["loyalty.reward"])
+        for coupon, rewards in result.items():
+            for reward in rewards:
+                if reward.reward_type != "rebate":
+                    filtered_result[coupon] += reward
+        return filtered_result

@@ -28,6 +28,26 @@
                         [("program_type", "!=", "year_end_rebate")]
                 </attribute>
             </field>
+
+            <!-- hide product some criteria -->
+            <field name="product_domain" position="attributes">
+                <attribute name="attrs">{"invisible": [("program_type", "=", "year_end_rebate")]}</attribute>
+            </field>
+            <field name="product_category_id" position="attributes">
+                <attribute name="attrs">{"invisible": [("program_type", "=", "year_end_rebate")]}</attribute>
+            </field>
+            <field name="product_tag_id" position="attributes">
+                <attribute name="attrs">{"invisible": [("program_type", "=", "year_end_rebate")]}</attribute>
+            </field>
+
+            <!-- hide all partner criteria -->
+            <field name="partner_ids" position="attributes">
+                <attribute name="attrs">{"invisible": [("program_type", "=", "year_end_rebate")]}</attribute>
+            </field>
+            <field name="partner_domain" position="attributes">
+                <attribute name="attrs">{"invisible": [("program_type", "=", "year_end_rebate")]}</attribute>
+            </field>
+
         </field>
     </record>
 </odoo>

@@ -51,3 +51,47 @@ class TestSaleLoyaltyYearEndRebate(TestSaleLoyaltyYearEndRebateCommon):
         self.assertEqual(1, len(self.year_end_rebate_program.coupon_ids))
         loyalty_cart = self.year_end_rebate_program.coupon_ids[0]
         self.assertEqual(line.price_subtotal, loyalty_cart.points)
+
+    def test_rebate_reward_is_no_claimable(self):
+        order = self.env["sale.order"].create(
+            {
+                "partner_id": self.steve.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product_A.id,
+                            "product_uom_qty": 1,
+                        },
+                    )
+                ],
+            }
+        )
+        order.action_confirm()
+
+        reward = order._get_claimable_rewards()
+        self.assertFalse(reward)
+
+    def test_cancel_reset_points(self):
+        self.assertFalse(self.year_end_rebate_program.coupon_ids)
+        order = self.env["sale.order"].create(
+            {
+                "partner_id": self.steve.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product_A.id,
+                            "product_uom_qty": 1,
+                        },
+                    )
+                ],
+            }
+        )
+        order.action_confirm()
+        self.assertEqual(1, len(self.year_end_rebate_program.coupon_ids))
+        self.assertEqual(100, self.year_end_rebate_program.coupon_ids.points)
+        order._action_cancel()
+        self.assertEqual(0, self.year_end_rebate_program.coupon_ids.points)

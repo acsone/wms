@@ -139,6 +139,7 @@
         "alc_sale_report_search_narcotics",
         "alc_sale_security",
         "alc_sale_statistics",
+        "alc_sale_stock_loyalty_year_end_rebate",
         "alc_sale_suite_name",
         "alc_sales_count",
         "alc_stock_available_product_expiry",
