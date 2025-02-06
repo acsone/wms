@@ -14,6 +14,48 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_sale_loyalty_year_end_rebate
+#. odoo-python
+#: code:addons/alc_sale_loyalty_year_end_rebate/models/loyalty_rule.py:0
+#, python-format
+msgid ""
+"A rule restricted to specific partners cannot be applied on a year-end "
+"rebate program."
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
+#. odoo-python
+#: code:addons/alc_sale_loyalty_year_end_rebate/models/loyalty_rule.py:0
+#, python-format
+msgid ""
+"A rule with a partner domain cannot be applied on a year-end rebate program."
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
+#. odoo-python
+#: code:addons/alc_sale_loyalty_year_end_rebate/models/loyalty_rule.py:0
+#, python-format
+msgid ""
+"A rule with a product category cannot be applied on a year-end rebate "
+"program."
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
+#. odoo-python
+#: code:addons/alc_sale_loyalty_year_end_rebate/models/loyalty_rule.py:0
+#, python-format
+msgid ""
+"A rule with a product domain cannot be applied on a year-end rebate program."
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
+#. odoo-python
+#: code:addons/alc_sale_loyalty_year_end_rebate/models/loyalty_rule.py:0
+#, python-format
+msgid ""
+"A rule with a product tag cannot be applied on a year-end rebate program."
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_sale_order_coupon_points__coupon_id
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_sale_order_line__coupon_id
 msgid "Coupon"
@@ -30,12 +72,18 @@ msgid "Loyalty Reward"
 msgstr ""
 
 #. module: alc_sale_loyalty_year_end_rebate
+#: model:ir.model,name:alc_sale_loyalty_year_end_rebate.model_loyalty_rule
+msgid "Loyalty Rule"
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_sale_order_coupon_points__order_id
 msgid "Order"
 msgstr ""
 
 #. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_loyalty_program__program_type
+#: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_loyalty_rule__program_type
 msgid "Program Type"
 msgstr ""
 
@@ -84,4 +132,13 @@ msgstr ""
 #: model:ir.model.fields.selection,name:alc_sale_loyalty_year_end_rebate.selection__loyalty_program__program_type__year_end_rebate
 #, python-format
 msgid "Year-end Rebate"
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
+#. odoo-python
+#: code:addons/alc_sale_loyalty_year_end_rebate/models/loyalty_rule.py:0
+#, python-format
+msgid ""
+"You must select at least one product to apply the rule on a year-end rebate "
+"program."
 msgstr ""
