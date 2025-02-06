@@ -22,13 +22,9 @@ msgid "Analytic Account"
 msgstr "Compte analytique"
 
 #. module: account_move_line_single_analytic_account
-#. odoo-python
-#: code:addons/account_move_line_single_analytic_account/models/account_move_line.py:0
-#, python-format
-msgid "Invalid analytic distribution %(distrib)s"
-msgstr "Distribution analytique non valide: %(distrib)s"
-
-#. module: account_move_line_single_analytic_account
 #: model:ir.model,name:account_move_line_single_analytic_account.model_account_move_line
 msgid "Journal Item"
 msgstr "Ecriture comptable"
+
+#~ msgid "Invalid analytic distribution %(distrib)s"
+#~ msgstr "Distribution analytique non valide: %(distrib)s"
