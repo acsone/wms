@@ -1,0 +1,55 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_sale_stock_loyalty_year_end_rebate
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-07 14:46+0000\n"
+"PO-Revision-Date: 2025-02-07 14:46+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_loyalty_card__accrued_points
+#: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order_coupon_points__accrued_points
+#: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.loyalty_card_form_view
+msgid "Accrued Points"
+msgstr "Points acquis"
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model,name:alc_sale_stock_loyalty_year_end_rebate.model_loyalty_card
+msgid "Loyalty Coupon"
+msgstr "Bon de fidélité"
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_loyalty_card__program_type
+msgid "Program Type"
+msgstr "Type de programme"
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model,name:alc_sale_stock_loyalty_year_end_rebate.model_sale_order_coupon_points
+msgid ""
+"Sale Order Coupon Points - Keeps track of how a sale order impacts a coupon"
+msgstr ""
+"Points de réduction des bons de commande - Garde une trace de l'impact d'un "
+"bon de commande sur un bon de réduction"
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model,name:alc_sale_stock_loyalty_year_end_rebate.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de bons de commande"
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,help:alc_sale_stock_loyalty_year_end_rebate.field_loyalty_card__accrued_points
+msgid ""
+"The amount of points that will be converted into a rebate based on delivered"
+" quantities."
+msgstr ""
+"Le montant de points qui sera converti en remise en fonction des quantités "
+"livrées."
