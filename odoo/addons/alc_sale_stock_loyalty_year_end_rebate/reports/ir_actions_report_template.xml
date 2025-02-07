@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="report_saleorder_document_rebate"
+        priority="50"
+        inherit_id="sale.report_saleorder_document"
+    >
+        <xpath expr="//div[@name='signature']" position="before">
+            <div name="so_rebate_summary" class="row mt-2" t-if="doc._display_rebate_on_report()">
+                <div
+                    t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ms-auto"
+                >
+                    <table class="table table-sm table-borderless">
+                        <tbody>
+                        <tr>
+                            <td class="border-black o_subtotal">
+                                <strong>Rebate</strong>
+                            </td>
+                            <td class="text-end">
+                                <span
+                                    t-field="doc.rebate_potential_amount"
+                                    t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border-black o_subtotal">
+                                <strong>Total Rebate Accrued</strong>
+                            </td>
+                            <td class="text-end">
+                                <span
+                                    t-field="doc.rebate_accrued_total_amount"
+                                    t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"
+                                />
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
