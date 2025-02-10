@@ -23,6 +23,7 @@
         "alc_eshop_api_cart",
         "alc_eshop_api_cart_delivery",
         "alc_eshop_api_cart_discount_pricelist",
+        "alc_eshop_api_cart_no_onchange",
         "alc_eshop_api_cart_product_unavailable",
         "alc_eshop_api_catalog",
         "alc_eshop_api_classifieds",
