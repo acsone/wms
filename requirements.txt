@@ -266,8 +266,8 @@ odoo-addon-sale-discount-display-amount==16.0.1.1.0.7
 odoo-addon-sale-exception @ git+https://github.com/acsone/sale-workflow.git@c77d771d37ab0f8ff960d9a9eee5e6a26129a990#subdirectory=setup/sale_exception
 odoo-addon-sale-force-invoiced==16.0.2.1.1.5
 odoo-addon-sale-invoice-policy @ git+https://github.com/acsone/sale-workflow.git@dd6f488a42a3ed90692a9cab9a4f78bce07a4cfe#subdirectory=setup/sale_invoice_policy
-odoo-addon-sale-loyalty-beneficiary @ git+https://github.com/acsone/sale-promotion.git@e236a18bc8de9c0c49a6c73bc90477f44760506c#subdirectory=setup/sale_loyalty_beneficiary
 odoo-addon-sale-line-refund-to-invoice-qty @ git+https://github.com/acsone/account-invoicing.git@9b1c0321cdb847c3fac92ee9d5d40b0dbad1f613#subdirectory=setup/sale_line_refund_to_invoice_qty
+odoo-addon-sale-loyalty-beneficiary @ git+https://github.com/acsone/sale-promotion.git@5172c35c3bc891230a466ffcc84fdb975787f67b#subdirectory=setup/sale_loyalty_beneficiary
 odoo-addon-sale-loyalty-initial-date-validity==16.0.1.0.1
 odoo-addon-sale-loyalty-partner-applicability @ git+https://github.com/acsone/sale-promotion.git@e6217d0eb9ebd890d46c3ade95442edb1c71bf9e#subdirectory=setup/sale_loyalty_partner_applicability
 odoo-addon-sale-manual-delivery @ git+https://github.com/acsone/sale-workflow.git@6030fcd1a26a0dad9d66c4b1b309967dab60fd26#subdirectory=setup/sale_manual_delivery

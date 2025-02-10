@@ -16,6 +16,11 @@
         # Alcyon
         "alc_sale_loyalty_year_end_rebate",
     ],
-    "data": ["views/loyalty_card.xml"],
+    "data": [
+        "views/loyalty_card.xml",
+        "views/sale_order.xml",
+        "views/res_config_settings.xml",
+        "reports/ir_actions_report_template.xml",
+    ],
     "demo": [],
 }

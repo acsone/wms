@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-10 08:47+0000\n"
-"PO-Revision-Date: 2025-02-10 08:47+0000\n"
+"POT-Creation-Date: 2025-02-10 10:23+0000\n"
+"PO-Revision-Date: 2025-02-10 10:23+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,60 +18,86 @@ msgstr ""
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.report_saleorder_document_rebate
 msgid "<strong>Rebate</strong>"
-msgstr ""
+msgstr "<strong>RFA</strong>"
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.report_saleorder_document_rebate
 msgid "<strong>Total Rebate Accrued</strong>"
-msgstr ""
+msgstr "<strong>Total RFA acquises</strong>"
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_loyalty_card__accrued_points
 #: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order_coupon_points__accrued_points
 #: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.loyalty_card_form_view
 msgid "Accrued Points"
+msgstr "Points acquis"
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model,name:alc_sale_stock_loyalty_year_end_rebate.model_res_config_settings
+msgid "Config Settings"
+msgstr "Configuration"
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_res_config_settings__display_rebate_on_sale_order_report
+msgid "Display Rebate On Sale Order Report"
 msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.res_config_settings_form_view
+msgid "Display rebate on printed sale order"
+msgstr "Afficher la remise sur le bon de commande imprimé"
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.res_config_settings_form_view
+msgid ""
+"If checked, the rebate information will be displayed on the sale order "
+"reports."
+msgstr ""
+"Si coché, les informations de remise seront affichées sur documents de "
+"devis et bons de commande."
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model,name:alc_sale_stock_loyalty_year_end_rebate.model_loyalty_card
 msgid "Loyalty Coupon"
-msgstr ""
+msgstr "Bon de fidélité"
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_loyalty_card__program_type
 msgid "Program Type"
-msgstr ""
+msgstr "Type de programme"
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_accrued_amount
 msgid "Rebate Accrued Amount"
-msgstr ""
+msgstr "RFA acquises"
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_accrued_total_amount
 msgid "Rebate Accrued Total Amount"
-msgstr ""
+msgstr "Total des RFA acquises"
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_potential_amount
 msgid "Rebate Potential Amount"
-msgstr ""
+msgstr "RFA potentielles"
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model,name:alc_sale_stock_loyalty_year_end_rebate.model_sale_order_coupon_points
 msgid ""
 "Sale Order Coupon Points - Keeps track of how a sale order impacts a coupon"
 msgstr ""
+"Points de réduction des bons de commande - Garde une trace de l'impact d'un "
+"bon de commande sur un bon de réduction"
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model,name:alc_sale_stock_loyalty_year_end_rebate.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Ventes"
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model,name:alc_sale_stock_loyalty_year_end_rebate.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Ligne de bons de commande"
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model.fields,help:alc_sale_stock_loyalty_year_end_rebate.field_loyalty_card__accrued_points
@@ -79,11 +105,13 @@ msgid ""
 "The amount of points that will be converted into a rebate based on delivered"
 " quantities."
 msgstr ""
+"Le montant de points qui sera converti en remise en fonction des quantités "
+"livrées."
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model.fields,help:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_accrued_amount
 msgid "The amount of rebate accrued for the current partner."
-msgstr ""
+msgstr "Le montant de la remise acquise pour le client actuel."
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model.fields,help:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_potential_amount
@@ -91,8 +119,10 @@ msgid ""
 "The amount of rebate potential for the current order if all products are "
 "delivered."
 msgstr ""
+"Le montant de la remise potentielle pour la commande actuelle si tous les "
+"produits sont livrés."
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model.fields,help:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_accrued_total_amount
 msgid "The amount total of rebate accrued for the current partner."
-msgstr ""
+msgstr "Le montant total des remises acquises pour le client actuel."

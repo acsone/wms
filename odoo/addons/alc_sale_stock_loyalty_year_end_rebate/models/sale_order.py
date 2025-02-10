@@ -1,0 +1,59 @@
+# Copyright 2025 ACSONE SA/NV
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+from odoo import api, fields, models
+from odoo.tools import str2bool
+
+
+class SaleOrder(models.Model):
+    _inherit = "sale.order"
+
+    rebate_accrued_total_amount = fields.Float(
+        help="The amount total of rebate accrued for the current partner.",
+        compute="_compute_rebate_amounts",
+        default=0.0,
+    )
+
+    rebate_accrued_amount = fields.Float(
+        help="The amount of rebate accrued for the current partner.",
+        compute="_compute_rebate_amounts",
+        default=0.0,
+    )
+
+    rebate_potential_amount = fields.Float(
+        help="The amount of rebate potential for the current order "
+        "if all products are delivered.",
+        compute="_compute_rebate_amounts",
+        default=0.0,
+    )
+
+    @api.depends("coupon_point_ids")
+    def _compute_rebate_amounts(self):
+        for order in self:
+            accrued_total_points = 0.0
+            accrued_points = 0.0
+            potential_points = 0.0
+            rebate_coupon_points = order.coupon_point_ids.filtered(
+                lambda cp: cp.coupon_id.program_type == "year_end_rebate"
+            )
+            if rebate_coupon_points:
+                accrued_total_points = sum(
+                    rebate_coupon_points.coupon_id.mapped("accrued_points")
+                )
+                potential_points = sum(rebate_coupon_points.mapped("points"))
+                accrued_points = sum(rebate_coupon_points.mapped("accrued_points"))
+            order.rebate_accrued_total_amount = accrued_total_points
+            order.rebate_potential_amount = potential_points
+            order.rebate_accrued_amount = accrued_points
+
+    def _display_rebate_on_report(self):
+        display_rebate_on_sale_order_report = str2bool(
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param(
+                "alc_sale_stock_loyalty_year_end_rebate.display_rebate_on_sale_order_report"
+            )
+        )
+        return display_rebate_on_sale_order_report and (
+            self.rebate_potential_amount > 0.0 or self.rebate_accrued_total_amount > 0.0
+        )
