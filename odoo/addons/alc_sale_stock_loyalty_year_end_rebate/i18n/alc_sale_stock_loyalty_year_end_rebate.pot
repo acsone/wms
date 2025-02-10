@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-10 08:47+0000\n"
-"PO-Revision-Date: 2025-02-10 08:47+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -30,6 +28,28 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order_coupon_points__accrued_points
 #: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.loyalty_card_form_view
 msgid "Accrued Points"
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model,name:alc_sale_stock_loyalty_year_end_rebate.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_res_config_settings__display_rebate_on_sale_order_report
+msgid "Display Rebate On Sale Order Report"
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.res_config_settings_form_view
+msgid "Display rebate on printed sale order"
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.res_config_settings_form_view
+msgid ""
+"If checked, the rebate information will be displayed on the sale order "
+"reports."
 msgstr ""
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
