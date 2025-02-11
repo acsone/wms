@@ -210,6 +210,7 @@ odoo-addon-product-attribute-set==16.0.1.2.0.3
 odoo-addon-product-brand==16.0.1.0.2.5
 odoo-addon-product-cost-security==16.0.2.3.0
 odoo-addon-product-dimension==16.0.1.2.0
+odoo-addon-product-expiry-alert @ git+https://github.com/acsone/product-attribute.git@8b47b30fa0d5c886f901be9a4719e5d19652db2d#subdirectory=setup/product_expiry_alert
 odoo-addon-product-expiry-configurable==16.0.1.0.0.13
 odoo-addon-product-logistics-uom==16.0.3.1.0
 odoo-addon-product-manufacturer==16.0.1.0.1.1
@@ -393,6 +394,7 @@ odoo-addon-stock-move-line-reserved-quant==16.0.1.0.0.7
 odoo-addon-stock-move-location==16.0.1.4.0.2
 odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@9f30e65953ebf7f532b23711613b34d43e49c54f#subdirectory=setup/stock_move_manage_priority
 odoo-addon-stock-move-priority-picking-assign==16.0.1.0.0.6
+odoo-addon-stock-move-product-expired-alert @ git+https://github.com/acsone/stock-logistics-workflow.git@e1ff661e382cc93f0c149ad1cd928b73b72183f0#subdirectory=setup/stock_move_product_expired_alert
 odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@989dcfe2f6d4c56cfa96e98b1d5378f8fdc37e02#subdirectory=setup/stock_move_propagate_first_move
 odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/acsone/stock-logistics-workflow.git@d859321231027547efb15f67d1427e24693a5c1b#subdirectory=setup/stock_move_propagate_first_move_cancel
 odoo-addon-stock-move-zone-location-source @ git+https://github.com/acsone/stock-logistics-workflow.git@88cedcf5c6e9e49a2663ac89e73a6d372d2e43f6#subdirectory=setup/stock_move_zone_location_source
