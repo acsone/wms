@@ -179,7 +179,7 @@ odoo-addon-l10n-be-bpost-address-validation @ git+https://github.com/acsone/l10n
 odoo-addon-l10n-be-eco-tax==16.0.1.0.1.1
 odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/acsone/l10n-belgium.git@ec5fae3144a3a38c4b84a59ac806f7955109fbac#subdirectory=setup/l10n_be_iso20022_pain
 odoo-addon-loyalty-initial-date-validity==16.0.1.0.1
-odoo-addon-loyalty-partner-applicability @ git+https://github.com/acsone/sale-promotion.git@53c040df55f51b0a1d6da2c7d2223cb136af3748#subdirectory=setup/loyalty_partner_applicability
+odoo-addon-loyalty-partner-applicability @ git+https://github.com/acsone/sale-promotion.git@1e6dd7c85e605ac0931b838a8f43bfb488227021#subdirectory=setup/loyalty_partner_applicability
 odoo-addon-mail-environment==16.0.1.0.1.7
 odoo-addon-mis-builder==16.0.5.1.12
 odoo-addon-mis-builder-budget==16.0.5.1.0
@@ -270,7 +270,7 @@ odoo-addon-sale-line-refund-to-invoice-qty @ git+https://github.com/acsone/accou
 odoo-addon-sale-loyalty-auto-refresh==16.0.1.0.1
 odoo-addon-sale-loyalty-beneficiary @ git+https://github.com/acsone/sale-promotion.git@5172c35c3bc891230a466ffcc84fdb975787f67b#subdirectory=setup/sale_loyalty_beneficiary
 odoo-addon-sale-loyalty-initial-date-validity==16.0.1.0.1
-odoo-addon-sale-loyalty-partner-applicability @ git+https://github.com/acsone/sale-promotion.git@e6217d0eb9ebd890d46c3ade95442edb1c71bf9e#subdirectory=setup/sale_loyalty_partner_applicability
+odoo-addon-sale-loyalty-partner-applicability @ git+https://github.com/acsone/sale-promotion.git@1e6dd7c85e605ac0931b838a8f43bfb488227021#subdirectory=setup/sale_loyalty_partner_applicability
 odoo-addon-sale-manual-delivery @ git+https://github.com/acsone/sale-workflow.git@6030fcd1a26a0dad9d66c4b1b309967dab60fd26#subdirectory=setup/sale_manual_delivery
 odoo-addon-sale-margin-delivered==16.0.2.0.0.5
 odoo-addon-sale-margin-delivered-dropshipping==16.0.1.0.1.3
