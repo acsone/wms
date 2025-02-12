@@ -120,7 +120,7 @@ def _init_rfa(env):
         )
         so._update_programs_and_rewards()
     _logger.info("Recomputing loyalty accruate points for all orders")
-    env["loyalty.card"].searh([])._refresh_accrued_points()
+    env["sale.order.coupon.points"].search([])._refresh_accrued_points()
 
 
 @click.command()
