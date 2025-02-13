@@ -5,7 +5,7 @@
     "name": "Alc Stock Available Product Expiry",
     "description": """
         Exclude expired lot from qty_available""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.2.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://www.acsone.eu",
@@ -15,6 +15,8 @@
         # Third-party
         "stock_available_immediately_exclude_location",
         "stock_available_location_get_domain",
+        # Alcyon/Stock Management
+        "stock_lot_track",
     ],
     "data": [
         "views/res_config_settings.xml",
