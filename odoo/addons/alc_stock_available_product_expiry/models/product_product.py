@@ -18,7 +18,7 @@ class ProductProduct(product.Product):
             domain_quant_loc = expression.AND(
                 [
                     domain_quant_loc,
-                    self._get_domain_quant_lots(),
+                    self._get_domain_quant_expiry(),
                 ]
             )
         return domain_quant_loc, domain_move_in_loc, domain_move_out_loc
@@ -33,7 +33,7 @@ class ProductProduct(product.Product):
             )
         ) and not self.env.context.get("disable_excludes_expired_lots", False)
 
-    def _get_domain_quant_lots(self):
+    def _get_domain_quant_expiry(self):
         max_expiration_date = fields.Datetime.now()
         from_date = self.env.context.get("from_date", False)
         if from_date:
@@ -47,27 +47,15 @@ class ProductProduct(product.Product):
         if compute_expired_only:
             removal_op = "<="
 
-        lot_domain = expression.AND(
-            [[("lot_id", "!=", False)], [("lot_id.expiration_date", "!=", False)]]
-        )
-
-        quants_lot_domain = expression.AND(
-            [
-                lot_domain,
-                [("lot_id.expiration_date", removal_op, max_expiration_date)],
-            ]
-        )
+        domain = [("expiration_date", removal_op, max_expiration_date)]
         if not compute_expired_only:
-            removal_unset_domain = expression.OR(
-                [[("lot_id", "=", False)], [("lot_id.expiration_date", "=", False)]]
-            )
-            quants_lot_domain = expression.OR(
+            domain = expression.OR(
                 [
-                    removal_unset_domain,
-                    quants_lot_domain,
+                    domain,
+                    [("expiration_date", "=", False)],
                 ]
             )
-        return quants_lot_domain
+        return domain
 
     def _get_domain_location_excluded_from_immediately_usable_qty(self):
         # glue method for stock_available_immediately_exclude_location
