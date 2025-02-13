@@ -24,8 +24,25 @@ msgid "Excludes Expired Lot From Qty Available"
 msgstr ""
 
 #. module: alc_stock_available_product_expiry
+#: model:ir.model.fields,field_description:alc_stock_available_product_expiry.field_stock_quant__expiration_date
+msgid "Expiration Date"
+msgstr ""
+
+#. module: alc_stock_available_product_expiry
 #: model:ir.model,name:alc_stock_available_product_expiry.model_product_product
 msgid "Product Variant"
+msgstr ""
+
+#. module: alc_stock_available_product_expiry
+#: model:ir.model,name:alc_stock_available_product_expiry.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: alc_stock_available_product_expiry
+#: model:ir.model.fields,help:alc_stock_available_product_expiry.field_stock_quant__expiration_date
+msgid ""
+"This is the date on which the goods with this Serial Number may become "
+"dangerous and must not be consumed."
 msgstr ""
 
 #. module: alc_stock_available_product_expiry
