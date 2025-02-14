@@ -115,7 +115,7 @@ msgstr "Remise du montant cumulé"
 #. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_sale_order_line__reward_id
 msgid "Reward"
-msgstr "Récompense
+msgstr "Récompense"
 
 #. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_loyalty_reward__reward_type
