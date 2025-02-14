@@ -24,6 +24,8 @@ msgid ""
 "A rule restricted to specific partners cannot be applied on a year-end "
 "rebate program."
 msgstr ""
+"Une règle restreinte à des partenaires spécifiques ne peut pas être appliquée "
+"sur un programme de remise de fin d'année."
 
 #. module: alc_sale_loyalty_year_end_rebate
 #. odoo-python
@@ -32,6 +34,8 @@ msgstr ""
 msgid ""
 "A rule with a partner domain cannot be applied on a year-end rebate program."
 msgstr ""
+"Une règle avec un domaine de partenaire ne peut pas être appliquée sur un "
+"programme de remise de fin d'année."
 
 #. module: alc_sale_loyalty_year_end_rebate
 #. odoo-python
@@ -41,6 +45,8 @@ msgid ""
 "A rule with a product category cannot be applied on a year-end rebate "
 "program."
 msgstr ""
+"Une règle avec une catégorie de produit ne peut pas être appliquée sur un "
+"programme de remise de fin d'année."
 
 #. module: alc_sale_loyalty_year_end_rebate
 #. odoo-python
@@ -49,6 +55,8 @@ msgstr ""
 msgid ""
 "A rule with a product domain cannot be applied on a year-end rebate program."
 msgstr ""
+"Une règle avec un domaine de produit ne peut pas être appliquée sur un "
+"programme de remise de fin d'année."
 
 #. module: alc_sale_loyalty_year_end_rebate
 #. odoo-python
@@ -57,6 +65,8 @@ msgstr ""
 msgid ""
 "A rule with a product tag cannot be applied on a year-end rebate program."
 msgstr ""
+"Une règle avec une étiquette de produit ne peut pas être appliquée sur un "
+"programme de remise de fin d'année."
 
 #. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_sale_order_coupon_points__coupon_id
@@ -93,7 +103,7 @@ msgstr "Type de programme"
 #. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model.fields.selection,name:alc_sale_loyalty_year_end_rebate.selection__loyalty_reward__reward_type__rebate
 msgid "Rebate"
-msgstr "Remise"
+msgstr "Remise de fin d'année"
 
 #. module: alc_sale_loyalty_year_end_rebate
 #. odoo-python
@@ -105,7 +115,7 @@ msgstr "Remise du montant cumulé"
 #. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_sale_order_line__reward_id
 msgid "Reward"
-msgstr ""
+msgstr "Récompense
 
 #. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_loyalty_reward__reward_type
@@ -144,3 +154,5 @@ msgid ""
 "You must select at least one product to apply the rule on a year-end rebate "
 "program."
 msgstr ""
+"Vous devez sélectionner au moins un produit pour appliquer la règle sur un "
+"programme de remise de fin d'année."
