@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="loyalty_rule_form_view">
+        <field name="model">loyalty.rule</field>
+        <field name="inherit_id" ref="loyalty.loyalty_rule_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group" position="before">
+                <label for="name" class="oe_edit_only" />
+                <h1>
+                    <field name="name" />
+                </h1>
+            </xpath>
+            <field name="reward_point_amount" position="attributes">
+                <attribute name="digits">[42,3]</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="loyalty_rule_kanban_view">
+        <field name="model">loyalty.rule</field>
+        <field name="inherit_id" ref="loyalty.loyalty_rule_view_kanban"/>
+        <field name="arch" type="xml">
+            <field name="user_has_debug" position="after">
+                <field name="name"/>
+            </field>
+            <xpath expr="//templates/t/div[1]/div[1]/t[1]" position="before">
+                <t t-if="record.name.value">
+                    <strong class="o_kanban_record_title">
+                        <t t-esc="record.name.value"/>
+                    </strong><br/>
+                </t>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="loyalty_rule_tree_view">
+        <field name="name">loyalty.rule.tree.view</field>
+        <field name="model">loyalty.rule</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle"/>
+                <field name="display_name"/>
+                <field name="reward_point_amount" digits="[42,3]"/>
+                <field name="reward_point_mode"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
