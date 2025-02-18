@@ -4,13 +4,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 08:40+0000\n"
-"PO-Revision-Date: 2023-07-06 08:40+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2025-02-18 10:21+0000\n"
+"PO-Revision-Date: 2025-02-18 10:21+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -84,31 +83,43 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_alcyonnaire
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group__is_alcyonnaire
 msgid "Is Alcyonnaire"
-msgstr ""
+msgstr "Est Alcyonnaire"
 
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__is_alcyonnaire_under_contract
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_alcyonnaire_under_contract
 msgid "Is Alcyonnaire Under Contract"
-msgstr ""
+msgstr "Est Alcyonnaire sous contrat"
 
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__is_date_end_contract_editable
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_date_end_contract_editable
 msgid "Is Date End Contract Editable"
-msgstr ""
+msgstr "La date de fin du contrat est-elle modifiable"
 
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__is_date_start_contract_editable
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_date_start_contract_editable
 msgid "Is Date Start Contract Editable"
-msgstr ""
+msgstr "La date de début du contrat est-elle modifiable"
 
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__is_dates_contract_visible
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_dates_contract_visible
 msgid "Is Dates Contract Visible"
 msgstr ""
+
+#. module: alc_veterinary_group
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__is_exclusive_vet_efficiency_member
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_exclusive_vet_efficiency_member
+msgid "Is Exclusive Vet Efficiency Member"
+msgstr "Est membre exclusif de Vet Efficiency"
+
+#. module: alc_veterinary_group
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__is_valid_vet_efficiency_member
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_valid_vet_efficiency_member
+msgid "Is Valid Vet Efficiency Member"
+msgstr "Est membre valide de Vet Efficiency"
 
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group____last_update
@@ -128,7 +139,7 @@ msgstr ""
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group__name
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group__partner_ids
@@ -139,13 +150,13 @@ msgstr ""
 #. module: alc_veterinary_group
 #: model:ir.model,name:alc_veterinary_group.model_product_template
 msgid "Product"
-msgstr ""
+msgstr "Produit"
 
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group__product_template_ids
 #: model_terms:ir.ui.view,arch_db:alc_veterinary_group.veterinary_group_form_view
 msgid "Products"
-msgstr ""
+msgstr "Produits"
 
 #. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group__sequence
@@ -164,14 +175,17 @@ msgstr "La date de fin doit être antérieure à aujourd'hui."
 #: code:addons/alc_veterinary_group/models/res_partner.py:0
 #, python-format
 msgid ""
-"The end date of the contract must be set before leaving the group of "
-"alcyonnaire.\n"
+"The end date of the contract must be set before leaving the group of alcyonnaire.\n"
 "Please set the end date of the contract in the partner form for partners: \n"
 " %(names)s."
 msgstr ""
+"La date de fin du contrat doit être définie avant de quitter le groupe des alcyonnaires.\n"
+"Veuillez définir la date de fin du contrat dans le formulaire de contact pour les contacts: \n"
+" %(names)s."
 
 #. module: alc_veterinary_group
 #. odoo-python
+#: code:addons/alc_veterinary_group/models/res_partner.py:0
 #: code:addons/alc_veterinary_group/models/res_partner.py:0
 #, python-format
 msgid "The partner must be Alcyonnaire to have a contract."
@@ -223,37 +237,3 @@ msgstr "du"
 #: model_terms:ir.ui.view,arch_db:alc_veterinary_group.view_partner_form
 msgid "to"
 msgstr "au"
-
-#~ msgid "Is alcyonnaire"
-#~ msgstr "Est Alcyonnaire"
-
-#~ msgid "Is alcyonnaire under contract"
-#~ msgstr "Est Alcyonnaire sous contrat"
-
-#~ msgid "Is date end contract editable"
-#~ msgstr "La date de fin du contrat est-elle modifiable"
-
-#~ msgid "Is date start contract editable"
-#~ msgstr "La date de début du contrat est-elle modifiable"
-
-#~ msgid "Is dates contract visible"
-#~ msgstr "Les dates du contrat sont-elles visibles"
-
-#~ msgid "Partner"
-#~ msgstr "Partenaire"
-
-#~ msgid "Product Template"
-#~ msgstr "Modèle de produit"
-
-#~ msgid ""
-#~ "The end date of the contract must be set before leaving the group of "
-#~ "alcyonnaire.\n"
-#~ "Please set the end date of the contract in the partner form for "
-#~ "partners: \n"
-#~ " %s."
-#~ msgstr ""
-#~ "La date de fin du contrat doit être fixée avant de quitter le groupe "
-#~ "d'Alcyonnaire.\n"
-#~ "Veuillez fixer la date de fin du contrat dans le formulaire du contact "
-#~ "pour les contacts: \n"
-#~ " %s."

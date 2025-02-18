@@ -26,11 +26,11 @@ class TestAlcVeterinaryGroup(TransactionCase):
             [
                 {"name": "Partner"},
                 {
-                    "name": "Partner Veterinary",
+                    "name": "Partner Veterinary no contract",
                     "veterinary_group_ids": [Command.link(cls.alcyonnaire_group.id)],
                 },
                 {
-                    "name": "Partner Veterinary",
+                    "name": "Partner Veterinary under contract",
                     "veterinary_group_ids": [Command.link(cls.alcyonnaire_group.id)],
                     "date_start_contract_alcyonnaire": cls.yesterday,
                 },
@@ -125,3 +125,38 @@ class TestAlcVeterinaryGroup(TransactionCase):
         self.alcyonnaire_group.write(
             {"partner_ids": [(3, self.partner_veterinary_with_contract.id)]}
         )
+
+    def test_vet_efficiency(self):
+        self.assertTrue(
+            self.partner_veterinary_with_contract.is_alcyonnaire_under_contract
+        )
+        self.assertFalse(
+            self.partner_veterinary_with_contract.is_exclusive_vet_efficiency_member
+        )
+        partners = self.env["res.partner"].search(
+            [("is_valid_vet_efficiency_member", "=", True)]
+        )
+        self.assertEqual(len(partners), 0)
+        partners = self.env["res.partner"].search(
+            [("is_valid_vet_efficiency_member", "=", False)]
+        )
+        self.assertIn(self.partner_veterinary_with_contract, partners)
+        self.partner_veterinary_with_contract.is_exclusive_vet_efficiency_member = True
+        partners = self.env["res.partner"].search(
+            [("is_valid_vet_efficiency_member", "=", True)]
+        )
+        self.assertEqual(self.partner_veterinary_with_contract, partners)
+        self.partner_veterinary.is_exclusive_vet_efficiency_member = True
+        # only partners under contract are valid
+        partners = self.env["res.partner"].search(
+            [("is_valid_vet_efficiency_member", "=", True)]
+        )
+        self.assertEqual(self.partner_veterinary_with_contract, partners)
+        for domain in [
+            [("is_valid_vet_efficiency_member", "!=", False)],
+            [("is_valid_vet_efficiency_member", "=", True)],
+            [("is_valid_vet_efficiency_member", "in", [True])],
+            [("is_valid_vet_efficiency_member", "not in", [False])],
+        ]:
+            partners = self.env["res.partner"].search(domain)
+            self.assertEqual(self.partner_veterinary_with_contract, partners)

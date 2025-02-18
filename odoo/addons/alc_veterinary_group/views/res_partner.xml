@@ -35,6 +35,7 @@
           />
 
             </div>
+          <field name="is_exclusive_vet_efficiency_member"/>
       </xpath>
     </field>
   </record>
