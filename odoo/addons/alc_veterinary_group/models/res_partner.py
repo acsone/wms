@@ -3,6 +3,7 @@
 
 from odoo import _, api, fields
 from odoo.exceptions import ValidationError
+from odoo.osv.expression import AND, FALSE_LEAF, NEGATIVE_TERM_OPERATORS, OR, TRUE_LEAF
 
 from odoo.addons.base.models.res_partner import Partner
 
@@ -20,6 +21,13 @@ class ResPartner(Partner):
     is_alcyonnaire = fields.Boolean(compute="_compute_is_alcyonnaire")
     is_alcyonnaire_under_contract = fields.Boolean(
         compute="_compute_is_alcyonnaire_under_contract"
+    )
+    is_exclusive_vet_efficiency_member = fields.Boolean(
+        index=True,
+    )
+    is_valid_vet_efficiency_member = fields.Boolean(
+        compute="_compute_is_valid_vet_efficiency_member",
+        search="_search_is_valid_vet_efficiency_member",
     )
     date_start_contract_alcyonnaire = fields.Date(
         string="Date start contract", tracking=True
@@ -121,6 +129,61 @@ class ResPartner(Partner):
             partner.is_dates_contract_visible = (
                 partner.is_alcyonnaire or partner.date_start_contract_alcyonnaire
             )
+
+    @api.depends("is_alcyonnaire_under_contract", "is_exclusive_vet_efficiency_member")
+    def _compute_is_valid_vet_efficiency_member(self):
+        for partner in self:
+            partner.is_valid_vet_efficiency_member = (
+                partner.is_alcyonnaire_under_contract
+                and partner.is_exclusive_vet_efficiency_member
+            )
+
+    def _search_is_valid_vet_efficiency_member(self, operator, value):
+        today = fields.Date.today()
+        domain = []
+        negative_op = operator in NEGATIVE_TERM_OPERATORS
+        is_valid = (value and not negative_op) or (not value and negative_op)
+        if "in" in operator:  # value should be a list
+            if not value:
+                domain = TRUE_LEAF if negative_op else FALSE_LEAF
+            elif True in value and False in value:
+                domain = FALSE_LEAF if negative_op else TRUE_LEAF
+            elif False in value:  # not in [False]
+                is_valid = negative_op
+            else:  # in [True]
+                is_valid = not negative_op
+        if not domain:
+            if is_valid:
+                domain = AND(
+                    [
+                        [("is_exclusive_vet_efficiency_member", "=", True)],
+                        [("date_start_contract_alcyonnaire", "<=", today)],
+                        OR(
+                            [
+                                [("date_end_contract_alcyonnaire", "=", False)],
+                                [("date_end_contract_alcyonnaire", ">", today)],
+                            ]
+                        ),
+                    ]
+                )
+
+                domain = domain or [
+                    ("date_end_contract_alcyonnaire", "<", today),
+                    ("date_end_contract_alcyonnaire", "!=", False),
+                ]
+            else:
+                domain = OR(
+                    [
+                        [("is_exclusive_vet_efficiency_member", "=", False)],
+                        [("date_start_contract_alcyonnaire", ">", today)],
+                        [("date_start_contract_alcyonnaire", "=", False)],
+                        [
+                            ("date_end_contract_alcyonnaire", "!=", False),
+                            ("date_end_contract_alcyonnaire", "<", today),
+                        ],
+                    ]
+                )
+        return domain
 
     def _check_date_end_contract_alcyonnaire(self):
         """This method is called on a list of partners when the partner is.

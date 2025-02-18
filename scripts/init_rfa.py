@@ -53,6 +53,7 @@ def _init_rfa(env):
                         },
                     )
                 ],
+                "partner_domain": '[("is_valid_vet_efficiency_member", "=", True)]',
             }
         )
         # add the xml id
@@ -64,9 +65,10 @@ def _init_rfa(env):
         program.write({"rule_ids": [Command.clear()], "partner_ids": [Command.clear()]})
         rfa_vt_groups = env["veterinary.group"].search([("name", "=like", "RFA%")])
         # We write all the partners from the veterinary groups to the program
-        program.write(
-            {"partner_ids": [Command.set(rfa_vt_groups.mapped("partner_ids").ids)]}
-        )
+        # program.write(
+        #    {"partner_ids": [Command.set(rfa_vt_groups.mapped("partner_ids").ids)]}
+        # )
+
         # we create a rule for each group
         for group in rfa_vt_groups:
             amount = get_amount_from_string(group.name)
