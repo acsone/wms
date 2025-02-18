@@ -146,6 +146,7 @@
     - oca 16.0
     - oca refs/pull/441/head # [IMP] rma_sale: Avoid computing RMA move unnecessarily
     - oca refs/pull/442/head # [FIX] don't restrict lot if return product is different
+    - oca refs/pull/451/head # [FIX] rma_sale_lot: force ml reservation to the restricted lot
   target: origin 16.0-alc-rma_lot
 
 ./src/stock_picking_group_by_partner_by_carrier:
