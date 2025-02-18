@@ -18,36 +18,6 @@
     />
   </function>
 
-  <!-- Set display put in pack wizard on old PICK picking type-->
-  <!-- Set allow additional product on reserved qty on old PICK picking type-->
-  <function model="stock.picking.type" name="write">
-    <value
-      model="stock.picking.type"
-      eval="(obj().env.cr.execute(&quot;select id from stock_picking_type where sequence_code=&apos;WH/PICK/&apos;&quot;) or True) and [i[0] for i in obj().env.cr.fetchall()]"
-    />
-    <value
-      eval="{'set_delivery_package_type_on_put_in_pack': True, 'allow_additional_product_on_reserved_qty': True}"
-    />
-  </function>
-  <!-- set sequence VLB/PICK on picking type Pick Aliments / Pick M/ Pick frigo/ Pick M/ Pick G/ Pick matériel / Pick Zone inconnu -->
-  <function model="stock.picking.type" name="write">
-    <value
-      model="stock.picking.type"
-      eval="obj().browse([ref('alc_stock_picking_type_aliment.stock_picking_type_ali'), ref('__setup__.stock_picking_type_froid', raise_if_not_found=False) or False, ref('alc_shopfloor.stock_picking_type_medoc', raise_if_not_found=False) or False, ref('__setup__.stock_picking_type_materiel', raise_if_not_found=False) or False]).ids"
-    />
-    <value
-      model="ir.sequence"
-      eval="{'sequence_id': obj().search([('prefix', '=', 'VLB/PICK/')]) or ref('stock.seq_picking_internal')}"
-    />
-  </function>
-
-  <function model="stock.picking.type" name="write">
-    <value model="stock.picking.type" eval="obj().browse([3, 24]).exists().ids" />
-    <value
-      model="ir.sequence"
-      eval="{'sequence_id': obj().search([('prefix', '=', 'VLB/PICK/')]) or ref('stock.seq_picking_internal')}"
-    />
-  </function>
   <data noupdate="1">
     <record id="stock_picking_type_reassort" model="stock.picking.type">
       <field name="name">Réassort</field>
