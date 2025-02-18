@@ -49,6 +49,8 @@
         "alc_company_term_condition",
         "alc_customer_audit",
         "alc_delivery_product_hide_hs_code",
+        "alc_loyalty_info",
+        "alc_loyalty_view",
         "alc_partner_address",
         "alc_partner_apb_authorization",
         "alc_partner_call_name",

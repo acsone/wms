@@ -88,6 +88,8 @@ def _init_rfa(env):
                                 ),
                                 "reward_point_mode": "money",
                                 "product_ids": [Command.set(products.ids)],
+                                "name": group.name,
+                                "sequence": group.sequence,
                             }
                         )
                     ]
