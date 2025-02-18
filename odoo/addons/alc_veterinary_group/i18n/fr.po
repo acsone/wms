@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2025-02-18 10:21+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -110,18 +111,6 @@ msgid "Is Dates Contract Visible"
 msgstr ""
 
 #. module: alc_veterinary_group
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__is_exclusive_vet_efficiency_member
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_exclusive_vet_efficiency_member
-msgid "Is Exclusive Vet Efficiency Member"
-msgstr "Est membre exclusif de Vet Efficiency"
-
-#. module: alc_veterinary_group
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__is_valid_vet_efficiency_member
-#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_valid_vet_efficiency_member
-msgid "Is Valid Vet Efficiency Member"
-msgstr "Est membre valide de Vet Efficiency"
-
-#. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group____last_update
 msgid "Last Modified on"
 msgstr ""
@@ -175,17 +164,19 @@ msgstr "La date de fin doit être antérieure à aujourd'hui."
 #: code:addons/alc_veterinary_group/models/res_partner.py:0
 #, python-format
 msgid ""
-"The end date of the contract must be set before leaving the group of alcyonnaire.\n"
+"The end date of the contract must be set before leaving the group of "
+"alcyonnaire.\n"
 "Please set the end date of the contract in the partner form for partners: \n"
 " %(names)s."
 msgstr ""
-"La date de fin du contrat doit être définie avant de quitter le groupe des alcyonnaires.\n"
-"Veuillez définir la date de fin du contrat dans le formulaire de contact pour les contacts: \n"
+"La date de fin du contrat doit être définie avant de quitter le groupe des "
+"alcyonnaires.\n"
+"Veuillez définir la date de fin du contrat dans le formulaire de contact "
+"pour les contacts: \n"
 " %(names)s."
 
 #. module: alc_veterinary_group
 #. odoo-python
-#: code:addons/alc_veterinary_group/models/res_partner.py:0
 #: code:addons/alc_veterinary_group/models/res_partner.py:0
 #, python-format
 msgid "The partner must be Alcyonnaire to have a contract."
@@ -237,3 +228,9 @@ msgstr "du"
 #: model_terms:ir.ui.view,arch_db:alc_veterinary_group.view_partner_form
 msgid "to"
 msgstr "au"
+
+#~ msgid "Is Exclusive Vet Efficiency Member"
+#~ msgstr "Est membre exclusif de Vet Efficiency"
+
+#~ msgid "Is Valid Vet Efficiency Member"
+#~ msgstr "Est membre valide de Vet Efficiency"
