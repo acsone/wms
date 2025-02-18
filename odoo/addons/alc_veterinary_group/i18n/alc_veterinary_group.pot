@@ -103,6 +103,18 @@ msgid "Is Dates Contract Visible"
 msgstr ""
 
 #. module: alc_veterinary_group
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__is_exclusive_vet_efficiency_member
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_exclusive_vet_efficiency_member
+msgid "Is Exclusive Vet Efficiency Member"
+msgstr ""
+
+#. module: alc_veterinary_group
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_partner__is_valid_vet_efficiency_member
+#: model:ir.model.fields,field_description:alc_veterinary_group.field_res_users__is_valid_vet_efficiency_member
+msgid "Is Valid Vet Efficiency Member"
+msgstr ""
+
+#. module: alc_veterinary_group
 #: model:ir.model.fields,field_description:alc_veterinary_group.field_veterinary_group____last_update
 msgid "Last Modified on"
 msgstr ""
