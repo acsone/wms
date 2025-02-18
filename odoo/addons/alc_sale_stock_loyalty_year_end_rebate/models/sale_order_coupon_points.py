@@ -9,6 +9,12 @@ class SaleOrderCouponPoints(models.Model):
 
     accrued_points = fields.Float(default=0.0)
 
+    max_accrued_points = fields.Float(
+        help="The maximum amount of points that can be earned with the SO "
+        "if all the rules have overperformed.",
+        default=0.0,
+    )
+
     def _partition_by_order_id_and_program_id(self):
         coupon_points_by_order_and_program = {}
         program_ids = set()
@@ -35,7 +41,8 @@ class SaleOrderCouponPoints(models.Model):
                 SELECT
                     sol.order_id,
                     lc.program_id,
-                    sum(sol.price_subtotal / sol.product_uom_qty * sol.qty_delivered * lr.reward_point_amount)
+                    sum(sol.price_subtotal / sol.product_uom_qty * sol.qty_delivered * lr.reward_point_amount),
+                    sum(sol.price_subtotal / sol.product_uom_qty * sol.qty_delivered * COALESCE(NULLIF(lr.reward_point_max_amount, 0), lr.reward_point_amount) )
                 FROM
                     sale_order_line sol,
                     sale_order_coupon_points scp,
@@ -55,7 +62,7 @@ class SaleOrderCouponPoints(models.Model):
             self.env.cr.execute(
                 sql, {"program_id": tuple(program_ids), "order_id": tuple(order_ids)}
             )
-            for order_id, program_id, points in self.env.cr.fetchall():
+            for order_id, program_id, points, max_points in self.env.cr.fetchall():
                 coupon_point = coupon_points_by_order_and_program.pop(
                     (order_id, program_id)
                 )
@@ -64,8 +71,17 @@ class SaleOrderCouponPoints(models.Model):
                 if old_value != new_value:
                     coupon_point.coupon_id.accrued_points -= old_value
                     coupon_point.coupon_id.accrued_points += new_value
-                coupon_point.accrued_points = new_value
+                    coupon_point.accrued_points = new_value
+                old_max_value = coupon_point.max_accrued_points
+                new_max_value = max_points
+                if old_max_value != new_max_value:
+                    coupon_point.coupon_id.max_accrued_points -= old_max_value
+                    coupon_point.coupon_id.max_accrued_points += new_max_value
+                    coupon_point.max_accrued_points = new_max_value
+
         # Reset the remaining coupon points since they are no values for them
         for coupon_point in coupon_points_by_order_and_program.values():
             coupon_point.coupon_id.accrued_points -= coupon_point.accrued_points
             coupon_point.accrued_points = 0.0
+            coupon_point.coupon_id.max_accrued_points -= coupon_point.max_accrued_points
+            coupon_point.max_accrued_points = 0.0

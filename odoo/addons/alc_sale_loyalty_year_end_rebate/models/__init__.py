@@ -3,4 +3,5 @@ from . import sale_order_line
 from . import loyalty_program
 from . import loyalty_reward
 from . import loyalty_rule
+from . import loyalty_card
 from . import sale_order_coupon_points

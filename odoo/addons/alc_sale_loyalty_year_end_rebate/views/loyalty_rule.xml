@@ -29,6 +29,14 @@
                 </attribute>
             </field>
 
+            <field name="reward_point_amount" position="before">
+                <div class="me-2" attrs="{'invisible': [('program_type', '!=', 'year_end_rebate')]}"> min:&amp;nbsp;</div>
+            </field>
+            <field name="reward_point_amount" position="after">
+                <div class="me-2" attrs="{'invisible': [('program_type', '!=', 'year_end_rebate')]}"> max:&amp;nbsp;</div>
+                <field name="reward_point_max_amount" attrs="{'invisible': [('program_type', '!=', 'year_end_rebate')]}" digits="[42,3]"/>
+            </field>
+
             <!-- hide product some criteria -->
             <field name="product_domain" position="attributes">
                 <attribute name="attrs">{"invisible": [("program_type", "=", "year_end_rebate")]}</attribute>

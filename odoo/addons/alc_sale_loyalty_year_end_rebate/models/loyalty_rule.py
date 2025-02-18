@@ -10,6 +10,14 @@ class LoyaltyRule(models.Model):
     _inherit = "loyalty.rule"
 
     program_type = fields.Selection(related="program_id.program_type", store=True)
+    reward_point_max_amount = fields.Float(
+        string="Reward Max",
+        help="Maximum amount of points that can be earned with this rule."
+        "This field is only used for year-end rebate programs when the potential"
+        "points to earn are not known in advance and will depend on the volume of"
+        "sales at the end of the year.",
+        default=0.0,
+    )
 
     @api.constrains("program_type", "product_domain")
     def _check_program_type(self):
