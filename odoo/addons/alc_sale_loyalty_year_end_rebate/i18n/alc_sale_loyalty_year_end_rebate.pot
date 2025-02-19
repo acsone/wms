@@ -62,6 +62,11 @@ msgid "Coupon"
 msgstr ""
 
 #. module: alc_sale_loyalty_year_end_rebate
+#: model:ir.model,name:alc_sale_loyalty_year_end_rebate.model_loyalty_card
+msgid "Loyalty Coupon"
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model,name:alc_sale_loyalty_year_end_rebate.model_loyalty_program
 msgid "Loyalty Program"
 msgstr ""
@@ -77,11 +82,27 @@ msgid "Loyalty Rule"
 msgstr ""
 
 #. module: alc_sale_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_loyalty_card__max_points
+#: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_sale_order_coupon_points__max_points
+msgid "Max Points"
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
+#: model:ir.model.fields,help:alc_sale_loyalty_year_end_rebate.field_loyalty_rule__reward_point_max_amount
+msgid ""
+"Maximum amount of points that can be earned with this rule.This field is "
+"only used for year-end rebate programs when the potentialpoints to earn are "
+"not known in advance and will depend on the volume ofsales at the end of the"
+" year."
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_sale_order_coupon_points__order_id
 msgid "Order"
 msgstr ""
 
 #. module: alc_sale_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_loyalty_card__program_type
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_loyalty_program__program_type
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_loyalty_rule__program_type
 msgid "Program Type"
@@ -102,6 +123,11 @@ msgstr ""
 #. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_sale_order_line__reward_id
 msgid "Reward"
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_loyalty_rule__reward_point_max_amount
+msgid "Reward Max"
 msgstr ""
 
 #. module: alc_sale_loyalty_year_end_rebate
@@ -126,6 +152,13 @@ msgid "Sales Order Line"
 msgstr ""
 
 #. module: alc_sale_loyalty_year_end_rebate
+#: model:ir.model.fields,help:alc_sale_loyalty_year_end_rebate.field_loyalty_card__max_points
+msgid ""
+"The maximum amount of points earned with the card if all the rules have "
+"overperformed."
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
 #. odoo-python
 #: code:addons/alc_sale_loyalty_year_end_rebate/models/loyalty_program.py:0
 #: code:addons/alc_sale_loyalty_year_end_rebate/models/loyalty_program.py:0
@@ -141,4 +174,14 @@ msgstr ""
 msgid ""
 "You must select at least one product to apply the rule on a year-end rebate "
 "program."
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
+#: model_terms:ir.ui.view,arch_db:alc_sale_loyalty_year_end_rebate.loyalty_rule_form_view
+msgid "max:&amp;nbsp;"
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
+#: model_terms:ir.ui.view,arch_db:alc_sale_loyalty_year_end_rebate.loyalty_rule_form_view
+msgid "min:&amp;nbsp;"
 msgstr ""
