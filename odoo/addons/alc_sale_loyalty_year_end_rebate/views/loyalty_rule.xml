@@ -58,4 +58,16 @@
 
         </field>
     </record>
+
+     <record model="ir.ui.view" id="loyalty_rule_tree_view">
+        <field name="name">loyalty.rule.tree.view</field>
+        <field name="model">loyalty.rule</field>
+        <field name="inherit_id" ref="alc_loyalty_info.loyalty_rule_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="reward_point_amount" position="after">
+                <field name="program_type" invisible="1"/>
+                <field name="reward_point_max_amount" attrs="{'invisible': [('program_type', '!=', 'year_end_rebate')]}" digits="[42,3]"/>
+            </field>
+        </field>
+    </record>
 </odoo>

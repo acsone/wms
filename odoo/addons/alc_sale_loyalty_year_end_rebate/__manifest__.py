@@ -14,6 +14,8 @@
         # Third-party
         "base_view_inheritance_extension",
         "sale_loyalty_partner_applicability",
+        # Alcyon
+        "alc_loyalty_info",
     ],
     "data": [
         "views/loyalty_rule.xml",
