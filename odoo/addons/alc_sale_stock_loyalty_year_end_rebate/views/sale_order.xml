@@ -7,9 +7,27 @@
         <field name="arch" type="xml">
             <data>
                 <xpath expr="//group[@name='sale_total']/field[last()]" position="after">
-                    <field name="rebate_potential_amount" />
-                    <field name="rebate_accrued_amount" />
-                    <field name="rebate_accrued_total_amount" />
+                    <label for="rebate_potential_amount"/>
+                    <div class="o_row">
+                        <field name="rebate_potential_amount"  nolabel="1"/>
+                        <field name="is_rebate_potential_max_amount_visible" invisible="1"/>
+                        <span attrs="{'invisible': [('is_rebate_potential_max_amount_visible', '=', False)]}">&amp;nbsp;/&amp;nbsp;</span>
+                        <field name="rebate_potential_max_amount"  nolabel="1" attrs="{'invisible': [('is_rebate_potential_max_amount_visible', '=', False)]}"/>
+                    </div>
+                    <label for="rebate_accrued_amount"/>
+                    <div class="o_row">
+                        <field name="rebate_accrued_amount"  nolabel="1"/>
+                        <field name="is_rebate_accrued_max_amount_visible" invisible="1"/>
+                        <span attrs="{'invisible': [('is_rebate_accrued_max_amount_visible', '=', False)]}">&amp;nbsp;/&amp;nbsp;</span>
+                        <field name="rebate_accrued_max_amount"  nolabel="1" attrs="{'invisible': [('is_rebate_accrued_max_amount_visible', '=', False)]}"/>
+                    </div>
+                    <label for="rebate_accrued_total_amount"/>
+                    <div class="o_row">
+                        <field name="rebate_accrued_total_amount"  nolabel="1"/>
+                        <field name="is_rebate_accrued_total_max_amount_visible" invisible="1"/>
+                        <span attrs="{'invisible': [('is_rebate_accrued_total_max_amount_visible', '=', False)]}">&amp;nbsp;/&amp;nbsp;</span>
+                        <field name="rebate_accrued_total_max_amount"  nolabel="1" attrs="{'invisible': [('is_rebate_accrued_total_max_amount_visible', '=', False)]}"/>
+                    </div>
                 </xpath>
             </data>
         </field>

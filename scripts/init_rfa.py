@@ -10,21 +10,24 @@ from odoo import Command
 _logger = logging.getLogger(__name__)
 
 
-# re to extract the first float from a string
+# re to extract the floats from a string
 # formatted as RFA 4,5% or RFA 2,5-5%
-# for RFA 4,5% it will return 4.5
-# for RFA 2,5-5% it will return 2.5
-# for RFA 5% it will return 5.0
-# for RFA 5-10% it will return 5.0
-
-AMOUNT_RE = re.compile(r"RFA (\d+(?:,\d+)?)(?:-\d+(?:,\d+)?)?%")
+# for RFA 4,5% it will return (4.5, 0.0)
+# for RFA 2,5-5% it will return (2.5, 5.0)
+# for RFA 5% it will return (5.0, 0.0)
+# for RFA 5-10% it will return (5.0, 10.0)
+AMOUNT_RE = re.compile(r"RFA (\d+(?:,\d+)?)(?:-(\d+(?:,\d+)?))?%")
 
 
 def get_amount_from_string(string):
     match = AMOUNT_RE.search(string)
     if match:
-        return float(match.group(1).replace(",", ".")) / 100
-    return 0.0
+        amount1 = float(match.group(1).replace(",", ".")) / 100
+        amount2 = (
+            float(match.group(2).replace(",", ".")) / 100 if match.group(2) else 0.0
+        )
+        return amount1, amount2
+    return (0.0, 0.0)
 
 
 def _init_rfa(env):
@@ -68,14 +71,19 @@ def _init_rfa(env):
         # program.write(
         #    {"partner_ids": [Command.set(rfa_vt_groups.mapped("partner_ids").ids)]}
         # )
+        partners = rfa_vt_groups.mapped("partner_ids")
+        partners.is_exclusive_vet_efficiency_member = True
+        partners = partners.filtered(lambda p: p.is_valid_vet_efficiency_member)
 
         # we create a rule for each group
         for group in rfa_vt_groups:
-            amount = get_amount_from_string(group.name)
-            if not amount:
+            amount_min, amount_max = get_amount_from_string(group.name)
+            if not amount_min:
                 _logger.error(f"Invalid amount for group {group.name}")
                 continue
-            _logger.info(f"Creating rule for group {group.name} with amount {amount}")
+            _logger.info(
+                f"Creating rule for group {group.name} with amount {amount_min} to {amount_max}"
+            )
             products = group.product_template_ids.product_variant_ids
             if not products:
                 _logger.error(f"No products for group {group.name}")
@@ -85,9 +93,8 @@ def _init_rfa(env):
                     "rule_ids": [
                         Command.create(
                             {
-                                "reward_point_amount": get_amount_from_string(
-                                    group.name
-                                ),
+                                "reward_point_amount": amount_min,
+                                "reward_point_max_amount": amount_max,
                                 "reward_point_mode": "money",
                                 "product_ids": [Command.set(products.ids)],
                                 "name": group.name,
@@ -111,7 +118,7 @@ def _init_rfa(env):
         [
             ("date_order", ">=", "2025-01-01"),
             ("state", "in", ["sale", "done"]),
-            ("partner_id", "in", program.partner_ids.ids),
+            ("partner_id", "in", partners.ids),
         ]
     )
     cpt = 0

@@ -5,7 +5,9 @@ import s3fs
 
 env = env  # noqa
 
-today = datetime.today().strftime("%Y-%m-%d")
+today = datetime.datetime.today()
+today = today.replace(tzinfo=datetime.timezone.utc)
+
 
 fs_storage = env.ref("alc_fs_attachment.fs_storage_prod")
 
@@ -30,7 +32,7 @@ def list_all_files(fs_storage, root_path=None):
         else:
             # if the file has been created before today we keep it
             # (to avoid to delete a file added after the search in ir_attachment)
-            creation_date = fs.info(path)["CreationTime"]
+            creation_date = fs.info(path)["LastModified"]
             if creation_date < today:
                 yield path.replace(f"{fs_storage.directory_path}/", "")
 
