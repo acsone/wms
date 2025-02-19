@@ -17,6 +17,27 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
+#: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.sale_order_view_form_display_discount
+msgid ""
+"<span attrs=\"{'invisible': [('is_rebate_accrued_max_amount_visible', '=', "
+"False)]}\">&amp;nbsp;/&amp;nbsp;</span>"
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.sale_order_view_form_display_discount
+msgid ""
+"<span attrs=\"{'invisible': [('is_rebate_accrued_total_max_amount_visible', "
+"'=', False)]}\">&amp;nbsp;/&amp;nbsp;</span>"
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.sale_order_view_form_display_discount
+msgid ""
+"<span attrs=\"{'invisible': [('is_rebate_potential_max_amount_visible', '=', "
+"False)]}\">&amp;nbsp;/&amp;nbsp;</span>"
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
 #: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.report_saleorder_document_rebate
 msgid "<strong>Rebate</strong>"
 msgstr "<strong>RFA</strong>"
@@ -58,14 +79,31 @@ msgstr ""
 "et bons de commande."
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__is_rebate_accrued_max_amount_visible
+msgid "Is Rebate Accrued Max Amount Visible"
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__is_rebate_accrued_total_max_amount_visible
+msgid "Is Rebate Accrued Total Max Amount Visible"
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__is_rebate_potential_max_amount_visible
+msgid "Is Rebate Potential Max Amount Visible"
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model,name:alc_sale_stock_loyalty_year_end_rebate.model_loyalty_card
 msgid "Loyalty Coupon"
 msgstr "Bon de fidélité"
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
-#: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_loyalty_card__program_type
-msgid "Program Type"
-msgstr "Type de programme"
+#: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_loyalty_card__max_accrued_points
+#: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order_coupon_points__max_accrued_points
+#: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.loyalty_card_form_view
+msgid "Max Accrued Points"
+msgstr ""
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_accrued_amount
@@ -73,14 +111,29 @@ msgid "Rebate Accrued Amount"
 msgstr "RFA acquises"
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_accrued_max_amount
+msgid "Rebate Accrued Max Amount"
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_accrued_total_amount
 msgid "Rebate Accrued Total Amount"
 msgstr "Total des RFA acquises"
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_accrued_total_max_amount
+msgid "Rebate Accrued Total Max Amount"
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_potential_amount
 msgid "Rebate Potential Amount"
 msgstr "RFA potentielles"
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_potential_max_amount
+msgid "Rebate Potential Max Amount"
+msgstr ""
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model,name:alc_sale_stock_loyalty_year_end_rebate.model_sale_order_coupon_points
@@ -124,6 +177,40 @@ msgstr ""
 "produits sont livrés."
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,help:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_accrued_total_max_amount
+msgid "The amount total max of rebate accrued for the current partner."
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model.fields,help:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_accrued_total_amount
 msgid "The amount total of rebate accrued for the current partner."
 msgstr "Le montant total des remises acquises pour le client actuel."
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,help:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_accrued_max_amount
+msgid "The max amount of rebate accrued for the current partner."
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,help:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_potential_max_amount
+msgid ""
+"The max amount of rebate potential for the current order if all products are "
+"delivered."
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,help:alc_sale_stock_loyalty_year_end_rebate.field_sale_order_coupon_points__max_accrued_points
+msgid ""
+"The maximum amount of points that can be earned with the SO if all the rules "
+"have overperformed."
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,help:alc_sale_stock_loyalty_year_end_rebate.field_loyalty_card__max_accrued_points
+msgid ""
+"The maximum amount of points that can be earned with the card if all the "
+"rules have overperformed."
+msgstr ""
+
+#~ msgid "Program Type"
+#~ msgstr "Type de programme"
