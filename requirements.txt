@@ -257,7 +257,7 @@ odoo-addon-rma-delivery-procurement-group-carrier @ git+https://github.com/acson
 odoo-addon-rma-lot @ git+https://github.com/acsone/rma.git@70b44f8657ba028478c6b7d331bc8e32619dbaf1#subdirectory=setup/rma_lot
 odoo-addon-rma-procurement-customer==16.0.1.0.0.2
 odoo-addon-rma-reason @ git+https://github.com/acsone/rma.git@618c595e733e239ef649162a737967f033d8dd36#subdirectory=setup/rma_reason
-odoo-addon-rma-sale @ git+https://github.com/acsone/rma.git@b77119bf1c5fc0d58959688594816d6c27ff7ae3#subdirectory=setup/rma_sale
+odoo-addon-rma-sale @ git+https://github.com/acsone/rma.git@080338e08530d868d745f784f588587b87b45f88#subdirectory=setup/rma_sale
 odoo-addon-rma-sale-lot @ git+https://github.com/acsone/rma.git@70b44f8657ba028478c6b7d331bc8e32619dbaf1#subdirectory=setup/rma_sale_lot
 odoo-addon-rma-sale-reason @ git+https://github.com/acsone/rma.git@618c595e733e239ef649162a737967f033d8dd36#subdirectory=setup/rma_sale_reason
 odoo-addon-sale-cart==16.0.1.0.0.4
