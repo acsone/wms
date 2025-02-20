@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2025-02-19 14:30+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -104,8 +105,8 @@ msgstr "Points max"
 msgid ""
 "Maximum amount of points that can be earned with this rule.This field is "
 "only used for year-end rebate programs when the potentialpoints to earn are "
-"not known in advance and will depend on the volume ofsales at the end of the"
-" year."
+"not known in advance and will depend on the volume ofsales at the end of the "
+"year."
 msgstr ""
 "Montant maximum de points pouvant être gagné avec cette règle. Ce champ est "
 "uniquement utilisé pour les programmes de remise de fin d'année lorsque les "
@@ -175,12 +176,11 @@ msgid ""
 "The maximum amount of points earned with the card if all the rules have "
 "overperformed."
 msgstr ""
-"Le montant maximum de points gagnés avec la carte si toutes les objectifs "
-"de ventes sont dépassés."
+"Le montant maximum de points gagnés avec la carte si toutes les objectifs de "
+"ventes sont dépassés."
 
 #. module: alc_sale_loyalty_year_end_rebate
 #. odoo-python
-#: code:addons/alc_sale_loyalty_year_end_rebate/models/loyalty_program.py:0
 #: code:addons/alc_sale_loyalty_year_end_rebate/models/loyalty_program.py:0
 #: model:ir.model.fields.selection,name:alc_sale_loyalty_year_end_rebate.selection__loyalty_program__program_type__year_end_rebate
 #, python-format
