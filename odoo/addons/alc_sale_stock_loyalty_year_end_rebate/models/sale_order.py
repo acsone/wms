@@ -57,6 +57,12 @@ class SaleOrder(models.Model):
         compute="_compute_is_rebate_max_amount_visible"
     )
 
+    rfa_program_id = fields.Many2one(
+        "loyalty.program",
+        help="The loyalty program used to calculate the rebate.",
+        compute="_compute_rfa_program_id",
+    )
+
     @api.depends("rebate_accrued_total_max_amount", "rebate_accrued_total_amount")
     def _compute_is_rebate_accrued_total_max_amount_visible(self):
         for order in self:
@@ -132,3 +138,12 @@ class SaleOrder(models.Model):
         return display_rebate_on_sale_order_report and (
             self.rebate_potential_amount > 0.0 or self.rebate_accrued_total_amount > 0.0
         )
+
+    @api.depends("coupon_point_ids")
+    def _compute_rfa_program_id(self):
+        for order in self:
+            order.rfa_program_id = fields.first(
+                order.coupon_point_ids.filtered(
+                    lambda cp: cp.coupon_id.program_type == "year_end_rebate"
+                )
+            ).coupon_id.program_id

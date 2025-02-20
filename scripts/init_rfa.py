@@ -37,7 +37,7 @@ def _init_rfa(env):
         # the reward is without interest at this moment...
         program = env["loyalty.program"].create(
             {
-                "name": "RFA",
+                "name": "RFA 2025",
                 "program_type": "year_end_rebate",
                 "currency_id": env.ref("base.EUR").id,
                 "trigger": "auto",

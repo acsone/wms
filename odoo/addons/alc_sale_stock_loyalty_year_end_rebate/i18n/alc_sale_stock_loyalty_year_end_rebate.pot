@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-20 14:18+0000\n"
+"PO-Revision-Date: 2025-02-20 14:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -36,12 +38,22 @@ msgstr ""
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.report_saleorder_document_rebate
-msgid "<strong>Rebate</strong>"
+msgid "<span>possible objective&amp;nbsp;</span>"
 msgstr ""
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.report_saleorder_document_rebate
-msgid "<strong>Total Rebate Accrued</strong>"
+msgid "<span>.</span>"
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.report_saleorder_document_rebate
+msgid "<span>guaranteed minimum&amp;nbsp;</span>"
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.report_saleorder_document_rebate
+msgid "<strong>Rebate of the current order: </strong>"
 msgstr ""
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
@@ -131,6 +143,11 @@ msgid "Rebate Potential Max Amount"
 msgstr ""
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,field_description:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rfa_program_id
+msgid "Rfa Program"
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model,name:alc_sale_stock_loyalty_year_end_rebate.model_sale_order_coupon_points
 msgid ""
 "Sale Order Coupon Points - Keeps track of how a sale order impacts a coupon"
@@ -176,6 +193,11 @@ msgid "The amount total of rebate accrued for the current partner."
 msgstr ""
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
+#: model:ir.model.fields,help:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rfa_program_id
+msgid "The loyalty program used to calculate the rebate."
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
 #: model:ir.model.fields,help:alc_sale_stock_loyalty_year_end_rebate.field_sale_order__rebate_accrued_max_amount
 msgid "The max amount of rebate accrued for the current partner."
 msgstr ""
@@ -199,4 +221,9 @@ msgstr ""
 msgid ""
 "The maximum amount of points that can be earned with the card if all the "
 "rules have overperformed."
+msgstr ""
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.report_saleorder_document_rebate
+msgid "Total"
 msgstr ""

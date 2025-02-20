@@ -14,24 +14,44 @@
                         <tbody>
                         <tr>
                             <td class="border-black o_subtotal">
-                                <strong>Rebate</strong>
+                                <strong>Rebate of the current order: </strong>
                             </td>
                             <td class="text-end">
-                                <span
-                                    t-field="doc.rebate_potential_amount"
-                                    t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"
-                                />
+                                <p>
+                                    <span>guaranteed minimum&amp;nbsp;</span>
+                                    <span
+                                        t-field="doc.rebate_potential_amount"
+                                        t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"
+                                    />
+                                </p>
+                                <p>
+                                    <span>possible objective&amp;nbsp;</span>
+                                    <span
+                                        t-field="doc.rebate_potential_max_amount"
+                                        t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"
+                                    />
+                                </p>
                             </td>
                         </tr>
                         <tr>
                             <td class="border-black o_subtotal">
-                                <strong>Total Rebate Accrued</strong>
+                                <strong>Total <span t-field="doc.rfa_program_id.name"/>: </strong>
                             </td>
                             <td class="text-end">
-                                <span
-                                    t-field="doc.rebate_accrued_total_amount"
-                                    t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"
-                                />
+                                <p>
+                                    <span>guaranteed minimum&amp;nbsp;</span>
+                                    <span
+                                        t-field="doc.rebate_accrued_total_amount"
+                                        t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"
+                                    />
+                                </p>
+                                <p>
+                                    <span>possible objective&amp;nbsp;</span>
+                                    <span
+                                        t-field="doc.rebate_accrued_total_max_amount"
+                                        t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"
+                                    />
+                                </p>
                             </td>
                         </tr>
                         </tbody>
