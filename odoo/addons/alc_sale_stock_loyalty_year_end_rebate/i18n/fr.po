@@ -39,18 +39,13 @@ msgstr ""
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.report_saleorder_document_rebate
-msgid "<span>possible objective&amp;nbsp;</span>"
-msgstr "<span>objectif possible&amp;nbsp;</span>"
-
-#. module: alc_sale_stock_loyalty_year_end_rebate
-#: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.report_saleorder_document_rebate
-msgid "<span>.</span>"
-msgstr ""
-
-#. module: alc_sale_stock_loyalty_year_end_rebate
-#: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.report_saleorder_document_rebate
 msgid "<span>guaranteed minimum&amp;nbsp;</span>"
 msgstr "<span>minimum garanti&amp;nbsp;</span>"
+
+#. module: alc_sale_stock_loyalty_year_end_rebate
+#: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.report_saleorder_document_rebate
+msgid "<span>possible objective&amp;nbsp;</span>"
+msgstr "<span>objectif possible&amp;nbsp;</span>"
 
 #. module: alc_sale_stock_loyalty_year_end_rebate
 #: model_terms:ir.ui.view,arch_db:alc_sale_stock_loyalty_year_end_rebate.report_saleorder_document_rebate
