@@ -41,6 +41,7 @@
         "stock_location_orderpoint_cleanup",
         "stock_location_orderpoint_dynamic_routing_merge",
         "stock_location_pending_move",
+        "stock_location_release_channel_restriction",
         "stock_lot_is_archived",
         "stock_move_common_dest",
         "stock_move_line_change_lot",

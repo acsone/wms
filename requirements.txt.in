@@ -138,6 +138,7 @@ odoo-addon-stock-location-children @ git+https://github.com/OCA/stock-logistics-
 odoo-addon-stock-location-fill-state @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2188/head#subdirectory=setup/stock_location_fill_state
 odoo-addon-stock-location-pending-move @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2200/head#subdirectory=setup/stock_location_pending_move
 odoo-addon-stock-location-product-restriction @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2211/head#subdirectory=setup/stock_location_product_restriction
+odoo-addon-stock-location-release-channel-restriction @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2248/head#subdirectory=setup/stock_location_release_channel_restriction
 odoo-addon-stock-quant-task-deferred @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2205/head#subdirectory=setup/stock_quant_task_deferred
 odoo-addon-stock-reserve-rule @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2229/head#subdirectory=setup/stock_reserve_rule
 odoo-addon-stock-safe-scrap @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2181/head#subdirectory=setup/stock_safe_scrap
