@@ -7,7 +7,6 @@ from odoo.addons.sale_loyalty.tests.common import TestSaleCouponCommon
 
 
 class TestSaleLoyaltyYearEndRebateCommon(TestSaleCouponCommon):
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

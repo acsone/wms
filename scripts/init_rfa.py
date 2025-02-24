@@ -124,7 +124,9 @@ def _init_rfa(env):
     cpt = 0
     total = len(orders)
     _logger.info(f"Recomputing loyalty points for {len(orders)} sale orders")
-    for so in orders:
+    for so in orders.with_context(
+        ensure_program_valid_at_order_date=True, restricted_program_ids=program.ids
+    ):
         cpt += 1
         _logger.info(
             f"Recomputing loyalty points for sale order {so.name} ({cpt}/{total})"
