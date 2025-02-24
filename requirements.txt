@@ -453,7 +453,7 @@ odoo-addon-stock-split-picking==16.0.1.0.4.2
 odoo-addon-stock-split-picking-dimension @ git+https://github.com/acsone/stock-logistics-workflow.git@d22c15713032586fa391cb1fce13a542b23cd736#subdirectory=setup/stock_split_picking_dimension
 odoo-addon-stock-storage-category-capacity-name==16.0.1.0.0.5
 odoo-addon-stock-storage-category-usage-report @ git+https://github.com/acsone/stock-logistics-reporting.git@7041bd19c5bb976bac41d781e4b39f2c2656a697#subdirectory=setup/stock_storage_category_usage_report
-odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@b734827018ec3700fb9a8d258d6ea688648ff04d#subdirectory=setup/stock_storage_type
+odoo-addon-stock-storage-type @ git+https://github.com/acsone/wms.git@838188c32ac227134d97ce8721eefaba54569cb0#subdirectory=setup/stock_storage_type
 odoo-addon-stock-storage-type-putaway-abc==16.0.1.0.0.12
 odoo-addon-stock-storage-type-putaway-abc-classification-sale-stock @ git+https://github.com/acsone/wms.git@980b444e365da2752f5bc1345f22d2cf5ca80657#subdirectory=setup/stock_storage_type_putaway_abc_classification_sale_stock
 odoo-addon-uom-unece==16.0.1.3.0.3
