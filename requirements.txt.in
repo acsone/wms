@@ -78,6 +78,7 @@ odoo-addon-stock-release-channel-split-picking @ git+https://github.com/OCA/wms.
 odoo-addon-stock-available-to-promise-release-restrict-lot @ git+https://github.com/OCA/wms.git@refs/pull/943/head#subdirectory=setup/stock_available_to_promise_release_restrict_lot
 
 # product-attribute
+odoo-addon-product-expiry-alert @ git+https://github.com/OCA/product-attribute.git@refs/pull/1882/head#subdirectory=setup/product_expiry_alert
 odoo-addon-product-packaging-level @ git+https://github.com/OCA/product-attribute.git@refs/pull/1595/head#subdirectory=setup/product_packaging_level
 # https://github.com/OCA/product-attribute/pull/1216 - [MIG][16.0] product_packaging_type_pallet => product_packaging_level_pallet
 odoo-addon-product-packaging-level-pallet @ git+https://github.com/acsone/product-attribute.git@16.0-mig-product-packaging-level-pallet-dro#subdirectory=setup/product_packaging_level_pallet
@@ -144,6 +145,7 @@ odoo-addon-procurement-auto-create-group-by-product @ git+https://github.com/OCA
 g @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2078/head#subdirectory=setup/stock_location_zone
 
 # stock-logistics-workflow
+odoo-addon-stock-move-product-expired-alert @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1874/head#subdirectory=setup/stock_move_product_expired_alert
 odoo-addon-stock-move-zone-location-source @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1377/head#subdirectory=setup/stock_move_zone_location_source
 # https://github.com/OCA/stock-logistics-workflow/pull/1199
 odoo-addon-stock-picking-backorder-reason @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1199/head#subdirectory=setup/stock_picking_backorder_reason

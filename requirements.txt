@@ -180,6 +180,8 @@ odoo-addon-l10n-be-eco-tax==16.0.1.0.1.1
 odoo-addon-l10n-be-iso20022-pain @ git+https://github.com/acsone/l10n-belgium.git@ec5fae3144a3a38c4b84a59ac806f7955109fbac#subdirectory=setup/l10n_be_iso20022_pain
 odoo-addon-loyalty-initial-date-validity==16.0.1.0.1
 odoo-addon-loyalty-partner-applicability @ git+https://github.com/acsone/sale-promotion.git@1e6dd7c85e605ac0931b838a8f43bfb488227021#subdirectory=setup/loyalty_partner_applicability
+odoo-addon-mail-activity-board==16.0.1.1.1.9
+odoo-addon-mail-activity-team==16.0.1.0.1.3
 odoo-addon-mail-environment==16.0.1.0.1.7
 odoo-addon-mis-builder==16.0.5.1.12
 odoo-addon-mis-builder-budget==16.0.5.1.0
@@ -210,6 +212,7 @@ odoo-addon-product-attribute-set==16.0.1.2.0.3
 odoo-addon-product-brand==16.0.1.0.2.5
 odoo-addon-product-cost-security==16.0.2.3.0
 odoo-addon-product-dimension==16.0.1.2.0
+odoo-addon-product-expiry-alert @ git+https://github.com/acsone/product-attribute.git@908b9aae34db9dd25f249e9b6441cad6ae2dc33a#subdirectory=setup/product_expiry_alert
 odoo-addon-product-expiry-configurable==16.0.1.0.0.13
 odoo-addon-product-logistics-uom==16.0.3.1.0
 odoo-addon-product-manufacturer==16.0.1.0.1.1
@@ -393,6 +396,7 @@ odoo-addon-stock-move-line-reserved-quant==16.0.1.0.0.7
 odoo-addon-stock-move-location==16.0.1.4.0.2
 odoo-addon-stock-move-manage-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@9f30e65953ebf7f532b23711613b34d43e49c54f#subdirectory=setup/stock_move_manage_priority
 odoo-addon-stock-move-priority-picking-assign==16.0.1.0.0.6
+odoo-addon-stock-move-product-expired-alert @ git+https://github.com/acsone/stock-logistics-workflow.git@de85e5a9c39f02ba7a40bbc4ac42be81b3bfa241#subdirectory=setup/stock_move_product_expired_alert
 odoo-addon-stock-move-propagate-first-move @ git+https://github.com/acsone/stock-logistics-workflow.git@989dcfe2f6d4c56cfa96e98b1d5378f8fdc37e02#subdirectory=setup/stock_move_propagate_first_move
 odoo-addon-stock-move-propagate-first-move-cancel @ git+https://github.com/acsone/stock-logistics-workflow.git@d859321231027547efb15f67d1427e24693a5c1b#subdirectory=setup/stock_move_propagate_first_move_cancel
 odoo-addon-stock-move-zone-location-source @ git+https://github.com/acsone/stock-logistics-workflow.git@88cedcf5c6e9e49a2663ac89e73a6d372d2e43f6#subdirectory=setup/stock_move_zone_location_source
