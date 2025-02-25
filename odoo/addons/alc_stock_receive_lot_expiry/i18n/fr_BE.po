@@ -27,11 +27,9 @@ msgid "Filled in lot is expired! Please check the product."
 msgstr "Le lot rempli est expiré! Veuillez vérifier le produit."
 
 #. module: alc_stock_receive_lot_expiry
-#: model:ir.model,name:alc_stock_receive_lot_expiry.model_stock_pack_operation_lot
-msgid "Lot/Serial number for pack ops"
-msgstr "Lot/Numéro de série pour l'opération"
-
-#. module: alc_stock_receive_lot_expiry
 #: model:ir.model.fields,field_description:alc_stock_receive_lot_expiry.field_stock_pack_operation_lot_add__is_removal_date_expired
 msgid "Removal Date Expired"
 msgstr "Date de retrait expirée"
+
+#~ msgid "Lot/Serial number for pack ops"
+#~ msgstr "Lot/Numéro de série pour l'opération"
