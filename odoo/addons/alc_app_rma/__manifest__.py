@@ -24,6 +24,7 @@
         # Alcyon
         "alc_rma_activity",
         "alc_rma_operation_return_location",
+        "alc_rma_original_picking_responsible",
         "alc_rma_sale_stock_restocking_fee_invoicing",
         "alc_rma_shipment_advice",
         "alc_rma_stock_delivery_slip",
