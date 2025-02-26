@@ -984,9 +984,9 @@
                     <t
             t-if="deliveryslip.picking_type_code=='outgoing'"
           >Delivery slip</t>
-                    <t
+                    <h4
             t-if="deliveryslip.picking_type_code=='incoming'"
-          >Goods return note <strong t-if="duplicata">(DUPLICATA)</strong></t>
+          >Goods return note <strong t-if="duplicata">(DUPLICATA)</strong></h4>
                 </div>
             </div>
             <t
@@ -1011,7 +1011,7 @@
             />
                     </div>
                     <div class="main_title">
-                        Entry register
+                        <h4>Entry register</h4>
                     </div>
                 </div>
             </div>
