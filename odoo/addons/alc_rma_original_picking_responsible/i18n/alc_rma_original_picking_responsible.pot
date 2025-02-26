@@ -1,0 +1,49 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_rma_original_picking_responsible
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_rma_original_picking_responsible
+#: model:ir.model.fields,field_description:alc_rma_original_picking_responsible.field_rma__internal_picking_id
+msgid "First Preparation Picking"
+msgstr ""
+
+#. module: alc_rma_original_picking_responsible
+#: model:ir.model.fields,field_description:alc_rma_original_picking_responsible.field_rma__internal_picking_user_id
+msgid "First Preparation Responsible"
+msgstr ""
+
+#. module: alc_rma_original_picking_responsible
+#: model_terms:ir.ui.view,arch_db:alc_rma_original_picking_responsible.rma_search_view
+msgid "First Preparation User"
+msgstr ""
+
+#. module: alc_rma_original_picking_responsible
+#: model_terms:ir.ui.view,arch_db:alc_rma_original_picking_responsible.rma_form_view
+msgid "Preparation"
+msgstr ""
+
+#. module: alc_rma_original_picking_responsible
+#: model:ir.model.fields,field_description:alc_rma_original_picking_responsible.field_rma__internal_picking_ids
+msgid "Preparation Pickings"
+msgstr ""
+
+#. module: alc_rma_original_picking_responsible
+#: model:ir.model.fields,field_description:alc_rma_original_picking_responsible.field_rma__internal_picking_user_ids
+msgid "Preparation Users"
+msgstr ""
+
+#. module: alc_rma_original_picking_responsible
+#: model:ir.model,name:alc_rma_original_picking_responsible.model_rma
+msgid "RMA"
+msgstr ""
