@@ -32,3 +32,14 @@ class TestAccountInvoiceSupplierRefUnique(TransactionCase):
         invoice.action_post()
         with self.assertRaises(ValidationError):
             invoice.supplier_invoice_number = False
+
+    def test_supplier_invoice_number_not_required_for_supplier_refund(self):
+        invoice = self.account_move.create(
+            {
+                "partner_id": self.partner.id,
+                "move_type": "in_refund",
+                "invoice_date": "2023-01-01",
+                "invoice_line_ids": [Command.create({"partner_id": self.partner.id})],
+            }
+        )
+        invoice.action_post()
