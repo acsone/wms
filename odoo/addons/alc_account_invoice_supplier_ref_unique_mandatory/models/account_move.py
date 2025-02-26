@@ -19,7 +19,7 @@ class AccountMove(AccountMoveBase):
         for rec in self:
             rec.supplier_invoice_number_required = (
                 rec.company_id.check_invoice_supplier_number_mandatory
-                and rec.is_purchase_document(include_receipts=True)
+                and rec.move_type in ["in_invoice", "in_receipt"]
                 and rec.state == "posted"
             )
 
