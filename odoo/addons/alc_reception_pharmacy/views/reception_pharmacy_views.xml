@@ -25,6 +25,7 @@
             states="draft"
             context="{'default_reception_pharmacy_id': active_id}"
           />
+          <button name="action_cancel" string="Cancel" type="object" states="draft" />
           <field name="state" widget="statusbar" statusbar_visible="draft,done" />
         </header>
         <sheet>

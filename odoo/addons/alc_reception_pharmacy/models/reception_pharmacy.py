@@ -29,10 +29,10 @@ class ReceptionPharmacy(models.Model):
     line_ids = fields.One2many[ReceptionPharmacyLine](
         inverse_name="wizard_id",
         string="Lines",
-        states={"done": [("readonly", True)]},
+        states={"done": [("readonly", True)], "cancel": [("readonly", True)]},
     )
     state = fields.Selection(
-        [("draft", "New"), ("done", "Done")],
+        [("draft", "New"), ("done", "Done"), ("cancel", "Cancel")],
         compute="_compute_state",
         store=True,
         copy=False,
@@ -44,7 +44,9 @@ class ReceptionPharmacy(models.Model):
     def _compute_state(self):
         for reception in self:
             # If no lines have been added yet or if one of them is 'draft'
-            if not (reception.line_ids) or any(
+            if all(line.state == "cancel" for line in reception.line_ids):
+                reception.state = "cancel"
+            elif not (reception.line_ids) or any(
                 line.state == "draft" for line in reception.line_ids
             ):
                 reception.state = "draft"
@@ -81,3 +83,15 @@ class ReceptionPharmacy(models.Model):
         self.env.user.notify_info(
             _("Reception pharmacy : lines are validated in background")
         )
+
+    def action_cancel(self):
+        self.ensure_one()
+        if any(line.state == "done" for line in self.line_ids):
+            raise UserError(
+                _(
+                    "One of the lines has been validated."
+                    "You can't cancel this reception."
+                )
+            )
+        self.line_ids.write({"state": "cancel"})
+        self.write({"state": "cancel"})
