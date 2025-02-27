@@ -50,7 +50,10 @@ class ReceptionPharmacyLine(models.Model):
         readonly=True,
     )
     state = fields.Selection(
-        [("draft", "New"), ("done", "Done")], copy=False, readonly=True, default="draft"
+        [("draft", "New"), ("done", "Done"), ("cancel", "cancel")],
+        copy=False,
+        readonly=True,
+        default="draft",
     )
 
     @api.constrains("customer_id")

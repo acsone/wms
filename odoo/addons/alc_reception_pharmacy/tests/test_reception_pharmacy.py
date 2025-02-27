@@ -3,6 +3,8 @@
 
 from freezegun import freeze_time
 
+from odoo.exceptions import UserError
+
 from .common import CommonReceptionPharmacyCase
 
 
@@ -153,3 +155,40 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
         lot = pharmacy_line.lot_id
 
         self.assertEqual(lot.name, "2023TC12345")
+
+    def test_action_cancel(self):
+        reception = self.ReceptionPharmacy.create({"product_id": self.product.id})
+        wiz = self.wizard.create(
+            {
+                "reception_pharmacy_id": reception.id,
+                "customer_id": self.partner.id,
+                "bin_id": self.bin.id,
+                "lot_name": "TC123467436",
+                "product_qty": 1,
+            }
+        )
+        wiz.validate_reception()
+        reception.action_cancel()
+        self.assertEqual(reception.line_ids.state, "cancel")
+        self.assertEqual(reception.state, "cancel")
+
+    def test_action_cancel_not_allowed(self):
+        reception = self.ReceptionPharmacy.create({"product_id": self.product.id})
+        wiz = self.wizard.create(
+            {
+                "reception_pharmacy_id": reception.id,
+                "customer_id": self.partner.id,
+                "bin_id": self.bin.id,
+                "lot_name": "TC123467436",
+                "product_qty": 1,
+            }
+        )
+        wiz.validate_reception()
+        self._validate_reception_and_return_picking(reception)
+        with self.assertRaises(UserError):
+            reception.action_cancel()
+
+    def test_action_cancel_no_line(self):
+        reception = self.ReceptionPharmacy.create({"product_id": self.product.id})
+        reception.action_cancel()
+        self.assertEqual(reception.state, "cancel")
