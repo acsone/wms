@@ -138,7 +138,7 @@
           <div class="col-6">
             <div
               t-field="doc.partner_invoice_id"
-              t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;, &quot;fax&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"
+              t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;, &quot;fax&quot;, &quot;email&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"
             />
             <p t-if="doc.partner_invoice_id.vat">VAT: <span
                 t-field="doc.partner_invoice_id.vat"
@@ -172,6 +172,7 @@
           <thead>
             <tr>
               <th>Ref</th>
+              <th>CNK</th>
               <th>Description</th>
               <th class="text-right">Quantity</th>
             </tr>
@@ -182,6 +183,9 @@
               <tr>
                 <td>
                   <span t-field="l.product_id.default_code" />
+                </td>
+                <td>
+                  <span t-field="l.product_id.cnk_code" />
                 </td>
                 <td>
                   <span t-field="l.name" />
