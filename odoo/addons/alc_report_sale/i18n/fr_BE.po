@@ -113,6 +113,11 @@ msgid "Apb"
 msgstr ""
 
 #. module: alc_report_sale
+#: model_terms:ir.ui.view,arch_db:alc_report_sale.report_saleorder_document_pharmacist_supplier
+msgid "CNK"
+msgstr ""
+
+#. module: alc_report_sale
 #. odoo-python
 #: code:addons/alc_report_sale/models/sale_order.py:0
 #, python-format
