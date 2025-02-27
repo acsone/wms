@@ -181,7 +181,7 @@ odoo-addon-attachment-s3 @ git+https://github.com/acsone/odoo-cloud-platform@16.
 odoo-addon-internal-stock-quant-package @ git+https://github.com/OCA/stock-logistics-tracking.git@refs/pull/34/head#subdirectory=setup/internal_stock_quant_package
 
 # stock-logistics-transport
-odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/OCA/stock-logistics-transport.git@refs/pull/169/head#subdirectory=setup/shipment_advice_planner_toursolver
+odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/acsone/stock-logistics-transport.git@16.0-alc-shipment_advice_planner_toursolver#subdirectory=setup/shipment_advice_planner_toursolver
 
 # stock-logistics-availability
 # https://github.com/OCA/stock-logistics-availability/pull/10 - [ADD] stock_available_location_orderpoint
