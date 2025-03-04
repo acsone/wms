@@ -76,6 +76,7 @@ odoo-addon-stock-picking-batch-creation @ git+https://github.com/OCA/wms.git@ref
 odoo-addon-shopfloor-putaway-recompute @ git+https://github.com/OCA/wms@refs/pull/934/head#subdirectory=setup/shopfloor_putaway_recompute
 odoo-addon-stock-release-channel-split-picking @ git+https://github.com/OCA/wms.git@refs/pull/941/head#subdirectory=setup/stock_release_channel_split_picking
 odoo-addon-stock-available-to-promise-release-restrict-lot @ git+https://github.com/OCA/wms.git@refs/pull/943/head#subdirectory=setup/stock_available_to_promise_release_restrict_lot
+odoo-addon-stock-release-channel-shipment-advice-toursolver @ git+https://github.com/OCA/wms.git@refs/pull/990/head#subdirectory=setup/stock_release_channel_shipment_advice_toursolver
 
 # product-attribute
 odoo-addon-product-expiry-alert @ git+https://github.com/OCA/product-attribute.git@refs/pull/1882/head#subdirectory=setup/product_expiry_alert
