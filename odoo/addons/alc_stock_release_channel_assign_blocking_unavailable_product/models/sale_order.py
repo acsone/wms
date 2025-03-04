@@ -8,4 +8,4 @@ from odoo.addons.sale_stock.models.sale_order import SaleOrder as SaleOrderBase
 
 class SaleOrder(SaleOrderBase):
 
-    do_not_deliver_if_alone = fields.Boolean(default=False)
+    do_not_deliver_if_alone = fields.Boolean(default=False, tracking=True)
