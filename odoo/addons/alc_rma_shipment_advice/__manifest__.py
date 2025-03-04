@@ -19,6 +19,7 @@
         "views/stock_picking.xml",
         "views/shipment_advice.xml",
         "views/stock_picking_type.xml",
+        "views/rma.xml",
     ],
     "demo": [],
 }
