@@ -11,8 +11,19 @@
             <xpath expr="//page[@name='page_other']" position="inside">
                 <group string="Shipment">
                     <field name="shipment_advice_id"/>
+                    <field name="toursolver_resource_id"/>
                     <field name="toursolver_task_id"/>
                 </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="rma_tree_view">
+        <field name="model">rma</field>
+        <field name="inherit_id" ref="rma.rma_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="toursolver_resource_id"/>
             </xpath>
         </field>
     </record>

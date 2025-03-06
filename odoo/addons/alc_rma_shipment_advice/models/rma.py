@@ -7,6 +7,9 @@ from odoo.addons.rma.models.rma import Rma as RmaBase
 from odoo.addons.shipment_advice_planner_toursolver.models.shipment_advice import (
     ShipmentAdvice,
 )
+from odoo.addons.shipment_advice_planner_toursolver.models.toursolver_resource import (
+    ToursolverResource,
+)
 from odoo.addons.shipment_advice_planner_toursolver.models.toursolver_task import (
     ToursolverTask,
 )
@@ -18,6 +21,9 @@ class Rma(RmaBase):
     )
     toursolver_task_id = fields.Many2one[ToursolverTask](
         store=True, related="shipment_advice_id.toursolver_task_id"
+    )
+    toursolver_resource_id = fields.Many2one[ToursolverResource](
+        related="shipment_advice_id.toursolver_resource_id", store=True
     )
 
     def _create_receipt(self):
