@@ -984,9 +984,14 @@
                     <t
             t-if="deliveryslip.picking_type_code=='outgoing'"
           >Delivery slip</t>
-                    <h4
+                    <br/>
+                        <span t-field="doc.planned_shipment_advice_id.toursolver_resource_id"/>
+                    <h3
             t-if="deliveryslip.picking_type_code=='incoming'"
-          >Goods return note <strong t-if="duplicata">(DUPLICATA)</strong></h4>
+          >RMA <strong t-if="duplicata">(DUPLICATA)</strong>
+                    <br/>
+                        <span t-field="doc.planned_shipment_advice_id.toursolver_resource_id"/>
+                    </h3>
                 </div>
             </div>
             <t
@@ -1012,6 +1017,8 @@
                     </div>
                     <div class="main_title">
                         Entry register
+                        <br/>
+                        <span t-field="doc.planned_shipment_advice_id.toursolver_resource_id"/>
                     </div>
                 </div>
             </div>

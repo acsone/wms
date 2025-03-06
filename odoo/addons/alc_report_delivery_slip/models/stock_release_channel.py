@@ -11,11 +11,7 @@ class StockReleaseChannel(StockReleaseChannelBase):
     _inherit = "stock.release.channel"
 
     def print_all_deliveryslip(self):
-        shipment_advice = self.shipment_advice_ids.filtered(
-            "in_release_channel_auto_process"
+        done_shipment_advices = self.in_process_shipment_advice_ids.filtered(
+            lambda s: s.state == "done"
         )
-        if not shipment_advice:
-            return {}
-        if len(shipment_advice) > 1:
-            shipment_advice = shipment_advice[0]
-        return shipment_advice.print_all_deliveryslip()
+        return done_shipment_advices.print_all_deliveryslip()
