@@ -32,7 +32,7 @@ class ReceptionPharmacy(models.Model):
         states={"done": [("readonly", True)], "cancel": [("readonly", True)]},
     )
     state = fields.Selection(
-        [("draft", "New"), ("done", "Done"), ("cancel", "Cancel")],
+        [("draft", "New"), ("done", "Done"), ("cancel", "Cancelled")],
         compute="_compute_state",
         store=True,
         copy=False,

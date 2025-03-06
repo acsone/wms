@@ -50,7 +50,7 @@ class ReceptionPharmacyLine(models.Model):
         readonly=True,
     )
     state = fields.Selection(
-        [("draft", "New"), ("done", "Done"), ("cancel", "cancel")],
+        [("draft", "New"), ("done", "Done"), ("cancel", "Cancelled")],
         copy=False,
         readonly=True,
         default="draft",
