@@ -7,17 +7,22 @@ from odoo.addons.shipment_advice.models.shipment_advice import ShipmentAdvice as
 class ShipmentAdvice(Advice):
     def print_all_deliveryslip(self):
         ship_type = self.env.ref("stock.picking_type_out")
-        shippings = (
-            (self.loaded_picking_ids | self.rma_picking_ids)
-            .sorted(
-                lambda p: (
-                    p.toursolver_shipment_advice_rank,
-                    p.picking_type_id.code != "incoming",
+        sorted_shippings = self.env["stock.picking"]
+        for shipment in self:
+            shippings = (
+                (shipment.loaded_picking_ids | shipment.rma_picking_ids)
+                .sorted(
+                    lambda p: (
+                        p.toursolver_shipment_advice_rank,
+                        p.picking_type_id.code != "incoming",
+                    )
+                )
+                .filtered(
+                    lambda ship: ship.picking_type_id == ship_type
+                    or ship.picking_type_id.is_rma
                 )
             )
-            .filtered(
-                lambda ship: ship.picking_type_id == ship_type
-                or ship.picking_type_id.is_rma
-            )
+            sorted_shippings |= shippings
+        return self.env.ref("stock.action_report_delivery").report_action(
+            sorted_shippings
         )
-        return self.env.ref("stock.action_report_delivery").report_action(shippings)

@@ -188,7 +188,7 @@ msgstr "Frigo"
 #. module: alc_report_delivery_slip
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.alcyon_report_deliveryslip
 msgid "Goods return note"
-msgstr "Bon de retour"
+msgstr "RMA"
 
 #. module: alc_report_delivery_slip
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.deliveryslip_with_price
