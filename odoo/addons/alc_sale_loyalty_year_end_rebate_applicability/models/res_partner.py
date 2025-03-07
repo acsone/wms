@@ -82,7 +82,7 @@ class ResPartner(models.Model):
                 ensure_program_valid_at_order_date=True,
                 restricted_program_ids=programs.ids,
             ):
-                order._update_programs_and_rewards(programs)
+                order._update_programs_and_rewards()
 
     def _remove_rfa(self, programs):
         """Remove the RFA from the partner."""
