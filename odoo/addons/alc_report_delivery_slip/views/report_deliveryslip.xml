@@ -980,18 +980,18 @@
             alt="Logo"
           />
                 </div>
-                <div class="main_title">
+                <div class="main_title col-4">
                     <t
             t-if="deliveryslip.picking_type_code=='outgoing'"
           >Delivery slip</t>
-                    <br/>
-                        <span t-field="doc.planned_shipment_advice_id.toursolver_resource_id"/>
                     <h3
             t-if="deliveryslip.picking_type_code=='incoming'"
           >RMA <strong t-if="duplicata">(DUPLICATA)</strong>
                     </h3>
-                    <br/>
-                    <span t-field="doc.rma_shipment_advice_id.toursolver_resource_id"/>
+                    <div>
+                      <span t-field="doc.planned_shipment_advice_id.toursolver_resource_id"/>
+                      <span t-field="doc.rma_shipment_advice_id.toursolver_resource_id"/>
+                    </div>
                 </div>
             </div>
             <t
@@ -1015,11 +1015,12 @@
               alt="Logo"
             />
                     </div>
-                    <div class="main_title">
+                    <div class="main_title col-4">
                         Entry register
-                        <br/>
-                        <span t-field="doc.planned_shipment_advice_id.toursolver_resource_id"/>
-                        <span t-field="doc.rma_shipment_advice_id.toursolver_resource_id"/>
+                        <div>
+                          <span t-field="doc.planned_shipment_advice_id.toursolver_resource_id"/>
+                          <span t-field="doc.rma_shipment_advice_id.toursolver_resource_id"/>
+                        </div>
                     </div>
                 </div>
             </div>
