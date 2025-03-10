@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2025-03-10 11:21+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -103,8 +104,8 @@ msgid ""
 "Check this box to print the delivery slip as a 'DUPLICATA' (duplicate copy) "
 "at reception."
 msgstr ""
-"Cochez cette case pour imprimer le bon de livraison en tant que 'DUPLICATA' "
-"(copie dupliquée) lors de la réception."
+"Cochez cette case pour imprimer le bon de livraison en tant que "
+"'DUPLICATA' (copie dupliquée) lors de la réception."
 
 #. module: alc_report_delivery_slip
 #: model:ir.model,name:alc_report_delivery_slip.model_res_company
@@ -184,6 +185,11 @@ msgstr "Péremption"
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.report_deliveryslip_entry_register_body
 msgid "Fridge"
 msgstr "Frigo"
+
+#. module: alc_report_delivery_slip
+#: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.alcyon_report_deliveryslip
+msgid "Goods return note"
+msgstr ""
 
 #. module: alc_report_delivery_slip
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.deliveryslip_with_price
@@ -299,11 +305,6 @@ msgid "Quantity"
 msgstr "Quantité"
 
 #. module: alc_report_delivery_slip
-#: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.alcyon_report_deliveryslip
-msgid "RMA"
-msgstr ""
-
-#. module: alc_report_delivery_slip
 #: model:ir.model,name:alc_report_delivery_slip.model_rma_operation
 msgid "RMA requested operation"
 msgstr "Opération RMA demandée"
@@ -361,8 +362,7 @@ msgstr "Sous-total"
 #. module: alc_report_delivery_slip
 #: model_terms:ir.ui.view,arch_db:alc_report_delivery_slip.res_config_settings_view_form_stock
 msgid ""
-"This is the configuration on how to compute boxes and units on Delivery "
-"Slip."
+"This is the configuration on how to compute boxes and units on Delivery Slip."
 msgstr ""
 
 #. module: alc_report_delivery_slip
