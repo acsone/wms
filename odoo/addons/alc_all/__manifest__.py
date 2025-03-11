@@ -31,6 +31,7 @@
         "alc_app_account_payment",
         "alc_app_analytic",
         "alc_app_b2c",
+        "alc_app_crm",
         "alc_app_data",
         "alc_app_eshop_b2b",
         "alc_app_framework",
