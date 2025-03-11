@@ -10,6 +10,7 @@ class TestSaleLoyaltyYearEndRebateCommon(TestSaleCouponCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, queue_job__no_delay=True))
         cls.year_end_rebate_program = cls.env["loyalty.program"].create(
             {
                 "name": "Year-end Rebate",

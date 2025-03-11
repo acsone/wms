@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="loyalty_program_from_view" model="ir.ui.view">
+        <field name="model">loyalty.program</field>
+        <field name="inherit_id" ref="loyalty.loyalty_program_view_form" />
+        <field name="arch" type="xml">
+        <button name="%(loyalty.loyalty_generate_wizard_action)d" position="after">
+            <button name="action_launch_rfa_updater" string="Update Retroactive" class="btn-primary" type="object"
+                    attrs="{'invisible': [('program_type', '!=', 'year_end_rebate')]}"/>
+            </button>
+        </field>
+    </record>
+</odoo>

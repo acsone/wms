@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="alc_loyalty_rule_updater_form_view" model="ir.ui.view">
+        <field name="name">alc.loyalty.rule.updater.form</field>
+        <field name="model">alc.loyalty.rule.updater</field>
+        <field name="arch" type="xml">
+            <form string="Loyalty Rule Updater">
+                <group>
+                    <field name="loyalty_program_id" invisible="1" />
+                    <field name="retroactive" />
+                    <field name="is_retroactive_date_required" invisible="1" />
+                    <field name="retroactive_date"
+                        attrs="{'invisible': [('is_retroactive_date_required', '=', False)], 'required': [('is_retroactive_date_required', '=', True)]}" />
+                    <field name="line_ids" />
+                </group>
+                <footer>
+                    <button
+                        name="do_update"
+                        string="OK"
+                        class="btn-primary"
+                        type="object"
+                    />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

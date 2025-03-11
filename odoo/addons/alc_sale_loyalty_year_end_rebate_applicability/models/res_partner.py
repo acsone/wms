@@ -78,11 +78,7 @@ class ResPartner(models.Model):
                     ("date_order", ">=", partner.date_start_contract_alcyonnaire),
                 ]
             )
-            for order in orders.with_context(
-                ensure_program_valid_at_order_date=True,
-                restricted_program_ids=programs.ids,
-            ):
-                order._update_programs_and_rewards()
+            orders._delay_recompute_rfa(programs)
 
     def _remove_rfa(self, programs):
         """Remove the RFA from the partner."""

@@ -114,6 +114,7 @@
         "alc_sale_internal_confirmation_mail",
         "alc_sale_loyalty_year_end_rebate",
         "alc_sale_loyalty_year_end_rebate_applicability",
+        "alc_sale_loyalty_year_end_rebate_updater",
         "alc_sale_mto_check_procurements",
         "alc_sale_order_blanket_order_sale_channel",
         "alc_sale_order_cancel",
