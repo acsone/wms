@@ -8,7 +8,12 @@ class ClusterPicking(Component):
     _inherit = "shopfloor.cluster.picking"
 
     def put_in_pack(
-        self, picking_batch_id, picking_id, nbr_packages=None, package_type_id=None
+        self,
+        picking_batch_id,
+        picking_id,
+        selected_line_ids,
+        nbr_packages=None,
+        package_type_id=None,
     ):
         if not self.env.user.printing_product_label_printer_id:
             return self._response_put_in_pack(
@@ -23,6 +28,7 @@ class ClusterPicking(Component):
         return super().put_in_pack(
             picking_batch_id,
             picking_id,
+            selected_line_ids,
             nbr_packages=nbr_packages,
             package_type_id=package_type_id,
         )
@@ -103,8 +109,10 @@ class ClusterPicking(Component):
                 lot_id=lot_id,
             )
 
-    def _put_in_pack(self, picking, number_of_parcels, package_type_id):
-        pack = super()._put_in_pack(picking, number_of_parcels, package_type_id)
+    def _put_in_pack(self, picking, move_lines, number_of_parcels, package_type_id):
+        pack = super()._put_in_pack(
+            picking, move_lines, number_of_parcels, package_type_id
+        )
         if isinstance(pack, self.env["stock.quant.package"].__class__):
             if package_type_id is not None:
                 # Package type has been chosen by user, so don't override it as
