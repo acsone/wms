@@ -13,6 +13,7 @@
         # Third-party
         "queue_job",
         "shopfloor",
+        "stock_location_release_channel_restriction",
         # Alcyon
         "alc_queue_job_background_channel",
     ],

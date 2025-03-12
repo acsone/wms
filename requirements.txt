@@ -313,8 +313,8 @@ odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/w
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@2fdc6e5f475dec0920762f0d6396d66cb745c401#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-mobile-base==16.0.1.1.0
 odoo-addon-shopfloor-mobile-base-auth-api-key==16.0.1.0.0.5
-odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@84cd6f8cf48e068d506323d50b0b8c3f536f2aa7#subdirectory=setup/shopfloor_mobile_packing
-odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@84cd6f8cf48e068d506323d50b0b8c3f536f2aa7#subdirectory=setup/shopfloor_packing
+odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@80ebc9c48882c6e797b952f6f4afe31e86176309#subdirectory=setup/shopfloor_mobile_packing
+odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@80ebc9c48882c6e797b952f6f4afe31e86176309#subdirectory=setup/shopfloor_packing
 odoo-addon-shopfloor-putaway-recompute @ git+https://github.com/acsone/wms@b136dbd468916d9dfa782bc7307213e2004b04f5#subdirectory=setup/shopfloor_putaway_recompute
 odoo-addon-shopfloor-reception @ git+https://github.com/acsone/wms.git@5b3ae519d249c7f9878e4bc97c9be2b89aa76ce8#subdirectory=setup/shopfloor_reception
 odoo-addon-shopfloor-reception-mobile @ git+https://github.com/acsone/wms.git@921aaefcb87b344ad46a209c75858ac5ec63d5d1#subdirectory=setup/shopfloor_reception_mobile
@@ -384,7 +384,7 @@ odoo-addon-stock-location-orderpoint-dynamic-routing-merge @ git+https://github.
 odoo-addon-stock-location-pending-move @ git+https://github.com/acsone/stock-logistics-warehouse.git@acada3b25c58b4c49f066a200f79552dd1bb7f71#subdirectory=setup/stock_location_pending_move
 odoo-addon-stock-location-position==16.0.1.0.0.10
 odoo-addon-stock-location-product-restriction @ git+https://github.com/acsone/stock-logistics-warehouse.git@e28db5cc46245552c6282a0e2e907f12ecdb3ddc#subdirectory=setup/stock_location_product_restriction
-odoo-addon-stock-location-release-channel-restriction @ git+https://github.com/acsone/stock-logistics-warehouse.git@37213f050c569fef187ff5133bdd152f24544879#subdirectory=setup/stock_location_release_channel_restriction
+odoo-addon-stock-location-release-channel-restriction @ git+https://github.com/acsone/stock-logistics-warehouse.git@8458874549562a694614dbb8b64275e0cf81e198#subdirectory=setup/stock_location_release_channel_restriction
 odoo-addon-stock-location-zone @ git+https://github.com/acsone/stock-logistics-warehouse.git@e4901deafc05a35b5aef6eb60f2a2853f59a10bd#subdirectory=setup/stock_location_zone
 odoo-addon-stock-lot-is-archived==16.0.1.0.0.5
 odoo-addon-stock-move-auto-assign==16.0.1.1.1.4

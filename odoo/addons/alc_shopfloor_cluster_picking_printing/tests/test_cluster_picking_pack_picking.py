@@ -81,6 +81,7 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             params={
                 "picking_batch_id": self.batch.id,
                 "picking_id": picking.id,
+                "selected_line_ids": move_lines.ids,
                 "nbr_packages": 4,
             },
         )
@@ -100,6 +101,7 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             params={
                 "picking_batch_id": self.batch.id,
                 "picking_id": picking.id,
+                "selected_line_ids": move_lines.ids,
                 "nbr_packages": 4,
             },
         )
@@ -126,6 +128,7 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
                 "put_in_pack",
                 params={
                     "picking_batch_id": self.batch.id,
+                    "selected_line_ids": move_lines.ids,
                     "picking_id": picking.id,
                     "nbr_packages": 4,
                 },
@@ -370,6 +373,7 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
                 params={
                     "picking_batch_id": batch.id,
                     "picking_id": picking.id,
+                    "selected_line_ids": move_line.ids,
                     "nbr_packages": 4,
                 },
             )

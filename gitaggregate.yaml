@@ -99,14 +99,8 @@
     oca: git@github.com:oca/wms.git
   merges:
     - oca 16.0
-    - oca refs/pull/899/head # shopfloor: Extended details service for products and locations
-    - oca refs/pull/902/head # shopfloor: Zone picking no packing
-    - oca refs/pull/911/head # [16.0][FIX] shopfloor: Don't embed postponed line quantity
-    - oca refs/pull/912/head # [16.0] shopfloor cluster_picking: Custom sorting by device
-    - oca refs/pull/917/head # [16.0] shopfloor: location_content_transfer: get_work additional domain and sort key.
     - oca refs/pull/925/head # [IMP] shopfloor: Improve message for location content transfer items
-    - oca refs/pull/942/head # [IMP] shopfloor: Give user better information about the problematic line
-    - oca refs/pull/953/head # [16.0][FIX] shopfloor: fix create return move and move lines sort
+    - oca refs/pull/989/head # [FIX] shopfloor: Allow to manage supplierinfos on product templates
   target: origin 16.0-alc-shopfloor
 
 ./src/rma:
