@@ -11,4 +11,14 @@
     <field name="perm_write" eval="1" />
     <field name="perm_unlink" eval="0" />
   </record>
+
+  <record model="ir.model.access" id="alc_stock_move_report_wizard_access">
+    <field name="name">alc.stock.move.report.wizard access</field>
+    <field name="model_id" ref="model_alc_stock_move_report_wizard" />
+    <field name="group_id" ref="base.group_user" />
+    <field name="perm_read" eval="1" />
+    <field name="perm_create" eval="1" />
+    <field name="perm_write" eval="1" />
+    <field name="perm_unlink" eval="0" />
+  </record>
 </odoo>

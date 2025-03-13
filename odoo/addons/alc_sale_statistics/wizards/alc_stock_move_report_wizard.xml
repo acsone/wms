@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="alc_stock_move_report_wizard_form_view">
+        <field name="model">alc.stock.move.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group name="group_main">
+                    <group name="group_main_left">
+                        <field
+                            name="date_start"
+                            widget="daterange"
+                            class="oe_inline"
+                            options="{'related_end_date': 'date_end'}"
+                        />
+                    </group>
+                    <group name="group_main_right">
+                        <field
+                            name="date_end"
+                            widget="daterange"
+                            class="oe_inline"
+                            options="{'related_start_date': 'date_start'}"
+                        />
+                    </group>
+                </group>
+                <footer>
+                  <button
+                    name="action_open_sale_statistics"
+                    string="Apply"
+                    type="object"
+                    class="btn btn-sm btn-primary"
+                  />
+                  <button string="Cancel" class="btn btn-sm btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+  <record id="action_stock_move_report_wizard" model="ir.actions.act_window">
+    <field name="name">Stock Move (with partner)</field>
+    <field name="res_model">alc.stock.move.report.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+  <record model="ir.ui.menu" id="menu_stock_moves_with_partner">
+    <field name="name">Stock Move (with partner)</field>
+    <field name="parent_id" ref="stock.menu_warehouse_report" />
+    <field name="action" ref="action_stock_move_report_wizard" />
+    <field name="sequence" eval="99" />
+  </record>
+
+</odoo>
