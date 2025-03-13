@@ -15,7 +15,6 @@
         "account_cutoff_accrual_order_product_category",
         "account_cutoff_accrual_purchase_stock",
         "account_cutoff_accrual_sale_stock",
-        "account_cutoff_accrual_sale_stock_sale_invoice_policy",
         "account_financial_report",
         "account_invoice_accrual",
         "account_invoice_check_total",
