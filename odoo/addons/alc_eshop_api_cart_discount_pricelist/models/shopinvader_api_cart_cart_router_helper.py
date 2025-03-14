@@ -29,12 +29,13 @@ class ShopinvaderApiCartRouterHelper(ShopinvaderApiCartRouterHelperBase):
         updated_line_ids = []
         ctx_token = _updated_cart_line_ids_ctx.set(updated_line_ids)
         try:
+            exsting_lines = cart.order_line
             res = super()._apply_transactions(cart, transactions)
+            new_lines = cart.order_line - exsting_lines
             updated_line_ids = _updated_cart_line_ids_ctx.get()
-            for line in cart.order_line.filtered(
-                lambda l, ids=updated_line_ids: l.id in updated_line_ids
-            ):
-                line.onchange_product_id_reset_discount()
+            for line in cart.order_line:
+                if line.id in updated_line_ids or line in new_lines:
+                    line.onchange_product_id_reset_discount()
             return res
         finally:
             _updated_cart_line_ids_ctx.reset(ctx_token)

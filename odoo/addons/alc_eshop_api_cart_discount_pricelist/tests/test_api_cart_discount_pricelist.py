@@ -79,14 +79,14 @@ class TestSaleCartApi(FastAPITransactionCase):
         cls.default_fastapi_router = cart_router
 
     def test_discount_multiple_min_qty(self):
-        cart_uuid = str(uuid.uuid4())
+        transaction_uuid = str(uuid.uuid4())
         with self._create_test_client() as test_client:
             response = test_client.post(
                 "/sync",
                 json={
                     "transactions": [
                         {
-                            "uuid": cart_uuid,
+                            "uuid": transaction_uuid,
                             "product_id": self.product_1.id,
                             "qty": 5,
                         }
@@ -103,7 +103,7 @@ class TestSaleCartApi(FastAPITransactionCase):
                 json={
                     "transactions": [
                         {
-                            "uuid": cart_uuid,
+                            "uuid": transaction_uuid,
                             "product_id": self.product_1.id,
                             "qty": 5,
                         }
@@ -119,7 +119,7 @@ class TestSaleCartApi(FastAPITransactionCase):
                 json={
                     "transactions": [
                         {
-                            "uuid": cart_uuid,
+                            "uuid": transaction_uuid,
                             "product_id": self.product_1.id,
                             "qty": -5,
                         }
@@ -130,3 +130,25 @@ class TestSaleCartApi(FastAPITransactionCase):
             line = self.so.order_line
             self.assertEqual(self.discount_item_5, line.discount_item_id)
             self.assertEqual(5, line.discount3)
+
+    def test_discount_on_new_line(self):
+        self.so.order_line.unlink()
+        self.assertFalse(self.so.order_line)
+        transaction_uuid = str(uuid.uuid4())
+        with self._create_test_client() as test_client:
+            response = test_client.post(
+                "/sync",
+                json={
+                    "transactions": [
+                        {
+                            "uuid": transaction_uuid,
+                            "product_id": self.product_1.id,
+                            "qty": 5,
+                        }
+                    ]
+                },
+            )
+            self.assertEqual(response.status_code, 201)
+            line = self.so.order_line
+            self.assertEqual(5, line.discount3)
+            self.assertEqual(self.discount_item_5, line.discount_item_id)
