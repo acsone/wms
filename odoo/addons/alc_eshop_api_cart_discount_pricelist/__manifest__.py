@@ -11,6 +11,8 @@
     "depends": [
         # Third-party
         "shopinvader_api_cart",
+        # Alcyon
+        "alc_eshop_api_cart_no_onchange",
         # Alcyon/Sales Management
         "alc_pricelist_discount",
     ],
