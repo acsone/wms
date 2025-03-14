@@ -152,7 +152,7 @@ odoo-addon-delivery-procurement-group-carrier==16.0.1.1.0.2
 odoo-addon-endpoint-route-handler==16.0.1.1.0.4
 odoo-addon-extendable==16.0.1.0.1.3
 odoo-addon-extendable-fastapi==16.0.2.1.1.1
-odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@e657680226992ee28df1ffa4d4c306f201838c06#subdirectory=setup/fastapi
+odoo-addon-fastapi==16.0.1.5.0
 odoo-addon-fastapi-auth-jwt==16.0.1.0.4
 odoo-addon-fs-attachment==16.0.1.3.1
 odoo-addon-fs-base-multi-image==16.0.1.1.1.1
@@ -282,15 +282,15 @@ odoo-addon-sale-order-blanket-order @ git+https://github.com/acsone/sale-blanket
 odoo-addon-sale-order-blanket-order-sale-margin @ git+https://github.com/acsone/sale-blanket.git@f44ae25f07e13cfa45bbdbafc4af03b8108b2da3#subdirectory=setup/sale_order_blanket_order_sale_margin
 odoo-addon-sale-order-blanket-order-stock-prebook @ git+https://github.com/acsone/sale-blanket.git@458131440331e93521b3a8ffcd9aa9e760e97e9a#subdirectory=setup/sale_order_blanket_order_stock_prebook
 odoo-addon-sale-order-blanket-order-stock-prebook-release @ git+https://github.com/acsone/sale-blanket.git@1dd6650581950fcef0536d14f70536854c38ab49#subdirectory=setup/sale_order_blanket_order_stock_prebook_release
-odoo-addon-sale-order-line-cancel @ git+https://github.com/acsone/sale-workflow.git@544e9463f87c374a9a591504df5f1dba93b9db35#subdirectory=setup/sale_order_line_cancel
+odoo-addon-sale-order-line-cancel==16.0.1.0.0.14
 odoo-addon-sale-procurement-customer==16.0.1.0.0.6
 odoo-addon-sale-product-set==16.0.3.0.0.3
 odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.git@f506b778476eacfc4a3f33d85c2f77f790a8ebc8#subdirectory=setup/sale_route_amendment
 odoo-addon-sale-shipping-info-helper==16.0.1.0.0.5
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@f1ea2c731d30580089b38a1b3b68b1df40afc680#subdirectory=setup/sale_stock_picking_blocking
-odoo-addon-sale-stock-prebook @ git+https://github.com/acsone/sale-workflow.git@2c7f835ff3c626f09f2f123431d90565a06b375b#subdirectory=setup/sale_stock_prebook
-odoo-addon-sale-stock-prebook-cancel-line @ git+https://github.com/acsone/sale-workflow.git@d226d1f3ac21317f6a57432ea8d7db45f89f3a77#subdirectory=setup/sale_stock_prebook_cancel_line
-odoo-addon-sale-stock-prebook-stock-available-to-promise-release @ git+https://github.com/acsone/sale-workflow.git@f82e234493105ddf1aff73e99f879695f8891484#subdirectory=setup/sale_stock_prebook_stock_available_to_promise_release
+odoo-addon-sale-stock-prebook @ git+https://github.com/acsone/sale-prebook.git@0058e325803788d812fcadb2b448061f42b341c1#subdirectory=setup/sale_stock_prebook
+odoo-addon-sale-stock-prebook-cancel-line @ git+https://github.com/acsone/sale-prebook.git@e727ff3b32a28645d10c4970081431a4ecfc78a1#subdirectory=setup/sale_stock_prebook_cancel_line
+odoo-addon-sale-stock-prebook-stock-available-to-promise-release @ git+https://github.com/acsone/sale-prebook.git@9e320bdba7167ec0c3f4a475f60867a0ae0b5345#subdirectory=setup/sale_stock_prebook_stock_available_to_promise_release
 odoo-addon-sale-stock-restocking-fee-invoicing==16.0.1.0.0.5
 odoo-addon-sale-triple-discount==16.0.1.0.4
 odoo-addon-sale-wishlist==16.0.1.0.0.5

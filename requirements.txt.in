@@ -106,12 +106,13 @@ odoo-addon-rma-delivery-procurement-group-carrier @ git+https://github.com/OCA/r
 odoo-addon-sale-exception @ git+https://github.com/OCA/sale-workflow.git@refs/pull/3503/head#subdirectory=setup/sale_exception
 odoo-addon-sale-manual-delivery @ git+https://github.com/OCA/sale-workflow.git@refs/pull/3477/head#subdirectory=setup/sale_manual_delivery
 odoo-addon-sale-invoice-policy @ git+https://github.com/OCA/sale-workflow.git@refs/pull/3376/head#subdirectory=setup/sale_invoice_policy
-odoo-addon-sale-order-line-cancel @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2357/head#subdirectory=setup/sale_order_line_cancel
 odoo-addon-sale-route-amendment @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2423/head#subdirectory=setup/sale_route_amendment
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2693/head#subdirectory=setup/sale_stock_picking_blocking
-odoo-addon-sale-stock-prebook @ git+https://github.com/OCA/sale-workflow.git@refs/pull/3481/head#subdirectory=setup/sale_stock_prebook
-odoo-addon-sale-stock-prebook-stock-available-to_promise-release @ git+https://github.com/OCA/sale-workflow.git@refs/pull/3424/head#subdirectory=setup/sale_stock_prebook_stock_available_to_promise_release
-odoo-addon-sale-stock-prebook-cancel-line @ git+https://github.com/OCA/sale-workflow.git@refs/pull/3507/head#subdirectory=setup/sale_stock_prebook_cancel_line
+
+# sale-prebook
+odoo-addon-sale-stock-prebook @ git+https://github.com/OCA/sale-prebook.git@refs/pull/6/head#subdirectory=setup/sale_stock_prebook
+odoo-addon-sale-stock-prebook-stock-available-to_promise-release @ git+https://github.com/OCA/sale-prebook.git@refs/pull/4/head#subdirectory=setup/sale_stock_prebook_stock_available_to_promise_release
+odoo-addon-sale-stock-prebook-cancel-line @ git+https://github.com/OCA/sale-prebook.git@refs/pull/5/head#subdirectory=setup/sale_stock_prebook_cancel_line
 
 # sale-blanket
 odoo-addon-sale-order-blanket-order @ git+https://github.com/OCA/sale-blanket.git@refs/pull/2/head#subdirectory=setup/sale_order_blanket_order
@@ -234,9 +235,6 @@ odoo-addon-module-analysis-price @ git+https://github.com/akretion/ak-odoo-incub
 
 # OCA/queue
 odoo-addon-queue_job @ git+https://github.com/acsone/queue@16.0-alc-queue#subdirectory=setup/queue_job
-
-# OCA/rest-framework
-odoo-addon-fastapi @ git+https://github.com/OCA/rest-framework.git@refs/pull/486/head#subdirectory=setup/fastapi
 
 # lmignon/extendable-pydantic
 extendable-pydantic @ git+https://github.com/lmignon/extendable-pydantic.git@refs/pull/22/head
