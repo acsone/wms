@@ -13,9 +13,6 @@
             <xpath expr="//field[@name='delivery_zone']" position="before">
                 <group>
                     <group>
-                        <field name="delivery_plan_id"/>
-                    </group>
-                    <group>
                         <field name="shape_name"/>
                     </group>
                 </group>

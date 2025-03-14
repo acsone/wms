@@ -27,8 +27,8 @@ class TestShapeFileImportWizard(TransactionCase):
             ]
         )
         cls.multipolygon = MultiPolygon([cls.polygon])
-        cls.delivery_plan = cls.env.ref(
-            "alc_stock_release_channel_import.alc_delivery_plan_default"
+        cls.preparation_plan = cls.env.ref(
+            "stock_release_channel_plan.stock_release_channel_preparation_plan_demo_mon"
         )
 
     def _do_import(self, shape_filename):
@@ -37,7 +37,7 @@ class TestShapeFileImportWizard(TransactionCase):
         )
         with open(shape_file_path, "rb") as f:
             content = base64.encodebytes(f.read())
-            values = {"file": content, "delivery_plan_id": self.delivery_plan.id}
+            values = {"file": content, "preparation_plan_id": self.preparation_plan.id}
             wizard = self.wizard_model.create(values)
             wizard.button_import()
 
@@ -50,7 +50,7 @@ class TestShapeFileImportWizard(TransactionCase):
     def test_update_channel(self):
         """Channel 2 already exist => do update."""
         channel = self.channel_model.create(
-            {"name": "D2", "delivery_plan_id": self.delivery_plan.id}
+            {"name": "D2", "preparation_plan_ids": [(6, 0, self.preparation_plan.ids)]}
         )
         self._do_import("shape_test_2.zip")
         self.assertTrue(isinstance(channel.delivery_zone, MultiPolygon))
@@ -63,7 +63,7 @@ class TestShapeFileImportWizard(TransactionCase):
             {
                 "name": "xxxx",
                 "shape_name": "D2",
-                "delivery_plan_id": self.delivery_plan.id,
+                "preparation_plan_ids": [(6, 0, self.preparation_plan.ids)],
             }
         )
         self._do_import("shape_test_2.zip")
@@ -82,21 +82,22 @@ class TestShapeFileImportWizard(TransactionCase):
             {
                 "name": "D1",
                 "delivery_zone": self.multipolygon,
-                "delivery_plan_id": self.delivery_plan.id,
+                "preparation_plan_ids": [(6, 0, self.preparation_plan.ids)],
             }
         )
         self._do_import("shape_test_3.zip")
         self.assertFalse(self.channel_model.search([("name", "=", "D1")]))
 
     def test_import_multiple_channels(self):
+        self.preparation_plan.release_channel_ids = False
         self.assertFalse(
             self.channel_model.search(
-                [("delivery_plan_id", "=", self.delivery_plan.id)]
+                [("preparation_plan_ids", "in", self.preparation_plan.ids)]
             )
         )
         self._do_import("shape_test_4.zip")
         channels = self.channel_model.search(
-            [("delivery_plan_id", "=", self.delivery_plan.id)]
+            [("preparation_plan_ids", "in", self.preparation_plan.ids)]
         )
         self.assertEqual(len(channels), 8)
         self.assertSetEqual(
