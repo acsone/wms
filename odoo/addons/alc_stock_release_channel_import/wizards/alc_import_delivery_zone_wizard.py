@@ -13,11 +13,13 @@ from shapely.geometry.multipolygon import MultiPolygon
 from shapely.geometry.polygon import Polygon
 from shapely.wkb import loads as wkbloads
 
-from odoo import _, api, fields, models
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.osv.expression import AND, OR
 
-from ..models.alc_delivery_plan import AlcDeliveryPlan
+from odoo.addons.stock_release_channel_plan.models.stock_release_channel_preparation_plan import (
+    StockReleaseChannelPreparationPlan,
+)
 
 _logger = logging.getLogger(__name__)
 
@@ -27,10 +29,10 @@ class AlcImportDeliveryZoneWizard(models.TransientModel):
     _name = "alc.import.delivery.zone.wizard"
     _description = "Import Delivery Zones Wizard"
 
-    delivery_plan_id = fields.Many2one[AlcDeliveryPlan](
-        string="Delivery Plan",
+    preparation_plan_id = fields.Many2one[StockReleaseChannelPreparationPlan](
+        string="Preparation Plan",
         required=True,
-        default=lambda x: x._default_delivery_plan(),
+        default=lambda x: x._default_preparation_plan(),
     )
     filename = fields.Char()
     file = fields.Binary(string="Import shape file", required=True)
@@ -71,7 +73,7 @@ class AlcImportDeliveryZoneWizard(models.TransientModel):
                 raise UserError(_("Unable to import the shape file")) from error
 
     def _get_existing_channels(self, channel_name=None):
-        domain = [("delivery_plan_id", "=", self.delivery_plan_id.id)]
+        domain = [("preparation_plan_ids", "=", self.preparation_plan_id.ids)]
         if channel_name:
             domain = AND(
                 [
@@ -143,7 +145,7 @@ class AlcImportDeliveryZoneWizard(models.TransientModel):
     def _get_channel_values(self, shape_name, delivery_zone, channel_name=None):
         vals = {
             "shape_name": shape_name,
-            "delivery_plan_id": self.delivery_plan_id.id,
+            "preparation_plan_ids": [Command.set(self.preparation_plan_id.ids)],
             "restrict_to_delivery_zone": True,
             "delivery_zone": delivery_zone,
         }
@@ -152,9 +154,9 @@ class AlcImportDeliveryZoneWizard(models.TransientModel):
         return vals
 
     @api.model
-    def _default_delivery_plan(self):
+    def _default_preparation_plan(self):
         active_model = self.env.context.get("active_model")
         active_id = self.env.context.get("active_id")
-        if active_model == "alc.delivery.plan" and active_id:
+        if active_model == "stock.release.channel.preparation.plan" and active_id:
             return self.env[active_model].browse(active_id)
         return None

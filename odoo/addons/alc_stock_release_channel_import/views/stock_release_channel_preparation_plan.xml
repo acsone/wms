@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+
+
+    <record id="alc_import_delivery_zone_wizard_action" model="ir.actions.server">
+        <field name="name">Import Preparation Plans</field>
+        <field name="model_id" ref="stock_release_channel_plan.model_stock_release_channel_preparation_plan" />
+        <field name="binding_model_id" ref="stock_release_channel_plan.model_stock_release_channel_preparation_plan" />
+        <field name="state">code</field>
+        <field name="code">action = records.action_import_release_channels()</field>
+    </record>
+
+</odoo>
