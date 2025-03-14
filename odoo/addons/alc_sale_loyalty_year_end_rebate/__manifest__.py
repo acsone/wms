@@ -12,13 +12,17 @@
         # Odoo Community
         "sale_loyalty",
         # Third-party
+        "base_partition",
         "base_view_inheritance_extension",
+        "sale_loyalty_beneficiary",
         "sale_loyalty_partner_applicability",
         # Alcyon
         "alc_loyalty_info",
+        "alc_queue_job_background_channel",
     ],
     "data": [
         "views/loyalty_rule.xml",
+        "data/queue_job_function.xml",
     ],
     "demo": [],
 }

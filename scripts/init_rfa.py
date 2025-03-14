@@ -132,6 +132,8 @@ def _init_rfa(env):
             f"Recomputing loyalty points for sale order {so.name} ({cpt}/{total})"
         )
         so._update_programs_and_rewards()
+        if cpt % 10 == 0:
+            env.cr.commit()
     _logger.info("Recomputing loyalty accruate points for all orders")
     env["sale.order.coupon.points"].search([])._refresh_accrued_points()
 

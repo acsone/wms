@@ -1,0 +1,1 @@
+from . import test_sale_loyalty_year_end_rebate_updater

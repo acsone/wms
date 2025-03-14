@@ -147,3 +147,8 @@ class SaleOrder(models.Model):
                     lambda cp: cp.coupon_id.program_type == "year_end_rebate"
                 )
             ).coupon_id.program_id
+
+    def _update_programs_and_rewards(self):
+        res = super()._update_programs_and_rewards()
+        self.coupon_point_ids._refresh_accrued_points()
+        return res

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="alc_loyalty_rule_updater_line_form_view" model="ir.ui.view">
+        <field name="name">alc.loyalty.rule.updater.line.form</field>
+        <field name="model">alc.loyalty.rule.updater.line</field>
+        <field name="arch" type="xml">
+            <form string="Loyalty Rule Updater Line">
+                <group>
+                    <field name="loyalty_program_id" invisible="1" />
+                    <field name="update_type"/>
+                    <field name="is_loyalty_rule_required" invisible="1"/>
+                    <field name="loyalty_rule_id" domain="[('program_id', '=', loyalty_program_id)]"
+                        attrs="{'invisible': [('is_loyalty_rule_required', '=', False)], 'required': [('is_loyalty_rule_required', '=', True)]}" />
+                    <field name="is_rule_name_required" invisible="1"/>
+                    <field name="rule_name" attrs="{'invisible': [('is_rule_name_required', '=', False)], 'required': [('is_rule_name_required', '=', True)]}" />
+                    <field name="is_points_required" invisible="1"/>
+                    <field name="new_reward_point_amount" attrs="{'invisible': [('is_points_required', '=', False)], 'required': [('is_points_required', '=', True)]}" />
+                    <field name="new_reward_point_max_amount" attrs="{'invisible': [('is_points_required', '=', False)], 'required': [('is_points_required', '=', True)]}" />
+                    <field name="is_added_product_required" invisible="1"/>
+                    <field name="added_product_ids"
+                        attrs="{'invisible': [('is_added_product_required', '=', False)], 'required': [('is_added_product_required', '=', True)]}"
+                        widget="many2many_tags"/>
+                    <field name="is_removed_product_required" invisible="1"/>
+                    <field name="removed_product_ids"
+                        attrs="{'invisible': [('is_removed_product_required', '=', False)], 'required': [('is_removed_product_required', '=', True)]}"
+                        widget="many2many_tags"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="alc_loyalty_rule_updater_line_tree_view" model="ir.ui.view">
+        <field name="name">alc.loyalty.rule.updater.line.tree</field>
+        <field name="model">alc.loyalty.rule.updater.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="update_type"/>
+                <field name="loyalty_rule_id"/>
+                <field name="rule_name" />
+                <field name="new_reward_point_amount" />
+                <field name="new_reward_point_max_amount" />
+                <field name="added_product_ids" widget="many2many_tags"/>
+                <field name="removed_product_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="alc_loyalty_rule_updater_line_action" model="ir.actions.act_window">
+        <field name="name">RFA Rules Update</field>
+        <field name="res_model">alc.loyalty.rule.updater.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

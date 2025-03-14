@@ -53,6 +53,9 @@ class SaleOrderCouponPoints(models.Model):
         self.env["sale.order.line"].flush_model(
             ["qty_delivered", "price_subtotal", "product_id", "order_id"]
         )
+        self.env["loyalty.rule"].flush_model(
+            ["reward_point_amount", "reward_point_max_amount", "product_ids"]
+        )
         if order_ids:
             sql = """
                 SELECT
