@@ -110,7 +110,7 @@ odoo-addon-sale-route-amendment @ git+https://github.com/OCA/sale-workflow.git@r
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2693/head#subdirectory=setup/sale_stock_picking_blocking
 
 # sale-prebook
-odoo-addon-sale-stock-prebook @ git+https://github.com/OCA/sale-prebook.git@refs/pull/6/head#subdirectory=setup/sale_stock_prebook
+odoo-addon-sale-stock-prebook @ git+https://github.com/OCA/sale-prebook.git@refs/pull/3/head#subdirectory=setup/sale_stock_prebook
 odoo-addon-sale-stock-prebook-stock-available-to_promise-release @ git+https://github.com/OCA/sale-prebook.git@refs/pull/4/head#subdirectory=setup/sale_stock_prebook_stock_available_to_promise_release
 odoo-addon-sale-stock-prebook-cancel-line @ git+https://github.com/OCA/sale-prebook.git@refs/pull/5/head#subdirectory=setup/sale_stock_prebook_cancel_line
 
