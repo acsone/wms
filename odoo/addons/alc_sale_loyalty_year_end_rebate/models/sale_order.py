@@ -118,6 +118,7 @@ class SaleOrder(models.Model):
                         to=next_step,
                         total=total,
                     )
+                    step = next_step
                     delayable = (
                         batch.delayable()
                         .set(description=description)
