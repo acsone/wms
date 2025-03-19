@@ -162,13 +162,3 @@
     - oca refs/pull/716/head # [16.0][IMP] queue_job: remove dead jobs requeuer cron and automatically requeue dead jobs
     - oca refs/pull/668/head # [16.0][IMP] queue_job: HA job runner using session level advisory lock
   target: origin 16.0-alc-queue
-
-./src/shipment_advice_planner_toursolver:
-  remotes:
-    origin: git@github.com:acsone/stock-logistics-transport.git
-    oca: git@github.com:OCA/stock-logistics-transport.git
-  merges:
-    - oca 16.0
-    - oca refs/pull/169/head # [IMP] shipment_advice_planner_toursolver: allow manual tourSolver optimization #169
-    - oca refs/pull/170/head # [FIX] shipment_advice_planner_toursolver: force workload distribution #170
-  target: origin 16.0-alc-shipment_advice_planner_toursolver
