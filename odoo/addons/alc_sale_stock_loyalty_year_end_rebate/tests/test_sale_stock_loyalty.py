@@ -14,13 +14,35 @@ class TestSaleStockLoyalty(TestSaleLoyaltyYearEndRebateCommon):
     @classmethod
     def setUpClass(cls):
         res = super().setUpClass()
+        programs = cls.env["loyalty.program"].search(
+            [("id", "!=", cls.year_end_rebate_program.id)]
+        )
+        programs.write({"active": False})
         cls.year_end_rebate_program.rule_ids.reward_point_max_amount = 10
+        cls.steve_bis = cls.steve.copy({"name": "Steve Bis"})
+        cls.so_with_loyalty = cls.env["sale.order"].create(
+            {
+                "partner_id": cls.steve_bis.id,
+                "order_line": [
+                    Command.create(
+                        {
+                            "product_id": cls.product_A.id,
+                            "product_uom_qty": 10,
+                        },
+                    )
+                ],
+            }
+        )
+        cls.so_with_loyalty.action_confirm()
+        cls._deliver_order(cls.so_with_loyalty, cls.product_A, 10)
         return res
 
-    def _sell_product(self, product, qty):
-        order = self.env["sale.order"].create(
+    @classmethod
+    def _sell_product(cls, product, qty, partner=None):
+        partner = partner or cls.env["res.partner"].browse()
+        order = cls.env["sale.order"].create(
             {
-                "partner_id": self.steve.id,
+                "partner_id": partner.id or cls.steve.id,
                 "order_line": [
                     Command.create(
                         {
@@ -34,7 +56,8 @@ class TestSaleStockLoyalty(TestSaleLoyaltyYearEndRebateCommon):
         order.action_confirm()
         return order
 
-    def _deliver_order(self, order, product, qty):
+    @classmethod
+    def _deliver_order(cls, order, product, qty):
         picking = order.picking_ids.filtered(lambda p: p.state == "assigned")
         move_ids = picking.move_ids.filtered(
             lambda l: l.product_id == product and l.state not in ["cancel", "done"]
@@ -145,4 +168,49 @@ class TestSaleStockLoyalty(TestSaleLoyaltyYearEndRebateCommon):
         self.assertEqual(500, sale_order_coupon_points.accrued_points)
         self.assertEqual(500, loyalty_cart.accrued_points)
         self.assertEqual(500, sale_order_coupon_points.max_accrued_points)
+        self.assertEqual(500, loyalty_cart.max_accrued_points)
+
+    def test_update_programs_and_rewards_recompute_total(self):
+        order = self.so_with_loyalty
+        loyalty_cart = order.coupon_point_ids.coupon_id
+        self.assertEqual(1, len(order.coupon_point_ids))
+        # unlink the coupon point
+        loyalty_cart.sudo().unlink()
+        self.env.flush_all()
+        self.assertEqual(0, len(order.coupon_point_ids))
+        # recomputes the coupon points
+        order._update_programs_and_rewards()
+        sale_order_coupon_points = order.coupon_point_ids
+        loyalty_cart = sale_order_coupon_points.coupon_id
+        self.assertEqual(1, len(order.coupon_point_ids))
+        self.assertEqual(1000, sale_order_coupon_points.accrued_points)
+        self.assertEqual(10000, sale_order_coupon_points.max_accrued_points)
+        self.assertEqual(1000, loyalty_cart.accrued_points)
+        self.assertEqual(10000, loyalty_cart.max_accrued_points)
+
+    def test_update_programs_and_rewards_removing_coupon_point(self):
+        order = self.so_with_loyalty
+        self.assertEqual(1, len(order.coupon_point_ids))
+        # we sell antoher product to ensure that a coupon point
+        # will remain on for the partner
+        rule_ids = self.year_end_rebate_program.rule_ids
+        rule_ids.product_ids |= self.product_B
+        order2 = self._sell_product(self.product_B, 10, partner=self.steve_bis)
+        self._deliver_order(order2, self.product_B, 10)
+        self.env.flush_all()
+
+        sale_order_coupon_points = order.coupon_point_ids
+        loyalty_cart = sale_order_coupon_points.coupon_id
+        self.assertEqual(order2.coupon_point_ids.coupon_id, loyalty_cart)
+        self.assertEqual(1000, sale_order_coupon_points.accrued_points)
+        self.assertEqual(10000, sale_order_coupon_points.max_accrued_points)
+        self.assertEqual(1050, loyalty_cart.accrued_points)
+        self.assertEqual(10500, loyalty_cart.max_accrued_points)
+
+        # we unlink the product A from the rule
+        rule_ids.product_ids = self.product_B
+
+        # recomputes the coupon points
+        order._update_programs_and_rewards()
+        self.assertEqual(50, loyalty_cart.accrued_points)
         self.assertEqual(500, loyalty_cart.max_accrued_points)
