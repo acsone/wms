@@ -33,13 +33,6 @@ class SaleOrderCouponPoints(models.Model):
         coupon_points_by_order_and_program, program_ids, order_ids = (
             self._partition_by_order_id_and_program_id()
         )
-        self._do_refresh_accrued_points(
-            coupon_points_by_order_and_program, program_ids, order_ids
-        )
-
-    def _do_refresh_accrued_points(
-        self, coupon_points_by_order_and_program, program_ids, order_ids
-    ):
         self.env["sale.order.line"].flush_model(
             ["qty_delivered", "price_subtotal", "product_id", "order_id"]
         )
@@ -97,11 +90,9 @@ class SaleOrderCouponPoints(models.Model):
             coupon_point.max_accrued_points = 0.0
 
     def unlink(self):
-        coupon_points_by_order_and_program, program_ids, order_ids = (
-            self._partition_by_order_id_and_program_id()
-        )
-        res = super().unlink()
-        self._do_refresh_accrued_points(
-            coupon_points_by_order_and_program, program_ids, order_ids
-        )
-        return res
+        for coupon_points in self:
+            coupon_points.coupon_id.accrued_points -= coupon_points.accrued_points
+            coupon_points.coupon_id.max_accrued_points -= (
+                coupon_points.max_accrued_points
+            )
+        return super().unlink()

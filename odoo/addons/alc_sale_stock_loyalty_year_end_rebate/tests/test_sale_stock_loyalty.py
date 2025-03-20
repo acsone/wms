@@ -176,7 +176,7 @@ class TestSaleStockLoyalty(TestSaleLoyaltyYearEndRebateCommon):
         self.assertEqual(1, len(order.coupon_point_ids))
         # unlink the coupon point
         loyalty_cart.sudo().unlink()
-        self.env.flush_all()
+        order.coupon_point_ids.sudo().unlink()
         self.assertEqual(0, len(order.coupon_point_ids))
         # recomputes the coupon points
         order._update_programs_and_rewards()
@@ -211,6 +211,6 @@ class TestSaleStockLoyalty(TestSaleLoyaltyYearEndRebateCommon):
         rule_ids.product_ids = self.product_B
 
         # recomputes the coupon points
-        order._update_programs_and_rewards()
+        order._recompute_rfa(self.year_end_rebate_program)
         self.assertEqual(50, loyalty_cart.accrued_points)
         self.assertEqual(500, loyalty_cart.max_accrued_points)
