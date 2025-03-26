@@ -190,5 +190,6 @@ class TestReceptionPharmacy(CommonReceptionPharmacyCase):
 
     def test_action_cancel_no_line(self):
         reception = self.ReceptionPharmacy.create({"product_id": self.product.id})
+        self.assertEqual(reception.state, "draft")
         reception.action_cancel()
         self.assertEqual(reception.state, "cancel")
