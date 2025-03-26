@@ -44,12 +44,12 @@ class ReceptionPharmacy(models.Model):
     def _compute_state(self):
         for reception in self:
             # If no lines have been added yet or if one of them is 'draft'
-            if all(line.state == "cancel" for line in reception.line_ids):
-                reception.state = "cancel"
-            elif not (reception.line_ids) or any(
+            if not (reception.line_ids) or any(
                 line.state == "draft" for line in reception.line_ids
             ):
                 reception.state = "draft"
+            elif all(line.state == "cancel" for line in reception.line_ids):
+                reception.state = "cancel"
             else:
                 reception.state = "done"
 
