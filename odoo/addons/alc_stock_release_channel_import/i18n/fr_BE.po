@@ -7,34 +7,35 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-27 14:30+0000\n"
-"PO-Revision-Date: 2025-03-27 14:30+0000\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2025-03-27 15:03+0000\n"
+"Last-Translator: Souheil Bejaoui <souheil.bejaoui@acsone.eu>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: fr_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #. module: alc_stock_release_channel_import
 #: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__active
 msgid "Active"
-msgstr ""
+msgstr "Actif"
 
 #. module: alc_stock_release_channel_import
 #: model:ir.model,name:alc_stock_release_channel_import.model_alc_delivery_plan
 msgid "Alc Delivery Plan"
-msgstr ""
+msgstr "Plans de préparation"
 
 #. module: alc_stock_release_channel_import
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_form_view
 msgid "Alc Import Delivery Zone Wizard"
-msgstr ""
+msgstr "Wizard d'import de plan de préparation"
 
 #. module: alc_stock_release_channel_import
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_import.alc_delivery_plan_form_view
 msgid "Archived"
-msgstr ""
+msgstr "Archivé"
 
 #. module: alc_stock_release_channel_import
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_form_view
@@ -63,13 +64,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__delivery_plan_id
 #: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_stock_release_channel__delivery_plan_id
 msgid "Delivery Plan"
-msgstr ""
+msgstr "Plan de préparation"
 
 #. module: alc_stock_release_channel_import
 #: model:ir.actions.act_window,name:alc_stock_release_channel_import.alc_delivery_plan_act_window
 #: model:ir.ui.menu,name:alc_stock_release_channel_import.alc_delivery_plan_menu
 msgid "Delivery Plans"
-msgstr ""
+msgstr "Plans de préparation"
 
 #. module: alc_stock_release_channel_import
 #: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__display_name
