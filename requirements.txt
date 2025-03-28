@@ -291,7 +291,7 @@ odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.gi
 odoo-addon-sale-shipping-info-helper==16.0.1.0.0.5
 odoo-addon-sale-stock-picking-blocking @ git+https://github.com/acsone/sale-workflow.git@f1ea2c731d30580089b38a1b3b68b1df40afc680#subdirectory=setup/sale_stock_picking_blocking
 odoo-addon-sale-stock-prebook @ git+https://github.com/acsone/sale-prebook.git@edf7f5302bd05d79b955bf1e4fac95c126b2213b#subdirectory=setup/sale_stock_prebook
-odoo-addon-sale-stock-prebook-cancel-line @ git+https://github.com/acsone/sale-prebook.git@66192190290e6f3a40a51aefdae04de72ef7c732#subdirectory=setup/sale_stock_prebook_cancel_line
+odoo-addon-sale-stock-prebook-cancel-line @ git+https://github.com/acsone/sale-prebook.git@629b6443a95346468c13f5189edfc11206fa6a65#subdirectory=setup/sale_stock_prebook_cancel_line
 odoo-addon-sale-stock-prebook-stock-available-to-promise-release @ git+https://github.com/acsone/sale-prebook.git@9e320bdba7167ec0c3f4a475f60867a0ae0b5345#subdirectory=setup/sale_stock_prebook_stock_available_to_promise_release
 odoo-addon-sale-stock-restocking-fee-invoicing==16.0.1.0.0.5
 odoo-addon-sale-triple-discount==16.0.1.0.4
