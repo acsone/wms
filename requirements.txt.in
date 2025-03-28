@@ -249,3 +249,6 @@ odoo-addon-sale-loyalty-beneficiary  @ git+https://github.com/OCA/sale-promotion
 
 # OCA/rest-framework
 odoo-addon-fastapi @ git+https://github.com/OCA/rest-framework.git@refs/pull/508/head#subdirectory=setup/fastapi
+
+# odoo
+odoo_upgrade @ git+https://github.com/odoo/upgrade-util@master

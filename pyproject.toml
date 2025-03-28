@@ -49,6 +49,7 @@ odoo_version_override = "16.0"
 dependencies = [
   "click-odoo-contrib>=1.4.1",
   "openupgradelib",
+  "odoo_upgrade",
   "odoo-addons-enterprise",
   "typodoo",
   "typing_extensions", # Should be declared into typodoo
@@ -67,6 +68,8 @@ dependencies = [
   "reportlab<4",
   # fs_storage with s3
   "s3fs",
+  # progress bar
+  "tqdm",
 
 ]
 addons_dirs = ["odoo/addons"]
