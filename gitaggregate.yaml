@@ -33,6 +33,16 @@
     - git revert ebb5939ec316b86925c973d9937438f5a5dd3ef6 # revert [FIX] core: remove ?session_id= way to provide sid
   target: origin 16.0-alc_master
 
+./src/account_cutoff_accrual_purchase_stock:
+  remotes:
+    origin: git@github.com:acsone/account-closing.git
+    oca: git@github.com:oca/account-closing.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/326/head # [16.0][MIG] account_payment_mode_auto_reconcile: Migrate to version 16.0
+    - oca refs/pull/336/head # [FIX] account_cutoff_accrual_purchase_stock: fix delivered after
+  target: origin 16.0-alc_account_cutoff_accrual_purchase_stock
+
 ./src/account_payment_mode_auto_reconcile:
   remotes:
     origin: git@github.com:acsone/account-reconcile.git
