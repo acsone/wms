@@ -17,7 +17,7 @@ class AlcLoyaltyRuleUpdater(models.TransientModel):
     line_ids = fields.One2many(
         "alc.loyalty.rule.updater.line",
         "alc_loyalty_rule_updater_id",
-        string="Updates",
+        string="Update rules lines",
     )
 
     retroactive = fields.Boolean(

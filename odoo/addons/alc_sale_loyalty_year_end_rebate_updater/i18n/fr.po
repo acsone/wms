@@ -285,5 +285,5 @@ msgstr "Ajouter des produits"
 
 #. module: alc_sale_loyalty_year_end_rebate_updater
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate_updater.field_alc_loyalty_rule_updater__line_ids
-msgid "Updates"
-msgstr "Met à jour"
+msgid "Update rules lines"
+msgstr "Operations de mise à jour d'une règle"
