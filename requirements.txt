@@ -73,7 +73,7 @@ odoo-addon-account-cutoff-accrual-order-base @ git+https://github.com/acsone/acc
 odoo-addon-account-cutoff-accrual-order-product-category @ git+https://github.com/acsone/account-closing.git@0dbad8a080db8b47860b8c162f37ead596051534#subdirectory=setup/account_cutoff_accrual_order_product_category
 odoo-addon-account-cutoff-accrual-order-stock-base==16.0.1.0.0.4
 odoo-addon-account-cutoff-accrual-purchase==16.0.1.0.0.4
-odoo-addon-account-cutoff-accrual-purchase-stock @ git+https://github.com/acsone/account-closing.git@c1e0a19a404d0c4dc99c2170eaf683155e5f2b4e#subdirectory=setup/account_cutoff_accrual_purchase_stock
+odoo-addon-account-cutoff-accrual-purchase-stock @ git+https://github.com/acsone/account-closing.git@bf120bf067bcf44a1cb2856fcbf4173037e1c6fb#subdirectory=setup/account_cutoff_accrual_purchase_stock
 odoo-addon-account-cutoff-accrual-sale @ git+https://github.com/acsone/account-closing.git@bf120bf067bcf44a1cb2856fcbf4173037e1c6fb#subdirectory=setup/account_cutoff_accrual_sale
 odoo-addon-account-cutoff-accrual-sale-stock @ git+https://github.com/acsone/account-closing.git@bf120bf067bcf44a1cb2856fcbf4173037e1c6fb#subdirectory=setup/account_cutoff_accrual_sale_stock
 odoo-addon-account-cutoff-base==16.0.1.6.0
