@@ -1,6 +1,7 @@
 # Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import Command, _, api, fields, models
+from odoo.osv.expression import FALSE_DOMAIN
 
 
 class AlcLoyaltyRuleUpdaterLine(models.TransientModel):
@@ -44,6 +45,9 @@ class AlcLoyaltyRuleUpdaterLine(models.TransientModel):
         string="New Products",
         relation="alc_loyalty_rule_updater_line_added_product_rel",
     )
+    added_product_ids_domain = fields.Binary(
+        compute="_compute_added_product_ids_domain"
+    )
     is_added_product_required = fields.Boolean(
         compute="_compute_is_added_product_required",
     )
@@ -52,6 +56,10 @@ class AlcLoyaltyRuleUpdaterLine(models.TransientModel):
         string="Products to Remove",
         relation="alc_loyalty_rule_updater_line_removed_product_rel",
     )
+    removed_product_ids_domain = fields.Binary(
+        compute="_compute_removed_product_ids_domain"
+    )
+
     is_removed_product_required = fields.Boolean(
         compute="_compute_is_removed_product_required",
     )
@@ -110,6 +118,26 @@ class AlcLoyaltyRuleUpdaterLine(models.TransientModel):
                 raise ValueError(_("Rule name is required for this update type"))
             if not record.is_rule_name_required and record.rule_name:
                 raise ValueError(_("Rule name should not be set for this update type"))
+
+    @api.depends("update_type", "loyalty_rule_id")
+    def _compute_removed_product_ids_domain(self):
+        for wizard in self:
+            if wizard.loyalty_rule_id and wizard.update_type == "rule_remove_products":
+                wizard.removed_product_ids_domain = [
+                    ("id", "in", wizard.loyalty_rule_id.product_ids.ids)
+                ]
+            else:
+                wizard.removed_product_ids_domain = FALSE_DOMAIN
+
+    @api.depends("update_type", "loyalty_rule_id")
+    def _compute_added_product_ids_domain(self):
+        for wizard in self:
+            if wizard.loyalty_rule_id and wizard.update_type == "rule_add_products":
+                wizard.added_product_ids_domain = [
+                    ("id", "not in", wizard.loyalty_rule_id.product_ids.ids)
+                ]
+            else:
+                wizard.added_product_ids_domain = FALSE_DOMAIN
 
     @api.depends("update_type")
     def _compute_is_loyalty_rule_required(self):

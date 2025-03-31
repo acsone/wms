@@ -20,11 +20,13 @@
                     <field name="is_added_product_required" invisible="1"/>
                     <field name="added_product_ids"
                         attrs="{'invisible': [('is_added_product_required', '=', False)], 'required': [('is_added_product_required', '=', True)]}"
-                        widget="many2many_tags"/>
+                        widget="many2many_tags" domain="added_product_ids_domain"/>
+                    <field name="added_product_ids_domain" invisible="1"/>
                     <field name="is_removed_product_required" invisible="1"/>
                     <field name="removed_product_ids"
                         attrs="{'invisible': [('is_removed_product_required', '=', False)], 'required': [('is_removed_product_required', '=', True)]}"
-                        widget="many2many_tags"/>
+                        widget="many2many_tags" domain="removed_product_ids_domain"/>
+                    <field name="removed_product_ids_domain" invisible="1"/>
                 </group>
             </form>
         </field>
