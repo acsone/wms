@@ -12,6 +12,7 @@ class AlcLoyaltyRuleUpdaterLine(models.TransientModel):
         "alc.loyalty.rule.updater",
         string="Loyalty Rule Updater",
         required=True,
+        ondelete="cascade",
     )
     update_type = fields.Selection(
         [
