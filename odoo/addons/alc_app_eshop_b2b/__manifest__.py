@@ -74,6 +74,7 @@
         "alc_eshop_product_tax",
         "alc_eshop_product_veterinary_group",
         "alc_eshop_schema_address",
+        "alc_eshop_schema_sale_year_end_rebate",
         "alc_eshop_search_engine_ads",
         "alc_eshop_search_engine_assortment_bind",
         "alc_eshop_search_engine_image",
