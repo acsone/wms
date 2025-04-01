@@ -355,6 +355,10 @@ def cleanup_models(cr):
         "alc.eshop.news",
         "alc.eshop.snippet",
         "product.set.add",
+        "x_bi_sql_view.location_occupation_rate",
+        "x_bi_sql_view.products_by_location_and_storagetype",
+        "x_bi_sql_view.average_daily_sale_6_months",
+        "x_bi_sql_view.average_daily_sale_12_months",
     ]
 
     for model in tqdm(models, desc="Removing models"):
@@ -535,13 +539,12 @@ if __name__ == "__main__":
             "snailmail_letter_format_error",
         ],
     )
-    fields_to_remove = collect_fields_to_remove(dbname)
     if True:
         conn = odoo.sql_db.db_connect(dbname)
         with closing(conn.cursor()) as cr:
             clenup_round_instance_mail_message(cr)
             cleanup_modules(cr)
-            # cleanup_models(cr)
+            cleanup_models(cr)
         fields_to_remove = collect_fields_to_remove(dbname)
         with closing(conn.cursor()) as cr:
             cleanup_fields(cr, fields_to_remove)
