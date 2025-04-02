@@ -201,6 +201,7 @@ class ProductProduct(models.Model):
         if not ProductProduct._text_embedding_model:
             ProductProduct._text_embedding_model = SentenceTransformer(
                 "paraphrase-multilingual-MiniLM-L12-v2"
+                # model_name_or_path="odoo/addons/alc_product_similarity/static/paraphrase-multilingual-MiniLM-L12-v2"
             )
         return ProductProduct._text_embedding_model
 
@@ -230,3 +231,62 @@ class ProductProduct(models.Model):
             .encode(description, show_progress_bar=False)
             .tolist()
         )
+
+    def get_similar_products(self, limit):
+        """
+        Retrieves similar products based on vector distances.
+
+        Args:
+            limit (int): the maximum numer of similar prducts to return (limit parameter of the sql query).
+
+        Returns:
+            (list[dict]): a list of dicts of the form {
+                'product': <product>,
+                'characteristics_distance': <the characteristics vectors distance>,
+                'description_distance': <the description vectors disance>,
+            }
+        """
+        self.ensure_one()
+
+        # 3. Perform the query using raw SQL (for vector operations)
+        query = f"""
+            SELECT
+                id,
+                pp.characteristics_vector::vector <=> %s::vector,
+                pp.description_vector::vector <=> %s::vector
+            FROM
+                product_product AS pp
+            WHERE
+                pp.id != %s
+            ORDER BY
+                pp.characteristics_vector::vector <=> %s::vector,
+                pp.description_vector::vector <=> %s::vector
+            LIMIT {limit};
+        """
+
+        self.env.cr.execute(
+            query,
+            (
+                self.characteristics_vector,
+                self.description_vector,
+                self.id,
+                self.characteristics_vector,
+                self.description_vector,
+            ),
+        )
+
+        results = self.env.cr.fetchall()
+
+        similar_products = []
+        for row in results:
+            product_id = row[0]
+            product = self.browse(product_id)
+            similar_products.append(
+                {
+                    "product": product,
+                    "characteristics_distance": row[1],
+                    "description_distance": row[2],
+                }
+            )
+
+        return similar_products
