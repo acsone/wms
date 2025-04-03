@@ -131,5 +131,4 @@ class TestProductProduct(BaseCommon):
         product.get_similar_products(limit=20)
 
     # def test_description_vector(self):
-    #     description_vector = self.product.description_vector
-    #     pass
+    #     self.product.description_vector

@@ -32,10 +32,7 @@ class ProductProduct(models.Model):
     def _compute_description_vector(self):
         """Computes the description_vector for the product."""
         for product in self:
-            # product.description_vector = product._get_description_vector()
-            product.description_vector = str(
-                [42 for i in range(384)]
-            )  # TODO: remove after debug !!!
+            product.description_vector = product._get_description_vector()
 
     @api.model
     @tools.ormcache()
@@ -200,8 +197,7 @@ class ProductProduct(models.Model):
     def _get_text_embedding_model(self):
         if not ProductProduct._text_embedding_model:
             ProductProduct._text_embedding_model = SentenceTransformer(
-                "paraphrase-multilingual-MiniLM-L12-v2"
-                # model_name_or_path="odoo/addons/alc_product_similarity/static/paraphrase-multilingual-MiniLM-L12-v2"
+                "paraphrase-multilingual-MiniLM-L12-v2",
             )
         return ProductProduct._text_embedding_model
 
