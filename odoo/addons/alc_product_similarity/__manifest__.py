@@ -16,7 +16,9 @@
         "alc_product_animal_species",
     ],
     "application": False,
-    "data": [],
+    "data": [
+        "security/ir.model.access.csv",
+    ],
     "demo": [],
     "external_dependencies": {"python": ["sentence-transformers"]},
 }

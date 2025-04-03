@@ -110,9 +110,16 @@ class ProductProduct(models.Model):
             ]
         )
 
-    def _get_characteristics(self):
-        """Extracts the characteristics that will be used for similarity search."""
+    def _get_characteristics_infos(self):
+        """
+        Extracts the characteristics infos that will be used for similarity search.
+
+        Returns:
+            list[tuple]: a list of tuples of the form (<characteristic_record>, <characteristic_name>, <characteristic_weight>)
+        """
         self.ensure_one()
+
+        main_species = self.species_id
         species = self.species_ids
         sizes = self.animal_size_option_ids
         ages = self.categ_age_option_ids
@@ -125,17 +132,31 @@ class ProductProduct(models.Model):
             lambda x: x in self.medical_categories
         )
 
-        return [
-            *species,
-            *sizes,
-            *ages,
-            *food_range,
-            *indications,
-            *presentation,
-            *active_principles,
-            *administration_route,
-            *medical_categories,
-        ]
+        infos = []
+        if self.is_meds:
+            infos.extend([(x, "categ_ids", 1) for x in medical_categories])
+            infos.extend(
+                [(x, "active_principle_option_ids", 2) for x in active_principles]
+            )
+            infos.extend(
+                [
+                    (x, "administration_route_option_ids", 1)
+                    for x in administration_route
+                ]
+            )
+
+        if self.is_meds or self.is_food:
+            infos.extend([(x, "species_ids", 1) for x in species])
+            infos.extend([(x, "species_id", 1) for x in main_species])
+
+        if self.is_food:
+            infos.extend([(x, "food_range_option_id", 1) for x in food_range])
+            infos.extend([(x, "animal_size_option_ids", 1) for x in sizes])
+            infos.extend([(x, "categ_age_option_ids", 1) for x in ages])
+            infos.extend([(x, "indication_option_ids", 1) for x in indications])
+            infos.extend([(x, "presentation_option_id", 1) for x in presentation])
+
+        return infos
 
     def _get_characteristics_vector_dim(self):
         """Retrieves the characteristics vector dimension from system parameters."""
@@ -184,13 +205,17 @@ class ProductProduct(models.Model):
             return
 
         for record in self:
-            characteristics = record._get_characteristics()
-            vector_indices = AlcProductCharacteristic(self.env).get_vector_indices(
-                characteristics
+            characteristics_infos = record._get_characteristics_infos()
+            vector_indices_and_weights = AlcProductCharacteristic(
+                self.env
+            ).get_vector_indices_and_weights(
+                [infos[0] for infos in characteristics_infos],
+                [infos[1] for infos in characteristics_infos],
+                [infos[2] for infos in characteristics_infos],
             )
             vector = [0 for _ in range(vector_dim)]
-            for i in vector_indices.values():
-                vector[i] = 1
+            for index, weight in vector_indices_and_weights.values():
+                vector[index] = weight
             record.characteristics_vector = str(vector)
 
     @api.model

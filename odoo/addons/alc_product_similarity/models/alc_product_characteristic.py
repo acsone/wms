@@ -1,5 +1,3 @@
-from collections.abc import Hashable
-
 from odoo import api, fields, models, tools
 
 
@@ -12,12 +10,13 @@ class AlcProductCharacteristic(models.Model):
     characteristic_res_id = fields.Many2oneReference(
         model_field="characteristic_res_model"
     )
-    # characteristic_weight = fields.Float(required=True, default=1) -> #TODO: think about the necessary changes to support this field in the methods below
+    characteristic_name = fields.Char(string="Characteristic Name", required=True)
+    characteristic_weight = fields.Float(required=True, default=1)
 
     _sql_constraints = [
         (
-            "unique_model_and_id",
-            "unique(characteristic_res_model, characteristic_res_id)",
+            "unique_model_id_and_name",
+            "unique(characteristic_res_model, characteristic_res_id, characteristic_name)",
             "A characteristic cannot reference the same record in the same model more than once.",
         ),
         (
@@ -26,31 +25,41 @@ class AlcProductCharacteristic(models.Model):
             "There cannot be two characteristics pointing to the same index in the vector.",
         ),
         (
-            "check_vector_index_positive",
-            "vector_index > 0",
-            "A vector index must be > 0",
+            "check_vector_non_negative",
+            "vector_index >= 0",
+            "A vector index must be >= 0",
         ),
-        # (
-        #     "check_characteristic_weight_positive",
-        #     "characteristic_weight > 0",
-        #     "characteristic_weight must be > 0",
-        # ),
+        (
+            "check_characteristic_weight_positive",
+            "characteristic_weight > 0",
+            "characteristic_weight must be > 0",
+        ),
     ]
 
-    def _to_cache_key(self) -> Hashable:
+    def _to_cache_key(self):
         """Returns the cache key for a characteristic from this model."""
         self.ensure_one()
-        return (self.characteristic_res_model, self.characteristic_res_id)
+        return (
+            self.characteristic_res_model,
+            self.characteristic_res_id,
+            self.characteristic_name,
+        )
 
-    def _record_to_cache_key(self, record) -> Hashable:
+    def _record_to_cache_key(self, record, characteristic_name):
         """Returns the cache key for a characteristic from another model."""
-        return (record._name, record.id)
+        return (record._name, record.id, characteristic_name)
 
     @api.model
     @tools.ormcache()
     def _get_vector_index_map(self):
         records = self.search([])
-        return {r._to_cache_key(): r.vector_index for r in records}
+        return {
+            r._to_cache_key(): {
+                "index": r.vector_index,
+                "weight": r.characteristic_weight,
+            }
+            for r in records
+        }
 
     def _get_empty_index(self):
         """
@@ -58,7 +67,7 @@ class AlcProductCharacteristic(models.Model):
 
         that is not present in the given list.
         """
-        indices = self._get_vector_index_map().values()
+        indices = [x["index"] for x in self._get_vector_index_map().values()]
         if not indices:
             return 0
         for i, index in enumerate(sorted(indices)):
@@ -67,8 +76,11 @@ class AlcProductCharacteristic(models.Model):
         return len(indices)
 
     @api.model
-    def _get_vector_index(self, record):
-        """Get the index of the given characteristic in the characteristics vector of product.product.
+    def _get_vector_index_and_weight(
+        self, record, characteristic_name, characteristic_weight=None
+    ):
+        """
+        Get the index of the given characteristic in the characteristics vector of product.product.
 
         This function creates the enrty in db if no line exists yet in the table.
         """
@@ -78,7 +90,14 @@ class AlcProductCharacteristic(models.Model):
             )
 
         index_map = self._get_vector_index_map()
-        index = index_map.get(self._record_to_cache_key(record), -1)
+        index_and_weight = index_map.get(
+            self._record_to_cache_key(record, characteristic_name),
+            {
+                "index": -1,
+                "weight": characteristic_weight if characteristic_weight else 1,
+            },
+        )
+        index = index_and_weight["index"]
 
         # when index for this characteristic is not yet in db, create the entry
         if index < 0:
@@ -88,20 +107,35 @@ class AlcProductCharacteristic(models.Model):
                     {
                         "characteristic_res_model": record._name,
                         "characteristic_res_id": record.id,
+                        "characteristic_name": characteristic_name,
+                        "characteristic_weight": index_and_weight["weight"],
                         "vector_index": index,
                     }
                 ]
             )
 
-        return index
+        return (index, index_and_weight["weight"])
 
     @api.model
-    def get_vector_indices(self, records):
-        """Get the indices of the given characteristics in the characteristics vector of product.product.
-
-        This function creates the enrties in db if no line exists yet in the table.
+    def get_vector_indices_and_weights(
+        self,
+        records,
+        characteristics_names,
+        characteristics_weights=None,
+    ):
         """
-        return {r: self._get_vector_index(r) for r in records}
+        Get the indices of the given characteristics in the characteristics vector of product.product.
+
+        This function creates the entries in db if no line exists yet in the table.
+        """
+        if characteristics_weights is None:
+            characteristics_weights = [1 for _ in range(len(records))]
+        return {
+            (r, name): self._get_vector_index_and_weight(r, name, weight)
+            for r, name, weight in zip(
+                records, characteristics_names, characteristics_weights, strict=True
+            )
+        }
 
     @api.model_create_multi
     def create(self, vals_list):
