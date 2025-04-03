@@ -112,7 +112,7 @@ class ProductProduct(models.Model):
 
     def _get_characteristics_infos(self):
         """
-        Extracts the characteristics infos that will be used for similarity search.
+        Extracts the characteristics infos that will be used for similarity search (the extarcted characteristics are not the same depending on the type if the item).
 
         Returns:
             list[tuple]: a list of tuples of the form (<characteristic_record>, <characteristic_name>, <characteristic_weight>)
@@ -192,7 +192,7 @@ class ProductProduct(models.Model):
         "categ_ids",
     )
     def _compute_characteristics_vector(self):
-        """Compute the characteristic vector and update the record in place."""
+        """Computes the characteristic vector and updates the record in place."""
         total_number_characteristics = self._get_total_number_characteristics()
         vector_dim = self._get_characteristics_vector_dim()
 

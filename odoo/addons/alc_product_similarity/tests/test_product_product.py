@@ -10,13 +10,13 @@ class TestProductProduct(BaseCommon):
         super().setUpClass()
 
         cls.product_product = cls.env["product.product"]
-        cls.product = cls.product_product.create(
+        cls.product_test_food = cls.product_product.create(
             {
-                "name": "Test product",
+                "name": "Test food",
                 "uom_id": cls.env.ref("uom.product_uom_unit").id,
                 "type": "product",
                 "categ_id": cls.env.ref(
-                    "alc_product_category_data.product_categ_undefined"
+                    "alc_product_category_data.product_categ_ali_divers"
                 ).id,
                 "description_shop_long": "This is a long shop description",
                 "species_ids": [
@@ -83,13 +83,13 @@ class TestProductProduct(BaseCommon):
         )
 
     def test_characteristics_vector_updates(self):
-        characteristics_vector_0 = self.product.characteristics_vector
-        self.product.write(
+        characteristics_vector_0 = self.product_test_food.characteristics_vector
+        self.product_test_food.write(
             {"species_ids": [(4, self.env.ref("alc_product_animal_species.horse").id)]}
         )
-        characteristics_vector_1 = self.product.characteristics_vector
-        self.product.write({"species_ids": [(5, 0, 0)]})
-        characteristics_vector_2 = self.product.characteristics_vector
+        characteristics_vector_1 = self.product_test_food.characteristics_vector
+        self.product_test_food.write({"species_ids": [(5, 0, 0)]})
+        characteristics_vector_2 = self.product_test_food.characteristics_vector
 
         non_zero_count_0 = characteristics_vector_0.count("1")
         non_zero_count_1 = characteristics_vector_1.count("1")
