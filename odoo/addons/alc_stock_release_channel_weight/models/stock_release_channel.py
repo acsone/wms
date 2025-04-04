@@ -20,15 +20,23 @@ class StockReleaseChannel(StockReleaseChannelBase):
         ]._get_weight_uom_name_from_ir_config_parameter()
 
     def _compute_total_weight(self):
-        picking_model = self.env["stock.picking"]
-        common_domain = [
-            ("picking_type_code", "=", "outgoing"),
-            ("state", "not in", ("done", "cancel")),
-        ]
+        sql = """
+            SELECT
+                release_channel_id,
+                sum(sm.weight) as weight
+            FROM
+                stock_move sm
+                join stock_picking sp on sp.id = sm.picking_id
+                join stock_picking_type spt on spt.id = sp.picking_type_id
+            WHERE
+                sp.release_channel_id in %s
+                AND spt.code = 'outgoing'
+                AND sp.state not in ('cancel', 'done')
+                AND sm.state not in ('confirmed', 'daft', 'cancel')
+            GROUP BY
+                sp.release_channel_id;
+        """
+        self.env.cr.execute(sql, (tuple(self.ids),))
+        total_weight_dict = dict(self.env.cr.fetchall())
         for rec in self:
-            domain = [*common_domain, ("release_channel_id", "=", rec.id)]
-            pickings = picking_model.search(domain)
-            if not pickings:
-                rec.total_weight = 0
-            else:
-                rec.total_weight = sum(pickings.mapped("weight"))
+            rec.total_weight = total_weight_dict.get(rec.id, 0.0)
