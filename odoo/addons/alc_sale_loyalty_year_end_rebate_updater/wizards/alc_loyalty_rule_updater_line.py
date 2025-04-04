@@ -1,7 +1,7 @@
 # Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import Command, _, api, fields, models
-from odoo.osv.expression import FALSE_DOMAIN
+from odoo.osv.expression import FALSE_DOMAIN, TRUE_DOMAIN
 
 
 class AlcLoyaltyRuleUpdaterLine(models.TransientModel):
@@ -133,12 +133,16 @@ class AlcLoyaltyRuleUpdaterLine(models.TransientModel):
     @api.depends("update_type", "loyalty_rule_id")
     def _compute_added_product_ids_domain(self):
         for wizard in self:
+            domain = FALSE_DOMAIN
             if wizard.loyalty_rule_id and wizard.update_type == "rule_add_products":
-                wizard.added_product_ids_domain = [
-                    ("id", "not in", wizard.loyalty_rule_id.product_ids.ids)
-                ]
-            else:
-                wizard.added_product_ids_domain = FALSE_DOMAIN
+                domain = [("id", "not in", wizard.loyalty_rule_id.product_ids.ids)]
+            elif wizard.update_type == "add_rule":
+                product_ids = self.loyalty_program_id.rule_ids.product_ids
+                if product_ids:
+                    domain = [("id", "not in", product_ids.ids)]
+                else:
+                    domain = TRUE_DOMAIN
+            wizard.added_product_ids_domain = domain
 
     @api.depends("update_type")
     def _compute_is_loyalty_rule_required(self):

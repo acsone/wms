@@ -300,3 +300,65 @@ class TestSaleLoyaltyYearEndRebateUpdate(TestSaleLoyaltyYearEndRebateCommon):
         self.assertEqual(1, len(coupon_2025))
         self.assertEqual(310, coupon_2025.points)
         self.assertEqual(415, coupon_2025.max_points)
+
+    def test_added_product_ids_domain(self):
+        updater = self.program_updater.create(
+            {
+                "loyalty_program_id": self.rebate_2025.id,
+                "retroactive_date": "2025-06-30",
+                "retroactive": True,
+                "line_ids": [
+                    Command.create(
+                        {
+                            "update_type": "add_rule",
+                            "new_reward_point_amount": 2,
+                            "new_reward_point_max_amount": 3,
+                            "added_product_ids": [Command.set(self.product_B.ids)],
+                            "rule_name": "New rule",
+                        },
+                    ),
+                    Command.create(
+                        {
+                            "update_type": "rule_add_products",
+                            "loyalty_rule_id": self.rebate_2025.rule_ids.id,
+                            "added_product_ids": [Command.set(self.product_B.ids)],
+                        },
+                    ),
+                ],
+            }
+        )
+        add_rule_line = updater.line_ids[0]
+        domain = add_rule_line.added_product_ids_domain
+        products = self.env["product.product"].search(domain)
+        self.assertTrue(products)
+        for product in self.rebate_2025.rule_ids.product_ids:
+            self.assertNotIn(product, products)
+
+        rule_add_products_line = updater.line_ids[1]
+        domain = rule_add_products_line.added_product_ids_domain
+        products = self.env["product.product"].search(domain)
+        self.assertTrue(products)
+        for product in self.rebate_2025.rule_ids.product_ids:
+            self.assertNotIn(product, products)
+
+    def test_removed_product_ids_domain(self):
+        updater = self.program_updater.create(
+            {
+                "loyalty_program_id": self.rebate_2025.id,
+                "retroactive_date": "2025-06-30",
+                "retroactive": True,
+                "line_ids": [
+                    Command.create(
+                        {
+                            "update_type": "rule_remove_products",
+                            "loyalty_rule_id": self.rebate_2025.rule_ids.id,
+                            "removed_product_ids": [Command.set(self.product_B.ids)],
+                        },
+                    ),
+                ],
+            }
+        )
+        remove_rule_line = updater.line_ids[0]
+        domain = remove_rule_line.removed_product_ids_domain
+        products = self.env["product.product"].search(domain)
+        self.assertEqual(products, self.rebate_2025.rule_ids.product_ids)
