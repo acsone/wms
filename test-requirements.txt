@@ -1,2 +1,4 @@
 vcrpy-unittest
 odoo_test_helper
+
+odoo-addon-shopfloor @ git+https://github.com/OCA/wms@refs/pull/1001/head#subdirectory=setup/shopfloor
