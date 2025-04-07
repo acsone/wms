@@ -39,6 +39,7 @@
         "alc_eshop_api_products_on_order_blanket_order",
         "alc_eshop_api_promotion_subscriptions",
         "alc_eshop_api_registration",
+        "alc_eshop_api_sale_loyalty_year_end_rebate",
         "alc_eshop_api_sale_order_blanket_order",
         "alc_eshop_api_sale_statistic",
         "alc_eshop_api_veterinary_groups",

@@ -34,6 +34,9 @@ from odoo.addons.alc_eshop_api_promotion_subscriptions.routers import (
     promo_subscriptions_router,
 )
 from odoo.addons.alc_eshop_api_registration.routers import registrations_router
+from odoo.addons.alc_eshop_api_sale_loyalty_year_end_rebate.routers import (
+    loyalty_card_router,
+)
 from odoo.addons.alc_eshop_api_sale_statistic.routers import sale_statistics_router
 from odoo.addons.alc_eshop_api_veterinary_groups.routers import veterinary_groups_router
 from odoo.addons.auth_jwt.models.auth_jwt_validator import AuthJwtValidator
@@ -100,6 +103,7 @@ class FastapiEndpoint(FastapiEndpointBase):
             wishlist_router,
             delivery_carriers_router,
             carts_router_delivery,
+            loyalty_card_router,
         ]
 
     def _get_alc_eshop_app_tags(self, params) -> list:
@@ -204,6 +208,12 @@ class FastapiEndpoint(FastapiEndpointBase):
             {
                 "name": "orders",
                 "description": "List the partner's orders",
+            }
+        )
+        tags_metadata.append(
+            {
+                "name": "loyalty_card",
+                "description": "Set of services to manage loyalty cards",
             }
         )
         return tags_metadata
