@@ -112,7 +112,7 @@
     - oca refs/pull/925/head # [IMP] shopfloor: Improve message for location content transfer items
     - oca refs/pull/989/head # [FIX] shopfloor: Allow to manage supplierinfos on product templates
     - oca refs/pull/995/head # [16.0][IMP] shopfloor/mobile: Allow to do single unload with each pack
-    - origin 16.0-imp-shopfloor-parse-barcode-dro # [IMP] shopfloor: Add a barcode parser to support multi representation
+    - oca refs/pull/1001/head # [IMP] shopfloor: Add a barcode parser to support multi representation
   target: origin 16.0-alc-shopfloor
 
 ./src/rma:
