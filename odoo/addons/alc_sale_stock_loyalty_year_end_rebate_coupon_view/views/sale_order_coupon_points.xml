@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="sale_order_coupon_points_tree_view">
+        <field name="model">sale.order.coupon.points</field>
+        <field name="inherit_id" ref="alc_sale_loyalty_coupon_point_view.sale_order_coupon_points_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="points" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+            <field name="points" position="after">
+                <field name="accrued_points" optional="show"/>
+                <field name="max_accrued_points" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="sale_order_coupon_points_pivot_view" model="ir.ui.view">
+    <field name="model">sale.order.coupon.points</field>
+    <field name="inherit_id" ref="alc_sale_loyalty_coupon_point_view.sale_order_coupon_points_pivot_view"/>
+    <field name="arch" type="xml">
+        <field name="points" position="after">
+            <field name="accrued_points" type="measure"/>
+            <field name="max_accrued_points" type="measure"/>
+        </field>
+    </field>
+  </record>
+
+</odoo>
