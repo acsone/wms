@@ -11,7 +11,7 @@ LOT_BARCODE = re.compile(r"#(?P<product_default_code>\w+)#(?P<lot_name>\w+)#?")
 
 class SearchAction(SearchActionBase):
     def lot_from_scan(self, barcode, products=None, limit=1):
-        m = LOT_BARCODE.match(barcode)
+        m = LOT_BARCODE.match(str(barcode))
         if m and len(m.groups()) == 2:
             barcode = m.group("lot_name")
             product_codes = m.group("product_default_code")
