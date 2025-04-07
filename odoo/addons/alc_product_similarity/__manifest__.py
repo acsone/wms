@@ -11,9 +11,15 @@
     "depends": [
         # Odoo Community
         "product",
+        # Third-party
+        "attribute_set",
+        "field_vector",
+        "product_multi_category",
         # Alcyon
-        "alc_pim",
+        "alc_pim_product",
         "alc_product_animal_species",
+        "alc_product_category_data",
+        "alc_product_pharmacy",
     ],
     "application": False,
     "data": [

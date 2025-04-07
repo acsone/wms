@@ -1,87 +1,10 @@
-# Copyright 2025 Acsone
+# Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.addons.base.tests.common import BaseCommon
+from .common import TestProductSimilarityBase
 
 
-class TestProductProduct(BaseCommon):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-
-        cls.product_product = cls.env["product.product"]
-        cls.product_test_food = cls.product_product.create(
-            {
-                "name": "Test food",
-                "uom_id": cls.env.ref("uom.product_uom_unit").id,
-                "type": "product",
-                "categ_id": cls.env.ref(
-                    "alc_product_category_data.product_categ_ali_divers"
-                ).id,
-                "description_shop_long": "This is a long shop description",
-                "species_ids": [
-                    (
-                        6,
-                        0,
-                        [
-                            cls.env.ref("alc_product_animal_species.dog").id,
-                            cls.env.ref("alc_product_animal_species.cat").id,
-                            cls.env.ref("alc_product_animal_species.ferret").id,
-                        ],
-                    )
-                ],
-                "animal_size_option_ids": [
-                    (
-                        6,
-                        0,
-                        [
-                            cls.env.ref(
-                                "alc_pim.option_attribute_animal_size_small"
-                            ).id,
-                            cls.env.ref(
-                                "alc_pim.option_attribute_animal_size_medium"
-                            ).id,
-                        ],
-                    )
-                ],
-                "categ_age_option_ids": [
-                    (
-                        6,
-                        0,
-                        [
-                            cls.env.ref("alc_pim.attribute_option_senior").id,
-                            cls.env.ref("alc_pim.attribute_option_adult").id,
-                        ],
-                    )
-                ],
-                "food_range_option_id": cls.env.ref(
-                    "alc_pim.attribute_option_recovery"
-                ).id,
-                "indication_option_ids": [
-                    (
-                        6,
-                        0,
-                        [
-                            cls.env.ref("alc_pim.attribute_option_oral").id,
-                            cls.env.ref("alc_pim.attribute_option_heart").id,
-                        ],
-                    )
-                ],
-                "presentation_option_id": cls.env.ref(
-                    "alc_pim.attribute_option_croquette"
-                ).id,
-                "active_principle_option_ids": [
-                    (
-                        6,
-                        0,
-                        [
-                            cls.env.ref("alc_pim.attribute_option_croquette").id,
-                        ],
-                    )
-                ],
-            }
-        )
-
+class TestProductProduct(TestProductSimilarityBase):
     def test_characteristics_vector_updates(self):
         characteristics_vector_0 = self.product_test_food.characteristics_vector
         self.product_test_food.write(
@@ -91,9 +14,9 @@ class TestProductProduct(BaseCommon):
         self.product_test_food.write({"species_ids": [(5, 0, 0)]})
         characteristics_vector_2 = self.product_test_food.characteristics_vector
 
-        non_zero_count_0 = characteristics_vector_0.count("1")
-        non_zero_count_1 = characteristics_vector_1.count("1")
-        non_zero_count_2 = characteristics_vector_2.count("1")
+        non_zero_count_0 = sum(1 if x else 0 for x in characteristics_vector_0.value)
+        non_zero_count_1 = sum(1 if x else 0 for x in characteristics_vector_1.value)
+        non_zero_count_2 = sum(1 if x else 0 for x in characteristics_vector_2.value)
         self.assertEqual(
             non_zero_count_0 + 1,
             non_zero_count_1,
@@ -106,7 +29,29 @@ class TestProductProduct(BaseCommon):
         )
 
     def test_get_similar_products(self):
-        product = self.product_product.create(
+        product_0 = self.env["product.product"].create(
+            {
+                "name": "Test product",
+                "uom_id": self.env.ref("uom.product_uom_unit").id,
+                "type": "product",
+                "categ_id": self.env.ref(
+                    "alc_product_category_data.product_categ_undefined"
+                ).id,
+                "description_shop_long": "This is a long shop description",
+                "species_ids": [
+                    (
+                        6,
+                        0,
+                        [
+                            self.env.ref("alc_product_animal_species.rat").id,
+                            self.env.ref("alc_product_animal_species.reptile").id,
+                            self.env.ref("alc_product_animal_species.sheep").id,
+                        ],
+                    )
+                ],
+            }
+        )
+        product_1 = self.env["product.product"].create(
             {
                 "name": "Another test product",
                 "uom_id": self.env.ref("uom.product_uom_unit").id,
@@ -120,15 +65,42 @@ class TestProductProduct(BaseCommon):
                         6,
                         0,
                         [
-                            self.env.ref("alc_product_animal_species.dog").id,
-                            self.env.ref("alc_product_animal_species.cat").id,
-                            self.env.ref("alc_product_animal_species.ferret").id,
+                            self.env.ref("alc_product_animal_species.rat").id,
+                            self.env.ref("alc_product_animal_species.reptile").id,
+                            self.env.ref("alc_product_animal_species.sheep").id,
                         ],
                     )
                 ],
             }
         )
-        product.get_similar_products(limit=20)
-
-    # def test_description_vector(self):
-    #     self.product.description_vector
+        product_2 = self.env["product.product"].create(
+            {
+                "name": "Test product",
+                "uom_id": self.env.ref("uom.product_uom_unit").id,
+                "type": "product",
+                "categ_id": self.env.ref(
+                    "alc_product_category_data.product_categ_undefined"
+                ).id,
+                "description_shop_long": "This is a long shop description",
+                "species_ids": [
+                    (
+                        6,
+                        0,
+                        [
+                            self.env.ref("alc_product_animal_species.rat").id,
+                            self.env.ref("alc_product_animal_species.reptile").id,
+                        ],
+                    )
+                ],
+            }
+        )
+        self.env.flush_all()
+        product_0_neighbors = [
+            x["product"] for x in product_0.get_similar_products(limit=20)
+        ]
+        self.assertEqual(
+            product_0_neighbors[0], product_1, "Unexpected first neighbor."
+        )
+        self.assertEqual(
+            product_0_neighbors[1], product_2, "Unexpected second neighbor."
+        )

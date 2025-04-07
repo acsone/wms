@@ -3,9 +3,9 @@
 
 from sentence_transformers import SentenceTransformer
 
-from odoo import api, fields, models, tools
+from odoo import api, models
 
-from .alc_product_characteristic import AlcProductCharacteristic
+from odoo.addons.field_vector.fields import Vector
 
 
 class ProductProduct(models.Model):
@@ -13,19 +13,20 @@ class ProductProduct(models.Model):
     _inherit = "product.product"
 
     _text_embedding_model = None  # lazy loading of the text embedding model
-    TEXT_EMBEDDING_DIM = None  # 384 (lazy loading)
 
-    characteristics_vector = fields.Text(
+    characteristics_vector = Vector(
         string="Characteristics vector",
         readonly=True,
         compute="_compute_characteristics_vector",
         store=True,
+        dimensions=1000,
     )
-    description_vector = fields.Text(
+    description_vector = Vector(
         string="Description vector",
         readonly=True,
         compute="_compute_description_vector",
         store=True,
+        dimensions=384,
     )
 
     @api.depends("name", "description_shop_long")
@@ -33,82 +34,6 @@ class ProductProduct(models.Model):
         """Computes the description_vector for the product."""
         for product in self:
             product.description_vector = product._get_description_vector()
-
-    @api.model
-    @tools.ormcache()
-    def _get_total_number_characteristics(self):
-        species = list(self.env["animal.species"].search([], order="id"))
-        attribute_values = self.env["attribute.option"].search([], order="id")
-        animal_sizes = list(
-            attribute_values.filtered(
-                lambda x: x.attribute_id.name == "animal_size_option_ids"
-            )
-        )
-        categ_ages = list(
-            attribute_values.filtered(
-                lambda x: x.attribute_id.name == "categ_age_option_ids"
-            )
-        )
-        food_ranges = list(
-            attribute_values.filtered(
-                lambda x: x.attribute_id.name == "food_range_option_id"
-            )
-        )
-        indications = list(
-            attribute_values.filtered(
-                lambda x: x.attribute_id.name == "indication_option_ids"
-            )
-        )
-        presentations = list(
-            attribute_values.filtered(
-                lambda x: x.attribute_id.name == "presentation_option_id"
-            )
-        )
-        active_principles = list(
-            attribute_values.filtered(
-                lambda x: x.attribute_id.name == "active_principle_option_ids"
-            )
-        )
-        administration_routes = list(
-            attribute_values.filtered(
-                lambda x: x.attribute_id.name == "administration_route_option_ids"
-            )
-        )
-        # SELECT name from leaf categories into medical
-        SQL = """
-            select
-                id
-            from
-                product_category
-            where
-                id not in (
-                    select
-                        distinct pc.parent_id
-                    from
-                        product_category pc
-                    where
-                        parent_id is not null
-                )
-                and complete_name like 'Catalogue Alcyon / Drugs /%'
-            order by id;
-        """
-        self.env.cr.execute(SQL)
-        ids = [x[0] for x in self.env.cr.fetchall()]
-        medical_categories = list(self.env["product.category"].browse(ids))
-
-        return len(
-            [
-                *species,
-                *animal_sizes,
-                *categ_ages,
-                *food_ranges,
-                *indications,
-                *presentations,
-                *active_principles,
-                *administration_routes,
-                *medical_categories,
-            ]
-        )
 
     def _get_characteristics_infos(self):
         """
@@ -119,42 +44,44 @@ class ProductProduct(models.Model):
         """
         self.ensure_one()
 
-        main_species = self.species_id
-        species = self.species_ids
-        sizes = self.animal_size_option_ids
-        ages = self.categ_age_option_ids
-        food_range = self.food_range_option_id
-        indications = self.indication_option_ids
-        presentation = self.presentation_option_id
-        active_principles = self.active_principle_option_ids
-        administration_route = self.administration_route_option_ids
-        medical_categories = self.categ_ids.filtered(
-            lambda x: x in self.medical_categories
-        )
-
         infos = []
         if self.is_meds:
-            infos.extend([(x, "categ_ids", 1) for x in medical_categories])
+            infos.extend([(x, "categ_ids", 1) for x in self.categ_ids])
             infos.extend(
-                [(x, "active_principle_option_ids", 2) for x in active_principles]
+                [
+                    (x, "active_principle_option_ids", 2)
+                    for x in self.active_principle_option_ids
+                ]
             )
             infos.extend(
                 [
                     (x, "administration_route_option_ids", 1)
-                    for x in administration_route
+                    for x in self.administration_route_option_ids
                 ]
             )
 
-        if self.is_meds or self.is_food:
-            infos.extend([(x, "species_ids", 1) for x in species])
-            infos.extend([(x, "species_id", 1) for x in main_species])
+        infos.extend([(x, "species_ids", 1) for x in self.species_ids])
+        infos.extend([(x, "species_id", 1) for x in self.species_id])
 
         if self.is_food:
-            infos.extend([(x, "food_range_option_id", 1) for x in food_range])
-            infos.extend([(x, "animal_size_option_ids", 1) for x in sizes])
-            infos.extend([(x, "categ_age_option_ids", 1) for x in ages])
-            infos.extend([(x, "indication_option_ids", 1) for x in indications])
-            infos.extend([(x, "presentation_option_id", 1) for x in presentation])
+            infos.extend(
+                [(x, "food_range_option_id", 1) for x in self.food_range_option_id]
+            )
+            infos.extend(
+                [(x, "animal_size_option_ids", 1) for x in self.animal_size_option_ids]
+            )
+            infos.extend(
+                [(x, "categ_age_option_ids", 1) for x in self.categ_age_option_ids]
+            )
+            infos.extend(
+                [(x, "indication_option_ids", 1) for x in self.indication_option_ids]
+            )
+            infos.extend(
+                [(x, "presentation_option_id", 1) for x in self.presentation_option_id]
+            )
+
+        if self.is_equipment:
+            infos.extend([(x, "thread_option_id", 1) for x in self.thread_option_id])
 
         return infos
 
@@ -193,30 +120,31 @@ class ProductProduct(models.Model):
     )
     def _compute_characteristics_vector(self):
         """Computes the characteristic vector and updates the record in place."""
-        total_number_characteristics = self._get_total_number_characteristics()
         vector_dim = self._get_characteristics_vector_dim()
 
-        # if the size of the vector is too small to fit all characteristics, double the size and re-index all records
-        if total_number_characteristics > vector_dim:
-            new_vector_dim = 2 * vector_dim
-            self._set_characteristics_vector_dim(new_vector_dim)
-            for record in self.search([]):
-                record._compute_characteristics_vector()
-            return
-
-        for record in self:
-            characteristics_infos = record._get_characteristics_infos()
-            vector_indices_and_weights = AlcProductCharacteristic(
-                self.env
-            ).get_vector_indices_and_weights(
+        for product in self:
+            characteristics_infos = product._get_characteristics_infos()
+            vector_indices_and_weights = self.env[
+                "alc.product.characteristic"
+            ].get_vector_indices_and_weights(
                 [infos[0] for infos in characteristics_infos],
                 [infos[1] for infos in characteristics_infos],
                 [infos[2] for infos in characteristics_infos],
             )
+
+            number_indexed_characteristics = self.env[
+                "alc.product.characteristic"
+            ].get_number_indexed_characteristics()
+            if number_indexed_characteristics > vector_dim:
+                # TODO: update the dimension (and thus all vectors) here instead of throwing an error
+                raise NotImplementedError(
+                    "The total number of all possible characteristics exceeds the dimension of the characteristics vector. This case is not supported for now."
+                )
+
             vector = [0 for _ in range(vector_dim)]
             for index, weight in vector_indices_and_weights.values():
                 vector[index] = weight
-            record.characteristics_vector = str(vector)
+            product.characteristics_vector = vector
 
     @api.model
     def _get_text_embedding_model(self):
@@ -226,20 +154,6 @@ class ProductProduct(models.Model):
             )
         return ProductProduct._text_embedding_model
 
-    @api.model
-    def _get_text_embedding_dim(self):
-        if not ProductProduct.TEXT_EMBEDDING_DIM:
-            ProductProduct.TEXT_EMBEDDING_DIM = (
-                self._get_text_embedding_model().encode("dummy input").shape[0]
-            )
-        return ProductProduct.TEXT_EMBEDDING_DIM
-
-    def _get_characteristics_vector_data(self):
-        return [float(x) for x in self.characteristics_vector.strip("[]").split(",")]
-
-    def _get_description_vector_data(self):
-        return [float(x) for x in self.description_vector.strip("[]").split(",")]
-
     def _get_description_vector(self):
         description = self.name + (
             ("\n" + str(self.description_shop_long))
@@ -247,15 +161,15 @@ class ProductProduct(models.Model):
             else ""
         )
 
-        return str(
-            self._get_text_embedding_model()
-            .encode(description, show_progress_bar=False)
-            .tolist()
+        return self._get_text_embedding_model().encode(
+            description, show_progress_bar=False
         )
 
     def get_similar_products(self, limit):
         """
         Retrieves similar products based on vector distances.
+
+        (Do not return this product in the the list)
 
         Args:
             limit (int): the maximum numer of similar prducts to return (limit parameter of the sql query).
@@ -269,19 +183,18 @@ class ProductProduct(models.Model):
         """
         self.ensure_one()
 
-        # 3. Perform the query using raw SQL (for vector operations)
         query = f"""
             SELECT
                 id,
-                pp.characteristics_vector::vector <=> %s::vector,
-                pp.description_vector::vector <=> %s::vector
+                pp.characteristics_vector <=> %s,
+                pp.description_vector <=> %s
             FROM
                 product_product AS pp
             WHERE
                 pp.id != %s
             ORDER BY
-                pp.characteristics_vector::vector <=> %s::vector,
-                pp.description_vector::vector <=> %s::vector
+                pp.characteristics_vector <=> %s,
+                pp.description_vector <=> %s
             LIMIT {limit};
         """
 

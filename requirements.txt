@@ -162,6 +162,7 @@ odoo-addon-extendable==16.0.1.0.1.3
 odoo-addon-extendable-fastapi==16.0.2.1.1.1
 odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@5505a6ae4e1fd189c90c0ca404cf80a519c2bd4f#subdirectory=setup/fastapi
 odoo-addon-fastapi-auth-jwt==16.0.1.0.4
+odoo-addon-field-vector @ git+https://github.com/acsone/server-tools@05a748f589368fd20abb4f792b849560e2b13a1f#subdirectory=setup/field_vector
 odoo-addon-fs-attachment==16.0.1.3.1
 odoo-addon-fs-base-multi-image==16.0.1.1.1.1
 odoo-addon-fs-base-multi-media==16.0.1.0.1.4

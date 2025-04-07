@@ -16,22 +16,22 @@ class AlcProductCharacteristic(models.Model):
     _sql_constraints = [
         (
             "unique_model_id_and_name",
-            "unique(characteristic_res_model, characteristic_res_id, characteristic_name)",
+            "UNIQUE(characteristic_res_model, characteristic_res_id, characteristic_name)",
             "A characteristic cannot reference the same record in the same model more than once.",
         ),
         (
             "unique_vector_index",
-            "unique(vector_index)",
+            "UNIQUE(vector_index)",
             "There cannot be two characteristics pointing to the same index in the vector.",
         ),
         (
-            "check_vector_non_negative",
-            "vector_index >= 0",
+            "check_vector_index_non_negative",
+            "CHECK(vector_index >= 0)",
             "A vector index must be >= 0",
         ),
         (
             "check_characteristic_weight_positive",
-            "characteristic_weight > 0",
+            "CHECK(characteristic_weight > 0)",
             "characteristic_weight must be > 0",
         ),
     ]
@@ -63,7 +63,7 @@ class AlcProductCharacteristic(models.Model):
 
     def _get_empty_index(self):
         """
-        Get an empty index by returning the smallest positive integer in the range [0, max(indices) + 1].
+        Gets an empty index by returning the smallest positive integer in the range [0, max(indices) + 1].
 
         that is not present in the given list.
         """
@@ -80,7 +80,7 @@ class AlcProductCharacteristic(models.Model):
         self, record, characteristic_name, characteristic_weight=None
     ):
         """
-        Get the index of the given characteristic in the characteristics vector of product.product.
+        Gets the index of the given characteristic in the characteristics vector of product.product.
 
         This function creates the enrty in db if no line exists yet in the table.
         """
@@ -136,6 +136,11 @@ class AlcProductCharacteristic(models.Model):
                 records, characteristics_names, characteristics_weights, strict=True
             )
         }
+
+    @api.model
+    def get_number_indexed_characteristics(self):
+        """Returns the number of characteristics currently indexed (ie the number of records in this model)."""
+        return len(self._get_vector_index_map())
 
     @api.model_create_multi
     def create(self, vals_list):
