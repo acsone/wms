@@ -67,26 +67,24 @@ RUN --mount=type=ssh \
       -r /tmp/requirements-test.txt \
  && find $VIRTUAL_ENV/lib/python3.*/site-packages/odoo/addons/*/i18n -type f ! -name 'fr*.po' ! -name 'nl*.po' ! -name 'en*.po' ! -name '*.pot' -delete
 
-ENV MODEL_NAME=paraphrase-multilingual-MiniLM-L12-v2
-ENV HF_DATASETS_CACHE=/huggingface
-RUN python -u -c "\
-import logging;\
-import os; \
-from huggingface_hub import hf_hub_download;\
-from sentence_transformers import SentenceTransformer;\
-logging.basicConfig(level=logging.INFO);\
-print('Loading model...');\
-model = SentenceTransformer('$MODEL_NAME');\
-print('Model loaded!');\
-path = hf_hub_download(repo_id='sentence-transformers/$MODEL_NAME', filename='config.json');\
-print('Model cached at:', os.path.dirname(path));"
-
 #######################################################################################
 # dependencies stage, copy the venv from build-deps, so we have a light layer
 # without all the build tools.
 #
 
 FROM base as dependencies
+
+ENV HF_HUB_CACHE=/huggingface
+ENV MODEL_NAME=paraphrase-multilingual-MiniLM-L12-v2
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=from=ghcr.io/astral-sh/uv:latest,source=/uvx,target=/bin/uvx \
+    uvx --from huggingface_hub huggingface-cli \
+      repo download \
+      --cache-dir ${HF_HUB_CACHE} \
+      --local-dir ${HF_HUB_CACHE} \
+      --local-dir-use-symlinks False \
+      --repo-type model \
+      $MODEL_NAME
 
 # Install python dependencies we built in the build stage.
 # Use --no-deps and --no-index to be sure to not download anything else.
