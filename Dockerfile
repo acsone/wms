@@ -121,6 +121,25 @@ RUN --mount=type=ssh \
     --mount=type=cache,target=/root/.cache/pip \
     pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
 
+FROM build-deps as build-sentence-transformers
+COPY --from=split-requirements /reqs/requirements-group-other.txt /build/reqs.txt
+ENV MODEL_NAME=paraphrase-multilingual-MiniLM-L12-v2
+RUN --mount=type=ssh \
+    --mount=type=cache,target=/root/.cache/ \
+    pip install sentence-transformers -c /build/reqs.txt
+RUN python -u -c "\
+import logging;\
+import os; \
+from huggingface_hub import hf_hub_download;\
+from sentence_transformers import SentenceTransformer;\
+logging.basicConfig(level=logging.INFO);\
+print('Loading model...');\
+model = SentenceTransformer('$MODEL_NAME');\
+print('Model loaded!');\
+path = hf_hub_download(repo_id='sentence-transformers/$MODEL_NAME', filename='config.json');\
+print('Model cached at:', os.path.dirname(path));"
+
+
 #######################################################################################
 # dependencies stage, installs wheels from build stages on top of other runtime deps.
 # This stage basically installs everything we need at runtime, except the app itself.
@@ -151,6 +170,9 @@ RUN --mount=type=bind,target=/build,source=/build,from=build-odoo-addons-stock \
 
 RUN --mount=type=bind,target=/build,source=/build,from=build-odoo-addons \
   pip install --no-deps --no-index /build/*.whl
+
+# sentence-transformers model
+COPY --from=build-sentence-transformers /root/.cache/huggingface /root/.cache/huggingface
 
 # Additional entry point scripts.
 COPY ./container/entrypoint-dbbase /odoo/start-entrypoint.d/
