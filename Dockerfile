@@ -21,6 +21,12 @@ RUN set -e \
   && apt -y clean \
   && rm -rf /var/lib/apt/lists/*
 
+  # we'll use build isolation so we don't need setuptools and wheel in the venv
+RUN pip uninstall -y setuptools wheel
+
+ENV UV_COMPILE_BYTECODE=1
+ENV UV_LINK_MODE=copy
+
 #######################################################################################
 # builds-deps stage, where we download requirements-build.txt,
 # and install tools necessary to build source distributions.
@@ -45,88 +51,24 @@ RUN set -e \
 
 # Configure ssh.
 RUN mkdir $HOME/.ssh \
-  && echo "Host github.com\n  StrictHostKeyChecking no" >> $HOME/.ssh/config \
-  && echo "PubkeyAcceptedKeyTypes=+ssh-rsa" >> $HOME/.ssh/config \
-  && echo "Host upgrade.odoo.com\n  StrictHostKeyChecking no" >> $HOME/.ssh/config
+ && ssh-keyscan github.com >> $HOME/.ssh/known_hosts \
+ && ssh-keyscan gitlab.acsone.eu >> $HOME/.ssh/known_hosts
 
-# Configure pip:
-# - use pep517 builds always (no setup.py bdist_wheel)
-# - constraint build depdendencies for better reproducibility
-ENV PIP_USE_PEP517=1 PIP_CONSTRAINTS=/build-deps/requirements-build.txt PIP_DISABLE_PIP_VERSION_CHECK=1
-
-# Download build dependencies to /build-deps.
-# --only-binary=:all: is to avoid trying building build dependencies from source
-# --no-deps is to make sure we have pinned them all
-COPY requirements-build.txt /build-deps/
-RUN pip wheel --only-binary=:all: --no-deps --wheel-dir=/build-deps -r /build-deps/requirements-build.txt
-
-#######################################################################################
-# build-* stages, can run in parallel and be cached as independent layers.
-# --no-deps is to make sure we have pinned them all
-#
-
-FROM python:3.11-slim as split-requirements
-RUN pip install "pip-split-requirements>=0.7"
-WORKDIR /reqs/
-COPY requirements*.txt /reqs/
-RUN pip-split-requirements \
-    --group-spec="odoo:^(odoo|odoo-addons-enterprise)\s*@" \
-    --group-spec="odoo-addons-shopinvader:odoo-addon-.*shopinvader" \
-    --group-spec="odoo-addons-shopfloor:odoo-addon-.*shopfloor" \
-    --group-spec="odoo-addons-account:odoo-addon-.*account" \
-    --group-spec="odoo-addons-stock:odoo-addon-.*stock" \
-    --group-spec="odoo-addons:odoo-addon-" \
-    --prefix="requirements-group" \
-    requirements.txt requirements-test.txt
-
-FROM build-deps as build-odoo
-COPY --from=split-requirements /reqs/requirements-group-odoo.txt /build/reqs.txt
+# Install the app dependencies in the venv. We use --no-deps to avoid installing
+# things that would not have been locked.
+COPY requirements*.txt /tmp/
 RUN --mount=type=ssh \
-    --mount=type=cache,target=/root/.cache/pip \
-    pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
+    --mount=type=cache,target=/root/.cache/uv \
+    --mount=from=ghcr.io/astral-sh/uv:latest,source=/uv,target=/bin/uv \
+    uv pip install \
+      --no-deps \
+      --build-constraint=/tmp/requirements-build.txt \
+      -r /tmp/requirements.txt \
+      -r /tmp/requirements-test.txt \
+ && find $VIRTUAL_ENV/lib/python3.*/site-packages/odoo/addons/*/i18n -type f ! -name 'fr*.po' ! -name 'nl*.po' ! -name 'en*.po' ! -name '*.pot' -delete
 
-FROM build-deps as build-odoo-addons
-COPY --from=split-requirements /reqs/requirements-group-odoo-addons.txt /build/reqs.txt
-RUN --mount=type=ssh \
-    --mount=type=cache,target=/root/.cache/pip \
-    pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
-
-FROM build-deps as build-odoo-addons-shopinvader
-COPY --from=split-requirements /reqs/requirements-group-odoo-addons-shopinvader.txt /build/reqs.txt
-RUN --mount=type=ssh \
-    --mount=type=cache,target=/root/.cache/pip \
-    pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
-
-FROM build-deps as build-odoo-addons-shopfloor
-COPY --from=split-requirements /reqs/requirements-group-odoo-addons-shopfloor.txt /build/reqs.txt
-RUN --mount=type=ssh \
-    --mount=type=cache,target=/root/.cache/pip \
-    pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
-
-FROM build-deps as build-odoo-addons-account
-COPY --from=split-requirements /reqs/requirements-group-odoo-addons-account.txt /build/reqs.txt
-RUN --mount=type=ssh \
-    --mount=type=cache,target=/root/.cache/pip \
-    pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
-
-FROM build-deps as build-odoo-addons-stock
-COPY --from=split-requirements /reqs/requirements-group-odoo-addons-stock.txt /build/reqs.txt
-RUN --mount=type=ssh \
-    --mount=type=cache,target=/root/.cache/pip \
-    pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
-
-FROM build-deps as build-other
-COPY --from=split-requirements /reqs/requirements-group-other.txt /build/reqs.txt
-RUN --mount=type=ssh \
-    --mount=type=cache,target=/root/.cache/pip \
-    pip wheel --no-deps --wheel-dir=/build -r /build/reqs.txt
-
-FROM build-deps as build-sentence-transformers
-COPY --from=split-requirements /reqs/requirements-group-other.txt /build/reqs.txt
 ENV MODEL_NAME=paraphrase-multilingual-MiniLM-L12-v2
-RUN --mount=type=ssh \
-    --mount=type=cache,target=/root/.cache/ \
-    pip install sentence-transformers -c /build/reqs.txt
+ENV HF_DATASETS_CACHE=/huggingface
 RUN python -u -c "\
 import logging;\
 import os; \
@@ -139,10 +81,9 @@ print('Model loaded!');\
 path = hf_hub_download(repo_id='sentence-transformers/$MODEL_NAME', filename='config.json');\
 print('Model cached at:', os.path.dirname(path));"
 
-
 #######################################################################################
-# dependencies stage, installs wheels from build stages on top of other runtime deps.
-# This stage basically installs everything we need at runtime, except the app itself.
+# dependencies stage, copy the venv from build-deps, so we have a light layer
+# without all the build tools.
 #
 
 FROM base as dependencies
@@ -150,44 +91,27 @@ FROM base as dependencies
 # Install python dependencies we built in the build stage.
 # Use --no-deps and --no-index to be sure to not download anything else.
 
-RUN --mount=type=bind,target=/build,source=/build,from=build-odoo \
-  pip install --no-deps --no-index /build/*.whl
-
-RUN --mount=type=bind,target=/build,source=/build,from=build-other \
-  pip install --no-deps --no-index /build/*.whl
-
-RUN --mount=type=bind,target=/build,source=/build,from=build-odoo-addons-shopinvader \
-  pip install --no-deps --no-index /build/*.whl
-
-RUN --mount=type=bind,target=/build,source=/build,from=build-odoo-addons-shopfloor \
-  pip install --no-deps --no-index /build/*.whl
-
-RUN --mount=type=bind,target=/build,source=/build,from=build-odoo-addons-account \
-  pip install --no-deps --no-index /build/*.whl
-
-RUN --mount=type=bind,target=/build,source=/build,from=build-odoo-addons-stock \
-  pip install --no-deps --no-index /build/*.whl
-
-RUN --mount=type=bind,target=/build,source=/build,from=build-odoo-addons \
-  pip install --no-deps --no-index /build/*.whl
-
-# sentence-transformers model
-COPY --from=build-sentence-transformers /root/.cache/huggingface /root/.cache/huggingface
+COPY --from=build-deps /odoo /odoo
 
 # Additional entry point scripts.
 COPY ./container/entrypoint-dbbase /odoo/start-entrypoint.d/
+
+ENV HF_DATASETS_OFFLINE=1
 
 #######################################################################################
 # runtime stage, installs the app in editable mode, on top of dependencies.
 #
 
-FROM dependencies as runtime
+FROM dependencies AS runtime
 
 # Install the app in editable mode.
-# Here we don't use --no-deps but we do use --no-index to be sure that all dependencies
-# have been installed before (i.e. they have been pinned in requirements.txt).
+# TODO Ideally, we should use --no-index here to check that everything is installed
+# but that prevents accessing the build dependencies.
 COPY . /app
-RUN python -m compileall /app/odoo/addons
-RUN --mount=type=bind,target=/build-deps,source=/build-deps,from=build-deps \
-    --mount=type=cache,target=/root/.cache/pip \
-  pip install --no-index --find-links /build-deps --editable /app
+RUN python -m compileall /app
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=from=ghcr.io/astral-sh/uv:latest,source=/uv,target=/bin/uv \
+  uv pip install \
+      --no-deps \
+      --build-constraint=/app/requirements-build.txt \
+      --editable /app
