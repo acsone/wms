@@ -85,6 +85,7 @@
         "alc_eshop_search_engine_manual_export",
         "alc_eshop_search_engine_product_expiry",
         "alc_eshop_search_engine_product_media",
+        "alc_eshop_search_engine_product_similarity",
         "alc_eshop_search_engine_product_stock",
         "alc_eshop_search_engine_product_stock",
         "alc_eshop_search_engine_product_url_locales",
