@@ -4,6 +4,7 @@
 from sentence_transformers import SentenceTransformer
 
 from odoo import api, models
+from odoo.tools import str2bool
 
 from odoo.addons.field_vector.fields import Vector
 
@@ -29,9 +30,21 @@ class ProductProduct(models.Model):
         dimensions=384,
     )
 
+    @api.model
+    def _is_product_description_vectorization_enabled(self):
+        return str2bool(
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param(
+                "alc_product_similarity_settings.product_description_vectorization_enabled"
+            )
+        )
+
     @api.depends("name", "description_shop_long")
     def _compute_description_vector(self):
         """Computes the description_vector for the product."""
+        if not self._is_product_description_vectorization_enabled():
+            return
         for product in self:
             product.description_vector = product._get_description_vector()
 

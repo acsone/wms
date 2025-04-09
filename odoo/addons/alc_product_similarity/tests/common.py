@@ -8,6 +8,10 @@ class TestProductSimilarityBase(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env["ir.config_parameter"].set_param(
+            "alc_product_similarity_settings.product_description_vectorization_enabled",
+            True,
+        )
 
         # --- Create attributes
 
@@ -194,6 +198,9 @@ class TestProductSimilarityBase(BaseCommon):
                 "property_cost_method": "average",
             }
         )
+        # compatibility if alc_product_shop_category is installed (hack)
+        if "is_web" in cls.category_test._fields:
+            cls.category_test.parent_id = cls.env.ref("alc_product_shop_category.master")
 
         # --- Create products
         cls.product_test_food = cls.env["product.product"].create(
