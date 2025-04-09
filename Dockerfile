@@ -54,6 +54,7 @@ RUN mkdir $HOME/.ssh \
  && ssh-keyscan github.com >> $HOME/.ssh/known_hosts \
  && ssh-keyscan gitlab.acsone.eu >> $HOME/.ssh/known_hosts
 
+
 # Install the app dependencies in the venv. We use --no-deps to avoid installing
 # things that would not have been locked.
 COPY requirements*.txt /tmp/
@@ -67,24 +68,37 @@ RUN --mount=type=ssh \
       -r /tmp/requirements-test.txt \
  && find $VIRTUAL_ENV/lib/python3.*/site-packages/odoo/addons/*/i18n -type f ! -name 'fr*.po' ! -name 'nl*.po' ! -name 'en*.po' ! -name '*.pot' -delete
 
-#######################################################################################
+
+ #######################################################################################
 # dependencies stage, copy the venv from build-deps, so we have a light layer
 # without all the build tools.
 #
 
 FROM base as dependencies
 
+
+# Preload the hugging face model cache.
+# This is required to make sure the model is available in the container when we
+# the container start.
+
 ENV HF_HUB_CACHE=/huggingface
 ENV MODEL_NAME=paraphrase-multilingual-MiniLM-L12-v2
 RUN --mount=type=cache,target=/root/.cache/uv \
-    --mount=from=ghcr.io/astral-sh/uv:latest,source=/uvx,target=/bin/uvx \
-    uvx --from huggingface_hub huggingface-cli \
-      repo download \
-      --cache-dir ${HF_HUB_CACHE} \
-      --local-dir ${HF_HUB_CACHE} \
-      --local-dir-use-symlinks False \
-      --repo-type model \
-      $MODEL_NAME
+    --mount=type=cache,target=/root/.cache/huggingface \
+    --mount=from=ghcr.io/astral-sh/uv:latest,source=/uv,target=/bin/uv \
+    --mount=type=bind,source=requirements.txt,target=/tmp/requirements.txt \
+    uv pip install huggingface_hub sentence_transformers -c /tmp/requirements.txt
+RUN python -u -c "\
+import logging;\
+import os; \
+from huggingface_hub import hf_hub_download;\
+from sentence_transformers import SentenceTransformer;\
+logging.basicConfig(level=logging.INFO);\
+print('Loading model...');\
+model = SentenceTransformer('$MODEL_NAME');\
+print('Model loaded!');\
+path = hf_hub_download(repo_id='sentence-transformers/$MODEL_NAME', filename='config.json');\
+print('Model cached at:', os.path.dirname(path));"
 
 # Install python dependencies we built in the build stage.
 # Use --no-deps and --no-index to be sure to not download anything else.
@@ -95,6 +109,7 @@ COPY --from=build-deps /odoo /odoo
 COPY ./container/entrypoint-dbbase /odoo/start-entrypoint.d/
 
 ENV HF_DATASETS_OFFLINE=1
+
 
 #######################################################################################
 # runtime stage, installs the app in editable mode, on top of dependencies.
