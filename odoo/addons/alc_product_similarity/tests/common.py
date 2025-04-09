@@ -200,7 +200,9 @@ class TestProductSimilarityBase(BaseCommon):
         )
         # compatibility if alc_product_shop_category is installed (hack)
         if "is_web" in cls.category_test._fields:
-            cls.category_test.parent_id = cls.env.ref("alc_product_shop_category.master")
+            cls.category_test.parent_id = cls.env.ref(
+                "alc_product_shop_category.master"
+            )
 
         # --- Create products
         cls.product_test_food = cls.env["product.product"].create(

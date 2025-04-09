@@ -231,7 +231,9 @@ class TestProductCharacteristic(TestProductSimilarityBase):
             {"name": "Test category 2"}
         )
         if "is_web" in self.env["product.category"]._fields:
-            (test_category_1 | test_category_2).parent_id = self.env.ref("alc_product_shop_category.master")
+            (test_category_1 | test_category_2).parent_id = self.env.ref(
+                "alc_product_shop_category.master"
+            )
         # create a product using the new characteristics otherwise they won't be indexed
         self.env["product.product"].create(
             {
