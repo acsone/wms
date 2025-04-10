@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2025-03-06 18:33+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -28,15 +29,8 @@ msgstr "Bac"
 
 #. module: alc_reception_pharmacy
 #: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.receive_pharmacy_products_form_view
-#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
 msgid "Cancel"
 msgstr "Annuler"
-
-#. module: alc_reception_pharmacy
-#: model:ir.model.fields.selection,name:alc_reception_pharmacy.selection__reception_pharmacy__state__cancel
-#: model:ir.model.fields.selection,name:alc_reception_pharmacy.selection__reception_pharmacy_line__state__cancel
-msgid "Cancelled"
-msgstr "Annulé"
 
 #. module: alc_reception_pharmacy
 #: model:product.template,name:alc_reception_pharmacy.product_colis_souverain_product_template
@@ -80,7 +74,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__create_uid
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__create_uid
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__create_uid
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer__create_uid
 msgid "Created by"
 msgstr "Créé par"
 
@@ -88,7 +81,6 @@ msgstr "Créé par"
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__create_date
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__create_date
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__create_date
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer__create_date
 msgid "Created on"
 msgstr "Créé le"
 
@@ -119,12 +111,6 @@ msgid "Delivered By Alcyon Constraint"
 msgstr "Livré par Alcyon"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_partner__is_delivered_by_alcyon
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_users__is_delivered_by_alcyon
-msgid "Delivered by Alcyon?"
-msgstr "Livré par Alcyon?"
-
-#. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__partner_shipping_id
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_partner__partner_shipping_id
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_res_users__partner_shipping_id
@@ -135,7 +121,6 @@ msgstr "Adresse de livraison"
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__display_name
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__display_name
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__display_name
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer__display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
@@ -166,7 +151,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__id
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__id
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__id
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer__id
 msgid "ID"
 msgstr ""
 
@@ -174,7 +158,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products____last_update
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy____last_update
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line____last_update
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer____last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
@@ -182,7 +165,6 @@ msgstr "Dernière modification le"
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__write_uid
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__write_uid
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__write_uid
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer__write_uid
 msgid "Last Updated by"
 msgstr "Derniere fois mis à jour par"
 
@@ -190,7 +172,6 @@ msgstr "Derniere fois mis à jour par"
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_receive_pharmacy_products__write_date
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__write_date
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy_line__write_date
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer__write_date
 msgid "Last Updated on"
 msgstr "Dernière mis à jour le"
 
@@ -225,13 +206,6 @@ msgstr "Nouveau"
 
 #. module: alc_reception_pharmacy
 #. odoo-python
-#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:0
-#, python-format
-msgid "One of the lines has been validated.You can't cancel this reception."
-msgstr "L'une des lignes a été validée. Vous ne pouvez pas annuler cette réception."
-
-#. module: alc_reception_pharmacy
-#. odoo-python
 #: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:0
 #, fuzzy, python-format
 #| msgid "Partner {} does not belong to any itinerary"
@@ -245,21 +219,11 @@ msgid "Pharmacy Reception"
 msgstr "Réception Pharmacie"
 
 #. module: alc_reception_pharmacy
-#: model:ir.model,name:alc_reception_pharmacy.model_select_pharmacy_printing_printer
-msgid "Pharmacy printing printer selection wizard"
-msgstr "Assistant de sélection d'imprimante de réception pharmacie"
-
-#. module: alc_reception_pharmacy
 #. odoo-python
 #: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:0
 #, python-format
 msgid "Please insert at least one line"
 msgstr ""
-
-#. module: alc_reception_pharmacy
-#: model:ir.model.fields,field_description:alc_reception_pharmacy.field_select_pharmacy_printing_printer__printer_id
-msgid "Printer"
-msgstr "Imprimante"
 
 #. module: alc_reception_pharmacy
 #: model:ir.model.fields,field_description:alc_reception_pharmacy.field_reception_pharmacy__product_id
@@ -362,18 +326,13 @@ msgid ""
 "This reception is transferred, please create a new one before adding "
 "products to receive."
 msgstr ""
-"Cette réception est terminée, veuillez en créer une nouvelle avant d'ajouter"
-" des produits à recevoir."
+"Cette réception est terminée, veuillez en créer une nouvelle avant d'ajouter "
+"des produits à recevoir."
 
 #. module: alc_reception_pharmacy
 #: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
 msgid "Transfer"
 msgstr "Transfert"
-
-#. module: alc_reception_pharmacy
-#: model:ir.model,name:alc_reception_pharmacy.model_res_users
-msgid "User"
-msgstr "Utilisateur"
 
 #. module: alc_reception_pharmacy
 #. odoo-python
@@ -394,3 +353,22 @@ msgstr "Assistant"
 msgid "Wizard of pharmacy reception"
 msgstr "Réception Pharmacie"
 
+#~ msgid "Cancelled"
+#~ msgstr "Annulé"
+
+#~ msgid "Delivered by Alcyon?"
+#~ msgstr "Livré par Alcyon?"
+
+#~ msgid "One of the lines has been validated.You can't cancel this reception."
+#~ msgstr ""
+#~ "L'une des lignes a été validée. Vous ne pouvez pas annuler cette "
+#~ "réception."
+
+#~ msgid "Pharmacy printing printer selection wizard"
+#~ msgstr "Assistant de sélection d'imprimante de réception pharmacie"
+
+#~ msgid "Printer"
+#~ msgstr "Imprimante"
+
+#~ msgid "User"
+#~ msgstr "Utilisateur"
