@@ -111,6 +111,7 @@
     - oca 16.0
     - oca refs/pull/925/head # [IMP] shopfloor: Improve message for location content transfer items
     - oca refs/pull/989/head # [FIX] shopfloor: Allow to manage supplierinfos on product templates
+    - oca refs/pull/995/head # [16.0][IMP] shopfloor/mobile: Allow to do single unload with each pack
   target: origin 16.0-alc-shopfloor
 
 ./src/rma:
