@@ -12,6 +12,7 @@ attrs==23.1.0
 babel==2.12.1
 bcrypt==4.0.1
 beautifulsoup4==4.12.2
+biip==3.6.0
 botocore==1.34.131
 cachetools==5.3.1
 cerberus==1.3.4
@@ -308,17 +309,18 @@ odoo-addon-shipment-advice==16.0.1.5.0
 odoo-addon-shipment-advice-planner==16.0.1.1.1
 odoo-addon-shipment-advice-planner-toursolver @ git+https://github.com/acsone/stock-logistics-transport.git@1f67aade91cb701f8c575aaa7c67954ef45c730f#subdirectory=setup/shipment_advice_planner_toursolver
 odoo-addon-shipment-advice-planner-toursolver-queue-job==16.0.1.0.0.5
-odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@74178437d6e2babc442b2bdaf26be4bd283e0c65#subdirectory=setup/shopfloor
+odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@8446f182121db0fecff78400b17ac3cd3be0e12c#subdirectory=setup/shopfloor
 odoo-addon-shopfloor-base @ git+https://github.com/acsone/wms.git@f612387d6fade3434db137b35a3919d841c74ad0#subdirectory=setup/shopfloor_base
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/acsone/wms.git@bb539fc077ec8f6d6be20e900381dfb03c8ed9e2#subdirectory=setup/shopfloor_batch_automatic_creation
 odoo-addon-shopfloor-full-location-reservation @ git+https://github.com/acsone/wms.git@d477836c5ebd4b4039d6159fae05c941bc6874dc#subdirectory=setup/shopfloor_full_location_reservation
+odoo-addon-shopfloor-gs1 @ git+https://github.com/acsone/wms.git@8a5f8415ae30f1263fa48180c3a3889e404b3fc2#subdirectory=setup/shopfloor_gs1
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@74178437d6e2babc442b2bdaf26be4bd283e0c65#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-mobile-base==16.0.1.1.0
 odoo-addon-shopfloor-mobile-base-auth-api-key==16.0.1.0.0.5
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@80ebc9c48882c6e797b952f6f4afe31e86176309#subdirectory=setup/shopfloor_mobile_packing
 odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@80ebc9c48882c6e797b952f6f4afe31e86176309#subdirectory=setup/shopfloor_packing
 odoo-addon-shopfloor-putaway-recompute @ git+https://github.com/acsone/wms@b136dbd468916d9dfa782bc7307213e2004b04f5#subdirectory=setup/shopfloor_putaway_recompute
-odoo-addon-shopfloor-reception @ git+https://github.com/acsone/wms.git@5b3ae519d249c7f9878e4bc97c9be2b89aa76ce8#subdirectory=setup/shopfloor_reception
+odoo-addon-shopfloor-reception @ git+https://github.com/acsone/wms.git@e694ffa01d204fc0d5f71bf1811df00196d92a62#subdirectory=setup/shopfloor_reception
 odoo-addon-shopfloor-reception-mobile @ git+https://github.com/acsone/wms.git@921aaefcb87b344ad46a209c75858ac5ec63d5d1#subdirectory=setup/shopfloor_reception_mobile
 odoo-addon-shopfloor-rest-log==16.0.1.0.0.5
 odoo-addon-shopfloor-workstation==16.0.1.0.0.3
