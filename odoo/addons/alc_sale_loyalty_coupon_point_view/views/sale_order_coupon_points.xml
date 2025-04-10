@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="sale_order_coupon_points_search_view">
+        <field name="model">sale.order.coupon.points</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="order_partner_id" />
+                <field name="coupon_partner_id" />
+                <field name="program_id"/>
+                <field name="order_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sale_order_coupon_points_tree_view">
+        <field name="model">sale.order.coupon.points</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="program_id" optional="show"/>
+                <field name="date_order"/>
+                <field name="order_id"/>
+                <field name="points"/>
+                <field name="order_partner_id" optional="hide"/>
+                <field name="coupon_partner_id" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sale_order_coupon_points_pivot_view" model="ir.ui.view">
+    <field name="model">sale.order.coupon.points</field>
+    <field name="arch" type="xml">
+      <pivot string="Coupons">
+        <field name="coupon_partner_id" type="row" />
+        <field name="program_id" type="col" />
+        <field name="points" type="measure"/>
+      </pivot>
+    </field>
+  </record>
+
+    <record model="ir.actions.act_window" id="sale_order_coupon_points_act_window">
+        <field name="name">Sale Order Coupon Points</field>
+        <field name="res_model">sale.order.coupon.points</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="domain">[("points", "&gt;", 0)]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="sale_order_coupon_points_menu">
+        <field name="name">Sale Order Coupon Points</field>
+        <field name="parent_id" ref="sale.product_menu_catalog"/>
+        <field name="action" ref="sale_order_coupon_points_act_window"/>
+        <field name="sequence" eval="70"/>
+    </record>
+
+</odoo>
