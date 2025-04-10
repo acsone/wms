@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-13 16:41+0000\n"
+"PO-Revision-Date: 2025-03-13 16:41+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,6 +26,11 @@ msgid ""
 msgstr ""
 
 #. module: alc_sale_statistics
+#: model_terms:ir.ui.view,arch_db:alc_sale_statistics.alc_stock_move_report_wizard_form_view
+msgid "Apply"
+msgstr ""
+
+#. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_res_partner__ask_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_res_users__ask_sale_statistics
 msgid "Ask for sale statistics "
@@ -32,6 +39,11 @@ msgstr ""
 #. module: alc_sale_statistics
 #: model:ir.model.fields.selection,name:alc_sale_statistics.selection__alc_stock_move_report__state__assigned
 msgid "Available"
+msgstr ""
+
+#. module: alc_sale_statistics
+#: model_terms:ir.ui.view,arch_db:alc_sale_statistics.alc_stock_move_report_wizard_form_view
+msgid "Cancel"
 msgstr ""
 
 #. module: alc_sale_statistics
@@ -50,12 +62,23 @@ msgid "Cost"
 msgstr ""
 
 #. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report__location_dest_id
 msgid "Destination Location"
 msgstr ""
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report__display_name
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_wizard__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -65,7 +88,13 @@ msgid "Done"
 msgstr ""
 
 #. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_wizard__date_end
+msgid "End date"
+msgstr ""
+
+#. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report__id
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_wizard__id
 msgid "ID"
 msgstr ""
 
@@ -85,7 +114,18 @@ msgstr ""
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report____last_update
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_wizard____last_update
 msgid "Last Modified on"
+msgstr ""
+
+#. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_wizard__write_date
+msgid "Last Updated on"
 msgstr ""
 
 #. module: alc_sale_statistics
@@ -115,7 +155,7 @@ msgstr ""
 
 #. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report__partner_invoice_depot_number
-msgid "Partner depot numbr for invoicing"
+msgid "Partner depot number for invoicing"
 msgstr ""
 
 #. module: alc_sale_statistics
@@ -144,11 +184,6 @@ msgid "Picking reference"
 msgstr ""
 
 #. module: alc_sale_statistics
-#: model_terms:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
-msgid "Previous Month"
-msgstr ""
-
-#. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report__product_id
 msgid "Product"
 msgstr ""
@@ -174,8 +209,8 @@ msgid "Product quantity"
 msgstr ""
 
 #. module: alc_sale_statistics
-#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report__product_sale_price_2
-msgid "Sale Price 2"
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report__partner_invoice_zip_prov
+msgid "Province partner zip for invoicing"
 msgstr ""
 
 #. module: alc_sale_statistics
@@ -190,11 +225,22 @@ msgid "Source Location"
 msgstr ""
 
 #. module: alc_sale_statistics
+#: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report_wizard__date_start
+msgid "Start date"
+msgstr ""
+
+#. module: alc_sale_statistics
+#: model_terms:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
+msgid "Statistics Period"
+msgstr ""
+
+#. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report__state
 msgid "Status"
 msgstr ""
 
 #. module: alc_sale_statistics
+#: model:ir.actions.act_window,name:alc_sale_statistics.action_stock_move_report_wizard
 #: model:ir.actions.act_window,name:alc_sale_statistics.action_stock_moves_with_partner
 #: model:ir.ui.menu,name:alc_sale_statistics.menu_stock_moves_with_partner
 msgid "Stock Move (with partner)"
@@ -248,6 +294,11 @@ msgstr ""
 #. module: alc_sale_statistics
 #: model:ir.model.fields.selection,name:alc_sale_statistics.selection__alc_stock_move_report__state__confirmed
 msgid "Waiting Availability"
+msgstr ""
+
+#. module: alc_sale_statistics
+#: model:ir.model,name:alc_sale_statistics.model_alc_stock_move_report_wizard
+msgid "alc.stock.move.report.wizard"
 msgstr ""
 
 #. module: alc_sale_statistics

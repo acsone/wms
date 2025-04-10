@@ -21,8 +21,10 @@
         "alc_sale_channel",
     ],
     "data": [
+        "data/export_template.xml",
         "views/res_partner.xml",
         "views/alc_stock_move_report.xml",
+        "wizards/alc_stock_move_report_wizard.xml",
         "security/alc_sale_statistics_security.xml",
     ],
     "demo": [],

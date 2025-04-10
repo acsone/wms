@@ -36,12 +36,17 @@ class AlcStockMoveReport(models.Model):
     )
     partner_invoice_city = fields.Char("Partner city for invoicing", readonly=True)
     partner_invoice_depot_number = fields.Char(
-        "Partner depot numbr for invoicing", readonly=True
+        "Partner depot number for invoicing", readonly=True
     )
     partner_invoice_name = fields.Char("Partner name for invoicing", readonly=True)
     partner_invoice_street = fields.Char("Partner street for invoicing", readonly=True)
     partner_invoice_vat = fields.Char("Partner vat for invoicing", readonly=True)
     partner_invoice_zip = fields.Char("Partner zip for invoicing", readonly=True)
+    partner_invoice_zip_prov = fields.Char(
+        "Province partner zip for invoicing",
+        compute="_compute_partner_invoice_zip_prov",
+        readonly=True,
+    )
 
     picking_reference = fields.Char("Picking reference", readonly=True)
 
@@ -51,10 +56,7 @@ class AlcStockMoveReport(models.Model):
     product_default_code = fields.Char()
     product_name = fields.Char(readonly=True, translate=True)
     product_price = fields.Float(readonly=True)
-    product_qty = fields.Float("Product quantity", readonly=True)
-    product_sale_price_2 = fields.Float(
-        related="product_id.product_tmpl_id.sale_price_2", readonly=True
-    )
+    product_qty = fields.Integer("Product quantity", readonly=True)
     product_standard_price = fields.Float(
         related="product_id.standard_price", readonly=True
     )
@@ -98,8 +100,8 @@ class AlcStockMoveReport(models.Model):
                        sm.state AS state,
                        sm.location_id AS location_id,
                        sm.location_dest_id AS location_dest_id,
-                       sm.date AS validation_date,
-                       sm.product_uom_qty AS product_qty,
+                       date(sm.date) AS validation_date,
+                       CASE WHEN pick.name LIKE '%/IN/%' then -round(sm.product_uom_qty)::int else round(sm.product_uom_qty)::int end AS product_qty,
                        pt.default_code AS product_default_code,
                        pt.name AS product_name,
                        pt.list_price AS product_price,
@@ -130,3 +132,31 @@ class AlcStockMoveReport(models.Model):
             )
         """
         )
+
+    def _compute_partner_invoice_zip_prov(self):  # noqa: C901
+        """
+        1000 - 2000 - 3000 - 4000 - 5000 - 6000 à 6599 (6000) - 6600 à 6999 (6600) -.
+
+        7000 - 8000 - 9000
+        """
+        for rec in self:
+            if rec.partner_invoice_zip < "2000":
+                rec.partner_invoice_zip_prov = "1000"
+            elif rec.partner_invoice_zip < "3000":
+                rec.partner_invoice_zip_prov = "2000"
+            elif rec.partner_invoice_zip < "4000":
+                rec.partner_invoice_zip_prov = "3000"
+            elif rec.partner_invoice_zip < "5000":
+                rec.partner_invoice_zip_prov = "4000"
+            elif rec.partner_invoice_zip < "6000":
+                rec.partner_invoice_zip_prov = "5000"
+            elif rec.partner_invoice_zip < "6600":
+                rec.partner_invoice_zip_prov = "6000"
+            elif rec.partner_invoice_zip < "7000":
+                rec.partner_invoice_zip_prov = "6600"
+            elif rec.partner_invoice_zip < "8000":
+                rec.partner_invoice_zip_prov = "7000"
+            elif rec.partner_invoice_zip < "9000":
+                rec.partner_invoice_zip_prov = "8000"
+            else:
+                rec.partner_invoice_zip_prov = "9000"
