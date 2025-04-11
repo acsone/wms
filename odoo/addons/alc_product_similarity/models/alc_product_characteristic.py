@@ -6,18 +6,20 @@ class AlcProductCharacteristic(models.Model):
     _description = "Product Characteristic"
 
     vector_index = fields.Integer(string="Vector Index", required=True)
-    characteristic_res_model = fields.Char(required=True)
-    characteristic_res_id = fields.Many2oneReference(
-        model_field="characteristic_res_model"
+    value_res_model = fields.Char(required=True)
+    value_res_id = fields.Many2oneReference(
+        required=True, model_field="value_res_model"
     )
-    characteristic_name = fields.Char(string="Characteristic Name", required=True)
-    characteristic_weight = fields.Float(required=True, default=1)
+    field_id = fields.Many2one(
+        "ir.model.fields", store=True, ondelete="cascade", string="Field", required=True
+    )
+    field_weight = fields.Float(required=True, default=1)
 
     _sql_constraints = [
         (
-            "unique_model_id_and_name",
-            "UNIQUE(characteristic_res_model, characteristic_res_id, characteristic_name)",
-            "A characteristic cannot reference the same record in the same model more than once.",
+            "unique_field_value",
+            "UNIQUE(field_id, value_res_id)",
+            "A field cannot reference the same record of the same model more than once.",
         ),
         (
             "unique_vector_index",
@@ -30,9 +32,9 @@ class AlcProductCharacteristic(models.Model):
             "A vector index must be >= 0",
         ),
         (
-            "check_characteristic_weight_positive",
-            "CHECK(characteristic_weight > 0)",
-            "characteristic_weight must be > 0",
+            "check_field_weight_positive",
+            "CHECK(field_weight > 0)",
+            "field_weight must be > 0",
         ),
     ]
 
@@ -40,14 +42,15 @@ class AlcProductCharacteristic(models.Model):
         """Returns the cache key for a characteristic from this model."""
         self.ensure_one()
         return (
-            self.characteristic_res_model,
-            self.characteristic_res_id,
-            self.characteristic_name,
-        )
+            self.value_res_model,
+            self.value_res_id,
+            self.field_id.id,
+        )  # use field_id.id instead of field_id because field_id is of type "ir.model.fields" and not simply int because of the Many2one
 
-    def _record_to_cache_key(self, record, characteristic_name):
+    def _record_to_cache_key(self, record, field_name):
         """Returns the cache key for a characteristic from another model."""
-        return (record._name, record.id, characteristic_name)
+        field_id = self.env["ir.model.fields"]._get("product.product", field_name).id
+        return (record._name, record.id, field_id)
 
     @api.model
     @tools.ormcache()
@@ -56,7 +59,7 @@ class AlcProductCharacteristic(models.Model):
         return {
             r._to_cache_key(): {
                 "index": r.vector_index,
-                "weight": r.characteristic_weight,
+                "weight": r.field_weight,
             }
             for r in records
         }
@@ -76,9 +79,7 @@ class AlcProductCharacteristic(models.Model):
         return len(indices)
 
     @api.model
-    def _get_vector_index_and_weight(
-        self, record, characteristic_name, characteristic_weight=None
-    ):
+    def _get_vector_index_and_weight(self, record, field_name, field_weight=None):
         """
         Gets the index of the given characteristic in the characteristics vector of product.product.
 
@@ -90,11 +91,13 @@ class AlcProductCharacteristic(models.Model):
             )
 
         index_map = self._get_vector_index_map()
+        cache_key = self._record_to_cache_key(record, field_name)
+        _, _, field_id = cache_key
         index_and_weight = index_map.get(
-            self._record_to_cache_key(record, characteristic_name),
+            cache_key,
             {
                 "index": -1,
-                "weight": characteristic_weight if characteristic_weight else 1,
+                "weight": field_weight if field_weight else 1,
             },
         )
         index = index_and_weight["index"]
@@ -102,17 +105,20 @@ class AlcProductCharacteristic(models.Model):
         # when index for this characteristic is not yet in db, create the entry
         if index < 0:
             index = self._get_empty_index()
-            self.create(
-                [
-                    {
-                        "characteristic_res_model": record._name,
-                        "characteristic_res_id": record.id,
-                        "characteristic_name": characteristic_name,
-                        "characteristic_weight": index_and_weight["weight"],
-                        "vector_index": index,
-                    }
-                ]
-            )
+            try:
+                self.create(
+                    [
+                        {
+                            "value_res_model": record._name,
+                            "value_res_id": record.id,
+                            "field_id": field_id,
+                            "field_weight": index_and_weight["weight"],
+                            "vector_index": index,
+                        }
+                    ]
+                )
+            except Exception as e:
+                raise e
 
         return (index, index_and_weight["weight"])
 
@@ -120,20 +126,20 @@ class AlcProductCharacteristic(models.Model):
     def get_vector_indices_and_weights(
         self,
         records,
-        characteristics_names,
-        characteristics_weights=None,
+        fields_names,
+        fields_weights=None,
     ):
         """
         Get the indices of the given characteristics in the characteristics vector of product.product.
 
         This function creates the entries in db if no line exists yet in the table.
         """
-        if characteristics_weights is None:
-            characteristics_weights = [1 for _ in range(len(records))]
+        if fields_weights is None:
+            fields_weights = [1 for _ in range(len(records))]
         return {
             (r, name): self._get_vector_index_and_weight(r, name, weight)
             for r, name, weight in zip(
-                records, characteristics_names, characteristics_weights, strict=True
+                records, fields_names, fields_weights, strict=True
             )
         }
 

@@ -1,4 +1,4 @@
-# Copyright 2021 ACSONE SA/NV
+# Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
@@ -27,4 +27,5 @@
     ],
     "demo": [],
     "external_dependencies": {"python": ["sentence-transformers"]},
+    "development_status": "Alpha",
 }

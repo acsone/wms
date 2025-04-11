@@ -5,7 +5,7 @@ from .common import TestProductSimilarityBase
 
 
 class TestProductCharacteristic(TestProductSimilarityBase):
-    def test_different_indices_for_same_attribute_with_different_name(self):
+    def test_different_indices_for_same_attribute_on_different_fields(self):
         dog_attribute_id = self.env.ref("alc_product_animal_species.dog").id
         product = self.env["product.product"].create(
             {
@@ -34,7 +34,7 @@ class TestProductCharacteristic(TestProductSimilarityBase):
         ) | self.env[
             "alc.product.characteristic"
         ].get_vector_indices_and_weights(
-            product.species_id, ["specis_id"]
+            product.species_id, ["species_id"]
         )
         self.assertEqual(
             len(indices_and_weights),

@@ -5,6 +5,7 @@ from sentence_transformers import SentenceTransformer
 
 from odoo import api, models
 from odoo.tools import str2bool
+from odoo.tools.sql import create_index
 
 from odoo.addons.field_vector.fields import Vector
 
@@ -30,6 +31,23 @@ class ProductProduct(models.Model):
         dimensions=384,
     )
 
+    def init(self):  # pylint: disable=missing-return
+        create_index(
+            self.env.cr,
+            "product_product_characteristics_vector_index",
+            self._table,
+            ["characteristics_vector vector_cosine_ops"],
+            method="hnsw",
+        )
+        create_index(
+            self.env.cr,
+            "product_product_description_vector_index",
+            self._table,
+            ["description_vector vector_cosine_ops"],
+            method="hnsw",
+        )
+        super().init()
+
     @api.model
     def _is_product_description_vectorization_enabled(self):
         return str2bool(
@@ -50,7 +68,9 @@ class ProductProduct(models.Model):
 
     def _get_characteristics_infos(self):
         """
-        Extracts the characteristics infos that will be used for similarity search (the extarcted characteristics are not the same depending on the type if the item).
+        Extracts the characteristics infos that will be used for similarity search.
+
+        Note that the extracted characteristics are not the same depending on the type if the item.
 
         Returns:
             list[tuple]: a list of tuples of the form (<characteristic_record>, <characteristic_name>, <characteristic_weight>)
@@ -196,31 +216,30 @@ class ProductProduct(models.Model):
         """
         self.ensure_one()
 
-        query = f"""
-            SELECT
-                id,
-                pp.characteristics_vector <=> %s,
-                pp.description_vector <=> %s
-            FROM
-                product_product AS pp
-            WHERE
-                pp.id != %s
-            ORDER BY
-                pp.characteristics_vector <=> %s,
-                pp.description_vector <=> %s
-            LIMIT {limit};
-        """
+        query = self._search([("id", "!=", self.id)])
+        from_clause, where_clause, where_clause_params = query.get_sql()
 
-        self.env.cr.execute(
-            query,
-            (
-                self.characteristics_vector,
-                self.description_vector,
-                self.id,
-                self.characteristics_vector,
-                self.description_vector,
-            ),
+        sql = f"""
+        SELECT
+            product_product.id,
+            product_product.characteristics_vector <=> %s,
+            product_product.description_vector <=> %s
+        FROM
+            {from_clause}
+        WHERE
+            {where_clause}
+        ORDER BY
+            product_product.characteristics_vector <=> %s,
+            product_product.description_vector <=> %s
+        """
+        params = (
+            self.characteristics_vector,
+            self.description_vector,
+            *where_clause_params,
+            self.characteristics_vector,
+            self.description_vector,
         )
+        self.env.cr.execute(sql, params)
 
         results = self.env.cr.fetchall()
 
