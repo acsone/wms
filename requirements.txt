@@ -391,8 +391,9 @@ odoo-addon-stock-location-product-restriction @ git+https://github.com/acsone/st
 odoo-addon-stock-location-release-channel-restriction @ git+https://github.com/acsone/stock-logistics-warehouse.git@31fe8ff5b65e6768891076d9562f06a4247403f3#subdirectory=setup/stock_location_release_channel_restriction
 odoo-addon-stock-location-zone @ git+https://github.com/acsone/stock-logistics-warehouse.git@e4901deafc05a35b5aef6eb60f2a2853f59a10bd#subdirectory=setup/stock_location_zone
 odoo-addon-stock-lot-is-archived==16.0.1.0.0.5
-odoo-addon-stock-move-auto-assign @ git+https://github.com/acsone/stock-logistics-warehouse.git@f2048de9f397471167777e9eebe461c8982bdee7#subdirectory=setup/stock_move_auto_assign
-odoo-addon-stock-move-auto-assign-auto-release==16.0.1.1.2.2
+odoo-addon-stock-move-auto-assign==16.0.1.1.2
+odoo-addon-stock-move-auto-assign-auto-release==16.0.1.1.4
+odoo-addon-stock-move-auto-assign-auto-release-exclude-location==16.0.1.0.0.2
 odoo-addon-stock-move-common-dest==16.0.1.0.1.5
 odoo-addon-stock-move-free-reservation-reassign==16.0.1.0.1.4
 odoo-addon-stock-move-line-change-lot==16.0.1.0.1
