@@ -28,4 +28,5 @@
     "demo": [],
     "external_dependencies": {"python": ["sentence-transformers"]},
     "development_status": "Alpha",
+    "pre_init_hook": "pre_init_hook",
 }
