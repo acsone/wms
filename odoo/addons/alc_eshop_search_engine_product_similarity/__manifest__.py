@@ -17,4 +17,5 @@
     "application": False,
     "data": [],
     "demo": [],
+    "development_status": "Alpha",
 }
