@@ -167,4 +167,5 @@
         # Alcyon/Stock Management
         "alc_sale_consignment",
     ],
+    "development_status": "Alpha",
 }

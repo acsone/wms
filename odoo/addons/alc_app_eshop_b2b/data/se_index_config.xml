@@ -11,6 +11,16 @@
 {
   "mappings":{
     "properties":{
+      "characteristics_vector": {
+        "type": "knn_vector",
+        "dimension": 1000,
+        "space_type": "cosinesimil"
+      },
+      "description_vector": {
+        "type": "knn_vector",
+        "dimension": 384,
+        "space_type": "cosinesimil"
+      },
       "links":{
         "dynamic":false,
         "type":"object"
@@ -331,6 +341,7 @@
     }
   },
   "settings":{
+    "index.knn": true,
     "index.mapping.total_fields.limit": 2000,
     "default_pipeline":"set-current-price",
     "analysis":{
@@ -443,6 +454,16 @@
 {
   "mappings":{
     "properties":{
+      "characteristics_vector": {
+        "type": "knn_vector",
+        "dimension": 1000,
+        "space_type": "cosinesimil"
+      },
+      "description_vector": {
+        "type": "knn_vector",
+        "dimension": 384,
+        "space_type": "cosinesimil"
+      },
       "links":{
         "dynamic":false,
         "type":"object"
@@ -763,7 +784,8 @@
     }
   },
   "settings":{
-  "index.mapping.total_fields.limit": 2000,
+    "index.knn": true,
+    "index.mapping.total_fields.limit": 2000,
     "default_pipeline":"set-current-price",
     "analysis":{
       "filter":{
@@ -865,6 +887,16 @@
 {
   "mappings":{
     "properties":{
+      "characteristics_vector": {
+        "type": "knn_vector",
+        "dimension": 1000,
+        "space_type": "cosinesimil"
+      },
+      "description_vector": {
+        "type": "knn_vector",
+        "dimension": 384,
+        "space_type": "cosinesimil"
+      },
       "links":{
         "dynamic":false,
         "type":"object"
@@ -1185,7 +1217,8 @@
     }
   },
   "settings":{
-  "index.mapping.total_fields.limit": 2000,
+    "index.knn": true,
+    "index.mapping.total_fields.limit": 2000,
     "default_pipeline":"set-current-price",
     "analysis":{
       "filter":{
