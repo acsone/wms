@@ -101,6 +101,7 @@
         "alc_product_promotion_subscription",
         "alc_product_search_cnk",
         "alc_product_shop_category",
+        "alc_product_similarity",
         "alc_product_sku",
         "alc_product_stock_state",
         "alc_product_supplierinfo_check",
