@@ -43,6 +43,7 @@
         "stock_location_pending_move",
         "stock_location_release_channel_restriction",
         "stock_lot_is_archived",
+        "stock_move_auto_assign_auto_release_exclude_location",
         "stock_move_common_dest",
         "stock_move_line_change_lot",
         "stock_move_line_lock_qty_done",
