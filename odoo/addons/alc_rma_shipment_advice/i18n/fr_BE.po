@@ -90,9 +90,25 @@ msgid "RMA requested operation"
 msgstr "Opération RMA demandée"
 
 #. module: alc_rma_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_rma_shipment_advice.rma_form_view
+msgid "Shipment"
+msgstr ""
+
+#. module: alc_rma_shipment_advice
 #: model:ir.model,name:alc_rma_shipment_advice.model_shipment_advice
+#: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_rma__shipment_advice_id
 msgid "Shipment Advice"
 msgstr "Note d'envoi"
+
+#. module: alc_rma_shipment_advice
+#: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_rma__toursolver_resource_id
+msgid "Toursolver Resource"
+msgstr ""
+
+#. module: alc_rma_shipment_advice
+#: model:ir.model.fields,field_description:alc_rma_shipment_advice.field_rma__toursolver_task_id
+msgid "Toursolver Task"
+msgstr ""
 
 #. module: alc_rma_shipment_advice
 #: model:ir.model,name:alc_rma_shipment_advice.model_stock_picking
