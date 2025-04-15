@@ -253,6 +253,8 @@ class ProductProduct(models.Model):
         ORDER BY
             product_product.characteristics_vector <=> %s,
             product_product.description_vector <=> %s
+        LIMIT
+            {limit}
         """
         params = (
             self.characteristics_vector,
