@@ -34,18 +34,24 @@ class TestProductSimilarityBase(BaseCommon):
                 ],
             }
         )
+        # we set random verctor values since the vector creation is disabled
+        # in the test environment
+        product.description_vector = [0.1, 0.2, 0.3]
+        product.characteristics_vector = [0.4, 0.5, 0.6]
 
         product_model = ProductProduct.from_product_product(product)
-        self.assertEqual(type(product_model.description_vector), str)
-        self.assertEqual(type(product_model.characteristics_vector), str)
-        self.assertEqual(
-            [float(x) for x in product_model.description_vector.strip("[]").split(",")],
-            product.description_vector.value.tolist(),
+        self.assertListEqual(
+            product_model.description_vector,
+            product.description_vector.to_list(),
         )
-        self.assertEqual(
-            [
-                float(x)
-                for x in product_model.characteristics_vector.strip("[]").split(",")
-            ],
-            product.characteristics_vector.value.tolist(),
+        self.assertListEqual(
+            product_model.characteristics_vector,
+            product.characteristics_vector.to_list(),
         )
+
+        # the vectors are nullable
+        product.description_vector = None
+        product.characteristics_vector = None
+        product_model = ProductProduct.from_product_product(product)
+        self.assertIsNone(product_model.description_vector)
+        self.assertIsNone(product_model.characteristics_vector)
