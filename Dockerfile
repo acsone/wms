@@ -59,7 +59,7 @@ RUN mkdir $HOME/.ssh \
 # things that would not have been locked.
 COPY requirements*.txt /tmp/
 RUN --mount=type=ssh \
-    --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=cache,target=/root/.cache/uv,id=uv-jammy \
     --mount=from=ghcr.io/astral-sh/uv:latest,source=/uv,target=/bin/uv \
     uv pip install \
       --no-deps \
@@ -83,8 +83,8 @@ FROM base as dependencies
 
 ENV HF_HUB_CACHE=/huggingface
 ENV MODEL_NAME=paraphrase-multilingual-MiniLM-L12-v2
-RUN --mount=type=cache,target=/root/.cache/uv \
-    --mount=type=cache,target=/root/.cache/huggingface \
+RUN --mount=type=cache,target=/root/.cache/uv,id=uv-jammy \
+    --mount=type=cache,target=/root/.cache/huggingface,id=hg-jammy \
     --mount=from=ghcr.io/astral-sh/uv:latest,source=/uv,target=/bin/uv \
     --mount=type=bind,source=requirements.txt,target=/tmp/requirements.txt \
     uv pip install huggingface_hub sentence_transformers -c /tmp/requirements.txt
@@ -122,7 +122,7 @@ FROM dependencies AS runtime
 # but that prevents accessing the build dependencies.
 COPY . /app
 RUN python -m compileall /app
-RUN --mount=type=cache,target=/root/.cache/uv \
+RUN --mount=type=cache,target=/root/.cache/uv,id=uv-jammy \
     --mount=from=ghcr.io/astral-sh/uv:latest,source=/uv,target=/bin/uv \
   uv pip install \
       --no-deps \
