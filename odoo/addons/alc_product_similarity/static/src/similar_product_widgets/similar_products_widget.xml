@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="alc_product_similarity.similar_products_widget" owl="1">
+        <div class="o_similar_products_widget">
+            <t t-if="state.similarProducts.length > 0">
+                <div class="o_kanban_view o_kanban_mobile">
+                    <div class="o_kanban_group o_kanban_group_has_content">
+                        <div class="o_kanban_record" t-foreach="state.similarProducts"
+                            t-as="product"
+                            t-key="product.id"
+                            t-on-click="() => onSimilarProductClick(product.id)">
+                            <div class="o_kanban_record_top">
+                            </div>
+                            <div class="o_kanban_record_body">
+                                <div class="o_kanban_image">
+                                    <img
+                                        t-att-src="'/web/image/product.product/' + product.id + '/image_128'"
+                                        alt="Product Image" />
+                                </div>
+                                <div class="o_kanban_primary_left">
+                                    <div class="o_kanban_record_title">
+                                        <t t-esc="product.name" />
+                                    </div>
+                                    <div class="o_kanban_record_subtitle"> Price: <t
+                                            t-esc="product.list_price" />
+                                    </div>
+                                </div>
+                                <div class="o_kanban_primary_right">
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_bottom">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+            <t t-else="">
+                <p>No similar products found.</p>
+            </t>
+        </div>
+    </t>
+</templates>

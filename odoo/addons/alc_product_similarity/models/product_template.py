@@ -1,10 +1,14 @@
-# Copyright 2023 ACSONE SA/NV
+# Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import api, models
+from odoo import fields, api, models
 
 
 class ProductTemplate(models.Model):
     _inherit = "product.template"
+
+    similar_products_ids = fields.Json(
+        related="product_variant_ids.similar_products_ids"
+    )
 
     @api.model
     def _get_description_vector_recompute_tiggers(self):
@@ -31,3 +35,4 @@ class ProductTemplate(models.Model):
         if any(field in vals for field in triggers):
             self.product_variant_ids._delay_compute_description_vector()
         return res
+
