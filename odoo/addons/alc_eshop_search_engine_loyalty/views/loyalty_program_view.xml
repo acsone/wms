@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="loyalty_program_form_view">
+        <field name="model">loyalty.program</field>
+        <field name="inherit_id" ref="loyalty.loyalty_program_view_form"/>
+        <field name="arch" type="xml">
+            <button name="action_open_loyalty_cards" position="after">
+                <field name="is_published" invisible="1" />
+                <button
+      name="action_toggle_is_published"
+      attrs="{'invisible': [('is_published', '=', False)]}"
+      class="oe_stat_button"
+      type="object"
+      icon="fa-globe"
+    >
+                    <div class="o_stat_info o_field_widget">
+                        <span class="text-success">Published</span>
+                    </div>
+                </button>
+                <button
+      name="action_toggle_is_published"
+      attrs="{'invisible': [('is_published', '=', True)]}"
+      class="oe_stat_button"
+      type="object"
+      icon="fa-eye-slash"
+    >
+                    <div class="o_stat_info o_field_widget">
+                        <span class="text-danger">Unpublished</span>
+                    </div>
+                </button>
+            </button>
+        </field>
+    </record>
+
+</odoo>
