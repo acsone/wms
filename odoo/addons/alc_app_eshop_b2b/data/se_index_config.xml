@@ -15,12 +15,12 @@
         "type": "knn_vector",
         "dimension": 1000,
         "space_type": "cosinesimil"
-      }
+      },
       "description_vector": {
         "type": "knn_vector",
         "dimension": 384,
         "space_type": "cosinesimil"
-      }
+      },
       "links":{
         "dynamic":false,
         "type":"object"
@@ -458,12 +458,12 @@
         "type": "knn_vector",
         "dimension": 1000,
         "space_type": "cosinesimil"
-      }
+      },
       "description_vector": {
         "type": "knn_vector",
         "dimension": 384,
         "space_type": "cosinesimil"
-      }
+      },
       "links":{
         "dynamic":false,
         "type":"object"
@@ -891,12 +891,12 @@
         "type": "knn_vector",
         "dimension": 1000,
         "space_type": "cosinesimil"
-      }
+      },
       "description_vector": {
         "type": "knn_vector",
         "dimension": 384,
         "space_type": "cosinesimil"
-      }
+      },
       "links":{
         "dynamic":false,
         "type":"object"
