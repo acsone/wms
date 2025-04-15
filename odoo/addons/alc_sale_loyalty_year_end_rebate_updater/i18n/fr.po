@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2025-03-14 09:03+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,6 +20,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:alc_sale_loyalty_year_end_rebate_updater.selection__alc_loyalty_rule_updater_line__update_type__add_rule
 msgid "Add a new rule"
 msgstr "Ajouter une nouvelle règle"
+
+#. module: alc_sale_loyalty_year_end_rebate_updater
+#: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate_updater.field_alc_loyalty_rule_updater_line__added_product_ids_domain
+msgid "Added Product Ids Domain"
+msgstr ""
 
 #. module: alc_sale_loyalty_year_end_rebate_updater
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate_updater.field_alc_loyalty_rule_updater__retroactive
@@ -45,7 +51,8 @@ msgstr "Créé le"
 #. module: alc_sale_loyalty_year_end_rebate_updater
 #: model:ir.model.fields,help:alc_sale_loyalty_year_end_rebate_updater.field_alc_loyalty_rule_updater__retroactive_date
 msgid "Date from which the new rule will be applied to past sales"
-msgstr "Date à partir de laquelle la nouvelle règle sera appliquée aux ventes passées"
+msgstr ""
+"Date à partir de laquelle la nouvelle règle sera appliquée aux ventes passées"
 
 #. module: alc_sale_loyalty_year_end_rebate_updater
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate_updater.field_alc_loyalty_rule_updater__display_name
@@ -132,7 +139,6 @@ msgstr "Assistant de mise à jour des règles de fidélité"
 
 #. module: alc_sale_loyalty_year_end_rebate_updater
 #: model_terms:ir.ui.view,arch_db:alc_sale_loyalty_year_end_rebate_updater.alc_loyalty_rule_updater_line_form_view
-#: model_terms:ir.ui.view,arch_db:alc_sale_loyalty_year_end_rebate_updater.alc_loyalty_rule_updater_line_tree_view
 msgid "Loyalty Rule Updater Line"
 msgstr ""
 
@@ -148,7 +154,8 @@ msgstr "La règle de fidélité est requise pour ce type de mise à jour"
 #: code:addons/alc_sale_loyalty_year_end_rebate_updater/wizards/alc_loyalty_rule_updater_line.py:0
 #, python-format
 msgid "Loyalty Rule should not be set for this update type"
-msgstr "La règle de fidélité ne doit pas être définie pour ce type de mise à jour"
+msgstr ""
+"La règle de fidélité ne doit pas être définie pour ce type de mise à jour"
 
 #. module: alc_sale_loyalty_year_end_rebate_updater
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate_updater.field_alc_loyalty_rule_updater_line__added_product_ids
@@ -187,14 +194,12 @@ msgstr "Les points ne doivent pas être définis pour ce type de mise à jour"
 #. module: alc_sale_loyalty_year_end_rebate_updater
 #. odoo-python
 #: code:addons/alc_sale_loyalty_year_end_rebate_updater/wizards/alc_loyalty_rule_updater_line.py:0
-#: code:addons/alc_sale_loyalty_year_end_rebate_updater/wizards/alc_loyalty_rule_updater_line.py:0
 #, python-format
 msgid "Products are required for this update type"
 msgstr "AU moins un produit est requis pour ce type de mise à jour"
 
 #. module: alc_sale_loyalty_year_end_rebate_updater
 #. odoo-python
-#: code:addons/alc_sale_loyalty_year_end_rebate_updater/wizards/alc_loyalty_rule_updater_line.py:0
 #: code:addons/alc_sale_loyalty_year_end_rebate_updater/wizards/alc_loyalty_rule_updater_line.py:0
 #, python-format
 msgid "Products should not be set for this update type"
@@ -219,6 +224,11 @@ msgstr "Supprimer une règle"
 #: model:ir.model.fields.selection,name:alc_sale_loyalty_year_end_rebate_updater.selection__alc_loyalty_rule_updater_line__update_type__rule_remove_products
 msgid "Remove products"
 msgstr "Supprimer des produits"
+
+#. module: alc_sale_loyalty_year_end_rebate_updater
+#: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate_updater.field_alc_loyalty_rule_updater_line__removed_product_ids_domain
+msgid "Removed Product Ids Domain"
+msgstr ""
 
 #. module: alc_sale_loyalty_year_end_rebate_updater
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate_updater.field_alc_loyalty_rule_updater__retroactive_date
