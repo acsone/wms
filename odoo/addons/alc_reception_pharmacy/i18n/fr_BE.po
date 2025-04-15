@@ -29,8 +29,15 @@ msgstr "Bac"
 
 #. module: alc_reception_pharmacy
 #: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.receive_pharmacy_products_form_view
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
 msgid "Cancel"
 msgstr "Annuler"
+
+#. module: alc_reception_pharmacy
+#: model:ir.model.fields.selection,name:alc_reception_pharmacy.selection__reception_pharmacy__state__cancel
+#: model:ir.model.fields.selection,name:alc_reception_pharmacy.selection__reception_pharmacy_line__state__cancel
+msgid "Cancelled"
+msgstr "Annulé"
 
 #. module: alc_reception_pharmacy
 #: model:product.template,name:alc_reception_pharmacy.product_colis_souverain_product_template
@@ -206,6 +213,14 @@ msgstr "Nouveau"
 
 #. module: alc_reception_pharmacy
 #. odoo-python
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:0
+#, python-format
+msgid "One of the lines has been validated.You can't cancel this reception."
+msgstr ""
+"L'une des lignes a été validée. Vous ne pouvez pas annuler cette réception."
+
+#. module: alc_reception_pharmacy
+#. odoo-python
 #: code:addons/alc_reception_pharmacy/models/reception_pharmacy_line.py:0
 #, fuzzy, python-format
 #| msgid "Partner {} does not belong to any itinerary"
@@ -353,16 +368,8 @@ msgstr "Assistant"
 msgid "Wizard of pharmacy reception"
 msgstr "Réception Pharmacie"
 
-#~ msgid "Cancelled"
-#~ msgstr "Annulé"
-
 #~ msgid "Delivered by Alcyon?"
 #~ msgstr "Livré par Alcyon?"
-
-#~ msgid "One of the lines has been validated.You can't cancel this reception."
-#~ msgstr ""
-#~ "L'une des lignes a été validée. Vous ne pouvez pas annuler cette "
-#~ "réception."
 
 #~ msgid "Pharmacy printing printer selection wizard"
 #~ msgstr "Assistant de sélection d'imprimante de réception pharmacie"
