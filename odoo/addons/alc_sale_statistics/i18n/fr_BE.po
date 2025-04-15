@@ -254,6 +254,11 @@ msgid "Stock Move (with partner)"
 msgstr "Mouvements de stock (statistiques)"
 
 #. module: alc_sale_statistics
+#: model:ir.model,name:alc_sale_statistics.model_alc_stock_move_report_wizard
+msgid "Stock Move Report Wizard to select statistics period"
+msgstr ""
+
+#. module: alc_sale_statistics
 #: model:ir.model.fields,field_description:alc_sale_statistics.field_alc_stock_move_report__move_id
 msgid "Stock move"
 msgstr "Mouvement de stock"
@@ -302,11 +307,6 @@ msgstr "En attente d'un autre mouvement"
 #: model:ir.model.fields.selection,name:alc_sale_statistics.selection__alc_stock_move_report__state__confirmed
 msgid "Waiting Availability"
 msgstr "En attente de disponibilité"
-
-#. module: alc_sale_statistics
-#: model:ir.model,name:alc_sale_statistics.model_alc_stock_move_report_wizard
-msgid "alc.stock.move.report.wizard"
-msgstr ""
 
 #. module: alc_sale_statistics
 #: model_terms:ir.ui.view,arch_db:alc_sale_statistics.stock_moves_with_partner_view_search
