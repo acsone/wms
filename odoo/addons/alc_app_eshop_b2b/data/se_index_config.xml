@@ -210,6 +210,21 @@
           }
         }
       },
+      "loyalty_rules":{
+        "type":"nested",
+        "properties":{
+          "time_frame":{
+            "type":"date_range",
+            "format":"yyyy-MM-dd"
+          },
+          "sequence":{
+            "type":"integer"
+          },
+          "program_id":{
+            "type":"integer"
+          }
+        }
+      },
       "attributes":{
         "properties":{
           "species_id":{
@@ -627,6 +642,21 @@
           }
         }
       },
+      "loyalty_rules":{
+        "type":"nested",
+        "properties":{
+          "time_frame":{
+            "type":"date_range",
+            "format":"yyyy-MM-dd"
+          },
+          "sequence":{
+            "type":"integer"
+          },
+          "program_id":{
+            "type":"integer"
+          }
+        }
+      },
       "attributes":{
         "properties":{
           "species_id":{
@@ -1031,6 +1061,21 @@
           "time_frame":{
             "type":"date_range",
             "format":"yyyy-MM-dd"
+          }
+        }
+      },
+      "loyalty_rules":{
+        "type":"nested",
+        "properties":{
+          "time_frame":{
+            "type":"date_range",
+            "format":"yyyy-MM-dd"
+          },
+          "sequence":{
+            "type":"integer"
+          },
+          "program_id":{
+            "type":"integer"
           }
         }
       },

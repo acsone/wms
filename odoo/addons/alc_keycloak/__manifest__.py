@@ -11,6 +11,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         # Alcyon
+        "alc_elasticsearch_security_loyalty",
         "alc_elasticsearch_security_vt_groups",
         "alc_eshop_ordering_allowed",
         "alc_partner_pricelist",
@@ -21,4 +22,5 @@
     "application": False,
     "data": [],
     "demo": [],
+    "development_status": "Alpha",
 }

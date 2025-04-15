@@ -169,4 +169,57 @@
     />
         <field name="serializer_type">alc_eshop_info_banner</field>
     </record>
+
+
+  <record id="loyalty_program_index_fr_BE" model="se.index">
+      <field
+    name="backend_id"
+    ref="alc_search_engine_backend.elasticsearch_backend"
+  />
+      <field name="custom_tech_name">loyalty_program</field>
+      <field
+    name="model_id"
+    ref="loyalty.model_loyalty_program"
+  />
+      <field name="lang_id" eval="ref('base.lang_fr_BE')" />
+      <field
+    name="config_id"
+    ref="alc_eshop_search_engine_loyalty.index_config_loyalty_program"
+  />
+      <field name="serializer_type">loyalty_program</field>
+  </record>
+  <record id="loyalty_program_index_nl_BE" model="se.index">
+      <field
+    name="backend_id"
+    ref="alc_search_engine_backend.elasticsearch_backend"
+  />
+      <field name="custom_tech_name">loyalty_program</field>
+      <field
+    name="model_id"
+    ref="loyalty.model_loyalty_program"
+  />
+      <field name="lang_id" eval="ref('base.lang_nl_BE')" />
+      <field
+    name="config_id"
+    ref="alc_eshop_search_engine_loyalty.index_config_loyalty_program"
+  />
+      <field name="serializer_type">loyalty_program</field>
+  </record>
+  <record id="loyalty_program_index_en" model="se.index">
+      <field
+    name="backend_id"
+    ref="alc_search_engine_backend.elasticsearch_backend"
+  />
+      <field name="custom_tech_name">loyalty_program</field>
+      <field
+    name="model_id"
+    ref="loyalty.model_loyalty_program"
+  />
+      <field name="lang_id" eval="ref('base.lang_en')" />
+      <field
+    name="config_id"
+    ref="alc_eshop_search_engine_loyalty.index_config_loyalty_program"
+  />
+      <field name="serializer_type">loyalty_program</field>
+  </record>
 </odoo>

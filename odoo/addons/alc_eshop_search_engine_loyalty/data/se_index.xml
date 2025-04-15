@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <record id="index_config_loyalty_program" model="se.index.config">
+        <field name="name">Loyalty Program Index config</field>
+        <field name="body">{}</field>
+        <field name="body_str">
+            {
+                "settings" : {
+                    "index" : {
+                        "sort.field" : ["sequence"],
+                        "sort.order" : ["asc"]
+                    }
+                },
+                "mappings": {
+                    "properties": {
+                        "id": {
+                            "type": "integer"
+                        },
+                        "date_start": {
+                            "type": "date"
+                        },
+                        "date_end": {
+                            "type": "date"
+                        },
+                        "time_frame":{
+                            "type":"date_range",
+                            "format":"yyyy-MM-dd"
+                        }
+                    }
+                }
+            }
+        </field>
+    </record>
+
+</odoo>

@@ -11,7 +11,14 @@ class TestSaleSchema(SchemaSaleCase):
     @classmethod
     def setUpClass(cls):
         res = super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, queue_job__no_delay=True))
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context,
+                queue_job__no_delay=True,
+                # avoid failure when elasticsearch_security is installed
+                es_security_no_autosync=True,
+            )
+        )
         cls.tax_15pc_excl = cls.env["account.tax"].create(
             {
                 "name": "Tax 15%",
