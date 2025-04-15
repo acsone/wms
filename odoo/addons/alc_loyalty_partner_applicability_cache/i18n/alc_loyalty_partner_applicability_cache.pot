@@ -1,0 +1,60 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_loyalty_partner_applicability_cache
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_loyalty_partner_applicability_cache
+#: model:ir.model.fields,field_description:alc_loyalty_partner_applicability_cache.field_loyalty_program__all_restricted_partner_ids
+msgid "All Partners"
+msgstr ""
+
+#. module: alc_loyalty_partner_applicability_cache
+#: model:ir.model.fields,help:alc_loyalty_partner_applicability_cache.field_loyalty_program__all_restricted_partner_ids
+msgid ""
+"All partners that are eligible for this loyalty program.\n"
+"This field is used to cache the partner eligibility for the loyalty program.\n"
+"It is automatically updated when the program is created or modified. It's also modified when a partner is created or modified and by a daily cron.\n"
+"The list is empty if the program is not active or if the program is not restricted to specific partners.\n"
+msgstr ""
+
+#. module: alc_loyalty_partner_applicability_cache
+#: model:ir.model,name:alc_loyalty_partner_applicability_cache.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_loyalty_partner_applicability_cache
+#: model:ir.model,name:alc_loyalty_partner_applicability_cache.model_loyalty_program
+msgid "Loyalty Program"
+msgstr ""
+
+#. module: alc_loyalty_partner_applicability_cache
+#: model:ir.actions.server,name:alc_loyalty_partner_applicability_cache.action_loyalty_program_recompute_all_restricted_partners
+#: model:ir.cron,cron_name:alc_loyalty_partner_applicability_cache.ir_cron_loyalty_program_recompute_all_restricted_partners
+msgid "Loyalty Program: Recompute the cache of restricted partners"
+msgstr ""
+
+#. module: alc_loyalty_partner_applicability_cache
+#: model:ir.model.fields,field_description:alc_loyalty_partner_applicability_cache.field_loyalty_program__is_public
+msgid "Public"
+msgstr ""
+
+#. module: alc_loyalty_partner_applicability_cache
+#: model:ir.model.fields,field_description:alc_loyalty_partner_applicability_cache.field_res_partner__restricted_loyalty_program_ids
+#: model:ir.model.fields,field_description:alc_loyalty_partner_applicability_cache.field_res_users__restricted_loyalty_program_ids
+msgid "Restricted Loyalty Programs"
+msgstr ""
+
+#. module: alc_loyalty_partner_applicability_cache
+#: model:ir.model.fields,help:alc_loyalty_partner_applicability_cache.field_loyalty_program__is_public
+msgid "This program is available for all partners."
+msgstr ""
