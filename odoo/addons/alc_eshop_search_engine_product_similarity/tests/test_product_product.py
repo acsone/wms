@@ -2,14 +2,16 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.addons.base.tests.common import BaseCommon
+from odoo.addons.extendable.tests.common import ExtendableMixin
+from odoo.addons.shopinvader_product.schemas.product import ProductProduct
 
-from ..schemas.product_product import ProductProduct
 
-
-class TestProductSimilarityBase(BaseCommon):
+class TestProductSimilarityBase(BaseCommon, ExtendableMixin):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.init_extendable_registry()
+        cls.addClassCleanup(cls.reset_extendable_registry)
 
     def test_product_product_pydantic(self):
         product = self.env["product.product"].create(
