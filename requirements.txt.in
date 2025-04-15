@@ -201,7 +201,7 @@ openupgradelib @ git+https://github.com/acsone/openupgradelib.git@16.0-alc_maste
 
 # OCA/account-closing
 # https://github.com/OCA/account-closing/pull/326 - account cutoff accrual on order
-odoo-addon-account-cutoff-accrual-order-base @ git+https://github.com/OCA/account-closing.git@refs/pull/326/head#subdirectory=setup/account_cutoff_accrual_order_base
+odoo-addon-account-cutoff-accrual-order-base @ git+https://github.com/acsone/account-closing.git@16.0-alc_account_cutoff_accrual_order_base#subdirectory=setup/account_cutoff_accrual_order_base
 odoo-addon-account-cutoff-accrual-order-product-category @ git+https://github.com/OCA/account-closing.git@refs/pull/273/head#subdirectory=setup/account_cutoff_accrual_order_product_categoryg
 odoo-addon-account-cutoff-accrual-purchase-stock @ git+https://github.com/acsone/account-closing.git@16.0-alc_account_cutoff_accrual_purchase_stock#subdirectory=setup/account_cutoff_accrual_purchase_stock
 odoo-addon-account-cutoff-accrual-sale @ git+https://github.com/OCA/account-closing.git@refs/pull/326/head#subdirectory=setup/account_cutoff_accrual_sale
