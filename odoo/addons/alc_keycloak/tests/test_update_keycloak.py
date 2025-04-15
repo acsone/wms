@@ -245,3 +245,24 @@ class TestKeycloakUpdateFlow(TestKeycloak):
         for k, v in expected_attributes.items():
             self.assertEqual(payload["attributes"][k], v)
         self.assertEqual(set(roles_str.split(",")), expected_roles)
+
+    def test_loyalty_program(self):
+        keycloak_user = self.env["keycloak.user"].create(self.vals_user)
+        loyalty_program = self.env["loyalty.program"].create({"name": "Loyalty"})
+        # delete queue job created by the group creation
+
+        # on veterinary group update if we add a partner it should be exported
+        with trap_jobs() as trap:
+            loyalty_program.partner_ids = keycloak_user.partner_id
+            loyalty_program.flush_recordset()
+            trap.assert_enqueued_job(
+                self.keycloak_backend.update_user_fields,
+                args=(keycloak_user, ["restricted_loyalty_program_ids"]),
+            )
+
+        payload = keycloak_user.keycloak_backend_id._get_user_payload(
+            keycloak_user, ["restricted_loyalty_program_ids"]
+        )
+        self.assertEqual(list(payload.keys()), ["attributes"])
+        roles_str = payload["attributes"].pop("shopinvader-vt-roles")
+        self.assertIn(loyalty_program._get_role_name(), roles_str.split(","))

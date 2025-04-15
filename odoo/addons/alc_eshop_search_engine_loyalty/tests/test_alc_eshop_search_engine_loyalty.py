@@ -27,6 +27,13 @@ class TestEshopSearchEngineLoyalty(TestBindingIndexBaseFake, ExtendableMixin):
 
     @classmethod
     def setup_records(cls, backend=None):
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context,
+                # avoid failure when elasticsearch_security is installed
+                es_security_no_autosync=True,
+            )
+        )
         cls.LoyaltyProgram = cls.env["loyalty.program"]
         backend = backend or cls.backend
         # ensure we only work with the index we'll create
@@ -58,7 +65,7 @@ class TestEshopSearchEngineLoyalty(TestBindingIndexBaseFake, ExtendableMixin):
 
     @classmethod
     def _expected_result(cls, loyalty_program):
-        return {
+        res = {
             "id": loyalty_program.id,
             "name": loyalty_program.name,
             "date_start": loyalty_program.date_start.isoformat(),
@@ -79,6 +86,9 @@ class TestEshopSearchEngineLoyalty(TestBindingIndexBaseFake, ExtendableMixin):
                 for rule in loyalty_program.rule_ids
             ],
         }
+        if "is_public" in loyalty_program._fields:
+            res["is_public"] = loyalty_program.is_public
+        return res
 
     def test_serializer(self):
         """Test the serializer of loyalty program."""

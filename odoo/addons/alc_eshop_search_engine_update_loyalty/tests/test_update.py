@@ -14,6 +14,13 @@ class TestUpdate(TestProductBindingBase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context,
+                # avoid failure when elasticsearch_security is installed
+                es_security_no_autosync=True,
+            )
+        )
         cls.loyalty_program = cls.env["loyalty.program"].create(
             {
                 "name": "Loyalty Program",

@@ -19,6 +19,7 @@ class KeycloakBackend(KeycloakBackendBase):
             "supplier_promotion_sale_allowed": "shopinvader-vt-roles",
             "date_start_contract_alcyonnaire": "shopinvader-vt-roles",
             "date_end_contract_alcyonnaire": "shopinvader-vt-roles",
+            "restricted_loyalty_program_ids": "shopinvader-vt-roles",
             "lang": "locale",
             "ref": "ref",
             "eshop_ordering_allowed": "can_order",
