@@ -13,7 +13,6 @@
         "product_brand",
         # Alcyon
         "alc_pim_attribute_group",
-        "alc_pim_attribute_group",
         "alc_pim_product",
         "alc_product_animal_species",
         "alc_product_audit",

@@ -95,4 +95,9 @@
     name="set_param"
     eval="('alc_elasticsearch_security_legacy_support.enable', True)"
   />
+  <function
+    model="ir.config_parameter"
+    name="set_param"
+    eval="('alc_product_similarity_settings.product_description_vectorization_enabled', True)"
+  />
 </odoo>
