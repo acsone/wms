@@ -14,23 +14,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_release_channel_import
-#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__active
-msgid "Active"
-msgstr ""
-
-#. module: alc_stock_release_channel_import
-#: model:ir.model,name:alc_stock_release_channel_import.model_alc_delivery_plan
-msgid "Alc Delivery Plan"
-msgstr ""
-
-#. module: alc_stock_release_channel_import
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_form_view
 msgid "Alc Import Delivery Zone Wizard"
-msgstr ""
-
-#. module: alc_stock_release_channel_import
-#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_import.alc_delivery_plan_form_view
-msgid "Archived"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
@@ -39,37 +24,16 @@ msgid "Cancel"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
-#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__release_channel_ids
-#: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_import.alc_delivery_plan_form_view
-msgid "Channels"
-msgstr ""
-
-#. module: alc_stock_release_channel_import
-#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__create_uid
 #: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
-#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__create_date
 #: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
-#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__delivery_plan_id
-#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_stock_release_channel__delivery_plan_id
-msgid "Delivery Plan"
-msgstr ""
-
-#. module: alc_stock_release_channel_import
-#: model:ir.actions.act_window,name:alc_stock_release_channel_import.alc_delivery_plan_act_window
-#: model:ir.ui.menu,name:alc_stock_release_channel_import.alc_delivery_plan_menu
-msgid "Delivery Plans"
-msgstr ""
-
-#. module: alc_stock_release_channel_import
-#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__display_name
 #: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__display_name
 msgid "Display Name"
 msgstr ""
@@ -87,7 +51,6 @@ msgid "Filename"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
-#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__id
 #: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__id
 msgid "ID"
 msgstr ""
@@ -98,15 +61,15 @@ msgid "Import"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
-#: model:ir.actions.act_window,name:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_act_window
-#: model:ir.actions.server,name:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_action
-#: model:ir.ui.menu,name:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_menu
-msgid "Import Delivery Plans"
+#: model:ir.model,name:alc_stock_release_channel_import.model_alc_import_delivery_zone_wizard
+msgid "Import Delivery Zones Wizard"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
-#: model:ir.model,name:alc_stock_release_channel_import.model_alc_import_delivery_zone_wizard
-msgid "Import Delivery Zones Wizard"
+#: model:ir.actions.act_window,name:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_act_window
+#: model:ir.actions.server,name:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_action
+#: model:ir.ui.menu,name:alc_stock_release_channel_import.alc_import_delivery_zone_wizard_menu
+msgid "Import Preparation Plans"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
@@ -115,34 +78,18 @@ msgid "Import shape file"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
-#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan____last_update
 #: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
-#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__write_uid
 #: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
-#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__write_date
 #: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__write_date
 msgid "Last Updated on"
-msgstr ""
-
-#. module: alc_stock_release_channel_import
-#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_delivery_plan__name
-msgid "Name"
-msgstr ""
-
-#. module: alc_stock_release_channel_import
-#. odoo-python
-#: code:addons/alc_stock_release_channel_import/models/alc_delivery_plan.py:0
-#: model:ir.model.constraint,message:alc_stock_release_channel_import.constraint_alc_delivery_plan_name_uniq
-#, python-format
-msgid "Name must be unique"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
@@ -153,10 +100,8 @@ msgid "No file sent."
 msgstr ""
 
 #. module: alc_stock_release_channel_import
-#. odoo-python
-#: code:addons/alc_stock_release_channel_import/models/alc_delivery_plan.py:0
-#, python-format
-msgid "Release Channels"
+#: model:ir.model.fields,field_description:alc_stock_release_channel_import.field_alc_import_delivery_zone_wizard__preparation_plan_id
+msgid "Preparation Plan"
 msgstr ""
 
 #. module: alc_stock_release_channel_import
@@ -167,6 +112,11 @@ msgstr ""
 #. module: alc_stock_release_channel_import
 #: model:ir.model.fields,help:alc_stock_release_channel_import.field_stock_release_channel__shape_name
 msgid "Shape resource name into the imported shape file"
+msgstr ""
+
+#. module: alc_stock_release_channel_import
+#: model:ir.model,name:alc_stock_release_channel_import.model_stock_release_channel_preparation_plan
+msgid "Stock Release Channel Preparation Plan"
 msgstr ""
 
 #. module: alc_stock_release_channel_import

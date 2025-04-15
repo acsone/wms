@@ -121,6 +121,15 @@ msgid "Rebate of cumulated amount"
 msgstr ""
 
 #. module: alc_sale_loyalty_year_end_rebate
+#. odoo-python
+#: code:addons/alc_sale_loyalty_year_end_rebate/models/sale_order.py:0
+#, python-format
+msgid ""
+"Recompute RFA for %(beneficiary)s from %(from_)s to %(to)s on %(total)s "
+"orders"
+msgstr ""
+
+#. module: alc_sale_loyalty_year_end_rebate
 #: model:ir.model.fields,field_description:alc_sale_loyalty_year_end_rebate.field_sale_order_line__reward_id
 msgid "Reward"
 msgstr ""

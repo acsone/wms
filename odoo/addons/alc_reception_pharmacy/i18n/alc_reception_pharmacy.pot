@@ -26,7 +26,14 @@ msgstr ""
 
 #. module: alc_reception_pharmacy
 #: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.receive_pharmacy_products_form_view
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy.reception_pharmacy_view_form
 msgid "Cancel"
+msgstr ""
+
+#. module: alc_reception_pharmacy
+#: model:ir.model.fields.selection,name:alc_reception_pharmacy.selection__reception_pharmacy__state__cancel
+#: model:ir.model.fields.selection,name:alc_reception_pharmacy.selection__reception_pharmacy_line__state__cancel
+msgid "Cancelled"
 msgstr ""
 
 #. module: alc_reception_pharmacy
@@ -188,6 +195,13 @@ msgstr ""
 #: model:ir.model.fields.selection,name:alc_reception_pharmacy.selection__reception_pharmacy__state__draft
 #: model:ir.model.fields.selection,name:alc_reception_pharmacy.selection__reception_pharmacy_line__state__draft
 msgid "New"
+msgstr ""
+
+#. module: alc_reception_pharmacy
+#. odoo-python
+#: code:addons/alc_reception_pharmacy/models/reception_pharmacy.py:0
+#, python-format
+msgid "One of the lines has been validated.You can't cancel this reception."
 msgstr ""
 
 #. module: alc_reception_pharmacy

@@ -1,0 +1,45 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_partner_sale_loyalty
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_partner_sale_loyalty
+#: model:ir.model.fields,field_description:alc_partner_sale_loyalty.field_loyalty_card__beneficiary_partner_type
+msgid "Beneficiary Partner"
+msgstr ""
+
+#. module: alc_partner_sale_loyalty
+#: model:ir.model,name:alc_partner_sale_loyalty.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: alc_partner_sale_loyalty
+#: model:ir.model.fields,field_description:alc_partner_sale_loyalty.field_res_partner__loyalty_cards_count
+#: model:ir.model.fields,field_description:alc_partner_sale_loyalty.field_res_users__loyalty_cards_count
+#: model_terms:ir.ui.view,arch_db:alc_partner_sale_loyalty.res_partner_form_view
+msgid "Loyalty Cards"
+msgstr ""
+
+#. module: alc_partner_sale_loyalty
+#: model:ir.model,name:alc_partner_sale_loyalty.model_loyalty_card
+msgid "Loyalty Coupon"
+msgstr ""
+
+#. module: alc_partner_sale_loyalty
+#: model:ir.model.fields,help:alc_partner_sale_loyalty.field_loyalty_card__beneficiary_partner_type
+msgid ""
+"The the partner that will be the beneficiary of the program\n"
+"- Customer: the customer of the sale order\n"
+"- Invoiced Customer: the invoiced partner of the sale order\n"
+"- Commercial Entity: the commercial entity of the customer of the sale order"
+msgstr ""
