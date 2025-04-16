@@ -9,9 +9,10 @@ class SimilarProductsWidget extends Component {
   setup() {
     super.setup();
     this.orm = useService("orm");
-    this.action = useService("action"); // Use the action service
+    this.action = useService("action");
     this.state = useState({
       similarProducts: [],
+      productsVectorizationEnabled: true,
     });
 
     this.onSimilarProductClick = this.onSimilarProductClick.bind(this);
@@ -24,6 +25,12 @@ class SimilarProductsWidget extends Component {
   async loadSimilarProducts() {
     if (this.props.value && this.props.value.length > 0) {
       try {
+        // The product.product model returns [-1] if the product vectorization settings is set to False
+        if (this.props.value[0] === -1) {
+          this.state.similarProducts = [];
+          this.state.productsVectorizationEnabled = false;
+          return;
+        }
         const products = await this.orm.searchRead(
           "product.product",
           [["id", "in", this.props.value]],

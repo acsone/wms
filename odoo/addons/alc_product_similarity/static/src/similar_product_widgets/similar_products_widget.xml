@@ -34,9 +34,19 @@
                     </div>
                 </div>
             </t>
+            <t t-elif="!state.productsVectorizationEnabled">
+                <div class="alert alert-warning" role="alert">
+                    <p>
+                        You must activate "Product Description Vectorization" setting to get
+                        similar products.
+                    </p>
+                </div>
+
+            </t>
             <t t-else="">
                 <p>No similar products found.</p>
             </t>
+
         </div>
     </t>
 </templates>
