@@ -12,6 +12,7 @@
         # Third-party
         "shopinvader_schema_sale",
         # Alcyon
+        "alc_eshop_total_year_end_rebate_partner_visibility",
         "alc_sale_stock_loyalty_year_end_rebate",
     ],
     "data": [],

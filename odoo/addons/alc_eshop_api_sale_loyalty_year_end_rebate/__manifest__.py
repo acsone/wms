@@ -13,6 +13,7 @@
         "fastapi",
         "loyalty_initial_date_validity",
         # Alcyon
+        "alc_eshop_total_year_end_rebate_partner_visibility",
         "alc_partner_sale_loyalty",
         "alc_sale_stock_loyalty_year_end_rebate",
     ],
