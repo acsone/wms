@@ -230,9 +230,6 @@ odoo-addon-module-analysis-price @ git+https://github.com/akretion/ak-odoo-incub
 # OCA/queue
 odoo-addon-queue_job @ git+https://github.com/acsone/queue@16.0-alc-queue#subdirectory=setup/queue_job
 
-# lmignon/extendable-pydantic
-extendable-pydantic @ git+https://github.com/lmignon/extendable-pydantic.git@refs/pull/22/head
-
 # OCA/sale-promotion
 odoo-addon-loyalty-partner-applicability @ git+https://github.com/OCA/sale-promotion.git@refs/pull/265/head#subdirectory=setup/loyalty_partner_applicability
 odoo-addon-sale-loyalty-partner-applicability @ git+https://github.com/OCA/sale-promotion.git@refs/pull/265/head#subdirectory=setup/sale_loyalty_partner_applicability
