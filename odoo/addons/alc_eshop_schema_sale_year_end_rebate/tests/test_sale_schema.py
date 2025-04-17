@@ -1,16 +1,24 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from datetime import datetime, timedelta
+
 from odoo import Command
 
+from odoo.addons.alc_eshop_total_year_end_rebate_partner_visibility.tests.common import (
+    YearEndRebatePartnerVisibilityTestMixin,
+)
 from odoo.addons.shopinvader_schema_sale.schemas import Sale
 from odoo.addons.shopinvader_schema_sale.tests.common import SchemaSaleCase
 
+from ..schemas import YearEndRebateWithTotal
 
-class TestSaleSchema(SchemaSaleCase):
+
+class TestSaleSchema(SchemaSaleCase, YearEndRebatePartnerVisibilityTestMixin):
     @classmethod
     def setUpClass(cls):
         res = super().setUpClass()
+        cls._setupRecords()
         cls.env = cls.env(
             context=dict(
                 cls.env.context,
@@ -92,6 +100,12 @@ class TestSaleSchema(SchemaSaleCase):
         cls.so_with_loyalty.action_confirm()
         cls._deliver_order(cls.so_with_loyalty, cls.product_A, 5)
         cls.empty_order = cls.env["sale.order"].create({"partner_id": cls.steve.id})
+        cls.veterinary_group_model = cls.env["veterinary.group"]
+        cls.partner_model = cls.env["res.partner"]
+        cls.alcyonnaire_group = cls.veterinary_group_model.create(
+            {"name": "Alcyonnaire", "is_alcyonnaire": True}
+        )
+        cls.yesterday = datetime.now() - timedelta(days=1)
         return res
 
     @classmethod
@@ -104,19 +118,45 @@ class TestSaleSchema(SchemaSaleCase):
         picking._action_done()
 
     def tests_so_no_loyalty(self):
+        self._allow_partner_to_see_total_year_end_rebate(
+            self.empty_order.partner_id, allow=True
+        )
         sale = Sale.from_sale_order(self.empty_order)
-        self.assertEqual(sale.rebate_accrued_total_amount, 0.0)
-        self.assertEqual(sale.rebate_accrued_total_max_amount, 0.0)
-        self.assertEqual(sale.rebate_accrued_amount, 0.0)
-        self.assertEqual(sale.rebate_accrued_max_amount, 0.0)
-        self.assertEqual(sale.rebate_potential_amount, 0.0)
-        self.assertEqual(sale.rebate_potential_max_amount, 0.0)
+        year_end_rebate = sale.year_end_rebate
+        self.assertEqual(year_end_rebate.rebate_accrued_total_amount, 0.0)
+        self.assertEqual(year_end_rebate.rebate_accrued_total_max_amount, 0.0)
+        self.assertEqual(year_end_rebate.rebate_accrued_amount, 0.0)
+        self.assertEqual(year_end_rebate.rebate_accrued_max_amount, 0.0)
+        self.assertEqual(year_end_rebate.rebate_potential_amount, 0.0)
+        self.assertEqual(year_end_rebate.rebate_potential_max_amount, 0.0)
+        self.assertIsNone(year_end_rebate.program_id)
 
     def tests_so_with_loyalty(self):
+        self._allow_partner_to_see_total_year_end_rebate(
+            self.so_with_loyalty.partner_id, allow=True
+        )
         sale = Sale.from_sale_order(self.so_with_loyalty)
-        self.assertEqual(sale.rebate_accrued_total_amount, 500.0)
-        self.assertEqual(sale.rebate_accrued_total_max_amount, 5000.0)
-        self.assertEqual(sale.rebate_accrued_amount, 500.0)
-        self.assertEqual(sale.rebate_accrued_max_amount, 5000.0)
-        self.assertEqual(sale.rebate_potential_amount, 1000.0)
-        self.assertEqual(sale.rebate_potential_max_amount, 10000.0)
+        year_end_rebate = sale.year_end_rebate
+        self.assertEqual(year_end_rebate.rebate_accrued_total_amount, 500.0)
+        self.assertEqual(year_end_rebate.rebate_accrued_total_max_amount, 5000.0)
+        self.assertEqual(year_end_rebate.rebate_accrued_amount, 500.0)
+        self.assertEqual(year_end_rebate.rebate_accrued_max_amount, 5000.0)
+        self.assertEqual(year_end_rebate.rebate_potential_amount, 1000.0)
+        self.assertEqual(year_end_rebate.rebate_potential_max_amount, 10000.0)
+        self.assertEqual(year_end_rebate.program_id, self.year_end_rebate_program.id)
+
+    def test_so_with_loyalty_secutry(self):
+        # Check that depoending on the user, we can see or not the total
+        # year end rebate
+        self._allow_partner_to_see_total_year_end_rebate(
+            self.so_with_loyalty.partner_id, allow=False
+        )
+        sale = Sale.from_sale_order(self.so_with_loyalty)
+        year_end_rebate = sale.year_end_rebate
+        self.assertFalse(isinstance(year_end_rebate, YearEndRebateWithTotal))
+        self._allow_partner_to_see_total_year_end_rebate(
+            self.so_with_loyalty.partner_id, allow=True
+        )
+        sale = Sale.from_sale_order(self.so_with_loyalty)
+        year_end_rebate = sale.year_end_rebate
+        self.assertTrue(isinstance(year_end_rebate, YearEndRebateWithTotal))

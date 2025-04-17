@@ -26,8 +26,13 @@ def get_current_loyalty_card_rfa(
     env: Annotated[api.Environment, Depends(authenticated_partner_env)],
     partner: Annotated[Partner, Depends(authenticated_partner)],
 ) -> LoyaltyCard:
-    """Get current RFA info."""
+    """Get current RFA info.
 
+    This service returns 204 if the partner has no loyalty card
+    or if the partner is not allowed to see the total year end rebate.
+    """
+    if not partner._allows_see_total_year_end_rebate():
+        return Response(status_code=204)
     domain = partner.sudo()._get_loyalty_card_domain()
     cards = (
         env["loyalty.card"]
@@ -63,7 +68,13 @@ def get_loyalty_card_history(
     env: Annotated[api.Environment, Depends(authenticated_partner_env)],
     partner: Annotated[Partner, Depends(authenticated_partner)],
 ) -> PagedCollection[LoyaltyCardHistory]:
-    """Get loyalty card points assignation history."""
+    """Get loyalty card points assignation history.
+
+    This service returns 204 if the partner has no loyalty card
+    or if the partner is not allowed to see the total year end rebate.
+    """
+    if not partner._allows_see_total_year_end_rebate():
+        return Response(status_code=204)
     domain = partner.sudo()._get_loyalty_card_domain()
     domain = AND(
         [

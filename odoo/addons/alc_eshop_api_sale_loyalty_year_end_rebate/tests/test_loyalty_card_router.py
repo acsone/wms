@@ -4,15 +4,21 @@ import freezegun
 
 from odoo import Command
 
+from odoo.addons.alc_eshop_total_year_end_rebate_partner_visibility.tests.common import (
+    YearEndRebatePartnerVisibilityTestMixin,
+)
 from odoo.addons.fastapi.tests.common import FastAPITransactionCase
 
 from ..routers import loyalty_card_router
 
 
-class TestLoyaltyCardRouter(FastAPITransactionCase):
+class TestLoyaltyCardRouter(
+    FastAPITransactionCase, YearEndRebatePartnerVisibilityTestMixin
+):
     @classmethod
     def setUpClass(cls):
         res = super().setUpClass()
+        cls._setupRecords()
         cls.default_fastapi_router = loyalty_card_router
         cls.tax_15pc_excl = cls.env["account.tax"].create(
             {
@@ -70,9 +76,11 @@ class TestLoyaltyCardRouter(FastAPITransactionCase):
                 "email": "steve.bucknor@example.com",
             }
         )
+        cls._allow_partner_to_see_total_year_end_rebate(partner=cls.steve, allow=True)
         programs.write({"active": False})
         cls.year_end_rebate_program.rule_ids.reward_point_max_amount = 10
         cls.steve_bis = cls.steve.copy({"name": "Steve Bis"})
+        cls._allow_partner_to_see_total_year_end_rebate(cls.steve_bis, allow=True)
         with freezegun.freeze_time("2025-01-02 12:00:00"):
             cls.so_with_loyalty = cls.env["sale.order"].create(
                 {
@@ -174,3 +182,20 @@ class TestLoyaltyCardRouter(FastAPITransactionCase):
         with self._create_test_client(partner=self.steve) as client:
             response = client.get(f"/loyalty/card/{self.loyalty_card.id}/history")
             self.assertEqual(response.status_code, 404)
+
+    @freezegun.freeze_time("2025-06-01 00:00:00")
+    def test_loyalty_card_no_access(self):
+        with self._create_test_client(
+            partner=self.so_with_loyalty.partner_id
+        ) as client:
+            response = client.get("/loyalty/card/rfa/current")
+            self.assertEqual(response.status_code, 200)
+            response = client.get(f"/loyalty/card/{self.loyalty_card.id}/history")
+            self.assertEqual(response.status_code, 200)
+            self._allow_partner_to_see_total_year_end_rebate(
+                self.so_with_loyalty.partner_id, allow=False
+            )
+            response = client.get("loyalty/card/rfa/current")
+            self.assertEqual(response.status_code, 204)
+            response = client.get(f"/loyalty/card/{self.loyalty_card.id}/history")
+            self.assertEqual(response.status_code, 204)

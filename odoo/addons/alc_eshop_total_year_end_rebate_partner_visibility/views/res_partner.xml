@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="res_partner_form_view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="alc_veterinary_group.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="is_exclusive_vet_efficiency_member" position="after">
+                <field name="is_valid_vet_efficiency_member" invisible="1"/>
+                <field name="is_total_year_end_rebate_visible" attrs="{'invisible': [('is_valid_vet_efficiency_member', '=', False)]}"/>
+            </field>
+        </field>
+    </record>
+
+
+
+</odoo>
