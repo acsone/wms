@@ -83,7 +83,7 @@ odoo-addon-account-cutoff-accrual-purchase==16.0.1.0.0.4
 odoo-addon-account-cutoff-accrual-purchase-stock==16.0.1.1.0
 odoo-addon-account-cutoff-accrual-sale==16.0.1.1.0
 odoo-addon-account-cutoff-accrual-sale-stock==16.0.1.1.0
-odoo-addon-account-cutoff-base==16.0.1.6.0
+odoo-addon-account-cutoff-base @ git+https://github.com/acsone/account-closing.git@8d658267bba6d3d64814f806b546b8784dbb34f3#subdirectory=setup/account_cutoff_base
 odoo-addon-account-einvoice-generate @ git+https://github.com/acsone/edi.git@3349389850381b2f1dde99e510d7fb4491387bb7#subdirectory=setup/account_einvoice_generate
 odoo-addon-account-financial-report @ git+https://github.com/acsone/account-financial-reporting@c6c4dac24762cf5721d58d9147ef29b7de5e610c#subdirectory=setup/account_financial_report
 odoo-addon-account-invoice-accrual @ git+https://github.com/acsone/account-closing.git@42710267a8ed7351ba1f70a58491ce04beac04a2#subdirectory=setup/account_invoice_accrual
