@@ -1,4 +1,5 @@
 # Copyright 2023 ACSONE SA/NV
+# Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from datetime import date
@@ -27,12 +28,17 @@ class ProductProduct(ProductBase):
     )
 
     def _compute_average_sale(self):
-        # Stop the method if self is empty.
+        # Set value in case of newId
+        for product in self:
+            if not product.id:
+                product.average_annual_sale = 0
+                product.average_three_months_sale = 0
+        # Stop the method if ids is empty.
         # Otherwise SQL query will fail (ids = [])
-        if not self:
+        ids = tuple(self.ids)
+        if not ids:
             return
         today = date.today()
-        ids = tuple(self.ids)
 
         # Compute annual sale
         today_minus_one_year = today - relativedelta(years=1)
