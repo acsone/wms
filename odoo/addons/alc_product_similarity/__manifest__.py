@@ -10,9 +10,7 @@
     "website": "https://acsone.eu/",
     "depends": [
         # Odoo Community
-        "base",
         "product",
-        "web",
         # Third-party
         "attribute_set",
         "field_vector",
@@ -36,9 +34,4 @@
     "external_dependencies": {"python": ["requests"]},
     "development_status": "Alpha",
     "pre_init_hook": "pre_init_hook",
-    "assets": {
-        "web.assets_backend": [
-            "alc_product_similarity/static/src/**/*",
-        ],
-    },
 }

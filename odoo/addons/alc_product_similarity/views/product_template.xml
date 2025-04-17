@@ -10,7 +10,9 @@
         <field name="arch" type="xml">
             <notebook position="inside">
                 <page name="similar_products" string="Similar Products">
-                    <field name="similar_products_ids" widget="similar_products_widget" />
+                    <!-- You can define a custom kanban view here by creating a child <kanban> node
+                    inside the field (you can then remove the "mode" attribute) -->
+                    <field name="similar_products_ids" mode="kanban" />
                 </page>
             </notebook>
         </field>

@@ -6,7 +6,7 @@ from odoo import fields, api, models
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    similar_products_ids = fields.Json(
+    similar_products_ids = fields.Many2many(
         related="product_variant_ids.similar_products_ids"
     )
 

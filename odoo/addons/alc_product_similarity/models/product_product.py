@@ -27,8 +27,9 @@ class ProductProduct(models.Model):
         readonly=True,
         dimensions=384,
     )
-    similar_products_ids = fields.Json(
+    similar_products_ids = fields.Many2many(
         string="Similar products",
+        comodel_name="product.product",
         readonly=True,
         store=False,
         compute="_compute_similar_products_ids",
@@ -53,10 +54,6 @@ class ProductProduct(models.Model):
 
     @api.depends("description_vector", "characteristics_vector")
     def _compute_similar_products_ids(self):
-        if not self._is_product_description_vectorization_enabled():
-            # putting an empty array causes a JS error on props validation of similar_products_widget
-            self.similar_products_ids = [-1]
-            return
         for product in self:
             similar_products_infos = product.get_similar_products(5)
             product.similar_products_ids = [
