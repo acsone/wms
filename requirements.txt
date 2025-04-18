@@ -325,8 +325,8 @@ odoo-addon-shopfloor-reception @ git+https://github.com/acsone/wms.git@e694ffa01
 odoo-addon-shopfloor-reception-mobile @ git+https://github.com/acsone/wms.git@921aaefcb87b344ad46a209c75858ac5ec63d5d1#subdirectory=setup/shopfloor_reception_mobile
 odoo-addon-shopfloor-reception-product-barcode @ git+https://github.com/acsone/wms.git@951775e3a695adeec85341c0dfc6a675216978c8#subdirectory=setup/shopfloor_reception_product_barcode
 odoo-addon-shopfloor-reception-product-barcode-mobile @ git+https://github.com/acsone/wms.git@951775e3a695adeec85341c0dfc6a675216978c8#subdirectory=setup/shopfloor_reception_product_barcode_mobile
-odoo-addon-shopfloor-reception-product-dimension @ git+https://github.com/acsone/wms.git@016cd8d8bafbadde53eca7196b0385f3a915cdf2#subdirectory=setup/shopfloor_reception_product_dimension
-odoo-addon-shopfloor-reception-product-dimension-mobile @ git+https://github.com/acsone/wms.git@016cd8d8bafbadde53eca7196b0385f3a915cdf2#subdirectory=setup/shopfloor_reception_product_dimension_mobile
+odoo-addon-shopfloor-reception-product-dimension @ git+https://github.com/acsone/wms.git@3f52ec1ddc3b13fce328da12634d62194edfe704#subdirectory=setup/shopfloor_reception_product_dimension
+odoo-addon-shopfloor-reception-product-dimension-mobile @ git+https://github.com/acsone/wms.git@3f52ec1ddc3b13fce328da12634d62194edfe704#subdirectory=setup/shopfloor_reception_product_dimension_mobile
 odoo-addon-shopfloor-rest-log==16.0.1.0.0.5
 odoo-addon-shopfloor-workstation==16.0.1.0.0.3
 odoo-addon-shopfloor-workstation-mobile==16.0.1.0.0.4
