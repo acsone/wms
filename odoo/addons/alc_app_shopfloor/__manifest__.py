@@ -22,6 +22,8 @@
         "shopfloor_putaway_recompute",
         "shopfloor_reception",
         "shopfloor_reception_mobile",
+        "shopfloor_reception_product_barcode",
+        "shopfloor_reception_product_barcode_mobile",
         "shopfloor_reception_product_dimension",
         "shopfloor_reception_product_dimension_mobile",
         "shopfloor_rest_log",
