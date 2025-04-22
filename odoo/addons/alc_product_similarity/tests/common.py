@@ -8,11 +8,6 @@ class TestProductSimilarityBase(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env["ir.config_parameter"].set_param(
-            "alc_product_similarity_settings.product_description_vectorization_enabled",
-            True,
-        )
-
         # --- Create attributes
 
         # animal sizes

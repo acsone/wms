@@ -77,29 +77,6 @@ RUN --mount=type=ssh \
 FROM base as dependencies
 
 
-# Preload the hugging face model cache.
-# This is required to make sure the model is available in the container when we
-# the container start.
-
-ENV HF_HUB_CACHE=/huggingface
-ENV MODEL_NAME=paraphrase-multilingual-MiniLM-L12-v2
-RUN --mount=type=cache,target=/root/.cache/uv,id=uv-jammy \
-    --mount=type=cache,target=/root/.cache/huggingface,id=hg-jammy \
-    --mount=from=ghcr.io/astral-sh/uv:latest,source=/uv,target=/bin/uv \
-    --mount=type=bind,source=requirements.txt,target=/tmp/requirements.txt \
-    uv pip install huggingface_hub sentence_transformers -c /tmp/requirements.txt
-RUN python -u -c "\
-import logging;\
-import os; \
-from huggingface_hub import hf_hub_download;\
-from sentence_transformers import SentenceTransformer;\
-logging.basicConfig(level=logging.INFO);\
-print('Loading model...');\
-model = SentenceTransformer('$MODEL_NAME');\
-print('Model loaded!');\
-path = hf_hub_download(repo_id='sentence-transformers/$MODEL_NAME', filename='config.json');\
-print('Model cached at:', os.path.dirname(path));"
-
 # Install python dependencies we built in the build stage.
 # Use --no-deps and --no-index to be sure to not download anything else.
 
@@ -107,8 +84,6 @@ COPY --from=build-deps /odoo /odoo
 
 # Additional entry point scripts.
 COPY ./container/entrypoint-dbbase /odoo/start-entrypoint.d/
-
-ENV HF_DATASETS_OFFLINE=1
 
 
 #######################################################################################
