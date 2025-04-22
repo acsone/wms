@@ -1,4 +1,5 @@
 from . import product_product
+from . import product_template
 from . import alc_product_characteristic
 from . import animal_species
 from . import attribute_option

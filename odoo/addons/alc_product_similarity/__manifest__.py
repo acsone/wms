@@ -15,6 +15,7 @@
         "attribute_set",
         "field_vector",
         "product_multi_category",
+        "product_sale_description",
         "queue_job",
         # Alcyon
         "alc_pim_product",
@@ -24,9 +25,7 @@
         "alc_queue_job_background_channel",
     ],
     "application": False,
-    "data": [
-        "security/ir.model.access.csv",
-    ],
+    "data": ["security/ir.model.access.csv", "data/queue_job_function.xml"],
     "demo": [],
     "external_dependencies": {"python": ["requests"]},
     "development_status": "Alpha",
