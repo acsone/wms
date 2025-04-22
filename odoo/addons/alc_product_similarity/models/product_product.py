@@ -15,8 +15,6 @@ class ProductProduct(models.Model):
     _name = "product.product"
     _inherit = "product.product"
 
-    _text_embedding_model = None  # lazy loading of the text embedding model
-
     characteristics_vector = Vector(
         string="Characteristics vector",
         readonly=True,
@@ -63,22 +61,6 @@ class ProductProduct(models.Model):
             "alc_product_similarity_settings.embed_service_url"
         ) or os.environ.get("EMBED_SERVER_URL")
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        # Override to trigger the computation of the description vector
-        # when creating a product
-        new_products = super().create(vals_list)
-        new_products._delay_compute_description_vector()
-        return new_products
-
-    def write(self, vals):
-        # Override to trigger the computation of the description vector
-        # when updating a product
-        res = super().write(vals)
-        if "name" in vals or "description_shop_long" in vals:
-            self._delay_compute_description_vector()
-        return res
-
     def _delay_compute_description_vector(self):
         """
         Triggers the computation of the description vector in the background.
@@ -96,11 +78,8 @@ class ProductProduct(models.Model):
             )._compute_description_vector()
 
     def _get_description_vector_input_text(self):
-        return self.name + (
-            ("\n" + str(self.description_shop_long))
-            if self.description_shop_long
-            else ""
-        )
+        description = self.description_sale_long or self.description_sale_short
+        return self.name + (("\n" + str(description)) if self.description else "")
 
     def _compute_description_vector(self):
         """Computes the description_vector for the product."""

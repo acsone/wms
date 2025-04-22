@@ -27,6 +27,9 @@ class TestProductProduct(TestProductSimilarityBase):
             "alc_product_similarity_settings.embed_service_url",
             cls.embed_service_url,
         )
+        cls.product_test_food = cls.product_test_food.with_env(cls.env)
+        cls.product_material = cls.product_material.with_env(cls.env)
+        cls.product_vitamines = cls.product_vitamines.with_env(cls.env)
 
     @contextmanager
     def mock_embed_service(self):
@@ -42,7 +45,7 @@ class TestProductProduct(TestProductSimilarityBase):
                 f"{self.embed_service_url}/embed/products",
                 json=call_back,
             )
-            yield
+            yield m
 
     def test_characteristics_vector_updates(self):
         characteristics_vector_0 = self.product_test_food.characteristics_vector
@@ -144,3 +147,16 @@ class TestProductProduct(TestProductSimilarityBase):
             self.assertEqual(
                 product_0_neighbors[1], product_2, "Unexpected second neighbor."
             )
+
+    def test_description_vector_updates(self):
+        with self.mock_embed_service() as m:
+            self.product_test_food.description_sale_short = (
+                "This is a short description"
+            )
+            self.assertTrue(m.called)
+
+        with self.mock_embed_service() as m:
+            self.product_test_food.product_tmpl_id.description_sale_long = (
+                "This is a long description"
+            )
+            self.assertTrue(m.called)
