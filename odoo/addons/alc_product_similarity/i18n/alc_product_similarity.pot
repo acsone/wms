@@ -115,6 +115,11 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: alc_product_similarity
+#: model:ir.model,name:alc_product_similarity.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: alc_product_similarity
 #: model:ir.model,name:alc_product_similarity.model_product_category
 msgid "Product Category"
 msgstr ""
