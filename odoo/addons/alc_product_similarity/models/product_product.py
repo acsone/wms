@@ -1,9 +1,10 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+import os
 
-from sentence_transformers import SentenceTransformer
+import requests
 
-from odoo import api, models
+from odoo import _, api, models
 from odoo.tools import str2bool
 from odoo.tools.sql import create_index
 
@@ -26,8 +27,6 @@ class ProductProduct(models.Model):
     description_vector = Vector(
         string="Description vector",
         readonly=True,
-        compute="_compute_description_vector",
-        store=True,
         dimensions=384,
     )
 
@@ -58,13 +57,76 @@ class ProductProduct(models.Model):
             )
         )
 
-    @api.depends("name", "description_shop_long")
+    @property
+    def embed_service_url(self):
+        return self.env["ir.config_parameter"].sudo().get_param(
+            "alc_product_similarity_settings.embed_service_url"
+        ) or os.environ.get("EMBED_SERVER_URL")
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Override to trigger the computation of the description vector
+        # when creating a product
+        new_products = super().create(vals_list)
+        new_products._delay_compute_description_vector()
+        return new_products
+
+    def write(self, vals):
+        # Override to trigger the computation of the description vector
+        # when updating a product
+        res = super().write(vals)
+        if "name" in vals or "description_shop_long" in vals:
+            self._delay_compute_description_vector()
+        return res
+
+    def _delay_compute_description_vector(self):
+        """
+        Triggers the computation of the description vector in the background.
+
+        using a queue job.
+        """
+        if not self._is_product_description_vectorization_enabled():
+            return
+        for record in self:
+            record.with_delay(
+                description=_(
+                    "Compute description vector for product %(name)s",
+                    name=record.display_name,
+                )
+            )._compute_description_vector()
+
+    def _get_description_vector_input_text(self):
+        return self.name + (
+            ("\n" + str(self.description_shop_long))
+            if self.description_shop_long
+            else ""
+        )
+
     def _compute_description_vector(self):
         """Computes the description_vector for the product."""
         if not self._is_product_description_vectorization_enabled():
             return
-        for product in self:
-            product.description_vector = product._get_description_vector()
+        url = self.embed_service_url
+        if not url:
+            raise ValueError(
+                _(
+                    "The embed service URL is not set. Please configure it in the system parameters by setting the key 'alc_product_similarity_settings.embed_service_url'."
+                )
+            )
+        rqst = {
+            "texts": [p._get_description_vector_input_text() for p in self],
+        }
+
+        response = requests.post(
+            url=f"{url}/embed/products",
+            json=rqst,
+            headers={"Content-Type": "application/json"},
+            timeout=60,
+        )
+        response.raise_for_status()
+        embeddings = response.json().get("embeddings")
+        for product, vector in zip(self, embeddings, strict=True):
+            product.description_vector = vector
 
     def _get_characteristics_infos(self):
         """
@@ -178,25 +240,6 @@ class ProductProduct(models.Model):
             for index, weight in vector_indices_and_weights.values():
                 vector[index] = weight
             product.characteristics_vector = vector
-
-    @api.model
-    def _get_text_embedding_model(self):
-        if not ProductProduct._text_embedding_model:
-            ProductProduct._text_embedding_model = SentenceTransformer(
-                "paraphrase-multilingual-MiniLM-L12-v2",
-            )
-        return ProductProduct._text_embedding_model
-
-    def _get_description_vector(self):
-        description = self.name + (
-            ("\n" + str(self.description_shop_long))
-            if self.description_shop_long
-            else ""
-        )
-
-        return self._get_text_embedding_model().encode(
-            description, show_progress_bar=False
-        )
 
     def get_similar_products(self, limit):
         """
