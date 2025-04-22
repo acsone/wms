@@ -48,6 +48,13 @@ msgid ""
 msgstr ""
 
 #. module: alc_product_similarity
+#. odoo-python
+#: code:addons/alc_product_similarity/models/product_product.py:0
+#, python-format
+msgid "Compute description vector for product %(name)s"
+msgstr ""
+
+#. module: alc_product_similarity
 #: model:ir.model,name:alc_product_similarity.model_res_config_settings
 msgid "Config Settings"
 msgstr ""
@@ -120,6 +127,16 @@ msgstr ""
 #. module: alc_product_similarity
 #: model:ir.model,name:alc_product_similarity.model_product_product
 msgid "Product Variant"
+msgstr ""
+
+#. module: alc_product_similarity
+#. odoo-python
+#: code:addons/alc_product_similarity/models/product_product.py:0
+#, python-format
+msgid ""
+"The embed service URL is not set. Please configure it in the system "
+"parameters by setting the key "
+"'alc_product_similarity_settings.embed_service_url'."
 msgstr ""
 
 #. module: alc_product_similarity
