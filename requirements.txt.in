@@ -69,6 +69,11 @@ odoo-addon-shopfloor @ git+https://github.com/acsone/wms.git@16.0-alc-shopfloor#
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@16.0-alc-shopfloor#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-gs1 @ git+https://github.com/OCA/wms.git@refs/pull/966/head#subdirectory=setup/shopfloor_gs1
 odoo-addon-shopfloor-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/head#subdirectory=setup/shopfloor_packing
+odoo-addon-shopfloor-product-dimension @ git+https://github.com/OCA/wms.git@refs/pull/1004/head#subdirectory=setup/shopfloor_product_dimension
+odoo-addon-shopfloor-reception-product-dimension @ git+https://github.com/OCA/wms.git@refs/pull/1005/head#subdirectory=setup/shopfloor_reception_product_dimension
+odoo-addon-shopfloor-reception-product-dimension-mobile @ git+https://github.com/OCA/wms.git@refs/pull/1005/head#subdirectory=setup/shopfloor_reception_product_dimension_mobile
+odoo-addon-shopfloor-reception-product-barcode @ git+https://github.com/OCA/wms.git@refs/pull/1007/head#subdirectory=setup/shopfloor_reception_product_barcode
+odoo-addon-shopfloor-reception-product-barcode-mobile @ git+https://github.com/OCA/wms.git@refs/pull/1007/head#subdirectory=setup/shopfloor_reception_product_barcode_mobile
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/head#subdirectory=setup/shopfloor_mobile_packing
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/OCA/wms.git@refs/pull/933/head#subdirectory=setup/shopfloor_batch_automatic_creation
 odoo-addon-shopfloor-reception @ git+https://github.com/OCA/wms.git@refs/pull/1002/head#subdirectory=setup/shopfloor_reception
