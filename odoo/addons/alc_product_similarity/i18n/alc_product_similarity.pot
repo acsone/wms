@@ -135,6 +135,17 @@ msgid "Product Variant"
 msgstr ""
 
 #. module: alc_product_similarity
+#: model_terms:ir.ui.view,arch_db:alc_product_similarity.product_template_form_view
+msgid "Similar Products"
+msgstr ""
+
+#. module: alc_product_similarity
+#: model:ir.model.fields,field_description:alc_product_similarity.field_product_product__similar_products_ids
+#: model:ir.model.fields,field_description:alc_product_similarity.field_product_template__similar_products_ids
+msgid "Similar products"
+msgstr ""
+
+#. module: alc_product_similarity
 #. odoo-python
 #: code:addons/alc_product_similarity/models/product_product.py:0
 #, python-format
