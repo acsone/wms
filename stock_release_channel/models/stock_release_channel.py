@@ -225,6 +225,10 @@ class StockReleaseChannel(models.Model):
         compute="_compute_is_action_wake_up_allowed",
         help="Technical field to check if the " "action 'Wake Up' is allowed.",
     )
+    is_action_safe_sleep_allowed = fields.Boolean(
+        compute="_compute_is_action_safe_sleep_allowed",
+        help="Technical field to check if the action 'Safe Sleep' is allowed.",
+    )
     is_release_allowed = fields.Boolean(
         compute="_compute_is_release_allowed",
         search="_search_is_release_allowed",
@@ -269,6 +273,13 @@ class StockReleaseChannel(models.Model):
     def _compute_is_release_allowed(self):
         for rec in self:
             rec.is_release_allowed = rec.state == "open" and not rec.release_forbidden
+
+    @api.depends("state")
+    def _compute_is_action_safe_sleep_allowed(self):
+        for rec in self:
+            rec.is_action_safe_sleep_allowed = bool(
+                rec.state in ["locked", "open"] and rec.open_picking_ids
+            )
 
     def _compute_show_last_picking_done(self):
         for rec in self:
@@ -873,14 +884,21 @@ class StockReleaseChannel(models.Model):
         self.write({"state": "open"})
 
     def action_sleep(self):
+        # TODO: Add safe argument in function arguments in further version to
+        # avoid context call
+        safe_sleep = self.env.context.get("release_channel_safe_sleep", False)
         self._check_is_action_sleep_allowed()
         pickings_to_unassign = self.env["stock.picking"].search(
             self._get_picking_to_unassign_domain()
         )
         pickings_to_unassign.write({"release_channel_id": False})
-        pickings_to_unassign.unrelease()
+        pickings_to_unassign.unrelease(safe_unrelease=safe_sleep)
         self.write({"state": "asleep"})
         pickings_to_unassign._delay_assign_release_channel()
+
+    def action_safe_sleep(self):
+        self.with_context(release_channel_safe_sleep=True).action_sleep()
+        return {"type": "ir.actions.act_window_close"}
 
     def action_wake_up(self):
         self._check_is_action_wake_up_allowed()
