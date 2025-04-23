@@ -25,7 +25,11 @@
         "alc_queue_job_background_channel",
     ],
     "application": False,
-    "data": ["security/ir.model.access.csv", "data/queue_job_function.xml"],
+    "data": [
+        "views/product_template.xml",
+        "security/ir.model.access.csv",
+        "data/queue_job_function.xml",
+    ],
     "demo": [],
     "external_dependencies": {"python": ["requests"]},
     "development_status": "Alpha",

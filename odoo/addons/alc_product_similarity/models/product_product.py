@@ -4,7 +4,7 @@ import os
 
 import requests
 
-from odoo import _, api, models
+from odoo import _, api, fields, models
 from odoo.tools import str2bool
 from odoo.tools.sql import create_index
 
@@ -27,6 +27,13 @@ class ProductProduct(models.Model):
         readonly=True,
         dimensions=384,
     )
+    similar_products_ids = fields.Many2many(
+        string="Similar products",
+        comodel_name="product.product",
+        readonly=True,
+        store=False,
+        compute="_compute_similar_products_ids",
+    )
 
     def init(self):  # pylint: disable=missing-return
         create_index(
@@ -44,6 +51,14 @@ class ProductProduct(models.Model):
             method="hnsw",
         )
         super().init()
+
+    @api.depends("description_vector", "characteristics_vector")
+    def _compute_similar_products_ids(self):
+        for product in self:
+            similar_products_infos = product.get_similar_products(5)
+            product.similar_products_ids = [
+                x["product"].id for x in similar_products_infos
+            ]
 
     @api.model
     def _is_product_description_vectorization_enabled(self):
@@ -253,6 +268,8 @@ class ProductProduct(models.Model):
         ORDER BY
             product_product.characteristics_vector <=> %s,
             product_product.description_vector <=> %s
+        LIMIT
+            {limit}
         """
         params = (
             self.characteristics_vector,
