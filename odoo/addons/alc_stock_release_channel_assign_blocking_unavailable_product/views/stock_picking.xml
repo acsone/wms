@@ -30,11 +30,12 @@
             </header>
             <xpath expr="//notebook/page[@name='operations']/field/tree" position="inside">
                 <field name="delivery_requires_other_lines" invisible="1" />
-                <button
-                    class="fa fa-exclamation-triangle text-danger"
-                    string="Delivery requires other lines"
-                    disabled="1"
+                <field
+                    name="delivery_requires_other_lines_label"
                     attrs="{'invisible': [('delivery_requires_other_lines', '=', False)]}"
+                    widget="badge"
+                    decoration-danger="True"
+                    optional="show"
                 />
             </xpath>
         </field>
