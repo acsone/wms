@@ -1,5 +1,6 @@
 # Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+import json
 
 from odoo.addons.alc_elasticsearch_security.tests.common import TestESRoles
 
@@ -24,3 +25,11 @@ class TestESRolesLoyalty(TestESRoles):
         self.assertIn(
             self.loyalty_program._get_role_name(), self.partner.elasticsearch_role
         )
+
+    def test_role_body_is_json_valid(self):
+        body = self.loyalty_program._get_role_body()
+        try:
+            json.loads(body)
+        except json.JSONDecodeError as e:
+            msg = "Role body is not valid JSON. " f"Error: {e.msg}. " f"Body: {body}"
+            self.fail(msg)
