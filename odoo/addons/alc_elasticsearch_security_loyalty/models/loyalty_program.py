@@ -1,6 +1,8 @@
 # Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import json
+
 from slugify import slugify
 
 from odoo import api
@@ -24,16 +26,16 @@ class LoyaltyProgram(Model):
         return slugify(f"lp{self.id}")
 
     def _get_role_body(self):
-        body = """{
-            "index_permissions":[
+        body = {
+            "index_permissions": [
                 {
-                    "index_patterns":["alc_loyalty_program_*"],
-                    "dls": "{\"term\": {\"id\": \"%s\"}}",,
+                    "index_patterns": ["alc_loyalty_program_*"],
+                    "dls": f'{{"term": {{"id": {self.id}}}}}',
                 }
             ]
-            }
-        """
-        return body % self.id
+        }
+        body = json.dumps(body)
+        return body
 
     def _get_vals(self):
         vals = super()._get_vals()
