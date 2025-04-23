@@ -1,6 +1,6 @@
 # Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import fields, api, models
+from odoo import api, fields, models
 
 
 class ProductTemplate(models.Model):
@@ -35,4 +35,3 @@ class ProductTemplate(models.Model):
         if any(field in vals for field in triggers):
             self.product_variant_ids._delay_compute_description_vector()
         return res
-
