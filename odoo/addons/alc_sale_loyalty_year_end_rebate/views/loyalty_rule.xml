@@ -4,19 +4,19 @@
         <field name="model">loyalty.rule</field>
         <field name="inherit_id" ref="loyalty.loyalty_rule_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//sheet/group[2]/group[2]" position="attributes">
+            <xpath expr="//sheet/group[3]/group[2]" position="attributes">
                 <attribute name="attrs" operation="attrs_domain_add"
                         key="invisible" join_operator="AND">
                         [("program_type", "!=", "year_end_rebate")]
                 </attribute>
             </xpath>
-            <xpath expr="//sheet/group[2]/group[2]/label[@for='reward_point_amount']" position="attributes">
+            <xpath expr="//sheet/group[3]/group[2]/label[@for='reward_point_amount']" position="attributes">
                 <attribute name="attrs" operation="attrs_domain_add"
                         key="invisible" join_operator="AND">
                         [("program_type", "!=", "year_end_rebate")]
                 </attribute>
             </xpath>
-            <xpath expr="//sheet/group[2]/group[2]/div" position="attributes">
+            <xpath expr="//sheet/group[3]/group[2]/div" position="attributes">
                 <attribute name="attrs" operation="attrs_domain_add"
                         key="invisible" join_operator="AND">
                         [("program_type", "!=", "year_end_rebate")]

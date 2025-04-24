@@ -13,8 +13,9 @@
                 <h1>
                     <field name="name" />
                 </h1>
-                <label for="sequence" class="oe_edit_only" />
-                <field name="sequence" />
+                <group name="sequence">
+                    <field name="sequence" />
+                </group>
             </xpath>
             <field name="reward_point_amount" position="attributes">
                 <attribute name="digits">[42,3]</attribute>
