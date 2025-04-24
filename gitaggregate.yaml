@@ -105,6 +105,16 @@
     - oca refs/pull/1001/head # [IMP] shopfloor: Add a barcode parser to support multi representation
   target: origin 16.0-alc-shopfloor
 
+./src/shopfloor_reception:
+  remotes:
+    origin: git@github.com:acsone/wms.git
+    oca: git@github.com:oca/wms.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/1002/head # [IMP] shopfloor_reception: Allows to interpret parsed result for multi attribute barcode
+    - oca refs/pull/1013/head # [IMP] shopfloor_reception: Allows to configure today pickings
+  target: origin 16.0-alc-shopfloor-reception
+
 ./src/rma:
   remotes:
     origin: git@github.com:acsone/rma.git
