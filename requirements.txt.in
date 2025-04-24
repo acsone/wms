@@ -77,7 +77,7 @@ odoo-addon-shopfloor-reception-product-barcode @ git+https://github.com/OCA/wms.
 odoo-addon-shopfloor-reception-product-barcode-mobile @ git+https://github.com/OCA/wms.git@refs/pull/1007/head#subdirectory=setup/shopfloor_reception_product_barcode_mobile
 odoo-addon-shopfloor-mobile-packing @ git+https://github.com/OCA/wms.git@refs/pull/718/head#subdirectory=setup/shopfloor_mobile_packing
 odoo-addon-shopfloor-batch-automatic-creation @ git+https://github.com/OCA/wms.git@refs/pull/933/head#subdirectory=setup/shopfloor_batch_automatic_creation
-odoo-addon-shopfloor-reception @ git+https://github.com/OCA/wms.git@refs/pull/1002/head#subdirectory=setup/shopfloor_reception
+odoo-addon-shopfloor-reception @ git+https://github.com/acsone/wms.git@16.0-alc-shopfloor-reception#subdirectory=setup/shopfloor_reception
 odoo-addon-stock-picking-batch-creation @ git+https://github.com/OCA/wms.git@refs/pull/932/head#subdirectory=setup/stock_picking_batch_creation
 odoo-addon-shopfloor-putaway-recompute @ git+https://github.com/OCA/wms@refs/pull/934/head#subdirectory=setup/shopfloor_putaway_recompute
 odoo-addon-stock-release-channel-split-picking @ git+https://github.com/OCA/wms.git@refs/pull/941/head#subdirectory=setup/stock_release_channel_split_picking
