@@ -32,9 +32,17 @@ msgid "Channel Assignation Blocked"
 msgstr ""
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#. odoo-python
+#: code:addons/alc_stock_release_channel_assign_blocking_unavailable_product/models/stock_move.py:0
 #: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_move__delivery_requires_other_lines
 #: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_picking__delivery_requires_other_lines
+#, python-format
 msgid "Delivery Requires Other Lines"
+msgstr ""
+
+#. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_move__delivery_requires_other_lines_label
+msgid "Delivery Requires Other Lines Label"
 msgstr ""
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
@@ -90,8 +98,8 @@ msgstr ""
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_assign_blocking_unavailable_product.stock_picking_form_view
 msgid ""
-"This picking is blocked for release channel assignation. Please click on "
-"'Ignore release channel block' to ignore it."
+"This picking is blocked for release channel assignation. Please click on 'Ignore\n"
+"                    release channel block' to ignore it."
 msgstr ""
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
