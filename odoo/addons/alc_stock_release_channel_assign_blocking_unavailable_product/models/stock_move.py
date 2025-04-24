@@ -10,7 +10,6 @@ class StockMove(StockMoveBase):
     delivery_requires_other_lines = fields.Boolean(readonly=True)
     product_qty_unavailable = fields.Float()
     delivery_requires_other_lines_label = fields.Char(
-        string="Delivery Requires Other Lines",
         compute="_compute_delivery_requires_other_lines_label",
     )
 
