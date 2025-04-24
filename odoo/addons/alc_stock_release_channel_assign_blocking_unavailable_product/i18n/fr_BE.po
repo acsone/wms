@@ -36,10 +36,18 @@ msgid "Channel Assignation Blocked"
 msgstr "Assignation à un canal bloqué"
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#. odoo-python
+#: code:addons/alc_stock_release_channel_assign_blocking_unavailable_product/models/stock_move.py:0
 #: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_move__delivery_requires_other_lines
 #: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_picking__delivery_requires_other_lines
+#, python-format
 msgid "Delivery Requires Other Lines"
 msgstr "La livraison nécessite d'autres produits"
+
+#. module: alc_stock_release_channel_assign_blocking_unavailable_product
+#: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_stock_move__delivery_requires_other_lines_label
+msgid "Delivery Requires Other Lines Label"
+msgstr ""
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model:ir.model.fields,field_description:alc_stock_release_channel_assign_blocking_unavailable_product.field_sale_order__do_not_deliver_if_alone
@@ -89,18 +97,25 @@ msgstr "Règle de stock minimum"
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_assign_blocking_unavailable_product.view_picking_internal_search
 msgid "This picking is blocked and won't be assigned to a release channel."
-msgstr "Ce transfert est bloqué et ne sera pas assigné à un canal de livraison."
+msgstr ""
+"Ce transfert est bloqué et ne sera pas assigné à un canal de livraison."
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model_terms:ir.ui.view,arch_db:alc_stock_release_channel_assign_blocking_unavailable_product.stock_picking_form_view
 msgid ""
 "This picking is blocked for release channel assignation. Please click on "
-"'Ignore release channel block' to ignore it."
+"'Ignore\n"
+"                    release channel block' to ignore it."
 msgstr ""
-"Ce transfert est bloqué pour le release d'un canal de livraison; Cliquez sur "
-"'Ignorer le blocage du canal de livraison' pour ignorer ce blocage."
 
 #. module: alc_stock_release_channel_assign_blocking_unavailable_product
 #: model:ir.model,name:alc_stock_release_channel_assign_blocking_unavailable_product.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
+
+#~ msgid ""
+#~ "This picking is blocked for release channel assignation. Please click on "
+#~ "'Ignore release channel block' to ignore it."
+#~ msgstr ""
+#~ "Ce transfert est bloqué pour le release d'un canal de livraison; Cliquez "
+#~ "sur 'Ignorer le blocage du canal de livraison' pour ignorer ce blocage."
