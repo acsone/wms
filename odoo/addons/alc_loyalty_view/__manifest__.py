@@ -3,7 +3,7 @@
 
 {
     "name": "Alc Loyalty View",
-    "summary": """Alcyon: Specialized vew for loyalty programs""",
+    "summary": """Alcyon: Specialized view for loyalty programs""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
