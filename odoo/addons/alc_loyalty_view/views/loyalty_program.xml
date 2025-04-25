@@ -31,6 +31,19 @@
                     </group>
                 </page>
             </page>
+            <xpath expr="//sheet/div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" type="object" name="action_open_conditional_rules"
+                    icon="fa-list">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="rules_count"/>
+                        </span>
+                        <span class="o_stat_text">
+                            Rules
+                        </span>
+                    </div>
+                </button>
+            </xpath>
         </field>
     </record>
 
