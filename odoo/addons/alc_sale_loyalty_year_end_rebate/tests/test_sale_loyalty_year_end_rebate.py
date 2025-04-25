@@ -1,11 +1,12 @@
 # Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from odoo import Command
+
 from .common import TestSaleLoyaltyYearEndRebateCommon
 
 
 class TestSaleLoyaltyYearEndRebate(TestSaleLoyaltyYearEndRebateCommon):
-
     def test_program_is_nominative(self):
         self.assertTrue(self.year_end_rebate_program.is_nominative)
         order = self.env["sale.order"].create(
@@ -169,3 +170,39 @@ class TestSaleLoyaltyYearEndRebate(TestSaleLoyaltyYearEndRebateCommon):
         new_order._action_cancel()
         self.assertEqual(100, self.year_end_rebate_program.coupon_ids.points)
         self.assertEqual(1000, self.year_end_rebate_program.coupon_ids.max_points)
+
+    def test_looser_constraint_on_reward_point_amount_when_year_end_rebate(self):
+        """
+        Test if the sql constraint "reward_point_amount_positive" of the base odoo module `loyalty.rule` got properly overwritten.
+
+        to allow for `reward_point_amount=0` in the case of a "year_end_rebate" program type.
+        """
+        self.env["loyalty.program"].create(
+            {
+                "name": "Year-end Rebate",
+                "applies_on": "both",
+                "trigger": "auto",
+                "program_type": "year_end_rebate",
+                "rule_ids": [
+                    Command.create(
+                        {
+                            "product_ids": self.product_A,
+                            "reward_point_amount": 0,  # <- this should now be possible when `program_type` is "year_end_rebate"
+                            "reward_point_mode": "money",
+                            "minimum_qty": 1,
+                        }
+                    )
+                ],
+                "reward_ids": [
+                    Command.clear(),
+                    Command.create(
+                        {
+                            "discount": 0,
+                            "required_points": 1,
+                            "reward_type": "rebate",
+                        }
+                    ),
+                ],
+                "communication_plan_ids": [Command.clear()],
+            }
+        )

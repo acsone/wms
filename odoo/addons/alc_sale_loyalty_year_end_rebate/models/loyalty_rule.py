@@ -6,7 +6,6 @@ from odoo.exceptions import ValidationError
 
 
 class LoyaltyRule(models.Model):
-
     _inherit = "loyalty.rule"
 
     program_type = fields.Selection(related="program_id.program_type", store=True)
@@ -18,6 +17,15 @@ class LoyaltyRule(models.Model):
         "sales at the end of the year.",
         default=0.0,
     )
+
+    _sql_constraints = [
+        (
+            # overwride default constraint to allow for 0 rewrad in wase of year-end rebate programs
+            "reward_point_amount_positive",
+            "CHECK ((program_type = 'year_end_rebate' AND reward_point_amount >= 0) OR (program_type != 'year_end_rebate' AND reward_point_amount > 0))",
+            "Reward point amount must be greater than or equal to 0 for year-end rebate programs, and greater than 0 for other program types.",
+        )
+    ]
 
     @api.constrains("program_type", "product_domain")
     def _check_program_type(self):
