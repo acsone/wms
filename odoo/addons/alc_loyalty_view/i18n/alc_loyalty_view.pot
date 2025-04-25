@@ -15,12 +15,37 @@ msgstr ""
 
 #. module: alc_loyalty_view
 #: model_terms:ir.ui.view,arch_db:alc_loyalty_view.loyalty_program_form_view
+msgid ""
+"<span class=\"o_stat_text\">\n"
+"                            Rules\n"
+"                        </span>"
+msgstr ""
+
+#. module: alc_loyalty_view
+#: model_terms:ir.ui.view,arch_db:alc_loyalty_view.loyalty_program_form_view
 msgid "Add a reward"
 msgstr ""
 
 #. module: alc_loyalty_view
 #: model_terms:ir.ui.view,arch_db:alc_loyalty_view.loyalty_program_form_view
 msgid "Add a rule"
+msgstr ""
+
+#. module: alc_loyalty_view
+#: model:ir.model,name:alc_loyalty_view.model_loyalty_program
+msgid "Loyalty Program"
+msgstr ""
+
+#. module: alc_loyalty_view
+#. odoo-python
+#: code:addons/alc_loyalty_view/models/loyalty_program.py:0
+#, python-format
+msgid "Loyalty Rules"
+msgstr ""
+
+#. module: alc_loyalty_view
+#: model:ir.model.fields,field_description:alc_loyalty_view.field_loyalty_program__rules_count
+msgid "Number of Rules"
 msgstr ""
 
 #. module: alc_loyalty_view
