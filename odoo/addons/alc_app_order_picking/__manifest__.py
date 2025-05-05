@@ -103,6 +103,7 @@
         "alc_label_printing_reception",
         "alc_mail_thread_no_auto_subscribe_notify",
         "alc_partner_carrier",
+        "alc_product_abc_classification_link",
         "alc_product_abc_classification_storage_type",
         "alc_product_category_warning_info",
         "alc_product_expiry",
