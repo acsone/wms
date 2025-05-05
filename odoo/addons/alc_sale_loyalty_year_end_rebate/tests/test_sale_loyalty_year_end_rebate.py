@@ -171,38 +171,54 @@ class TestSaleLoyaltyYearEndRebate(TestSaleLoyaltyYearEndRebateCommon):
         self.assertEqual(100, self.year_end_rebate_program.coupon_ids.points)
         self.assertEqual(1000, self.year_end_rebate_program.coupon_ids.max_points)
 
-    def test_looser_constraint_on_reward_point_amount_when_year_end_rebate(self):
-        """
-        Test if the sql constraint "reward_point_amount_positive" of the base odoo module `loyalty.rule` got properly overwritten.
-
-        to allow for `reward_point_amount=0` in the case of a "year_end_rebate" program type.
-        """
-        self.env["loyalty.program"].create(
+    def test_rule_no_reward_point(self):
+        self.year_end_rebate_program.write(
             {
-                "name": "Year-end Rebate",
-                "applies_on": "both",
-                "trigger": "auto",
-                "program_type": "year_end_rebate",
                 "rule_ids": [
                     Command.create(
                         {
-                            "product_ids": self.product_A,
-                            "reward_point_amount": 0,  # <- this should now be possible when `program_type` is "year_end_rebate"
+                            "product_ids": self.product_D,
+                            "reward_point_amount": 0,
                             "reward_point_mode": "money",
-                            "minimum_qty": 1,
                         }
                     )
                 ],
-                "reward_ids": [
-                    Command.clear(),
-                    Command.create(
-                        {
-                            "discount": 0,
-                            "required_points": 1,
-                            "reward_type": "rebate",
-                        }
-                    ),
-                ],
-                "communication_plan_ids": [Command.clear()],
             }
         )
+
+        order_1 = self.env["sale.order"].create(
+            {
+                "partner_id": self.steve.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product_D.id,
+                            "product_uom_qty": 1,
+                        },
+                    )
+                ],
+            }
+        )
+        order_1.action_confirm()
+        self.assertEqual(0, len(self.year_end_rebate_program.coupon_ids))
+
+        order_2 = self.env["sale.order"].create(
+            {
+                "partner_id": self.steve.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product_A.id,
+                            "product_uom_qty": 1,
+                        },
+                    )
+                ],
+            }
+        )
+        order_2.action_confirm()
+        self.assertEqual(1, len(self.year_end_rebate_program.coupon_ids))
+        self.assertEqual(100, self.year_end_rebate_program.coupon_ids.points)
