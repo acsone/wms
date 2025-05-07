@@ -1,11 +1,12 @@
 # Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from odoo import Command
+
 from .common import TestSaleLoyaltyYearEndRebateCommon
 
 
 class TestSaleLoyaltyYearEndRebate(TestSaleLoyaltyYearEndRebateCommon):
-
     def test_program_is_nominative(self):
         self.assertTrue(self.year_end_rebate_program.is_nominative)
         order = self.env["sale.order"].create(
@@ -169,3 +170,55 @@ class TestSaleLoyaltyYearEndRebate(TestSaleLoyaltyYearEndRebateCommon):
         new_order._action_cancel()
         self.assertEqual(100, self.year_end_rebate_program.coupon_ids.points)
         self.assertEqual(1000, self.year_end_rebate_program.coupon_ids.max_points)
+
+    def test_rule_no_reward_point(self):
+        self.year_end_rebate_program.write(
+            {
+                "rule_ids": [
+                    Command.create(
+                        {
+                            "product_ids": self.product_D,
+                            "reward_point_amount": 0,
+                            "reward_point_mode": "money",
+                        }
+                    )
+                ],
+            }
+        )
+
+        order_1 = self.env["sale.order"].create(
+            {
+                "partner_id": self.steve.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product_D.id,
+                            "product_uom_qty": 1,
+                        },
+                    )
+                ],
+            }
+        )
+        order_1.action_confirm()
+        self.assertEqual(0, len(self.year_end_rebate_program.coupon_ids))
+
+        order_2 = self.env["sale.order"].create(
+            {
+                "partner_id": self.steve.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product_A.id,
+                            "product_uom_qty": 1,
+                        },
+                    )
+                ],
+            }
+        )
+        order_2.action_confirm()
+        self.assertEqual(1, len(self.year_end_rebate_program.coupon_ids))
+        self.assertEqual(100, self.year_end_rebate_program.coupon_ids.points)
