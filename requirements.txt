@@ -402,7 +402,7 @@ odoo-addon-stock-move-auto-assign-auto-release==16.0.1.1.4
 odoo-addon-stock-move-auto-assign-auto-release-exclude-location==16.0.1.0.0.2
 odoo-addon-stock-move-common-dest==16.0.1.0.1.5
 odoo-addon-stock-move-free-reservation-reassign==16.0.1.0.1.4
-odoo-addon-stock-move-line-change-lot==16.0.1.0.1
+odoo-addon-stock-move-line-change-lot==16.0.1.0.2
 odoo-addon-stock-move-line-lock-qty-done @ git+https://github.com/acsone/stock-logistics-workflow.git@72e532530c359ce057a0b80ae302c01d782637dd#subdirectory=setup/stock_move_line_lock_qty_done
 odoo-addon-stock-move-line-reserved-quant==16.0.1.0.0.7
 odoo-addon-stock-move-location==16.0.1.4.0.2
