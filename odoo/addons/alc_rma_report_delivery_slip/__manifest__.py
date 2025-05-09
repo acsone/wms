@@ -14,6 +14,11 @@
         # Alcyon
         "alc_report_delivery_slip",
     ],
+    "assets": {
+        "web.report_assets_common": [
+            "alc_rma_report_delivery_slip/static/src/css/alc_rma_report_delivery_slip.css",
+        ],
+    },
     "data": ["views/report_delivery_slip.xml"],
     "demo": [],
     "installable": True,
