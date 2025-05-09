@@ -985,6 +985,7 @@
             t-if="deliveryslip.picking_type_code=='outgoing'"
           >Delivery slip</t>
                     <h3
+            id="rma_title"
             t-if="deliveryslip.picking_type_code=='incoming'"
           >RMA <strong t-if="duplicata">(DUPLICATA)</strong>
                     </h3>
