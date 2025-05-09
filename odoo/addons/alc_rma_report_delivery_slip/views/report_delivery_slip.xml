@@ -1,0 +1,21 @@
+<odoo>
+    <template
+        id="report_deliveryslip"
+        inherit_id="alc_report_delivery_slip.alcyon_report_deliveryslip"
+    >
+        <xpath expr="//div/h3[@id='rma_title']" position="after">
+            <strong t-if="duplicata">(DUPLICATA)</strong>
+            <div id="rma_infos_container">
+                <div t-if="deliveryslip.rma_reason">
+                    <strong> Reason: </strong>
+                    <t t-esc="deliveryslip.rma_reason" />
+                </div>
+                <div t-if="deliveryslip.rma_operation">
+                    <strong> Operation: </strong>
+                    <t t-esc="deliveryslip.rma_operation" />
+                </div>
+            </div>
+
+        </xpath>
+    </template>
+</odoo>
