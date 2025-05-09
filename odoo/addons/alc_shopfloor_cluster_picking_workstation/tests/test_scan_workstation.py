@@ -38,7 +38,7 @@ class TestScanWorkstation(ClusterPickingUnloadingCommonCase):
         )
         operations = self.move_lines
         picking = operations[-1].picking_id
-        data = self.data_detail.pack_picking_detail(picking)
+        data = self.data.pack_picking(picking)
         self.assert_response(
             response,
             next_state="pack_picking_scan_pack",

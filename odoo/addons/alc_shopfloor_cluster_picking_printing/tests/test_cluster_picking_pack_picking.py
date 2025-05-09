@@ -55,7 +55,7 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
 
         # The first bin to process is bin1 scan the pack and try to put in pack
         picking = move_lines[-1].picking_id
-        data = self.data_detail.pack_picking_detail(picking)
+        data = self.data.pack_picking(picking)
         self.assert_response(
             response,
             next_state="pack_picking_scan_pack",
@@ -70,7 +70,7 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
                 "barcode": self.bin1.name,
             },
         )
-        data = self.data_detail.pack_picking_detail(picking)
+        data = self.data.pack_picking(picking)
         self.assert_response(
             response,
             next_state="pack_picking_put_in_pack",
@@ -86,7 +86,7 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             },
         )
         # No product printer defined...
-        data = self.data_detail.pack_picking_detail(picking)
+        data = self.data.pack_picking(picking)
         self.assert_response(
             response,
             next_state="pack_picking_put_in_pack",
@@ -106,7 +106,7 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
             },
         )
         # No package printer defined...
-        data = self.data_detail.pack_picking_detail(picking)
+        data = self.data.pack_picking(picking)
         self.assert_response(
             response,
             next_state="pack_picking_put_in_pack",
@@ -333,7 +333,7 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
 
         # The first bin to process is bin1 scan the pack and try to put in pack
         picking = move_line.picking_id
-        data = self.data_detail.pack_picking_detail(picking)
+        data = self.data.pack_picking(picking)
         self.assert_response(
             response,
             next_state="pack_picking_scan_pack",
@@ -348,7 +348,7 @@ class ClusterPickingPutInPackPrintCase(ClusterPickingUnloadingCommonCase):
                 "barcode": self.bin1.name,
             },
         )
-        data = self.data_detail.pack_picking_detail(picking)
+        data = self.data.pack_picking(picking)
         self.assert_response(
             response,
             next_state="pack_picking_put_in_pack",
