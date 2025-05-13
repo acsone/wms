@@ -103,6 +103,7 @@
     - oca refs/pull/989/head # [FIX] shopfloor: Allow to manage supplierinfos on product templates
     - oca refs/pull/995/head # [16.0][IMP] shopfloor/mobile: Allow to do single unload with each pack
     - oca refs/pull/1001/head # [IMP] shopfloor: Add a barcode parser to support multi representation
+    - oca refs/pull/1023/head # [IMP] shopfloor: Don't split operations at user assignation
   target: origin 16.0-alc-shopfloor
 
 ./src/shopfloor_reception:
@@ -113,6 +114,7 @@
     - oca 16.0
     - oca refs/pull/1002/head # [IMP] shopfloor_reception: Allows to interpret parsed result for multi attribute barcode
     - oca refs/pull/1013/head # [IMP] shopfloor_reception: Allows to configure today pickings
+    - oca refs/pull/1024/head # [IMP] shopfloor_reception: Allows to set picking as started
   target: origin 16.0-alc-shopfloor-reception
 
 ./src/rma:
