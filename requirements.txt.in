@@ -48,6 +48,9 @@ odoo-addon-delivery-carrier-label-gls @ git+https://github.com/oca/delivery-carr
 odoo-addon-stock-picking-delivery-package-type-category @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/848/head#subdirectory=setup/stock_picking_delivery_package_type_category
 odoo-addon-stock-picking-delivery-package-type-domain @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/846/head#subdirectory=setup/stock_picking_delivery_package_type_domain
 
+# margin-analysis
+odoo-addon-sale-margin-security @ git+https://github.com/OCA/margin-analysis.git@refs/pull/223/head#subdirectory=setup/sale_margin_security
+
 # wms
 odoo-addon-stock-full-location-reservation @ git+https://github.com/mt-software-de/wms.git@refs/pull/6/head#subdirectory=setup/stock_full_location_reservation
 odoo-addon-stock-available-to-promise-release @ git+https://github.com/acsone/wms.git@16.0-alc_stock_available_to_promise_release#subdirectory=setup/stock_available_to_promise_release
