@@ -154,7 +154,7 @@ odoo-addon-delivery-procurement-group-carrier==16.0.1.1.0.2
 odoo-addon-endpoint-route-handler==16.0.1.1.0.4
 odoo-addon-extendable==16.0.1.0.1.3
 odoo-addon-extendable-fastapi==16.0.2.1.1.1
-odoo-addon-fastapi @ git+https://github.com/acsone/rest-framework.git@5505a6ae4e1fd189c90c0ca404cf80a519c2bd4f#subdirectory=setup/fastapi
+odoo-addon-fastapi==16.0.1.6.0.1
 odoo-addon-fastapi-auth-jwt==16.0.1.0.4
 odoo-addon-field-vector @ git+https://github.com/acsone/server-tools@547cb90c1983c91e515f73fd9ef7cdb0f1448c6f#subdirectory=setup/field_vector
 odoo-addon-fs-attachment==16.0.1.3.1
@@ -257,7 +257,7 @@ odoo-addon-report-generate-helper==16.0.1.0.0.5
 odoo-addon-report-xlsx==16.0.2.0.2
 odoo-addon-report-xlsx-helper==16.0.1.0.0.11
 odoo-addon-report-xml==16.0.1.1.2.2
-odoo-addon-rest-log @ git+https://github.com/acsone/rest-framework.git@a3bae8c57c493d35843779b0475cc06ba9a0206f#subdirectory=setup/rest_log
+odoo-addon-rest-log==16.0.1.0.3
 odoo-addon-rma @ git+https://github.com/acsone/rma.git@4b5775ccc907ef5c8c1a3119d481bb438dfa9bb0#subdirectory=setup/rma
 odoo-addon-rma-delivery @ git+https://github.com/acsone/rma.git@bbf680fb7ca4351ba236b18d5cf094f18e2ba870#subdirectory=setup/rma_delivery
 odoo-addon-rma-delivery-procurement-group-carrier @ git+https://github.com/acsone/rma.git@6bcf02fa51529539f050f86df999283ad2ad4fa7#subdirectory=setup/rma_delivery_procurement_group_carrier
