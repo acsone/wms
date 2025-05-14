@@ -4,3 +4,7 @@
   font-weight: normal;
   text-transform: none;
 }
+
+#rma_infos_container strong {
+  white-space: nowrap;
+}
