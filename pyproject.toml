@@ -35,6 +35,7 @@ test = [
 ]
 dev = [
   "ipython",
+  "jingtrang", # Expands Odoo xml validator to show the real error
 ]
 
 [project.scripts]
