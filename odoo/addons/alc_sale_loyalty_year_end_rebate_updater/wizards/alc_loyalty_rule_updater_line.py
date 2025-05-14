@@ -87,12 +87,20 @@ class AlcLoyaltyRuleUpdaterLine(models.TransientModel):
     )
     def _check_points(self):
         for record in self:
-            if record.is_points_required and not (
-                record.new_reward_point_max_amount or record.new_reward_point_amount
+            if (
+                record.is_points_required
+                and not (
+                    record.new_reward_point_max_amount or record.new_reward_point_amount
+                )
+                and record.loyalty_program_id.program_type != "year_end_rebate"
             ):
                 raise ValueError(_("Points are required for this update type"))
-            if not record.is_points_required and (
-                record.new_reward_point_max_amount or record.new_reward_point_amount
+            if (
+                not record.is_points_required
+                and (
+                    record.new_reward_point_max_amount or record.new_reward_point_amount
+                )
+                and record.loyalty_program_id.program_type != "year_end_rebate"
             ):
                 raise ValueError(_("Points should not be set for this update type"))
 
