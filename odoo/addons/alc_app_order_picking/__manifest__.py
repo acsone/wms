@@ -117,6 +117,7 @@
         "alc_stock_location_data",
         "alc_stock_location_orderpoint_cleanup",
         "alc_stock_location_orderpoint_priority",
+        "alc_stock_location_weight_index_opt",
         "alc_stock_lot_is_empty",
         "alc_stock_move_direction",
         "alc_stock_move_line_audit",
