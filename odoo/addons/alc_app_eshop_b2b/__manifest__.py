@@ -63,6 +63,7 @@
         "alc_eshop_product_food",
         "alc_eshop_product_link_notice",
         "alc_eshop_product_loyalty",
+        "alc_eshop_product_order_mode",
         "alc_eshop_product_packaging",
         "alc_eshop_product_partner_type",
         "alc_eshop_product_pharmacy",
