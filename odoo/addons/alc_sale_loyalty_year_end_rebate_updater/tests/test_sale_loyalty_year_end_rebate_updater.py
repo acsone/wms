@@ -4,6 +4,7 @@
 import freezegun
 
 from odoo import Command
+from odoo.exceptions import ValidationError
 
 from odoo.addons.alc_sale_loyalty_year_end_rebate.tests.common import (
     TestSaleLoyaltyYearEndRebateCommon,
@@ -11,7 +12,6 @@ from odoo.addons.alc_sale_loyalty_year_end_rebate.tests.common import (
 
 
 class TestSaleLoyaltyYearEndRebateUpdate(TestSaleLoyaltyYearEndRebateCommon):
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -362,3 +362,38 @@ class TestSaleLoyaltyYearEndRebateUpdate(TestSaleLoyaltyYearEndRebateCommon):
         domain = remove_rule_line.removed_product_ids_domain
         products = self.env["product.product"].search(domain)
         self.assertEqual(products, self.rebate_2025.rule_ids.product_ids)
+
+    def test_wizard_enables_0_point_reward_for_year_end_rebate(self):
+        self.assertEqual(self.rebate_2025.program_type, "year_end_rebate")
+
+        try:
+            updater = self.program_updater.create(
+                {
+                    "loyalty_program_id": self.rebate_2025.id,
+                    "retroactive_date": "2025-06-30",
+                    "retroactive": True,
+                    "line_ids": [
+                        Command.create(
+                            {
+                                "update_type": "add_rule",
+                                "new_reward_point_amount": 0,
+                                "new_reward_point_max_amount": 0,
+                                "added_product_ids": [Command.set(self.product_B.ids)],
+                                "rule_name": "New rule",
+                            },
+                        ),
+                        Command.create(
+                            {
+                                "update_type": "rule_update_points",
+                                "loyalty_rule_id": self.rebate_2025.rule_ids.id,
+                                "new_reward_point_amount": 0,
+                                "new_reward_point_max_amount": 0,
+                            },
+                        ),
+                    ],
+                }
+            )
+            updater.do_update()
+
+        except ValidationError as e:
+            self.fail(f"Calling the interaction triggered an unexpected error: {e}")

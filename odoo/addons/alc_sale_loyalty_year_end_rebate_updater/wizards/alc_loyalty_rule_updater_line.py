@@ -1,6 +1,7 @@
 # Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import Command, _, api, fields, models
+from odoo.exceptions import ValidationError
 from odoo.osv.expression import FALSE_DOMAIN, TRUE_DOMAIN
 
 
@@ -76,9 +77,11 @@ class AlcLoyaltyRuleUpdaterLine(models.TransientModel):
     def _check_loyalty_rule_id(self):
         for record in self:
             if record.is_loyalty_rule_required and not record.loyalty_rule_id:
-                raise ValueError(_("Loyalty Rule is required for this update type"))
+                raise ValidationError(
+                    _("Loyalty Rule is required for this update type")
+                )
             if not record.is_loyalty_rule_required and record.loyalty_rule_id:
-                raise ValueError(
+                raise ValidationError(
                     _("Loyalty Rule should not be set for this update type")
                 )
 
@@ -87,38 +90,54 @@ class AlcLoyaltyRuleUpdaterLine(models.TransientModel):
     )
     def _check_points(self):
         for record in self:
-            if record.is_points_required and not (
-                record.new_reward_point_max_amount or record.new_reward_point_amount
+            if (
+                record.is_points_required
+                and not (
+                    record.new_reward_point_max_amount or record.new_reward_point_amount
+                )
+                and record.loyalty_program_id.program_type != "year_end_rebate"
             ):
-                raise ValueError(_("Points are required for this update type"))
-            if not record.is_points_required and (
-                record.new_reward_point_max_amount or record.new_reward_point_amount
+                raise ValidationError(_("Points are required for this update type"))
+            if (
+                not record.is_points_required
+                and (
+                    record.new_reward_point_max_amount or record.new_reward_point_amount
+                )
+                and record.loyalty_program_id.program_type != "year_end_rebate"
             ):
-                raise ValueError(_("Points should not be set for this update type"))
+                raise ValidationError(
+                    _("Points should not be set for this update type")
+                )
 
     @api.constrains("update_type", "added_product_ids")
     def _check_added_products(self):
         for record in self:
             if record.is_added_product_required and not record.added_product_ids:
-                raise ValueError(_("Products are required for this update type"))
+                raise ValidationError(_("Products are required for this update type"))
             if not record.is_added_product_required and record.added_product_ids:
-                raise ValueError(_("Products should not be set for this update type"))
+                raise ValidationError(
+                    _("Products should not be set for this update type")
+                )
 
     @api.constrains("update_type", "removed_product_ids")
     def _check_removed_products(self):
         for record in self:
             if record.is_removed_product_required and not record.removed_product_ids:
-                raise ValueError(_("Products are required for this update type"))
+                raise ValidationError(_("Products are required for this update type"))
             if not record.is_removed_product_required and record.removed_product_ids:
-                raise ValueError(_("Products should not be set for this update type"))
+                raise ValidationError(
+                    _("Products should not be set for this update type")
+                )
 
     @api.constrains("update_type", "rule_name")
     def _check_rule_name(self):
         for record in self:
             if record.is_rule_name_required and not record.rule_name:
-                raise ValueError(_("Rule name is required for this update type"))
+                raise ValidationError(_("Rule name is required for this update type"))
             if not record.is_rule_name_required and record.rule_name:
-                raise ValueError(_("Rule name should not be set for this update type"))
+                raise ValidationError(
+                    _("Rule name should not be set for this update type")
+                )
 
     @api.depends("update_type", "loyalty_rule_id")
     def _compute_removed_product_ids_domain(self):

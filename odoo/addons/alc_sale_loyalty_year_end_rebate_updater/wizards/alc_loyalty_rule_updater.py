@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class AlcLoyaltyRuleUpdater(models.TransientModel):
@@ -35,7 +36,7 @@ class AlcLoyaltyRuleUpdater(models.TransientModel):
     def _check_retroactive_date(self):
         for wizard in self:
             if wizard.retroactive and not wizard.retroactive_date:
-                raise ValueError(_("Retroactive date is required"))
+                raise ValidationError(_("Retroactive date is required"))
 
     @api.depends("retroactive")
     def _compute_is_retroactive_date_required(self):
