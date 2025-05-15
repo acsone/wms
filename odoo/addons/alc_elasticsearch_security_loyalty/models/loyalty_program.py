@@ -31,6 +31,7 @@ class LoyaltyProgram(Model):
                 {
                     "index_patterns": ["alc_loyalty_program_*"],
                     "dls": f'{{"term": {{"id": {self.id}}}}}',
+                    "allowed_actions": ["read"],
                 }
             ]
         }
