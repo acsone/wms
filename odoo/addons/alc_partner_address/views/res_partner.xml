@@ -7,13 +7,13 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
-            <field name="type" position="after">
-                <label for="type_delivery" string="Is also delivery" />
-                <field
-          name="type_delivery"
-          attrs="{'invisible': [('type', '!=', 'invoice')]}"
-        />
-            </field>
+            <xpath
+                expr="//field[@name='type']/parent::span[@name='address_name']"
+                position="before"
+            >
+                <field name="type_delivery" attrs="{'invisible': [('type', '!=', 'invoice')]}"/>
+            </xpath>
+
             <xpath
         expr="//page[@name='contact_addresses']//form//field[@name='type']"
         position="after"
