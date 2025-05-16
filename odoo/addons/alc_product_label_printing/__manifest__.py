@@ -5,7 +5,7 @@
     "name": "Alc Product label printing",
     "summary": """
         Add code needed to print products labels""",
-    "version": "16.0.1.0.2",
+    "version": "16.0.1.0.3",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "depends": [

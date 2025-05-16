@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<odoo noupdate="1">
+<odoo>
   <template id="stock_lot_nolot_label_zebra_v1">
     <div class="raw">
       <t t-foreach="docs" t-as="product_id">
