@@ -14,8 +14,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_stock_location_weight_index_opt
-#: model:ir.model.fields,field_description:alc_stock_location_weight_index_opt.field_stock_location__forecast_weight
-msgid "Forecasted Weight"
+#: model:ir.model.fields,field_description:alc_stock_location_weight_index_opt.field_stock_location__incoming_move_line_ids
+msgid "Incoming Move Line"
 msgstr ""
 
 #. module: alc_stock_location_weight_index_opt
@@ -24,8 +24,8 @@ msgid "Inventory Locations"
 msgstr ""
 
 #. module: alc_stock_location_weight_index_opt
-#: model:ir.model.fields,field_description:alc_stock_location_weight_index_opt.field_stock_location__net_weight
-msgid "Net Weight"
+#: model:ir.model.fields,field_description:alc_stock_location_weight_index_opt.field_stock_location__outgoing_move_line_ids
+msgid "Outgoing Move Line"
 msgstr ""
 
 #. module: alc_stock_location_weight_index_opt
