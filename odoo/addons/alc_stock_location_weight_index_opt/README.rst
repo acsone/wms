@@ -31,8 +31,8 @@ Context and Problems
 Solutions
 ---------
 
-- The compute method is overridden to remove dependencies on move lines,
-  avoiding unnecessary recomputations.
+- The relational fields outgoing_move_line_ids and incoming_move_line_ids are now
+  computed and non stored with null for non internal locations
 - The _order for stock_move_line is simplified.
 - A combined index is added on ``stock_move_line(location_dest_id, id)``, improving
   the performance of ordered queries.

@@ -11,6 +11,8 @@
         # Odoo Community
         "stock",
     ],
-    "data": [],
+    "data": [
+        "views/stock_move_line.xml",
+    ],
     "demo": [],
 }
