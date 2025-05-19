@@ -255,7 +255,7 @@ msgstr ""
 
 #. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
-msgid "^FO25,220^A0N,25,20^CI13^FR^FD"
+msgid "^FO25,220^A0N,25,20^CI13^FR^FDPrint:"
 msgstr ""
 
 #. module: alc_product_label_printing
