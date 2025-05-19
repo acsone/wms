@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<odoo noupdate="1">
+<odoo>
   <template id="stock_lot_nolot_label_zebra_v1">
     <div class="raw">
       <t t-foreach="docs" t-as="product_id">
@@ -17,7 +17,7 @@
             t-esc="rule.location_in_id.name + '/' + rule.location_out_id.name"
           />^FS\r
       </t>
-^FO25,220^A0N,25,20^CI13^FR^FD<t t-esc="datetime.datetime.now().strftime('%Y-%m-%d')" />^FS\r
+^FO25,220^A0N,25,20^CI13^FR^FDPrint: <t t-esc="datetime.datetime.now().strftime('%d/%m/%Y')" />^FS\r
 ^FO420,150\r
 ^BQN,2,6\r
 ^FDQA,<t t-esc="product_id.default_code" />^FS\r
