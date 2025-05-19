@@ -254,11 +254,6 @@ msgid ""
 msgstr ""
 
 #. module: alc_product_label_printing
-#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
-msgid "^FO25,220^A0N,25,20^CI13^FR^FDPrint:"
-msgstr ""
-
-#. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
 msgid ""
 "^FO295,200\n"
@@ -274,6 +269,14 @@ msgstr ""
 #. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_product_food_label_zebra_v1
 msgid "^FO330,330^A030,30^FDB2C^FS\\r"
+msgstr ""
+
+#. module: alc_product_label_printing
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
+msgid ""
+"^FO420,150\\r\n"
+"^BQN,2,6\\r\n"
+"^FDQA,"
 msgstr ""
 
 #. module: alc_product_label_printing
@@ -388,19 +391,17 @@ msgid ""
 msgstr ""
 
 #. module: alc_product_label_printing
-#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
+#: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"^FO25,80^A0N,40,30^CI13^FR^FD"
+"^FO25,360^A0N,25,20^CI13^FR^FDPrint:"
 msgstr ""
 
 #. module: alc_product_label_printing
 #: model_terms:ir.ui.view,arch_db:alc_product_label_printing.stock_lot_nolot_label_zebra_v1
 msgid ""
 "^FS\\r\n"
-"^FO420,150\\r\n"
-"^BQN,2,6\\r\n"
-"^FDQA,"
+"^FO25,80^A0N,40,30^CI13^FR^FD"
 msgstr ""
 
 #. module: alc_product_label_printing
