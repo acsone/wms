@@ -287,7 +287,7 @@ odoo-addon-sale-order-blanket-order==16.0.1.0.0.5
 odoo-addon-sale-order-blanket-order-sale-margin==16.0.1.0.0.2
 odoo-addon-sale-order-blanket-order-stock-prebook==16.0.1.0.0.3
 odoo-addon-sale-order-blanket-order-stock-prebook-release==16.0.1.0.0.2
-odoo-addon-sale-order-line-cancel @ git+https://github.com/acsone/sale-workflow.git@1f416325381c04b06e54c8c1857b8d661c40d02b#subdirectory=setup/sale_order_line_cancel
+odoo-addon-sale-order-line-cancel==16.0.1.1.1
 odoo-addon-sale-procurement-customer==16.0.1.0.0.6
 odoo-addon-sale-product-set==16.0.3.0.0.3
 odoo-addon-sale-route-amendment @ git+https://github.com/acsone/sale-workflow.git@f506b778476eacfc4a3f33d85c2f77f790a8ebc8#subdirectory=setup/sale_route_amendment
