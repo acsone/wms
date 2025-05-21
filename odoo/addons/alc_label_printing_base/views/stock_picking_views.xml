@@ -30,7 +30,9 @@
         />
 <t t-set="ship" t-value="ships and ships[0]" />
 <t t-foreach="packages" t-as="package">
-<t t-foreach="range(package.number_of_parcels or 1)" t-as="index">
+<t t-set="parcels_splitted" t-value="package.package_type_id.auto_distribute_products_in_parcels" />
+<t t-set="number_of_parcels" t-value="(package.number_of_parcels or 1) if not parcels_splitted else 1" />
+<t t-foreach="range(number_of_parcels)" t-as="index">
 ^XA
 
 ^FO30,30^GB<t
@@ -49,7 +51,7 @@
 </t>
 
 ^FO570,47,1^A0N60,60^FD<t t-esc="index + 1" /> / <t
-              t-esc="package.number_of_parcels"
+              t-esc="(not parcels_splitted and package.number_of_parcels) or 1"
             />^FS\r
 
 ^FO30,140^A0N30,30^FD<t

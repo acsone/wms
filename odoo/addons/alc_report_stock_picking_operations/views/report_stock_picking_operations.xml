@@ -112,7 +112,7 @@
             <div class="row">
                 <div class="col-6 text-center" style="padding-top:20px">
                   <strong>
-                    <t t-if="pack.number_of_parcels">
+                    <t t-if="pack.number_of_parcels and not pack.package_type_id.auto_distribute_products_in_parcels">
                       <span t-field="pack.number_of_parcels" />
                     </t>
                   </strong>

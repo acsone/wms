@@ -97,6 +97,7 @@
         "alc_delivery_carrier_gls_b2c",
         "alc_delivery_carrier_gls_report",
         "alc_delivery_carrier_label_gls_server_env",
+        "alc_delivery_package_type_number_parcels_split",
         "alc_empty_package_at_picking_return",
         "alc_label_printing_base",
         "alc_label_printing_gls",

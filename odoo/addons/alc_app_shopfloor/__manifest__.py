@@ -51,6 +51,7 @@
         "alc_shopfloor_mobile_qty_picker_font_style",
         "alc_shopfloor_mobile_stock_issue_button",
         "alc_shopfloor_mobile_stock_reserve",
+        "alc_shopfloor_packing_parcels_split",
         "alc_shopfloor_product_info",
         "alc_shopfloor_product_print_label",
         "alc_shopfloor_security",

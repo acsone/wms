@@ -1,0 +1,81 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alc_delivery_package_type_number_parcels_split
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-21 15:06+0000\n"
+"PO-Revision-Date: 2025-05-21 15:06+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alc_delivery_package_type_number_parcels_split
+#: model:ir.model.fields,field_description:alc_delivery_package_type_number_parcels_split.field_stock_package_type__auto_distribute_products_in_parcels
+msgid "Auto-distribute products in parcels"
+msgstr "Auto-distribuer les produits dans les colis"
+
+#. module: alc_delivery_package_type_number_parcels_split
+#: model:ir.model,name:alc_delivery_package_type_number_parcels_split.model_choose_delivery_package
+msgid "Delivery Package Selection Wizard"
+msgstr "Assistant de sélection de colis"
+
+#. module: alc_delivery_package_type_number_parcels_split
+#: model:ir.model.fields,help:alc_delivery_package_type_number_parcels_split.field_stock_package_type__auto_distribute_products_in_parcels
+msgid ""
+"If checked, on put in pack, as many packs as the number of parcels  will be "
+"created. Products will be 'equally' and 'randomly' distributed among the "
+"various packs. If unchecked, only one pack will be created and all products "
+"will be put in this pack. This option is if you want to create a pack for "
+"each parcel but don't want to follow the content of the parcels since you "
+"can put your different parcels in different locations and still know where "
+"the different parts of your delivery are. This option is only available if "
+"the number of parcels is greater than 1."
+msgstr ""
+"Si coché, lors de la mise en colis, autant de colis que le nombre de colis "
+"seront créés. Les produits seront répartis 'également' et 'aléatoirement' "
+"entre les différents colis. Si décoché, un seul colis sera créé et tous les "
+"produits seront mis dans ce colis. Cette option est si vous souhaitez créer "
+"un colis pour chaque colis mais ne souhaitez pas suivre le contenu des "
+"colis, car vous pouvez mettre vos différents colis dans différents "
+"emplacements et savoir toujours où se trouvent les différentes parties de "
+"votre livraison. Cette option n'est disponible que si le nombre de colis "
+"est supérieur à 1."
+
+#. module: alc_delivery_package_type_number_parcels_split
+#: model:ir.model,name:alc_delivery_package_type_number_parcels_split.model_stock_quant_package
+msgid "Packages"
+msgstr "Colis"
+
+#. module: alc_delivery_package_type_number_parcels_split
+#: model:ir.model,name:alc_delivery_package_type_number_parcels_split.model_stock_package_type
+msgid "Stock package type"
+msgstr "Type de colis de stock"
+
+#. module: alc_delivery_package_type_number_parcels_split
+#. odoo-python
+#: code:addons/alc_delivery_package_type_number_parcels_split/models/stock_picking.py:0
+#, python-format
+msgid ""
+"The number of items to pack must be greater or equal to the number of "
+"parcels."
+msgstr ""
+"Le nombre d'articles à emballer doit être supérieur ou égal au nombre de "
+"colis."
+
+#. module: alc_delivery_package_type_number_parcels_split
+#. odoo-python
+#: code:addons/alc_delivery_package_type_number_parcels_split/models/stock_picking.py:0
+#, python-format
+msgid "The number of parcels must be greater than 0."
+msgstr "Le nombre de colis doit être supérieur à 0."
+
+#. module: alc_delivery_package_type_number_parcels_split
+#: model:ir.model,name:alc_delivery_package_type_number_parcels_split.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
