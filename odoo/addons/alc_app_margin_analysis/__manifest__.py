@@ -5,7 +5,7 @@
     "name": "Alc App Margin Analysis",
     "description": """
         Add sale margin capabitlities to odoo""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV",
     "website": "https://www.acsone.eu",
