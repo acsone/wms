@@ -5,6 +5,9 @@ werkzeug<2.1
 pypdf2<2
 dicttoxml @ git+https://github.com/acsone/dicttoxml.git@alc-master-perf
 
+# account-analytic
+odoo-addon-product-analytic @ git+https://github.com/OCA/account-analytic@refs/pull/786/head#subdirectory=setup/product_analytic
+
 # account-financial-reporting
 odoo-addon-account-financial-report @ git+https://github.com/OCA/account-financial-reporting@refs/pull/1081/head#subdirectory=setup/account_financial_report
 
