@@ -44,6 +44,11 @@
         "views/stock_package_type_category.xml",
         "views/res_config_settings.xml",
     ],
+    "assets": {
+        "web.report_assets_common": [
+            "alc_report_delivery_slip/static/src/css/alc_report_delivery_slip.css"
+        ],
+    },
     "demo": [],
     "installable": True,
 }
