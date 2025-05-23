@@ -15,16 +15,17 @@ class ClusterPicking(Component):
         nbr_packages=None,
         package_type_id=None,
     ):
-        if not self.env.user.printing_product_label_printer_id:
-            return self._response_put_in_pack(
-                picking_batch_id,
-                message=self.msg_store.no_product_label_printer_found(),
-            )
-        if not self.env.user.default_label_printer_id:
-            return self._response_put_in_pack(
-                picking_batch_id,
-                message=self.msg_store.no_package_label_printer_found(),
-            )
+        if self.work.menu.print_on_pack_pickings:
+            if not self.env.user.printing_product_label_printer_id:
+                return self._response_put_in_pack(
+                    picking_batch_id,
+                    message=self.msg_store.no_product_label_printer_found(),
+                )
+            if not self.env.user.default_label_printer_id:
+                return self._response_put_in_pack(
+                    picking_batch_id,
+                    message=self.msg_store.no_package_label_printer_found(),
+                )
         return super().put_in_pack(
             picking_batch_id,
             picking_id,
@@ -108,25 +109,3 @@ class ClusterPicking(Component):
                 quantity_done=quantity,
                 lot_id=lot_id,
             )
-
-    def _put_in_pack(self, picking, move_lines, number_of_parcels, package_type_id):
-        pack = super()._put_in_pack(
-            picking, move_lines, number_of_parcels, package_type_id
-        )
-        if isinstance(pack, self.env["stock.quant.package"].__class__):
-            if package_type_id is not None:
-                # Package type has been chosen by user, so don't override it as
-                # it contains already the number of parcels
-                return pack
-            pack.package_type_id = self._get_suitable_package_type(number_of_parcels)
-            pack.number_of_parcels = number_of_parcels
-        return pack
-
-    def _get_suitable_package_type(self, number_of_parcels):
-        return self.env["stock.package.type"].search(
-            [
-                ("number_of_parcels", "=", number_of_parcels),
-                ("package_carrier_type", "=", "none"),
-            ],
-            limit=1,
-        )

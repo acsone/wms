@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="stock_package_type_form_view">
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="delivery_package_type_number_parcels.stock_package_type_form_delivery"/>
+        <field name="arch" type="xml">
+            <field name="number_of_parcels" position="after">
+                <field name="auto_distribute_products_in_parcels"
+                       attrs="{'invisible': [('number_of_parcels', '&lt;=', '1')]}"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_package_type_tree_view">
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="delivery_package_type_number_parcels.stock_package_type_tree_delivery"/>
+        <field name="arch" type="xml">
+            <field name="number_of_parcels" position="after">
+                <field
+                    name="auto_distribute_products_in_parcels"
+                    optional="show"
+                    attrs="{'invisible': [('number_of_parcels', '&lt;=', '1')]}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

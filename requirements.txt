@@ -318,7 +318,7 @@ odoo-addon-shopfloor-gs1 @ git+https://github.com/acsone/wms.git@8a5f8415ae30f12
 odoo-addon-shopfloor-mobile @ git+https://github.com/acsone/wms.git@ec5fd55e25626f31fd743530106a995e36487f4a#subdirectory=setup/shopfloor_mobile
 odoo-addon-shopfloor-mobile-base==16.0.1.1.0
 odoo-addon-shopfloor-mobile-base-auth-api-key==16.0.1.0.0.5
-odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@80ebc9c48882c6e797b952f6f4afe31e86176309#subdirectory=setup/shopfloor_mobile_packing
+odoo-addon-shopfloor-mobile-packing @ git+https://github.com/acsone/wms.git@60735506e32c014c0c8ce2ceb742cfd077114d90#subdirectory=setup/shopfloor_mobile_packing
 odoo-addon-shopfloor-packing @ git+https://github.com/acsone/wms.git@57a6adbed432bebb5da80ba849c378f69e024e84#subdirectory=setup/shopfloor_packing
 odoo-addon-shopfloor-product-dimension @ git+https://github.com/acsone/wms.git@472fc077704463953d0cae82bd1e3fd29046570a#subdirectory=setup/shopfloor_product_dimension
 odoo-addon-shopfloor-putaway-recompute @ git+https://github.com/acsone/wms@b136dbd468916d9dfa782bc7307213e2004b04f5#subdirectory=setup/shopfloor_putaway_recompute
