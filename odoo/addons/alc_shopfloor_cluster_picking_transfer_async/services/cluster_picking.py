@@ -66,6 +66,35 @@ class ClusterPicking(Component):
             )
         return super()._unload_set_picking_to_done(picking, lines)
 
+    def unload_scan_destination(
+        self, picking_batch_id, package_id, barcode, confirmation=False
+    ):
+        """TODO: This has to be removed if we remove async."""
+        batch = self.env["stock.picking.batch"].browse(picking_batch_id)
+        lines = self._lines_to_unload(batch)
+        res = super().unload_scan_destination(
+            picking_batch_id=picking_batch_id,
+            package_id=package_id,
+            barcode=barcode,
+            confirmation=confirmation,
+        )
+        if not lines:
+            return res
+        lines_with_error = lines.filtered(
+            lambda line: line._has_destination_location_release_channel_restriction
+        )
+        if lines_with_error:
+            line = first(lines_with_error)
+            raise ReleaseChannelLocationRestrictionError(
+                line.picking_id,
+                line.location_dest_id,
+                line.for_restriction_incoming_location_channel_ids,
+                line.for_restriction_destination_location_channel_id,
+                line.env,
+            )
+
+        return res
+
     def set_destination_all(self, picking_batch_id, barcode, confirmation=None):
         """TODO: This has to be removed if we remove async."""
         batch = self.env["stock.picking.batch"].browse(picking_batch_id)
@@ -85,6 +114,7 @@ class ClusterPicking(Component):
             raise ReleaseChannelLocationRestrictionError(
                 line.picking_id,
                 line.location_dest_id,
+                line.for_restriction_incoming_location_channel_ids,
                 line.for_restriction_destination_location_channel_id,
                 line.env,
             )
