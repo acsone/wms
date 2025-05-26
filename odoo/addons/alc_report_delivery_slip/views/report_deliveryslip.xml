@@ -989,7 +989,7 @@
             t-if="deliveryslip.picking_type_code=='incoming'"
           >RMA <strong t-if="duplicata">(DUPLICATA)</strong>
                     </h3>
-                    <div>
+                    <div id="rma_toursolver_resource_id">
                       <span t-field="doc.planned_shipment_advice_id.toursolver_resource_id"/>
                       <span t-field="doc.rma_shipment_advice_id.toursolver_resource_id"/>
                     </div>
