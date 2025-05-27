@@ -4,6 +4,10 @@
   text-transform: none;
 }
 
+#partner_header {
+  margin-top: 20px;
+}
+
 #rma_infos_container strong {
   white-space: nowrap;
 }
