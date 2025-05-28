@@ -83,7 +83,14 @@ class ProductPartnerType(models.AbstractModel):
 
     def _filter_partner_types_veterinary(self, partner_types):
         if self.veterinary_only:
-            partner_types -= {"export_customer", "wholesaler_pharmacy", "misc"}
+            partner_types -= {
+                "equipment_only",
+                "export_customer",
+                "student_like",
+                "wholesaler_pharmacy",
+                "misc",
+                "food_only",
+            }
         return partner_types
 
     def _filter_partner_types_belgium(self, partner_types):

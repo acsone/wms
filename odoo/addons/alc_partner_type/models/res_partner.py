@@ -17,6 +17,7 @@ class ResPartner(res_partner.ResPartner):
             ("student_like", "Student and similar"),
             ("shareholder", "Shareholder"),
             ("veterinary", "Veterinary"),
+            ("veterinary_without_pharmacy", "Veterinary without Pharmacy"),
             ("wholesaler_pharmacy", "Pharmacy Wholesaler"),
             ("wholesaler_veterinary", "Veterinary Wholesaler"),
             ("equipment_only", "Equipment Only"),
