@@ -244,9 +244,9 @@ class TestSaleOrderException(TestSaleOrderExceptionCommon):
         self.assertTrue(line.main_exception_id)
         line.product_id = self.prod_stup
         self.assertTrue(line.main_exception_id)
-        # And vet only product as well, I guess
+        # And vet only product should not be allowed
         line.product_id = self.prod_vet_only
-        self.assertFalse(line.main_exception_id)
+        self.assertTrue(line.main_exception_id)
         warns.write({"active": 0})
 
     def test_customer_partner_type_wholesaler_pharmacy(self):

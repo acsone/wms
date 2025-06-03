@@ -10,6 +10,7 @@ ALL_P_TYPES = {
     "shareholder",
     "veterinary",
     "wholesaler_pharmacy",
+    "veterinary_without_pharmacy",
     "wholesaler_veterinary",
     "equipment_only",
     "food_only",
@@ -64,6 +65,7 @@ class TestProductAccess(TransactionCase):
             {
                 "wholesaler_veterinary",
                 "wholesaler_pharmacy",
+                "veterinary_without_pharmacy",
                 "veterinary",
                 "supplier",
                 "shareholder",
@@ -108,6 +110,7 @@ class TestProductAccess(TransactionCase):
             {
                 "wholesaler_veterinary",
                 "wholesaler_pharmacy",
+                "veterinary_without_pharmacy",
                 "veterinary",
                 "supplier",
                 "shareholder",

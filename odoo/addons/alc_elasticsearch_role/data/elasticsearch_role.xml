@@ -131,6 +131,20 @@
 }
     </field>
   </record>
+  <record id="role_veterinary_without_pharmacy" model="elasticsearch.role">
+    <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
+    <field name="name">veterinary_without_pharmacy</field>
+    <field name="body">{
+  "index_permissions": [
+    {
+      "index_patterns":["alc_shopinvader_variant_*"],
+      "dls": "{\"bool\": {\"must\": {\"term\": {\"allowed_partner_types\": \"veterinary_without_pharmacy\"}}}}",
+      "fls": ["stock.*"]
+    }
+  ]
+}
+    </field>
+  </record>
   <record id="role_export_customer" model="elasticsearch.role">
     <field name="backend_id" ref="alc_search_engine_backend.elasticsearch_backend" />
     <field name="name">export_customer</field>

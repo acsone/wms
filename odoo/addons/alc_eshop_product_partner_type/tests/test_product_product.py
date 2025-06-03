@@ -36,5 +36,6 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
                 "equipment_only",
                 "student_like",
                 "export_customer",
+                "veterinary_without_pharmacy",
             },
         )
