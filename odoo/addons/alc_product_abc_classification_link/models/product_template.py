@@ -19,11 +19,15 @@ class ProductTemplate(models.Model):
         readonly=True,
     )
 
-    @api.depends("abc_classification_product_level_ids")
+    @api.depends("product_variant_ids", "product_variant_ids.abc_storage")
     def _compute_abc_storage(self):
-        for template in self:
-            template.abc_storage = (
-                template.abc_classification_product_level_ids[0].level_id.name
-                if template.abc_classification_product_level_ids
-                else "b"
-            )
+        unique_variants = self.filtered(
+            lambda template: len(template.product_variant_ids) == 1
+        )
+        for template in unique_variants:
+            template.abc_storage = template.product_variant_ids.abc_storage
+        for template in self - unique_variants:
+            if len(set(template.product_variant_ids.mapped("abc_storage"))) == 1:
+                template.abc_storage = template.product_variant_ids[0].abc_storage
+            else:
+                template.abc_storage = "b"
