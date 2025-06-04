@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
   <!--
   <record model="ir.ui.view" id="sale.res_partner_view_buttons">
@@ -21,4 +21,46 @@
     <field name="priority">80</field>
   </record>
   -->
+
+  <!-- Choose custom order of the columns using the "hide and replace" trick -->
+  <record id="view_partner_tree_custom_order" model="ir.ui.view">
+    <field name="name">res.partner.tree.custom.order</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_tree" />
+    <!-- High priority to make sure every other inherited view is loaded first so that we have
+    access to all fields -->
+    <field name="priority" eval="1000" />
+    <field name="arch" type="xml">
+
+      <xpath expr="//field[@name='ref']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='type_name']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='city']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='phone']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='email']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='country_id']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+
+      <xpath expr="//field[@name='display_name']" position="after">
+        <field name="ref" />
+        <field name="type_name" />
+        <field name="city" optional="show" />
+        <field name="phone" optional="show" class="o_force_ltr" />
+        <field name="email" optional="show" />
+        <field name="country_id" optional="show" />
+      </xpath>
+
+    </field>
+  </record>
+
 </odoo>
