@@ -60,7 +60,6 @@
         <field name="arch" type="xml">
             <field name="display_name" position="after">
                 <field name="type_name" />
-                <field name="city" />
             </field>
         </field>
     </record>
