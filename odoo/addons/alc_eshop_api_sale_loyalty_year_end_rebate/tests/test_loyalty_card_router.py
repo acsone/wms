@@ -16,6 +16,7 @@ class TestLoyaltyCardRouter(
     FastAPITransactionCase, YearEndRebatePartnerVisibilityTestMixin
 ):
     @classmethod
+    @freezegun.freeze_time("2025-06-01 00:00:00")
     def setUpClass(cls):
         res = super().setUpClass()
         cls._setupRecords()
