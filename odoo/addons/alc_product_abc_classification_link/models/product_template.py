@@ -30,4 +30,4 @@ class ProductTemplate(models.Model):
             if len(set(template.product_variant_ids.mapped("abc_storage"))) == 1:
                 template.abc_storage = template.product_variant_ids[0].abc_storage
             else:
-                template.abc_storage = "b"
+                template.abc_storage = False

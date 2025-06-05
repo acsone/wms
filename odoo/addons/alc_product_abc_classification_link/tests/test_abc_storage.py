@@ -104,7 +104,7 @@ class TestAbcStorage(ABCClassificationLevelCase):
             1. Change one of the products product level so that they are now distinct
         Expected:
             0. The `abc_storage` of the template should be the same as the variants
-            1. The `abc_storage` of the template should be the default value
+            1. The `abc_storage` of the template should be False
         """
         template = self.product_product.product_tmpl_id
 
@@ -141,4 +141,4 @@ class TestAbcStorage(ABCClassificationLevelCase):
                 }
             ),
         ]
-        self.assertEqual(template.abc_storage, "b")
+        self.assertEqual(template.abc_storage, False)
