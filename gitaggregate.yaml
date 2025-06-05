@@ -167,6 +167,16 @@
     - oca refs/pull/1789/head # [16.0][FIX] stock_picking_group_by_partner_by_carrier: merged procurement group should not be linked to the original sales order #1789
   target: origin 16.0-alc-stock_picking_group_by_partner_by_carrier
 
+./src/stock_storage_type:
+  remotes:
+    origin: git@github.com:acsone/wms.git
+    oca: git@github.com:oca/wms.git
+  merges:
+    - oca 16.0
+    - oca refs/pull/1040/head # [16.0][IMP] stock_storage_type: Allow to recompute putaways + several improvements
+    - oca refs/pull/1049/head # [FIX] stock_storage_type: Allow to have two rules for a storage type
+  target: origin 16.0-alc-stock_storage_type
+
 ./src/queue:
   remotes:
     origin: git@github.com:acsone/queue.git
