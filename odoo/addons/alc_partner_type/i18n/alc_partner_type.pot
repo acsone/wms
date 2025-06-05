@@ -125,3 +125,8 @@ msgstr ""
 #: model:ir.model.fields.selection,name:alc_partner_type.selection__res_partner__partner_type__wholesaler_veterinary
 msgid "Veterinary Wholesaler"
 msgstr ""
+
+#. module: alc_partner_type
+#: model:ir.model.fields.selection,name:alc_partner_type.selection__res_partner__partner_type__veterinary_without_pharmacy
+msgid "Veterinary without Pharmacy"
+msgstr ""
