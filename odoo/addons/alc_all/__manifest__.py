@@ -50,6 +50,7 @@
         "alc_magento_api",
         "alc_partner_message_subscribe",
         "alc_partner_name",
+        "alc_partner_release_channel",
         "alc_product_search_more_tree_view",
         "alc_report_qweb_pdf_batch",
         "alc_running_env",
