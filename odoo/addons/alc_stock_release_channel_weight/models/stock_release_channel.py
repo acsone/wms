@@ -31,8 +31,8 @@ class StockReleaseChannel(StockReleaseChannelBase):
             WHERE
                 sp.release_channel_id in %s
                 AND spt.code = 'outgoing'
-                AND sp.state not in ('cancel', 'done')
-                AND sm.state not in ('confirmed', 'daft', 'cancel')
+                AND sp.state not in ('cancel', 'done', 'draft')
+                AND sm.state not in ('cancel', 'done', 'draft')
             GROUP BY
                 sp.release_channel_id;
         """
