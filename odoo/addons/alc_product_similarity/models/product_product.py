@@ -54,11 +54,46 @@ class ProductProduct(models.Model):
 
     @api.depends("description_vector", "characteristics_vector")
     def _compute_similar_products_ids(self):
+        """
+        This compute method is triggered in three main scenarios:
+
+        1. On a brand new, unsaved record (a "NewId").
+        2. When loading a saved record from the database.
+        3. During an "onchange" on a saved record.
+
+        The similarity search uses a DB index and MUST NOT run on virtual
+        data from scenarios 1 or 3.
+
+        We can detect scenarios 1 and 3 by checking if the record has a
+        database-backed origin. A new record has no origin. An existing
+        record in an onchange has an origin, but the in-memory values
+        for its dependencies may have changed.
+
+        A robust way to handle this is to check if the dependencies have changed
+        from their original, saved state.
+        """
         for product in self:
-            similar_products_infos = product.get_similar_products(5)
-            product.similar_products_ids = [
-                x["product"].id for x in similar_products_infos
-            ]
+
+            if (
+                not product._origin.id
+                or (
+                    product._origin.characteristics_vector
+                    != product.characteristics_vector
+                )
+                or (product._origin.description_vector != product.description_vector)
+            ):
+                # CASE 1: This is a brand-new record (no origin).
+                # CASE 2: The dependencies have changed in memory (onchange event).
+                # In either case, a new search would fail.
+                # To prevent the UI list from disappearing during an onchange,
+                # we explicitly assign the value from the origin. For a new record,
+                # this will correctly result in an empty list.
+                product.similar_products_ids = product._origin.similar_products_ids
+            else:
+                similar_products_infos = product.get_similar_products(5)
+                product.similar_products_ids = [
+                    x["product"].id for x in similar_products_infos
+                ]
 
     @api.model
     def _is_product_description_vectorization_enabled(self):
@@ -239,7 +274,7 @@ class ProductProduct(models.Model):
         """
         Retrieves similar products based on vector distances.
 
-        (Do not return this product in the the list)
+        (Do not return this product in the list)
 
         Args:
             limit (int): the maximum numer of similar prducts to return (limit parameter of the sql query).
