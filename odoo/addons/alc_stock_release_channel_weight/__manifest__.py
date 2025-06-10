@@ -10,6 +10,8 @@
     "author": "ACSONE SA/NV",
     "website": "https://acsone.eu",
     "depends": [
+        # Odoo Community
+        "delivery",
         # Third-party
         "stock_release_channel",
     ],
