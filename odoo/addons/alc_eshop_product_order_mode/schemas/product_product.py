@@ -5,14 +5,14 @@ from odoo.addons.shopinvader_product.schemas.product import (
     ProductProduct as BaseProductProduct,
 )
 
-from .shop_order_mode import ShopOrderMode
+from .order_mode import OrderMode
 
 
 class ProductProduct(BaseProductProduct, extends=True):
-    shop_order_mode: ShopOrderMode
+    order_mode: OrderMode
 
     @classmethod
     def from_product_product(cls, odoo_rec):
         obj = super().from_product_product(odoo_rec)
-        obj.shop_order_mode = odoo_rec.shop_order_mode
+        obj.order_mode = odoo_rec.shop_order_mode
         return obj

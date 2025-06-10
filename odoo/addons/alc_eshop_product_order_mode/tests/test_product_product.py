@@ -14,7 +14,7 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
         cls.init_extendable_registry()
         cls.addClassCleanup(cls.reset_extendable_registry)
 
-        cls.shop_order_modes = [
+        cls.order_modes = [
             "direct_sale_only",
             "quotation_only",
             "direct_sale_or_quotation",
@@ -24,26 +24,24 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
             .create(
                 {
                     "name": f"Test product {i}",
-                    "shop_order_mode": shop_order_mode,
-                    "is_shop_order_mode_unabled_on_variant": True,
+                    "shop_order_mode": order_mode,
                 }
             )
             .product_variant_id
-            for i, shop_order_mode in enumerate(cls.shop_order_modes)
+            for i, order_mode in enumerate(cls.order_modes)
         ]
 
     def test_0(self):
-        for product, shop_order_mode in zip(
-            self.products, self.shop_order_modes, strict=True
-        ):
+        for product, order_mode in zip(self.products, self.order_modes, strict=True):
             product_schema = ProductProduct.from_product_product(product)
-            self.assertEqual(product_schema.shop_order_mode.value, shop_order_mode)
+            self.assertEqual(product_schema.order_mode.value, order_mode)
 
     def test_1(self):
         product = self.products[0]
         product_schema = ProductProduct.from_product_product(product)
-        self.assertEqual(product_schema.shop_order_mode.value, "direct_sale_only")
+        self.assertEqual(product_schema.order_mode.value, "direct_sale_only")
 
+        product.product_tmpl_id.is_shop_order_mode_unabled_on_variant = True
         product.shop_order_mode = "quotation_only"
         product_schema = ProductProduct.from_product_product(product)
-        self.assertEqual(product_schema.shop_order_mode.value, "quotation_only")
+        self.assertEqual(product_schema.order_mode.value, "quotation_only")

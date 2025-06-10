@@ -4,7 +4,7 @@
 from enum import Enum
 
 
-class ShopOrderMode(Enum):
+class OrderMode(Enum):
     """Enum for product shop order mode."""
 
     direct_sale_only = "direct_sale_only"
