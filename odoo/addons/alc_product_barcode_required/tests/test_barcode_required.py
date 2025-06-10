@@ -133,3 +133,21 @@ class TestBarcodeRequired(TransactionCase):
         product_tmpl = product.product_tmpl_id
         p2 = product_tmpl.copy()
         self.assertTrue(p2)
+
+    def test_update_no_barcode_authorized(self):
+        product = self.env["product.product"].create(
+            {
+                "name": "Unittest missing barcode on write",
+                "uom_id": self.env.ref("uom.product_uom_unit").id,
+                "type": "product",
+                "weight": 6.0,
+                "barcode": "1234567892",
+                "no_barcode_authorized": True,
+            }
+        )
+        template = product.product_tmpl_id
+
+        self.assertTrue(template.no_barcode_authorized)
+
+        template.no_barcode_authorized = False
+        self.assertFalse(product.no_barcode_authorized)
