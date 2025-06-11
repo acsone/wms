@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+
+    <record id="view_res_partner_release_channel_filter" model="ir.ui.view">
+    <field name="name">res.partner.search.release_channel</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_res_partner_filter" />
+    <field name="arch" type="xml">
+      <field name="name" position="after">
+        <field name="located_in_stock_release_channel_ids"
+          string="Release Channels"
+          filter_domain="[('located_in_stock_release_channel_ids', 'ilike', self)]"
+           />
+      </field>
+
+    </field>
+  </record>
+
+
+</odoo>
