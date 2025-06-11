@@ -13,6 +13,7 @@ class ProductTemplate(ProductTemplateBase):
     no_barcode_authorized = fields.Boolean(
         "Barcode not required for this product",
         related="product_variant_ids.no_barcode_authorized",
+        readonly=False,
     )
 
     @api.model_create_multi
