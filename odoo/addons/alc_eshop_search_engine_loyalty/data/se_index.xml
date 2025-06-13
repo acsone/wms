@@ -19,6 +19,9 @@
                         "id": {
                             "type": "integer"
                         },
+                        "sequence": {
+                            "type": "integer"
+                        },
                         "date_start": {
                             "type": "date"
                         },

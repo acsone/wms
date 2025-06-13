@@ -11,22 +11,6 @@
 {
   "mappings":{
     "properties":{
-      "characteristics_vector": {
-        "type": "knn_vector",
-        "dimension": 1000,
-        "method": {
-          "name": "hnsw",
-          "space_type": "cosinesimil"
-        }
-      },
-      "description_vector": {
-        "type": "knn_vector",
-        "dimension": 384,
-        "method": {
-          "name": "hnsw",
-          "space_type": "cosinesimil"
-        }
-      },
       "links":{
         "dynamic":false,
         "type":"object"
@@ -460,22 +444,6 @@
 {
   "mappings":{
     "properties":{
-      "characteristics_vector": {
-        "type": "knn_vector",
-        "dimension": 1000,
-        "method": {
-          "name": "hnsw",
-          "space_type": "cosinesimil"
-        }
-      },
-      "description_vector": {
-        "type": "knn_vector",
-        "dimension": 384,
-        "method": {
-          "name": "hnsw",
-          "space_type": "cosinesimil"
-        }
-      },
       "links":{
         "dynamic":false,
         "type":"object"
@@ -899,22 +867,6 @@
 {
   "mappings":{
     "properties":{
-     "characteristics_vector": {
-        "type": "knn_vector",
-        "dimension": 1000,
-        "method": {
-          "name": "hnsw",
-          "space_type": "cosinesimil"
-        }
-      },
-      "description_vector": {
-        "type": "knn_vector",
-        "dimension": 384,
-        "method": {
-          "name": "hnsw",
-          "space_type": "cosinesimil"
-        }
-      },
       "links":{
         "dynamic":false,
         "type":"object"
