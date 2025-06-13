@@ -36,10 +36,10 @@ class TestStockPickingRmaFields(TestRma):
         rma.action_confirm()
         reception = rma.reception_move_id.picking_id
 
-        self.assertEqual(reception.rma_reason, "Test")
-        self.assertEqual(reception.rma_operation, "Replace")
+        self.assertEqual(reception.rma_id.reason_id.name, "Test")
+        self.assertEqual(reception.rma_id.operation_id.name, "Replace")
 
         rma.reason_id = rma_reason_2
         rma.operation_id = operation_2
-        self.assertEqual(reception.rma_reason, "Test2")
-        self.assertEqual(reception.rma_operation, "Repair")
+        self.assertEqual(reception.rma_id.reason_id.name, "Test2")
+        self.assertEqual(reception.rma_id.operation_id.name, "Repair")

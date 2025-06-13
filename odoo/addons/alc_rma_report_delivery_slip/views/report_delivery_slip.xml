@@ -5,15 +5,11 @@
     >
         <xpath expr="//div/h3[@id='rma_title']" position="after">
             <div id="rma_infos_container" t-if="deliveryslip.picking_type_code=='incoming'">
-                <div t-if="deliveryslip.rma_reason">
-                    <strong>
-                        <t t-esc="deliveryslip.rma_reason" />
-                    </strong>
+                <div t-if="deliveryslip.rma_id.reason_id">
+                    <strong t-field="deliveryslip.rma_id.reason_id" />
                 </div>
-                <div t-if="deliveryslip.rma_operation">
-                    <strong>
-                        <t t-esc="deliveryslip.rma_operation" />
-                    </strong>
+                <div t-if="deliveryslip.rma_id.operation_id">
+                    <strong t-field="deliveryslip.rma_id.operation_id" />
                 </div>
             </div>
 
