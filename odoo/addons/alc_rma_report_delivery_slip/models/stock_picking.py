@@ -15,8 +15,6 @@ class StockPicking(Picking):
         store=False,
         search="_search_rma_id",
     )
-    rma_reason = fields.Char(compute="_compute_rma_reason", store=False)
-    rma_operation = fields.Char(compute="_compute_rma_operation", store=False)
 
     @api.depends("origin")
     def _compute_rma_id(self):
@@ -31,13 +29,3 @@ class StockPicking(Picking):
         if operator == "!=":
             return [("origin", "!=", self.env["rma"].browse(value).name)]
         return []
-
-    @api.depends("origin", "rma_id.reason_id")
-    def _compute_rma_reason(self):
-        for picking in self:
-            picking.rma_reason = self.rma_id.reason_id.name
-
-    @api.depends("origin", "rma_id.operation_id")
-    def _compute_rma_operation(self):
-        for picking in self:
-            picking.rma_operation = self.rma_id.operation_id.name
