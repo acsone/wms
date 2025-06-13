@@ -15,6 +15,7 @@
         "fs_product_brand_multi_image",
         "fs_product_multi_image",
         "fs_product_multi_media",
+        "sale_quotation",
         "shopinvader_base_url",
         "shopinvader_es_product_categ",
         "shopinvader_multi_category",
