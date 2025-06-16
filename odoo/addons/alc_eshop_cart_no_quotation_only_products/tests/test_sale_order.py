@@ -21,12 +21,13 @@ class TestSaleOrder(TransactionCase):
             .create(
                 {
                     "name": "product_2",
-                    "shop_order_mode": "quotation_only",
-                    "is_shop_order_mode_unabled_on_variant": True,
+                    "is_shop_order_mode_enabled_on_variant": True,
                 }
             )
             .product_variant_id
         )
+        cls.product_2.shop_order_mode = "quotation_only"
+
         partner = cls.env["res.partner"].create({"name": "Test Partner"})
 
         cls.cart = cls.env["sale.order"]._create_empty_cart(partner.id)
