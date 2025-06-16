@@ -151,6 +151,7 @@
         "alc_sale_stock_loyalty_year_end_rebate",
         "alc_sale_stock_loyalty_year_end_rebate_coupon_view",
         "alc_sale_suite_name",
+        "alc_sale_triple_discount_display_amount",
         "alc_sales_count",
         "alc_stock_available_product_expiry",
         "alc_stock_lot_available",
