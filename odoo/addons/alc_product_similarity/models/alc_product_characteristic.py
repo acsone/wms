@@ -38,6 +38,26 @@ class AlcProductCharacteristic(models.Model):
         ),
     ]
 
+    @api.model
+    def _get_effective_id(self, record):
+        """
+        Returns the effective integer ID of the given record.
+
+        This method provides a consistent integer identifier for a record,
+        whether it has been committed to the database (and thus has a real
+        database ID) or is a new record still in the current transaction
+        (represented by an Odoo `NewId` object).
+
+        This method prevents issues caused by `models.NewId` objects being coerced into `0`
+        when converted to an integer, which can lead to unique constraint violations or other unexpected behavior.
+        """
+        record.ensure_one()
+
+        if isinstance(record.id, models.NewId):
+            return record.id.origin
+
+        return record.id
+
     def _to_cache_key(self):
         """Returns the cache key for a characteristic from this model."""
         self.ensure_one()
@@ -45,12 +65,12 @@ class AlcProductCharacteristic(models.Model):
             self.value_res_model,
             self.value_res_id,
             self.field_id.id,
-        )  # use field_id.id instead of field_id because field_id is of type "ir.model.fields" and not simply int because of the Many2one
+        )
 
     def _record_to_cache_key(self, record, field_name):
         """Returns the cache key for a characteristic from another model."""
         field_id = self.env["ir.model.fields"]._get("product.product", field_name).id
-        return (record._name, record.id, field_id)
+        return (record._name, self._get_effective_id(record), field_id)
 
     @api.model
     @tools.ormcache()
@@ -83,7 +103,7 @@ class AlcProductCharacteristic(models.Model):
         """
         Gets the index of the given characteristic in the characteristics vector of product.product.
 
-        This function creates the enrty in db if no line exists yet in the table.
+        This function creates the entry in db if no line exists yet in the table.
         """
         if len(record) != 1:
             raise ValueError(
@@ -110,7 +130,7 @@ class AlcProductCharacteristic(models.Model):
                     [
                         {
                             "value_res_model": record._name,
-                            "value_res_id": record.id,
+                            "value_res_id": self._get_effective_id(record),
                             "field_id": field_id,
                             "field_weight": index_and_weight["weight"],
                             "vector_index": index,
