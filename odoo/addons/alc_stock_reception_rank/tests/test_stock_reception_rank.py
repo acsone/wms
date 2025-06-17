@@ -177,3 +177,29 @@ class TestStockReceptionRank(CommonTestStockReceptionRankCase):
         self._create_outgoing_picking(self.customer2, qty=1, product=self.product2)
         self.incoming_picking_2_products.button_rank_recompute()
         self.assertEqual(self.incoming_picking_2_products.rank, 2 * 1000 + 2 * 1)
+
+    def test_09_stock_started_reception_rank_recompute_ignored(self):
+        """Test the started reception are ignored from rank recompute."""
+
+        self._create_outgoing_picking(self.customer1, qty=1, product=self.product)
+        self.assert_no_waiting(self.incoming_picking)
+        self.env["stock.grn"].create(
+            {
+                "carrier_id": self.supplier.id,
+                "delivery_note_supplier_number": "GRN RECEPTION RANK TEST",
+                "picking_ids": [
+                    (4, self.incoming_picking.id),
+                ],
+            }
+        )
+        self._create_outgoing_picking(self.customer2, qty=1, product=self.product)
+        self.assertEqual(self.incoming_picking.count_partners_waiting_for_reception, 1)
+        self.incoming_picking.action_start()
+        self.env["stock.picking"]._cron_reception_rank_recompute()
+        self.assertEqual(self.incoming_picking.count_partners_waiting_for_reception, 1)
+        self.assertEqual(
+            self.incoming_picking.count_planned_partners_waiting_for_reception, 0
+        )
+        self.assertEqual(
+            self.incoming_picking.count_planned_products_waiting_for_reception, 0
+        )

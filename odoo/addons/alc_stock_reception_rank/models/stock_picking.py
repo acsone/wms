@@ -267,7 +267,15 @@ class StockPicking(StockPickingBase):
 
     def button_rank_recompute(self):
         res = super().button_rank_recompute()
-        receptions = self.filtered(lambda r: r.location_id.usage == "supplier")
+        receptions = self.filtered(
+            lambda r: r.location_id.usage == "supplier"
+            and not r.started
+            # ignore receptions that have already started, as this information is no
+            # longer relevant once the reception is in progress.
+            # the `count_partners_waiting_for_reception` is intended only for receptions
+            # that have not yet begun, in order to help notify users about which
+            # receptions should be prioritized
+        )
         receptions._compute_waiting_for_reception()
         receptions._calc_reception_rank()
         return res
@@ -277,6 +285,7 @@ class StockPicking(StockPickingBase):
         domain = [
             ("grn_id", "!=", False),
             ("state", "in", ("assigned", "confirmed")),
+            ("started", "=", False),
         ]
         receptions = self.search(domain)
         receptions.button_rank_recompute()
