@@ -1,0 +1,1 @@
+from . import test_stock_picking_start_at_receive_lot
