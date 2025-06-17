@@ -50,6 +50,7 @@
         "alc_stock_move_line_show_quantity",
         "alc_stock_move_list",
         "alc_stock_orderpoint_product_mto",
+        "alc_stock_picking_start_at_receive_lot",
         "alc_stock_receive_display_stock_storage_type",
         "alc_stock_receive_lot_missing_product_nouveaute_info",
         "alc_stock_receive_lot_product_info",
