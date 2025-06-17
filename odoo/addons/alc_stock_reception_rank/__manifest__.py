@@ -16,6 +16,7 @@
         "stock_available_to_promise_release",
         "stock_grn",
         "stock_move_propagate_first_move",
+        "stock_picking_start",
         "stock_release_channel",
         # Alcyon/Stock Management
         "alc_stock_picking_rank",
