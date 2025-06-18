@@ -135,7 +135,7 @@ odoo-addon-stock-storage-category-usage-report @ git+https://github.com/OCA/stoc
 
 # stock-logistics-warehouse
 odoo-addon-stock-location-children @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2190/head#subdirectory=setup/stock_location_children
-odoo-addon-stock-location-fill-state @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2188/head#subdirectory=setup/stock_location_fill_state
+odoo-addon-stock-location-fill-state @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2367/head#subdirectory=setup/stock_location_fill_state
 odoo-addon-stock-location-pending-move @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2200/head#subdirectory=setup/stock_location_pending_move
 odoo-addon-stock-location-product-restriction @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2342/head#subdirectory=setup/stock_location_product_restriction
 odoo-addon-stock-location-release-channel-restriction @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2344/head#subdirectory=setup/stock_location_release_channel_restriction
