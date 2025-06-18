@@ -408,4 +408,122 @@
             ref="alc_report_shipment_advice.paperformat_shipment_advice"
         />
     </record>
+
+    <!-- PACK LOADING -->
+
+    <template id="alc_report_shipment_advice_pack_loading_document">
+        <t t-call="web.html_container">
+            <t t-set="index" t-value="1" />
+            <t t-set="report" t-value="o.get_alc_report_shipment_advice()" />
+            <t t-set="lines" t-value="report.line_ids" />
+            <t t-set="company" t-value="o.company_id or res_company" />
+            <div class="page">
+                <h2>
+                    <span t-field="o.display_name" /> - <t t-if="o.toursolver_resource_id">
+                        <span t-field="o.toursolver_resource_id.display_name" /> - </t>
+                    <span
+                        t-esc="datetime.date.today().strftime('%d/%m/%Y')" />
+                </h2>
+                <div class="row mb-3" id="shipment_header">
+                    <div class="col-5">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td> Exp: <span t-field="company.name" />
+                                        <br />
+                                        <span
+                                            t-field="company.street" />
+                                        <br />
+                                        <span
+                                            t-field="company.zip" />, <span t-field="company.city" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-5 offset-2">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td class="col-4">Stops</td>
+                                    <td class="col-8">
+                                        <span t-esc="len(lines)" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="shipment_content">
+                <table
+                    class="table table-bordered table-sm"
+                    name="bulk_content"
+                    t-if="lines"
+                >
+                    <thead>
+                        <tr class="active bg-grey">
+                            <th width="3%">Seq.</th>
+                            <th width="20%">Customer</th>
+                            <th width="20%">Customer Ref</th>
+                            <th width="20%">Pack</th>
+                            <th width="20%">Pack Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="lines.picking_ids" t-as="picking">
+                            <t t-set="partner" t-value="picking['partner_id']" />
+                            <tr t-foreach="picking.package_ids" t-as="package">
+                                <td>
+                                    <span t-esc="index" />
+                                </td>
+                                <td>
+                                    <span t-field="partner.name" />
+                                </td>
+                                <td>
+                                    <span t-field="partner.ref" />
+                                </td>
+                                <td>
+                                    <span t-field="package.name" />
+                                </td>
+                                <td>
+                                    <span t-field="picking.location_id.name" />
+                                </td>
+                            </tr>
+                            <t t-set="index" t-value="index + 1" />
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_shipment_advice_pack_loading">
+        <t t-foreach="docs" t-as="o">
+            <div
+                class="article"
+                t-att-data-oe-model="o and o._name"
+                t-att-data-oe-id="o and o.id"
+                t-att-data-oe-lang="o and o.env.context.get('lang')"
+            >
+                <t
+                    t-call="alc_report_shipment_advice.alc_report_shipment_advice_pack_loading_document"
+                />
+            </div>
+        </t>
+    </template>
+
+    <!-- Below code will create the action button to print the report in the form view of
+    shipment.advice -->
+    <record id="action_report_shipment_advice" model="ir.actions.report">
+        <field name="name">Shipment Advice Pack Loading</field>
+        <field name="model">shipment.advice</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">alc_report_shipment_advice.report_shipment_advice_pack_loading</field>
+        <field name="report_file">alc_report_shipment_advice.report_shipment_advice_pack_loading</field>
+        <field name="paperformat_id" ref="alc_report_shipment_advice.paperformat_shipment_advice" />
+        <field name="print_report_name">'Shipment Advice Pack Loading - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_shipment_advice" />
+        <field name="binding_type">report</field>
+    </record>
 </odoo>
