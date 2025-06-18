@@ -104,6 +104,7 @@
     - oca refs/pull/995/head # [16.0][IMP] shopfloor/mobile: Allow to do single unload with each pack
     - oca refs/pull/1001/head # [IMP] shopfloor: Add a barcode parser to support multi representation
     - oca refs/pull/1023/head # [IMP] shopfloor: Don't split operations at user assignation
+    - oca refs/pull/1055/head # [FIX] shopfloor: Fetch qty_available only when needed
   target: origin 16.0-alc-shopfloor
 
 ./src/shopfloor_reception:
