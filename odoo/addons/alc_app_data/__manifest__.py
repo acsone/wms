@@ -12,6 +12,7 @@
     "application": True,
     "depends": [
         # Alcyon
+        "alc_base_security",
         "alc_report_base",
         "alc_report_delivery_slip",
         "alc_report_invoice",
