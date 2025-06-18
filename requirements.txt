@@ -422,7 +422,7 @@ odoo-addon-stock-picking-back2draft==16.0.1.0.0.11
 odoo-addon-stock-picking-backorder-reason @ git+https://github.com/acsone/stock-logistics-workflow.git@0c98b39292f2fedb1acc417741f2c6f305946b54#subdirectory=setup/stock_picking_backorder_reason
 odoo-addon-stock-picking-backorder-reason-grn @ git+https://github.com/acsone/stock-logistics-workflow.git@385cf7dc6eb9ce7c43ca7e0f697d513c4cd6891b#subdirectory=setup/stock_picking_backorder_reason_grn
 odoo-addon-stock-picking-batch-creation @ git+https://github.com/acsone/wms.git@230082583aa3cf82cc28b84db5a06f7eb1dda08c#subdirectory=setup/stock_picking_batch_creation
-odoo-addon-stock-picking-batch-start @ git+https://github.com/acsone/stock-logistics-workflow.git@2c72016cdc9a0a15508dd3295218c3089b105523#subdirectory=setup/stock_picking_batch_start
+odoo-addon-stock-picking-batch-start @ git+https://github.com/acsone/stock-logistics-workflow.git@4fe978758bf481f870aa9ea5a89d39889fa6570e#subdirectory=setup/stock_picking_batch_start
 odoo-addon-stock-picking-completion-info==16.0.1.0.1.6
 odoo-addon-stock-picking-delivery-link==16.0.1.1.4.1
 odoo-addon-stock-picking-delivery-package-type-category @ git+https://github.com/acsone/delivery-carrier.git@8557f2bbbd7cf9693fb0f4bb28f33dff5245966c#subdirectory=setup/stock_picking_delivery_package_type_category
@@ -439,7 +439,7 @@ odoo-addon-stock-picking-operation-loss-quantity @ git+https://github.com/acsone
 odoo-addon-stock-picking-progress==16.0.1.0.0.9
 odoo-addon-stock-picking-putaway-recompute @ git+https://github.com/acsone/stock-logistics-workflow.git@525e51dc279fb2fc248c883fe3803bbb8052a971#subdirectory=setup/stock_picking_putaway_recompute
 odoo-addon-stock-picking-return-lot==16.0.1.1.0
-odoo-addon-stock-picking-start==16.0.1.1.1
+odoo-addon-stock-picking-start @ git+https://github.com/acsone/stock-logistics-workflow.git@c427ae0062a3baca9937b06c7bb353063e76882f#subdirectory=setup/stock_picking_start
 odoo-addon-stock-picking-type-shipping-policy==16.0.1.0.0.7
 odoo-addon-stock-picking-volume==16.0.1.0.4
 odoo-addon-stock-procurement-customer==16.0.1.0.1.6
