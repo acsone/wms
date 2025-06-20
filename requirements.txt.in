@@ -249,6 +249,7 @@ odoo-addon-shopinvader-api-quotation @ git+ssh://git@github.com/acsone/odoo-shop
 odoo-addon-shopinvader-api-cart-quotation @ git+ssh://git@github.com/acsone/odoo-shopinvader.git@16.0-refactor-quotations-rest-api#subdirectory=setup/shopinvader_api_cart_quotation
 odoo-addon-shopinvader-product-order-mode @ git+ssh://git@github.com/acsone/odoo-shopinvader.git@16.0-refactor-quotations-rest-api#subdirectory=setup/shopinvader_product_order_mode
 odoo-addon-shopinvader-product-order-mode-on-request @ git+ssh://git@github.com/acsone/odoo-shopinvader.git@16.0-refactor-quotations-rest-api#subdirectory=setup/shopinvader_product_order_mode_on_request
+odoo-addon-sale-quotation @ git+ssh://git@github.com/acsone/odoo-shopinvader.git@16.0-refactor-quotations-rest-api#subdirectory=setup/sale_quotation
 
 # OCA/report-print-send
 odoo-addon-base-report-to-printer @ git+https://github.com/OCA/report-print-send.git@refs/pull/406/head#subdirectory=setup/base_report_to_printer

@@ -21,7 +21,7 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
         cls.product = (
             cls.env["product.template"]
             .create(
-                {"name": "test product", "is_shop_order_mode_unabled_on_variant": True}
+                {"name": "test product", "is_shop_order_mode_enabled_on_variant": True}
             )
             .product_variant_id
         )

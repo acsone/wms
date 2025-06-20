@@ -41,7 +41,7 @@ class TestProductSchema(TransactionCase, ExtendableMixin):
         product_schema = ProductProduct.from_product_product(product)
         self.assertEqual(product_schema.order_mode.value, "direct_sale_only")
 
-        product.product_tmpl_id.is_shop_order_mode_unabled_on_variant = True
+        product.product_tmpl_id.is_shop_order_mode_enabled_on_variant = True
         product.shop_order_mode = "quotation_only"
         product_schema = ProductProduct.from_product_product(product)
         self.assertEqual(product_schema.order_mode.value, "quotation_only")
