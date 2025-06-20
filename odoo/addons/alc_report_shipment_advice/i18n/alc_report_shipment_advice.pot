@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: alc_report_shipment_advice
+#: model:ir.actions.report,print_report_name:alc_report_shipment_advice.action_report_shipment_advice
+msgid "'Shipment Advice Pack Loading - %s' % (object.name)"
+msgstr ""
+
+#. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Arriving time"
 msgstr ""
@@ -59,7 +64,13 @@ msgstr ""
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_pack_loading_document
 msgid "Customer"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_pack_loading_document
+msgid "Customer Ref"
 msgstr ""
 
 #. module: alc_report_shipment_advice
@@ -80,6 +91,7 @@ msgstr ""
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_pack_loading_document
 msgid "Exp:"
 msgstr ""
 
@@ -130,6 +142,16 @@ msgstr ""
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
 msgid "Notes"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_pack_loading_document
+msgid "Pack"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_pack_loading_document
+msgid "Pack Location"
 msgstr ""
 
 #. module: alc_report_shipment_advice
@@ -192,6 +214,7 @@ msgstr ""
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_pack_loading_document
 msgid "Seq."
 msgstr ""
 
@@ -205,6 +228,11 @@ msgstr ""
 #: model:ir.model,name:alc_report_shipment_advice.model_shipment_advice
 #: model:ir.model.fields,field_description:alc_report_shipment_advice.field_alc_report_shipment_advice__shipment_advice_id
 msgid "Shipment Advice"
+msgstr ""
+
+#. module: alc_report_shipment_advice
+#: model:ir.actions.report,name:alc_report_shipment_advice.action_report_shipment_advice
+msgid "Shipment Advice Pack Loading"
 msgstr ""
 
 #. module: alc_report_shipment_advice
@@ -246,6 +274,7 @@ msgstr ""
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_document
+#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.alc_report_shipment_advice_pack_loading_document
 msgid "Stops"
 msgstr ""
 
@@ -271,16 +300,7 @@ msgstr ""
 
 #. module: alc_report_shipment_advice
 #: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_packages
-msgid ""
-"box(es)\n"
-"                        <br/>"
-msgstr ""
-
-#. module: alc_report_shipment_advice
-#: model_terms:ir.ui.view,arch_db:alc_report_shipment_advice.report_shipment_advice_packages
-msgid ""
-"box(es)\n"
-"                <br/>"
+msgid "box(es) <br/>"
 msgstr ""
 
 #. module: alc_report_shipment_advice

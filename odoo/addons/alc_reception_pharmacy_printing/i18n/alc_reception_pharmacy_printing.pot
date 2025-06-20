@@ -159,6 +159,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy_printing.pharmacy_lot_label
 msgid ""
 "^FS\\r\n"
+"^FO32,322^A0N,25,20^FDPrint:"
+msgstr ""
+
+#. module: alc_reception_pharmacy_printing
+#: model_terms:ir.ui.view,arch_db:alc_reception_pharmacy_printing.pharmacy_lot_label
+msgid ""
+"^FS\\r\n"
 "^FO420,150\\r\n"
 "^BQN,2,6\\r\n"
 "^FDQA,"
