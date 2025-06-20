@@ -21,6 +21,7 @@
 ^FO32,283^A0N,31,23^FD<t
           t-esc="line.lot_id.product_id.name and line.lot_id.product_id.name[:45]"
         />^FS\r
+^FO32,322^A0N,25,20^FDPrint: <t t-esc="datetime.datetime.now().strftime('%d/%m/%Y')" />^FS\r
 ^FO420,150\r
 ^BQN,2,6\r
 ^FDQA,<t t-esc="line.lot_id.name" />^FS\r
