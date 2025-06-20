@@ -16,6 +16,9 @@ class TestMissingInfoOnNewProduct(TransactionCase):
                 cls.env.context, tracking_disable=True, queue_job__no_delay=True
             )
         )
+        cls.env["res.config.settings"].create(
+            {"product_barcode_required": True}
+        ).execute()
         storage_type_new = cls.env["stock.package.type"].create(
             {"name": "any name", "is_new": True}
         )
