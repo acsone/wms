@@ -12,9 +12,7 @@ from odoo.addons.stock_storage_type.models.stock_package_type import StockPackag
 
 class ProductTemplate(product_template.ProductTemplate):
 
-    is_new = fields.Boolean(
-        related="package_type_id.is_new",
-    )
+    is_new = fields.Boolean(related="package_type_id.is_new", store=True)
     new_product_with_old_date = fields.Boolean(
         default=False,
         compute="_compute_new_product_with_old_date",
