@@ -55,6 +55,7 @@ from odoo.addons.fastapi_auth_jwt.dependencies import (
 )
 from odoo.addons.shopinvader_api_address.routers.address_service import address_router
 from odoo.addons.shopinvader_api_cart.routers import cart_router
+from odoo.addons.shopinvader_api_quotation.routers import quotation_router
 from odoo.addons.shopinvader_api_sale.routers.sales import sale_router
 from odoo.addons.shopinvader_api_wishlist.routers import wishlist_router
 
@@ -104,6 +105,7 @@ class FastapiEndpoint(FastapiEndpointBase):
             delivery_carriers_router,
             carts_router_delivery,
             loyalty_card_router,
+            quotation_router,
         ]
 
     def _get_alc_eshop_app_tags(self, params) -> list:
@@ -214,6 +216,12 @@ class FastapiEndpoint(FastapiEndpointBase):
             {
                 "name": "loyalty_card",
                 "description": "Set of services to manage loyalty cards",
+            }
+        )
+        tags_metadata.append(
+            {
+                "name": "quotations",
+                "description": "Set of services to manage quotations",
             }
         )
         return tags_metadata
