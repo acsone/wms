@@ -18,16 +18,16 @@ class ProductTemplate(ProductTemplateBase):
     )
     missing_barcode = fields.Boolean(default=False, compute="_compute_missing_barcode")
 
-    @api.depends("barcode", "no_barcode_authorized", "is_new")
+    @api.depends("barcode", "no_barcode_authorized", "package_type_id.is_new")
     def _compute_missing_barcode(self):
         for template in self:
             template.missing_barcode = (
-                not template.is_new
+                not template.package_type_id.is_new
                 and not template.barcode
                 and not template.no_barcode_authorized
             )
 
-    @api.constrains("active", "is_new", "barcode", "no_barcode_authorized")
+    @api.constrains("active", "package_type_id", "barcode", "no_barcode_authorized")
     def _check_barcode_is_mandatory(self):
         if self.env.context.get("disable_check_barcode_constrains"):
             return
