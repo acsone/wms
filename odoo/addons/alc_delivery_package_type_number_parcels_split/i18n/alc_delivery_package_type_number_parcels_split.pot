@@ -37,6 +37,11 @@ msgid ""
 msgstr ""
 
 #. module: alc_delivery_package_type_number_parcels_split
+#: model:ir.model.fields,field_description:alc_delivery_package_type_number_parcels_split.field_stock_quant_package__number_of_parcels_idx
+msgid "Number of Parcels Index"
+msgstr ""
+
+#. module: alc_delivery_package_type_number_parcels_split
 #: model:ir.model,name:alc_delivery_package_type_number_parcels_split.model_stock_quant_package
 msgid "Packages"
 msgstr ""
@@ -44,6 +49,13 @@ msgstr ""
 #. module: alc_delivery_package_type_number_parcels_split
 #: model:ir.model,name:alc_delivery_package_type_number_parcels_split.model_stock_package_type
 msgid "Stock package type"
+msgstr ""
+
+#. module: alc_delivery_package_type_number_parcels_split
+#: model:ir.model.fields,help:alc_delivery_package_type_number_parcels_split.field_stock_quant_package__number_of_parcels_idx
+msgid ""
+"The index of the current package in the list of parcels for the delivery "
+"package type."
 msgstr ""
 
 #. module: alc_delivery_package_type_number_parcels_split
