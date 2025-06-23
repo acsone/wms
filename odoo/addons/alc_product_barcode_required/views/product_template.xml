@@ -1,18 +1,33 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright 2021 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
   <record id="product_template_form_view" model="ir.ui.view">
-    <field name="name">product.template.form  (in alc_product_barcode_required)</field>
+    <field name="name">product.template.form (in alc_product_barcode_required)</field>
     <field name="model">product.template</field>
     <field name="inherit_id" ref="product.product_template_only_form_view" />
     <field name="arch" type="xml">
       <field name="barcode" position="after">
-        <field
-          name="no_barcode_authorized"
-          attrs="{'invisible': [('product_variant_count', '>', 1)]}"
-        />
+        <field name="is_new" invisible="1" />
+        <field name="no_barcode_authorized" />
       </field>
+      <field name="barcode" position="attributes">
+        <attribute name="attrs">
+          {'required': [('no_barcode_authorized', '=', False), ('is_new', '=', False)]}
+        </attribute>
+      </field>
+
+      <header position="after">
+        <field name="missing_barcode" invisible="1" />
+        <div
+          class="alert alert-warning"
+          role="alert"
+          attrs="{'invisible': [('missing_barcode', '=', False)]}"
+        >
+          <p>- You must enter a barcode or specify product without barcode.</p>
+        </div>
+
+      </header>
     </field>
   </record>
 </odoo>
