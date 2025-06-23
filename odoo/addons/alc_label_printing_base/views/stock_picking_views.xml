@@ -33,6 +33,7 @@
 <t t-set="parcels_splitted" t-value="package.package_type_id.auto_distribute_products_in_parcels" />
 <t t-set="number_of_parcels" t-value="(package.number_of_parcels or 1) if not parcels_splitted else 1" />
 <t t-foreach="range(number_of_parcels)" t-as="index">
+  <t t-set="number_of_parcels_idx" t-value="(index + 1) if not parcel_splitted else package.number_of_parcels_idx" />
 ^XA
 
 ^FO30,30^GB<t
@@ -50,8 +51,8 @@
 ^FO340,47^A0N60,60^FDB2C^FS\r
 </t>
 
-^FO570,47,1^A0N60,60^FD<t t-esc="index + 1" /> / <t
-              t-esc="(not parcels_splitted and package.number_of_parcels) or 1"
+^FO570,47,1^A0N60,60^FD<t t-esc="number_of_parcels_idx" /> / <t
+              t-esc="package.number_of_parcels"
             />^FS\r
 
 ^FO30,140^A0N30,30^FD<t

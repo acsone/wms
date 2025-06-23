@@ -225,3 +225,7 @@ class TestStockQuantPackageDelivery(TestPackingCommon):
         # the suffixes should be a counter from 1 to 3
         self.assertEqual(len(set(sfxs)), 3)
         self.assertEqual(set(sfxs), {str(i) for i in range(1, 4)})
+
+        number_of_parcels_idxs = packages.mapped("number_of_parcels_idx")
+        # the number of parcels idx should be 1, 2, 3
+        self.assertEqual(set(number_of_parcels_idxs), {1, 2, 3})

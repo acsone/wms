@@ -25,9 +25,12 @@ class ChooseDeliveryPackage(models.TransientModel):
                     move_line_ids, package_type.number_of_parcels
                 )
             ):
-                default_package_name = package_name + f"_{i+1}"
+                number_of_parcels_idx = i + 1
+                default_package_name = package_name + f"_{number_of_parcels_idx}"
                 self_ctx = self.with_context(
-                    forced_lines=mls, default_package_name=default_package_name
+                    forced_lines=mls,
+                    default_package_name=default_package_name,
+                    default_number_of_parcels_idx=number_of_parcels_idx,
                 )
                 res = super(ChooseDeliveryPackage, self_ctx).action_put_in_pack()
 

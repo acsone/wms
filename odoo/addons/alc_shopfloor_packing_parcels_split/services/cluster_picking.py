@@ -24,9 +24,12 @@ class ClusterPicking(Component):
                     move_lines, package_type.number_of_parcels
                 )
             ):
-                default_package_name = package_name + f"_{i+1}"
+                number_of_parcels_idx = i + 1
+                default_package_name = package_name + f"_{number_of_parcels_idx}"
                 pick_in_ctx = picking.with_context(
-                    forced_lines=mls, default_package_name=default_package_name
+                    forced_lines=mls,
+                    default_package_name=default_package_name,
+                    default_number_of_parcels_idx=number_of_parcels_idx,
                 )
                 packages |= super()._put_in_pack(
                     pick_in_ctx, mls, None, package_type.id
