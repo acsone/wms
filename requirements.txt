@@ -125,7 +125,7 @@ odoo-addon-base-optional-quick-create==16.0.1.0.0.9
 odoo-addon-base-partition==16.0.1.0.0.7
 odoo-addon-base-partner-sequence @ git+https://github.com/acsone/partner-contact.git@2718d8147ccad7ffb7abccad321f90d50a73f0a8#subdirectory=setup/base_partner_sequence
 odoo-addon-base-report-to-label-printer==16.0.1.0.0.5
-odoo-addon-base-report-to-printer @ git+https://github.com/acsone/report-print-send.git@c351b4675e7647626b9e3f3ad8acc1b50433d23b#subdirectory=setup/base_report_to_printer
+odoo-addon-base-report-to-printer @ git+https://github.com/acsone/report-print-send.git@65c098c608e158c6d513afa657e4110234a36907#subdirectory=setup/base_report_to_printer
 odoo-addon-base-rest==16.0.1.0.2.2
 odoo-addon-base-sparse-field-list-support==16.0.1.0.0.4
 odoo-addon-base-technical-features==16.0.1.0.0.10
