@@ -438,6 +438,7 @@ odoo-addon-stock-picking-is-completed @ git+https://github.com/acsone/stock-logi
 odoo-addon-stock-picking-kind==16.0.1.0.0.10
 odoo-addon-stock-picking-low-priority @ git+https://github.com/acsone/stock-logistics-workflow.git@ffaa42ce3e44c5748d81921a4e8574147abad5b5#subdirectory=setup/stock_picking_low_priority
 odoo-addon-stock-picking-operation-destination-suggestion @ git+https://github.com/acsone/stock-logistics-workflow.git@9dc2f943928d274d8227934a7811a016f0b2a572#subdirectory=setup/stock_picking_operation_destination_suggestion
+odoo-addon-stock-picking-operation-destination-suggestion-release-channel @ git+https://github.com/acsone/stock-logistics-workflow.git@3ece7814288d12fcc7b1b0f54a65f51f354d9558#subdirectory=setup/stock_picking_operation_destination_suggestion_release_channel
 odoo-addon-stock-picking-operation-loss-quantity @ git+https://github.com/acsone/stock-logistics-workflow.git@56858c353f49ae90f71754599eb9968e606a23a7#subdirectory=setup/stock_picking_operation_loss_quantity
 odoo-addon-stock-picking-progress==16.0.1.0.0.9
 odoo-addon-stock-picking-putaway-recompute @ git+https://github.com/acsone/stock-logistics-workflow.git@525e51dc279fb2fc248c883fe3803bbb8052a971#subdirectory=setup/stock_picking_putaway_recompute
