@@ -15,6 +15,8 @@
         "shopfloor_batch_automatic_creation",
         "shopfloor_full_location_reservation",
         "shopfloor_gs1",
+        "shopfloor_location_destination_suggestion",
+        "shopfloor_location_destination_suggestion_mobile",
         "shopfloor_mobile",
         "shopfloor_mobile_base_auth_api_key",
         "shopfloor_mobile_packing",
