@@ -77,8 +77,14 @@ class Reception(Component):
         return domain
 
     def _get_today_start_end_datetime(self, naive=True):
+        # TODO: Put warehouse tz retrieval in shopfloor module?
         company = self.env.company
-        tz = company.partner_id.tz or "UTC"
+        warehouse = self.picking_types.warehouse_id
+        tz = (
+            warehouse.partner_id.tz
+            if (len(warehouse) == 1 and warehouse.partner_id.tz)
+            else company.partner_id.tz or "UTC"
+        )
         today = fields.Datetime.today()
         today_start = today_start_localized = fields.Datetime.start_of(today, "day")
         today_end = today_end_localized = fields.Datetime.end_of(today, "day")
