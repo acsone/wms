@@ -779,7 +779,6 @@ class Reception(Component):
         return self._response(next_state="manual_selection", data=data)
 
     def _response_for_set_lot(self, picking, line, message=None):
-        self._set_lot_from_parse(picking, line)
         return self._response(
             next_state="set_lot",
             data={
@@ -788,38 +787,6 @@ class Reception(Component):
             },
             message=message,
         )
-
-    def _set_lot_from_parse(self, picking, line):
-        """
-        The lot has not been found in move lines before this call.
-
-        Following the picking type configuration, set it:
-
-            - on lot_id if record is found
-            - on lot_name if record is not found
-            - set expiration date if found in parse result
-        """
-        if line.shopfloor_should_create_lot and self.search_result.parse_result:
-            expiration_date = None
-            lot_name = None
-            found = False
-            for result in self.search_result.parse_result:
-                if result.type == "lot":
-                    if self.search_result.type == "lot" and self.search_result.record:
-                        lot_id = self.search_result.record
-                        lot_name = lot_id.name
-                        found = True
-                    else:
-                        lot_name = result.value
-                        found = True
-                if (
-                    result.type == "expiration_date"
-                    and line.product_id.use_expiration_date
-                ):
-                    expiration_date = result.value
-
-            if found:
-                return self.set_lot(picking.id, line.id, lot_name, expiration_date)
 
     def _align_display_product_uom_qty(self, line, response):
         # This method aligns product uom qties on move lines.
