@@ -131,11 +131,14 @@ export const reception_states = function () {
             },
             on_scan: (barcode) => {
                 // Scan a lot
+                const input = document.querySelector('input[name="expiration_date"]');
+                const expiration_date = input?.value;
                 this.wait_call(
                     this.odoo.call("set_lot", {
                         picking_id: this.state.data.picking.id,
                         selected_line_id: this.line_being_handled.id,
                         lot_name: barcode.text,
+                        expiration_date: expiration_date,
                     })
                 ).then(() => {
                     // We need to wait for the call to the backend to be over
