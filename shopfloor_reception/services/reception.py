@@ -1035,6 +1035,9 @@ class Reception(Component):
         if not selected_line.exists():
             message = self.msg_store.record_not_found()
             return self._response_for_set_lot(picking, selected_line, message=message)
+        if selected_line.product_id.use_expiration_date and not expiration_date:
+            message = self.msg_store.expiration_date_missing()
+            return self._response_for_set_lot(picking, selected_line, message=message)
         search = self._actions_for("search")
         if lot_name:
             product = selected_line.product_id
@@ -1045,10 +1048,13 @@ class Reception(Component):
                 )
             selected_line.lot_id = lot.id
             selected_line._onchange_lot_id()
-        elif expiration_date:
+        if expiration_date:
             selected_line.write({"expiration_date": expiration_date})
             selected_line.lot_id.write({"expiration_date": expiration_date})
-        return self._response_for_set_lot(picking, selected_line)
+        message = None
+        if fields.Date.to_date(expiration_date) <= fields.Date.today():
+            message = self.msg_store.expiration_date_past()
+        return self._response_for_set_lot(picking, selected_line, message=message)
 
     def _create_lot_values(self, product, lot_name):
         return {
