@@ -9,6 +9,7 @@ from .common import CommonCase
 
 _TODAY = "2022-12-07"
 _TOMORROW = "2022-12-08"
+_TODAY_ELEVEN = "2022-12-07 23:30:00"
 
 
 class TestSelectDocument(CommonCase):
@@ -79,6 +80,29 @@ class TestSelectDocument(CommonCase):
             response,
             next_state="select_move",
             data=self._data_for_select_move(picking_today),
+        )
+
+    @freeze_time(_TODAY_ELEVEN, tz_offset=0)
+    def test_scan_picking_origin_multiple_pickings_one_today_tz(self):
+        # freezed today is UTC time, set warehouse user to Brussels
+        self.wh.partner_id.sudo().tz = "Europe/Brussels"
+
+        # Create a picking with the UTC hour
+        picking_today = self._create_picking(scheduled_date=_TODAY_ELEVEN)
+
+        picking_tomorrow = self._create_picking(scheduled_date=_TOMORROW)
+        pickings = picking_today | picking_tomorrow
+        pickings = pickings.sorted(lambda p: (p.scheduled_date, p.id), reverse=False)
+        pickings.write({"origin": "Somewhere together"})
+        response = self.service.dispatch(
+            "scan_document", params={"barcode": "Somewhere together"}
+        )
+
+        # Today filter returns nothing as today in UTC + 1 is 2022-12-08
+        self.assert_response(
+            response,
+            next_state="select_move",
+            data=self._data_for_select_move(pickings),
         )
 
     def test_scan_picking_origin_one_picking(self):
