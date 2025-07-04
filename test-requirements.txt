@@ -1,2 +1,4 @@
 vcrpy-unittest
 odoo_test_helper
+
+odoo-addon-shopfloor @ git+https://github.com/acsone/wms@16.0-shopfloor_reception_expiry_date-sbj#subdirectory=setup/shopfloor
