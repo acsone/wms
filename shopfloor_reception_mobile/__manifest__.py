@@ -5,7 +5,11 @@
     "summary": "Scenario for receiving products",
     "version": "16.0.1.0.1",
     "development_status": "Beta",
-    "depends": ["shopfloor_mobile_base", "shopfloor_reception"],
+    "depends": [
+        "shopfloor_mobile_base",
+        "shopfloor_reception",
+        "shopfloor_product_expiry",
+    ],
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "maintainers": ["JuMiSanAr"],
     "website": "https://github.com/OCA/wms",
