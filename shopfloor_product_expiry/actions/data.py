@@ -6,9 +6,14 @@ from odoo.addons.component.core import Component
 class DataAction(Component):
     _inherit = "shopfloor.data.action"
 
-    @property
-    def _move_line_parser(self):
-        # This will add expiration date filled in on move lines
-        data = super()._move_line_parser
-        data.append("expiration_date")
+    def move_line(self, record, with_picking=False, **kw):
+        """
+        We add here a string list of locations suggestions
+        Note: the presence of locations here depends on
+        picking type configuration (see: stock_picking_operation_destination_suggest).
+        """
+        data = super().move_line(record, with_picking=with_picking, **kw)
+        if "expiration_date" in kw:
+            result = self._jsonify(record, ["expiration_date"])
+            data.update(result)
         return data
