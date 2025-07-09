@@ -357,13 +357,6 @@ const Reception = {
                     },
                     {path: "lot.name", label: "Lot"},
                     {
-                        path: "lot.expiration_date",
-                        label: "Expiry date",
-                        renderer: (rec, field) => {
-                            return this.utils.display.render_field_date(rec, field);
-                        },
-                    },
-                    {
                         path: "lot_name",
                         label: "Lot",
                         renderer: (rec, field) => {
@@ -378,11 +371,7 @@ const Reception = {
                         path: "expiration_date",
                         label: "Expiry date",
                         renderer: (rec, field) => {
-                            if (!rec.lot || !rec.lot.expiration_date) {
-                                return this.utils.display.render_field_date(rec, field);
-                            } else {
-                                return "";
-                            }
+                            return this.utils.display.render_field_date(rec, field);
                         },
                     },
                 ],
