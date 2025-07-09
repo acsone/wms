@@ -39,7 +39,9 @@ class TestSelectLine(CommonCase):
             next_state="set_lot",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, lot_name=True
+                ),
             },
         )
 
@@ -62,7 +64,9 @@ class TestSelectLine(CommonCase):
             next_state="set_lot",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, lot_name=True
+                ),
             },
         )
 
@@ -312,6 +316,8 @@ class TestSelectLine(CommonCase):
             next_state="set_lot",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, lot_name=True
+                ),
             },
         )
