@@ -767,7 +767,9 @@ class Reception(Component):
         return self._response(
             next_state="set_lot",
             data={
-                "selected_move_line": self._data_for_move_lines(line),
+                "selected_move_line": self._data_for_move_lines(
+                    line, expiration_date=True, lot_name=True
+                ),
                 "picking": self.data.picking(picking),
             },
             message=message,
@@ -1049,20 +1051,52 @@ class Reception(Component):
         if not selected_line.exists():
             message = self.msg_store.record_not_found()
             return self._response_for_set_lot(picking, selected_line, message=message)
+
+        find_types = ["lot", "expiration_date"]
+        # Do a first search if multi tenant barcode is used.
+        # If the lot name is passed, let the expiration date
+        # get from interface.
+
         search = self._actions_for("search")
+        # Search for lot and add product from line as context
+        search_result = search.find(
+            lot_name,
+            find_types,
+            handler_kw=dict(lot=dict(products=selected_line.product_id)),
+        )
+
+        # Look for an expiration date
+        for result in search_result.parse_result:
+            if result.type == "expiration_date":
+                expiration_date = result.value
+
+        use_expiration_date = selected_line.product_id.use_expiration_date
+        if use_expiration_date and not expiration_date:
+            message = self.msg_store.expiration_date_missing()
+            return self._response_for_set_lot(picking, selected_line, message=message)
+        lot = (
+            search_result.record
+            if search_result.type == "lot"
+            else self.env["stock.lot"].browse()
+        )
         if lot_name:
             product = selected_line.product_id
-            lot = search.lot_from_scan(lot_name, products=product)
             if not lot:
                 lot = self.env["stock.lot"].create(
                     self._create_lot_values(product, lot_name)
                 )
             selected_line.lot_id = lot.id
             selected_line._onchange_lot_id()
-        elif expiration_date:
+        if expiration_date:
             selected_line.write({"expiration_date": expiration_date})
             selected_line.lot_id.write({"expiration_date": expiration_date})
-        return self._response_for_set_lot(picking, selected_line)
+        message = None
+        if (
+            use_expiration_date
+            and fields.Date.to_date(expiration_date) <= fields.Date.today()
+        ):
+            message = self.msg_store.expiration_date_past()
+        return self._response_for_set_lot(picking, selected_line, message=message)
 
     def _create_lot_values(self, product, lot_name):
         return {
