@@ -201,7 +201,7 @@ class MessageAction(Component):
         return {
             "message_type": "warning",
             "body": _(
-                "Confirm location change from %(location_from)s to " "%(location_to)s?"
+                "Confirm location change from %(location_from)s to %(location_to)s?"
             )
             % dict(location_from=from_location.name, location_to=to_location.name),
         }
@@ -560,6 +560,15 @@ class MessageAction(Component):
         return {
             "message_type": "warning",
             "body": _("Create new PACK {}? Scan it again to confirm.").format(barcode),
+        }
+
+    def over_reception_ask_confirm(self):
+        return {
+            "message_type": "warning",
+            "body": _(
+                "You confirmed you wanted to receive more goods "
+                "than expected. Click again to continue."
+            ),
         }
 
     def place_in_location_ask_confirmation(self, location_name):
