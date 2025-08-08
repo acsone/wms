@@ -63,6 +63,12 @@ class Reception(Component):
         yield
         self.search_result = SearchResult()
 
+    def _create_over_reception_helpdesk_ticket(
+        self, picking, selected_line, ordered_qty, received_qty
+    ):
+        """Helper method to create a helpdesk ticket when over receiving."""
+        pass
+
     def _check_picking_processible(self, pickings):
         # When returns are allowed,
         # the created picking might be empty and cannot be assigned.
@@ -892,6 +898,24 @@ class Reception(Component):
         )
         return self._align_display_product_uom_qty(line, response)
 
+    def _response_for_confirm_over_reception(
+        self,
+        picking,
+        line,
+        message,
+        savepoint_name,
+    ):
+        response = self._response(
+            next_state="confirm_over_reception",
+            data={
+                "selected_move_line": self._data_for_move_lines(line),
+                "picking": self._data_for_stock_picking(picking, with_lines=True),
+                "savepoint_name": savepoint_name,
+            },
+            message=message,
+        )
+        return response
+
     def _response_for_set_destination(self, picking, line, message=None):
         return self._response(
             next_state="set_destination",
@@ -1246,6 +1270,7 @@ class Reception(Component):
         quantity=None,
         barcode=None,
         confirmation=None,
+        is_over_reception_confirmed=False,
     ):
         """Set the quantity done
 
@@ -1306,18 +1331,24 @@ class Reception(Component):
                 selected_line.unlink()
         return self._response_for_select_move(picking)
 
-    def _set_quantity__process__set_qty_and_split(self, picking, line, quantity):
+    def _set_quantity__process__set_qty_and_split(
+        self, picking, line, quantity, is_over_reception_confirmed=False
+    ):
         move = line.move_id
         sum(move.move_line_ids.mapped("qty_done"))
         savepoint = self._actions_for("savepoint").new()
         line.qty_done = quantity
         compare = self._set_quantity__check_quantity_done(line)
-        if compare == 1:
-            # If move's qty_done > to move's qty_todo, rollback and return an error
-            savepoint.rollback()
-            return self._response_for_set_quantity(
-                picking, line, message=self.msg_store.unable_to_pick_qty()
+        if compare == 1 and not is_over_reception_confirmed:
+            # savepoint.rollback() # -> TODO: find where to put this rollback
+            # 🚩 pass the savepoint inside the "data" of the message arg?
+            message = self._response_for_confirm_over_reception(
+                picking,
+                line,
+                message=self.msg_store.line_scanned_qty_done_higher_than_allowed(),
+                savepoint_name=savepoint.name,
             )
+            return message
         savepoint.release()
         # Only if total_qty_done < qty_todo, we split the move line
         if compare == -1:
@@ -1328,7 +1359,9 @@ class Reception(Component):
             }
             line._split_qty_to_be_done(quantity, **default_values)
 
-    def process_with_existing_pack(self, picking_id, selected_line_id, quantity):
+    def process_with_existing_pack(
+        self, picking_id, selected_line_id, quantity, is_over_reception_confirmed=False
+    ):
         picking = self.env["stock.picking"].browse(picking_id)
         selected_line = self.env["stock.move.line"].browse(selected_line_id)
         message = self._check_picking_processible(picking)
@@ -1337,13 +1370,15 @@ class Reception(Component):
                 picking, selected_line, message=message
             )
         response = self._set_quantity__process__set_qty_and_split(
-            picking, selected_line, quantity
+            picking, selected_line, quantity, is_over_reception_confirmed
         )
         if response:
             return response
         return self._response_for_select_dest_package(picking, selected_line)
 
-    def process_with_new_pack(self, picking_id, selected_line_id, quantity):
+    def process_with_new_pack(
+        self, picking_id, selected_line_id, quantity, is_over_reception_confirmed=False
+    ):
         picking = self.env["stock.picking"].browse(picking_id)
         selected_line = self.env["stock.move.line"].browse(selected_line_id)
         message = self._check_picking_processible(picking)
@@ -1352,14 +1387,17 @@ class Reception(Component):
                 picking, selected_line, message=message
             )
         response = self._set_quantity__process__set_qty_and_split(
-            picking, selected_line, quantity
+            picking, selected_line, quantity, is_over_reception_confirmed
         )
         if response:
             return response
         picking._put_in_pack(selected_line)
         return self._response_for_set_destination(picking, selected_line)
 
-    def process_without_pack(self, picking_id, selected_line_id, quantity):
+    def process_without_pack(
+        self, picking_id, selected_line_id, quantity, is_over_reception_confirmed=False
+    ):
+
         picking = self.env["stock.picking"].browse(picking_id)
         selected_line = self.env["stock.move.line"].browse(selected_line_id)
         message = self._check_picking_processible(picking)
@@ -1368,7 +1406,7 @@ class Reception(Component):
                 picking, selected_line, message=message
             )
         response = self._set_quantity__process__set_qty_and_split(
-            picking, selected_line, quantity
+            picking, selected_line, quantity, is_over_reception_confirmed
         )
         if response:
             return response
@@ -1601,6 +1639,7 @@ class ShopfloorReceptionValidator(Component):
             "quantity": {"type": "float"},
             "barcode": {"type": "string"},
             "confirmation": {"type": "string", "nullable": True},
+            "is_over_reception_confirmed": {"type": "boolean"},
         }
 
     def set_quantity__cancel_action(self):
@@ -1622,6 +1661,8 @@ class ShopfloorReceptionValidator(Component):
                 "required": True,
             },
             "quantity": {"coerce": to_float, "type": "float"},
+            "is_over_reception_confirmed": {"type": "boolean"}
+            
         }
 
     def process_with_new_pack(self):
@@ -1633,6 +1674,8 @@ class ShopfloorReceptionValidator(Component):
                 "required": True,
             },
             "quantity": {"coerce": to_float, "type": "float"},
+            "is_over_reception_confirmed": {"type": "boolean"}
+            
         }
 
     def process_without_pack(self):
@@ -1644,6 +1687,8 @@ class ShopfloorReceptionValidator(Component):
                 "required": True,
             },
             "quantity": {"coerce": to_float, "type": "float"},
+            "is_over_reception_confirmed": {"type": "boolean"}
+            
         }
 
     def set_destination(self):
@@ -1707,6 +1752,7 @@ class ShopfloorReceptionValidatorResponse(Component):
             "manual_selection": self._schema_manual_selection,
             "select_move": self._schema_select_move,
             "confirm_done": self._schema_confirm_done,
+            "confirm_over_reception": self._schema_confirm_over_reception,
             "set_lot": self._schema_set_lot,
             "set_quantity": self._schema_set_quantity,
             "set_destination": self._schema_set_destination,
@@ -1796,6 +1842,14 @@ class ShopfloorReceptionValidatorResponse(Component):
 
     @property
     def _schema_confirm_done(self):
+        return {
+            "picking": self.schemas._schema_dict_of(
+                self._schema_stock_picking_with_lines(), required=True
+            )
+        }
+
+    @property
+    def _schema_confirm_over_reception(self):
         return {
             "picking": self.schemas._schema_dict_of(
                 self._schema_stock_picking_with_lines(), required=True
