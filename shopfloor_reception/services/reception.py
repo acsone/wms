@@ -48,12 +48,6 @@ class Reception(Component):
     _usage = "reception"
     _description = __doc__
 
-    def _create_over_reception_helpdesk_ticket(
-        self, picking, selected_line, ordered_qty, received_qty
-    ):
-        """Helper method to create a helpdesk ticket when over receiving."""
-        pass
-
     def _check_picking_processible(self, pickings):
         # When returns are allowed,
         # the created picking might be empty and cannot be assigned.
@@ -1227,6 +1221,18 @@ class Reception(Component):
                 selected_line.unlink()
         return self._response_for_select_move(picking)
 
+    def _after_over_recepetion_confirmed_hook(self, picking, line):
+        """
+        Post-processing hook for handling over-reception.
+
+        This hook function is called when a user confirms an over-reception on a picking.
+        It can be extended to implement custom business logic, such as:
+            - Creating a new helpdesk ticket for the supplier.
+            - Sending a notification to a specific team.
+            - Automatically adjusting the purchase order quantity.
+        """
+        pass
+
     def _set_quantity__process__set_qty_and_split(
         self, picking, line, quantity, action, is_over_reception_confirmed=False
     ):
@@ -1254,6 +1260,9 @@ class Reception(Component):
                 "expiration_date": False,
             }
             line._split_qty_to_be_done(quantity, **default_values)
+
+        if is_over_reception_confirmed:
+            self._after_over_recepetion_confirmed_hook(picking, line)
 
     def process_with_existing_pack(
         self, picking_id, selected_line_id, quantity, is_over_reception_confirmed=False
