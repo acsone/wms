@@ -1231,7 +1231,6 @@ class Reception(Component):
             - Sending a notification to a specific team.
             - Automatically adjusting the purchase order quantity.
         """
-        pass
 
     def _set_quantity__process__set_qty_and_split(
         self, picking, line, quantity, action, is_over_reception_confirmed=False
