@@ -550,7 +550,7 @@ class Reception(Component):
         if move.product_uom_qty - move.quantity_done < 1 and not line_without_package:
             return self.msg_store.move_already_done()
 
-    def _set_quantity__check_quantity_done(self, selected_line, new_qty_done):
+    def _set_quantity__check_quantity_done(self, selected_line, new_qty_done=None):
         """
         Compare the total quantity done of a stock move with its expected quantity.
 
@@ -560,7 +560,8 @@ class Reception(Component):
 
         Input:
             selected_line: The `stock.move.line` record being updated.
-            new_qty_done: The new quantity to set on `selected_line`.
+            new_qty_done: The new quantity to set on `selected_line`. If None,
+                          use the `qty_done` of the selected line.
 
         Output:
             An integer representing the comparison result:
@@ -570,10 +571,22 @@ class Reception(Component):
         """
         move = selected_line.move_id
         max_qty_done = move.product_uom_qty
-        qty_done = (
-            sum([m.qty_done for m in move.move_line_ids if m.id != selected_line.id])
-            + new_qty_done
-        )
+
+        # In case `new_qty_done` is set, use this instead of `selected_line.qty_done`
+        #
+        # This enables to compute the expected total qty_done on the move before
+        # apply the new qty done to the selected line in order to avoid having to
+        # potentially rollback this value afterwards
+        if new_qty_done:
+            qty_done = (
+                sum(
+                    [m.qty_done for m in move.move_line_ids if m.id != selected_line.id]
+                )
+                + new_qty_done
+            )
+        else:
+            qty_done = sum(move.move_line_ids.mapped("qty_done"))
+
         rounding = selected_line.product_uom_id.rounding
         return float_compare(qty_done, max_qty_done, precision_rounding=rounding)
 
@@ -598,9 +611,7 @@ class Reception(Component):
             # If we have an error, return it, since this is also true for return lines
             if message_type == "error":
                 return response
-            compare = self._set_quantity__check_quantity_done(
-                selected_line, selected_line.qty_done
-            )
+            compare = self._set_quantity__check_quantity_done(selected_line)
             # We cannot set a qty_done superior to what has initally been sent
             if compare == 1:
                 # If so, reset selected_line to its previous state, and return an error
@@ -632,9 +643,7 @@ class Reception(Component):
             # If we have an error, return it, since this is also true for return lines
             if message_type == "error":
                 return response
-            compare = self._set_quantity__check_quantity_done(
-                selected_line, selected_line.qty_done
-            )
+            compare = self._set_quantity__check_quantity_done(selected_line)
             # We cannot set a qty_done superior to what has initally been sent
             if compare == 1:
                 # If so, reset selected_line to its previous state, and return an error
