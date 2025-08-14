@@ -836,6 +836,22 @@ class Reception(Component):
         action,
         message,
     ):
+        """
+        Create a response message to send user to 'confirm_over_reception' UI state.
+
+        Input:
+            picking: the picking being processed
+            line: the line being processed
+            quantity: the quantity entered by the worker
+            action: the action function the user is coming from
+                    (e.g. "process_without_pack", "process_with_new_pack",
+                    "process_with_existing_pack")
+            message: the warning message to show in the UI
+
+        Transitions:
+        - set_quantity: a bigger qty than expected has been entered and
+                        user still pressed on an action button.
+        """
         response = self._response(
             next_state="confirm_over_reception",
             data={
@@ -1233,8 +1249,19 @@ class Reception(Component):
         """
 
     def _set_quantity__process__set_qty_and_split(
-        self, picking, line, quantity, action, is_over_reception_confirmed=False
+        self, picking, line, quantity, action=None, is_over_reception_confirmed=False
     ):
+        """
+        Input:
+            picking: the current picking being processed
+            line: the current move line being processed
+            quantity: the quantity entered by the user
+            action: the action function the user is coming from
+                    (e.g. "process_without_pack", "process_with_new_pack",
+                    "process_with_existing_pack")
+            is_over_reception_confirmed: True if user already confirmed he wants
+                                         to receive more goods than expected.
+        """
         previous_vals = {
             "qty_done": line.qty_done,
         }

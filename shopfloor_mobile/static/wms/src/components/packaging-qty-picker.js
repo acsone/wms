@@ -220,7 +220,7 @@ export var PackagingQtyPicker = Vue.component("packaging-qty-picker", {
                 return "background-color: rgb(143, 191, 68)";
             }
             if (this.qty > this.qtyTodo) {
-                return "background-color: rgb(229, 171, 0)";
+                return "background-color: orangered";
             }
             return "background-color: pink";
         },
