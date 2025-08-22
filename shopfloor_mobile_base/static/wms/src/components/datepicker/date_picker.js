@@ -40,6 +40,7 @@ export var DatePicker = Vue.component("date-picker-input", {
                     v-model="date"
                     v-bind="attrs"
                     v-on="on"
+                    name="expiration_date"
                 ></v-text-field>
             </template>
             <v-date-picker
