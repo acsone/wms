@@ -429,7 +429,7 @@ class TestSetQuantity(CommonCase):
 
     def test_concurrent_update(self):
         # We're testing that move line's product uom qties are updated correctly
-        # when users are workng on the same move in parallel
+        # when users are working on the same move in parallel
         picking = self._create_picking()
         self.service.dispatch("scan_document", params={"barcode": picking.name})
         self.service.dispatch(
@@ -534,11 +534,13 @@ class TestSetQuantity(CommonCase):
         self.assertEqual(lines_qty_done, move_lines.move_id.quantity_done)
 
         # We shouldn't be able to process any of those move lines
+        # (except if we are doing an over-reception)
         error_msg = {
-            "message_type": "error",
-            "body": "You cannot process that much units.",
+            "body": "Please note that the scanned quantity is higher than the "
+            "maximum allowed.",
+            "message_type": "warning",
         }
-        picking_data = self.data.picking(picking)
+
         quantity_done_by_user = 1
         for line, service in line_service_mapping:
             quantity_done_by_user += 2
@@ -554,12 +556,8 @@ class TestSetQuantity(CommonCase):
             line_data[0]["quantity"] = quantity_done_by_user
             self.assert_response(
                 response,
-                next_state="set_quantity",
-                data={
-                    "picking": picking_data,
-                    "confirmation_required": None,
-                    "selected_move_line": line_data,
-                },
+                next_state="confirm_over_reception",
+                data=self.ANY,
                 message=error_msg,
             )
 
@@ -774,8 +772,8 @@ class TestSetQuantity(CommonCase):
         )
         #
         expected_message = {
-            "body": "You cannot process that much units.",
-            "message_type": "error",
+            "body": "Please note that the scanned quantity is higher than the maximum allowed.",
+            "message_type": "warning",
         }
         self.assertMessage(response, expected_message)
         # user1 cancels the operation
