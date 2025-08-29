@@ -823,6 +823,10 @@ class ClusterPicking(Component):
         It goes to different screens depending if all the move lines have
         the same destination or not.
 
+        This behavior can be changed (unload_single_package in menu)
+        if unload should be done in a different
+        location and that location is not known yet.
+
         Transitions:
         * unload_all: when all lines go to the same destination
         * unload_single: when lines have different destinations
@@ -830,7 +834,10 @@ class ClusterPicking(Component):
         batch = self.env["stock.picking.batch"].browse(picking_batch_id)
         if not batch.exists():
             return self._response_batch_does_not_exist()
-        if self._are_all_dest_location_same(batch):
+        if (
+            not self.work.menu.unload_single_package
+            and self._are_all_dest_location_same(batch)
+        ):
             return self._response_for_unload_all(batch)
         else:
             # the lines have different destinations
@@ -858,6 +865,7 @@ class ClusterPicking(Component):
             {
                 "package": self.data.package(package),
                 "location_dest": self.data.location(line.location_dest_id),
+                "selected_move_line": self.data.move_line(line),
             }
         )
         return data
@@ -1221,6 +1229,13 @@ class ClusterPicking(Component):
 
         return self._unload_next_package(batch)
 
+    def _response_for_unload_single_wrong_bin(self, batch, package):
+        return self._response_for_unload_single(
+            batch,
+            package,
+            message={"message_type": "error", "body": _("Wrong bin")},
+        )
+
     def unload_scan_pack(self, picking_batch_id, package_id, barcode):
         """Check that the operator scans the correct package (bin) on unload
 
@@ -1238,11 +1253,14 @@ class ClusterPicking(Component):
         if not package.exists():
             return self._unload_next_package(batch)
         if package.name != barcode:
-            return self._response_for_unload_single(
-                batch,
-                package,
-                message={"message_type": "error", "body": _("Wrong bin")},
-            )
+            wrong = True
+            if self.work.menu.unload_single_package_choice:
+                package_from_barcode = batch._get_package_from_barcode(barcode)
+                if package_from_barcode:
+                    package = package_from_barcode
+                    wrong = False
+            if wrong:
+                return self._response_for_unload_single_wrong_bin(batch, package)
         return self._response_for_unload_set_destination(batch, package)
 
     def unload_scan_destination(
@@ -1635,6 +1653,9 @@ class ShopfloorClusterPickingValidatorResponse(Component):
         schema = self.schemas.picking_batch()
         schema["package"] = self.schemas._schema_dict_of(self.schemas.package())
         schema["location_dest"] = self.schemas._schema_dict_of(self.schemas.location())
+        schema["selected_move_line"] = self.schemas._schema_dict_of(
+            self.schemas.move_line()
+        )
         schema["confirmation"] = {"type": "string", "nullable": True, "required": False}
         return schema
 
