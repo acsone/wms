@@ -48,7 +48,9 @@ class TestSetQuantity(CommonCase):
             next_state="set_quantity",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, expiration_date=True, lot_name=True
+                ),
                 "confirmation_required": None,
             },
         )
@@ -75,7 +77,9 @@ class TestSetQuantity(CommonCase):
             next_state="set_quantity",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, expiration_date=True, lot_name=True
+                ),
                 "confirmation_required": None,
             },
         )
@@ -101,7 +105,9 @@ class TestSetQuantity(CommonCase):
             next_state="set_quantity",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, expiration_date=True, lot_name=True
+                ),
                 "confirmation_required": None,
             },
         )
@@ -153,7 +159,9 @@ class TestSetQuantity(CommonCase):
             next_state="set_quantity",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, expiration_date=True, lot_name=True
+                ),
                 "confirmation_required": None,
             },
         )
@@ -213,7 +221,9 @@ class TestSetQuantity(CommonCase):
             next_state="set_quantity",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, expiration_date=True, lot_name=True
+                ),
                 "confirmation_required": None,
             },
             message={"message_type": "error", "body": "You cannot place it here"},
@@ -286,7 +296,9 @@ class TestSetQuantity(CommonCase):
             next_state="set_quantity",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, expiration_date=True, lot_name=True
+                ),
                 "confirmation_required": None,
             },
             message={"message_type": "error", "body": "You cannot place it here"},
@@ -314,7 +326,9 @@ class TestSetQuantity(CommonCase):
             next_state="set_quantity",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, expiration_date=True, lot_name=True
+                ),
                 "confirmation_required": None,
             },
             message={"message_type": "error", "body": "You cannot place it here"},
@@ -341,7 +355,9 @@ class TestSetQuantity(CommonCase):
             next_state="set_quantity",
             data={
                 "picking": picking_data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, expiration_date=True, lot_name=True
+                ),
                 "confirmation_required": "FooBar",
             },
             message={
@@ -386,7 +402,9 @@ class TestSetQuantity(CommonCase):
         )
         data = {
             "picking": self.data.picking(picking),
-            "selected_move_line": self.data.move_lines(selected_move_line),
+            "selected_move_line": self.data.move_lines(
+                selected_move_line, expiration_date=True, lot_name=True
+            ),
             "confirmation_required": "Pack1",
         }
         # System ask for confimation for Pack 1
@@ -550,7 +568,7 @@ class TestSetQuantity(CommonCase):
                     "quantity": line.qty_done,
                 },
             )
-            line_data = self.data.move_lines(line)
+            line_data = self.data.move_lines(line, expiration_date=True, lot_name=True)
             line_data[0]["quantity"] = quantity_done_by_user
             self.assert_response(
                 response,
