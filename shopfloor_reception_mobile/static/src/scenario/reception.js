@@ -243,7 +243,11 @@ const Reception = {
             return this.state.data.selected_move_line[0] || {};
         },
         ordered_moves: function () {
-            const moves = _.result(this.state, "data.picking.moves", []);
+            // We can either have moves or move lines
+            var moves = _.result(this.state, "data.picking.moves", []);
+            if (_.isEmpty(moves)) {
+                moves = _.result(this.state, "data.picking.move_lines", []);
+            }
             if (_.isEmpty(moves)) {
                 return;
             }
@@ -387,6 +391,11 @@ const Reception = {
             };
         },
         picking_detail_options_for_select_move: function () {
+            var move_lines = _.has(this.state, "data.picking.move_lines");
+            var qty_done_field = "quantity_done";
+            if (move_lines) {
+                qty_done_field = "qty_done";
+            }
             return {
                 show_title: true,
                 showActions: false,
@@ -411,9 +420,16 @@ const Reception = {
                             label: "Vendor code",
                         },
                         {
-                            path: "quantity_done",
+                            path: qty_done_field,
                             label: "Qty done",
                             display_no_value: true,
+                            renderer: function (rec, field) {
+                                if (_.has(rec, "qty_done")) {
+                                    return rec.qty_done + " / " + rec.quantity;
+                                } else {
+                                    return rec.quantity_done + " / " + rec.quantity;
+                                }
+                            },
                         },
                     ],
                 },
