@@ -96,13 +96,12 @@ const ClusterPicking = {
                     :options="{main: true, key_title: 'name', title_icon: 'mdi-truck-outline'}"
                     />
                 <detail-package
-                        :record="state.data.package"
-                        :color="'success'"
+                    :record="state.data.package"
+                    :color="'screen_step_done'"
                 />
                 <detail-location-destination-operation
-                    :color="'detail_main_card'"
                     :record="state.data.selected_move_line"
-                    :state="'unload_single'"
+                    :color="'screen_step_todo'"
                 />
 
             </div>
@@ -117,12 +116,11 @@ const ClusterPicking = {
                     />
                 <detail-package
                     :record="state.data.package"
-                    :color="'detail_main_card'"
+                    :color="'screen_step_todo'"
                 />
-
                 <detail-location-destination-operation
                     :record="state.data.selected_move_line"
-                    :state="'unload_single'"
+                    :color="'screen_step_todo'"
                 />
             </div>
 

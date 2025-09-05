@@ -19,9 +19,10 @@ Vue.component("detail-location-destination-operation", {
         location_operation_detail_options() {
             return {
                 main: false,
-                title_icon: "mdi-package-variant-closed",
+                title_icon: "mdi-arrow-right-bold-outline",
                 fields: this.location_operation_detail_fields(),
                 klass: "loud-labels",
+                key_title: "location_dest.name",
             };
         },
         location_operation_detail_fields() {
@@ -37,7 +38,6 @@ Vue.component("detail-location-destination-operation", {
             :key="make_component_key(['location-operation', record.id])"
             :options="location_operation_detail_options()"
             >
-            <template v-slot:title>Destination</template>
         </item-detail-card>
     </div>
 `,
