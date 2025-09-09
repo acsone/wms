@@ -14,3 +14,5 @@ from . import test_return_scan_line
 from . import test_return_set_quantity
 from . import test_return_reception_done
 from . import test_over_reception
+from . import test_datetime_parsing
+
