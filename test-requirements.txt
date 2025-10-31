@@ -1,2 +1,4 @@
 vcrpy-unittest
 odoo_test_helper
+
+odoo-addon-helpdesk-mgmt-stock @ git+https://github.com/OCA/helpdesk@refs/pull/875/head#subdirectory=setup/helpdesk_mgmt_stock
