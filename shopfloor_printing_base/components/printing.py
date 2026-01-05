@@ -17,13 +17,23 @@ class ShopFloorPrintingAction(AbstractComponent):
         """
         return self.work.menu.label_print_report_id
 
-    def print(self, record_ids, quantity=1, **kwargs):
+    def print(self, record_ids, quantity=1, **kwargs) -> dict:
         """
         Print the current report defined on menu level with the
         defined quantity.
+
+        return: A message dictionary
         """
         report = self.report_to_print
+        message = dict()
+        if not report:
+            message = self.msg_store.print_no_report()
+            return message
         result = report.print_document_client_action(
             record_ids, **{"quantity": quantity}
         )
-        return result
+        if result:
+            message = self.msg_store.print_job_sent()
+        else:
+            message = self.msg_store.print_error()
+        return message
