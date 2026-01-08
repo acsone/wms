@@ -388,9 +388,7 @@ class LocationContentTransfer(Component):
                 if not self.is_dest_location_valid(line.move_id, line.location_dest_id):
                     savepoint.rollback()
                     return self._response_for_start(
-                        message=self.msg_store.location_content_unable_to_transfer(
-                            location
-                        )
+                        message=self.msg_store.dest_location_not_allowed(location)
                     )
 
         stock = self._actions_for("stock")
@@ -467,7 +465,8 @@ class LocationContentTransfer(Component):
 
         if not self.is_dest_location_valid(move_lines.move_id, scanned_location):
             return self._response_for_scan_destination_all(
-                pickings, message=self.msg_store.dest_location_not_allowed()
+                pickings,
+                message=self.msg_store.dest_location_not_allowed(scanned_location),
             )
         if confirmation != barcode and self.is_dest_location_to_confirm(
             move_lines.location_dest_id, scanned_location
@@ -693,7 +692,7 @@ class LocationContentTransfer(Component):
             return self._response_for_scan_destination(
                 location,
                 package_level,
-                message=self.msg_store.dest_location_not_allowed(),
+                message=self.msg_store.dest_location_not_allowed(scanned_location),
             )
         if confirmation != barcode and self.is_dest_location_to_confirm(
             package_level.location_dest_id, scanned_location
@@ -750,7 +749,9 @@ class LocationContentTransfer(Component):
             )
         if not self.is_dest_location_valid(move_line.move_id, scanned_location):
             return self._response_for_scan_destination(
-                location, move_line, message=self.msg_store.dest_location_not_allowed()
+                location,
+                move_line,
+                message=self.msg_store.dest_location_not_allowed(scanned_location),
             )
         if confirmation != barcode and self.is_dest_location_to_confirm(
             move_line.location_dest_id, scanned_location
