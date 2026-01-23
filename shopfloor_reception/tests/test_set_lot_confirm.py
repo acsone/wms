@@ -55,7 +55,9 @@ class TestSetLotConfirm(CommonCase):
             next_state="set_lot",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, expiration_date=True, lot_name=True
+                ),
             },
             message={"message_type": "error", "body": "Missing expiration date."},
         )
@@ -83,7 +85,9 @@ class TestSetLotConfirm(CommonCase):
             next_state="set_quantity",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, expiration_date=True, lot_name=True
+                ),
                 "confirmation_required": None,
             },
         )
