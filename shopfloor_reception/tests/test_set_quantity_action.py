@@ -124,11 +124,6 @@ class TestSetQuantityAction(CommonCase):
             },
         )
         # Users are blocked, product_uom_qty is 10, but both users have qty_done=10
-        # on their move line, therefore, none of them can confirm
-        expected_message = {
-            "body": "You cannot process that much units.",
-            "message_type": "error",
-        }
         response = service_user_1.dispatch(
             "process_with_new_pack",
             params={
@@ -137,7 +132,9 @@ class TestSetQuantityAction(CommonCase):
                 "quantity": 10.0,
             },
         )
-        self.assertMessage(response, expected_message)
+        self.assertMessage(
+            response, self.msg_store.line_scanned_qty_done_higher_than_allowed()
+        )
         response = service_user_2.dispatch(
             "process_with_new_pack",
             params={
@@ -146,7 +143,9 @@ class TestSetQuantityAction(CommonCase):
                 "quantity": 10.0,
             },
         )
-        self.assertMessage(response, expected_message)
+        self.assertMessage(
+            response, self.msg_store.line_scanned_qty_done_higher_than_allowed()
+        )
         # make user1 cancel
         service_user_1.dispatch(
             "set_quantity__cancel_action",

@@ -494,7 +494,7 @@ class TestSetQuantity(CommonCase):
 
     def test_concurrent_update(self):
         # We're testing that move line's product uom qties are updated correctly
-        # when users are workng on the same move in parallel
+        # when users are working on the same move in parallel
         picking = self._create_picking()
         self.service.dispatch("scan_document", params={"barcode": picking.name})
         self.service.dispatch(
@@ -599,11 +599,7 @@ class TestSetQuantity(CommonCase):
         self.assertEqual(lines_qty_done, move_lines.move_id.quantity_done)
 
         # We shouldn't be able to process any of those move lines
-        error_msg = {
-            "message_type": "error",
-            "body": "You cannot process that much units.",
-        }
-        picking_data = self.data.picking(picking)
+        # (except if we are doing an over-reception)
         quantity_done_by_user = 1
         for line, service in line_service_mapping:
             quantity_done_by_user += 2
@@ -619,13 +615,9 @@ class TestSetQuantity(CommonCase):
             line_data[0]["quantity"] = quantity_done_by_user
             self.assert_response(
                 response,
-                next_state="set_quantity",
-                data={
-                    "picking": picking_data,
-                    "confirmation_required": None,
-                    "selected_move_line": line_data,
-                },
-                message=error_msg,
+                next_state="confirm_over_reception",
+                data=self.ANY,
+                message=self.msg_store.line_scanned_qty_done_higher_than_allowed(),
             )
 
         # But line's reserved_uom_qty hasn't changed and is still 10.0
@@ -839,12 +831,9 @@ class TestSetQuantity(CommonCase):
                 "quantity": 10.0,
             },
         )
-        #
-        expected_message = {
-            "body": "You cannot process that much units.",
-            "message_type": "error",
-        }
-        self.assertMessage(response, expected_message)
+        self.assertMessage(
+            response, self.msg_store.line_scanned_qty_done_higher_than_allowed()
+        )
         # user1 cancels the operation
         service_user_1.dispatch(
             "set_quantity__cancel_action",
