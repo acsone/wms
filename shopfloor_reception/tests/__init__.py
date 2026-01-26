@@ -15,3 +15,4 @@ from . import test_return_set_quantity
 from . import test_return_reception_done
 from . import test_datetime_parsing
 from . import test_over_reception
+from . import test_recover
