@@ -41,7 +41,9 @@ class TestSelectLine(CommonCase):
             next_state="set_lot",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, lot_name=True, expiration_date=True
+                ),
             },
         )
 
@@ -64,7 +66,9 @@ class TestSelectLine(CommonCase):
             next_state="set_lot",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, lot_name=True, expiration_date=True
+                ),
             },
         )
 
@@ -88,7 +92,9 @@ class TestSelectLine(CommonCase):
             next_state="set_quantity",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, expiration_date=True, lot_name=True
+                ),
                 "confirmation_required": None,
             },
         )
@@ -113,7 +119,9 @@ class TestSelectLine(CommonCase):
             next_state="set_quantity",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, expiration_date=True, lot_name=True
+                ),
                 "confirmation_required": None,
             },
         )
@@ -138,7 +146,9 @@ class TestSelectLine(CommonCase):
             next_state="set_quantity",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, expiration_date=True, lot_name=True
+                ),
                 "confirmation_required": None,
             },
         )
@@ -314,6 +324,8 @@ class TestSelectLine(CommonCase):
             next_state="set_lot",
             data={
                 "picking": data,
-                "selected_move_line": self.data.move_lines(selected_move_line),
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, lot_name=True, expiration_date=True
+                ),
             },
         )
