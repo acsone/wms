@@ -130,35 +130,50 @@ export const reception_states = function () {
                 scan_input_placeholder_expiry: "Scan expiration date",
             },
             on_scan: (barcode) => {
-                // Scan a lot
                 this.wait_call(
-                    this.odoo.call("set_lot", {
+                    this.odoo.call("scan_lot_name", {
                         picking_id: this.state.data.picking.id,
                         selected_line_id: this.line_being_handled.id,
                         lot_name: barcode.text,
                     })
-                ).then(() => {
-                    // We need to wait for the call to the backend to be over
-                    // to update the date-picker-input component
-                    // with the expiration_date of the selected lot.
-                    event_hub.$emit("datepicker:newdate", this.line_being_handled.lot);
-                });
-            },
-            on_date_picker_selected: (expiration_date) => {
-                // Select expiration_date
-                this.wait_call(
-                    this.odoo.call("set_lot", {
-                        picking_id: this.state.data.picking.id,
-                        selected_line_id: this.line_being_handled.id,
-                        expiration_date: expiration_date,
-                    })
                 );
             },
-            on_confirm_action: () => {
+            on_date_picker_selected: (expiration_date) => {
+                if (!expiration_date) return;
+
+                // We split and use the constructor to avoid JS auto-converting to UTC
+                // NB: JS uses the timezone info of the device
+                // NB: Yes, months are 0-indexed in JS, this is not a bug...
+                const [year, month, day] = expiration_date.split("-");
+                const localDate = new Date(year, month - 1, day, 0, 0, 0);
+
+                // 2. Convert local midnight to a UTC string. Odoo expects 'naive' UTC datetimes
+                // in the database. By converting here, we ensure data consistency: the
+                // backend stores the exact UTC moment, while the UI remains responsible
+                // for localizing that timestamp back to the user's specific timezone.
+                const utcYear = localDate.getUTCFullYear();
+                const utcMonth = String(localDate.getUTCMonth() + 1).padStart(2, "0");
+                const utcDay = String(localDate.getUTCDate()).padStart(2, "0");
+                const utcHours = String(localDate.getUTCHours()).padStart(2, "0");
+                const utcMinutes = String(localDate.getUTCMinutes()).padStart(2, "0");
+                const utcSeconds = String(localDate.getUTCSeconds()).padStart(2, "0");
+                // use the same format as odoo
+                const utcString = `${utcYear}-${utcMonth}-${utcDay} ${utcHours}:${utcMinutes}:${utcSeconds}`;
+
+                // We merge the new date with whatever is already in .lot
+                // If .lot is null/undefined, we start with an empty object
+                this.line_being_handled.lot = {
+                    ...(this.line_being_handled.lot || {}),
+                    expiration_date: utcString,
+                };
+            },
+            on_confirm_lot: () => {
                 this.wait_call(
                     this.odoo.call("set_lot_confirm_action", {
                         picking_id: this.state.data.picking.id,
                         selected_line_id: this.line_being_handled.id,
+                        lot_name: this.line_being_handled.lot.name,
+                        expiration_date: this.line_being_handled.lot.expiration_date,
                     })
                 );
             },
