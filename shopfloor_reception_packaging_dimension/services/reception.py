@@ -128,7 +128,7 @@ class Reception(Component):
 
     def _check_dimension_to_update(self, dimensions):
         """Check if the Shopfloor payload contains data for a packaging update."""
-        return any([value is not None for key, value in dimensions.items()])
+        return any(value is not None for value in dimensions.values())
 
     def _get_dimension_fields_conversion_map(self):
         """
