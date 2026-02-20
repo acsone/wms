@@ -127,10 +127,14 @@ class Reception(Component):
         return self._before_state__set_quantity(picking, selected_line, message=message)
 
     def _check_dimension_to_update(self, dimensions):
-        """Return True if any dimension on the packaging needs to be updated"""
+        """Check if the Shopfloor payload contains data for a packaging update."""
         return any([value is not None for key, value in dimensions.items()])
 
     def _get_dimension_fields_conversion_map(self):
+        """
+        Get the mapping between JSON keys from the Shopfloor interface
+        and the technical field names of the product.packaging model.
+        """
         return {"length": "packaging_length"}
 
     def _update_packaging_dimension(self, packaging, dimensions_to_update):
