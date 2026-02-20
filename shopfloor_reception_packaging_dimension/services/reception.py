@@ -135,11 +135,18 @@ class Reception(Component):
 
     def _update_packaging_dimension(self, packaging, dimensions_to_update):
         """Update dimension on the packaging."""
-        fields_conv_map = self._get_dimension_fields_conversion_map()
-        for dimension, value in dimensions_to_update.items():
-            if value is not None:
-                dimension = fields_conv_map.get(dimension, dimension)
-                packaging[dimension] = value
+        field_map = self._get_dimension_fields_conversion_map()
+        values_to_update = {}
+
+        for key, value in dimensions_to_update.items():
+            if value is None:
+                continue
+
+            odoo_field = field_map.get(key, key)
+            values_to_update[odoo_field] = value
+
+        if values_to_update:
+            packaging.write(values_to_update)
 
 
 class ShopfloorReceptionValidator(Component):
