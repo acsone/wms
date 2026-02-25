@@ -168,3 +168,31 @@ class TestSetQuantityAction(CommonCase):
         )
         # This line has been created by shopfloor, therefore, we unlinked it
         self.assertFalse(move_line_user_2.exists())
+
+    def test_cancel_action_clears_lot(self):
+        product = self.selected_move_line.product_id
+        product.sudo().tracking = "lot"
+        self.picking.sudo().picking_type_id.use_create_lots = True
+
+        response = self.service.dispatch(
+            "set_lot_confirm_action",
+            params={
+                "picking_id": self.picking.id,
+                "selected_line_id": self.selected_move_line.id,
+                "lot_name": "FooBar",
+                "expiration_date": "2022-08-24T12:00:00",
+            },
+        )
+        self.assertEqual(response.get("next_state"), "set_quantity")
+        self.assertEqual(self.selected_move_line.lot_id.name, "FooBar")
+
+        response = self.service.dispatch(
+            "set_quantity__cancel_action",
+            params={
+                "picking_id": self.picking.id,
+                "selected_line_id": self.selected_move_line.id,
+            },
+        )
+        self.assertFalse(
+            self.selected_move_line.lot_id, "Cancel action should clear the lot"
+        )
