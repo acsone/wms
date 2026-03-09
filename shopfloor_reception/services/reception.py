@@ -4,6 +4,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 
+from datetime import date, datetime
+
 import pytz
 from decorator import contextmanager
 
@@ -14,6 +16,17 @@ from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
 from odoo.addons.shopfloor.actions.search import SearchResult
 from odoo.addons.shopfloor.utils import to_float
+
+
+class UnsetParamValue(object):
+    def __repr__(self):
+        return ""
+
+    def __bool__(self):
+        return False
+
+
+UNSET = UnsetParamValue()
 
 
 class Reception(Component):
@@ -91,15 +104,29 @@ class Reception(Component):
         domain.append(("scheduled_date", "<=", today_end))
         return domain
 
-    def _get_today_start_end_datetime(self, naive=True):
-        # TODO: Put warehouse tz retrieval in shopfloor module?
+    def _get_input_tz_name(self) -> str:
+        """Get the timezone name to interpret input dates.
+        Timezome comes by priority from:
+        - the warehouse of the picking types associated to the work
+        - the company of the user
+        - the context timezone
+        - the user timezone
+        - UTC
+        """
         company = self.env.company
         warehouse = self.picking_types.warehouse_id
-        tz = (
+        return (
             warehouse.partner_id.tz
             if (len(warehouse) == 1 and warehouse.partner_id.tz)
-            else company.partner_id.tz or "UTC"
+            else company.partner_id.tz
+            or self.env.context.get("tz")
+            or self.env.user.tz
+            or "UTC"
         )
+
+    def _get_today_start_end_datetime(self, naive=True):
+        # TODO: Put warehouse tz retrieval in shopfloor module?
+        tz = self._get_input_tz_name()
         today = fields.Datetime.today()
         today_start = today_start_localized = fields.Datetime.start_of(today, "day")
         today_end = today_end_localized = fields.Datetime.end_of(today, "day")
@@ -820,15 +847,22 @@ class Reception(Component):
         return self._response(next_state="manual_selection", data=data)
 
     def _response_for_set_lot(self, picking, line, message=None):
-        self._set_lot_from_parse(picking, line)
-        return self._response(
-            next_state="set_lot",
-            data={
-                "selected_move_line": self._data_for_move_lines(line),
-                "picking": self.data.picking(picking),
-            },
-            message=message,
-        )
+        # maybe our search result on scan_lne is a multi-tenant barcode
+        # and the lot and expiration date are availabe into the parsed
+        # result
+        response = self._set_lot_from_parse(picking, line)
+        if not response:
+            response = self._response(
+                next_state="set_lot",
+                data={
+                    "selected_move_line": self._data_for_move_lines(
+                        line, expiration_date=True, lot_name=True
+                    ),
+                    "picking": self.data.picking(picking),
+                },
+                message=message,
+            )
+        return response
 
     def _set_lot_from_parse(self, picking, line):
         """
@@ -840,7 +874,7 @@ class Reception(Component):
             - on lot_name if record is not found
             - set expiration date if found in parse result
         """
-        if line.shopfloor_should_create_lot and self.search_result.parse_result:
+        if self.search_result.parse_result:
             expiration_date = None
             lot_name = None
             found = False
@@ -858,7 +892,8 @@ class Reception(Component):
                     and line.product_id.use_expiration_date
                 ):
                     expiration_date = result.value
-
+            # reset the search result to ensure no recursion
+            self.search_result = SearchResult()
             if found:
                 return self.set_lot(picking.id, line.id, lot_name, expiration_date)
 
@@ -909,7 +944,9 @@ class Reception(Component):
         response = self._response(
             next_state="set_quantity",
             data={
-                "selected_move_line": self._data_for_move_lines(line),
+                "selected_move_line": self._data_for_move_lines(
+                    line, expiration_date=True, lot_name=True
+                ),
                 "picking": self.data.picking(picking),
                 "confirmation_required": asking_confirmation,
             },
@@ -1118,8 +1155,9 @@ class Reception(Component):
             # Remove user_id on backorder, if any
             backorders_after.user_id = False
 
+    # flake8: noqa: C901
     def set_lot(
-        self, picking_id, selected_line_id, lot_name=None, expiration_date=None
+        self, picking_id, selected_line_id, lot_name=UNSET, expiration_date=UNSET
     ):
         """Set lot and its expiration date
 
@@ -1143,28 +1181,187 @@ class Reception(Component):
         if not selected_line.exists():
             message = self.msg_store.record_not_found()
             return self._response_for_set_lot(picking, selected_line, message=message)
-        search = self._actions_for("search")
-        if lot_name:
-            product = selected_line.product_id
-            lot = search.lot_from_scan(lot_name, products=product)
-            if not lot:
-                lot = self.env["stock.lot"].create(
-                    self._create_lot_values(product, lot_name)
-                )
-            selected_line.lot_id = lot.id
-            selected_line._onchange_lot_id()
-        if expiration_date:
-            selected_line.write({"expiration_date": expiration_date})
-            selected_line.lot_id.write({"expiration_date": expiration_date})
-        return self._response_for_set_lot(picking, selected_line)
 
-    def _create_lot_values(self, product, lot_name):
-        return {
-            "name": lot_name,
-            "product_id": product.id,
-            "company_id": self.env.company.id,
-            "use_expiration_date": product.use_expiration_date,
-        }
+        # The following combinations are possible:
+        # - lot_name is set, expiration_date is not set
+        # - lot_name is not set, expiration_date is set
+        # - both lot_name and expiration_date are set
+        # To these combinations, we need to add the previously
+        # scanned_lot and expiration_date
+        # It results a lot of possbile combinations for which
+        # we must ensure:
+        # - the unicity of the lot for the product
+        # - the respect of the previously provided values
+        # - the help of the user by providing suggestions
+        # Last but not least, in some cases, the lot_name
+        # could be a multi-tenant barcode providing in addition
+        # to the lot_name the expiration_date.
+
+        # We first start by processing the lot_name. It could
+        # be:
+        # - a single value providing the lot_name
+        # - a multi-tenant barcode providing in addition
+        #   to the lot_name the expiration_date.
+        # If a lot_name is provided:
+        # - we must ensure its unicity for the product
+        # The unicity must be checked against the expiration_date
+        # provided by the user OR already set on the line.
+        # If the unicity is not respected, we must ask the user
+        # to provide a new lot_name or expiration_date.
+        find_types = ["lot", "expiration_date"]
+        search = self._actions_for("search")
+        scanned_lot = self.env["stock.lot"]
+
+        # Search for lot and add product from line as context
+        scanned_expiration_date = UNSET
+        if lot_name is not UNSET:
+            search_result = search.find(
+                lot_name,
+                find_types,
+                # no limit to get all lot... may be could get lot with the
+                # different expiration date
+                handler_kw=dict(lot=dict(products=selected_line.product_id)),
+            )
+
+            # Look for an expiration date
+            for result in search_result.parse_result:
+                if result.type == "expiration_date":
+                    scanned_expiration_date = result.value
+
+            if search_result.type == "lot":
+                scanned_lot = search_result.record
+                lot_name = search_result.code
+        else:
+            scanned_lot = selected_line.lot_id or UNSET
+
+        scanned_expiration_date = self._to_iso_datetime_at_utc(scanned_expiration_date)
+        expiration_date = self._to_iso_datetime_at_utc(expiration_date)
+
+        # If scanned_expiration_date is set
+        # and expiration_date is set
+        # and scanned_expiration_date != expiration_date
+        # we warm the user:
+        if scanned_expiration_date is not UNSET and expiration_date is not UNSET:
+            if fields.Date.to_date(scanned_expiration_date) != fields.Date.to_date(
+                expiration_date
+            ):
+                message = self.msg_store.expiration_date_different_than_scanned(
+                    scanned_expiration_date, expiration_date
+                )
+                return self._response_for_set_lot(
+                    picking, selected_line, message=message
+                )
+
+        # If expiration_date is passed to the method, the priority is:
+        # 1. The scanned_expiration_date if set
+        # 2. The one from the lot if available
+        # 3. The one previously set on the line
+        if expiration_date is UNSET:
+            expiration_date = scanned_expiration_date
+        if expiration_date is UNSET:
+            expiration_date = (
+                scanned_lot.expiration_date or selected_line.expiration_date
+            )
+
+        # If the lot_name is not passed to the method, the priority is:
+        # 1. The one from the first lot found for the expiration_date if specified
+        # 2. The one previously set on the line
+        if lot_name is UNSET:
+            if expiration_date is not UNSET:
+                scanned_lot = self.env["stock.lot"].search(
+                    [
+                        (
+                            "expiration_date",
+                            "=",
+                            fields.Date.from_string(expiration_date),
+                        ),
+                        ("product_id", "=", selected_line.product_id.id),
+                        ("company_id", "=", selected_line.env.company.id),
+                    ],
+                    limit=1,
+                )
+            lot_name = scanned_lot.name or selected_line.lot_name
+
+        # Check if we need to use the expiration date
+        use_expiration_date = selected_line.product_id.use_expiration_date
+        if use_expiration_date and (not expiration_date or expiration_date is UNSET):
+            message = self.msg_store.expiration_date_missing()
+            return self._response_for_set_lot(picking, selected_line, message=message)
+
+        # we check for duplicate:
+        if scanned_lot:
+            if fields.Date.from_string(
+                scanned_lot.expiration_date
+            ) != fields.Date.from_string(expiration_date):
+                # If the lot has an expiration date, it must be the same
+                message = self.msg_store.lot_already_exists_different_expiration_date(
+                    scanned_lot, expiration_date
+                )
+                return self._response_for_set_lot(
+                    picking, selected_line, message=message
+                )
+
+        if scanned_lot:
+            selected_line.lot_id = scanned_lot.id
+            selected_line.expiration_date = False
+            selected_line.lot_name = False
+            selected_line._onchange_lot_id()
+
+        else:
+            selected_line.lot_id = False
+            if lot_name is not UNSET:
+                selected_line.lot_name = lot_name
+            if expiration_date is not UNSET:
+                selected_line.expiration_date = expiration_date
+
+        message = None
+        if use_expiration_date and expiration_date.date() <= fields.Date.today():
+            message = self.msg_store.expiration_date_past()
+        return self._response_for_set_lot(picking, selected_line, message=message)
+
+    def _to_iso_datetime_at_utc(
+        self, value: str | datetime | date | UnsetParamValue
+    ) -> datetime | None:
+        if not value:
+            return value
+        tz_name = self._get_input_tz_name()
+        user_tz = pytz.timezone(tz_name)
+        received_date_only = False
+        if isinstance(value, str):
+            # check if the string is in ISO format and contains time part or
+            # check if the string is in ISO format and contains time part or
+            # ensure we receive timeinfo into the string
+            if len(value) == 10:
+                received_date_only = True
+            try:
+                value = datetime.fromisoformat(value)
+            except ValueError:
+                raise ValueError("Invalid date format. Expected ISO format.")
+
+        # if value is a date, convert it to datetime
+        if isinstance(value, date) and not isinstance(value, datetime):
+            # The date is a date at midnight into the user's timezone since
+            # the value comes from a datepicker
+            # We convert it to a datetime at midnight into the user's timezone
+            # and then convert it to UTC
+            value = datetime.combine(value, datetime.min.time())
+            value = user_tz.localize(value)
+
+        if value.tzinfo is None:
+            if received_date_only:
+                # The date is a date at midnight into the user's timezone since
+                # the value comes from a datepicker
+                # The time should be at midnight into the user's timezone
+                value = datetime.combine(value.date(), datetime.min.time())
+            # naive datetime, we consider it's a UTC datetime. We must convert
+            # it so it become a datetime at midnight into the user's timezone
+            # and then convert it to UTC
+            # Localize the naive datetime to the user's timezone
+            value = user_tz.localize(value)
+
+        # convert to UTC
+        # return a naive datetime in UTC
+        return value.astimezone(pytz.utc).replace(tzinfo=None)
 
     def set_lot_confirm_action(self, picking_id, selected_line_id):
         picking = self.env["stock.picking"].browse(picking_id)
