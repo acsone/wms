@@ -6,7 +6,6 @@
 
 import {ScenarioBaseMixin} from "/shopfloor_mobile_base/static/wms/src/scenario/mixins.js";
 import {process_registry} from "/shopfloor_mobile_base/static/wms/src/services/process_registry.js";
-import event_hub from "/shopfloor_mobile_base/static/wms/src/services/event_hub.js";
 import {reception_states} from "./reception_states.js";
 
 const Reception = {
@@ -23,7 +22,7 @@ const Reception = {
             />
             <date-picker-input
                 v-if="state_is('set_lot')"
-                :handler_to_update_date="get_expiration_date_from_lot"
+                :handler_to_update_date="get_expiration_date_from_line"
                 v-on:date_picker_selected="state.on_date_picker_selected"
             />
             <template v-if="state_is('select_move')">
@@ -318,13 +317,21 @@ const Reception = {
                         path: "product.barcode",
                         label: "Barcode",
                     },
-                    {path: "lot.name", label: "Lot", klass: "loud"},
                     {
-                        path: "lot.expiration_date",
+                        path: "lot_name",
+                        label: "Lot",
+                        klass: "loud",
+                    },
+                    {
+                        path: "expiration_date",
                         label: "Expiry date",
                         klass: "loud",
                         renderer: (rec, field) => {
-                            return this.utils.display.render_field_date(rec, field);
+                            if (rec.expiration_date) {
+                                return this.utils.display.render_field_date(rec, field);
+                            } else {
+                                return "";
+                            }
                         },
                     },
                 ],
@@ -342,12 +349,19 @@ const Reception = {
                         path: "product.supplier_code",
                         label: "Vendor code",
                     },
-                    {path: "lot.name", label: "Lot"},
                     {
-                        path: "lot.expiration_date",
+                        path: "lot_name",
+                        label: "Lot",
+                    },
+                    {
+                        path: "expiration_date",
                         label: "Expiry date",
                         renderer: (rec, field) => {
-                            return this.utils.display.render_field_date(rec, field);
+                            if (rec.expiration_date) {
+                                return this.utils.display.render_field_date(rec, field);
+                            } else {
+                                return "";
+                            }
                         },
                     },
                 ],
@@ -472,18 +486,24 @@ const Reception = {
         },
         lot_has_expiry_date: function () {
             // If there's a expiry date, it means there's a lot too.
-            const expiry_date = _.result(
+            var expiry_date = _.result(
                 this.line_being_handled,
                 "lot.expiration_date",
                 ""
             );
+            if (!expiry_date) {
+                // Lot is not defined, look for expiration date on move line
+                expiry_date = _.result(this.line_being_handled, "lot_name", "")
+                    ? _.result(this.line_being_handled, "expiration_date", "")
+                    : "";
+            }
             return !_.isEmpty(expiry_date);
         },
-        get_expiration_date_from_lot: function (lot) {
-            if (!lot.expiration_date) {
+        get_expiration_date_from_line: function () {
+            if (!this.line_being_handled.expiration_date) {
                 return;
             }
-            return lot.expiration_date.split("T")[0];
+            return this.line_being_handled.expiration_date.split("T")[0];
         },
         move_card_color: function (move) {
             if (move.progress === 100) {
