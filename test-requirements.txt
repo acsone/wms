@@ -1,2 +1,4 @@
 vcrpy-unittest
 odoo_test_helper
+odoo-addon-stock-split-picking @ git+https://github.com/OCA/stock-logistics-workflow@refs/pull/2271/head#subdirectory=setup/stock_split_picking
+odoo-addon-stock-split-picking-dimension @ git+https://github.com/OCA/stock-logistics-workflow@refs/pull/2271/head#subdirectory=setup/stock_split_picking_dimension
