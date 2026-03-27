@@ -103,6 +103,18 @@ const new_template =
 //   - the js code for the new state
 const ReceptionPackageDimension = process_registry.extend("reception", {
     template: new_template,
+    beforeMount: function () {
+        // Pre-fill the form inputs with db values
+        const pkg = this.state.data.packaging;
+        const input_fields = this.get_packaging_measurements_inputs();
+
+        input_fields.forEach((inputKey) => {
+            const originalKey = inputKey.replace("_input", "");
+            if (pkg[inputKey] === undefined || pkg[inputKey] === null) {
+                this.$set(pkg, inputKey, pkg[originalKey]);
+            }
+        });
+    },
     "methods.get_packaging_measurements_inputs": function () {
         return [
             "packaging_length_input",
