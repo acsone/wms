@@ -334,6 +334,7 @@ class TestSetQuantity(CommonCase):
             data={
                 "picking": data,
                 "selected_move_line": self.data.move_lines(selected_move_line),
+                "confirmation": None,
             },
         )
 
@@ -456,6 +457,7 @@ class TestSetQuantity(CommonCase):
             data={
                 "picking": picking_data,
                 "selected_move_line": self.data.move_lines(selected_move_line),
+                "confirmation": None,
             },
         )
 
@@ -714,6 +716,7 @@ class TestSetQuantity(CommonCase):
             data={
                 "picking": picking_data,
                 "selected_move_line": self.data.move_lines(selected_move_line),
+                "confirmation": None,
             },
         )
         # there should be 3 lines now
@@ -789,6 +792,7 @@ class TestSetQuantity(CommonCase):
             data={
                 "picking": picking_data,
                 "selected_move_line": self.data.move_lines(move_line_user_1),
+                "confirmation": None,
             },
         )
 
@@ -892,6 +896,7 @@ class TestSetQuantity(CommonCase):
             data={
                 "picking": data,
                 "selected_move_line": self.data.move_lines(move_line_user_2),
+                "confirmation": None,
             },
         )
         self.assertEqual(move_product_a.quantity_done, 1.0)
