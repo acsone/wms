@@ -12,6 +12,9 @@ from odoo.addons.shopfloor.actions.search import SearchAction, SearchResult
 from .common import CommonCase
 
 UTC = timezone.utc
+GTIN_AI = "01"
+LOT_AI = "10"
+EXPIRATION_DATE_AI = "17"
 
 
 class TestScanLotName(CommonCase):
@@ -21,7 +24,7 @@ class TestScanLotName(CommonCase):
         cls.product_a.tracking = "lot"
         return res
 
-    def test_scan_lot_name_extract_expiration_date_new_lot(self):
+    def test_scan_lot_extract_expiration_date_new_lot(self):
         """
         Test that the expiration date can be extracted from barcode scan
         (case when the lot does not already exsit in db)
@@ -34,21 +37,26 @@ class TestScanLotName(CommonCase):
         )
         selected_move_line.shopfloor_user_id = self.env.uid
 
+        gs1_barcode = (
+            f"{GTIN_AI}01234567890128{EXPIRATION_DATE_AI}220702{LOT_AI}{lot.name}"
+        )
+
         with mock.patch.object(SearchAction, "find") as mock_find:
             mock_find.return_value = SearchResult(
                 record=None,
                 type="None",
                 parse_result=[
-                    BarcodeResult(type="unknown", value=lot.name),
+                    BarcodeResult(type="unknown", value=gs1_barcode),
                     BarcodeResult(type="expiration_date", value=expiration_date),
+                    BarcodeResult(type="lot", value=lot.name),
                 ],
             )
             res = self.service.dispatch(
-                "scan_lot_name",
+                "scan_lot",
                 params={
                     "picking_id": picking.id,
                     "selected_line_id": selected_move_line.id,
-                    "lot_name": lot.name,
+                    "barcode": lot.name,
                 },
             )
 
@@ -60,7 +68,7 @@ class TestScanLotName(CommonCase):
             res["data"]["set_lot"]["selected_move_line"][0]["lot"]["name"], lot.name
         )
 
-    def test_scan_lot_name_extract_expiration_date_existing_lot(self):
+    def test_scan_lot_extract_expiration_date_existing_lot(self):
         """
         When lot already exists, take the expiration date from the existing lot.
 
@@ -78,24 +86,29 @@ class TestScanLotName(CommonCase):
         )
         selected_move_line.shopfloor_user_id = self.env.uid
 
+        gs1_barcode = (
+            f"{GTIN_AI}01234567890128{EXPIRATION_DATE_AI}220704{LOT_AI}{lot.name}"
+        )
+
         with mock.patch.object(SearchAction, "find") as mock_find:
             mock_find.return_value = SearchResult(
                 record=lot,
                 type="lot",
                 parse_result=[
-                    BarcodeResult(type="unknown", value=lot.name),
+                    BarcodeResult(type="unknown", value=gs1_barcode),
                     BarcodeResult(
                         type="expiration_date",
-                        value=lot.expiration_date + timedelta(days=2),
+                        value=expiration_date + timedelta(days=2),
                     ),
+                    BarcodeResult(type="lot", value=lot.name),
                 ],
             )
             res = self.service.dispatch(
-                "scan_lot_name",
+                "scan_lot",
                 params={
                     "picking_id": picking.id,
                     "selected_line_id": selected_move_line.id,
-                    "lot_name": lot.name,
+                    "barcode": lot.name,
                 },
             )
 
@@ -117,3 +130,26 @@ class TestScanLotName(CommonCase):
                 lot, lot.expiration_date + timedelta(days=2)
             ),
         )
+
+    def test_scan_lot_name_auto_set_lot_on_move_line(self):
+        """
+        If lot exists and lot_name is set on the move line,
+        auto-fill the lot_id and skip "sel_lot" state.
+        """
+        picking = self._create_picking()
+        lot = self._create_lot()
+        selected_move_line = picking.move_line_ids.filtered(
+            lambda l: l.product_id == self.product_a
+        )
+        selected_move_line.lot_name = lot.name
+
+        res = self.service.dispatch(
+            "scan_line",
+            params={
+                "picking_id": picking.id,
+                "barcode": lot.name,
+            },
+        )
+
+        self.assertEqual(res["next_state"], "set_quantity")
+        self.assertEqual(selected_move_line.lot_id, lot)
