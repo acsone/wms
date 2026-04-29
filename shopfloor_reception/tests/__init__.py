@@ -3,7 +3,6 @@ from . import test_select_document
 from . import test_manual_selection
 from . import test_select_move
 from . import test_reception_done
-from . import test_set_lot
 from . import test_set_lot_confirm
 from . import test_set_quantity
 from . import test_set_quantity_action
@@ -15,3 +14,4 @@ from . import test_return_set_quantity
 from . import test_return_reception_done
 from . import test_recover
 from . import test_over_reception
+from . import test_scan_lot
