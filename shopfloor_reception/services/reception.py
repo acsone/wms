@@ -1506,28 +1506,29 @@ class Reception(Component):
                 "expiration_date": False,
             }
             line._split_qty_to_be_done(quantity, **default_values)
-
         if is_over_reception_confirmed:
             self._after_over_reception_confirmed_hook(picking, line)
 
-    def process_with_existing_pack(
-        self, picking_id, selected_line_id, quantity, is_over_reception_confirmed=False
-    ):
+    def _process(self, picking, line, quantity):
+        if message := self._check_picking_processible(picking):
+            return self._response_for_set_quantity(picking, line, message=message)
+
+        if float_is_zero(quantity, precision_rounding=line.product_id.uom_id.rounding):
+            return self._response_for_set_quantity(
+                picking,
+                line,
+                message=self.msg_store.invalid_quantity(quantity),
+            )
+
+        response = self._set_quantity__process__set_qty_and_split(
+            picking, line, quantity
+        )
+        return response
+
+    def process_with_existing_pack(self, picking_id, selected_line_id, quantity):
         picking = self.env["stock.picking"].browse(picking_id)
         selected_line = self.env["stock.move.line"].browse(selected_line_id)
-        message = self._check_picking_processible(picking)
-        if message:
-            return self._response_for_set_quantity(
-                picking, selected_line, message=message
-            )
-        response = self._set_quantity__process__set_qty_and_split(
-            picking,
-            selected_line,
-            quantity,
-            action="process_with_existing_pack",
-            is_over_reception_confirmed=is_over_reception_confirmed,
-        )
-        if response:
+        if response := self._process(picking, selected_line, quantity):
             return response
         return self._response_for_select_dest_package(picking, selected_line)
 
@@ -1536,19 +1537,7 @@ class Reception(Component):
     ):
         picking = self.env["stock.picking"].browse(picking_id)
         selected_line = self.env["stock.move.line"].browse(selected_line_id)
-        message = self._check_picking_processible(picking)
-        if message:
-            return self._response_for_set_quantity(
-                picking, selected_line, message=message
-            )
-        response = self._set_quantity__process__set_qty_and_split(
-            picking,
-            selected_line,
-            quantity,
-            action="process_with_new_pack",
-            is_over_reception_confirmed=is_over_reception_confirmed,
-        )
-        if response:
+        if response := self._process(picking, selected_line, quantity):
             return response
         picking._put_in_pack(selected_line)
         return self._response_for_set_destination(picking, selected_line)
@@ -1558,19 +1547,7 @@ class Reception(Component):
     ):
         picking = self.env["stock.picking"].browse(picking_id)
         selected_line = self.env["stock.move.line"].browse(selected_line_id)
-        message = self._check_picking_processible(picking)
-        if message:
-            return self._response_for_set_quantity(
-                picking, selected_line, message=message
-            )
-        response = self._set_quantity__process__set_qty_and_split(
-            picking,
-            selected_line,
-            quantity,
-            "process_without_pack",
-            is_over_reception_confirmed,
-        )
-        if response:
+        if response := self._process(picking, selected_line, quantity):
             return response
         return self._response_for_set_destination(picking, selected_line)
 
