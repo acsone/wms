@@ -1,0 +1,112 @@
+# Copyright 2026 ACSONE SA/NV
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+from odoo.addons.shopfloor_reception.tests.common import CommonCase
+
+
+class TestShopfloorReceptionPutinpackRestriction(CommonCase):
+    @classmethod
+    def setUpClassBaseData(cls):
+        res = super().setUpClassBaseData()
+        cls.picking = cls._create_picking()
+        cls.selected_move_line = cls.picking.move_line_ids.filtered(
+            lambda line: line.product_id == cls.product_a
+        )
+        return res
+
+    def test_process_with_existing_package_not_allowed(self):
+        self.picking.sudo().picking_type_id.put_in_pack_restriction = "no_package"
+
+        self.env["stock.quant.package"].create({"name": "FOO"})
+        response = self.service.dispatch(
+            "process_with_existing_pack",
+            params={
+                "picking_id": self.picking.id,
+                "selected_line_id": self.selected_move_line.id,
+                "quantity": 2,
+            },
+        )
+        self.assert_response(
+            response,
+            next_state="set_quantity",
+            data={
+                "picking": self.data.picking(self.picking),
+                "selected_move_line": self.data.move_lines(self.selected_move_line),
+                "confirmation_required": None,
+                "put_in_pack_restriction": "no_package",
+            },
+            message=self.msg_store.package_not_allowed_for_operation(self.picking),
+        )
+
+    def test_process_with_new_package_not_allowed(self):
+        self.picking.sudo().picking_type_id.put_in_pack_restriction = "no_package"
+
+        response = self.service.dispatch(
+            "process_with_new_pack",
+            params={
+                "picking_id": self.picking.id,
+                "selected_line_id": self.selected_move_line.id,
+                "quantity": 2,
+            },
+        )
+        self.assert_response(
+            response,
+            next_state="set_quantity",
+            data={
+                "picking": self.data.picking(self.picking),
+                "selected_move_line": self.data.move_lines(self.selected_move_line),
+                "confirmation_required": None,
+                "put_in_pack_restriction": "no_package",
+            },
+            message=self.msg_store.package_not_allowed_for_operation(self.picking),
+        )
+
+    def test_process_without_package_not_allowed(self):
+        self.picking.sudo().picking_type_id.put_in_pack_restriction = "with_package"
+
+        response = self.service.dispatch(
+            "process_without_pack",
+            params={
+                "picking_id": self.picking.id,
+                "selected_line_id": self.selected_move_line.id,
+                "quantity": 2,
+            },
+        )
+        self.assert_response(
+            response,
+            next_state="set_quantity",
+            data={
+                "picking": self.data.picking(self.picking),
+                "selected_move_line": self.data.move_lines(self.selected_move_line),
+                "confirmation_required": None,
+                "put_in_pack_restriction": "with_package",
+            },
+            message=self.msg_store.package_required_for_operation(self.picking),
+        )
+
+    def test_set_quantity_not_allowed(self):
+        self.picking.sudo().picking_type_id.put_in_pack_restriction = "no_package"
+
+        self.env["stock.quant.package"].create({"name": "FOO"})
+        # Simulates a scan of a package
+        response = self.service.dispatch(
+            "set_quantity",
+            params={
+                "picking_id": self.picking.id,
+                "selected_line_id": self.selected_move_line.id,
+                "quantity": 0,
+                "barcode": "FOO",
+            },
+        )
+
+        self.assert_response(
+            response,
+            next_state="set_quantity",
+            data={
+                "picking": self.data.picking(self.picking),
+                "selected_move_line": self.data.move_lines(self.selected_move_line),
+                "confirmation_required": None,
+                "put_in_pack_restriction": "no_package",
+            },
+            message=self.msg_store.package_not_allowed_for_operation(self.picking),
+        )
