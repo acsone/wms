@@ -1,1 +1,1 @@
-Restrict the use of packages in shopfloor reception
+This module allows administrators to simplify the shopfloor user interface by hiding package-related actions during the reception scenario.

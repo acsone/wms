@@ -60,26 +60,26 @@ class Reception(Component):
 
         return res
 
-    def set_quantity(
-        self,
-        picking_id,
-        selected_line_id,
-        quantity=None,
-        barcode=None,
-        confirmation=None,
-    ):
-        picking = self.env["stock.picking"].browse(picking_id)
-        selected_line = self.env["stock.move.line"].browse(selected_line_id)
-
+    def _set_quantity__by_package(self, picking, selected_line, package):
         if message := self._check_picking_putinpack_restriction(
             picking, with_pack=True
         ):
             return self._response_for_set_quantity(
                 picking, selected_line, message=message
             )
+        return super()._set_quantity__by_package(picking, selected_line, package)
 
-        return super().set_quantity(
-            picking_id, selected_line_id, quantity, barcode, confirmation
+    def _set_quantity__by_new_package(
+        self, picking, selected_line, barcode: str, confirmation: str
+    ):
+        if message := self._check_picking_putinpack_restriction(
+            picking, with_pack=True
+        ):
+            return self._response_for_set_quantity(
+                picking, selected_line, message=message
+            )
+        return super()._set_quantity__by_new_package(
+            picking, selected_line, barcode, confirmation
         )
 
     def _response_for_set_quantity(

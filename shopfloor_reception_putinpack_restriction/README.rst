@@ -32,7 +32,9 @@ Shopfloor Reception Putinpack Restriction
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Restrict the use of packages in shopfloor reception
+This module allows administrators to simplify the shopfloor user
+interface by hiding package-related actions during the reception
+scenario.
 
 **Table of contents**
 
@@ -42,27 +44,16 @@ Restrict the use of packages in shopfloor reception
 Use Cases / Context
 ===================
 
-**BUSINESS NEED:**
+It is specifically designed for warehouses that want to control if goods
+are put in a pack or cannot be put in a pack, here at the end of the
+reception. This prevents warehouse operators from freely choosing by
+hiding forbidden buttons.
 
-This module allows administrators to simplify the shopfloor user
-interface by hiding package-related actions during the reception
-scenario.
+Configuration
+=============
 
-It is specifically designed for warehouses that do not utilize packages
-during their receptions, preventing warehouse operators from
-accidentally creating unwanted packages or cluttering the UI with unused
-buttons.
-
-**APPROACH:**
-
-You can configure on the picking type level if you want to use packages
-or not.
-
-**USEFUL INFORMATION:**
-
-It can also inform on related modules:
-
-- modules it depends on: ``stock_picking_putinpack_restriction``
+You can configure on the picking type if you want to use packages or
+not.
 
 Bug Tracker
 ===========
@@ -81,18 +72,20 @@ Authors
 -------
 
 * ACSONE SA/NV
+* BCIM
 
 Contributors
 ------------
 
 - Nicolas Delbovier nicolas.delbovier@acsone.eu (https://www.acsone.eu/)
+- Jacques-Etienne Baudoux (BCIM) je@bcim.be
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
-- ACSONE SA/NV
+- Alcyon Belux
 
 Maintainers
 -----------

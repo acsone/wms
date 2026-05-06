@@ -110,3 +110,86 @@ class TestShopfloorReceptionPutinpackRestriction(CommonCase):
             },
             message=self.msg_store.package_not_allowed_for_operation(self.picking),
         )
+
+    def test_set_quantity_scan_not_broken(self):
+        """
+        Ensure that the put in pack restriction does not prevent to update
+        the quantity by scanning a product/packaging/location
+        """
+        self.picking.sudo().picking_type_id.put_in_pack_restriction = "no_package"
+
+        # Set qty by product barcode
+        response = self.service.dispatch(
+            "set_quantity",
+            params={
+                "picking_id": self.picking.id,
+                "selected_line_id": self.selected_move_line.id,
+                "quantity": 0,
+                "barcode": self.product_a.barcode,
+            },
+        )
+        self.assert_response(
+            response,
+            next_state="set_quantity",
+            data={
+                "picking": self.data.picking(self.picking),
+                "selected_move_line": self.data.move_lines(self.selected_move_line),
+                "confirmation_required": None,
+                "put_in_pack_restriction": "no_package",
+            },
+        )
+        self.assertEqual(self.selected_move_line.qty_done, 1.0)
+
+        # Set qty by packaging
+        self.env["product.packaging"].sudo().create(
+            {
+                "name": "Box",
+                "product_id": self.product_a.id,
+                "qty": 5.0,
+                "barcode": "PKG_TEST",
+            }
+        )
+        response = self.service.dispatch(
+            "set_quantity",
+            params={
+                "picking_id": self.picking.id,
+                "selected_line_id": self.selected_move_line.id,
+                "quantity": 0,
+                "barcode": "PKG_TEST",
+            },
+        )
+        self.assert_response(
+            response,
+            next_state="set_quantity",
+            data={
+                "picking": self.data.picking(self.picking),
+                "selected_move_line": self.data.move_lines(self.selected_move_line),
+                "confirmation_required": None,
+                "put_in_pack_restriction": "no_package",
+            },
+        )
+        self.assertEqual(self.selected_move_line.qty_done, 5.0)
+
+        # Set qty by location
+        loc_dest = (
+            self.env["stock.location"]
+            .sudo()
+            .create(
+                {
+                    "name": "Test Location",
+                    "usage": "internal",
+                    "location_id": self.picking.location_dest_id.id,
+                }
+            )
+        )
+        response = self.service.dispatch(
+            "set_quantity",
+            params={
+                "picking_id": self.picking.id,
+                "selected_line_id": self.selected_move_line.id,
+                "quantity": 5,
+                "barcode": loc_dest.name,
+            },
+        )
+        self.assertIsNone(response.get("message"))
+        self.assertEqual(self.selected_move_line.location_dest_id, loc_dest)
