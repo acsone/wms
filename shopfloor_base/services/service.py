@@ -29,6 +29,8 @@ class BaseShopfloorService(AbstractComponent):
         self._profile = getattr(self.work, "profile", self.env["shopfloor.profile"])
         self._menu = getattr(self.work, "menu", self.env["shopfloor.menu"])
 
+        self._msg_store = self._actions_for("message")
+
     def _get_api_spec(self, **params):
         return ShopfloorRestServiceAPISpec(self, **params)
 
@@ -70,6 +72,13 @@ class BaseShopfloorService(AbstractComponent):
         for record in records:
             res.append(self._convert_one_record(record))
         return res
+
+    def _get_message(self, message=None) -> dict:
+        if message is None:
+            message = {}
+        if self.msg_store and self.msg_store.message_queue and "body" in message:
+            message["body"] += "\n".join(self.msg_store.message_queue)
+        return message
 
     def _response(
         self, base_response=None, data=None, next_state=None, message=None, popup=None
@@ -113,7 +122,7 @@ class BaseShopfloorService(AbstractComponent):
         elif data:
             response["data"] = data
 
-        if message:
+        if message := self._get_message(message):
             response["message"] = message
 
         if popup:
@@ -197,7 +206,7 @@ class BaseShopfloorService(AbstractComponent):
 
     @property
     def msg_store(self):
-        return self._actions_for("message")
+        return self._msg_store if self._msg_store else self._actions_for("message")
 
     # TODO: maybe to be proposed to base_rest
     # TODO: add tests
