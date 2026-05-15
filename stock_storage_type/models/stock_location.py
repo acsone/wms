@@ -171,7 +171,6 @@ class StockLocation(models.Model):
         for location in self:
             if (
                 location.fill_state not in ("empty", "being_emptied")
-                and location._should_compute_will_contain_lot_ids()
                 and len(location.location_will_contain_lot_ids) > 1
             ):
                 locations_with_exception |= location
@@ -187,7 +186,6 @@ class StockLocation(models.Model):
         for location in self:
             if (
                 location.fill_state not in ("empty", "being_emptied")
-                and location._should_compute_will_contain_product_ids()
                 and len(location.location_will_contain_product_ids) > 1
             ):
                 locations_with_exception |= location
@@ -312,7 +310,14 @@ class StockLocation(models.Model):
         "do_not_mix_products",
     )
     def _compute_location_will_contain_product_ids(self):
-        for rec in self:
+        # We should not retrieve fields values for records that should not be computed
+        # as when the field is accessed the first time for a record that should be
+        # computed (in 'else'), field value for records of 'self' will be retrieved.
+        # Like 'quant_ids' for locations like 'Customers'
+        prefetch_ids = [
+            rec.id for rec in self if rec._should_compute_will_contain_product_ids()
+        ]
+        for rec in self.with_prefetch(prefetch_ids):
             if not rec._should_compute_will_contain_product_ids():
                 no_product = self.env["product.product"].browse()
                 rec.location_will_contain_product_ids = no_product
