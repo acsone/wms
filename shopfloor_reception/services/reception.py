@@ -10,7 +10,7 @@ import pytz
 from decorator import contextmanager
 
 from odoo import fields
-from odoo.tools import float_compare, float_is_zero
+from odoo.tools import float_compare, float_is_zero, safe_eval
 
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
@@ -365,6 +365,16 @@ class Reception(Component):
 
     def _scan_document__by_picking(self, pickings, barcode):
         picking_filter_result = pickings
+
+        if self.additional_domain:
+            filtered_move_lines = picking_filter_result.move_line_ids.filtered_domain(
+                safe_eval.safe_eval(
+                    self.additional_domain,
+                    self.search_move_line._get_additional_domain_eval_context(),
+                )
+            )
+            picking_filter_result = filtered_move_lines.picking_id
+
         reception_pickings = picking_filter_result.filtered(
             lambda p: p.picking_type_id.id in self.picking_types.ids
         )
