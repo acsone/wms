@@ -8,7 +8,6 @@ from odoo.addons.component.core import Component
 
 
 class SearchResult:
-
     __slots__ = ("record", "type", "code", "parse_result")
 
     def __init__(self, **kw) -> None:
@@ -95,8 +94,11 @@ class SearchAction(Component):
         _types = types or self._barcode_type_handler.keys()
         # TODO: decide the best default order in case we don't pass `types`
         parse_results = self.parser.parse(barcode, types)
-        for parse_result in parse_results:
-            for btype in _types:
+        # OPTIMIZATION: Push 'unknown' types to the end so that we return earlier
+        # in case the type is known after parsing
+        for parse_result in sorted(parse_results, key=lambda r: r.type == "unknown"):
+            btypes = _types if parse_result.type == "unknown" else [parse_result.type]
+            for btype in btypes:
                 record = self._find_record_by_type(
                     parse_result.value, btype, handler_kw
                 )
