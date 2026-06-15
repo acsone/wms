@@ -41,7 +41,7 @@ class BaseShopfloorService(AbstractComponent):
         return super().dispatch(method_name, *args, params=params)
 
     def _actions_for(self, usage, **kw):
-        return get_actions_for(self, usage, **kw)
+        return get_actions_for(self, usage, propagate_kwargs=["menu"], **kw)
 
     @property
     def _exposed_model(self):
