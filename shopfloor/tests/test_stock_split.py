@@ -1,77 +1,15 @@
 # Copyright 2020 Camptocamp SA (http://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo.tests import tagged
-from odoo.tests.common import TransactionCase
+from .model_common import ModelCommon
 
 # pylint: disable=missing-return
 
 
-@tagged("post_install", "-at_install")
-class TestStockSplit(TransactionCase):
+class TestStockSplit(ModelCommon):
     @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.warehouse = cls.env.ref("stock.warehouse0")
-        cls.warehouse.delivery_steps = "pick_pack_ship"
-        cls.customer_location = cls.env.ref("stock.stock_location_customers")
-        cls.pack_location = cls.warehouse.wh_pack_stock_loc_id
-        cls.ship_location = cls.warehouse.wh_output_stock_loc_id
-        cls.stock_location = cls.env.ref("stock.stock_location_stock")
-        # Create products
-        cls.product_a = (
-            cls.env["product.product"]
-            .sudo()
-            .create(
-                {
-                    "name": "Product A",
-                    "type": "product",
-                    "default_code": "A",
-                    "barcode": "A",
-                    "weight": 2,
-                }
-            )
-        )
-        cls.product_a_packaging = (
-            cls.env["product.packaging"]
-            .sudo()
-            .create(
-                {
-                    "name": "Box",
-                    "product_id": cls.product_a.id,
-                    "barcode": "ProductABox",
-                }
-            )
-        )
-        cls.product_b = (
-            cls.env["product.product"]
-            .sudo()
-            .create(
-                {
-                    "name": "Product B",
-                    "type": "product",
-                    "default_code": "B",
-                    "barcode": "B",
-                    "weight": 2,
-                }
-            )
-        )
-        cls.product_b_packaging = (
-            cls.env["product.packaging"]
-            .sudo()
-            .create(
-                {
-                    "name": "Box",
-                    "product_id": cls.product_b.id,
-                    "barcode": "ProductBBox",
-                }
-            )
-        )
-        # Put product_a quantities in different packages to get several move lines
-        cls.package_1 = cls.env["stock.quant.package"].create({"name": "PACKAGE_1"})
-        cls.package_2 = cls.env["stock.quant.package"].create({"name": "PACKAGE_2"})
-        cls.package_3 = cls.env["stock.quant.package"].create({"name": "PACKAGE_3"})
-        cls.package_4 = cls.env["stock.quant.package"].create({"name": "PACKAGE_4"})
+    def setUpClassData(cls):
+        super().setUpClassData()
+        cls.warehouse.write({"delivery_steps": "pick_pack_ship"})
         cls._update_qty_in_location(
             cls.stock_location, cls.product_a, 6, package=cls.package_1
         )
@@ -95,7 +33,37 @@ class TestStockSplit(TransactionCase):
                 "warehouse_id": cls.warehouse.id,
                 "picking_type_id": cls.warehouse.out_type_id.id,
                 "procure_method": "make_to_order",
-                "state": "draft",
+                "state": "waiting",
+            }
+        )
+        cls.pack_move_a = cls.env["stock.move"].create(
+            {
+                "name": cls.product_a.display_name,
+                "product_id": cls.product_a.id,
+                "product_uom_qty": 15.0,
+                "product_uom": cls.product_a.uom_id.id,
+                "location_id": cls.pack_location.id,
+                "location_dest_id": cls.ship_location.id,
+                "warehouse_id": cls.warehouse.id,
+                "picking_type_id": cls.warehouse.pack_type_id.id,
+                "procure_method": "make_to_order",
+                "state": "waiting",
+                "move_dest_ids": [(4, cls.ship_move_a.id)],
+            }
+        )
+        cls.pick_move_a = cls.env["stock.move"].create(
+            {
+                "name": cls.product_a.display_name,
+                "product_id": cls.product_a.id,
+                "product_uom_qty": 15.0,
+                "product_uom": cls.product_a.uom_id.id,
+                "location_id": cls.stock_location.id,
+                "location_dest_id": cls.pack_location.id,
+                "warehouse_id": cls.warehouse.id,
+                "picking_type_id": cls.warehouse.pick_type_id.id,
+                "procure_method": "make_to_stock",
+                "state": "confirmed",
+                "move_dest_ids": [(4, cls.pack_move_a.id)],
             }
         )
         cls.ship_move_b = cls.env["stock.move"].create(
@@ -109,31 +77,50 @@ class TestStockSplit(TransactionCase):
                 "warehouse_id": cls.warehouse.id,
                 "picking_type_id": cls.warehouse.out_type_id.id,
                 "procure_method": "make_to_order",
-                "state": "draft",
+                "state": "waiting",
             }
         )
-        (cls.ship_move_a | cls.ship_move_b)._assign_picking()
-        (cls.ship_move_a | cls.ship_move_b)._action_confirm(merge=False)
-        cls.pack_move_a = cls.ship_move_a.move_orig_ids[0]
-        cls.pick_move_a = cls.pack_move_a.move_orig_ids[0]
-        cls.pack_move_b = cls.ship_move_b.move_orig_ids[0]
-        cls.pick_move_b = cls.pack_move_b.move_orig_ids[0]
+        cls.pack_move_b = cls.env["stock.move"].create(
+            {
+                "name": cls.product_b.display_name,
+                "product_id": cls.product_b.id,
+                "product_uom_qty": 4.0,
+                "product_uom": cls.product_b.uom_id.id,
+                "location_id": cls.pack_location.id,
+                "location_dest_id": cls.ship_location.id,
+                "warehouse_id": cls.warehouse.id,
+                "picking_type_id": cls.warehouse.pack_type_id.id,
+                "procure_method": "make_to_order",
+                "state": "waiting",
+                "move_dest_ids": [(4, cls.ship_move_b.id)],
+            }
+        )
+        cls.pick_move_b = cls.env["stock.move"].create(
+            {
+                "name": cls.product_b.display_name,
+                "product_id": cls.product_b.id,
+                "product_uom_qty": 4.0,
+                "product_uom": cls.product_b.uom_id.id,
+                "location_id": cls.stock_location.id,
+                "location_dest_id": cls.pack_location.id,
+                "warehouse_id": cls.warehouse.id,
+                "picking_type_id": cls.warehouse.pick_type_id.id,
+                "procure_method": "make_to_stock",
+                "state": "confirmed",
+                "move_dest_ids": [(4, cls.pack_move_b.id)],
+            }
+        )
+        (
+            cls.ship_move_a
+            | cls.ship_move_b
+            | cls.pack_move_a
+            | cls.pack_move_b
+            | cls.pick_move_a
+            | cls.pick_move_b
+        )._assign_picking()
         cls.picking = cls.pick_move_a.picking_id
         cls.packing = cls.pack_move_a.picking_id
         cls.picking.action_assign()
-
-    @classmethod
-    def _update_qty_in_location(
-        cls, location, product, quantity, package=None, lot=None
-    ):
-        quants = cls.env["stock.quant"]._gather(
-            product, location, lot_id=lot, package_id=package, strict=True
-        )
-        # this method adds the quantity to the current quantity, so remove it
-        quantity -= sum(quants.mapped("quantity"))
-        cls.env["stock.quant"]._update_available_quantity(
-            product, location, quantity, package_id=package, lot_id=lot
-        )
 
     def test_split_pickings_from_source_location(self):
         dest_location = self.pick_move_a.location_dest_id.sudo().copy(
@@ -159,7 +146,8 @@ class TestStockSplit(TransactionCase):
         self.assertEqual(len(self.pack_move_a.move_line_ids), 3)
         self.assertEqual(len(self.packing.package_level_ids), 3)
         self.assertEqual(len(move_lines_to_process), 1)
-        new_packing = move_lines_to_process._split_pickings_from_source_location()
+        move_lines_to_process._extract_in_split_order()
+        new_packing = self.packing.backorder_ids
         self.assertEqual(len(self.packing.package_level_ids), 2)
         self.assertEqual(len(new_packing.package_level_ids), 1)
         self.assertEqual(len(new_packing.move_line_ids), 1)
