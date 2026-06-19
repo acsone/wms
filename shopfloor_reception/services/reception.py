@@ -1223,7 +1223,10 @@ class Reception(Component):
             if result.type == "lot":
                 lot_name = result.value
             elif result.type == "expiration_date":
-                lot_expiration_date = result.value
+                # We need to ensure we have a `datetime` object for valid
+                # comparison with stock.lot.expiration_date
+                _date = result.value
+                lot_expiration_date = datetime(_date.year, _date.month, _date.day)
             elif (
                 result.type == "product"
                 and result.raw != selected_line.product_id.barcode
