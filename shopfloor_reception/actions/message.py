@@ -50,3 +50,12 @@ class MessageAction(Component):
                 "The scanned lot does not match the selected product",
             ),
         }
+
+    def lot_has_barcode_but_product_missing(self):
+        return {
+            "message_type": "error",
+            "body": _(
+                "The scanned lot contains a barcode but you have no "
+                "barcode for this product in Odoo.",
+            ),
+        }

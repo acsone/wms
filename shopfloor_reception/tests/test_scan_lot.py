@@ -198,6 +198,39 @@ class TestScanLotName(CommonCase):
             },
         )
 
+    def test_scan_lot_barcode_on_lot_but_not_on_product(self):
+        self.selected_move_line.product_id.sudo().barcode = False
+
+        expiration_date = date(2022, 7, 2)
+        other_product_barcode = "01223334444555"
+        gs1_barcode = self._generate_gs1(
+            other_product_barcode, expiration_date, self.lot.name
+        )
+
+        with mock.patch.object(SearchAction, "find") as mock_find:
+            mock_find.return_value = self._generate_search_result(
+                gs1_barcode, expiration_date, self.lot.name, other_product_barcode
+            )
+            res = self.service.dispatch(
+                "scan_lot",
+                params={
+                    "picking_id": self.picking.id,
+                    "selected_line_id": self.selected_move_line.id,
+                    "barcode": self.lot.name,
+                },
+            )
+        self.assert_response(
+            res,
+            "set_lot",
+            self.msg_store.lot_has_barcode_but_product_missing(),
+            data={
+                "picking": self.data.picking(self.picking),
+                "selected_move_line": self._data_for_move_lines(
+                    self.selected_move_line
+                ),
+            },
+        )
+
     def test_set_lot_from_select_move(self):
         picking = self._create_picking()
         lot = self._create_lot()

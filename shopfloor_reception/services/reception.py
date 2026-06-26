@@ -1219,10 +1219,16 @@ class Reception(Component):
                 result.type == "product"
                 and result.raw != selected_line.product_id.barcode
             ):
+                message = (
+                    self.msg_store.lot_product_mismatch()
+                    if selected_line.product_id.barcode
+                    else self.msg_store.lot_has_barcode_but_product_missing()
+                )
+
                 return self._response_for_set_lot(
                     picking,
                     selected_line,
-                    message=self.msg_store.lot_product_mismatch(),
+                    message=message,
                 )
 
         if search_result.type == "lot":
