@@ -173,10 +173,25 @@ class TestScanLotName(CommonCase):
         gs1_barcode = self._generate_gs1(
             other_product_barcode, expiration_date, self.lot.name
         )
+        other_product = (
+            self.env["product.product"]
+            .sudo()
+            .create(
+                {
+                    "name": "Other Product",
+                    "barcode": other_product_barcode,
+                }
+            )
+        )
 
         with mock.patch.object(SearchAction, "find") as mock_find:
             mock_find.return_value = self._generate_search_result(
-                gs1_barcode, expiration_date, self.lot.name, other_product_barcode
+                gs1_barcode,
+                expiration_date,
+                self.lot.name,
+                other_product_barcode,
+                _type="product",
+                record=other_product,
             )
             res = self.service.dispatch(
                 "scan_lot",
@@ -189,7 +204,40 @@ class TestScanLotName(CommonCase):
         self.assert_response(
             res,
             "set_lot",
-            self.msg_store.lot_product_mismatch(),
+            self.msg_store.lot_product_mismatch(self.selected_move_line, other_product),
+            data={
+                "picking": self.data.picking(self.picking),
+                "selected_move_line": self._data_for_move_lines(
+                    self.selected_move_line
+                ),
+            },
+        )
+
+    def test_scan_lot_product_not_found(self):
+        self.selected_move_line.product_id.sudo().barcode = False
+
+        expiration_date = date(2022, 7, 2)
+        unkown_product_barcode = "01223334444555"
+        gs1_barcode = self._generate_gs1(
+            unkown_product_barcode, expiration_date, self.lot.name
+        )
+
+        with mock.patch.object(SearchAction, "find") as mock_find:
+            mock_find.return_value = self._generate_search_result(
+                gs1_barcode, expiration_date, self.lot.name, unkown_product_barcode
+            )
+            res = self.service.dispatch(
+                "scan_lot",
+                params={
+                    "picking_id": self.picking.id,
+                    "selected_line_id": self.selected_move_line.id,
+                    "barcode": self.lot.name,
+                },
+            )
+        self.assert_response(
+            res,
+            "set_lot",
+            self.msg_store.lot_product_not_found(unkown_product_barcode),
             data={
                 "picking": self.data.picking(self.picking),
                 "selected_move_line": self._data_for_move_lines(
