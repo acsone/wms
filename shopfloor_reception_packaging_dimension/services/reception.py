@@ -153,6 +153,62 @@ class Reception(Component):
         if values_to_update:
             packaging.write(values_to_update)
 
+    def _response_for_set_quantity(
+        self, picking, line, message=None, asking_confirmation=None
+    ):
+        res = super()._response_for_set_quantity(
+            picking, line, message, asking_confirmation
+        )
+        if self.work.menu.create_new_packaging:
+            res["data"]["set_quantity"]["create_new_packaging"] = True
+        return res
+
+    def _response_for_create_new_packaging(
+        self, picking, line, packaging, message=None
+    ):
+        response = self._response(
+            next_state="create_new_packaging",
+            data={
+                "selected_move_line": self.data.move_line(line),
+                "picking": self.data.picking(picking),
+                "packaging": self.data.packaging_dimensions(packaging),
+            },
+            message=message,
+        )
+        return response
+
+    def create_new_packaging(self, picking_id, selected_line_id):
+        picking = self.env["stock.picking"].browse(picking_id)
+        line = self.env["stock.move.line"].browse(selected_line_id)
+        packaging = (
+            self.env["product.packaging"]
+            .sudo()
+            .create(
+                {
+                    "name": "New Packaging (from Shopfloor)",
+                    "product_id": line.product_id.id,
+                }
+            )
+        )
+
+        return self._response_for_create_new_packaging(
+            picking,
+            line,
+            packaging,
+            message=self.msg_store.new_packaging_created(packaging),
+        )
+
+    def delete_new_packaging(self, picking_id, selected_line_id, packaging_id):
+        picking = self.env["stock.picking"].browse(picking_id)
+        line = self.env["stock.move.line"].browse(selected_line_id)
+        packaging = self.env["product.packaging"].browse(packaging_id)
+        message = None
+        if packaging:
+            message = self.msg_store.packaging_deleted(packaging)
+            packaging.sudo().unlink()
+
+        return self._response_for_set_quantity(picking, line, message=message)
+
 
 class ShopfloorReceptionValidator(Component):
     _inherit = "shopfloor.reception.validator"
@@ -203,7 +259,29 @@ class ShopfloorReceptionValidator(Component):
                 "nullable": True,
             },
             "barcode": {"type": "string", "required": False, "nullable": True},
+            "name": {"type": "string", "required": False, "nullable": True},
             "skip": {"type": "boolean"},
+        }
+
+    def create_new_packaging(self):
+        return {
+            "picking_id": {"coerce": to_int, "required": True, "type": "integer"},
+            "selected_line_id": {
+                "coerce": to_int,
+                "required": True,
+                "type": "integer",
+            },
+        }
+
+    def delete_new_packaging(self):
+        return {
+            "picking_id": {"coerce": to_int, "required": True, "type": "integer"},
+            "selected_line_id": {
+                "coerce": to_int,
+                "required": True,
+                "type": "integer",
+            },
+            "packaging_id": {"coerce": to_int, "required": True, "type": "integer"},
         }
 
 
@@ -213,6 +291,7 @@ class ShopfloorReceptionValidatorResponse(Component):
     def _states(self):
         res = super()._states()
         res.update({"set_packaging_dimension": self._schema_set_packaging_dimension})
+        res.update({"create_new_packaging": self._schema_create_new_packaging})
         return res
 
     def _scan_line_next_states(self):
@@ -222,6 +301,14 @@ class ShopfloorReceptionValidatorResponse(Component):
 
     @property
     def _schema_set_packaging_dimension(self):
+        return {
+            "picking": {"type": "dict", "schema": self.schemas.picking()},
+            "selected_move_line": {"type": "dict", "schema": self.schemas.move_line()},
+            "packaging": self._schema_packaging_dimensions(),
+        }
+
+    @property
+    def _schema_create_new_packaging(self):
         return {
             "picking": {"type": "dict", "schema": self.schemas.picking()},
             "selected_move_line": {"type": "dict", "schema": self.schemas.move_line()},
@@ -241,3 +328,26 @@ class ShopfloorReceptionValidatorResponse(Component):
         return self._response_schema(
             next_states=self._set_packaging_dimension_next_states()
         )
+
+    def _create_new_packaging_next_state(self):
+        return {"create_new_packaging", "set_quantity"}
+
+    def create_new_packaging(self):
+        return self._response_schema(
+            next_states=self._create_new_packaging_next_state()
+        )
+
+    @property
+    def _schema_set_quantity(self):
+        res = super()._schema_set_quantity
+
+        res.update(
+            {
+                "create_new_packaging": {
+                    "type": "boolean",
+                    "nullable": True,
+                    "required": False,
+                },
+            }
+        )
+        return res
