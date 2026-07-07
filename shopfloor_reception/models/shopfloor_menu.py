@@ -1,6 +1,6 @@
 # Copyright 2025 ACSONE SA/NV (https://www.acsone.eu)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import _, api, exceptions, fields, models
+from odoo import api, fields, models
 
 FILTER_TODAY_SCHEDULED_PICKINGS_HELP = """
 By default, at first step, filter the available
@@ -31,16 +31,3 @@ class ShopfloorMenu(models.Model):
         self.filter_today_scheduled_pickings = (
             self.filter_today_scheduled_pickings_is_possible
         )
-
-    @api.constrains("scenario_id", "picking_type_ids", "allow_move_create")
-    def _check_filter_today_scheduled_pickings(self):
-        for menu in self:
-            if (
-                menu.filter_today_scheduled_pickings
-                and not menu.filter_today_scheduled_pickings_is_possible
-            ):
-                raise exceptions.ValidationError(
-                    _("Filter Today Pickings is not allowed for menu {}.").format(
-                        menu.name
-                    )
-                )
