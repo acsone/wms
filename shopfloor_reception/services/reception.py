@@ -1230,7 +1230,7 @@ class Reception(Component):
                 )
             elif (
                 result.type == "product"
-                and result.value != selected_line.product_id.barcode
+                and result.raw != selected_line.product_id.barcode
             ):
                 product = (
                     search_result.record
@@ -1238,14 +1238,14 @@ class Reception(Component):
                     # Make sure not to make a second redundant search on product
                     else None
                     if search_result.type == "none"
-                    else search.product_from_scan(result.value)
+                    else search.product_from_scan(result.raw)
                 )
                 if product:
                     message = self.msg_store.lot_product_mismatch(
                         selected_line, product
                     )
                 else:
-                    message = self.msg_store.lot_product_not_found(result.value)
+                    message = self.msg_store.lot_product_not_found(result.raw)
                 return self._response_for_set_lot(
                     picking,
                     selected_line,
