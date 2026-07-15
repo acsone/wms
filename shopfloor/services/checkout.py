@@ -9,7 +9,7 @@ from odoo import _, fields
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
 
-from ..actions.search import InvalidPicking, InvalidProduct
+from ..actions.search import SearchInvalidPicking, SearchInvalidProduct
 from ..utils import to_float
 
 
@@ -493,7 +493,7 @@ class Checkout(Component):
                     types=handlers.keys(),
                 )
             )
-        except InvalidProduct as e:
+        except SearchInvalidProduct as e:
             if e.recordset._name == "product.product":
                 product = e.recordset
                 return_picking = self._get_pickings_for_product(product, limit=1)
@@ -510,7 +510,7 @@ class Checkout(Component):
             else:
                 raise e
 
-        except InvalidPicking as e:
+        except SearchInvalidPicking as e:
             if e.recordset._name == "stock.quant.package":
                 # No line for scanned package in selected picking
                 # Check if there's any picking reserving this product.
@@ -1089,7 +1089,7 @@ class Checkout(Component):
         }
         try:
             search_result = self._scan_package_find(picking, barcode, handlers.keys())
-        except InvalidProduct as e:
+        except SearchInvalidProduct as e:
             return self._response_for_select_package(
                 picking,
                 selected_lines,

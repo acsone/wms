@@ -7,7 +7,7 @@ from odoo.osv.expression import AND
 from odoo.addons.component.core import Component
 
 
-class InvalidRecordset(Exception):
+class SearchInvalidRecordset(Exception):
     __slots__ = ("recordset",)
 
     def __init__(self, recordset):
@@ -15,11 +15,11 @@ class InvalidRecordset(Exception):
         self.recordset = recordset
 
 
-class InvalidProduct(InvalidRecordset):
+class SearchInvalidProduct(SearchInvalidRecordset):
     pass
 
 
-class InvalidPicking(InvalidRecordset):
+class SearchInvalidPicking(SearchInvalidRecordset):
     pass
 
 
@@ -228,7 +228,7 @@ class SearchAction(Component):
                 lambda p: not (p.move_line_ids.package_id & packages)
             )
             if invalid_pickings:
-                raise InvalidPicking(recordset=packages)
+                raise SearchInvalidPicking(recordset=packages)
 
         return packages
 
@@ -267,7 +267,7 @@ class SearchAction(Component):
         if self._products and products:
             valid_products = products & self._products
             if not valid_products:
-                raise InvalidProduct(products - self._products)
+                raise SearchInvalidProduct(products - self._products)
             return valid_products
         return products
 
@@ -285,12 +285,12 @@ class SearchAction(Component):
             errors = []
             try:
                 products = self.with_limit(None)._find_product(parse_results)
-            except InvalidProduct as e:
+            except SearchInvalidProduct as e:
                 errors.append(e)
             try:
                 packagings = self.with_limit(None)._find_packaging(parse_results)
                 products |= packagings.product_id
-            except InvalidProduct as e:
+            except SearchInvalidProduct as e:
                 errors.append(e)
 
             if errors and not products:
@@ -320,7 +320,7 @@ class SearchAction(Component):
                 lambda p: p.product_id in self._products
             )
             if not valid_packagings:
-                raise InvalidProduct(packagings - valid_packagings)
+                raise SearchInvalidProduct(packagings - valid_packagings)
             return valid_packagings
         return packagings
 
