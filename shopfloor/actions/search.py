@@ -224,11 +224,10 @@ class SearchAction(Component):
         packages = model.search([("name", "=", barcode)], limit=self._limit)
 
         if packages and self._pickings:
-            invalid_pickings = self._pickings.filtered(
-                lambda p: not (p.move_line_ids.package_id & packages)
-            )
-            if invalid_pickings:
+            valid_packages = packages & self._pickings.move_line_ids.package_id
+            if not valid_packages:
                 raise SearchInvalidPicking(recordset=packages)
+            return valid_packages
 
         return packages
 
@@ -267,7 +266,7 @@ class SearchAction(Component):
         if self._products and products:
             valid_products = products & self._products
             if not valid_products:
-                raise SearchInvalidProduct(products - self._products)
+                raise SearchInvalidProduct(products)
             return valid_products
         return products
 
