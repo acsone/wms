@@ -9,7 +9,7 @@ from odoo import _, fields
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
 
-from ..actions.search import SearchInvalidPicking, SearchInvalidProduct
+from ..actions.search import SearchInvalidPackage, SearchInvalidProduct
 from ..utils import to_float
 
 
@@ -487,7 +487,7 @@ class Checkout(Component):
             search = self._actions_for("search")
             search_result = (
                 search.for_products(picking.move_ids.product_id)
-                .for_pickings(picking)
+                .for_packages(picking.move_line_ids.package_id)
                 .find(
                     barcode,
                     types=handlers.keys(),
@@ -495,22 +495,20 @@ class Checkout(Component):
             )
         except SearchInvalidProduct as e:
             if e.recordset._name == "product.product":
-                product = e.recordset
-                return_picking = self._get_pickings_for_product(product, limit=1)
-                if return_picking:
-                    message = self.msg_store.reserved_for_other_picking_type(
-                        return_picking
-                    )
-                else:
-                    message = self.msg_store.product_not_found_in_current_picking(
-                        product
-                    )
-                return self._response_for_select_line(picking, message=message)
-
+                product = e.recordset[:1]
+            elif e.recordset._name == "product.packaging":
+                product = e.recordset[:1].product_id
             else:
+                # should not happen
                 raise e
+            return_picking = self._get_pickings_for_product(product, limit=1)
+            if return_picking:
+                message = self.msg_store.reserved_for_other_picking_type(return_picking)
+            else:
+                message = self.msg_store.product_not_found_in_current_picking(product)
+            return self._response_for_select_line(picking, message=message)
 
-        except SearchInvalidPicking as e:
+        except SearchInvalidPackage as e:
             if e.recordset._name == "stock.quant.package":
                 # No line for scanned package in selected picking
                 # Check if there's any picking reserving this product.

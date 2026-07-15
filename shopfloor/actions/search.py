@@ -19,7 +19,7 @@ class SearchInvalidProduct(SearchInvalidRecordset):
     pass
 
 
-class SearchInvalidPicking(SearchInvalidRecordset):
+class SearchInvalidPackage(SearchInvalidRecordset):
     pass
 
 
@@ -70,14 +70,14 @@ class SearchAction(Component):
         self,
         work_context,
         products=None,
-        pickings=None,
+        packages=None,
         limit=1,
         use_origin=False,
         extra_domain=None,
     ):
         super().__init__(work_context)
         self._products = products
-        self._pickings = pickings
+        self._packages = packages
         self._limit = limit
         self._use_origin = use_origin
         self._extra_domain = extra_domain
@@ -85,7 +85,7 @@ class SearchAction(Component):
     def _get_properties(self):
         return {
             "products": self._products,
-            "pickings": self._pickings,
+            "packages": self._packages,
             "limit": self._limit,
             "use_origin": self._use_origin,
             "extra_domain": self._extra_domain,
@@ -101,8 +101,8 @@ class SearchAction(Component):
     def for_products(self, products):
         return self._clone_with(products=products)
 
-    def for_pickings(self, pickings):
-        return self._clone_with(pickings=pickings)
+    def for_packages(self, packages):
+        return self._clone_with(packages=packages)
 
     def with_limit(self, limit):
         return self._clone_with(limit=limit)
@@ -223,10 +223,10 @@ class SearchAction(Component):
 
         packages = model.search([("name", "=", barcode)], limit=self._limit)
 
-        if packages and self._pickings:
-            valid_packages = packages & self._pickings.move_line_ids.package_id
+        if packages and self._packages:
+            valid_packages = packages & self._packages
             if not valid_packages:
-                raise SearchInvalidPicking(recordset=packages)
+                raise SearchInvalidPackage(recordset=packages)
             return valid_packages
 
         return packages
