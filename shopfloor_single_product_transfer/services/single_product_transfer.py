@@ -12,6 +12,7 @@ from odoo.tools import float_compare
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
 from odoo.addons.component.exception import NoComponentError
+from odoo.addons.shopfloor.actions.search import SearchInvalidProduct
 from odoo.addons.shopfloor.utils import to_float
 
 _logger = logging.getLogger("shopfloor.services.single_product_transfer")
@@ -839,11 +840,15 @@ class ShopfloorSingleProductTransfer(Component):
             "package": self._scan_location_or_package__by_package,
             "location": self._scan_location_or_package__by_location,
         }
-        search_result = search.find(barcode, types=handlers_by_type.keys())
-        handler = handlers_by_type.get(search_result.type)
-        if handler:
-            return handler(search_result.record)
-        message = self.msg_store.barcode_not_found()
+        try:
+            search_result = search.find(barcode, types=handlers_by_type.keys())
+            handler = handlers_by_type.get(search_result.type)
+            if handler:
+                return handler(search_result.record)
+        except SearchInvalidProduct as e:
+            message = self.msg_store.invalid_product(e.product)
+        else:
+            message = self.msg_store.barcode_not_found()
         return self._response_for_select_location_or_package(message=message)
 
     @with_savepoint
@@ -877,11 +882,10 @@ class ShopfloorSingleProductTransfer(Component):
             "packaging": self._scan_product__scan_packaging,
             "lot": self._scan_product__scan_lot,
         }
-        search = self._actions_for("search")
+        search = self._actions_for("search").for_products(products)
         search_result = search.find(
             barcode,
             types=handlers_by_type.keys(),
-            handler_kw={"lot": {"products": products}},
         )
         handler = handlers_by_type.get(search_result.type)
         if handler:
