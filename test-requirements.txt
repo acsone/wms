@@ -1,2 +1,4 @@
 vcrpy-unittest
 odoo_test_helper
+
+odoo-addon-stock-move-source-reassign @ git+https://github.com/OCA/stock-logistics-workflow@refs/pull/2369/head#subdirectory=setup/stock_move_source_reassign
