@@ -51,3 +51,9 @@ class StockPickingBatch(models.Model):
                 lambda package: package.name == barcode
             )
         )
+
+    def _sanity_check(self):
+        if self.env.context.get("skip_batch_sanity_check"):
+            return
+        return super()._sanity_check()
+

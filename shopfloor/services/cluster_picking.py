@@ -1179,6 +1179,7 @@ class ClusterPicking(Component):
         return self._unload_end(batch, completion_info_popup=completion_info_popup)
 
     def _unload_write_destination_on_lines(self, lines, location):
+        lines = lines.with_context(skip_batch_sanity_check=True)
         stock = self._actions_for("stock")
         stock.set_destination_on_lines(lines, location)
         if self.work.menu.unload_package_at_destination:
