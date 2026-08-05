@@ -1,5 +1,6 @@
 # Copyright 2020 Camptocamp SA (http://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+import hashlib
 from collections import defaultdict
 
 from odoo.osv.expression import OR
@@ -220,7 +221,10 @@ class DataDetailAction(Component):
     def _product_image_url(self, record, field_name):
         if not record[field_name]:
             return None
-        return f"/web/image/product.product/{record.id}/{field_name}"
+        sha = hashlib.sha512(
+            str(getattr(record, "__last_update")).encode("utf-8")  # noqa: B009
+        ).hexdigest()[:7]
+        return f"/web/image/product.product/{record.id}/{field_name}?unique={sha}"
 
     @property
     def _product_supplierinfo_parser(self):
