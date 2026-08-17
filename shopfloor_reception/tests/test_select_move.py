@@ -439,6 +439,41 @@ class TestSelectLine(CommonCase):
             },
         )
 
+    def test_manual_select_move_to_set_lot(self):
+        # only a peremption date is prefilled, no lot name
+        self.product_a.tracking = "lot"
+        self.product_a.use_expiration_date = True
+        picking = self._create_picking()
+        # The picking type is configured to create lots,
+        # so the line is prefilled with an expiration date, but no lot name.
+        # This test is a regression test to ensure that
+        # all the information of the lot are optional when the user is
+        # prompted to set a lot.
+        picking.sudo().picking_type_id.use_create_lots = True
+        selected_move = picking.move_ids.filtered(
+            lambda m: m.product_id == self.product_a
+        )
+        line = picking.move_line_ids.filtered(lambda l: l.product_id == self.product_a)
+        self.assertTrue(line.expiration_date)
+        response = self.service.dispatch(
+            "manual_select_move",
+            params={"move_id": selected_move.id},
+        )
+        selected_move_line = picking.move_line_ids.filtered(
+            lambda l: l.product_id == self.product_a
+        )
+        data = self.data.picking(picking)
+        self.assert_response(
+            response,
+            next_state="set_lot",
+            data={
+                "picking": data,
+                "selected_move_line": self.data.move_lines(
+                    selected_move_line, lot_expiration_date=line.expiration_date
+                ),
+            },
+        )
+
     def test_select_move_to_set_lot_prefills_lot_name(self):
         picking = self._create_picking()
         self.product_a.tracking = "lot"
