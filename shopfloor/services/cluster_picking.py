@@ -670,6 +670,11 @@ class ClusterPicking(Component):
         several products or a mix of several products and packages, we
         ask to scan a more precise barcode.
         """
+        if not self.work.menu.scan_location_selects_move:
+            return self._response_for_start_line(
+                move_line,
+                message=self.msg_store.scan_location_move_selection_disabled(),
+            )
         response = self._check_first_scan_location_or_pack_first(
             move_line, None, location_scanned=location
         )

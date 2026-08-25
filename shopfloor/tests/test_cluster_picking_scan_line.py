@@ -195,8 +195,7 @@ class ClusterPickingScanLineCase(ClusterPickingLineCommonCase):
             line.lot_id.name,
             {
                 "message_type": "warning",
-                "body": "This lot is part of multiple"
-                " packages, please scan a package.",
+                "body": "This lot is part of multiple packages, please scan a package.",
             },
         )
 
@@ -215,8 +214,7 @@ class ClusterPickingScanLineCase(ClusterPickingLineCommonCase):
             line.lot_id.name,
             {
                 "message_type": "warning",
-                "body": "This lot is part of multiple"
-                " packages, please scan a package.",
+                "body": "This lot is part of multiple packages, please scan a package.",
             },
         )
 
@@ -405,4 +403,14 @@ class ClusterPickingScanLineCase(ClusterPickingLineCommonCase):
             self.batch.picking_ids.move_line_ids,
             "NO_EXISTING_BARCODE",
             {"message_type": "error", "body": "Barcode not found"},
+        )
+
+    def test_scan_line_prevent_location_scan(self):
+        self.menu.sudo().scan_location_selects_move = False
+        self._simulate_batch_selected(self.batch, in_package=True)
+        line = self.batch.picking_ids.move_line_ids
+        self._scan_line_error(
+            line,
+            line.location_id.barcode,
+            self.msg_store.scan_location_move_selection_disabled(),
         )

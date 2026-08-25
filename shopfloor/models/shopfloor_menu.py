@@ -299,6 +299,15 @@ class ShopfloorMenu(models.Model):
         compute="_compute_require_destination_package_is_possible"
     )
 
+    scan_location_selects_move_is_possible = fields.Boolean(
+        compute="_compute_scan_location_selects_move_is_possible"
+    )
+    scan_location_selects_move = fields.Boolean(
+        string="Allow Location Scanning to Select Move",
+        default=True,
+        help="If enabled, scanning a location barcode infers and selects the move line.",
+    )
+
     @api.onchange("unload_package_at_destination")
     def _onchange_unload_package_at_destination(self):
         # Uncheck pick_pack_same_time when unload_package_at_destination is set to True
@@ -602,6 +611,13 @@ class ShopfloorMenu(models.Model):
         for menu in self:
             menu.allow_quantity_exceeding_demand_is_possible = (
                 menu.scenario_id.has_option("allow_quantity_exceeding_demand")
+            )
+
+    @api.depends("scenario_id")
+    def _compute_scan_location_selects_move_is_possible(self):
+        for menu in self:
+            menu.scan_location_selects_move_is_possible = menu.scenario_id.has_option(
+                "scan_location_selects_move"
             )
 
     @api.constrains(
