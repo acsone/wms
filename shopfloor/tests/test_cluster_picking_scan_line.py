@@ -1,6 +1,10 @@
 # Copyright 2020 Camptocamp SA (http://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from unittest import mock
+
+from odoo.addons.shopfloor.actions.barcode_parser import BarcodeParser, BarcodeResult
+
 from .test_cluster_picking_base import ClusterPickingLineCommonCase
 
 
@@ -414,3 +418,32 @@ class ClusterPickingScanLineCase(ClusterPickingLineCommonCase):
             line.location_id.barcode,
             self.msg_store.scan_location_move_selection_disabled(),
         )
+
+    def test_scan_line_incorrect_lot_and_product(self):
+        self._simulate_batch_selected(self.batch, in_package=True)
+
+        lot = self._create_lot(product=self.product_b)
+
+        with mock.patch.object(BarcodeParser, "parse") as mock_parse:
+            multi_barcode = f"(01){self.product_b.barcode}(10){lot.name}"
+            mock_parse.return_value = {
+                "unknown": BarcodeResult(
+                    type="unknown", value=multi_barcode, raw=multi_barcode
+                ),
+                "product": BarcodeResult(
+                    type="product",
+                    value=lot.product_id.barcode,
+                    raw=lot.product_id.barcode,
+                ),
+                "lot": BarcodeResult(type="lot", value=lot.name, raw=lot.name),
+            }
+            res = self.service.dispatch(
+                "scan_line",
+                params={
+                    "picking_batch_id": self.batch.id,
+                    "move_line_id": self.batch.picking_ids.move_line_ids.ids[0],
+                    "barcode": multi_barcode,
+                },
+            )
+
+        self.assertEqual(res["message"], self.msg_store.wrong_record(self.product_b))
