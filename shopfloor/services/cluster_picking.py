@@ -3,8 +3,6 @@
 # Copyright 2023 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import logging
-
 from markupsafe import Markup
 
 from odoo import _, fields
@@ -14,10 +12,7 @@ from odoo.osv import expression
 from odoo.addons.base_rest.components.service import to_bool, to_int
 from odoo.addons.component.core import Component
 
-from ..actions.search import SearchInvalidProduct
 from ..utils import to_float
-
-_logger = logging.getLogger(__name__)
 
 
 class ClusterPicking(Component):
@@ -516,11 +511,7 @@ class ClusterPicking(Component):
                 picking, move_line, packaging, sublocation
             )
 
-        try:
-            lot = None
-            lot = search.lot_from_scan(barcode, products=move_line.product_id)
-        except SearchInvalidProduct:
-            _logger.debug("Cluster Picking: invalid product found on scanned lot.")
+        lot = search.lot_from_scan(barcode, products=move_line.product_id)
         if lot and move_line.lot_id == lot:
             return self._scan_line_by_lot(picking, move_line, lot, sublocation)
 
