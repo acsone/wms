@@ -191,15 +191,6 @@
                   </div>
                 </group>
                 <group
-                    attrs="{'invisible': [('scan_location_selects_move_is_possible', '=', False)]}"
-                >
-                    <field
-                        name="scan_location_selects_move_is_possible"
-                        invisible="1"
-                    />
-                    <field name="scan_location_selects_move" />
-                </group>
-                <group
                     name="auto_post_line"
                     attrs="{'invisible': [('auto_post_line_is_possible', '=', False)]}"
                 >

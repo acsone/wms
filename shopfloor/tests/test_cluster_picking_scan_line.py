@@ -199,7 +199,8 @@ class ClusterPickingScanLineCase(ClusterPickingLineCommonCase):
             line.lot_id.name,
             {
                 "message_type": "warning",
-                "body": "This lot is part of multiple packages, please scan a package.",
+                "body": "This lot is part of multiple"
+                " packages, please scan a package.",
             },
         )
 
@@ -218,7 +219,8 @@ class ClusterPickingScanLineCase(ClusterPickingLineCommonCase):
             line.lot_id.name,
             {
                 "message_type": "warning",
-                "body": "This lot is part of multiple packages, please scan a package.",
+                "body": "This lot is part of multiple"
+                " packages, please scan a package.",
             },
         )
 

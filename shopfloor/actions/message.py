@@ -202,7 +202,7 @@ class MessageAction(Component):
         return {
             "message_type": "warning",
             "body": _(
-                "Confirm location change from %(location_from)s to %(location_to)s?"
+                "Confirm location change from %(location_from)s to " "%(location_to)s?"
             )
             % dict(location_from=from_location.name, location_to=to_location.name),
         }
@@ -1054,10 +1054,4 @@ class MessageAction(Component):
         return {
             "message_type": "error",
             "body": body,
-        }
-
-    def scan_location_move_selection_disabled(self):
-        return {
-            "body": _("Scanning a location to select a move is disabled. "),
-            "message_type": "error",
         }
