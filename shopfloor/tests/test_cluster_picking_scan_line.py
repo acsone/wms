@@ -449,3 +449,12 @@ class ClusterPickingScanLineCase(ClusterPickingLineCommonCase):
             )
 
         self.assertEqual(res["message"], self.msg_store.wrong_record(self.product_b))
+        self.menu.sudo().force_detailed_scan = True
+        self._simulate_batch_selected(self.batch, in_package=True)
+        line = self.batch.picking_ids.move_line_ids
+        self._scan_line_error(
+            line=line,
+            scanned=line.location_id.barcode,
+            message=None,
+            sublocation=line.location_id,
+        )

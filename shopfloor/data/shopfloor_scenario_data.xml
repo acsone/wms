@@ -38,7 +38,8 @@
     "no_prefill_qty": true,
     "scan_location_or_pack_first": true,
     "unload_single_package": true,
-    "unload_single_package_choice": true
+    "unload_single_package_choice": true,
+    "force_detailed_scan": true
 }
         </field>
     </record>
