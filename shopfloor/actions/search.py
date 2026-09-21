@@ -254,13 +254,20 @@ class SearchAction(Component):
             return model.search(source_document_domain, limit=self._limit)
         return model.browse()
 
+    def _find_product_domain_barcodes(self, barcode):
+        return [barcode]
+
     def _find_product(self, parse_results, btype="product"):
         model = self.env["product.product"]
         barcode = self._get_parse_results_value(parse_results, btype)
         if not barcode:
             return model.browse()
         products = model.search(
-            ["|", ("barcode", "=", barcode), ("default_code", "=", barcode)],
+            [
+                "|",
+                ("barcode", "in", self._find_product_domain_barcodes(barcode)),
+                ("default_code", "=", barcode),
+            ],
             limit=None if self._products else self._limit,
         )
         if self._products and products:
@@ -312,7 +319,11 @@ class SearchAction(Component):
         if not barcode:
             return model.browse()
         packagings = model.search(
-            [("barcode", "=", barcode), ("product_id", "!=", False)], limit=self._limit
+            [
+                ("barcode", "in", self._find_product_domain_barcodes(barcode)),
+                ("product_id", "!=", False),
+            ],
+            limit=self._limit,
         )
         if self._products and packagings:
             valid_packagings = packagings.filtered(
