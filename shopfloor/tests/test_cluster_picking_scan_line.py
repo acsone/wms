@@ -199,8 +199,7 @@ class ClusterPickingScanLineCase(ClusterPickingLineCommonCase):
             line.lot_id.name,
             {
                 "message_type": "warning",
-                "body": "This lot is part of multiple"
-                " packages, please scan a package.",
+                "body": "This lot is part of multiple packages, please scan a package.",
             },
         )
 
@@ -219,8 +218,7 @@ class ClusterPickingScanLineCase(ClusterPickingLineCommonCase):
             line.lot_id.name,
             {
                 "message_type": "warning",
-                "body": "This lot is part of multiple"
-                " packages, please scan a package.",
+                "body": "This lot is part of multiple packages, please scan a package.",
             },
         )
 
@@ -437,3 +435,33 @@ class ClusterPickingScanLineCase(ClusterPickingLineCommonCase):
                 ),
             }
             self._scan_line_ok(line, f"(01){self.product_a.barcode}(17){lot.name}")
+
+    def test_scan_line_incorrect_lot_and_product(self):
+        self._simulate_batch_selected(self.batch, in_package=True)
+
+        lot = self._create_lot(product=self.product_b)
+
+        with mock.patch.object(BarcodeParser, "parse") as mock_parse:
+            multi_barcode = f"(01){self.product_b.barcode}(10){lot.name}"
+            mock_parse.return_value = {
+                "unknown": BarcodeResult(
+                    type="unknown", value=multi_barcode, raw=multi_barcode
+                ),
+                "product": BarcodeResult(
+                    type="product",
+                    value=lot.product_id.barcode,
+                    raw=lot.product_id.barcode,
+                ),
+                "lot": BarcodeResult(type="lot", value=lot.name, raw=lot.name),
+            }
+            res = self.service.dispatch(
+                "scan_line",
+                params={
+                    "picking_batch_id": self.batch.id,
+                    "move_line_id": self.batch.picking_ids.move_line_ids.ids[0],
+                    "barcode": multi_barcode,
+                },
+            )
+
+        self.assertEqual(res["message"], self.msg_store.wrong_record(self.product_b))
+
