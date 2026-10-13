@@ -25,6 +25,7 @@
   "cluster_picking.batch_picking_line.action_stock_out": "Declare stock out",
   "cluster_picking.batch_picking_line.action_change_pack_or_lot": "Change lot or pack",
   "cluster_picking.batch_picking_line.destination_not_selected": "Destination not selected.",
+  "cluster_picking.unload_scan_pack.scan_placeholder": "Scan Bin",
 
   "batch_picking_detail.pickings_list": "Transfers list",
   "batch_picking_detail.total_operations": "Total operations",
