@@ -32,7 +32,6 @@
   "batch_picking_detail.total_weight": "Poids total",
   "batch_picking_detail.lines": "Lignes",
   "batch_picking_detail.weight": "Poids",
-
   "location_content_transfer.scan_destination.title": "Définissez une qté et scannez l'emplacement de destination",
   "location_content_transfer.scan_destination_all.title": "Scannez l'emplacement de destination pour tous les produits",
   "location_content_transfer.scan_location.title": "Commencez en scannant un emplacement",
