@@ -789,7 +789,14 @@ class Reception(Component):
         return self.data.move_lines(lines, **kw)
 
     def _data_for_moves(self, moves, **kw):
-        return self.data.moves(moves, **kw)
+        return [
+            self.data.move(
+                # ↓ Show the external_ref/supplier_code in product display name brackets
+                move.with_context(seller_id=move.product_id.variant_seller_ids[:1].ids),
+                **kw,
+            )
+            for move in moves
+        ]
 
     # RESPONSES
 
