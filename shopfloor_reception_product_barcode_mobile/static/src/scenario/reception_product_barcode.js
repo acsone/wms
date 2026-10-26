@@ -44,7 +44,7 @@ const new_template =
     <div class="button-list button-vertical-list full">
         <v-row align="center">
             <v-col class="text-center" cols="12">
-                <btn-action action="todo" @click="state.on_done">{{ $t('reception.product_barcode.done') }}</btn-action>
+                <btn-action @click="state.on_done">{{ $t('reception.product_barcode.done') }}</btn-action>
             </v-col>
         </v-row>
         <v-row align="center">
