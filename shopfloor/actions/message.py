@@ -220,7 +220,7 @@ class MessageAction(Component):
         return {
             "message_type": "warning",
             "body": _(
-                "Confirm location change from %(location_from)s to " "%(location_to)s?"
+                "Confirm location change from %(location_from)s to %(location_to)s?"
             )
             % dict(location_from=from_location.name, location_to=to_location.name),
         }
@@ -673,12 +673,17 @@ class MessageAction(Component):
             ),
         }
 
-    def location_content_unable_to_transfer(self, location_dest):
+    def location_content_unable_to_transfer(self, move, location, location_dest):
+        message = _(
+            "The content of %(location)s cannot be transferred to "
+            "%(location_dest)s with this scenario for product %(product_name)s.",
+            location=location.name,
+            location_dest=location_dest.name,
+            product_name=move.product_id.display_name,
+        )
         return {
             "message_type": "error",
-            "body": _(
-                "The content of {} cannot be transferred with this scenario."
-            ).format(location_dest.name),
+            "body": message,
         }
 
     def product_in_multiple_sublocation(self, product):
@@ -1073,4 +1078,13 @@ class MessageAction(Component):
         return {
             "message_type": "error",
             "body": body,
+        }
+
+    def location_source_invalid(self, location):
+        return {
+            "message_type": "error",
+            "body": _(
+                "The content of %(loc_name)s cannot be transferred with this scenario.",
+                loc_name=location.name,
+            ),
         }
