@@ -184,7 +184,7 @@ class DataAction(Component):
 
     @property
     def _lot_parser(self):
-        return self._simple_record_parser() + ["ref", "expiration_date"]
+        return self._simple_record_parser() + ["ref"]
 
     def _add_quants_context(self, record):
         # Incoming moves should not restrict their quants computations
