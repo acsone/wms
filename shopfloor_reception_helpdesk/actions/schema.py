@@ -27,4 +27,9 @@ class ShopfloorSchemaAction(Component):
         return {
             "id": {"required": True, "type": "integer"},
             "name": {"type": "string", "nullable": False, "required": True},
+            "default_description": {
+                "type": "string",
+                "nullable": True,
+                "required": False,
+            },
         }

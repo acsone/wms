@@ -93,9 +93,14 @@ class Reception(Component):
 
     def _get_available_motives(self, picking: Picking) -> list[dict]:
         default_helpdesk_team = picking.picking_type_id.default_helpdesk_team_id
-        return self.env["helpdesk.ticket.motive"].search_read(
-            [("team_id", "in", default_helpdesk_team.ids + [False])], ["id", "name"]
+        motives = self.env["helpdesk.ticket.motive"].search_read(
+            [("team_id", "in", default_helpdesk_team.ids + [False])],
+            ["id", "name", "default_description"],
         )
+        # Ensure there is no `False` value inside the data (should be string or None)
+        for motive in motives:
+            motive["default_description"] = motive["default_description"] or None
+        return motives
 
 
 class ShopfloorReceptionValidator(Component):
