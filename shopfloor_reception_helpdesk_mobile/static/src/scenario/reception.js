@@ -34,6 +34,7 @@ const new_template =
         item-value="id"
         return-object
         v-model="state.data.helpdesk_wizard.motive"
+        @change="state.on_change_motive"
     />
 
     <v-text-field
@@ -112,6 +113,12 @@ const ReceptionHelpdesk = process_registry.extend("reception", {
                         origin_state: self.state.data.origin_state,
                     })
                 );
+            },
+            on_change_motive: (selected_motive) => {
+                if (selected_motive && selected_motive.default_description) {
+                    self.state.data.helpdesk_wizard.description =
+                        selected_motive.default_description;
+                }
             },
         };
         return states;
