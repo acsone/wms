@@ -11,5 +11,11 @@ class StockHelpdeskTicketCreate(models.TransientModel):
 
     def _prepare_ticket_values(self) -> dict:
         res = super()._prepare_ticket_values()
-        res["motive_id"] = self.motive_id.id
+        if self.env.context.get("from_shopfloor_reception"):
+            if self.motive_id:
+                res[
+                    "name"
+                ] = f"[Shopfloor] {self.motive_id.name} - {self.stock_picking_id.name}"
+            else:
+                res["name"] = f"[Shopfloor] {self.stock_picking_id.name}"
         return res
