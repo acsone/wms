@@ -35,6 +35,13 @@ const Reception = {
                         </v-col>
                     </v-row>
                 </div>
+                <div class="button-list button-vertical-list full">
+                    <v-row align="center">
+                        <v-col class="text-center" cols="12">
+                            <btn-back />
+                        </v-col>
+                    </v-row>
+                </div>
             </template>
             <template v-if="state_is('manual_selection') && visible_pickings">
                 <list-filter
@@ -81,11 +88,42 @@ const Reception = {
                 <div class="button-list button-vertical-list full">
                     <v-row align="center">
                         <v-col class="text-center" cols="12">
-                            <btn-confirm-dialog
-                                @click="state.on_mark_as_done"
-                                :title="picking_complete ? $t('reception.confirm_reception.title') : $t('reception.confirm_partial_reception.title')"
-                                :message="picking_complete ? $t('reception.confirm_reception.message') : $t('reception.confirm_partial_reception.message')"
-                                >{{ $t("reception.select_move.btn.mark_as_done") }}</btn-confirm-dialog>
+                            <btn-action @click="state.on_mark_as_done">{{ $t("reception.select_move.btn.mark_as_done") }}</btn-action>
+                        </v-col>
+                    </v-row>
+                </div>
+                <div class="button-list button-vertical-list full">
+                    <v-row align="center">
+                        <v-col class="text-center" cols="12">
+                            <btn-back />
+                        </v-col>
+                    </v-row>
+                </div>
+            </template>
+            <template v-if="state_is('confirm_over_reception')">
+                <div class="button-list button-vertical-list full">
+                    <v-row align="center">
+                        <v-col class="text-center" cols="12">
+                            <btn-action action="todo" @click="state.on_confirm">{{ $t("btn.confirm.title") }}</btn-action>
+                        </v-col>
+                    </v-row>
+                    <v-row align="center">
+                        <v-col class="text-center" cols="12">
+                            <btn-back />
+                        </v-col>
+                    </v-row>
+                </div>
+            </template>
+            <template v-if="state_is('confirm_done')">
+                <div class="button-list button-vertical-list full">
+                    <v-row align="center">
+                        <v-col class="text-center" cols="12">
+                            <btn-action action="todo" @click="state.on_confirm">{{ $t("btn.confirm.title") }}</btn-action>
+                        </v-col>
+                    </v-row>
+                    <v-row align="center">
+                        <v-col class="text-center" cols="12">
+                            <btn-back />
                         </v-col>
                     </v-row>
                 </div>
