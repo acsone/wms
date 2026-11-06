@@ -121,6 +121,7 @@ class TestSelectLine(CommonCase):
             response,
             next_state="select_move",
             data=self._data_for_select_move(picking),
+            message=self.msg_store.line_destination_set_success(selected_move_line),
         )
         lines = picking.move_line_ids.filtered(lambda l: l.product_id == self.product_a)
         self.assertEqual(2, len(lines))
@@ -383,21 +384,6 @@ class TestSelectLine(CommonCase):
             "done_action",
             params={
                 "picking_id": picking.id,
-            },
-        )
-        data = {"picking": self._data_for_picking_with_moves(picking)}
-        self.assert_response(
-            response,
-            next_state="confirm_done",
-            data=data,
-            message={"message_type": "warning", "body": "Are you sure?"},
-        )
-        # Confirm the package is done.
-        response = self.service.dispatch(
-            "done_action",
-            params={
-                "picking_id": picking.id,
-                "confirmation": True,
             },
         )
         pickings = self.env["stock.picking"].search(
