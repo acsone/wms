@@ -1,5 +1,7 @@
 # Copyright 2020 Camptocamp SA (http://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+from odoo.osv import expression
+
 from odoo.addons.base_rest.components.service import to_int
 from odoo.addons.component.core import Component
 
@@ -9,17 +11,18 @@ class ShopfloorMenu(Component):
 
     def _convert_one_record(self, record):
         values = super()._convert_one_record(record)
-        shopfloor_app = self.work.collection
         if record.picking_type_ids:
-            if shopfloor_app.show_counters:
+            if record.show_counters:
                 counters = self._get_move_line_counters(record)
                 values.update(counters)
             else:
-                values.update()
-                values["has_work"] = self._has_work_to_do(record)
+                values["has_urgent_work"] = self._has_work_to_do(record, urgent=True)
+                values["has_work"] = values["has_urgent_work"] or self._has_work_to_do(
+                    record
+                )
         return values
 
-    def _has_work_to_do(self, record):
+    def _has_work_to_do(self, record, urgent=False):
         """Fast existence check to verify if work is pending without computing counters."""
         move_line_search = self._actions_for(
             "search_move_line",
@@ -29,6 +32,8 @@ class ShopfloorMenu(Component):
             sort_order_custom_code=record.move_line_search_sort_order_custom_code,
         )
         domain = move_line_search._search_move_lines_domain()
+        if urgent:
+            domain = expression.AND([domain, [("move_id.priority", ">=", "1")]])
         return bool(self.env["stock.move.line"].search_count(domain, limit=1))
 
     def _get_move_line_counters(self, record):
@@ -68,6 +73,11 @@ class ShopfloorMenuValidatorResponse(Component):
                     self._picking_type_schema, required=False, nullable=True
                 ),
                 "has_work": {"type": "boolean", "nullable": True, "required": False},
+                "has_urgent_work": {
+                    "type": "boolean",
+                    "nullable": True,
+                    "required": False,
+                },
             }
         )
         schema.update(self.schemas.move_lines_counters())

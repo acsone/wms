@@ -172,7 +172,8 @@ class TestMenuCountersCommonCase(MenuCountersCommonCase):
 
     def test_menu_search_counters_disabled_has_work(self):
         """When show_counters is False, counters are omitted and has_work is provided."""
-        self.shopfloor_app.sudo().show_counters = False
+        self.menu1.sudo().show_counters = False
+        self.menu2.sudo().show_counters = False
 
         # Configure menu1 to have zero matching lines
         self.menu1.sudo().move_line_search_additional_domain = [("id", "=", 0)]
@@ -193,4 +194,29 @@ class TestMenuCountersCommonCase(MenuCountersCommonCase):
         # menu2 has pending lines -> has_work is True
         menu2_data = menu_items_by_id[self.menu2.id]
         self.assertTrue(menu2_data.get("has_work"))
+        self.assertNotIn("lines_count", menu2_data)
+
+    def test_menu_search_counters_disabled_has_urgent_work(self):
+        """When an urgent picking exists, has_urgent_work and has_work are both True."""
+        self.menu2.sudo().show_counters = False
+
+        # Mark a picking matching menu2 as urgent
+        picking = self.env["stock.picking"].search(
+            [
+                ("picking_type_id", "in", self.menu2.picking_type_ids.ids),
+                ("state", "=", "assigned"),
+            ],
+            limit=1,
+        )
+        self.assertTrue(picking)
+        picking.sudo().priority = "1"
+
+        service = self.get_service("menu", profile=self.wms_profile)
+        response = service.dispatch("search")
+
+        menu_items_by_id = {item["id"]: item for item in response["data"]["records"]}
+        menu2_data = menu_items_by_id[self.menu2.id]
+
+        self.assertTrue(menu2_data.get("has_work"))
+        self.assertTrue(menu2_data.get("has_urgent_work"))
         self.assertNotIn("lines_count", menu2_data)

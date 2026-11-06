@@ -39,7 +39,6 @@
         "stock_picking_delivery_link",
     ],
     "data": [
-        "views/shopfloor_app.xml",
         "data/shopfloor_scenario_data.xml",
         "security/groups.xml",
         "views/shopfloor_menu.xml",
