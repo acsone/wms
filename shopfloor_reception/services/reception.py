@@ -754,7 +754,6 @@ class Reception(Component):
             picking.id,
             selected_line.id,
             selected_line.qty_done,
-            is_over_reception_confirmed=False,
         )
         return self.set_destination(
             picking.id,
