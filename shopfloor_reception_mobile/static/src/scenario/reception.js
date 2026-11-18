@@ -545,7 +545,7 @@ const Reception = {
             return true;
         },
         move_card_color: function (move) {
-            if (move.progress === 100) {
+            if (move.progress >= 100) {
                 return "screen_step_done";
             } else {
                 return "screen_step_todo";
